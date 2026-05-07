@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="우리집">
+  <meta name="theme-color" content="#FCF9F2">
+  <title>우리집 OS</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      /* Mood A: 실크 & 린든 (Day) */
+      --bg: #FCF9F2;
+      --surface: rgba(255, 255, 255, 0.95);
+      --surface-solid: #ffffff;
+      --text: #4A4541;
+      --text-soft: #A8A19A;
+      --border: rgba(0, 0, 0, 0.04);
+      --shadow: 0 10px 40px rgba(74, 69, 65, 0.05);
+
+      --jun-theme: #A6B1C2;
+      --yerim-theme: #E6B9B3;
+      --sihyeon-theme: #E6D2B3;
+      --family-theme: #B8C4B5;
+      
+      --danger: #D98C8C;
+      --warning: #E6C08C;
+      --success: #A6C2A6;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --blur: blur(25px);
+      --active-theme: var(--jun-theme);
+    }
+
+    body.mood-night {
+      /* Mood B: 미드나잇 부티크 (Night) */
+      --bg: #1A1C1E;
+      --surface: rgba(42, 44, 48, 0.92);
+      --surface-solid: #2A2C30;
+      --text: #E3E2E1;
+      --text-soft: #8A8A88;
+      --border: rgba(255, 255, 255, 0.05);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      --jun-theme: #8AA1C2;
+      --yerim-theme: #D4A199;
+      --sihyeon-theme: #D4C199;
+      --family-theme: #99A896;
+    }
+
+    body.theme-me { --active-theme: var(--jun-theme); }
+    body.theme-wife { --active-theme: var(--yerim-theme); }
+    body.theme-sihyeon { --active-theme: var(--sihyeon-theme); }
+    body.theme-family { --active-theme: var(--family-theme); }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 120px; transition: background 0.8s ease, color 0.5s ease; overflow-x: hidden; }
+    
+    .bg-anim { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: -1; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--active-theme) 15%, transparent), transparent 60%); pointer-events: none; transition: 0.8s ease; }
+
+    header { position: sticky; top: 0; z-index: 100; padding: 15px 20px; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: var(--blur); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: var(--active-theme); color: white; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px color-mix(in srgb, var(--active-theme) 30%, transparent); transition: 0.6s ease; cursor: pointer; }
+    #headerTitle { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+
+    .top-actions { display: flex; gap: 8px; }
+    .top-btn { width: 38px; height: 38px; border-radius: 12px; background: var(--surface-solid); border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; transition: 0.2s; box-shadow: var(--shadow); }
+
+    .app { max-width: 800px; margin: 0 auto; padding: 10px 15px; }
+    .panel { display: none; animation: fadeIn 0.4s ease forwards; }
+    .panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 16px; box-shadow: var(--shadow); border-top: 4px solid var(--active-theme); transition: 0.5s; position: relative; }
+    .card-label { font-size: 13px; font-weight: 800; color: var(--text-soft); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.5px; }
+
+    input, select, textarea { width: 100%; border: 1px solid var(--border); background: var(--surface-solid); color: var(--text); border-radius: var(--radius-md); padding: 14px; font-size: 15px; margin-bottom: 10px; font-family: inherit; outline: none; }
+    .btn { background: var(--active-theme); color: white; border: none; padding: 15px; border-radius: var(--radius-md); font-weight: 800; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: 0.2s; }
+    .btn:active { transform: scale(0.96); opacity: 0.9; }
+    .btn.secondary { background: var(--surface-solid); color: var(--text); border: 1px solid var(--border); }
+
+    .ai-panel { background: var(--surface-solid); border: 2px dashed var(--active-theme); border-radius: var(--radius-md); padding: 15px; margin-top: 10px; display: none; }
+    .ai-text { font-size: 14px; line-height: 1.6; white-space: pre-wrap; margin-bottom: 10px; color: var(--text); }
+    .memo-full-text { max-height: 200px; overflow-y: auto; font-size: 14px; line-height: 1.6; white-space: pre-wrap; color: var(--text); padding: 5px 0; }
+
+    .list-item { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .item-check { width: 26px; height: 26px; border-radius: 9px; border: 2px solid var(--border); background: var(--surface-solid); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .item-check.done { background: var(--success); border-color: var(--success); color: white; }
+    .item-body { flex: 1; min-width: 0; }
+    .item-title { font-size: 16px; font-weight: 700; color: var(--text); }
+    .item-title.done { color: var(--text-soft); text-decoration: line-through; }
+    
+    .dday-badge { display: inline-block; padding: 3px 8px; border-radius: 8px; font-size: 11px; font-weight: 800; color: white; margin-left: 6px; }
+    .dday-emergency { background: var(--danger); animation: pulse 2s infinite; }
+    .dday-soon { background: var(--warning); }
+    .dday-normal { background: var(--text-soft); }
+
+    .chart-container { height: 180px; margin-bottom: 20px; }
+
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: color-mix(in srgb, var(--surface) 95%, transparent); backdrop-filter: var(--blur); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 10px 30px; z-index: 100; }
+    .nav-btn { background: none; border: none; color: var(--text-soft); font-size: 11px; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; flex: 1; }
+    .nav-icon { font-size: 22px; filter: grayscale(1); opacity: 0.5; transition: 0.3s; }
+    .nav-btn.active .nav-icon { filter: grayscale(0); opacity: 1; transform: scale(1.15); }
+
+    .empty-state { padding: 40px 0; text-align: center; color: var(--text-soft); font-size: 14px; font-weight: 600; }
+    .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(74, 69, 65, 0.9); color: white; padding: 12px 25px; border-radius: 25px; font-size: 14px; font-weight: 800; opacity: 0; pointer-events: none; transition: 0.4s; z-index: 9999; }
+  </style>
+</head>
+<body class="theme-me">
+  <div class="bg-anim" id="bgAnim"></div>
+  <div id="toast" class="toast">알림</div>
+
+  <header>
+    <div class="brand-mark" onclick="switchTab('me')">🏡</div>
+    <h1 id="headerTitle">준성이 방</h1>
+    <div class="top-actions">
+      <button class="top-btn" id="moodBtn" onclick="toggleMood()" title="무드 전환">🌤️</button>
+      <button class="top-btn" onclick="openSettings()">⚙️</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <section id="panel-me" class="panel active">
+      <div class="card">
+        <div class="card-label">✅ 오늘 내가 챙길 것</div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <input type="text" id="todoMeInput" placeholder="가족을 위해 할 일..." style="margin:0;">
+          <button class="btn" style="width:70px;" onclick="addItem('todosMe', 'todoMeInput')">추가</button>
+        </div>
+        <div id="todoMeList" class="scroll-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">✨ 우리집 도우미</div>
+        <textarea id="aiQuery" placeholder="주말 나들이 코스나 선물 아이디어를 물어보세요." style="height:90px; resize:none;"></textarea>
+        <button class="btn" onclick="askAI()">도우미 호출</button>
+        <div id="aiPanel" class="ai-panel">
+          <div id="aiOutput" class="ai-text"></div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn secondary" onclick="copyAi()">📋 복사</button>
+            <button class="btn" onclick="saveAi()">💾 금고 저장</button>
+          </div>
+        </div>
+        <div id="aiMemoList" class="scroll-list" style="margin-top:20px;"></div>
+      </div>
+    </section>
+
+    <section id="panel-wife" class="panel">
+      <div class="card" style="background:#fffcfb;">
+        <div class="card-label" style="color:var(--yerim-theme);">💄 우아림 예약 관리</div>
+        <button class="btn" style="background:var(--yerim-theme);" onclick="window.open('https://calendar.google.com')">예약 캘린더 바로가기</button>
+      </div>
+      <div class="card">
+        <div class="card-label">🌸 예림이와 함께하는 기록</div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <input type="text" id="todoWifeInput" placeholder="함께 챙길 것, 선물 아이디어..." style="margin:0;">
+          <button class="btn" style="width:70px; background:var(--yerim-theme);" onclick="addItem('todosWife', 'todoWifeInput')">기록</button>
+        </div>
+        <div id="todoWifeList" class="scroll-list"></div>
+      </div>
+    </section>
+
+    <section id="panel-sihyeon" class="panel">
+      <div class="game-nav">
+        <button class="game-tab active" onclick="setGame('fairytale', this)">📖 마법 동화책</button>
+        <button class="game-tab" onclick="setGame('quiz', this)">🔍 빠방 퀴즈</button>
+        <button class="game-tab" onclick="setGame('color', this)">🎨 색칠 놀이</button>
+      </div>
+      <div class="card game-stage" id="gameCanvas"></div>
+    </section>
+
+    <section id="panel-family" class="panel">
+      <div class="card">
+        <div class="card-label">📆 우리집 D-Day & 일정</div>
+        <div style="display:grid; grid-template-columns: 1fr 125px; gap:8px; margin-bottom:10px;">
+          <input type="text" id="todoFamInput" placeholder="보험, 세금, 가족 행사..." style="margin:0;">
+          <input type="date" id="todoFamDate" style="margin:0;">
+        </div>
+        <button class="btn" style="background:var(--family-theme);" onclick="addFamSchedule()">일정 등록</button>
+        <div id="todoFamList" class="scroll-list" style="margin-top:10px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">💳 이번 달 가족 지출 (<span id="monthTotal">0</span>원)</div>
+        <div class="chart-container"><canvas id="moneyChart"></canvas></div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
+          <select id="moneyCat"><option>식비</option><option>육아</option><option>차량</option><option>고양이</option><option>기타</option></select>
+          <input type="number" id="moneyAmt" placeholder="금액" style="margin:0;">
+        </div>
+        <input type="text" id="moneyNote" placeholder="메모 (예: 마트)">
+        <button class="btn" style="background:var(--family-theme);" onclick="addMoney()">지출 기록</button>
+        <div id="moneyList" class="scroll-list" style="margin-top:15px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🐾 눈이 & 름이 케어</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+          <button id="btnCatNoon" class="btn secondary" onclick="checkCat('noon')">눈이 밥</button>
+          <button id="btnCatReum" class="btn secondary" onclick="checkCat('reum')">름이 밥</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎞️ 가족 타임라인</div>
+        <textarea id="timelineIn" placeholder="오늘 시현이의 모습이나 가족의 일상을 남겨주세요." style="height:80px; resize:none;"></textarea>
+        <button class="btn secondary" style="border-color:var(--family-theme); color:var(--family-theme);" onclick="addItem('timeline', 'timelineIn')">추억 저장</button>
+        <div id="timelineList" class="scroll-list" style="margin-top:20px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="me" onclick="switchTab('me')"><span class="nav-icon">😎</span>나</button>
+    <button class="nav-btn" data-tab="wife" onclick="switchTab('wife')"><span class="nav-icon">👩</span>예림</button>
+    <button class="nav-btn" data-tab="sihyeon" onclick="switchTab('sihyeon')"><span class="nav-icon">👦</span>시현</button>
+    <button class="nav-btn" data-tab="family" onclick="switchTab('family')"><span class="nav-icon">🏡</span>가족</button>
+  </nav>
+
+  <div id="settingsModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; backdrop-filter:blur(5px); align-items:center; justify-content:center;">
+    <div class="card" style="width:90%; max-width:400px; border-top:none;">
+      <h3 style="margin-bottom:15px;">시스템 설정</h3>
+      <div style="font-size:12px; font-weight:800; color:var(--text-soft); margin-bottom:5px;">API Key 저장 상태: <span id="keyStatus">미저장</span></div>
+      <input type="password" id="apiKeyIn" placeholder="Gemini API Key">
+      <div style="display:flex; gap:8px; margin-bottom:20px;">
+        <button class="btn" style="flex:1;" onclick="saveKey()">저장</button>
+        <button class="btn danger" style="flex:1;" onclick="deleteKey()">삭제</button>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn secondary" style="flex:1;" onclick="exportData()">💾 백업</button>
+        <button class="btn secondary" style="flex:1;" onclick="document.getElementById('impFile').click()">📂 복구</button>
+        <input type="file" id="impFile" hidden onchange="importData(this)">
+      </div>
+      <button class="btn secondary" style="margin-top:15px; border:none;" onclick="closeSettings()">닫기</button>
+    </div>
+  </div>
+
+  <script>
+    const DB_KEY = 'NEST_FAMILY_OS_V2';
+    const getInitDb = () => ({
+      todosMe: [], memosAi: [], todosWife: [], todosFam: [], money: [], timeline: [],
+      catCare: { noon: '', reum: '' }, settings: { apiKey: '', mood: 'day' }
+    });
+    
+    let db = JSON.parse(localStorage.getItem(DB_KEY)) || getInitDb();
+    let chart = null;
+
+    const escapeHtml = (s) => (s||"").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    const getToday = () => new Date().toLocaleDateString('sv-SE');
+    const save = () => { localStorage.setItem(DB_KEY, JSON.stringify(db)); renderAll(); };
+    const showToast = (m) => { const t=document.getElementById('toast'); t.innerText=m; t.style.opacity=1; setTimeout(()=>t.style.opacity=0, 2500); };
+
+    function applyMood() {
+      const mood = db.settings.mood || 'day';
+      const btn = document.getElementById('moodBtn');
+      if(mood === 'night') {
+        document.body.classList.add('mood-night');
+        btn.innerText = '🌙';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1A1C1E');
+      } else {
+        document.body.classList.remove('mood-night');
+        btn.innerText = '🌤️';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FCF9F2');
+      }
+    }
+
+    function toggleMood() {
+      db.settings.mood = db.settings.mood === 'night' ? 'day' : 'night';
+      applyMood(); save();
+      if(curTab === 'family') renderChart();
+      showToast(db.settings.mood === 'night' ? '나이트 무드로 전환합니다.' : '데이 무드로 전환합니다.');
+    }
+
+    function switchTab(id) {
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+      document.getElementById('panel-'+id).classList.add('active');
+      document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+      document.body.className = (db.settings.mood === 'night' ? 'mood-night ' : '') + 'theme-' + id;
+      const titles = { me: '준성이 방', wife: '예림이 방', sihyeon: '시현이 놀이터', family: '가족 라운지' };
+      document.getElementById('headerTitle').innerText = titles[id];
+      if(id==='sihyeon') initGame();
+      renderAll();
+    }
+
+    function addItem(k, i) {
+      const v = document.getElementById(i).value.trim(); if(!v) return;
+      if(!db[k]) db[k] = [];
+      db[k].unshift({ id: Date.now(), text: v, done: false, date: getToday() });
+      document.getElementById(i).value = ""; save();
+    }
+
+    function addFamSchedule() {
+      const v = document.getElementById('todoFamInput').value.trim();
+      const d = document.getElementById('todoFamDate').value;
+      if(!v) return;
+      db.todosFam.unshift({ id: Date.now(), text: v, done: false, date: getToday(), target: d });
+      document.getElementById('todoFamInput').value = ""; document.getElementById('todoFamDate').value = ""; save();
+    }
+
+    function toggleItem(k, id) { const i=db[k].find(x=>x.id===id); if(i){i.done=!i.done; save();} }
+    function delItem(k, id) { db[k]=db[k].filter(x=>x.id!==id); save(); }
+
+    function addMoney() {
+      const a = parseInt(document.getElementById('moneyAmt').value); if(!a) return;
+      db.money.unshift({ id: Date.now(), amt: a, cat: document.getElementById('moneyCat').value, note: document.getElementById('moneyNote').value, date: getToday() });
+      document.getElementById('moneyAmt').value = ""; document.getElementById('moneyNote').value = ""; save();
+    }
+
+    function renderChart() {
+      const ctx = document.getElementById('moneyChart'); if(!ctx) return;
+      const cats = {}; 
+      db.money.filter(m=>m.date.startsWith(getToday().slice(0,7))).forEach(m=>{ cats[m.cat] = (cats[m.cat]||0)+m.amt; });
+      const labels = Object.keys(cats);
+      if(labels.length === 0) { if(chart) chart.destroy(); return; }
+      const colors = (db.settings.mood === 'night') ? ['#D4A199','#D4C199','#8AA1C2','#99A896','#8A8A88'] : ['#E6B9B3','#E6D2B3','#A6B1C2','#B8C4B5','#A8A19A'];
+      if(chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type:'doughnut',
+        data: { labels, datasets: [{ data: Object.values(cats), backgroundColor: colors, borderWidth: 0 }] },
+        options: { cutout:'70%', plugins:{ legend:{ position:'right', labels:{ boxWidth:10, color: (db.settings.mood==='night'?'#8A8A88':'#4A4541'), font:{size:11, weight:'bold', family:'Pretendard'}}}} }
+      });
+      document.getElementById('monthTotal').innerText = Object.values(cats).reduce((a,b)=>a+b,0).toLocaleString();
+    }
+
+    function renderList(k, elId, isFam=false) {
+      const el = document.getElementById(elId); if(!el || !db[k]) return;
+      if(db[k].length === 0) { el.innerHTML = '<div class="empty-state">아직 기록이 없어요 😊</div>'; return; }
+      el.innerHTML = db[k].map(i => {
+        let ddayHtml = '';
+        if(isFam && i.target) {
+          const diff = Math.ceil((new Date(i.target) - new Date(getToday())) / 86400000);
+          let cls = 'dday-normal';
+          if(diff === 0) cls = 'dday-emergency'; else if(diff > 0 && diff <= 7) cls = 'dday-soon';
+          ddayHtml = `<span class="dday-badge ${cls}">${diff === 0 ? 'D-Day' : (diff > 0 ? 'D-'+diff : 'D+'+Math.abs(diff))}</span>`;
+        }
+        return `<div class="list-item" style="flex-direction:column; align-items:flex-start;">
+          <div style="display:flex; align-items:center; width:100%; gap:12px;">
+            ${i.hasOwnProperty('done') ? `<div class="item-check ${i.done?'done':''}" onclick="toggleItem('${k}', ${i.id})">✓</div>` : ''}
+            <div class="item-body">
+              <div class="item-title ${i.done?'done':''}">${escapeHtml(i.text)}${ddayHtml}</div>
+            </div>
+            <div class="del-btn" style="color:var(--text-soft); font-size:12px;" onclick="delItem('${k}', ${i.id})">삭제</div>
+          </div>
+          ${k === 'memosAi' ? `<div class="memo-full-text">${escapeHtml(i.fullText)}</div>` : ''}
+          <div style="font-size:11px; color:var(--text-soft); margin-top:4px;">${i.date}</div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderAll() {
+      renderList('todosMe', 'todoMeList'); renderList('todosWife', 'todoWifeList'); 
+      renderList('todosFam', 'todoFamList', true); renderList('memosAi', 'aiMemoList');
+      renderList('timeline', 'timelineList');
+      renderChart();
+      const n=document.getElementById('btnCatNoon'), r=document.getElementById('btnCatReum');
+      if(n) { n.className = db.catCare.noon===getToday()?'btn':'btn secondary'; n.innerText = db.catCare.noon===getToday()?'눈이 완료!':'눈이 밥'; }
+      if(r) { r.className = db.catCare.reum===getToday()?'btn':'btn secondary'; r.innerText = db.catCare.reum===getToday()?'름이 완료!':'름이 밥'; }
+      const ml = document.getElementById('moneyList');
+      if(ml) ml.innerHTML = db.money.slice(0,10).map(m=>`<div class="list-item"><div class="item-body"><div class="item-title" style="font-size:14px;">${m.amt.toLocaleString()}원 <span style="font-size:11px; color:var(--text-soft);">(${m.cat})</span></div><div style="font-size:11px; color:var(--text-soft);">${escapeHtml(m.note)}</div></div><div class="del-btn" onclick="delItem('money', ${m.id})">🗑️</div></div>`).join('');
+    }
+
+    async function askAI() {
+      const q = document.getElementById('aiQuery').value; if(!db.settings.apiKey || !q) return showToast('API 키 또는 질문을 확인해줘!');
+      const out = document.getElementById('aiOutput');
+      out.innerText = "생각 중... 🧠"; document.getElementById('aiPanel').style.display='block';
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${db.settings.apiKey}`, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({contents:[{parts:[{text:q}]}]})
+        });
+        const data = await res.json();
+        const txt = data?.candidates?.[0]?.content?.parts?.[0]?.text || "답변을 가져오지 못했어.";
+        out.innerText = txt;
+      } catch(e) { out.innerText = "오류가 발생했어. 키를 확인해봐!"; }
+    }
+    function copyAi() { navigator.clipboard.writeText(document.getElementById('aiOutput').innerText); showToast('복사 완료!'); }
+    function saveAi() { 
+      const fullTxt = document.getElementById('aiOutput').innerText; if(!fullTxt) return;
+      db.memosAi.unshift({ id: Date.now(), text: "[AI 답변] " + getToday(), fullText: fullTxt, date: getToday() });
+      save(); showToast('금고에 저장했어!'); document.getElementById('aiPanel').style.display='none';
+    }
+
+    async function generateFairyTale(t) {
+      if(!db.settings.apiKey) return showToast('설정에서 마법 열쇠(Key)를 먼저 넣어주세요!');
+      const cv = document.getElementById('gameCanvas'); cv.innerHTML = "동화 요정이 글을 쓰고 있어요... ✨";
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${db.settings.apiKey}`, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({contents:[{parts:[{text:`시현이를 위해 '${t}' 주제로 150자 내외의 동화를 지어줘.`}]}]})
+        });
+        const data = await res.json();
+        const txt = (data?.candidates?.[0]?.content?.parts?.[0]?.text || "실패").replace(/\*/g,'');
+        cv.textContent = ""; 
+        const txtDiv = document.createElement('div'); txtDiv.style.cssText = "font-size:16px; line-height:1.7; text-align:left; padding:10px;";
+        txtDiv.textContent = txt; cv.appendChild(txtDiv);
+        const btn = document.createElement('button'); btn.className = 'btn'; btn.style.marginTop = '15px'; btn.textContent = '다시 고르기';
+        btn.onclick = initGame; cv.appendChild(btn);
+        const u = new SpeechSynthesisUtterance(txt); u.lang='ko-KR'; u.rate=0.9; window.speechSynthesis.speak(u);
+      } catch(e) { cv.textContent = "통신 실패!"; }
+    }
+
+    let curGame = 'fairytale';
+    function setGame(g, b) { curGame=g; document.querySelectorAll('.game-tab').forEach(x=>x.classList.remove('active')); b.classList.add('active'); initGame(); }
+    function initGame() {
+      const cv = document.getElementById('gameCanvas'); cv.innerHTML = "";
+      if(curGame==='fairytale') {
+        cv.innerHTML = `<div style="font-size:60px;">📖</div><p style="margin:20px 0; font-weight:700;">어떤 동화를 들려줄까?</p><div class="options-grid"><button class="btn" onclick="generateFairyTale('포크레인')">🚜 포크레인</button><button class="btn" onclick="generateFairyTale('소방차')">🚒 소방차</button></div>`;
+      } else if(curGame === 'quiz') {
+        const cars = [['🚜','포크레인'],['🚒','소방차'],['🚓','경찰차']]; const r = cars[Math.floor(Math.random()*3)];
+        cv.innerHTML = `<div style="font-size:100px; filter:brightness(0); opacity:0.1;">${r[0]}</div><p style="margin:20px 0; font-weight:700;">이 차의 이름은?</p><div class="options-grid">${cars.map(c=>`<button class="btn" style="background:var(--surface-solid); color:var(--text); border:1px solid var(--border);" onclick="checkQuiz('${c[1]}','${r[1]}')">${c[1]}</button>`).join('')}</div>`;
+      } else {
+        const icons = ['🚜','🚒','🚓','🚑','🚜','🚒']; const r = icons[Math.floor(Math.random()*icons.length)];
+        cv.innerHTML = `<div id="colorCar" style="font-size:100px; filter:grayscale(1); opacity:0.3; margin-bottom:20px;">${r}</div><div class="options-grid"><button class="btn" style="background:#ff6b6b;" onclick="doColor('#ff6b6b')">빨강</button><button class="btn" style="background:#7aa5d2;" onclick="doColor('#7aa5d2')">파랑</button><button class="btn" style="background:#ffd166; color:#333;" onclick="doColor('#ffd166')">노랑</button><button class="btn" style="background:#82c49b;" onclick="doColor('#82c49b')">초록</button></div>`;
+      }
+    }
+    function checkQuiz(sel, ans) { if(sel===ans) { showToast('정답이야! 우와~ 🎉'); initGame(); } else showToast('어? 다시 생각해보자!'); }
+    function doColor(c) { const car = document.getElementById('colorCar'); car.style.filter='none'; car.style.opacity='1'; car.style.textShadow=`0 0 40px ${c}`; showToast('예쁘게 색칠했어!'); setTimeout(initGame, 1500); }
+
+    function openSettings() { 
+      document.getElementById('keyStatus').innerText = db.settings.apiKey ? "✅ 저장됨" : "❌ 미저장";
+      document.getElementById('apiKeyIn').value = db.settings.apiKey || "";
+      document.getElementById('settingsModal').style.display='flex'; 
+    }
+    function closeSettings() { document.getElementById('settingsModal').style.display='none'; }
+    function saveKey() { db.settings.apiKey = document.getElementById('apiKeyIn').value; save(); closeSettings(); }
+    function deleteKey() { db.settings.apiKey = ""; save(); closeSettings(); }
+    function checkCat(c) { db.catCare[c] = getToday(); save(); showToast('체크 완료!'); }
+    function exportData() {
+      const d = JSON.parse(JSON.stringify(db)); d.settings.apiKey = "";
+      const blob = new Blob([JSON.stringify(d)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = `우리집OS_백업_${getToday()}.json`; a.click();
+    }
+    function importData(input) {
+      const f = input.files[0]; if(!f) return;
+      const r = new FileReader();
+      r.onload = (e) => {
+        try {
+          const imp = JSON.parse(e.target.result);
+          const currentKey = db.settings.apiKey;
+          const currentMood = db.settings.mood || 'day';
+          db = {
+            todosMe: imp.todosMe || [], memosAi: imp.memosAi || [],
+            todosWife: imp.todosWife || [], todosFam: imp.todosFam || [],
+            money: imp.money || [], timeline: imp.timeline || [],
+            catCare: imp.catCare || { noon:'', reum:'' },
+            settings: { apiKey: currentKey, mood: imp.settings?.mood || currentMood }
+          };
+          applyMood(); save(); showToast('복원 완료!'); closeSettings();
+        } catch(err) { showToast('오류!'); }
+      };
+      r.readAsText(f); input.value = "";
+    }
+    window.onload = () => { applyMood(); renderAll(); };
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+  </script>
+</body>
+</html>

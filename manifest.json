@@ -1,0 +1,17 @@
+{
+  "name": "우리집 OS",
+  "short_name": "우리집",
+  "description": "가족이 함께 쓰는 작은 생활 운영체제",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff8e7",
+  "theme_color": "#fff8e7",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
