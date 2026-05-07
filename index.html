@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,6 @@
       --text: #1d1d1f; --text-soft: #69706f; --border: rgba(0, 0, 0, 0.08);
       --primary: #147d64; --primary-soft: rgba(20, 125, 100, 0.1);
       --accent: #e05d3f; --success: #34c759; --warning: #f3a51d; --danger: #e33b32;
-      --uareum-bg: rgba(224, 93, 63, 0.08); --uareum-border: rgba(224, 93, 63, 0.22); --uareum-text: #b34834;
       --sky: #3478f6; --radius-xl: 28px; --radius-lg: 20px; --radius-md: 14px;
       --shadow: 0 10px 40px rgba(20, 30, 28, 0.07); --blur: blur(25px);
     }
@@ -108,10 +107,6 @@
       display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 9px; font-size: 12px;
       line-height: 1; font-weight: 800; border: 1px solid var(--border); white-space: nowrap;
     }
-    .badge-상담 { background: rgba(52, 120, 246, 0.1); color: #245bb8; border-color: rgba(52, 120, 246, 0.22); }
-    .badge-예약 { background: var(--uareum-bg); color: var(--uareum-text); border-color: var(--uareum-border); }
-    .badge-완료 { background: rgba(52, 199, 89, 0.12); color: #207a38; border-color: rgba(52, 199, 89, 0.25); }
-    .badge-확인필요 { background: rgba(243, 165, 29, 0.16); color: #9a6200; border-color: rgba(243, 165, 29, 0.3); }
     .play-nav { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 16px; scrollbar-width: none; }
     .play-nav::-webkit-scrollbar { display: none; }
     .play-tab {
@@ -143,6 +138,90 @@
     }
     body.dark .story-card { background: var(--surface-solid); border-color: var(--border); }
     .story-theme { width: fit-content; border-radius: 999px; padding: 5px 10px; background: rgba(243, 165, 29, 0.16); color: #9a6200; font-size: 12px; font-weight: 900; }
+    #panel-play .kids-world {
+      --k-red: #ff4d4d;
+      --k-orange: #ff9f43;
+      --k-yellow: #ffdb4d;
+      --k-green: #63d471;
+      --k-mint: #4ddfc0;
+      --k-blue: #4da3ff;
+      --k-purple: #a66cff;
+      --k-pink: #ff7ac8;
+      --k-brown: #b9794a;
+      --k-black: #2f3437;
+      --k-white: #ffffff;
+      position: relative; overflow: hidden; padding: 18px; border-radius: 30px;
+      background: linear-gradient(180deg, #bfefff 0%, #e9fbff 56%, #a7e86f 57%, #75c94c 100%);
+      box-shadow: inset 0 -18px 0 rgba(255,255,255,0.18);
+    }
+    #panel-play .kids-world::after {
+      content: ""; position: absolute; left: -6%; right: -6%; bottom: 0; height: 70px;
+      background:
+        radial-gradient(circle at 10% 100%, #63b947 0 34px, transparent 35px),
+        radial-gradient(circle at 28% 100%, #8edc5c 0 42px, transparent 43px),
+        radial-gradient(circle at 48% 100%, #5fb842 0 33px, transparent 34px),
+        radial-gradient(circle at 70% 100%, #8bdd59 0 44px, transparent 45px),
+        radial-gradient(circle at 90% 100%, #65bd45 0 36px, transparent 37px);
+      pointer-events: none;
+    }
+    #panel-play .kids-clouds { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    #panel-play .kids-cloud {
+      position: absolute; width: 120px; height: 42px; border-radius: 999px; background: rgba(255,255,255,0.86);
+      filter: drop-shadow(0 8px 12px rgba(80, 150, 180, 0.12));
+    }
+    #panel-play .kids-cloud::before, #panel-play .kids-cloud::after {
+      content: ""; position: absolute; bottom: 12px; border-radius: 50%; background: inherit;
+    }
+    #panel-play .kids-cloud::before { width: 54px; height: 54px; left: 18px; }
+    #panel-play .kids-cloud::after { width: 66px; height: 66px; right: 14px; }
+    #panel-play .kids-cloud:nth-child(1) { top: 24px; left: 20px; }
+    #panel-play .kids-cloud:nth-child(2) { top: 82px; right: -18px; transform: scale(0.84); opacity: 0.82; }
+    #panel-play .kids-cloud:nth-child(3) { top: 178px; left: 50%; transform: translateX(-50%) scale(0.68); opacity: 0.72; }
+    #panel-play .kids-play-title {
+      position: relative; z-index: 1; margin-bottom: 14px; color: #23516a; font-size: 28px; font-weight: 900;
+      text-align: center; line-height: 1.15; text-shadow: 0 2px 0 rgba(255,255,255,0.7);
+    }
+    #panel-play .kids-hub-card {
+      position: relative; z-index: 1; background: rgba(255,255,255,0.92); border: 3px solid rgba(255,255,255,0.9);
+      border-radius: 24px; padding: 18px; box-shadow: 0 12px 24px rgba(38, 115, 140, 0.14);
+    }
+    #panel-play .voice-card {
+      position: relative; z-index: 1; border: 3px solid rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.84); box-shadow: 0 12px 24px rgba(38, 115, 140, 0.12);
+    }
+    #panel-play .voice-card .card-title { font-size: 17px; color: #23516a; text-transform: none; letter-spacing: 0; }
+    #panel-play .voice-card .btn { min-height: 58px; border-radius: 22px; background: #ff8f3d; box-shadow: 0 8px 0 #d96d21; }
+    #panel-play .play-hub { position: relative; z-index: 1; gap: 16px; }
+    #panel-play .play-card {
+      min-height: 162px; padding: 24px 16px; border-radius: 24px; border: 3px solid rgba(255,255,255,0.9);
+      background: linear-gradient(180deg, #ffffff, #fff7d9); box-shadow: 0 10px 0 rgba(77, 157, 63, 0.18), 0 16px 28px rgba(33, 103, 130, 0.12);
+    }
+    #panel-play .play-card:nth-child(2) { background: linear-gradient(180deg, #ffffff, #dff8ff); }
+    #panel-play .play-card:nth-child(3) { background: linear-gradient(180deg, #ffffff, #ffe7f1); }
+    #panel-play .play-card:nth-child(4) { background: linear-gradient(180deg, #ffffff, #e8f4cf); }
+    #panel-play .play-card:nth-child(5) { background: linear-gradient(180deg, #ffffff, #e8ebff); }
+    #panel-play .play-card.story-play-card { background: linear-gradient(180deg, #ffffff, #ffe1ec); border-color: #ffc7d9; }
+    #panel-play .play-card:active { transform: translateY(4px) scale(0.98); }
+    #panel-play .play-card-icon { font-size: 58px; margin-bottom: 14px; }
+    #panel-play .play-card-title { font-size: 22px; color: #203b55; }
+    #panel-play .play-card-desc { font-size: 15px; color: #54706a; }
+    #panel-play .play-nav {
+      position: relative; z-index: 1; margin: 4px 0 12px; padding-bottom: 8px; opacity: 0.86;
+    }
+    #panel-play .play-tab { padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.82); }
+    #panel-play #interactive-zone, #panel-play #story-zone, #panel-play .card[style*="margin-top: 20px"] { position: relative; z-index: 1; }
+    #panel-play .game-zone { border-color: rgba(255,255,255,0.92); background: #fffef2; box-shadow: 0 10px 0 rgba(77, 157, 63, 0.16); }
+    #panel-play .garage-target { width: 108px; height: 108px; border-color: #ffb33d; background: rgba(255,255,255,0.78); color: #cd7a00; }
+    #panel-play .garage-part { font-size: 76px; }
+    #panel-play .blueprint { font-size: 178px; opacity: 0.14; }
+    #panel-play .memory-grid { background: #f8ffe6; gap: 12px; }
+    #panel-play .story-card {
+      border: 3px solid rgba(255, 200, 105, 0.48); border-radius: 24px; background: linear-gradient(180deg, #fffdf8, #fff2cb);
+      box-shadow: 0 10px 0 rgba(255, 185, 72, 0.18), 0 14px 24px rgba(87, 63, 28, 0.1);
+    }
+    #panel-play .story-card-title { font-size: 21px; font-weight: 900; line-height: 1.25; color: #4b3a20; }
+    #panel-play .story-card-desc { font-size: 14px; color: #6f6044; line-height: 1.45; font-weight: 750; flex: 1; }
+    #panel-play .story-card-actions { display: grid; gap: 8px; }
     .story-reader-controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 14px; }
     .story-reader-controls .btn { min-height: 48px; padding: 10px 8px; font-size: 14px; }
     .story-paragraph {
@@ -169,6 +248,19 @@
     .memory-back { background: white; transform: rotateY(180deg); border: 3px solid var(--primary); }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; }
     .scratch-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 150px; background: radial-gradient(circle, #fff9c4, #ffeb3b); z-index: 1; }
+    .color-game { width: 100%; height: 100%; display: grid; grid-template-rows: auto 1fr; gap: 10px; padding: 12px; background: #fffdf8; }
+    .color-toolbar { display: grid; gap: 8px; }
+    .color-tools { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+    .color-tools::-webkit-scrollbar { display: none; }
+    .color-swatch, .brush-btn, .color-action {
+      flex: 0 0 auto; border: 2px solid rgba(0,0,0,0.14); background: #fff; color: #203b55;
+      border-radius: 14px; min-width: 44px; height: 44px; font-weight: 900; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+    }
+    .color-swatch.active, .brush-btn.active, .color-action.active { border-color: #203b55; box-shadow: 0 0 0 3px rgba(52,120,246,0.18); }
+    .color-swatch { color: transparent; }
+    .color-action { padding: 0 12px; min-width: auto; }
+    #colorCanvas { width: 100%; height: 100%; min-height: 0; border: 3px solid rgba(0,0,0,0.1); border-radius: 18px; background: white; touch-action: none; }
     .book-reader { background: #fffcf2; border: 3px solid #eaddb6; border-radius: 20px; padding: 30px; min-height: 350px; font-size: 20px; line-height: 1.8; color: #5a4634; box-shadow: inset 0 0 40px rgba(234,221,182,0.3); position: relative; }
     .book-title { font-weight: 900; font-size: 26px; color: #8b4513; margin-bottom: 20px; text-align: center; border-bottom: 2px dashed #eaddb6; padding-bottom: 15px; }
     .highlight { color: var(--primary); font-weight: 900; background: linear-gradient(transparent 60%, rgba(20,125,100,0.2) 60%); padding: 0 4px; }
@@ -198,6 +290,10 @@
       .book-reader { padding: 22px; font-size: 18px; }
       .story-card-grid { grid-template-columns: 1fr; }
       .story-reader-controls { grid-template-columns: repeat(2, 1fr); }
+      #panel-play .kids-world { padding: 14px; border-radius: 24px; }
+      #panel-play .play-hub { grid-template-columns: 1fr; }
+      #panel-play .play-card { min-height: 136px; }
+      #panel-play .play-card-icon { font-size: 52px; }
     }
   </style>
 </head>
@@ -229,8 +325,10 @@
       <div class="summary-row" onclick="switchTab('family')">
         <div class="summary-badge"><span>🛒 장보기</span><strong id="todayShoppingCount">0</strong></div>
         <div class="summary-badge"><span>🗓️ 일정</span><strong id="todayEventCount">0</strong></div>
-        <div class="summary-badge"><span>💄 우아림 확인</span><strong id="todayUareumNeedCount">0</strong></div>
+        <div class="summary-badge"><span>📒 오늘 기록</span><strong id="todayQuickNoteCount">0</strong></div>
       </div>
+
+      <div id="todayQuestWidget" class="card"></div>
 
       <div class="bento-grid">
         <div class="card bento-full" onclick="switchTab('play')" style="background: linear-gradient(135deg, var(--sky), var(--primary)); color: white; cursor: pointer; border: none;">
@@ -283,62 +381,77 @@
     </section>
 
     <section id="panel-play" class="panel">
-      <div class="card voice-card">
-        <div class="card-title">시현이 모드</div>
-        <button class="btn" onclick="startChildVoiceMode()">시현이 모드 시작</button>
-      </div>
+      <div class="kids-world">
+        <div class="kids-clouds">
+          <div class="kids-cloud"></div>
+          <div class="kids-cloud"></div>
+          <div class="kids-cloud"></div>
+        </div>
+        <div class="kids-play-title">시현이 놀이터</div>
 
-      <div id="playHubZone" class="play-hub">
-        <div class="play-card" onclick="selectPlayFromHub('garage')">
-          <div class="play-card-icon">🔧</div>
-          <div class="play-card-title">자동차 조립</div>
-          <div class="play-card-desc">부품을 맞춰요</div>
+        <div class="card voice-card">
+          <div class="card-title">시현이 모드</div>
+          <button class="btn" onclick="startChildVoiceMode()">시현이랑 놀기</button>
         </div>
-        <div class="play-card" onclick="selectPlayFromHub('blocks')">
-          <div class="play-card-icon">🧱</div>
-          <div class="play-card-title">와르르 블록</div>
-          <div class="play-card-desc">폭탄 펑펑!</div>
-        </div>
-        <div class="play-card" onclick="selectPlayFromHub('memory')">
-          <div class="play-card-icon">🃏</div>
-          <div class="play-card-title">기억력 카드</div>
-          <div class="play-card-desc">짝을 찾아요</div>
-        </div>
-        <div class="play-card" onclick="selectPlayFromHub('scratch')">
-          <div class="play-card-icon">🎨</div>
-          <div class="play-card-title">매직 스크래치</div>
-          <div class="play-card-desc">쓱쓱 문질러요</div>
-        </div>
-        <div class="play-card bento-full" onclick="selectPlayFromHub('story')" style="background: linear-gradient(135deg, #fff0f5, #ffe4e1); border-color: #ffb6c1;">
-          <div class="play-card-icon">📖</div>
-          <div class="play-card-title" style="color: #d81b60; font-size: 20px;">마법 동화 도서관</div>
-          <div class="play-card-desc">재미나이가 책을 읽어줘요</div>
-        </div>
-      </div>
 
-      <div class="play-nav">
-        <button class="play-tab active" onclick="setPlayMode('garage', this)">🔧 자동차 정비</button>
-        <button class="play-tab" onclick="setPlayMode('blocks', this)">🧱 물리 블록</button>
-        <button class="play-tab" onclick="setPlayMode('memory', this)">🃏 기억력 카드</button>
-        <button class="play-tab" onclick="setPlayMode('scratch', this)">🎨 매직 스크래치</button>
-        <button class="play-tab" onclick="setPlayMode('story', this)">📖 마법 동화</button>
-      </div>
+        <div id="playHubZone" class="play-hub">
+          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('garage')">
+            <div class="play-card-icon">🔧</div>
+            <div class="play-card-title">자동차 조립</div>
+            <div class="play-card-desc">빈칸에 쏙</div>
+          </div>
+          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('blocks')">
+            <div class="play-card-icon">🧱</div>
+            <div class="play-card-title">와르르 블록</div>
+            <div class="play-card-desc">톡 누르면 쿵</div>
+          </div>
+          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('memory')">
+            <div class="play-card-icon">🃏</div>
+            <div class="play-card-title">기억력 카드</div>
+            <div class="play-card-desc">짝을 찾아요</div>
+          </div>
+          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('scratch')">
+            <div class="play-card-icon">🎨</div>
+            <div class="play-card-title">매직 스크래치</div>
+            <div class="play-card-desc">쓱쓱 문질러요</div>
+          </div>
+          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('color')">
+            <div class="play-card-icon">🖌️</div>
+            <div class="play-card-title">색칠 놀이터</div>
+            <div class="play-card-desc">손가락으로 그려요</div>
+          </div>
+          <div class="play-card kids-hub-card bento-full story-play-card" onclick="selectPlayFromHub('story')">
+            <div class="play-card-icon">📖</div>
+            <div class="play-card-title">마법 동화 도서관</div>
+            <div class="play-card-desc">똑똑이가 읽어줘요</div>
+          </div>
+        </div>
 
-      <div id="interactive-zone" class="card" style="padding: 0; background: transparent; border: none; box-shadow: none;">
-        <div class="game-zone" id="gameCanvas"></div>
-      </div>
+        <div class="play-nav">
+          <button class="play-tab active" onclick="setPlayMode('garage', this)">🔧 자동차 정비</button>
+          <button class="play-tab" onclick="setPlayMode('blocks', this)">🧱 물리 블록</button>
+          <button class="play-tab" onclick="setPlayMode('memory', this)">🃏 기억력 카드</button>
+          <button class="play-tab" onclick="setPlayMode('scratch', this)">🎨 매직 스크래치</button>
+          <button class="play-tab" onclick="setPlayMode('color', this)">🖌️ 색칠</button>
+          <button class="play-tab" onclick="setPlayMode('story', this)">📖 마법 동화</button>
+        </div>
 
-      <div id="story-zone" style="display: none;">
+        <div id="interactive-zone" class="card" style="padding: 0; background: transparent; border: none; box-shadow: none;">
+          <div class="game-zone" id="gameCanvas"></div>
+        </div>
+
+        <div id="story-zone" style="display: none;">
         <div class="story-filter-row" id="storyFilterNav">
           <button class="status-badge active" onclick="setStoryFilter('전체')">전체</button>
+          <button class="status-badge" onclick="setStoryFilter('이솝우화')">📖 이솝우화</button>
+          <button class="status-badge" onclick="setStoryFilter('전래동화')">🐯 전래동화</button>
+          <button class="status-badge" onclick="setStoryFilter('세계명작')">🏰 세계명작</button>
           <button class="status-badge" onclick="setStoryFilter('자동차')">🚜 자동차</button>
           <button class="status-badge" onclick="setStoryFilter('공룡')">🦖 공룡</button>
-          <button class="status-badge" onclick="setStoryFilter('동물')">🐰 동물</button>
           <button class="status-badge" onclick="setStoryFilter('우주')">🚀 우주</button>
           <button class="status-badge" onclick="setStoryFilter('바다')">🐳 바다</button>
-          <button class="status-badge" onclick="setStoryFilter('전래')">🏡 전래</button>
-          <button class="status-badge" onclick="setStoryFilter('이솝')">🌿 이솝</button>
           <button class="status-badge" onclick="setStoryFilter('잠자리')">🌙 잠자리</button>
+          <button class="status-badge" onclick="setStoryFilter('생활습관')">🪥 생활습관</button>
           <button class="status-badge" onclick="setStoryFilter('저장한 동화')">💖 저장한 동화</button>
         </div>
 
@@ -355,7 +468,7 @@
             </div>
           </div>
           <div class="story-reader-controls">
-            <button class="btn" onclick="speakBookText()">▶ 읽기</button>
+            <button class="btn" onclick="speakBookText()">▶ 감성 낭독</button>
             <button class="btn outline" onclick="pauseStoryReading()">⏸ 일시정지</button>
             <button class="btn outline" onclick="nextStoryParagraph()">⏭ 다음 문단</button>
             <button class="btn outline" onclick="stopStoryReading()">⏹ 정지</button>
@@ -364,9 +477,10 @@
         </div>
       </div>
 
-      <div class="card" style="margin-top: 20px;">
-        <div class="card-title">시현이 자동차 도감 (<span id="collCount">0</span>/12)</div>
-        <div id="collGrid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; font-size: 32px; text-align: center;"></div>
+        <div class="card" style="margin-top: 20px;">
+          <div class="card-title">시현이 자동차 도감 (<span id="collCount">0</span>/12)</div>
+          <div id="collGrid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; font-size: 32px; text-align: center;"></div>
+        </div>
       </div>
     </section>
 
@@ -403,31 +517,6 @@
           <button class="btn small" onclick="addFamilyMemo()">저장</button>
         </div>
         <div id="familyMemoList"></div>
-      </div>
-
-      <div class="card" style="border-color: var(--uareum-border); background: color-mix(in srgb, var(--uareum-bg) 70%, var(--surface));">
-        <div class="card-title">💄 우아림 메모</div>
-        <p class="item-meta" style="margin:-6px 0 14px;">상담, 예약, 확인할 내용을 가볍게 남겨요.</p>
-        <div style="display:flex; gap:6px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none;">
-          <button class="status-badge" style="background:var(--surface-solid); color:var(--text);" onclick="setUareumFilter('전체')">전체</button>
-          <button class="status-badge badge-상담" onclick="setUareumFilter('상담')">상담</button>
-          <button class="status-badge badge-예약" onclick="setUareumFilter('예약')">예약</button>
-          <button class="status-badge badge-확인필요" onclick="setUareumFilter('확인필요')">확인필요</button>
-          <button class="status-badge badge-완료" onclick="setUareumFilter('완료')">완료</button>
-        </div>
-        <div class="row">
-          <input type="date" id="uareumDateIn" style="margin:0;">
-          <input type="text" id="uareumNameIn" placeholder="이름/별칭" style="margin:0;">
-        </div>
-        <select id="uareumStatusIn">
-          <option>상담</option>
-          <option>예약</option>
-          <option>완료</option>
-          <option>확인필요</option>
-        </select>
-        <textarea id="uareumMemoIn" placeholder="메모" rows="3"></textarea>
-        <button class="btn" onclick="addUareumMemo()">우아림 메모 저장</button>
-        <div id="uareumMemoList" style="margin-top: 12px;"></div>
       </div>
     </section>
 
@@ -518,10 +607,12 @@
         <div id="advancedSettingsBox" class="hidden-settings" style="display:none;">
           <p style="font-size: 13px; color: var(--text-soft); margin-bottom: 5px; font-weight: 700;">똑똑이 연결 키</p>
           <p style="font-size: 11px; color: var(--text-soft); margin-bottom: 10px;">
-            동화 만들기, 가족 요약, 우아림 메모 정리, 가계부 요약에 사용됩니다.
+            동화 만들기, 가족 요약, 가계부 요약, 가족 기록 정리에 사용됩니다.
           </p>
           <input type="password" id="apiKeyIn" placeholder="연결 키 입력" style="font-size: 14px; padding: 12px; margin-bottom: 10px;">
+          <div id="apiKeyStatus" class="item-meta" style="margin:0 0 10px;">연결 키 상태를 확인하는 중입니다.</div>
           <button class="btn outline" onclick="saveApiKey()">똑똑이 연결 키 저장</button>
+          <button class="btn outline" style="margin-top:10px;" onclick="deleteApiKey()">똑똑이 연결 키 삭제</button>
           <button class="btn outline" style="margin-top:10px;" onclick="toggleVoiceGuide()">음성 안내 켜기/끄기</button>
         </div>
       </div>
@@ -543,7 +634,7 @@
 
     function defaultFamilyNexusState() {
       return {
-        version: "2.0.0",
+        version: "2.6.1",
         family: {
           homeName: "우리집",
           members: [
@@ -552,7 +643,16 @@
             { id: "sihyeon", name: "시현", role: "child" }
           ]
         },
-        progress: { level: 1, exp: 0, badges: [], streaks: {} },
+        progress: {
+          level: 1,
+          exp: 0,
+          badges: [],
+          streaks: {},
+          lastLoginDate: "",
+          dailyQuests: [],
+          dailyQuestCompletedDate: "",
+          todayQuestVoiceDate: ""
+        },
         today: { missions: [], briefingHistory: [], quickNotes: [] },
         playground: {
           collection: [], stickers: [], unlockedItems: [], gameRecords: [],
@@ -561,7 +661,7 @@
             settings: { heroName: "시현", defaultTheme: "자동차", defaultLength: "long", defaultTone: "dad" }
           }
         },
-        familyBoard: { events: [], memos: [], shopping: [], promises: [], places: [], uareumMemos: [] },
+        familyBoard: { events: [], memos: [], shopping: [], promises: [], places: [] },
         money: { records: [], categories: ["식비", "생활", "시현", "외식", "차량", "의료", "기타"], purchaseHold: [] },
         memories: { dailyNotes: [], childQuotes: [], growthLogs: [], familyDiaries: [], conditionLogs: [] },
         assistant: { enabled: false, savedPromptMode: "family", history: [] },
@@ -569,14 +669,13 @@
           theme: "light", hiddenAiKeySaved: false,
           ai: {
             provider: "gemini",
-            model: "gemini-3.0-flash",
+            model: "gemini-2.5-flash",
             keySaved: false,
             assistantName: "똑똑이",
             defaultTone: "warm-family",
             roles: {
               writer: true,
               familyAssistant: true,
-              uareumAssistant: true,
               moneyAssistant: true,
               memoryWriter: true
             }
@@ -591,7 +690,7 @@
       const base = defaultFamilyNexusState();
       if (!raw || typeof raw !== 'object') return base;
 
-      if (raw.version === "2.0.0") {
+      if (raw.version && String(raw.version).startsWith("2.")) {
         const merged = { ...base, ...raw };
         merged.family = { ...base.family, ...(raw.family || {}) };
         merged.progress = { ...base.progress, ...(raw.progress || {}) };
@@ -619,7 +718,6 @@
       base.familyBoard.memos = Array.isArray(raw.memos) ? raw.memos : [];
       base.familyBoard.shopping = Array.isArray(raw.shopping) ? raw.shopping : base.familyBoard.shopping;
       base.familyBoard.events = Array.isArray(raw.events) ? raw.events : base.familyBoard.events;
-      base.familyBoard.uareumMemos = Array.isArray(raw.uareumMemos) ? raw.uareumMemos : base.familyBoard.uareumMemos;
       base.memories.childQuotes = Array.isArray(raw.childQuotes) ? raw.childQuotes : base.memories.childQuotes;
       base.memories.familyDiaries = Array.isArray(raw.familyDiaries) ? raw.familyDiaries : base.memories.familyDiaries;
       base.playground.collection = Array.isArray(raw.collection) ? raw.collection : [];
@@ -639,6 +737,10 @@
     function migrateFamilyNexusDB(state) {
       state.progress.level = Number(state.progress.level || state.legacy?.level) || 1;
       state.progress.exp = Number(state.progress.exp || state.legacy?.exp) || 0;
+      state.progress.lastLoginDate = state.progress.lastLoginDate || "";
+      state.progress.dailyQuests = Array.isArray(state.progress.dailyQuests) ? state.progress.dailyQuests : [];
+      state.progress.dailyQuestCompletedDate = state.progress.dailyQuestCompletedDate || "";
+      state.progress.todayQuestVoiceDate = state.progress.todayQuestVoiceDate || "";
       state.today.missions = Array.isArray(state.today.missions) ? state.today.missions : [];
       if (Array.isArray(state.money)) state.money = { records: state.money, categories: defaultFamilyNexusState().money.categories, purchaseHold: [] };
       state.money = { ...defaultFamilyNexusState().money, ...(state.money || {}) };
@@ -647,7 +749,6 @@
       state.familyBoard = { ...defaultFamilyNexusState().familyBoard, ...(state.familyBoard || {}) };
       state.familyBoard.shopping = Array.isArray(state.familyBoard.shopping) ? state.familyBoard.shopping : [];
       state.familyBoard.events = Array.isArray(state.familyBoard.events) ? state.familyBoard.events : [];
-      state.familyBoard.uareumMemos = Array.isArray(state.familyBoard.uareumMemos) ? state.familyBoard.uareumMemos : [];
       state.memories = { ...defaultFamilyNexusState().memories, ...(state.memories || {}) };
       state.memories.conditionLogs = Array.isArray(state.memories.conditionLogs) ? state.memories.conditionLogs : [];
       state.memories.childQuotes = Array.isArray(state.memories.childQuotes) ? state.memories.childQuotes : [];
@@ -678,8 +779,11 @@
         ...defaultFamilyNexusState().settings.ai.roles,
         ...(state.settings.ai.roles || {})
       };
+      if (!state.settings.ai.model || state.settings.ai.model === "gemini-3.0-flash" || state.settings.ai.model === "gemini-3-flash-preview") {
+        state.settings.ai.model = "gemini-2.5-flash";
+      }
       if (state.settings.hiddenAiKeySaved) state.settings.ai.keySaved = true;
-      state.version = "2.0.0";
+      state.version = "2.6.1";
       return state;
     }
 
@@ -701,7 +805,6 @@
     const collection = () => db.playground.collection;
     const shoppingItems = () => db.familyBoard.shopping;
     const familyEvents = () => db.familyBoard.events;
-    const uareumMemos = () => db.familyBoard.uareumMemos;
     const childQuotes = () => db.memories.childQuotes;
     const familyDiaries = () => db.memories.familyDiaries;
 
@@ -728,25 +831,20 @@
       { id: 'forklift', i: '🏗️', n: '지게차', s: '삐리리!' }
     ];
 
-    const STATIC_STORIES = [
-      { t: "무적의 킹 포크레인", c: "옛날 공사장에 아주 힘이 센 포크레인 킹이 살았어요. 어느 날 킹이 흙더미에 바퀴가 빠져 움직이지 못했어요. 그때 <span class='highlight'>시현</span>이가 멋진 모자를 쓰고 나타났어요. 시현이가 버튼을 누르자 킹은 흙더미를 번쩍 들어 올렸답니다. 모두가 박수를 치며 시현이를 최고의 공사장 대장이라고 불렀어요." },
-      { t: "불꽃 소방차 대장", c: "마을의 커다란 나무에 작은 불꽃이 피어났어요. 삐뽀삐뽀 소리를 내며 소방차 대장이 달려왔지만 물 호스가 꼬여 있었어요. 그때 <span class='highlight'>시현</span>이가 차분하게 호스를 풀어 주었어요. 시현이가 물 발사 버튼을 누르자 시원한 물줄기가 뿜어져 불꽃을 꺼 주었답니다. 소방차 대장은 시현이에게 고맙다고 인사했어요." }
-    ];
-
     let curPlayMode = null;
     let physicsRaf;
     let blocks = [];
     let voiceUnlocked = false;
-    let currentUareumFilter = '전체';
     function switchTab(id) {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById('panel-' + id).classList.add('active');
       document.querySelector(`[data-tab="${id}"]`)?.classList.add('active');
       window.scrollTo(0, 0);
+      if (id === 'today') announceTodayQuestOnce();
       if (id !== 'play') {
         cancelAnimationFrame(physicsRaf);
-        stopStoryReading();
+        if (window.stopStoryReading) window.stopStoryReading(true);
       }
       if (id === 'play' && curPlayMode === 'blocks') startBlocksPhysics();
       if (id === 'play' && !curPlayMode) {
@@ -757,7 +855,62 @@
         if (interactiveZone) interactiveZone.style.display = 'none';
         if (storyZone) storyZone.style.display = 'none';
       }
-      if (id === 'play' && voiceUnlocked && db.settings.voiceGuide.autoRead) speakGuide('시현아, 놀이터야. 하고 싶은 놀이를 눌러 봐.');
+      if (id === 'play' && voiceUnlocked && db.settings.voiceGuide.autoRead) speakGuide('시현아, 놀이터야. 어떤 놀이를 해볼까?');
+    }
+
+    function checkDailyQuests() {
+      const today = getToday();
+      if (db.progress.lastLoginDate === today && Array.isArray(db.progress.dailyQuests) && db.progress.dailyQuests.length) return;
+      const candidates = [
+        { text: "자동차 한 대 고치기", type: "car", target: 1 },
+        { text: "블록 10개 떨어뜨리기", type: "block", target: 10 },
+        { text: "멋진 그림 저장하기", type: "color", target: 1 }
+      ];
+      db.progress.dailyQuests = candidates.map(q => ({
+        id: `${q.type}_${today}`,
+        text: q.text,
+        type: q.type,
+        count: 0,
+        target: q.target,
+        done: false
+      }));
+      db.progress.lastLoginDate = today;
+      db.progress.dailyQuestCompletedDate = "";
+    }
+
+    function completeAllDailyQuests() {
+      const today = getToday();
+      const quests = db.progress.dailyQuests || [];
+      if (db.progress.dailyQuestCompletedDate === today || !quests.length || !quests.every(q => q.done)) return;
+      db.progress.dailyQuestCompletedDate = today;
+      fireConfetti();
+      speakPraise("우와! 오늘 미션을 다 했어! 대단해!", true);
+      gainExp(30);
+    }
+
+    function updateQuestProgress(type, amount = 1) {
+      const quests = db.progress.dailyQuests || [];
+      if (db.progress.dailyQuestCompletedDate === getToday()) return;
+      const quest = quests.find(q => q.type === type && !q.done);
+      if (!quest) return;
+      quest.count = Math.min(quest.target, Number(quest.count || 0) + amount);
+      if (quest.count >= quest.target) {
+        quest.done = true;
+        speakPraise("미션 하나 성공!", true);
+        gainExp(10);
+      }
+      completeAllDailyQuests();
+      save();
+    }
+
+    function announceTodayQuestOnce() {
+      const today = getToday();
+      const quests = db.progress.dailyQuests || [];
+      const left = quests.filter(q => !q.done).length;
+      if (!db.settings.voiceGuide.enabled || db.progress.todayQuestVoiceDate === today || left === 0) return;
+      speakGuide(`시현아, 오늘 미션이 ${left}개 남았어.`, true);
+      db.progress.todayQuestVoiceDate = today;
+      save();
     }
 
     function toggleTheme() {
@@ -766,6 +919,56 @@
       localStorage.setItem('MY_NEXUS_THEME', db.settings.theme);
       save();
     }
+
+    function isStoryPlaying() {
+      return Boolean(window.storyReadState && window.storyReadState.isReading);
+    }
+    window.isStoryPlaying = isStoryPlaying;
+
+    function pickRandom(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+    window.pickRandom = pickRandom;
+
+    function praiseRandom(type = 'default') {
+      const map = {
+        default: [
+          '시현이 최고!',
+          '정말 잘했어!',
+          '우와, 멋지다!',
+          '또 해볼까?',
+          '시현이가 해냈어!'
+        ],
+        car: [
+          '착! 자동차가 딱 맞았어!',
+          '정비사 시현이 최고!',
+          '자동차가 아주 좋아해!'
+        ],
+        block: [
+          '와르르! 정말 멋지게 무너졌어!',
+          '블록 놀이 대성공!',
+          '쿵쿵, 재미있다!'
+        ],
+        card: [
+          '딩동! 짝을 찾았어.',
+          '시현이 기억력 최고!',
+          '같은 자동차를 찾았네!'
+        ],
+        color: [
+          '시현이는 정말 멋진 화가구나!',
+          '색깔이 반짝반짝 예쁘다!',
+          '그림이 아주 멋져!'
+        ],
+        story: [
+          '동화를 잘 들었어.',
+          '시현이 이야기 나라에 왔구나.',
+          '다음 이야기도 골라볼까?'
+        ]
+      };
+      const list = map[type] || map.default;
+      speakPraise(pickRandom(list), true);
+    }
+    window.praiseRandom = praiseRandom;
 
     function speakText(text, options = {}) {
       if (!('speechSynthesis' in window)) {
@@ -777,46 +980,81 @@
       utterance.lang = options.lang || 'ko-KR';
       utterance.rate = options.rate || db.settings.voiceGuide.rate || 0.85;
       utterance.pitch = options.pitch || db.settings.voiceGuide.pitch || 1.1;
+      utterance.volume = options.volume || 1;
       window.speechSynthesis.speak(utterance);
     }
-    function speakGuide(text) {
+
+    function speakGuide(text, force = false) {
+      if (!force && isStoryPlaying()) return;
       if (!db.settings.voiceGuide.enabled) return;
-      speakText(text, { rate: 0.86, pitch: 1.08 });
+      speakText(text, { rate: 0.88, pitch: 1.08 });
     }
+    window.speakGuide = speakGuide;
+
+    function speakPraise(text, force = false) {
+      if (!force && isStoryPlaying()) return;
+      if (!db.settings.voiceGuide.enabled) return;
+      speakText(text, { rate: 0.96, pitch: 1.2 });
+    }
+    window.speakPraise = speakPraise;
+
+    function speakSoft(text, force = false) {
+      if (!force && isStoryPlaying()) return;
+      if (!db.settings.voiceGuide.enabled) return;
+      speakText(text, { rate: 0.82, pitch: 1.0 });
+    }
+    window.speakSoft = speakSoft;
+
+    function speakGameCue(text, force = false) {
+      if (!force && isStoryPlaying()) return;
+      if (!db.settings.voiceGuide.enabled) return;
+      speakText(text, { rate: 0.98, pitch: 1.14 });
+    }
+    window.speakGameCue = speakGameCue;
+
     function speakStory(text) {
       speakText(text, { rate: 0.82, pitch: 1.06 });
     }
+
     function stopSpeaking() {
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     }
+
     function toggleVoiceGuide() {
       db.settings.voiceGuide.enabled = !db.settings.voiceGuide.enabled;
       save();
-      alert(db.settings.voiceGuide.enabled ? '음성 안내를 켰어요.' : '음성 안내를 껐어요.');
+      if (db.settings.voiceGuide.enabled) speakGuide('음성 안내를 켰어.');
+      else stopSpeaking();
     }
+
     function speakButtonGuide(label, description) {
       speakGuide(`${label}. ${description}`);
     }
+
     function startChildVoiceMode() {
       voiceUnlocked = true;
-      speakGuide('시현아, 안녕. 자동차 정비, 블록 놀이, 카드 놀이, 그림 긁기, 동화책이 있어. 누르면 시작해.');
+      speakGuide('시현아, 놀이터야. 어떤 놀이를 해볼까?');
     }
 
     function gainExp(amt) {
       db.progress.exp += amt;
+      let leveledUp = false;
       while (db.progress.exp >= 100) {
         db.progress.level++;
         db.progress.exp -= 100;
-        fireConfetti();
-        alert(`우리집 레벨 업! Lv.${db.progress.level}`);
+        leveledUp = true;
       }
       save();
+      if (leveledUp) {
+        fireConfetti();
+        speakPraise('우리집 레벨이 올라갔어. 우와! 시현이 최고!');
+      }
     }
     function unlockCar(carIcon) {
       if (!collection().includes(carIcon)) {
         collection().push(carIcon);
         fireConfetti();
-        alert('새 자동차가 도감에 등록됐어요!');
+        speakPraise('우와! 새 자동차가 도감에 들어왔어!');
         save();
       }
     }
@@ -839,10 +1077,26 @@
       }
     }
 
+    window.selectPlayFromHub = function(mode) {
+      const tabLabel = {
+        garage: '정비',
+        blocks: '블록',
+        memory: '카드',
+        scratch: '스크래치',
+        color: '색칠',
+        story: '동화'
+      }[mode];
+      document.querySelectorAll('.play-tab').forEach(t => {
+        if(tabLabel && t.innerText.includes(tabLabel)) {
+          setPlayMode(mode, t);
+        }
+      });
+    };
+
     function setPlayMode(mode, btnElement) {
       curPlayMode = mode;
       document.querySelectorAll('.play-tab').forEach(t => t.classList.remove('active'));
-      btnElement?.classList.add('active');
+      if(btnElement) btnElement.classList.add('active');
       const interactiveZone = document.getElementById('interactive-zone');
       const storyZone = document.getElementById('story-zone');
       const canvasZone = document.getElementById('gameCanvas');
@@ -856,24 +1110,38 @@
         blocks: ['물리 블록', '화면을 누르면 블록이 떨어져.'],
         memory: ['기억력 카드', '같은 자동차 카드 두 장을 찾아 봐.'],
         scratch: ['매직 스크래치', '손가락으로 문질러 숨어 있는 자동차를 찾아 봐.'],
+        color: ['색칠 놀이터', '색을 고르고 손가락으로 그림을 그려 봐.'],
         story: ['마법 동화', '책을 고르고 읽어주기 버튼을 눌러 봐.']
       };
-      if (voiceUnlocked) speakButtonGuide(labels[mode][0], labels[mode][1]);
       if (mode === 'story') {
         interactiveZone.style.display = 'none';
         storyZone.style.display = 'block';
-        setStoryFilter(window.currentStoryFilter || '전체');
+        if(window.setStoryFilter) setStoryFilter(window.currentStoryFilter || '전체');
+        speakGuide('읽고 싶은 동화를 골라 봐.', true);
       } else {
+        if (window.stopStoryReading) window.stopStoryReading(true);
         interactiveZone.style.display = 'block';
         storyZone.style.display = 'none';
-        if (mode === 'garage') initGarageGame(canvasZone);
-        else if (mode === 'blocks') initBlocksGame(canvasZone);
-        else if (mode === 'memory') initMemoryGame(canvasZone);
-        else if (mode === 'scratch') initScratchGame(canvasZone);
+        if (mode === 'garage') {
+          initGarageGame(canvasZone);
+        }
+        else if (mode === 'blocks') {
+          initBlocksGame(canvasZone);
+        }
+        else if (mode === 'memory') {
+          initMemoryGame(canvasZone);
+        }
+        else if (mode === 'scratch') {
+          initScratchGame(canvasZone);
+        }
+        else if (mode === 'color') {
+          initColorGame(canvasZone);
+        }
       }
     }
 
     function initGarageGame(container) {
+      speakGuide('자동차를 빈칸까지 끌고 가 보자.');
       container.innerHTML = '';
       const targetCar = CARS[Math.floor(Math.random() * 6)];
       const bp = document.createElement('div');
@@ -893,7 +1161,7 @@
       container.appendChild(part);
 
       let isDragging = false;
-      part.onpointerdown = (e) => { isDragging = true; e.preventDefault(); };
+      part.onpointerdown = (e) => { isDragging = true; e.preventDefault(); speakGameCue(pickRandom(['좋아, 천천히 움직이면 돼.', '영차 영차!'])); };
       window.onpointermove = (e) => {
         if (!isDragging) return;
         const rect = container.getBoundingClientRect();
@@ -905,22 +1173,33 @@
         isDragging = false;
         const tRect = targetBox.getBoundingClientRect();
         const pRect = part.getBoundingClientRect();
-        if (!(pRect.right < tRect.left || pRect.left > tRect.right || pRect.bottom < tRect.top || pRect.top > tRect.bottom)) {
+        const xPad = tRect.width * 0.25;
+        const yPad = tRect.height * 0.25;
+        const easyTarget = {
+          left: tRect.left - xPad,
+          right: tRect.right + xPad,
+          top: tRect.top - yPad,
+          bottom: tRect.bottom + yPad
+        };
+        if (!(pRect.right < easyTarget.left || pRect.left > easyTarget.right || pRect.bottom < easyTarget.top || pRect.top > easyTarget.bottom)) {
           targetBox.classList.add('filled');
           part.style.pointerEvents = 'none';
           part.style.left = targetBox.style.left;
           part.style.top = targetBox.style.top;
           part.style.transform = 'translate(-50%, -20%) scale(1.5)';
+          fireConfetti();
+          speakPraise('착! 자동차가 딱 맞았어. 시현이 최고!');
+          updateQuestProgress('car', 1);
           setTimeout(() => {
-            alert(`수리 완료! ${targetCar.n} 출동! ${targetCar.s}`);
             gainExp(15); unlockCar(targetCar.i);
             initGarageGame(container);
-          }, 500);
+          }, 1800);
         }
       };
     }
 
     function initBlocksGame(container) {
+      speakGuide('화면을 톡 누르면 블록이 떨어져.');
       container.innerHTML = `<canvas id="blockCanvas"></canvas><div class="physics-ui"><button class="bomb-btn" onclick="bombBlocks()">💥 와르르!</button></div>`;
       const canvas = document.getElementById('blockCanvas');
       canvas.width = container.clientWidth;
@@ -928,12 +1207,14 @@
       blocks = [];
       canvas.onpointerdown = (e) => {
         const rect = canvas.getBoundingClientRect();
-        const colors = ['#e33b32', '#34c759', '#3478f6', '#f3a51d', '#147d64'];
+        const colors = ['#ff3b30', '#34c759', '#0a84ff', '#ffcc00', '#bf5af2', '#ff9f0a'];
         blocks.push({
           x: e.clientX - rect.left - 25, y: e.clientY - rect.top - 25, w: 50, h: 50,
           vx: (Math.random() - 0.5) * 5, vy: 0, color: colors[Math.floor(Math.random() * colors.length)]
         });
+        speakGameCue('쿵!');
         gainExp(1);
+        updateQuestProgress('block', 1);
       };
       startBlocksPhysics();
     }
@@ -970,12 +1251,14 @@
     window.bombBlocks = function() {
       if (blocks.length === 0) return;
       fireConfetti();
+      speakPraise('와르르! 정말 멋지게 무너졌어!');
       blocks.forEach(b => { b.vy = -Math.random() * 20 - 10; b.vx = (Math.random() - 0.5) * 30; });
       gainExp(10);
       setTimeout(() => { blocks = []; }, 1000);
     };
 
     function initMemoryGame(container) {
+      speakGuide('카드를 하나 골라 볼까? 같은 자동차를 찾아 보자.');
       container.innerHTML = '';
       container.style.overflow = 'auto';
       const grid = document.createElement('div');
@@ -994,12 +1277,15 @@
           if (lockBoard || card.classList.contains('flipped')) return;
           card.classList.add('flipped');
           flippedCards.push(card);
+          speakGameCue('이거?');
           if (flippedCards.length === 2) {
             lockBoard = true;
             if (flippedCards[0].dataset.id === flippedCards[1].dataset.id) {
               matchedCount += 2; flippedCards = []; lockBoard = false; gainExp(5);
-              if (matchedCount === deck.length) setTimeout(() => { alert('우와! 짝을 모두 맞췄어요!'); fireConfetti(); gainExp(30); initMemoryGame(container); }, 500);
+              speakPraise('딩동! 짝을 찾았어.');
+              if (matchedCount === deck.length) setTimeout(() => { fireConfetti(); speakPraise('우와! 카드를 모두 맞췄어!'); gainExp(30); initMemoryGame(container); }, 1500);
             } else {
+              speakSoft('괜찮아, 다시 찾아보자.');
               setTimeout(() => {
                 flippedCards[0].classList.remove('flipped');
                 flippedCards[1].classList.remove('flipped');
@@ -1013,6 +1299,7 @@
     }
 
     function initScratchGame(container) {
+      speakGuide('손가락으로 쓱쓱 문질러 봐.');
       const targetCar = CARS[Math.floor(Math.random() * CARS.length)];
       container.innerHTML = `<div class="scratch-bg">${targetCar.i}</div><canvas id="scratchCanvas"></canvas>`;
       const canvas = document.getElementById('scratchCanvas');
@@ -1028,6 +1315,7 @@
       ctx.globalCompositeOperation = 'destination-out';
       let isDrawing = false;
       let erasedPixels = 0;
+      let gaveHint = false;
       const scratch = (e) => {
         if (!isDrawing) return;
         const rect = canvas.getBoundingClientRect();
@@ -1035,20 +1323,182 @@
         const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
         ctx.beginPath(); ctx.arc(x, y, 35, 0, Math.PI * 2); ctx.fill();
         erasedPixels++;
+        if (erasedPixels > 50 && !gaveHint) {
+          speakGameCue('조금 더 문질러 볼까?');
+          gaveHint = true;
+        }
         if (erasedPixels > 200) {
           isDrawing = false;
           canvas.style.transition = "opacity 1s";
           canvas.style.opacity = "0";
+          fireConfetti();
+          speakPraise('짜잔! 숨어 있던 자동차를 찾았어.');
           setTimeout(() => {
-            alert(`짜잔! ${targetCar.n} 발견!`);
             gainExp(20); unlockCar(targetCar.i);
             initScratchGame(container);
-          }, 1000);
+          }, 1800);
         }
       };
       canvas.onpointerdown = () => isDrawing = true;
       window.onpointerup = () => isDrawing = false;
       canvas.onpointermove = scratch;
+    }
+
+    function initColorGame(container) {
+      speakGuide('색을 고르고 손가락으로 그림을 그려 봐.');
+      const colors = [
+        { name: '빨간색', value: 'var(--k-red)' },
+        { name: '주황색', value: 'var(--k-orange)' },
+        { name: '노란색', value: 'var(--k-yellow)' },
+        { name: '초록색', value: 'var(--k-green)' },
+        { name: '민트색', value: 'var(--k-mint)' },
+        { name: '파란색', value: 'var(--k-blue)' },
+        { name: '보라색', value: 'var(--k-purple)' },
+        { name: '분홍색', value: 'var(--k-pink)' },
+        { name: '갈색', value: 'var(--k-brown)' },
+        { name: '검은색', value: 'var(--k-black)' }
+      ];
+      const brushSizes = [10, 20, 35, 55];
+      let currentColor = colors[0].value;
+      let brushSize = brushSizes[1];
+      let isEraser = false;
+      let isDrawing = false;
+      let lastPoint = null;
+
+      container.innerHTML = `
+        <div class="color-game">
+          <div class="color-toolbar">
+            <div class="color-tools" id="colorPalette">
+              ${colors.map((color, index) => `
+                <button class="color-swatch${index === 0 ? ' active' : ''}" type="button" data-color="${color.value}" data-name="${color.name}" title="${color.name}" aria-label="${color.name}" style="background:${color.value};">색</button>
+              `).join('')}
+            </div>
+            <div class="color-tools" id="brushPalette">
+              ${brushSizes.map(size => `
+                <button class="brush-btn${size === brushSize ? ' active' : ''}" type="button" data-size="${size}" aria-label="붓 ${size}">${size}</button>
+              `).join('')}
+              <button class="color-action" type="button" id="eraserBtn">지우개</button>
+              <button class="color-action" type="button" id="clearColorBtn">전체 지우기</button>
+              <button class="color-action" type="button" id="saveColorBtn">저장</button>
+            </div>
+          </div>
+          <canvas id="colorCanvas"></canvas>
+        </div>
+      `;
+
+      const canvas = document.getElementById('colorCanvas');
+      const ctx = canvas.getContext('2d');
+      const colorRoot = document.querySelector('#panel-play .kids-world');
+
+      function resolveColor(colorValue) {
+        if (!colorValue.startsWith('var(')) return colorValue;
+        const propName = colorValue.replace('var(', '').replace(')', '').trim();
+        return getComputedStyle(colorRoot).getPropertyValue(propName).trim() || '#111111';
+      }
+
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const scale = window.devicePixelRatio || 1;
+        const snapshot = document.createElement('canvas');
+        snapshot.width = canvas.width;
+        snapshot.height = canvas.height;
+        if (canvas.width && canvas.height) snapshot.getContext('2d').drawImage(canvas, 0, 0);
+        canvas.width = Math.max(1, Math.floor(rect.width * scale));
+        canvas.height = Math.max(1, Math.floor(rect.height * scale));
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, rect.width, rect.height);
+        if (snapshot.width && snapshot.height) ctx.drawImage(snapshot, 0, 0, snapshot.width / scale, snapshot.height / scale);
+      }
+
+      function pointFromEvent(e) {
+        const rect = canvas.getBoundingClientRect();
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      }
+
+      function drawTo(point) {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = isEraser ? '#ffffff' : resolveColor(currentColor);
+        ctx.lineWidth = brushSize;
+        ctx.beginPath();
+        ctx.moveTo(lastPoint.x, lastPoint.y);
+        ctx.lineTo(point.x, point.y);
+        ctx.stroke();
+        lastPoint = point;
+      }
+
+      function drawDot(point) {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = isEraser ? '#ffffff' : resolveColor(currentColor);
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, brushSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      resizeCanvas();
+
+      document.querySelectorAll('#colorPalette .color-swatch').forEach(btn => {
+        btn.onclick = () => {
+          currentColor = btn.dataset.color;
+          isEraser = false;
+          document.querySelectorAll('#colorPalette .color-swatch').forEach(b => b.classList.remove('active'));
+          document.getElementById('eraserBtn').classList.remove('active');
+          btn.classList.add('active');
+          speakGameCue(`${btn.dataset.name}으로 그려볼까?`);
+        };
+      });
+
+      document.querySelectorAll('#brushPalette .brush-btn').forEach(btn => {
+        btn.onclick = () => {
+          brushSize = Number(btn.dataset.size);
+          document.querySelectorAll('#brushPalette .brush-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          speakGameCue('붓 크기를 바꿨어.');
+        };
+      });
+
+      document.getElementById('eraserBtn').onclick = () => {
+        isEraser = true;
+        document.querySelectorAll('#colorPalette .color-swatch').forEach(b => b.classList.remove('active'));
+        document.getElementById('eraserBtn').classList.add('active');
+        speakGameCue('지우개로 살살 지워 보자.');
+      };
+
+      document.getElementById('clearColorBtn').onclick = () => {
+        const rect = canvas.getBoundingClientRect();
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, rect.width, rect.height);
+        speakGameCue('깨끗해졌어. 다시 그려보자.');
+      };
+
+      document.getElementById('saveColorBtn').onclick = () => {
+        fireConfetti();
+        praiseRandom('color');
+        gainExp(20);
+        updateQuestProgress('color', 1);
+      };
+
+      canvas.onpointerdown = (e) => {
+        e.preventDefault();
+        canvas.setPointerCapture(e.pointerId);
+        isDrawing = true;
+        lastPoint = pointFromEvent(e);
+        drawDot(lastPoint);
+      };
+      canvas.onpointermove = (e) => {
+        if (!isDrawing) return;
+        e.preventDefault();
+        drawTo(pointFromEvent(e));
+      };
+      canvas.onpointerup = (e) => {
+        isDrawing = false;
+        lastPoint = null;
+        if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+      };
+      canvas.onpointercancel = canvas.onpointerup;
+      window.addEventListener('resize', resizeCanvas);
     }
 
     function addTodo() {
@@ -1122,9 +1572,7 @@
       save();
     }
 
-    function addShopping() {
-      addShoppingItem();
-    }
+    window.addShopping = addShoppingItem;
 
     function addFamilyEvent() {
       const dateInput = document.getElementById('eventDateIn');
@@ -1138,23 +1586,7 @@
       save();
     }
 
-    function addPromise() {
-      addFamilyEvent();
-    }
-
-    function addUareumMemo() {
-      const date = document.getElementById('uareumDateIn').value || getToday();
-      const name = document.getElementById('uareumNameIn').value.trim();
-      const status = document.getElementById('uareumStatusIn').value;
-      const memo = document.getElementById('uareumMemoIn').value.trim();
-      if (!name && !memo) return;
-      uareumMemos().unshift({ id: Date.now(), date, name, status, memo });
-      document.getElementById('uareumDateIn').value = "";
-      document.getElementById('uareumNameIn').value = "";
-      document.getElementById('uareumStatusIn').value = "상담";
-      document.getElementById('uareumMemoIn').value = "";
-      save();
-    }
+    window.addPromise = addFamilyEvent;
 
     function addChildQuote() {
       const input = document.getElementById('childQuoteIn');
@@ -1176,9 +1608,7 @@
       save();
     }
 
-    function addDailyNote() {
-      addFamilyDiary();
-    }
+    window.addDailyNote = addFamilyDiary;
 
     function toggleAdvancedSettings() {
       const box = document.getElementById('advancedSettingsBox');
@@ -1193,8 +1623,25 @@
       db.settings.hiddenAiKeySaved = true;
       db.settings.ai.keySaved = true;
       document.getElementById('apiKeyIn').value = "";
+      updateApiKeyStatus();
       save();
-      alert('똑똑이 연결 키를 저장했어요.');
+      speakGuide('똑똑이 연결 키를 저장했어요.');
+    }
+
+    function deleteApiKey() {
+      localStorage.removeItem('GEMINI_3_FLASH_KEY');
+      db.settings.hiddenAiKeySaved = false;
+      db.settings.ai.keySaved = false;
+      updateApiKeyStatus();
+      save();
+      speakGuide('똑똑이 연결 키를 삭제했어요.');
+    }
+
+    function updateApiKeyStatus() {
+      const el = document.getElementById('apiKeyStatus');
+      if (!el) return;
+      const saved = Boolean(localStorage.getItem('GEMINI_3_FLASH_KEY'));
+      el.textContent = saved ? '연결 키 저장됨' : '연결 키 없음';
     }
 
     function delItem(collectionName, id) {
@@ -1202,7 +1649,7 @@
         todos: missions(), money: moneyRecords(), vault: purchaseHold(), health: conditionLogs(),
         quickNotes: db.today.quickNotes, familyMemos: db.familyBoard.memos,
         shopping: shoppingItems(), events: familyEvents(), promises: db.familyBoard.promises,
-        uareumMemos: uareumMemos(), childQuotes: childQuotes(), familyDiaries: familyDiaries(),
+        childQuotes: childQuotes(), familyDiaries: familyDiaries(),
         dailyNotes: db.memories.dailyNotes
       };
       const list = maps[collectionName];
@@ -1212,9 +1659,7 @@
       save();
     }
 
-    function delData(collectionName, id) {
-      delItem(collectionName, id);
-    }
+    window.delData = delItem;
 
     function toggleShoppingItem(id) {
       const item = shoppingItems().find(x => x.id === id);
@@ -1222,9 +1667,7 @@
       save();
     }
 
-    function toggleShopping(id) {
-      toggleShoppingItem(id);
-    }
+    window.toggleShopping = toggleShoppingItem;
 
     function toggleMission(id) {
       const item = missions().find(x => x.id === id);
@@ -1258,10 +1701,36 @@
       const today = getToday();
       const todayShoppingCount = document.getElementById('todayShoppingCount');
       const todayEventCount = document.getElementById('todayEventCount');
-      const todayUareumNeedCount = document.getElementById('todayUareumNeedCount');
       if (todayShoppingCount) todayShoppingCount.innerText = shoppingItems().filter(x => !x.done).length;
       if (todayEventCount) todayEventCount.innerText = familyEvents().filter(x => x.date >= today).length;
-      if (todayUareumNeedCount) todayUareumNeedCount.innerText = uareumMemos().filter(x => x.status === '확인필요').length;
+      const todayQuickNoteCount = document.getElementById('todayQuickNoteCount');
+      if (todayQuickNoteCount) todayQuickNoteCount.innerText = db.today.quickNotes.filter(x => x.date === today).length;
+      renderTodayQuestWidget();
+    }
+
+    function renderTodayQuestWidget() {
+      const widget = document.getElementById('todayQuestWidget');
+      if (!widget) return;
+      const quests = db.progress.dailyQuests || [];
+      if (!quests.length) {
+        widget.innerHTML = `
+          <div class="card-title">오늘 시현이 미션</div>
+          <div class="item-meta">오늘 미션을 준비하고 있어요.</div>
+        `;
+        return;
+      }
+      widget.innerHTML = `
+        <div class="card-title">오늘 시현이 미션</div>
+        ${quests.map(q => `
+          <div class="list-item">
+            <div class="item-body">
+              <div class="item-title">${escapeHtml(q.text)}</div>
+              <div class="item-meta">${Math.min(Number(q.count || 0), Number(q.target || 1))}/${q.target}</div>
+            </div>
+            ${q.done ? '<span class="status-badge" style="background:rgba(52,199,89,0.12); color:#207a38; border-color:rgba(52,199,89,0.25);">완료</span>' : ''}
+          </div>
+        `).join('')}
+      `;
     }
 
     function renderFamily() {
@@ -1295,23 +1764,6 @@
       if (familyMemoList) familyMemoList.innerHTML = db.familyBoard.memos.slice(0, 8).map(m => `
         <div class="list-item"><div class="item-body"><div class="item-title">${escapeHtml(m.text)}</div><div class="item-meta">${m.date}</div></div><button class="del-btn" onclick="delData('familyMemos', ${m.id})">삭제</button></div>
       `).join('') || `<div class="item-meta">가족 메모를 남겨 보세요.</div>`;
-
-      const uareumMemoList = document.getElementById('uareumMemoList');
-      if (uareumMemoList) {
-        const filteredMemos = currentUareumFilter === '전체'
-          ? uareumMemos()
-          : uareumMemos().filter(m => m.status === currentUareumFilter);
-        uareumMemoList.innerHTML = filteredMemos.slice(0, 15).map(m => `
-          <div class="list-item">
-            <div class="item-body">
-              <div class="item-title">${escapeHtml(m.name || '이름 없음')} <span class="status-badge badge-${escapeHtml(m.status)}">${escapeHtml(m.status)}</span></div>
-              <div class="item-meta">${m.date}</div>
-              <div style="margin-top:8px; line-height:1.5;">${escapeHtml(m.memo).replace(/\n/g, '<br>')}</div>
-            </div>
-            <button class="del-btn" onclick="delData('uareumMemos', ${m.id})">삭제</button>
-          </div>
-        `).join('') || `<div class="item-meta">우아림 상담, 예약 메모가 없습니다.</div>`;
-      }
     }
 
     function renderMoney() {
@@ -1395,14 +1847,29 @@
       if (portalLv) portalLv.innerText = db.progress.level;
       if (portalExpText) portalExpText.innerText = `${db.progress.exp}/100`;
       if (portalExpFill) portalExpFill.style.width = db.progress.exp + '%';
-      if (collGrid) collGrid.innerHTML = CARS.map(c => `
-        <div style="opacity:${collection().includes(c.i) ? 1 : 0.15}; transition:0.3s; filter:${collection().includes(c.i) ? 'drop-shadow(0 5px 10px rgba(0,0,0,0.2))' : 'none'};">${c.i}</div>
-      `).join('');
+      if (collGrid) {
+        const ownedCars = collection();
+        collGrid.innerHTML = CARS.map((c, index) => {
+          const owned = ownedCars.includes(c.i);
+          return `
+            <div data-car-index="${index}" style="opacity:${owned ? 1 : 0.15}; transition:0.3s; filter:${owned ? 'drop-shadow(0 5px 10px rgba(0,0,0,0.2))' : 'none'}; cursor:${owned ? 'pointer' : 'default'};">${c.i}</div>
+          `;
+        }).join('');
+        collGrid.querySelectorAll('[data-car-index]').forEach(item => {
+          item.onclick = () => {
+            const car = CARS[Number(item.dataset.carIndex)];
+            if (!car || !collection().includes(car.i)) return;
+            speakGameCue(`${car.n}. ${car.s}`);
+          };
+        });
+      }
       if (collCount) collCount.innerText = collection().length;
     }
 
     function exportData() {
       refreshLegacyCompatibility();
+      db.settings.hiddenAiKeySaved = Boolean(localStorage.getItem('GEMINI_3_FLASH_KEY'));
+      db.settings.ai.keySaved = Boolean(localStorage.getItem('GEMINI_3_FLASH_KEY'));
       const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -1414,13 +1881,21 @@
     window.onload = () => {
       const storedTheme = db.settings.theme || localStorage.getItem('MY_NEXUS_THEME');
       if (storedTheme === 'dark') document.body.classList.add('dark');
+      checkDailyQuests();
       save();
-      renderAll();
+      updateApiKeyStatus();
     };
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(error => {
+          console.warn('ServiceWorker registration failed:', error);
+        });
+      });
+    }
   </script>
   <script src="./js/ttokttoki-engine.js"></script>
   <script src="./js/story-data.js"></script>
   <script src="./js/story-world.js"></script>
 </body>
 </html>
-

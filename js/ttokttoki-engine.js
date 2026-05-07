@@ -1,6 +1,6 @@
 /*
   Family Nexus Ttokttoki AI Engine
-  역할: 동화, 가족 브리핑, 우아림, 가계부, 기록에 공통으로 쓰는 AI 호출 레이어
+  역할: 동화, 가족 브리핑, 가계부, 기록에 공통으로 쓰는 AI 호출 레이어
 */
 
 function getTtokttokiApiKey() {
@@ -8,10 +8,10 @@ function getTtokttokiApiKey() {
 }
 
 function getTtokttokiModel() {
-  return window.db?.settings?.ai?.model || 'gemini-3.0-flash';
+  return window.db?.settings?.ai?.model || 'gemini-2.5-flash';
 }
 
-async function callTtokttokiAi({ role, prompt, temperature = 0.8, expectJson = false }) {
+async function callTtokttokiAi({ role, prompt, temperature = 1.0, expectJson = false, useSearch = false }) {
   const apiKey = getTtokttokiApiKey();
   if (!apiKey) throw new Error('AI_API_KEY_MISSING');
 
@@ -20,23 +20,28 @@ async function callTtokttokiAi({ role, prompt, temperature = 0.8, expectJson = f
 
   const finalPrompt = `${buildTtokttokiRolePrefix(role)}\n\n${prompt}`;
 
+  const requestBody = {
+    generationConfig: {
+      temperature,
+      responseMimeType: expectJson ? "application/json" : "text/plain"
+    },
+    contents: [
+      {
+        parts: [
+          { text: finalPrompt }
+        ]
+      }
+    ]
+  };
+
+  if (useSearch) {
+    requestBody.tools = [{ googleSearch: {} }];
+  }
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      generationConfig: {
-        temperature,
-        responseMimeType: expectJson ? "application/json" : "text/plain"
-      },
-      tools: [{ googleSearch: {} }],
-      contents: [
-        {
-          parts: [
-            { text: finalPrompt }
-          ]
-        }
-      ]
-    })
+    body: JSON.stringify(requestBody)
   });
 
   if (!response.ok) throw new Error('AI_REQUEST_FAILED');
@@ -51,23 +56,19 @@ async function callTtokttokiAi({ role, prompt, temperature = 0.8, expectJson = f
 function buildTtokttokiRolePrefix(role) {
   const roles = {
     writer: `
-너는 4살 남자아이 시현이를 위한 세계 최고의 유아동 오디오북 동화 작가다. 
-시각, 청각, 촉각 묘사를 풍부하게 하고, 아이들이 좋아하는 의성어와 의태어를 적극적으로 사용한다. 
-시현이가 푹 빠져들 수 있도록 흥미진진하게 쓰되, 무섭거나 잔인하거나 자극적인 내용은 절대 금지한다. 
-반드시 5분 이상 낭독할 수 있는 2,500자 이상의 긴 호흡을 가진 장문 동화를 작성하며, 문장은 리듬감 있고 짧게 끊어 읽기 좋게 구성한다.
+너는 4살 남자아이 시현이를 위한 따뜻한 유아동 오디오북 동화 작가다.
+동화는 부모가 아이에게 읽어주는 글이므로 문장은 짧고 부드럽게 쓰며, 성우처럼 감정을 담아 읽기 좋도록 쉼표, 느낌표, 물음표를 자연스럽게 배치한다.
+자동차, 공룡, 동물, 우주, 바다, 전래, 이솝, 잠자리 같은 소재를 아이 눈높이에 맞게 풀어낸다.
+무섭거나 잔인하거나 자극적인 장면은 금지한다.
+시현이가 직접 관찰하고, 선택하고, 작은 문제를 해결하는 구조로 쓴다.
+의성어와 의태어를 자연스럽게 넣되 과하게 반복하지 않는다.
+출력 형식이 JSON으로 요구되면 반드시 JSON만 출력한다.
 `,
 
     familyAssistant: `
 너는 우리집 넥서스의 메인 가족 비서 “똑똑이”다. 
 아빠, 엄마, 시현이가 함께 쓰는 가족 생활(일정, 장보기, 브리핑 등)을 다정하고 센스 있게 챙긴다. 
 사용자가 날씨, 맛집, 카페, 여행지, 최신 정보 등을 물어보면 반드시 '실시간 구글 검색'을 활용해 검증된 최신 정보를 찾아보고, 특히 장소 추천 시 '평점(별점)이 높고 리뷰가 좋은 곳' 위주로 엄선하여 이유와 함께 추천한다. 대답은 항상 친절하고 명확하며 실용적이어야 한다.
-`,
-
-    uareumAssistant: `
-너는 아내의 비즈니스인 '우아림'을 돕는 전속 상담 비서 “똑똑이”다. 
-고객의 상담, 예약, 확인 필요 내용들을 한눈에 보기 좋게, 부드럽고 예쁜 어조로 요약하고 정리해 준다. 
-'CRM, 영업, 매출, 메이크업' 같은 딱딱하거나 지정되지 않은 단어는 절대 쓰지 않으며, 오직 “우아림”이라는 명칭만 사용한다. 
-바쁜 아내를 위해 핵심만 정확히 짚어주되, 톤앤매너는 항상 따뜻하고 우아하게 유지한다.
 `,
 
     moneyAssistant: `
