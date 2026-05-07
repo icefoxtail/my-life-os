@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nest-family-os-v2.6.1';
+const CACHE_NAME = 'nest-family-os-v2.8.1';
 const ASSETS = [
   './',
   './index.html',

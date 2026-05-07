@@ -47,12 +47,51 @@
 
   function getPauseAfterSentence(sentence, basePause) {
     const value = String(sentence || '');
-    if (value.includes('...') || value.includes('…')) return basePause + 450;
-    if (value.includes('?')) return basePause + 300;
-    if (value.includes('!')) return basePause + 180;
+    if (value.includes('...') || value.includes('…')) return basePause + 700;
+    if (value.includes('?')) return basePause + 400;
+    if (value.includes('!')) return basePause + 300;
     const commaCount = (value.match(/,/g) || []).length;
-    if (commaCount >= 2) return basePause + 120;
+    if (commaCount >= 2) return basePause + 160;
     return basePause;
+  }
+
+  function defaultVoiceAudioMeta() {
+    return {
+      status: "none",
+      provider: "",
+      voiceId: "",
+      audioKey: "",
+      createdAt: null
+    };
+  }
+
+  function renderReaderVoiceControls() {
+    return '';
+  }
+
+  function getStoryCoverClass(theme) {
+    const value = String(theme || '');
+    if (value.includes('자동차')) return 'cover-auto';
+    if (value.includes('공룡')) return 'cover-dino';
+    if (value.includes('우주')) return 'cover-space';
+    if (value.includes('바다')) return 'cover-sea';
+    if (value.includes('잠자리')) return 'cover-bedtime';
+    if (value.includes('전래')) return 'cover-folk';
+    if (value.includes('세계명작') || value.includes('명작')) return 'cover-classic';
+    return 'cover-classic';
+  }
+
+  function getStoryCoverEmoji(theme) {
+    const value = String(theme || '');
+    if (value.includes('자동차')) return '🚜';
+    if (value.includes('공룡')) return '🦖';
+    if (value.includes('우주')) return '🚀';
+    if (value.includes('바다')) return '🐳';
+    if (value.includes('잠자리')) return '🌙';
+    if (value.includes('전래')) return '🐯';
+    if (value.includes('세계명작') || value.includes('명작')) return '🏰';
+    if (value.includes('생활습관')) return '🪥';
+    return '📖';
   }
 
   function normalizeStory(story) {
@@ -81,7 +120,7 @@
     window.currentStoryFilter = filter;
     const nav = document.getElementById('storyFilterNav');
     nav?.querySelectorAll('.status-badge').forEach(btn => {
-      btn.classList.toggle('active', btn.innerText.includes(filter) || (filter === '전체' && btn.innerText.trim() === '전체'));
+      btn.classList.toggle('active', btn.dataset.theme === filter || btn.innerText.includes(filter) || (filter === '전체' && btn.innerText.includes('전체')));
     });
     renderStoryLibrary();
   }
@@ -112,20 +151,25 @@
       const saved = Boolean(story.source || story.paragraphs || story.savedId || story.content);
       const readId = story.id || story.savedId;
       const canRead = saved || story.hasFullContent || Boolean(story.content);
+      const coverClass = getStoryCoverClass(story.theme);
+      const coverEmoji = getStoryCoverEmoji(story.theme);
       return `
         <div class="story-card kids-story-card">
-          <div class="story-theme">${escapeHtml(story.theme || '저장')}</div>
-          <div class="story-card-title">${escapeHtml(story.title)}</div>
-          <div class="story-card-desc">${escapeHtml(story.desc || story.summary || '')}</div>
-          <div class="item-meta">예상 낭독 ${story.readingMinutes || 5}분 · ${canRead ? '바로 읽기 가능' : '새 이야기 만들기'}</div>
-          <div class="story-card-actions">
-            <button class="btn small outline" style="width:100%; min-height:48px;" onclick="readStoryById('${readId}')" ${canRead ? '' : 'disabled'}>▶ 감성 낭독</button>
-            <button class="btn small ai-btn" style="width:100%; min-height:48px;" onclick="generateStoryFromSeed('${story.sourceId || story.id}')">✨ 새 이야기 만들기</button>
+          <div class="story-cover ${coverClass}"><span class="cover-emoji">${coverEmoji}</span></div>
+          <div class="story-card-body">
+            <div class="story-theme">${escapeHtml(story.theme || '저장')}</div>
+            <div class="story-card-title">${escapeHtml(story.title)}</div>
+            <div class="story-card-desc">${escapeHtml(story.desc || story.summary || '')}</div>
+            <div class="item-meta">예상 낭독 ${story.readingMinutes || 5}분 · ${canRead ? '바로 읽기 가능' : '새 이야기 만들기'}</div>
+            <div class="story-card-actions">
+              <button class="btn small outline" style="width:100%; min-height:56px;" onclick="readStoryById('${readId}')" ${canRead ? '' : 'disabled'}>▶ 감성 낭독</button>
+              <button class="btn small ai-btn" style="width:100%; min-height:56px;" onclick="generateStoryFromSeed('${story.sourceId || story.id}')">✨ 새 이야기 만들기</button>
+            </div>
+            ${saved
+              ? `<button class="del-btn" style="width:100%; margin-top:2px;" onclick="deleteSavedStory('${readId}')">삭제</button>`
+              : `<button class="btn small outline" style="width:100%; min-height:48px;" onclick="readStoryById('${readId}'); saveCurrentStory();" ${canRead ? '' : 'disabled'}>💖 저장</button>`
+            }
           </div>
-          ${saved
-            ? `<button class="del-btn" style="width:100%; margin-top:2px;" onclick="deleteSavedStory('${readId}')">삭제</button>`
-            : `<button class="btn small outline" style="width:100%; min-height:48px;" onclick="readStoryById('${readId}'); saveCurrentStory();" ${canRead ? '' : 'disabled'}>💖 저장</button>`
-          }
         </div>
       `;
     }).join('') || `<div class="item-meta bento-full" style="text-align:center; padding:30px;">해당하는 동화가 없어요.</div>`;
@@ -158,6 +202,7 @@
     `).join('');
     document.getElementById('bookView').innerHTML = `
       <div class="book-title">${escapeHtml(normalized.title)}</div>
+      ${renderReaderVoiceControls()}
       <div class="item-meta" style="text-align:center; margin:-10px 0 18px;">${escapeHtml(normalized.theme)} · 약 ${normalized.readingMinutes}분 · ${escapeHtml(normalized.characters.join(', '))}</div>
       <div id="bookContentText">${paragraphsHtml}</div>
     `;
@@ -505,6 +550,7 @@ ${JSON.stringify(story)}
         paragraphs: parsed.paragraphs,
         readingMinutes: Math.max(5, Math.ceil((parsed.paragraphs.join('')).length / 500)),
         createdAt: Date.now(),
+        voiceAudio: defaultVoiceAudioMeta(),
         source: 'ai'
       };
 
@@ -552,6 +598,7 @@ ${JSON.stringify(story)}
       paragraphs: cur.paragraphs,
       readingMinutes: cur.readingMinutes,
       createdAt: Date.now(),
+      voiceAudio: defaultVoiceAudioMeta(),
       source: cur.source || 'built-in'
     });
     save();
@@ -578,7 +625,7 @@ ${JSON.stringify(story)}
       desc: '기본 동화',
       content: book.paragraphs.join(' ')
     };
-    document.getElementById('bookView').innerHTML = `<div class="book-title">${book.title}</div><div id="bookContentText">${book.paragraphs.map(p => `<p class="story-paragraph">${p}</p>`).join('')}</div>`;
+    document.getElementById('bookView').innerHTML = `<div class="book-title">${book.title}</div>${renderReaderVoiceControls()}<div id="bookContentText">${book.paragraphs.map(p => `<p class="story-paragraph">${p}</p>`).join('')}</div>`;
   }
 
   async function generateGeminiStory() {

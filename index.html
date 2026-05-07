@@ -68,12 +68,19 @@
     .metric { font-size: 13px; font-weight: 900; color: var(--text-soft); }
     .big-number { font-size: 30px; font-weight: 900; color: var(--primary); line-height: 1; }
     .btn {
-      background: var(--primary); color: white; border: none; padding: 16px; border-radius: var(--radius-md);
-      font-weight: 850; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
-      gap: 8px; width: 100%; transition: 0.2s; box-shadow: 0 4px 15px var(--primary-soft);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 88%, white), var(--primary));
+      color: white; border: 3px solid rgba(255,255,255,0.72); padding: 16px; border-radius: 20px;
+      font-weight: 900; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%; transition: transform 0.12s, box-shadow 0.12s, filter 0.2s;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.2), inset 0 3px 0 rgba(255,255,255,0.4);
+      -webkit-text-stroke: 1px rgba(0,0,0,0.1); text-shadow: 0 1px 0 rgba(0,0,0,0.18);
     }
-    .btn:active { transform: scale(0.96); }
-    .btn.outline { background: var(--surface-solid); border: 2px solid var(--border); color: var(--text); box-shadow: none; }
+    .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+    .btn:disabled { filter: grayscale(0.12); transform: none; box-shadow: 0 6px 0 rgba(0,0,0,0.16), inset 0 3px 0 rgba(255,255,255,0.3); }
+    .btn.outline {
+      background: linear-gradient(180deg, #ffffff, #eef4f4); border: 3px solid rgba(0,0,0,0.08); color: var(--text);
+      box-shadow: 0 6px 0 rgba(0,0,0,0.2), inset 0 3px 0 rgba(255,255,255,0.4);
+    }
     .btn.small { width: auto; padding: 12px 14px; font-size: 14px; }
     input, select, textarea {
       width: 100%; border: 2px solid var(--border); background: var(--surface-solid); color: var(--text);
@@ -126,18 +133,67 @@
     .play-card-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
     .play-card-desc { font-size: 13px; font-weight: 750; color: var(--text-soft); }
     .story-card-item { background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-    .story-filter-row { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 15px; padding-bottom: 6px; scrollbar-width: none; }
+    .story-filter-row {
+      position: relative; display: flex; gap: 10px; overflow-x: auto; margin-bottom: 18px; padding: 8px 4px 10px;
+      scrollbar-width: none; mask-image: linear-gradient(to right, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+      background: linear-gradient(to bottom, rgba(233,251,255,0.95), transparent 22%, transparent 78%, rgba(233,251,255,0.95));
+    }
+    .story-filter-row::before, .story-filter-row::after {
+      content: ""; position: sticky; top: 0; width: 18px; flex: 0 0 18px; z-index: 2; pointer-events: none;
+    }
+    .story-filter-row::before { left: 0; background: linear-gradient(to right, #e9fbff, transparent); }
+    .story-filter-row::after { right: 0; background: linear-gradient(to left, #e9fbff, transparent); }
     .story-filter-row::-webkit-scrollbar { display: none; }
-    .story-filter-row .status-badge { font-size: 14px; padding: 9px 13px; min-height: 38px; background: var(--surface-solid); color: var(--text); cursor: pointer; }
-    .story-filter-row .status-badge.active { background: var(--text); color: var(--surface-solid); border-color: var(--text); }
-    .story-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .story-filter-row .status-badge {
+      flex: 0 0 auto; height: 50px; min-width: 70px; padding: 5px 12px; background: #ffffff; color: #203b55; cursor: pointer;
+      border: 3px solid rgba(255,255,255,0.82); border-radius: 20px; flex-direction: column; justify-content: center; gap: 3px;
+      box-shadow: 0 5px 0 rgba(0,0,0,0.14), inset 0 2px 0 rgba(255,255,255,0.62); transition: 0.18s;
+    }
+    .story-filter-row .status-badge span { font-size: 18px; line-height: 1; }
+    .story-filter-row .status-badge small { font-size: 11px; line-height: 1; font-weight: 900; }
+    .story-filter-row .status-badge.active { border: 3px solid white; transform: scale(1.1); color: white; background: var(--sky); }
+    .story-filter-row .status-badge[data-theme="자동차"].active { background: #ff9f43; }
+    .story-filter-row .status-badge[data-theme="공룡"].active { background: #63d471; }
+    .story-filter-row .status-badge[data-theme="우주"].active { background: #4da3ff; }
+    .story-filter-row .status-badge[data-theme="바다"].active { background: #35bda8; }
+    .story-filter-row .status-badge[data-theme="잠자리"].active { background: #8f67e8; }
+    .story-filter-row .status-badge[data-theme="전래동화"].active { background: #d09742; }
+    .story-filter-row .status-badge[data-theme="세계명작"].active { background: #e874af; }
+    .story-card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     .story-card {
-      background: linear-gradient(180deg, #fffdf6, var(--surface-solid)); border: 2px solid rgba(139, 92, 38, 0.14);
-      border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px;
-      min-height: 220px;
+      background: linear-gradient(90deg, #fffaf0, #ffffff); border: 4px solid rgba(139, 92, 38, 0.18);
+      border-radius: 18px; padding: 14px; box-shadow: 0 10px 0 rgba(125, 94, 47, 0.13), 0 18px 28px rgba(87, 63, 28, 0.1);
+      display: flex; flex-direction: column; gap: 12px; min-height: 170px; overflow: hidden;
     }
     body.dark .story-card { background: var(--surface-solid); border-color: var(--border); }
     .story-theme { width: fit-content; border-radius: 999px; padding: 5px 10px; background: rgba(243, 165, 29, 0.16); color: #9a6200; font-size: 12px; font-weight: 900; }
+    .story-cover {
+      height: 110px; border-radius: 14px; position: relative; overflow: hidden; align-self: stretch;
+      box-shadow: inset 0 3px 0 rgba(255,255,255,0.42), 0 6px 0 rgba(0,0,0,0.12);
+    }
+    .cover-emoji { position: absolute; inset: 0; display: grid; place-items: center; font-size: 72px; z-index: 2; filter: drop-shadow(0 5px 0 rgba(0,0,0,0.12)); }
+    .story-card-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .cover-auto { background: linear-gradient(135deg, #fff3cd, #ffe4b5); }
+    .cover-auto::before { content:""; position:absolute; width:28px; height:28px; border-radius:50%; background:rgba(255,159,67,0.36); left:18px; top:14px; box-shadow: 178px 52px 0 rgba(255,159,67,0.24), 84px 16px 0 rgba(255,255,255,0.65); }
+    .cover-auto::after { content:""; position:absolute; left:18px; right:18px; bottom:20px; height:8px; border-radius:8px; background:repeating-linear-gradient(90deg, rgba(176,121,74,0.34) 0 18px, transparent 18px 30px); transform:rotate(-5deg); }
+    .cover-dino { background: linear-gradient(135deg, #d4edda, #c3e6cb); }
+    .cover-dino::before { content:""; position:absolute; left:20px; right:20px; bottom:-18px; height:55px; border-radius:50% 50% 0 0; background:rgba(99,212,113,0.52); box-shadow: 48px -56px 0 -24px rgba(255,255,255,0.7), 142px -42px 0 -20px rgba(255,255,255,0.55); }
+    .cover-dino::after { content:""; position:absolute; right:26px; top:20px; width:16px; height:16px; border-radius:50%; background:rgba(47,52,55,0.18); box-shadow:-38px 26px 0 rgba(47,52,55,0.13), -82px -4px 0 rgba(47,52,55,0.10); }
+    .cover-space { background: linear-gradient(135deg, #cce5ff, #b8daff); }
+    .cover-space::before { content:""; position:absolute; inset:12px; background:radial-gradient(circle at 15% 20%, white 0 3px, transparent 4px), radial-gradient(circle at 78% 26%, white 0 2px, transparent 3px), radial-gradient(circle at 65% 76%, white 0 3px, transparent 4px); }
+    .cover-space::after { content:""; position:absolute; left:28px; top:52px; width:94px; height:18px; border:4px solid rgba(77,163,255,0.72); border-radius:50%; transform:rotate(-14deg); }
+    .cover-sea { background: linear-gradient(135deg, #d6fff8, #4ddfc0); }
+    .cover-sea::before { content:""; position:absolute; inset:auto -10px 10px; height:38px; background: radial-gradient(ellipse at 18px 4px, transparent 18px, white 19px 28px, transparent 29px); background-size: 58px 34px; opacity:0.9; }
+    .cover-sea::after { content:""; position:absolute; inset:14px 18px auto auto; width:7px; height:7px; border-radius:50%; background:white; box-shadow:-42px 18px 0 white, -18px 46px 0 white, 26px 38px 0 white, -70px 60px 0 white; }
+    .cover-bedtime { background: linear-gradient(135deg, #eadcff, #8f67e8); }
+    .cover-bedtime::before { content:""; position:absolute; top:18px; left:22px; width:42px; height:42px; border-radius:50%; background:#ffdb4d; box-shadow:12px 0 0 #8f67e8; }
+    .cover-bedtime::after { content:""; position:absolute; left:18px; right:14px; bottom:20px; height:34px; background: radial-gradient(circle at 20px 22px, white 0 20px, transparent 21px), radial-gradient(circle at 52px 14px, white 0 24px, transparent 25px), radial-gradient(circle at 90px 24px, white 0 18px, transparent 19px); opacity:0.86; }
+    .cover-folk { background: linear-gradient(135deg, #f5d6a1, #d09742); }
+    .cover-folk::before { content:""; position:absolute; top:16px; right:24px; width:42px; height:42px; border-radius:50%; background:#e84f3d; }
+    .cover-folk::after { content:""; position:absolute; left:0; right:0; bottom:0; height:52px; background: linear-gradient(135deg, transparent 50%, #735331 51%) 0 0/48px 52px, linear-gradient(225deg, transparent 50%, #5f452e 51%) 0 0/48px 52px; }
+    .cover-classic { background: linear-gradient(135deg, #ffd4e8, #ff9ccc); }
+    .cover-classic::before { content:""; position:absolute; left:22px; right:22px; bottom:18px; height:58px; background: linear-gradient(#fff 0 0) 0 20px/26px 38px no-repeat, linear-gradient(#fff 0 0) 32px 0/34px 58px no-repeat, linear-gradient(#fff 0 0) 72px 16px/28px 42px no-repeat; clip-path: polygon(0 100%,0 25%,12% 25%,12% 0,24% 0,24% 25%,48% 25%,48% 0,60% 0,60% 25%,100% 25%,100% 100%); }
+    .cover-classic::after { content:"✦"; position:absolute; top:14px; right:28px; color:white; font-size:26px; text-shadow:-46px 32px 0 white, -18px 56px 0 white; }
     #panel-play .kids-world {
       --k-red: #ff4d4d;
       --k-orange: #ff9f43;
@@ -193,18 +249,42 @@
     #panel-play .voice-card .btn { min-height: 58px; border-radius: 22px; background: #ff8f3d; box-shadow: 0 8px 0 #d96d21; }
     #panel-play .play-hub { position: relative; z-index: 1; gap: 16px; }
     #panel-play .play-card {
-      min-height: 162px; padding: 24px 16px; border-radius: 24px; border: 3px solid rgba(255,255,255,0.9);
-      background: linear-gradient(180deg, #ffffff, #fff7d9); box-shadow: 0 10px 0 rgba(77, 157, 63, 0.18), 0 16px 28px rgba(33, 103, 130, 0.12);
+      min-height: 180px; padding: 14px; border-radius: 28px; border: 4px solid var(--toy-accent, #ff9f43);
+      background: linear-gradient(135deg, white 0%, #f0f0f0 100%);
+      box-shadow: 0 10px 0 rgba(0,0,0,0.14), inset 0 4px 0 rgba(255,255,255,0.8), 0 18px 28px rgba(33, 103, 130, 0.12);
+      display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
     }
-    #panel-play .play-card:nth-child(2) { background: linear-gradient(180deg, #ffffff, #dff8ff); }
-    #panel-play .play-card:nth-child(3) { background: linear-gradient(180deg, #ffffff, #ffe7f1); }
-    #panel-play .play-card:nth-child(4) { background: linear-gradient(180deg, #ffffff, #e8f4cf); }
-    #panel-play .play-card:nth-child(5) { background: linear-gradient(180deg, #ffffff, #e8ebff); }
-    #panel-play .play-card.story-play-card { background: linear-gradient(180deg, #ffffff, #ffe1ec); border-color: #ffc7d9; }
-    #panel-play .play-card:active { transform: translateY(4px) scale(0.98); }
-    #panel-play .play-card-icon { font-size: 58px; margin-bottom: 14px; }
+    #panel-play .play-card:nth-child(1) { --toy-accent: #ff9f43; }
+    #panel-play .play-card:nth-child(2) { --toy-accent: #ffdb4d; }
+    #panel-play .play-card:nth-child(3) { --toy-accent: #63d471; }
+    #panel-play .play-card:nth-child(4) { --toy-accent: #24315d; }
+    #panel-play .play-card:nth-child(5) { --toy-accent: #ff7ac8; }
+    #panel-play .play-card.story-play-card { --toy-accent: #a66cff; }
+    #panel-play .play-card:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.14), inset 0 2px 0 rgba(255,255,255,0.65); }
+    #panel-play .play-card-icon { display: none; }
     #panel-play .play-card-title { font-size: 22px; color: #203b55; }
     #panel-play .play-card-desc { font-size: 15px; color: #54706a; }
+    .toy-scene {
+      position: relative; min-height: 84px; border-radius: 22px; overflow: hidden; clip-path: inset(0 round 22px);
+      box-shadow: inset 0 4px 0 rgba(255,255,255,0.34), inset 0 -8px 0 rgba(0,0,0,0.06);
+    }
+    .toy-car { background: radial-gradient(circle at 18% 22%, rgba(255,255,255,0.48), transparent 26%), #ff9f43; }
+    .toy-car::before { content:""; position:absolute; left:12px; right:12px; bottom:18px; height:24px; border-radius:999px; background:#fff; box-shadow: 18px 10px 0 -8px #ff9f43, 48px 10px 0 -8px #ff9f43, 78px 10px 0 -8px #ff9f43; opacity:0.92; }
+    .toy-car::after { content:""; position:absolute; right:26px; top:18px; width:50px; height:14px; border-radius:999px; background:white; transform:rotate(-35deg); box-shadow:-15px 18px 0 -2px white, 20px 18px 0 -2px white; }
+    .toy-construction { background: repeating-linear-gradient(135deg, #ffdb4d 0 16px, #2f3437 16px 28px); }
+    .toy-construction::before { content:""; position:absolute; left:34px; top:18px; width:78px; height:48px; border:10px solid #ff9f43; border-left-color:transparent; border-bottom-color:transparent; border-radius:50%; transform:rotate(-18deg); }
+    .toy-construction::after { content:""; position:absolute; left:88px; top:48px; width:42px; height:14px; border-radius:12px; background:#ff9f43; transform:rotate(22deg); }
+    .toy-dino { background: radial-gradient(ellipse at 50% 92%, #63d471 0 45%, transparent 46%), linear-gradient(#b9f7d0, #4ddfc0); }
+    .toy-dino::before { content:""; position:absolute; left:30px; top:24px; width:34px; height:44px; border-radius:50%; background:#fff7d8; box-shadow:52px 10px 0 -6px #fff7d8; }
+    .toy-dino::after { content:""; position:absolute; right:22px; bottom:22px; width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:18px solid rgba(47,52,55,0.34); transform:rotate(18deg); filter: drop-shadow(-28px -6px 0 rgba(47,52,55,0.34)) drop-shadow(-56px 8px 0 rgba(47,52,55,0.34)); }
+    .toy-space { background: radial-gradient(circle at 18% 24%, white 0 3px, transparent 4px), radial-gradient(circle at 72% 28%, white 0 2px, transparent 3px), radial-gradient(circle at 82% 72%, white 0 3px, transparent 4px), #24315d; }
+    .toy-space::before { content:""; position:absolute; left:34px; top:22px; width:58px; height:58px; border-radius:50%; background:#a66cff; }
+    .toy-space::after { content:""; position:absolute; left:22px; top:42px; width:86px; height:24px; border:4px solid #ffdb4d; border-radius:50%; transform:rotate(-18deg); }
+    .toy-art { background: radial-gradient(circle at 20% 30%, #ff4d4d 0 16px, transparent 17px), radial-gradient(circle at 58% 34%, #4da3ff 0 18px, transparent 19px), radial-gradient(circle at 76% 70%, #ffdb4d 0 17px, transparent 18px), #fff6d9; }
+    .toy-art::after { content:""; position:absolute; left:26px; bottom:18px; width:98px; height:14px; background:#b9794a; border-radius:999px; transform:rotate(-18deg); box-shadow:58px -20px 0 -2px #2f3437; }
+    .toy-book { background: linear-gradient(135deg, #a66cff, #ff7ac8); }
+    .toy-book::before { content:""; position:absolute; left:24px; top:16px; width:88px; height:58px; border-radius:8px; background:#fff; box-shadow: inset 42px 0 0 #fff4c7; }
+    .toy-book::after { content:""; position:absolute; left:68px; top:18px; width:4px; height:54px; border-radius:4px; background:#d7b777; }
     #panel-play .play-nav {
       position: relative; z-index: 1; margin: 4px 0 12px; padding-bottom: 8px; opacity: 0.86;
     }
@@ -215,20 +295,21 @@
     #panel-play .garage-part { font-size: 76px; }
     #panel-play .blueprint { font-size: 178px; opacity: 0.14; }
     #panel-play .memory-grid { background: #f8ffe6; gap: 12px; }
-    #panel-play .story-card {
-      border: 3px solid rgba(255, 200, 105, 0.48); border-radius: 24px; background: linear-gradient(180deg, #fffdf8, #fff2cb);
-      box-shadow: 0 10px 0 rgba(255, 185, 72, 0.18), 0 14px 24px rgba(87, 63, 28, 0.1);
-    }
+    #panel-play .story-card { border-radius: 22px; background: linear-gradient(90deg, #fff8e6, #ffffff); }
     #panel-play .story-card-title { font-size: 21px; font-weight: 900; line-height: 1.25; color: #4b3a20; }
     #panel-play .story-card-desc { font-size: 14px; color: #6f6044; line-height: 1.45; font-weight: 750; flex: 1; }
     #panel-play .story-card-actions { display: grid; gap: 8px; }
-    .story-reader-controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 14px; }
-    .story-reader-controls .btn { min-height: 48px; padding: 10px 8px; font-size: 14px; }
+    .story-reader-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .story-reader-controls .btn { min-height: 52px; padding: 10px 8px; font-size: 16px; border-radius: 20px; box-shadow: 0 6px 0 rgba(0,0,0,0.2), inset 0 3px 0 rgba(255,255,255,0.4); }
+    .story-reader-controls .read-main { grid-column: 1 / -1; min-height: 64px; font-size: 18px; background: linear-gradient(180deg, #63d471, #147d64); }
     .story-paragraph {
       border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: rgba(255,255,255,0.48);
-      line-height: 1.78; transition: background 0.25s, box-shadow 0.25s, transform 0.25s;
+      font-size: 24px; line-height: 2.0; transition: background 0.25s, box-shadow 0.25s, transform 0.25s, font-size 0.25s;
     }
-    .story-paragraph.reading-active { background: #fff1bd; box-shadow: 0 0 0 3px rgba(243, 165, 29, 0.22); transform: translateY(-1px); }
+    .story-paragraph.reading-active {
+      font-size: 26px; background: #fff8e1; border-left: 6px solid #ff9f43; box-shadow: 0 0 0 3px rgba(243, 165, 29, 0.22);
+      transform: translateY(-1px) scale(1.02); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
     .voice-card { background: linear-gradient(135deg, rgba(255, 159, 10, 0.12), rgba(52, 120, 246, 0.08)); }
     .game-zone { width: 100%; aspect-ratio: 4/3; background: #ffffff; border-radius: 24px; position: relative; overflow: hidden; border: 3px solid var(--border); box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
     .garage-part { position: absolute; font-size: 60px; cursor: grab; user-select: none; z-index: 10; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); transition: transform 0.1s; }
@@ -261,10 +342,15 @@
     .color-swatch { color: transparent; }
     .color-action { padding: 0 12px; min-width: auto; }
     #colorCanvas { width: 100%; height: 100%; min-height: 0; border: 3px solid rgba(0,0,0,0.1); border-radius: 18px; background: white; touch-action: none; }
-    .book-reader { background: #fffcf2; border: 3px solid #eaddb6; border-radius: 20px; padding: 30px; min-height: 350px; font-size: 20px; line-height: 1.8; color: #5a4634; box-shadow: inset 0 0 40px rgba(234,221,182,0.3); position: relative; }
-    .book-title { font-weight: 900; font-size: 26px; color: #8b4513; margin-bottom: 20px; text-align: center; border-bottom: 2px dashed #eaddb6; padding-bottom: 15px; }
+    .book-reader {
+      background: #fffcf2; border: 3px solid #eaddb6; border-left: 6px solid #c0a080; border-radius: 20px;
+      padding: 30px; min-height: 350px; font-size: 20px; line-height: 1.8; color: #5a4634;
+      box-shadow: inset 10px 0 15px -5px rgba(0,0,0,0.1), inset 0 0 40px rgba(234,221,182,0.3); position: relative;
+    }
+    .book-title { font-weight: 900; font-size: 30px; color: #8b4513; margin-bottom: 20px; text-align: center; border-bottom: 2px dashed #eaddb6; padding-bottom: 15px; }
+    .book-title::before { content: "📖 "; }
     .highlight { color: var(--primary); font-weight: 900; background: linear-gradient(transparent 60%, rgba(20,125,100,0.2) 60%); padding: 0 4px; }
-    .ai-btn { background: linear-gradient(135deg, #f3a51d, #e05d3f); box-shadow: 0 5px 20px rgba(224,93,63,0.25); }
+    .ai-btn { background: linear-gradient(180deg, #ff9f43, #e05d3f); }
     #particle-container { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
     .particle { position: absolute; border-radius: 50%; animation: fall linear forwards; }
     @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
@@ -289,7 +375,7 @@
       .brand-title p { display: none; }
       .book-reader { padding: 22px; font-size: 18px; }
       .story-card-grid { grid-template-columns: 1fr; }
-      .story-reader-controls { grid-template-columns: repeat(2, 1fr); }
+      .story-reader-controls { grid-template-columns: repeat(3, 1fr); }
       #panel-play .kids-world { padding: 14px; border-radius: 24px; }
       #panel-play .play-hub { grid-template-columns: 1fr; }
       #panel-play .play-card { min-height: 136px; }
@@ -396,31 +482,37 @@
 
         <div id="playHubZone" class="play-hub">
           <div class="play-card kids-hub-card" onclick="selectPlayFromHub('garage')">
+            <div class="toy-scene toy-car"></div>
             <div class="play-card-icon">🔧</div>
             <div class="play-card-title">자동차 조립</div>
             <div class="play-card-desc">빈칸에 쏙</div>
           </div>
           <div class="play-card kids-hub-card" onclick="selectPlayFromHub('blocks')">
+            <div class="toy-scene toy-construction"></div>
             <div class="play-card-icon">🧱</div>
             <div class="play-card-title">와르르 블록</div>
             <div class="play-card-desc">톡 누르면 쿵</div>
           </div>
           <div class="play-card kids-hub-card" onclick="selectPlayFromHub('memory')">
+            <div class="toy-scene toy-dino"></div>
             <div class="play-card-icon">🃏</div>
             <div class="play-card-title">기억력 카드</div>
             <div class="play-card-desc">짝을 찾아요</div>
           </div>
           <div class="play-card kids-hub-card" onclick="selectPlayFromHub('scratch')">
+            <div class="toy-scene toy-space"></div>
             <div class="play-card-icon">🎨</div>
             <div class="play-card-title">매직 스크래치</div>
             <div class="play-card-desc">쓱쓱 문질러요</div>
           </div>
           <div class="play-card kids-hub-card" onclick="selectPlayFromHub('color')">
+            <div class="toy-scene toy-art"></div>
             <div class="play-card-icon">🖌️</div>
             <div class="play-card-title">색칠 놀이터</div>
             <div class="play-card-desc">손가락으로 그려요</div>
           </div>
           <div class="play-card kids-hub-card bento-full story-play-card" onclick="selectPlayFromHub('story')">
+            <div class="toy-scene toy-book"></div>
             <div class="play-card-icon">📖</div>
             <div class="play-card-title">마법 동화 도서관</div>
             <div class="play-card-desc">똑똑이가 읽어줘요</div>
@@ -442,17 +534,17 @@
 
         <div id="story-zone" style="display: none;">
         <div class="story-filter-row" id="storyFilterNav">
-          <button class="status-badge active" onclick="setStoryFilter('전체')">전체</button>
-          <button class="status-badge" onclick="setStoryFilter('이솝우화')">📖 이솝우화</button>
-          <button class="status-badge" onclick="setStoryFilter('전래동화')">🐯 전래동화</button>
-          <button class="status-badge" onclick="setStoryFilter('세계명작')">🏰 세계명작</button>
-          <button class="status-badge" onclick="setStoryFilter('자동차')">🚜 자동차</button>
-          <button class="status-badge" onclick="setStoryFilter('공룡')">🦖 공룡</button>
-          <button class="status-badge" onclick="setStoryFilter('우주')">🚀 우주</button>
-          <button class="status-badge" onclick="setStoryFilter('바다')">🐳 바다</button>
-          <button class="status-badge" onclick="setStoryFilter('잠자리')">🌙 잠자리</button>
-          <button class="status-badge" onclick="setStoryFilter('생활습관')">🪥 생활습관</button>
-          <button class="status-badge" onclick="setStoryFilter('저장한 동화')">💖 저장한 동화</button>
+          <button class="status-badge active" data-theme="전체" onclick="setStoryFilter('전체')"><span>📚</span><small>전체</small></button>
+          <button class="status-badge" data-theme="이솝우화" onclick="setStoryFilter('이솝우화')"><span>📖</span><small>이솝</small></button>
+          <button class="status-badge" data-theme="전래동화" onclick="setStoryFilter('전래동화')"><span>🐯</span><small>전래</small></button>
+          <button class="status-badge" data-theme="세계명작" onclick="setStoryFilter('세계명작')"><span>🏰</span><small>명작</small></button>
+          <button class="status-badge" data-theme="자동차" onclick="setStoryFilter('자동차')"><span>🚜</span><small>자동차</small></button>
+          <button class="status-badge" data-theme="공룡" onclick="setStoryFilter('공룡')"><span>🦖</span><small>공룡</small></button>
+          <button class="status-badge" data-theme="우주" onclick="setStoryFilter('우주')"><span>🚀</span><small>우주</small></button>
+          <button class="status-badge" data-theme="바다" onclick="setStoryFilter('바다')"><span>🐳</span><small>바다</small></button>
+          <button class="status-badge" data-theme="잠자리" onclick="setStoryFilter('잠자리')"><span>🌙</span><small>잠자리</small></button>
+          <button class="status-badge" data-theme="생활습관" onclick="setStoryFilter('생활습관')"><span>🪥</span><small>생활</small></button>
+          <button class="status-badge" data-theme="저장한 동화" onclick="setStoryFilter('저장한 동화')"><span>💖</span><small>저장</small></button>
         </div>
 
         <div id="storyLibraryGrid" class="story-card-grid"></div>
@@ -468,10 +560,9 @@
             </div>
           </div>
           <div class="story-reader-controls">
-            <button class="btn" onclick="speakBookText()">▶ 감성 낭독</button>
+            <button class="btn read-main" onclick="speakBookText()">▶ 감성 낭독 시작</button>
             <button class="btn outline" onclick="pauseStoryReading()">⏸ 일시정지</button>
-            <button class="btn outline" onclick="nextStoryParagraph()">⏭ 다음 문단</button>
-            <button class="btn outline" onclick="stopStoryReading()">⏹ 정지</button>
+            <button class="btn outline" onclick="nextStoryParagraph()">⏭ 다음</button>
             <button class="btn outline" onclick="restartStoryReading()">🔁 처음부터</button>
           </div>
         </div>
@@ -985,28 +1076,28 @@
     }
 
     function speakGuide(text, force = false) {
-      if (!force && isStoryPlaying()) return;
+      if (isStoryPlaying()) return;
       if (!db.settings.voiceGuide.enabled) return;
       speakText(text, { rate: 0.88, pitch: 1.08 });
     }
     window.speakGuide = speakGuide;
 
     function speakPraise(text, force = false) {
-      if (!force && isStoryPlaying()) return;
+      if (isStoryPlaying()) return;
       if (!db.settings.voiceGuide.enabled) return;
       speakText(text, { rate: 0.96, pitch: 1.2 });
     }
     window.speakPraise = speakPraise;
 
     function speakSoft(text, force = false) {
-      if (!force && isStoryPlaying()) return;
+      if (isStoryPlaying()) return;
       if (!db.settings.voiceGuide.enabled) return;
       speakText(text, { rate: 0.82, pitch: 1.0 });
     }
     window.speakSoft = speakSoft;
 
     function speakGameCue(text, force = false) {
-      if (!force && isStoryPlaying()) return;
+      if (isStoryPlaying()) return;
       if (!db.settings.voiceGuide.enabled) return;
       speakText(text, { rate: 0.98, pitch: 1.14 });
     }
