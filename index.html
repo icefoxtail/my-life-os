@@ -1,461 +1,1426 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="우리집">
-  <meta name="theme-color" content="#FCF9F2">
-  <title>우리집 OS</title>
-  
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon.svg">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>우리집 넥서스 / Family Nexus</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <style>
     :root {
-      /* Mood A: 실크 & 린든 (Day) */
-      --bg: #FCF9F2;
-      --surface: rgba(255, 255, 255, 0.95);
-      --surface-solid: #ffffff;
-      --text: #4A4541;
-      --text-soft: #A8A19A;
-      --border: rgba(0, 0, 0, 0.04);
-      --shadow: 0 10px 40px rgba(74, 69, 65, 0.05);
-
-      --jun-theme: #A6B1C2;
-      --yerim-theme: #E6B9B3;
-      --sihyeon-theme: #E6D2B3;
-      --family-theme: #B8C4B5;
-      
-      --danger: #D98C8C;
-      --warning: #E6C08C;
-      --success: #A6C2A6;
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --blur: blur(25px);
-      --active-theme: var(--jun-theme);
+      --bg: #f4f6f5; --surface: rgba(255, 255, 255, 0.92); --surface-solid: #ffffff;
+      --text: #1d1d1f; --text-soft: #69706f; --border: rgba(0, 0, 0, 0.08);
+      --primary: #147d64; --primary-soft: rgba(20, 125, 100, 0.1);
+      --accent: #e05d3f; --success: #34c759; --warning: #f3a51d; --danger: #e33b32;
+      --uareum-bg: rgba(224, 93, 63, 0.08); --uareum-border: rgba(224, 93, 63, 0.22); --uareum-text: #b34834;
+      --sky: #3478f6; --radius-xl: 28px; --radius-lg: 20px; --radius-md: 14px;
+      --shadow: 0 10px 40px rgba(20, 30, 28, 0.07); --blur: blur(25px);
     }
-
-    body.mood-night {
-      /* Mood B: 미드나잇 부티크 (Night) */
-      --bg: #1A1C1E;
-      --surface: rgba(42, 44, 48, 0.92);
-      --surface-solid: #2A2C30;
-      --text: #E3E2E1;
-      --text-soft: #8A8A88;
-      --border: rgba(255, 255, 255, 0.05);
-      --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      --jun-theme: #8AA1C2;
-      --yerim-theme: #D4A199;
-      --sihyeon-theme: #D4C199;
-      --family-theme: #99A896;
+    body.dark {
+      --bg: #101311; --surface: rgba(28, 31, 29, 0.92); --surface-solid: #1c1f1d;
+      --text: #f5f5f7; --text-soft: #9aa09d; --border: rgba(255, 255, 255, 0.1);
+      --primary: #4dd0a8; --primary-soft: rgba(77, 208, 168, 0.12);
     }
-
-    body.theme-me { --active-theme: var(--jun-theme); }
-    body.theme-wife { --active-theme: var(--yerim-theme); }
-    body.theme-sihyeon { --active-theme: var(--sihyeon-theme); }
-    body.theme-family { --active-theme: var(--family-theme); }
-
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 120px; transition: background 0.8s ease, color 0.5s ease; overflow-x: hidden; }
-    
-    .bg-anim { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: -1; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--active-theme) 15%, transparent), transparent 60%); pointer-events: none; transition: 0.8s ease; }
-
-    header { position: sticky; top: 0; z-index: 100; padding: 15px 20px; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: var(--blur); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: var(--active-theme); color: white; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px color-mix(in srgb, var(--active-theme) 30%, transparent); transition: 0.6s ease; cursor: pointer; }
-    #headerTitle { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
-
-    .top-actions { display: flex; gap: 8px; }
-    .top-btn { width: 38px; height: 38px; border-radius: 12px; background: var(--surface-solid); border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; transition: 0.2s; box-shadow: var(--shadow); }
-
-    .app { max-width: 800px; margin: 0 auto; padding: 10px 15px; }
-    .panel { display: none; animation: fadeIn 0.4s ease forwards; }
+    body {
+      font-family: 'Pretendard', system-ui, sans-serif; background: var(--bg); color: var(--text);
+      padding-bottom: 120px; transition: background 0.4s ease; overflow-x: hidden; touch-action: manipulation;
+    }
+    canvas { display: block; }
+    .topbar {
+      position: sticky; top: 0; z-index: 1000; padding: 15px 20px;
+      background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: var(--blur);
+      border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--sky));
+      color: white; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px;
+      box-shadow: 0 4px 15px rgba(20, 125, 100, 0.3);
+    }
+    .brand-title h1 { font-size: 19px; font-weight: 900; letter-spacing: 0; }
+    .brand-title p { font-size: 11px; color: var(--text-soft); font-weight: 800; margin-top: 2px; }
+    .top-actions { display: flex; gap: 10px; }
+    .top-btn {
+      width: 40px; height: 40px; border-radius: 12px; background: var(--surface-solid);
+      border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center;
+      font-size: 18px; cursor: pointer; transition: 0.2s;
+    }
+    .top-btn:active { transform: scale(0.9); }
+    .app { max-width: 800px; margin: 0 auto; padding: 15px; position: relative; }
+    .panel { display: none; animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
     .panel.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 16px; box-shadow: var(--shadow); border-top: 4px solid var(--active-theme); transition: 0.5s; position: relative; }
-    .card-label { font-size: 13px; font-weight: 800; color: var(--text-soft); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.5px; }
-
-    input, select, textarea { width: 100%; border: 1px solid var(--border); background: var(--surface-solid); color: var(--text); border-radius: var(--radius-md); padding: 14px; font-size: 15px; margin-bottom: 10px; font-family: inherit; outline: none; }
-    .btn { background: var(--active-theme); color: white; border: none; padding: 15px; border-radius: var(--radius-md); font-weight: 800; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: 0.2s; }
-    .btn:active { transform: scale(0.96); opacity: 0.9; }
-    .btn.secondary { background: var(--surface-solid); color: var(--text); border: 1px solid var(--border); }
-
-    .ai-panel { background: var(--surface-solid); border: 2px dashed var(--active-theme); border-radius: var(--radius-md); padding: 15px; margin-top: 10px; display: none; }
-    .ai-text { font-size: 14px; line-height: 1.6; white-space: pre-wrap; margin-bottom: 10px; color: var(--text); }
-    .memo-full-text { max-height: 200px; overflow-y: auto; font-size: 14px; line-height: 1.6; white-space: pre-wrap; color: var(--text); padding: 5px 0; }
-
-    .list-item { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
-    .item-check { width: 26px; height: 26px; border-radius: 9px; border: 2px solid var(--border); background: var(--surface-solid); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 22px; box-shadow: var(--shadow); backdrop-filter: var(--blur); margin-bottom: 18px; position: relative;
+    }
+    .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
+    .bento-full { grid-column: 1 / -1; }
+    .card-title {
+      font-size: 14px; font-weight: 900; color: var(--text-soft); margin-bottom: 16px;
+      text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .hero-brief {
+      border-left: 6px solid var(--primary); background: linear-gradient(to right, var(--primary-soft), transparent);
+      font-size: 18px; font-weight: 900; line-height: 1.55;
+    }
+    .metric { font-size: 13px; font-weight: 900; color: var(--text-soft); }
+    .big-number { font-size: 30px; font-weight: 900; color: var(--primary); line-height: 1; }
+    .btn {
+      background: var(--primary); color: white; border: none; padding: 16px; border-radius: var(--radius-md);
+      font-weight: 850; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%; transition: 0.2s; box-shadow: 0 4px 15px var(--primary-soft);
+    }
+    .btn:active { transform: scale(0.96); }
+    .btn.outline { background: var(--surface-solid); border: 2px solid var(--border); color: var(--text); box-shadow: none; }
+    .btn.small { width: auto; padding: 12px 14px; font-size: 14px; }
+    input, select, textarea {
+      width: 100%; border: 2px solid var(--border); background: var(--surface-solid); color: var(--text);
+      border-radius: var(--radius-md); padding: 16px; font-size: 16px; margin-bottom: 12px; outline: none;
+      transition: 0.3s; font-family: inherit; font-weight: 650;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--primary); }
+    .row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .list-item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .list-item:last-child { border-bottom: none; }
+    .item-check {
+      width: 28px; height: 28px; border-radius: 8px; border: 2px solid var(--border); background: var(--surface-solid);
+      cursor: pointer; display: flex; align-items: center; justify-content: center; color: transparent; font-size: 16px;
+      font-weight: 900; transition: 0.2s; flex-shrink: 0;
+    }
     .item-check.done { background: var(--success); border-color: var(--success); color: white; }
     .item-body { flex: 1; min-width: 0; }
-    .item-title { font-size: 16px; font-weight: 700; color: var(--text); }
+    .item-title { font-size: 16px; font-weight: 850; overflow-wrap: anywhere; }
     .item-title.done { color: var(--text-soft); text-decoration: line-through; }
-    
-    .dday-badge { display: inline-block; padding: 3px 8px; border-radius: 8px; font-size: 11px; font-weight: 800; color: white; margin-left: 6px; }
-    .dday-emergency { background: var(--danger); animation: pulse 2s infinite; }
-    .dday-soon { background: var(--warning); }
-    .dday-normal { background: var(--text-soft); }
-
-    .chart-container { height: 180px; margin-bottom: 20px; }
-
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: color-mix(in srgb, var(--surface) 95%, transparent); backdrop-filter: var(--blur); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 10px 30px; z-index: 100; }
-    .nav-btn { background: none; border: none; color: var(--text-soft); font-size: 11px; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; flex: 1; }
-    .nav-icon { font-size: 22px; filter: grayscale(1); opacity: 0.5; transition: 0.3s; }
-    .nav-btn.active .nav-icon { filter: grayscale(0); opacity: 1; transform: scale(1.15); }
-
-    .empty-state { padding: 40px 0; text-align: center; color: var(--text-soft); font-size: 14px; font-weight: 600; }
-    .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(74, 69, 65, 0.9); color: white; padding: 12px 25px; border-radius: 25px; font-size: 14px; font-weight: 800; opacity: 0; pointer-events: none; transition: 0.4s; z-index: 9999; }
+    .item-meta { font-size: 13px; color: var(--text-soft); margin-top: 4px; font-weight: 700; }
+    .del-btn { color: var(--danger); font-size: 14px; font-weight: 850; background: none; border: none; cursor: pointer; padding: 5px; }
+    .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: -8px 0 18px; }
+    .summary-badge {
+      background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 14px 12px; cursor: pointer; box-shadow: var(--shadow); font-weight: 800; color: var(--text);
+      display: flex; flex-direction: column; gap: 6px; min-height: 76px;
+    }
+    .summary-badge span { color: var(--text-soft); font-size: 12px; font-weight: 700; }
+    .summary-badge strong { font-size: 20px; font-weight: 800; }
+    .status-badge {
+      display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 9px; font-size: 12px;
+      line-height: 1; font-weight: 800; border: 1px solid var(--border); white-space: nowrap;
+    }
+    .badge-상담 { background: rgba(52, 120, 246, 0.1); color: #245bb8; border-color: rgba(52, 120, 246, 0.22); }
+    .badge-예약 { background: var(--uareum-bg); color: var(--uareum-text); border-color: var(--uareum-border); }
+    .badge-완료 { background: rgba(52, 199, 89, 0.12); color: #207a38; border-color: rgba(52, 199, 89, 0.25); }
+    .badge-확인필요 { background: rgba(243, 165, 29, 0.16); color: #9a6200; border-color: rgba(243, 165, 29, 0.3); }
+    .play-nav { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 16px; scrollbar-width: none; }
+    .play-nav::-webkit-scrollbar { display: none; }
+    .play-tab {
+      flex: 0 0 auto; padding: 12px 22px; border-radius: 30px; background: var(--surface-solid);
+      border: 2px solid var(--border); font-size: 15px; font-weight: 850; cursor: pointer; transition: 0.3s;
+    }
+    .play-tab.active { background: var(--text); color: var(--surface-solid); border-color: var(--text); box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+    .play-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .play-hub .bento-full { grid-column: 1 / -1; }
+    .play-card {
+      background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg);
+      padding: 20px 15px; text-align: center; cursor: pointer; box-shadow: var(--shadow);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .play-card:active { transform: scale(0.92); border-color: var(--primary); }
+    .play-card-icon { font-size: 45px; margin-bottom: 12px; line-height: 1; }
+    .play-card-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+    .play-card-desc { font-size: 13px; font-weight: 750; color: var(--text-soft); }
+    .story-card-item { background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    .story-filter-row { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 15px; padding-bottom: 6px; scrollbar-width: none; }
+    .story-filter-row::-webkit-scrollbar { display: none; }
+    .story-filter-row .status-badge { font-size: 14px; padding: 9px 13px; min-height: 38px; background: var(--surface-solid); color: var(--text); cursor: pointer; }
+    .story-filter-row .status-badge.active { background: var(--text); color: var(--surface-solid); border-color: var(--text); }
+    .story-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .story-card {
+      background: linear-gradient(180deg, #fffdf6, var(--surface-solid)); border: 2px solid rgba(139, 92, 38, 0.14);
+      border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px;
+      min-height: 220px;
+    }
+    body.dark .story-card { background: var(--surface-solid); border-color: var(--border); }
+    .story-theme { width: fit-content; border-radius: 999px; padding: 5px 10px; background: rgba(243, 165, 29, 0.16); color: #9a6200; font-size: 12px; font-weight: 900; }
+    .story-reader-controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 14px; }
+    .story-reader-controls .btn { min-height: 48px; padding: 10px 8px; font-size: 14px; }
+    .story-paragraph {
+      border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: rgba(255,255,255,0.48);
+      line-height: 1.78; transition: background 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+    .story-paragraph.reading-active { background: #fff1bd; box-shadow: 0 0 0 3px rgba(243, 165, 29, 0.22); transform: translateY(-1px); }
+    .voice-card { background: linear-gradient(135deg, rgba(255, 159, 10, 0.12), rgba(52, 120, 246, 0.08)); }
+    .game-zone { width: 100%; aspect-ratio: 4/3; background: #ffffff; border-radius: 24px; position: relative; overflow: hidden; border: 3px solid var(--border); box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
+    .garage-part { position: absolute; font-size: 60px; cursor: grab; user-select: none; z-index: 10; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); transition: transform 0.1s; }
+    .garage-part:active { cursor: grabbing; transform: scale(1.1); }
+    .garage-target { position: absolute; width: 80px; height: 80px; border: 4px dashed #ddd; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #aaa; font-weight: 900; }
+    .garage-target.filled { border-color: var(--success); background: rgba(52, 199, 89, 0.1); }
+    .blueprint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 150px; opacity: 0.1; pointer-events: none; }
+    #blockCanvas { width: 100%; height: 100%; touch-action: none; background: linear-gradient(to bottom, #e0f7fa, #ffffff); }
+    .physics-ui { position: absolute; bottom: 15px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 20; pointer-events: none; }
+    .bomb-btn { pointer-events: auto; background: var(--danger); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 900; font-size: 18px; box-shadow: 0 5px 15px rgba(255,59,48,0.4); cursor: pointer; }
+    .memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; height: 100%; padding: 15px; background: #fdf6e3; }
+    .memory-card { perspective: 1000px; cursor: pointer; min-height: 62px; }
+    .memory-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .memory-card.flipped .memory-inner { transform: rotateY(180deg); }
+    .memory-front, .memory-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .memory-front { background: linear-gradient(135deg, var(--primary), var(--sky)); color: white; font-weight: 900; font-size: 24px; }
+    .memory-back { background: white; transform: rotateY(180deg); border: 3px solid var(--primary); }
+    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; }
+    .scratch-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 150px; background: radial-gradient(circle, #fff9c4, #ffeb3b); z-index: 1; }
+    .book-reader { background: #fffcf2; border: 3px solid #eaddb6; border-radius: 20px; padding: 30px; min-height: 350px; font-size: 20px; line-height: 1.8; color: #5a4634; box-shadow: inset 0 0 40px rgba(234,221,182,0.3); position: relative; }
+    .book-title { font-weight: 900; font-size: 26px; color: #8b4513; margin-bottom: 20px; text-align: center; border-bottom: 2px dashed #eaddb6; padding-bottom: 15px; }
+    .highlight { color: var(--primary); font-weight: 900; background: linear-gradient(transparent 60%, rgba(20,125,100,0.2) 60%); padding: 0 4px; }
+    .ai-btn { background: linear-gradient(135deg, #f3a51d, #e05d3f); box-shadow: 0 5px 20px rgba(224,93,63,0.25); }
+    #particle-container { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+    .particle { position: absolute; border-radius: 50%; animation: fall linear forwards; }
+    @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; background: color-mix(in srgb, var(--surface) 96%, transparent);
+      backdrop-filter: var(--blur); border-top: 1px solid var(--border); display: flex; padding: 12px 10px 35px; z-index: 1000;
+    }
+    .nav-btn {
+      flex: 1; background: none; border: none; color: var(--text-soft); font-size: 12px; font-weight: 900;
+      display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 0;
+    }
+    .nav-btn.active { color: var(--primary); }
+    .nav-icon { font-size: 24px; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .nav-btn.active .nav-icon { transform: translateY(-4px) scale(1.1); }
+    .hidden-settings { margin-top: 10px; color: var(--text-soft); font-weight: 800; }
+    details.hidden-settings { margin-top: 10px; color: var(--text-soft); font-weight: 800; }
+    details.hidden-settings summary { cursor: pointer; padding: 12px 0; }
+    @media (max-width: 520px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .summary-row { grid-template-columns: 1fr; }
+      .row { flex-direction: column; }
+      .brand-title p { display: none; }
+      .book-reader { padding: 22px; font-size: 18px; }
+      .story-card-grid { grid-template-columns: 1fr; }
+      .story-reader-controls { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
-<body class="theme-me">
-  <div class="bg-anim" id="bgAnim"></div>
-  <div id="toast" class="toast">알림</div>
+<body>
+  <div id="particle-container"></div>
 
-  <header>
-    <div class="brand-mark" onclick="switchTab('me')">🏡</div>
-    <h1 id="headerTitle">준성이 방</h1>
+  <header class="topbar">
+    <div class="brand" onclick="switchTab('today')">
+      <div class="brand-mark">家</div>
+      <div class="brand-title">
+        <h1>우리집 넥서스</h1>
+        <p>Family Nexus</p>
+      </div>
+    </div>
     <div class="top-actions">
-      <button class="top-btn" id="moodBtn" onclick="toggleMood()" title="무드 전환">🌤️</button>
-      <button class="top-btn" onclick="openSettings()">⚙️</button>
+      <button class="top-btn" onclick="toggleTheme()" title="다크모드">◐</button>
+      <button class="top-btn" onclick="exportData()" title="백업">💾</button>
+      <button class="top-btn" onclick="toggleVoiceGuide()" title="음성 안내">🔊</button>
     </div>
   </header>
 
   <main class="app">
-    <section id="panel-me" class="panel active">
-      <div class="card">
-        <div class="card-label">✅ 오늘 내가 챙길 것</div>
-        <div style="display:flex; gap:8px; margin-bottom:12px;">
-          <input type="text" id="todoMeInput" placeholder="가족을 위해 할 일..." style="margin:0;">
-          <button class="btn" style="width:70px;" onclick="addItem('todosMe', 'todoMeInput')">추가</button>
-        </div>
-        <div id="todoMeList" class="scroll-list"></div>
+    <section id="panel-today" class="panel active">
+      <div class="card hero-brief">
+        <div class="card-title">우리집 오늘 브리핑</div>
+        <div id="briefing">오늘도 우리집 하루를 차분하게 시작해요.<br>시현이 놀이터, 가족 미션, 지출 기록을 한곳에서 챙깁니다.</div>
       </div>
 
-      <div class="card">
-        <div class="card-label">✨ 우리집 도우미</div>
-        <textarea id="aiQuery" placeholder="주말 나들이 코스나 선물 아이디어를 물어보세요." style="height:90px; resize:none;"></textarea>
-        <button class="btn" onclick="askAI()">도우미 호출</button>
-        <div id="aiPanel" class="ai-panel">
-          <div id="aiOutput" class="ai-text"></div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn secondary" onclick="copyAi()">📋 복사</button>
-            <button class="btn" onclick="saveAi()">💾 금고 저장</button>
+      <div class="summary-row" onclick="switchTab('family')">
+        <div class="summary-badge"><span>🛒 장보기</span><strong id="todayShoppingCount">0</strong></div>
+        <div class="summary-badge"><span>🗓️ 일정</span><strong id="todayEventCount">0</strong></div>
+        <div class="summary-badge"><span>💄 우아림 확인</span><strong id="todayUareumNeedCount">0</strong></div>
+      </div>
+
+      <div class="bento-grid">
+        <div class="card bento-full" onclick="switchTab('play')" style="background: linear-gradient(135deg, var(--sky), var(--primary)); color: white; cursor: pointer; border: none;">
+          <div style="font-weight: 900; font-size: 24px; display:flex; justify-content:space-between; align-items:center;">
+            <span>시현이 오늘 놀이</span><span style="font-size: 30px;">🚜</span>
+          </div>
+          <div style="font-size: 15px; opacity: 0.92; margin-top: 8px; font-weight: 650;">자동차 정비, 블록, 카드, 스크래치, 마법 동화</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">오늘 가족 미션</div>
+          <div class="row">
+            <input type="text" id="todoIn" placeholder="오늘 할 일" style="margin:0;">
+            <button class="btn small" onclick="addTodo()">추가</button>
+          </div>
+          <div id="todoList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">오늘 가계부 요약</div>
+          <div class="metric">이번 달 지출</div>
+          <div class="big-number"><span id="monthTotalToday">0</span>원</div>
+          <button class="btn outline" style="margin-top:16px;" onclick="switchTab('money')">가계부 열기</button>
+        </div>
+
+        <div class="card bento-full">
+          <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom: 12px;">
+            <div>
+              <div class="metric">우리집 레벨</div>
+              <div class="big-number">Lv.<span id="portalLv">1</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="metric">EXP <span id="portalExpText">0/100</span></div>
+            </div>
+          </div>
+          <div style="height: 12px; background:var(--border); border-radius:6px; overflow:hidden;">
+            <div id="portalExpFill" style="height:100%; background:linear-gradient(90deg, var(--primary), var(--accent)); width:0%; transition:width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></div>
           </div>
         </div>
-        <div id="aiMemoList" class="scroll-list" style="margin-top:20px;"></div>
-      </div>
-    </section>
 
-    <section id="panel-wife" class="panel">
-      <div class="card" style="background:#fffcfb;">
-        <div class="card-label" style="color:var(--yerim-theme);">💄 우아림 예약 관리</div>
-        <button class="btn" style="background:var(--yerim-theme);" onclick="window.open('https://calendar.google.com')">예약 캘린더 바로가기</button>
-      </div>
-      <div class="card">
-        <div class="card-label">🌸 예림이와 함께하는 기록</div>
-        <div style="display:flex; gap:8px; margin-bottom:12px;">
-          <input type="text" id="todoWifeInput" placeholder="함께 챙길 것, 선물 아이디어..." style="margin:0;">
-          <button class="btn" style="width:70px; background:var(--yerim-theme);" onclick="addItem('todosWife', 'todoWifeInput')">기록</button>
+        <div class="card bento-full">
+          <div class="card-title">오늘 한 줄 기록</div>
+          <div class="row">
+            <input type="text" id="quickNoteIn" placeholder="오늘 기억하고 싶은 한 줄" style="margin:0;">
+            <button class="btn small" onclick="addQuickNote()">저장</button>
+          </div>
+          <div id="quickNoteList"></div>
         </div>
-        <div id="todoWifeList" class="scroll-list"></div>
       </div>
     </section>
 
-    <section id="panel-sihyeon" class="panel">
-      <div class="game-nav">
-        <button class="game-tab active" onclick="setGame('fairytale', this)">📖 마법 동화책</button>
-        <button class="game-tab" onclick="setGame('quiz', this)">🔍 빠방 퀴즈</button>
-        <button class="game-tab" onclick="setGame('color', this)">🎨 색칠 놀이</button>
+    <section id="panel-play" class="panel">
+      <div class="card voice-card">
+        <div class="card-title">시현이 모드</div>
+        <button class="btn" onclick="startChildVoiceMode()">시현이 모드 시작</button>
       </div>
-      <div class="card game-stage" id="gameCanvas"></div>
+
+      <div id="playHubZone" class="play-hub">
+        <div class="play-card" onclick="selectPlayFromHub('garage')">
+          <div class="play-card-icon">🔧</div>
+          <div class="play-card-title">자동차 조립</div>
+          <div class="play-card-desc">부품을 맞춰요</div>
+        </div>
+        <div class="play-card" onclick="selectPlayFromHub('blocks')">
+          <div class="play-card-icon">🧱</div>
+          <div class="play-card-title">와르르 블록</div>
+          <div class="play-card-desc">폭탄 펑펑!</div>
+        </div>
+        <div class="play-card" onclick="selectPlayFromHub('memory')">
+          <div class="play-card-icon">🃏</div>
+          <div class="play-card-title">기억력 카드</div>
+          <div class="play-card-desc">짝을 찾아요</div>
+        </div>
+        <div class="play-card" onclick="selectPlayFromHub('scratch')">
+          <div class="play-card-icon">🎨</div>
+          <div class="play-card-title">매직 스크래치</div>
+          <div class="play-card-desc">쓱쓱 문질러요</div>
+        </div>
+        <div class="play-card bento-full" onclick="selectPlayFromHub('story')" style="background: linear-gradient(135deg, #fff0f5, #ffe4e1); border-color: #ffb6c1;">
+          <div class="play-card-icon">📖</div>
+          <div class="play-card-title" style="color: #d81b60; font-size: 20px;">마법 동화 도서관</div>
+          <div class="play-card-desc">재미나이가 책을 읽어줘요</div>
+        </div>
+      </div>
+
+      <div class="play-nav">
+        <button class="play-tab active" onclick="setPlayMode('garage', this)">🔧 자동차 정비</button>
+        <button class="play-tab" onclick="setPlayMode('blocks', this)">🧱 물리 블록</button>
+        <button class="play-tab" onclick="setPlayMode('memory', this)">🃏 기억력 카드</button>
+        <button class="play-tab" onclick="setPlayMode('scratch', this)">🎨 매직 스크래치</button>
+        <button class="play-tab" onclick="setPlayMode('story', this)">📖 마법 동화</button>
+      </div>
+
+      <div id="interactive-zone" class="card" style="padding: 0; background: transparent; border: none; box-shadow: none;">
+        <div class="game-zone" id="gameCanvas"></div>
+      </div>
+
+      <div id="story-zone" style="display: none;">
+        <div class="story-filter-row" id="storyFilterNav">
+          <button class="status-badge active" onclick="setStoryFilter('전체')">전체</button>
+          <button class="status-badge" onclick="setStoryFilter('자동차')">🚜 자동차</button>
+          <button class="status-badge" onclick="setStoryFilter('공룡')">🦖 공룡</button>
+          <button class="status-badge" onclick="setStoryFilter('동물')">🐰 동물</button>
+          <button class="status-badge" onclick="setStoryFilter('우주')">🚀 우주</button>
+          <button class="status-badge" onclick="setStoryFilter('바다')">🐳 바다</button>
+          <button class="status-badge" onclick="setStoryFilter('전래')">🏡 전래</button>
+          <button class="status-badge" onclick="setStoryFilter('이솝')">🌿 이솝</button>
+          <button class="status-badge" onclick="setStoryFilter('잠자리')">🌙 잠자리</button>
+          <button class="status-badge" onclick="setStoryFilter('저장한 동화')">💖 저장한 동화</button>
+        </div>
+
+        <div id="storyLibraryGrid" class="story-card-grid"></div>
+
+        <div id="storyReaderView" style="display:none;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+            <button class="btn outline small" style="width:auto; border-radius:20px;" onclick="closeStoryReader()">← 책장으로</button>
+            <button class="btn small" style="width:auto; border-radius:20px; background:#ff2d55; border:none;" onclick="saveCurrentStory()">💖 저장하기</button>
+          </div>
+          <div class="book-reader" id="bookView">
+            <div style="text-align:center; padding-top:100px; color:var(--text-soft); font-weight: 800;">
+              동화를 불러오고 있어요...
+            </div>
+          </div>
+          <div class="story-reader-controls">
+            <button class="btn" onclick="speakBookText()">▶ 읽기</button>
+            <button class="btn outline" onclick="pauseStoryReading()">⏸ 일시정지</button>
+            <button class="btn outline" onclick="nextStoryParagraph()">⏭ 다음 문단</button>
+            <button class="btn outline" onclick="stopStoryReading()">⏹ 정지</button>
+            <button class="btn outline" onclick="restartStoryReading()">🔁 처음부터</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-title">시현이 자동차 도감 (<span id="collCount">0</span>/12)</div>
+        <div id="collGrid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; font-size: 32px; text-align: center;"></div>
+      </div>
     </section>
 
     <section id="panel-family" class="panel">
       <div class="card">
-        <div class="card-label">📆 우리집 D-Day & 일정</div>
-        <div style="display:grid; grid-template-columns: 1fr 125px; gap:8px; margin-bottom:10px;">
-          <input type="text" id="todoFamInput" placeholder="보험, 세금, 가족 행사..." style="margin:0;">
-          <input type="date" id="todoFamDate" style="margin:0;">
+        <div class="card-title">장보기 목록</div>
+        <div class="row">
+          <select id="shoppingCatIn" style="width: 100px; margin: 0; padding: 0 10px; flex-shrink: 0;">
+            <option value="🍎 식재료">식재료</option>
+            <option value="🧻 생활">생활</option>
+            <option value="🧸 시현">시현</option>
+            <option value="💊 기타">기타</option>
+          </select>
+          <input type="text" id="shoppingIn" placeholder="살 것" style="margin:0;">
+          <button class="btn small" style="flex-shrink: 0;" onclick="addShoppingItem()">추가</button>
         </div>
-        <button class="btn" style="background:var(--family-theme);" onclick="addFamSchedule()">일정 등록</button>
-        <div id="todoFamList" class="scroll-list" style="margin-top:10px;"></div>
+        <div id="shoppingList"></div>
       </div>
 
       <div class="card">
-        <div class="card-label">💳 이번 달 가족 지출 (<span id="monthTotal">0</span>원)</div>
-        <div class="chart-container"><canvas id="moneyChart"></canvas></div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
-          <select id="moneyCat"><option>식비</option><option>육아</option><option>차량</option><option>고양이</option><option>기타</option></select>
-          <input type="number" id="moneyAmt" placeholder="금액" style="margin:0;">
+        <div class="card-title">가족 일정/약속</div>
+        <div class="row">
+          <input type="date" id="eventDateIn" style="margin:0;">
+          <input type="text" id="eventTextIn" placeholder="일정이나 약속" style="margin:0;">
+          <button class="btn small" onclick="addFamilyEvent()">저장</button>
         </div>
-        <input type="text" id="moneyNote" placeholder="메모 (예: 마트)">
-        <button class="btn" style="background:var(--family-theme);" onclick="addMoney()">지출 기록</button>
-        <div id="moneyList" class="scroll-list" style="margin-top:15px;"></div>
+        <div id="familyEventList"></div>
       </div>
 
       <div class="card">
-        <div class="card-label">🐾 눈이 & 름이 케어</div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-          <button id="btnCatNoon" class="btn secondary" onclick="checkCat('noon')">눈이 밥</button>
-          <button id="btnCatReum" class="btn secondary" onclick="checkCat('reum')">름이 밥</button>
+        <div class="card-title">가족 메모</div>
+        <div class="row">
+          <input type="text" id="familyMemoIn" placeholder="가족에게 남길 메모" style="margin:0;">
+          <button class="btn small" onclick="addFamilyMemo()">저장</button>
         </div>
+        <div id="familyMemoList"></div>
+      </div>
+
+      <div class="card" style="border-color: var(--uareum-border); background: color-mix(in srgb, var(--uareum-bg) 70%, var(--surface));">
+        <div class="card-title">💄 우아림 메모</div>
+        <p class="item-meta" style="margin:-6px 0 14px;">상담, 예약, 확인할 내용을 가볍게 남겨요.</p>
+        <div style="display:flex; gap:6px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none;">
+          <button class="status-badge" style="background:var(--surface-solid); color:var(--text);" onclick="setUareumFilter('전체')">전체</button>
+          <button class="status-badge badge-상담" onclick="setUareumFilter('상담')">상담</button>
+          <button class="status-badge badge-예약" onclick="setUareumFilter('예약')">예약</button>
+          <button class="status-badge badge-확인필요" onclick="setUareumFilter('확인필요')">확인필요</button>
+          <button class="status-badge badge-완료" onclick="setUareumFilter('완료')">완료</button>
+        </div>
+        <div class="row">
+          <input type="date" id="uareumDateIn" style="margin:0;">
+          <input type="text" id="uareumNameIn" placeholder="이름/별칭" style="margin:0;">
+        </div>
+        <select id="uareumStatusIn">
+          <option>상담</option>
+          <option>예약</option>
+          <option>완료</option>
+          <option>확인필요</option>
+        </select>
+        <textarea id="uareumMemoIn" placeholder="메모" rows="3"></textarea>
+        <button class="btn" onclick="addUareumMemo()">우아림 메모 저장</button>
+        <div id="uareumMemoList" style="margin-top: 12px;"></div>
+      </div>
+    </section>
+
+    <section id="panel-money" class="panel">
+      <div class="card">
+        <div class="card-title">가계부 입력</div>
+        <div style="display:grid; grid-template-columns: 100px 1fr; gap: 10px; margin-bottom: 10px;">
+          <select id="moneyType" style="margin:0;"><option value="expense">지출</option><option value="income">수입</option></select>
+          <input type="number" id="moneyAmt" placeholder="금액 (원)" style="margin:0;">
+        </div>
+        <div class="row">
+          <select id="moneyCat" style="width: 130px; margin:0;">
+            <option>식비</option><option>생활</option><option>시현</option><option>외식</option><option>차량</option><option>의료</option><option>기타</option>
+          </select>
+          <input type="text" id="moneyNote" placeholder="항목 메모" style="margin:0;">
+        </div>
+        <button class="btn" onclick="addMoney()">기록 저장</button>
       </div>
 
       <div class="card">
-        <div class="card-label">🎞️ 가족 타임라인</div>
-        <textarea id="timelineIn" placeholder="오늘 시현이의 모습이나 가족의 일상을 남겨주세요." style="height:80px; resize:none;"></textarea>
-        <button class="btn secondary" style="border-color:var(--family-theme); color:var(--family-theme);" onclick="addItem('timeline', 'timelineIn')">추억 저장</button>
-        <div id="timelineList" class="scroll-list" style="margin-top:20px;"></div>
+        <div class="card-title">이번 달 지출 합계</div>
+        <div class="big-number"><span id="monthTotal">0</span>원</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">최근 내역</div>
+        <div id="moneyList" style="max-height: 300px; overflow-y: auto;"></div>
+      </div>
+
+      <div class="card" style="border-color: var(--warning); background: color-mix(in srgb, var(--warning) 6%, var(--surface));">
+        <div class="card-title" style="color:var(--warning);">구매 보류함</div>
+        <div class="row">
+          <input type="text" id="vaultItem" placeholder="사고 싶은 물건" style="margin:0;">
+          <input type="number" id="vaultPrice" placeholder="가격" style="width:110px; margin:0;">
+          <button class="btn small" style="background:var(--warning);" onclick="addVault()">보류</button>
+        </div>
+        <div id="vaultList"></div>
+      </div>
+    </section>
+
+    <section id="panel-records" class="panel">
+      <div class="card">
+        <div class="card-title">시현이 한 줄 기록</div>
+        <div class="row">
+          <select id="childQuoteTypeIn" style="width: 100px; margin: 0; padding: 0 10px; flex-shrink: 0;">
+            <option value="🗣️ 말">🗣️ 말</option>
+            <option value="🏃 행동">🏃 행동</option>
+            <option value="😍 귀여움">😍 귀여움</option>
+            <option value="🌱 성장">🌱 성장</option>
+          </select>
+          <input type="text" id="childQuoteIn" placeholder="시현이가 한 말이나 행동" style="margin:0;">
+          <button class="btn small" style="flex-shrink: 0;" onclick="addChildQuote()">저장</button>
+        </div>
+        <div id="childQuoteList"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">가족 하루 기록</div>
+        <div class="row" style="margin-top: 16px;">
+          <select id="familyDiaryEmojiIn" style="width: 80px; margin: 0; padding: 0 10px; font-size: 20px;">
+            <option value="😊">😊</option><option value="😴">😴</option><option value="🚗">🚗</option>
+            <option value="🍚">🍚</option><option value="🏥">🏥</option><option value="🎉">🎉</option>
+          </select>
+          <textarea id="familyDiaryIn" placeholder="오늘 우리 가족에게 있었던 일" rows="3" style="margin:0;"></textarea>
+        </div>
+        <button class="btn" style="margin-top: 10px;" onclick="addFamilyDiary()">가족 하루 저장</button>
+        <div id="familyDiaryList" style="margin-top: 12px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">가족 컨디션 & 수면 기록</div>
+        <div class="row">
+          <select id="healthMember" style="margin:0;"><option value="dad">아빠</option><option value="mom">엄마</option><option value="sihyeon">시현</option></select>
+          <input type="number" id="healthSleep" placeholder="수면시간 (h)" step="0.5" style="margin:0;">
+          <select id="healthCond" style="margin:0;"><option value="5">최고 (5)</option><option value="4">좋음 (4)</option><option value="3" selected>보통 (3)</option><option value="2">피곤 (2)</option><option value="1">나쁨 (1)</option></select>
+          <button class="btn small" onclick="saveHealth()">저장</button>
+        </div>
+        <div id="healthList"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">고급 설정 및 백업</div>
+        <div class="row">
+          <button class="btn outline" onclick="toggleTheme()">다크모드 전환</button>
+          <button class="btn outline" onclick="exportData()">전체 백업</button>
+          <button class="btn outline" onclick="toggleAdvancedSettings()">고급 설정</button>
+        </div>
+        <div id="advancedSettingsBox" class="hidden-settings" style="display:none;">
+          <p style="font-size: 13px; color: var(--text-soft); margin-bottom: 5px; font-weight: 700;">똑똑이 연결 키</p>
+          <p style="font-size: 11px; color: var(--text-soft); margin-bottom: 10px;">
+            동화 만들기, 가족 요약, 우아림 메모 정리, 가계부 요약에 사용됩니다.
+          </p>
+          <input type="password" id="apiKeyIn" placeholder="연결 키 입력" style="font-size: 14px; padding: 12px; margin-bottom: 10px;">
+          <button class="btn outline" onclick="saveApiKey()">똑똑이 연결 키 저장</button>
+          <button class="btn outline" style="margin-top:10px;" onclick="toggleVoiceGuide()">음성 안내 켜기/끄기</button>
+        </div>
       </div>
     </section>
   </main>
 
   <nav class="bottom-nav">
-    <button class="nav-btn active" data-tab="me" onclick="switchTab('me')"><span class="nav-icon">😎</span>나</button>
-    <button class="nav-btn" data-tab="wife" onclick="switchTab('wife')"><span class="nav-icon">👩</span>예림</button>
-    <button class="nav-btn" data-tab="sihyeon" onclick="switchTab('sihyeon')"><span class="nav-icon">👦</span>시현</button>
-    <button class="nav-btn" data-tab="family" onclick="switchTab('family')"><span class="nav-icon">🏡</span>가족</button>
+    <button class="nav-btn active" data-tab="today" onclick="switchTab('today')"><span class="nav-icon">☀️</span>오늘</button>
+    <button class="nav-btn" data-tab="play" onclick="switchTab('play')"><span class="nav-icon">🚜</span>놀이터</button>
+    <button class="nav-btn" data-tab="family" onclick="switchTab('family')"><span class="nav-icon">🏠</span>가족</button>
+    <button class="nav-btn" data-tab="money" onclick="switchTab('money')"><span class="nav-icon">💰</span>가계부</button>
+    <button class="nav-btn" data-tab="records" onclick="switchTab('records')"><span class="nav-icon">📒</span>기록</button>
   </nav>
 
-  <div id="settingsModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; backdrop-filter:blur(5px); align-items:center; justify-content:center;">
-    <div class="card" style="width:90%; max-width:400px; border-top:none;">
-      <h3 style="margin-bottom:15px;">시스템 설정</h3>
-      <div style="font-size:12px; font-weight:800; color:var(--text-soft); margin-bottom:5px;">API Key 저장 상태: <span id="keyStatus">미저장</span></div>
-      <input type="password" id="apiKeyIn" placeholder="Gemini API Key">
-      <div style="display:flex; gap:8px; margin-bottom:20px;">
-        <button class="btn" style="flex:1;" onclick="saveKey()">저장</button>
-        <button class="btn danger" style="flex:1;" onclick="deleteKey()">삭제</button>
-      </div>
-      <div style="display:flex; gap:8px;">
-        <button class="btn secondary" style="flex:1;" onclick="exportData()">💾 백업</button>
-        <button class="btn secondary" style="flex:1;" onclick="document.getElementById('impFile').click()">📂 복구</button>
-        <input type="file" id="impFile" hidden onchange="importData(this)">
-      </div>
-      <button class="btn secondary" style="margin-top:15px; border:none;" onclick="closeSettings()">닫기</button>
-    </div>
-  </div>
-
   <script>
-    const DB_KEY = 'NEST_FAMILY_OS_V2';
-    const getInitDb = () => ({
-      todosMe: [], memosAi: [], todosWife: [], todosFam: [], money: [], timeline: [],
-      catCare: { noon: '', reum: '' }, settings: { apiKey: '', mood: 'day' }
-    });
-    
-    let db = JSON.parse(localStorage.getItem(DB_KEY)) || getInitDb();
-    let chart = null;
-
-    const escapeHtml = (s) => (s||"").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    const DB_KEY = 'MY_NEXUS_V3_MONSTER';
     const getToday = () => new Date().toLocaleDateString('sv-SE');
-    const save = () => { localStorage.setItem(DB_KEY, JSON.stringify(db)); renderAll(); };
-    const showToast = (m) => { const t=document.getElementById('toast'); t.innerText=m; t.style.opacity=1; setTimeout(()=>t.style.opacity=0, 2500); };
+    const escapeHtml = (s) => (s || "").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-    function applyMood() {
-      const mood = db.settings.mood || 'day';
-      const btn = document.getElementById('moodBtn');
-      if(mood === 'night') {
-        document.body.classList.add('mood-night');
-        btn.innerText = '🌙';
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1A1C1E');
-      } else {
-        document.body.classList.remove('mood-night');
-        btn.innerText = '🌤️';
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FCF9F2');
+    function defaultFamilyNexusState() {
+      return {
+        version: "2.0.0",
+        family: {
+          homeName: "우리집",
+          members: [
+            { id: "dad", name: "아빠", role: "dad" },
+            { id: "mom", name: "엄마", role: "mom" },
+            { id: "sihyeon", name: "시현", role: "child" }
+          ]
+        },
+        progress: { level: 1, exp: 0, badges: [], streaks: {} },
+        today: { missions: [], briefingHistory: [], quickNotes: [] },
+        playground: {
+          collection: [], stickers: [], unlockedItems: [], gameRecords: [],
+          storyWorld: {
+            library: [], savedStories: [], characters: [], readingHistory: [], favoriteStoryIds: [], currentStory: null,
+            settings: { heroName: "시현", defaultTheme: "자동차", defaultLength: "long", defaultTone: "dad" }
+          }
+        },
+        familyBoard: { events: [], memos: [], shopping: [], promises: [], places: [], uareumMemos: [] },
+        money: { records: [], categories: ["식비", "생활", "시현", "외식", "차량", "의료", "기타"], purchaseHold: [] },
+        memories: { dailyNotes: [], childQuotes: [], growthLogs: [], familyDiaries: [], conditionLogs: [] },
+        assistant: { enabled: false, savedPromptMode: "family", history: [] },
+        settings: {
+          theme: "light", hiddenAiKeySaved: false,
+          ai: {
+            provider: "gemini",
+            model: "gemini-3.0-flash",
+            keySaved: false,
+            assistantName: "똑똑이",
+            defaultTone: "warm-family",
+            roles: {
+              writer: true,
+              familyAssistant: true,
+              uareumAssistant: true,
+              moneyAssistant: true,
+              memoryWriter: true
+            }
+          },
+          voiceGuide: { enabled: true, autoRead: true, rate: 0.85, pitch: 1.1, voiceMode: "dad" }
+        },
+        legacy: { level: 1, exp: 0, todos: [], money: [], vault: [], health: [], memos: [], collection: [] }
+      };
+    }
+
+    function ensureFamilyNexusState(raw) {
+      const base = defaultFamilyNexusState();
+      if (!raw || typeof raw !== 'object') return base;
+
+      if (raw.version === "2.0.0") {
+        const merged = { ...base, ...raw };
+        merged.family = { ...base.family, ...(raw.family || {}) };
+        merged.progress = { ...base.progress, ...(raw.progress || {}) };
+        merged.today = { ...base.today, ...(raw.today || {}) };
+        merged.playground = { ...base.playground, ...(raw.playground || {}) };
+        merged.playground.storyWorld = { ...base.playground.storyWorld, ...(raw.playground?.storyWorld || {}) };
+        merged.familyBoard = { ...base.familyBoard, ...(raw.familyBoard || {}) };
+        merged.money = Array.isArray(raw.money) ? { ...base.money, records: raw.money } : { ...base.money, ...(raw.money || {}) };
+        merged.memories = { ...base.memories, ...(raw.memories || {}) };
+        merged.assistant = { ...base.assistant, ...(raw.assistant || {}) };
+        merged.settings = { ...base.settings, ...(raw.settings || {}) };
+        merged.settings.voiceGuide = { ...base.settings.voiceGuide, ...(raw.settings?.voiceGuide || {}) };
+        merged.settings.ai = { ...base.settings.ai, ...(raw.settings?.ai || {}) };
+        merged.settings.ai.roles = { ...base.settings.ai.roles, ...(raw.settings?.ai?.roles || {}) };
+        merged.legacy = { ...base.legacy, ...(raw.legacy || {}) };
+        return migrateFamilyNexusDB(merged);
+      }
+
+      base.progress.level = Number(raw.level) || 1;
+      base.progress.exp = Number(raw.exp) || 0;
+      base.today.missions = Array.isArray(raw.todos) ? raw.todos : [];
+      base.money.records = Array.isArray(raw.money) ? raw.money : [];
+      base.money.purchaseHold = Array.isArray(raw.vault) ? raw.vault : [];
+      base.memories.conditionLogs = Array.isArray(raw.health) ? raw.health : [];
+      base.familyBoard.memos = Array.isArray(raw.memos) ? raw.memos : [];
+      base.familyBoard.shopping = Array.isArray(raw.shopping) ? raw.shopping : base.familyBoard.shopping;
+      base.familyBoard.events = Array.isArray(raw.events) ? raw.events : base.familyBoard.events;
+      base.familyBoard.uareumMemos = Array.isArray(raw.uareumMemos) ? raw.uareumMemos : base.familyBoard.uareumMemos;
+      base.memories.childQuotes = Array.isArray(raw.childQuotes) ? raw.childQuotes : base.memories.childQuotes;
+      base.memories.familyDiaries = Array.isArray(raw.familyDiaries) ? raw.familyDiaries : base.memories.familyDiaries;
+      base.playground.collection = Array.isArray(raw.collection) ? raw.collection : [];
+      base.legacy = {
+        level: raw.level ?? 1,
+        exp: raw.exp ?? 0,
+        todos: Array.isArray(raw.todos) ? raw.todos : [],
+        money: Array.isArray(raw.money) ? raw.money : [],
+        vault: Array.isArray(raw.vault) ? raw.vault : [],
+        health: Array.isArray(raw.health) ? raw.health : [],
+        memos: Array.isArray(raw.memos) ? raw.memos : [],
+        collection: Array.isArray(raw.collection) ? raw.collection : []
+      };
+      return base;
+    }
+
+    function migrateFamilyNexusDB(state) {
+      state.progress.level = Number(state.progress.level || state.legacy?.level) || 1;
+      state.progress.exp = Number(state.progress.exp || state.legacy?.exp) || 0;
+      state.today.missions = Array.isArray(state.today.missions) ? state.today.missions : [];
+      if (Array.isArray(state.money)) state.money = { records: state.money, categories: defaultFamilyNexusState().money.categories, purchaseHold: [] };
+      state.money = { ...defaultFamilyNexusState().money, ...(state.money || {}) };
+      state.money.records = Array.isArray(state.money.records) ? state.money.records : (Array.isArray(state.legacy?.money) ? state.legacy.money : []);
+      state.money.purchaseHold = Array.isArray(state.money.purchaseHold) ? state.money.purchaseHold : (Array.isArray(state.legacy?.vault) ? state.legacy.vault : []);
+      state.familyBoard = { ...defaultFamilyNexusState().familyBoard, ...(state.familyBoard || {}) };
+      state.familyBoard.shopping = Array.isArray(state.familyBoard.shopping) ? state.familyBoard.shopping : [];
+      state.familyBoard.events = Array.isArray(state.familyBoard.events) ? state.familyBoard.events : [];
+      state.familyBoard.uareumMemos = Array.isArray(state.familyBoard.uareumMemos) ? state.familyBoard.uareumMemos : [];
+      state.memories = { ...defaultFamilyNexusState().memories, ...(state.memories || {}) };
+      state.memories.conditionLogs = Array.isArray(state.memories.conditionLogs) ? state.memories.conditionLogs : [];
+      state.memories.childQuotes = Array.isArray(state.memories.childQuotes) ? state.memories.childQuotes : [];
+      state.memories.familyDiaries = Array.isArray(state.memories.familyDiaries) ? state.memories.familyDiaries : [];
+      state.familyBoard.memos = Array.isArray(state.familyBoard.memos) ? state.familyBoard.memos : [];
+      state.playground = { ...defaultFamilyNexusState().playground, ...(state.playground || {}) };
+      state.playground.storyWorld = { ...defaultFamilyNexusState().playground.storyWorld, ...(state.playground.storyWorld || {}) };
+      state.playground.storyWorld.savedStories = Array.isArray(state.playground.storyWorld.savedStories) ? state.playground.storyWorld.savedStories : [];
+      state.playground.storyWorld.characters = Array.isArray(state.playground.storyWorld.characters) ? state.playground.storyWorld.characters : [];
+      state.playground.storyWorld.readingHistory = Array.isArray(state.playground.storyWorld.readingHistory) ? state.playground.storyWorld.readingHistory : [];
+      state.playground.storyWorld.favoriteStoryIds = Array.isArray(state.playground.storyWorld.favoriteStoryIds) ? state.playground.storyWorld.favoriteStoryIds : [];
+      state.playground.storyWorld.currentStory = state.playground.storyWorld.currentStory || null;
+      state.playground.storyWorld.settings = { ...defaultFamilyNexusState().playground.storyWorld.settings, ...(state.playground.storyWorld.settings || {}) };
+      state.playground.collection = Array.isArray(state.playground.collection) ? state.playground.collection : [];
+      state.settings = {
+        ...defaultFamilyNexusState().settings,
+        ...(state.settings || {})
+      };
+      state.settings.voiceGuide = {
+        ...defaultFamilyNexusState().settings.voiceGuide,
+        ...(state.settings.voiceGuide || {})
+      };
+      state.settings.ai = {
+        ...defaultFamilyNexusState().settings.ai,
+        ...(state.settings.ai || {})
+      };
+      state.settings.ai.roles = {
+        ...defaultFamilyNexusState().settings.ai.roles,
+        ...(state.settings.ai.roles || {})
+      };
+      if (state.settings.hiddenAiKeySaved) state.settings.ai.keySaved = true;
+      state.version = "2.0.0";
+      return state;
+    }
+
+    function loadStoredDB() {
+      try {
+        return JSON.parse(localStorage.getItem(DB_KEY) || 'null');
+      } catch (error) {
+        console.warn('Family Nexus storage parse failed. Keeping a fresh wrapper without deleting localStorage.', error);
+        return null;
       }
     }
 
-    function toggleMood() {
-      db.settings.mood = db.settings.mood === 'night' ? 'day' : 'night';
-      applyMood(); save();
-      if(curTab === 'family') renderChart();
-      showToast(db.settings.mood === 'night' ? '나이트 무드로 전환합니다.' : '데이 무드로 전환합니다.');
-    }
+    let db = ensureFamilyNexusState(loadStoredDB());
+    window.db = db;
+    const missions = () => db.today.missions;
+    const moneyRecords = () => db.money.records;
+    const purchaseHold = () => db.money.purchaseHold;
+    const conditionLogs = () => db.memories.conditionLogs;
+    const collection = () => db.playground.collection;
+    const shoppingItems = () => db.familyBoard.shopping;
+    const familyEvents = () => db.familyBoard.events;
+    const uareumMemos = () => db.familyBoard.uareumMemos;
+    const childQuotes = () => db.memories.childQuotes;
+    const familyDiaries = () => db.memories.familyDiaries;
 
+    function refreshLegacyCompatibility() {
+      db.legacy = {
+        level: db.progress.level, exp: db.progress.exp, todos: missions(), money: moneyRecords(),
+        vault: purchaseHold(), health: conditionLogs(), memos: db.familyBoard.memos, collection: collection()
+      };
+    }
+    const save = () => { refreshLegacyCompatibility(); localStorage.setItem(DB_KEY, JSON.stringify(db)); renderAll(); };
+
+    const CARS = [
+      { id: 'fire', i: '🚒', n: '소방차', s: '삐뽀 삐뽀!' },
+      { id: 'excavator', i: '🚜', n: '포크레인', s: '쿠궁 쿠궁!' },
+      { id: 'amb', i: '🚑', n: '구급차', s: '애앵 애앵!' },
+      { id: 'police', i: '🚓', n: '경찰차', s: '위용 위용!' },
+      { id: 'dump', i: '🚚', n: '덤프트럭', s: '부릉 부릉!' },
+      { id: 'bus', i: '🚌', n: '버스', s: '빵빵!' },
+      { id: 'mixer', i: '🚛', n: '레미콘', s: '빙글 빙글!' },
+      { id: 'taxi', i: '🚕', n: '택시', s: '부우웅!' },
+      { id: 'ladder', i: '🪜', n: '사다리차', s: '쭉쭉!' },
+      { id: 'clean', i: '🧹', n: '청소차', s: '쓱싹 쓱싹!' },
+      { id: 'box', i: '📦', n: '택배차', s: '배달 왔어요!' },
+      { id: 'forklift', i: '🏗️', n: '지게차', s: '삐리리!' }
+    ];
+
+    const STATIC_STORIES = [
+      { t: "무적의 킹 포크레인", c: "옛날 공사장에 아주 힘이 센 포크레인 킹이 살았어요. 어느 날 킹이 흙더미에 바퀴가 빠져 움직이지 못했어요. 그때 <span class='highlight'>시현</span>이가 멋진 모자를 쓰고 나타났어요. 시현이가 버튼을 누르자 킹은 흙더미를 번쩍 들어 올렸답니다. 모두가 박수를 치며 시현이를 최고의 공사장 대장이라고 불렀어요." },
+      { t: "불꽃 소방차 대장", c: "마을의 커다란 나무에 작은 불꽃이 피어났어요. 삐뽀삐뽀 소리를 내며 소방차 대장이 달려왔지만 물 호스가 꼬여 있었어요. 그때 <span class='highlight'>시현</span>이가 차분하게 호스를 풀어 주었어요. 시현이가 물 발사 버튼을 누르자 시원한 물줄기가 뿜어져 불꽃을 꺼 주었답니다. 소방차 대장은 시현이에게 고맙다고 인사했어요." }
+    ];
+
+    let curPlayMode = null;
+    let physicsRaf;
+    let blocks = [];
+    let voiceUnlocked = false;
+    let currentUareumFilter = '전체';
     function switchTab(id) {
-      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-      document.getElementById('panel-'+id).classList.add('active');
-      document.querySelector(`[data-tab="${id}"]`).classList.add('active');
-      document.body.className = (db.settings.mood === 'night' ? 'mood-night ' : '') + 'theme-' + id;
-      const titles = { me: '준성이 방', wife: '예림이 방', sihyeon: '시현이 놀이터', family: '가족 라운지' };
-      document.getElementById('headerTitle').innerText = titles[id];
-      if(id==='sihyeon') initGame();
-      renderAll();
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      document.querySelector(`[data-tab="${id}"]`)?.classList.add('active');
+      window.scrollTo(0, 0);
+      if (id !== 'play') {
+        cancelAnimationFrame(physicsRaf);
+        stopStoryReading();
+      }
+      if (id === 'play' && curPlayMode === 'blocks') startBlocksPhysics();
+      if (id === 'play' && !curPlayMode) {
+        const hub = document.getElementById('playHubZone');
+        if (hub) hub.style.display = 'grid';
+        const interactiveZone = document.getElementById('interactive-zone');
+        const storyZone = document.getElementById('story-zone');
+        if (interactiveZone) interactiveZone.style.display = 'none';
+        if (storyZone) storyZone.style.display = 'none';
+      }
+      if (id === 'play' && voiceUnlocked && db.settings.voiceGuide.autoRead) speakGuide('시현아, 놀이터야. 하고 싶은 놀이를 눌러 봐.');
     }
 
-    function addItem(k, i) {
-      const v = document.getElementById(i).value.trim(); if(!v) return;
-      if(!db[k]) db[k] = [];
-      db[k].unshift({ id: Date.now(), text: v, done: false, date: getToday() });
-      document.getElementById(i).value = ""; save();
+    function toggleTheme() {
+      const dark = document.body.classList.toggle('dark');
+      db.settings.theme = dark ? 'dark' : 'light';
+      localStorage.setItem('MY_NEXUS_THEME', db.settings.theme);
+      save();
     }
 
-    function addFamSchedule() {
-      const v = document.getElementById('todoFamInput').value.trim();
-      const d = document.getElementById('todoFamDate').value;
-      if(!v) return;
-      db.todosFam.unshift({ id: Date.now(), text: v, done: false, date: getToday(), target: d });
-      document.getElementById('todoFamInput').value = ""; document.getElementById('todoFamDate').value = ""; save();
+    function speakText(text, options = {}) {
+      if (!('speechSynthesis' in window)) {
+        alert('이 기기는 음성 읽어주기를 지원하지 않아요.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = options.lang || 'ko-KR';
+      utterance.rate = options.rate || db.settings.voiceGuide.rate || 0.85;
+      utterance.pitch = options.pitch || db.settings.voiceGuide.pitch || 1.1;
+      window.speechSynthesis.speak(utterance);
+    }
+    function speakGuide(text) {
+      if (!db.settings.voiceGuide.enabled) return;
+      speakText(text, { rate: 0.86, pitch: 1.08 });
+    }
+    function speakStory(text) {
+      speakText(text, { rate: 0.82, pitch: 1.06 });
+    }
+    function stopSpeaking() {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+    function toggleVoiceGuide() {
+      db.settings.voiceGuide.enabled = !db.settings.voiceGuide.enabled;
+      save();
+      alert(db.settings.voiceGuide.enabled ? '음성 안내를 켰어요.' : '음성 안내를 껐어요.');
+    }
+    function speakButtonGuide(label, description) {
+      speakGuide(`${label}. ${description}`);
+    }
+    function startChildVoiceMode() {
+      voiceUnlocked = true;
+      speakGuide('시현아, 안녕. 자동차 정비, 블록 놀이, 카드 놀이, 그림 긁기, 동화책이 있어. 누르면 시작해.');
     }
 
-    function toggleItem(k, id) { const i=db[k].find(x=>x.id===id); if(i){i.done=!i.done; save();} }
-    function delItem(k, id) { db[k]=db[k].filter(x=>x.id!==id); save(); }
+    function gainExp(amt) {
+      db.progress.exp += amt;
+      while (db.progress.exp >= 100) {
+        db.progress.level++;
+        db.progress.exp -= 100;
+        fireConfetti();
+        alert(`우리집 레벨 업! Lv.${db.progress.level}`);
+      }
+      save();
+    }
+    function unlockCar(carIcon) {
+      if (!collection().includes(carIcon)) {
+        collection().push(carIcon);
+        fireConfetti();
+        alert('새 자동차가 도감에 등록됐어요!');
+        save();
+      }
+    }
+
+    function fireConfetti() {
+      const container = document.getElementById('particle-container');
+      const colors = ['#e05d3f', '#34c759', '#3478f6', '#f3a51d', '#147d64'];
+      for (let i = 0; i < 50; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 15 + 5;
+        p.style.width = size + 'px'; p.style.height = size + 'px';
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.top = -20 + 'px';
+        p.style.animationDuration = (Math.random() * 2 + 1) + 's';
+        p.style.animationDelay = (Math.random() * 0.5) + 's';
+        container.appendChild(p);
+        setTimeout(() => p.remove(), 3500);
+      }
+    }
+
+    function setPlayMode(mode, btnElement) {
+      curPlayMode = mode;
+      document.querySelectorAll('.play-tab').forEach(t => t.classList.remove('active'));
+      btnElement?.classList.add('active');
+      const interactiveZone = document.getElementById('interactive-zone');
+      const storyZone = document.getElementById('story-zone');
+      const canvasZone = document.getElementById('gameCanvas');
+      const hub = document.getElementById('playHubZone');
+      if (hub) hub.style.display = 'none';
+      cancelAnimationFrame(physicsRaf);
+      canvasZone.innerHTML = '';
+      canvasZone.style.overflow = 'hidden';
+      const labels = {
+        garage: ['자동차 정비', '자동차를 빈칸에 끌어다 놓아 봐.'],
+        blocks: ['물리 블록', '화면을 누르면 블록이 떨어져.'],
+        memory: ['기억력 카드', '같은 자동차 카드 두 장을 찾아 봐.'],
+        scratch: ['매직 스크래치', '손가락으로 문질러 숨어 있는 자동차를 찾아 봐.'],
+        story: ['마법 동화', '책을 고르고 읽어주기 버튼을 눌러 봐.']
+      };
+      if (voiceUnlocked) speakButtonGuide(labels[mode][0], labels[mode][1]);
+      if (mode === 'story') {
+        interactiveZone.style.display = 'none';
+        storyZone.style.display = 'block';
+        setStoryFilter(window.currentStoryFilter || '전체');
+      } else {
+        interactiveZone.style.display = 'block';
+        storyZone.style.display = 'none';
+        if (mode === 'garage') initGarageGame(canvasZone);
+        else if (mode === 'blocks') initBlocksGame(canvasZone);
+        else if (mode === 'memory') initMemoryGame(canvasZone);
+        else if (mode === 'scratch') initScratchGame(canvasZone);
+      }
+    }
+
+    function initGarageGame(container) {
+      container.innerHTML = '';
+      const targetCar = CARS[Math.floor(Math.random() * 6)];
+      const bp = document.createElement('div');
+      bp.className = 'blueprint'; bp.innerText = targetCar.i;
+      container.appendChild(bp);
+      const targetBox = document.createElement('div');
+      targetBox.className = 'garage-target';
+      targetBox.innerText = '주차';
+      targetBox.style.left = '50%'; targetBox.style.top = '20%';
+      targetBox.style.transform = 'translate(-50%, 0)';
+      targetBox.id = 'garageTarget';
+      container.appendChild(targetBox);
+      const part = document.createElement('div');
+      part.className = 'garage-part';
+      part.innerText = targetCar.i;
+      part.style.left = '20px'; part.style.bottom = '20px';
+      container.appendChild(part);
+
+      let isDragging = false;
+      part.onpointerdown = (e) => { isDragging = true; e.preventDefault(); };
+      window.onpointermove = (e) => {
+        if (!isDragging) return;
+        const rect = container.getBoundingClientRect();
+        part.style.left = `${e.clientX - rect.left - 30}px`;
+        part.style.top = `${e.clientY - rect.top - 30}px`;
+      };
+      window.onpointerup = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const tRect = targetBox.getBoundingClientRect();
+        const pRect = part.getBoundingClientRect();
+        if (!(pRect.right < tRect.left || pRect.left > tRect.right || pRect.bottom < tRect.top || pRect.top > tRect.bottom)) {
+          targetBox.classList.add('filled');
+          part.style.pointerEvents = 'none';
+          part.style.left = targetBox.style.left;
+          part.style.top = targetBox.style.top;
+          part.style.transform = 'translate(-50%, -20%) scale(1.5)';
+          setTimeout(() => {
+            alert(`수리 완료! ${targetCar.n} 출동! ${targetCar.s}`);
+            gainExp(15); unlockCar(targetCar.i);
+            initGarageGame(container);
+          }, 500);
+        }
+      };
+    }
+
+    function initBlocksGame(container) {
+      container.innerHTML = `<canvas id="blockCanvas"></canvas><div class="physics-ui"><button class="bomb-btn" onclick="bombBlocks()">💥 와르르!</button></div>`;
+      const canvas = document.getElementById('blockCanvas');
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      blocks = [];
+      canvas.onpointerdown = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const colors = ['#e33b32', '#34c759', '#3478f6', '#f3a51d', '#147d64'];
+        blocks.push({
+          x: e.clientX - rect.left - 25, y: e.clientY - rect.top - 25, w: 50, h: 50,
+          vx: (Math.random() - 0.5) * 5, vy: 0, color: colors[Math.floor(Math.random() * colors.length)]
+        });
+        gainExp(1);
+      };
+      startBlocksPhysics();
+    }
+
+    function startBlocksPhysics() {
+      const canvas = document.getElementById('blockCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const gravity = 0.5;
+      const bounce = 0.4;
+      const ground = canvas.height;
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        blocks.forEach((b, i) => {
+          b.vy += gravity; b.x += b.vx; b.y += b.vy;
+          if (b.y + b.h >= ground) { b.y = ground - b.h; b.vy *= -bounce; b.vx *= 0.8; }
+          if (b.x <= 0) { b.x = 0; b.vx *= -bounce; }
+          if (b.x + b.w >= canvas.width) { b.x = canvas.width - b.w; b.vx *= -bounce; }
+          blocks.forEach((b2, j) => {
+            if (i === j) return;
+            if (b.x < b2.x + b2.w && b.x + b.w > b2.x && b.y < b2.y + b2.h && b.y + b.h > b2.y && b.vy > 0 && b.y < b2.y) {
+              b.y = b2.y - b.h; b.vy = 0; b.vx *= 0.5;
+            }
+          });
+          ctx.fillStyle = b.color;
+          ctx.beginPath(); ctx.roundRect(b.x, b.y, b.w, b.h, 10); ctx.fill();
+          ctx.strokeStyle = 'rgba(0,0,0,0.2)'; ctx.lineWidth = 3; ctx.stroke();
+        });
+        physicsRaf = requestAnimationFrame(update);
+      }
+      update();
+    }
+
+    window.bombBlocks = function() {
+      if (blocks.length === 0) return;
+      fireConfetti();
+      blocks.forEach(b => { b.vy = -Math.random() * 20 - 10; b.vx = (Math.random() - 0.5) * 30; });
+      gainExp(10);
+      setTimeout(() => { blocks = []; }, 1000);
+    };
+
+    function initMemoryGame(container) {
+      container.innerHTML = '';
+      container.style.overflow = 'auto';
+      const grid = document.createElement('div');
+      grid.className = 'memory-grid';
+      container.appendChild(grid);
+      let deck = [...CARS.slice(0, 6), ...CARS.slice(0, 6)].sort(() => Math.random() - 0.5);
+      let flippedCards = [];
+      let matchedCount = 0;
+      let lockBoard = false;
+      deck.forEach(car => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.id = car.id;
+        card.innerHTML = `<div class="memory-inner"><div class="memory-front">?</div><div class="memory-back">${car.i}</div></div>`;
+        card.onclick = () => {
+          if (lockBoard || card.classList.contains('flipped')) return;
+          card.classList.add('flipped');
+          flippedCards.push(card);
+          if (flippedCards.length === 2) {
+            lockBoard = true;
+            if (flippedCards[0].dataset.id === flippedCards[1].dataset.id) {
+              matchedCount += 2; flippedCards = []; lockBoard = false; gainExp(5);
+              if (matchedCount === deck.length) setTimeout(() => { alert('우와! 짝을 모두 맞췄어요!'); fireConfetti(); gainExp(30); initMemoryGame(container); }, 500);
+            } else {
+              setTimeout(() => {
+                flippedCards[0].classList.remove('flipped');
+                flippedCards[1].classList.remove('flipped');
+                flippedCards = []; lockBoard = false;
+              }, 1000);
+            }
+          }
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    function initScratchGame(container) {
+      const targetCar = CARS[Math.floor(Math.random() * CARS.length)];
+      container.innerHTML = `<div class="scratch-bg">${targetCar.i}</div><canvas id="scratchCanvas"></canvas>`;
+      const canvas = document.getElementById('scratchCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      ctx.fillStyle = '#b0bec5';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#78909c';
+      ctx.font = 'bold 24px Pretendard';
+      ctx.textAlign = 'center';
+      ctx.fillText('손가락으로 쓱쓱 문질러 봐요', canvas.width / 2, canvas.height / 2);
+      ctx.globalCompositeOperation = 'destination-out';
+      let isDrawing = false;
+      let erasedPixels = 0;
+      const scratch = (e) => {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+        ctx.beginPath(); ctx.arc(x, y, 35, 0, Math.PI * 2); ctx.fill();
+        erasedPixels++;
+        if (erasedPixels > 200) {
+          isDrawing = false;
+          canvas.style.transition = "opacity 1s";
+          canvas.style.opacity = "0";
+          setTimeout(() => {
+            alert(`짜잔! ${targetCar.n} 발견!`);
+            gainExp(20); unlockCar(targetCar.i);
+            initScratchGame(container);
+          }, 1000);
+        }
+      };
+      canvas.onpointerdown = () => isDrawing = true;
+      window.onpointerup = () => isDrawing = false;
+      canvas.onpointermove = scratch;
+    }
+
+    function addTodo() {
+      const input = document.getElementById('todoIn');
+      const val = input.value.trim();
+      if (!val) return;
+      missions().unshift({ id: Date.now(), text: val, done: false, date: getToday() });
+      input.value = "";
+      save();
+    }
 
     function addMoney() {
-      const a = parseInt(document.getElementById('moneyAmt').value); if(!a) return;
-      db.money.unshift({ id: Date.now(), amt: a, cat: document.getElementById('moneyCat').value, note: document.getElementById('moneyNote').value, date: getToday() });
-      document.getElementById('moneyAmt').value = ""; document.getElementById('moneyNote').value = ""; save();
-    }
-
-    function renderChart() {
-      const ctx = document.getElementById('moneyChart'); if(!ctx) return;
-      const cats = {}; 
-      db.money.filter(m=>m.date.startsWith(getToday().slice(0,7))).forEach(m=>{ cats[m.cat] = (cats[m.cat]||0)+m.amt; });
-      const labels = Object.keys(cats);
-      if(labels.length === 0) { if(chart) chart.destroy(); return; }
-      const colors = (db.settings.mood === 'night') ? ['#D4A199','#D4C199','#8AA1C2','#99A896','#8A8A88'] : ['#E6B9B3','#E6D2B3','#A6B1C2','#B8C4B5','#A8A19A'];
-      if(chart) chart.destroy();
-      chart = new Chart(ctx, {
-        type:'doughnut',
-        data: { labels, datasets: [{ data: Object.values(cats), backgroundColor: colors, borderWidth: 0 }] },
-        options: { cutout:'70%', plugins:{ legend:{ position:'right', labels:{ boxWidth:10, color: (db.settings.mood==='night'?'#8A8A88':'#4A4541'), font:{size:11, weight:'bold', family:'Pretendard'}}}} }
+      const amt = parseInt(document.getElementById('moneyAmt').value, 10);
+      if (!amt) return;
+      moneyRecords().unshift({
+        id: Date.now(), type: document.getElementById('moneyType').value,
+        amt, cat: document.getElementById('moneyCat').value,
+        note: document.getElementById('moneyNote').value, date: getToday()
       });
-      document.getElementById('monthTotal').innerText = Object.values(cats).reduce((a,b)=>a+b,0).toLocaleString();
+      document.getElementById('moneyAmt').value = "";
+      document.getElementById('moneyNote').value = "";
+      gainExp(5);
     }
 
-    function renderList(k, elId, isFam=false) {
-      const el = document.getElementById(elId); if(!el || !db[k]) return;
-      if(db[k].length === 0) { el.innerHTML = '<div class="empty-state">아직 기록이 없어요 😊</div>'; return; }
-      el.innerHTML = db[k].map(i => {
-        let ddayHtml = '';
-        if(isFam && i.target) {
-          const diff = Math.ceil((new Date(i.target) - new Date(getToday())) / 86400000);
-          let cls = 'dday-normal';
-          if(diff === 0) cls = 'dday-emergency'; else if(diff > 0 && diff <= 7) cls = 'dday-soon';
-          ddayHtml = `<span class="dday-badge ${cls}">${diff === 0 ? 'D-Day' : (diff > 0 ? 'D-'+diff : 'D+'+Math.abs(diff))}</span>`;
-        }
-        return `<div class="list-item" style="flex-direction:column; align-items:flex-start;">
-          <div style="display:flex; align-items:center; width:100%; gap:12px;">
-            ${i.hasOwnProperty('done') ? `<div class="item-check ${i.done?'done':''}" onclick="toggleItem('${k}', ${i.id})">✓</div>` : ''}
-            <div class="item-body">
-              <div class="item-title ${i.done?'done':''}">${escapeHtml(i.text)}${ddayHtml}</div>
-            </div>
-            <div class="del-btn" style="color:var(--text-soft); font-size:12px;" onclick="delItem('${k}', ${i.id})">삭제</div>
-          </div>
-          ${k === 'memosAi' ? `<div class="memo-full-text">${escapeHtml(i.fullText)}</div>` : ''}
-          <div style="font-size:11px; color:var(--text-soft); margin-top:4px;">${i.date}</div>
-        </div>`;
-      }).join('');
+    function addVault() {
+      const item = document.getElementById('vaultItem').value.trim();
+      const price = parseInt(document.getElementById('vaultPrice').value, 10) || 0;
+      if (!item) return;
+      purchaseHold().unshift({ id: Date.now(), item, price, createdAt: Date.now() });
+      document.getElementById('vaultItem').value = "";
+      document.getElementById('vaultPrice').value = "";
+      save();
+    }
+
+    function saveHealth() {
+      const sleep = document.getElementById('healthSleep').value;
+      if (!sleep) return;
+      conditionLogs().unshift({
+        id: Date.now(), member: document.getElementById('healthMember').value,
+        sleep, cond: document.getElementById('healthCond').value, date: getToday()
+      });
+      document.getElementById('healthSleep').value = "";
+      gainExp(15);
+    }
+
+    function addQuickNote() {
+      const input = document.getElementById('quickNoteIn');
+      const text = input.value.trim();
+      if (!text) return;
+      db.today.quickNotes.unshift({ id: Date.now(), text, date: getToday() });
+      input.value = "";
+      save();
+    }
+
+    function addFamilyMemo() {
+      const input = document.getElementById('familyMemoIn');
+      const text = input.value.trim();
+      if (!text) return;
+      db.familyBoard.memos.unshift({ id: Date.now(), text, date: getToday() });
+      input.value = "";
+      save();
+    }
+
+    function addShoppingItem() {
+      const input = document.getElementById('shoppingIn');
+      const cat = document.getElementById('shoppingCatIn')?.value || '';
+      const text = input.value.trim();
+      if (!text) return;
+      shoppingItems().unshift({ id: Date.now(), text: cat ? `[${cat}] ${text}` : text, done: false, date: getToday() });
+      input.value = "";
+      save();
+    }
+
+    function addShopping() {
+      addShoppingItem();
+    }
+
+    function addFamilyEvent() {
+      const dateInput = document.getElementById('eventDateIn');
+      const textInput = document.getElementById('eventTextIn');
+      const date = dateInput.value || getToday();
+      const text = textInput.value.trim();
+      if (!text) return;
+      familyEvents().unshift({ id: Date.now(), date, text });
+      textInput.value = "";
+      dateInput.value = "";
+      save();
+    }
+
+    function addPromise() {
+      addFamilyEvent();
+    }
+
+    function addUareumMemo() {
+      const date = document.getElementById('uareumDateIn').value || getToday();
+      const name = document.getElementById('uareumNameIn').value.trim();
+      const status = document.getElementById('uareumStatusIn').value;
+      const memo = document.getElementById('uareumMemoIn').value.trim();
+      if (!name && !memo) return;
+      uareumMemos().unshift({ id: Date.now(), date, name, status, memo });
+      document.getElementById('uareumDateIn').value = "";
+      document.getElementById('uareumNameIn').value = "";
+      document.getElementById('uareumStatusIn').value = "상담";
+      document.getElementById('uareumMemoIn').value = "";
+      save();
+    }
+
+    function addChildQuote() {
+      const input = document.getElementById('childQuoteIn');
+      const type = document.getElementById('childQuoteTypeIn')?.value || '🗣️ 말';
+      const text = input.value.trim();
+      if (!text) return;
+      childQuotes().unshift({ id: Date.now(), text, type, date: getToday() });
+      input.value = "";
+      save();
+    }
+
+    function addFamilyDiary() {
+      const input = document.getElementById('familyDiaryIn');
+      const emoji = document.getElementById('familyDiaryEmojiIn')?.value || '😊';
+      const text = input.value.trim();
+      if (!text) return;
+      familyDiaries().unshift({ id: Date.now(), text, emoji, date: getToday() });
+      input.value = "";
+      save();
+    }
+
+    function addDailyNote() {
+      addFamilyDiary();
+    }
+
+    function toggleAdvancedSettings() {
+      const box = document.getElementById('advancedSettingsBox');
+      if (!box) return;
+      box.style.display = box.style.display === 'none' || !box.style.display ? 'block' : 'none';
+    }
+
+    function saveApiKey() {
+      const key = document.getElementById('apiKeyIn').value.trim();
+      if (!key) return;
+      localStorage.setItem('GEMINI_3_FLASH_KEY', key);
+      db.settings.hiddenAiKeySaved = true;
+      db.settings.ai.keySaved = true;
+      document.getElementById('apiKeyIn').value = "";
+      save();
+      alert('똑똑이 연결 키를 저장했어요.');
+    }
+
+    function delItem(collectionName, id) {
+      const maps = {
+        todos: missions(), money: moneyRecords(), vault: purchaseHold(), health: conditionLogs(),
+        quickNotes: db.today.quickNotes, familyMemos: db.familyBoard.memos,
+        shopping: shoppingItems(), events: familyEvents(), promises: db.familyBoard.promises,
+        uareumMemos: uareumMemos(), childQuotes: childQuotes(), familyDiaries: familyDiaries(),
+        dailyNotes: db.memories.dailyNotes
+      };
+      const list = maps[collectionName];
+      if (!list) return;
+      const idx = list.findIndex(x => x.id === id);
+      if (idx >= 0) list.splice(idx, 1);
+      save();
+    }
+
+    function delData(collectionName, id) {
+      delItem(collectionName, id);
+    }
+
+    function toggleShoppingItem(id) {
+      const item = shoppingItems().find(x => x.id === id);
+      if (item) item.done = !item.done;
+      save();
+    }
+
+    function toggleShopping(id) {
+      toggleShoppingItem(id);
+    }
+
+    function toggleMission(id) {
+      const item = missions().find(x => x.id === id);
+      if (item) item.done = !item.done;
+      save();
     }
 
     function renderAll() {
-      renderList('todosMe', 'todoMeList'); renderList('todosWife', 'todoWifeList'); 
-      renderList('todosFam', 'todoFamList', true); renderList('memosAi', 'aiMemoList');
-      renderList('timeline', 'timelineList');
-      renderChart();
-      const n=document.getElementById('btnCatNoon'), r=document.getElementById('btnCatReum');
-      if(n) { n.className = db.catCare.noon===getToday()?'btn':'btn secondary'; n.innerText = db.catCare.noon===getToday()?'눈이 완료!':'눈이 밥'; }
-      if(r) { r.className = db.catCare.reum===getToday()?'btn':'btn secondary'; r.innerText = db.catCare.reum===getToday()?'름이 완료!':'름이 밥'; }
-      const ml = document.getElementById('moneyList');
-      if(ml) ml.innerHTML = db.money.slice(0,10).map(m=>`<div class="list-item"><div class="item-body"><div class="item-title" style="font-size:14px;">${m.amt.toLocaleString()}원 <span style="font-size:11px; color:var(--text-soft);">(${m.cat})</span></div><div style="font-size:11px; color:var(--text-soft);">${escapeHtml(m.note)}</div></div><div class="del-btn" onclick="delItem('money', ${m.id})">🗑️</div></div>`).join('');
+      renderToday();
+      renderFamily();
+      renderMoney();
+      renderRecords();
+      renderStats();
     }
 
-    async function askAI() {
-      const q = document.getElementById('aiQuery').value; if(!db.settings.apiKey || !q) return showToast('API 키 또는 질문을 확인해줘!');
-      const out = document.getElementById('aiOutput');
-      out.innerText = "생각 중... 🧠"; document.getElementById('aiPanel').style.display='block';
-      try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${db.settings.apiKey}`, {
-          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({contents:[{parts:[{text:q}]}]})
-        });
-        const data = await res.json();
-        const txt = data?.candidates?.[0]?.content?.parts?.[0]?.text || "답변을 가져오지 못했어.";
-        out.innerText = txt;
-      } catch(e) { out.innerText = "오류가 발생했어. 키를 확인해봐!"; }
-    }
-    function copyAi() { navigator.clipboard.writeText(document.getElementById('aiOutput').innerText); showToast('복사 완료!'); }
-    function saveAi() { 
-      const fullTxt = document.getElementById('aiOutput').innerText; if(!fullTxt) return;
-      db.memosAi.unshift({ id: Date.now(), text: "[AI 답변] " + getToday(), fullText: fullTxt, date: getToday() });
-      save(); showToast('금고에 저장했어!'); document.getElementById('aiPanel').style.display='none';
+    function renderToday() {
+      const todoList = document.getElementById('todoList');
+      if (todoList) todoList.innerHTML = missions().filter(t => t.date === getToday()).map(t => `
+        <div class="list-item">
+          <div class="item-check ${t.done ? 'done' : ''}" onclick="toggleMission(${t.id})">✓</div>
+          <div class="item-body"><div class="item-title ${t.done ? 'done' : ''}">${escapeHtml(t.text)}</div></div>
+          <button class="del-btn" onclick="delItem('todos', ${t.id})">삭제</button>
+        </div>
+      `).join('') || `<div class="item-meta">오늘 가족 미션을 하나 적어 보세요.</div>`;
+
+      const quickNoteList = document.getElementById('quickNoteList');
+      if (quickNoteList) quickNoteList.innerHTML = db.today.quickNotes.slice(0, 3).map(n => `
+        <div class="list-item"><div class="item-body"><div class="item-title">${escapeHtml(n.text)}</div><div class="item-meta">${n.date}</div></div><button class="del-btn" onclick="delItem('quickNotes', ${n.id})">삭제</button></div>
+      `).join('') || `<div class="item-meta">아직 오늘 기록이 없어요.</div>`;
+
+      const today = getToday();
+      const todayShoppingCount = document.getElementById('todayShoppingCount');
+      const todayEventCount = document.getElementById('todayEventCount');
+      const todayUareumNeedCount = document.getElementById('todayUareumNeedCount');
+      if (todayShoppingCount) todayShoppingCount.innerText = shoppingItems().filter(x => !x.done).length;
+      if (todayEventCount) todayEventCount.innerText = familyEvents().filter(x => x.date >= today).length;
+      if (todayUareumNeedCount) todayUareumNeedCount.innerText = uareumMemos().filter(x => x.status === '확인필요').length;
     }
 
-    async function generateFairyTale(t) {
-      if(!db.settings.apiKey) return showToast('설정에서 마법 열쇠(Key)를 먼저 넣어주세요!');
-      const cv = document.getElementById('gameCanvas'); cv.innerHTML = "동화 요정이 글을 쓰고 있어요... ✨";
-      try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${db.settings.apiKey}`, {
-          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({contents:[{parts:[{text:`시현이를 위해 '${t}' 주제로 150자 내외의 동화를 지어줘.`}]}]})
-        });
-        const data = await res.json();
-        const txt = (data?.candidates?.[0]?.content?.parts?.[0]?.text || "실패").replace(/\*/g,'');
-        cv.textContent = ""; 
-        const txtDiv = document.createElement('div'); txtDiv.style.cssText = "font-size:16px; line-height:1.7; text-align:left; padding:10px;";
-        txtDiv.textContent = txt; cv.appendChild(txtDiv);
-        const btn = document.createElement('button'); btn.className = 'btn'; btn.style.marginTop = '15px'; btn.textContent = '다시 고르기';
-        btn.onclick = initGame; cv.appendChild(btn);
-        const u = new SpeechSynthesisUtterance(txt); u.lang='ko-KR'; u.rate=0.9; window.speechSynthesis.speak(u);
-      } catch(e) { cv.textContent = "통신 실패!"; }
-    }
+    function renderFamily() {
+      const shoppingList = document.getElementById('shoppingList');
+      if (shoppingList) shoppingList.innerHTML = shoppingItems().slice(0, 12).map(s => `
+        <div class="list-item"><div class="item-check ${s.done ? 'done' : ''}" onclick="toggleShoppingItem(${s.id})">✓</div><div class="item-body"><div class="item-title ${s.done ? 'done' : ''}">${escapeHtml(s.text)}</div><div class="item-meta">${s.date || ''}</div></div><button class="del-btn" onclick="delData('shopping', ${s.id})">삭제</button></div>
+      `).join('') || `<div class="item-meta">장보기 목록을 추가해 보세요.</div>`;
 
-    let curGame = 'fairytale';
-    function setGame(g, b) { curGame=g; document.querySelectorAll('.game-tab').forEach(x=>x.classList.remove('active')); b.classList.add('active'); initGame(); }
-    function initGame() {
-      const cv = document.getElementById('gameCanvas'); cv.innerHTML = "";
-      if(curGame==='fairytale') {
-        cv.innerHTML = `<div style="font-size:60px;">📖</div><p style="margin:20px 0; font-weight:700;">어떤 동화를 들려줄까?</p><div class="options-grid"><button class="btn" onclick="generateFairyTale('포크레인')">🚜 포크레인</button><button class="btn" onclick="generateFairyTale('소방차')">🚒 소방차</button></div>`;
-      } else if(curGame === 'quiz') {
-        const cars = [['🚜','포크레인'],['🚒','소방차'],['🚓','경찰차']]; const r = cars[Math.floor(Math.random()*3)];
-        cv.innerHTML = `<div style="font-size:100px; filter:brightness(0); opacity:0.1;">${r[0]}</div><p style="margin:20px 0; font-weight:700;">이 차의 이름은?</p><div class="options-grid">${cars.map(c=>`<button class="btn" style="background:var(--surface-solid); color:var(--text); border:1px solid var(--border);" onclick="checkQuiz('${c[1]}','${r[1]}')">${c[1]}</button>`).join('')}</div>`;
-      } else {
-        const icons = ['🚜','🚒','🚓','🚑','🚜','🚒']; const r = icons[Math.floor(Math.random()*icons.length)];
-        cv.innerHTML = `<div id="colorCar" style="font-size:100px; filter:grayscale(1); opacity:0.3; margin-bottom:20px;">${r}</div><div class="options-grid"><button class="btn" style="background:#ff6b6b;" onclick="doColor('#ff6b6b')">빨강</button><button class="btn" style="background:#7aa5d2;" onclick="doColor('#7aa5d2')">파랑</button><button class="btn" style="background:#ffd166; color:#333;" onclick="doColor('#ffd166')">노랑</button><button class="btn" style="background:#82c49b;" onclick="doColor('#82c49b')">초록</button></div>`;
+      const familyEventList = document.getElementById('familyEventList');
+      if (familyEventList) {
+        const todayTime = new Date(getToday()).getTime();
+        const sortedEvents = [...familyEvents()].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+        familyEventList.innerHTML = sortedEvents.slice(0, 10).map(e => {
+          const eventTime = new Date(e.date).getTime();
+          const diffDays = Math.ceil((eventTime - todayTime) / (1000 * 60 * 60 * 24));
+          const dDayBadge = diffDays === 0
+            ? '<span style="color:var(--danger); font-weight:900;">[D-Day]</span>'
+            : diffDays > 0
+              ? `<span style="color:var(--primary); font-weight:800;">[D-${diffDays}]</span>`
+              : `<span style="color:var(--text-soft); font-weight:700;">[D+${Math.abs(diffDays)}]</span>`;
+          return `
+            <div class="list-item">
+              <div class="item-body"><div class="item-title">${escapeHtml(e.text)}</div><div class="item-meta">${dDayBadge} ${e.date}</div></div>
+              <button class="del-btn" onclick="delData('events', ${e.id})">삭제</button>
+            </div>
+          `;
+        }).join('') || `<div class="item-meta">가족 일정이나 약속을 날짜와 함께 남겨 보세요.</div>`;
+      }
+
+      const familyMemoList = document.getElementById('familyMemoList');
+      if (familyMemoList) familyMemoList.innerHTML = db.familyBoard.memos.slice(0, 8).map(m => `
+        <div class="list-item"><div class="item-body"><div class="item-title">${escapeHtml(m.text)}</div><div class="item-meta">${m.date}</div></div><button class="del-btn" onclick="delData('familyMemos', ${m.id})">삭제</button></div>
+      `).join('') || `<div class="item-meta">가족 메모를 남겨 보세요.</div>`;
+
+      const uareumMemoList = document.getElementById('uareumMemoList');
+      if (uareumMemoList) {
+        const filteredMemos = currentUareumFilter === '전체'
+          ? uareumMemos()
+          : uareumMemos().filter(m => m.status === currentUareumFilter);
+        uareumMemoList.innerHTML = filteredMemos.slice(0, 15).map(m => `
+          <div class="list-item">
+            <div class="item-body">
+              <div class="item-title">${escapeHtml(m.name || '이름 없음')} <span class="status-badge badge-${escapeHtml(m.status)}">${escapeHtml(m.status)}</span></div>
+              <div class="item-meta">${m.date}</div>
+              <div style="margin-top:8px; line-height:1.5;">${escapeHtml(m.memo).replace(/\n/g, '<br>')}</div>
+            </div>
+            <button class="del-btn" onclick="delData('uareumMemos', ${m.id})">삭제</button>
+          </div>
+        `).join('') || `<div class="item-meta">우아림 상담, 예약 메모가 없습니다.</div>`;
       }
     }
-    function checkQuiz(sel, ans) { if(sel===ans) { showToast('정답이야! 우와~ 🎉'); initGame(); } else showToast('어? 다시 생각해보자!'); }
-    function doColor(c) { const car = document.getElementById('colorCar'); car.style.filter='none'; car.style.opacity='1'; car.style.textShadow=`0 0 40px ${c}`; showToast('예쁘게 색칠했어!'); setTimeout(initGame, 1500); }
 
-    function openSettings() { 
-      document.getElementById('keyStatus').innerText = db.settings.apiKey ? "✅ 저장됨" : "❌ 미저장";
-      document.getElementById('apiKeyIn').value = db.settings.apiKey || "";
-      document.getElementById('settingsModal').style.display='flex'; 
+    function renderMoney() {
+      const curMonth = getToday().slice(0, 7);
+      const monthlyExp = moneyRecords().filter(m => (m.date || '').startsWith(curMonth) && m.type === 'expense').reduce((sum, m) => sum + Number(m.amt || 0), 0);
+      const monthTotal = document.getElementById('monthTotal');
+      const monthTotalToday = document.getElementById('monthTotalToday');
+      const todayMonthTotal = document.getElementById('todayMonthTotal');
+      if (monthTotal) monthTotal.innerText = monthlyExp.toLocaleString();
+      if (monthTotalToday) monthTotalToday.innerText = monthlyExp.toLocaleString();
+      if (todayMonthTotal) todayMonthTotal.innerText = monthlyExp.toLocaleString();
+      const moneyList = document.getElementById('moneyList');
+      if (moneyList) moneyList.innerHTML = moneyRecords().slice(0, 10).map(m => `
+        <div class="list-item">
+          <div class="item-body">
+            <div class="item-title" style="color:${m.type === 'income' ? 'var(--success)' : 'var(--text)'}">${m.type === 'income' ? '+' : '-'}${Number(m.amt).toLocaleString()}원</div>
+            <div class="item-meta">${escapeHtml(m.cat)} - ${escapeHtml(m.note)} (${m.date})</div>
+          </div>
+          <button class="del-btn" onclick="delItem('money', ${m.id})">삭제</button>
+        </div>
+      `).join('') || `<div class="item-meta">아직 기록된 내역이 없어요.</div>`;
+
+      const now = Date.now();
+      const vaultList = document.getElementById('vaultList');
+      if (vaultList) vaultList.innerHTML = purchaseHold().map(v => {
+        const left = (Number(v.createdAt) + 72 * 3600000) - now;
+        const isUnlocked = left <= 0;
+        return `
+          <div class="list-item" style="background:${isUnlocked ? 'rgba(52,199,89,0.1)' : 'transparent'}; border-radius:12px; padding:10px;">
+            <div class="item-body">
+              <div class="item-title">${escapeHtml(v.item)} (${Number(v.price || 0).toLocaleString()}원)</div>
+              <div class="item-meta" style="color:${isUnlocked ? 'var(--success)' : 'var(--warning)'}">${isUnlocked ? '보류 해제! 구매 여부를 다시 결정해요.' : `${Math.ceil(left / 3600000)}시간 남음`}</div>
+            </div>
+            <button class="del-btn" onclick="delItem('vault', ${v.id})">삭제</button>
+          </div>
+        `;
+      }).join('') || `<div class="item-meta">구매를 잠깐 보류할 물건을 넣어 두세요.</div>`;
     }
-    function closeSettings() { document.getElementById('settingsModal').style.display='none'; }
-    function saveKey() { db.settings.apiKey = document.getElementById('apiKeyIn').value; save(); closeSettings(); }
-    function deleteKey() { db.settings.apiKey = ""; save(); closeSettings(); }
-    function checkCat(c) { db.catCare[c] = getToday(); save(); showToast('체크 완료!'); }
+
+    function renderRecords() {
+      const memberName = (id) => db.family.members.find(m => m.id === id)?.name || '가족';
+      const childQuoteList = document.getElementById('childQuoteList');
+      if (childQuoteList) childQuoteList.innerHTML = childQuotes().slice(0, 10).map(q => `
+        <div class="list-item">
+          <div class="item-body">
+            <div style="font-size:11px; font-weight:800; color:var(--primary); margin-bottom:4px;">${escapeHtml(q.type || '🗣️ 말')}</div>
+            <div class="item-title">"${escapeHtml(q.text)}"</div>
+            <div class="item-meta">${q.date}</div>
+          </div>
+          <button class="del-btn" onclick="delData('childQuotes', ${q.id})">삭제</button>
+        </div>
+      `).join('') || `<div class="item-meta">시현이의 말을 한 줄로 남겨 보세요.</div>`;
+
+      const familyDiaryList = document.getElementById('familyDiaryList');
+      if (familyDiaryList) familyDiaryList.innerHTML = familyDiaries().slice(0, 8).map(d => `
+        <div class="list-item">
+          <div style="font-size: 26px; margin-right: 10px;">${escapeHtml(d.emoji || '😊')}</div>
+          <div class="item-body">
+            <div class="item-title" style="font-weight:600; line-height:1.4;">${escapeHtml(d.text).replace(/\n/g, '<br>')}</div>
+            <div class="item-meta">${d.date}</div>
+          </div>
+          <button class="del-btn" onclick="delData('familyDiaries', ${d.id})">삭제</button>
+        </div>
+      `).join('') || `<div class="item-meta">가족 하루 기록을 남겨 보세요.</div>`;
+
+      const healthList = document.getElementById('healthList');
+      if (healthList) healthList.innerHTML = conditionLogs().slice(0, 8).map(h => `
+        <div class="list-item">
+          <div class="item-body"><div class="item-title">${memberName(h.member)} 수면 ${h.sleep}시간, 컨디션 ${h.cond}/5</div><div class="item-meta">${h.date}</div></div>
+          <button class="del-btn" onclick="delItem('health', ${h.id})">삭제</button>
+        </div>
+      `).join('') || `<div class="item-meta">가족 컨디션을 기록해 보세요.</div>`;
+    }
+
+    function renderStats() {
+      const portalLv = document.getElementById('portalLv');
+      const portalExpText = document.getElementById('portalExpText');
+      const portalExpFill = document.getElementById('portalExpFill');
+      const collGrid = document.getElementById('collGrid');
+      const collCount = document.getElementById('collCount');
+      if (portalLv) portalLv.innerText = db.progress.level;
+      if (portalExpText) portalExpText.innerText = `${db.progress.exp}/100`;
+      if (portalExpFill) portalExpFill.style.width = db.progress.exp + '%';
+      if (collGrid) collGrid.innerHTML = CARS.map(c => `
+        <div style="opacity:${collection().includes(c.i) ? 1 : 0.15}; transition:0.3s; filter:${collection().includes(c.i) ? 'drop-shadow(0 5px 10px rgba(0,0,0,0.2))' : 'none'};">${c.i}</div>
+      `).join('');
+      if (collCount) collCount.innerText = collection().length;
+    }
+
     function exportData() {
-      const d = JSON.parse(JSON.stringify(db)); d.settings.apiKey = "";
-      const blob = new Blob([JSON.stringify(d)], {type:'application/json'});
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-      a.download = `우리집OS_백업_${getToday()}.json`; a.click();
+      refreshLegacyCompatibility();
+      const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `FAMILY_NEXUS_BACKUP_${getToday()}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
     }
-    function importData(input) {
-      const f = input.files[0]; if(!f) return;
-      const r = new FileReader();
-      r.onload = (e) => {
-        try {
-          const imp = JSON.parse(e.target.result);
-          const currentKey = db.settings.apiKey;
-          const currentMood = db.settings.mood || 'day';
-          db = {
-            todosMe: imp.todosMe || [], memosAi: imp.memosAi || [],
-            todosWife: imp.todosWife || [], todosFam: imp.todosFam || [],
-            money: imp.money || [], timeline: imp.timeline || [],
-            catCare: imp.catCare || { noon:'', reum:'' },
-            settings: { apiKey: currentKey, mood: imp.settings?.mood || currentMood }
-          };
-          applyMood(); save(); showToast('복원 완료!'); closeSettings();
-        } catch(err) { showToast('오류!'); }
-      };
-      r.readAsText(f); input.value = "";
-    }
-    window.onload = () => { applyMood(); renderAll(); };
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+
+    window.onload = () => {
+      const storedTheme = db.settings.theme || localStorage.getItem('MY_NEXUS_THEME');
+      if (storedTheme === 'dark') document.body.classList.add('dark');
+      save();
+      renderAll();
+    };
   </script>
+  <script src="./js/ttokttoki-engine.js"></script>
+  <script src="./js/story-data.js"></script>
+  <script src="./js/story-world.js"></script>
 </body>
 </html>
+

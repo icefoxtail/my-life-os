@@ -1,11 +1,11 @@
 {
-  "name": "우리집 OS",
+  "name": "우리집 넥서스",
   "short_name": "우리집",
-  "description": "가족이 함께 쓰는 작은 생활 운영체제",
+  "description": "가족 생활 보드와 시현이 놀이터를 담은 Family Nexus",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#fff8e7",
-  "theme_color": "#fff8e7",
+  "background_color": "#f4f6f5",
+  "theme_color": "#147d64",
   "icons": [
     {
       "src": "icon.svg",
