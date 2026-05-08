@@ -187,7 +187,7 @@
         btn.type = 'button';
         btn.className = 'nc-toy-block-btn';
         btn.textContent = num;
-        btn.setAttribute('aria-label', `${num}개`);
+        btn.setAttribute('aria-label', ` ${num}`);
         btn.onclick = () => this.checkAnswer(num);
         choicesArea.appendChild(btn);
       });
@@ -210,16 +210,16 @@
           img.classList.add('dance');
         });
         
-        // 지시하신 대로 숫자 대신 명확한 한글 발음으로 "일, 이, 삼" 주입
+        // 지시하신 대로 숫자 자체를 명확하게 발음하도록 수정
         const sinoKoreanNumbers = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구', '십'];
         const spokenNumber = sinoKoreanNumbers[this.state.currentAnswer] || this.state.currentAnswer;
 
-        feedback.innerHTML = `🎉 맞았어! ${this.state.currentAnswer}개야!`;
+        feedback.innerHTML = `🎉 맞았어! ${this.state.currentAnswer}!`;
         feedback.style.color = '#FF7A1A';
         this.createStars(14);
         
-        // TTS가 헷갈리지 않게 "삼 개야!" 가 아닌 "일, 이, 삼..." 으로 텍스트 전달
-        this.say(`맞았어! ${spokenNumber} 개야!`, true);
+        // "일 개야" 대신 명확하게 " 일!" 로 발음하도록 주입
+        this.say(`맞았어!  ${spokenNumber}!`, true);
         
         if(this.state.options.fireConfetti) this.state.options.fireConfetti();
         this.setManagedTimeout(() => {

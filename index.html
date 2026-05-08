@@ -122,6 +122,7 @@
       position: absolute;
       inset: 0;
       z-index: 10;
+      pointer-events: none;
     }
 
     .world-zone,
@@ -135,6 +136,7 @@
       z-index: 15;
       min-width: 64px;
       min-height: 64px;
+      pointer-events: auto;
     }
 
     .world-zone:active,
@@ -248,8 +250,9 @@
     @keyframes sunPulse { 0%,100% { box-shadow: 0 0 48px rgba(255,200,0,0.55); } 50% { box-shadow: 0 0 72px rgba(255,200,0,0.75); } }
 
     .zone-head {
-      position: relative; z-index: 10; display: flex; align-items: center;
+      position: relative; z-index: 80; display: flex; align-items: center;
       padding: max(14px, env(safe-area-inset-top)) 16px 10px; flex-shrink: 0;
+      pointer-events: none;
     }
     .zone-home-btn {
       flex-shrink: 0; padding: 0 20px; height: 64px; border-radius: 32px;
@@ -258,6 +261,7 @@
       display: flex; align-items: center; gap: 8px;
       box-shadow: 0 7px 0 rgba(0,0,0,0.18), 0 10px 20px rgba(0,0,0,0.1);
       transition: transform 0.1s, box-shadow 0.1s;
+      pointer-events: auto;
     }
     .zone-home-btn:active { transform: translateY(5px); box-shadow: 0 2px 0 rgba(0,0,0,0.18); }
     .zone-title { margin-left: auto; font-size: clamp(24px, 6vw, 36px); color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,0.2); }
