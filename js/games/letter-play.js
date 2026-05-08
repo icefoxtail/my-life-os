@@ -9,6 +9,12 @@
 
 window.SihyeonGames = window.SihyeonGames || {};
 
+function playGameVoice(id) {
+  if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+    window.SihyeonVoice.play(id).catch(() => {});
+  }
+}
+
 window.SihyeonGames.letterPlay = {
   id: 'letterPlay',
   title: '글자놀이터',
@@ -528,6 +534,7 @@ window.SihyeonGames.letterPlay = {
     container.appendChild(root);
 
     const t = setTimeout(() => {
+      playGameVoice('games.letter.question');
       this._say(`${round.word}의 첫 글자는 무엇일까요?`, false);
     }, 350);
     this._timers.push(t);
@@ -549,6 +556,7 @@ window.SihyeonGames.letterPlay = {
       this._state.score += 1;
       gainExp(15);
       confetti();
+      playGameVoice('games.letter.correct');
       this._say(`맞아요! ${round.word}의 첫 글자는 ${round.answer}!`, true);
       const t = setTimeout(() => this._showRoundResult(), 1500);
       this._timers.push(t);
@@ -556,6 +564,7 @@ window.SihyeonGames.letterPlay = {
     }
 
     btn.classList.add('wrong');
+    playGameVoice('games.letter.wrong');
     this._say('괜찮아요. 다시 찾아봐요!', false);
     const t = setTimeout(() => {
       btn.classList.remove('wrong');
@@ -653,6 +662,7 @@ window.SihyeonGames.letterPlay = {
     root.appendChild(overlay);
     container.appendChild(root);
 
+    playGameVoice('games.letter.complete');
     this._say(isPerfect ? '완벽해요! 정말 잘했어요!' : `${s.score}개나 맞혔어요! 대단해요!`, true);
   },
 
@@ -668,6 +678,7 @@ window.SihyeonGames.letterPlay = {
       locked: false,
       rounds: shuffled
     };
+    playGameVoice('games.letter.intro');
     this._renderGame(this._container);
   },
 

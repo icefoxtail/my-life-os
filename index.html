@@ -201,6 +201,85 @@
     .avatar-emoji { font-size: clamp(42px, 9vw, 56px); z-index: 2; }
     .sihyeon-avatar img { position: absolute; width: 100%; height: 100%; border-radius: 50%; z-index: 3; object-fit: cover; }
 
+
+    .map-character,
+    .land-character {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: clamp(54px, 12vw, 86px);
+      height: clamp(54px, 12vw, 86px);
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 8px 14px rgba(0,0,0,0.22), inset 0 2px 0 rgba(255,255,255,0.65);
+      display: grid;
+      place-items: center;
+      z-index: 22;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      overflow: hidden;
+    }
+
+    .map-character { z-index: 21; }
+    .land-character { z-index: 18; }
+
+    .map-character:active,
+    .land-character:active {
+      transform: translate(-50%, -50%) scale(0.92);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.65);
+    }
+
+    .map-character img,
+    .land-character img,
+    .land-sihyeon-runner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .character-emoji-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: clamp(34px, 8vw, 54px);
+      background: rgba(255,255,255,0.86);
+      pointer-events: none;
+    }
+
+    .map-character img:not([style*="display: none"]) + .character-emoji-fallback,
+    .land-character img:not([style*="display: none"]) + .character-emoji-fallback,
+    .land-sihyeon-runner img:not([style*="display: none"]) + .character-emoji-fallback {
+      display: none;
+    }
+
+    .land-sihyeon-runner {
+      position: absolute;
+      left: 50%;
+      top: 88%;
+      transform: translate(-50%, -50%);
+      width: clamp(60px, 12vw, 84px);
+      height: clamp(60px, 12vw, 84px);
+      border-radius: 50%;
+      border: 4px solid #fff;
+      background: #fff;
+      box-shadow: 0 8px 14px rgba(0,0,0,0.24);
+      z-index: 26;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      pointer-events: none;
+      transition: left 0.85s cubic-bezier(0.25, 0.9, 0.3, 1), top 0.85s cubic-bezier(0.25, 0.9, 0.3, 1), transform 0.85s cubic-bezier(0.25, 0.9, 0.3, 1);
+    }
+
+    .land-sihyeon-runner.is-moving {
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
     .mic-button-floating {
       position: absolute;
       bottom: calc(18px + env(safe-area-inset-bottom));
@@ -443,6 +522,27 @@ const WORLD_ZONES = {
   station: { x: '50%', y: '88%', label: '중앙역', emoji: '🚉' }
 };
 
+
+
+const CHARACTER_ASSETS = {
+  sihyeon:  { name: '시현',   file: './assets/characters/sihyeon.png',   emoji: '👦🏻' },
+  dad:      { name: '아빠',   file: './assets/characters/dad.png',       emoji: '👨' },
+  mom:      { name: '엄마',   file: './assets/characters/mom.png',       emoji: '👩' },
+  sicheoni: { name: '시천이', file: './assets/characters/sicheoni.png',  emoji: '🧸' },
+  rona:     { name: '로나',   file: './assets/characters/rona.png',      emoji: '✨' },
+  reumi:    { name: '름이',   file: './assets/characters/reumi.png',     emoji: '🐱' },
+  nuni:     { name: '눈이',   file: './assets/characters/nuni.png',      emoji: '🐈' }
+};
+
+const LAND_CHARACTERS = {
+  game:    { id: 'dad',      mainX: '18%', mainY: '17%', landX: '24%', landY: '72%' },
+  numbers: { id: 'mom',      mainX: '82%', mainY: '17%', landX: '76%', landY: '72%' },
+  letters: { id: 'rona',     mainX: '18%', mainY: '42%', landX: '24%', landY: '72%' },
+  cars:    { id: 'sicheoni', mainX: '82%', mainY: '43%', landX: '76%', landY: '72%' },
+  story:   { id: 'reumi',    mainX: '18%', mainY: '68%', landX: '24%', landY: '72%' },
+  voice:   { id: 'nuni',     mainX: '82%', mainY: '69%', landX: '76%', landY: '72%' }
+};
+
 const CARS = ['🚗','🚕','🚙','🚌','🚒','🚑','🚓','🚚','🚜','🏎️','🚛','🚐'];
 let garageCleanup = null;
 
@@ -592,6 +692,89 @@ function handleMapImageError(img) {
   img.style.opacity = '0';
 }
 
+
+function getCharacterMeta(characterId) {
+  return CHARACTER_ASSETS[characterId] || { name: characterId || '친구', file: '', emoji: '⭐' };
+}
+
+function renderCharacterButton(zoneId, placement = 'main') {
+  const cfg = LAND_CHARACTERS[zoneId];
+  if (!cfg) return '';
+  const meta = getCharacterMeta(cfg.id);
+  const x = placement === 'land' ? cfg.landX : cfg.mainX;
+  const y = placement === 'land' ? cfg.landY : cfg.mainY;
+  const cls = placement === 'land' ? 'land-character' : 'map-character';
+  const action = placement === 'land'
+    ? `moveSihyeonToLandCharacter('${zoneId}')`
+    : `travelToZoneFromCharacter('${zoneId}')`;
+
+  return `
+    <button
+      class="${cls}"
+      style="left:${x}; top:${y};"
+      onclick="${action}"
+      aria-label="${escapeHtml(meta.name)}에게 가기"
+    >
+      <img src="${meta.file}" alt="${escapeHtml(meta.name)}" onerror="this.style.display='none'">
+      <span class="character-emoji-fallback">${meta.emoji}</span>
+    </button>
+  `;
+}
+
+function renderMainCharacters() {
+  return ['game', 'numbers', 'letters', 'cars', 'story', 'voice']
+    .map(zoneId => renderCharacterButton(zoneId, 'main'))
+    .join('');
+}
+
+function renderLandCharacters(zoneId) {
+  return renderCharacterButton(zoneId, 'land');
+}
+
+function renderLandSihyeonRunner() {
+  const meta = getCharacterMeta('sihyeon');
+  return `
+    <div id="landSihyeonRunner" class="land-sihyeon-runner" aria-label="시현이">
+      <img src="${meta.file}" alt="${escapeHtml(meta.name)}" onerror="this.style.display='none'">
+      <span class="character-emoji-fallback">${meta.emoji}</span>
+    </div>
+  `;
+}
+
+function getLandCharacterInfo(zoneId) {
+  const cfg = LAND_CHARACTERS[zoneId];
+  if (!cfg) return null;
+  return { ...cfg, meta: getCharacterMeta(cfg.id) };
+}
+
+function moveSihyeonAvatarTo(x, y) {
+  const avatar = document.getElementById('sihyeonAvatar');
+  if (!avatar) return;
+  avatar.style.bottom = 'auto';
+  avatar.style.left = x;
+  avatar.style.top = y;
+  avatar.style.transform = 'translate(-50%, -50%) scale(1.06)';
+}
+
+function moveSihyeonToLandCharacter(zoneId) {
+  const info = getLandCharacterInfo(zoneId);
+  const runner = document.getElementById('landSihyeonRunner');
+  if (!info || !runner) return;
+  runner.classList.add('is-moving');
+  runner.style.left = info.landX;
+  runner.style.top = info.landY;
+  speakGuide(`${info.meta.name}에게 가볼게!`, true);
+  setTimeout(() => {
+    runner.classList.remove('is-moving');
+  }, 900);
+}
+
+function travelToZoneFromCharacter(zoneId) {
+  const info = getLandCharacterInfo(zoneId);
+  if (info) moveSihyeonAvatarTo(info.mainX, info.mainY);
+  travelToZone(zoneId);
+}
+
 function renderWorldMapHome() {
   cleanupActiveGame();
   closeGarageHandlers();
@@ -617,6 +800,8 @@ function renderWorldMapHome() {
               </button>
             `;
           }).join('')}
+
+          ${renderMainCharacters()}
 
           <div id="trainSprite" class="train-sprite" style="left:${WORLD_ZONES.station.x}; top:${WORLD_ZONES.station.y};">
             <img src="./assets/vehicles/transport/train.png" alt="기차" onerror="this.style.display='none'">
@@ -648,6 +833,8 @@ function openImageLand(zoneId, title, imageSrc, hotspots) {
       <div class="world-map-frame">
         <img class="world-map-bg" src="${imageSrc}" alt="${escapeHtml(title)}" onerror="handleMapImageError(this)">
         ${makeZoneHead(title)}
+        ${renderLandCharacters(zoneId)}
+        ${renderLandSihyeonRunner()}
         <div class="image-land-hotspots">
           ${hotspots.map(h => `
             <button
@@ -1023,7 +1210,7 @@ Object.assign(window, {
   gainExp, unlockCar, fireConfetti,
   speakText, speakGuide, speakStory, stopSpeaking,
   refreshLegacyCompatibility,
-  renderWorldMapHome, travelToZone, enterZone, closeToParkHome,
+  renderWorldMapHome, travelToZone, travelToZoneFromCharacter, moveSihyeonToLandCharacter, enterZone, closeToParkHome,
   openImageLand, openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand,
   cleanupActiveGame, openGameShell, openMemoryGame, openNumberCountGame, openLetterGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater
@@ -1046,6 +1233,7 @@ if('serviceWorker' in navigator){
 }
 </script>
 
+<script src="./js/voice-engine.js"></script>
 <script src="./js/ttokttoki-engine.js"></script>
 <script src="./js/story-data.js"></script>
 <script src="./js/story-world.js"></script>

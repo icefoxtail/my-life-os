@@ -17,6 +17,12 @@
     destroyed: false
   };
 
+  function playGameVoice(id) {
+    if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(id).catch(() => {});
+    }
+  }
+
   function injectStyle() {
     if (document.getElementById(STYLE_ID)) return;
     const style = document.createElement('style');
@@ -271,6 +277,7 @@
     state.matched = 0;
     state.locked = false;
     renderMemoryBoard();
+    playGameVoice('games.memory.intro');
     state.options.speakGuide?.('자동차 카드 두 장을 골라서 같은 친구를 찾아 보자!', true);
   }
 
@@ -339,6 +346,7 @@
         state.matched += 2;
         state.flipped = [];
         state.locked = false;
+        playGameVoice('games.memory.match');
         state.options.speakGuide?.(`${first.data.name}. 짝을 찾았어!`, true);
         if (state.matched >= CARD_COUNT) showMemorySuccess();
       }, 260);
@@ -349,6 +357,7 @@
       second.el.classList.remove('is-open');
       state.flipped = [];
       state.locked = false;
+      playGameVoice('games.memory.no_match');
     }, 760);
   }
 
@@ -356,6 +365,7 @@
     state.locked = true;
     state.options.fireConfetti?.();
     state.options.gainExp?.(20);
+    playGameVoice('games.memory.complete');
     state.options.speakGuide?.('자동차 짝을 모두 찾았어. 정말 멋져!', true);
     const panel = document.createElement('div');
     panel.className = 'memory-success-panel';

@@ -6,6 +6,12 @@
 (function() {
   window.SihyeonGames = window.SihyeonGames || {};
 
+  function playGameVoice(id) {
+    if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(id).catch(() => {});
+    }
+  }
+
   window.SihyeonGames.colorBalloon = {
     id: 'colorBalloon',
     title: '🎈 색깔 풍선 팡팡!',
@@ -74,6 +80,7 @@
       `;
 
       this.attachEvents();
+      playGameVoice('games.color.intro');
       this.startLevel();
     },
 
@@ -97,6 +104,7 @@
       missionText.style.color = this.state.targetColor.hex;
 
       // 음성 가이드
+      playGameVoice('games.color.question');
       if (this.state.options.speakGuide) {
         this.state.options.speakGuide(`${this.state.targetColor.name} 풍선을 찾아봐!`, true);
       }
@@ -180,6 +188,7 @@
         balloonElement.style.animation = 'none';
         balloonElement.className = 'balloon pop';
         
+        playGameVoice('games.color.correct');
         if (this.state.options.speakGuide) {
           this.state.options.speakGuide(`맞았어! 팡!`, true);
         }
@@ -203,6 +212,7 @@
           if (balloonElement) balloonElement.style.transform = '';
         }, 150);
         
+        playGameVoice('games.color.wrong');
         if (this.state.options.speakGuide) {
           this.state.options.speakGuide(`어라? ${this.state.targetColor.name}을 찾아보자!`, true);
         }
@@ -224,6 +234,7 @@
       missionArea.style.display = 'none';
       successPanel.style.display = 'flex';
 
+      playGameVoice('games.color.complete');
       if (this.state.options.speakGuide) {
         this.state.options.speakGuide("우와! 풍선을 다 터뜨렸어. 시현이가 최고야!", true);
       }

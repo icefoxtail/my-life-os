@@ -1,0 +1,44 @@
+{
+  "version": "sihyeon-voice-v1.0.0",
+  "base_dir": "assets/voice",
+  "games": {
+    "common": {
+      "start": "games/common/start.mp3",
+      "correct": "games/common/correct.mp3",
+      "wrong": "games/common/wrong.mp3",
+      "great": "games/common/great.mp3",
+      "complete": "games/common/complete.mp3",
+      "again": "games/common/again.mp3",
+      "next": "games/common/next.mp3",
+      "home": "games/common/home.mp3"
+    },
+    "memory": {
+      "intro": "games/memory/intro.mp3",
+      "match": "games/memory/match.mp3",
+      "no_match": "games/memory/no_match.mp3",
+      "complete": "games/memory/complete.mp3"
+    },
+    "number": {
+      "intro": "games/number/intro.mp3",
+      "question": "games/number/question.mp3",
+      "correct": "games/number/correct.mp3",
+      "wrong": "games/number/wrong.mp3",
+      "complete": "games/number/complete.mp3"
+    },
+    "letter": {
+      "intro": "games/letter/intro.mp3",
+      "question": "games/letter/question.mp3",
+      "correct": "games/letter/correct.mp3",
+      "wrong": "games/letter/wrong.mp3",
+      "complete": "games/letter/complete.mp3"
+    },
+    "color": {
+      "intro": "games/color/intro.mp3",
+      "question": "games/color/question.mp3",
+      "correct": "games/color/correct.mp3",
+      "wrong": "games/color/wrong.mp3",
+      "complete": "games/color/complete.mp3"
+    }
+  },
+  "stories": {}
+}

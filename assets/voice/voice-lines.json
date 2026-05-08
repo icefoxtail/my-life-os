@@ -1,0 +1,141 @@
+{
+  "version": "sihyeon-game-voice-lines-v1.0.0",
+  "provider": "typecast",
+  "lines": [
+    {
+      "id": "games.common.start",
+      "path": "assets/voice/games/common/start.mp3",
+      "text": "시작해 볼까?"
+    },
+    {
+      "id": "games.common.correct",
+      "path": "assets/voice/games/common/correct.mp3",
+      "text": "맞았어! 시현이 최고!"
+    },
+    {
+      "id": "games.common.wrong",
+      "path": "assets/voice/games/common/wrong.mp3",
+      "text": "괜찮아, 다시 해보자!"
+    },
+    {
+      "id": "games.common.great",
+      "path": "assets/voice/games/common/great.mp3",
+      "text": "우와, 정말 잘했어!"
+    },
+    {
+      "id": "games.common.complete",
+      "path": "assets/voice/games/common/complete.mp3",
+      "text": "다 했어! 정말 멋져!"
+    },
+    {
+      "id": "games.common.again",
+      "path": "assets/voice/games/common/again.mp3",
+      "text": "다시 한 번 해볼까?"
+    },
+    {
+      "id": "games.common.next",
+      "path": "assets/voice/games/common/next.mp3",
+      "text": "다음 놀이로 가볼까?"
+    },
+    {
+      "id": "games.common.home",
+      "path": "assets/voice/games/common/home.mp3",
+      "text": "광장으로 돌아가자!"
+    },
+    {
+      "id": "games.memory.intro",
+      "path": "assets/voice/games/memory/intro.mp3",
+      "text": "같은 자동차 카드를 찾아보자!"
+    },
+    {
+      "id": "games.memory.match",
+      "path": "assets/voice/games/memory/match.mp3",
+      "text": "똑같은 자동차야!"
+    },
+    {
+      "id": "games.memory.no_match",
+      "path": "assets/voice/games/memory/no_match.mp3",
+      "text": "이번엔 다른 자동차였네. 다시 찾아보자!"
+    },
+    {
+      "id": "games.memory.complete",
+      "path": "assets/voice/games/memory/complete.mp3",
+      "text": "자동차 카드를 모두 찾았어!"
+    },
+    {
+      "id": "games.number.intro",
+      "path": "assets/voice/games/number/intro.mp3",
+      "text": "자동차가 몇 대인지 세어 보자!"
+    },
+    {
+      "id": "games.number.question",
+      "path": "assets/voice/games/number/question.mp3",
+      "text": "하나씩 천천히 세어 보자."
+    },
+    {
+      "id": "games.number.correct",
+      "path": "assets/voice/games/number/correct.mp3",
+      "text": "정답이야!"
+    },
+    {
+      "id": "games.number.wrong",
+      "path": "assets/voice/games/number/wrong.mp3",
+      "text": "괜찮아, 다시 천천히 세어보자!"
+    },
+    {
+      "id": "games.number.complete",
+      "path": "assets/voice/games/number/complete.mp3",
+      "text": "시현이는 숫자 박사야!"
+    },
+    {
+      "id": "games.letter.intro",
+      "path": "assets/voice/games/letter/intro.mp3",
+      "text": "그림을 보고 첫 글자를 찾아보자!"
+    },
+    {
+      "id": "games.letter.question",
+      "path": "assets/voice/games/letter/question.mp3",
+      "text": "어떤 글자로 시작할까?"
+    },
+    {
+      "id": "games.letter.correct",
+      "path": "assets/voice/games/letter/correct.mp3",
+      "text": "이 글자가 맞아!"
+    },
+    {
+      "id": "games.letter.wrong",
+      "path": "assets/voice/games/letter/wrong.mp3",
+      "text": "다른 글자였네. 다시 찾아보자!"
+    },
+    {
+      "id": "games.letter.complete",
+      "path": "assets/voice/games/letter/complete.mp3",
+      "text": "글자 풍선을 다 찾았어!"
+    },
+    {
+      "id": "games.color.intro",
+      "path": "assets/voice/games/color/intro.mp3",
+      "text": "색깔 풍선을 찾아서 터뜨려 보자!"
+    },
+    {
+      "id": "games.color.question",
+      "path": "assets/voice/games/color/question.mp3",
+      "text": "알맞은 색깔 풍선을 찾아보자."
+    },
+    {
+      "id": "games.color.correct",
+      "path": "assets/voice/games/color/correct.mp3",
+      "text": "이 색깔 풍선이 맞아!"
+    },
+    {
+      "id": "games.color.wrong",
+      "path": "assets/voice/games/color/wrong.mp3",
+      "text": "다른 색깔이야. 다시 찾아보자!"
+    },
+    {
+      "id": "games.color.complete",
+      "path": "assets/voice/games/color/complete.mp3",
+      "text": "풍선을 모두 터뜨렸어!"
+    }
+  ]
+}
