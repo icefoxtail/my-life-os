@@ -77,7 +77,7 @@
           <div class="nc-cloud nc-c1"></div>
           <div class="nc-cloud nc-c2"></div>
           <div class="nc-game-header">
-            <h1 class="nc-game-title">🚗 몇 대일까?</h1>
+            <h1 class="nc-game-title">🚗 몇 개일까?</h1>
             <div class="nc-level-badge" id="ncLevelBadge">1 / 5</div>
           </div>
           <div class="nc-objects-area" id="ncObjectsArea">
@@ -168,7 +168,7 @@
         wrapper.appendChild(img);
       }
 
-      this.say(`${this.state.currentVehicle.name} 친구들이 왔어! 모두 몇 대일까?`, true);
+      this.say(`${this.state.currentVehicle.name} 친구들이 왔어! 모두 몇 개일까?`, true);
       this.renderChoices();
     },
 
@@ -187,7 +187,7 @@
         btn.type = 'button';
         btn.className = 'nc-toy-block-btn';
         btn.textContent = num;
-        btn.setAttribute('aria-label', `${num}대`);
+        btn.setAttribute('aria-label', `${num}개`);
         btn.onclick = () => this.checkAnswer(num);
         choicesArea.appendChild(btn);
       });
@@ -209,10 +209,18 @@
           img.style.animationDelay = `${index*0.06}s`;
           img.classList.add('dance');
         });
-        feedback.innerHTML = `🎉 맞았어! ${this.state.currentAnswer}대야!`;
+        
+        // 지시하신 대로 숫자 대신 명확한 한글 발음으로 "일, 이, 삼" 주입
+        const sinoKoreanNumbers = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구', '십'];
+        const spokenNumber = sinoKoreanNumbers[this.state.currentAnswer] || this.state.currentAnswer;
+
+        feedback.innerHTML = `🎉 맞았어! ${this.state.currentAnswer}개야!`;
         feedback.style.color = '#FF7A1A';
         this.createStars(14);
-        this.say(`맞았어! 자동차가 ${this.state.currentAnswer}대야!`, true);
+        
+        // TTS가 헷갈리지 않게 "삼 개야!" 가 아닌 "일, 이, 삼..." 으로 텍스트 전달
+        this.say(`맞았어! ${spokenNumber} 개야!`, true);
+        
         if(this.state.options.fireConfetti) this.state.options.fireConfetti();
         this.setManagedTimeout(() => {
           this.state.currentLevel++;
