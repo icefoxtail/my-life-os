@@ -1,0 +1,302 @@
+{
+  "version": "sihyeon-vehicles-v1.0.0",
+  "description": "시현이 놀이터 OS 차량 에셋 통합 매니페스트",
+  "base_dir": "assets/vehicles",
+  "categories": [
+    {
+      "id": "fire",
+      "name_ko": "소방차"
+    },
+    {
+      "id": "police",
+      "name_ko": "경찰차"
+    },
+    {
+      "id": "rescue",
+      "name_ko": "구급/구조"
+    },
+    {
+      "id": "construction",
+      "name_ko": "중장비"
+    },
+    {
+      "id": "transport",
+      "name_ko": "기본 이동/확장"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "pump_engine",
+      "category": "fire",
+      "file": "assets/vehicles/fire/pump_engine.png",
+      "name_ko": "펌프차",
+      "sound_ko": "삐뽀삐뽀, 물을 뿜어요!"
+    },
+    {
+      "id": "water_tanker",
+      "category": "fire",
+      "file": "assets/vehicles/fire/water_tanker.png",
+      "name_ko": "물탱크차",
+      "sound_ko": "출렁출렁 물을 싣고 가요!"
+    },
+    {
+      "id": "ladder_truck",
+      "category": "fire",
+      "file": "assets/vehicles/fire/ladder_truck.png",
+      "name_ko": "사다리차",
+      "sound_ko": "사다리가 쭉쭉 올라가요!"
+    },
+    {
+      "id": "aerial_ladder_truck",
+      "category": "fire",
+      "file": "assets/vehicles/fire/aerial_ladder_truck.png",
+      "name_ko": "고가사다리차",
+      "sound_ko": "높이높이 올라가요!"
+    },
+    {
+      "id": "articulating_ladder_truck",
+      "category": "fire",
+      "file": "assets/vehicles/fire/articulating_ladder_truck.png",
+      "name_ko": "굴절사다리차",
+      "sound_ko": "팔이 꺾여서 슈욱 움직여요!"
+    },
+    {
+      "id": "rescue_fire_truck",
+      "category": "fire",
+      "file": "assets/vehicles/fire/rescue_fire_truck.png",
+      "name_ko": "구조공작차",
+      "sound_ko": "구조 장비를 싣고 출동해요!"
+    },
+    {
+      "id": "airport_fire_truck",
+      "category": "fire",
+      "file": "assets/vehicles/fire/airport_fire_truck.png",
+      "name_ko": "공항소방차",
+      "sound_ko": "커다란 바퀴로 힘차게 출동해요!"
+    },
+    {
+      "id": "foam_fire_truck",
+      "category": "fire",
+      "file": "assets/vehicles/fire/foam_fire_truck.png",
+      "name_ko": "포소화차",
+      "sound_ko": "몽글몽글 거품을 뿜어요!"
+    },
+    {
+      "id": "fire_command_vehicle",
+      "category": "fire",
+      "file": "assets/vehicles/fire/fire_command_vehicle.png",
+      "name_ko": "소방 지휘차",
+      "sound_ko": "현장을 살피며 지휘해요!"
+    },
+    {
+      "id": "korean_police_car",
+      "category": "police",
+      "file": "assets/vehicles/police/korean_police_car.png",
+      "name_ko": "한국 경찰차",
+      "sound_ko": "위용위용 순찰해요!"
+    },
+    {
+      "id": "us_police_car",
+      "category": "police",
+      "file": "assets/vehicles/police/us_police_car.png",
+      "name_ko": "미국 경찰차",
+      "sound_ko": "우웅, 멋지게 달려요!"
+    },
+    {
+      "id": "police_motorcycle",
+      "category": "police",
+      "file": "assets/vehicles/police/police_motorcycle.png",
+      "name_ko": "경찰 오토바이",
+      "sound_ko": "부릉부릉 빠르게 달려요!"
+    },
+    {
+      "id": "swat_truck",
+      "category": "police",
+      "file": "assets/vehicles/police/swat_truck.png",
+      "name_ko": "경찰특공대차",
+      "sound_ko": "튼튼하게 출동해요!"
+    },
+    {
+      "id": "forensic_bus",
+      "category": "police",
+      "file": "assets/vehicles/police/forensic_bus.png",
+      "name_ko": "과학수사버스",
+      "sound_ko": "차근차근 단서를 찾아요!"
+    },
+    {
+      "id": "riot_police_bus",
+      "category": "police",
+      "file": "assets/vehicles/police/riot_police_bus.png",
+      "name_ko": "기동대 버스",
+      "sound_ko": "큰 버스가 안전하게 이동해요!"
+    },
+    {
+      "id": "ambulance",
+      "category": "rescue",
+      "file": "assets/vehicles/rescue/ambulance.png",
+      "name_ko": "구급차",
+      "sound_ko": "애앵애앵 도와주러 가요!"
+    },
+    {
+      "id": "doctor_car",
+      "category": "rescue",
+      "file": "assets/vehicles/rescue/doctor_car.png",
+      "name_ko": "닥터카",
+      "sound_ko": "의사 선생님이 빨리 도착해요!"
+    },
+    {
+      "id": "rescue_helicopter",
+      "category": "rescue",
+      "file": "assets/vehicles/rescue/rescue_helicopter.png",
+      "name_ko": "구조 헬기",
+      "sound_ko": "두두두두 하늘을 날아요!"
+    },
+    {
+      "id": "excavator",
+      "category": "construction",
+      "file": "assets/vehicles/construction/excavator.png",
+      "name_ko": "포크레인",
+      "sound_ko": "쿠궁쿠궁 흙을 퍼요!"
+    },
+    {
+      "id": "mini_excavator",
+      "category": "construction",
+      "file": "assets/vehicles/construction/mini_excavator.png",
+      "name_ko": "미니 굴착기",
+      "sound_ko": "작지만 힘차게 파요!"
+    },
+    {
+      "id": "bulldozer",
+      "category": "construction",
+      "file": "assets/vehicles/construction/bulldozer.png",
+      "name_ko": "불도저",
+      "sound_ko": "쓱쓱 밀고 지나가요!"
+    },
+    {
+      "id": "wheel_loader",
+      "category": "construction",
+      "file": "assets/vehicles/construction/wheel_loader.png",
+      "name_ko": "휠로더",
+      "sound_ko": "커다란 삽으로 담아요!"
+    },
+    {
+      "id": "dump_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/dump_truck.png",
+      "name_ko": "덤프트럭",
+      "sound_ko": "우르르 짐을 내려요!"
+    },
+    {
+      "id": "concrete_mixer",
+      "category": "construction",
+      "file": "assets/vehicles/construction/concrete_mixer.png",
+      "name_ko": "레미콘",
+      "sound_ko": "빙글빙글 섞어요!"
+    },
+    {
+      "id": "concrete_pump_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/concrete_pump_truck.png",
+      "name_ko": "콘크리트 펌프카",
+      "sound_ko": "쭉쭉 뻗어서 보내요!"
+    },
+    {
+      "id": "crane_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/crane_truck.png",
+      "name_ko": "크레인차",
+      "sound_ko": "번쩍 들어 올려요!"
+    },
+    {
+      "id": "forklift",
+      "category": "construction",
+      "file": "assets/vehicles/construction/forklift.png",
+      "name_ko": "지게차",
+      "sound_ko": "삐리리 짐을 들어요!"
+    },
+    {
+      "id": "train",
+      "category": "transport",
+      "file": "assets/vehicles/transport/train.png",
+      "name_ko": "기차",
+      "sound_ko": "칙칙폭폭 달려요!"
+    },
+    {
+      "id": "bus",
+      "category": "transport",
+      "file": "assets/vehicles/transport/bus.png",
+      "name_ko": "버스",
+      "sound_ko": "빵빵 친구들을 태워요!"
+    },
+    {
+      "id": "car",
+      "category": "transport",
+      "file": "assets/vehicles/transport/car.png",
+      "name_ko": "자동차",
+      "sound_ko": "부릉부릉 달려요!"
+    },
+    {
+      "id": "taxi",
+      "category": "transport",
+      "file": "assets/vehicles/transport/taxi.png",
+      "name_ko": "택시",
+      "sound_ko": "띠띠 목적지로 가요!"
+    },
+    {
+      "id": "school_bus",
+      "category": "transport",
+      "file": "assets/vehicles/transport/school_bus.png",
+      "name_ko": "스쿨버스",
+      "sound_ko": "친구들을 데리러 가요!"
+    },
+    {
+      "id": "rocket",
+      "category": "transport",
+      "file": "assets/vehicles/transport/rocket.png",
+      "name_ko": "로켓",
+      "sound_ko": "슈우웅 하늘로 날아요!"
+    },
+    {
+      "id": "submarine",
+      "category": "transport",
+      "file": "assets/vehicles/transport/submarine.png",
+      "name_ko": "잠수함",
+      "sound_ko": "꼬르륵 바닷속으로 가요!"
+    },
+    {
+      "id": "tow_truck",
+      "category": "transport",
+      "file": "assets/vehicles/transport/tow_truck.png",
+      "name_ko": "견인차",
+      "sound_ko": "고장난 차를 도와줘요!"
+    },
+    {
+      "id": "garbage_truck",
+      "category": "transport",
+      "file": "assets/vehicles/transport/garbage_truck.png",
+      "name_ko": "청소차",
+      "sound_ko": "쓱싹쓱싹 깨끗하게 해요!"
+    },
+    {
+      "id": "tractor",
+      "category": "transport",
+      "file": "assets/vehicles/transport/tractor.png",
+      "name_ko": "트랙터",
+      "sound_ko": "덜컹덜컹 밭으로 가요!"
+    },
+    {
+      "id": "airplane",
+      "category": "transport",
+      "file": "assets/vehicles/transport/airplane.png",
+      "name_ko": "비행기",
+      "sound_ko": "슝 하늘을 날아요!"
+    },
+    {
+      "id": "helicopter",
+      "category": "transport",
+      "file": "assets/vehicles/transport/helicopter.png",
+      "name_ko": "헬리콥터",
+      "sound_ko": "두두두두 날아가요!"
+    }
+  ]
+}

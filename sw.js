@@ -1,9 +1,9 @@
-const CACHE_NAME = 'nest-family-os-v2.8.1';
+const CACHE_NAME = 'sihyeon-play-os-v1.0.0';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './icon.svg'
+  './icon.png'
 ];
 
 self.addEventListener('install', (e) => {

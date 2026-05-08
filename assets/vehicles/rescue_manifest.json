@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ambulance",
+    "category": "rescue",
+    "file": "assets/vehicles/rescue/ambulance.png",
+    "name_ko": "구급차",
+    "sound_ko": "애앵애앵 도와주러 가요!"
+  },
+  {
+    "id": "doctor_car",
+    "category": "rescue",
+    "file": "assets/vehicles/rescue/doctor_car.png",
+    "name_ko": "닥터카",
+    "sound_ko": "의사 선생님이 빨리 도착해요!"
+  },
+  {
+    "id": "rescue_helicopter",
+    "category": "rescue",
+    "file": "assets/vehicles/rescue/rescue_helicopter.png",
+    "name_ko": "구조 헬기",
+    "sound_ko": "두두두두 하늘을 날아요!"
+  }
+]

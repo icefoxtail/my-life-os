@@ -1,0 +1,65 @@
+[
+  {
+    "id": "excavator",
+    "category": "construction",
+    "file": "assets/vehicles/construction/excavator.png",
+    "name_ko": "포크레인",
+    "sound_ko": "쿠궁쿠궁 흙을 퍼요!"
+  },
+  {
+    "id": "mini_excavator",
+    "category": "construction",
+    "file": "assets/vehicles/construction/mini_excavator.png",
+    "name_ko": "미니 굴착기",
+    "sound_ko": "작지만 힘차게 파요!"
+  },
+  {
+    "id": "bulldozer",
+    "category": "construction",
+    "file": "assets/vehicles/construction/bulldozer.png",
+    "name_ko": "불도저",
+    "sound_ko": "쓱쓱 밀고 지나가요!"
+  },
+  {
+    "id": "wheel_loader",
+    "category": "construction",
+    "file": "assets/vehicles/construction/wheel_loader.png",
+    "name_ko": "휠로더",
+    "sound_ko": "커다란 삽으로 담아요!"
+  },
+  {
+    "id": "dump_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/dump_truck.png",
+    "name_ko": "덤프트럭",
+    "sound_ko": "우르르 짐을 내려요!"
+  },
+  {
+    "id": "concrete_mixer",
+    "category": "construction",
+    "file": "assets/vehicles/construction/concrete_mixer.png",
+    "name_ko": "레미콘",
+    "sound_ko": "빙글빙글 섞어요!"
+  },
+  {
+    "id": "concrete_pump_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/concrete_pump_truck.png",
+    "name_ko": "콘크리트 펌프카",
+    "sound_ko": "쭉쭉 뻗어서 보내요!"
+  },
+  {
+    "id": "crane_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/crane_truck.png",
+    "name_ko": "크레인차",
+    "sound_ko": "번쩍 들어 올려요!"
+  },
+  {
+    "id": "forklift",
+    "category": "construction",
+    "file": "assets/vehicles/construction/forklift.png",
+    "name_ko": "지게차",
+    "sound_ko": "삐리리 짐을 들어요!"
+  }
+]

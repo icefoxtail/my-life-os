@@ -1,3 +1,157 @@
+const FAMILY_CAST = [
+  {
+    id: "dad",
+    name: "아빠",
+    group: "가족",
+    roleTag: "든든한 이야기 동행자",
+    personality: "시현이를 따뜻하게 믿어 주고, 모험이 안전하게 이어지도록 곁에서 도와줘요.",
+    favoriteThemes: ["자동차", "공룡", "우주", "잠자리", "모험"],
+    storyUse: "시현이의 선택을 응원하고, 마지막에 따뜻하게 칭찬해 주는 역할"
+  },
+  {
+    id: "mom",
+    name: "엄마",
+    group: "가족",
+    roleTag: "포근한 마음 안내자",
+    personality: "다정하고 세심하게 시현이의 마음을 살펴줘요.",
+    favoriteThemes: ["잠자리", "동물", "바다", "가족", "전래"],
+    storyUse: "불안하거나 속상한 마음을 포근하게 감싸 주는 역할"
+  },
+  {
+    id: "grandma",
+    name: "할머니",
+    group: "가족",
+    roleTag: "따뜻한 이야기 보따리",
+    personality: "옛이야기를 부드럽게 들려주고 맛있는 냄새처럼 포근한 분위기를 만들어요.",
+    favoriteThemes: ["전래", "이솝", "잠자리", "동물"],
+    storyUse: "전래 느낌의 이야기 문을 열어 주거나 따뜻한 지혜를 건네는 역할"
+  },
+  {
+    id: "grandpa",
+    name: "할아버지",
+    group: "가족",
+    roleTag: "느긋한 지혜 길잡이",
+    personality: "천천히 바라보고 차분하게 방법을 찾아요.",
+    favoriteThemes: ["자동차", "공룡", "전래", "숲"],
+    storyUse: "성급하지 않게 문제를 살피고 시현이가 스스로 선택하도록 기다려 주는 역할"
+  },
+  {
+    id: "aunt",
+    name: "고모",
+    group: "가족",
+    roleTag: "신나는 놀이 친구",
+    personality: "밝고 경쾌하게 분위기를 살리고 시현이의 상상을 크게 키워줘요.",
+    favoriteThemes: ["자동차", "동물", "우주", "마법"],
+    storyUse: "놀이처럼 문제를 풀어 가게 만드는 역할"
+  },
+  {
+    id: "uncle_in_law",
+    name: "고모부",
+    group: "가족",
+    roleTag: "뚝딱 도구 도우미",
+    personality: "차분하고 실용적으로 필요한 도구를 찾아줘요.",
+    favoriteThemes: ["자동차", "우주", "공룡", "모험"],
+    storyUse: "수리, 조립, 준비물을 도와주는 역할"
+  },
+  {
+    id: "uncle",
+    name: "삼촌",
+    group: "가족",
+    roleTag: "장난기 많은 모험 대장",
+    personality: "재미있는 말과 장난으로 시현이를 웃게 해줘요.",
+    favoriteThemes: ["공룡", "자동차", "우주", "바다", "모험"],
+    storyUse: "신나는 출발 장면이나 웃음 장면을 만드는 역할"
+  }
+];
+
+const PET_CAST = [
+  {
+    id: "nuni",
+    name: "눈이",
+    group: "고양이",
+    roleTag: "새하얀 발자국 고양이",
+    personality: "조용히 살금살금 걷고 작은 소리를 잘 들어요.",
+    favoriteThemes: ["잠자리", "동물", "숲", "마법"],
+    storyUse: "작은 발자국, 작은 소리, 숨은 단서를 찾아 주는 역할"
+  },
+  {
+    id: "reumi",
+    name: "름이",
+    group: "고양이",
+    roleTag: "몽글몽글 장난꾸러기 고양이",
+    personality: "호기심이 많고 장난스럽지만 시현이를 좋아해요.",
+    favoriteThemes: ["자동차", "동물", "잠자리", "모험"],
+    storyUse: "귀여운 실수나 장난으로 이야기를 시작하게 만드는 역할"
+  }
+];
+
+const COMFORT_TOY_CAST = [
+  {
+    id: "sicheoni",
+    name: "시천이",
+    group: "애착인형",
+    roleTag: "시현이의 작은 용기 인형",
+    personality: "시현이가 용기를 내야 할 때 조용히 곁에 있어줘요.",
+    favoriteThemes: ["잠자리", "공룡", "우주", "모험"],
+    storyUse: "시현이가 마지막 선택을 할 때 마음속 용기를 주는 역할"
+  },
+  {
+    id: "rona",
+    name: "로나",
+    group: "애착인형",
+    roleTag: "반짝 상상 인형",
+    personality: "반짝이는 상상과 재미있는 아이디어를 좋아해요.",
+    favoriteThemes: ["우주", "마법", "잠자리", "자동차"],
+    storyUse: "상상 문을 열거나 반짝 물건을 발견하게 해 주는 역할"
+  },
+  {
+    id: "gureumi",
+    name: "구름이",
+    group: "애착인형",
+    roleTag: "폭신폭신 잠자리 인형",
+    personality: "포근하고 느긋해서 마음을 차분하게 해줘요.",
+    favoriteThemes: ["잠자리", "바다", "하늘", "동물"],
+    storyUse: "잠자리, 감정 정리, 포근한 마무리 역할"
+  }
+];
+
+const FRIEND_CAST = [
+  { id: "yungyeom", name: "윤겸", group: "시현이 친구", roleTag: "튼튼한 해결사", personality: "용감하고 힘이 세지만 친구 말을 잘 들어요.", favoriteThemes: ["공룡", "자동차", "모험"], storyUse: "무거운 것을 옮기거나 친구들을 도와주는 역할" },
+  { id: "sijun", name: "시준", group: "시현이 친구", roleTag: "호기심 탐험가", personality: "궁금한 것이 많고 새로운 길을 잘 찾아요.", favoriteThemes: ["우주", "공룡", "바다"], storyUse: "새로운 장소를 발견하고 질문을 던지는 역할" },
+  { id: "seoa", name: "서아", group: "시현이 친구", roleTag: "다정한 이야기꾼", personality: "친구 마음을 잘 알아주고 예쁜 말을 해요.", favoriteThemes: ["동물", "잠자리", "전래"], storyUse: "속상한 친구를 달래고 따뜻한 마무리를 돕는 역할" },
+  { id: "haneul", name: "하늘", group: "시현이 친구", roleTag: "상상력 대장", personality: "구름, 별, 로켓 같은 상상을 좋아해요.", favoriteThemes: ["우주", "잠자리", "마법"], storyUse: "상상 장면을 열어 주는 역할" },
+  { id: "haeun", name: "하은", group: "시현이 친구", roleTag: "차분한 관찰자", personality: "작은 소리와 작은 변화를 잘 알아차려요.", favoriteThemes: ["동물", "바다", "잠자리"], storyUse: "단서를 발견하고 조용히 해결책을 제안하는 역할" },
+  { id: "dasom", name: "다솜", group: "시현이 친구", roleTag: "즐거운 응원단장", personality: "친구들을 잘 응원하고 웃음을 만들어 줘요.", favoriteThemes: ["자동차", "동물", "놀이"], storyUse: "분위기를 밝게 만들고 후렴구를 함께 외치는 역할" },
+  { id: "yuchan", name: "유찬", group: "시현이 친구", roleTag: "뚝딱뚝딱 발명가", personality: "고치고 만들고 조립하는 것을 좋아해요.", favoriteThemes: ["자동차", "우주", "공룡"], storyUse: "도구나 장치를 만들어 문제 해결을 돕는 역할" },
+  { id: "hayul", name: "하율", group: "시현이 친구", roleTag: "반짝 아이디어 친구", personality: "기발한 생각을 잘 떠올리고 놀이를 좋아해요.", favoriteThemes: ["전래", "이솝", "마법"], storyUse: "예상 밖의 방법으로 길을 여는 역할" },
+  { id: "iseo", name: "이서", group: "시현이 친구", roleTag: "꼼꼼한 약속 지킴이", personality: "순서를 잘 기억하고 친구들을 안전하게 챙겨요.", favoriteThemes: ["잠자리", "동물", "바다"], storyUse: "규칙, 약속, 순서를 정리해 주는 역할" }
+];
+
+const CLASSIC_CHARACTER_CAST = [
+  { id: "snow_white", name: "백설공주", group: "명작", roleTag: "숲속의 다정한 공주", personality: "친절하고 친구들의 마음을 잘 살펴요.", favoriteThemes: ["동물", "전래", "잠자리", "숲"], storyUse: "숲속 친구들을 모으고 따뜻한 결말을 만드는 역할", safetyNote: "독사과, 마녀, 죽음 요소는 절대 사용하지 않는다." },
+  { id: "seven_dwarfs", name: "일곱 난쟁이", group: "명작", roleTag: "뚝딱뚝딱 작은 일꾼들", personality: "작지만 힘을 모아 큰일을 해내요.", favoriteThemes: ["자동차", "공룡", "숲", "모험"], storyUse: "작은 도구와 협동으로 문제를 해결하는 역할", safetyNote: "위험한 광산, 어두운 공포 장면은 사용하지 않는다." },
+  { id: "cinderella", name: "신데렐라", group: "명작", roleTag: "반짝 구두의 다정한 친구", personality: "차분하고 상냥하며 작은 도움에도 고마워해요.", favoriteThemes: ["전래", "잠자리", "동물", "마법"], storyUse: "반짝이는 물건이나 잃어버린 길을 찾는 역할", safetyNote: "괴롭힘, 학대, 가족 갈등 요소는 사용하지 않는다." },
+  { id: "pinocchio", name: "피노키오", group: "명작", roleTag: "궁금한 나무 인형 친구", personality: "궁금한 것이 많고 실수해도 다시 배우려고 해요.", favoriteThemes: ["자동차", "모험", "이솝"], storyUse: "실수 후 솔직하게 말하고 해결을 돕는 역할", safetyNote: "벌을 받거나 위협받는 장면은 사용하지 않는다." },
+  { id: "little_mermaid", name: "인어공주", group: "명작", roleTag: "바닷속 노래 친구", personality: "노래를 좋아하고 바다 친구들을 다정하게 챙겨요.", favoriteThemes: ["바다", "잠자리", "동물"], storyUse: "바닷길을 안내하거나 노래로 친구들을 안심시키는 역할", safetyNote: "목소리를 빼앗기거나 슬픈 결말은 사용하지 않는다." },
+  { id: "red_riding_hood", name: "빨간 모자", group: "명작", roleTag: "숲길 배달 친구", personality: "씩씩하게 길을 걷고 선물을 전해요.", favoriteThemes: ["숲", "동물", "전래"], storyUse: "길 안내, 바구니 선물, 숲속 배달 역할", safetyNote: "늑대의 위협, 잡아먹힘 요소는 사용하지 않는다." },
+  { id: "sun", name: "햇님", group: "전래", roleTag: "따뜻한 빛 친구", personality: "밝고 포근하게 길을 비춰 줘요.", favoriteThemes: ["잠자리", "우주", "전래", "바다"], storyUse: "어두운 길을 밝혀 주거나 마음을 따뜻하게 해 주는 역할", safetyNote: "뜨겁거나 위험한 태양 묘사는 사용하지 않는다." },
+  { id: "moon", name: "달님", group: "전래", roleTag: "조용한 밤 친구", personality: "차분하고 다정하게 이야기를 들어줘요.", favoriteThemes: ["잠자리", "우주", "전래"], storyUse: "잠자리 동화에서 감정을 정리하고 포근한 마무리를 돕는 역할", safetyNote: "무서운 밤길이나 공포 분위기는 사용하지 않는다." },
+  { id: "tiger", name: "호랑이", group: "전래", roleTag: "커다랗지만 순한 숲 친구", personality: "겉모습은 크지만 마음은 따뜻하고 장난기가 있어요.", favoriteThemes: ["전래", "동물", "공룡"], storyUse: "큰 힘으로 친구를 돕거나 웃음을 만드는 역할", safetyNote: "잡아먹힘, 추격, 위협 요소는 절대 사용하지 않는다." },
+  { id: "swallow", name: "제비", group: "전래", roleTag: "작은 지도 배달부", personality: "빠르고 고마움을 잘 표현해요.", favoriteThemes: ["전래", "동물", "모험"], storyUse: "작은 지도나 편지를 전해 주는 역할", safetyNote: "다치는 장면은 사용하지 않는다." },
+  { id: "mountain_spirit", name: "산신령", group: "전래", roleTag: "산속 반짝 길잡이", personality: "차분하고 지혜롭게 선택을 도와줘요.", favoriteThemes: ["전래", "숲", "잠자리"], storyUse: "반짝 물건을 보여 주며 시현이의 선택을 돕는 역할", safetyNote: "무섭거나 권위적인 심판자처럼 묘사하지 않는다." },
+  { id: "rabbit", name: "토끼", group: "이솝", roleTag: "빠른 숲속 친구", personality: "빠르고 장난기가 있지만 마음은 착해요.", favoriteThemes: ["동물", "이솝", "자동차", "공룡"], storyUse: "빠르게 뛰어가 단서를 찾거나 실수 후 다시 배우는 역할", safetyNote: "비웃음이나 과한 경쟁 중심으로 쓰지 않는다." },
+  { id: "turtle", name: "거북이", group: "이솝", roleTag: "느긋한 지혜 친구", personality: "천천히 가지만 끝까지 해내요.", favoriteThemes: ["동물", "바다", "이솝", "잠자리"], storyUse: "서두르지 않고 차분한 해결 방법을 알려주는 역할", safetyNote: "훈계식 교훈으로 직접 설명하지 않는다." },
+  { id: "ant", name: "개미", group: "이솝", roleTag: "부지런한 작은 친구", personality: "작은 힘을 모아 큰일을 해내요.", favoriteThemes: ["동물", "이솝", "자동차"], storyUse: "작은 부품, 작은 길, 작은 단서를 모으는 역할", safetyNote: "게으름을 혼내는 구조로 쓰지 않는다." },
+  { id: "grasshopper", name: "베짱이", group: "이솝", roleTag: "노래하는 숲속 친구", personality: "노래와 리듬을 좋아하고 분위기를 밝게 만들어요.", favoriteThemes: ["동물", "이솝", "잠자리"], storyUse: "후렴구, 노래, 리듬으로 동화의 반복 구조를 만드는 역할", safetyNote: "게으르다고 비난받는 구조로 쓰지 않는다." },
+  { id: "fox", name: "여우", group: "이솝", roleTag: "꾀 많은 숲속 친구", personality: "생각이 빠르고 장난스러운 아이디어를 잘 내요.", favoriteThemes: ["이솝", "동물", "전래"], storyUse: "기발한 방법을 제안하되 마지막 선택은 시현이가 하게 만드는 역할", safetyNote: "속임수나 나쁜 꾀를 성공시키는 구조로 쓰지 않는다." },
+  { id: "crane", name: "두루미", group: "이솝", roleTag: "긴 부리의 우아한 친구", personality: "천천히 살피고 서로 편한 방법을 생각해요.", favoriteThemes: ["동물", "바다", "이솝"], storyUse: "서로 다른 친구들이 함께 쓰는 방법을 알려주는 역할", safetyNote: "상대방을 골탕 먹이는 원작 구조는 사용하지 않는다." },
+  { id: "lion", name: "사자", group: "이솝", roleTag: "커다란 마음의 왕", personality: "목소리는 크지만 친구를 아끼는 마음도 커요.", favoriteThemes: ["동물", "이솝", "공룡"], storyUse: "큰 소리나 큰 힘을 부드럽게 쓰는 법을 배우는 역할", safetyNote: "위협적이거나 무서운 왕으로 묘사하지 않는다." },
+  { id: "mouse", name: "생쥐", group: "이솝", roleTag: "작지만 빠른 도움 친구", personality: "작고 빠르며 좁은 곳을 잘 지나가요.", favoriteThemes: ["동물", "이솝", "자동차"], storyUse: "작은 틈에서 단서를 찾는 역할", safetyNote: "잡아먹힐 위기 장면은 사용하지 않는다." },
+  { id: "cloud", name: "구름", group: "자연", roleTag: "폭신폭신 하늘 친구", personality: "부드럽고 천천히 움직이며 마음을 편하게 해줘요.", favoriteThemes: ["잠자리", "우주", "바다"], storyUse: "이동 수단, 자장가, 감정 정리 역할", safetyNote: "폭풍이나 위험한 날씨로 묘사하지 않는다." },
+  { id: "star_fairy", name: "별 요정", group: "자연", roleTag: "반짝 등불 친구", personality: "작은 별빛으로 길을 밝혀 줘요.", favoriteThemes: ["잠자리", "우주", "마법"], storyUse: "길 안내, 작은 소원, 자장가 분위기 역할", safetyNote: "무서운 마법이나 벌주는 마법은 사용하지 않는다." },
+  { id: "rainbow", name: "무지개", group: "자연", roleTag: "알록달록 다리 친구", personality: "밝고 즐겁게 친구들을 이어 줘요.", favoriteThemes: ["동물", "바다", "우주", "전래"], storyUse: "서로 다른 장소를 연결하는 다리 역할", safetyNote: "높은 곳에서 떨어지는 위험 장면은 사용하지 않는다." }
+];
+
 window.STORY_LIBRARY = [
 
   { id:"built_car_garage_night", theme:"자동차", voiceTone:"bright", title:"반짝반짝 차고의 밤", desc:"시현이가 자동차 친구들의 밤 점검을 도와주는 기본 장문 동화", plotSeed:"밤이 된 차고에서 자동차 친구들이 잠자기 전 점검을 기다리고, 시현이가 정비사처럼 하나씩 살펴본다.", conflict:"자동차 친구들이 작은 불편함 때문에 편히 쉬지 못한다.", sihyeonRole:"시현이가 손전등과 작은 정비 도구를 들고 바퀴, 호스, 의자, 편지를 차례로 정리해 준다.", characters:["시현","포키","빨간 소방차","작은 버스"], mood:"포근함", readingMinutes:5, hasFullContent:true, contentKey:"car_garage_night" },
@@ -115,6 +269,134 @@ window.STORY_LIBRARY = [
   { id:"orig_habit_4", theme:"생활습관", voiceTone:"bright", title:"안녕, 예쁘게 인사하기", desc:"인사봇이 된 로봇", plotSeed:"부끄러워서 인사를 못하는 로봇의 태엽이 감기지 않아 멈춤", conflict:"작은 인사가 마음을 여는 큰 태엽이 됨", sihyeonRole:"시현이가 배꼽 손 인사를 씩씩하게 보여주어 로봇의 태엽이 띠링띠링 돌아가게 만듦", characters:["시현","인사로봇"], mood:"활기참", readingMinutes:5, hasFullContent:false },
   { id:"orig_habit_5", theme:"생활습관", voiceTone:"bright", title:"화장실 변기 몬스터", desc:"쉬야 참기 대작전", plotSeed:"화장실 가기가 귀찮아서 참다가 배 속 몬스터가 빵빵해짐", conflict:"미루면 더 큰 불편함이 찾아옴", sihyeonRole:"시현이가 용감하게 화장실로 달려가 변기 물을 쏴아 내리며 배 속 몬스터를 물리침", characters:["시현","변기몬스터"], mood:"상쾌함", readingMinutes:5, hasFullContent:false }
 ];
+
+const STORY_THEME_META = {
+  "자동차": {
+    familyIds: ["dad"],
+    friendIds: ["yuchan", "dasom"],
+    petIds: ["reumi"],
+    comfortToyIds: ["rona"],
+    classicCharacterIds: ["seven_dwarfs"],
+    storyGoal: "자동차 친구의 작은 문제를 함께 고쳐 다시 즐겁게 출발한다.",
+    conflict: "자동차 친구가 작은 부품이나 길 때문에 잠시 멈춘다.",
+    magicObject: "반짝 스패너",
+    emotionalTone: "밝고 신나는 정비 놀이",
+    successPattern: "car-repair"
+  },
+  "공룡": {
+    familyIds: ["grandpa"],
+    friendIds: ["yungyeom", "haeun"],
+    petIds: [],
+    comfortToyIds: ["sicheoni"],
+    classicCharacterIds: ["turtle"],
+    storyGoal: "공룡 친구가 자기 힘을 부드럽게 쓰도록 도와준다.",
+    conflict: "커다란 발걸음 때문에 작은 친구들이 깜짝 놀란다.",
+    magicObject: "폭신 발자국 스티커",
+    emotionalTone: "든든하고 다정한 모험",
+    successPattern: "dino-growth"
+  },
+  "동물": {
+    familyIds: ["mom"],
+    friendIds: ["seoa", "haeun"],
+    petIds: ["nuni"],
+    comfortToyIds: [],
+    classicCharacterIds: ["rabbit", "turtle"],
+    storyGoal: "동물 친구들의 마음을 살피고 모두 편한 방법을 찾는다.",
+    conflict: "친구마다 속도와 방법이 달라 작은 오해가 생긴다.",
+    magicObject: "따뜻한 리본",
+    emotionalTone: "부드럽고 다정한 동물 이야기",
+    successPattern: "slow-and-kind"
+  },
+  "우주": {
+    familyIds: ["dad"],
+    friendIds: ["haneul", "yuchan"],
+    petIds: [],
+    comfortToyIds: ["rona"],
+    classicCharacterIds: ["star_fairy"],
+    storyGoal: "반짝이는 우주 단서를 찾아 안전하게 여행을 이어 간다.",
+    conflict: "우주선이나 별길에 작고 안전한 문제가 생긴다.",
+    magicObject: "반짝 별 지도",
+    emotionalTone: "상상력이 가득한 우주 모험",
+    successPattern: "space-repair"
+  },
+  "바다": {
+    familyIds: ["mom"],
+    friendIds: ["haeun", "seoa"],
+    petIds: ["nuni"],
+    comfortToyIds: ["gureumi"],
+    classicCharacterIds: ["little_mermaid"],
+    storyGoal: "바닷길에서 작은 부탁을 안전하게 전하고 친구를 안심시킨다.",
+    conflict: "바다 친구가 노래나 선물을 어디에 두었는지 잠시 헷갈린다.",
+    magicObject: "조개빛 나침반",
+    emotionalTone: "잔잔하고 반짝이는 바다 이야기",
+    successPattern: "sea-song"
+  },
+  "전래동화": {
+    familyIds: ["grandma", "grandpa"],
+    friendIds: ["hayul", "seoa"],
+    petIds: ["nuni"],
+    comfortToyIds: [],
+    classicCharacterIds: ["swallow"],
+    storyGoal: "전래 느낌의 따뜻한 도움을 나누고 고마움을 전한다.",
+    conflict: "작은 선물이나 길 안내가 필요한 친구가 나타난다.",
+    magicObject: "반짝 복주머니",
+    emotionalTone: "옛이야기처럼 포근하고 정겨운 분위기",
+    successPattern: "folk-kindness"
+  },
+  "이솝우화": {
+    familyIds: ["grandma", "grandpa"],
+    friendIds: ["dasom", "iseo"],
+    petIds: ["nuni"],
+    comfortToyIds: [],
+    classicCharacterIds: ["ant", "grasshopper"],
+    storyGoal: "작은 노력과 노래를 함께 모아 친구의 일을 돕는다.",
+    conflict: "친구들이 서로 다른 방식으로 준비해서 잠시 순서가 꼬인다.",
+    magicObject: "딸랑딸랑 작은 종",
+    emotionalTone: "밝고 리듬 있는 이솝풍 이야기",
+    successPattern: "share-and-song"
+  },
+  "잠자리": {
+    familyIds: ["mom", "dad"],
+    friendIds: ["haneul", "seoa"],
+    petIds: ["nuni"],
+    comfortToyIds: ["gureumi"],
+    classicCharacterIds: ["cloud", "moon"],
+    storyGoal: "하루의 마음을 정리하고 포근하게 잠자리로 돌아온다.",
+    conflict: "잠들기 전 마음에 남은 작은 생각이 둥실 떠오른다.",
+    magicObject: "폭신 달빛 담요",
+    emotionalTone: "차분하고 포근한 잠자리 동화",
+    successPattern: "bedtime-calm"
+  }
+};
+
+const STORY_PATTERN_BY_ID = {
+  built_car_garage_night: { friendIds: ["yuchan", "dasom"], classicCharacterIds: ["seven_dwarfs"], successPattern: "car-repair" },
+  built_dino_soft_steps: { friendIds: ["yungyeom", "haeun"], classicCharacterIds: ["turtle"], successPattern: "dino-growth" },
+  orig_bed_1: { friendIds: ["haneul", "seoa"], classicCharacterIds: ["cloud", "moon"], successPattern: "bedtime-calm" }
+};
+
+window.STORY_LIBRARY.forEach(story => {
+  const themeMeta = STORY_THEME_META[story.theme] || STORY_THEME_META["동물"];
+  const idMeta = STORY_PATTERN_BY_ID[story.id] || {};
+  Object.assign(story, {
+    familyIds: Array.isArray(story.familyIds) ? story.familyIds : (idMeta.familyIds || themeMeta.familyIds || []),
+    friendIds: Array.isArray(story.friendIds) ? story.friendIds : (idMeta.friendIds || themeMeta.friendIds || []),
+    petIds: Array.isArray(story.petIds) ? story.petIds : (idMeta.petIds || themeMeta.petIds || []),
+    comfortToyIds: Array.isArray(story.comfortToyIds) ? story.comfortToyIds : (idMeta.comfortToyIds || themeMeta.comfortToyIds || []),
+    classicCharacterIds: Array.isArray(story.classicCharacterIds) ? story.classicCharacterIds : (idMeta.classicCharacterIds || themeMeta.classicCharacterIds || []),
+    storyGoal: story.storyGoal || themeMeta.storyGoal,
+    conflict: story.conflict || themeMeta.conflict,
+    magicObject: story.magicObject || themeMeta.magicObject,
+    emotionalTone: story.emotionalTone || story.mood || themeMeta.emotionalTone,
+    successPattern: story.successPattern || idMeta.successPattern || themeMeta.successPattern
+  });
+});
+
+window.FAMILY_CAST = FAMILY_CAST;
+window.PET_CAST = PET_CAST;
+window.COMFORT_TOY_CAST = COMFORT_TOY_CAST;
+window.FRIEND_CAST = FRIEND_CAST;
+window.CLASSIC_CHARACTER_CAST = CLASSIC_CHARACTER_CAST;
 
 window.STORY_CONTENTS = {
   car_garage_night: {

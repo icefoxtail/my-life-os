@@ -5,1988 +5,1048 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>우리집 넥서스 / Family Nexus</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#5BC8F5">
+  <title>시현이 놀이터 OS</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
+    /* ═══════════════════════════════════════
+       COLOR SYSTEM & RESET
+    ═══════════════════════════════════════ */
     :root {
-      --bg: #f4f6f5; --surface: rgba(255, 255, 255, 0.92); --surface-solid: #ffffff;
-      --text: #1d1d1f; --text-soft: #69706f; --border: rgba(0, 0, 0, 0.08);
-      --primary: #147d64; --primary-soft: rgba(20, 125, 100, 0.1);
-      --accent: #e05d3f; --success: #34c759; --warning: #f3a51d; --danger: #e33b32;
-      --sky: #3478f6; --radius-xl: 28px; --radius-lg: 20px; --radius-md: 14px;
-      --shadow: 0 10px 40px rgba(20, 30, 28, 0.07); --blur: blur(25px);
+      --sky-top:   #5BC8F5;
+      --sky-mid:   #A8E6FF;
+      --grass:     #7CB342;
+      --grass-dark:#558B2F;
+      --ink:       #1A2E3B;
+      --white:     #FFFFFF;
+      --primary:   #FF7A1A;
+      --warning:   #FFD93D;
+      --sun:       #FFD93D;
+      --sun-glow:  #FFAA00;
     }
-    body.dark {
-      --bg: #101311; --surface: rgba(28, 31, 29, 0.92); --surface-solid: #1c1f1d;
-      --text: #f5f5f7; --text-soft: #9aa09d; --border: rgba(255, 255, 255, 0.1);
-      --primary: #4dd0a8; --primary-soft: rgba(77, 208, 168, 0.12);
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html { height: 100%; overflow: hidden; }
     body {
-      font-family: 'Pretendard', system-ui, sans-serif; background: var(--bg); color: var(--text);
-      padding-bottom: 120px; transition: background 0.4s ease; overflow-x: hidden; touch-action: manipulation;
+      height: 100%;
+      font-family: 'Jua', 'Apple SD Gothic Neo', sans-serif;
+      color: var(--ink);
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      background: var(--sky-top);
     }
-    canvas { display: block; }
-    .topbar {
-      position: sticky; top: 0; z-index: 1000; padding: 15px 20px;
-      background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: var(--blur);
-      border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;
+    button { border: 0; cursor: pointer; color: inherit; background: none; font: inherit; }
+    button:focus { outline: none; }
+
+    /* ═══════════════════════════════════════
+       CONFETTI
+    ═══════════════════════════════════════ */
+    #particle-container {
+      position: fixed; inset: 0;
+      z-index: 9000; pointer-events: none; overflow: hidden;
     }
-    .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-    .brand-mark {
-      width: 42px; height: 42px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--sky));
-      color: white; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px;
-      box-shadow: 0 4px 15px rgba(20, 125, 100, 0.3);
+    .particle {
+      position: absolute; border-radius: 4px;
+      animation: confettiFall linear forwards;
     }
-    .brand-title h1 { font-size: 19px; font-weight: 900; letter-spacing: 0; }
-    .brand-title p { font-size: 11px; color: var(--text-soft); font-weight: 800; margin-top: 2px; }
-    .top-actions { display: flex; gap: 10px; }
-    .top-btn {
-      width: 40px; height: 40px; border-radius: 12px; background: var(--surface-solid);
-      border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center;
-      font-size: 18px; cursor: pointer; transition: 0.2s;
+    @keyframes confettiFall {
+      0%   { transform: translateY(-30px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh)  rotate(720deg); opacity: 0; }
     }
-    .top-btn:active { transform: scale(0.9); }
-    .app { max-width: 800px; margin: 0 auto; padding: 15px; position: relative; }
-    .panel { display: none; animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
-    .panel.active { display: block; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
-      padding: 22px; box-shadow: var(--shadow); backdrop-filter: var(--blur); margin-bottom: 18px; position: relative;
+
+    /* ═══════════════════════════════════════
+       APP SHELL & IMAGE MAP SYSTEM
+    ═══════════════════════════════════════ */
+    #sihyeonPlayOS { position: fixed; inset: 0; overflow: hidden; }
+
+    .world-map-screen,
+    .image-land-screen {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--grass-dark) 100%);
+      animation: zoneEnter 0.35s cubic-bezier(0.25, 0.9, 0.3, 1) both;
     }
-    .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
-    .bento-full { grid-column: 1 / -1; }
-    .card-title {
-      font-size: 14px; font-weight: 900; color: var(--text-soft); margin-bottom: 16px;
-      text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center;
+
+    .world-blur-bg {
+      position: absolute;
+      inset: -26px;
+      background-image: var(--map-bg);
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px) saturate(1.08);
+      transform: scale(1.08);
+      opacity: 0.62;
+      z-index: 0;
     }
-    .hero-brief {
-      border-left: 6px solid var(--primary); background: linear-gradient(to right, var(--primary-soft), transparent);
-      font-size: 18px; font-weight: 900; line-height: 1.55;
+
+    .world-map-frame {
+      position: relative;
+      z-index: 1;
+      height: 100dvh;
+      aspect-ratio: 9 / 16;
+      max-width: 100vw;
+      max-height: 100dvh;
+      overflow: hidden;
+      background: var(--sky-top);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.18), 0 18px 48px rgba(0,0,0,0.18);
     }
-    .metric { font-size: 13px; font-weight: 900; color: var(--text-soft); }
-    .big-number { font-size: 30px; font-weight: 900; color: var(--primary); line-height: 1; }
-    .btn {
-      background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 88%, white), var(--primary));
-      color: white; border: 3px solid rgba(255,255,255,0.72); padding: 16px; border-radius: 20px;
-      font-weight: 900; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
-      gap: 8px; width: 100%; transition: transform 0.12s, box-shadow 0.12s, filter 0.2s;
-      box-shadow: 0 6px 0 rgba(0,0,0,0.2), inset 0 3px 0 rgba(255,255,255,0.4);
-      -webkit-text-stroke: 1px rgba(0,0,0,0.1); text-shadow: 0 1px 0 rgba(0,0,0,0.18);
-    }
-    .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
-    .btn:disabled { filter: grayscale(0.12); transform: none; box-shadow: 0 6px 0 rgba(0,0,0,0.16), inset 0 3px 0 rgba(255,255,255,0.3); }
-    .btn.outline {
-      background: linear-gradient(180deg, #ffffff, #eef4f4); border: 3px solid rgba(0,0,0,0.08); color: var(--text);
-      box-shadow: 0 6px 0 rgba(0,0,0,0.2), inset 0 3px 0 rgba(255,255,255,0.4);
-    }
-    .btn.small { width: auto; padding: 12px 14px; font-size: 14px; }
-    input, select, textarea {
-      width: 100%; border: 2px solid var(--border); background: var(--surface-solid); color: var(--text);
-      border-radius: var(--radius-md); padding: 16px; font-size: 16px; margin-bottom: 12px; outline: none;
-      transition: 0.3s; font-family: inherit; font-weight: 650;
-    }
-    input:focus, textarea:focus, select:focus { border-color: var(--primary); }
-    .row { display: flex; gap: 10px; margin-bottom: 10px; }
-    .list-item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
-    .list-item:last-child { border-bottom: none; }
-    .item-check {
-      width: 28px; height: 28px; border-radius: 8px; border: 2px solid var(--border); background: var(--surface-solid);
-      cursor: pointer; display: flex; align-items: center; justify-content: center; color: transparent; font-size: 16px;
-      font-weight: 900; transition: 0.2s; flex-shrink: 0;
-    }
-    .item-check.done { background: var(--success); border-color: var(--success); color: white; }
-    .item-body { flex: 1; min-width: 0; }
-    .item-title { font-size: 16px; font-weight: 850; overflow-wrap: anywhere; }
-    .item-title.done { color: var(--text-soft); text-decoration: line-through; }
-    .item-meta { font-size: 13px; color: var(--text-soft); margin-top: 4px; font-weight: 700; }
-    .del-btn { color: var(--danger); font-size: 14px; font-weight: 850; background: none; border: none; cursor: pointer; padding: 5px; }
-    .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: -8px 0 18px; }
-    .summary-badge {
-      background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-md);
-      padding: 14px 12px; cursor: pointer; box-shadow: var(--shadow); font-weight: 800; color: var(--text);
-      display: flex; flex-direction: column; gap: 6px; min-height: 76px;
-    }
-    .summary-badge span { color: var(--text-soft); font-size: 12px; font-weight: 700; }
-    .summary-badge strong { font-size: 20px; font-weight: 800; }
-    .status-badge {
-      display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 9px; font-size: 12px;
-      line-height: 1; font-weight: 800; border: 1px solid var(--border); white-space: nowrap;
-    }
-    .play-nav { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 16px; scrollbar-width: none; }
-    .play-nav::-webkit-scrollbar { display: none; }
-    .play-tab {
-      flex: 0 0 auto; padding: 12px 22px; border-radius: 30px; background: var(--surface-solid);
-      border: 2px solid var(--border); font-size: 15px; font-weight: 850; cursor: pointer; transition: 0.3s;
-    }
-    .play-tab.active { background: var(--text); color: var(--surface-solid); border-color: var(--text); box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
-    .play-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-    .play-hub .bento-full { grid-column: 1 / -1; }
-    .play-card {
-      background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg);
-      padding: 20px 15px; text-align: center; cursor: pointer; box-shadow: var(--shadow);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .play-card:active { transform: scale(0.92); border-color: var(--primary); }
-    .play-card-icon { font-size: 45px; margin-bottom: 12px; line-height: 1; }
-    .play-card-title { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
-    .play-card-desc { font-size: 13px; font-weight: 750; color: var(--text-soft); }
-    .story-card-item { background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-    .story-filter-row {
-      position: relative; display: flex; gap: 10px; overflow-x: auto; margin-bottom: 18px; padding: 8px 4px 10px;
-      scrollbar-width: none; mask-image: linear-gradient(to right, transparent, #000 26px, #000 calc(100% - 26px), transparent);
-      background: linear-gradient(to bottom, rgba(233,251,255,0.95), transparent 22%, transparent 78%, rgba(233,251,255,0.95));
-    }
-    .story-filter-row::before, .story-filter-row::after {
-      content: ""; position: sticky; top: 0; width: 18px; flex: 0 0 18px; z-index: 2; pointer-events: none;
-    }
-    .story-filter-row::before { left: 0; background: linear-gradient(to right, #e9fbff, transparent); }
-    .story-filter-row::after { right: 0; background: linear-gradient(to left, #e9fbff, transparent); }
-    .story-filter-row::-webkit-scrollbar { display: none; }
-    .story-filter-row .status-badge {
-      flex: 0 0 auto; height: 50px; min-width: 70px; padding: 5px 12px; background: #ffffff; color: #203b55; cursor: pointer;
-      border: 3px solid rgba(255,255,255,0.82); border-radius: 20px; flex-direction: column; justify-content: center; gap: 3px;
-      box-shadow: 0 5px 0 rgba(0,0,0,0.14), inset 0 2px 0 rgba(255,255,255,0.62); transition: 0.18s;
-    }
-    .story-filter-row .status-badge span { font-size: 18px; line-height: 1; }
-    .story-filter-row .status-badge small { font-size: 11px; line-height: 1; font-weight: 900; }
-    .story-filter-row .status-badge.active { border: 3px solid white; transform: scale(1.1); color: white; background: var(--sky); }
-    .story-filter-row .status-badge[data-theme="자동차"].active { background: #ff9f43; }
-    .story-filter-row .status-badge[data-theme="공룡"].active { background: #63d471; }
-    .story-filter-row .status-badge[data-theme="우주"].active { background: #4da3ff; }
-    .story-filter-row .status-badge[data-theme="바다"].active { background: #35bda8; }
-    .story-filter-row .status-badge[data-theme="잠자리"].active { background: #8f67e8; }
-    .story-filter-row .status-badge[data-theme="전래동화"].active { background: #d09742; }
-    .story-filter-row .status-badge[data-theme="세계명작"].active { background: #e874af; }
-    .story-card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    .story-card {
-      background: linear-gradient(90deg, #fffaf0, #ffffff); border: 4px solid rgba(139, 92, 38, 0.18);
-      border-radius: 18px; padding: 14px; box-shadow: 0 10px 0 rgba(125, 94, 47, 0.13), 0 18px 28px rgba(87, 63, 28, 0.1);
-      display: flex; flex-direction: column; gap: 12px; min-height: 170px; overflow: hidden;
-    }
-    body.dark .story-card { background: var(--surface-solid); border-color: var(--border); }
-    .story-theme { width: fit-content; border-radius: 999px; padding: 5px 10px; background: rgba(243, 165, 29, 0.16); color: #9a6200; font-size: 12px; font-weight: 900; }
-    .story-cover {
-      height: 110px; border-radius: 14px; position: relative; overflow: hidden; align-self: stretch;
-      box-shadow: inset 0 3px 0 rgba(255,255,255,0.42), 0 6px 0 rgba(0,0,0,0.12);
-    }
-    .cover-emoji { position: absolute; inset: 0; display: grid; place-items: center; font-size: 72px; z-index: 2; filter: drop-shadow(0 5px 0 rgba(0,0,0,0.12)); }
-    .story-card-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-    .cover-auto { background: linear-gradient(135deg, #fff3cd, #ffe4b5); }
-    .cover-auto::before { content:""; position:absolute; width:28px; height:28px; border-radius:50%; background:rgba(255,159,67,0.36); left:18px; top:14px; box-shadow: 178px 52px 0 rgba(255,159,67,0.24), 84px 16px 0 rgba(255,255,255,0.65); }
-    .cover-auto::after { content:""; position:absolute; left:18px; right:18px; bottom:20px; height:8px; border-radius:8px; background:repeating-linear-gradient(90deg, rgba(176,121,74,0.34) 0 18px, transparent 18px 30px); transform:rotate(-5deg); }
-    .cover-dino { background: linear-gradient(135deg, #d4edda, #c3e6cb); }
-    .cover-dino::before { content:""; position:absolute; left:20px; right:20px; bottom:-18px; height:55px; border-radius:50% 50% 0 0; background:rgba(99,212,113,0.52); box-shadow: 48px -56px 0 -24px rgba(255,255,255,0.7), 142px -42px 0 -20px rgba(255,255,255,0.55); }
-    .cover-dino::after { content:""; position:absolute; right:26px; top:20px; width:16px; height:16px; border-radius:50%; background:rgba(47,52,55,0.18); box-shadow:-38px 26px 0 rgba(47,52,55,0.13), -82px -4px 0 rgba(47,52,55,0.10); }
-    .cover-space { background: linear-gradient(135deg, #cce5ff, #b8daff); }
-    .cover-space::before { content:""; position:absolute; inset:12px; background:radial-gradient(circle at 15% 20%, white 0 3px, transparent 4px), radial-gradient(circle at 78% 26%, white 0 2px, transparent 3px), radial-gradient(circle at 65% 76%, white 0 3px, transparent 4px); }
-    .cover-space::after { content:""; position:absolute; left:28px; top:52px; width:94px; height:18px; border:4px solid rgba(77,163,255,0.72); border-radius:50%; transform:rotate(-14deg); }
-    .cover-sea { background: linear-gradient(135deg, #d6fff8, #4ddfc0); }
-    .cover-sea::before { content:""; position:absolute; inset:auto -10px 10px; height:38px; background: radial-gradient(ellipse at 18px 4px, transparent 18px, white 19px 28px, transparent 29px); background-size: 58px 34px; opacity:0.9; }
-    .cover-sea::after { content:""; position:absolute; inset:14px 18px auto auto; width:7px; height:7px; border-radius:50%; background:white; box-shadow:-42px 18px 0 white, -18px 46px 0 white, 26px 38px 0 white, -70px 60px 0 white; }
-    .cover-bedtime { background: linear-gradient(135deg, #eadcff, #8f67e8); }
-    .cover-bedtime::before { content:""; position:absolute; top:18px; left:22px; width:42px; height:42px; border-radius:50%; background:#ffdb4d; box-shadow:12px 0 0 #8f67e8; }
-    .cover-bedtime::after { content:""; position:absolute; left:18px; right:14px; bottom:20px; height:34px; background: radial-gradient(circle at 20px 22px, white 0 20px, transparent 21px), radial-gradient(circle at 52px 14px, white 0 24px, transparent 25px), radial-gradient(circle at 90px 24px, white 0 18px, transparent 19px); opacity:0.86; }
-    .cover-folk { background: linear-gradient(135deg, #f5d6a1, #d09742); }
-    .cover-folk::before { content:""; position:absolute; top:16px; right:24px; width:42px; height:42px; border-radius:50%; background:#e84f3d; }
-    .cover-folk::after { content:""; position:absolute; left:0; right:0; bottom:0; height:52px; background: linear-gradient(135deg, transparent 50%, #735331 51%) 0 0/48px 52px, linear-gradient(225deg, transparent 50%, #5f452e 51%) 0 0/48px 52px; }
-    .cover-classic { background: linear-gradient(135deg, #ffd4e8, #ff9ccc); }
-    .cover-classic::before { content:""; position:absolute; left:22px; right:22px; bottom:18px; height:58px; background: linear-gradient(#fff 0 0) 0 20px/26px 38px no-repeat, linear-gradient(#fff 0 0) 32px 0/34px 58px no-repeat, linear-gradient(#fff 0 0) 72px 16px/28px 42px no-repeat; clip-path: polygon(0 100%,0 25%,12% 25%,12% 0,24% 0,24% 25%,48% 25%,48% 0,60% 0,60% 25%,100% 25%,100% 100%); }
-    .cover-classic::after { content:"✦"; position:absolute; top:14px; right:28px; color:white; font-size:26px; text-shadow:-46px 32px 0 white, -18px 56px 0 white; }
-    #panel-play .kids-world {
-      --k-red: #ff4d4d;
-      --k-orange: #ff9f43;
-      --k-yellow: #ffdb4d;
-      --k-green: #63d471;
-      --k-mint: #4ddfc0;
-      --k-blue: #4da3ff;
-      --k-purple: #a66cff;
-      --k-pink: #ff7ac8;
-      --k-brown: #b9794a;
-      --k-black: #2f3437;
-      --k-white: #ffffff;
-      position: relative; overflow: hidden; padding: 18px; border-radius: 30px;
-      background: linear-gradient(180deg, #bfefff 0%, #e9fbff 56%, #a7e86f 57%, #75c94c 100%);
-      box-shadow: inset 0 -18px 0 rgba(255,255,255,0.18);
-    }
-    #panel-play .kids-world::after {
-      content: ""; position: absolute; left: -6%; right: -6%; bottom: 0; height: 70px;
-      background:
-        radial-gradient(circle at 10% 100%, #63b947 0 34px, transparent 35px),
-        radial-gradient(circle at 28% 100%, #8edc5c 0 42px, transparent 43px),
-        radial-gradient(circle at 48% 100%, #5fb842 0 33px, transparent 34px),
-        radial-gradient(circle at 70% 100%, #8bdd59 0 44px, transparent 45px),
-        radial-gradient(circle at 90% 100%, #65bd45 0 36px, transparent 37px);
+
+    .world-map-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      z-index: 1;
+      user-select: none;
       pointer-events: none;
     }
-    #panel-play .kids-clouds { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    #panel-play .kids-cloud {
-      position: absolute; width: 120px; height: 42px; border-radius: 999px; background: rgba(255,255,255,0.86);
-      filter: drop-shadow(0 8px 12px rgba(80, 150, 180, 0.12));
+
+    .world-map-content,
+    .image-land-hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
     }
-    #panel-play .kids-cloud::before, #panel-play .kids-cloud::after {
-      content: ""; position: absolute; bottom: 12px; border-radius: 50%; background: inherit;
+
+    .world-zone,
+    .image-hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0);
+      border: 0;
+      border-radius: 28px;
+      cursor: pointer;
+      z-index: 15;
+      min-width: 64px;
+      min-height: 64px;
     }
-    #panel-play .kids-cloud::before { width: 54px; height: 54px; left: 18px; }
-    #panel-play .kids-cloud::after { width: 66px; height: 66px; right: 14px; }
-    #panel-play .kids-cloud:nth-child(1) { top: 24px; left: 20px; }
-    #panel-play .kids-cloud:nth-child(2) { top: 82px; right: -18px; transform: scale(0.84); opacity: 0.82; }
-    #panel-play .kids-cloud:nth-child(3) { top: 178px; left: 50%; transform: translateX(-50%) scale(0.68); opacity: 0.72; }
-    #panel-play .kids-play-title {
-      position: relative; z-index: 1; margin-bottom: 14px; color: #23516a; font-size: 28px; font-weight: 900;
-      text-align: center; line-height: 1.15; text-shadow: 0 2px 0 rgba(255,255,255,0.7);
+
+    .world-zone:active,
+    .image-hotspot:active {
+      background: rgba(255,255,255,0.18);
+      transform: translate(-50%, -50%) scale(0.96);
     }
-    #panel-play .kids-hub-card {
-      position: relative; z-index: 1; background: rgba(255,255,255,0.92); border: 3px solid rgba(255,255,255,0.9);
-      border-radius: 24px; padding: 18px; box-shadow: 0 12px 24px rgba(38, 115, 140, 0.14);
+
+    body.debug-hotspots .world-zone,
+    body.debug-hotspots .image-hotspot {
+      background: rgba(255, 0, 0, 0.18);
+      border: 2px dashed rgba(255, 0, 0, 0.65);
     }
-    #panel-play .voice-card {
-      position: relative; z-index: 1; border: 3px solid rgba(255,255,255,0.88);
-      background: rgba(255,255,255,0.84); box-shadow: 0 12px 24px rgba(38, 115, 140, 0.12);
+
+    .zone-emoji-fallback {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(34px, 8vw, 58px);
+      display: none;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      pointer-events: none;
     }
-    #panel-play .voice-card .card-title { font-size: 17px; color: #23516a; text-transform: none; letter-spacing: 0; }
-    #panel-play .voice-card .btn { min-height: 58px; border-radius: 22px; background: #ff8f3d; box-shadow: 0 8px 0 #d96d21; }
-    #panel-play .play-hub { position: relative; z-index: 1; gap: 16px; }
-    #panel-play .play-card {
-      min-height: 180px; padding: 14px; border-radius: 28px; border: 4px solid var(--toy-accent, #ff9f43);
-      background: linear-gradient(135deg, white 0%, #f0f0f0 100%);
-      box-shadow: 0 10px 0 rgba(0,0,0,0.14), inset 0 4px 0 rgba(255,255,255,0.8), 0 18px 28px rgba(33, 103, 130, 0.12);
-      display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
+
+    .world-map-screen.map-fallback .zone-emoji-fallback,
+    .image-land-screen.map-fallback .zone-emoji-fallback {
+      display: block;
     }
-    #panel-play .play-card:nth-child(1) { --toy-accent: #ff9f43; }
-    #panel-play .play-card:nth-child(2) { --toy-accent: #ffdb4d; }
-    #panel-play .play-card:nth-child(3) { --toy-accent: #63d471; }
-    #panel-play .play-card:nth-child(4) { --toy-accent: #24315d; }
-    #panel-play .play-card:nth-child(5) { --toy-accent: #ff7ac8; }
-    #panel-play .play-card.story-play-card { --toy-accent: #a66cff; }
-    #panel-play .play-card:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.14), inset 0 2px 0 rgba(255,255,255,0.65); }
-    #panel-play .play-card-icon { display: none; }
-    #panel-play .play-card-title { font-size: 22px; color: #203b55; }
-    #panel-play .play-card-desc { font-size: 15px; color: #54706a; }
-    .toy-scene {
-      position: relative; min-height: 84px; border-radius: 22px; overflow: hidden; clip-path: inset(0 round 22px);
-      box-shadow: inset 0 4px 0 rgba(255,255,255,0.34), inset 0 -8px 0 rgba(0,0,0,0.06);
+
+    .train-sprite {
+      position: absolute;
+      width: clamp(62px, 13vw, 94px);
+      height: clamp(62px, 13vw, 94px);
+      transform: translate(-50%, -50%);
+      transition: left 1.15s cubic-bezier(0.4, 0, 0.2, 1), top 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 25;
+      pointer-events: none;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.35));
+      display: grid;
+      place-items: center;
     }
-    .toy-car { background: radial-gradient(circle at 18% 22%, rgba(255,255,255,0.48), transparent 26%), #ff9f43; }
-    .toy-car::before { content:""; position:absolute; left:12px; right:12px; bottom:18px; height:24px; border-radius:999px; background:#fff; box-shadow: 18px 10px 0 -8px #ff9f43, 48px 10px 0 -8px #ff9f43, 78px 10px 0 -8px #ff9f43; opacity:0.92; }
-    .toy-car::after { content:""; position:absolute; right:26px; top:18px; width:50px; height:14px; border-radius:999px; background:white; transform:rotate(-35deg); box-shadow:-15px 18px 0 -2px white, 20px 18px 0 -2px white; }
-    .toy-construction { background: repeating-linear-gradient(135deg, #ffdb4d 0 16px, #2f3437 16px 28px); }
-    .toy-construction::before { content:""; position:absolute; left:34px; top:18px; width:78px; height:48px; border:10px solid #ff9f43; border-left-color:transparent; border-bottom-color:transparent; border-radius:50%; transform:rotate(-18deg); }
-    .toy-construction::after { content:""; position:absolute; left:88px; top:48px; width:42px; height:14px; border-radius:12px; background:#ff9f43; transform:rotate(22deg); }
-    .toy-dino { background: radial-gradient(ellipse at 50% 92%, #63d471 0 45%, transparent 46%), linear-gradient(#b9f7d0, #4ddfc0); }
-    .toy-dino::before { content:""; position:absolute; left:30px; top:24px; width:34px; height:44px; border-radius:50%; background:#fff7d8; box-shadow:52px 10px 0 -6px #fff7d8; }
-    .toy-dino::after { content:""; position:absolute; right:22px; bottom:22px; width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:18px solid rgba(47,52,55,0.34); transform:rotate(18deg); filter: drop-shadow(-28px -6px 0 rgba(47,52,55,0.34)) drop-shadow(-56px 8px 0 rgba(47,52,55,0.34)); }
-    .toy-space { background: radial-gradient(circle at 18% 24%, white 0 3px, transparent 4px), radial-gradient(circle at 72% 28%, white 0 2px, transparent 3px), radial-gradient(circle at 82% 72%, white 0 3px, transparent 4px), #24315d; }
-    .toy-space::before { content:""; position:absolute; left:34px; top:22px; width:58px; height:58px; border-radius:50%; background:#a66cff; }
-    .toy-space::after { content:""; position:absolute; left:22px; top:42px; width:86px; height:24px; border:4px solid #ffdb4d; border-radius:50%; transform:rotate(-18deg); }
-    .toy-art { background: radial-gradient(circle at 20% 30%, #ff4d4d 0 16px, transparent 17px), radial-gradient(circle at 58% 34%, #4da3ff 0 18px, transparent 19px), radial-gradient(circle at 76% 70%, #ffdb4d 0 17px, transparent 18px), #fff6d9; }
-    .toy-art::after { content:""; position:absolute; left:26px; bottom:18px; width:98px; height:14px; background:#b9794a; border-radius:999px; transform:rotate(-18deg); box-shadow:58px -20px 0 -2px #2f3437; }
-    .toy-book { background: linear-gradient(135deg, #a66cff, #ff7ac8); }
-    .toy-book::before { content:""; position:absolute; left:24px; top:16px; width:88px; height:58px; border-radius:8px; background:#fff; box-shadow: inset 42px 0 0 #fff4c7; }
-    .toy-book::after { content:""; position:absolute; left:68px; top:18px; width:4px; height:54px; border-radius:4px; background:#d7b777; }
-    #panel-play .play-nav {
-      position: relative; z-index: 1; margin: 4px 0 12px; padding-bottom: 8px; opacity: 0.86;
+    .train-emoji { font-size: clamp(54px, 12vw, 82px); line-height: 1; z-index: 2; }
+    .train-sprite img { position: absolute; width: 100%; height: 100%; z-index: 3; object-fit: contain; }
+
+    .sihyeon-avatar {
+      position: absolute;
+      bottom: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(64px, 12vw, 86px);
+      height: clamp(64px, 12vw, 86px);
+      background: #fff;
+      border: 4px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      display: grid;
+      place-items: center;
+      z-index: 30;
+      pointer-events: none;
     }
-    #panel-play .play-tab { padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.82); }
-    #panel-play #interactive-zone, #panel-play #story-zone, #panel-play .card[style*="margin-top: 20px"] { position: relative; z-index: 1; }
-    #panel-play .game-zone { border-color: rgba(255,255,255,0.92); background: #fffef2; box-shadow: 0 10px 0 rgba(77, 157, 63, 0.16); }
-    #panel-play .garage-target { width: 108px; height: 108px; border-color: #ffb33d; background: rgba(255,255,255,0.78); color: #cd7a00; }
-    #panel-play .garage-part { font-size: 76px; }
-    #panel-play .blueprint { font-size: 178px; opacity: 0.14; }
-    #panel-play .memory-grid { background: #f8ffe6; gap: 12px; }
-    #panel-play .story-card { border-radius: 22px; background: linear-gradient(90deg, #fff8e6, #ffffff); }
-    #panel-play .story-card-title { font-size: 21px; font-weight: 900; line-height: 1.25; color: #4b3a20; }
-    #panel-play .story-card-desc { font-size: 14px; color: #6f6044; line-height: 1.45; font-weight: 750; flex: 1; }
-    #panel-play .story-card-actions { display: grid; gap: 8px; }
-    .story-reader-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
-    .story-reader-controls .btn { min-height: 52px; padding: 10px 8px; font-size: 16px; border-radius: 20px; box-shadow: 0 6px 0 rgba(0,0,0,0.2), inset 0 3px 0 rgba(255,255,255,0.4); }
-    .story-reader-controls .read-main { grid-column: 1 / -1; min-height: 64px; font-size: 18px; background: linear-gradient(180deg, #63d471, #147d64); }
-    .story-paragraph {
-      border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: rgba(255,255,255,0.48);
-      font-size: 24px; line-height: 2.0; transition: background 0.25s, box-shadow 0.25s, transform 0.25s, font-size 0.25s;
+    .avatar-emoji { font-size: clamp(42px, 9vw, 56px); z-index: 2; }
+    .sihyeon-avatar img { position: absolute; width: 100%; height: 100%; border-radius: 50%; z-index: 3; object-fit: cover; }
+
+    .mic-button-floating {
+      position: absolute;
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      right: 18px;
+      width: clamp(64px, 12vw, 78px);
+      height: clamp(64px, 12vw, 78px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF7A1A, #E65100);
+      border: 4px solid #fff;
+      color: #fff;
+      font-size: clamp(30px, 7vw, 38px);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      z-index: 30;
+      transition: transform 0.15s;
     }
-    .story-paragraph.reading-active {
-      font-size: 26px; background: #fff8e1; border-left: 6px solid #ff9f43; box-shadow: 0 0 0 3px rgba(243, 165, 29, 0.22);
-      transform: translateY(-1px) scale(1.02); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .mic-button-floating:active { transform: scale(0.92); box-shadow: 0 4px 8px rgba(0,0,0,0.25); }
+
+    @media (min-aspect-ratio: 9/16) {
+      .world-map-frame { height: 100dvh; width: auto; }
     }
-    .voice-card { background: linear-gradient(135deg, rgba(255, 159, 10, 0.12), rgba(52, 120, 246, 0.08)); }
-    .game-zone { width: 100%; aspect-ratio: 4/3; background: #ffffff; border-radius: 24px; position: relative; overflow: hidden; border: 3px solid var(--border); box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
-    .garage-part { position: absolute; font-size: 60px; cursor: grab; user-select: none; z-index: 10; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); transition: transform 0.1s; }
-    .garage-part:active { cursor: grabbing; transform: scale(1.1); }
-    .garage-target { position: absolute; width: 80px; height: 80px; border: 4px dashed #ddd; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #aaa; font-weight: 900; }
-    .garage-target.filled { border-color: var(--success); background: rgba(52, 199, 89, 0.1); }
-    .blueprint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 150px; opacity: 0.1; pointer-events: none; }
-    #blockCanvas { width: 100%; height: 100%; touch-action: none; background: linear-gradient(to bottom, #e0f7fa, #ffffff); }
-    .physics-ui { position: absolute; bottom: 15px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 20; pointer-events: none; }
-    .bomb-btn { pointer-events: auto; background: var(--danger); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 900; font-size: 18px; box-shadow: 0 5px 15px rgba(255,59,48,0.4); cursor: pointer; }
-    .memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; height: 100%; padding: 15px; background: #fdf6e3; }
-    .memory-card { perspective: 1000px; cursor: pointer; min-height: 62px; }
-    .memory-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    .memory-card.flipped .memory-inner { transform: rotateY(180deg); }
-    .memory-front, .memory-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-    .memory-front { background: linear-gradient(135deg, var(--primary), var(--sky)); color: white; font-weight: 900; font-size: 24px; }
-    .memory-back { background: white; transform: rotateY(180deg); border: 3px solid var(--primary); }
-    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; }
-    .scratch-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 150px; background: radial-gradient(circle, #fff9c4, #ffeb3b); z-index: 1; }
-    .color-game { width: 100%; height: 100%; display: grid; grid-template-rows: auto 1fr; gap: 10px; padding: 12px; background: #fffdf8; }
-    .color-toolbar { display: grid; gap: 8px; }
-    .color-tools { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
-    .color-tools::-webkit-scrollbar { display: none; }
-    .color-swatch, .brush-btn, .color-action {
-      flex: 0 0 auto; border: 2px solid rgba(0,0,0,0.14); background: #fff; color: #203b55;
-      border-radius: 14px; min-width: 44px; height: 44px; font-weight: 900; cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+
+    @media (max-aspect-ratio: 9/16) {
+      .world-map-frame { width: 100vw; height: auto; }
     }
-    .color-swatch.active, .brush-btn.active, .color-action.active { border-color: #203b55; box-shadow: 0 0 0 3px rgba(52,120,246,0.18); }
-    .color-swatch { color: transparent; }
-    .color-action { padding: 0 12px; min-width: auto; }
-    #colorCanvas { width: 100%; height: 100%; min-height: 0; border: 3px solid rgba(0,0,0,0.1); border-radius: 18px; background: white; touch-action: none; }
-    .book-reader {
-      background: #fffcf2; border: 3px solid #eaddb6; border-left: 6px solid #c0a080; border-radius: 20px;
-      padding: 30px; min-height: 350px; font-size: 20px; line-height: 1.8; color: #5a4634;
-      box-shadow: inset 10px 0 15px -5px rgba(0,0,0,0.1), inset 0 0 40px rgba(234,221,182,0.3); position: relative;
+
+    /* ═══════════════════════════════════════
+       FULLSCREEN ZONE BASE
+    ═══════════════════════════════════════ */
+    .fullscreen-zone {
+      position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; z-index: 2;
+      animation: zoneEnter 0.35s cubic-bezier(0.25, 0.9, 0.3, 1) both;
     }
-    .book-title { font-weight: 900; font-size: 30px; color: #8b4513; margin-bottom: 20px; text-align: center; border-bottom: 2px dashed #eaddb6; padding-bottom: 15px; }
-    .book-title::before { content: "📖 "; }
-    .highlight { color: var(--primary); font-weight: 900; background: linear-gradient(transparent 60%, rgba(20,125,100,0.2) 60%); padding: 0 4px; }
-    .ai-btn { background: linear-gradient(180deg, #ff9f43, #e05d3f); }
-    #particle-container { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
-    .particle { position: absolute; border-radius: 50%; animation: fall linear forwards; }
-    @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
-    .bottom-nav {
-      position: fixed; bottom: 0; left: 0; right: 0; background: color-mix(in srgb, var(--surface) 96%, transparent);
-      backdrop-filter: var(--blur); border-top: 1px solid var(--border); display: flex; padding: 12px 10px 35px; z-index: 1000;
+    @keyframes zoneEnter { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+    
+    .zone-sky-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 50%, var(--grass) 50%, var(--grass-dark) 100%);
     }
-    .nav-btn {
-      flex: 1; background: none; border: none; color: var(--text-soft); font-size: 12px; font-weight: 900;
-      display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 0;
+    
+    .deco-sun {
+      position: absolute; top: 18px; right: 22px; width: 88px; height: 88px;
+      border-radius: 50%; background: radial-gradient(circle, #FFF176 0 38%, var(--sun) 40% 65%, transparent 66%);
+      box-shadow: 0 0 48px rgba(255,200,0,0.55); z-index: 1; animation: sunPulse 4s ease-in-out infinite;
     }
-    .nav-btn.active { color: var(--primary); }
-    .nav-icon { font-size: 24px; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .nav-btn.active .nav-icon { transform: translateY(-4px) scale(1.1); }
-    .hidden-settings { margin-top: 10px; color: var(--text-soft); font-weight: 800; }
-    details.hidden-settings { margin-top: 10px; color: var(--text-soft); font-weight: 800; }
-    details.hidden-settings summary { cursor: pointer; padding: 12px 0; }
+    @keyframes sunPulse { 0%,100% { box-shadow: 0 0 48px rgba(255,200,0,0.55); } 50% { box-shadow: 0 0 72px rgba(255,200,0,0.75); } }
+
+    .zone-head {
+      position: relative; z-index: 10; display: flex; align-items: center;
+      padding: max(14px, env(safe-area-inset-top)) 16px 10px; flex-shrink: 0;
+    }
+    .zone-home-btn {
+      flex-shrink: 0; padding: 0 20px; height: 64px; border-radius: 32px;
+      background: linear-gradient(180deg, #fff 0%, #ffe577 100%); border: 4px solid #fff;
+      font-size: 24px; font-weight: 900; color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 7px 0 rgba(0,0,0,0.18), 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .zone-home-btn:active { transform: translateY(5px); box-shadow: 0 2px 0 rgba(0,0,0,0.18); }
+    .zone-title { margin-left: auto; font-size: clamp(24px, 6vw, 36px); color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,0.2); }
+    
+    .zone-body { position: relative; z-index: 5; flex: 1; overflow-y: auto; overflow-x: hidden; padding: 8px 14px max(16px, env(safe-area-inset-bottom)); }
+    .zone-body::-webkit-scrollbar { display: none; }
+
+    /* ═══════════════════════════════════════
+       EXPANDED GAME SCREEN — tablet fills screen
+    ═══════════════════════════════════════ */
+    .game-play-screen {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--sky-top);
+      z-index: 2;
+      animation: zoneEnter 0.35s cubic-bezier(0.25, 0.9, 0.3, 1) both;
+    }
+
+    .game-play-body {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(8px, 2vw, 24px);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .game-play-body > * {
+      width: 100%;
+      min-height: 0;
+    }
+
     @media (max-width: 520px) {
-      .bento-grid { grid-template-columns: 1fr; }
-      .summary-row { grid-template-columns: 1fr; }
-      .row { flex-direction: column; }
-      .brand-title p { display: none; }
-      .book-reader { padding: 22px; font-size: 18px; }
-      .story-card-grid { grid-template-columns: 1fr; }
-      .story-reader-controls { grid-template-columns: repeat(3, 1fr); }
-      #panel-play .kids-world { padding: 14px; border-radius: 24px; }
-      #panel-play .play-hub { grid-template-columns: 1fr; }
-      #panel-play .play-card { min-height: 136px; }
-      #panel-play .play-card-icon { font-size: 52px; }
+      .game-play-body { max-width: none; padding: 8px; }
+    }
+
+    @media (min-width: 768px) {
+      .game-play-body { padding: 22px; }
+    }
+
+
+    /* ═══════════════════════════════════════
+       PLACEHOLDER ZONE
+    ═══════════════════════════════════════ */
+    .placeholder-body {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 20px; text-align: center; padding: 20px; position: relative; z-index: 5;
+    }
+    .placeholder-icon {
+      font-size: clamp(100px, 30vw, 180px); filter: drop-shadow(0 16px 0 rgba(0,0,0,0.15));
+      animation: iconFloat 2.5s ease-in-out infinite;
+    }
+    @keyframes iconFloat { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(2deg); } }
+    .placeholder-text { font-size: clamp(26px, 7vw, 48px); color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,0.22); }
+
+    /* ═══════════════════════════════════════
+       GARAGE (자동차 정비소)
+    ═══════════════════════════════════════ */
+    .garage-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+    .garage-car-base { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: clamp(140px, 38vw, 240px); opacity: 0.22; pointer-events: none; }
+    .garage-target {
+      position: absolute; left: 50%; top: 32%; transform: translate(-50%, -50%);
+      width: clamp(144px, 38vw, 196px); height: clamp(144px, 38vw, 196px);
+      display: grid; place-items: center; border: 7px dashed #FFAA00; border-radius: 28px;
+      background: rgba(255,255,255,0.82); color: #CC7700; font-size: 24px;
+      box-shadow: inset 0 4px 0 rgba(255,255,255,0.7), 0 14px 0 rgba(0,0,0,0.12);
+    }
+    .garage-target.filled { border-style: solid; border-color: #4CAF50; background: rgba(255,255,255,0.96); }
+    .garage-part {
+      position: absolute; left: 20px; bottom: 80px; width: clamp(116px, 28vw, 150px); height: clamp(116px, 28vw, 150px);
+      display: grid; place-items: center; font-size: clamp(90px, 22vw, 120px);
+      user-select: none; touch-action: none; cursor: grab; filter: drop-shadow(0 12px 0 rgba(0,0,0,0.15)); z-index: 4;
+    }
+    .garage-message {
+      position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); width: min(92%, 500px); min-height: 64px;
+      display: grid; place-items: center; padding: 10px 20px; border-radius: 20px;
+      background: rgba(255,255,255,0.92); border: 4px solid #fff; color: #1A4A60; font-size: clamp(18px, 5vw, 26px);
+      text-align: center; box-shadow: 0 8px 0 rgba(0,0,0,0.12);
+    }
+
+    /* ═══════════════════════════════════════
+       STORY THEATER (동화극장)
+    ═══════════════════════════════════════ */
+    .story-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, #2D0060 0%, #6A0DAD 35%, #FFD700 35%, #FF8C00 100%); }
+    .story-stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+    .star { position: absolute; width: 4px; height: 4px; background: #fff; border-radius: 50%; animation: starTwinkle 2s ease-in-out infinite; }
+    @keyframes starTwinkle { 0%,100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.6); } }
+    
+    .story-filter-row {
+      position: relative; z-index: 10; display: flex; gap: 8px; overflow-x: auto;
+      padding: 4px 14px 8px; scrollbar-width: none; flex-shrink: 0;
+    }
+    .story-filter-row::-webkit-scrollbar { display: none; }
+    .story-filter-btn {
+      flex-shrink: 0; min-width: 80px; min-height: 52px; padding: 6px 12px; border-radius: 16px;
+      background: rgba(255,255,255,0.18); border: 3px solid rgba(255,255,255,0.5); color: #fff;
+      font-size: clamp(12px, 3.5vw, 16px); box-shadow: 0 5px 0 rgba(0,0,0,0.15); transition: background 0.15s, transform 0.1s;
+    }
+    .story-filter-btn.active { background: rgba(255,255,255,0.95); color: #6A0DAD; }
+    .story-filter-btn:active { transform: translateY(3px); }
+    
+    .story-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .story-card {
+      min-height: 220px; padding: 14px; border-radius: 20px; background: rgba(255,255,255,0.96);
+      border: 4px solid rgba(255,255,255,0.9); box-shadow: 0 8px 0 rgba(90,0,140,0.2), 0 14px 24px rgba(60,0,100,0.14);
+      display: flex; flex-direction: column; gap: 8px; transition: transform 0.15s;
+    }
+    .story-card:active { transform: scale(0.97); }
+    .story-cover { min-height: 90px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, #E8D5FF, #C084FC); }
+    .cover-emoji { font-size: 54px; }
+    .story-theme { font-size: 12px; color: #8B5CF6; font-weight: 700; }
+    .story-card-title { font-size: 18px; line-height: 1.2; color: #3B0764; }
+    .story-card-desc { font-size: 13px; line-height: 1.4; color: #6D28D9; flex: 1; }
+    .story-card-actions { display: grid; gap: 6px; margin-top: auto; }
+    .btn-story {
+      min-height: 50px; border-radius: 14px; background: #7C3AED; border: 3px solid #fff; color: #fff;
+      font-size: 15px; box-shadow: 0 5px 0 rgba(0,0,0,0.18); transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .btn-story:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.18); }
+    .btn-story.outline { background: rgba(255,255,255,0.9); color: #5B21B6; }
+
+    #storyReaderView {
+      display: none; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.88);
+      border: 4px solid rgba(255,255,255,0.9); gap: 12px;
+    }
+    #storyReaderView.active { display: grid; }
+    #bookView { display: grid; gap: 12px; font-size: 18px; line-height: 1.7; color: #2D1060; }
+    .book-title { text-align: center; font-size: clamp(26px, 6vw, 42px); color: #5B21B6; line-height: 1.15; }
+    .story-paragraph { padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.85); }
+    .story-paragraph.active, .story-paragraph.reading-active { outline: 5px solid #FFD700; }
+    .highlight { color: #FF5722; }
+    .story-reader-actions { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+    .story-voice-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 6px; margin-top: 12px; }
+
+    @media (max-width: 480px) {
+      .story-card-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
-  <div id="particle-container"></div>
 
-  <header class="topbar">
-    <div class="brand" onclick="switchTab('today')">
-      <div class="brand-mark">家</div>
-      <div class="brand-title">
-        <h1>우리집 넥서스</h1>
-        <p>Family Nexus</p>
-      </div>
-    </div>
-    <div class="top-actions">
-      <button class="top-btn" onclick="toggleTheme()" title="다크모드">◐</button>
-      <button class="top-btn" onclick="exportData()" title="백업">💾</button>
-      <button class="top-btn" onclick="toggleVoiceGuide()" title="음성 안내">🔊</button>
-    </div>
-  </header>
+<div id="particle-container"></div>
+<main id="sihyeonPlayOS"></main>
 
-  <main class="app">
-    <section id="panel-today" class="panel active">
-      <div class="card hero-brief">
-        <div class="card-title">우리집 오늘 브리핑</div>
-        <div id="briefing">오늘도 우리집 하루를 차분하게 시작해요.<br>시현이 놀이터, 가족 미션, 지출 기록을 한곳에서 챙깁니다.</div>
-      </div>
+<script>
+/* ═══════════════════════════════════════════
+   DB & CONSTANTS
+═══════════════════════════════════════════ */
+const DB_KEY = 'MY_NEXUS_V3_MONSTER';
+window.DB_KEY = DB_KEY;
 
-      <div class="summary-row" onclick="switchTab('family')">
-        <div class="summary-badge"><span>🛒 장보기</span><strong id="todayShoppingCount">0</strong></div>
-        <div class="summary-badge"><span>🗓️ 일정</span><strong id="todayEventCount">0</strong></div>
-        <div class="summary-badge"><span>📒 오늘 기록</span><strong id="todayQuickNoteCount">0</strong></div>
-      </div>
+var currentStoryFilter = window.currentStoryFilter || '전체';
+window.currentStoryFilter = currentStoryFilter;
 
-      <div id="todayQuestWidget" class="card"></div>
+const WORLD_ASSETS = {
+  main: './assets/world/park_main.png',
+  game: './assets/world/game_land_map.png',
+  numbers: './assets/world/number_land_map.png',
+  letters: './assets/world/letter_land_map.png',
+  cars: './assets/world/car_land_map.png',
+  story: './assets/world/story_land_map.png',
+  voice: './assets/world/voice_land_map.png'
+};
 
-      <div class="bento-grid">
-        <div class="card bento-full" onclick="switchTab('play')" style="background: linear-gradient(135deg, var(--sky), var(--primary)); color: white; cursor: pointer; border: none;">
-          <div style="font-weight: 900; font-size: 24px; display:flex; justify-content:space-between; align-items:center;">
-            <span>시현이 오늘 놀이</span><span style="font-size: 30px;">🚜</span>
+const WORLD_ZONES = {
+  game:    { x: '29%', y: '23%', w:'30%', h:'20%', label: '게임랜드',   emoji: '🎮' },
+  numbers: { x: '72%', y: '24%', w:'30%', h:'21%', label: '숫자놀이터', emoji: '🔢' },
+  letters: { x: '27%', y: '47%', w:'32%', h:'22%', label: '글자놀이터', emoji: '🔤' },
+  cars:    { x: '73%', y: '49%', w:'32%', h:'24%', label: '자동차마을', emoji: '🚗' },
+  story:   { x: '29%', y: '74%', w:'34%', h:'24%', label: '동화나라',   emoji: '🏰' },
+  voice:   { x: '72%', y: '76%', w:'32%', h:'23%', label: '말하기광장', emoji: '🎤' },
+  station: { x: '50%', y: '88%', label: '중앙역', emoji: '🚉' }
+};
+
+const CARS = ['🚗','🚕','🚙','🚌','🚒','🚑','🚓','🚚','🚜','🏎️','🚛','🚐'];
+let garageCleanup = null;
+
+const DEFAULT_DB = {
+  version: '2.0.0',
+  progress: { level:1, exp:0 },
+  playground: {
+    collection: [],
+    storyWorld: {
+      savedStories: [], characters: [], readingHistory: [], favoriteStoryIds: [], currentStory: null,
+      settings: { heroName: '시현', defaultTheme: '자동차', defaultLength: 'long', defaultTone: 'dad' }
+    }
+  },
+  settings: {
+    voiceGuide: { enabled:true, autoRead:true, rate:0.85, pitch:1.1 },
+    ai: { model:'gemini-3.0-flash' }
+  }
+};
+
+/* ═══════════════════════════════════════════
+   UTILITY & DB FUNCTIONS
+═══════════════════════════════════════════ */
+function clone(v){ return JSON.parse(JSON.stringify(v)); }
+
+function mergeDefaults(target, defaults){
+  if(!target || typeof target !== 'object') target = {};
+  Object.keys(defaults).forEach(key => {
+    const sv = defaults[key], tv = target[key];
+    if(Array.isArray(sv)){ if(!Array.isArray(tv)) target[key]=[]; return; }
+    if(sv && typeof sv === 'object'){ target[key]=mergeDefaults(tv,sv); return; }
+    if(tv===undefined||tv===null) target[key]=sv;
+  });
+  return target;
+}
+
+function loadStoredDB(){
+  try{
+    const raw = localStorage.getItem(DB_KEY);
+    if(!raw) return JSON.parse(JSON.stringify(DEFAULT_DB));
+    return mergeDefaults(JSON.parse(raw), JSON.parse(JSON.stringify(DEFAULT_DB)));
+  }catch(e){ 
+    return JSON.parse(JSON.stringify(DEFAULT_DB)); 
+  }
+}
+
+function loadDB(){
+  window.db = loadStoredDB();
+  return window.db;
+}
+
+let db = loadDB();
+window.db = db;
+
+function getToday(){ return new Date().toISOString().slice(0,10); }
+
+function escapeHtml(v){
+  return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+
+function refreshLegacyCompatibility(){
+  db.progress = db.progress||{level:1,exp:0};
+  db.playground = db.playground||{};
+  db.playground.collection = Array.isArray(db.playground.collection)?db.playground.collection:[];
+  db.playground.storyWorld = mergeDefaults(db.playground.storyWorld, clone(DEFAULT_DB.playground.storyWorld));
+  db.settings = mergeDefaults(db.settings, clone(DEFAULT_DB.settings));
+}
+
+function save(){ 
+  refreshLegacyCompatibility(); 
+  localStorage.setItem(DB_KEY, JSON.stringify(db)); 
+}
+
+/* ═══════════════════════════════════════════
+   AUDIO & UX FUNCTIONS
+═══════════════════════════════════════════ */
+function isStoryPlaying(){ 
+  return Boolean(window.storyReadState && window.storyReadState.isReading); 
+}
+
+function speakText(text, opts={}){
+  if(!text || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR'; 
+  u.rate = opts.rate || db.settings.voiceGuide.rate || 0.85;
+  u.pitch = opts.pitch || db.settings.voiceGuide.pitch || 1.1;
+  window.speechSynthesis.speak(u);
+}
+
+function speakGuide(text, force=false){
+  if(!force && isStoryPlaying()) return;
+  if(!db.settings.voiceGuide.enabled) return;
+  speakText(text, {rate:0.88, pitch:1.08});
+}
+
+function speakStory(text){ 
+  speakText(text, {rate:0.82, pitch:1.03}); 
+}
+
+function stopSpeaking(){ 
+  if('speechSynthesis' in window) window.speechSynthesis.cancel(); 
+}
+
+function fireConfetti(){
+  const c = document.getElementById('particle-container');
+  if(!c) return;
+  const colors=['#FFD93D','#FF7A1A','#FF4D4D','#3478F6','#8E5CFF','#00C2A8','#FF7AC8'];
+  for(let i=0;i<50;i++){
+    const d = document.createElement('div'); d.className='particle';
+    const s=Math.random()*13+8;
+    d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}vw;top:-24px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*1.4+1.4}s;animation-delay:${Math.random()*0.3}s;border-radius:${Math.random()>0.5?'50%':'4px'}`;
+    c.appendChild(d);
+    setTimeout(()=>d.remove(),3600);
+  }
+}
+
+function gainExp(amount){
+  db.progress.exp = Number(db.progress.exp||0)+Number(amount||0);
+  while(db.progress.exp>=100){
+    db.progress.level = Number(db.progress.level||1)+1; 
+    db.progress.exp -= 100;
+    fireConfetti(); 
+    speakGuide('레벨이 올라갔어! 시현이 최고!');
+  }
+  save();
+}
+
+function unlockCar(icon){
+  if(!db.playground.collection.includes(icon)){ 
+    db.playground.collection.push(icon); 
+    fireConfetti(); 
+  }
+  save();
+}
+
+function closeGarageHandlers(){ 
+  if(typeof garageCleanup==='function') garageCleanup(); 
+  garageCleanup=null; 
+}
+
+/* ═══════════════════════════════════════════
+   2D WORLD MAP HOME
+═══════════════════════════════════════════ */
+function handleMapImageError(img) {
+  const screen = img.closest('.world-map-screen, .image-land-screen');
+  if (screen) screen.classList.add('map-fallback');
+  img.style.opacity = '0';
+}
+
+function renderWorldMapHome() {
+  cleanupActiveGame();
+  closeGarageHandlers();
+  const root = document.getElementById('sihyeonPlayOS');
+  const bg = WORLD_ASSETS.main;
+
+  root.innerHTML = `
+    <section class="world-map-screen" id="worldMapScreen" style="--map-bg:url('${bg}')">
+      <div class="world-blur-bg"></div>
+      <div class="world-map-frame">
+        <img src="${bg}" class="world-map-bg" alt="시현이 큰 놀이동산" onerror="handleMapImageError(this)">
+        <div class="world-map-content">
+          ${['game', 'numbers', 'letters', 'cars', 'story', 'voice'].map(zoneId => {
+            const z = WORLD_ZONES[zoneId];
+            return `
+              <button
+                class="world-zone"
+                style="left:${z.x}; top:${z.y}; width:${z.w}; height:${z.h};"
+                onclick="travelToZone('${zoneId}')"
+                aria-label="${escapeHtml(z.label)}"
+              >
+                <span class="zone-emoji-fallback">${z.emoji}</span>
+              </button>
+            `;
+          }).join('')}
+
+          <div id="trainSprite" class="train-sprite" style="left:${WORLD_ZONES.station.x}; top:${WORLD_ZONES.station.y};">
+            <img src="./assets/vehicles/transport/train.png" alt="기차" onerror="this.style.display='none'">
+            <div class="train-emoji">🚂</div>
           </div>
-          <div style="font-size: 15px; opacity: 0.92; margin-top: 8px; font-weight: 650;">자동차 정비, 블록, 카드, 스크래치, 마법 동화</div>
-        </div>
 
-        <div class="card">
-          <div class="card-title">오늘 가족 미션</div>
-          <div class="row">
-            <input type="text" id="todoIn" placeholder="오늘 할 일" style="margin:0;">
-            <button class="btn small" onclick="addTodo()">추가</button>
+          <div id="sihyeonAvatar" class="sihyeon-avatar">
+            <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
+            <div class="avatar-emoji">👦🏻</div>
           </div>
-          <div id="todoList"></div>
-        </div>
 
-        <div class="card">
-          <div class="card-title">오늘 가계부 요약</div>
-          <div class="metric">이번 달 지출</div>
-          <div class="big-number"><span id="monthTotalToday">0</span>원</div>
-          <button class="btn outline" style="margin-top:16px;" onclick="switchTab('money')">가계부 열기</button>
-        </div>
-
-        <div class="card bento-full">
-          <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom: 12px;">
-            <div>
-              <div class="metric">우리집 레벨</div>
-              <div class="big-number">Lv.<span id="portalLv">1</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="metric">EXP <span id="portalExpText">0/100</span></div>
-            </div>
-          </div>
-          <div style="height: 12px; background:var(--border); border-radius:6px; overflow:hidden;">
-            <div id="portalExpFill" style="height:100%; background:linear-gradient(90deg, var(--primary), var(--accent)); width:0%; transition:width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></div>
-          </div>
-        </div>
-
-        <div class="card bento-full">
-          <div class="card-title">오늘 한 줄 기록</div>
-          <div class="row">
-            <input type="text" id="quickNoteIn" placeholder="오늘 기억하고 싶은 한 줄" style="margin:0;">
-            <button class="btn small" onclick="addQuickNote()">저장</button>
-          </div>
-          <div id="quickNoteList"></div>
+          <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 지도에서 가고 싶은 곳을 눌러봐!', true)" aria-label="마이크">
+            🎤
+          </button>
         </div>
       </div>
     </section>
+  `;
+}
 
-    <section id="panel-play" class="panel">
-      <div class="kids-world">
-        <div class="kids-clouds">
-          <div class="kids-cloud"></div>
-          <div class="kids-cloud"></div>
-          <div class="kids-cloud"></div>
+function openImageLand(zoneId, title, imageSrc, hotspots) {
+  cleanupActiveGame();
+  closeGarageHandlers();
+  const root = document.getElementById('sihyeonPlayOS');
+
+  root.innerHTML = `
+    <section class="image-land-screen" style="--map-bg:url('${imageSrc}')">
+      <div class="world-blur-bg"></div>
+      <div class="world-map-frame">
+        <img class="world-map-bg" src="${imageSrc}" alt="${escapeHtml(title)}" onerror="handleMapImageError(this)">
+        ${makeZoneHead(title)}
+        <div class="image-land-hotspots">
+          ${hotspots.map(h => `
+            <button
+              class="image-hotspot"
+              style="left:${h.x}; top:${h.y}; width:${h.w}; height:${h.h};"
+              onclick="${h.action}"
+              aria-label="${escapeHtml(h.label)}"
+            >
+              <span class="zone-emoji-fallback">${h.emoji || ''}</span>
+            </button>
+          `).join('')}
         </div>
-        <div class="kids-play-title">시현이 놀이터</div>
+      </div>
+    </section>
+  `;
 
-        <div class="card voice-card">
-          <div class="card-title">시현이 모드</div>
-          <button class="btn" onclick="startChildVoiceMode()">시현이랑 놀기</button>
+  speakGuide(`${title}에 도착했어. 하고 싶은 곳을 눌러 봐!`, true);
+}
+
+function openGameLand() {
+  openImageLand('game', '🎮 게임랜드', WORLD_ASSETS.game, [
+    { x:'49%', y:'35%', w:'52%', h:'34%', label:'자동차 짝맞추기', emoji:'🚗', action:'openMemoryGame()' }
+  ]);
+}
+
+function openNumberLand() {
+  openImageLand('numbers', '🔢 숫자놀이터', WORLD_ASSETS.numbers, [
+    { x:'50%', y:'46%', w:'58%', h:'42%', label:'몇 대일까', emoji:'🚗', action:'openNumberCountGame()' }
+  ]);
+}
+
+function openLetterLand() {
+  openImageLand('letters', '🔤 글자놀이터', WORLD_ASSETS.letters, [
+    { x:'48%', y:'46%', w:'58%', h:'44%', label:'글자 풍선', emoji:'🎈', action:'openLetterGame()' }
+  ]);
+}
+
+function openCarLand() {
+  openImageLand('cars', '🚗 자동차마을', WORLD_ASSETS.cars, [
+    { x:'52%', y:'45%', w:'62%', h:'46%', label:'자동차 정비소', emoji:'🔧', action:'openFullscreenGarage()' }
+  ]);
+}
+
+function openStoryLand() {
+  openImageLand('story', '📖 동화나라', WORLD_ASSETS.story, [
+    { x:'50%', y:'43%', w:'62%', h:'48%', label:'동화극장', emoji:'📖', action:'openStoryTheater()' }
+  ]);
+}
+
+function openVoiceLand() {
+  openImageLand('voice', '🎤 말하기광장', WORLD_ASSETS.voice, [
+    { x:'50%', y:'45%', w:'62%', h:'46%', label:'말하기 놀이', emoji:'🎤', action:'renderPlaceholderZone("voice")' }
+  ]);
+}
+
+/* ═══════════════════════════════════════════
+   TRAIN NAVIGATION
+═══════════════════════════════════════════ */
+function travelToZone(zoneId) {
+  if (isStoryPlaying()) return;
+  cleanupActiveGame();
+
+  const zone = WORLD_ZONES[zoneId];
+  if (!zone) return;
+
+  speakGuide(`기차 타고 ${zone.label}으로 출발! 칙칙 폭폭!`, true);
+
+  const train = document.getElementById('trainSprite');
+  if (train) {
+    train.style.left = zone.x;
+    train.style.top = zone.y;
+  }
+
+  setTimeout(() => {
+    enterZone(zoneId);
+  }, 1180);
+}
+
+function enterZone(zoneId) {
+  cleanupActiveGame();
+  if(zoneId === 'cars') openCarLand();
+  else if(zoneId === 'game') openGameLand();
+  else if(zoneId === 'numbers') openNumberLand();
+  else if(zoneId === 'letters') openLetterLand();
+  else if(zoneId === 'story') openStoryLand();
+  else if(zoneId === 'voice') openVoiceLand();
+  else renderPlaceholderZone(zoneId);
+}
+
+function closeToParkHome(){
+  cleanupActiveGame();
+  closeGarageHandlers();
+  stopSpeaking();
+  if(window.stopStoryReading) window.stopStoryReading(true);
+
+  renderWorldMapHome();
+  speakGuide('광장으로 돌아왔어! 다음은 어디로 갈까?', true);
+}
+
+function makeZoneHead(title){
+  return `
+    <div class="zone-head">
+      <button class="zone-home-btn" onclick="closeToParkHome()" aria-label="홈으로">
+        <span>🏠</span>
+        <span>광장</span>
+      </button>
+      <h1 class="zone-title">${title}</h1>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════
+   PLACEHOLDER ZONE
+═══════════════════════════════════════════ */
+function cleanupActiveGame() {
+  if (window.SihyeonGames?.vehicleMemory?.destroy) {
+    window.SihyeonGames.vehicleMemory.destroy();
+  }
+  if (window.SihyeonGames?.numberCount?.destroy) {
+    window.SihyeonGames.numberCount.destroy();
+  }
+  if (window.SihyeonGames?.letterPlay?.destroy) {
+    window.SihyeonGames.letterPlay.destroy();
+  }
+}
+
+function openGameShell(title, bodyId, bg = 'linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)') {
+  cleanupActiveGame();
+  closeGarageHandlers();
+
+  const root = document.getElementById('sihyeonPlayOS');
+  root.innerHTML = `
+    <div class="game-play-screen" style="background:${bg}">
+      ${makeZoneHead(title)}
+      <div class="game-play-body" id="${bodyId}"></div>
+    </div>
+  `;
+
+  return document.getElementById(bodyId);
+}
+
+function openNumberCountGame() {
+  const target = openGameShell('🔢 몇 대일까?', 'numberCountTarget', 'linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
+
+  if (window.SihyeonGames?.numberCount?.render) {
+    window.SihyeonGames.numberCount.render(target, {
+      speakGuide,
+      fireConfetti,
+      gainExp,
+      closeToParkHome
+    });
+  } else {
+    target.innerHTML = `
+      <div style="padding:30px;text-align:center;font-size:24px;color:#fff;">
+        숫자놀이를 불러오지 못했어요.
+      </div>
+    `;
+  }
+}
+
+function openMemoryGame() {
+  const target = openGameShell('🎮 자동차 짝맞추기', 'memoryGameTarget');
+
+  if (window.SihyeonGames?.vehicleMemory?.render) {
+    window.SihyeonGames.vehicleMemory.render(target, {
+      speakGuide,
+      fireConfetti,
+      gainExp,
+      closeToParkHome
+    });
+  } else {
+    target.innerHTML = `
+      <div style="padding:30px;text-align:center;font-size:24px;color:#fff;">
+        자동차 카드 게임을 불러오지 못했어요.
+      </div>
+    `;
+  }
+}
+
+function openLetterGame() {
+  const target = openGameShell('🔤 글자놀이터', 'letterGameTarget', 'linear-gradient(180deg,#1E90FF 0%,#A8E6FF 100%)');
+
+  if (window.SihyeonGames?.letterPlay?.render) {
+    window.SihyeonGames.letterPlay.render(target, {
+      speakGuide,
+      fireConfetti,
+      gainExp,
+      closeToParkHome
+    });
+  } else {
+    target.innerHTML = `
+      <div style="padding:30px;text-align:center;font-size:24px;color:#fff;">
+        글자놀이터를 불러오지 못했어요.
+      </div>
+    `;
+  }
+}
+
+function renderPlaceholderZone(zoneId){
+  cleanupActiveGame();
+  closeGarageHandlers();
+  const zone = WORLD_ZONES[zoneId];
+  const title = zone.label;
+  const root = document.getElementById('sihyeonPlayOS');
+  root.innerHTML = `
+    <div class="fullscreen-zone">
+      <div class="zone-sky-bg"></div>
+      <div class="deco-sun"></div>
+      ${makeZoneHead(title)}
+      <div class="placeholder-body">
+        <div class="placeholder-icon">${zone.emoji}</div>
+        <div class="placeholder-text">재미있는 놀이를 준비하고 있어!</div>
+      </div>
+    </div>
+  `;
+  speakGuide(`${title}에 도착했어! 재미있는 놀이를 준비하고 있어!`);
+}
+
+/* ═══════════════════════════════════════════
+   GARAGE GAME
+═══════════════════════════════════════════ */
+function openFullscreenGarage(){
+  cleanupActiveGame();
+  closeGarageHandlers();
+  const root = document.getElementById('sihyeonPlayOS');
+  root.innerHTML = `
+    <div class="fullscreen-zone" style="background:linear-gradient(180deg,#5BC8F5 0%,#A8E6FF 50%,#FF7A1A 50%,#E65100 100%)">
+      <div class="zone-sky-bg" style="background:linear-gradient(180deg,#5BC8F5 0%,#A8E6FF 50%,#FF7A1A 50%,#E65100 100%)"></div>
+      <div class="deco-sun"></div>
+      ${makeZoneHead('🔧 자동차 정비소')}
+      <div class="zone-body" style="padding:0; overflow:hidden; display:flex;">
+        <div class="garage-stage" id="garageStage">
+          <div class="garage-car-base" aria-hidden="true">🚗</div>
+          <div class="garage-target" id="garageTarget">여기에 쏙!</div>
+          <div class="garage-part" id="garagePart" role="button" aria-label="자동차 부품"></div>
+          <div class="garage-message" id="garageMessage">자동차를 빈칸에 끌어다 놓아 봐!</div>
         </div>
+      </div>
+    </div>
+  `;
+  speakGuide('자동차마을 정비소 도착!');
+  initGarageRound();
+}
 
-        <div id="playHubZone" class="play-hub">
-          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('garage')">
-            <div class="toy-scene toy-car"></div>
-            <div class="play-card-icon">🔧</div>
-            <div class="play-card-title">자동차 조립</div>
-            <div class="play-card-desc">빈칸에 쏙</div>
-          </div>
-          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('blocks')">
-            <div class="toy-scene toy-construction"></div>
-            <div class="play-card-icon">🧱</div>
-            <div class="play-card-title">와르르 블록</div>
-            <div class="play-card-desc">톡 누르면 쿵</div>
-          </div>
-          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('memory')">
-            <div class="toy-scene toy-dino"></div>
-            <div class="play-card-icon">🃏</div>
-            <div class="play-card-title">기억력 카드</div>
-            <div class="play-card-desc">짝을 찾아요</div>
-          </div>
-          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('scratch')">
-            <div class="toy-scene toy-space"></div>
-            <div class="play-card-icon">🎨</div>
-            <div class="play-card-title">매직 스크래치</div>
-            <div class="play-card-desc">쓱쓱 문질러요</div>
-          </div>
-          <div class="play-card kids-hub-card" onclick="selectPlayFromHub('color')">
-            <div class="toy-scene toy-art"></div>
-            <div class="play-card-icon">🖌️</div>
-            <div class="play-card-title">색칠 놀이터</div>
-            <div class="play-card-desc">손가락으로 그려요</div>
-          </div>
-          <div class="play-card kids-hub-card bento-full story-play-card" onclick="selectPlayFromHub('story')">
-            <div class="toy-scene toy-book"></div>
-            <div class="play-card-icon">📖</div>
-            <div class="play-card-title">마법 동화 도서관</div>
-            <div class="play-card-desc">똑똑이가 읽어줘요</div>
-          </div>
-        </div>
+function initGarageRound(){
+  const stage   = document.getElementById('garageStage');
+  const target  = document.getElementById('garageTarget');
+  const part    = document.getElementById('garagePart');
+  const message = document.getElementById('garageMessage');
+  if(!stage||!target||!part||!message) return;
 
-        <div class="play-nav">
-          <button class="play-tab active" onclick="setPlayMode('garage', this)">🔧 자동차 정비</button>
-          <button class="play-tab" onclick="setPlayMode('blocks', this)">🧱 물리 블록</button>
-          <button class="play-tab" onclick="setPlayMode('memory', this)">🃏 기억력 카드</button>
-          <button class="play-tab" onclick="setPlayMode('scratch', this)">🎨 매직 스크래치</button>
-          <button class="play-tab" onclick="setPlayMode('color', this)">🖌️ 색칠</button>
-          <button class="play-tab" onclick="setPlayMode('story', this)">📖 마법 동화</button>
-        </div>
+  const carIcon = CARS[Math.floor(Math.random()*CARS.length)];
+  part.textContent = carIcon;
+  target.classList.remove('filled');
+  target.textContent = '여기에 쏙!';
+  message.textContent = '자동차를 빈칸까지 끌고 가 보자!';
+  part.style.cssText = 'left:20px;bottom:80px;transform:none;pointer-events:auto;';
 
-        <div id="interactive-zone" class="card" style="padding: 0; background: transparent; border: none; box-shadow: none;">
-          <div class="game-zone" id="gameCanvas"></div>
-        </div>
+  let dragging=false, pointerId=null;
 
-        <div id="story-zone" style="display: none;">
-        <div class="story-filter-row" id="storyFilterNav">
-          <button class="status-badge active" data-theme="전체" onclick="setStoryFilter('전체')"><span>📚</span><small>전체</small></button>
-          <button class="status-badge" data-theme="이솝우화" onclick="setStoryFilter('이솝우화')"><span>📖</span><small>이솝</small></button>
-          <button class="status-badge" data-theme="전래동화" onclick="setStoryFilter('전래동화')"><span>🐯</span><small>전래</small></button>
-          <button class="status-badge" data-theme="세계명작" onclick="setStoryFilter('세계명작')"><span>🏰</span><small>명작</small></button>
-          <button class="status-badge" data-theme="자동차" onclick="setStoryFilter('자동차')"><span>🚜</span><small>자동차</small></button>
-          <button class="status-badge" data-theme="공룡" onclick="setStoryFilter('공룡')"><span>🦖</span><small>공룡</small></button>
-          <button class="status-badge" data-theme="우주" onclick="setStoryFilter('우주')"><span>🚀</span><small>우주</small></button>
-          <button class="status-badge" data-theme="바다" onclick="setStoryFilter('바다')"><span>🐳</span><small>바다</small></button>
-          <button class="status-badge" data-theme="잠자리" onclick="setStoryFilter('잠자리')"><span>🌙</span><small>잠자리</small></button>
-          <button class="status-badge" data-theme="생활습관" onclick="setStoryFilter('생활습관')"><span>🪥</span><small>생활</small></button>
-          <button class="status-badge" data-theme="저장한 동화" onclick="setStoryFilter('저장한 동화')"><span>💖</span><small>저장</small></button>
-        </div>
+  const movePart=(cx,cy)=>{
+    const sr=stage.getBoundingClientRect(), pr=part.getBoundingClientRect();
+    const nl=Math.max(0,Math.min(sr.width-pr.width,  cx-sr.left-pr.width/2));
+    const nt=Math.max(0,Math.min(sr.height-pr.height, cy-sr.top-pr.height/2));
+    part.style.left=`${nl}px`; part.style.top=`${nt}px`; part.style.bottom='auto';
+  };
 
+  const onDown=(e)=>{ dragging=true; pointerId=e.pointerId; part.setPointerCapture(e.pointerId); movePart(e.clientX,e.clientY); };
+  const onMove=(e)=>{ if(!dragging||e.pointerId!==pointerId) return; e.preventDefault(); movePart(e.clientX,e.clientY); };
+  const onUp=(e)=>{
+    if(!dragging||e.pointerId!==pointerId) return;
+    dragging=false;
+    if(part.hasPointerCapture(pointerId)) part.releasePointerCapture(pointerId);
+    const tr=target.getBoundingClientRect(), pr2=part.getBoundingClientRect();
+    const hit=!(pr2.right<tr.left-30||pr2.left>tr.right+30||pr2.bottom<tr.top-30||pr2.top>tr.bottom+30);
+    if(!hit){ message.textContent='조금만 더 가까이!'; speakGuide('조금만 더 가까이 가 볼까?'); return; }
+    target.classList.add('filled');
+    target.textContent=carIcon;
+    part.style.pointerEvents='none';
+    part.style.left=`${target.offsetLeft-part.offsetWidth/2}px`;
+    part.style.top=`${target.offsetTop-part.offsetHeight/2}px`;
+    part.style.transform='scale(1.2)';
+    message.textContent='착! 자동차가 딱 맞았어! 🎉';
+    fireConfetti();
+    speakGuide('착! 자동차가 딱 맞았어. 시현이 최고!');
+    gainExp(15);
+    unlockCar(carIcon);
+    setTimeout(()=>{ if(document.getElementById('garageStage')) initGarageRound(); }, 1400);
+  };
+
+  part.addEventListener('pointerdown',onDown);
+  part.addEventListener('pointermove',onMove);
+  part.addEventListener('pointerup',onUp);
+  part.addEventListener('pointercancel',onUp);
+  garageCleanup=()=>{
+    part.removeEventListener('pointerdown',onDown);
+    part.removeEventListener('pointermove',onMove);
+    part.removeEventListener('pointerup',onUp);
+    part.removeEventListener('pointercancel',onUp);
+  };
+}
+
+/* ═══════════════════════════════════════════
+   STORY THEATER
+═══════════════════════════════════════════ */
+function openStoryTheater(){
+  cleanupActiveGame();
+  closeGarageHandlers();
+  const root = document.getElementById('sihyeonPlayOS');
+
+  const stars = Array.from({length:24},(_,i)=>{
+    const delay=(i*0.37)%3;
+    const size=Math.random()>0.6?6:4;
+    return `<div class="star" style="left:${Math.random()*100}%;top:${Math.random()*35}%;animation-delay:${delay}s;width:${size}px;height:${size}px"></div>`;
+  }).join('');
+
+  root.innerHTML = `
+    <div class="fullscreen-zone">
+      <div class="story-bg"></div>
+      <div class="story-stars">${stars}</div>
+      ${makeZoneHead('📖 동화극장')}
+      
+      <nav id="storyFilterNav" class="story-filter-row" aria-label="동화 필터">
+        <button class="story-filter-btn status-badge active" data-theme="전체"   onclick="setStoryFilter('전체')">📚 전체</button>
+        <button class="story-filter-btn status-badge"        data-theme="자동차" onclick="setStoryFilter('자동차')">🚗 자동차</button>
+        <button class="story-filter-btn status-badge"        data-theme="공룡"   onclick="setStoryFilter('공룡')">🦕 공룡</button>
+        <button class="story-filter-btn status-badge"        data-theme="동물"   onclick="setStoryFilter('동물')">🐰 동물</button>
+        <button class="story-filter-btn status-badge"        data-theme="우주"   onclick="setStoryFilter('우주')">🚀 우주</button>
+        <button class="story-filter-btn status-badge"        data-theme="바다"   onclick="setStoryFilter('바다')">🌊 바다</button>
+        <button class="story-filter-btn status-badge"        data-theme="전래"   onclick="setStoryFilter('전래')">🏮 전래</button>
+        <button class="story-filter-btn status-badge"        data-theme="이솝"   onclick="setStoryFilter('이솝')">🌿 이솝</button>
+        <button class="story-filter-btn status-badge"        data-theme="잠자리" onclick="setStoryFilter('잠자리')">🌙 잠자리</button>
+        <button class="story-filter-btn status-badge"        data-theme="저장한 동화" onclick="setStoryFilter('저장한 동화')">💖 저장</button>
+      </nav>
+      <div class="zone-body">
         <div id="storyLibraryGrid" class="story-card-grid"></div>
-
-        <div id="storyReaderView" style="display:none;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-            <button class="btn outline small" style="width:auto; border-radius:20px;" onclick="closeStoryReader()">← 책장으로</button>
-            <button class="btn small" style="width:auto; border-radius:20px; background:#ff2d55; border:none;" onclick="saveCurrentStory()">💖 저장하기</button>
+        <section id="storyReaderView">
+          <div class="story-reader-actions">
+            <button class="btn-story outline" onclick="closeStoryReader()">← 책장</button>
+            <button class="btn-story" onclick="saveCurrentStory()">💖 저장</button>
           </div>
-          <div class="book-reader" id="bookView">
-            <div style="text-align:center; padding-top:100px; color:var(--text-soft); font-weight: 800;">
-              동화를 불러오고 있어요...
-            </div>
+          <div id="bookView"></div>
+          <div class="story-voice-controls">
+            <button class="btn-story" onclick="speakBookText()">▶ 낭독</button>
+            <button class="btn-story outline" onclick="pauseStoryReading()">⏸ 일시정지</button>
+            <button class="btn-story outline" onclick="nextStoryParagraph()">⏭ 다음</button>
+            <button class="btn-story outline" onclick="stopStoryReading()">⏹ 정지</button>
+            <button class="btn-story outline" onclick="restartStoryReading()">🔁 처음</button>
           </div>
-          <div class="story-reader-controls">
-            <button class="btn read-main" onclick="speakBookText()">▶ 감성 낭독 시작</button>
-            <button class="btn outline" onclick="pauseStoryReading()">⏸ 일시정지</button>
-            <button class="btn outline" onclick="nextStoryParagraph()">⏭ 다음</button>
-            <button class="btn outline" onclick="restartStoryReading()">🔁 처음부터</button>
-          </div>
-        </div>
+        </section>
       </div>
-
-        <div class="card" style="margin-top: 20px;">
-          <div class="card-title">시현이 자동차 도감 (<span id="collCount">0</span>/12)</div>
-          <div id="collGrid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; font-size: 32px; text-align: center;"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="panel-family" class="panel">
-      <div class="card">
-        <div class="card-title">장보기 목록</div>
-        <div class="row">
-          <select id="shoppingCatIn" style="width: 100px; margin: 0; padding: 0 10px; flex-shrink: 0;">
-            <option value="🍎 식재료">식재료</option>
-            <option value="🧻 생활">생활</option>
-            <option value="🧸 시현">시현</option>
-            <option value="💊 기타">기타</option>
-          </select>
-          <input type="text" id="shoppingIn" placeholder="살 것" style="margin:0;">
-          <button class="btn small" style="flex-shrink: 0;" onclick="addShoppingItem()">추가</button>
-        </div>
-        <div id="shoppingList"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">가족 일정/약속</div>
-        <div class="row">
-          <input type="date" id="eventDateIn" style="margin:0;">
-          <input type="text" id="eventTextIn" placeholder="일정이나 약속" style="margin:0;">
-          <button class="btn small" onclick="addFamilyEvent()">저장</button>
-        </div>
-        <div id="familyEventList"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">가족 메모</div>
-        <div class="row">
-          <input type="text" id="familyMemoIn" placeholder="가족에게 남길 메모" style="margin:0;">
-          <button class="btn small" onclick="addFamilyMemo()">저장</button>
-        </div>
-        <div id="familyMemoList"></div>
-      </div>
-    </section>
-
-    <section id="panel-money" class="panel">
-      <div class="card">
-        <div class="card-title">가계부 입력</div>
-        <div style="display:grid; grid-template-columns: 100px 1fr; gap: 10px; margin-bottom: 10px;">
-          <select id="moneyType" style="margin:0;"><option value="expense">지출</option><option value="income">수입</option></select>
-          <input type="number" id="moneyAmt" placeholder="금액 (원)" style="margin:0;">
-        </div>
-        <div class="row">
-          <select id="moneyCat" style="width: 130px; margin:0;">
-            <option>식비</option><option>생활</option><option>시현</option><option>외식</option><option>차량</option><option>의료</option><option>기타</option>
-          </select>
-          <input type="text" id="moneyNote" placeholder="항목 메모" style="margin:0;">
-        </div>
-        <button class="btn" onclick="addMoney()">기록 저장</button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">이번 달 지출 합계</div>
-        <div class="big-number"><span id="monthTotal">0</span>원</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">최근 내역</div>
-        <div id="moneyList" style="max-height: 300px; overflow-y: auto;"></div>
-      </div>
-
-      <div class="card" style="border-color: var(--warning); background: color-mix(in srgb, var(--warning) 6%, var(--surface));">
-        <div class="card-title" style="color:var(--warning);">구매 보류함</div>
-        <div class="row">
-          <input type="text" id="vaultItem" placeholder="사고 싶은 물건" style="margin:0;">
-          <input type="number" id="vaultPrice" placeholder="가격" style="width:110px; margin:0;">
-          <button class="btn small" style="background:var(--warning);" onclick="addVault()">보류</button>
-        </div>
-        <div id="vaultList"></div>
-      </div>
-    </section>
-
-    <section id="panel-records" class="panel">
-      <div class="card">
-        <div class="card-title">시현이 한 줄 기록</div>
-        <div class="row">
-          <select id="childQuoteTypeIn" style="width: 100px; margin: 0; padding: 0 10px; flex-shrink: 0;">
-            <option value="🗣️ 말">🗣️ 말</option>
-            <option value="🏃 행동">🏃 행동</option>
-            <option value="😍 귀여움">😍 귀여움</option>
-            <option value="🌱 성장">🌱 성장</option>
-          </select>
-          <input type="text" id="childQuoteIn" placeholder="시현이가 한 말이나 행동" style="margin:0;">
-          <button class="btn small" style="flex-shrink: 0;" onclick="addChildQuote()">저장</button>
-        </div>
-        <div id="childQuoteList"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">가족 하루 기록</div>
-        <div class="row" style="margin-top: 16px;">
-          <select id="familyDiaryEmojiIn" style="width: 80px; margin: 0; padding: 0 10px; font-size: 20px;">
-            <option value="😊">😊</option><option value="😴">😴</option><option value="🚗">🚗</option>
-            <option value="🍚">🍚</option><option value="🏥">🏥</option><option value="🎉">🎉</option>
-          </select>
-          <textarea id="familyDiaryIn" placeholder="오늘 우리 가족에게 있었던 일" rows="3" style="margin:0;"></textarea>
-        </div>
-        <button class="btn" style="margin-top: 10px;" onclick="addFamilyDiary()">가족 하루 저장</button>
-        <div id="familyDiaryList" style="margin-top: 12px;"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">가족 컨디션 & 수면 기록</div>
-        <div class="row">
-          <select id="healthMember" style="margin:0;"><option value="dad">아빠</option><option value="mom">엄마</option><option value="sihyeon">시현</option></select>
-          <input type="number" id="healthSleep" placeholder="수면시간 (h)" step="0.5" style="margin:0;">
-          <select id="healthCond" style="margin:0;"><option value="5">최고 (5)</option><option value="4">좋음 (4)</option><option value="3" selected>보통 (3)</option><option value="2">피곤 (2)</option><option value="1">나쁨 (1)</option></select>
-          <button class="btn small" onclick="saveHealth()">저장</button>
-        </div>
-        <div id="healthList"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">고급 설정 및 백업</div>
-        <div class="row">
-          <button class="btn outline" onclick="toggleTheme()">다크모드 전환</button>
-          <button class="btn outline" onclick="exportData()">전체 백업</button>
-          <button class="btn outline" onclick="toggleAdvancedSettings()">고급 설정</button>
-        </div>
-        <div id="advancedSettingsBox" class="hidden-settings" style="display:none;">
-          <p style="font-size: 13px; color: var(--text-soft); margin-bottom: 5px; font-weight: 700;">똑똑이 연결 키</p>
-          <p style="font-size: 11px; color: var(--text-soft); margin-bottom: 10px;">
-            동화 만들기, 가족 요약, 가계부 요약, 가족 기록 정리에 사용됩니다.
-          </p>
-          <input type="password" id="apiKeyIn" placeholder="연결 키 입력" style="font-size: 14px; padding: 12px; margin-bottom: 10px;">
-          <div id="apiKeyStatus" class="item-meta" style="margin:0 0 10px;">연결 키 상태를 확인하는 중입니다.</div>
-          <button class="btn outline" onclick="saveApiKey()">똑똑이 연결 키 저장</button>
-          <button class="btn outline" style="margin-top:10px;" onclick="deleteApiKey()">똑똑이 연결 키 삭제</button>
-          <button class="btn outline" style="margin-top:10px;" onclick="toggleVoiceGuide()">음성 안내 켜기/끄기</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <nav class="bottom-nav">
-    <button class="nav-btn active" data-tab="today" onclick="switchTab('today')"><span class="nav-icon">☀️</span>오늘</button>
-    <button class="nav-btn" data-tab="play" onclick="switchTab('play')"><span class="nav-icon">🚜</span>놀이터</button>
-    <button class="nav-btn" data-tab="family" onclick="switchTab('family')"><span class="nav-icon">🏠</span>가족</button>
-    <button class="nav-btn" data-tab="money" onclick="switchTab('money')"><span class="nav-icon">💰</span>가계부</button>
-    <button class="nav-btn" data-tab="records" onclick="switchTab('records')"><span class="nav-icon">📒</span>기록</button>
-  </nav>
-
-  <script>
-    const DB_KEY = 'MY_NEXUS_V3_MONSTER';
-    const getToday = () => new Date().toLocaleDateString('sv-SE');
-    const escapeHtml = (s) => (s || "").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-    function defaultFamilyNexusState() {
-      return {
-        version: "2.6.1",
-        family: {
-          homeName: "우리집",
-          members: [
-            { id: "dad", name: "아빠", role: "dad" },
-            { id: "mom", name: "엄마", role: "mom" },
-            { id: "sihyeon", name: "시현", role: "child" }
-          ]
-        },
-        progress: {
-          level: 1,
-          exp: 0,
-          badges: [],
-          streaks: {},
-          lastLoginDate: "",
-          dailyQuests: [],
-          dailyQuestCompletedDate: "",
-          todayQuestVoiceDate: ""
-        },
-        today: { missions: [], briefingHistory: [], quickNotes: [] },
-        playground: {
-          collection: [], stickers: [], unlockedItems: [], gameRecords: [],
-          storyWorld: {
-            library: [], savedStories: [], characters: [], readingHistory: [], favoriteStoryIds: [], currentStory: null,
-            settings: { heroName: "시현", defaultTheme: "자동차", defaultLength: "long", defaultTone: "dad" }
-          }
-        },
-        familyBoard: { events: [], memos: [], shopping: [], promises: [], places: [] },
-        money: { records: [], categories: ["식비", "생활", "시현", "외식", "차량", "의료", "기타"], purchaseHold: [] },
-        memories: { dailyNotes: [], childQuotes: [], growthLogs: [], familyDiaries: [], conditionLogs: [] },
-        assistant: { enabled: false, savedPromptMode: "family", history: [] },
-        settings: {
-          theme: "light", hiddenAiKeySaved: false,
-          ai: {
-            provider: "gemini",
-            model: "gemini-2.5-flash",
-            keySaved: false,
-            assistantName: "똑똑이",
-            defaultTone: "warm-family",
-            roles: {
-              writer: true,
-              familyAssistant: true,
-              moneyAssistant: true,
-              memoryWriter: true
-            }
-          },
-          voiceGuide: { enabled: true, autoRead: true, rate: 0.85, pitch: 1.1, voiceMode: "dad" }
-        },
-        legacy: { level: 1, exp: 0, todos: [], money: [], vault: [], health: [], memos: [], collection: [] }
-      };
-    }
-
-    function ensureFamilyNexusState(raw) {
-      const base = defaultFamilyNexusState();
-      if (!raw || typeof raw !== 'object') return base;
-
-      if (raw.version && String(raw.version).startsWith("2.")) {
-        const merged = { ...base, ...raw };
-        merged.family = { ...base.family, ...(raw.family || {}) };
-        merged.progress = { ...base.progress, ...(raw.progress || {}) };
-        merged.today = { ...base.today, ...(raw.today || {}) };
-        merged.playground = { ...base.playground, ...(raw.playground || {}) };
-        merged.playground.storyWorld = { ...base.playground.storyWorld, ...(raw.playground?.storyWorld || {}) };
-        merged.familyBoard = { ...base.familyBoard, ...(raw.familyBoard || {}) };
-        merged.money = Array.isArray(raw.money) ? { ...base.money, records: raw.money } : { ...base.money, ...(raw.money || {}) };
-        merged.memories = { ...base.memories, ...(raw.memories || {}) };
-        merged.assistant = { ...base.assistant, ...(raw.assistant || {}) };
-        merged.settings = { ...base.settings, ...(raw.settings || {}) };
-        merged.settings.voiceGuide = { ...base.settings.voiceGuide, ...(raw.settings?.voiceGuide || {}) };
-        merged.settings.ai = { ...base.settings.ai, ...(raw.settings?.ai || {}) };
-        merged.settings.ai.roles = { ...base.settings.ai.roles, ...(raw.settings?.ai?.roles || {}) };
-        merged.legacy = { ...base.legacy, ...(raw.legacy || {}) };
-        return migrateFamilyNexusDB(merged);
-      }
-
-      base.progress.level = Number(raw.level) || 1;
-      base.progress.exp = Number(raw.exp) || 0;
-      base.today.missions = Array.isArray(raw.todos) ? raw.todos : [];
-      base.money.records = Array.isArray(raw.money) ? raw.money : [];
-      base.money.purchaseHold = Array.isArray(raw.vault) ? raw.vault : [];
-      base.memories.conditionLogs = Array.isArray(raw.health) ? raw.health : [];
-      base.familyBoard.memos = Array.isArray(raw.memos) ? raw.memos : [];
-      base.familyBoard.shopping = Array.isArray(raw.shopping) ? raw.shopping : base.familyBoard.shopping;
-      base.familyBoard.events = Array.isArray(raw.events) ? raw.events : base.familyBoard.events;
-      base.memories.childQuotes = Array.isArray(raw.childQuotes) ? raw.childQuotes : base.memories.childQuotes;
-      base.memories.familyDiaries = Array.isArray(raw.familyDiaries) ? raw.familyDiaries : base.memories.familyDiaries;
-      base.playground.collection = Array.isArray(raw.collection) ? raw.collection : [];
-      base.legacy = {
-        level: raw.level ?? 1,
-        exp: raw.exp ?? 0,
-        todos: Array.isArray(raw.todos) ? raw.todos : [],
-        money: Array.isArray(raw.money) ? raw.money : [],
-        vault: Array.isArray(raw.vault) ? raw.vault : [],
-        health: Array.isArray(raw.health) ? raw.health : [],
-        memos: Array.isArray(raw.memos) ? raw.memos : [],
-        collection: Array.isArray(raw.collection) ? raw.collection : []
-      };
-      return base;
-    }
-
-    function migrateFamilyNexusDB(state) {
-      state.progress.level = Number(state.progress.level || state.legacy?.level) || 1;
-      state.progress.exp = Number(state.progress.exp || state.legacy?.exp) || 0;
-      state.progress.lastLoginDate = state.progress.lastLoginDate || "";
-      state.progress.dailyQuests = Array.isArray(state.progress.dailyQuests) ? state.progress.dailyQuests : [];
-      state.progress.dailyQuestCompletedDate = state.progress.dailyQuestCompletedDate || "";
-      state.progress.todayQuestVoiceDate = state.progress.todayQuestVoiceDate || "";
-      state.today.missions = Array.isArray(state.today.missions) ? state.today.missions : [];
-      if (Array.isArray(state.money)) state.money = { records: state.money, categories: defaultFamilyNexusState().money.categories, purchaseHold: [] };
-      state.money = { ...defaultFamilyNexusState().money, ...(state.money || {}) };
-      state.money.records = Array.isArray(state.money.records) ? state.money.records : (Array.isArray(state.legacy?.money) ? state.legacy.money : []);
-      state.money.purchaseHold = Array.isArray(state.money.purchaseHold) ? state.money.purchaseHold : (Array.isArray(state.legacy?.vault) ? state.legacy.vault : []);
-      state.familyBoard = { ...defaultFamilyNexusState().familyBoard, ...(state.familyBoard || {}) };
-      state.familyBoard.shopping = Array.isArray(state.familyBoard.shopping) ? state.familyBoard.shopping : [];
-      state.familyBoard.events = Array.isArray(state.familyBoard.events) ? state.familyBoard.events : [];
-      state.memories = { ...defaultFamilyNexusState().memories, ...(state.memories || {}) };
-      state.memories.conditionLogs = Array.isArray(state.memories.conditionLogs) ? state.memories.conditionLogs : [];
-      state.memories.childQuotes = Array.isArray(state.memories.childQuotes) ? state.memories.childQuotes : [];
-      state.memories.familyDiaries = Array.isArray(state.memories.familyDiaries) ? state.memories.familyDiaries : [];
-      state.familyBoard.memos = Array.isArray(state.familyBoard.memos) ? state.familyBoard.memos : [];
-      state.playground = { ...defaultFamilyNexusState().playground, ...(state.playground || {}) };
-      state.playground.storyWorld = { ...defaultFamilyNexusState().playground.storyWorld, ...(state.playground.storyWorld || {}) };
-      state.playground.storyWorld.savedStories = Array.isArray(state.playground.storyWorld.savedStories) ? state.playground.storyWorld.savedStories : [];
-      state.playground.storyWorld.characters = Array.isArray(state.playground.storyWorld.characters) ? state.playground.storyWorld.characters : [];
-      state.playground.storyWorld.readingHistory = Array.isArray(state.playground.storyWorld.readingHistory) ? state.playground.storyWorld.readingHistory : [];
-      state.playground.storyWorld.favoriteStoryIds = Array.isArray(state.playground.storyWorld.favoriteStoryIds) ? state.playground.storyWorld.favoriteStoryIds : [];
-      state.playground.storyWorld.currentStory = state.playground.storyWorld.currentStory || null;
-      state.playground.storyWorld.settings = { ...defaultFamilyNexusState().playground.storyWorld.settings, ...(state.playground.storyWorld.settings || {}) };
-      state.playground.collection = Array.isArray(state.playground.collection) ? state.playground.collection : [];
-      state.settings = {
-        ...defaultFamilyNexusState().settings,
-        ...(state.settings || {})
-      };
-      state.settings.voiceGuide = {
-        ...defaultFamilyNexusState().settings.voiceGuide,
-        ...(state.settings.voiceGuide || {})
-      };
-      state.settings.ai = {
-        ...defaultFamilyNexusState().settings.ai,
-        ...(state.settings.ai || {})
-      };
-      state.settings.ai.roles = {
-        ...defaultFamilyNexusState().settings.ai.roles,
-        ...(state.settings.ai.roles || {})
-      };
-      if (!state.settings.ai.model || state.settings.ai.model === "gemini-3.0-flash" || state.settings.ai.model === "gemini-3-flash-preview") {
-        state.settings.ai.model = "gemini-2.5-flash";
-      }
-      if (state.settings.hiddenAiKeySaved) state.settings.ai.keySaved = true;
-      state.version = "2.6.1";
-      return state;
-    }
-
-    function loadStoredDB() {
-      try {
-        return JSON.parse(localStorage.getItem(DB_KEY) || 'null');
-      } catch (error) {
-        console.warn('Family Nexus storage parse failed. Keeping a fresh wrapper without deleting localStorage.', error);
-        return null;
-      }
-    }
-
-    let db = ensureFamilyNexusState(loadStoredDB());
-    window.db = db;
-    const missions = () => db.today.missions;
-    const moneyRecords = () => db.money.records;
-    const purchaseHold = () => db.money.purchaseHold;
-    const conditionLogs = () => db.memories.conditionLogs;
-    const collection = () => db.playground.collection;
-    const shoppingItems = () => db.familyBoard.shopping;
-    const familyEvents = () => db.familyBoard.events;
-    const childQuotes = () => db.memories.childQuotes;
-    const familyDiaries = () => db.memories.familyDiaries;
-
-    function refreshLegacyCompatibility() {
-      db.legacy = {
-        level: db.progress.level, exp: db.progress.exp, todos: missions(), money: moneyRecords(),
-        vault: purchaseHold(), health: conditionLogs(), memos: db.familyBoard.memos, collection: collection()
-      };
-    }
-    const save = () => { refreshLegacyCompatibility(); localStorage.setItem(DB_KEY, JSON.stringify(db)); renderAll(); };
-
-    const CARS = [
-      { id: 'fire', i: '🚒', n: '소방차', s: '삐뽀 삐뽀!' },
-      { id: 'excavator', i: '🚜', n: '포크레인', s: '쿠궁 쿠궁!' },
-      { id: 'amb', i: '🚑', n: '구급차', s: '애앵 애앵!' },
-      { id: 'police', i: '🚓', n: '경찰차', s: '위용 위용!' },
-      { id: 'dump', i: '🚚', n: '덤프트럭', s: '부릉 부릉!' },
-      { id: 'bus', i: '🚌', n: '버스', s: '빵빵!' },
-      { id: 'mixer', i: '🚛', n: '레미콘', s: '빙글 빙글!' },
-      { id: 'taxi', i: '🚕', n: '택시', s: '부우웅!' },
-      { id: 'ladder', i: '🪜', n: '사다리차', s: '쭉쭉!' },
-      { id: 'clean', i: '🧹', n: '청소차', s: '쓱싹 쓱싹!' },
-      { id: 'box', i: '📦', n: '택배차', s: '배달 왔어요!' },
-      { id: 'forklift', i: '🏗️', n: '지게차', s: '삐리리!' }
-    ];
-
-    let curPlayMode = null;
-    let physicsRaf;
-    let blocks = [];
-    let voiceUnlocked = false;
-    function switchTab(id) {
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('panel-' + id).classList.add('active');
-      document.querySelector(`[data-tab="${id}"]`)?.classList.add('active');
-      window.scrollTo(0, 0);
-      if (id === 'today') announceTodayQuestOnce();
-      if (id !== 'play') {
-        cancelAnimationFrame(physicsRaf);
-        if (window.stopStoryReading) window.stopStoryReading(true);
-      }
-      if (id === 'play' && curPlayMode === 'blocks') startBlocksPhysics();
-      if (id === 'play' && !curPlayMode) {
-        const hub = document.getElementById('playHubZone');
-        if (hub) hub.style.display = 'grid';
-        const interactiveZone = document.getElementById('interactive-zone');
-        const storyZone = document.getElementById('story-zone');
-        if (interactiveZone) interactiveZone.style.display = 'none';
-        if (storyZone) storyZone.style.display = 'none';
-      }
-      if (id === 'play' && voiceUnlocked && db.settings.voiceGuide.autoRead) speakGuide('시현아, 놀이터야. 어떤 놀이를 해볼까?');
-    }
-
-    function checkDailyQuests() {
-      const today = getToday();
-      if (db.progress.lastLoginDate === today && Array.isArray(db.progress.dailyQuests) && db.progress.dailyQuests.length) return;
-      const candidates = [
-        { text: "자동차 한 대 고치기", type: "car", target: 1 },
-        { text: "블록 10개 떨어뜨리기", type: "block", target: 10 },
-        { text: "멋진 그림 저장하기", type: "color", target: 1 }
-      ];
-      db.progress.dailyQuests = candidates.map(q => ({
-        id: `${q.type}_${today}`,
-        text: q.text,
-        type: q.type,
-        count: 0,
-        target: q.target,
-        done: false
-      }));
-      db.progress.lastLoginDate = today;
-      db.progress.dailyQuestCompletedDate = "";
-    }
-
-    function completeAllDailyQuests() {
-      const today = getToday();
-      const quests = db.progress.dailyQuests || [];
-      if (db.progress.dailyQuestCompletedDate === today || !quests.length || !quests.every(q => q.done)) return;
-      db.progress.dailyQuestCompletedDate = today;
-      fireConfetti();
-      speakPraise("우와! 오늘 미션을 다 했어! 대단해!", true);
-      gainExp(30);
-    }
-
-    function updateQuestProgress(type, amount = 1) {
-      const quests = db.progress.dailyQuests || [];
-      if (db.progress.dailyQuestCompletedDate === getToday()) return;
-      const quest = quests.find(q => q.type === type && !q.done);
-      if (!quest) return;
-      quest.count = Math.min(quest.target, Number(quest.count || 0) + amount);
-      if (quest.count >= quest.target) {
-        quest.done = true;
-        speakPraise("미션 하나 성공!", true);
-        gainExp(10);
-      }
-      completeAllDailyQuests();
-      save();
-    }
-
-    function announceTodayQuestOnce() {
-      const today = getToday();
-      const quests = db.progress.dailyQuests || [];
-      const left = quests.filter(q => !q.done).length;
-      if (!db.settings.voiceGuide.enabled || db.progress.todayQuestVoiceDate === today || left === 0) return;
-      speakGuide(`시현아, 오늘 미션이 ${left}개 남았어.`, true);
-      db.progress.todayQuestVoiceDate = today;
-      save();
-    }
-
-    function toggleTheme() {
-      const dark = document.body.classList.toggle('dark');
-      db.settings.theme = dark ? 'dark' : 'light';
-      localStorage.setItem('MY_NEXUS_THEME', db.settings.theme);
-      save();
-    }
-
-    function isStoryPlaying() {
-      return Boolean(window.storyReadState && window.storyReadState.isReading);
-    }
-    window.isStoryPlaying = isStoryPlaying;
-
-    function pickRandom(list) {
-      return list[Math.floor(Math.random() * list.length)];
-    }
-    window.pickRandom = pickRandom;
-
-    function praiseRandom(type = 'default') {
-      const map = {
-        default: [
-          '시현이 최고!',
-          '정말 잘했어!',
-          '우와, 멋지다!',
-          '또 해볼까?',
-          '시현이가 해냈어!'
-        ],
-        car: [
-          '착! 자동차가 딱 맞았어!',
-          '정비사 시현이 최고!',
-          '자동차가 아주 좋아해!'
-        ],
-        block: [
-          '와르르! 정말 멋지게 무너졌어!',
-          '블록 놀이 대성공!',
-          '쿵쿵, 재미있다!'
-        ],
-        card: [
-          '딩동! 짝을 찾았어.',
-          '시현이 기억력 최고!',
-          '같은 자동차를 찾았네!'
-        ],
-        color: [
-          '시현이는 정말 멋진 화가구나!',
-          '색깔이 반짝반짝 예쁘다!',
-          '그림이 아주 멋져!'
-        ],
-        story: [
-          '동화를 잘 들었어.',
-          '시현이 이야기 나라에 왔구나.',
-          '다음 이야기도 골라볼까?'
-        ]
-      };
-      const list = map[type] || map.default;
-      speakPraise(pickRandom(list), true);
-    }
-    window.praiseRandom = praiseRandom;
-
-    function speakText(text, options = {}) {
-      if (!('speechSynthesis' in window)) {
-        alert('이 기기는 음성 읽어주기를 지원하지 않아요.');
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = options.lang || 'ko-KR';
-      utterance.rate = options.rate || db.settings.voiceGuide.rate || 0.85;
-      utterance.pitch = options.pitch || db.settings.voiceGuide.pitch || 1.1;
-      utterance.volume = options.volume || 1;
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function speakGuide(text, force = false) {
-      if (isStoryPlaying()) return;
-      if (!db.settings.voiceGuide.enabled) return;
-      speakText(text, { rate: 0.88, pitch: 1.08 });
-    }
-    window.speakGuide = speakGuide;
-
-    function speakPraise(text, force = false) {
-      if (isStoryPlaying()) return;
-      if (!db.settings.voiceGuide.enabled) return;
-      speakText(text, { rate: 0.96, pitch: 1.2 });
-    }
-    window.speakPraise = speakPraise;
-
-    function speakSoft(text, force = false) {
-      if (isStoryPlaying()) return;
-      if (!db.settings.voiceGuide.enabled) return;
-      speakText(text, { rate: 0.82, pitch: 1.0 });
-    }
-    window.speakSoft = speakSoft;
-
-    function speakGameCue(text, force = false) {
-      if (isStoryPlaying()) return;
-      if (!db.settings.voiceGuide.enabled) return;
-      speakText(text, { rate: 0.98, pitch: 1.14 });
-    }
-    window.speakGameCue = speakGameCue;
-
-    function speakStory(text) {
-      speakText(text, { rate: 0.82, pitch: 1.06 });
-    }
-
-    function stopSpeaking() {
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    }
-
-    function toggleVoiceGuide() {
-      db.settings.voiceGuide.enabled = !db.settings.voiceGuide.enabled;
-      save();
-      if (db.settings.voiceGuide.enabled) speakGuide('음성 안내를 켰어.');
-      else stopSpeaking();
-    }
-
-    function speakButtonGuide(label, description) {
-      speakGuide(`${label}. ${description}`);
-    }
-
-    function startChildVoiceMode() {
-      voiceUnlocked = true;
-      speakGuide('시현아, 놀이터야. 어떤 놀이를 해볼까?');
-    }
-
-    function gainExp(amt) {
-      db.progress.exp += amt;
-      let leveledUp = false;
-      while (db.progress.exp >= 100) {
-        db.progress.level++;
-        db.progress.exp -= 100;
-        leveledUp = true;
-      }
-      save();
-      if (leveledUp) {
-        fireConfetti();
-        speakPraise('우리집 레벨이 올라갔어. 우와! 시현이 최고!');
-      }
-    }
-    function unlockCar(carIcon) {
-      if (!collection().includes(carIcon)) {
-        collection().push(carIcon);
-        fireConfetti();
-        speakPraise('우와! 새 자동차가 도감에 들어왔어!');
-        save();
-      }
-    }
-
-    function fireConfetti() {
-      const container = document.getElementById('particle-container');
-      const colors = ['#e05d3f', '#34c759', '#3478f6', '#f3a51d', '#147d64'];
-      for (let i = 0; i < 50; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random() * 15 + 5;
-        p.style.width = size + 'px'; p.style.height = size + 'px';
-        p.style.background = colors[Math.floor(Math.random() * colors.length)];
-        p.style.left = Math.random() * 100 + 'vw';
-        p.style.top = -20 + 'px';
-        p.style.animationDuration = (Math.random() * 2 + 1) + 's';
-        p.style.animationDelay = (Math.random() * 0.5) + 's';
-        container.appendChild(p);
-        setTimeout(() => p.remove(), 3500);
-      }
-    }
-
-    window.selectPlayFromHub = function(mode) {
-      const tabLabel = {
-        garage: '정비',
-        blocks: '블록',
-        memory: '카드',
-        scratch: '스크래치',
-        color: '색칠',
-        story: '동화'
-      }[mode];
-      document.querySelectorAll('.play-tab').forEach(t => {
-        if(tabLabel && t.innerText.includes(tabLabel)) {
-          setPlayMode(mode, t);
-        }
-      });
-    };
-
-    function setPlayMode(mode, btnElement) {
-      curPlayMode = mode;
-      document.querySelectorAll('.play-tab').forEach(t => t.classList.remove('active'));
-      if(btnElement) btnElement.classList.add('active');
-      const interactiveZone = document.getElementById('interactive-zone');
-      const storyZone = document.getElementById('story-zone');
-      const canvasZone = document.getElementById('gameCanvas');
-      const hub = document.getElementById('playHubZone');
-      if (hub) hub.style.display = 'none';
-      cancelAnimationFrame(physicsRaf);
-      canvasZone.innerHTML = '';
-      canvasZone.style.overflow = 'hidden';
-      const labels = {
-        garage: ['자동차 정비', '자동차를 빈칸에 끌어다 놓아 봐.'],
-        blocks: ['물리 블록', '화면을 누르면 블록이 떨어져.'],
-        memory: ['기억력 카드', '같은 자동차 카드 두 장을 찾아 봐.'],
-        scratch: ['매직 스크래치', '손가락으로 문질러 숨어 있는 자동차를 찾아 봐.'],
-        color: ['색칠 놀이터', '색을 고르고 손가락으로 그림을 그려 봐.'],
-        story: ['마법 동화', '책을 고르고 읽어주기 버튼을 눌러 봐.']
-      };
-      if (mode === 'story') {
-        interactiveZone.style.display = 'none';
-        storyZone.style.display = 'block';
-        if(window.setStoryFilter) setStoryFilter(window.currentStoryFilter || '전체');
-        speakGuide('읽고 싶은 동화를 골라 봐.', true);
-      } else {
-        if (window.stopStoryReading) window.stopStoryReading(true);
-        interactiveZone.style.display = 'block';
-        storyZone.style.display = 'none';
-        if (mode === 'garage') {
-          initGarageGame(canvasZone);
-        }
-        else if (mode === 'blocks') {
-          initBlocksGame(canvasZone);
-        }
-        else if (mode === 'memory') {
-          initMemoryGame(canvasZone);
-        }
-        else if (mode === 'scratch') {
-          initScratchGame(canvasZone);
-        }
-        else if (mode === 'color') {
-          initColorGame(canvasZone);
-        }
-      }
-    }
-
-    function initGarageGame(container) {
-      speakGuide('자동차를 빈칸까지 끌고 가 보자.');
-      container.innerHTML = '';
-      const targetCar = CARS[Math.floor(Math.random() * 6)];
-      const bp = document.createElement('div');
-      bp.className = 'blueprint'; bp.innerText = targetCar.i;
-      container.appendChild(bp);
-      const targetBox = document.createElement('div');
-      targetBox.className = 'garage-target';
-      targetBox.innerText = '주차';
-      targetBox.style.left = '50%'; targetBox.style.top = '20%';
-      targetBox.style.transform = 'translate(-50%, 0)';
-      targetBox.id = 'garageTarget';
-      container.appendChild(targetBox);
-      const part = document.createElement('div');
-      part.className = 'garage-part';
-      part.innerText = targetCar.i;
-      part.style.left = '20px'; part.style.bottom = '20px';
-      container.appendChild(part);
-
-      let isDragging = false;
-      part.onpointerdown = (e) => { isDragging = true; e.preventDefault(); speakGameCue(pickRandom(['좋아, 천천히 움직이면 돼.', '영차 영차!'])); };
-      window.onpointermove = (e) => {
-        if (!isDragging) return;
-        const rect = container.getBoundingClientRect();
-        part.style.left = `${e.clientX - rect.left - 30}px`;
-        part.style.top = `${e.clientY - rect.top - 30}px`;
-      };
-      window.onpointerup = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        const tRect = targetBox.getBoundingClientRect();
-        const pRect = part.getBoundingClientRect();
-        const xPad = tRect.width * 0.25;
-        const yPad = tRect.height * 0.25;
-        const easyTarget = {
-          left: tRect.left - xPad,
-          right: tRect.right + xPad,
-          top: tRect.top - yPad,
-          bottom: tRect.bottom + yPad
-        };
-        if (!(pRect.right < easyTarget.left || pRect.left > easyTarget.right || pRect.bottom < easyTarget.top || pRect.top > easyTarget.bottom)) {
-          targetBox.classList.add('filled');
-          part.style.pointerEvents = 'none';
-          part.style.left = targetBox.style.left;
-          part.style.top = targetBox.style.top;
-          part.style.transform = 'translate(-50%, -20%) scale(1.5)';
-          fireConfetti();
-          speakPraise('착! 자동차가 딱 맞았어. 시현이 최고!');
-          updateQuestProgress('car', 1);
-          setTimeout(() => {
-            gainExp(15); unlockCar(targetCar.i);
-            initGarageGame(container);
-          }, 1800);
-        }
-      };
-    }
-
-    function initBlocksGame(container) {
-      speakGuide('화면을 톡 누르면 블록이 떨어져.');
-      container.innerHTML = `<canvas id="blockCanvas"></canvas><div class="physics-ui"><button class="bomb-btn" onclick="bombBlocks()">💥 와르르!</button></div>`;
-      const canvas = document.getElementById('blockCanvas');
-      canvas.width = container.clientWidth;
-      canvas.height = container.clientHeight;
-      blocks = [];
-      canvas.onpointerdown = (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const colors = ['#ff3b30', '#34c759', '#0a84ff', '#ffcc00', '#bf5af2', '#ff9f0a'];
-        blocks.push({
-          x: e.clientX - rect.left - 25, y: e.clientY - rect.top - 25, w: 50, h: 50,
-          vx: (Math.random() - 0.5) * 5, vy: 0, color: colors[Math.floor(Math.random() * colors.length)]
-        });
-        speakGameCue('쿵!');
-        gainExp(1);
-        updateQuestProgress('block', 1);
-      };
-      startBlocksPhysics();
-    }
-
-    function startBlocksPhysics() {
-      const canvas = document.getElementById('blockCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const gravity = 0.5;
-      const bounce = 0.4;
-      const ground = canvas.height;
-      function update() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        blocks.forEach((b, i) => {
-          b.vy += gravity; b.x += b.vx; b.y += b.vy;
-          if (b.y + b.h >= ground) { b.y = ground - b.h; b.vy *= -bounce; b.vx *= 0.8; }
-          if (b.x <= 0) { b.x = 0; b.vx *= -bounce; }
-          if (b.x + b.w >= canvas.width) { b.x = canvas.width - b.w; b.vx *= -bounce; }
-          blocks.forEach((b2, j) => {
-            if (i === j) return;
-            if (b.x < b2.x + b2.w && b.x + b.w > b2.x && b.y < b2.y + b2.h && b.y + b.h > b2.y && b.vy > 0 && b.y < b2.y) {
-              b.y = b2.y - b.h; b.vy = 0; b.vx *= 0.5;
-            }
-          });
-          ctx.fillStyle = b.color;
-          ctx.beginPath(); ctx.roundRect(b.x, b.y, b.w, b.h, 10); ctx.fill();
-          ctx.strokeStyle = 'rgba(0,0,0,0.2)'; ctx.lineWidth = 3; ctx.stroke();
-        });
-        physicsRaf = requestAnimationFrame(update);
-      }
-      update();
-    }
-
-    window.bombBlocks = function() {
-      if (blocks.length === 0) return;
-      fireConfetti();
-      speakPraise('와르르! 정말 멋지게 무너졌어!');
-      blocks.forEach(b => { b.vy = -Math.random() * 20 - 10; b.vx = (Math.random() - 0.5) * 30; });
-      gainExp(10);
-      setTimeout(() => { blocks = []; }, 1000);
-    };
-
-    function initMemoryGame(container) {
-      speakGuide('카드를 하나 골라 볼까? 같은 자동차를 찾아 보자.');
-      container.innerHTML = '';
-      container.style.overflow = 'auto';
-      const grid = document.createElement('div');
-      grid.className = 'memory-grid';
-      container.appendChild(grid);
-      let deck = [...CARS.slice(0, 6), ...CARS.slice(0, 6)].sort(() => Math.random() - 0.5);
-      let flippedCards = [];
-      let matchedCount = 0;
-      let lockBoard = false;
-      deck.forEach(car => {
-        const card = document.createElement('div');
-        card.className = 'memory-card';
-        card.dataset.id = car.id;
-        card.innerHTML = `<div class="memory-inner"><div class="memory-front">?</div><div class="memory-back">${car.i}</div></div>`;
-        card.onclick = () => {
-          if (lockBoard || card.classList.contains('flipped')) return;
-          card.classList.add('flipped');
-          flippedCards.push(card);
-          speakGameCue('이거?');
-          if (flippedCards.length === 2) {
-            lockBoard = true;
-            if (flippedCards[0].dataset.id === flippedCards[1].dataset.id) {
-              matchedCount += 2; flippedCards = []; lockBoard = false; gainExp(5);
-              speakPraise('딩동! 짝을 찾았어.');
-              if (matchedCount === deck.length) setTimeout(() => { fireConfetti(); speakPraise('우와! 카드를 모두 맞췄어!'); gainExp(30); initMemoryGame(container); }, 1500);
-            } else {
-              speakSoft('괜찮아, 다시 찾아보자.');
-              setTimeout(() => {
-                flippedCards[0].classList.remove('flipped');
-                flippedCards[1].classList.remove('flipped');
-                flippedCards = []; lockBoard = false;
-              }, 1000);
-            }
-          }
-        };
-        grid.appendChild(card);
-      });
-    }
-
-    function initScratchGame(container) {
-      speakGuide('손가락으로 쓱쓱 문질러 봐.');
-      const targetCar = CARS[Math.floor(Math.random() * CARS.length)];
-      container.innerHTML = `<div class="scratch-bg">${targetCar.i}</div><canvas id="scratchCanvas"></canvas>`;
-      const canvas = document.getElementById('scratchCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = container.clientWidth;
-      canvas.height = container.clientHeight;
-      ctx.fillStyle = '#b0bec5';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#78909c';
-      ctx.font = 'bold 24px Pretendard';
-      ctx.textAlign = 'center';
-      ctx.fillText('손가락으로 쓱쓱 문질러 봐요', canvas.width / 2, canvas.height / 2);
-      ctx.globalCompositeOperation = 'destination-out';
-      let isDrawing = false;
-      let erasedPixels = 0;
-      let gaveHint = false;
-      const scratch = (e) => {
-        if (!isDrawing) return;
-        const rect = canvas.getBoundingClientRect();
-        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-        const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
-        ctx.beginPath(); ctx.arc(x, y, 35, 0, Math.PI * 2); ctx.fill();
-        erasedPixels++;
-        if (erasedPixels > 50 && !gaveHint) {
-          speakGameCue('조금 더 문질러 볼까?');
-          gaveHint = true;
-        }
-        if (erasedPixels > 200) {
-          isDrawing = false;
-          canvas.style.transition = "opacity 1s";
-          canvas.style.opacity = "0";
-          fireConfetti();
-          speakPraise('짜잔! 숨어 있던 자동차를 찾았어.');
-          setTimeout(() => {
-            gainExp(20); unlockCar(targetCar.i);
-            initScratchGame(container);
-          }, 1800);
-        }
-      };
-      canvas.onpointerdown = () => isDrawing = true;
-      window.onpointerup = () => isDrawing = false;
-      canvas.onpointermove = scratch;
-    }
-
-    function initColorGame(container) {
-      speakGuide('색을 고르고 손가락으로 그림을 그려 봐.');
-      const colors = [
-        { name: '빨간색', value: 'var(--k-red)' },
-        { name: '주황색', value: 'var(--k-orange)' },
-        { name: '노란색', value: 'var(--k-yellow)' },
-        { name: '초록색', value: 'var(--k-green)' },
-        { name: '민트색', value: 'var(--k-mint)' },
-        { name: '파란색', value: 'var(--k-blue)' },
-        { name: '보라색', value: 'var(--k-purple)' },
-        { name: '분홍색', value: 'var(--k-pink)' },
-        { name: '갈색', value: 'var(--k-brown)' },
-        { name: '검은색', value: 'var(--k-black)' }
-      ];
-      const brushSizes = [10, 20, 35, 55];
-      let currentColor = colors[0].value;
-      let brushSize = brushSizes[1];
-      let isEraser = false;
-      let isDrawing = false;
-      let lastPoint = null;
-
-      container.innerHTML = `
-        <div class="color-game">
-          <div class="color-toolbar">
-            <div class="color-tools" id="colorPalette">
-              ${colors.map((color, index) => `
-                <button class="color-swatch${index === 0 ? ' active' : ''}" type="button" data-color="${color.value}" data-name="${color.name}" title="${color.name}" aria-label="${color.name}" style="background:${color.value};">색</button>
-              `).join('')}
-            </div>
-            <div class="color-tools" id="brushPalette">
-              ${brushSizes.map(size => `
-                <button class="brush-btn${size === brushSize ? ' active' : ''}" type="button" data-size="${size}" aria-label="붓 ${size}">${size}</button>
-              `).join('')}
-              <button class="color-action" type="button" id="eraserBtn">지우개</button>
-              <button class="color-action" type="button" id="clearColorBtn">전체 지우기</button>
-              <button class="color-action" type="button" id="saveColorBtn">저장</button>
-            </div>
-          </div>
-          <canvas id="colorCanvas"></canvas>
-        </div>
-      `;
-
-      const canvas = document.getElementById('colorCanvas');
-      const ctx = canvas.getContext('2d');
-      const colorRoot = document.querySelector('#panel-play .kids-world');
-
-      function resolveColor(colorValue) {
-        if (!colorValue.startsWith('var(')) return colorValue;
-        const propName = colorValue.replace('var(', '').replace(')', '').trim();
-        return getComputedStyle(colorRoot).getPropertyValue(propName).trim() || '#111111';
-      }
-
-      function resizeCanvas() {
-        const rect = canvas.getBoundingClientRect();
-        const scale = window.devicePixelRatio || 1;
-        const snapshot = document.createElement('canvas');
-        snapshot.width = canvas.width;
-        snapshot.height = canvas.height;
-        if (canvas.width && canvas.height) snapshot.getContext('2d').drawImage(canvas, 0, 0);
-        canvas.width = Math.max(1, Math.floor(rect.width * scale));
-        canvas.height = Math.max(1, Math.floor(rect.height * scale));
-        ctx.setTransform(scale, 0, 0, scale, 0, 0);
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, rect.width, rect.height);
-        if (snapshot.width && snapshot.height) ctx.drawImage(snapshot, 0, 0, snapshot.width / scale, snapshot.height / scale);
-      }
-
-      function pointFromEvent(e) {
-        const rect = canvas.getBoundingClientRect();
-        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      }
-
-      function drawTo(point) {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.strokeStyle = isEraser ? '#ffffff' : resolveColor(currentColor);
-        ctx.lineWidth = brushSize;
-        ctx.beginPath();
-        ctx.moveTo(lastPoint.x, lastPoint.y);
-        ctx.lineTo(point.x, point.y);
-        ctx.stroke();
-        lastPoint = point;
-      }
-
-      function drawDot(point) {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = isEraser ? '#ffffff' : resolveColor(currentColor);
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, brushSize / 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      resizeCanvas();
-
-      document.querySelectorAll('#colorPalette .color-swatch').forEach(btn => {
-        btn.onclick = () => {
-          currentColor = btn.dataset.color;
-          isEraser = false;
-          document.querySelectorAll('#colorPalette .color-swatch').forEach(b => b.classList.remove('active'));
-          document.getElementById('eraserBtn').classList.remove('active');
-          btn.classList.add('active');
-          speakGameCue(`${btn.dataset.name}으로 그려볼까?`);
-        };
-      });
-
-      document.querySelectorAll('#brushPalette .brush-btn').forEach(btn => {
-        btn.onclick = () => {
-          brushSize = Number(btn.dataset.size);
-          document.querySelectorAll('#brushPalette .brush-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          speakGameCue('붓 크기를 바꿨어.');
-        };
-      });
-
-      document.getElementById('eraserBtn').onclick = () => {
-        isEraser = true;
-        document.querySelectorAll('#colorPalette .color-swatch').forEach(b => b.classList.remove('active'));
-        document.getElementById('eraserBtn').classList.add('active');
-        speakGameCue('지우개로 살살 지워 보자.');
-      };
-
-      document.getElementById('clearColorBtn').onclick = () => {
-        const rect = canvas.getBoundingClientRect();
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, rect.width, rect.height);
-        speakGameCue('깨끗해졌어. 다시 그려보자.');
-      };
-
-      document.getElementById('saveColorBtn').onclick = () => {
-        fireConfetti();
-        praiseRandom('color');
-        gainExp(20);
-        updateQuestProgress('color', 1);
-      };
-
-      canvas.onpointerdown = (e) => {
-        e.preventDefault();
-        canvas.setPointerCapture(e.pointerId);
-        isDrawing = true;
-        lastPoint = pointFromEvent(e);
-        drawDot(lastPoint);
-      };
-      canvas.onpointermove = (e) => {
-        if (!isDrawing) return;
-        e.preventDefault();
-        drawTo(pointFromEvent(e));
-      };
-      canvas.onpointerup = (e) => {
-        isDrawing = false;
-        lastPoint = null;
-        if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
-      };
-      canvas.onpointercancel = canvas.onpointerup;
-      window.addEventListener('resize', resizeCanvas);
-    }
-
-    function addTodo() {
-      const input = document.getElementById('todoIn');
-      const val = input.value.trim();
-      if (!val) return;
-      missions().unshift({ id: Date.now(), text: val, done: false, date: getToday() });
-      input.value = "";
-      save();
-    }
-
-    function addMoney() {
-      const amt = parseInt(document.getElementById('moneyAmt').value, 10);
-      if (!amt) return;
-      moneyRecords().unshift({
-        id: Date.now(), type: document.getElementById('moneyType').value,
-        amt, cat: document.getElementById('moneyCat').value,
-        note: document.getElementById('moneyNote').value, date: getToday()
-      });
-      document.getElementById('moneyAmt').value = "";
-      document.getElementById('moneyNote').value = "";
-      gainExp(5);
-    }
-
-    function addVault() {
-      const item = document.getElementById('vaultItem').value.trim();
-      const price = parseInt(document.getElementById('vaultPrice').value, 10) || 0;
-      if (!item) return;
-      purchaseHold().unshift({ id: Date.now(), item, price, createdAt: Date.now() });
-      document.getElementById('vaultItem').value = "";
-      document.getElementById('vaultPrice').value = "";
-      save();
-    }
-
-    function saveHealth() {
-      const sleep = document.getElementById('healthSleep').value;
-      if (!sleep) return;
-      conditionLogs().unshift({
-        id: Date.now(), member: document.getElementById('healthMember').value,
-        sleep, cond: document.getElementById('healthCond').value, date: getToday()
-      });
-      document.getElementById('healthSleep').value = "";
-      gainExp(15);
-    }
-
-    function addQuickNote() {
-      const input = document.getElementById('quickNoteIn');
-      const text = input.value.trim();
-      if (!text) return;
-      db.today.quickNotes.unshift({ id: Date.now(), text, date: getToday() });
-      input.value = "";
-      save();
-    }
-
-    function addFamilyMemo() {
-      const input = document.getElementById('familyMemoIn');
-      const text = input.value.trim();
-      if (!text) return;
-      db.familyBoard.memos.unshift({ id: Date.now(), text, date: getToday() });
-      input.value = "";
-      save();
-    }
-
-    function addShoppingItem() {
-      const input = document.getElementById('shoppingIn');
-      const cat = document.getElementById('shoppingCatIn')?.value || '';
-      const text = input.value.trim();
-      if (!text) return;
-      shoppingItems().unshift({ id: Date.now(), text: cat ? `[${cat}] ${text}` : text, done: false, date: getToday() });
-      input.value = "";
-      save();
-    }
-
-    window.addShopping = addShoppingItem;
-
-    function addFamilyEvent() {
-      const dateInput = document.getElementById('eventDateIn');
-      const textInput = document.getElementById('eventTextIn');
-      const date = dateInput.value || getToday();
-      const text = textInput.value.trim();
-      if (!text) return;
-      familyEvents().unshift({ id: Date.now(), date, text });
-      textInput.value = "";
-      dateInput.value = "";
-      save();
-    }
-
-    window.addPromise = addFamilyEvent;
-
-    function addChildQuote() {
-      const input = document.getElementById('childQuoteIn');
-      const type = document.getElementById('childQuoteTypeIn')?.value || '🗣️ 말';
-      const text = input.value.trim();
-      if (!text) return;
-      childQuotes().unshift({ id: Date.now(), text, type, date: getToday() });
-      input.value = "";
-      save();
-    }
-
-    function addFamilyDiary() {
-      const input = document.getElementById('familyDiaryIn');
-      const emoji = document.getElementById('familyDiaryEmojiIn')?.value || '😊';
-      const text = input.value.trim();
-      if (!text) return;
-      familyDiaries().unshift({ id: Date.now(), text, emoji, date: getToday() });
-      input.value = "";
-      save();
-    }
-
-    window.addDailyNote = addFamilyDiary;
-
-    function toggleAdvancedSettings() {
-      const box = document.getElementById('advancedSettingsBox');
-      if (!box) return;
-      box.style.display = box.style.display === 'none' || !box.style.display ? 'block' : 'none';
-    }
-
-    function saveApiKey() {
-      const key = document.getElementById('apiKeyIn').value.trim();
-      if (!key) return;
-      localStorage.setItem('GEMINI_3_FLASH_KEY', key);
-      db.settings.hiddenAiKeySaved = true;
-      db.settings.ai.keySaved = true;
-      document.getElementById('apiKeyIn').value = "";
-      updateApiKeyStatus();
-      save();
-      speakGuide('똑똑이 연결 키를 저장했어요.');
-    }
-
-    function deleteApiKey() {
-      localStorage.removeItem('GEMINI_3_FLASH_KEY');
-      db.settings.hiddenAiKeySaved = false;
-      db.settings.ai.keySaved = false;
-      updateApiKeyStatus();
-      save();
-      speakGuide('똑똑이 연결 키를 삭제했어요.');
-    }
-
-    function updateApiKeyStatus() {
-      const el = document.getElementById('apiKeyStatus');
-      if (!el) return;
-      const saved = Boolean(localStorage.getItem('GEMINI_3_FLASH_KEY'));
-      el.textContent = saved ? '연결 키 저장됨' : '연결 키 없음';
-    }
-
-    function delItem(collectionName, id) {
-      const maps = {
-        todos: missions(), money: moneyRecords(), vault: purchaseHold(), health: conditionLogs(),
-        quickNotes: db.today.quickNotes, familyMemos: db.familyBoard.memos,
-        shopping: shoppingItems(), events: familyEvents(), promises: db.familyBoard.promises,
-        childQuotes: childQuotes(), familyDiaries: familyDiaries(),
-        dailyNotes: db.memories.dailyNotes
-      };
-      const list = maps[collectionName];
-      if (!list) return;
-      const idx = list.findIndex(x => x.id === id);
-      if (idx >= 0) list.splice(idx, 1);
-      save();
-    }
-
-    window.delData = delItem;
-
-    function toggleShoppingItem(id) {
-      const item = shoppingItems().find(x => x.id === id);
-      if (item) item.done = !item.done;
-      save();
-    }
-
-    window.toggleShopping = toggleShoppingItem;
-
-    function toggleMission(id) {
-      const item = missions().find(x => x.id === id);
-      if (item) item.done = !item.done;
-      save();
-    }
-
-    function renderAll() {
-      renderToday();
-      renderFamily();
-      renderMoney();
-      renderRecords();
-      renderStats();
-    }
-
-    function renderToday() {
-      const todoList = document.getElementById('todoList');
-      if (todoList) todoList.innerHTML = missions().filter(t => t.date === getToday()).map(t => `
-        <div class="list-item">
-          <div class="item-check ${t.done ? 'done' : ''}" onclick="toggleMission(${t.id})">✓</div>
-          <div class="item-body"><div class="item-title ${t.done ? 'done' : ''}">${escapeHtml(t.text)}</div></div>
-          <button class="del-btn" onclick="delItem('todos', ${t.id})">삭제</button>
-        </div>
-      `).join('') || `<div class="item-meta">오늘 가족 미션을 하나 적어 보세요.</div>`;
-
-      const quickNoteList = document.getElementById('quickNoteList');
-      if (quickNoteList) quickNoteList.innerHTML = db.today.quickNotes.slice(0, 3).map(n => `
-        <div class="list-item"><div class="item-body"><div class="item-title">${escapeHtml(n.text)}</div><div class="item-meta">${n.date}</div></div><button class="del-btn" onclick="delItem('quickNotes', ${n.id})">삭제</button></div>
-      `).join('') || `<div class="item-meta">아직 오늘 기록이 없어요.</div>`;
-
-      const today = getToday();
-      const todayShoppingCount = document.getElementById('todayShoppingCount');
-      const todayEventCount = document.getElementById('todayEventCount');
-      if (todayShoppingCount) todayShoppingCount.innerText = shoppingItems().filter(x => !x.done).length;
-      if (todayEventCount) todayEventCount.innerText = familyEvents().filter(x => x.date >= today).length;
-      const todayQuickNoteCount = document.getElementById('todayQuickNoteCount');
-      if (todayQuickNoteCount) todayQuickNoteCount.innerText = db.today.quickNotes.filter(x => x.date === today).length;
-      renderTodayQuestWidget();
-    }
-
-    function renderTodayQuestWidget() {
-      const widget = document.getElementById('todayQuestWidget');
-      if (!widget) return;
-      const quests = db.progress.dailyQuests || [];
-      if (!quests.length) {
-        widget.innerHTML = `
-          <div class="card-title">오늘 시현이 미션</div>
-          <div class="item-meta">오늘 미션을 준비하고 있어요.</div>
-        `;
-        return;
-      }
-      widget.innerHTML = `
-        <div class="card-title">오늘 시현이 미션</div>
-        ${quests.map(q => `
-          <div class="list-item">
-            <div class="item-body">
-              <div class="item-title">${escapeHtml(q.text)}</div>
-              <div class="item-meta">${Math.min(Number(q.count || 0), Number(q.target || 1))}/${q.target}</div>
-            </div>
-            ${q.done ? '<span class="status-badge" style="background:rgba(52,199,89,0.12); color:#207a38; border-color:rgba(52,199,89,0.25);">완료</span>' : ''}
-          </div>
-        `).join('')}
-      `;
-    }
-
-    function renderFamily() {
-      const shoppingList = document.getElementById('shoppingList');
-      if (shoppingList) shoppingList.innerHTML = shoppingItems().slice(0, 12).map(s => `
-        <div class="list-item"><div class="item-check ${s.done ? 'done' : ''}" onclick="toggleShoppingItem(${s.id})">✓</div><div class="item-body"><div class="item-title ${s.done ? 'done' : ''}">${escapeHtml(s.text)}</div><div class="item-meta">${s.date || ''}</div></div><button class="del-btn" onclick="delData('shopping', ${s.id})">삭제</button></div>
-      `).join('') || `<div class="item-meta">장보기 목록을 추가해 보세요.</div>`;
-
-      const familyEventList = document.getElementById('familyEventList');
-      if (familyEventList) {
-        const todayTime = new Date(getToday()).getTime();
-        const sortedEvents = [...familyEvents()].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-        familyEventList.innerHTML = sortedEvents.slice(0, 10).map(e => {
-          const eventTime = new Date(e.date).getTime();
-          const diffDays = Math.ceil((eventTime - todayTime) / (1000 * 60 * 60 * 24));
-          const dDayBadge = diffDays === 0
-            ? '<span style="color:var(--danger); font-weight:900;">[D-Day]</span>'
-            : diffDays > 0
-              ? `<span style="color:var(--primary); font-weight:800;">[D-${diffDays}]</span>`
-              : `<span style="color:var(--text-soft); font-weight:700;">[D+${Math.abs(diffDays)}]</span>`;
-          return `
-            <div class="list-item">
-              <div class="item-body"><div class="item-title">${escapeHtml(e.text)}</div><div class="item-meta">${dDayBadge} ${e.date}</div></div>
-              <button class="del-btn" onclick="delData('events', ${e.id})">삭제</button>
-            </div>
-          `;
-        }).join('') || `<div class="item-meta">가족 일정이나 약속을 날짜와 함께 남겨 보세요.</div>`;
-      }
-
-      const familyMemoList = document.getElementById('familyMemoList');
-      if (familyMemoList) familyMemoList.innerHTML = db.familyBoard.memos.slice(0, 8).map(m => `
-        <div class="list-item"><div class="item-body"><div class="item-title">${escapeHtml(m.text)}</div><div class="item-meta">${m.date}</div></div><button class="del-btn" onclick="delData('familyMemos', ${m.id})">삭제</button></div>
-      `).join('') || `<div class="item-meta">가족 메모를 남겨 보세요.</div>`;
-    }
-
-    function renderMoney() {
-      const curMonth = getToday().slice(0, 7);
-      const monthlyExp = moneyRecords().filter(m => (m.date || '').startsWith(curMonth) && m.type === 'expense').reduce((sum, m) => sum + Number(m.amt || 0), 0);
-      const monthTotal = document.getElementById('monthTotal');
-      const monthTotalToday = document.getElementById('monthTotalToday');
-      const todayMonthTotal = document.getElementById('todayMonthTotal');
-      if (monthTotal) monthTotal.innerText = monthlyExp.toLocaleString();
-      if (monthTotalToday) monthTotalToday.innerText = monthlyExp.toLocaleString();
-      if (todayMonthTotal) todayMonthTotal.innerText = monthlyExp.toLocaleString();
-      const moneyList = document.getElementById('moneyList');
-      if (moneyList) moneyList.innerHTML = moneyRecords().slice(0, 10).map(m => `
-        <div class="list-item">
-          <div class="item-body">
-            <div class="item-title" style="color:${m.type === 'income' ? 'var(--success)' : 'var(--text)'}">${m.type === 'income' ? '+' : '-'}${Number(m.amt).toLocaleString()}원</div>
-            <div class="item-meta">${escapeHtml(m.cat)} - ${escapeHtml(m.note)} (${m.date})</div>
-          </div>
-          <button class="del-btn" onclick="delItem('money', ${m.id})">삭제</button>
-        </div>
-      `).join('') || `<div class="item-meta">아직 기록된 내역이 없어요.</div>`;
-
-      const now = Date.now();
-      const vaultList = document.getElementById('vaultList');
-      if (vaultList) vaultList.innerHTML = purchaseHold().map(v => {
-        const left = (Number(v.createdAt) + 72 * 3600000) - now;
-        const isUnlocked = left <= 0;
-        return `
-          <div class="list-item" style="background:${isUnlocked ? 'rgba(52,199,89,0.1)' : 'transparent'}; border-radius:12px; padding:10px;">
-            <div class="item-body">
-              <div class="item-title">${escapeHtml(v.item)} (${Number(v.price || 0).toLocaleString()}원)</div>
-              <div class="item-meta" style="color:${isUnlocked ? 'var(--success)' : 'var(--warning)'}">${isUnlocked ? '보류 해제! 구매 여부를 다시 결정해요.' : `${Math.ceil(left / 3600000)}시간 남음`}</div>
-            </div>
-            <button class="del-btn" onclick="delItem('vault', ${v.id})">삭제</button>
-          </div>
-        `;
-      }).join('') || `<div class="item-meta">구매를 잠깐 보류할 물건을 넣어 두세요.</div>`;
-    }
-
-    function renderRecords() {
-      const memberName = (id) => db.family.members.find(m => m.id === id)?.name || '가족';
-      const childQuoteList = document.getElementById('childQuoteList');
-      if (childQuoteList) childQuoteList.innerHTML = childQuotes().slice(0, 10).map(q => `
-        <div class="list-item">
-          <div class="item-body">
-            <div style="font-size:11px; font-weight:800; color:var(--primary); margin-bottom:4px;">${escapeHtml(q.type || '🗣️ 말')}</div>
-            <div class="item-title">"${escapeHtml(q.text)}"</div>
-            <div class="item-meta">${q.date}</div>
-          </div>
-          <button class="del-btn" onclick="delData('childQuotes', ${q.id})">삭제</button>
-        </div>
-      `).join('') || `<div class="item-meta">시현이의 말을 한 줄로 남겨 보세요.</div>`;
-
-      const familyDiaryList = document.getElementById('familyDiaryList');
-      if (familyDiaryList) familyDiaryList.innerHTML = familyDiaries().slice(0, 8).map(d => `
-        <div class="list-item">
-          <div style="font-size: 26px; margin-right: 10px;">${escapeHtml(d.emoji || '😊')}</div>
-          <div class="item-body">
-            <div class="item-title" style="font-weight:600; line-height:1.4;">${escapeHtml(d.text).replace(/\n/g, '<br>')}</div>
-            <div class="item-meta">${d.date}</div>
-          </div>
-          <button class="del-btn" onclick="delData('familyDiaries', ${d.id})">삭제</button>
-        </div>
-      `).join('') || `<div class="item-meta">가족 하루 기록을 남겨 보세요.</div>`;
-
-      const healthList = document.getElementById('healthList');
-      if (healthList) healthList.innerHTML = conditionLogs().slice(0, 8).map(h => `
-        <div class="list-item">
-          <div class="item-body"><div class="item-title">${memberName(h.member)} 수면 ${h.sleep}시간, 컨디션 ${h.cond}/5</div><div class="item-meta">${h.date}</div></div>
-          <button class="del-btn" onclick="delItem('health', ${h.id})">삭제</button>
-        </div>
-      `).join('') || `<div class="item-meta">가족 컨디션을 기록해 보세요.</div>`;
-    }
-
-    function renderStats() {
-      const portalLv = document.getElementById('portalLv');
-      const portalExpText = document.getElementById('portalExpText');
-      const portalExpFill = document.getElementById('portalExpFill');
-      const collGrid = document.getElementById('collGrid');
-      const collCount = document.getElementById('collCount');
-      if (portalLv) portalLv.innerText = db.progress.level;
-      if (portalExpText) portalExpText.innerText = `${db.progress.exp}/100`;
-      if (portalExpFill) portalExpFill.style.width = db.progress.exp + '%';
-      if (collGrid) {
-        const ownedCars = collection();
-        collGrid.innerHTML = CARS.map((c, index) => {
-          const owned = ownedCars.includes(c.i);
-          return `
-            <div data-car-index="${index}" style="opacity:${owned ? 1 : 0.15}; transition:0.3s; filter:${owned ? 'drop-shadow(0 5px 10px rgba(0,0,0,0.2))' : 'none'}; cursor:${owned ? 'pointer' : 'default'};">${c.i}</div>
-          `;
-        }).join('');
-        collGrid.querySelectorAll('[data-car-index]').forEach(item => {
-          item.onclick = () => {
-            const car = CARS[Number(item.dataset.carIndex)];
-            if (!car || !collection().includes(car.i)) return;
-            speakGameCue(`${car.n}. ${car.s}`);
-          };
-        });
-      }
-      if (collCount) collCount.innerText = collection().length;
-    }
-
-    function exportData() {
-      refreshLegacyCompatibility();
-      db.settings.hiddenAiKeySaved = Boolean(localStorage.getItem('GEMINI_3_FLASH_KEY'));
-      db.settings.ai.keySaved = Boolean(localStorage.getItem('GEMINI_3_FLASH_KEY'));
-      const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `FAMILY_NEXUS_BACKUP_${getToday()}.json`;
-      a.click();
-      URL.revokeObjectURL(a.href);
-    }
-
-    window.onload = () => {
-      const storedTheme = db.settings.theme || localStorage.getItem('MY_NEXUS_THEME');
-      if (storedTheme === 'dark') document.body.classList.add('dark');
-      checkDailyQuests();
-      save();
-      updateApiKeyStatus();
-    };
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(error => {
-          console.warn('ServiceWorker registration failed:', error);
-        });
-      });
-    }
-  </script>
-  <script src="./js/ttokttoki-engine.js"></script>
-  <script src="./js/story-data.js"></script>
-  <script src="./js/story-world.js"></script>
+    </div>
+  `;
+
+  if(window.renderStoryWorld) window.renderStoryWorld();
+  else setTimeout(()=>window.renderStoryWorld?.(), 0);
+  speakGuide('동화극장에 도착했어. 읽고 싶은 책을 골라 봐!');
+}
+
+const _origSetFilter = window.setStoryFilter;
+window.setStoryFilter = function(theme){
+  document.querySelectorAll('[data-theme]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.theme===theme);
+  });
+  if(typeof _origSetFilter==='function') _origSetFilter(theme);
+};
+
+/* ═══════════════════════════════════════════
+   GLOBAL EXPORTS & BOOT
+═══════════════════════════════════════════ */
+Object.assign(window, {
+  getToday, escapeHtml, loadStoredDB, loadDB, save,
+  gainExp, unlockCar, fireConfetti,
+  speakText, speakGuide, speakStory, stopSpeaking,
+  refreshLegacyCompatibility,
+  renderWorldMapHome, travelToZone, enterZone, closeToParkHome,
+  openImageLand, openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand,
+  cleanupActiveGame, openGameShell, openMemoryGame, openNumberCountGame, openLetterGame,
+  renderPlaceholderZone, openFullscreenGarage, openStoryTheater
+});
+
+refreshLegacyCompatibility();
+
+// 초기 부팅
+renderWorldMapHome();
+
+if(!sessionStorage.getItem('greeted')){
+  sessionStorage.setItem('greeted','1');
+  setTimeout(()=>speakGuide('시현아 안녕! 놀이공원에 온 걸 환영해!', true), 600);
+}
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('SW 등록 실패',e));
+  });
+}
+</script>
+
+<script src="./js/ttokttoki-engine.js"></script>
+<script src="./js/story-data.js"></script>
+<script src="./js/story-world.js"></script>
+<script src="./js/games/vehicle-memory.js"></script>
+<script src="./js/games/number-count.js"></script>
+<script src="./js/games/letter-play.js"></script>
 </body>
 </html>

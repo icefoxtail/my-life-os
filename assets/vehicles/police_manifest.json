@@ -1,0 +1,44 @@
+[
+  {
+    "id": "korean_police_car",
+    "category": "police",
+    "file": "assets/vehicles/police/korean_police_car.png",
+    "name_ko": "한국 경찰차",
+    "sound_ko": "위용위용 순찰해요!"
+  },
+  {
+    "id": "us_police_car",
+    "category": "police",
+    "file": "assets/vehicles/police/us_police_car.png",
+    "name_ko": "미국 경찰차",
+    "sound_ko": "우웅, 멋지게 달려요!"
+  },
+  {
+    "id": "police_motorcycle",
+    "category": "police",
+    "file": "assets/vehicles/police/police_motorcycle.png",
+    "name_ko": "경찰 오토바이",
+    "sound_ko": "부릉부릉 빠르게 달려요!"
+  },
+  {
+    "id": "swat_truck",
+    "category": "police",
+    "file": "assets/vehicles/police/swat_truck.png",
+    "name_ko": "경찰특공대차",
+    "sound_ko": "튼튼하게 출동해요!"
+  },
+  {
+    "id": "forensic_bus",
+    "category": "police",
+    "file": "assets/vehicles/police/forensic_bus.png",
+    "name_ko": "과학수사버스",
+    "sound_ko": "차근차근 단서를 찾아요!"
+  },
+  {
+    "id": "riot_police_bus",
+    "category": "police",
+    "file": "assets/vehicles/police/riot_police_bus.png",
+    "name_ko": "기동대 버스",
+    "sound_ko": "큰 버스가 안전하게 이동해요!"
+  }
+]

@@ -1,17 +1,22 @@
 {
-  "name": "우리집 넥서스",
-  "short_name": "우리집",
-  "description": "가족 생활 보드와 시현이 놀이터를 담은 Family Nexus",
+  "name": "시현이 칙칙폭폭 놀이터",
+  "short_name": "시현이놀이터",
+  "description": "시현이가 기차와 소방차를 타고 게임, 동화, 숫자, 글자 놀이를 즐기는 풀스크린 놀이터",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f6f5",
-  "theme_color": "#147d64",
+  "orientation": "portrait-primary",
+  "background_color": "#5BC8F5",
+  "theme_color": "#FF7A1A",
+  "lang": "ko",
+  "categories": ["kids", "education", "games"],
   "icons": [
     {
-      "src": "icon.svg",
+      "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "prefer_related_applications": false
 }

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "train",
+    "category": "transport",
+    "file": "assets/vehicles/transport/train.png",
+    "name_ko": "기차",
+    "sound_ko": "칙칙폭폭 달려요!"
+  },
+  {
+    "id": "bus",
+    "category": "transport",
+    "file": "assets/vehicles/transport/bus.png",
+    "name_ko": "버스",
+    "sound_ko": "빵빵 친구들을 태워요!"
+  },
+  {
+    "id": "car",
+    "category": "transport",
+    "file": "assets/vehicles/transport/car.png",
+    "name_ko": "자동차",
+    "sound_ko": "부릉부릉 달려요!"
+  },
+  {
+    "id": "taxi",
+    "category": "transport",
+    "file": "assets/vehicles/transport/taxi.png",
+    "name_ko": "택시",
+    "sound_ko": "띠띠 목적지로 가요!"
+  },
+  {
+    "id": "school_bus",
+    "category": "transport",
+    "file": "assets/vehicles/transport/school_bus.png",
+    "name_ko": "스쿨버스",
+    "sound_ko": "친구들을 데리러 가요!"
+  },
+  {
+    "id": "rocket",
+    "category": "transport",
+    "file": "assets/vehicles/transport/rocket.png",
+    "name_ko": "로켓",
+    "sound_ko": "슈우웅 하늘로 날아요!"
+  },
+  {
+    "id": "submarine",
+    "category": "transport",
+    "file": "assets/vehicles/transport/submarine.png",
+    "name_ko": "잠수함",
+    "sound_ko": "꼬르륵 바닷속으로 가요!"
+  },
+  {
+    "id": "tow_truck",
+    "category": "transport",
+    "file": "assets/vehicles/transport/tow_truck.png",
+    "name_ko": "견인차",
+    "sound_ko": "고장난 차를 도와줘요!"
+  },
+  {
+    "id": "garbage_truck",
+    "category": "transport",
+    "file": "assets/vehicles/transport/garbage_truck.png",
+    "name_ko": "청소차",
+    "sound_ko": "쓱싹쓱싹 깨끗하게 해요!"
+  },
+  {
+    "id": "tractor",
+    "category": "transport",
+    "file": "assets/vehicles/transport/tractor.png",
+    "name_ko": "트랙터",
+    "sound_ko": "덜컹덜컹 밭으로 가요!"
+  },
+  {
+    "id": "airplane",
+    "category": "transport",
+    "file": "assets/vehicles/transport/airplane.png",
+    "name_ko": "비행기",
+    "sound_ko": "슝 하늘을 날아요!"
+  },
+  {
+    "id": "helicopter",
+    "category": "transport",
+    "file": "assets/vehicles/transport/helicopter.png",
+    "name_ko": "헬리콥터",
+    "sound_ko": "두두두두 날아가요!"
+  }
+]

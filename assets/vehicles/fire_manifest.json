@@ -1,0 +1,65 @@
+[
+  {
+    "id": "pump_engine",
+    "category": "fire",
+    "file": "assets/vehicles/fire/pump_engine.png",
+    "name_ko": "펌프차",
+    "sound_ko": "삐뽀삐뽀, 물을 뿜어요!"
+  },
+  {
+    "id": "water_tanker",
+    "category": "fire",
+    "file": "assets/vehicles/fire/water_tanker.png",
+    "name_ko": "물탱크차",
+    "sound_ko": "출렁출렁 물을 싣고 가요!"
+  },
+  {
+    "id": "ladder_truck",
+    "category": "fire",
+    "file": "assets/vehicles/fire/ladder_truck.png",
+    "name_ko": "사다리차",
+    "sound_ko": "사다리가 쭉쭉 올라가요!"
+  },
+  {
+    "id": "aerial_ladder_truck",
+    "category": "fire",
+    "file": "assets/vehicles/fire/aerial_ladder_truck.png",
+    "name_ko": "고가사다리차",
+    "sound_ko": "높이높이 올라가요!"
+  },
+  {
+    "id": "articulating_ladder_truck",
+    "category": "fire",
+    "file": "assets/vehicles/fire/articulating_ladder_truck.png",
+    "name_ko": "굴절사다리차",
+    "sound_ko": "팔이 꺾여서 슈욱 움직여요!"
+  },
+  {
+    "id": "rescue_fire_truck",
+    "category": "fire",
+    "file": "assets/vehicles/fire/rescue_fire_truck.png",
+    "name_ko": "구조공작차",
+    "sound_ko": "구조 장비를 싣고 출동해요!"
+  },
+  {
+    "id": "airport_fire_truck",
+    "category": "fire",
+    "file": "assets/vehicles/fire/airport_fire_truck.png",
+    "name_ko": "공항소방차",
+    "sound_ko": "커다란 바퀴로 힘차게 출동해요!"
+  },
+  {
+    "id": "foam_fire_truck",
+    "category": "fire",
+    "file": "assets/vehicles/fire/foam_fire_truck.png",
+    "name_ko": "포소화차",
+    "sound_ko": "몽글몽글 거품을 뿜어요!"
+  },
+  {
+    "id": "fire_command_vehicle",
+    "category": "fire",
+    "file": "assets/vehicles/fire/fire_command_vehicle.png",
+    "name_ko": "소방 지휘차",
+    "sound_ko": "현장을 살피며 지휘해요!"
+  }
+]

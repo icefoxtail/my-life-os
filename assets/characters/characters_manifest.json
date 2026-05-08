@@ -1,0 +1,75 @@
+{
+  "assetFolder": "assets/characters",
+  "files": [
+    {
+      "id": "sihyeon",
+      "name": "시현",
+      "file": "sihyeon.png"
+    },
+    {
+      "id": "dad",
+      "name": "아빠",
+      "file": "dad.png"
+    },
+    {
+      "id": "mom",
+      "name": "엄마",
+      "file": "mom.png"
+    },
+    {
+      "id": "aunt",
+      "name": "고모",
+      "file": "aunt.png"
+    },
+    {
+      "id": "yuchan",
+      "name": "유찬",
+      "file": "yuchan.png"
+    },
+    {
+      "id": "nuni",
+      "name": "눈이",
+      "file": "nuni.png"
+    },
+    {
+      "id": "reumi",
+      "name": "름이",
+      "file": "reumi.png"
+    },
+    {
+      "id": "nyangi",
+      "name": "냥이",
+      "file": "nyangi.png"
+    },
+    {
+      "id": "nyangi_friend",
+      "name": "냥이친구",
+      "file": "nyangi_friend.png"
+    },
+    {
+      "id": "sicheoni",
+      "name": "시천이",
+      "file": "sicheoni.png"
+    },
+    {
+      "id": "rona",
+      "name": "로나",
+      "file": "rona.png"
+    },
+    {
+      "id": "grandpa",
+      "name": "할아버지",
+      "file": "grandpa.png"
+    },
+    {
+      "id": "grandma",
+      "name": "할머니",
+      "file": "grandma.png"
+    },
+    {
+      "id": "uncle",
+      "name": "삼촌",
+      "file": "uncle.png"
+    }
+  ]
+}
