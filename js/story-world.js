@@ -157,7 +157,7 @@
   function getStoryCoverEmoji(theme) {
     const value = String(theme || '');
     if (value.includes('자동차')) return '🚜';
-    if (value.includes('공룡')) return '🦖';
+    if (value.includes('공룡')) return 'Rex';
     if (value.includes('우주')) return '🚀';
     if (value.includes('바다')) return '🐳';
     if (value.includes('잠자리')) return '🌙';
@@ -437,6 +437,28 @@
     storyReadState.pageIndex = 0;
     storyReadState.pageSentenceIndex = 0;
     storyReadState.paragraphIndex = 0;
+
+    const coverEmoji = getStoryCoverEmoji(normalized.theme);
+    const coverHtml = `<div class="storybook-reader-hero">
+  ${normalized.coverImage
+    ? `<img src="${normalized.coverImage}" alt="${escapeHtml(normalized.title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">`
+    : ''}
+  <span class="storybook-reader-hero-fallback" style="${normalized.coverImage ? 'display:none;' : ''}">${coverEmoji}</span>
+</div>`;
+
+    document.getElementById('bookView').innerHTML = `
+      <article class="storybook-reader-book" onclick="nextStoryParagraph()">
+        <header class="storybook-reader-topline">
+          <button class="storybook-reader-back" type="button" onclick="event.stopPropagation(); closeStoryReader();">← 책장</button>
+          <div class="storybook-reader-page">1 / ${normalized.pages.length}</div>
+        </header>
+        ${coverHtml}
+        <section id="bookContentText" class="storybook-reader-text">
+          ${normalized.paragraphs.map((p, i) => `<p class="story-paragraph" data-story-paragraph="${i}">${escapeHtml(p).replace(/시현/g, "<span class='highlight'>시현</span>")}</p>`).join('')}
+        </section>
+      </article>
+    `;
+
     renderStoryPage();
     refreshLegacyCompatibility();
     localStorage.setItem(DB_KEY, JSON.stringify(db));
