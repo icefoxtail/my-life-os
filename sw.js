@@ -1,4 +1,3 @@
-// sw.js 전체 교체
 const CACHE_NAME = 'sihyeon-play-os-v1.0.9';
 
 const ASSETS = [
@@ -9,9 +8,11 @@ const ASSETS = [
 
   './js/voice-engine.js',
   './js/ttokttoki-engine.js',
+
   './js/data/story-pack-registry.js',
   './js/data/classic-stories-content.js',
   './js/data/classic-story-packs.js',
+
   './js/story-data.js',
   './js/story-world.js',
 
