@@ -401,7 +401,7 @@
         <div class="vz-card-grid">
           <section class="vz-card" aria-label="내 목소리 듣기">
             <div class="vz-card-visual">
-              <img class="vz-card-img" src="./assets/voice/cards/voice-record.png" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+              <img class="vz-card-img" src="./assets/voice/cards/voice-record.webp" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
               <span class="vz-card-fallback" style="display:none;">🎙️</span>
             </div>
             <div class="vz-card-title">내 목소리 듣기</div>
@@ -413,7 +413,7 @@
 
           <section class="vz-card" aria-label="노래 틀어줘">
             <div class="vz-card-visual">
-              <img class="vz-card-img" src="./assets/voice/cards/song-play.png" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+              <img class="vz-card-img" src="./assets/voice/cards/song-play.webp" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
               <span class="vz-card-fallback" style="display:none;">🎵</span>
             </div>
             <div class="vz-card-title">노래 틀어줘</div>
