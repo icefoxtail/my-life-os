@@ -56,9 +56,15 @@
       window.SihyeonVoice.play(id).catch(()=>{});
   }
 
-  function pickAnswer(level){
-    if(level === 1) return 1;
-    return Math.floor(Math.random()*8)+2;
+  function getAnswerMax(difficulty, level){
+    if(difficulty === 1) return 5;
+    if(difficulty === 2) return 9;
+    return level <= 3 ? 5 : 9;
+  }
+
+  function pickAnswer(level, difficulty){
+    const max = getAnswerMax(difficulty, level);
+    return Math.floor(Math.random()*max)+1;
   }
 
   function colsFor(n){
@@ -68,23 +74,24 @@
   }
 
   /* 7번: 라운드별 선택지 범위 (초반 좁게) */
-  function getChoices(answer, level){
+  function getChoices(answer, level, difficulty){
     const set = [answer];
+    const max = getAnswerMax(difficulty, level);
     let attempts = 0;
     while(set.length < 3 && attempts < 80){
       attempts++;
       let n;
-      if(level <= 2){
+      if(max <= 5){
         /* 1~2라운드: ±2 범위 */
         const offset = (Math.floor(Math.random()*4)+1) * (Math.random()<0.5?1:-1);
-        n = Math.max(1, Math.min(9, answer + offset));
+        n = Math.max(1, Math.min(max, answer + offset));
       } else {
-        n = Math.floor(Math.random()*9)+1;
+        n = Math.floor(Math.random()*max)+1;
       }
       if(!set.includes(n)) set.push(n);
     }
     /* 부족하면 순차 채우기 */
-    for(let n=1; n<=9 && set.length<3; n++){
+    for(let n=1; n<=max && set.length<3; n++){
       if(!set.includes(n)) set.push(n);
     }
     return shuffle(set);
@@ -105,6 +112,7 @@
       wrongCount:0,
       vehicles:[],
       gameVehicles:[],
+      difficulty:1,
       container:null,
       styleElement:null,
       isAnimating:false,
@@ -139,6 +147,10 @@
           <div class="nc-game-header">
             <div class="nc-dot-progress" id="ncDotProgress"></div>
             <div class="nc-home-btn" id="ncPlazaBtn">🏠</div>
+          </div>
+          <div class="nc-difficulty-tabs" id="ncDifficultyTabs">
+            <button type="button" class="nc-difficulty-tab active" data-difficulty="1">⭐1단계 1~5</button>
+            <button type="button" class="nc-difficulty-tab" data-difficulty="2">⭐⭐2단계 1~9</button>
           </div>
 
           <div class="nc-objects-area" id="ncObjectsArea">
@@ -198,6 +210,7 @@
       this.state.correctCount   = 0;
       this.state.wrongCount     = 0;
       this.state.isAnimating    = false;
+      this.state.difficulty     = this.state.difficulty || 1;
       const panel   = this.query('#ncSuccessPanel');
       const choices = this.query('#ncChoicesArea');
       if(panel)   panel.style.display = 'none';
@@ -216,7 +229,7 @@
 
       this.state.isAnimating   = false;
       this.state.wrongCount    = 0;
-      this.state.currentAnswer  = pickAnswer(this.state.currentLevel);
+      this.state.currentAnswer  = pickAnswer(this.state.currentLevel, this.state.difficulty);
       this.state.currentVehicle = this.state.gameVehicles[(this.state.currentLevel-1) % this.state.gameVehicles.length];
 
       this.applyTheme(this.state.currentLevel - 1);
@@ -390,7 +403,7 @@
       const area = this.query('#ncChoicesArea');
       if(!area) return;
       const ans     = this.state.currentAnswer;
-      const choices = getChoices(ans, this.state.currentLevel);
+      const choices = getChoices(ans, this.state.currentLevel, this.state.difficulty);
       area.innerHTML = '';
 
       choices.forEach(num => {
@@ -617,6 +630,17 @@
       const home2   = this.query('#ncPlazaBtn2');
       if(restart) restart.onclick = ()=> this.restart();
       if(next)    next.onclick    = ()=> this.startNewGameSession();
+      this.query('#ncDifficultyTabs')?.querySelectorAll('[data-difficulty]').forEach(btn=>{
+        btn.onclick = ()=>{
+          const difficulty = Number(btn.dataset.difficulty) || 1;
+          if(this.state.difficulty === difficulty || this.state.isAnimating) return;
+          this.state.difficulty = difficulty;
+          this.query('#ncDifficultyTabs')?.querySelectorAll('[data-difficulty]').forEach(tab=>{
+            tab.classList.toggle('active', Number(tab.dataset.difficulty) === difficulty);
+          });
+          this.startNewGameSession();
+        };
+      });
       const goHome = ()=>{ if(this.state.options.closeToParkHome) this.state.options.closeToParkHome(); };
       if(home)  home.onclick  = goHome;
       if(home2) home2.onclick = goHome;
@@ -742,6 +766,28 @@
           line-height:1;transition:transform .15s;
         }
         .nc-home-btn:active{transform:scale(.85);}
+        .nc-difficulty-tabs{
+          position:relative;z-index:10;
+          display:flex;justify-content:center;gap:8px;
+          padding:8px 10px 2px;
+        }
+        .nc-difficulty-tab{
+          min-height:36px;padding:0 12px;
+          border:3px solid rgba(255,255,255,.85);
+          border-radius:18px;
+          background:rgba(255,255,255,.62);
+          color:#1B5E20;
+          font-family:'Jua','Apple SD Gothic Neo',sans-serif;
+          font-size:clamp(14px,3.5vw,18px);
+          font-weight:900;
+          box-shadow:0 4px 0 rgba(0,0,0,.12);
+          cursor:pointer;
+        }
+        .nc-difficulty-tab.active{
+          background:#FFD93D;
+          color:#3E2723;
+          box-shadow:0 4px 0 #F57F17;
+        }
 
         /* ════════════════════════════
            ★ 3·2·1 카운트다운 오버레이
@@ -1027,6 +1073,7 @@
       this.state.correctCount   = 0;
       this.state.wrongCount     = 0;
       this.state.isAnimating    = false;
+      this.state.difficulty     = 1;
       this.state.gameVehicles   = [];
       this.state.container      = null;
       this.state.options        = {};

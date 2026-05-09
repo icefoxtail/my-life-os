@@ -299,17 +299,37 @@
     if (!story) return false;
     const id = String(story.id || story.sourceId || '').trim();
     if (!id.startsWith('classic_')) return false;
+
     const cfg = CLASSIC_STORY_CONFIGS[id];
     const pack = getStoryPackByStory(story) || getClassicPackBySeedId(id);
-    return Boolean(story.imageReady || cfg?.imageReady || pack?.imageReady || CLASSIC_STORY_PACK_ID_BY_SEED_ID[id]);
+    const contentKey = getStoryContentKey(story) || cfg?.contentKey || '';
+    const full = contentKey ? window.STORY_CONTENTS?.[contentKey] : null;
+    const packTexts = pack ? flattenPackTexts(pack) : [];
+
+    return Boolean(
+      story.imageReady ||
+      cfg?.imageReady ||
+      pack?.imageReady ||
+      CLASSIC_STORY_PACK_ID_BY_SEED_ID[id] ||
+      packTexts.length ||
+      full?.paragraphs?.length
+    );
   }
 
   function getAllIllustratedClassicStories() {
     const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
+    const seen = new Set();
+
     const stories = library
       .filter(isIllustratedClassicSeed)
       .map(normalizeStory)
-      .filter(story => story?.title);
+      .filter(story => story?.title)
+      .filter(story => {
+        const key = String(story.sourceId || story.id || story.title);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
 
     if (stories.length) {
       return stories.sort((a, b) => getClassicStoryNumber(a) - getClassicStoryNumber(b));
@@ -699,11 +719,55 @@
   function readStoryById(storyId) {
     requestStoryLandscapeMode();
     showStoryReader();
+
+    const id = String(storyId || '').trim();
     const savedStories = renderSavedStories();
-    const saved = savedStories.find(item => item.id === storyId || item.savedId === storyId);
-    const seed = window.STORY_LIBRARY.find(item => item.id === storyId || item.contentKey === storyId || getStoryContentKey(item) === storyId);
-    const target = saved || seed;
-    const normalized = normalizeStory(target);
+
+    const saved = savedStories.find(item =>
+      String(item.id || '') === id ||
+      String(item.savedId || '') === id ||
+      String(item.packId || '') === id ||
+      String(item.storyPackId || '') === id
+    );
+
+    const directPack = window.StoryPackRegistry?.getPackById?.(id) || getClassicPackBySeedId(id);
+
+    const seed = (window.STORY_LIBRARY || []).find(item =>
+      String(item.id || '') === id ||
+      String(item.contentKey || '') === id ||
+      String(getStoryContentKey(item) || '') === id ||
+      String(item.packId || '') === id ||
+      String(item.storyPackId || '') === id ||
+      String(item.sourceId || '') === id
+    );
+
+    let target = saved || directPack || seed;
+
+    if (!target && directPack) target = directPack;
+
+    let normalized = normalizeStory(target);
+
+    if ((!normalized || !normalized.paragraphs || !normalized.paragraphs.length) && directPack) {
+      const packTexts = flattenPackTexts(directPack);
+      if (packTexts.length) {
+        normalized = normalizeStory({
+          id: directPack.seedId || directPack.id || id,
+          sourceId: directPack.seedId || id,
+          packId: directPack.id,
+          storyPackId: directPack.id,
+          title: directPack.title || '명작 동화',
+          theme: directPack.theme || '세계명작',
+          desc: directPack.desc || directPack.summary || '',
+          summary: directPack.summary || directPack.desc || '',
+          imageDir: directPack.imageDir || '',
+          coverImage: directPack.coverImage || '',
+          imageReady: Boolean(directPack.imageReady),
+          paragraphs: packTexts,
+          pages: directPack.pages || []
+        });
+      }
+    }
+
     if (normalized?.paragraphs?.length) {
       renderStoryReader(normalized);
       setTimeout(() => startStoryReading(normalized), 450);
@@ -1465,6 +1529,15 @@ ${JSON.stringify(story)}
   window.readStory = readStory;
   window.generateGeminiStory = generateGeminiStory;
   window.renderStoryWorld = renderStoryWorld;
+  function bootStoryWorldIfMounted() {
+    const grid = document.getElementById('storyLibraryGrid');
+    if (!grid) return;
+    storyShelfStage = 'classics';
+    classicShelfPage = 0;
+    renderStoryLibrary();
+  }
+
+  window.bootStoryWorldIfMounted = bootStoryWorldIfMounted;
   window.validateGeneratedStory = validateGeneratedStory;
   window.buildExpandStoryPrompt = buildExpandStoryPrompt;
 })();

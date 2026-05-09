@@ -788,13 +788,25 @@ const ZONE_CONFIGS = {
     character:'sicheoni',
     greeting:'시천이랑 자동차 놀이! 뭐 하고 싶어?',
     games: [
-      { id:'garage', title:'자동차 정비소', emoji:'🔧', desc:'드래그로 차를 고쳐요', action:'openFullscreenGarage()', isNew:false },
+      { id:'garage',  title:'자동차 정비소', emoji:'🔧', desc:'드래그로 차를 고쳐요', action:'openFullscreenGarage()', isNew:false },
+      { id:'parking', title:'주차장',       emoji:'🅿️', desc:'차를 주차해요',       action:'openParkingGame()',      isNew:true  },
     ]
   }
 };
 
 const CARS = ['🚗','🚕','🚙','🚌','🚒','🚑','🚓','🚚','🚜','🏎️','🚛','🚐'];
 let garageCleanup = null;
+let _gameTimer = null;
+
+function startGameTimer() {
+  clearGameTimer();
+  _gameTimer = setTimeout(() => {
+    speakGuide('10분이 지났어! 잠깐 쉬어볼까?', true);
+  }, 10 * 60 * 1000);
+}
+function clearGameTimer() {
+  if (_gameTimer) { clearTimeout(_gameTimer); _gameTimer = null; }
+}
 
 const DEFAULT_DB = {
   version:'2.0.0',
@@ -1196,6 +1208,7 @@ function enterZone(zoneId){
   else renderPlaceholderZone(zoneId);
 }
 function closeToParkHome(){
+  clearGameTimer();
   cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
   if(window.stopStoryReading) window.stopStoryReading(true);
   renderWorldMapHome();
@@ -1235,6 +1248,7 @@ function renderPlaceholderZone(zoneId){
 ═══════════════════════════════════════════ */
 function openGameShell(title, bodyId, bg='linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)'){
   cleanupActiveGame(); closeGarageHandlers();
+  startGameTimer();
   const root=document.getElementById('sihyeonPlayOS');
   root.innerHTML=`
     <div class="game-play-screen" style="background:${bg}">
@@ -1267,6 +1281,12 @@ function openColorBalloonGame(){
   if(window.SihyeonGames?.colorBalloon?.render){
     window.SihyeonGames.colorBalloon.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">색깔 풍선을 불러오지 못했어요.</div>';
+}
+function openParkingGame(){
+  const t=openGameShell('🅿️ 주차장','parkingTarget','linear-gradient(160deg,#e0f7fa 0%,#4CAF50 100%)');
+  if(window.SihyeonGames?.parkingLot?.render){
+    window.SihyeonGames.parkingLot.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">주차장을 불러오지 못했어요.</div>';
 }
 
 /* ═══════════════════════════════════════════
@@ -1384,8 +1404,16 @@ function openStoryTheater(){
       </section>
     </div>`;
 
-  if(window.renderStoryGrid) window.renderStoryGrid('전체');
-  else setTimeout(()=>window.renderStoryGrid?.('전체'), 0);
+  if (window.renderStoryWorld) {
+    window.renderStoryWorld();
+  } else if (window.renderStoryGrid) {
+    window.renderStoryGrid('전체');
+  } else {
+    setTimeout(() => {
+      if (window.renderStoryWorld) window.renderStoryWorld();
+      else window.renderStoryGrid?.('전체');
+    }, 0);
+  }
   speakGuide('동화극장에 도착했어. 읽고 싶은 책을 골라봐!', true);
 }
 
@@ -1504,7 +1532,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberCountGame, openLetterGame, openColorBalloonGame,
+  openMemoryGame, openNumberCountGame, openLetterGame, openColorBalloonGame, openParkingGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
   filterStoriesBySearch, loadMoreStories,
   renderStoryGrid, _renderStoryGridPage
@@ -1523,6 +1551,11 @@ window.addEventListener('load', () => {
       }
     }, 0);
   };
+  setTimeout(() => {
+    if (document.getElementById('storyLibraryGrid') && window.bootStoryWorldIfMounted) {
+      window.bootStoryWorldIfMounted();
+    }
+  }, 0);
 });
 
 if(!sessionStorage.getItem('greeted')){
@@ -1551,5 +1584,6 @@ if('serviceWorker' in navigator){
 <script src="./js/games/number-count.js"></script>
 <script src="./js/games/letter-play.js"></script>
 <script src="./js/games/color-balloon.js"></script>
+<script src="./js/games/parking-lot.js"></script>
 </body>
 </html>

@@ -453,6 +453,7 @@
     if (!cardData || !cardEl || cardEl.classList.contains('is-open') || cardEl.classList.contains('is-matched')) return;
     cardEl.classList.add('is-open');
     state.flipped.push({ index, data: cardData, el: cardEl });
+    state.options.speakGuide?.(cardData.sound || cardData.name);
     if (state.flipped.length === 2) checkMemoryMatch();
   }
 
@@ -469,9 +470,9 @@
         state.flipped = [];
         state.locked = false;
         playGameVoice('games.memory.match');
-        state.options.speakGuide?.(`${first.data.name}. 짝을 찾았어!`, true);
+        state.options.speakGuide?.(`${first.data.sound || first.data.name}. 짝을 찾았어!`, true);
         if (state.matched >= CARD_COUNT) showMemorySuccess();
-      }, 260);
+      }, 400);
       return;
     }
     window.setTimeout(() => {
@@ -493,21 +494,26 @@
     const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
     state.options.speakGuide?.(`${label} 짝을 모두 찾았어. 정말 멋져!`, true);
     
-    const panel = document.createElement('div');
-    panel.className = 'memory-success-panel';
-    panel.innerHTML = `
-      <div class="memory-success-box">
-        <div class="memory-success-icon">🏁</div>
-        <div class="memory-success-title">다 찾았어!</div>
-        <div class="memory-success-actions">
-          <button class="memory-game-btn" type="button" data-action="restart-success">다시 하기</button>
-          <button class="memory-game-btn" type="button" data-action="next">다음 게임</button>
+    const matchedCards = Array.from(state.container.querySelectorAll('.memory-card.is-matched'));
+    const totalDelay = matchedCards.length * 80 + 5000;
+    window.setTimeout(() => {
+      if (!state.container || state.matched < CARD_COUNT || state.container.querySelector('.memory-success-panel')) return;
+      const panel = document.createElement('div');
+      panel.className = 'memory-success-panel';
+      panel.innerHTML = `
+        <div class="memory-success-box">
+          <div class="memory-success-icon">🏁</div>
+          <div class="memory-success-title">다 찾았어!</div>
+          <div class="memory-success-actions">
+            <button class="memory-game-btn" type="button" data-action="restart-success">다시 하기</button>
+            <button class="memory-game-btn" type="button" data-action="next">다음 게임</button>
+          </div>
         </div>
-      </div>
-    `;
-    state.container.querySelector('.memory-game-container')?.appendChild(panel);
-    panel.querySelector('[data-action="restart-success"]')?.addEventListener('click', restartMemoryGame);
-    panel.querySelector('[data-action="next"]')?.addEventListener('click', nextMemoryGame);
+      `;
+      state.container.querySelector('.memory-game-container')?.appendChild(panel);
+      panel.querySelector('[data-action="restart-success"]')?.addEventListener('click', restartMemoryGame);
+      panel.querySelector('[data-action="next"]')?.addEventListener('click', nextMemoryGame);
+    }, totalDelay);
   }
 
   function restartMemoryGame() {
