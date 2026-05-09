@@ -5,6 +5,61 @@
   const CARD_COUNT = 12;
   const PAIR_COUNT = CARD_COUNT / 2;
 
+  const EMOJI_CATEGORIES = {
+    '🍎과일': [
+      { id:'fruit_1',  name:'사과',   emoji:'🍎' },
+      { id:'fruit_2',  name:'바나나', emoji:'🍌' },
+      { id:'fruit_3',  name:'딸기',   emoji:'🍓' },
+      { id:'fruit_4',  name:'포도',   emoji:'🍇' },
+      { id:'fruit_5',  name:'수박',   emoji:'🍉' },
+      { id:'fruit_6',  name:'귤',     emoji:'🍊' },
+      { id:'fruit_7',  name:'레몬',   emoji:'🍋' },
+      { id:'fruit_8',  name:'복숭아', emoji:'🍑' },
+      { id:'fruit_9',  name:'키위',   emoji:'🥝' },
+      { id:'fruit_10', name:'체리',   emoji:'🍒' },
+      { id:'fruit_11', name:'파인애플',emoji:'🍍' },
+      { id:'fruit_12', name:'망고',   emoji:'🥭' },
+      { id:'fruit_13', name:'배',     emoji:'🍐' },
+      { id:'fruit_14', name:'블루베리',emoji:'🫐' },
+    ],
+    '🍕음식': [
+      { id:'food_1',  name:'피자',      emoji:'🍕' },
+      { id:'food_2',  name:'라면',      emoji:'🍜' },
+      { id:'food_3',  name:'밥',        emoji:'🍚' },
+      { id:'food_4',  name:'케이크',    emoji:'🎂' },
+      { id:'food_5',  name:'아이스크림',emoji:'🍦' },
+      { id:'food_6',  name:'햄버거',    emoji:'🍔' },
+      { id:'food_7',  name:'초밥',      emoji:'🍣' },
+      { id:'food_8',  name:'떡볶이',    emoji:'🌶️' },
+      { id:'food_9',  name:'치킨',      emoji:'🍗' },
+      { id:'food_10', name:'도넛',      emoji:'🍩' },
+      { id:'food_11', name:'사탕',      emoji:'🍭' },
+      { id:'food_12', name:'쿠키',      emoji:'🍪' },
+      { id:'food_13', name:'빵',        emoji:'🍞' },
+      { id:'food_14', name:'스파게티',  emoji:'🍝' },
+      { id:'food_15', name:'타코',      emoji:'🌮' },
+    ],
+    '🐶동물': [
+      { id:'animal_1',  name:'강아지', emoji:'🐶' },
+      { id:'animal_2',  name:'고양이', emoji:'🐱' },
+      { id:'animal_3',  name:'토끼',   emoji:'🐰' },
+      { id:'animal_4',  name:'곰',     emoji:'🐻' },
+      { id:'animal_5',  name:'사자',   emoji:'🦁' },
+      { id:'animal_6',  name:'코끼리', emoji:'🐘' },
+      { id:'animal_7',  name:'기린',   emoji:'🦒' },
+      { id:'animal_8',  name:'펭귄',   emoji:'🐧' },
+      { id:'animal_9',  name:'오리',   emoji:'🐥' },
+      { id:'animal_10', name:'개구리', emoji:'🐸' },
+      { id:'animal_11', name:'판다',   emoji:'🐼' },
+      { id:'animal_12', name:'호랑이', emoji:'🐯' },
+      { id:'animal_13', name:'원숭이', emoji:'🐒' },
+      { id:'animal_14', name:'돼지',   emoji:'🐷' },
+      { id:'animal_15', name:'닭',     emoji:'🐔' },
+      { id:'animal_16', name:'양',     emoji:'🐑' },
+    ],
+  };
+  let selectedCategory = '🚗탈것'; // 기본값
+
   const state = {
     container: null,
     options: {},
@@ -201,6 +256,40 @@
         .memory-board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .memory-card-face { border-radius: 18px; border-width: 4px; }
       }
+      .memory-cat-bar {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 0 8px;
+        flex-shrink: 0;
+      }
+      .memory-cat-bar::-webkit-scrollbar { display: none; }
+      .memory-cat-chip {
+        flex-shrink: 0;
+        min-height: 52px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.82);
+        border: 4px solid #fff;
+        box-shadow: 0 5px 0 rgba(0,0,0,0.14);
+        font-size: clamp(15px, 4vw, 19px);
+        font-weight: 900;
+        cursor: pointer;
+        white-space: nowrap;
+        touch-action: manipulation;
+        transition: transform 0.1s;
+      }
+      .memory-cat-chip:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.14); }
+      .memory-cat-chip.active {
+        background: linear-gradient(180deg,#fff 0%,#ffe577 100%);
+        box-shadow: 0 5px 0 rgba(200,140,0,0.25);
+      }
+      .memory-card-front .memory-emoji-face {
+        font-size: clamp(44px, 14vw, 72px);
+        line-height: 1;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -241,6 +330,15 @@
     ]));
   }
 
+  function pickRoundEmoji() {
+    const pool = EMOJI_CATEGORIES[selectedCategory] || [];
+    const picked = shuffle(pool).slice(0, PAIR_COUNT);
+    return shuffle(picked.flatMap(item => [
+      { ...item, uid: `${item.id}-a`, isEmoji: true },
+      { ...item, uid: `${item.id}-b`, isEmoji: true }
+    ]));
+  }
+
   function render(container, options = {}) {
     destroy();
     injectStyle();
@@ -272,33 +370,49 @@
 
   function startRound() {
     if (!state.container) return;
-    state.cards = pickRoundVehicles();
+    state.cards = selectedCategory === '🚗탈것'
+      ? pickRoundVehicles()
+      : pickRoundEmoji();
     state.flipped = [];
     state.matched = 0;
     state.locked = false;
     renderMemoryBoard();
     playGameVoice('games.memory.intro');
-    state.options.speakGuide?.('자동차 카드 두 장을 골라서 같은 친구를 찾아 보자!', true);
+    const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
+    state.options.speakGuide?.(`${label} 카드 두 장을 골라서 같은 친구를 찾아 보자!`, true);
   }
 
   function renderMemoryBoard() {
+    const catBar = `
+      <div class="memory-cat-bar">
+        ${['🚗탈것', ...Object.keys(EMOJI_CATEGORIES)].map(cat => `
+          <button class="memory-cat-chip ${selectedCategory === cat ? 'active' : ''}"
+            type="button" data-cat="${cat}">${cat}</button>
+        `).join('')}
+      </div>
+    `;
+
     state.container.innerHTML = `
       <div class="memory-game-container">
         <div class="memory-game-top">
-          <div class="memory-game-pill">🚗 ${state.round}판</div>
+          <div class="memory-game-pill">🎴 ${state.round}판</div>
           <div class="memory-game-actions">
             <button class="memory-game-btn" type="button" data-action="restart">다시</button>
             <button class="memory-game-btn" type="button" data-action="home">홈</button>
           </div>
         </div>
-        <div class="memory-board" role="grid" aria-label="자동차 카드 맞추기">
+        ${catBar}
+        <div class="memory-board" role="grid" aria-label="카드 맞추기">
           ${state.cards.map((card, index) => `
-            <button class="memory-card" type="button" data-index="${index}" aria-label="자동차 카드">
+            <button class="memory-card" type="button" data-index="${index}" aria-label="카드">
               <span class="memory-card-inner">
                 <span class="memory-card-face memory-card-back">★</span>
                 <span class="memory-card-face memory-card-front">
-                  <img src="./${card.file}" alt="${escapeAttr(card.name)}" draggable="false">
-                  <span class="memory-card-fallback" hidden>🚗</span>
+                  ${card.isEmoji
+                    ? `<span class="memory-emoji-face">${card.emoji}</span>`
+                    : `<img src="./${card.file}" alt="${escapeAttr(card.name)}" draggable="false">
+                       <span class="memory-card-fallback" hidden>🚗</span>`
+                  }
                 </span>
               </span>
             </button>
@@ -320,6 +434,14 @@
       img.addEventListener('error', () => {
         img.hidden = true;
         img.nextElementSibling.hidden = false;
+      });
+    });
+
+    root.querySelectorAll('.memory-cat-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        selectedCategory = chip.dataset.cat;
+        state.round = 1;
+        startRound();
       });
     });
   }
@@ -366,7 +488,11 @@
     state.options.fireConfetti?.();
     state.options.gainExp?.(20);
     playGameVoice('games.memory.complete');
-    state.options.speakGuide?.('자동차 짝을 모두 찾았어. 정말 멋져!', true);
+    
+    // 카테고리 이름 가이드 대응 (완료 멘트)
+    const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
+    state.options.speakGuide?.(`${label} 짝을 모두 찾았어. 정말 멋져!`, true);
+    
     const panel = document.createElement('div');
     panel.className = 'memory-success-panel';
     panel.innerHTML = `
