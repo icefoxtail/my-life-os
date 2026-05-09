@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -7,15 +7,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#5BC8F5">
-  <title>시현이 놀이터 OS</title>
+  <title>?쒗쁽????댄꽣 OS</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235BC8F5'/%3E%3Ccircle cx='22' cy='42' r='7' fill='%231A2E3B'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%231A2E3B'/%3E%3Cpath d='M10 37h44l-5-15H24L15 31z' fill='%23FFD93D'/%3E%3Cpath d='M24 22h17l4 11H18z' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        COLOR SYSTEM & RESET
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     :root {
       --sky-top:   #5BC8F5;
       --sky-mid:   #A8E6FF;
@@ -40,9 +40,9 @@
     button { border: 0; cursor: pointer; color: inherit; background: none; font: inherit; }
     button:focus { outline: none; }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        CONFETTI
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     #particle-container { position: fixed; inset: 0; z-index: 9000; pointer-events: none; overflow: hidden; }
     .particle { position: absolute; border-radius: 4px; animation: confettiFall linear forwards; }
     @keyframes confettiFall {
@@ -50,9 +50,9 @@
       100% { transform: translateY(110vh)  rotate(720deg); opacity: 0; }
     }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        APP SHELL & IMAGE MAP
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     #sihyeonPlayOS { position: fixed; inset: 0; overflow: hidden; }
 
     .world-map-screen, .image-land-screen {
@@ -81,7 +81,7 @@
       position: absolute; inset: 0; z-index: 10;
     }
 
-    /* ─── 존/핫스팟 버튼 ─── */
+    /* ??? 議??レ뒪??踰꾪듉 ??? */
     .world-zone, .image-hotspot {
       position: absolute; transform: translate(-50%, -50%);
       background: rgba(255,255,255,0); border: 0; border-radius: 28px;
@@ -94,9 +94,9 @@
       transform: translate(-50%, -50%) scale(0.96);
     }
 
-    /* ═══════════════════════════════════════
-       ★ 존 레이블 (항상 표시)
-    ═══════════════════════════════════════ */
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+       ??議??덉씠釉?(??긽 ?쒖떆)
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .zone-label {
       position: absolute;
       top: -32px;
@@ -124,7 +124,7 @@
     .world-map-screen.map-fallback .zone-emoji-fallback,
     .image-land-screen.map-fallback .zone-emoji-fallback { display: block; }
 
-    /* ─── 기차/아바타/캐릭터 ─── */
+    /* ??? 湲곗감/?꾨컮?/罹먮┃????? */
     .train-sprite {
       position: absolute; width: clamp(62px,13vw,94px); height: clamp(62px,13vw,94px);
       transform: translate(-50%,-50%);
@@ -191,7 +191,7 @@
     .land-character img:not([style*="display: none"]) + .character-emoji-fallback,
     .land-sihyeon-runner img:not([style*="display: none"]) + .character-emoji-fallback { display:none; }
 
-    /* ─── 캐릭터 이름 뱃지 ─── */
+    /* ??? 罹먮┃???대쫫 諭껋? ??? */
     .character-name-badge {
       position: absolute;
       top: calc(100% + 5px);
@@ -231,9 +231,9 @@
     @media (min-aspect-ratio:9/16) { .world-map-frame { height:100dvh; width:auto; } }
     @media (max-aspect-ratio:9/16) { .world-map-frame { width:100vw; height:auto; } }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        FULLSCREEN ZONE BASE
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .fullscreen-zone {
       position:absolute; inset:0; display:flex; flex-direction:column; overflow:hidden; z-index:2;
       animation:zoneEnter 0.35s cubic-bezier(0.25,0.9,0.3,1) both;
@@ -283,9 +283,9 @@
     }
     .zone-body::-webkit-scrollbar { display:none; }
 
-    /* ═══════════════════════════════════════
-       ★ 존 랜드 — 캐릭터 스트립 + 말풍선
-    ═══════════════════════════════════════ */
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+       ??議??쒕뱶 ??罹먮┃???ㅽ듃由?+ 留먰뭾??
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .zone-character-strip {
       position:relative; z-index:10; flex-shrink:0;
       display:flex; align-items:flex-end; justify-content:flex-start;
@@ -309,9 +309,9 @@
       box-shadow:0 4px 0 rgba(0,0,0,0.10); max-width:220px; line-height:1.4;
     }
 
-    /* ═══════════════════════════════════════
-       ★ 게임 카드 그리드 (스케일러블)
-    ═══════════════════════════════════════ */
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+       ??寃뚯엫 移대뱶 洹몃━??(?ㅼ??쇰윭釉?
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .zone-game-grid {
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -361,9 +361,9 @@
       pointer-events:none;
     }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        GAME PLAY SCREEN
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .game-play-screen {
       position:fixed; inset:0; overflow:hidden; display:flex; flex-direction:column;
       background:var(--sky-top); z-index:2;
@@ -377,9 +377,9 @@
     @media (max-width:520px) { .game-play-body { max-width:none; padding:8px; } }
     @media (min-width:768px) { .game-play-body { padding:22px; } }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        PLACEHOLDER ZONE
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .placeholder-body {
       flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
       gap:20px; text-align:center; padding:20px; position:relative; z-index:5;
@@ -391,9 +391,9 @@
     @keyframes iconFloat { 0%,100%{transform:translateY(0) rotate(-2deg);} 50%{transform:translateY(-14px) rotate(2deg);} }
     .placeholder-text { font-size:clamp(22px,6vw,40px); color:#fff; text-shadow:0 3px 0 rgba(0,0,0,0.22); }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        GARAGE
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .garage-stage { position:absolute; inset:0; display:grid; place-items:center; }
     .garage-car-base { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:clamp(140px,38vw,240px); opacity:0.22; pointer-events:none; }
     .garage-target {
@@ -416,9 +416,9 @@
       font-size:clamp(18px,5vw,26px); text-align:center; box-shadow:0 8px 0 rgba(0,0,0,0.12);
     }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        STORY THEATER
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .story-bg { position:absolute; inset:0; z-index:0; background:linear-gradient(180deg,#2D0060 0%,#6A0DAD 35%,#FFD700 35%,#FF8C00 100%); }
     .story-stars { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
     .star { position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; animation:starTwinkle 2s ease-in-out infinite; }
@@ -524,9 +524,9 @@
       .zgc-image, .zgc-emoji-fallback { min-height:96px; }
     }
 
-    /* ═══════════════════════════════════════
-       STORYBOOK MODE — 표지/책장/리더
-    ═══════════════════════════════════════ */
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+       STORYBOOK MODE ???쒖?/梨낆옣/由щ뜑
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .storybook-intro-grid {
       min-height: calc(100dvh - 124px);
       display: grid !important;
@@ -575,7 +575,7 @@
       50%      { transform: translateY(-8px) rotate(0.5deg); }
     }
 
-    /* ─── 책장 그리드 ─── */
+    /* ??? 梨낆옣 洹몃━????? */
     .storybook-featured-grid {
       display: grid !important;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -625,7 +625,7 @@
       background: rgba(255,255,255,0.96);
     }
 
-    /* ─── 리더 오버레이 ─── */
+    /* ??? 由щ뜑 ?ㅻ쾭?덉씠 ??? */
     #storyReaderView { display: none; }
     #storyReaderView .story-reader-actions,
     #storyReaderView .story-voice-controls { display: none !important; }
@@ -739,9 +739,9 @@
       background:rgba(255,0,0,0.18); border:2px dashed rgba(255,0,0,0.65);
     }
 
-    /* ═══════════════════════════════════════
+    /* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
        PARENT DASHBOARD & PIN
-    ═══════════════════════════════════════ */
+    ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
     .btn-parent-lock {
       position: absolute; top: max(16px, env(safe-area-inset-top)); right: 16px;
       width: 44px; height: 44px; border-radius: 50%;
@@ -827,32 +827,32 @@
 <main id="sihyeonPlayOS"></main>
 
 <script>
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    DB & CONSTANTS
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 const DB_KEY = 'MY_NEXUS_V3_MONSTER';
 window.DB_KEY = DB_KEY;
-var currentStoryFilter = window.currentStoryFilter || '전체';
+var currentStoryFilter = window.currentStoryFilter || '?꾩껜';
 window.currentStoryFilter = currentStoryFilter;
 
 const WORLD_ASSETS = {
-  main:    './assets/world/park_main.png',
-  game:    './assets/world/game_land_map.png',
-  numbers: './assets/world/number_land_map.png',
-  letters: './assets/world/letter_land_map.png',
-  cars:    './assets/world/car_land_map.png',
-  story:   './assets/world/story_land_map.png',
-  voice:   './assets/world/voice_land_map.png'
+  main:    './assets/world/park_main.webp',
+  game:    './assets/world/game_land_map.webp',
+  numbers: './assets/world/number_land_map.webp',
+  letters: './assets/world/letter_land_map.webp',
+  cars:    './assets/world/car_land_map.webp',
+  story:   './assets/world/story_land_map.webp',
+  voice:   './assets/world/voice_land_map.webp'
 };
 
 const WORLD_ZONES = {
-  game:    { x:'29%', y:'23%', w:'30%', h:'20%', label:'게임랜드',   emoji:'🎮' },
-  numbers: { x:'72%', y:'24%', w:'30%', h:'21%', label:'숫자놀이터', emoji:'🔢' },
-  letters: { x:'27%', y:'47%', w:'32%', h:'22%', label:'글자놀이터', emoji:'🔤' },
-  cars:    { x:'73%', y:'49%', w:'32%', h:'24%', label:'자동차마을', emoji:'🚗' },
-  story:   { x:'29%', y:'74%', w:'34%', h:'24%', label:'동화나라',   emoji:'🏰' },
-  voice:   { x:'72%', y:'76%', w:'32%', h:'23%', label:'말하기광장', emoji:'🎤' },
-  station: { x:'50%', y:'88%', label:'중앙역', emoji:'🚉' }
+  game:    { x:'29%', y:'23%', w:'30%', h:'20%', label:'寃뚯엫?쒕뱶',   emoji:'?렜' },
+  numbers: { x:'72%', y:'24%', w:'30%', h:'21%', label:'?レ옄??댄꽣', emoji:'?뵢' },
+  letters: { x:'27%', y:'47%', w:'32%', h:'22%', label:'湲?먮??댄꽣', emoji:'?뵥' },
+  cars:    { x:'73%', y:'49%', w:'32%', h:'24%', label:'?먮룞李⑤쭏??, emoji:'?슅' },
+  story:   { x:'29%', y:'74%', w:'34%', h:'24%', label:'?숉솕?섎씪',   emoji:'?룿' },
+  voice:   { x:'72%', y:'76%', w:'32%', h:'23%', label:'留먰븯湲곌킅??, emoji:'?렎' },
+  station: { x:'50%', y:'88%', label:'以묒븰??, emoji:'?쉲' }
 };
 
 const ZONE_PATHS = {
@@ -865,79 +865,79 @@ const ZONE_PATHS = {
 };
 
 const CHARACTER_ASSETS = {
-  sihyeon:  { name:'시현',   file:'./assets/characters/sihyeon.png',  emoji:'👦🏻' },
-  dad:      { name:'아빠',   file:'./assets/characters/dad.png',      emoji:'👨' },
-  mom:      { name:'엄마',   file:'./assets/characters/mom.png',      emoji:'👩' },
-  sicheoni: { name:'시천이', file:'./assets/characters/sicheoni.png', emoji:'🧸' },
-  rona:     { name:'로나',   file:'./assets/characters/rona.png',     emoji:'✨' },
-  reumi:    { name:'름이',   file:'./assets/characters/reumi.png',    emoji:'🐱' },
-  nuni:     { name:'눈이',   file:'./assets/characters/nuni.png',     emoji:'🐈' }
+  sihyeon:  { name:'?쒗쁽',   file:'./assets/characters/sihyeon.png',  emoji:'?뫂?뤋' },
+  dad:      { name:'?꾨튌',   file:'./assets/characters/dad.png',      emoji:'?뫅' },
+  mom:      { name:'?꾨쭏',   file:'./assets/characters/mom.png',      emoji:'?뫆' },
+  sicheoni: { name:'?쒖쿇??, file:'./assets/characters/sicheoni.png', emoji:'?㎏' },
+  rona:     { name:'濡쒕굹',   file:'./assets/characters/rona.png',     emoji:'?? },
+  reumi:    { name:'由꾩씠',   file:'./assets/characters/reumi.png',    emoji:'?맩' },
+  nuni:     { name:'?덉씠',   file:'./assets/characters/nuni.png',     emoji:'?릦' }
 };
 
 const LAND_CHARACTERS = {
-  game:    { id:'dad',      mainX:'18%', mainY:'17%', landX:'24%', landY:'72%', action:'openMemoryGame()',          greeting:'아빠랑 게임 해볼까?' },
-  numbers: { id:'mom',      mainX:'82%', mainY:'17%', landX:'76%', landY:'72%', action:'openNumberCountGame()',     greeting:'엄마랑 숫자 공부하자!' },
-  letters: { id:'rona',     mainX:'18%', mainY:'42%', landX:'24%', landY:'72%', action:'openLetterGame()',          greeting:'로나랑 글자 놀이!' },
-  cars:    { id:'sicheoni', mainX:'82%', mainY:'43%', landX:'76%', landY:'72%', action:'openCarGarageGame()',       greeting:'시천이랑 차 고쳐보자!' },
-  story:   { id:'reumi',    mainX:'18%', mainY:'68%', landX:'24%', landY:'72%', action:'openStoryTheater()',        greeting:'름이랑 동화 읽어볼까?' },
-  voice:   { id:'nuni',     mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'openVoiceZone()', greeting:'눈이랑 말하기 연습!' }
+  game:    { id:'dad',      mainX:'18%', mainY:'17%', landX:'24%', landY:'72%', action:'openMemoryGame()',          greeting:'?꾨튌??寃뚯엫 ?대낵源?' },
+  numbers: { id:'mom',      mainX:'82%', mainY:'17%', landX:'76%', landY:'72%', action:'openNumberCountGame()',     greeting:'?꾨쭏???レ옄 怨듬??섏옄!' },
+  letters: { id:'rona',     mainX:'18%', mainY:'42%', landX:'24%', landY:'72%', action:'openLetterGame()',          greeting:'濡쒕굹??湲?????' },
+  cars:    { id:'sicheoni', mainX:'82%', mainY:'43%', landX:'76%', landY:'72%', action:'openCarGarageGame()',       greeting:'?쒖쿇?대옉 李?怨좎퀜蹂댁옄!' },
+  story:   { id:'reumi',    mainX:'18%', mainY:'68%', landX:'24%', landY:'72%', action:'openStoryTheater()',        greeting:'由꾩씠???숉솕 ?쎌뼱蹂쇨퉴?' },
+  voice:   { id:'nuni',     mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'openVoiceZone()', greeting:'?덉씠??留먰븯湲??곗뒿!' }
 };
 
 const ZONE_CONFIGS = {
   game: {
-    id:'game', title:'🎮 게임랜드', emoji:'🎮',
+    id:'game', title:'?렜 寃뚯엫?쒕뱶', emoji:'?렜',
     bg:'linear-gradient(160deg,#FF7A1A 0%,#FFD93D 100%)',
     character:'dad',
-    greeting:'아빠랑 게임 해볼까? 하고 싶은 게임을 골라봐!',
+    greeting:'?꾨튌??寃뚯엫 ?대낵源? ?섍퀬 ?띠? 寃뚯엫??怨⑤씪遊?',
     games: [
-      { id:'memory',   title:'짝맞추기',  emoji:'🃏', image:'./assets/games/cards/vehicle-memory.png',  desc:'같은 차를 찾아요',    action:'openMemoryGame()',          isNew:false },
-      { id:'balloon',  title:'색깔 풍선', emoji:'🎈', image:'./assets/games/cards/color-balloon.png',  desc:'색깔을 맞춰요',      action:'openColorBalloonGame()',    isNew:true  },
-      { id:'lifeseq',  title:'하루 순서', emoji:'🌅', image:'./assets/games/cards/life-sequence.png',  desc:'순서대로 해봐요',    action:'openLifeSequenceGame()',    isNew:true  },
-      { id:'artzone',  title:'매직 그림판', emoji:'🎨', image:'./assets/games/cards/art-zone.png',       desc:'자유롭게 그려봐요',  action:'openArtZoneGame()',         isNew:true  },
-      { id:'catcare',  title:'고양이 돌보기', emoji:'🐱', image:'./assets/games/cards/cat-care.png',      desc:'고양이를 돌봐요',    action:'openCatCareGame()',         isNew:true  },
+      { id:'memory',   title:'吏앸쭪異붽린',  emoji:'?깗', image:'./assets/games/cards/vehicle-memory.webp',  desc:'媛숈? 李⑤? 李얠븘??,    action:'openMemoryGame()',          isNew:false },
+      { id:'balloon',  title:'?됯퉼 ?띿꽑', emoji:'?럥', image:'./assets/games/cards/color-balloon.webp',  desc:'?됯퉼??留욎떠??,      action:'openColorBalloonGame()',    isNew:true  },
+      { id:'lifeseq',  title:'?섎（ ?쒖꽌', emoji:'?똿', image:'./assets/games/cards/life-sequence.webp',  desc:'?쒖꽌?濡??대킄??,    action:'openLifeSequenceGame()',    isNew:true  },
+      { id:'artzone',  title:'留ㅼ쭅 洹몃┝??, emoji:'?렓', image:'./assets/games/cards/art-zone.webp',       desc:'?먯쑀濡?쾶 洹몃젮遊먯슂',  action:'openArtZoneGame()',         isNew:true  },
+      { id:'catcare',  title:'怨좎뼇???뚮낫湲?, emoji:'?맩', image:'./assets/games/cards/cat-care.webp',      desc:'怨좎뼇?대? ?뚮킄??,    action:'openCatCareGame()',         isNew:true  },
     ]
   },
   numbers: {
-    id:'numbers', title:'🔢 숫자놀이터', emoji:'🔢',
+    id:'numbers', title:'?뵢 ?レ옄??댄꽣', emoji:'?뵢',
     bg:'linear-gradient(160deg,#1E90FF 0%,#87CEEB 100%)',
     character:'mom',
-    greeting:'엄마랑 숫자 공부해볼까? 어떤 게임 할래?',
+    greeting:'?꾨쭏???レ옄 怨듬??대낵源? ?대뼡 寃뚯엫 ?좊옒?',
     games: [
-      { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.png', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
-      { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.png', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
+      { id:'count', title:'紐???쇨퉴?', emoji:'?슅', image:'./assets/games/cards/number-count.webp', desc:'李⑤웾 ?섎? ?몄뼱??, action:'openNumberCountGame()', isNew:false },
+      { id:'blocks', title:'?レ옄 釉붾줉', emoji:'?뵢', image:'./assets/games/cards/number-blocks.webp', desc:'釉붾줉???⑹퀜 5瑜?留뚮뱾?댁슂', action:'openNumberBlocksGame()', isNew:true },
     ]
   },
   letters: {
-    id:'letters', title:'🔤 글자놀이터', emoji:'🔤',
+    id:'letters', title:'?뵥 湲?먮??댄꽣', emoji:'?뵥',
     bg:'linear-gradient(160deg,#FF85C2 0%,#FFD4E8 100%)',
     character:'rona',
-    greeting:'로나랑 글자 공부! 어떤 놀이 할까?',
+    greeting:'濡쒕굹??湲??怨듬?! ?대뼡 ????좉퉴?',
     games: [
-      { id:'letter',  title:'글자 풍선',  emoji:'🎈', image:'./assets/games/cards/letter-play.png',  desc:'첫 글자를 찾아요',   action:'openLetterGame()',       isNew:false },
-      { id:'abcphon', title:'ABC 변신',   emoji:'🔤', image:'./assets/games/cards/abc-phonics.png',  desc:'A,B,C가 변신해요',  action:'openAbcPhonicsGame()',   isNew:true  },
+      { id:'letter',  title:'湲???띿꽑',  emoji:'?럥', image:'./assets/games/cards/letter-play.webp',  desc:'泥?湲?먮? 李얠븘??,   action:'openLetterGame()',       isNew:false },
+      { id:'abcphon', title:'ABC 蹂??,   emoji:'?뵥', image:'./assets/games/cards/abc-phonics.webp',  desc:'A,B,C媛 蹂?좏빐??,  action:'openAbcPhonicsGame()',   isNew:true  },
     ]
   },
   cars: {
-    id:'cars', title:'🚗 자동차마을', emoji:'🚗',
+    id:'cars', title:'?슅 ?먮룞李⑤쭏??, emoji:'?슅',
     bg:'linear-gradient(160deg,#4CAF50 0%,#A5D6A7 100%)',
     character:'sicheoni',
-    greeting:'시천이랑 자동차 놀이! 뭐 하고 싶어?',
+    greeting:'?쒖쿇?대옉 ?먮룞李???? 萸??섍퀬 ?띠뼱?',
     games: [
-      { id:'garage',  title:'자동차 정비소', emoji:'🔧', image:'./assets/games/cards/car-garage.png', desc:'드래그로 차를 고쳐요', action:'openCarGarageGame()',    isNew:false },
-      { id:'parking', title:'주차장',       emoji:'🅿️', image:'./assets/games/cards/parking-lot.png', desc:'차를 주차해요',       action:'openParkingGame()',      isNew:true  },
-      { id:'construction', title:'공사장',  emoji:'🏗️', image:'./assets/games/cards/construction-site.png', desc:'공사차를 골라요',     action:'openConstructionSiteGame()', isNew:true  },
+      { id:'garage',  title:'?먮룞李??뺣퉬??, emoji:'?뵩', image:'./assets/games/cards/car-garage.webp', desc:'?쒕옒洹몃줈 李⑤? 怨좎퀜??, action:'openCarGarageGame()',    isNew:false },
+      { id:'parking', title:'二쇱감??,       emoji:'?끏截?, image:'./assets/games/cards/parking-lot.webp', desc:'李⑤? 二쇱감?댁슂',       action:'openParkingGame()',      isNew:true  },
+      { id:'construction', title:'怨듭궗??,  emoji:'?룛截?, image:'./assets/games/cards/construction-site.webp', desc:'怨듭궗李⑤? 怨⑤씪??,     action:'openConstructionSiteGame()', isNew:true  },
     ]
   }
 };
 
-const CARS = ['🚗','🚕','🚙','🚌','🚒','🚑','🚓','🚚','🚜','🏎️','🚛','🚐'];
+const CARS = ['?슅','?슃','?슇','?쉶','?쉾','?쉻','?슀','?슊','?슌','?룑截?,'?슋','?쉺'];
 let garageCleanup = null;
 let _gameTimer = null;
 
 function startGameTimer() {
   clearGameTimer();
   _gameTimer = setTimeout(() => {
-    speakGuide('10분이 지났어! 잠깐 쉬어볼까?', true);
+    speakGuide('10遺꾩씠 吏?ъ뼱! ?좉퉸 ?ъ뼱蹂쇨퉴?', true);
     const todayStr = getToday();
     if(db.parentLog && db.parentLog.daily[todayStr]) {
       db.parentLog.daily[todayStr].timerCount++;
@@ -956,7 +956,7 @@ const DEFAULT_DB = {
     collection:[],
     storyWorld:{
       savedStories:[], characters:[], readingHistory:[], favoriteStoryIds:[], currentStory:null,
-      settings:{ heroName:'시현', defaultTheme:'자동차', defaultLength:'long', defaultTone:'dad' }
+      settings:{ heroName:'?쒗쁽', defaultTheme:'?먮룞李?, defaultLength:'long', defaultTone:'dad' }
     }
   },
   settings:{
@@ -966,9 +966,9 @@ const DEFAULT_DB = {
   parentLog: { daily: { launchCount: 0 } }
 };
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    UTILITY & DB
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function clone(v){ return JSON.parse(JSON.stringify(v)); }
 
 function mergeDefaults(target, defaults){
@@ -1011,9 +1011,9 @@ function refreshLegacyCompatibility(){
 }
 function save(){ refreshLegacyCompatibility(); localStorage.setItem(DB_KEY,JSON.stringify(db)); }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    AUDIO & UX
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function isStoryPlaying(){ return Boolean(window.storyReadState&&window.storyReadState.isReading); }
 function speakText(text,opts={}){
   if(!text||!('speechSynthesis' in window)) return;
@@ -1045,7 +1045,7 @@ function gainExp(amount){
   db.progress.exp=Number(db.progress.exp||0)+Number(amount||0);
   while(db.progress.exp>=100){
     db.progress.level=Number(db.progress.level||1)+1; db.progress.exp-=100;
-    fireConfetti(); speakGuide('레벨이 올라갔어! 시현이 최고!');
+    fireConfetti(); speakGuide('?덈꺼???щ씪媛붿뼱! ?쒗쁽??理쒓퀬!');
   }
   save();
 }
@@ -1055,9 +1055,9 @@ function unlockCar(icon){
 }
 function closeGarageHandlers(){ if(typeof garageCleanup==='function') garageCleanup(); garageCleanup=null; }
 
-/* ═══════════════════════════════════════════
-   ★ 통합 cleanupActiveGame
-═══════════════════════════════════════════ */
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+   ???듯빀 cleanupActiveGame
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function cleanupActiveGame(){
   ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','lifeSequence','artZone','abcPhonics','catCare'].forEach(key=>{
     window.SihyeonGames?.[key]?.destroy?.();
@@ -1065,15 +1065,15 @@ function cleanupActiveGame(){
   window.SihyeonZones?.voiceZone?.destroy?.();
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    MAP / CHARACTER RENDERING
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function handleMapImageError(img){
   const screen=img.closest('.world-map-screen,.image-land-screen');
   if(screen) screen.classList.add('map-fallback');
   img.style.opacity='0';
 }
-function getCharacterMeta(id){ return CHARACTER_ASSETS[id]||{name:id||'친구',file:'',emoji:'⭐'}; }
+function getCharacterMeta(id){ return CHARACTER_ASSETS[id]||{name:id||'移쒓뎄',file:'',emoji:'狩?}; }
 
 function renderCharacterButton(zoneId, placement='main'){
   const cfg=LAND_CHARACTERS[zoneId]; if(!cfg) return '';
@@ -1098,7 +1098,7 @@ function renderMainCharacters(){
 function renderLandCharacters(zoneId){ return renderCharacterButton(zoneId,'land'); }
 function renderLandSihyeonRunner(){
   const meta=getCharacterMeta('sihyeon');
-  return `<div id="landSihyeonRunner" class="land-sihyeon-runner" aria-label="시현이">
+  return `<div id="landSihyeonRunner" class="land-sihyeon-runner" aria-label="?쒗쁽??>
     <img src="${meta.file}" alt="${escapeHtml(meta.name)}" onerror="this.style.display='none'">
     <span class="character-emoji-fallback">${meta.emoji}</span>
   </div>`;
@@ -1108,9 +1108,9 @@ function getLandCharacterInfo(zoneId){
   return {...cfg, meta:getCharacterMeta(cfg.id)};
 }
 
-/* ═══════════════════════════════════════════
-   ★ goWithLandCharacter
-═══════════════════════════════════════════ */
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+   ??goWithLandCharacter
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function runLandAction(zoneId){
   const actionMap = {
     game: openMemoryGame,
@@ -1130,7 +1130,7 @@ function goWithLandCharacter(zoneId){
   runner.classList.add('is-moving');
   runner.style.left=info.landX;
   runner.style.top=info.landY;
-  speakGuide(`${info.meta.name}이랑 같이 가볼게!`, true);
+  speakGuide(`${info.meta.name}?대옉 媛숈씠 媛蹂쇨쾶!`, true);
   setTimeout(()=>{
     runner.classList.remove('is-moving');
     runLandAction(zoneId);
@@ -1148,7 +1148,7 @@ function moveSihyeonToLandCharacter(zoneId){
   if(!info||!runner) return;
   runner.classList.add('is-moving');
   runner.style.left=info.landX; runner.style.top=info.landY;
-  speakGuide(`${info.meta.name}에게 가볼게!`, true);
+  speakGuide(`${info.meta.name}?먭쾶 媛蹂쇨쾶!`, true);
   setTimeout(()=>runner.classList.remove('is-moving'), 900);
 }
 function travelToZoneFromCharacter(zoneId){
@@ -1157,9 +1157,9 @@ function travelToZoneFromCharacter(zoneId){
   travelToZone(zoneId);
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    WORLD MAP HOME
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function renderWorldMapHome(){
   const todayStr = getToday();
   if(db.parentLog?.daily[todayStr] !== undefined) {
@@ -1174,8 +1174,8 @@ function renderWorldMapHome(){
     <section class="world-map-screen" id="worldMapScreen" style="--map-bg:url('${bg}')">
       <div class="world-blur-bg"></div>
       <div class="world-map-frame">
-        <img src="${bg}" class="world-map-bg" alt="시현이 큰 놀이동산" onerror="handleMapImageError(this)">
-        <button class="btn-parent-lock" onclick="showPinOverlay()" aria-label="부모 대시보드">🔒</button>
+        <img src="${bg}" class="world-map-bg" alt="?쒗쁽??????대룞?? onerror="handleMapImageError(this)">
+        <button class="btn-parent-lock" onclick="showPinOverlay()" aria-label="遺紐???쒕낫??>?뵏</button>
         <div class="world-map-content">
           ${['game','numbers','letters','cars','story','voice'].map(id=>{
             const z=WORLD_ZONES[id];
@@ -1188,22 +1188,22 @@ function renderWorldMapHome(){
           }).join('')}
           ${renderMainCharacters()}
           <div id="trainSprite" class="train-sprite" style="left:${WORLD_ZONES.station.x}; top:${WORLD_ZONES.station.y};">
-            <img src="./assets/vehicles/transport/train.png" alt="기차" onerror="this.style.display='none'">
-            <div class="train-emoji">🚂</div>
+            <img src="./assets/vehicles/transport/train.png" alt="湲곗감" onerror="this.style.display='none'">
+            <div class="train-emoji">?쉨</div>
           </div>
           <div id="sihyeonAvatar" class="sihyeon-avatar">
-            <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
-            <div class="avatar-emoji">👦🏻</div>
+            <img src="./assets/characters/sihyeon.png" alt="?쒗쁽?? onerror="this.style.display='none'">
+            <div class="avatar-emoji">?뫂?뤋</div>
           </div>
-          <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 지도에서 가고 싶은 곳을 눌러봐!', true)" aria-label="안내">🎤</button>
+          <button class="mic-button-floating" onclick="speakGuide('?대뵒濡?媛덇퉴? 吏?꾩뿉??媛怨??띠? 怨녹쓣 ?뚮윭遊?', true)" aria-label="?덈궡">?렎</button>
         </div>
       </div>
     </section>`;
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    IMAGE LAND
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function openImageLand(zoneId, title, imageSrc, hotspots){
   cleanupActiveGame(); closeGarageHandlers();
   const root=document.getElementById('sihyeonPlayOS');
@@ -1226,12 +1226,12 @@ function openImageLand(zoneId, title, imageSrc, hotspots){
         </div>
       </div>
     </section>`;
-  speakGuide(`${title}에 도착했어! 캐릭터나 게임을 눌러봐!`, true);
+  speakGuide(`${title}???꾩갑?덉뼱! 罹먮┃?곕굹 寃뚯엫???뚮윭遊?`, true);
 }
 
-/* ═══════════════════════════════════════════
-   ★ renderZoneLand
-═══════════════════════════════════════════ */
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+   ??renderZoneLand
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function renderZoneLand(config){
   cleanupActiveGame(); closeGarageHandlers();
   const root=document.getElementById('sihyeonPlayOS');
@@ -1271,28 +1271,28 @@ function renderZoneLand(config){
   speakGuide(config.greeting, true);
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    LAND OPEN FUNCTIONS
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function openGameLand()    { renderZoneLand(ZONE_CONFIGS.game);    }
 function openNumberLand()  { renderZoneLand(ZONE_CONFIGS.numbers); }
 function openLetterLand()  { renderZoneLand(ZONE_CONFIGS.letters); }
 function openCarLand()     { renderZoneLand(ZONE_CONFIGS.cars);    }
 
 function openStoryLand(){
-  openImageLand('story','📖 동화나라', WORLD_ASSETS.story,[
-    { x:'50%', y:'43%', w:'62%', h:'48%', label:'동화극장', emoji:'📖', action:'openStoryTheater()' }
+  openImageLand('story','?뱰 ?숉솕?섎씪', WORLD_ASSETS.story,[
+    { x:'50%', y:'43%', w:'62%', h:'48%', label:'?숉솕洹뱀옣', emoji:'?뱰', action:'openStoryTheater()' }
   ]);
 }
 function openVoiceLand(){
-  openImageLand('voice','🎤 말하기광장', WORLD_ASSETS.voice,[
-    { x:'50%', y:'45%', w:'62%', h:'46%', label:'말하기 놀이', emoji:'🎤', action:'openVoiceZone()' }
+  openImageLand('voice','?렎 留먰븯湲곌킅??, WORLD_ASSETS.voice,[
+    { x:'50%', y:'45%', w:'62%', h:'46%', label:'留먰븯湲????, emoji:'?렎', action:'openVoiceZone()' }
   ]);
 }
 
-/* ═══════════════════════════════════════════
-   ★ travelToZone + walkAvatarToZone
-═══════════════════════════════════════════ */
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+   ??travelToZone + walkAvatarToZone
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function travelToZone(zoneId){
   const zone=WORLD_ZONES[zoneId];
   if(!zone) return;
@@ -1311,7 +1311,7 @@ function travelToZone(zoneId){
     }
   }
 
-  speakGuide(`시현이가 ${zone.label}으로 걸어가요! 하나 둘, 하나 둘!`, true);
+  speakGuide(`?쒗쁽?닿? ${zone.label}?쇰줈 嫄몄뼱媛?? ?섎굹 ?? ?섎굹 ??`, true);
 
   let entered = false;
   const safeEnter = () => {
@@ -1385,20 +1385,20 @@ function closeToParkHome(){
   cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
   if(window.stopStoryReading) window.stopStoryReading(true);
   renderWorldMapHome();
-  speakGuide('광장으로 돌아왔어! 다음은 어디로 갈까?', true);
+  speakGuide('愿묒옣?쇰줈 ?뚯븘?붿뼱! ?ㅼ쓬? ?대뵒濡?媛덇퉴?', true);
 }
 function makeZoneHead(title){
   return `<div class="zone-head">
-    <button class="zone-home-btn" onclick="closeToParkHome()" aria-label="홈으로">
-      <span>🏠</span><span>광장</span>
+    <button class="zone-home-btn" onclick="closeToParkHome()" aria-label="?덉쑝濡?>
+      <span>?룧</span><span>愿묒옣</span>
     </button>
     <h1 class="zone-title">${title}</h1>
   </div>`;
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    PLACEHOLDER
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function renderPlaceholderZone(zoneId){
   cleanupActiveGame(); closeGarageHandlers();
   const zone=WORLD_ZONES[zoneId];
@@ -1410,15 +1410,15 @@ function renderPlaceholderZone(zoneId){
       ${makeZoneHead(zone.label)}
       <div class="placeholder-body">
         <div class="placeholder-icon">${zone.emoji}</div>
-        <div class="placeholder-text">재미있는 놀이를 준비하고 있어!</div>
+        <div class="placeholder-text">?щ??덈뒗 ??대? 以鍮꾪븯怨??덉뼱!</div>
       </div>
     </div>`;
-  speakGuide(`${zone.label}에 도착했어! 재미있는 놀이를 준비하고 있어!`);
+  speakGuide(`${zone.label}???꾩갑?덉뼱! ?щ??덈뒗 ??대? 以鍮꾪븯怨??덉뼱!`);
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    GAME SHELL & GAME OPEN FUNCTIONS
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function openGameShell(title, bodyId, bg='linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)'){
   cleanupActiveGame(); closeGarageHandlers();
   startGameTimer();
@@ -1432,87 +1432,87 @@ function openGameShell(title, bodyId, bg='linear-gradient(180deg,#FF7A1A 0%,#FFD
 }
 
 function openNumberCountGame(){
-  const t=openGameShell('🔢 몇 대일까?','numberCountTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
+  const t=openGameShell('?뵢 紐???쇨퉴?','numberCountTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
   if(window.SihyeonGames?.numberCount?.render){
     window.SihyeonGames.numberCount.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">숫자놀이를 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">?レ옄??대? 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openNumberBlocksGame(){
-  const t=openGameShell('🔢 숫자 블록','numberBlocksTarget','linear-gradient(135deg,#1A237E 0%,#311B92 100%)');
+  const t=openGameShell('?뵢 ?レ옄 釉붾줉','numberBlocksTarget','linear-gradient(135deg,#1A237E 0%,#311B92 100%)');
   if(window.SihyeonGames?.numberBlocks?.render){
     window.SihyeonGames.numberBlocks.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">숫자 블록을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">?レ옄 釉붾줉??遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openMemoryGame(){
-  const t=openGameShell('🎮 자동차 짝맞추기','memoryGameTarget');
+  const t=openGameShell('?렜 ?먮룞李?吏앸쭪異붽린','memoryGameTarget');
   if(window.SihyeonGames?.vehicleMemory?.render){
     window.SihyeonGames.vehicleMemory.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">카드 게임을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">移대뱶 寃뚯엫??遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openLetterGame(){
-  const t=openGameShell('🔤 글자놀이터','letterGameTarget','linear-gradient(180deg,#FF85C2 0%,#FFD4E8 100%)');
+  const t=openGameShell('?뵥 湲?먮??댄꽣','letterGameTarget','linear-gradient(180deg,#FF85C2 0%,#FFD4E8 100%)');
   if(window.SihyeonGames?.letterPlay?.render){
     window.SihyeonGames.letterPlay.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">글자놀이터를 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">湲?먮??댄꽣瑜?遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openColorBalloonGame(){
-  const t=openGameShell('🎈 색깔 풍선','colorBalloonTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
+  const t=openGameShell('?럥 ?됯퉼 ?띿꽑','colorBalloonTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
   if(window.SihyeonGames?.colorBalloon?.render){
     window.SihyeonGames.colorBalloon.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">색깔 풍선을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">?됯퉼 ?띿꽑??遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openParkingGame(){
-  const t=openGameShell('🅿️ 주차장','parkingTarget','linear-gradient(160deg,#e0f7fa 0%,#4CAF50 100%)');
+  const t=openGameShell('?끏截?二쇱감??,'parkingTarget','linear-gradient(160deg,#e0f7fa 0%,#4CAF50 100%)');
   if(window.SihyeonGames?.parkingLot?.render){
     window.SihyeonGames.parkingLot.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">주차장을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">二쇱감?μ쓣 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openConstructionSiteGame(){
-  const t=openGameShell('🏗️ 공사장','constructionSiteTarget','linear-gradient(180deg,#60c8ff 0%,#f7b143 100%)');
+  const t=openGameShell('?룛截?怨듭궗??,'constructionSiteTarget','linear-gradient(180deg,#60c8ff 0%,#f7b143 100%)');
   if(window.SihyeonGames?.constructionSite?.render){
     window.SihyeonGames.constructionSite.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">공사장을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">怨듭궗?μ쓣 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openCarGarageGame(){
-  const t=openGameShell('🔧 자동차 정비소','carGarageTarget','linear-gradient(180deg,#1a2a33 0%,#000 100%)');
+  const t=openGameShell('?뵩 ?먮룞李??뺣퉬??,'carGarageTarget','linear-gradient(180deg,#1a2a33 0%,#000 100%)');
   if(window.SihyeonGames?.carGarage?.render){
     window.SihyeonGames.carGarage.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">자동차 정비소를 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">?먮룞李??뺣퉬?뚮? 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openVoiceZone(){
-  const t=openGameShell('🎤 말하기광장','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
+  const t=openGameShell('?렎 留먰븯湲곌킅??,'voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
   if(window.SihyeonZones?.voiceZone?.render){
     window.SihyeonZones.voiceZone.render(t,{speakGuide,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기광장을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">留먰븯湲곌킅?μ쓣 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openLifeSequenceGame(){
-  const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)');
+  const t=openGameShell('?똿 ?섎（ ?쒖꽌','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)');
   if(window.SihyeonGames?.lifeSequence?.render){
     window.SihyeonGames.lifeSequence.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">하루 순서 게임을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">?섎（ ?쒖꽌 寃뚯엫??遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openArtZoneGame(){
-  const t=openGameShell('🎨 매직 그림판','artZoneTarget','linear-gradient(160deg,#f0f4f8 0%,#fce4ec 100%)');
+  const t=openGameShell('?렓 留ㅼ쭅 洹몃┝??,'artZoneTarget','linear-gradient(160deg,#f0f4f8 0%,#fce4ec 100%)');
   if(window.SihyeonGames?.artZone?.render){
     window.SihyeonGames.artZone.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">매직 그림판을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">留ㅼ쭅 洹몃┝?먯쓣 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openAbcPhonicsGame(){
-  const t=openGameShell('🔤 ABC 변신','abcPhonicsTarget','linear-gradient(160deg,#e8f5e9 0%,#fff9c4 100%)');
+  const t=openGameShell('?뵥 ABC 蹂??,'abcPhonicsTarget','linear-gradient(160deg,#e8f5e9 0%,#fff9c4 100%)');
   if(window.SihyeonGames?.abcPhonics?.render){
     window.SihyeonGames.abcPhonics.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">ABC 게임을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">ABC 寃뚯엫??遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 function openCatCareGame(){
-  const t=openGameShell('🐱 고양이 돌보기','catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)');
+  const t=openGameShell('?맩 怨좎뼇???뚮낫湲?,'catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)');
   if(window.SihyeonGames?.catCare?.render){
     window.SihyeonGames.catCare.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">고양이 돌보기를 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">怨좎뼇???뚮낫湲곕? 遺덈윭?ㅼ? 紐삵뻽?댁슂.</div>';
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    GARAGE GAME
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function openFullscreenGarage(){
   cleanupActiveGame(); closeGarageHandlers();
   const root=document.getElementById('sihyeonPlayOS');
@@ -1520,17 +1520,17 @@ function openFullscreenGarage(){
     <div class="fullscreen-zone" style="background:linear-gradient(180deg,#5BC8F5 0%,#A8E6FF 50%,#FF7A1A 50%,#E65100 100%)">
       <div class="zone-sky-bg" style="background:linear-gradient(180deg,#5BC8F5 0%,#A8E6FF 50%,#FF7A1A 50%,#E65100 100%)"></div>
       <div class="deco-sun"></div>
-      ${makeZoneHead('🔧 자동차 정비소')}
+      ${makeZoneHead('?뵩 ?먮룞李??뺣퉬??)}
       <div class="zone-body" style="padding:0;overflow:hidden;display:flex;">
         <div class="garage-stage" id="garageStage">
-          <div class="garage-car-base" aria-hidden="true">🚗</div>
-          <div class="garage-target" id="garageTarget">여기에 쏙!</div>
-          <div class="garage-part" id="garagePart" role="button" aria-label="자동차 부품"></div>
-          <div class="garage-message" id="garageMessage">자동차를 빈칸에 끌어다 놓아 봐!</div>
+          <div class="garage-car-base" aria-hidden="true">?슅</div>
+          <div class="garage-target" id="garageTarget">?ш린????</div>
+          <div class="garage-part" id="garagePart" role="button" aria-label="?먮룞李?遺??></div>
+          <div class="garage-message" id="garageMessage">?먮룞李⑤? 鍮덉뭏???뚯뼱???볦븘 遊?</div>
         </div>
       </div>
     </div>`;
-  speakGuide('자동차마을 정비소 도착! 자동차를 빈칸에 끌어다 놓아봐!', true);
+  speakGuide('?먮룞李⑤쭏???뺣퉬???꾩갑! ?먮룞李⑤? 鍮덉뭏???뚯뼱???볦븘遊?', true);
   initGarageRound();
 }
 function initGarageRound(){
@@ -1541,7 +1541,7 @@ function initGarageRound(){
   if(!stage||!target||!part||!message) return;
   const carIcon=CARS[Math.floor(Math.random()*CARS.length)];
   part.textContent=carIcon; target.classList.remove('filled');
-  target.textContent='여기에 쏙!'; message.textContent='자동차를 빈칸까지 끌고 가 보자!';
+  target.textContent='?ш린????'; message.textContent='?먮룞李⑤? 鍮덉뭏源뚯? ?뚭퀬 媛 蹂댁옄!';
   part.style.cssText='left:20px;bottom:80px;transform:none;pointer-events:auto;';
   let dragging=false, pointerId=null;
   const movePart=(cx,cy)=>{
@@ -1558,14 +1558,14 @@ function initGarageRound(){
     if(part.hasPointerCapture(pointerId)) part.releasePointerCapture(pointerId);
     const tr=target.getBoundingClientRect(), pr2=part.getBoundingClientRect();
     const hit=!(pr2.right<tr.left-30||pr2.left>tr.right+30||pr2.bottom<tr.top-30||pr2.top>tr.bottom+30);
-    if(!hit){ message.textContent='조금만 더 가까이!'; speakGuide('조금만 더 가까이 가 볼까?'); return; }
+    if(!hit){ message.textContent='議곌툑留???媛源뚯씠!'; speakGuide('議곌툑留???媛源뚯씠 媛 蹂쇨퉴?'); return; }
     target.classList.add('filled'); target.textContent=carIcon;
     part.style.pointerEvents='none';
     part.style.left=`${target.offsetLeft-part.offsetWidth/2}px`;
     part.style.top=`${target.offsetTop-part.offsetHeight/2}px`;
     part.style.transform='scale(1.2)';
-    message.textContent='착! 자동차가 딱 맞았어! 🎉';
-    fireConfetti(); speakGuide('착! 자동차가 딱 맞았어. 시현이 최고!');
+    message.textContent='李? ?먮룞李④? ??留욎븯?? ?럦';
+    fireConfetti(); speakGuide('李? ?먮룞李④? ??留욎븯?? ?쒗쁽??理쒓퀬!');
     gainExp(15); unlockCar(carIcon);
     setTimeout(()=>{ if(document.getElementById('garageStage')) initGarageRound(); }, 1400);
   };
@@ -1581,9 +1581,9 @@ function initGarageRound(){
   };
 }
 
-/* ═══════════════════════════════════════════
-   ★ STORY THEATER
-═══════════════════════════════════════════ */
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+   ??STORY THEATER
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 function openStoryTheater(){
   cleanupActiveGame(); closeGarageHandlers();
   const root=document.getElementById('sihyeonPlayOS');
@@ -1594,30 +1594,30 @@ function openStoryTheater(){
     <div class="fullscreen-zone">
       <div class="story-bg"></div>
       <div class="story-stars">${stars}</div>
-      ${makeZoneHead('📖 동화극장')}
+      ${makeZoneHead('?뱰 ?숉솕洹뱀옣')}
       <div class="story-search-row">
-        <span class="story-search-icon">🔍</span>
+        <span class="story-search-icon">?뵇</span>
         <input type="search" id="storySearchInput" class="story-search-input"
-          placeholder="제목이나 주제 검색..."
+          placeholder="?쒕ぉ?대굹 二쇱젣 寃??.."
           oninput="filterStoriesBySearch(this.value)"
-          aria-label="동화 검색">
+          aria-label="?숉솕 寃??>
       </div>
       <nav id="storyFilterNav" class="story-filter-row">
-        <button class="story-filter-btn active" data-theme="전체"      onclick="renderStoryGrid('전체')">📚 전체</button>
-        <button class="story-filter-btn"        data-theme="자동차"    onclick="renderStoryGrid('자동차')">🚗 자동차</button>
-        <button class="story-filter-btn"        data-theme="공룡"      onclick="renderStoryGrid('공룡')">🦕 공룡</button>
-        <button class="story-filter-btn"        data-theme="동물"      onclick="renderStoryGrid('동물')">🐰 동물</button>
-        <button class="story-filter-btn"        data-theme="우주"      onclick="renderStoryGrid('우주')">🚀 우주</button>
-        <button class="story-filter-btn"        data-theme="바다"      onclick="renderStoryGrid('바다')">🌊 바다</button>
-        <button class="story-filter-btn"        data-theme="전래"      onclick="renderStoryGrid('전래')">🏮 전래</button>
-        <button class="story-filter-btn"        data-theme="이솝"      onclick="renderStoryGrid('이솝')">🌿 이솝</button>
-        <button class="story-filter-btn"        data-theme="잠자리"    onclick="renderStoryGrid('잠자리')">🌙 잠자리</button>
-        <button class="story-filter-btn"        data-theme="저장한 동화" onclick="renderStoryGrid('저장한 동화')">💖 저장</button>
+        <button class="story-filter-btn active" data-theme="?꾩껜"      onclick="renderStoryGrid('?꾩껜')">?뱴 ?꾩껜</button>
+        <button class="story-filter-btn"        data-theme="?먮룞李?    onclick="renderStoryGrid('?먮룞李?)">?슅 ?먮룞李?/button>
+        <button class="story-filter-btn"        data-theme="怨듬！"      onclick="renderStoryGrid('怨듬！')">?쫾 怨듬！</button>
+        <button class="story-filter-btn"        data-theme="?숇Ъ"      onclick="renderStoryGrid('?숇Ъ')">?맧 ?숇Ъ</button>
+        <button class="story-filter-btn"        data-theme="?곗＜"      onclick="renderStoryGrid('?곗＜')">?? ?곗＜</button>
+        <button class="story-filter-btn"        data-theme="諛붾떎"      onclick="renderStoryGrid('諛붾떎')">?뙄 諛붾떎</button>
+        <button class="story-filter-btn"        data-theme="?꾨옒"      onclick="renderStoryGrid('?꾨옒')">?룼 ?꾨옒</button>
+        <button class="story-filter-btn"        data-theme="?댁넔"      onclick="renderStoryGrid('?댁넔')">?뙼 ?댁넔</button>
+        <button class="story-filter-btn"        data-theme="?좎옄由?    onclick="renderStoryGrid('?좎옄由?)">?뙔 ?좎옄由?/button>
+        <button class="story-filter-btn"        data-theme="??ν븳 ?숉솕" onclick="renderStoryGrid('??ν븳 ?숉솕')">?뮇 ???/button>
       </nav>
       <div class="zone-body">
         <div id="storyLibraryGrid" class="story-card-grid"></div>
         <button class="story-load-more" id="storyLoadMoreBtn" style="display:none;" onclick="loadMoreStories()">
-          📖 더 보기
+          ?뱰 ??蹂닿린
         </button>
       </div>
       <section id="storyReaderView" style="display:none; position:absolute; inset:0; z-index:50; overflow-y:auto; background:linear-gradient(180deg,#2D0060 0%,#6A0DAD 60%,#1A0040 100%); padding: max(14px,env(safe-area-inset-top)) 10px max(14px,env(safe-area-inset-bottom));">
@@ -1628,50 +1628,50 @@ function openStoryTheater(){
   if (window.renderStoryWorld) {
     window.renderStoryWorld();
   } else if (window.renderStoryGrid) {
-    window.renderStoryGrid('전체');
+    window.renderStoryGrid('?꾩껜');
   } else {
     setTimeout(() => {
       if (window.renderStoryWorld) window.renderStoryWorld();
-      else window.renderStoryGrid?.('전체');
+      else window.renderStoryGrid?.('?꾩껜');
     }, 0);
   }
-  speakGuide('동화극장에 도착했어. 읽고 싶은 책을 골라봐!', true);
+  speakGuide('?숉솕洹뱀옣???꾩갑?덉뼱. ?쎄퀬 ?띠? 梨낆쓣 怨⑤씪遊?', true);
 }
 
 function filterStoriesBySearch(query){
-  _renderStoryGridPage(window.currentStoryFilter || '전체', query.trim());
+  _renderStoryGridPage(window.currentStoryFilter || '?꾩껜', query.trim());
 }
 
 window._storyPage = 1;
 function loadMoreStories(){
   window._storyPage = (window._storyPage||1) + 1;
-  _renderStoryGridPage(window.currentStoryFilter || '전체');
+  _renderStoryGridPage(window.currentStoryFilter || '?꾩껜');
 }
 
-/* ═══════════════════════════════════════════
-   ★ 동화 그리드 직접 렌더링
-═══════════════════════════════════════════ */
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
+   ???숉솕 洹몃━??吏곸젒 ?뚮뜑留?
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 const STORY_PAGE_SIZE = 12;
 
 function _storyCoverEmoji(theme) {
   const t = String(theme || '');
-  if (t.includes('자동차')) return '🚜';
-  if (t.includes('공룡'))   return '🦖';
-  if (t.includes('우주'))   return '🚀';
-  if (t.includes('바다'))   return '🐳';
-  if (t.includes('잠자리')) return '🌙';
-  if (t.includes('전래'))   return '🐯';
-  if (t.includes('이솝'))   return '🌿';
-  if (t.includes('세계명작') || t.includes('명작')) return '🏰';
-  if (t.includes('동물'))   return '🐰';
-  return '📖';
+  if (t.includes('?먮룞李?)) return '?슌';
+  if (t.includes('怨듬！'))   return '?쫿';
+  if (t.includes('?곗＜'))   return '??';
+  if (t.includes('諛붾떎'))   return '?맫';
+  if (t.includes('?좎옄由?)) return '?뙔';
+  if (t.includes('?꾨옒'))   return '?맦';
+  if (t.includes('?댁넔'))   return '?뙼';
+  if (t.includes('?멸퀎紐낆옉') || t.includes('紐낆옉')) return '?룿';
+  if (t.includes('?숇Ъ'))   return '?맧';
+  return '?뱰';
 }
 
 function renderStoryGrid(theme) {
-  window.currentStoryFilter = theme || '전체';
+  window.currentStoryFilter = theme || '?꾩껜';
   window._storyPage = 1;
   document.querySelectorAll('[data-theme]').forEach(b => {
-    b.classList.toggle('active', b.dataset.theme === (theme || '전체'));
+    b.classList.toggle('active', b.dataset.theme === (theme || '?꾩껜'));
   });
   const si = document.getElementById('storySearchInput');
   if (si) si.value = '';
@@ -1692,16 +1692,16 @@ function _renderStoryGridPage(theme, query) {
 
   const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
   const saved   = Array.isArray(db.playground.storyWorld.savedStories) ? db.playground.storyWorld.savedStories : [];
-  const filter  = theme || window.currentStoryFilter || '전체';
+  const filter  = theme || window.currentStoryFilter || '?꾩껜';
   const q       = (query || '').trim().toLowerCase();
   const page    = window._storyPage || 1;
 
   let list;
-  if (filter === '저장한 동화') {
+  if (filter === '??ν븳 ?숉솕') {
     list = saved;
   } else {
     list = library.filter(s => {
-      if (filter !== '전체' && !String(s.theme || '').includes(filter)) return false;
+      if (filter !== '?꾩껜' && !String(s.theme || '').includes(filter)) return false;
       if (q) {
         const haystack = (s.title + ' ' + (s.desc||'') + ' ' + (s.theme||'') + ' ' + (s.plotSeed||'')).toLowerCase();
         return haystack.includes(q);
@@ -1714,7 +1714,7 @@ function _renderStoryGridPage(theme, query) {
   const paged = list.slice(0, page * STORY_PAGE_SIZE);
 
   if (!paged.length) {
-    grid.innerHTML = `<div class="story-empty">📚 "찾는 동화"가 없어요</div>`;
+    grid.innerHTML = `<div class="story-empty">?뱴 "李얜뒗 ?숉솕"媛 ?놁뼱??/div>`;
     const btn = document.getElementById('storyLoadMoreBtn');
     if (btn) btn.style.display = 'none';
     return;
@@ -1727,7 +1727,7 @@ function _renderStoryGridPage(theme, query) {
     return `
       <button class="storybook-book-card" type="button"
         onclick="readStoryById('${escapeHtml(id)}')"
-        aria-label="${escapeHtml(story.title)} 읽기">
+        aria-label="${escapeHtml(story.title)} ?쎄린">
         <span class="storybook-book-cover">
           ${img ? `<img src="${img}" alt="${escapeHtml(story.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid';">` : ''}
           <span class="storybook-book-fallback" ${img?'style="display:none;"':''}>${emoji}</span>
@@ -1740,9 +1740,9 @@ function _renderStoryGridPage(theme, query) {
   if (btn) btn.style.display = paged.length < total ? 'block' : 'none';
 }
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    PARENT DASHBOARD
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 let currentPin = '';
 function showPinOverlay() {
   currentPin = '';
@@ -1752,13 +1752,13 @@ function showPinOverlay() {
   div.id = 'pinOverlay';
   div.innerHTML = `
     <div class="pin-box">
-      <div class="pin-title">🔒 부모님 확인</div>
+      <div class="pin-title">?뵏 遺紐⑤떂 ?뺤씤</div>
       <div class="pin-display" id="pinDisplay">_ _ _ _</div>
       <div class="pin-numpad">
         ${[1,2,3,4,5,6,7,8,9].map(n => `<button class="pin-btn" onclick="handlePinPad(${n})">${n}</button>`).join('')}
         <button class="pin-btn" onclick="handlePinPad('C')">C</button>
         <button class="pin-btn" onclick="handlePinPad(0)">0</button>
-        <button class="pin-btn" onclick="closePinOverlay()">닫기</button>
+        <button class="pin-btn" onclick="closePinOverlay()">?リ린</button>
       </div>
     </div>
   `;
@@ -1784,7 +1784,7 @@ function handlePinPad(val) {
       closePinOverlay();
       renderParentDashboard();
     } else {
-      display.textContent = '다시 입력';
+      display.textContent = '?ㅼ떆 ?낅젰';
       display.style.color = 'red';
       setTimeout(() => {
          currentPin = '';
@@ -1814,42 +1814,42 @@ function renderParentDashboard() {
   root.innerHTML = `
     <div class="parent-dash-screen">
       <div class="dash-header">
-        <div class="dash-title">🔒 시현이 사용 현황</div>
-        <button class="dash-close-btn" onclick="renderWorldMapHome()">닫기</button>
+        <div class="dash-title">?뵏 ?쒗쁽???ъ슜 ?꾪솴</div>
+        <button class="dash-close-btn" onclick="renderWorldMapHome()">?リ린</button>
       </div>
       <div class="dash-content">
 
         <div class="summary-grid">
           <div class="summary-item">
-            <div class="summary-val">${todayLog.totalMinutes}분</div>
-            <div class="summary-lbl">오늘 사용 시간</div>
+            <div class="summary-val">${todayLog.totalMinutes}遺?/div>
+            <div class="summary-lbl">?ㅻ뒛 ?ъ슜 ?쒓컙</div>
           </div>
           <div class="summary-item">
-            <div class="summary-val">${todayLog.launchCount || 0}번</div>
-            <div class="summary-lbl">오늘 앱 실행 횟수</div>
+            <div class="summary-val">${todayLog.launchCount || 0}踰?/div>
+            <div class="summary-lbl">?ㅻ뒛 ???ㅽ뻾 ?잛닔</div>
           </div>
           <div class="summary-item" style="grid-column: span 2;">
             <div class="summary-val">Lv.${db.progress.level}</div>
-            <div class="summary-lbl">현재 게임 레벨 (경험치: ${db.progress.exp}%)</div>
+            <div class="summary-lbl">?꾩옱 寃뚯엫 ?덈꺼 (寃쏀뿕移? ${db.progress.exp}%)</div>
           </div>
         </div>
 
         <div class="dash-card">
-          <div class="dash-card-title">오늘 방문한 랜드</div>
+          <div class="dash-card-title">?ㅻ뒛 諛⑸Ц???쒕뱶</div>
           <div class="visited-lands">
-            ${todayLog.landsVisited.length ? todayLog.landsVisited.map(l => `<span class="visited-chip">${l}</span>`).join('') : '<span class="story-empty-lbl">아직 방문한 랜드가 없어요.</span>'}
+            ${todayLog.landsVisited.length ? todayLog.landsVisited.map(l => `<span class="visited-chip">${l}</span>`).join('') : '<span class="story-empty-lbl">?꾩쭅 諛⑸Ц???쒕뱶媛 ?놁뼱??</span>'}
           </div>
         </div>
 
         <div class="dash-card">
-          <div class="dash-card-title">오늘 읽은 동화</div>
+          <div class="dash-card-title">?ㅻ뒛 ?쎌? ?숉솕</div>
           <ul class="story-list">
-            ${todayLog.storiesWatched.length ? todayLog.storiesWatched.map(s => `<li>📖 ${escapeHtml(s)}</li>`).join('') : '<li class="story-empty-lbl">아직 읽은 동화가 없어요.</li>'}
+            ${todayLog.storiesWatched.length ? todayLog.storiesWatched.map(s => `<li>?뱰 ${escapeHtml(s)}</li>`).join('') : '<li class="story-empty-lbl">?꾩쭅 ?쎌? ?숉솕媛 ?놁뼱??</li>'}
           </ul>
         </div>
 
         <div class="dash-card">
-          <div class="dash-card-title">최근 7일 사용 시간 (분)</div>
+          <div class="dash-card-title">理쒓렐 7???ъ슜 ?쒓컙 (遺?</div>
           <div class="chart-container">
             ${last7Days.map(d => {
               const h = Math.max((d.mins / maxMins) * 100, 5);
@@ -1879,7 +1879,7 @@ function isStoryUsageTimerPaused(){
   );
 }
 
-// 매 1분마다 사용 시간 기록
+// 留?1遺꾨쭏???ъ슜 ?쒓컙 湲곕줉
 setInterval(() => {
   if(isStoryUsageTimerPaused()) return;
   const todayStr = getToday();
@@ -1889,9 +1889,9 @@ setInterval(() => {
   }
 }, 60000);
 
-/* ═══════════════════════════════════════════
+/* ?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??
    GLOBAL EXPORTS & BOOT
-═══════════════════════════════════════════ */
+?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧?먥븧??*/
 Object.assign(window,{
   getToday, escapeHtml, loadStoredDB, loadDB, save,
   gainExp, unlockCar, fireConfetti,
@@ -1918,12 +1918,12 @@ window.addEventListener('load', () => {
     if (typeof _origClose === 'function') _origClose();
     setTimeout(() => {
       if (document.getElementById('storyLibraryGrid')) {
-        window.renderStoryGrid(window.currentStoryFilter || '전체');
+        window.renderStoryGrid(window.currentStoryFilter || '?꾩껜');
       }
     }, 0);
   };
   
-  // 동화 읽기 후킹으로 로깅 처리
+  // ?숉솕 ?쎄린 ?꾪궧?쇰줈 濡쒓퉭 泥섎━
   setTimeout(() => {
     const origRead = window.readStoryById;
     if(typeof origRead === 'function') {
@@ -1952,12 +1952,12 @@ window.addEventListener('load', () => {
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>speakGuide('시현아 안녕! 놀이공원에 온 걸 환영해!', true), 600);
+  setTimeout(()=>speakGuide('?쒗쁽???덈뀞! ??닿났?먯뿉 ??嫄??섏쁺??', true), 600);
 }
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('SW 등록 실패',e));
+    navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('SW ?깅줉 ?ㅽ뙣',e));
   });
 }
 </script>
@@ -1990,3 +1990,4 @@ if('serviceWorker' in navigator){
 <script src="./js/games/cat-care.js"></script>
 </body>
 </html>
+

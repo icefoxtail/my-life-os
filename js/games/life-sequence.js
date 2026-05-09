@@ -9,14 +9,14 @@
       title: '손 씻기',
       guide: '손을 깨끗하게 씻어볼까?',
       completeText: '뽀득뽀득! 손이 깨끗해졌어요!',
-      bg: './assets/life-sequence/wash-hands/bg.png',
-      completeImage: './assets/life-sequence/wash-hands/complete.png',
+      bg: './assets/life-sequence/wash-hands/bg.webp',
+      completeImage: './assets/life-sequence/wash-hands/complete.webp',
       sceneEmoji: '🧼',
       completeEmoji: '✨',
       steps: [
-        { id: 'water', order: 1, label: '물을 틀어요', shortLabel: '물', emoji: '🚰', image: './assets/life-sequence/wash-hands/step1.png', effect: '물이 졸졸 나와요.', hint: '먼저 물을 틀어야 해요.' },
-        { id: 'soap', order: 2, label: '비누로 문질러요', shortLabel: '비누', emoji: '🫧', image: './assets/life-sequence/wash-hands/step2.png', effect: '보글보글 거품이 생겼어요.', hint: '비누는 그 다음이에요.' },
-        { id: 'towel', order: 3, label: '수건으로 닦아요', shortLabel: '수건', emoji: '🧻', image: './assets/life-sequence/wash-hands/step3.png', effect: '보송보송 닦았어요.', hint: '수건은 마지막에 써요.' }
+        { id: 'water', order: 1, label: '물을 틀어요', shortLabel: '물', emoji: '🚰', image: './assets/life-sequence/wash-hands/step1.webp', effect: '물이 졸졸 나와요.', hint: '먼저 물을 틀어야 해요.' },
+        { id: 'soap', order: 2, label: '비누로 문질러요', shortLabel: '비누', emoji: '🫧', image: './assets/life-sequence/wash-hands/step2.webp', effect: '보글보글 거품이 생겼어요.', hint: '비누는 그 다음이에요.' },
+        { id: 'towel', order: 3, label: '수건으로 닦아요', shortLabel: '수건', emoji: '🧻', image: './assets/life-sequence/wash-hands/step3.webp', effect: '보송보송 닦았어요.', hint: '수건은 마지막에 써요.' }
       ]
     },
     {
@@ -24,14 +24,14 @@
       title: '양치하기',
       guide: '이를 반짝반짝 닦아볼까?',
       completeText: '반짝반짝! 이가 깨끗해졌어요!',
-      bg: './assets/life-sequence/brush-teeth/bg.png',
-      completeImage: './assets/life-sequence/brush-teeth/complete.png',
+      bg: './assets/life-sequence/brush-teeth/bg.webp',
+      completeImage: './assets/life-sequence/brush-teeth/complete.webp',
       sceneEmoji: '🪥',
       completeEmoji: '😁',
       steps: [
-        { id: 'paste', order: 1, label: '치약을 짜요', shortLabel: '치약', emoji: '🪥', image: './assets/life-sequence/brush-teeth/step1.png', effect: '치약을 쭈욱 짰어요.', hint: '먼저 치약을 짜야 해요.' },
-        { id: 'brush', order: 2, label: '이를 쓱쓱 닦아요', shortLabel: '쓱쓱', emoji: '🫧', image: './assets/life-sequence/brush-teeth/step2.png', effect: '쓱쓱 깨끗하게 닦아요.', hint: '이를 닦는 건 그 다음이에요.' },
-        { id: 'rinse', order: 3, label: '입을 헹궈요', shortLabel: '헹구기', emoji: '🥛', image: './assets/life-sequence/brush-teeth/step3.png', effect: '입을 깨끗하게 헹궜어요.', hint: '입 헹구기는 마지막이에요.' }
+        { id: 'paste', order: 1, label: '치약을 짜요', shortLabel: '치약', emoji: '🪥', image: './assets/life-sequence/brush-teeth/step1.webp', effect: '치약을 쭈욱 짰어요.', hint: '먼저 치약을 짜야 해요.' },
+        { id: 'brush', order: 2, label: '이를 쓱쓱 닦아요', shortLabel: '쓱쓱', emoji: '🫧', image: './assets/life-sequence/brush-teeth/step2.webp', effect: '쓱쓱 깨끗하게 닦아요.', hint: '이를 닦는 건 그 다음이에요.' },
+        { id: 'rinse', order: 3, label: '입을 헹궈요', shortLabel: '헹구기', emoji: '🥛', image: './assets/life-sequence/brush-teeth/step3.webp', effect: '입을 깨끗하게 헹궜어요.', hint: '입 헹구기는 마지막이에요.' }
       ]
     },
     {
@@ -39,14 +39,14 @@
       title: '밥 먹기',
       guide: '맛있게 밥 먹을 준비를 해볼까?',
       completeText: '냠냠! 맛있게 잘 먹었어요!',
-      bg: './assets/life-sequence/eat-meal/bg.png',
-      completeImage: './assets/life-sequence/eat-meal/complete.png',
+      bg: './assets/life-sequence/eat-meal/bg.webp',
+      completeImage: './assets/life-sequence/eat-meal/complete.webp',
       sceneEmoji: '🍚',
       completeEmoji: '😋',
       steps: [
-        { id: 'clean', order: 1, label: '손을 씻어요', shortLabel: '손 씻기', emoji: '🧼', image: './assets/life-sequence/eat-meal/step1.png', effect: '깨끗한 손이 되었어요.', hint: '밥 먹기 전에는 먼저 손을 씻어요.' },
-        { id: 'sit', order: 2, label: '자리에 앉아요', shortLabel: '앉기', emoji: '🪑', image: './assets/life-sequence/eat-meal/step2.png', effect: '의자에 바르게 앉았어요.', hint: '손을 씻고 나서 자리에 앉아요.' },
-        { id: 'eat', order: 3, label: '맛있게 먹어요', shortLabel: '냠냠', emoji: '🍽️', image: './assets/life-sequence/eat-meal/step3.png', effect: '냠냠 맛있게 먹어요.', hint: '먹는 건 준비가 끝난 뒤예요.' }
+        { id: 'clean', order: 1, label: '손을 씻어요', shortLabel: '손 씻기', emoji: '🧼', image: './assets/life-sequence/eat-meal/step1.webp', effect: '깨끗한 손이 되었어요.', hint: '밥 먹기 전에는 먼저 손을 씻어요.' },
+        { id: 'sit', order: 2, label: '자리에 앉아요', shortLabel: '앉기', emoji: '🪑', image: './assets/life-sequence/eat-meal/step2.webp', effect: '의자에 바르게 앉았어요.', hint: '손을 씻고 나서 자리에 앉아요.' },
+        { id: 'eat', order: 3, label: '맛있게 먹어요', shortLabel: '냠냠', emoji: '🍽️', image: './assets/life-sequence/eat-meal/step3.webp', effect: '냠냠 맛있게 먹어요.', hint: '먹는 건 준비가 끝난 뒤예요.' }
       ]
     },
     {
@@ -54,14 +54,14 @@
       title: '잠자기',
       guide: '포근하게 잘 준비를 해볼까?',
       completeText: '코오 잘 자요. 내일 또 놀자!',
-      bg: './assets/life-sequence/sleep/bg.png',
-      completeImage: './assets/life-sequence/sleep/complete.png',
+      bg: './assets/life-sequence/sleep/bg.webp',
+      completeImage: './assets/life-sequence/sleep/complete.webp',
       sceneEmoji: '🌙',
       completeEmoji: '😴',
       steps: [
-        { id: 'pajamas', order: 1, label: '잠옷을 입어요', shortLabel: '잠옷', emoji: '👕', image: './assets/life-sequence/sleep/step1.png', effect: '포근한 잠옷을 입었어요.', hint: '먼저 잠옷을 입어요.' },
-        { id: 'book', order: 2, label: '책을 읽어요', shortLabel: '책', emoji: '📖', image: './assets/life-sequence/sleep/step2.png', effect: '조용히 책을 읽어요.', hint: '책 읽기는 그 다음이에요.' },
-        { id: 'light', order: 3, label: '불을 끄고 자요', shortLabel: '잘 자요', emoji: '🛏️', image: './assets/life-sequence/sleep/step3.png', effect: '불을 끄고 코오 자요.', hint: '자는 건 마지막이에요.' }
+        { id: 'pajamas', order: 1, label: '잠옷을 입어요', shortLabel: '잠옷', emoji: '👕', image: './assets/life-sequence/sleep/step1.webp', effect: '포근한 잠옷을 입었어요.', hint: '먼저 잠옷을 입어요.' },
+        { id: 'book', order: 2, label: '책을 읽어요', shortLabel: '책', emoji: '📖', image: './assets/life-sequence/sleep/step2.webp', effect: '조용히 책을 읽어요.', hint: '책 읽기는 그 다음이에요.' },
+        { id: 'light', order: 3, label: '불을 끄고 자요', shortLabel: '잘 자요', emoji: '🛏️', image: './assets/life-sequence/sleep/step3.webp', effect: '불을 끄고 코오 자요.', hint: '자는 건 마지막이에요.' }
       ]
     },
     {
@@ -69,14 +69,14 @@
       title: '외출 준비',
       guide: '밖에 나갈 준비를 해볼까?',
       completeText: '준비 끝! 신나게 나가요!',
-      bg: './assets/life-sequence/go-out/bg.png',
-      completeImage: './assets/life-sequence/go-out/complete.png',
+      bg: './assets/life-sequence/go-out/bg.webp',
+      completeImage: './assets/life-sequence/go-out/complete.webp',
       sceneEmoji: '🎒',
       completeEmoji: '🚪',
       steps: [
-        { id: 'clothes', order: 1, label: '옷을 입어요', shortLabel: '옷', emoji: '🧥', image: './assets/life-sequence/go-out/step1.png', effect: '멋진 옷을 입었어요.', hint: '밖에 나가기 전에 먼저 옷을 입어요.' },
-        { id: 'shoes', order: 2, label: '신발을 신어요', shortLabel: '신발', emoji: '👟', image: './assets/life-sequence/go-out/step2.png', effect: '신발을 꼭꼭 신었어요.', hint: '신발은 옷을 입은 다음이에요.' },
-        { id: 'door', order: 3, label: '문 밖으로 나가요', shortLabel: '나가기', emoji: '🚪', image: './assets/life-sequence/go-out/step3.png', effect: '문을 열고 신나게 나가요.', hint: '문 밖으로 나가는 건 마지막이에요.' }
+        { id: 'clothes', order: 1, label: '옷을 입어요', shortLabel: '옷', emoji: '🧥', image: './assets/life-sequence/go-out/step1.webp', effect: '멋진 옷을 입었어요.', hint: '밖에 나가기 전에 먼저 옷을 입어요.' },
+        { id: 'shoes', order: 2, label: '신발을 신어요', shortLabel: '신발', emoji: '👟', image: './assets/life-sequence/go-out/step2.webp', effect: '신발을 꼭꼭 신었어요.', hint: '신발은 옷을 입은 다음이에요.' },
+        { id: 'door', order: 3, label: '문 밖으로 나가요', shortLabel: '나가기', emoji: '🚪', image: './assets/life-sequence/go-out/step3.webp', effect: '문을 열고 신나게 나가요.', hint: '문 밖으로 나가는 건 마지막이에요.' }
       ]
     },
     {
@@ -84,14 +84,14 @@
       title: '장난감 정리',
       guide: '놀고 난 뒤 정리해볼까?',
       completeText: '우와! 방이 반짝반짝 깨끗해졌어요!',
-      bg: './assets/life-sequence/cleanup/bg.png',
-      completeImage: './assets/life-sequence/cleanup/complete.png',
+      bg: './assets/life-sequence/cleanup/bg.webp',
+      completeImage: './assets/life-sequence/cleanup/complete.webp',
       sceneEmoji: '🧸',
       completeEmoji: '🏠',
       steps: [
-        { id: 'gather', order: 1, label: '장난감을 모아요', shortLabel: '모으기', emoji: '🧩', image: './assets/life-sequence/cleanup/step1.png', effect: '장난감을 하나씩 모아요.', hint: '먼저 장난감을 모아요.' },
-        { id: 'basket', order: 2, label: '바구니에 넣어요', shortLabel: '바구니', emoji: '🧺', image: './assets/life-sequence/cleanup/step2.png', effect: '바구니에 쏙쏙 넣어요.', hint: '바구니에 넣는 건 그 다음이에요.' },
-        { id: 'clean', order: 3, label: '방이 깨끗해져요', shortLabel: '깨끗', emoji: '✨', image: './assets/life-sequence/cleanup/step3.png', effect: '방이 반짝반짝 깨끗해졌어요.', hint: '깨끗한 방은 마지막 모습이에요.' }
+        { id: 'gather', order: 1, label: '장난감을 모아요', shortLabel: '모으기', emoji: '🧩', image: './assets/life-sequence/cleanup/step1.webp', effect: '장난감을 하나씩 모아요.', hint: '먼저 장난감을 모아요.' },
+        { id: 'basket', order: 2, label: '바구니에 넣어요', shortLabel: '바구니', emoji: '🧺', image: './assets/life-sequence/cleanup/step2.webp', effect: '바구니에 쏙쏙 넣어요.', hint: '바구니에 넣는 건 그 다음이에요.' },
+        { id: 'clean', order: 3, label: '방이 깨끗해져요', shortLabel: '깨끗', emoji: '✨', image: './assets/life-sequence/cleanup/step3.webp', effect: '방이 반짝반짝 깨끗해졌어요.', hint: '깨끗한 방은 마지막 모습이에요.' }
       ]
     }
   ];
