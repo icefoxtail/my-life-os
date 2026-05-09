@@ -1,0 +1,15 @@
+{
+  "path": "assets/games/block-build/blocks/",
+  "files": [
+    "house-body.png",
+    "house-roof.png",
+    "house-door.png",
+    "train-engine.png",
+    "train-wheel.png",
+    "train-car.png",
+    "rocket-body.png",
+    "rocket-wing.png",
+    "rocket-fire.png"
+  ],
+  "note": "PNG block parts for number-blocks build mode"
+}
