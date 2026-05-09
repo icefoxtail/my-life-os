@@ -10,6 +10,9 @@
   const EXPECTED_PAGE_COUNT = 11;
 
   const PACK_ID_BY_SEED_ID = {
+    built_car_garage_night: 'car_garage_night',
+    built_dino_soft_steps: 'dino_soft_steps',
+    orig_bed_1: 'bed_cloud_lullaby',
     classic_1: 'classic_three_little_pigs',
     classic_2: 'classic_ugly_duckling',
     classic_4: 'classic_snow_white',
@@ -53,6 +56,7 @@
     return Object.assign(
       {},
       window.CLASSIC_STORY_PACKS || {},
+      window.BUILTIN_STORY_PACKS || {},
       window.GENERATED_STORY_PACKS || {},
       window.CUSTOM_STORY_PACKS || {}
     );
@@ -221,6 +225,7 @@
   window.STORYBOOK_EXPECTED_PAGE_COUNT = EXPECTED_PAGE_COUNT;
   window.STORYBOOK_PACK_ID_BY_SEED_ID = Object.assign({}, PACK_ID_BY_SEED_ID);
   window.STORYBOOK_IMAGE_DIR_BY_SEED_ID = Object.assign({}, IMAGE_DIR_BY_SEED_ID);
+  window.BUILTIN_STORY_PACKS = window.BUILTIN_STORY_PACKS || {};
   window.GENERATED_STORY_PACKS = window.GENERATED_STORY_PACKS || {};
   window.CUSTOM_STORY_PACKS = window.CUSTOM_STORY_PACKS || {};
   window.StoryPackRegistry = {

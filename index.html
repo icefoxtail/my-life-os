@@ -533,146 +533,92 @@
       background: #fff;
     }
     #storyReaderView {
-      position: fixed !important;
-      inset: 0 !important;
-      z-index: 120 !important;
       padding: 0 !important;
       border: 0 !important;
-      background: #07030f !important;
+      background: transparent !important;
       border-radius: 0 !important;
-      min-height: 100dvh;
-      overflow: hidden;
+      min-height: calc(100dvh - 96px);
     }
     #storyReaderView .story-reader-actions,
     #storyReaderView .story-voice-controls { display: none !important; }
-    #bookView {
-      width: 100%; height: 100dvh; min-height: 100dvh;
-      display: block !important; overflow: hidden;
-      background: #07030f;
-    }
+    #bookView { height: 100%; min-height: calc(100dvh - 96px); display: block !important; }
     .storybook-reader-book {
-      position: relative;
-      width: 100%; height: 100dvh;
+      height: calc(100dvh - 96px);
       min-height: 0;
-      display: block;
-      padding: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 8px;
+      padding: 6px 10px max(10px, env(safe-area-inset-bottom));
       overflow: hidden;
-      background: #07030f;
-      cursor: pointer;
     }
     .storybook-reader-topline {
-      position: absolute;
-      top: max(10px, env(safe-area-inset-top));
-      left: 12px; right: 12px;
-      z-index: 8;
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      pointer-events: none;
+      min-height: 42px;
     }
     .storybook-reader-back,
     .storybook-reader-page {
-      min-height: 34px;
-      padding: 0 12px;
+      min-height: 38px;
+      padding: 0 14px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.34);
-      border: 1px solid rgba(255,255,255,0.34);
-      color: #fff;
-      font-size: clamp(12px, 2.8vw, 16px);
+      background: rgba(255,255,255,0.92);
+      border: 3px solid rgba(255,255,255,0.95);
+      color: #3B0764;
+      font-size: clamp(14px, 3.6vw, 18px);
       font-weight: 900;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 0 rgba(0,0,0,0.12);
       display: inline-flex; align-items: center; justify-content: center;
-      pointer-events: auto;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.35);
     }
     .storybook-page-illustration {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
       min-height: 0;
-      border-radius: 0;
-      border: 0;
+      border-radius: 24px;
+      border: 5px solid rgba(255,255,255,0.95);
       overflow: hidden;
-      background: #07030f;
-      box-shadow: none;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 10px 0 rgba(61,0,92,0.15), 0 18px 32px rgba(0,0,0,0.18);
       display: grid; place-items: center;
-    }
-    .storybook-page-illustration::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 34%;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.26) 48%, rgba(0,0,0,0.58) 100%);
-      z-index: 2;
     }
     .storybook-page-illustration img {
       width: 100%; height: 100%; object-fit: contain; display: block;
-      background: #07030f;
+      background: rgba(255,255,255,0.92);
     }
     .storybook-page-illustration.image-missing span {
       font-size: clamp(90px, 28vw, 170px);
-      color: #fff;
-      z-index: 3;
     }
     .storybook-reader-text {
-      position: absolute;
-      left: 50%; bottom: max(16px, env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      z-index: 6;
-      width: min(92vw, 920px);
-      max-height: 28dvh;
-      overflow: hidden;
+      max-height: 30dvh;
+      overflow: auto;
       display: grid;
-      gap: 6px;
-      justify-items: center;
-      pointer-events: none;
+      gap: 8px;
+      padding-bottom: 2px;
     }
     .storybook-reader-text::-webkit-scrollbar { display: none; }
     .storybook-reader-text .story-paragraph {
-      display: none;
-      max-width: 100%;
-      margin: 0;
-      padding: 7px 12px 8px;
-      border-radius: 14px;
-      background: rgba(0,0,0,0.48);
-      color: #fff;
-      font-size: clamp(14px, 3.2vw, 22px);
-      line-height: 1.38;
-      text-align: center;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.72);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.22);
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.92);
+      color: #2D1060;
+      font-size: clamp(18px, 4.7vw, 25px);
+      line-height: 1.52;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.08);
     }
     .storybook-reader-text .story-paragraph.reading-active {
-      display: block;
-      outline: none;
-      background: rgba(0,0,0,0.50);
-      animation: storyCaptionIn 0.22s ease-out both;
-    }
-    @keyframes storyCaptionIn {
-      from { opacity: 0; transform: translateY(8px) scale(0.985); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .storybook-reader-text .highlight { color: #FFD93D; }
-    @media (orientation: portrait) {
-      .storybook-page-illustration img { object-fit: contain; }
-      .storybook-reader-text { bottom: max(20px, env(safe-area-inset-bottom)); width: min(94vw, 760px); }
-      .storybook-reader-text .story-paragraph { font-size: clamp(14px, 3.5vw, 20px); }
+      outline: 4px solid #FFD93D;
+      background: #fffbe8;
     }
     @media (orientation: landscape) {
-      #storyReaderView, #bookView, .storybook-reader-book { height: 100dvh; min-height: 100dvh; }
-      .storybook-page-illustration img { object-fit: contain; }
-      .storybook-reader-text {
-        bottom: max(14px, env(safe-area-inset-bottom));
-        width: min(78vw, 980px);
-        max-height: 24dvh;
+      .storybook-featured-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        min-height: calc(100dvh - 96px);
       }
-      .storybook-reader-text .story-paragraph {
-        font-size: clamp(14px, 2.25vw, 22px);
-        line-height: 1.34;
-        padding: 7px 14px 8px;
+      .storybook-book-card { min-height: clamp(190px, 66dvh, 360px); }
+      .storybook-reader-book {
+        height: calc(100dvh - 84px);
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 38vw);
+        grid-template-rows: auto minmax(0, 1fr);
       }
+      .storybook-reader-topline { grid-column: 1 / -1; }
+      .storybook-page-illustration { grid-column: 1; grid-row: 2; }
+      .storybook-reader-text { grid-column: 2; grid-row: 2; max-height: none; align-content: center; }
     }
     @media (max-width: 480px) {
       .storybook-main-cover-card { width: 90vw; min-height: 420px; }
@@ -960,18 +906,29 @@ function getLandCharacterInfo(zoneId){
 /* ═══════════════════════════════════════════
    ★ goWithLandCharacter — 랜드에서 캐릭터 탭 → 게임
 ═══════════════════════════════════════════ */
+function runLandAction(zoneId){
+  const actionMap = {
+    game: openMemoryGame,
+    numbers: openNumberCountGame,
+    letters: openLetterGame,
+    cars: openFullscreenGarage,
+    story: openStoryTheater,
+    voice: () => renderPlaceholderZone('voice')
+  };
+  const fn = actionMap[zoneId];
+  if(typeof fn === 'function') fn();
+}
 function goWithLandCharacter(zoneId){
   const info=getLandCharacterInfo(zoneId);
   const runner=document.getElementById('landSihyeonRunner');
-  if(!info||!runner) return;
+  if(!info||!runner){ runLandAction(zoneId); return; }
   runner.classList.add('is-moving');
   runner.style.left=info.landX;
   runner.style.top=info.landY;
   speakGuide(`${info.meta.name}이랑 같이 가볼게!`, true);
   setTimeout(()=>{
     runner.classList.remove('is-moving');
-    /* eslint-disable-next-line no-eval */
-    try{ eval(info.action); }catch(e){ console.warn('action error',e); }
+    runLandAction(zoneId);
   }, 850);
 }
 
@@ -1119,13 +1076,24 @@ function openVoiceLand(){
    TRAIN NAVIGATION & WALKING AVATAR
 ═══════════════════════════════════════════ */
 function travelToZone(zoneId){
-  if(isStoryPlaying()) return;
+  const zone=WORLD_ZONES[zoneId];
+  if(!zone) return;
+
+  if(window.stopStoryReading) window.stopStoryReading(true);
+  stopSpeaking();
   cleanupActiveGame();
-  const zone=WORLD_ZONES[zoneId]; if(!zone) return;
-  
-  speakGuide(`시현이가 ${zone.label}으로 출발! 하나 둘, 하나 둘!`, true);
-  
-  walkAvatarToZone(zoneId, () => enterZone(zoneId));
+
+  speakGuide(`시현이가 ${zone.label}으로 걸어가요! 하나 둘, 하나 둘!`, true);
+
+  let entered = false;
+  const safeEnter = () => {
+    if(entered) return;
+    entered = true;
+    enterZone(zoneId);
+  };
+
+  walkAvatarToZone(zoneId, safeEnter);
+  setTimeout(safeEnter, 2600);
 }
 
 function walkAvatarToZone(zoneId, onComplete) {
@@ -1417,7 +1385,7 @@ Object.assign(window,{
   speakText, speakGuide, speakStory, stopSpeaking,
   refreshLegacyCompatibility,
   renderWorldMapHome, travelToZone, travelToZoneFromCharacter, moveSihyeonToLandCharacter,
-  goWithLandCharacter, enterZone, closeToParkHome,
+  goWithLandCharacter, runLandAction, enterZone, closeToParkHome,
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand,
   cleanupActiveGame, openGameShell,
@@ -1444,11 +1412,6 @@ if('serviceWorker' in navigator){
 <script src="./js/voice-engine.js"></script>
 <script src="./js/ttokttoki-engine.js"></script>
 <script src="./js/story-data.js"></script>
-<script src="./js/data/story-pack-registry.js"></script>
-<script src="./js/data/classics/classic_three_little_pigs.js"></script>
-<script src="./js/data/classics/classic_ugly_duckling.js"></script>
-<script src="./js/data/classics/classic_snow_white.js"></script>
-<script src="./js/data/classics/classic_jack_and_the_beanstalk.js"></script>
 <script src="./js/story-world.js"></script>
 <script src="./js/games/vehicle-memory.js"></script>
 <script src="./js/games/number-count.js"></script>

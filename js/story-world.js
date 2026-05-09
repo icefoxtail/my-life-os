@@ -1161,16 +1161,14 @@ ${JSON.stringify(story)}
   }
 
   function readStory(index) {
-    const book = window.STORY_CONTENTS[Object.keys(window.STORY_CONTENTS)[index]];
-    showStoryReader();
-    db.playground.storyWorld.currentStory = {
-      id: `static_${index}`,
-      theme: book.theme,
-      title: book.title,
-      desc: '기본 동화',
-      content: book.paragraphs.join(' ')
-    };
-    document.getElementById('bookView').innerHTML = `<div class="book-title">${book.title}</div>${renderReaderVoiceControls()}<div id="bookContentText">${book.paragraphs.map(p => `<p class="story-paragraph">${p}</p>`).join('')}</div>`;
+    const packs = window.StoryPackRegistry?.getAllPacks?.() || {};
+    const pack = Object.values(packs)[Number(index) || 0];
+    if (pack?.id) {
+      readStoryById(pack.id);
+      return;
+    }
+    const story = (window.STORY_LIBRARY || [])[Number(index) || 0];
+    if (story?.id) readStoryById(story.id);
   }
 
   async function generateGeminiStory() {
