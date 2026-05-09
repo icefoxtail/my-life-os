@@ -354,6 +354,7 @@
     style.textContent = `
       .classic-video-section{grid-column:1/-1;display:block;margin:0 0 14px;}
       .classic-video-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;color:#fff;font-size:clamp(22px,5vw,34px);font-weight:900;text-shadow:0 3px 0 rgba(0,0,0,.22);}
+      .classic-video-section-title small{font-size:clamp(13px,3.2vw,17px);font-weight:800;line-height:1.25;text-align:right;color:rgba(255,255,255,.88);}
       .classic-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
       .classic-video-card{min-height:230px;border:4px solid rgba(255,255,255,.88);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,248,220,.94));box-shadow:0 10px 0 rgba(58,16,99,.24),0 18px 32px rgba(0,0,0,.18);overflow:hidden;text-align:left;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;}
       .classic-video-card:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(58,16,99,.22),0 10px 18px rgba(0,0,0,.16);}
@@ -381,6 +382,20 @@
 
   function getClassicVideoLibrary() {
     return Array.isArray(window.CLASSIC_VIDEO_LIBRARY) ? window.CLASSIC_VIDEO_LIBRARY : [];
+  }
+
+  function getFolkVideoLibrary() {
+    return Array.isArray(window.FOLK_VIDEO_LIBRARY) ? window.FOLK_VIDEO_LIBRARY : [];
+  }
+
+  function getVideoItemById(id) {
+    return (
+      window.getClassicVideoById?.(id) ||
+      window.getFolkVideoById?.(id) ||
+      getClassicVideoLibrary().find(video => video.id === id) ||
+      getFolkVideoLibrary().find(video => video.id === id) ||
+      null
+    );
   }
 
   function getStorySearchQuery() {
@@ -434,6 +449,36 @@
     `;
   }
 
+  function renderFolkVideoSection() {
+    if (!shouldShowClassicVideoSection()) return '';
+    const videos = filterClassicVideos(getFolkVideoLibrary(), getStorySearchQuery());
+    if (!videos.length) return '';
+    return `
+      <section class="classic-video-section" aria-label="전래동화관">
+        <div class="classic-video-section-title">
+          <span>🐯 전래동화관</span>
+          <small>길게 틀어두기 좋은 옛이야기 모음이에요.</small>
+        </div>
+        <div class="classic-video-grid">
+          ${videos.map(item => {
+            const cover = item.coverImage || '';
+            return `
+              <button class="classic-video-card" type="button" onclick="openClassicVideoTheater('${escapeAttr(item.id)}')" aria-label="${escapeAttr(item.title)} 보기">
+                <span class="classic-video-cover">
+                  ${cover ? `<img src="${cover}" alt="${escapeAttr(item.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid';">` : ''}
+                  <span class="classic-video-cover-fallback" ${cover ? 'style="display:none;"' : ''}>🐯</span>
+                </span>
+                <span class="classic-video-title">${escapeHtml(item.title)}</span>
+                <span class="classic-video-desc">${escapeHtml(item.desc || '')}</span>
+                <span class="classic-video-play-chip">▶ 모음 보기</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      </section>
+    `;
+  }
+
   function buildYoutubeEmbedUrl(videoId) {
     const id = encodeURIComponent(String(videoId || '').trim());
     return `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
@@ -455,7 +500,7 @@
   }
 
   function openClassicVideoTheater(itemId) {
-    const item = window.getClassicVideoById?.(itemId) || getClassicVideoLibrary().find(video => video.id === itemId);
+    const item = getVideoItemById(itemId);
     if (!item?.videoId) return;
     closeClassicVideoTheater();
     lockClassicVideoLandscape();
@@ -611,7 +656,7 @@
       </div>
     `;
 
-    const videoSectionHtml = renderClassicVideoSection();
+    const videoSectionHtml = renderClassicVideoSection() + renderFolkVideoSection();
     grid.innerHTML = videoSectionHtml + (bookHtml || `
       <button class="storybook-main-cover-card" type="button" onclick="openStorybookShelf()">
         <span class="storybook-main-cover-fallback">🏰</span>
@@ -1659,7 +1704,10 @@ ${JSON.stringify(story)}
   window.generateStoryByTheme = generateStoryByTheme;
   window.readStoryById = readStoryById;
   window.getClassicVideoLibrary = getClassicVideoLibrary;
+  window.getFolkVideoLibrary = getFolkVideoLibrary;
+  window.getVideoItemById = getVideoItemById;
   window.renderClassicVideoSection = renderClassicVideoSection;
+  window.renderFolkVideoSection = renderFolkVideoSection;
   window.openClassicVideoTheater = openClassicVideoTheater;
   window.closeClassicVideoTheater = closeClassicVideoTheater;
   window.buildYoutubeEmbedUrl = buildYoutubeEmbedUrl;
