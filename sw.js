@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.0.13';
+const CACHE_NAME = 'sihyeon-play-os-v1.0.16';
 
 const ASSETS = [
   './',
@@ -19,6 +19,16 @@ const ASSETS = [
   './js/games/number-count.js',
   './js/games/letter-play.js',
   './js/games/color-balloon.js',
+  './js/games/car-garage.js',
+
+  './assets/games/cards/vehicle-memory.png',
+  './assets/games/cards/color-balloon.png',
+  './assets/games/cards/number-count.png',
+  './assets/games/cards/number-blocks.png',
+  './assets/games/cards/letter-play.png',
+  './assets/games/cards/car-garage.png',
+  './assets/games/cards/parking-lot.png',
+  './assets/games/cards/construction-site.png',
 
   './assets/stories/storybook_main_cover.png'
 ];

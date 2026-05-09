@@ -38,13 +38,13 @@
     style.textContent = `
       .vz-root {
         width: 100%; height: 100%; min-height: 100%;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         background: linear-gradient(160deg, #fff0f5 0%, #e0f7fa 100%);
         font-family: 'Jua', 'Nanum Gothic', sans-serif;
-        padding: 20px; box-sizing: border-box;
-        overflow: hidden;
+        padding: clamp(14px, 3vw, 24px); box-sizing: border-box;
+        overflow: auto;
         user-select: none;
-        touch-action: none;
+        touch-action: pan-y;
         position: relative;
       }
       #vz-yt-player {
@@ -52,26 +52,63 @@
         width: 1px; height: 1px; opacity: 0; pointer-events: none;
       }
       .vz-character {
-        width: clamp(120px, 30vw, 180px);
-        height: clamp(120px, 30vw, 180px);
+        width: clamp(92px, 24vw, 138px);
+        height: clamp(92px, 24vw, 138px);
         background: #fff;
         border-radius: 50%;
         border: 6px solid #ffb6c1;
         box-shadow: 0 8px 16px rgba(255, 182, 193, 0.4);
         display: flex; align-items: center; justify-content: center;
-        margin-bottom: 50px;
+        margin: 0 auto 8px;
         flex-shrink: 0;
       }
       .vz-character img {
         width: 80%; height: 80%; object-fit: contain; border-radius: 50%;
       }
+      .vz-header {
+        position: relative; z-index: 2; width: min(100%, 820px);
+        display: grid; justify-items: center; gap: 8px; margin-bottom: 12px;
+      }
+      .vz-title {
+        margin: 0; color: #263238; text-align: center;
+        font-size: clamp(24px, 6vw, 40px); line-height: 1.12;
+        text-shadow: 0 2px 0 rgba(255,255,255,0.75);
+      }
+      .vz-card-grid {
+        position: relative; z-index: 2; width: min(100%, 920px);
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(14px, 3vw, 22px); padding: 4px 0 max(12px, env(safe-area-inset-bottom));
+      }
+      .vz-card {
+        min-height: 260px; border: 5px solid #fff; border-radius: 28px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,254,0.95));
+        box-shadow: 0 10px 0 rgba(123, 31, 162, 0.14), 0 18px 28px rgba(0,0,0,0.13);
+        display: flex; flex-direction: column; gap: 10px; padding: 13px;
+      }
+      .vz-card-visual {
+        position: relative; flex: 1 1 auto; min-height: 140px; border-radius: 22px;
+        overflow: hidden; display: grid; place-items: center;
+        background: linear-gradient(180deg, #e3f2fd 0%, #fff4c4 100%);
+        box-shadow: inset 0 -5px 0 rgba(0,0,0,0.06);
+      }
+      .vz-card-img { width: 100%; height: 100%; min-height: 140px; object-fit: cover; display: block; }
+      .vz-card-fallback { width: 100%; height: 100%; min-height: 140px; display: grid; place-items: center; font-size: clamp(68px, 18vw, 110px); }
+      .vz-card-title {
+        color: #283593; font-size: clamp(21px, 5vw, 30px);
+        font-weight: 900; line-height: 1.08; text-align: center;
+      }
+      .vz-card-desc {
+        color: #5f4775; font-size: clamp(14px, 3.4vw, 17px);
+        line-height: 1.3; text-align: center; min-height: 2.6em;
+      }
+      .vz-card-actions { display: flex; justify-content: center; align-items: center; min-height: 76px; }
       .vz-controls {
         position: relative;
         display: flex; align-items: center; justify-content: center;
       }
       .vz-mic-btn {
-        width: clamp(140px, 35vw, 220px);
-        height: clamp(140px, 35vw, 220px);
+        width: clamp(104px, 26vw, 156px);
+        height: clamp(104px, 26vw, 156px);
         border-radius: 50%;
         background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
         border: 8px solid #fff;
@@ -86,6 +123,8 @@
       .vz-mic-btn:active {
         transform: scale(0.92);
       }
+      .vz-mic-btn:focus-visible,
+      .vz-music-btn:focus-visible { outline: 5px solid #ffd54f; outline-offset: 4px; }
       @keyframes vz-pulse-red {
         0% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); }
         70% { box-shadow: 0 0 0 40px rgba(255, 82, 82, 0); }
@@ -107,22 +146,21 @@
         border-color: #e8f5e9;
       }
       .vz-music-btn {
-        position: absolute;
-        bottom: -10px; right: -20px;
-        width: clamp(60px, 15vw, 80px);
-        height: clamp(60px, 15vw, 80px);
+        position: relative;
+        width: clamp(96px, 24vw, 136px);
+        height: clamp(96px, 24vw, 136px);
         border-radius: 50%;
         background: linear-gradient(135deg, #ffd54f 0%, #ffb300 100%);
-        border: 4px solid #fff;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        font-size: clamp(28px, 7vw, 36px);
+        border: 7px solid #fff;
+        box-shadow: 0 8px 0 rgba(230,126,0,0.28), 0 14px 22px rgba(0,0,0,0.14);
+        font-size: clamp(44px, 11vw, 70px);
         display: flex; align-items: center; justify-content: center;
         cursor: pointer;
-        transition: transform 0.1s, opacity 0.3s;
+        transition: transform 0.1s, opacity 0.3s, box-shadow 0.1s;
         -webkit-tap-highlight-color: transparent;
         z-index: 20;
       }
-      .vz-music-btn:active { transform: scale(0.9); }
+      .vz-music-btn:active { transform: scale(0.94) translateY(3px); box-shadow: 0 4px 0 rgba(230,126,0,0.25), 0 8px 16px rgba(0,0,0,0.12); }
       .vz-music-btn.playing {
         animation: vz-bounce 1s infinite alternate;
       }
@@ -132,6 +170,10 @@
       @keyframes vz-bounce {
         from { transform: translateY(0); }
         to { transform: translateY(-10px); }
+      }
+      @media (max-width: 680px) {
+        .vz-card-grid { grid-template-columns: 1fr; }
+        .vz-card { min-height: 235px; }
       }
     `;
     document.head.appendChild(style);
@@ -348,13 +390,38 @@
     container.innerHTML = `
       <div class="vz-root">
         <div id="vz-yt-player"></div>
-        <div class="vz-character">
-          <img src="${nuniImgUrl}" alt="눈이" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <span class="vz-character-fallback" style="display:none; font-size: 80px;">🐱</span>
+        <div class="vz-header">
+          <div class="vz-character">
+            <img src="${nuniImgUrl}" alt="눈이" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="vz-character-fallback" style="display:none; font-size: 80px;">🐱</span>
+          </div>
+          <h2 class="vz-title">시현아, 말하고 다시 들어볼까?</h2>
         </div>
-        <div class="vz-controls">
-          <button class="vz-mic-btn" type="button" aria-label="마이크 버튼">🎤</button>
-          <button class="vz-music-btn disabled" type="button" aria-label="노래 재생 버튼">🎵</button>
+
+        <div class="vz-card-grid">
+          <section class="vz-card" aria-label="내 목소리 듣기">
+            <div class="vz-card-visual">
+              <img class="vz-card-img" src="./assets/voice/cards/voice-record.png" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+              <span class="vz-card-fallback" style="display:none;">🎙️</span>
+            </div>
+            <div class="vz-card-title">내 목소리 듣기</div>
+            <div class="vz-card-desc">꾹 누르고 말하면, 내 목소리가 다시 나와요</div>
+            <div class="vz-card-actions">
+              <button class="vz-mic-btn" type="button" aria-label="꾹 누르고 말하기">🎤</button>
+            </div>
+          </section>
+
+          <section class="vz-card" aria-label="노래 틀어줘">
+            <div class="vz-card-visual">
+              <img class="vz-card-img" src="./assets/voice/cards/song-play.png" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+              <span class="vz-card-fallback" style="display:none;">🎵</span>
+            </div>
+            <div class="vz-card-title">노래 틀어줘</div>
+            <div class="vz-card-desc">누르면 신나는 노래가 나와요</div>
+            <div class="vz-card-actions">
+              <button class="vz-music-btn disabled" type="button" aria-label="노래 재생 버튼">🎵</button>
+            </div>
+          </section>
         </div>
       </div>
     `;
