@@ -1,6 +1,8 @@
 (function() {
   const STORYBOOK_MAIN_COVER_SRC = './assets/stories/storybook_main_cover.png';
   const FEATURED_STORY_IDS = ['classic_1', 'classic_2', 'classic_4', 'classic_5'];
+  const CLASSIC_BOOK_PAGE_SIZE = 4;
+
   const CLASSIC_STORY_CONFIGS = {
     classic_1: { contentKey: 'classic_1_pigs', imageDir: 'classic_three_little_pigs', imageReady: true },
     classic_2: { contentKey: 'classic_2_ugly_duckling', imageDir: 'classic_ugly_duckling', imageReady: true },
@@ -22,12 +24,15 @@
     classic_19: { contentKey: 'classic_peter_pan', imageDir: 'classic_peter_pan', imageReady: false },
     classic_20: { contentKey: 'classic_20_wizard_of_oz', imageDir: 'classic_wizard_of_oz', imageReady: false }
   };
+
   const CLASSIC_STORY_PACK_ID_BY_SEED_ID = {
     classic_1: 'classic_three_little_pigs',
     classic_2: 'classic_ugly_duckling',
     classic_4: 'classic_snow_white',
     classic_5: 'classic_jack_and_the_beanstalk'
   };
+
+  let classicShelfPage = 0;
 
   function getClassicStoryPacks() {
     if (window.StoryPackRegistry?.getAllPacks) return window.StoryPackRegistry.getAllPacks();
@@ -65,7 +70,7 @@
     return pack.pages.flatMap(page => Array.isArray(page.texts) ? page.texts : []).filter(Boolean);
   }
 
-  let storyShelfStage = 'intro';
+  let storyShelfStage = 'classics';
   let currentStoryFilter = '전체';
   window.currentStoryFilter = window.currentStoryFilter || currentStoryFilter;
   currentStoryFilter = window.currentStoryFilter;
@@ -284,16 +289,69 @@
     return normalized;
   }
 
+  function getClassicStoryNumber(story) {
+    const id = String(story?.sourceId || story?.id || '').trim();
+    const match = id.match(/^classic_(\d+)/);
+    return match ? Number(match[1]) : 9999;
+  }
+
+  function isIllustratedClassicSeed(story) {
+    if (!story) return false;
+    const id = String(story.id || story.sourceId || '').trim();
+    if (!id.startsWith('classic_')) return false;
+    const cfg = CLASSIC_STORY_CONFIGS[id];
+    const pack = getStoryPackByStory(story) || getClassicPackBySeedId(id);
+    return Boolean(story.imageReady || cfg?.imageReady || pack?.imageReady || CLASSIC_STORY_PACK_ID_BY_SEED_ID[id]);
+  }
+
+  function getAllIllustratedClassicStories() {
+    const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
+    const stories = library
+      .filter(isIllustratedClassicSeed)
+      .map(normalizeStory)
+      .filter(story => story?.title);
+
+    if (stories.length) {
+      return stories.sort((a, b) => getClassicStoryNumber(a) - getClassicStoryNumber(b));
+    }
+
+    return FEATURED_STORY_IDS
+      .map(id => library.find(story => story.id === id))
+      .filter(Boolean)
+      .map(normalizeStory)
+      .filter(story => story?.title)
+      .sort((a, b) => getClassicStoryNumber(a) - getClassicStoryNumber(b));
+  }
+
+  function getFeaturedStories() {
+    return getAllIllustratedClassicStories();
+  }
+
+  function preloadClassicBookCovers(stories, page) {
+    if (!Array.isArray(stories) || !stories.length) return;
+    const nextStart = (page + 1) * CLASSIC_BOOK_PAGE_SIZE;
+    const nextStories = stories.slice(nextStart, nextStart + CLASSIC_BOOK_PAGE_SIZE);
+    window.setTimeout(() => {
+      nextStories.forEach(story => {
+        const src = story?.coverImage || '';
+        if (!src) return;
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = src;
+      });
+    }, 150);
+  }
 
   function setStoryFilter(filter) {
     currentStoryFilter = filter;
     window.currentStoryFilter = filter;
-    storyShelfStage = filter === '대표' ? 'intro' : 'classics';
+    storyShelfStage = 'classics';
+    classicShelfPage = 0;
     renderStoryLibrary();
   }
 
   function renderStoryWorld() {
-    storyShelfStage = 'intro';
+    storyShelfStage = 'classics';
     renderStoryLibrary();
   }
 
@@ -301,17 +359,8 @@
     return Array.isArray(db.playground.storyWorld.savedStories) ? db.playground.storyWorld.savedStories : [];
   }
 
-  function getFeaturedStories() {
-    const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
-    return FEATURED_STORY_IDS
-      .map(id => library.find(story => story.id === id))
-      .filter(Boolean)
-      .map(normalizeStory)
-      .filter(story => story?.paragraphs?.length);
-  }
-
   function openStorybookIntro() {
-    storyShelfStage = 'intro';
+    storyShelfStage = 'classics';
     renderStoryLibrary();
   }
 
@@ -320,40 +369,94 @@
     renderStoryLibrary();
   }
 
+  function nextClassicStoryPage() {
+    const stories = getFeaturedStories();
+    const maxPage = Math.max(0, Math.ceil(stories.length / CLASSIC_BOOK_PAGE_SIZE) - 1);
+    classicShelfPage = Math.min(maxPage, classicShelfPage + 1);
+    renderStoryLibrary();
+  }
+
+  function prevClassicStoryPage() {
+    classicShelfPage = Math.max(0, classicShelfPage - 1);
+    renderStoryLibrary();
+  }
+
   function renderStorybookIntro(grid) {
-    document.querySelector('.story-search-row')?.classList.add('story-ui-hidden');
-    document.querySelector('.story-filter-row')?.classList.add('story-ui-hidden');
-    const loadMore = document.getElementById('storyLoadMoreBtn');
-    if (loadMore) loadMore.style.display = 'none';
-    grid.className = 'story-card-grid storybook-intro-grid';
-    grid.innerHTML = `
-      <button class="storybook-main-cover-card" type="button" onclick="openStorybookShelf()" aria-label="명작 책장 열기">
-        <img src="${STORYBOOK_MAIN_COVER_SRC}" alt="동화나라" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
-        <span class="storybook-main-cover-fallback" style="display:none;">🏰</span>
-      </button>
-    `;
+    renderStorybookShelf(grid);
   }
 
   function renderStorybookShelf(grid) {
+    document.querySelector('.story-search-row')?.classList.add('story-ui-hidden');
+    document.querySelector('.story-filter-row')?.classList.add('story-ui-hidden');
+
+    const loadMore = document.getElementById('storyLoadMoreBtn');
+    if (loadMore) loadMore.style.display = 'none';
+
     const stories = getFeaturedStories();
+    const maxPage = Math.max(0, Math.ceil(stories.length / CLASSIC_BOOK_PAGE_SIZE) - 1);
+    classicShelfPage = Math.max(0, Math.min(classicShelfPage, maxPage));
+
+    const start = classicShelfPage * CLASSIC_BOOK_PAGE_SIZE;
+    const pageStories = stories.slice(start, start + CLASSIC_BOOK_PAGE_SIZE);
+
     grid.className = 'story-card-grid storybook-featured-grid';
-    grid.innerHTML = stories.map(story => {
+    grid.style.minHeight = 'auto';
+    grid.style.alignContent = 'start';
+    grid.style.paddingTop = '0px';
+    grid.style.paddingBottom = 'max(18px, env(safe-area-inset-bottom))';
+
+    const bookHtml = pageStories.map((story, index) => {
       const cover = story.coverImage || '';
       const emoji = getStoryCoverEmoji(story.theme);
+      const loadingMode = index < 4 ? 'eager' : 'lazy';
       return `
         <button class="storybook-book-card" type="button" onclick="readStoryById('${escapeAttr(story.sourceId || story.id)}')" aria-label="${escapeAttr(story.title)} 읽기">
           <span class="storybook-book-cover">
-            ${cover ? `<img src="${cover}" alt="${escapeAttr(story.title)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">` : ''}
+            ${cover ? `<img src="${cover}" alt="${escapeAttr(story.title)}" loading="${loadingMode}" decoding="async" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='grid';">` : ''}
             <span class="storybook-book-fallback" ${cover ? 'style="display:none;"' : ''}>${emoji}</span>
           </span>
           <span class="storybook-book-title">${escapeHtml(story.title)}</span>
         </button>
       `;
-    }).join('') || `
-      <button class="storybook-main-cover-card" type="button" onclick="openStorybookIntro()">
+    }).join('');
+
+    const pagerHtml = stories.length > CLASSIC_BOOK_PAGE_SIZE ? `
+      <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-top:2px;">
+        <button type="button" onclick="prevClassicStoryPage()" ${classicShelfPage <= 0 ? 'disabled' : ''}
+          style="min-height:52px; border-radius:18px; background:${classicShelfPage <= 0 ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.94)'}; color:#3B0764; font-size:18px; font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,0.12); opacity:${classicShelfPage <= 0 ? '0.45' : '1'};">
+          ◀ 이전
+        </button>
+        <div style="min-width:74px; text-align:center; color:#fff; font-size:18px; font-weight:900; text-shadow:0 2px 0 rgba(0,0,0,0.22);">
+          ${classicShelfPage + 1} / ${maxPage + 1}
+        </div>
+        <button type="button" onclick="nextClassicStoryPage()" ${classicShelfPage >= maxPage ? 'disabled' : ''}
+          style="min-height:52px; border-radius:18px; background:${classicShelfPage >= maxPage ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.94)'}; color:#3B0764; font-size:18px; font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,0.12); opacity:${classicShelfPage >= maxPage ? '0.45' : '1'};">
+          다음 ▶
+        </button>
+      </div>
+    ` : '';
+
+    const actionHtml = `
+      <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:2px;">
+        <button type="button" onclick="openStorySeedShelf()"
+          style="min-height:52px; border-radius:18px; background:rgba(255,255,255,0.94); color:#5B21B6; font-size:18px; font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,0.12);">
+          ✨ 새 이야기
+        </button>
+        <button type="button" onclick="openSavedStoryShelf()"
+          style="min-height:52px; border-radius:18px; background:rgba(255,255,255,0.94); color:#5B21B6; font-size:18px; font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,0.12);">
+          💖 저장한 동화
+        </button>
+      </div>
+    `;
+
+    grid.innerHTML = bookHtml || `
+      <button class="storybook-main-cover-card" type="button" onclick="openStorybookShelf()">
         <span class="storybook-main-cover-fallback">🏰</span>
       </button>
     `;
+
+    grid.innerHTML += pagerHtml + actionHtml;
+    preloadClassicBookCovers(stories, classicShelfPage);
   }
 
   function renderStoryLibrary() {
@@ -362,8 +465,137 @@
     const reader = document.getElementById('storyReaderView');
     if (reader) reader.style.display = 'none';
     grid.style.display = 'grid';
-    if (storyShelfStage === 'intro') renderStorybookIntro(grid);
-    else renderStorybookShelf(grid);
+    renderStorybookShelf(grid);
+  }
+
+  function openStorySeedShelf() {
+    const grid = document.getElementById('storyLibraryGrid');
+    if (!grid) return;
+
+    const loadMore = document.getElementById('storyLoadMoreBtn');
+    if (loadMore) loadMore.style.display = 'none';
+
+    document.querySelector('.story-search-row')?.classList.add('story-ui-hidden');
+    document.querySelector('.story-filter-row')?.classList.add('story-ui-hidden');
+
+    const themes = [
+      { theme: '자동차', icon: '🚗', label: '자동차 이야기' },
+      { theme: '공룡', icon: '🦕', label: '공룡 이야기' },
+      { theme: '우주', icon: '🚀', label: '우주 이야기' },
+      { theme: '바다', icon: '🌊', label: '바다 이야기' },
+      { theme: '잠자리', icon: '🌙', label: '잠자리 이야기' },
+      { theme: '생활습관', icon: '🪥', label: '생활습관 이야기' }
+    ];
+
+    grid.className = 'story-card-grid storybook-featured-grid';
+    grid.style.minHeight = 'auto';
+    grid.style.alignContent = 'start';
+
+    grid.innerHTML = `
+      <div style="grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:4px;">
+        <button type="button" onclick="renderStoryWorld()"
+          style="min-height:44px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,0.94); color:#3B0764; font-size:16px; font-weight:900; box-shadow:0 4px 0 rgba(0,0,0,0.12);">
+          ← 책장
+        </button>
+        <div style="color:#fff; font-size:20px; font-weight:900; text-shadow:0 2px 0 rgba(0,0,0,0.22);">
+          새 이야기
+        </div>
+      </div>
+      ${themes.map(item => `
+        <button class="storybook-book-card" type="button" onclick="generateStoryByTheme('${escapeAttr(item.theme)}')" aria-label="${escapeAttr(item.label)} 만들기">
+          <span class="storybook-book-cover">
+            <span class="storybook-book-fallback" style="display:grid;">${item.icon}</span>
+          </span>
+          <span class="storybook-book-title">${escapeHtml(item.label)}</span>
+        </button>
+      `).join('')}
+    `;
+  }
+
+  function openSavedStoryShelf() {
+    const grid = document.getElementById('storyLibraryGrid');
+    if (!grid) return;
+
+    const savedStories = renderSavedStories();
+    const loadMore = document.getElementById('storyLoadMoreBtn');
+    if (loadMore) loadMore.style.display = 'none';
+
+    document.querySelector('.story-search-row')?.classList.add('story-ui-hidden');
+    document.querySelector('.story-filter-row')?.classList.add('story-ui-hidden');
+
+    grid.className = 'story-card-grid storybook-featured-grid';
+    grid.style.minHeight = 'auto';
+    grid.style.alignContent = 'start';
+
+    if (!savedStories.length) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:4px;">
+          <button type="button" onclick="renderStoryWorld()"
+            style="min-height:44px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,0.94); color:#3B0764; font-size:16px; font-weight:900; box-shadow:0 4px 0 rgba(0,0,0,0.12);">
+            ← 책장
+          </button>
+          <div style="color:#fff; font-size:20px; font-weight:900; text-shadow:0 2px 0 rgba(0,0,0,0.22);">
+            저장한 동화
+          </div>
+        </div>
+        <div class="story-empty">💖 아직 저장한 동화가 없어요</div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = `
+      <div style="grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:4px;">
+        <button type="button" onclick="renderStoryWorld()"
+          style="min-height:44px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,0.94); color:#3B0764; font-size:16px; font-weight:900; box-shadow:0 4px 0 rgba(0,0,0,0.12);">
+          ← 책장
+        </button>
+        <div style="color:#fff; font-size:20px; font-weight:900; text-shadow:0 2px 0 rgba(0,0,0,0.22);">
+          저장한 동화
+        </div>
+      </div>
+      ${savedStories.slice(0, 12).map(story => {
+        const normalized = normalizeStory(story);
+        const cover = normalized?.coverImage || '';
+        const emoji = getStoryCoverEmoji(normalized?.theme || story.theme);
+        const id = story.id || story.savedId || normalized?.id;
+        return `
+          <button class="storybook-book-card" type="button" onclick="readStoryById('${escapeAttr(id)}')" aria-label="${escapeAttr(story.title || '저장한 동화')} 읽기">
+            <span class="storybook-book-cover">
+              ${cover ? `<img src="${cover}" alt="${escapeAttr(story.title || '저장한 동화')}" loading="lazy" decoding="async" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='grid';">` : ''}
+              <span class="storybook-book-fallback" ${cover ? 'style="display:none;"' : 'style="display:grid;"'}>${emoji}</span>
+            </span>
+            <span class="storybook-book-title">${escapeHtml(story.title || '저장한 동화')}</span>
+          </button>
+        `;
+      }).join('')}
+    `;
+  }
+
+  function generateStoryByTheme(theme) {
+    const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
+    const candidates = library.filter(story => {
+      const storyTheme = String(story.theme || '');
+      const id = String(story.id || '');
+      if (id.startsWith('classic_')) return false;
+      if (story.hasFullContent) return false;
+      return storyTheme.includes(theme);
+    });
+
+    const fallback = library.filter(story => {
+      const storyTheme = String(story.theme || '');
+      const id = String(story.id || '');
+      return !id.startsWith('classic_') && storyTheme.includes(theme);
+    });
+
+    const pool = candidates.length ? candidates : fallback;
+    const seed = pool[Math.floor(Math.random() * pool.length)];
+
+    if (!seed?.id) {
+      if (window.speakGuide) window.speakGuide('아직 만들 수 있는 이야기가 없어요.', true);
+      return;
+    }
+
+    generateStoryFromSeed(seed.id);
   }
 
   function closeStoryReader() {
@@ -384,6 +616,7 @@
     if (grid) grid.style.display = 'none';
     if (reader) reader.style.display = 'block';
   }
+
   function requestStoryLandscapeMode() {
     const orientation = window.screen?.orientation;
     if (!orientation || typeof orientation.lock !== 'function') return;
@@ -399,7 +632,6 @@
     try { orientation.unlock(); } catch (error) {}
   }
 
-
   function renderStoryPage() {
     const story = db.playground.storyWorld.currentStory;
     const normalized = normalizeStory(story);
@@ -407,7 +639,7 @@
     const pageIndex = Math.max(0, Math.min(storyReadState.pageIndex || 0, normalized.pages.length - 1));
     const page = normalized.pages[pageIndex] || { texts: normalized.paragraphs || [], image: normalized.coverImage || '' };
     const imageHtml = page.image
-      ? `<div class="storybook-page-illustration"><img src="${page.image}" alt="${escapeAttr(normalized.title)} ${pageIndex + 1}" onerror="this.parentElement.classList.add('image-missing'); this.style.display='none';"></div>`
+      ? `<div class="storybook-page-illustration"><img src="${page.image}" alt="${escapeAttr(normalized.title)} ${pageIndex + 1}" loading="eager" decoding="async" onerror="this.onerror=null; this.parentElement.classList.add('image-missing'); this.style.display='none';"></div>`
       : `<div class="storybook-page-illustration image-missing"><span>${getStoryCoverEmoji(normalized.theme)}</span></div>`;
     const textHtml = (page.texts || []).map((text, index) => `
       <p class="story-paragraph" data-story-paragraph="${index}">${escapeHtml(text).replace(/시현/g, "<span class='highlight'>시현</span>")}</p>
@@ -441,7 +673,7 @@
     const coverEmoji = getStoryCoverEmoji(normalized.theme);
     const coverHtml = `<div class="storybook-reader-hero">
   ${normalized.coverImage
-    ? `<img src="${normalized.coverImage}" alt="${escapeHtml(normalized.title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">`
+    ? `<img src="${normalized.coverImage}" alt="${escapeHtml(normalized.title)}" loading="eager" decoding="async" onerror="this.onerror=null; this.style.display='none';this.nextElementSibling.style.display='grid';">`
     : ''}
   <span class="storybook-reader-hero-fallback" style="${normalized.coverImage ? 'display:none;' : ''}">${coverEmoji}</span>
 </div>`;
@@ -1213,6 +1445,11 @@ ${JSON.stringify(story)}
   window.setStoryFilter = setStoryFilter;
   window.openStorybookIntro = openStorybookIntro;
   window.openStorybookShelf = openStorybookShelf;
+  window.nextClassicStoryPage = nextClassicStoryPage;
+  window.prevClassicStoryPage = prevClassicStoryPage;
+  window.openStorySeedShelf = openStorySeedShelf;
+  window.openSavedStoryShelf = openSavedStoryShelf;
+  window.generateStoryByTheme = generateStoryByTheme;
   window.readStoryById = readStoryById;
   window.generateStoryFromSeed = generateStoryFromSeed;
   window.saveCurrentStory = saveCurrentStory;
