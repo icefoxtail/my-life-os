@@ -144,18 +144,13 @@
       transition: left 0.6s ease-in-out, top 0.6s ease-in-out, transform 0.25s ease;
     }
 
-    /* ★ 수정: 걷기 바운스 — inner wrapper에 적용 (left/top transition과 충돌 없음) */
-    .avatar-walk-inner {
-      width: 100%; height: 100%;
-      display: grid; place-items: center;
-      position: relative;
-    }
-    .sihyeon-avatar.is-walking .avatar-walk-inner {
+    /* ★ 수정: translate 속성 사용 (transform의 scaleX 방향전환과 독립적으로 합성됨) */
+    .sihyeon-avatar.is-walking {
       animation: avatarBounce 0.34s ease-in-out infinite;
     }
     @keyframes avatarBounce {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-11px); }
+      0%, 100% { translate: 0 0px;   }
+      50%       { translate: 0 -11px; }
     }
 
     .map-character, .land-character {
@@ -985,12 +980,9 @@ function renderWorldMapHome(){
             <img src="./assets/vehicles/transport/train.png" alt="기차" onerror="this.style.display='none'">
             <div class="train-emoji">🚂</div>
           </div>
-          <!-- ★ 수정: avatar-walk-inner wrapper 추가 -->
-          <div id="sihyeonAvatar" class="sihyeon-avatar" style="bottom:2%; left:50%; top:auto; transform:translateX(-50%);">
-            <div class="avatar-walk-inner">
-              <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
-              <div class="avatar-emoji">👦🏻</div>
-            </div>
+          <div id="sihyeonAvatar" class="sihyeon-avatar">
+            <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
+            <div class="avatar-emoji">👦🏻</div>
           </div>
           <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 지도에서 가고 싶은 곳을 눌러봐!', true)" aria-label="안내">🎤</button>
         </div>
