@@ -347,6 +347,126 @@
     return getAllIllustratedClassicStories();
   }
 
+  function injectClassicVideoStyles() {
+    if (document.getElementById('classic-video-style')) return;
+    const style = document.createElement('style');
+    style.id = 'classic-video-style';
+    style.textContent = `
+      .classic-video-section{grid-column:1/-1;display:block;margin:0 0 14px;}
+      .classic-video-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;color:#fff;font-size:clamp(22px,5vw,34px);font-weight:900;text-shadow:0 3px 0 rgba(0,0,0,.22);}
+      .classic-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+      .classic-video-card{min-height:230px;border:4px solid rgba(255,255,255,.88);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,248,220,.94));box-shadow:0 10px 0 rgba(58,16,99,.24),0 18px 32px rgba(0,0,0,.18);overflow:hidden;text-align:left;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;}
+      .classic-video-card:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(58,16,99,.22),0 10px 18px rgba(0,0,0,.16);}
+      .classic-video-cover{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:16/10;background:radial-gradient(circle at 25% 15%,#FFF7AD 0,#FFD36A 28%,#A855F7 72%,#3B0764 100%);overflow:hidden;}
+      .classic-video-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+      .classic-video-cover-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:clamp(48px,12vw,78px);text-shadow:0 4px 0 rgba(0,0,0,.24);background:radial-gradient(circle at 30% 20%,#FFE9A8 0,#B565F2 54%,#2D0060 100%);}
+      .classic-video-title{display:block;padding:10px 12px 2px;color:#3B0764;font-size:clamp(18px,4.3vw,24px);font-weight:900;line-height:1.15;}
+      .classic-video-desc{display:block;padding:3px 12px 8px;color:#5B3B76;font-size:clamp(13px,3.3vw,16px);line-height:1.25;min-height:42px;}
+      .classic-video-play-chip{align-self:flex-start;margin:auto 12px 12px;padding:7px 12px;border-radius:999px;background:#FFD93D;color:#3B0764;font-size:15px;font-weight:900;box-shadow:0 3px 0 #E6A700;}
+      .classic-video-theater{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));background:rgba(14,0,32,.84);backdrop-filter:blur(8px);}
+      .classic-video-panel{width:min(1100px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;border:4px solid rgba(255,255,255,.84);border-radius:22px;background:linear-gradient(180deg,#3B0764 0%,#160026 100%);box-shadow:0 20px 60px rgba(0,0,0,.42);padding:10px;}
+      .classic-video-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;}
+      .classic-video-panel .classic-video-title{padding:0;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.24);}
+      .classic-video-close{flex:0 0 auto;min-width:74px;min-height:42px;border-radius:999px;background:#fff;color:#3B0764;font-size:17px;font-weight:900;box-shadow:0 4px 0 rgba(0,0,0,.18);}
+      .classic-video-frame-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;}
+      .classic-video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+      @media (min-width:760px){.classic-video-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.classic-video-card{min-height:260px;}}
+      @media (max-width:380px){.classic-video-grid{grid-template-columns:1fr;}.classic-video-card{min-height:250px;}.classic-video-theater{padding:8px;}.classic-video-panel{border-radius:18px;}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function getClassicVideoLibrary() {
+    return Array.isArray(window.CLASSIC_VIDEO_LIBRARY) ? window.CLASSIC_VIDEO_LIBRARY : [];
+  }
+
+  function getStorySearchQuery() {
+    return String(document.getElementById('storySearchInput')?.value || '').trim().toLowerCase();
+  }
+
+  function shouldShowClassicVideoSection() {
+    const filter = String(window.currentStoryFilter || currentStoryFilter || '전체');
+    return filter === '전체' || filter === '세계명작' || filter === '명작 만화관' || filter === '명작';
+  }
+
+  function filterClassicVideos(list, query) {
+    const q = String(query || '').trim().toLowerCase();
+    if (!q) return list;
+    return list.filter(item => {
+      const haystack = [
+        item.title,
+        item.desc,
+        item.theme,
+        item.group,
+        ...(Array.isArray(item.tags) ? item.tags : [])
+      ].join(' ').toLowerCase();
+      return haystack.includes(q);
+    });
+  }
+
+  function renderClassicVideoSection() {
+    if (!shouldShowClassicVideoSection()) return '';
+    const videos = filterClassicVideos(getClassicVideoLibrary(), getStorySearchQuery());
+    if (!videos.length) return '';
+    return `
+      <section class="classic-video-section" aria-label="명작 만화관">
+        <div class="classic-video-section-title"><span>🎬 명작 만화관</span></div>
+        <div class="classic-video-grid">
+          ${videos.map(item => {
+            const cover = item.coverImage || '';
+            return `
+              <button class="classic-video-card" type="button" onclick="openClassicVideoTheater('${escapeAttr(item.id)}')" aria-label="${escapeAttr(item.title)} 만화 보기">
+                <span class="classic-video-cover">
+                  ${cover ? `<img src="${cover}" alt="${escapeAttr(item.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid';">` : ''}
+                  <span class="classic-video-cover-fallback" ${cover ? 'style="display:none;"' : ''}>🏰</span>
+                </span>
+                <span class="classic-video-title">${escapeHtml(item.title)}</span>
+                <span class="classic-video-desc">${escapeHtml(item.desc || '')}</span>
+                <span class="classic-video-play-chip">▶ 만화 보기</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      </section>
+    `;
+  }
+
+  function buildYoutubeEmbedUrl(videoId) {
+    const id = encodeURIComponent(String(videoId || '').trim());
+    return `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+  }
+
+  function openClassicVideoTheater(itemId) {
+    const item = window.getClassicVideoById?.(itemId) || getClassicVideoLibrary().find(video => video.id === itemId);
+    if (!item?.videoId) return;
+    closeClassicVideoTheater();
+    const modal = document.createElement('div');
+    modal.id = 'classicVideoTheater';
+    modal.className = 'classic-video-theater';
+    modal.innerHTML = `
+      <div class="classic-video-panel" role="dialog" aria-modal="true" aria-label="${escapeAttr(item.title)}">
+        <div class="classic-video-panel-head">
+          <div class="classic-video-title">${escapeHtml(item.title)}</div>
+          <button class="classic-video-close" type="button" onclick="closeClassicVideoTheater()">닫기</button>
+        </div>
+        <div class="classic-video-frame-wrap">
+          <iframe src="${buildYoutubeEmbedUrl(item.videoId)}" title="${escapeAttr(item.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen playsinline></iframe>
+        </div>
+      </div>
+    `;
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeClassicVideoTheater();
+    });
+    document.body.appendChild(modal);
+  }
+
+  function closeClassicVideoTheater() {
+    const modal = document.getElementById('classicVideoTheater');
+    if (!modal) return;
+    modal.querySelectorAll('iframe').forEach(frame => { frame.src = ''; });
+    modal.remove();
+  }
+
   function preloadClassicBookCovers(stories, page) {
     if (!Array.isArray(stories) || !stories.length) return;
     const nextStart = (page + 1) * CLASSIC_BOOK_PAGE_SIZE;
@@ -406,6 +526,7 @@
   }
 
   function renderStorybookShelf(grid) {
+    injectClassicVideoStyles();
     document.querySelector('.story-search-row')?.classList.add('story-ui-hidden');
     document.querySelector('.story-filter-row')?.classList.add('story-ui-hidden');
 
@@ -469,11 +590,12 @@
       </div>
     `;
 
-    grid.innerHTML = bookHtml || `
+    const videoSectionHtml = renderClassicVideoSection();
+    grid.innerHTML = videoSectionHtml + (bookHtml || `
       <button class="storybook-main-cover-card" type="button" onclick="openStorybookShelf()">
         <span class="storybook-main-cover-fallback">🏰</span>
       </button>
-    `;
+    `);
 
     grid.innerHTML += pagerHtml + actionHtml;
     preloadClassicBookCovers(stories, classicShelfPage);
@@ -1515,6 +1637,11 @@ ${JSON.stringify(story)}
   window.openSavedStoryShelf = openSavedStoryShelf;
   window.generateStoryByTheme = generateStoryByTheme;
   window.readStoryById = readStoryById;
+  window.getClassicVideoLibrary = getClassicVideoLibrary;
+  window.renderClassicVideoSection = renderClassicVideoSection;
+  window.openClassicVideoTheater = openClassicVideoTheater;
+  window.closeClassicVideoTheater = closeClassicVideoTheater;
+  window.buildYoutubeEmbedUrl = buildYoutubeEmbedUrl;
   window.generateStoryFromSeed = generateStoryFromSeed;
   window.saveCurrentStory = saveCurrentStory;
   window.exportCurrentStoryPack = exportCurrentStoryPack;
@@ -1529,6 +1656,9 @@ ${JSON.stringify(story)}
   window.readStory = readStory;
   window.generateGeminiStory = generateGeminiStory;
   window.renderStoryWorld = renderStoryWorld;
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeClassicVideoTheater();
+  });
   function bootStoryWorldIfMounted() {
     const grid = document.getElementById('storyLibraryGrid');
     if (!grid) return;

@@ -9,6 +9,7 @@
   <meta name="theme-color" content="#5BC8F5">
   <title>시현이 놀이터 OS</title>
   <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235BC8F5'/%3E%3Ccircle cx='22' cy='42' r='7' fill='%231A2E3B'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%231A2E3B'/%3E%3Cpath d='M10 37h44l-5-15H24L15 31z' fill='%23FFD93D'/%3E%3Cpath d='M24 22h17l4 11H18z' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
@@ -689,6 +690,87 @@
     body.debug-hotspots .image-hotspot {
       background:rgba(255,0,0,0.18); border:2px dashed rgba(255,0,0,0.65);
     }
+
+    /* ═══════════════════════════════════════
+       PARENT DASHBOARD & PIN
+    ═══════════════════════════════════════ */
+    .btn-parent-lock {
+      position: absolute; top: max(16px, env(safe-area-inset-top)); right: 16px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.85); border: 3px solid #fff;
+      font-size: 20px; display: grid; place-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 50;
+      cursor: pointer; transition: transform 0.1s;
+    }
+    .btn-parent-lock:active { transform: scale(0.9); }
+
+    .pin-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px); z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .pin-box {
+      background: #fff; padding: 30px; border-radius: 24px;
+      text-align: center; width: 300px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .pin-title { font-size: 24px; color: var(--ink); margin-bottom: 20px; }
+    .pin-display {
+      font-size: 32px; letter-spacing: 8px; margin-bottom: 20px;
+      height: 40px; display: flex; align-items: center; justify-content: center;
+    }
+    .pin-numpad {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .pin-btn {
+      height: 60px; font-size: 24px; border-radius: 12px;
+      background: #f0f0f0; color: var(--ink);
+      box-shadow: 0 4px 0 #ddd;
+    }
+    .pin-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #ddd; }
+
+    .parent-dash-screen {
+      position: fixed; inset: 0; background: #f4f7f8;
+      z-index: 100; overflow-y: auto; padding-bottom: 40px;
+      animation: zoneEnter 0.3s ease-out;
+    }
+    .dash-header {
+      background: var(--sky-top); padding: max(16px, env(safe-area-inset-top)) 16px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      color: #fff; position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .dash-title { font-size: 24px; }
+    .dash-close-btn {
+      background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 16px;
+      color: #fff; border: 2px solid rgba(255,255,255,0.5); font-size: 16px;
+    }
+    .dash-content { padding: 20px; max-width: 800px; margin: 0 auto; display: grid; gap: 20px; }
+    .dash-card {
+      background: #fff; border-radius: 20px; padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .dash-card-title { font-size: 18px; color: var(--ink); margin-bottom: 16px; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .summary-item { background: #f8f9fa; padding: 16px; border-radius: 16px; text-align: center; }
+    .summary-val { font-size: 32px; font-weight: 900; color: var(--primary); }
+    .summary-lbl { font-size: 14px; color: #666; margin-top: 4px; }
+
+    .visited-lands { display: flex; flex-wrap: wrap; gap: 8px; }
+    .visited-chip { background: #e0f7fa; color: #00838f; padding: 6px 12px; border-radius: 12px; font-size: 14px; }
+
+    /* CSS Bar Chart */
+    .chart-container { display: flex; align-items: flex-end; height: 160px; gap: 8px; margin-top: 10px; padding-top: 20px;}
+    .chart-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px; }
+    .chart-bar-wrap { width: 100%; height: 120px; display: flex; align-items: flex-end; background: #f0f0f0; border-radius: 6px; position: relative;}
+    .chart-bar { width: 100%; background: var(--sky-top); border-radius: 6px 6px 0 0; transition: height 0.5s; }
+    .chart-lbl { font-size: 11px; color: #888; }
+    .chart-val { position: absolute; width: 100%; text-align: center; margin-bottom: 4px; font-size: 11px; color: var(--ink); }
+
+    .story-list { list-style: none; padding: 0; margin: 0; display:grid; gap:8px;}
+    .story-list li { background: #f3e5f5; padding: 10px 14px; border-radius: 12px; font-size: 15px; color: #4a148c; }
+    .story-empty-lbl { color: #999; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -750,7 +832,7 @@ const LAND_CHARACTERS = {
   letters: { id:'rona',     mainX:'18%', mainY:'42%', landX:'24%', landY:'72%', action:'openLetterGame()',          greeting:'로나랑 글자 놀이!' },
   cars:    { id:'sicheoni', mainX:'82%', mainY:'43%', landX:'76%', landY:'72%', action:'openFullscreenGarage()',    greeting:'시천이랑 차 고쳐보자!' },
   story:   { id:'reumi',    mainX:'18%', mainY:'68%', landX:'24%', landY:'72%', action:'openStoryTheater()',        greeting:'름이랑 동화 읽어볼까?' },
-  voice:   { id:'nuni',     mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'renderPlaceholderZone("voice")', greeting:'눈이랑 말하기 연습!' }
+  voice:   { id:'nuni',     mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'openVoiceZone()', greeting:'눈이랑 말하기 연습!' }
 };
 
 const ZONE_CONFIGS = {
@@ -802,6 +884,11 @@ function startGameTimer() {
   clearGameTimer();
   _gameTimer = setTimeout(() => {
     speakGuide('10분이 지났어! 잠깐 쉬어볼까?', true);
+    const todayStr = getToday();
+    if(db.parentLog && db.parentLog.daily[todayStr]) {
+      db.parentLog.daily[todayStr].timerCount++;
+      save();
+    }
   }, 10 * 60 * 1000);
 }
 function clearGameTimer() {
@@ -821,7 +908,8 @@ const DEFAULT_DB = {
   settings:{
     voiceGuide:{ enabled:true, autoRead:true, rate:0.85, pitch:1.1 },
     ai:{ model:'gemini-3.0-flash' }
-  }
+  },
+  parentLog: { daily: { launchCount: 0 } }
 };
 
 /* ═══════════════════════════════════════════
@@ -860,6 +948,12 @@ function refreshLegacyCompatibility(){
   db.playground.collection=Array.isArray(db.playground.collection)?db.playground.collection:[];
   db.playground.storyWorld=mergeDefaults(db.playground.storyWorld,clone(DEFAULT_DB.playground.storyWorld));
   db.settings=mergeDefaults(db.settings,clone(DEFAULT_DB.settings));
+  db.parentLog = db.parentLog || { daily: {} };
+  const todayStr = getToday();
+  if (!db.parentLog.daily[todayStr]) {
+    db.parentLog.daily[todayStr] = { totalMinutes: 0, timerCount: 0, launchCount: 0, landsVisited: [], storiesWatched: [] };
+  }
+  if (db.parentLog.daily[todayStr].launchCount === undefined) db.parentLog.daily[todayStr].launchCount = 0;
 }
 function save(){ refreshLegacyCompatibility(); localStorage.setItem(DB_KEY,JSON.stringify(db)); }
 
@@ -911,9 +1005,10 @@ function closeGarageHandlers(){ if(typeof garageCleanup==='function') garageClea
    ★ 통합 cleanupActiveGame
 ═══════════════════════════════════════════ */
 function cleanupActiveGame(){
-  ['vehicleMemory','numberCount','letterPlay','colorBalloon'].forEach(key=>{
+  ['vehicleMemory','numberCount','letterPlay','colorBalloon','parkingLot'].forEach(key=>{
     window.SihyeonGames?.[key]?.destroy?.();
   });
+  window.SihyeonZones?.voiceZone?.destroy?.();
 }
 
 /* ═══════════════════════════════════════════
@@ -1012,6 +1107,12 @@ function travelToZoneFromCharacter(zoneId){
    WORLD MAP HOME
 ═══════════════════════════════════════════ */
 function renderWorldMapHome(){
+  const todayStr = getToday();
+  if(db.parentLog?.daily[todayStr] !== undefined) {
+    db.parentLog.daily[todayStr].launchCount =
+      (db.parentLog.daily[todayStr].launchCount || 0) + 1;
+    save();
+  }
   cleanupActiveGame(); closeGarageHandlers();
   const root=document.getElementById('sihyeonPlayOS');
   const bg=WORLD_ASSETS.main;
@@ -1020,6 +1121,7 @@ function renderWorldMapHome(){
       <div class="world-blur-bg"></div>
       <div class="world-map-frame">
         <img src="${bg}" class="world-map-bg" alt="시현이 큰 놀이동산" onerror="handleMapImageError(this)">
+        <button class="btn-parent-lock" onclick="showPinOverlay()" aria-label="부모 대시보드">🔒</button>
         <div class="world-map-content">
           ${['game','numbers','letters','cars','story','voice'].map(id=>{
             const z=WORLD_ZONES[id];
@@ -1123,7 +1225,7 @@ function openStoryLand(){
 }
 function openVoiceLand(){
   openImageLand('voice','🎤 말하기광장', WORLD_ASSETS.voice,[
-    { x:'50%', y:'45%', w:'62%', h:'46%', label:'말하기 놀이', emoji:'🎤', action:'renderPlaceholderZone("voice")' }
+    { x:'50%', y:'45%', w:'62%', h:'46%', label:'말하기 놀이', emoji:'🎤', action:'openVoiceZone()' }
   ]);
 }
 
@@ -1137,6 +1239,16 @@ function travelToZone(zoneId){
   if(window.stopStoryReading) window.stopStoryReading(true);
   stopSpeaking();
   cleanupActiveGame();
+
+  // Log visited land
+  const todayStr = getToday();
+  if(db.parentLog && db.parentLog.daily[todayStr]) {
+    const landName = `${zone.emoji} ${zone.label}`;
+    if(!db.parentLog.daily[todayStr].landsVisited.includes(landName)){
+      db.parentLog.daily[todayStr].landsVisited.push(landName);
+      save();
+    }
+  }
 
   speakGuide(`시현이가 ${zone.label}으로 걸어가요! 하나 둘, 하나 둘!`, true);
 
@@ -1287,6 +1399,12 @@ function openParkingGame(){
   if(window.SihyeonGames?.parkingLot?.render){
     window.SihyeonGames.parkingLot.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">주차장을 불러오지 못했어요.</div>';
+}
+function openVoiceZone(){
+  const t=openGameShell('🎤 말하기광장','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
+  if(window.SihyeonZones?.voiceZone?.render){
+    window.SihyeonZones.voiceZone.render(t,{speakGuide,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기광장을 불러오지 못했어요.</div>';
 }
 
 /* ═══════════════════════════════════════════
@@ -1520,6 +1638,146 @@ function _renderStoryGridPage(theme, query) {
 }
 
 /* ═══════════════════════════════════════════
+   PARENT DASHBOARD
+═══════════════════════════════════════════ */
+let currentPin = '';
+function showPinOverlay() {
+  currentPin = '';
+  const root = document.getElementById('sihyeonPlayOS');
+  const div = document.createElement('div');
+  div.className = 'pin-overlay';
+  div.id = 'pinOverlay';
+  div.innerHTML = `
+    <div class="pin-box">
+      <div class="pin-title">🔒 부모님 확인</div>
+      <div class="pin-display" id="pinDisplay">_ _ _ _</div>
+      <div class="pin-numpad">
+        ${[1,2,3,4,5,6,7,8,9].map(n => `<button class="pin-btn" onclick="handlePinPad(${n})">${n}</button>`).join('')}
+        <button class="pin-btn" onclick="handlePinPad('C')">C</button>
+        <button class="pin-btn" onclick="handlePinPad(0)">0</button>
+        <button class="pin-btn" onclick="closePinOverlay()">닫기</button>
+      </div>
+    </div>
+  `;
+  root.appendChild(div);
+}
+
+function closePinOverlay() {
+  const el = document.getElementById('pinOverlay');
+  if(el) el.remove();
+}
+
+function handlePinPad(val) {
+  if(val === 'C') { currentPin = ''; }
+  else if(currentPin.length < 4) { currentPin += val; }
+
+  const display = document.getElementById('pinDisplay');
+  if(display) {
+    display.textContent = currentPin.padEnd(4, '_').split('').join(' ');
+  }
+
+  if(currentPin.length === 4) {
+    if(currentPin === '0000') {
+      closePinOverlay();
+      renderParentDashboard();
+    } else {
+      display.textContent = '다시 입력';
+      display.style.color = 'red';
+      setTimeout(() => {
+         currentPin = '';
+         display.textContent = '_ _ _ _';
+         display.style.color = '';
+      }, 800);
+    }
+  }
+}
+
+function renderParentDashboard() {
+  const root = document.getElementById('sihyeonPlayOS');
+  const todayStr = getToday();
+  const todayLog = db.parentLog?.daily[todayStr] || { totalMinutes: 0, timerCount: 0, launchCount: 0, landsVisited: [], storiesWatched: [] };
+
+  const last7Days = [];
+  let maxMins = 1;
+  for(let i=6; i>=0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dStr = d.toISOString().slice(0,10);
+    const mins = db.parentLog?.daily[dStr]?.totalMinutes || 0;
+    if(mins > maxMins) maxMins = mins;
+    last7Days.push({ date: `${d.getMonth()+1}/${d.getDate()}`, mins });
+  }
+
+  root.innerHTML = `
+    <div class="parent-dash-screen">
+      <div class="dash-header">
+        <div class="dash-title">🔒 시현이 사용 현황</div>
+        <button class="dash-close-btn" onclick="renderWorldMapHome()">닫기</button>
+      </div>
+      <div class="dash-content">
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <div class="summary-val">${todayLog.totalMinutes}분</div>
+            <div class="summary-lbl">오늘 사용 시간</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-val">${todayLog.launchCount || 0}번</div>
+            <div class="summary-lbl">오늘 앱 실행 횟수</div>
+          </div>
+          <div class="summary-item" style="grid-column: span 2;">
+            <div class="summary-val">Lv.${db.progress.level}</div>
+            <div class="summary-lbl">현재 게임 레벨 (경험치: ${db.progress.exp}%)</div>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-title">오늘 방문한 랜드</div>
+          <div class="visited-lands">
+            ${todayLog.landsVisited.length ? todayLog.landsVisited.map(l => `<span class="visited-chip">${l}</span>`).join('') : '<span class="story-empty-lbl">아직 방문한 랜드가 없어요.</span>'}
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-title">오늘 읽은 동화</div>
+          <ul class="story-list">
+            ${todayLog.storiesWatched.length ? todayLog.storiesWatched.map(s => `<li>📖 ${escapeHtml(s)}</li>`).join('') : '<li class="story-empty-lbl">아직 읽은 동화가 없어요.</li>'}
+          </ul>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-title">최근 7일 사용 시간 (분)</div>
+          <div class="chart-container">
+            ${last7Days.map(d => {
+              const h = Math.max((d.mins / maxMins) * 100, 5);
+              return `
+                <div class="chart-col">
+                  <div class="chart-bar-wrap">
+                    <div class="chart-val" style="bottom: ${h}%; margin-bottom: 4px;">${d.mins}</div>
+                    <div class="chart-bar" style="height: ${d.mins === 0 ? 0 : h}%;"></div>
+                  </div>
+                  <div class="chart-lbl">${d.date}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+
+// 매 1분마다 사용 시간 기록
+setInterval(() => {
+  const todayStr = getToday();
+  if(db.parentLog && db.parentLog.daily[todayStr]) {
+      db.parentLog.daily[todayStr].totalMinutes++;
+      save();
+  }
+}, 60000);
+
+/* ═══════════════════════════════════════════
    GLOBAL EXPORTS & BOOT
 ═══════════════════════════════════════════ */
 Object.assign(window,{
@@ -1530,12 +1788,13 @@ Object.assign(window,{
   renderWorldMapHome, travelToZone, travelToZoneFromCharacter, moveSihyeonToLandCharacter,
   goWithLandCharacter, runLandAction, enterZone, closeToParkHome,
   openImageLand, renderZoneLand,
-  openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand,
+  openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone,
   cleanupActiveGame, openGameShell,
   openMemoryGame, openNumberCountGame, openLetterGame, openColorBalloonGame, openParkingGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
   filterStoriesBySearch, loadMoreStories,
-  renderStoryGrid, _renderStoryGridPage
+  renderStoryGrid, _renderStoryGridPage,
+  showPinOverlay, handlePinPad, closePinOverlay, renderParentDashboard
 });
 
 refreshLegacyCompatibility();
@@ -1551,6 +1810,27 @@ window.addEventListener('load', () => {
       }
     }, 0);
   };
+  
+  // 동화 읽기 후킹으로 로깅 처리
+  setTimeout(() => {
+    const origRead = window.readStoryById;
+    if(typeof origRead === 'function') {
+      window.readStoryById = function(id) {
+        const story = window.STORY_LIBRARY?.find(s => s.id === id || s.savedId === id);
+        if(story) {
+            const todayStr = getToday();
+            if(db.parentLog && db.parentLog.daily[todayStr]) {
+                if(!db.parentLog.daily[todayStr].storiesWatched.includes(story.title)){
+                    db.parentLog.daily[todayStr].storiesWatched.push(story.title);
+                    save();
+                }
+            }
+        }
+        return origRead.apply(this, arguments);
+      };
+    }
+  }, 500);
+
   setTimeout(() => {
     if (document.getElementById('storyLibraryGrid') && window.bootStoryWorldIfMounted) {
       window.bootStoryWorldIfMounted();
@@ -1572,10 +1852,14 @@ if('serviceWorker' in navigator){
 
 <script src="./js/voice-engine.js"></script>
 <script src="./js/ttokttoki-engine.js"></script>
+<script src="./js/zones/voice-zone.js"></script>
 
 <script src="./js/data/story-pack-registry.js"></script>
-<script src="./js/data/classic-stories-content.js"></script>
-<script src="./js/data/classic-story-packs.js"></script>
+<script src="./js/data/classics/classic_three_little_pigs.js"></script>
+<script src="./js/data/classics/classic_ugly_duckling.js"></script>
+<script src="./js/data/classics/classic_snow_white.js"></script>
+<script src="./js/data/classics/classic_jack_and_the_beanstalk.js"></script>
+<script src="./js/data/classic-video-registry.js"></script>
 
 <script src="./js/story-data.js"></script>
 <script src="./js/story-world.js"></script>

@@ -8,10 +8,9 @@ const ASSETS = [
 
   './js/voice-engine.js',
   './js/ttokttoki-engine.js',
+  './js/zones/voice-zone.js',
 
   './js/data/story-pack-registry.js',
-  './js/data/classic-stories-content.js',
-  './js/data/classic-story-packs.js',
 
   './js/story-data.js',
   './js/story-world.js',
