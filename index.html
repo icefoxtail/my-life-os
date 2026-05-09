@@ -99,7 +99,7 @@
     ═══════════════════════════════════════ */
     .zone-label {
       position: absolute;
-      top: calc(100% + 5px);
+      top: -32px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0,0,0,0.68);
@@ -166,7 +166,7 @@
 
     .map-character, .land-character {
       position: absolute; transform: translate(-50%,-50%);
-      width: clamp(54px,12vw,86px); height: clamp(54px,12vw,86px);
+      width: clamp(72px,16vw,110px); height: clamp(72px,16vw,110px);
       border-radius: 50%; border: 4px solid rgba(255,255,255,0.96);
       background: rgba(255,255,255,0.72);
       box-shadow: 0 8px 14px rgba(0,0,0,0.22), inset 0 2px 0 rgba(255,255,255,0.65);
@@ -853,6 +853,7 @@ const ZONE_CONFIGS = {
     greeting:'엄마랑 숫자 공부해볼까? 어떤 게임 할래?',
     games: [
       { id:'count', title:'몇 대일까?', emoji:'🚗', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
+      { id:'blocks', title:'숫자 블록', emoji:'🔢', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
     ]
   },
   letters: {
@@ -872,6 +873,7 @@ const ZONE_CONFIGS = {
     games: [
       { id:'garage',  title:'자동차 정비소', emoji:'🔧', desc:'드래그로 차를 고쳐요', action:'openFullscreenGarage()', isNew:false },
       { id:'parking', title:'주차장',       emoji:'🅿️', desc:'차를 주차해요',       action:'openParkingGame()',      isNew:true  },
+      { id:'construction', title:'공사장',  emoji:'🏗️', desc:'공사차를 골라요',     action:'openConstructionSiteGame()', isNew:true  },
     ]
   }
 };
@@ -1005,7 +1007,7 @@ function closeGarageHandlers(){ if(typeof garageCleanup==='function') garageClea
    ★ 통합 cleanupActiveGame
 ═══════════════════════════════════════════ */
 function cleanupActiveGame(){
-  ['vehicleMemory','numberCount','letterPlay','colorBalloon','parkingLot'].forEach(key=>{
+  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite'].forEach(key=>{
     window.SihyeonGames?.[key]?.destroy?.();
   });
   window.SihyeonZones?.voiceZone?.destroy?.();
@@ -1376,6 +1378,12 @@ function openNumberCountGame(){
     window.SihyeonGames.numberCount.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">숫자놀이를 불러오지 못했어요.</div>';
 }
+function openNumberBlocksGame(){
+  const t=openGameShell('🔢 숫자 블록','numberBlocksTarget','linear-gradient(135deg,#1A237E 0%,#311B92 100%)');
+  if(window.SihyeonGames?.numberBlocks?.render){
+    window.SihyeonGames.numberBlocks.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">숫자 블록을 불러오지 못했어요.</div>';
+}
 function openMemoryGame(){
   const t=openGameShell('🎮 자동차 짝맞추기','memoryGameTarget');
   if(window.SihyeonGames?.vehicleMemory?.render){
@@ -1399,6 +1407,12 @@ function openParkingGame(){
   if(window.SihyeonGames?.parkingLot?.render){
     window.SihyeonGames.parkingLot.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">주차장을 불러오지 못했어요.</div>';
+}
+function openConstructionSiteGame(){
+  const t=openGameShell('🏗️ 공사장','constructionSiteTarget','linear-gradient(180deg,#60c8ff 0%,#f7b143 100%)');
+  if(window.SihyeonGames?.constructionSite?.render){
+    window.SihyeonGames.constructionSite.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">공사장을 불러오지 못했어요.</div>';
 }
 function openVoiceZone(){
   const t=openGameShell('🎤 말하기광장','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
@@ -1768,8 +1782,17 @@ function renderParentDashboard() {
   `;
 }
 
+function isStoryUsageTimerPaused(){
+  return Boolean(
+    document.getElementById('storyLibraryGrid') ||
+    document.getElementById('storyReaderView') ||
+    document.getElementById('classicVideoTheater')
+  );
+}
+
 // 매 1분마다 사용 시간 기록
 setInterval(() => {
+  if(isStoryUsageTimerPaused()) return;
   const todayStr = getToday();
   if(db.parentLog && db.parentLog.daily[todayStr]) {
       db.parentLog.daily[todayStr].totalMinutes++;
@@ -1790,7 +1813,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberCountGame, openLetterGame, openColorBalloonGame, openParkingGame,
+  openMemoryGame, openNumberCountGame, openNumberBlocksGame, openLetterGame, openColorBalloonGame, openParkingGame, openConstructionSiteGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
   filterStoriesBySearch, loadMoreStories,
   renderStoryGrid, _renderStoryGridPage,
@@ -1866,8 +1889,10 @@ if('serviceWorker' in navigator){
 
 <script src="./js/games/vehicle-memory.js"></script>
 <script src="./js/games/number-count.js"></script>
+<script src="./js/games/number-blocks.js"></script>
 <script src="./js/games/letter-play.js"></script>
 <script src="./js/games/color-balloon.js"></script>
 <script src="./js/games/parking-lot.js"></script>
+<script src="./js/games/construction-site.js"></script>
 </body>
 </html>

@@ -357,20 +357,23 @@
       .classic-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
       .classic-video-card{min-height:230px;border:4px solid rgba(255,255,255,.88);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,248,220,.94));box-shadow:0 10px 0 rgba(58,16,99,.24),0 18px 32px rgba(0,0,0,.18);overflow:hidden;text-align:left;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;}
       .classic-video-card:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(58,16,99,.22),0 10px 18px rgba(0,0,0,.16);}
-      .classic-video-cover{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:16/10;background:radial-gradient(circle at 25% 15%,#FFF7AD 0,#FFD36A 28%,#A855F7 72%,#3B0764 100%);overflow:hidden;}
+      .classic-video-cover{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:16/9;background:radial-gradient(circle at 25% 15%,#FFF7AD 0,#FFD36A 28%,#A855F7 72%,#3B0764 100%);overflow:hidden;}
       .classic-video-cover img{width:100%;height:100%;object-fit:cover;display:block;}
       .classic-video-cover-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:clamp(48px,12vw,78px);text-shadow:0 4px 0 rgba(0,0,0,.24);background:radial-gradient(circle at 30% 20%,#FFE9A8 0,#B565F2 54%,#2D0060 100%);}
       .classic-video-title{display:block;padding:10px 12px 2px;color:#3B0764;font-size:clamp(18px,4.3vw,24px);font-weight:900;line-height:1.15;}
       .classic-video-desc{display:block;padding:3px 12px 8px;color:#5B3B76;font-size:clamp(13px,3.3vw,16px);line-height:1.25;min-height:42px;}
       .classic-video-play-chip{align-self:flex-start;margin:auto 12px 12px;padding:7px 12px;border-radius:999px;background:#FFD93D;color:#3B0764;font-size:15px;font-weight:900;box-shadow:0 3px 0 #E6A700;}
-      .classic-video-theater{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));background:rgba(14,0,32,.84);backdrop-filter:blur(8px);}
-      .classic-video-panel{width:min(1100px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;border:4px solid rgba(255,255,255,.84);border-radius:22px;background:linear-gradient(180deg,#3B0764 0%,#160026 100%);box-shadow:0 20px 60px rgba(0,0,0,.42);padding:10px;}
+      .classic-video-theater{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:rgba(0,0,0,.86);backdrop-filter:blur(8px);overflow:auto;}
+      .classic-video-panel{width:min(96vw,1100px);max-height:100%;display:flex;flex-direction:column;gap:10px;border:4px solid rgba(255,255,255,.84);border-radius:22px;background:linear-gradient(180deg,#3B0764 0%,#160026 100%);box-shadow:0 20px 60px rgba(0,0,0,.42);padding:10px;margin:auto 0;}
       .classic-video-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;}
       .classic-video-panel .classic-video-title{padding:0;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.24);}
-      .classic-video-close{flex:0 0 auto;min-width:74px;min-height:42px;border-radius:999px;background:#fff;color:#3B0764;font-size:17px;font-weight:900;box-shadow:0 4px 0 rgba(0,0,0,.18);}
-      .classic-video-frame-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;}
+      .classic-video-close{position:relative;z-index:2;flex:0 0 auto;min-width:74px;min-height:42px;border-radius:999px;background:#fff;color:#3B0764;font-size:17px;font-weight:900;box-shadow:0 4px 0 rgba(0,0,0,.18);}
+      .classic-video-hint{color:rgba(255,255,255,.88);font-size:clamp(13px,3.4vw,16px);font-weight:800;text-align:center;text-shadow:0 1px 0 rgba(0,0,0,.25);}
+      .classic-video-frame-wrap{position:relative;align-self:center;width:min(96vw,1100px,calc(78dvh * 16 / 9));max-width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;max-height:78dvh;}
       .classic-video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
       @media (min-width:760px){.classic-video-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.classic-video-card{min-height:260px;}}
+      @media (orientation:portrait){.classic-video-theater{align-items:flex-start;}.classic-video-panel{margin:0;width:min(96vw,1100px);}.classic-video-frame-wrap{max-height:78dvh;}}
+      @media (orientation:landscape){.classic-video-theater{align-items:center;}.classic-video-panel{width:min(96vw,1200px);}.classic-video-frame-wrap{width:min(96vw,1200px,calc(86dvh * 16 / 9));max-height:86dvh;}}
       @media (max-width:380px){.classic-video-grid{grid-template-columns:1fr;}.classic-video-card{min-height:250px;}.classic-video-theater{padding:8px;}.classic-video-panel{border-radius:18px;}}
     `;
     document.head.appendChild(style);
@@ -436,10 +439,26 @@
     return `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
   }
 
+  function lockClassicVideoLandscape() {
+    const orientation = window.screen?.orientation;
+    if (!orientation || typeof orientation.lock !== 'function') return;
+    try {
+      const result = orientation.lock('landscape');
+      if (result && typeof result.catch === 'function') result.catch(() => {});
+    } catch (error) {}
+  }
+
+  function unlockClassicVideoOrientation() {
+    const orientation = window.screen?.orientation;
+    if (!orientation || typeof orientation.unlock !== 'function') return;
+    try { orientation.unlock(); } catch (error) {}
+  }
+
   function openClassicVideoTheater(itemId) {
     const item = window.getClassicVideoById?.(itemId) || getClassicVideoLibrary().find(video => video.id === itemId);
     if (!item?.videoId) return;
     closeClassicVideoTheater();
+    lockClassicVideoLandscape();
     const modal = document.createElement('div');
     modal.id = 'classicVideoTheater';
     modal.className = 'classic-video-theater';
@@ -452,6 +471,7 @@
         <div class="classic-video-frame-wrap">
           <iframe src="${buildYoutubeEmbedUrl(item.videoId)}" title="${escapeAttr(item.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen playsinline></iframe>
         </div>
+        <div class="classic-video-hint">화면을 가로로 돌리면 더 크게 볼 수 있어요.</div>
       </div>
     `;
     modal.addEventListener('click', (event) => {
@@ -462,6 +482,7 @@
 
   function closeClassicVideoTheater() {
     const modal = document.getElementById('classicVideoTheater');
+    unlockClassicVideoOrientation();
     if (!modal) return;
     modal.querySelectorAll('iframe').forEach(frame => { frame.src = ''; });
     modal.remove();
