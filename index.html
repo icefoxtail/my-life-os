@@ -139,23 +139,32 @@
       position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%);
       width: clamp(64px,12vw,86px); height: clamp(64px,12vw,86px);
       background: #fff; border: 4px solid #fff; border-radius: 50%;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25); display: grid; place-items: center; z-index: 30; pointer-events: none;
-      /* ★ 수정: position transition 추가 */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25); z-index: 30; pointer-events: none;
+      overflow: hidden; /* ★ 검정박스 방지 */
       transition: left 0.6s ease-in-out, top 0.6s ease-in-out, transform 0.25s ease;
     }
-
-    /* ★ 수정: 걷기 바운스 — inner wrapper에 적용 (left/top transition과 충돌 없음) */
-    .avatar-walk-inner {
+    /* ★ 아바타 이미지: 원형 꽉 채우기 */
+    .sihyeon-avatar img {
+      position: absolute; inset: 0;
       width: 100%; height: 100%;
-      display: grid; place-items: center;
-      position: relative;
+      object-fit: cover; border-radius: 50%;
+      z-index: 3; display: block;
     }
-    .sihyeon-avatar.is-walking .avatar-walk-inner {
+    /* ★ 이모지 fallback: 이미지 없을 때만 보임 */
+    .avatar-emoji {
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      font-size: clamp(42px,9vw,56px);
+      z-index: 2;
+    }
+
+    /* ★ 수정: translate 속성 사용 (transform의 scaleX 방향전환과 독립적으로 합성됨) */
+    .sihyeon-avatar.is-walking {
       animation: avatarBounce 0.34s ease-in-out infinite;
     }
     @keyframes avatarBounce {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-11px); }
+      0%, 100% { translate: 0 0px;   }
+      50%       { translate: 0 -11px; }
     }
 
     .map-character, .land-character {
@@ -467,111 +476,132 @@
     }
 
     /* ═══════════════════════════════════════
-       STORYBOOK MODE
+       STORYBOOK MODE — 표지/책장/리더
     ═══════════════════════════════════════ */
-    .story-ui-hidden { display: none !important; }
     .storybook-intro-grid {
-      min-height: calc(100dvh - 120px);
+      min-height: calc(100dvh - 124px);
       display: grid !important;
       place-items: center;
-      grid-template-columns: 1fr !important;
-      padding: 8px 12px max(18px, env(safe-area-inset-bottom));
+      padding: 8px 0 max(18px, env(safe-area-inset-bottom));
     }
     .storybook-main-cover-card {
-      width: min(88vw, 480px);
-      height: min(72dvh, 680px);
-      min-height: 430px;
+      position: relative;
+      width: min(86vw, 420px);
+      height: min(72dvh, 560px);
+      min-height: 420px;
       border-radius: 34px;
       overflow: hidden;
-      border: 6px solid rgba(255,255,255,0.95);
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 16px 0 rgba(61,0,92,0.18), 0 28px 54px rgba(0,0,0,0.25);
-      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,235,168,0.92));
+      border: 7px solid rgba(255,255,255,0.96);
+      box-shadow: 0 18px 0 rgba(72,18,105,0.28), 0 24px 50px rgba(27,5,56,0.34);
       display: grid;
       place-items: center;
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      cursor: pointer;
+      isolation: isolate;
+      animation: storybookCoverFloat 3.4s ease-in-out infinite;
       touch-action: manipulation;
     }
     .storybook-main-cover-card:active {
-      transform: scale(0.975) translateY(6px);
-      box-shadow: 0 8px 0 rgba(61,0,92,0.18), 0 16px 34px rgba(0,0,0,0.22);
+      transform: translateY(6px) scale(0.975);
+      box-shadow: 0 8px 0 rgba(72,18,105,0.28), 0 14px 28px rgba(27,5,56,0.28);
     }
     .storybook-main-cover-card img {
       width: 100%; height: 100%; object-fit: cover; display: block;
+      z-index: 1; pointer-events: none;
     }
     .storybook-main-cover-fallback {
       width: 100%; height: 100%; display: grid; place-items: center;
-      font-size: clamp(110px, 32vw, 220px);
-      background: linear-gradient(160deg, #FFE9A9 0%, #C084FC 48%, #6D28D9 100%);
+      font-size: clamp(92px, 28vw, 180px);
+      background: linear-gradient(160deg,#e0c3fc 0%,#8ec5fc 100%);
+      z-index: 1; pointer-events: none;
     }
+    .storybook-main-cover-glow {
+      position: absolute; inset: 0; z-index: 2;
+      background: radial-gradient(circle at 50% 18%, rgba(255,255,255,0.52), transparent 38%),
+                  linear-gradient(180deg, transparent 52%, rgba(40,0,70,0.22) 100%);
+      pointer-events: none;
+    }
+    @keyframes storybookCoverFloat {
+      0%,100% { transform: translateY(0) rotate(-0.5deg); }
+      50%      { transform: translateY(-8px) rotate(0.5deg); }
+    }
+
+    /* ─── 책장 그리드 ─── */
     .storybook-featured-grid {
-      min-height: calc(100dvh - 120px);
       display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      gap: clamp(12px, 3vw, 22px) !important;
-      padding: 8px 12px max(18px, env(safe-area-inset-bottom));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(12px, 3vw, 22px);
       align-content: center;
+      min-height: calc(100dvh - 124px);
+      padding: 6px 2px max(18px, env(safe-area-inset-bottom));
     }
     .storybook-book-card {
-      min-height: clamp(210px, 40dvh, 330px);
-      border-radius: 26px;
-      border: 5px solid rgba(255,255,255,0.95);
+      min-height: min(36dvh, 310px);
+      border-radius: 28px;
+      border: 6px solid rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 10px 0 rgba(72,18,105,0.22), 0 16px 30px rgba(25,0,70,0.18);
       overflow: hidden;
-      background: rgba(255,255,255,0.96);
-      box-shadow: 0 10px 0 rgba(61,0,92,0.18), 0 18px 32px rgba(0,0,0,0.18);
       display: grid;
       grid-template-rows: 1fr auto;
+      cursor: pointer;
       transition: transform 0.12s ease, box-shadow 0.12s ease;
       touch-action: manipulation;
     }
     .storybook-book-card:active {
-      transform: scale(0.965) translateY(5px);
-      box-shadow: 0 5px 0 rgba(61,0,92,0.18), 0 12px 22px rgba(0,0,0,0.18);
+      transform: translateY(5px) scale(0.97);
+      box-shadow: 0 4px 0 rgba(72,18,105,0.22), 0 8px 16px rgba(25,0,70,0.16);
     }
     .storybook-book-cover {
       min-height: 0;
-      width: 100%; height: 100%;
-      display: grid; place-items: center;
-      background: linear-gradient(135deg,#FDE68A,#C084FC);
-      overflow: hidden;
+      display: grid; place-items: center; overflow: hidden;
+      background: linear-gradient(160deg,#FDE68A 0%,#F9A8D4 55%,#A78BFA 100%);
     }
     .storybook-book-cover img {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .storybook-book-fallback {
       width: 100%; height: 100%; display: grid; place-items: center;
-      font-size: clamp(64px, 20vw, 120px);
+      font-size: clamp(62px, 20vw, 110px);
     }
     .storybook-book-title {
-      min-height: 54px;
-      padding: 8px 10px 10px;
+      min-height: 58px;
       display: grid; place-items: center;
-      text-align: center;
-      font-size: clamp(18px, 4.5vw, 26px);
+      padding: 8px 8px 10px;
+      font-size: clamp(18px, 5vw, 28px);
       font-weight: 900;
-      line-height: 1.15;
       color: #3B0764;
-      background: #fff;
+      text-align: center;
+      line-height: 1.12;
+      background: rgba(255,255,255,0.96);
     }
+
+    /* ─── 리더 ─── */
     #storyReaderView {
       padding: 0 !important;
       border: 0 !important;
       background: transparent !important;
       border-radius: 0 !important;
-      min-height: calc(100dvh - 96px);
+      box-shadow: none !important;
+      min-height: calc(100dvh - 112px);
     }
+    #storyReaderView.active { display: grid !important; }
     #storyReaderView .story-reader-actions,
     #storyReaderView .story-voice-controls { display: none !important; }
-    #bookView { height: 100%; min-height: calc(100dvh - 96px); display: block !important; }
+    #bookView { min-height: 0; }
+
+    /* ★ 페이지 기반 리더 레이아웃 (topline + illustration + text) */
     .storybook-reader-book {
-      height: calc(100dvh - 96px);
-      min-height: 0;
       display: grid;
       grid-template-rows: auto minmax(0, 1fr) auto;
-      gap: 8px;
+      gap: 10px;
+      height: calc(100dvh - 160px); /* ★ min-height → height: 1fr이 작동하려면 고정 필요 */
+      min-height: 300px;
       padding: 6px 10px max(10px, env(safe-area-inset-bottom));
-      overflow: hidden;
+      color: #2D1060;
+      cursor: pointer;
     }
+    /* ★ 상단 바 (← 책장 + 페이지 번호) */
     .storybook-reader-topline {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
       min-height: 42px;
@@ -590,6 +620,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       touch-action: manipulation;
     }
+    /* ★ 페이지 삽화 */
     .storybook-page-illustration {
       min-height: 0;
       border-radius: 24px;
@@ -600,51 +631,81 @@
       display: grid; place-items: center;
     }
     .storybook-page-illustration img {
-      width: 100%; height: 100%; object-fit: contain; display: block;
-      background: rgba(255,255,255,0.92);
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .storybook-page-illustration.image-missing span {
       font-size: clamp(90px, 28vw, 170px);
     }
+    /* ★ 커버 표지 영역 (renderStoryReader 초기 1프레임) */
+    .storybook-reader-hero {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 6px solid rgba(255,255,255,0.95);
+      box-shadow: 0 10px 0 rgba(72,18,105,0.22), 0 16px 30px rgba(25,0,70,0.18);
+      background: rgba(255,255,255,0.92);
+    }
+    .storybook-reader-hero img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    /* ★ coverImage 없는 동화의 이모지 fallback 삽화 */
+    .storybook-reader-hero-fallback {
+      width: 100%; height: 100%;
+      display: grid; place-items: center;
+      font-size: clamp(100px, 28vw, 180px);
+      background: linear-gradient(160deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+    /* ★ 본문 스크롤 */
     .storybook-reader-text {
-      max-height: 30dvh;
+      display: grid; gap: 10px;
       overflow: auto;
-      display: grid;
-      gap: 8px;
-      padding-bottom: 2px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
     .storybook-reader-text::-webkit-scrollbar { display: none; }
     .storybook-reader-text .story-paragraph {
-      padding: 10px 12px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.92);
-      color: #2D1060;
-      font-size: clamp(18px, 4.7vw, 25px);
-      line-height: 1.52;
-      box-shadow: 0 4px 0 rgba(0,0,0,0.08);
+      font-size: clamp(18px, 4.8vw, 25px);
+      line-height: 1.55;
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 4px 0 rgba(72,18,105,0.12);
     }
     .storybook-reader-text .story-paragraph.reading-active {
-      outline: 4px solid #FFD93D;
-      background: #fffbe8;
+      outline: 5px solid #FFD93D;
+      background: #FFF7CC;
     }
-    @media (orientation: landscape) {
+
+    /* ─── 반응형 ─── */
+    @media (orientation: landscape) and (min-width: 740px) {
+      .storybook-intro-grid { min-height: calc(100dvh - 96px); }
+      .storybook-main-cover-card { width: min(44vw, 520px); height: min(78dvh, 620px); }
       .storybook-featured-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-        min-height: calc(100dvh - 96px);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        min-height: calc(100dvh - 104px);
       }
-      .storybook-book-card { min-height: clamp(190px, 66dvh, 360px); }
+      .storybook-book-card { min-height: min(68dvh, 520px); }
       .storybook-reader-book {
-        height: calc(100dvh - 84px);
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 38vw);
-        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-columns: minmax(420px, 68%) minmax(260px, 32%);
+        grid-template-rows: auto 1fr;
+        column-gap: 16px;
+        min-height: calc(100dvh - 152px);
       }
       .storybook-reader-topline { grid-column: 1 / -1; }
       .storybook-page-illustration { grid-column: 1; grid-row: 2; }
-      .storybook-reader-text { grid-column: 2; grid-row: 2; max-height: none; align-content: center; }
+      .storybook-reader-text { grid-column: 2; grid-row: 2; max-height: calc(100dvh - 260px); }
     }
-    @media (max-width: 480px) {
-      .storybook-main-cover-card { width: 90vw; min-height: 420px; }
-      .storybook-featured-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    @media (max-width: 420px) {
+      .storybook-featured-grid { gap: 10px; }
+      .storybook-book-card { border-width: 5px; border-radius: 22px; }
+      .storybook-book-title { min-height: 52px; }
+    }
+
+    /* ─── 시현이 걷기 바운스 ─── */
+    .sihyeon-avatar.is-walking {
+      animation: avatarBounce 0.34s ease-in-out infinite;
+    }
+    @keyframes avatarBounce {
+      0%, 100% { translate: 0 0px;   }
+      50%       { translate: 0 -11px; }
     }
 
     body.debug-hotspots .world-zone,
@@ -985,12 +1046,9 @@ function renderWorldMapHome(){
             <img src="./assets/vehicles/transport/train.png" alt="기차" onerror="this.style.display='none'">
             <div class="train-emoji">🚂</div>
           </div>
-          <!-- ★ 수정: avatar-walk-inner wrapper 추가 -->
-          <div id="sihyeonAvatar" class="sihyeon-avatar" style="bottom:2%; left:50%; top:auto; transform:translateX(-50%);">
-            <div class="avatar-walk-inner">
-              <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
-              <div class="avatar-emoji">👦🏻</div>
-            </div>
+          <div id="sihyeonAvatar" class="sihyeon-avatar">
+            <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
+            <div class="avatar-emoji">👦🏻</div>
           </div>
           <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 지도에서 가고 싶은 곳을 눌러봐!', true)" aria-label="안내">🎤</button>
         </div>
@@ -1333,16 +1391,16 @@ function openStoryTheater(){
           aria-label="동화 검색">
       </div>
       <nav id="storyFilterNav" class="story-filter-row">
-        <button class="story-filter-btn active" data-theme="전체"      onclick="setStoryFilter('전체')">📚 전체</button>
-        <button class="story-filter-btn"        data-theme="자동차"    onclick="setStoryFilter('자동차')">🚗 자동차</button>
-        <button class="story-filter-btn"        data-theme="공룡"      onclick="setStoryFilter('공룡')">🦕 공룡</button>
-        <button class="story-filter-btn"        data-theme="동물"      onclick="setStoryFilter('동물')">🐰 동물</button>
-        <button class="story-filter-btn"        data-theme="우주"      onclick="setStoryFilter('우주')">🚀 우주</button>
-        <button class="story-filter-btn"        data-theme="바다"      onclick="setStoryFilter('바다')">🌊 바다</button>
-        <button class="story-filter-btn"        data-theme="전래"      onclick="setStoryFilter('전래')">🏮 전래</button>
-        <button class="story-filter-btn"        data-theme="이솝"      onclick="setStoryFilter('이솝')">🌿 이솝</button>
-        <button class="story-filter-btn"        data-theme="잠자리"    onclick="setStoryFilter('잠자리')">🌙 잠자리</button>
-        <button class="story-filter-btn"        data-theme="저장한 동화" onclick="setStoryFilter('저장한 동화')">💖 저장</button>
+        <button class="story-filter-btn active" data-theme="전체"      onclick="renderStoryGrid('전체')">📚 전체</button>
+        <button class="story-filter-btn"        data-theme="자동차"    onclick="renderStoryGrid('자동차')">🚗 자동차</button>
+        <button class="story-filter-btn"        data-theme="공룡"      onclick="renderStoryGrid('공룡')">🦕 공룡</button>
+        <button class="story-filter-btn"        data-theme="동물"      onclick="renderStoryGrid('동물')">🐰 동물</button>
+        <button class="story-filter-btn"        data-theme="우주"      onclick="renderStoryGrid('우주')">🚀 우주</button>
+        <button class="story-filter-btn"        data-theme="바다"      onclick="renderStoryGrid('바다')">🌊 바다</button>
+        <button class="story-filter-btn"        data-theme="전래"      onclick="renderStoryGrid('전래')">🏮 전래</button>
+        <button class="story-filter-btn"        data-theme="이솝"      onclick="renderStoryGrid('이솝')">🌿 이솝</button>
+        <button class="story-filter-btn"        data-theme="잠자리"    onclick="renderStoryGrid('잠자리')">🌙 잠자리</button>
+        <button class="story-filter-btn"        data-theme="저장한 동화" onclick="renderStoryGrid('저장한 동화')">💖 저장</button>
       </nav>
       <div class="zone-body">
         <div id="storyLibraryGrid" class="story-card-grid"></div>
@@ -1366,29 +1424,113 @@ function openStoryTheater(){
       </div>
     </div>`;
 
-  if(window.renderStoryWorld) window.renderStoryWorld();
-  else setTimeout(()=>window.renderStoryWorld?.(), 0);
+  if(window.renderStoryGrid) window.renderStoryGrid('전체');
+  else setTimeout(()=>window.renderStoryGrid?.('전체'), 0);
   speakGuide('동화극장에 도착했어. 읽고 싶은 책을 골라봐!', true);
 }
 
 function filterStoriesBySearch(query){
-  if(window.renderStoryWorld) window.renderStoryWorld(query.trim());
+  _renderStoryGridPage(window.currentStoryFilter || '전체', query.trim());
 }
 
 window._storyPage = 1;
 function loadMoreStories(){
   window._storyPage = (window._storyPage||1) + 1;
-  if(window.renderStoryWorld) window.renderStoryWorld();
+  _renderStoryGridPage(window.currentStoryFilter || '전체');
 }
 
-const _origSetFilter=window.setStoryFilter;
-window.setStoryFilter=function(theme){
-  window._storyPage=1;
-  document.querySelectorAll('[data-theme]').forEach(b=>{ b.classList.toggle('active',b.dataset.theme===theme); });
-  const si=document.getElementById('storySearchInput');
-  if(si) si.value='';
-  if(typeof _origSetFilter==='function') _origSetFilter(theme);
-};
+/* ═══════════════════════════════════════════
+   ★ 동화 그리드 직접 렌더링
+   (story-world.js setStoryFilter 우회 — 테마/검색 완전 동작)
+═══════════════════════════════════════════ */
+const STORY_PAGE_SIZE = 12;
+
+function _storyCoverEmoji(theme) {
+  const t = String(theme || '');
+  if (t.includes('자동차')) return '🚜';
+  if (t.includes('공룡'))   return '🦖';
+  if (t.includes('우주'))   return '🚀';
+  if (t.includes('바다'))   return '🐳';
+  if (t.includes('잠자리')) return '🌙';
+  if (t.includes('전래'))   return '🐯';
+  if (t.includes('이솝'))   return '🌿';
+  if (t.includes('세계명작') || t.includes('명작')) return '🏰';
+  if (t.includes('동물'))   return '🐰';
+  return '📖';
+}
+
+function renderStoryGrid(theme) {
+  window.currentStoryFilter = theme || '전체';
+  window._storyPage = 1;
+  document.querySelectorAll('[data-theme]').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === (theme || '전체'));
+  });
+  const si = document.getElementById('storySearchInput');
+  if (si) si.value = '';
+  _renderStoryGridPage(theme, '');
+}
+
+function _renderStoryGridPage(theme, query) {
+  const grid = document.getElementById('storyLibraryGrid');
+  if (!grid) return;
+
+  const reader = document.getElementById('storyReaderView');
+  if (reader) { reader.style.display = 'none'; reader.classList.remove('active'); }
+  grid.style.display = 'grid';
+  grid.className = 'story-card-grid storybook-featured-grid';
+  // story-world.js의 renderStorybookIntro가 숨겼을 수 있으므로 복원
+  document.querySelector('.story-search-row')?.classList.remove('story-ui-hidden');
+  document.querySelector('.story-filter-row')?.classList.remove('story-ui-hidden');
+
+  const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
+  const saved   = Array.isArray(db.playground.storyWorld.savedStories) ? db.playground.storyWorld.savedStories : [];
+  const filter  = theme || window.currentStoryFilter || '전체';
+  const q       = (query || '').trim().toLowerCase();
+  const page    = window._storyPage || 1;
+
+  let list;
+  if (filter === '저장한 동화') {
+    list = saved;
+  } else {
+    list = library.filter(s => {
+      if (filter !== '전체' && !String(s.theme || '').includes(filter)) return false;
+      if (q) {
+        const haystack = (s.title + ' ' + (s.desc||'') + ' ' + (s.theme||'') + ' ' + (s.plotSeed||'')).toLowerCase();
+        return haystack.includes(q);
+      }
+      return true;
+    });
+  }
+
+  const total = list.length;
+  const paged = list.slice(0, page * STORY_PAGE_SIZE);
+
+  if (!paged.length) {
+    grid.innerHTML = `<div class="story-empty">📚 "찾는 동화"가 없어요</div>`;
+    const btn = document.getElementById('storyLoadMoreBtn');
+    if (btn) btn.style.display = 'none';
+    return;
+  }
+
+  grid.innerHTML = paged.map(story => {
+    const id    = story.id || story.savedId;
+    const emoji = _storyCoverEmoji(story.theme);
+    const img   = story.coverImage || '';
+    return `
+      <button class="storybook-book-card" type="button"
+        onclick="readStoryById('${escapeHtml(id)}')"
+        aria-label="${escapeHtml(story.title)} 읽기">
+        <span class="storybook-book-cover">
+          ${img ? `<img src="${img}" alt="${escapeHtml(story.title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">` : ''}
+          <span class="storybook-book-fallback" ${img?'style="display:none;"':''}>${emoji}</span>
+        </span>
+        <span class="storybook-book-title">${escapeHtml(story.title)}</span>
+      </button>`;
+  }).join('');
+
+  const btn = document.getElementById('storyLoadMoreBtn');
+  if (btn) btn.style.display = paged.length < total ? 'block' : 'none';
+}
 
 /* ═══════════════════════════════════════════
    GLOBAL EXPORTS & BOOT
@@ -1405,11 +1547,27 @@ Object.assign(window,{
   cleanupActiveGame, openGameShell,
   openMemoryGame, openNumberCountGame, openLetterGame, openColorBalloonGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
-  filterStoriesBySearch, loadMoreStories
+  filterStoriesBySearch, loadMoreStories,
+  renderStoryGrid, _renderStoryGridPage
 });
 
 refreshLegacyCompatibility();
 renderWorldMapHome();
+
+/* ★ closeStoryReader 오버라이드 — story-world.js의 renderStoryLibrary(4개고정) 대신
+   우리 renderStoryGrid(현재필터)로 돌아오도록 */
+window.addEventListener('load', () => {
+  const _origClose = window.closeStoryReader;
+  window.closeStoryReader = function() {
+    if (typeof _origClose === 'function') _origClose();
+    // story-world.js가 renderStoryLibrary를 부른 뒤 우리가 덮어씀
+    setTimeout(() => {
+      if (document.getElementById('storyLibraryGrid')) {
+        window.renderStoryGrid(window.currentStoryFilter || '전체');
+      }
+    }, 0);
+  };
+});
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
