@@ -71,8 +71,9 @@ window.SihyeonGames.letterPlay = {
     const style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = `
+      /* // [수정본] height: 100% 제거, flex: 1, min-height: 0 추가 */
       .slp-root {
-        width: 100%; height: 100%; min-height: 100%;
+        width: 100%; flex: 1; min-height: 0;
         display: flex; flex-direction: column; align-items: center;
         background: linear-gradient(160deg, #ffecd2 0%, #ffe0f0 40%, #d4f5ff 100%);
         overflow: hidden; position: relative;
@@ -973,18 +974,25 @@ window.SihyeonGames.letterPlay = {
   },
 
   // ─── 공개 API ────────────────────────────────────────────
+  // // [수정본] render 함수 전체 교체 (세로 래퍼 생성 적용)
   render(container, options = {}) {
     this.destroy();
-    this._container     = container;
+    container.innerHTML = '';
+
+    // ★ 세로 래퍼 생성 — vowel bar + slp-root를 flex-column으로 담음
+    const wrapper = document.createElement('div');
+    wrapper.id = 'slpWrapper';
+    wrapper.style.cssText =
+      'width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;';
+    container.appendChild(wrapper);
+
+    this._container     = wrapper;     // ★ wrapper를 컨테이너로 사용
     this._options       = options;
     this._timers        = [];
     this._selectedVowel = null;
 
     this._injectStyle();
-
-    // 모음 선택바 (영구 고정)
-    this._renderVowelBar(container);
-
+    this._renderVowelBar(wrapper);
     this._startGame();
   },
 
