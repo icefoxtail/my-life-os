@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS - NUMBER COUNT GAME MODULE
-   js/games/number-count.js  [v3 — 이미지 퍼스트]
+   js/games/number-count.js  [v4 — 전면 업그레이드]
 ═══════════════════════════════════════════ */
 (function(){
   window.SihyeonGames = window.SihyeonGames || {};
@@ -9,60 +9,30 @@
   const MANIFEST_URL = './assets/vehicles/vehicles_manifest.json';
   const TOTAL_ROUNDS = 5;
 
+  /* ── 한국어 수사 (카운팅 TTS) ── */
+  const KOREAN_COUNT = ['','하나','둘','셋','넷','다섯','여섯','일곱','여덟','아홉'];
+  const SINO_KR      = ['','일','이','삼','사','오','육','칠','팔','구'];
+
   /* ── 라운드별 배경 테마 ── */
   const BG_THEMES = [
-    /* 1 - 맑은 낮 */
     { sky:'linear-gradient(180deg,#87CEEB 0%,#E0F7FA 65%,#C8E6C9 100%)', road:'#9E9E9E', roadShadow:'#757575', cloud:true  },
-    /* 2 - 저녁노을 */
     { sky:'linear-gradient(180deg,#FF7043 0%,#FFA726 45%,#FFE082 100%)', road:'#795548', roadShadow:'#4E342E', cloud:false },
-    /* 3 - 별밤 */
     { sky:'linear-gradient(180deg,#1A237E 0%,#283593 50%,#1565C0 100%)', road:'#37474F', roadShadow:'#263238', cloud:false },
-    /* 4 - 눈 내리는 날 */
     { sky:'linear-gradient(180deg,#B0BEC5 0%,#ECEFF1 60%,#E3F2FD 100%)', road:'#78909C', roadShadow:'#546E7A', cloud:true  },
-    /* 5 - 무지개 */
     { sky:'linear-gradient(180deg,#F48FB1 0%,#CE93D8 25%,#90CAF9 55%,#A5D6A7 100%)', road:'#8D6E63', roadShadow:'#6D4C41', cloud:true  },
   ];
 
   const FALLBACK = [
-    { id:'pump_engine',               category:'fire',         name_ko:'펌프차',           file:'./assets/vehicles/fire/pump_engine.png',               sound_ko:'삐뽀삐뽀, 물을 뿜어요!' },
-    { id:'water_tanker',              category:'fire',         name_ko:'물탱크차',          file:'./assets/vehicles/fire/water_tanker.png',              sound_ko:'출렁출렁 물을 싣고 가요!' },
-    { id:'ladder_truck',              category:'fire',         name_ko:'사다리차',          file:'./assets/vehicles/fire/ladder_truck.png',              sound_ko:'사다리가 쭉쭉 올라가요!' },
-    { id:'aerial_ladder_truck',       category:'fire',         name_ko:'고가사다리차',       file:'./assets/vehicles/fire/aerial_ladder_truck.png',       sound_ko:'높이높이 올라가요!' },
-    { id:'articulating_ladder_truck', category:'fire',         name_ko:'굴절사다리차',       file:'./assets/vehicles/fire/articulating_ladder_truck.png', sound_ko:'팔이 꺾여서 슈욱 움직여요!' },
-    { id:'rescue_fire_truck',         category:'fire',         name_ko:'구조공작차',         file:'./assets/vehicles/fire/rescue_fire_truck.png',         sound_ko:'구조 장비를 싣고 출동해요!' },
-    { id:'airport_fire_truck',        category:'fire',         name_ko:'공항소방차',         file:'./assets/vehicles/fire/airport_fire_truck.png',        sound_ko:'커다란 바퀴로 힘차게 출동해요!' },
-    { id:'foam_fire_truck',           category:'fire',         name_ko:'포소화차',           file:'./assets/vehicles/fire/foam_fire_truck.png',           sound_ko:'몽글몽글 거품을 뿜어요!' },
-    { id:'fire_command_vehicle',      category:'fire',         name_ko:'소방 지휘차',        file:'./assets/vehicles/fire/fire_command_vehicle.png',      sound_ko:'현장을 살피며 지휘해요!' },
-    { id:'korean_police_car',         category:'police',       name_ko:'한국 경찰차',        file:'./assets/vehicles/police/korean_police_car.png',       sound_ko:'위용위용 순찰해요!' },
-    { id:'us_police_car',             category:'police',       name_ko:'미국 경찰차',        file:'./assets/vehicles/police/us_police_car.png',           sound_ko:'우웅, 멋지게 달려요!' },
-    { id:'police_motorcycle',         category:'police',       name_ko:'경찰 오토바이',       file:'./assets/vehicles/police/police_motorcycle.png',       sound_ko:'부릉부릉 빠르게 달려요!' },
-    { id:'swat_truck',                category:'police',       name_ko:'경찰특공대차',        file:'./assets/vehicles/police/swat_truck.png',              sound_ko:'튼튼하게 출동해요!' },
-    { id:'forensic_bus',              category:'police',       name_ko:'과학수사버스',        file:'./assets/vehicles/police/forensic_bus.png',            sound_ko:'차근차근 단서를 찾아요!' },
-    { id:'riot_police_bus',           category:'police',       name_ko:'기동대 버스',         file:'./assets/vehicles/police/riot_police_bus.png',         sound_ko:'큰 버스가 안전하게 이동해요!' },
-    { id:'ambulance',                 category:'rescue',       name_ko:'구급차',              file:'./assets/vehicles/rescue/ambulance.png',               sound_ko:'애앵애앵 도와주러 가요!' },
-    { id:'doctor_car',                category:'rescue',       name_ko:'닥터카',              file:'./assets/vehicles/rescue/doctor_car.png',              sound_ko:'의사 선생님이 빨리 도착해요!' },
-    { id:'rescue_helicopter',         category:'rescue',       name_ko:'구조 헬기',           file:'./assets/vehicles/rescue/rescue_helicopter.png',       sound_ko:'두두두두 하늘을 날아요!' },
-    { id:'excavator',                 category:'construction', name_ko:'포크레인',            file:'./assets/vehicles/construction/excavator.png',         sound_ko:'쿠궁쿠궁 흙을 퍼요!' },
-    { id:'mini_excavator',            category:'construction', name_ko:'미니 굴착기',         file:'./assets/vehicles/construction/mini_excavator.png',    sound_ko:'작지만 힘차게 파요!' },
-    { id:'bulldozer',                 category:'construction', name_ko:'불도저',              file:'./assets/vehicles/construction/bulldozer.png',         sound_ko:'쓱쓱 밀고 지나가요!' },
-    { id:'wheel_loader',              category:'construction', name_ko:'휠로더',              file:'./assets/vehicles/construction/wheel_loader.png',      sound_ko:'커다란 삽으로 담아요!' },
-    { id:'dump_truck',                category:'construction', name_ko:'덤프트럭',            file:'./assets/vehicles/construction/dump_truck.png',        sound_ko:'우르르 짐을 내려요!' },
-    { id:'concrete_mixer',            category:'construction', name_ko:'레미콘',              file:'./assets/vehicles/construction/concrete_mixer.png',    sound_ko:'빙글빙글 섞어요!' },
-    { id:'concrete_pump_truck',       category:'construction', name_ko:'콘크리트 펌프카',      file:'./assets/vehicles/construction/concrete_pump_truck.png',sound_ko:'쭉쭉 뻗어서 보내요!' },
-    { id:'crane_truck',               category:'construction', name_ko:'크레인차',            file:'./assets/vehicles/construction/crane_truck.png',       sound_ko:'번쩍 들어 올려요!' },
-    { id:'forklift',                  category:'construction', name_ko:'지게차',              file:'./assets/vehicles/construction/forklift.png',          sound_ko:'삐리리 짐을 들어요!' },
-    { id:'train',                     category:'transport',    name_ko:'기차',                file:'./assets/vehicles/transport/train.png',                sound_ko:'칙칙폭폭 달려요!' },
-    { id:'bus',                       category:'transport',    name_ko:'버스',                file:'./assets/vehicles/transport/bus.png',                  sound_ko:'빵빵 친구들을 태워요!' },
-    { id:'car',                       category:'transport',    name_ko:'자동차',              file:'./assets/vehicles/transport/car.png',                  sound_ko:'부릉부릉 달려요!' },
-    { id:'taxi',                      category:'transport',    name_ko:'택시',                file:'./assets/vehicles/transport/taxi.png',                 sound_ko:'띠띠 목적지로 가요!' },
-    { id:'school_bus',                category:'transport',    name_ko:'스쿨버스',            file:'./assets/vehicles/transport/school_bus.png',           sound_ko:'친구들을 데리러 가요!' },
-    { id:'rocket',                    category:'transport',    name_ko:'로켓',                file:'./assets/vehicles/transport/rocket.png',               sound_ko:'슈우웅 하늘로 날아요!' },
-    { id:'submarine',                 category:'transport',    name_ko:'잠수함',              file:'./assets/vehicles/transport/submarine.png',            sound_ko:'꼬르륵 바닷속으로 가요!' },
-    { id:'tow_truck',                 category:'transport',    name_ko:'견인차',              file:'./assets/vehicles/transport/tow_truck.png',            sound_ko:'고장난 차를 도와줘요!' },
-    { id:'garbage_truck',             category:'transport',    name_ko:'청소차',              file:'./assets/vehicles/transport/garbage_truck.png',        sound_ko:'쓱싹쓱싹 깨끗하게 해요!' },
-    { id:'tractor',                   category:'transport',    name_ko:'트랙터',              file:'./assets/vehicles/transport/tractor.png',              sound_ko:'덜컹덜컹 밭으로 가요!' },
-    { id:'airplane',                  category:'transport',    name_ko:'비행기',              file:'./assets/vehicles/transport/airplane.png',             sound_ko:'슝 하늘을 날아요!' },
-    { id:'helicopter',                category:'transport',    name_ko:'헬리콥터',            file:'./assets/vehicles/transport/helicopter.png',           sound_ko:'두두두두 날아가요!' }
+    { id:'pump_engine',               category:'fire',         name_ko:'펌프차',       file:'./assets/vehicles/fire/pump_engine.png',               sound_ko:'삐뽀삐뽀, 물을 뿜어요!' },
+    { id:'ladder_truck',              category:'fire',         name_ko:'사다리차',     file:'./assets/vehicles/fire/ladder_truck.png',              sound_ko:'사다리가 쭉쭉 올라가요!' },
+    { id:'ambulance',                 category:'rescue',       name_ko:'구급차',       file:'./assets/vehicles/rescue/ambulance.png',               sound_ko:'애앵애앵 도와주러 가요!' },
+    { id:'excavator',                 category:'construction', name_ko:'포크레인',     file:'./assets/vehicles/construction/excavator.png',         sound_ko:'쿠궁쿠궁 흙을 퍼요!' },
+    { id:'dump_truck',                category:'construction', name_ko:'덤프트럭',     file:'./assets/vehicles/construction/dump_truck.png',        sound_ko:'우르르 짐을 내려요!' },
+    { id:'concrete_mixer',            category:'construction', name_ko:'레미콘',       file:'./assets/vehicles/construction/concrete_mixer.png',    sound_ko:'빙글빙글 섞어요!' },
+    { id:'train',                     category:'transport',    name_ko:'기차',         file:'./assets/vehicles/transport/train.png',                sound_ko:'칙칙폭폭 달려요!' },
+    { id:'bus',                       category:'transport',    name_ko:'버스',         file:'./assets/vehicles/transport/bus.png',                  sound_ko:'빵빵 친구들을 태워요!' },
+    { id:'car',                       category:'transport',    name_ko:'자동차',       file:'./assets/vehicles/transport/car.png',                  sound_ko:'부릉부릉 달려요!' },
+    { id:'airplane',                  category:'transport',    name_ko:'비행기',       file:'./assets/vehicles/transport/airplane.png',             sound_ko:'슝 하늘을 날아요!' },
   ];
 
   function normalizeVehicle(item){
@@ -86,19 +56,38 @@
       window.SihyeonVoice.play(id).catch(()=>{});
   }
 
-  const SINO_KR = ['','일','이','삼','사','오','육','칠','팔','구'];
-
-  /* 1라운드는 무조건 1, 이후는 2~9 랜덤 */
   function pickAnswer(level){
     if(level === 1) return 1;
     return Math.floor(Math.random()*8)+2;
   }
 
-  /* 그리드 열 수 */
   function colsFor(n){
     if(n === 1) return 1;
     if(n <= 4)  return 2;
     return 3;
+  }
+
+  /* 7번: 라운드별 선택지 범위 (초반 좁게) */
+  function getChoices(answer, level){
+    const set = [answer];
+    let attempts = 0;
+    while(set.length < 3 && attempts < 80){
+      attempts++;
+      let n;
+      if(level <= 2){
+        /* 1~2라운드: ±2 범위 */
+        const offset = (Math.floor(Math.random()*4)+1) * (Math.random()<0.5?1:-1);
+        n = Math.max(1, Math.min(9, answer + offset));
+      } else {
+        n = Math.floor(Math.random()*9)+1;
+      }
+      if(!set.includes(n)) set.push(n);
+    }
+    /* 부족하면 순차 채우기 */
+    for(let n=1; n<=9 && set.length<3; n++){
+      if(!set.includes(n)) set.push(n);
+    }
+    return shuffle(set);
   }
 
   /* ══════════════════════════════════════════════
@@ -106,13 +95,14 @@
   ══════════════════════════════════════════════ */
   window.SihyeonGames.numberCount = {
     id:'numberCount',
-    title:'🚗 차량 몇 대일까?',
+    title:'🚗',
 
     state:{
       currentLevel:1,
       currentAnswer:0,
       currentVehicle:null,
       correctCount:0,
+      wrongCount:0,
       vehicles:[],
       gameVehicles:[],
       container:null,
@@ -131,7 +121,6 @@
       this.state.options   = options || {};
       this.injectStyles();
 
-      /* 로딩: 이모지만 */
       container.innerHTML = `
         <div class="number-count-game">
           <div class="nc-loading-card">
@@ -142,7 +131,6 @@
       await this.loadVehicles();
       if(this.state.container !== container) return;
 
-      /* 메인 레이아웃 — 텍스트 0, 이모지/이미지만 */
       container.innerHTML = `
         <div class="number-count-game" id="ncGame">
           <div class="nc-cloud nc-c1"></div>
@@ -208,11 +196,12 @@
       this.state.currentAnswer  = 0;
       this.state.currentVehicle = null;
       this.state.correctCount   = 0;
+      this.state.wrongCount     = 0;
       this.state.isAnimating    = false;
       const panel   = this.query('#ncSuccessPanel');
       const choices = this.query('#ncChoicesArea');
       if(panel)   panel.style.display = 'none';
-      if(choices) choices.style.display = 'flex';
+      if(choices){ choices.style.display='flex'; choices.style.visibility='visible'; }
       playGameVoice('games.number.intro');
       this.loadNextQuestion();
     },
@@ -225,17 +214,15 @@
       if(!this.state.container) return;
       if(this.state.currentLevel > TOTAL_ROUNDS){ this.showCompleteScreen(); return; }
 
-      this.state.isAnimating    = false;
+      this.state.isAnimating   = false;
+      this.state.wrongCount    = 0;
       this.state.currentAnswer  = pickAnswer(this.state.currentLevel);
       this.state.currentVehicle = this.state.gameVehicles[(this.state.currentLevel-1) % this.state.gameVehicles.length];
 
-      /* 배경 테마 적용 */
       this.applyTheme(this.state.currentLevel - 1);
-
-      /* 도트 진행 */
       this.renderDotProgress();
 
-      /* 차량 그리드 */
+      /* 차량 그리드 빌드 (초기 오프스크린) */
       const wrapper = this.query('#ncVehiclesWrapper');
       if(!wrapper) return;
       wrapper.innerHTML = '';
@@ -243,9 +230,13 @@
       const cols  = colsFor(count);
       wrapper.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
-      for(let i=0;i<count;i++){
+      for(let i=0; i<count; i++){
         const wrap = document.createElement('div');
         wrap.className = 'nc-vehicle-cell';
+        /* 초기: 화면 왼쪽 밖에 숨김 */
+        wrap.style.transform  = 'translateX(-110vw)';
+        wrap.style.opacity    = '0';
+        wrap.style.transition = 'none';
 
         const img = document.createElement('img');
         img.src       = this.state.currentVehicle.image;
@@ -256,11 +247,78 @@
 
         wrap.appendChild(img);
         wrapper.appendChild(wrap);
+
+        /* 6번: 차량 탭 시 TTS */
+        wrap.addEventListener('click', ()=>{
+          this.say(this.state.currentVehicle.sound, true);
+          wrap.style.transition = 'transform 0.15s';
+          wrap.style.transform  = 'scale(1.12) rotate(-3deg)';
+          this.setManagedTimeout(()=>{ wrap.style.transform=''; }, 160);
+        });
       }
 
-      playGameVoice('games.number.question');
-      this.say(`${this.state.currentVehicle.name} 친구들이 왔어! 모두 몇 개일까?`, true);
-      this.renderChoices();
+      /* 선택지 숨김 */
+      const choicesArea = this.query('#ncChoicesArea');
+      if(choicesArea){ choicesArea.style.visibility='hidden'; }
+
+      /* ━━━ 3·2·1 카운트다운 후 드라이브인 ━━━ */
+      this.showCountdown(()=>{
+        this.driveIn(wrapper, ()=>{
+          if(choicesArea) choicesArea.style.visibility = 'visible';
+          this.renderChoices();
+          playGameVoice('games.number.question');
+          this.say(`${this.state.currentVehicle.name}! 모두 몇 대일까?`, true);
+        });
+      });
+    },
+
+    /* ════════════════════════════
+       ★ 3·2·1 카운트다운
+    ════════════════════════════ */
+    showCountdown:function(done){
+      const game = this.query('#ncGame');
+      if(!game){ done(); return; }
+
+      const overlay = document.createElement('div');
+      overlay.className = 'nc-countdown-overlay';
+      game.appendChild(overlay);
+
+      const steps = [
+        { num:'3', tts:'셋' },
+        { num:'2', tts:'둘' },
+        { num:'1', tts:'하나' },
+      ];
+      let idx = 0;
+
+      const next = ()=>{
+        if(idx >= steps.length){
+          this.setManagedTimeout(()=>{
+            if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            done();
+          }, 280);
+          return;
+        }
+        const step = steps[idx++];
+        overlay.innerHTML = `<div class="nc-countdown-num">${step.num}</div>`;
+        this.speakDirect(step.tts);
+        this.setManagedTimeout(next, 950);
+      };
+      next();
+    },
+
+    /* ════════════════════════════
+       ★ 차량 드라이브인
+    ════════════════════════════ */
+    driveIn:function(wrapper, done){
+      const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
+      cells.forEach((cell, i)=>{
+        this.setManagedTimeout(()=>{
+          cell.style.transition = 'transform 0.45s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s';
+          cell.style.transform  = '';
+          cell.style.opacity    = '1';
+        }, i * 130);
+      });
+      this.setManagedTimeout(done, cells.length * 130 + 480);
     },
 
     /* ════════════════════════════
@@ -273,20 +331,13 @@
       const c1   = this.query('.nc-c1');
       const c2   = this.query('.nc-c2');
       if(game) game.style.background = t.sky;
-      if(road){
-        road.style.background  = t.road;
-        road.style.boxShadow   = `0 12px 0 ${t.roadShadow}`;
-      }
-      /* 밤 테마일 때 구름 숨김, 별 표시 */
-      const showCloud = t.cloud;
-      if(c1) c1.style.opacity = showCloud ? '0.82' : '0';
-      if(c2) c2.style.opacity = showCloud ? '0.82' : '0';
-      if(idx === 2) this.spawnStars(); /* 별밤 전용 별 장식 */
-      /* 눈 라운드 눈송이 */
+      if(road){ road.style.background=t.road; road.style.boxShadow=`0 12px 0 ${t.roadShadow}`; }
+      if(c1) c1.style.opacity = t.cloud ? '0.82' : '0';
+      if(c2) c2.style.opacity = t.cloud ? '0.82' : '0';
+      if(idx === 2) this.spawnStars();
       if(idx === 3) this.spawnSnowflakes();
     },
 
-    /* 배경용 별 (게임 진행 내내 유지) */
     spawnStars:function(){
       const area = this.query('#ncObjectsArea');
       if(!area) return;
@@ -309,10 +360,9 @@
         f.className   = 'nc-snowflake';
         f.textContent = flakes[Math.floor(Math.random()*flakes.length)];
         f.style.left  = `${Math.random()*100}%`;
-        f.style.animationDuration  = `${3+Math.random()*4}s`;
-        f.style.animationDelay     = `${Math.random()*4}s`;
+        f.style.animationDuration = `${3+Math.random()*4}s`;
+        f.style.animationDelay    = `${Math.random()*4}s`;
         area.appendChild(f);
-        /* 라운드 끝나면 정리 */
         this.setManagedTimeout(()=>{ if(f.parentNode) f.parentNode.removeChild(f); }, 9000);
       }
     },
@@ -334,25 +384,28 @@
     },
 
     /* ════════════════════════════
-       선택 버튼
+       ★ 선택 버튼 (숫자 + 도트)
     ════════════════════════════ */
     renderChoices:function(){
       const area = this.query('#ncChoicesArea');
       if(!area) return;
-      const ans  = this.state.currentAnswer;
-      const set  = [ans];
-      while(set.length < 3){
-        const n = Math.floor(Math.random()*9)+1;
-        if(!set.includes(n)) set.push(n);
-      }
-      shuffle(set);
+      const ans     = this.state.currentAnswer;
+      const choices = getChoices(ans, this.state.currentLevel);
       area.innerHTML = '';
-      set.forEach(num => {
+
+      choices.forEach(num => {
         const btn = document.createElement('button');
-        btn.type        = 'button';
-        btn.className   = 'nc-toy-block-btn';
-        btn.textContent = num;
-        btn.setAttribute('aria-label', String(num));
+        btn.type      = 'button';
+        btn.className = 'nc-toy-block-btn';
+        btn.dataset.answer  = String(num);
+        if(num === ans) btn.dataset.correct = 'true';
+
+        /* 숫자 + 도트 */
+        const dotHTML = '<span class="nc-choice-dot"></span>'.repeat(num);
+        btn.innerHTML = `
+          <div class="nc-choice-num">${num}</div>
+          <div class="nc-choice-dots">${dotHTML}</div>
+        `;
         btn.onclick = ()=> this.checkAnswer(num);
         area.appendChild(btn);
       });
@@ -373,37 +426,47 @@
         this.state.correctCount++;
         choices.querySelectorAll('button').forEach(b=>{ b.disabled=true; });
 
-        /* ① 카운팅 하이라이트: 1번씩 순서대로 빛나는 동그라미 */
+        /* ① 카운팅 하이라이트 + TTS 동기화 */
         this.runCountingHighlight(wrapper, ()=>{
 
-          /* ② 차량 달려나가기 애니메이션 */
+          /* ② 차량 달려나가기 */
           this.driveOut(wrapper, ()=>{
 
-            /* ③ 별 폭죽 + 정답 이모지 코너 팝업 */
+            /* ③ 숫자 각인 스탬프 */
+            this.showNumberStamp(this.state.currentAnswer);
+
+            /* ④ 별 폭죽 + 정답 이모지 */
             this.createStars(18);
             this.showCorrectEmoji();
             if(this.state.options.fireConfetti) this.state.options.fireConfetti();
 
-            /* ④ 음성 */
+            /* ⑤ 음성 */
             const spokenNum = SINO_KR[this.state.currentAnswer] || this.state.currentAnswer;
             const vName     = this.state.currentVehicle.name;
             const vSound    = this.state.currentVehicle.sound;
             playGameVoice('games.number.correct');
             this.say(`정답은 숫자 ${spokenNum}! ${vName}, ${vSound}`, true);
 
-            /* ⑤ 6초 후 다음 문제 */
+            /* ⑥ 다음 문제 */
             this.setManagedTimeout(()=>{
               this.state.currentLevel++;
               this.state.isAnimating = false;
               this.loadNextQuestion();
-            }, 6000);
+            }, 5500);
           });
         });
         return;
       }
 
-      /* ── 오답: 화면 빨간빛 + 슬픈 이모지 ── */
+      /* ── 오답 ── */
       this.state.isAnimating = true;
+      this.state.wrongCount++;
+
+      /* 5번: 2회 이상 오답 → 정답 버튼 글로우 */
+      if(this.state.wrongCount >= 2){
+        this.query('.nc-toy-block-btn[data-correct="true"]')?.classList.add('hint-glow');
+      }
+
       playGameVoice('games.number.wrong');
       this.say('괜찮아, 다시 세어보자!', true);
       this.showWrongFlash();
@@ -411,27 +474,27 @@
       this.setManagedTimeout(()=>{
         wrapper.classList.remove('shake');
         this.state.isAnimating = false;
-      }, 600);
+      }, 620);
     },
 
     /* ════════════════════════════
-       ① 카운팅 하이라이트
-          각 차량 위에 빛나는 동그라미가 하나씩 순서대로 등장
+       ① 카운팅 하이라이트 + TTS
     ════════════════════════════ */
     runCountingHighlight:function(wrapper, done){
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
-      const delay = 380; /* 한 대당 딜레이 ms */
+      const delay = 400;
 
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
           const dot = document.createElement('div');
           dot.className   = 'nc-count-dot';
-          dot.textContent = i+1;          /* 숫자 공부: 순서대로 숫자 표시 */
+          dot.textContent = i+1;
           cell.appendChild(dot);
+          /* ★ 카운팅 TTS 동기화 */
+          this.speakDirect(KOREAN_COUNT[i+1] || String(i+1));
         }, i * delay);
       });
 
-      /* 전부 등장한 뒤 done 호출 */
       this.setManagedTimeout(done, cells.length * delay + 400);
     },
 
@@ -442,14 +505,30 @@
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
-          cell.classList.add('drive-out');
+          cell.style.transition = 'transform 0.55s cubic-bezier(0.4,0,1,1), opacity 0.5s';
+          cell.style.transform  = 'translateX(130vw) rotate(5deg)';
+          cell.style.opacity    = '0';
         }, i * 80);
       });
-      this.setManagedTimeout(done, cells.length * 80 + 600);
+      this.setManagedTimeout(done, cells.length * 80 + 620);
     },
 
     /* ════════════════════════════
-       정답 이모지 코너 팝업 (화면 안 가림)
+       ★ 숫자 각인 스탬프
+    ════════════════════════════ */
+    showNumberStamp:function(num){
+      const area = this.query('#ncObjectsArea');
+      if(!area) return;
+      const stamp = document.createElement('div');
+      stamp.className   = 'nc-number-stamp';
+      stamp.textContent = num;
+      area.appendChild(stamp);
+      this.speakDirect(SINO_KR[num] ? `숫자 ${SINO_KR[num]}` : String(num));
+      this.setManagedTimeout(()=>{ if(stamp.parentNode) stamp.parentNode.removeChild(stamp); }, 1500);
+    },
+
+    /* ════════════════════════════
+       정답 이모지 코너 팝업
     ════════════════════════════ */
     showCorrectEmoji:function(){
       const area = this.query('#ncObjectsArea');
@@ -458,7 +537,7 @@
       ov.className   = 'nc-correct-overlay';
       ov.textContent = ['🎉','🌟','🏆','✨'][Math.floor(Math.random()*4)];
       area.appendChild(ov);
-      this.setManagedTimeout(()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); }, 2000);
+      this.setManagedTimeout(()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); }, 2200);
     },
 
     /* ════════════════════════════
@@ -467,14 +546,10 @@
     showWrongFlash:function(){
       const game = this.query('#ncGame');
       if(!game) return;
-
-      /* 빨간 오버레이 */
       const flash = document.createElement('div');
       flash.className = 'nc-wrong-flash';
       game.appendChild(flash);
       this.setManagedTimeout(()=>{ if(flash.parentNode) flash.parentNode.removeChild(flash); }, 700);
-
-      /* 슬픈 이모지 중앙 */
       const sad = document.createElement('div');
       sad.className   = 'nc-sad-emoji';
       sad.textContent = ['😢','🙈','😅'][Math.floor(Math.random()*3)];
@@ -483,7 +558,7 @@
     },
 
     /* ════════════════════════════
-       별 폭죽 효과
+       별 폭죽
     ════════════════════════════ */
     createStars:function(count){
       const area = this.query('#ncObjectsArea');
@@ -502,27 +577,34 @@
     },
 
     /* ════════════════════════════
-       완료 화면
+       완료 화면 (8번: 달려나가기)
     ════════════════════════════ */
     showCompleteScreen:function(){
       const choices = this.query('#ncChoicesArea');
       const panel   = this.query('#ncSuccessPanel');
+      const wrapper = this.query('#ncVehiclesWrapper');
       if(!choices || !panel) return;
       this.clearTimers();
       this.state.isAnimating = false;
       choices.style.display  = 'none';
-      panel.style.display    = 'flex';
 
-      /* 남은 차량들 춤 */
-      this.state.container.querySelectorAll('.nc-vehicle-img').forEach((img,i)=>{
-        img.style.animationDelay = `${i*0.07}s`;
-        img.classList.add('dance');
-      });
-      this.createStars(24);
-      playGameVoice('games.number.complete');
-      this.say('우와! 다 맞혔어. 시현이가 숫자 박사야!', true);
-      if(this.state.options.fireConfetti) this.state.options.fireConfetti();
-      if(this.state.options.gainExp)      this.state.options.gainExp(30);
+      /* 차량 달려나가기 후 패널 표시 */
+      if(wrapper){
+        this.driveOut(wrapper, ()=>{
+          panel.style.display = 'flex';
+          this.createStars(24);
+          playGameVoice('games.number.complete');
+          this.say('우와! 다 맞혔어. 시현이가 숫자 박사야!', true);
+          if(this.state.options.fireConfetti) this.state.options.fireConfetti();
+          if(this.state.options.gainExp)      this.state.options.gainExp(30);
+        });
+      } else {
+        panel.style.display = 'flex';
+        playGameVoice('games.number.complete');
+        this.say('우와! 다 맞혔어. 시현이가 숫자 박사야!', true);
+        if(this.state.options.fireConfetti) this.state.options.fireConfetti();
+        if(this.state.options.gainExp)      this.state.options.gainExp(30);
+      }
     },
 
     /* ════════════════════════════
@@ -540,10 +622,20 @@
       if(home2) home2.onclick = goHome;
     },
 
+    /* TTS 헬퍼 */
     say:function(text, force=false){
       const speak = this.state.options && this.state.options.speakGuide;
       if(typeof speak === 'function') speak(text, force);
     },
+    /* 직접 TTS (카운팅 동기화용) */
+    speakDirect:function(text){
+      if(typeof speechSynthesis === 'undefined') return;
+      speechSynthesis.cancel();
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.lang  = 'ko-KR'; utt.rate = 0.82; utt.pitch = 1.2;
+      speechSynthesis.speak(utt);
+    },
+
     query:function(sel){
       return this.state.container ? this.state.container.querySelector(sel) : null;
     },
@@ -598,7 +690,7 @@
         .nc-c2:after{width:52px;height:52px;top:-22px;left:42px;}
         @keyframes ncCloud{from{transform:translateX(-18vw);}to{transform:translateX(115vw);}}
 
-        /* ── 배경 별 (별밤 라운드) ── */
+        /* ── 배경 별 ── */
         .nc-bg-star{
           position:absolute;width:6px;height:6px;border-radius:50%;
           background:#fff;pointer-events:none;z-index:1;
@@ -651,6 +743,33 @@
         }
         .nc-home-btn:active{transform:scale(.85);}
 
+        /* ════════════════════════════
+           ★ 3·2·1 카운트다운 오버레이
+        ════════════════════════════ */
+        .nc-countdown-overlay{
+          position:absolute;inset:0;z-index:60;
+          display:flex;align-items:center;justify-content:center;
+          background:rgba(0,0,0,0.25);
+          backdrop-filter:blur(3px);
+          pointer-events:none;
+        }
+        .nc-countdown-num{
+          font-size:clamp(130px,38vw,240px);
+          font-weight:900;
+          color:#fff;
+          text-shadow:
+            0 0 50px rgba(255,255,255,0.6),
+            0 8px 0 rgba(0,0,0,0.2);
+          animation:ncCountdownPop 0.75s cubic-bezier(0.34,1.56,0.64,1);
+          line-height:1;
+          user-select:none;
+        }
+        @keyframes ncCountdownPop{
+          0%  {transform:scale(0) rotate(-12deg);opacity:0;}
+          55% {transform:scale(1.18) rotate(4deg);opacity:1;}
+          100%{transform:scale(1) rotate(0deg);opacity:1;}
+        }
+
         /* ── 차량 영역 ── */
         .nc-objects-area{
           flex:1;min-height:0;position:relative;z-index:5;
@@ -676,13 +795,12 @@
           justify-items:center;align-items:center;
         }
 
-        /* ── 차량 셀 (카운팅 도트 포지션 기준) ── */
         .nc-vehicle-cell{
           position:relative;
           display:flex;align-items:flex-end;justify-content:center;
+          cursor:pointer;
         }
 
-        /* ── 차량 이미지 ── */
         .nc-vehicle-img{
           width:clamp(88px,22vw,220px);
           max-height:clamp(78px,20vw,200px);
@@ -694,12 +812,12 @@
 
         /* ── 카운팅 하이라이트 동그라미 ── */
         .nc-count-dot{
-          position:absolute;top:-18px;left:50%;transform:translateX(-50%);
-          width:clamp(26px,7vw,40px);height:clamp(26px,7vw,40px);
+          position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+          width:clamp(28px,7vw,42px);height:clamp(28px,7vw,42px);
           border-radius:50%;
-          background:radial-gradient(circle at 35% 35%, #fff 0%, #FFD700 50%, #FF8C00 100%);
+          background:radial-gradient(circle at 35% 35%,#fff 0%,#FFD700 50%,#FF8C00 100%);
           border:3px solid #fff;
-          box-shadow:0 0 10px 4px rgba(255,200,0,.7);
+          box-shadow:0 0 12px 5px rgba(255,200,0,.7);
           display:flex;align-items:center;justify-content:center;
           font-size:clamp(13px,3.5vw,20px);font-weight:900;color:#7B3F00;
           animation:ncCountPop .35s cubic-bezier(.175,.885,.32,1.275);
@@ -709,21 +827,6 @@
           0%{transform:translateX(-50%) scale(0);}
           70%{transform:translateX(-50%) scale(1.25);}
           100%{transform:translateX(-50%) scale(1);}
-        }
-
-        /* ── 달려나가기 ── */
-        .drive-out{animation:ncDriveOut .55s cubic-bezier(.4,0,.2,1) forwards;}
-        @keyframes ncDriveOut{
-          0%{transform:translateX(0) scaleX(1);opacity:1;}
-          40%{transform:translateX(15px) scaleX(1.08);opacity:1;}
-          100%{transform:translateX(140vw) scaleX(1.1);opacity:0;}
-        }
-
-        /* ── 춤 ── */
-        .dance{animation:ncDance .6s infinite alternate cubic-bezier(.4,0,.2,1);}
-        @keyframes ncDance{
-          from{transform:translateY(0) rotate(-7deg);}
-          to{transform:translateY(-20px) rotate(7deg) scale(1.07);}
         }
 
         /* ── 오답 흔들림 ── */
@@ -740,9 +843,7 @@
           background:rgba(220,30,30,.38);
           animation:ncRedFlash .65s ease-out forwards;
         }
-        @keyframes ncRedFlash{
-          0%{opacity:0;}20%{opacity:1;}100%{opacity:0;}
-        }
+        @keyframes ncRedFlash{0%{opacity:0;}20%{opacity:1;}100%{opacity:0;}}
 
         /* ── 오답 슬픈 이모지 ── */
         .nc-sad-emoji{
@@ -762,13 +863,37 @@
         .nc-correct-overlay{
           position:absolute;top:8%;right:5%;z-index:30;pointer-events:none;
           font-size:clamp(48px,13vw,100px);
-          animation:ncCornerPop 2s cubic-bezier(.175,.885,.32,1.275) forwards;
+          animation:ncCornerPop 2.2s cubic-bezier(.175,.885,.32,1.275) forwards;
         }
         @keyframes ncCornerPop{
           0%{transform:scale(0) rotate(-25deg);opacity:0;}
           30%{transform:scale(1.3) rotate(10deg);opacity:1;}
           70%{transform:scale(1.1) rotate(-5deg);opacity:1;}
           100%{transform:scale(1.4) rotate(0);opacity:0;}
+        }
+
+        /* ════════════════════════════
+           ★ 숫자 각인 스탬프
+        ════════════════════════════ */
+        .nc-number-stamp{
+          position:absolute;top:50%;left:50%;
+          transform:translate(-50%,-50%) scale(0);
+          font-size:clamp(130px,38vw,220px);
+          font-weight:900;
+          color:#FFD700;
+          text-shadow:
+            0 0 60px rgba(255,200,0,0.65),
+            0 0 20px rgba(255,150,0,0.4),
+            0 8px 0 rgba(0,0,0,0.12);
+          z-index:300;pointer-events:none;
+          animation:ncStampPop 1.3s cubic-bezier(0.34,1.56,0.64,1) forwards;
+          line-height:1;
+        }
+        @keyframes ncStampPop{
+          0%  {transform:translate(-50%,-50%) scale(0) rotate(-14deg);opacity:1;}
+          42% {transform:translate(-50%,-50%) scale(1.12) rotate(5deg);opacity:1;}
+          72% {transform:translate(-50%,-50%) scale(0.97) rotate(0deg);opacity:1;}
+          100%{transform:translate(-50%,-65%) scale(0.82) rotate(0deg);opacity:0;}
         }
 
         /* ── 별 폭죽 ── */
@@ -790,25 +915,58 @@
         }
         .nc-choices-area{
           display:flex;justify-content:center;
-          gap:clamp(14px,4vw,30px);flex-wrap:wrap;
+          gap:clamp(12px,3.5vw,26px);flex-wrap:wrap;
         }
 
-        /* ── 숫자 버튼 ── */
+        /* ════════════════════════════
+           ★ 숫자 버튼 (숫자 + 도트)
+        ════════════════════════════ */
         .nc-toy-block-btn{
           width:clamp(90px,22vw,144px);
-          height:clamp(90px,22vw,144px);
-          font-size:clamp(48px,12vw,80px);
+          min-height:clamp(100px,24vw,156px);
+          font-size:clamp(44px,11vw,76px);
           font-weight:900;font-family:'Jua','Apple SD Gothic Neo',sans-serif;
           border-radius:26px;border:5px solid #fff;
-          color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.22);
+          color:#fff;
           background:linear-gradient(135deg,#FFD93D,#FFAA00);
           box-shadow:0 10px 0 #E65100,0 14px 22px rgba(0,0,0,.22);
-          transition:transform .1s,box-shadow .1s,filter .15s;cursor:pointer;
+          transition:transform .1s,box-shadow .1s,filter .15s;
+          cursor:pointer;
+          display:flex;flex-direction:column;align-items:center;justify-content:center;
+          gap:4px;padding:8px 6px;
         }
         .nc-toy-block-btn:nth-child(2){background:linear-gradient(135deg,#4CAF50,#2E7D32);box-shadow:0 10px 0 #1B5E20,0 14px 22px rgba(0,0,0,.22);}
         .nc-toy-block-btn:nth-child(3){background:linear-gradient(135deg,#1E90FF,#1565C0);box-shadow:0 10px 0 #0D47A1,0 14px 22px rgba(0,0,0,.22);}
         .nc-toy-block-btn:active{transform:translateY(10px);box-shadow:0 0 0 transparent,0 4px 10px rgba(0,0,0,.2);}
         .nc-toy-block-btn:disabled{filter:saturate(.55) brightness(.88);cursor:default;}
+
+        /* ★ 힌트 글로우 */
+        .nc-toy-block-btn.hint-glow{
+          animation:ncBtnGlow 0.6s ease-in-out infinite alternate !important;
+        }
+        @keyframes ncBtnGlow{
+          from{filter:brightness(1) drop-shadow(0 0 4px rgba(255,255,255,0.3));}
+          to  {filter:brightness(1.3) drop-shadow(0 0 22px rgba(255,255,255,1));}
+        }
+
+        .nc-choice-num{
+          font-size:clamp(44px,11vw,76px);
+          font-weight:900;line-height:1;
+          text-shadow:0 3px 0 rgba(0,0,0,.22);
+        }
+
+        /* ★ 도트 그리드 (3열) */
+        .nc-choice-dots{
+          display:grid;
+          grid-template-columns:repeat(3,1fr);
+          gap:3px;
+          max-width:36px;margin:0 auto;
+        }
+        .nc-choice-dot{
+          width:9px;height:9px;border-radius:50%;
+          background:rgba(255,255,255,0.82);
+          box-shadow:0 1px 0 rgba(0,0,0,0.12);
+        }
 
         /* ── 완료 패널 ── */
         .nc-success-panel{
@@ -838,15 +996,17 @@
         /* ── 반응형 ── */
         @media (min-width:600px){
           .nc-vehicle-img{width:clamp(120px,18vw,220px);max-height:clamp(110px,16vw,200px);}
-          .nc-toy-block-btn{width:clamp(112px,14vw,152px);height:clamp(112px,14vw,152px);}
+          .nc-toy-block-btn{width:clamp(112px,14vw,152px);}
         }
         @media (max-width:380px){
           .nc-vehicle-img{width:clamp(70px,24vw,110px);max-height:78px;}
-          .nc-toy-block-btn{width:80px;height:80px;font-size:40px;}
+          .nc-toy-block-btn{width:80px;min-height:90px;font-size:36px;}
+          .nc-choice-dots{max-width:28px;}
+          .nc-choice-dot{width:7px;height:7px;}
         }
         @media (max-height:600px){
           .nc-vehicle-img{width:clamp(58px,15vw,110px);max-height:74px;}
-          .nc-toy-block-btn{width:74px;height:74px;font-size:40px;}
+          .nc-toy-block-btn{width:74px;min-height:84px;}
           .nc-game-header{min-height:38px;padding:5px 12px;}
         }
       `;
@@ -865,6 +1025,7 @@
       this.state.currentAnswer  = 0;
       this.state.currentVehicle = null;
       this.state.correctCount   = 0;
+      this.state.wrongCount     = 0;
       this.state.isAnimating    = false;
       this.state.gameVehicles   = [];
       this.state.container      = null;
