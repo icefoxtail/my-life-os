@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node --check \"c:/Users/USER/RECOVER_WORK/my-life-os/js/games/abc-phonics.js\")"
+      "Bash(node --check \"c:/Users/USER/RECOVER_WORK/my-life-os/js/games/abc-phonics.js\")",
+      "Bash(python -c ' *)",
+      "Bash(node --check js/games/life-sequence.js)"
     ]
   }
 }
