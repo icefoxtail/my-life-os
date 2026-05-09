@@ -23,6 +23,7 @@ window.SihyeonGames.letterPlay = {
   _container:    null,
   _options:      null,
   _selectedVowel: null,   // null = 단어 모드, 'ㅏ' 등 = 음절 모드
+  _selectedCategory: '🚗탈것',  // // [수정본] 기본값 설정
 
   // ─── 모음별 음절 데이터 (14음절 × 10행) ────────────────
   _vowelData: [
@@ -38,29 +39,129 @@ window.SihyeonGames.letterPlay = {
     { key: 'ㅣ', syllables: ['기','니','디','리','미','비','시','이','지','치','키','티','피','히'] },
   ],
 
-  // ─── 단어 모드 라운드 데이터 ────────────────────────────
-  _wordRounds: [
-    { emoji: '🍎', word: '사과',   answer: '사', choices: ['사','나','다'] },
-    { emoji: '🐶', word: '강아지', answer: '강', choices: ['강','바','하'] },
-    { emoji: '🌙', word: '달',     answer: '달', choices: ['달','말','살'] },
-    { emoji: '🚗', word: '자동차', answer: '자', choices: ['가','자','마'] },
-    { emoji: '🦋', word: '나비',   answer: '나', choices: ['다','나','라'] },
-    { emoji: '🍌', word: '바나나', answer: '바', choices: ['바','파','타'] },
-    { emoji: '🐱', word: '고양이', answer: '고', choices: ['도','소','고'] },
-    { emoji: '⭐', word: '별',     answer: '별', choices: ['별','열','절'] },
-    { emoji: '🌸', word: '꽃',     answer: '꽃', choices: ['꽃','못','솥'] },
-    { emoji: '🐸', word: '개구리', answer: '개', choices: ['개','새','배'] },
-    { emoji: '🐘', word: '코끼리', answer: '코', choices: ['고','코','소'] },
-    { emoji: '🍓', word: '딸기',   answer: '딸', choices: ['딸','말','발'] },
-    { emoji: '🌈', word: '무지개', answer: '무', choices: ['구','무','부'] },
-    { emoji: '🐠', word: '물고기', answer: '물', choices: ['물','불','풀'] },
-    { emoji: '🎵', word: '노래',   answer: '노', choices: ['노','도','보'] },
-    { emoji: '🏠', word: '집',     answer: '집', choices: ['집','힙','십'] },
-    { emoji: '🌺', word: '하늘',   answer: '하', choices: ['가','나','하'] },
-    { emoji: '🐰', word: '토끼',   answer: '토', choices: ['토','고','노'] },
-    { emoji: '🍦', word: '아이스크림', answer: '아', choices: ['아','오','이'] },
-    { emoji: '🎂', word: '케이크', answer: '케', choices: ['게','케','데'] },
-  ],
+  // // [수정본] _wordRounds 제거 및 _wordCategories 카테고리별 객체로 교체
+  _wordCategories: {
+    '🚗탈것':  [
+      { emoji:'🚗', word:'자동차', answer:'자', choices:['자','나','다'] },
+      { emoji:'🚌', word:'버스',   answer:'버', choices:['버','머','서'] },
+      { emoji:'🚒', word:'소방차', answer:'소', choices:['소','도','고'] },
+      { emoji:'🚑', word:'구급차', answer:'구', choices:['구','누','두'] },
+      { emoji:'🚂', word:'기차',   answer:'기', choices:['기','미','피'] },
+      { emoji:'🚀', word:'로켓',   answer:'로', choices:['로','모','보'] },
+      { emoji:'✈️', word:'비행기', answer:'비', choices:['비','미','피'] },
+      { emoji:'🚁', word:'헬리콥터',answer:'헬', choices:['헬','멜','델'] },
+      { emoji:'⛵', word:'배',     answer:'배', choices:['배','새','개'] },
+      { emoji:'🚲', word:'자전거', answer:'자', choices:['자','바','사'] },
+      { emoji:'🛵', word:'오토바이',answer:'오', choices:['오','도','보'] },
+      { emoji:'🚜', word:'포크레인',answer:'포', choices:['포','코','보'] },
+      { emoji:'🛻', word:'트럭',   answer:'트', choices:['트','크','프'] },
+      { emoji:'🚐', word:'미니버스',answer:'미', choices:['미','비','피'] },
+    ],
+    '🐶동물':  [
+      { emoji:'🦕', word:'공룡',   answer:'공', choices:['공','동','봉'] },
+      { emoji:'🦖', word:'티라노', answer:'티', choices:['티','키','피'] },
+      { emoji:'🐶', word:'강아지', answer:'강', choices:['강','방','당'] },
+      { emoji:'🐱', word:'고양이', answer:'고', choices:['고','도','소'] },
+      { emoji:'🐭', word:'쥐',     answer:'쥐', choices:['쥐','뒤','귀'] },
+      { emoji:'🐹', word:'햄스터', answer:'햄', choices:['햄','탬','잼'] },
+      { emoji:'🐰', word:'토끼',   answer:'토', choices:['토','고','노'] },
+      { emoji:'🐸', word:'개구리', answer:'개', choices:['개','새','배'] },
+      { emoji:'🐘', word:'코끼리', answer:'코', choices:['코','모','보'] },
+      { emoji:'🦁', word:'사자',   answer:'사', choices:['사','나','다'] },
+      { emoji:'🐯', word:'호랑이', answer:'호', choices:['호','보','소'] },
+      { emoji:'🐼', word:'판다',   answer:'판', choices:['판','반','난'] },
+      { emoji:'🐨', word:'코알라', answer:'코', choices:['코','도','보'] },
+      { emoji:'🦒', word:'기린',   answer:'기', choices:['기','미','피'] },
+      { emoji:'🦓', word:'얼룩말', answer:'얼', choices:['얼','걸','털'] },
+      { emoji:'🐧', word:'펭귄',   answer:'펭', choices:['펭','멩','벵'] },
+      { emoji:'🦆', word:'오리',   answer:'오', choices:['오','도','소'] },
+      { emoji:'🐔', word:'닭',     answer:'닭', choices:['닭','달','담'] },
+      { emoji:'🐢', word:'거북이', answer:'거', choices:['거','서','너'] },
+      { emoji:'🐠', word:'물고기', answer:'물', choices:['물','불','풀'] },
+      { emoji:'🦈', word:'상어',   answer:'상', choices:['상','방','당'] },
+      { emoji:'🐳', word:'고래',   answer:'고', choices:['고','조','노'] },
+      { emoji:'🦋', word:'나비',   answer:'나', choices:['나','다','라'] },
+      { emoji:'🐝', word:'벌',     answer:'벌', choices:['벌','걸','털'] },
+      { emoji:'🐞', word:'무당벌레',answer:'무', choices:['무','두','누'] },
+    ],
+    '🍎음식':  [
+      { emoji:'🍎', word:'사과',   answer:'사', choices:['사','바','타'] },
+      { emoji:'🍌', word:'바나나', answer:'바', choices:['바','파','타'] },
+      { emoji:'🍓', word:'딸기',   answer:'딸', choices:['딸','말','발'] },
+      { emoji:'🍇', word:'포도',   answer:'포', choices:['포','보','소'] },
+      { emoji:'🍊', word:'귤',     answer:'귤', choices:['귤','굴','쥴'] },
+      { emoji:'🍋', word:'레몬',   answer:'레', choices:['레','메','세'] },
+      { emoji:'🍉', word:'수박',   answer:'수', choices:['수','두','부'] },
+      { emoji:'🍑', word:'복숭아', answer:'복', choices:['복','독','목'] },
+      { emoji:'🍍', word:'파인애플',answer:'파', choices:['파','나','바'] },
+      { emoji:'🥝', word:'키위',   answer:'키', choices:['키','피','미'] },
+      { emoji:'🍦', word:'아이스크림',answer:'아',choices:['아','오','이'] },
+      { emoji:'🎂', word:'케이크', answer:'케', choices:['게','케','데'] },
+      { emoji:'🍕', word:'피자',   answer:'피', choices:['피','미','비'] },
+      { emoji:'🍜', word:'라면',   answer:'라', choices:['라','나','다'] },
+      { emoji:'🍙', word:'주먹밥', answer:'주', choices:['주','두','부'] },
+      { emoji:'🍰', word:'조각케이크',answer:'조',choices:['조','보','도'] },
+      { emoji:'🧁', word:'머핀',   answer:'머', choices:['머','서','너'] },
+      { emoji:'🍩', word:'도너츠', answer:'도', choices:['도','보','소'] },
+      { emoji:'🍫', word:'초콜릿', answer:'초', choices:['초','소','도'] },
+      { emoji:'🍭', word:'사탕',   answer:'사', choices:['사','바','가'] },
+      { emoji:'🥛', word:'우유',   answer:'우', choices:['우','두','무'] },
+      { emoji:'🧃', word:'주스',   answer:'주', choices:['주','두','무'] },
+      { emoji:'🍚', word:'밥',     answer:'밥', choices:['밥','탑','납'] },
+      { emoji:'🥚', word:'계란',   answer:'계', choices:['계','세','네'] },
+      { emoji:'🧀', word:'치즈',   answer:'치', choices:['치','미','비'] },
+    ],
+    '🏠생활':  [
+      { emoji:'🏠', word:'집',     answer:'집', choices:['집','힙','십'] },
+      { emoji:'🛁', word:'목욕',   answer:'목', choices:['목','독','복'] },
+      { emoji:'🪥', word:'칫솔',   answer:'칫', choices:['칫','밋','깃'] },
+      { emoji:'🛏️', word:'침대',   answer:'침', choices:['침','심','김'] },
+      { emoji:'🪑', word:'의자',   answer:'의', choices:['의','이','우'] },
+      { emoji:'📺', word:'텔레비전',answer:'텔', choices:['텔','멜','벨'] },
+      { emoji:'📱', word:'휴대폰', answer:'휴', choices:['휴','류','뮤'] },
+      { emoji:'💡', word:'전구',   answer:'전', choices:['전','천','선'] },
+      { emoji:'🪟', word:'창문',   answer:'창', choices:['창','방','당'] },
+      { emoji:'🚪', word:'문',     answer:'문', choices:['문','군','눈'] },
+    ],
+    '🎮놀이':  [
+      { emoji:'⚽', word:'축구',   answer:'축', choices:['축','국','죽'] },
+      { emoji:'🏊', word:'수영',   answer:'수', choices:['수','부','두'] },
+      { emoji:'🎠', word:'놀이터', answer:'놀', choices:['놀','볼','골'] },
+      { emoji:'🧩', word:'퍼즐',   answer:'퍼', choices:['퍼','머','버'] },
+      { emoji:'🎈', word:'풍선',   answer:'풍', choices:['풍','붕','중'] },
+      { emoji:'🎵', word:'노래',   answer:'노', choices:['노','도','보'] },
+      { emoji:'🎨', word:'그림',   answer:'그', choices:['그','크','프'] },
+      { emoji:'🪀', word:'요요',   answer:'요', choices:['요','소','도'] },
+      { emoji:'🎯', word:'다트',   answer:'다', choices:['다','바','사'] },
+      { emoji:'🎪', word:'서커스', answer:'서', choices:['서','어','너'] },
+      { emoji:'🎢', word:'롤러코스터',answer:'롤',choices:['롤','몰','골'] },
+      { emoji:'🎡', word:'회전목마',answer:'회', choices:['회','외','왜'] },
+    ],
+    '🌈자연':  [
+      { emoji:'🌙', word:'달',     answer:'달', choices:['달','말','살'] },
+      { emoji:'⭐', word:'별',     answer:'별', choices:['별','열','절'] },
+      { emoji:'☀️', word:'해',     answer:'해', choices:['해','새','배'] },
+      { emoji:'🌈', word:'무지개', answer:'무', choices:['무','구','부'] },
+      { emoji:'🌺', word:'하늘',   answer:'하', choices:['하','나','가'] },
+      { emoji:'🌊', word:'바다',   answer:'바', choices:['바','사','나'] },
+      { emoji:'🌲', word:'나무',   answer:'나', choices:['나','다','가'] },
+      { emoji:'🌸', word:'꽃',     answer:'꽃', choices:['꽃','못','솥'] },
+      { emoji:'⛄', word:'눈사람', answer:'눈', choices:['눈','분','군'] },
+      { emoji:'🌧️', word:'비',     answer:'비', choices:['비','미','피'] },
+    ],
+    '👨가족':  [
+      { emoji:'👦', word:'어린이', answer:'어', choices:['어','서','너'] },
+      { emoji:'👨', word:'아빠',   answer:'아', choices:['아','다','나'] },
+      { emoji:'👩', word:'엄마',   answer:'엄', choices:['엄','염','점'] },
+      { emoji:'👴', word:'할아버지',answer:'할', choices:['할','말','살'] },
+      { emoji:'👵', word:'할머니', answer:'할', choices:['할','말','날'] },
+      { emoji:'📚', word:'책',     answer:'책', choices:['책','색','맥'] },
+      { emoji:'✏️', word:'연필',   answer:'연', choices:['연','현','천'] },
+      { emoji:'🎒', word:'가방',   answer:'가', choices:['가','나','다'] },
+      { emoji:'👟', word:'신발',   answer:'신', choices:['신','진','민'] },
+      { emoji:'🧢', word:'모자',   answer:'모', choices:['모','보','소'] },
+    ],
+  },
 
   // ─── 스타일 ──────────────────────────────────────────────
   _injectStyle() {
@@ -71,7 +172,6 @@ window.SihyeonGames.letterPlay = {
     const style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = `
-      /* // [수정본] height: 100% 제거, flex: 1, min-height: 0 추가 */
       .slp-root {
         width: 100%; flex: 1; min-height: 0;
         display: flex; flex-direction: column; align-items: center;
@@ -112,12 +212,14 @@ window.SihyeonGames.letterPlay = {
         white-space: nowrap; flex-shrink: 0; margin-right: 2px;
         letter-spacing: 0.5px;
       }
+
+      /* // [수정본] 칩 높이, 폰트 키우기 */
       .slp-vowel-chip {
         flex-shrink: 0;
-        min-width: 36px; height: 36px;
+        min-width: 44px; height: 44px; font-size: 17px;
         border-radius: 50%; border: 3px solid rgba(255,133,194,0.3);
         background: rgba(255,255,255,0.9);
-        font-size: 15px; font-weight: 900; color: #cc6699;
+        font-weight: 900; color: #cc6699;
         cursor: pointer; display: grid; place-items: center;
         transition: all 0.2s; box-shadow: 0 3px 0 rgba(0,0,0,0.08);
         -webkit-tap-highlight-color: transparent;
@@ -129,11 +231,12 @@ window.SihyeonGames.letterPlay = {
         box-shadow: 0 4px 0 rgba(255,78,136,0.35);
         transform: scale(1.1);
       }
-      .slp-vowel-chip.word-mode {
+      
+      /* 카테고리 칩 활성화 색상 추가 (단어 모드용) */
+      .slp-cat-chip.active {
         background: linear-gradient(135deg,#7ecfff,#38b6ff);
         color: #fff; border-color: #38b6ff;
         box-shadow: 0 4px 0 rgba(56,182,255,0.35);
-        min-width: 44px; border-radius: 18px; font-size: 18px;
       }
 
       /* ── 진행 도트 ── */
@@ -172,8 +275,9 @@ window.SihyeonGames.letterPlay = {
       }
 
       /* 단어 모드 힌트 */
+      /* // [수정본] 힌트 이모지 크기 확대 */
       .slp-hint-emoji {
-        font-size: clamp(56px, 16vw, 88px); line-height: 1;
+        font-size: clamp(88px, 26vw, 140px); line-height: 1;
         animation: slp-emoji-bounce 2.5s ease-in-out infinite;
       }
       @keyframes slp-emoji-bounce {
@@ -245,8 +349,9 @@ window.SihyeonGames.letterPlay = {
         to   { filter: brightness(1.25) drop-shadow(0 0 18px rgba(255,255,255,1));  }
       }
 
+      /* // [수정본] 풍선 및 글자 크기 확대 */
       .slp-balloon-body {
-        width: clamp(78px, 21vw, 108px); height: clamp(94px, 26vw, 130px);
+        width: clamp(100px, 27vw, 148px); height: clamp(120px, 33vw, 178px);
         border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
         display: flex; align-items: center; justify-content: center;
         position: relative; transition: transform 0.15s;
@@ -269,7 +374,7 @@ window.SihyeonGames.letterPlay = {
         background: linear-gradient(to bottom,#aaa,#ccc); border-radius: 1px;
       }
       .slp-balloon-letter {
-        font-size: clamp(28px, 8.5vw, 50px); font-weight: 900; color: white;
+        font-size: clamp(38px, 11vw, 66px); font-weight: 900; color: white;
         text-shadow: 0 2px 8px rgba(0,0,0,0.25); z-index: 1; position: relative;
       }
 
@@ -475,31 +580,37 @@ window.SihyeonGames.letterPlay = {
   // ════════════════════════════════════════════════════════
   //  모음 선택바 렌더 (항상 상단에 위치)
   // ════════════════════════════════════════════════════════
+  // // [수정본] 모음 선택바를 카테고리+모음 통합 선택바로 교체
   _renderVowelBar(container) {
     const bar = document.createElement('div');
     bar.className = 'slp-vowel-bar';
     bar.id = 'slpVowelBar';
 
-    // 단어 모드 버튼
-    const wordChip = document.createElement('button');
-    wordChip.className = 'slp-vowel-chip word-mode' + (this._selectedVowel === null ? ' active' : '');
-    wordChip.textContent = '📖';
-    wordChip.title = '단어 모드';
-    wordChip.addEventListener('click', () => {
-      this._selectedVowel = null;
-      this._startGame();
+    // ── 단어 카테고리 칩 ──
+    Object.keys(this._wordCategories).forEach(cat => {
+      const chip = document.createElement('button');
+      chip.className = 'slp-vowel-chip slp-cat-chip'
+        + (this._selectedVowel === null && this._selectedCategory === cat ? ' active' : '');
+      chip.textContent = cat;
+      chip.style.cssText = 'min-width:60px; border-radius:18px; font-size:13px;';
+      chip.addEventListener('click', () => {
+        this._selectedVowel    = null;
+        this._selectedCategory = cat;
+        this._startGame();
+      });
+      bar.appendChild(chip);
     });
-    bar.appendChild(wordChip);
 
     // 구분선
     const sep = document.createElement('div');
-    sep.style.cssText = 'width:1px;height:26px;background:rgba(0,0,0,0.1);flex-shrink:0;margin:0 2px;';
+    sep.style.cssText = 'width:2px;height:26px;background:rgba(0,0,0,0.12);flex-shrink:0;margin:0 4px;';
     bar.appendChild(sep);
 
-    // 모음 칩
+    // ── 모음 칩 ──
     this._vowelData.forEach(({ key }) => {
       const chip = document.createElement('button');
-      chip.className = 'slp-vowel-chip' + (this._selectedVowel === key ? ' active' : '');
+      chip.className = 'slp-vowel-chip'
+        + (this._selectedVowel === key ? ' active' : '');
       chip.textContent = key;
       chip.addEventListener('click', () => {
         this._selectedVowel = key;
@@ -942,19 +1053,21 @@ window.SihyeonGames.letterPlay = {
   },
 
   // ─── 게임 시작 ───────────────────────────────────────────
+  // // [수정본] 단어 카테고리 분기 적용
   _startGame() {
     // 타이머 정리
     this._timers.forEach(t => clearTimeout(t));
     this._timers = [];
 
     if (this._selectedVowel === null) {
-      // 단어 모드: 20개 중 5개 랜덤
-      const shuffled = this._wordRounds
+      // ★ 카테고리 단어 모드: 선택된 카테고리에서 최대 8개 랜덤
+      const pool = this._wordCategories[this._selectedCategory] || [];
+      const shuffled = pool
         .map(r => ({ ...r, choices: [...r.choices].sort(() => Math.random() - 0.5) }))
         .sort(() => Math.random() - 0.5)
-        .slice(0, 5);
+        .slice(0, Math.min(8, pool.length)); // 최대 8문제
       this._state = {
-        mode: 'word', roundIndex: 0, totalRounds: 5,
+        mode: 'word', roundIndex: 0, totalRounds: shuffled.length,
         score: 0, locked: false, wrongCount: 0, rounds: shuffled
       };
     } else {
@@ -974,19 +1087,17 @@ window.SihyeonGames.letterPlay = {
   },
 
   // ─── 공개 API ────────────────────────────────────────────
-  // // [수정본] render 함수 전체 교체 (세로 래퍼 생성 적용)
   render(container, options = {}) {
     this.destroy();
     container.innerHTML = '';
 
-    // ★ 세로 래퍼 생성 — vowel bar + slp-root를 flex-column으로 담음
     const wrapper = document.createElement('div');
     wrapper.id = 'slpWrapper';
     wrapper.style.cssText =
       'width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;';
     container.appendChild(wrapper);
 
-    this._container     = wrapper;     // ★ wrapper를 컨테이너로 사용
+    this._container     = wrapper;
     this._options       = options;
     this._timers        = [];
     this._selectedVowel = null;
