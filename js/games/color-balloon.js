@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS - COLOR BALLOON GAME MODULE
-   js/games/color-balloon.js
+   js/games/color-balloon.js  (upgraded)
 ═══════════════════════════════════════════ */
 
 (function() {
@@ -14,13 +14,12 @@
 
   window.SihyeonGames.colorBalloon = {
     id: 'colorBalloon',
-    title: '🎈 색깔 풍선 팡팡!',
-    
+    title: '🎈',
+
     state: {
       currentLevel: 1,
       maxLevel: 5,
       targetColor: null,
-      correctCount: 0,
       container: null,
       styleElement: null,
       isAnimating: false,
@@ -28,62 +27,51 @@
       options: {}
     },
 
-    // 4~5세가 명확하게 구분할 수 있는 기본 색상 풀
     colorPool: [
-      { id: 'red', name: '빨간색', hex: '#FF3B3B', dark: '#CC1F1F' },
-      { id: 'blue', name: '파란색', hex: '#1E90FF', dark: '#1565C0' },
-      { id: 'yellow', name: '노란색', hex: '#FFD93D', dark: '#F5B041' },
-      { id: 'green', name: '초록색', hex: '#4CAF50', dark: '#2E7D32' },
-      { id: 'purple', name: '보라색', hex: '#9C27B0', dark: '#6A1B9A' },
-      { id: 'pink', name: '분홍색', hex: '#FF69B4', dark: '#C71585' }
+      { id: 'red',    name: '빨간색', hex: '#FF3B3B', dark: '#CC1F1F', bgTint: 'rgba(255,59,59,0.12)'   },
+      { id: 'blue',   name: '파란색', hex: '#1E90FF', dark: '#1565C0', bgTint: 'rgba(30,144,255,0.12)'  },
+      { id: 'yellow', name: '노란색', hex: '#FFD93D', dark: '#D4A017', bgTint: 'rgba(255,217,61,0.18)'  },
+      { id: 'green',  name: '초록색', hex: '#4CAF50', dark: '#2E7D32', bgTint: 'rgba(76,175,80,0.12)'   },
+      { id: 'purple', name: '보라색', hex: '#9C27B0', dark: '#6A1B9A', bgTint: 'rgba(156,39,176,0.12)'  },
+      { id: 'pink',   name: '분홍색', hex: '#FF69B4', dark: '#C71585', bgTint: 'rgba(255,105,180,0.12)' }
     ],
 
+    // 판별 풍선 수: 1판→2개, 2판→2개, 3판→3개, 4판→4개, 5판→4개
+    balloonCountByLevel: [2, 2, 3, 4, 4],
+
     render: function(container, options = {}) {
-      this.destroy(); // 기존 상태 완벽 초기화
-      
+      this.destroy();
+
       this.state.container = container;
-      this.state.options = options;
-      
+      this.state.options   = options;
+      this.state.currentLevel = 1;
+      this.state.isAnimating  = false;
+
       this.injectStyles();
 
-      // 게임 레이아웃 스캐폴딩
       container.innerHTML = `
-        <div class="balloon-game-wrapper">
-          <div class="bg-sky"></div>
+        <div class="cb-wrapper" id="cbWrapper">
+          <div class="cb-bg-tint"  id="cbBgTint"></div>
           <div class="bg-cloud b-c1"></div>
           <div class="bg-cloud b-c2"></div>
           <div class="bg-cloud b-c3"></div>
-          
-          <div class="game-header">
-            <h1 class="game-title">🎈 색깔 풍선 팡팡!</h1>
-            <div class="level-badge" id="cbLevelBadge">1 / 5</div>
-          </div>
-          
-          <div class="mission-area">
-            <div class="mission-card" id="cbMissionCard">
-              <span id="cbTargetColorText" class="target-text">빨간색</span> 풍선을 터뜨려봐!
+
+          <div class="cb-header">
+            <div class="cb-progress" id="cbProgress"></div>
+            <div class="cb-target-wrap">
+              <div class="cb-target-dot" id="cbTargetDot"></div>
             </div>
           </div>
 
-          <div class="balloon-area" id="cbBalloonArea"></div>
-          
-          <div class="interaction-area" id="cbInteractionArea">
-            <div class="success-panel" id="cbSuccessPanel" style="display: none;">
-              <h2 class="success-title">🎉 우와! 시현이 최고!</h2>
-              <div class="action-buttons">
-                <button class="action-btn btn-replay" id="cbRestartBtn">🔁 다시 하기</button>
-                <button class="action-btn btn-home" id="cbPlazaBtn">🏠 광장으로</button>
-              </div>
-            </div>
-          </div>
+          <div class="cb-balloon-area" id="cbBalloonArea"></div>
         </div>
       `;
 
-      this.attachEvents();
       playGameVoice('games.color.intro');
       this.startLevel();
     },
 
+    // ─── 레벨 시작 ───────────────────────────────────────────
     startLevel: function() {
       if (this.state.currentLevel > this.state.maxLevel) {
         this.showCompleteScreen();
@@ -92,311 +80,439 @@
 
       this.state.isAnimating = false;
       const container = this.state.container;
-      
-      // UI 업데이트
-      container.querySelector('#cbLevelBadge').textContent = `${this.state.currentLevel} / ${this.state.maxLevel}`;
-      
-      // 타겟 색상 랜덤 선택
-      this.state.targetColor = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
-      
-      const missionText = container.querySelector('#cbTargetColorText');
-      missionText.textContent = this.state.targetColor.name;
-      missionText.style.color = this.state.targetColor.hex;
 
-      // 음성 가이드
+      // 진행 도트
+      this.updateProgress();
+
+      // 타겟 색 선택
+      this.state.targetColor = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
+      const color = this.state.targetColor;
+
+      // 타겟 동그라미 업데이트
+      const dot = container.querySelector('#cbTargetDot');
+      if (dot) {
+        dot.style.background  = `radial-gradient(circle at 35% 35%, #fff 0%, ${color.hex} 28%, ${color.dark} 100%)`;
+        dot.style.boxShadow   = `0 0 0 4px #fff, 0 0 0 9px ${color.hex}, 0 6px 0 rgba(0,0,0,0.12)`;
+      }
+
+      // 배경 색조 반응
+      const tint = container.querySelector('#cbBgTint');
+      if (tint) tint.style.background = color.bgTint;
+
       playGameVoice('games.color.question');
       if (this.state.options.speakGuide) {
-        this.state.options.speakGuide(`${this.state.targetColor.name} 풍선을 찾아봐!`, true);
+        this.state.options.speakGuide(`${color.name} 풍선을 찾아봐!`, true);
       }
 
       this.clearBalloons();
       this.startSpawningBalloons();
     },
 
+    updateProgress: function() {
+      const el = this.state.container.querySelector('#cbProgress');
+      if (!el) return;
+      let html = '';
+      for (let i = 1; i <= this.state.maxLevel; i++) {
+        html += `<span class="cb-dot ${i < this.state.currentLevel ? 'done' : i === this.state.currentLevel ? 'active' : ''}"></span>`;
+      }
+      el.innerHTML = html;
+    },
+
+    // ─── 풍선 스폰 ───────────────────────────────────────────
     startSpawningBalloons: function() {
-      this.spawnBalloonBatch(); // 즉시 한 묶음 생성
-      
-      // 2초마다 계속 새로운 풍선 묶음 생성
+      this.spawnBalloonBatch();
       this.state.spawnInterval = setInterval(() => {
-        if (!this.state.isAnimating) {
-          this.spawnBalloonBatch();
-        }
-      }, 2000);
+        if (!this.state.isAnimating) this.spawnBalloonBatch();
+      }, 3500);
     },
 
     spawnBalloonBatch: function() {
       const area = this.state.container.querySelector('#cbBalloonArea');
       if (!area) return;
 
-      // 한 번에 3~4개의 풍선 생성 (반드시 정답 1개 포함)
-      let batchColors = [this.state.targetColor];
-      while (batchColors.length < 4) {
-        const randomColor = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
-        if (!batchColors.includes(randomColor)) {
-          batchColors.push(randomColor);
-        }
-      }
-      
-      // 색상 섞기
-      batchColors.sort(() => Math.random() - 0.5);
+      const count = this.balloonCountByLevel[this.state.currentLevel - 1] || 4;
+      const target = this.state.targetColor;
 
-      batchColors.forEach((color, index) => {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon';
-        
-        // 3D 느낌의 그라데이션 적용
-        balloon.style.background = `radial-gradient(circle at 30% 30%, #fff 0%, ${color.hex} 20%, ${color.dark} 100%)`;
-        
-        // 위치 및 애니메이션 랜덤화 (겹치지 않게 가로 영역 분할)
-        const leftPos = (index * 25) + (Math.random() * 10); 
-        balloon.style.left = `${leftPos}%`;
-        
-        // 올라가는 속도와 흔들림 정도 랜덤화
-        const duration = 4 + Math.random() * 3; // 4s ~ 7s
-        balloon.style.animation = `floatUp ${duration}s linear forwards, sway ${2 + Math.random()}s ease-in-out infinite alternate`;
-        
-        // 데이터 저장 및 클릭 이벤트
+      // 정답 1개 + 오답 (count-1)개 (중복 없이)
+      let batch = [target];
+      const others = [...this.colorPool.filter(c => c.id !== target.id)].sort(() => Math.random() - 0.5);
+      for (let i = 0; i < count - 1; i++) batch.push(others[i % others.length]);
+      batch.sort(() => Math.random() - 0.5);
+
+      // 최대 30% 간격으로 배치 (화면 밖 방지)
+      const slotWidth = Math.floor(70 / count);
+
+      batch.forEach((color, idx) => {
+        const isTarget  = color.id === target.id;
+        const balloon   = document.createElement('div');
+        balloon.className = isTarget ? 'cb-balloon cb-balloon-target' : 'cb-balloon';
+
+        balloon.style.background = `radial-gradient(circle at 30% 28%, rgba(255,255,255,0.85) 0%, ${color.hex} 22%, ${color.dark} 100%)`;
+
+        // 30% 슬롯 내 랜덤 배치
+        const leftPct = (idx * slotWidth) + Math.random() * (slotWidth - 5) + 2;
+        balloon.style.left = `${leftPct}%`;
+
+        // 속도: 7s~10s (느리게)
+        const dur   = 7 + Math.random() * 3;
+        const sway  = 1.8 + Math.random() * 1.4;
+        const glowAnim = isTarget ? `, targetGlow 2s ease-in-out infinite` : '';
+        balloon.style.animation = `cbFloatUp ${dur}s linear forwards, cbSway ${sway}s ease-in-out infinite alternate${glowAnim}`;
+
         balloon.dataset.colorId = color.id;
-        balloon.onclick = () => this.handleBalloonClick(balloon, color);
-        
-        // 매듭 (풍선 꼬리)
+        balloon.addEventListener('click', () => this.handleBalloonClick(balloon, color));
+
+        // 눈 (얼굴)
+        ['eye-l', 'eye-r'].forEach(cls => {
+          const eye = document.createElement('div');
+          eye.className = `cb-eye ${cls}`;
+          balloon.appendChild(eye);
+        });
+
+        // 매듭
         const knot = document.createElement('div');
-        knot.className = 'balloon-knot';
+        knot.className = 'cb-knot';
         knot.style.borderBottomColor = color.dark;
         balloon.appendChild(knot);
 
-        area.appendChild(balloon);
+        // 실
+        const str = document.createElement('div');
+        str.className = 'cb-string';
+        str.style.background = color.dark;
+        balloon.appendChild(str);
 
-        // 화면 밖으로 나간 풍선 제거
-        setTimeout(() => {
-          if (balloon && balloon.parentNode) {
-            balloon.remove();
-          }
-        }, duration * 1000);
+        area.appendChild(balloon);
+        setTimeout(() => { if (balloon.parentNode) balloon.remove(); }, dur * 1000);
       });
     },
 
-    handleBalloonClick: function(balloonElement, color) {
+    // ─── 클릭 핸들러 ─────────────────────────────────────────
+    handleBalloonClick: function(balloonEl, color) {
       if (this.state.isAnimating) return;
 
       if (color.id === this.state.targetColor.id) {
-        // 정답!
+        // ✅ 정답
         this.state.isAnimating = true;
         clearInterval(this.state.spawnInterval);
 
-        // 정답 풍선 터지는 이펙트
-        balloonElement.style.animation = 'none';
-        balloonElement.className = 'balloon pop';
-        
+        this.spawnParticles(balloonEl, color);
+
+        balloonEl.style.animation = 'none';
+        balloonEl.className = 'cb-balloon cb-pop';
+
         playGameVoice('games.color.correct');
-        if (this.state.options.speakGuide) {
-          this.state.options.speakGuide(`맞았어! 팡!`, true);
-        }
-        if (this.state.options.fireConfetti) {
-          this.state.options.fireConfetti();
-        }
+        if (this.state.options.speakGuide) this.state.options.speakGuide('맞았어! 팡!', true);
+        if (this.state.options.fireConfetti) this.state.options.fireConfetti();
 
-        // 다른 풍선들은 투명하게 사라짐
-        const allBalloons = this.state.container.querySelectorAll('.balloon:not(.pop)');
-        allBalloons.forEach(b => b.style.opacity = '0');
+        // 나머지 풍선 페이드아웃
+        this.state.container.querySelectorAll('.cb-balloon:not(.cb-pop)').forEach(b => {
+          b.style.transition = 'opacity 0.6s';
+          b.style.opacity = '0';
+        });
 
+        // 3.5초 후 다음 판 (성공 여운)
         setTimeout(() => {
           this.state.currentLevel++;
           this.startLevel();
-        }, 2000);
+        }, 3500);
 
       } else {
-        // 오답: 부드러운 튕김 효과
-        balloonElement.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-          if (balloonElement) balloonElement.style.transform = '';
-        }, 150);
-        
+        // ❌ 오답: 흔들흔들 (중복 방지)
+        if (balloonEl.classList.contains('cb-wobble')) return;
+        balloonEl.classList.add('cb-wobble');
+        setTimeout(() => { if (balloonEl) balloonEl.classList.remove('cb-wobble'); }, 500);
+
         playGameVoice('games.color.wrong');
         if (this.state.options.speakGuide) {
-          this.state.options.speakGuide(`어라? ${this.state.targetColor.name}을 찾아보자!`, true);
+          this.state.options.speakGuide(`${this.state.targetColor.name}을 찾아보자!`, true);
         }
       }
+    },
+
+    // ─── 파티클 이펙트 ───────────────────────────────────────
+    spawnParticles: function(balloonEl, color) {
+      const area = this.state.container.querySelector('#cbBalloonArea');
+      if (!area) return;
+
+      const br  = balloonEl.getBoundingClientRect();
+      const ar  = area.getBoundingClientRect();
+      const cx  = br.left - ar.left + br.width  / 2;
+      const cy  = br.top  - ar.top  + br.height / 2;
+
+      const shapes = ['●', '●', '▲', '★', '●'];
+
+      for (let i = 0; i < 10; i++) {
+        const p   = document.createElement('span');
+        p.className  = 'cb-particle';
+        p.textContent = shapes[i % shapes.length];
+        p.style.color = i % 2 === 0 ? color.hex : color.dark;
+        p.style.left  = `${cx}px`;
+        p.style.top   = `${cy}px`;
+
+        const angle = (i / 10) * Math.PI * 2;
+        const dist  = 55 + Math.random() * 70;
+        p.style.setProperty('--pdx', `${Math.cos(angle) * dist}px`);
+        p.style.setProperty('--pdy', `${Math.sin(angle) * dist}px`);
+        p.style.animationDelay = `${i * 25}ms`;
+
+        area.appendChild(p);
+        p.addEventListener('animationend', () => p.remove());
+      }
+    },
+
+    // ─── 완료 화면 ───────────────────────────────────────────
+    showCompleteScreen: function() {
+      this.clearBalloons();
+      const wrapper = this.state.container.querySelector('#cbWrapper');
+      if (!wrapper) return;
+
+      const el = document.createElement('div');
+      el.className = 'cb-complete';
+      el.innerHTML = `
+        <div class="cb-complete-emoji">🎉</div>
+        <div class="cb-complete-btns">
+          <button class="cb-btn cb-btn-replay" id="cbRestartBtn">🔁</button>
+          <button class="cb-btn cb-btn-home"   id="cbPlazaBtn">🏠</button>
+        </div>
+      `;
+      wrapper.appendChild(el);
+
+      playGameVoice('games.color.complete');
+      if (this.state.options.speakGuide) this.state.options.speakGuide('우와! 풍선을 다 터뜨렸어. 시현이가 최고야!', true);
+      if (this.state.options.fireConfetti) this.state.options.fireConfetti();
+      if (this.state.options.gainExp)      this.state.options.gainExp(25);
+
+      el.querySelector('#cbRestartBtn')?.addEventListener('click', () => {
+        this.state.currentLevel = 1;
+        el.remove();
+        this.startLevel();
+      });
+      el.querySelector('#cbPlazaBtn')?.addEventListener('click', () => {
+        this.state.options.closeToParkHome?.();
+      });
     },
 
     clearBalloons: function() {
       clearInterval(this.state.spawnInterval);
-      const area = this.state.container.querySelector('#cbBalloonArea');
+      const area = this.state.container?.querySelector('#cbBalloonArea');
       if (area) area.innerHTML = '';
     },
 
-    showCompleteScreen: function() {
-      this.clearBalloons();
-      const container = this.state.container;
-      const successPanel = container.querySelector('#cbSuccessPanel');
-      const missionArea = container.querySelector('.mission-area');
-      
-      missionArea.style.display = 'none';
-      successPanel.style.display = 'flex';
-
-      playGameVoice('games.color.complete');
-      if (this.state.options.speakGuide) {
-        this.state.options.speakGuide("우와! 풍선을 다 터뜨렸어. 시현이가 최고야!", true);
-      }
-      if (this.state.options.fireConfetti) this.state.options.fireConfetti();
-      if (this.state.options.gainExp) this.state.options.gainExp(25);
-    },
-
-    attachEvents: function() {
-      const container = this.state.container;
-      if (!container) return;
-      
-      const btnRestart = container.querySelector('#cbRestartBtn');
-      const btnPlaza = container.querySelector('#cbPlazaBtn');
-      
-      if (btnRestart) btnRestart.onclick = () => {
-        this.state.currentLevel = 1;
-        container.querySelector('.mission-area').style.display = 'flex';
-        container.querySelector('#cbSuccessPanel').style.display = 'none';
-        this.startLevel();
-      };
-      
-      if (btnPlaza) btnPlaza.onclick = () => {
-        if (this.state.options.closeToParkHome) this.state.options.closeToParkHome();
-      };
-    },
-
+    // ─── 스타일 주입 ─────────────────────────────────────────
     injectStyles: function() {
-      if (this.state.styleElement) return;
-      if (document.getElementById('sihyeon-color-balloon-style')) {
-        document.getElementById('sihyeon-color-balloon-style').remove();
-      }
+      const existing = document.getElementById('sihyeon-color-balloon-style');
+      if (existing) existing.remove();
 
       const style = document.createElement('style');
-      style.id = 'sihyeon-color-balloon-style';
+      style.id    = 'sihyeon-color-balloon-style';
       style.textContent = `
-        .balloon-game-wrapper {
+        /* ── 래퍼 ── */
+        .cb-wrapper {
           width: 100%; height: 100%; min-height: 100vh;
           position: relative; overflow: hidden;
           font-family: 'Jua', sans-serif;
           background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 100%);
           display: flex; flex-direction: column;
         }
+        .cb-bg-tint {
+          position: absolute; inset: 0; z-index: 0;
+          transition: background 0.9s ease;
+          pointer-events: none;
+        }
 
-        /* 하늘 배경 장식 */
-        .bg-sky { position: absolute; inset: 0; z-index: 0; }
+        /* ── 구름 ── */
         .bg-cloud { position: absolute; background: #fff; border-radius: 50px; opacity: 0.8; z-index: 1; pointer-events: none; }
         .bg-cloud::before, .bg-cloud::after { content: ''; position: absolute; background: #fff; border-radius: 50%; }
-        .b-c1 { width: 140px; height: 50px; top: 15%; left: -20%; animation: floatCloud 25s linear infinite; }
+        .b-c1 { width: 140px; height: 50px; top: 12%; left: -20%; animation: floatCloud 25s linear infinite; }
         .b-c1::before { width: 60px; height: 60px; top: -25px; left: 20px; }
-        .b-c1::after { width: 70px; height: 70px; top: -35px; left: 50px; }
-        .b-c2 { width: 100px; height: 35px; top: 35%; right: -20px; animation: floatCloud 35s linear infinite reverse; }
+        .b-c1::after  { width: 70px; height: 70px; top: -35px; left: 50px; }
+        .b-c2 { width: 100px; height: 35px; top: 32%; right: -20px; animation: floatCloud 35s linear infinite reverse; }
         .b-c2::before { width: 40px; height: 40px; top: -15px; left: 15px; }
-        .b-c2::after { width: 50px; height: 50px; top: -20px; left: 40px; }
-        .b-c3 { width: 120px; height: 40px; top: 60%; left: 30%; animation: floatCloud 30s linear infinite; opacity: 0.5; }
+        .b-c2::after  { width: 50px; height: 50px; top: -20px; left: 40px; }
+        .b-c3 { width: 120px; height: 40px; top: 58%; left: 28%; animation: floatCloud 30s linear infinite; opacity: 0.5; }
         .b-c3::before { width: 45px; height: 45px; top: -20px; left: 20px; }
-        .b-c3::after { width: 55px; height: 55px; top: -25px; left: 45px; }
-        @keyframes floatCloud { from { transform: translateX(-50vw); } to { transform: translateX(120vw); } }
+        .b-c3::after  { width: 55px; height: 55px; top: -25px; left: 45px; }
+        @keyframes floatCloud { from { transform: translateX(-60vw); } to { transform: translateX(130vw); } }
 
-        /* 상단 헤더 */
-        .game-header {
-          position: relative; z-index: 10;
+        /* ── 헤더 ── */
+        .cb-header {
+          position: relative; z-index: 10; flex-shrink: 0;
           display: flex; align-items: center; justify-content: space-between;
-          padding: 15px 20px; background: rgba(255,255,255,0.7);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 0 0 24px 24px;
+          padding: 12px 22px;
+          background: rgba(255,255,255,0.72);
+          box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+          border-radius: 0 0 26px 26px;
         }
-        .game-title { margin: 0; font-size: clamp(24px, 6vw, 32px); color: #FF7A1A; text-shadow: 0 2px 0 #fff; }
-        .level-badge { background: #1E90FF; color: white; padding: 6px 16px; border-radius: 99px; font-size: 20px; font-weight: bold; border: 3px solid #fff; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
 
-        /* 미션 안내 영역 */
-        .mission-area {
-          position: relative; z-index: 10;
-          display: flex; justify-content: center; margin-top: 20px; padding: 0 20px;
+        /* 진행 도트 */
+        .cb-progress { display: flex; gap: 10px; align-items: center; }
+        .cb-dot {
+          width: 20px; height: 20px; border-radius: 50%;
+          background: rgba(0,0,0,0.14);
+          transition: background 0.3s, transform 0.3s;
         }
-        .mission-card {
-          background: #fff; border: 5px solid #FFD93D; border-radius: 999px;
-          padding: 10px 30px; font-size: clamp(22px, 6vw, 32px); font-weight: bold;
-          color: #333; box-shadow: 0 8px 0 #E65100, 0 10px 20px rgba(0,0,0,0.15);
-          text-align: center;
+        .cb-dot.active {
+          background: #FF7A1A;
+          transform: scale(1.25);
+          box-shadow: 0 0 0 4px rgba(255,122,26,0.28);
         }
-        .target-text { text-shadow: 0 2px 0 #f0f0f0; }
+        .cb-dot.done { background: #FF7A1A; opacity: 0.4; }
 
-        /* 풍선 영역 */
-        .balloon-area {
+        /* 타겟 동그라미 */
+        .cb-target-wrap { display: flex; align-items: center; }
+        .cb-target-dot {
+          width: 58px; height: 58px; border-radius: 50%;
+          transition: background 0.5s, box-shadow 0.5s;
+          animation: cbTargetPulse 2s ease-in-out infinite;
+        }
+        @keyframes cbTargetPulse {
+          0%, 100% { transform: scale(1); }
+          50%       { transform: scale(1.1); }
+        }
+
+        /* ── 풍선 영역 ── */
+        .cb-balloon-area {
           flex: 1; position: relative; z-index: 5;
           width: 100%; overflow: hidden;
         }
 
-        /* 풍선 디자인 */
-        .balloon {
-          position: absolute; bottom: -120px;
-          width: clamp(80px, 20vw, 120px); height: clamp(100px, 25vw, 150px);
+        /* ── 풍선 ── */
+        .cb-balloon {
+          position: absolute; bottom: -200px;
+          width: clamp(130px, 24vw, 165px);
+          height: clamp(160px, 30vw, 205px);
           border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-          box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1), 0 10px 15px rgba(0,0,0,0.2);
-          cursor: pointer; -webkit-tap-highlight-color: transparent;
-          transition: opacity 0.5s ease, transform 0.1s ease;
+          box-shadow: inset -12px -12px 24px rgba(0,0,0,0.1), 0 10px 16px rgba(0,0,0,0.18);
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+          transition: opacity 0.6s ease;
+          user-select: none;
         }
-        
-        .balloon-knot {
-          position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+
+        /* 타겟 풍선: 살짝 크고 빛나게 */
+        .cb-balloon-target {
+          width: clamp(155px, 28vw, 190px);
+          height: clamp(190px, 34vw, 235px);
+        }
+        @keyframes targetGlow {
+          0%, 100% { filter: brightness(1)   drop-shadow(0 0 6px rgba(255,255,255,0.5)); }
+          50%       { filter: brightness(1.1) drop-shadow(0 0 18px rgba(255,255,255,0.95)); }
+        }
+
+        /* 눈 */
+        .cb-eye {
+          position: absolute; top: 37%;
+          width: 11px; height: 11px;
+          background: rgba(0,0,0,0.5);
+          border-radius: 50%;
+        }
+        .eye-l { left: 30%; }
+        .eye-r { right: 30%; }
+
+        /* 매듭 */
+        .cb-knot {
+          position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
           width: 0; height: 0;
-          border-left: 8px solid transparent; border-right: 8px solid transparent;
-          border-bottom: 15px solid; /* 색상은 JS에서 지정 */
+          border-left: 9px solid transparent;
+          border-right: 9px solid transparent;
+          border-bottom: 16px solid;
+        }
+
+        /* 실 */
+        .cb-string {
+          position: absolute; bottom: -56px; left: 50%; transform: translateX(-50%);
+          width: 2px; height: 42px; opacity: 0.45;
+        }
+
+        /* 오답 흔들흔들 */
+        .cb-balloon.cb-wobble { animation: cbWobble 0.5s ease-in-out !important; }
+        @keyframes cbWobble {
+          0%   { transform: rotate(0deg); }
+          20%  { transform: rotate(-13deg); }
+          40%  { transform: rotate(11deg); }
+          60%  { transform: rotate(-9deg); }
+          80%  { transform: rotate(6deg); }
+          100% { transform: rotate(0deg); }
         }
 
         /* 터지는 애니메이션 */
-        .balloon.pop {
-          animation: popEffect 0.3s forwards !important;
+        .cb-balloon.cb-pop { animation: cbPop 0.38s forwards !important; pointer-events: none; }
+        @keyframes cbPop {
+          0%   { transform: scale(1);   opacity: 1; }
+          55%  { transform: scale(1.7); opacity: 0.7; }
+          100% { transform: scale(2.3); opacity: 0; }
+        }
+
+        /* 파티클 */
+        .cb-particle {
+          position: absolute;
+          font-size: clamp(14px, 3.5vw, 20px);
           pointer-events: none;
+          z-index: 20;
+          animation: cbParticleFly 0.75s ease-out forwards;
+          line-height: 1;
         }
-        @keyframes popEffect {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.5); opacity: 0.8; }
-          100% { transform: scale(2); opacity: 0; }
-        }
-
-        /* 올라가는 애니메이션 */
-        @keyframes floatUp {
-          from { bottom: -150px; }
-          to { bottom: 120vh; }
-        }
-        @keyframes sway {
-          from { margin-left: -20px; }
-          to { margin-left: 20px; }
+        @keyframes cbParticleFly {
+          0%   { opacity: 1; transform: translate(0, 0) scale(1.2); }
+          100% { opacity: 0; transform: translate(var(--pdx), var(--pdy)) scale(0.2); }
         }
 
-        /* 하단 성공 패널 */
-        .interaction-area { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 20; display: flex; justify-content: center; }
-        .success-panel {
-          flex-direction: column; align-items: center; width: 100%; max-width: 500px;
-          background: rgba(255, 255, 255, 0.95); padding: 25px;
-          border: 5px solid #FFD93D; border-radius: 30px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-          animation: popUpPanel 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* 올라가는 + 흔들림 */
+        @keyframes cbFloatUp {
+          from { bottom: -220px; }
+          to   { bottom: 120vh; }
         }
-        @keyframes popUpPanel { from { opacity: 0; transform: translateY(50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        
-        .success-title { font-size: clamp(24px, 6vw, 32px); color: #FF7A1A; margin: 0 0 20px 0; text-shadow: 0 2px 0 #FFF9C4; }
-        .action-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; width: 100%; }
-        .action-btn {
-          flex: 1; min-width: 130px; min-height: 60px; font-size: 20px; font-weight: bold; font-family: 'Jua', sans-serif;
-          border-radius: 999px; border: 4px solid #fff; box-shadow: 0 6px 0 rgba(0,0,0,0.15); transition: transform 0.1s; cursor: pointer;
+        @keyframes cbSway {
+          from { margin-left: -18px; }
+          to   { margin-left: 18px; }
         }
-        .action-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }
-        .btn-replay { background: #4CAF50; color: white; }
-        .btn-home { background: #FF9800; color: white; }
+
+        /* ── 완료 화면 ── */
+        .cb-complete {
+          position: absolute; inset: 0; z-index: 30;
+          display: flex; flex-direction: column;
+          align-items: center; justify-content: center;
+          gap: 32px;
+          animation: cbFadeIn 0.45s ease;
+        }
+        @keyframes cbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .cb-complete-emoji {
+          font-size: clamp(90px, 28vw, 150px);
+          animation: cbBounceBig 0.65s cubic-bezier(0.2,0.8,0.2,1);
+        }
+        @keyframes cbBounceBig {
+          0%   { transform: scale(0); }
+          70%  { transform: scale(1.25); }
+          100% { transform: scale(1); }
+        }
+        .cb-complete-btns { display: flex; gap: 22px; }
+        .cb-btn {
+          width: 90px; height: 90px; font-size: 36px;
+          border-radius: 50%; border: 5px solid #fff;
+          box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+          cursor: pointer; font-family: 'Jua', sans-serif;
+          transition: transform 0.1s;
+          display: grid; place-items: center;
+        }
+        .cb-btn:active { transform: translateY(5px); box-shadow: 0 3px 0 rgba(0,0,0,0.15); }
+        .cb-btn-replay { background: #4CAF50; }
+        .cb-btn-home   { background: #FF9800; }
       `;
       document.head.appendChild(style);
       this.state.styleElement = style;
     },
 
+    // ─── 정리 ────────────────────────────────────────────────
     destroy: function() {
       this.clearBalloons();
       if (this.state.styleElement) {
         this.state.styleElement.remove();
         this.state.styleElement = null;
       }
-      if (this.state.container) {
-        this.state.container.innerHTML = '';
-      }
+      if (this.state.container) this.state.container.innerHTML = '';
       this.state.currentLevel = 1;
-      this.state.correctCount = 0;
-      this.state.isAnimating = false;
+      this.state.isAnimating  = false;
+      this.state.targetColor  = null;
     }
   };
 })();
