@@ -576,30 +576,37 @@
       background: rgba(255,255,255,0.96);
     }
 
-    /* ─── 리더 ─── */
-    #storyReaderView {
-      padding: 0 !important;
-      border: 0 !important;
-      background: transparent !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      min-height: calc(100dvh - 112px);
-    }
-    #storyReaderView.active { display: grid !important; }
+    /* ─── 리더 오버레이 ─── */
+    #storyReaderView { display: none; } /* JS가 inline style로 제어 */
     #storyReaderView .story-reader-actions,
     #storyReaderView .story-voice-controls { display: none !important; }
     #bookView { min-height: 0; }
 
-    /* ★ 페이지 기반 리더 레이아웃 (topline + illustration + text) */
+    /* ★ 리더 레이아웃 — flexbox로 구/신 story-world.js 모두 호환 */
     .storybook-reader-book {
-      display: grid;
-      grid-template-rows: auto minmax(0, 1fr) auto;
-      gap: 10px;
-      height: calc(100dvh - 160px); /* ★ min-height → height: 1fr이 작동하려면 고정 필요 */
+      display: flex;
+      flex-direction: column;
+      height: calc(100dvh - 160px);
       min-height: 300px;
+      gap: 10px;
       padding: 6px 10px max(10px, env(safe-area-inset-bottom));
       color: #2D1060;
       cursor: pointer;
+      overflow: hidden;
+    }
+    /* 삽화/히어로 영역이 남은 공간 채우기 */
+    .storybook-page-illustration,
+    .storybook-reader-hero {
+      flex: 1;
+      min-height: 0;
+    }
+    /* 텍스트는 최대 40% */
+    .storybook-reader-text {
+      max-height: 40%;
+      flex-shrink: 0;
+      display: grid; gap: 10px;
+      overflow: auto;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
     /* ★ 상단 바 (← 책장 + 페이지 번호) */
     .storybook-reader-topline {
@@ -661,18 +668,6 @@
       padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
     .storybook-reader-text::-webkit-scrollbar { display: none; }
-    .storybook-reader-text .story-paragraph {
-      font-size: clamp(18px, 4.8vw, 25px);
-      line-height: 1.55;
-      padding: 14px 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.94);
-      box-shadow: 0 4px 0 rgba(72,18,105,0.12);
-    }
-    .storybook-reader-text .story-paragraph.reading-active {
-      outline: 5px solid #FFD93D;
-      background: #FFF7CC;
-    }
 
     /* ─── 반응형 ─── */
     @media (orientation: landscape) and (min-width: 740px) {
@@ -684,14 +679,14 @@
       }
       .storybook-book-card { min-height: min(68dvh, 520px); }
       .storybook-reader-book {
-        grid-template-columns: minmax(420px, 68%) minmax(260px, 32%);
-        grid-template-rows: auto 1fr;
-        column-gap: 16px;
-        min-height: calc(100dvh - 152px);
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: calc(100dvh - 130px);
       }
-      .storybook-reader-topline { grid-column: 1 / -1; }
-      .storybook-page-illustration { grid-column: 1; grid-row: 2; }
-      .storybook-reader-text { grid-column: 2; grid-row: 2; max-height: calc(100dvh - 260px); }
+      .storybook-reader-topline { width: 100%; flex: none; }
+      .storybook-page-illustration,
+      .storybook-reader-hero { flex: 1; max-width: 65%; }
+      .storybook-reader-text { max-height: none; width: 34%; flex: 1; }
     }
     @media (max-width: 420px) {
       .storybook-featured-grid { gap: 10px; }
@@ -1407,21 +1402,11 @@ function openStoryTheater(){
         <button class="story-load-more" id="storyLoadMoreBtn" style="display:none;" onclick="loadMoreStories()">
           📖 더 보기
         </button>
-        <section id="storyReaderView">
-          <div class="story-reader-actions">
-            <button class="btn-story outline" onclick="closeStoryReader()">← 책장</button>
-            <button class="btn-story" onclick="saveCurrentStory()">💖 저장</button>
-          </div>
-          <div id="bookView"></div>
-          <div class="story-voice-controls">
-            <button class="btn-story" onclick="speakBookText()">▶ 낭독</button>
-            <button class="btn-story outline" onclick="pauseStoryReading()">⏸ 일시정지</button>
-            <button class="btn-story outline" onclick="nextStoryParagraph()">⏭ 다음</button>
-            <button class="btn-story outline" onclick="stopStoryReading()">⏹ 정지</button>
-            <button class="btn-story outline" onclick="restartStoryReading()">🔁 처음</button>
-          </div>
-        </section>
       </div>
+      <!-- ★ 리더: zone-body 밖 → 전체화면 오버레이 -->
+      <section id="storyReaderView" style="display:none; position:absolute; inset:0; z-index:50; overflow-y:auto; background:linear-gradient(180deg,#2D0060 0%,#6A0DAD 60%,#1A0040 100%); padding: max(14px,env(safe-area-inset-top)) 10px max(14px,env(safe-area-inset-bottom));">
+        <div id="bookView"></div>
+      </section>
     </div>`;
 
   if(window.renderStoryGrid) window.renderStoryGrid('전체');
