@@ -314,8 +314,11 @@
     ═══════════════════════════════════════ */
     .zone-game-grid {
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
-      gap:18px; padding:16px 0 22px;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: clamp(12px,3vw,18px);
+      padding: 12px 0 max(18px,env(safe-area-inset-bottom));
+      align-content: center;
+      min-height: 100%;
     }
     .zone-game-card {
       background:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,252,232,0.95)); border-radius:28px;
@@ -351,6 +354,12 @@
       padding:3px 8px; border-radius:10px; border:2px solid #fff;
     }
     .zone-game-card { position:relative; }
+    .zone-game-card-empty {
+      border-radius:28px; min-height:218px;
+      background:rgba(255,255,255,0.10);
+      border:4px dashed rgba(255,255,255,0.22);
+      pointer-events:none;
+    }
 
     /* ═══════════════════════════════════════
        GAME PLAY SCREEN
@@ -500,8 +509,8 @@
     }
 
     @media (max-width:640px) {
-      .zone-game-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
       .zone-game-card { min-height:200px; }
+      .zone-game-card-empty { min-height:200px; }
       .zgc-icon { min-height:102px; }
       .zgc-image, .zgc-emoji-fallback { min-height:102px; }
     }
@@ -509,8 +518,8 @@
     @media (max-width:480px) {
       .story-card-grid { grid-template-columns:repeat(2,1fr); }
       .zone-body { padding:8px 12px max(16px,env(safe-area-inset-bottom)); }
-      .zone-game-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; padding:12px 0 18px; }
       .zone-game-card { min-height:188px; padding:11px 9px 13px; border-radius:24px; border-width:4px; }
+      .zone-game-card-empty { min-height:188px; border-radius:24px; }
       .zgc-icon { min-height:96px; border-radius:18px; font-size:clamp(60px,20vw,82px); }
       .zgc-image, .zgc-emoji-fallback { min-height:96px; }
     }
@@ -881,8 +890,11 @@ const ZONE_CONFIGS = {
     character:'dad',
     greeting:'아빠랑 게임 해볼까? 하고 싶은 게임을 골라봐!',
     games: [
-      { id:'memory',  title:'짝맞추기',  emoji:'🃏', image:'./assets/games/cards/vehicle-memory.png', desc:'같은 차를 찾아요', action:'openMemoryGame()',       isNew:false },
-      { id:'balloon', title:'색깔 풍선', emoji:'🎈', image:'./assets/games/cards/color-balloon.png', desc:'색깔을 맞춰요',   action:'openColorBalloonGame()', isNew:true  },
+      { id:'memory',   title:'짝맞추기',  emoji:'🃏', image:'./assets/games/cards/vehicle-memory.png',  desc:'같은 차를 찾아요',    action:'openMemoryGame()',          isNew:false },
+      { id:'balloon',  title:'색깔 풍선', emoji:'🎈', image:'./assets/games/cards/color-balloon.png',  desc:'색깔을 맞춰요',      action:'openColorBalloonGame()',    isNew:true  },
+      { id:'lifeseq',  title:'하루 순서', emoji:'🌅', image:'./assets/games/cards/life-sequence.png',  desc:'순서대로 해봐요',    action:'openLifeSequenceGame()',    isNew:true  },
+      { id:'artzone',  title:'매직 그림판', emoji:'🎨', image:'./assets/games/cards/art-zone.png',       desc:'자유롭게 그려봐요',  action:'openArtZoneGame()',         isNew:true  },
+      { id:'catcare',  title:'고양이 돌보기', emoji:'🐱', image:'./assets/games/cards/cat-care.png',      desc:'고양이를 돌봐요',    action:'openCatCareGame()',         isNew:true  },
     ]
   },
   numbers: {
@@ -901,7 +913,8 @@ const ZONE_CONFIGS = {
     character:'rona',
     greeting:'로나랑 글자 공부! 어떤 놀이 할까?',
     games: [
-      { id:'letter', title:'글자 풍선', emoji:'🎈', image:'./assets/games/cards/letter-play.png', desc:'첫 글자를 찾아요', action:'openLetterGame()', isNew:false },
+      { id:'letter',  title:'글자 풍선',  emoji:'🎈', image:'./assets/games/cards/letter-play.png',  desc:'첫 글자를 찾아요',   action:'openLetterGame()',       isNew:false },
+      { id:'abcphon', title:'ABC 변신',   emoji:'🔤', image:'./assets/games/cards/abc-phonics.png',  desc:'A,B,C가 변신해요',  action:'openAbcPhonicsGame()',   isNew:true  },
     ]
   },
   cars: {
@@ -1046,7 +1059,7 @@ function closeGarageHandlers(){ if(typeof garageCleanup==='function') garageClea
    ★ 통합 cleanupActiveGame
 ═══════════════════════════════════════════ */
 function cleanupActiveGame(){
-  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage'].forEach(key=>{
+  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','lifeSequence','artZone','abcPhonics','catCare'].forEach(key=>{
     window.SihyeonGames?.[key]?.destroy?.();
   });
   window.SihyeonZones?.voiceZone?.destroy?.();
@@ -1250,6 +1263,7 @@ function renderZoneLand(config){
               <div class="zgc-title">${g.title}</div>
               <div class="zgc-desc">${g.desc}</div>
             </button>`).join('')}
+          ${config.games.length % 2 !== 0 ? '<div class="zone-game-card-empty" aria-hidden="true"></div>' : ''}
         </div>
       </div>
     </div>`;
@@ -1470,6 +1484,30 @@ function openVoiceZone(){
   if(window.SihyeonZones?.voiceZone?.render){
     window.SihyeonZones.voiceZone.render(t,{speakGuide,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기광장을 불러오지 못했어요.</div>';
+}
+function openLifeSequenceGame(){
+  const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)');
+  if(window.SihyeonGames?.lifeSequence?.render){
+    window.SihyeonGames.lifeSequence.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">하루 순서 게임을 불러오지 못했어요.</div>';
+}
+function openArtZoneGame(){
+  const t=openGameShell('🎨 매직 그림판','artZoneTarget','linear-gradient(160deg,#f0f4f8 0%,#fce4ec 100%)');
+  if(window.SihyeonGames?.artZone?.render){
+    window.SihyeonGames.artZone.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">매직 그림판을 불러오지 못했어요.</div>';
+}
+function openAbcPhonicsGame(){
+  const t=openGameShell('🔤 ABC 변신','abcPhonicsTarget','linear-gradient(160deg,#e8f5e9 0%,#fff9c4 100%)');
+  if(window.SihyeonGames?.abcPhonics?.render){
+    window.SihyeonGames.abcPhonics.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">ABC 게임을 불러오지 못했어요.</div>';
+}
+function openCatCareGame(){
+  const t=openGameShell('🐱 고양이 돌보기','catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)');
+  if(window.SihyeonGames?.catCare?.render){
+    window.SihyeonGames.catCare.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">고양이 돌보기를 불러오지 못했어요.</div>';
 }
 
 /* ═══════════════════════════════════════════
@@ -1864,7 +1902,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberCountGame, openNumberBlocksGame, openLetterGame, openColorBalloonGame, openParkingGame, openConstructionSiteGame, openCarGarageGame,
+  openMemoryGame, openNumberCountGame, openNumberBlocksGame, openLetterGame, openColorBalloonGame, openParkingGame, openConstructionSiteGame, openCarGarageGame, openLifeSequenceGame, openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
   filterStoriesBySearch, loadMoreStories,
   renderStoryGrid, _renderStoryGridPage,
@@ -1946,5 +1984,9 @@ if('serviceWorker' in navigator){
 <script src="./js/games/car-garage.js"></script>
 <script src="./js/games/parking-lot.js"></script>
 <script src="./js/games/construction-site.js"></script>
+<script src="./js/games/life-sequence.js"></script>
+<script src="./js/games/art-zone.js"></script>
+<script src="./js/games/abc-phonics.js"></script>
+<script src="./js/games/cat-care.js"></script>
 </body>
 </html>

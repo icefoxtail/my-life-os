@@ -1,9 +1,9 @@
 /**
- * 시현이 놀이터 OS — 글자놀이터 미니게임 v3 (음절 학습 특화)
+ * 시현이 놀이터 OS — 글자놀이터 미니게임 v5 (유아 몰입형 터치 업그레이드)
  * 파일: js/games/letter-play.js
  *
- * 모드 A (기본): 단어 첫 글자 풍선 터뜨리기 (기존)
- * 모드 B (음절): 부모가 모음 선택 → 가~하 14음절 순환 학습
+ * 모드 A (기본): 그림을 보고 첫 글자 풍선 터뜨리기
+ * 모드 B (음절): 모음 선택 → 5문제 짧은 라운드 학습
  */
 
 window.SihyeonGames = window.SihyeonGames || {};
@@ -17,6 +17,8 @@ function playGameVoice(id) {
 window.SihyeonGames.letterPlay = {
   id: 'letterPlay',
   title: '🎈',
+
+  ROUND_LIMIT: 5,
 
   _state:        null,
   _timers:       [],
@@ -196,13 +198,13 @@ window.SihyeonGames.letterPlay = {
       ════════════════════════════════════ */
       .slp-vowel-bar {
         width: 100%; flex-shrink: 0;
-        background: rgba(255,255,255,0.82);
-        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        padding: 8px 10px 7px;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        padding: 10px 12px 9px;
         display: flex; align-items: center;
-        gap: 5px; overflow-x: auto;
+        gap: 8px; overflow-x: auto;
         scrollbar-width: none; box-sizing: border-box;
-        border-bottom: 2px solid rgba(255,133,194,0.2);
+        border-bottom: 3px solid rgba(255,133,194,0.22);
         z-index: 20; position: relative;
       }
       .slp-vowel-bar::-webkit-scrollbar { display: none; }
@@ -216,15 +218,16 @@ window.SihyeonGames.letterPlay = {
       /* // [수정본] 칩 높이, 폰트 키우기 */
       .slp-vowel-chip {
         flex-shrink: 0;
-        min-width: 44px; height: 44px; font-size: 17px;
-        border-radius: 50%; border: 3px solid rgba(255,133,194,0.3);
-        background: rgba(255,255,255,0.9);
+        min-width: 64px; height: 64px; font-size: 23px;
+        border-radius: 50%; border: 4px solid rgba(255,133,194,0.38);
+        background: rgba(255,255,255,0.96);
         font-weight: 900; color: #cc6699;
         cursor: pointer; display: grid; place-items: center;
-        transition: all 0.2s; box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+        transition: all 0.2s; box-shadow: 0 6px 0 rgba(0,0,0,0.10), 0 10px 18px rgba(255,78,136,0.12);
         -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
-      .slp-vowel-chip:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+      .slp-vowel-chip:active { transform: translateY(5px) scale(0.96); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
       .slp-vowel-chip.active {
         background: linear-gradient(135deg,#ff85c2,#ff4e88);
         color: #fff; border-color: #ff4e88;
@@ -241,15 +244,17 @@ window.SihyeonGames.letterPlay = {
 
       /* ── 진행 도트 ── */
       .slp-progress-row {
-        display: flex; gap: 5px; padding: 8px 12px 4px;
+        display: flex; gap: 8px; padding: 10px 12px 5px;
         flex-shrink: 0; justify-content: center; flex-wrap: wrap;
         max-width: 100%;
       }
       .slp-prog-dot {
-        width: 16px; height: 16px; border-radius: 50%;
+        width: 22px; height: 22px; border-radius: 50%;
         background: rgba(0,0,0,0.12);
+        border: 3px solid rgba(255,255,255,0.95);
         transition: background 0.3s, transform 0.3s;
         flex-shrink: 0;
+        box-shadow: 0 3px 0 rgba(0,0,0,0.10);
       }
       .slp-prog-dot.done   { background: #ff85c2; }
       .slp-prog-dot.active {
@@ -274,26 +279,54 @@ window.SihyeonGames.letterPlay = {
         border: 3px solid rgba(255,180,220,0.55); pointer-events: none;
       }
 
-      /* 단어 모드 힌트 */
-      /* // [수정본] 힌트 이모지 크기 확대 */
+      /* 단어 모드 힌트 — 인기 유아앱 벤치마크형: 큰 그림 + 숨은 첫 글자 */
+      .slp-mascot-row {
+        width: 100%;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        margin-bottom: 4px;
+        color: #9b4f75; font-size: clamp(14px, 3.8vw, 18px); font-weight: 900;
+      }
+      .slp-mascot-face {
+        width: 34px; height: 34px; border-radius: 50%;
+        display: grid; place-items: center;
+        background: linear-gradient(135deg,#fff,#ffe4f5);
+        border: 3px solid rgba(255,133,194,0.38);
+        box-shadow: 0 3px 0 rgba(255,78,136,0.16);
+        font-size: 19px;
+      }
+      .slp-question-line {
+        margin-top: 6px; padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.72);
+        color: #7b5063;
+        font-size: clamp(14px, 4vw, 19px);
+        font-weight: 900;
+        line-height: 1.15;
+      }
       .slp-hint-emoji {
-        font-size: clamp(88px, 26vw, 140px); line-height: 1;
-        animation: slp-emoji-bounce 2.5s ease-in-out infinite;
+        font-size: clamp(108px, 32vw, 176px); line-height: 1;
+        animation: slp-emoji-bounce 2.1s ease-in-out infinite;
+        filter: drop-shadow(0 12px 0 rgba(0,0,0,0.10));
       }
       @keyframes slp-emoji-bounce {
         0%,100% { transform: translateY(0) scale(1); }
         50%      { transform: translateY(-8px) scale(1.05); }
       }
       .slp-hint-word {
-        font-size: clamp(24px, 7vw, 40px); font-weight: 900; color: #555;
-        margin-top: 4px; letter-spacing: 4px;
-        display: flex; align-items: baseline;
+        font-size: clamp(26px, 7.6vw, 44px); font-weight: 900; color: #555;
+        margin-top: 5px; letter-spacing: 3px;
+        display: flex; align-items: baseline; justify-content: center;
       }
       .slp-first-char {
-        color: #ff4e88; font-size: clamp(32px, 9vw, 54px);
-        text-shadow: 0 0 12px rgba(255,78,136,0.35);
+        min-width: 1.18em; height: 1.18em;
+        border-radius: 18px;
+        display: inline-grid; place-items: center;
+        color: #fff; font-size: clamp(36px, 10.5vw, 60px);
+        background: linear-gradient(135deg,#ff85c2,#ff4e88);
+        text-shadow: 0 2px 0 rgba(0,0,0,0.14);
+        box-shadow: 0 6px 0 rgba(255,78,136,0.22), 0 0 0 4px rgba(255,255,255,0.75);
         animation: slp-first-pulse 2s ease-in-out infinite;
-        display: inline-block;
+        margin-right: 3px;
       }
       @keyframes slp-first-pulse {
         0%,100% { transform: scale(1); }
@@ -321,8 +354,8 @@ window.SihyeonGames.letterPlay = {
       /* ── 풍선 영역 ── */
       .slp-balloons-area {
         flex: 1; display: flex; align-items: center; justify-content: center;
-        gap: clamp(10px, 4vw, 24px);
-        width: 100%; padding: 0 10px; box-sizing: border-box; min-height: 0;
+        gap: clamp(12px, 4.8vw, 30px);
+        width: 100%; padding: 2px 12px 8px; box-sizing: border-box; min-height: 0;
       }
 
       .slp-balloon-btn {
@@ -330,8 +363,9 @@ window.SihyeonGames.letterPlay = {
         position: relative; cursor: pointer;
         background: none; border: none; padding: 0; outline: none;
         -webkit-tap-highlight-color: transparent;
-        flex: 1; max-width: 115px;
-        animation: slp-balloon-float 3s ease-in-out infinite;
+        flex: 1; max-width: 154px; min-height: 198px;
+        animation: slp-balloon-float 2.6s ease-in-out infinite;
+        touch-action: manipulation;
       }
       .slp-balloon-btn:nth-child(2) { animation-delay: -1s; }
       .slp-balloon-btn:nth-child(3) { animation-delay: -2s; }
@@ -351,11 +385,11 @@ window.SihyeonGames.letterPlay = {
 
       /* // [수정본] 풍선 및 글자 크기 확대 */
       .slp-balloon-body {
-        width: clamp(100px, 27vw, 148px); height: clamp(120px, 33vw, 178px);
+        width: clamp(118px, 31vw, 176px); height: clamp(142px, 38vw, 212px);
         border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
         display: flex; align-items: center; justify-content: center;
         position: relative; transition: transform 0.15s;
-        box-shadow: 4px 8px 24px rgba(0,0,0,0.18), -6px -6px 0 0 rgba(255,255,255,0.2) inset;
+        box-shadow: 6px 12px 30px rgba(0,0,0,0.2), -8px -8px 0 0 rgba(255,255,255,0.23) inset, 0 0 0 5px rgba(255,255,255,0.35);
       }
       .slp-balloon-btn:active .slp-balloon-body { transform: scale(0.92); }
       .slp-balloon-body::before {
@@ -374,8 +408,8 @@ window.SihyeonGames.letterPlay = {
         background: linear-gradient(to bottom,#aaa,#ccc); border-radius: 1px;
       }
       .slp-balloon-letter {
-        font-size: clamp(38px, 11vw, 66px); font-weight: 900; color: white;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.25); z-index: 1; position: relative;
+        font-size: clamp(50px, 14vw, 82px); font-weight: 900; color: white;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.28); z-index: 1; position: relative;
       }
 
       .slp-balloon-color-0 { background:linear-gradient(135deg,#ff7eb3,#ff4e88); color:#ff4e88; }
@@ -390,7 +424,8 @@ window.SihyeonGames.letterPlay = {
       }
       @keyframes slp-pop {
         0%   { transform: scale(1);    opacity: 1; }
-        45%  { transform: scale(1.4);  opacity: 0.8; }
+        34%  { transform: scale(1.62) rotate(8deg);  opacity: 0.92; }
+        68%  { transform: scale(0.35) rotate(-10deg); opacity: 0.72; }
         100% { transform: scale(0);    opacity: 0; }
       }
       .slp-balloon-btn.correct .slp-balloon-string { opacity:0; transition:opacity 0.2s 0.2s; }
@@ -422,13 +457,13 @@ window.SihyeonGames.letterPlay = {
 
       /* 컨페티 */
       .slp-confetti-piece {
-        position: absolute; width: 10px; height: 14px;
-        border-radius: 2px; pointer-events: none;
+        position: absolute; width: 14px; height: 18px;
+        border-radius: 4px; pointer-events: none;
         animation: slp-confetti-fall linear forwards; z-index: 100;
       }
       @keyframes slp-confetti-fall {
         0%   { opacity:1; transform:translateY(0) rotate(0deg) scale(1); }
-        100% { opacity:0; transform:translateY(200px) rotate(540deg) scale(0.5); }
+        100% { opacity:0; transform:translateY(260px) rotate(720deg) scale(0.45); }
       }
 
       /* ── 오버레이 ── */
@@ -485,12 +520,13 @@ window.SihyeonGames.letterPlay = {
 
       /* 이모지 버튼 */
       .slp-icon-btn {
-        width: 76px; height: 76px; font-size: 32px;
-        border-radius: 50%; border: 5px solid #fff;
-        box-shadow: 0 7px 0 rgba(0,0,0,0.13);
+        width: 92px; height: 92px; font-size: 40px;
+        border-radius: 50%; border: 6px solid #fff;
+        box-shadow: 0 9px 0 rgba(0,0,0,0.14), 0 16px 24px rgba(0,0,0,0.12);
         cursor: pointer; display: grid; place-items: center;
         transition: transform 0.1s;
         -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
       .slp-icon-btn:active { transform: translateY(5px); box-shadow: 0 2px 0 rgba(0,0,0,0.13); }
       .slp-icon-btn-row { display: flex; gap: 18px; justify-content: center; }
@@ -510,14 +546,56 @@ window.SihyeonGames.letterPlay = {
 
       /* 발음 버튼 */
       .slp-speak-btn {
-        width: 48px; height: 48px; border-radius: 50%;
-        background: rgba(255,255,255,0.85); border: 3px solid rgba(255,133,194,0.45);
-        box-shadow: 0 4px 0 rgba(0,0,0,0.09);
-        cursor: pointer; font-size: 22px; display: grid; place-items: center;
-        flex-shrink: 0; margin-top: 4px; transition: transform 0.1s;
+        width: 84px; height: 84px; border-radius: 50%;
+        background: linear-gradient(180deg,#fff 0%,#fff0a8 100%); border: 5px solid rgba(255,255,255,0.96);
+        box-shadow: 0 8px 0 rgba(255,160,0,0.24), 0 14px 22px rgba(0,0,0,0.10);
+        cursor: pointer; font-size: 38px; display: grid; place-items: center;
+        flex-shrink: 0; margin-top: 6px; transition: transform 0.1s;
         -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
       .slp-speak-btn:active { transform: scale(0.9); }
+
+      .slp-reward-sticker {
+        position: absolute;
+        left: 50%; top: 43%;
+        z-index: 340;
+        width: clamp(112px, 30vw, 168px);
+        height: clamp(112px, 30vw, 168px);
+        border-radius: 36px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg,#ffffff 0%,#fff7b8 48%,#ffd1e8 100%);
+        border: 7px solid #fff;
+        box-shadow: 0 14px 0 rgba(255,122,26,0.22), 0 22px 46px rgba(0,0,0,0.2);
+        font-size: clamp(64px, 18vw, 104px);
+        pointer-events: none;
+        animation: slp-reward-sticker 1.28s cubic-bezier(.2,1.45,.35,1) forwards;
+      }
+      @keyframes slp-reward-sticker {
+        0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.16) rotate(-22deg); }
+        45%  { opacity: 1; transform: translate(-50%,-50%) scale(1.16) rotate(8deg); }
+        78%  { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(0deg); }
+        100% { opacity: 0; transform: translate(-50%,-68%) scale(0.86) rotate(0deg); }
+      }
+      .slp-tap-star {
+        position:absolute;
+        z-index:130;
+        pointer-events:none;
+        font-size:clamp(22px,7vw,38px);
+        animation: slp-tap-star 0.82s ease-out forwards;
+      }
+      @keyframes slp-tap-star {
+        0%   { opacity:1; transform:translate(0,0) scale(0.45) rotate(0deg); }
+        100% { opacity:0; transform:translate(var(--tx),var(--ty)) scale(1.5) rotate(260deg); }
+      }
+      @media (max-width: 430px) {
+        .slp-vowel-chip { min-width: 58px; height: 58px; font-size: 21px; }
+        .slp-cat-chip { min-width: 86px !important; }
+        .slp-balloon-btn { min-height: 178px; }
+        .slp-balloon-body { width: clamp(108px, 30vw, 150px); height: clamp(130px, 36vw, 184px); }
+        .slp-icon-btn { width: 84px; height: 84px; }
+      }
     `;
     document.head.appendChild(style);
   },
@@ -564,7 +642,7 @@ window.SihyeonGames.letterPlay = {
   // ─── 컨페티 ──────────────────────────────────────────────
   _burstConfetti(root, x, y) {
     const colors = ['#ff85c2','#ffcc70','#7ecfff','#a78bfa','#6ee7b7','#ff6b6b','#fff'];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 32; i++) {
       const p = document.createElement('div');
       p.className = 'slp-confetti-piece';
       p.style.background = colors[i % colors.length];
@@ -592,7 +670,7 @@ window.SihyeonGames.letterPlay = {
       chip.className = 'slp-vowel-chip slp-cat-chip'
         + (this._selectedVowel === null && this._selectedCategory === cat ? ' active' : '');
       chip.textContent = cat;
-      chip.style.cssText = 'min-width:60px; border-radius:18px; font-size:13px;';
+      chip.style.cssText = 'min-width:92px; min-height:64px; border-radius:22px; font-size:16px; padding:0 14px;';
       chip.addEventListener('click', () => {
         this._selectedVowel    = null;
         this._selectedCategory = cat;
@@ -660,16 +738,22 @@ window.SihyeonGames.letterPlay = {
 
     const round = s.rounds[s.roundIndex];
 
-    // 힌트 카드
+    // 힌트 카드 — 정답 글자를 직접 보여주지 않고, 그림·소리·빈칸으로 유도
+    const hiddenTail = round.word.length > 1 ? round.word.slice(1) : '';
     const hintCard = document.createElement('div');
     hintCard.className = 'slp-hint-card';
     hintCard.innerHTML = `
+      <div class="slp-mascot-row">
+        <span class="slp-mascot-face">🦊</span>
+        <span>로나가 문제를 냈어요</span>
+      </div>
       <span class="slp-hint-emoji">${round.emoji}</span>
       <div class="slp-hint-word">
-        <span class="slp-first-char">${round.word[0]}</span>${round.word.slice(1)}
+        <span class="slp-first-char">?</span>${hiddenTail}
       </div>
+      <div class="slp-question-line">첫 글자 풍선을 찾아 톡!</div>
     `;
-    hintCard.addEventListener('click', () => this._say(round.word, true));
+    hintCard.addEventListener('click', () => this._say(`${round.word}! 첫 글자를 찾아봐!`, true));
     root.appendChild(hintCard);
 
     const speakBtn = document.createElement('button');
@@ -684,7 +768,7 @@ window.SihyeonGames.letterPlay = {
 
     const t = setTimeout(() => {
       playGameVoice('games.letter.question');
-      this._say(`${round.word}! ${round.word}의 첫 글자를 찾아봐!`, false);
+      this._say(`${round.word}! 첫 글자 풍선을 톡 눌러봐!`, false);
     }, 350);
     this._timers.push(t);
   },
@@ -792,7 +876,7 @@ window.SihyeonGames.letterPlay = {
         this._state.score++;
         this._options?.gainExp?.(15);
         this._options?.fireConfetti?.();
-        const t = setTimeout(() => this._showWordRoundResult(round), 1800);
+        const t = setTimeout(() => this._showWordRoundResult(round), 1500);
         this._timers.push(t);
       });
     } else {
@@ -811,7 +895,7 @@ window.SihyeonGames.letterPlay = {
         this._state.score++;
         this._options?.gainExp?.(10);
         this._options?.fireConfetti?.();
-        const t = setTimeout(() => this._advanceSyllable(), 1800);
+        const t = setTimeout(() => this._advanceSyllable(), 1500);
         this._timers.push(t);
       });
     } else {
@@ -819,17 +903,47 @@ window.SihyeonGames.letterPlay = {
     }
   },
 
+
+  _burstTapStars(root, x, y) {
+    const stars = ['⭐','✨','💖','🌈','🎊'];
+    for (let i = 0; i < 14; i++) {
+      const star = document.createElement('div');
+      star.className = 'slp-tap-star';
+      star.textContent = stars[i % stars.length];
+      const angle = (Math.PI * 2 * i) / 14 + Math.random() * 0.35;
+      const dist = 80 + Math.random() * 120;
+      star.style.left = `${x}px`;
+      star.style.top = `${y}px`;
+      star.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+      star.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
+      root.appendChild(star);
+      const t = setTimeout(() => star.remove(), 920);
+      this._timers.push(t);
+    }
+  },
+
+  _showRewardSticker(root, symbol) {
+    const sticker = document.createElement('div');
+    sticker.className = 'slp-reward-sticker';
+    sticker.textContent = symbol || '⭐';
+    root.appendChild(sticker);
+    const t = setTimeout(() => sticker.remove(), 1350);
+    this._timers.push(t);
+  },
+
   // ─── 정답 처리 (공용) ────────────────────────────────────
   _handleCorrect(btn, letter, word, root, cb) {
     btn.classList.add('correct');
+    if (navigator.vibrate) try { navigator.vibrate([40, 30, 90]); } catch(e) {}
 
     // 컨페티
     const rect  = btn.getBoundingClientRect();
     const cRect = this._container.getBoundingClientRect();
-    this._burstConfetti(root,
-      rect.left - cRect.left + rect.width  / 2,
-      rect.top  - cRect.top  + rect.height / 2
-    );
+    const centerX = rect.left - cRect.left + rect.width  / 2;
+    const centerY = rect.top  - cRect.top  + rect.height / 2;
+    this._burstConfetti(root, centerX, centerY);
+    this._burstTapStars(root, centerX, centerY);
+    this._showRewardSticker(root, word ? (word[0] || letter) : letter);
 
     // 글자 각인 스탬프
     const stamp = document.createElement('div');
@@ -848,16 +962,19 @@ window.SihyeonGames.letterPlay = {
   _handleWrong(btn, root, correctAnswer, word) {
     if (btn.classList.contains('wrong')) return;
     btn.classList.add('wrong');
+    if (navigator.vibrate) try { navigator.vibrate([35, 35]); } catch(e) {}
     this._state.wrongCount++;
 
     playGameVoice('games.letter.wrong');
-    this._say(word || correctAnswer, true);
 
     // 2회 이상 오답 → 정답 풍선 힌트 글로우
     if (this._state.wrongCount >= 2) {
       root.querySelectorAll('.slp-balloon-btn').forEach(b => {
         if (b.dataset.letter === correctAnswer) b.classList.add('hint-glow');
       });
+      this._say(`${correctAnswer} 풍선이 반짝반짝해!`, true);
+    } else {
+      this._say(word ? `${word}! 다시 들어볼까?` : '다시 한 번 찾아볼까?', true);
     }
 
     const t = setTimeout(() => {
@@ -1060,21 +1177,22 @@ window.SihyeonGames.letterPlay = {
     this._timers = [];
 
     if (this._selectedVowel === null) {
-      // ★ 카테고리 단어 모드: 선택된 카테고리에서 최대 8개 랜덤
+      // ★ 카테고리 단어 모드: 유아 집중용 5문제 짧은 라운드
       const pool = this._wordCategories[this._selectedCategory] || [];
       const shuffled = pool
         .map(r => ({ ...r, choices: [...r.choices].sort(() => Math.random() - 0.5) }))
         .sort(() => Math.random() - 0.5)
-        .slice(0, Math.min(8, pool.length)); // 최대 8문제
+        .slice(0, Math.min(this.ROUND_LIMIT, pool.length)); // 최대 5문제
       this._state = {
         mode: 'word', roundIndex: 0, totalRounds: shuffled.length,
         score: 0, locked: false, wrongCount: 0, rounds: shuffled
       };
     } else {
-      // 음절 모드: 해당 행 14음절 전부 랜덤 순서
+      // 음절 모드: 해당 행에서 5문제만 랜덤 추출
       const row = this._vowelData.find(v => v.key === this._selectedVowel);
       const rounds = [...row.syllables]
         .sort(() => Math.random() - 0.5)
+        .slice(0, this.ROUND_LIMIT)
         .map(s => ({ answer: s }));
       this._state = {
         mode: 'syllable', roundIndex: 0, totalRounds: rounds.length,

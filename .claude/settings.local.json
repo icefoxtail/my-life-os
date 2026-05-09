@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem \"c:\\\\Users\\\\USER\\\\RECOVER_WORK\\\\my-life-os\" -Name)",
+      "Bash(node --check \"c:/Users/USER/RECOVER_WORK/my-life-os/sw.js\")"
+    ]
+  }
+}

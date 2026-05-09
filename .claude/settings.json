@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check \"c:/Users/USER/RECOVER_WORK/my-life-os/js/games/abc-phonics.js\")"
+    ]
+  }
+}

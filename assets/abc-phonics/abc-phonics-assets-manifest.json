@@ -1,0 +1,45 @@
+{
+  "gameKey": "abcPhonics",
+  "basePath": "assets/abc-phonics",
+  "tiles": {
+    "A": "assets/abc-phonics/tiles/a.png",
+    "apple": "assets/abc-phonics/tiles/apple.png",
+    "B": "assets/abc-phonics/tiles/b.png",
+    "ball": "assets/abc-phonics/tiles/ball.png",
+    "C": "assets/abc-phonics/tiles/c.png",
+    "car": "assets/abc-phonics/tiles/car.png"
+  },
+  "scenes": {
+    "A_apple": "assets/abc-phonics/scenes/a_apple.png",
+    "playroom_background": "assets/abc-phonics/scenes/playroom_bg.png",
+    "B_ball": "assets/abc-phonics/scenes/b_ball.png",
+    "C_car": "assets/abc-phonics/scenes/c_car.png"
+  },
+  "items": [
+    {
+      "letter": "A",
+      "word": "apple",
+      "label": "A - Apple",
+      "letterImage": "assets/abc-phonics/tiles/a.png",
+      "objectImage": "assets/abc-phonics/tiles/apple.png",
+      "sceneImage": "assets/abc-phonics/scenes/a_apple.png"
+    },
+    {
+      "letter": "B",
+      "word": "ball",
+      "label": "B - Ball",
+      "letterImage": "assets/abc-phonics/tiles/b.png",
+      "objectImage": "assets/abc-phonics/tiles/ball.png",
+      "sceneImage": "assets/abc-phonics/scenes/b_ball.png"
+    },
+    {
+      "letter": "C",
+      "word": "car",
+      "label": "C - Car",
+      "letterImage": "assets/abc-phonics/tiles/c.png",
+      "objectImage": "assets/abc-phonics/tiles/car.png",
+      "sceneImage": "assets/abc-phonics/scenes/c_car.png"
+    }
+  ],
+  "gameCard": "assets/games/cards/abc-phonics.png"
+}

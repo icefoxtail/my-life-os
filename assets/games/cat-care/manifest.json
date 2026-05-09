@@ -1,0 +1,23 @@
+{
+  "catCareImages": {
+    "white": {
+      "selectImg": "assets/games/cat-care/white_select.jpg",
+      "steps": {
+        "default": "assets/games/cat-care/white_default.jpg",
+        "eat": "assets/games/cat-care/white_eat.jpg",
+        "bath": "assets/games/cat-care/white_bath.jpg",
+        "sleep": "assets/games/cat-care/white_sleep.jpg"
+      }
+    },
+    "gray": {
+      "selectImg": "assets/games/cat-care/gray_select.jpg",
+      "steps": {
+        "default": "assets/games/cat-care/gray_default.jpg",
+        "eat": "assets/games/cat-care/gray_eat.jpg",
+        "bath": "assets/games/cat-care/gray_bath.jpg",
+        "sleep": "assets/games/cat-care/gray_sleep.jpg"
+      }
+    }
+  },
+  "note": "select 이미지는 현재 default 컷을 복제했습니다."
+}
