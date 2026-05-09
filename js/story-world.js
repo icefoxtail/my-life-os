@@ -1,15 +1,76 @@
 (function() {
-  let currentStoryFilter = '세계명작';
+  const STORYBOOK_MAIN_COVER_SRC = './assets/stories/storybook_main_cover.png';
+  const FEATURED_STORY_IDS = ['classic_1', 'classic_2', 'classic_4', 'classic_5'];
+  const CLASSIC_STORY_CONFIGS = {
+    classic_1: { contentKey: 'classic_1_pigs', imageDir: 'classic_three_little_pigs', imageReady: true },
+    classic_2: { contentKey: 'classic_2_ugly_duckling', imageDir: 'classic_ugly_duckling', imageReady: true },
+    classic_3: { contentKey: 'classic_cinderella', imageDir: 'classic_cinderella', imageReady: false },
+    classic_4: { contentKey: 'classic_4_snow_white', imageDir: 'classic_snow_white', imageReady: true },
+    classic_5: { contentKey: 'classic_5_jack_and_beanstalk', imageDir: 'classic_jack_and_the_beanstalk', imageReady: true },
+    classic_6: { contentKey: 'classic_6_pinocchio', imageDir: 'classic_pinocchio', imageReady: false },
+    classic_7: { contentKey: 'classic_7_red_riding_hood', imageDir: 'classic_red_riding_hood', imageReady: false },
+    classic_8: { contentKey: 'classic_10_hansel_and_gretel', imageDir: 'classic_hansel_and_gretel', imageReady: false },
+    classic_9: { contentKey: 'classic_thumbelina', imageDir: 'classic_thumbelina', imageReady: false },
+    classic_10: { contentKey: 'classic_emperors_new_clothes', imageDir: 'classic_emperors_new_clothes', imageReady: false },
+    classic_11: { contentKey: 'classic_little_mermaid', imageDir: 'classic_little_mermaid', imageReady: false },
+    classic_12: { contentKey: 'classic_19_match_girl', imageDir: 'classic_little_match_girl', imageReady: false },
+    classic_14: { contentKey: 'classic_14_sleeping_beauty', imageDir: 'classic_sleeping_beauty', imageReady: false },
+    classic_15: { contentKey: 'classic_15_puss_in_boots', imageDir: 'classic_puss_in_boots', imageReady: false },
+    classic_16: { contentKey: 'classic_16_rapunzel', imageDir: 'classic_rapunzel', imageReady: false },
+    classic_17: { contentKey: 'classic_11_aladdin', imageDir: 'classic_aladdin', imageReady: false },
+    classic_18: { contentKey: 'classic_18_alice', imageDir: 'classic_alice', imageReady: false },
+    classic_19: { contentKey: 'classic_peter_pan', imageDir: 'classic_peter_pan', imageReady: false },
+    classic_20: { contentKey: 'classic_20_wizard_of_oz', imageDir: 'classic_wizard_of_oz', imageReady: false }
+  };
+  const CLASSIC_STORY_PACK_ID_BY_SEED_ID = {
+    classic_1: 'classic_three_little_pigs',
+    classic_2: 'classic_ugly_duckling',
+    classic_4: 'classic_snow_white',
+    classic_5: 'classic_jack_and_the_beanstalk'
+  };
+
+  function getClassicStoryPacks() {
+    if (window.StoryPackRegistry?.getAllPacks) return window.StoryPackRegistry.getAllPacks();
+    return Object.assign({}, window.CLASSIC_STORY_PACKS || {}, window.GENERATED_STORY_PACKS || {}, window.CUSTOM_STORY_PACKS || {});
+  }
+
+  function getClassicPackBySeedId(seedId) {
+    const id = String(seedId || '').trim();
+    if (!id) return null;
+    if (window.StoryPackRegistry?.getPackById) {
+      const pack = window.StoryPackRegistry.getPackById(id);
+      if (pack) return pack;
+    }
+    const packs = getClassicStoryPacks();
+    const mapped = (window.STORYBOOK_PACK_ID_BY_SEED_ID && window.STORYBOOK_PACK_ID_BY_SEED_ID[id]) || CLASSIC_STORY_PACK_ID_BY_SEED_ID[id];
+    return packs[mapped] || packs[id] || null;
+  }
+
+  function getStoryPackByStory(story) {
+    if (!story) return null;
+    if (window.StoryPackRegistry?.getPackByStory) {
+      const pack = window.StoryPackRegistry.getPackByStory(story);
+      if (pack) return pack;
+    }
+    return getClassicPackBySeedId(story.packId)
+      || getClassicPackBySeedId(story.storyPackId)
+      || getClassicPackBySeedId(story.sourceId)
+      || getClassicPackBySeedId(story.id)
+      || getClassicPackBySeedId(story.savedId)
+      || getClassicPackBySeedId(story.contentKey);
+  }
+
+  function flattenPackTexts(pack) {
+    if (!pack || !Array.isArray(pack.pages)) return [];
+    return pack.pages.flatMap(page => Array.isArray(page.texts) ? page.texts : []).filter(Boolean);
+  }
+
+  let storyShelfStage = 'intro';
+  let currentStoryFilter = '전체';
   window.currentStoryFilter = window.currentStoryFilter || currentStoryFilter;
   currentStoryFilter = window.currentStoryFilter;
 
-  let storyShelfStage = 'intro';
-  const STORYBOOK_MAIN_COVER_SRC = './assets/stories/storybook_main_cover.png';
-  const FEATURED_STORY_IDS = ['classic_1', 'classic_2', 'classic_3', 'classic_20'];
-  const PREPARED_CLASSIC_IMAGE_DIRS = {
-    classic_1: 'classic_three_little_pigs',
-    classic_2: 'classic_ugly_duckling'
-  };
+  window.StoryPackRegistry?.prepareStoryLibrary?.();
 
   let storyReadState = {
     storyId: null,
@@ -20,7 +81,11 @@
     currentTone: 'gentle',
     isReading: false,
     isPaused: false,
-    pendingTimer: null
+    pendingTimer: null,
+    pages: [],
+    pageIndex: 0,
+    pageSentenceIndex: 0,
+    currentStory: null
   };
   window.storyReadState = storyReadState;
 
@@ -102,126 +167,95 @@
     return '📖';
   }
 
-  function getPreparedClassicImageDir(storyId) {
-    return PREPARED_CLASSIC_IMAGE_DIRS[String(storyId || '')] || '';
+  function getClassicConfig(story) {
+    const id = String(story?.id || story?.sourceId || '').trim();
+    return CLASSIC_STORY_CONFIGS[id] || null;
+  }
+
+  function getStoryContentKey(story) {
+    if (!story) return '';
+    return story.contentKey || getClassicConfig(story)?.contentKey || '';
+  }
+
+  function getStoryImageDir(story) {
+    if (!story) return '';
+    return story.imageDir || story.imageFolder || getClassicConfig(story)?.imageDir || '';
   }
 
   function getStoryCoverImage(story) {
     if (!story) return '';
     if (story.coverImage) return story.coverImage;
-    const preparedDir = getPreparedClassicImageDir(story.id || story.sourceId || story.savedId);
-    if (preparedDir) return `./assets/stories/classics/${preparedDir}/cover.png`;
-    if (String(story.theme || '').includes('세계명작') || String(story.theme || '').includes('명작')) return STORYBOOK_MAIN_COVER_SRC;
-    return '';
+    const dir = getStoryImageDir(story);
+    return dir ? `./assets/stories/classics/${dir}/cover.png` : '';
   }
 
-  function buildSeedPreviewParagraphs(seed) {
-    if (!seed) return [];
-    const title = seed.title || '동화';
-    const role = seed.sihyeonRole || '시현이가 친구들과 함께 방법을 찾아요.';
-    const conflict = seed.conflict || '친구들이 작은 문제를 만나요.';
-    const plot = seed.plotSeed || seed.desc || `${title} 이야기가 시작돼요.`;
-    return [
-      `${title} 이야기가 조용히 시작됐어요. 시현이는 반짝이는 길을 따라 그림책 속으로 들어갔어요.`,
-      plot,
-      conflict,
-      role,
-      `친구들은 시현이와 함께 웃었어요. 그리고 모두 포근한 마음으로 다음 모험을 기다렸답니다.`
-    ].filter(Boolean);
+  function getStoryPageImage(story, index) {
+    const dir = getStoryImageDir(story);
+    if (!dir) return '';
+    return `./assets/stories/classics/${dir}/p${String(index + 1).padStart(3, '0')}.png`;
   }
 
-  function getReadableStory(story) {
-    const normalized = normalizeStory(story);
-    if (!normalized) return null;
-    if (!Array.isArray(normalized.paragraphs) || !normalized.paragraphs.length) {
-      normalized.paragraphs = buildSeedPreviewParagraphs(story);
-      normalized.paragraphCount = normalized.paragraphs.length;
-      normalized.charCount = normalized.paragraphs.join('').length;
-      normalized.readingMinutes = Math.max(2, Math.ceil(normalized.charCount / 550));
-    }
-    normalized.coverImage = normalized.coverImage || getStoryCoverImage(story);
-    return normalized;
+  function isImageReadyStory(story) {
+    if (!story) return false;
+    if (story.imageReady) return true;
+    return Boolean(getClassicConfig(story)?.imageReady);
   }
 
-  function getFeaturedClassicStories() {
-    const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
-    const picked = FEATURED_STORY_IDS
-      .map(id => library.find(story => story.id === id))
-      .filter(Boolean);
-    if (picked.length >= 4) return picked.slice(0, 4);
-    const extras = library.filter(story =>
-      String(story.theme || '').includes('세계명작') && !picked.some(item => item.id === story.id)
-    );
-    return [...picked, ...extras].slice(0, 4);
+  function chunkParagraphsForPages(paragraphs, targetPageCount = 11) {
+    const list = Array.isArray(paragraphs) ? paragraphs.filter(Boolean) : [];
+    if (!list.length) return [];
+    const pageCount = Math.max(1, Math.min(targetPageCount, list.length));
+    const pages = Array.from({ length: pageCount }, () => []);
+    list.forEach((paragraph, index) => {
+      const pageIndex = Math.min(pageCount - 1, Math.floor(index * pageCount / list.length));
+      pages[pageIndex].push(paragraph);
+    });
+    return pages.filter(items => items.length);
   }
 
-  function openStorybookShelf() {
-    storyShelfStage = 'classics';
-    renderStoryLibrary();
-    if (window.speakGuide) window.speakGuide('읽고 싶은 그림책을 골라봐!', true);
+  function buildStoryPages(story, paragraphs) {
+    const desiredPageCount = isImageReadyStory(story) ? 11 : Math.max(1, Math.ceil((paragraphs || []).length / 2));
+    const textPages = chunkParagraphsForPages(paragraphs, desiredPageCount);
+    if (!textPages.length) return [];
+    return textPages.map((texts, index) => ({
+      index,
+      image: getStoryPageImage(story, index),
+      texts
+    }));
   }
 
-  function openStorybookIntro() {
-    storyShelfStage = 'intro';
-    stopStoryReading(true);
-    renderStoryLibrary();
-  }
-
-  function renderStorybookIntro(grid) {
-    grid.className = 'story-card-grid storybook-intro-grid';
-    grid.innerHTML = `
-      <button class="storybook-main-cover-card" type="button" onclick="openStorybookShelf()" aria-label="동화책 펼치기">
-        <img src="${STORYBOOK_MAIN_COVER_SRC}" alt="동화나라 표지" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
-        <span class="storybook-main-cover-fallback" style="display:none;">🏰</span>
-        <span class="storybook-main-cover-glow"></span>
-      </button>
-    `;
-  }
-
-  function renderFeaturedClassicShelf(grid) {
-    const list = getFeaturedClassicStories();
-    grid.className = 'story-card-grid storybook-featured-grid';
-    grid.innerHTML = list.map(story => {
-      const readId = story.id || story.savedId;
-      const coverImage = getStoryCoverImage(story);
-      const coverEmoji = getStoryCoverEmoji(story.theme);
-      return `
-        <button class="storybook-book-card" type="button" onclick="readStoryById('${readId}')" aria-label="${escapeHtml(story.title)} 읽기">
-          <span class="storybook-book-cover">
-            ${coverImage
-              ? `<img src="${coverImage}" alt="${escapeHtml(story.title)} 표지" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">`
-              : ''}
-            <span class="storybook-book-fallback" ${coverImage ? 'style="display:none;"' : ''}>${coverEmoji}</span>
-          </span>
-          <span class="storybook-book-title">${escapeHtml(story.title)}</span>
-        </button>
-      `;
-    }).join('') || `
-      <button class="storybook-main-cover-card" type="button" onclick="openStorybookIntro()">
-        <span class="storybook-main-cover-fallback">🏰</span>
-      </button>
-    `;
+  function escapeAttr(value) {
+    return escapeHtml(value).replace(/'/g, '&#39;');
   }
 
   function normalizeStory(story) {
     if (!story) return null;
-    const full = story.contentKey ? window.STORY_CONTENTS?.[story.contentKey] : null;
+    const seedId = story.sourceId || story.id || story.savedId || '';
+    const pack = getStoryPackByStory(story) || getClassicPackBySeedId(seedId) || getClassicPackBySeedId(story.contentKey);
+    const contentKey = getStoryContentKey(story);
+    const full = pack || (contentKey ? window.STORY_CONTENTS?.[contentKey] : null);
+    const packParagraphs = pack ? flattenPackTexts(pack) : [];
     const paragraphs = Array.isArray(story.paragraphs) && story.paragraphs.length
       ? story.paragraphs
-      : full?.paragraphs || (story.content ? [story.content] : []);
-    return {
-      id: story.id || story.savedId || ('story_' + Date.now()),
-      sourceId: story.sourceId || story.id || story.savedId || null,
-      title: story.title || full?.title || '시현이 동화',
-      theme: story.theme || full?.theme || '자동차',
-      voiceTone: story.voiceTone || full?.voiceTone || getStoryVoiceTone(story.theme || full?.theme || ''),
+      : packParagraphs.length
+        ? packParagraphs
+        : full?.paragraphs || (story.content ? [story.content] : []);
+    const imageDir = pack?.imageDir || getStoryImageDir(story);
+    const coverImage = pack?.coverImage || (imageDir ? `./assets/stories/classics/${imageDir}/cover.png` : getStoryCoverImage(story));
+    const imageReady = Boolean(pack?.imageReady || isImageReadyStory(story));
+    const normalized = {
+      id: pack?.id || story.id || story.savedId || ('story_' + Date.now()),
+      sourceId: story.sourceId || story.id || story.savedId || pack?.seedId || null,
+      contentKey,
+      title: story.title || full?.title || pack?.title || '시현이 동화',
+      theme: story.theme || full?.theme || pack?.theme || '자동차',
+      voiceTone: story.voiceTone || full?.voiceTone || pack?.voiceTone || getStoryVoiceTone(story.theme || full?.theme || pack?.theme || ''),
       summary: story.summary || story.desc || '저장한 동화',
-      desc: story.desc || story.summary || '저장한 동화',
-      coverImage: story.coverImage || full?.coverImage || getStoryCoverImage(story),
+      desc: story.desc || story.summary || full?.desc || pack?.desc || '저장한 동화',
       characters: Array.isArray(story.characters) ? story.characters : [],
       paragraphs,
-      readingMinutes: story.readingMinutes || Math.max(3, Math.ceil(paragraphs.join('').length / 550)),
-      source: story.source || (story.hasFullContent ? 'built-in' : 'ai'),
+      readingMinutes: story.readingMinutes || pack?.readingMinutes || Math.max(3, Math.ceil(paragraphs.join('').length / 550)),
+      source: story.source || (story.hasFullContent || full || pack ? 'built-in' : 'ai'),
       familyIds: Array.isArray(story.familyIds) ? story.familyIds : [],
       friendIds: Array.isArray(story.friendIds) ? story.friendIds : [],
       petIds: Array.isArray(story.petIds) ? story.petIds : [],
@@ -235,22 +269,31 @@
       storyPattern: story.storyPattern || story.successPattern || '',
       refrain: story.refrain || '',
       charCount: story.charCount || paragraphs.join('').length,
-      paragraphCount: story.paragraphCount || paragraphs.length
+      paragraphCount: story.paragraphCount || paragraphs.length,
+      imageDir,
+      coverImage,
+      imageReady
     };
+    normalized.pages = Array.isArray(story.pages) && story.pages.length
+      ? story.pages
+      : pack?.pages?.length
+        ? pack.pages
+        : window.StoryPackRegistry?.buildPagesFromStory
+          ? window.StoryPackRegistry.buildPagesFromStory(normalized, paragraphs)
+          : buildStoryPages(normalized, paragraphs);
+    return normalized;
   }
+
 
   function setStoryFilter(filter) {
     currentStoryFilter = filter;
     window.currentStoryFilter = filter;
     storyShelfStage = filter === '대표' ? 'intro' : 'classics';
-    const nav = document.getElementById('storyFilterNav');
-    nav?.querySelectorAll('.story-filter-btn, .status-badge').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.theme === filter || btn.innerText.includes(filter) || (filter === '세계명작' && btn.innerText.includes('명작')));
-    });
     renderStoryLibrary();
   }
 
   function renderStoryWorld() {
+    storyShelfStage = 'intro';
     renderStoryLibrary();
   }
 
@@ -258,133 +301,198 @@
     return Array.isArray(db.playground.storyWorld.savedStories) ? db.playground.storyWorld.savedStories : [];
   }
 
+  function getFeaturedStories() {
+    const library = Array.isArray(window.STORY_LIBRARY) ? window.STORY_LIBRARY : [];
+    return FEATURED_STORY_IDS
+      .map(id => library.find(story => story.id === id))
+      .filter(Boolean)
+      .map(normalizeStory)
+      .filter(story => story?.paragraphs?.length);
+  }
+
+  function openStorybookIntro() {
+    storyShelfStage = 'intro';
+    renderStoryLibrary();
+  }
+
+  function openStorybookShelf() {
+    storyShelfStage = 'classics';
+    renderStoryLibrary();
+  }
+
+  function renderStorybookIntro(grid) {
+    document.querySelector('.story-search-row')?.classList.add('story-ui-hidden');
+    document.querySelector('.story-filter-row')?.classList.add('story-ui-hidden');
+    const loadMore = document.getElementById('storyLoadMoreBtn');
+    if (loadMore) loadMore.style.display = 'none';
+    grid.className = 'story-card-grid storybook-intro-grid';
+    grid.innerHTML = `
+      <button class="storybook-main-cover-card" type="button" onclick="openStorybookShelf()" aria-label="명작 책장 열기">
+        <img src="${STORYBOOK_MAIN_COVER_SRC}" alt="동화나라" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+        <span class="storybook-main-cover-fallback" style="display:none;">🏰</span>
+      </button>
+    `;
+  }
+
+  function renderStorybookShelf(grid) {
+    const stories = getFeaturedStories();
+    grid.className = 'story-card-grid storybook-featured-grid';
+    grid.innerHTML = stories.map(story => {
+      const cover = story.coverImage || '';
+      const emoji = getStoryCoverEmoji(story.theme);
+      return `
+        <button class="storybook-book-card" type="button" onclick="readStoryById('${escapeAttr(story.sourceId || story.id)}')" aria-label="${escapeAttr(story.title)} 읽기">
+          <span class="storybook-book-cover">
+            ${cover ? `<img src="${cover}" alt="${escapeAttr(story.title)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">` : ''}
+            <span class="storybook-book-fallback" ${cover ? 'style="display:none;"' : ''}>${emoji}</span>
+          </span>
+          <span class="storybook-book-title">${escapeHtml(story.title)}</span>
+        </button>
+      `;
+    }).join('') || `
+      <button class="storybook-main-cover-card" type="button" onclick="openStorybookIntro()">
+        <span class="storybook-main-cover-fallback">🏰</span>
+      </button>
+    `;
+  }
+
   function renderStoryLibrary() {
     const grid = document.getElementById('storyLibraryGrid');
     if (!grid) return;
     const reader = document.getElementById('storyReaderView');
-    if (reader) {
-      reader.style.display = 'none';
-      reader.classList.remove('active');
-    }
+    if (reader) reader.style.display = 'none';
     grid.style.display = 'grid';
-
-    const searchInput = document.getElementById('storySearchInput');
-    if (searchInput) searchInput.value = '';
-
-    if (storyShelfStage === 'intro') {
-      renderStorybookIntro(grid);
-      return;
-    }
-
-    renderFeaturedClassicShelf(grid);
+    if (storyShelfStage === 'intro') renderStorybookIntro(grid);
+    else renderStorybookShelf(grid);
   }
 
   function closeStoryReader() {
     const reader = document.getElementById('storyReaderView');
     const grid = document.getElementById('storyLibraryGrid');
-    if (reader) {
-      reader.style.display = 'none';
-      reader.classList.remove('active');
-    }
+    if (reader) reader.style.display = 'none';
     if (grid) grid.style.display = 'grid';
     stopStoryReading(true);
+    releaseStoryLandscapeMode();
     storyShelfStage = 'classics';
     renderStoryLibrary();
-    if (window.speakGuide) window.speakGuide('책을 덮었어. 다른 책을 골라 볼까?', true);
+    if (window.speakGuide) window.speakGuide('책장으로 돌아왔어. 다른 책도 골라 볼까?', true);
   }
 
   function showStoryReader() {
     const grid = document.getElementById('storyLibraryGrid');
     const reader = document.getElementById('storyReaderView');
     if (grid) grid.style.display = 'none';
-    if (reader) {
-      reader.style.display = 'grid';
-      reader.classList.add('active');
-    }
+    if (reader) reader.style.display = 'block';
+  }
+  function requestStoryLandscapeMode() {
+    const orientation = window.screen?.orientation;
+    if (!orientation || typeof orientation.lock !== 'function') return;
+    try {
+      const lockResult = orientation.lock('landscape');
+      if (lockResult && typeof lockResult.catch === 'function') lockResult.catch(() => {});
+    } catch (error) {}
+  }
+
+  function releaseStoryLandscapeMode() {
+    const orientation = window.screen?.orientation;
+    if (!orientation || typeof orientation.unlock !== 'function') return;
+    try { orientation.unlock(); } catch (error) {}
+  }
+
+
+  function renderStoryPage() {
+    const story = db.playground.storyWorld.currentStory;
+    const normalized = normalizeStory(story);
+    if (!normalized) return;
+    const pageIndex = Math.max(0, Math.min(storyReadState.pageIndex || 0, normalized.pages.length - 1));
+    const page = normalized.pages[pageIndex] || { texts: normalized.paragraphs || [], image: normalized.coverImage || '' };
+    const imageHtml = page.image
+      ? `<div class="storybook-page-illustration"><img src="${page.image}" alt="${escapeAttr(normalized.title)} ${pageIndex + 1}" onerror="this.parentElement.classList.add('image-missing'); this.style.display='none';"></div>`
+      : `<div class="storybook-page-illustration image-missing"><span>${getStoryCoverEmoji(normalized.theme)}</span></div>`;
+    const textHtml = (page.texts || []).map((text, index) => `
+      <p class="story-paragraph" data-story-paragraph="${index}">${escapeHtml(text).replace(/시현/g, "<span class='highlight'>시현</span>")}</p>
+    `).join('');
+    const pageLabel = `${pageIndex + 1} / ${normalized.pages.length}`;
+    document.getElementById('bookView').innerHTML = `
+      <article class="storybook-reader-book" onclick="nextStoryParagraph()">
+        <header class="storybook-reader-topline">
+          <button class="storybook-reader-back" type="button" onclick="event.stopPropagation(); closeStoryReader();">← 책장</button>
+          <div class="storybook-reader-page">${pageLabel}</div>
+        </header>
+        ${imageHtml}
+        <section id="bookContentText" class="storybook-reader-text">${textHtml}</section>
+      </article>
+    `;
   }
 
   function renderStoryReader(story) {
-    const normalized = getReadableStory(story);
-    if (!normalized) return;
+    const normalized = normalizeStory(story);
+    if (!normalized?.paragraphs?.length) return;
     db.playground.storyWorld.currentStory = normalized;
     db.playground.storyWorld.readingHistory.unshift({ id: normalized.id, title: normalized.title, readAt: Date.now() });
     db.playground.storyWorld.readingHistory = db.playground.storyWorld.readingHistory.slice(0, 30);
-    const visibleCharacters = normalized.characters.slice(0, 6).join(', ');
-    const coverHtml = normalized.coverImage
-      ? `<div class="storybook-reader-hero"><img src="${normalized.coverImage}" alt="${escapeHtml(normalized.title)}" onerror="this.parentElement.style.display='none';"></div>`
-      : '';
-    const paragraphsHtml = normalized.paragraphs.map((paragraph, index) => `
-      <p class="story-paragraph" data-story-paragraph="${index}">${escapeHtml(paragraph).replace(/시현/g, "<span class='highlight'>시현</span>")}</p>
-    `).join('');
-    const metaLine = [normalized.theme, visibleCharacters ? `시현 · ${visibleCharacters}` : '시현'].filter(Boolean).join(' · ');
-    document.getElementById('bookView').innerHTML = `
-      <article class="storybook-reader-book">
-        ${coverHtml}
-        <div class="book-title">${escapeHtml(normalized.title)}</div>
-        <div class="storybook-reader-meta">${escapeHtml(metaLine)}</div>
-        <div id="bookContentText" class="storybook-reader-text">${paragraphsHtml}</div>
-      </article>
-    `;
+    storyReadState.currentStory = normalized;
+    storyReadState.storyId = normalized.id;
+    storyReadState.pages = normalized.pages;
+    storyReadState.pageIndex = 0;
+    storyReadState.pageSentenceIndex = 0;
+    storyReadState.paragraphIndex = 0;
+    renderStoryPage();
     refreshLegacyCompatibility();
     localStorage.setItem(DB_KEY, JSON.stringify(db));
   }
 
   function readStoryById(storyId) {
+    requestStoryLandscapeMode();
     showStoryReader();
-    stopStoryReading(true);
     const savedStories = renderSavedStories();
     const saved = savedStories.find(item => item.id === storyId || item.savedId === storyId);
-    const seed = window.STORY_LIBRARY.find(item => item.id === storyId || item.contentKey === storyId);
-    const target = getReadableStory(saved || seed);
-
-    if (target?.paragraphs?.length) {
-      renderStoryReader(target);
-      setTimeout(() => startStoryReading(target), 700);
+    const seed = window.STORY_LIBRARY.find(item => item.id === storyId || item.contentKey === storyId || getStoryContentKey(item) === storyId);
+    const target = saved || seed;
+    const normalized = normalizeStory(target);
+    if (normalized?.paragraphs?.length) {
+      renderStoryReader(normalized);
+      setTimeout(() => startStoryReading(normalized), 450);
       return;
     }
+    if (window.speakGuide) window.speakGuide('이 책은 아직 글씨가 없어. 새 이야기 만들기를 눌러 줘.', true);
+  }
 
-    closeStoryReader();
-    if (window.speakGuide) window.speakGuide('이 책은 아직 준비 중이야. 다른 그림책을 골라볼까?', true);
+  function buildPageSentences(page) {
+    const texts = Array.isArray(page?.texts) ? page.texts : [];
+    const sentences = [];
+    texts.forEach((paragraph, paragraphIndex) => {
+      splitKoreanSentences(paragraph).forEach(sentence => sentences.push({ text: sentence, paragraphIndex }));
+    });
+    return sentences;
   }
 
   function startStoryReading(story) {
-    const normalized = normalizeStory(story);
-    if (!normalized?.paragraphs?.length) return;
-
+    const normalized = normalizeStory(story || db.playground.storyWorld.currentStory);
+    if (!normalized?.pages?.length) return;
+    storyReadState.currentStory = normalized;
     storyReadState.storyId = normalized.id;
-    storyReadState.paragraphs = normalized.paragraphs;
-    storyReadState.paragraphIndex = 0;
+    storyReadState.pages = normalized.pages;
+    storyReadState.pageIndex = Math.max(0, storyReadState.pageIndex || 0);
+    storyReadState.pageSentenceIndex = 0;
     storyReadState.currentTone = normalized.voiceTone || getStoryVoiceTone(normalized.theme);
-    storyReadState.sentences = [];
-    storyReadState.sentenceIndex = 0;
     storyReadState.isReading = true;
     storyReadState.isPaused = false;
     clearTimeout(storyReadState.pendingTimer);
-
-    normalized.paragraphs.forEach((paragraph, paragraphIndex) => {
-      splitKoreanSentences(paragraph).forEach(sentence => {
-        storyReadState.sentences.push({ text: sentence, paragraphIndex });
-      });
-    });
-
-    if (!storyReadState.sentences.length) return;
-    if (window.speakGuide) window.speakGuide('이제 똑똑이가 부드럽게 읽어줄게.', true);
-    storyReadState.pendingTimer = setTimeout(speakCurrentSentence, 1200);
+    renderStoryPage();
+    if (window.speakGuide) window.speakGuide('동화책을 읽어줄게.', true);
+    storyReadState.pendingTimer = setTimeout(speakCurrentSentence, 700);
   }
 
   function speakStoryParagraphs(paragraphs, startIndex = 0) {
-    storyReadState.paragraphs = paragraphs;
-    storyReadState.paragraphIndex = Math.max(0, startIndex);
-    storyReadState.sentences = [];
-    paragraphs.forEach((paragraph, paragraphIndex) => {
-      splitKoreanSentences(paragraph).forEach(sentence => storyReadState.sentences.push({ text: sentence, paragraphIndex }));
+    const story = normalizeStory({
+      id: 'manual_story',
+      title: '동화',
+      theme: '세계명작',
+      paragraphs: paragraphs || []
     });
-    const firstSentenceIndex = storyReadState.sentences.findIndex(item => item.paragraphIndex >= storyReadState.paragraphIndex);
-    storyReadState.sentenceIndex = firstSentenceIndex >= 0 ? firstSentenceIndex : 0;
-    storyReadState.isReading = true;
-    storyReadState.isPaused = false;
-    clearTimeout(storyReadState.pendingTimer);
-    speakCurrentSentence();
+    storyReadState.pageIndex = Math.max(0, startIndex || 0);
+    startStoryReading(story);
   }
 
   function speakCurrentSentence() {
@@ -393,16 +501,29 @@
       alert('이 기기는 음성 읽어주기를 지원하지 않아요.');
       return;
     }
-    const current = storyReadState.sentences[storyReadState.sentenceIndex];
-    if (!current) {
+    const story = normalizeStory(storyReadState.currentStory || db.playground.storyWorld.currentStory);
+    const page = story?.pages?.[storyReadState.pageIndex];
+    if (!story || !page) {
       stopStoryReading(true);
       if (window.speakGuide) window.speakGuide('동화가 끝났어. 참 재미있었지?', true);
       return;
     }
-    storyReadState.paragraphIndex = current.paragraphIndex;
+    const sentences = buildPageSentences(page);
+    const current = sentences[storyReadState.pageSentenceIndex];
+    if (!current) {
+      if (storyReadState.pageIndex < story.pages.length - 1) {
+        storyReadState.pageIndex += 1;
+        storyReadState.pageSentenceIndex = 0;
+        renderStoryPage();
+        storyReadState.pendingTimer = setTimeout(speakCurrentSentence, 850);
+        return;
+      }
+      stopStoryReading(true);
+      if (window.speakGuide) window.speakGuide('동화가 끝났어. 참 재미있었지?', true);
+      return;
+    }
     highlightStoryParagraph(current.paragraphIndex);
     window.speechSynthesis.cancel();
-
     const profile = getVoiceProfileByTone(storyReadState.currentTone);
     const utterance = new SpeechSynthesisUtterance(current.text);
     utterance.lang = 'ko-KR';
@@ -410,9 +531,8 @@
     utterance.pitch = profile.pitch;
     utterance.onend = () => {
       if (!storyReadState.isReading || storyReadState.isPaused) return;
-      const pauseDuration = getPauseAfterSentence(current.text, profile.pauseBase);
-      storyReadState.sentenceIndex += 1;
-      storyReadState.pendingTimer = setTimeout(speakCurrentSentence, pauseDuration);
+      storyReadState.pageSentenceIndex += 1;
+      storyReadState.pendingTimer = setTimeout(speakCurrentSentence, getPauseAfterSentence(current.text, profile.pauseBase));
     };
     window.speechSynthesis.speak(utterance);
   }
@@ -434,7 +554,7 @@
     storyReadState.isPaused = false;
     storyReadState.isReading = true;
     if (window.speakGuide) window.speakGuide('다시 읽어볼게.', true);
-    storyReadState.pendingTimer = setTimeout(speakCurrentSentence, 900);
+    storyReadState.pendingTimer = setTimeout(speakCurrentSentence, 500);
   }
 
   function stopStoryReading(silent = false) {
@@ -448,38 +568,35 @@
   }
 
   function nextStoryParagraph() {
-    if (!storyReadState.sentences.length) {
-      const cur = db.playground.storyWorld.currentStory;
-      if (cur?.paragraphs?.length) startStoryReading(cur);
-      return;
-    }
-    const current = storyReadState.sentences[storyReadState.sentenceIndex];
-    const currentParagraphIndex = current?.paragraphIndex ?? storyReadState.paragraphIndex;
-    let nextIndex = storyReadState.sentenceIndex;
-    while (nextIndex < storyReadState.sentences.length && storyReadState.sentences[nextIndex].paragraphIndex === currentParagraphIndex) {
-      nextIndex += 1;
-    }
-    if (nextIndex >= storyReadState.sentences.length) {
-      stopStoryReading();
-      return;
-    }
+    const story = normalizeStory(storyReadState.currentStory || db.playground.storyWorld.currentStory);
+    if (!story?.pages?.length) return;
     clearTimeout(storyReadState.pendingTimer);
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    storyReadState.sentenceIndex = nextIndex;
-    storyReadState.isReading = true;
-    storyReadState.isPaused = false;
-    speakCurrentSentence();
+    if (storyReadState.pageIndex < story.pages.length - 1) {
+      storyReadState.pageIndex += 1;
+      storyReadState.pageSentenceIndex = 0;
+      storyReadState.isReading = true;
+      storyReadState.isPaused = false;
+      renderStoryPage();
+      storyReadState.pendingTimer = setTimeout(speakCurrentSentence, 350);
+    } else {
+      stopStoryReading(true);
+      if (window.speakGuide) window.speakGuide('마지막 장까지 다 읽었어.', true);
+    }
   }
 
   function restartStoryReading() {
-    const cur = db.playground.storyWorld.currentStory;
-    if (cur?.paragraphs?.length) startStoryReading(cur);
+    const cur = normalizeStory(db.playground.storyWorld.currentStory);
+    if (cur?.pages?.length) {
+      storyReadState.pageIndex = 0;
+      storyReadState.pageSentenceIndex = 0;
+      startStoryReading(cur);
+    }
   }
 
   function highlightStoryParagraph(index) {
     document.querySelectorAll('.story-paragraph').forEach((paragraph, paragraphIndex) => {
       paragraph.classList.toggle('reading-active', paragraphIndex === index);
-      if (paragraphIndex === index) paragraph.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   }
 
@@ -915,8 +1032,25 @@ ${JSON.stringify(story)}
         paragraphCount: quality.paragraphCount,
         createdAt: Date.now(),
         voiceAudio: defaultVoiceAudioMeta(),
-        source: 'ai'
+        source: 'ai',
+        storyPackMode: 'eleven_page_illustrated',
+        expectedPageCount: window.STORYBOOK_EXPECTED_PAGE_COUNT || 11
       };
+
+      const generatedPack = window.StoryPackRegistry?.makePackFromStory?.(savedStory, {
+        packId: 'generated_' + savedStory.id,
+        imageDir: 'generated/' + savedStory.id,
+        sourceId: seed.id
+      });
+      if (generatedPack) {
+        window.GENERATED_STORY_PACKS = window.GENERATED_STORY_PACKS || {};
+        window.GENERATED_STORY_PACKS[generatedPack.id] = generatedPack;
+        savedStory.packId = generatedPack.id;
+        savedStory.storyPackId = generatedPack.id;
+        savedStory.imageDir = generatedPack.imageDir;
+        savedStory.imageReady = false;
+        savedStory.pages = generatedPack.pages;
+      }
 
       db.playground.storyWorld.savedStories.unshift(savedStory);
       db.playground.storyWorld.currentStory = savedStory;
@@ -950,7 +1084,7 @@ ${JSON.stringify(story)}
       if (window.speakGuide) window.speakGuide('이미 보관함에 저장된 동화야.', true);
       return;
     }
-    savedStories.unshift({
+    const savedPackBase = {
       id: 'sv_' + Date.now(),
       sourceId: cur.sourceId || cur.id,
       title: cur.title,
@@ -973,12 +1107,49 @@ ${JSON.stringify(story)}
       readingMinutes: cur.readingMinutes,
       createdAt: Date.now(),
       voiceAudio: defaultVoiceAudioMeta(),
-      source: cur.source || 'built-in'
+      source: cur.source || 'built-in',
+      storyPackMode: 'eleven_page_illustrated',
+      expectedPageCount: window.STORYBOOK_EXPECTED_PAGE_COUNT || 11
+    };
+    const savedGeneratedPack = window.StoryPackRegistry?.makePackFromStory?.(savedPackBase, {
+      packId: 'generated_' + savedPackBase.id,
+      imageDir: 'generated/' + savedPackBase.id,
+      sourceId: savedPackBase.sourceId
     });
+    if (savedGeneratedPack) {
+      window.GENERATED_STORY_PACKS = window.GENERATED_STORY_PACKS || {};
+      window.GENERATED_STORY_PACKS[savedGeneratedPack.id] = savedGeneratedPack;
+      savedPackBase.packId = savedGeneratedPack.id;
+      savedPackBase.storyPackId = savedGeneratedPack.id;
+      savedPackBase.imageDir = savedGeneratedPack.imageDir;
+      savedPackBase.imageReady = false;
+      savedPackBase.pages = savedGeneratedPack.pages;
+    } else {
+      savedPackBase.pages = cur.pages || [];
+    }
+    savedStories.unshift(savedPackBase);
     save();
     renderStoryWorld();
     fireConfetti();
     alert('동화를 보관함에 저장했어요💖 언제든 다시 읽을 수 있습니다!');
+  }
+
+  function exportCurrentStoryPack() {
+    const cur = normalizeStory(db.playground.storyWorld.currentStory);
+    if (!cur?.paragraphs?.length) {
+      alert('내보낼 동화가 없어요.');
+      return;
+    }
+    const pack = window.StoryPackRegistry?.makePackFromStory?.(cur, {
+      packId: cur.packId || cur.storyPackId || ('generated_' + (cur.id || Date.now())),
+      imageDir: cur.imageDir || ('generated/' + (cur.id || Date.now())),
+      sourceId: cur.sourceId || cur.id
+    });
+    if (!pack || !window.StoryPackRegistry?.downloadPackFile) {
+      alert('동화 파일을 만들 수 없어요.');
+      return;
+    }
+    window.StoryPackRegistry.downloadPackFile(pack);
   }
 
   function deleteSavedStory(id) {
@@ -1020,11 +1191,12 @@ ${JSON.stringify(story)}
   }
 
   window.setStoryFilter = setStoryFilter;
-  window.openStorybookShelf = openStorybookShelf;
   window.openStorybookIntro = openStorybookIntro;
+  window.openStorybookShelf = openStorybookShelf;
   window.readStoryById = readStoryById;
   window.generateStoryFromSeed = generateStoryFromSeed;
   window.saveCurrentStory = saveCurrentStory;
+  window.exportCurrentStoryPack = exportCurrentStoryPack;
   window.deleteSavedStory = deleteSavedStory;
   window.closeStoryReader = closeStoryReader;
   window.speakBookText = speakBookText;

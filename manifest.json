@@ -5,11 +5,15 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "background_color": "#5BC8F5",
   "theme_color": "#FF7A1A",
   "lang": "ko",
-  "categories": ["kids", "education", "games"],
+  "categories": [
+    "kids",
+    "education",
+    "games"
+  ],
   "icons": [
     {
       "src": "icon.png",

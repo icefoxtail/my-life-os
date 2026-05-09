@@ -424,205 +424,6 @@
     }
     .story-load-more:active { transform:translateY(3px); }
 
-
-    /* ═══════════════════════════════════════
-       STORYBOOK FIRST UI — 대표 표지 → 명작 4권
-    ═══════════════════════════════════════ */
-    .storybook-intro-grid {
-      min-height: calc(100dvh - 124px);
-      display: grid !important;
-      place-items: center;
-      padding: 8px 0 max(18px, env(safe-area-inset-bottom));
-    }
-    .storybook-main-cover-card {
-      position: relative;
-      width: min(86vw, 420px);
-      height: min(72dvh, 560px);
-      min-height: 420px;
-      border-radius: 34px;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,235,168,0.92));
-      border: 7px solid rgba(255,255,255,0.96);
-      box-shadow: 0 18px 0 rgba(72,18,105,0.28), 0 24px 50px rgba(27,5,56,0.34);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      isolation: isolate;
-      animation: storybookCoverFloat 3.4s ease-in-out infinite;
-    }
-    .storybook-main-cover-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .storybook-main-cover-fallback {
-      width: 100%; height: 100%; display: grid; place-items: center;
-      font-size: clamp(92px, 28vw, 180px);
-      background: linear-gradient(160deg,#e0c3fc 0%,#8ec5fc 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .storybook-main-cover-glow {
-      position: absolute; inset: 0; z-index: 2;
-      background: radial-gradient(circle at 50% 18%, rgba(255,255,255,0.52), transparent 38%),
-                  linear-gradient(180deg, transparent 52%, rgba(40,0,70,0.22) 100%);
-      pointer-events: none;
-    }
-    @keyframes storybookCoverFloat {
-      0%,100% { transform: translateY(0) rotate(-0.5deg); }
-      50% { transform: translateY(-8px) rotate(0.5deg); }
-    }
-
-    .storybook-featured-grid {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(12px, 3vw, 22px);
-      align-content: center;
-      min-height: calc(100dvh - 124px);
-      padding: 6px 2px max(18px, env(safe-area-inset-bottom));
-    }
-    .storybook-book-card {
-      min-height: min(36dvh, 310px);
-      border-radius: 28px;
-      border: 6px solid rgba(255,255,255,0.95);
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 10px 0 rgba(72,18,105,0.22), 0 16px 30px rgba(25,0,70,0.18);
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
-    }
-    .storybook-book-card:active {
-      transform: translateY(5px) scale(0.97);
-      box-shadow: 0 4px 0 rgba(72,18,105,0.22), 0 8px 16px rgba(25,0,70,0.16);
-    }
-    .storybook-book-cover {
-      min-height: 0;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background: linear-gradient(160deg,#FDE68A 0%,#F9A8D4 55%,#A78BFA 100%);
-    }
-    .storybook-book-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .storybook-book-fallback {
-      width: 100%; height: 100%; display: grid; place-items: center;
-      font-size: clamp(62px, 20vw, 110px);
-    }
-    .storybook-book-title {
-      min-height: 58px;
-      display: grid;
-      place-items: center;
-      padding: 8px 8px 10px;
-      font-size: clamp(18px, 5vw, 28px);
-      font-weight: 900;
-      color: #3B0764;
-      text-align: center;
-      line-height: 1.12;
-      background: rgba(255,255,255,0.96);
-    }
-
-    #storyReaderView.active {
-      display: grid !important;
-      min-height: calc(100dvh - 112px);
-      padding: 0;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-    }
-    .story-reader-actions {
-      justify-content: flex-start;
-      margin-bottom: 8px;
-    }
-    .story-reader-actions .btn-story:not(:first-child),
-    .story-voice-controls {
-      display: none !important;
-    }
-    #bookView {
-      min-height: 0;
-    }
-    .storybook-reader-book {
-      display: grid;
-      grid-template-rows: minmax(260px, 58dvh) auto auto 1fr;
-      gap: 10px;
-      min-height: calc(100dvh - 176px);
-      color: #2D1060;
-    }
-    .storybook-reader-hero {
-      border-radius: 28px;
-      overflow: hidden;
-      border: 6px solid rgba(255,255,255,0.95);
-      box-shadow: 0 10px 0 rgba(72,18,105,0.22), 0 16px 30px rgba(25,0,70,0.18);
-      background: rgba(255,255,255,0.92);
-    }
-    .storybook-reader-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .storybook-reader-meta {
-      text-align: center;
-      color: rgba(255,255,255,0.86);
-      font-size: clamp(13px, 3.6vw, 17px);
-      text-shadow: 0 2px 0 rgba(0,0,0,0.18);
-      margin-top: -2px;
-    }
-    .storybook-reader-text {
-      display: grid;
-      gap: 10px;
-      overflow: auto;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-    }
-    .storybook-reader-text .story-paragraph {
-      font-size: clamp(18px, 4.8vw, 25px);
-      line-height: 1.55;
-      padding: 14px 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.94);
-      box-shadow: 0 4px 0 rgba(72,18,105,0.12);
-    }
-    .storybook-reader-text .story-paragraph.reading-active {
-      outline: 5px solid #FFD93D;
-      background: #FFF7CC;
-    }
-    @media (orientation: landscape) and (min-width: 740px) {
-      .storybook-intro-grid { min-height: calc(100dvh - 96px); }
-      .storybook-main-cover-card {
-        width: min(44vw, 520px);
-        height: min(78dvh, 620px);
-      }
-      .storybook-featured-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        min-height: calc(100dvh - 104px);
-      }
-      .storybook-book-card { min-height: min(68dvh, 520px); }
-      .storybook-reader-book {
-        grid-template-columns: minmax(420px, 68%) minmax(260px, 32%);
-        grid-template-rows: auto auto 1fr;
-        column-gap: 16px;
-        min-height: calc(100dvh - 152px);
-      }
-      .storybook-reader-hero {
-        grid-row: 1 / 4;
-        min-height: calc(100dvh - 170px);
-      }
-      .storybook-reader-text { max-height: calc(100dvh - 260px); }
-    }
-    @media (max-width: 420px) {
-      .storybook-featured-grid { gap: 10px; }
-      .storybook-book-card { border-width: 5px; border-radius: 22px; }
-      .storybook-book-title { min-height: 52px; }
-    }
-
     #storyReaderView { display:none; padding:14px; border-radius:18px; background:rgba(255,255,255,0.88); border:4px solid rgba(255,255,255,0.9); gap:12px; }
     #storyReaderView.active { display:grid; }
     #bookView { display:grid; gap:12px; font-size:18px; line-height:1.7; color:#2D1060; }
@@ -642,6 +443,240 @@
     @media (max-width:480px) {
       .story-card-grid { grid-template-columns:repeat(2,1fr); }
       .zone-game-grid { grid-template-columns:repeat(2,1fr); }
+    }
+
+
+
+    /* ═══════════════════════════════════════
+       STORYBOOK MODE — 대표 표지 → 명작 4개 → 자동 읽기
+    ═══════════════════════════════════════ */
+    .story-ui-hidden { display: none !important; }
+    .storybook-intro-grid {
+      min-height: calc(100dvh - 120px);
+      display: grid !important;
+      place-items: center;
+      grid-template-columns: 1fr !important;
+      padding: 8px 12px max(18px, env(safe-area-inset-bottom));
+    }
+    .storybook-main-cover-card {
+      width: min(88vw, 480px);
+      height: min(72dvh, 680px);
+      min-height: 430px;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 6px solid rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 16px 0 rgba(61,0,92,0.18), 0 28px 54px rgba(0,0,0,0.25);
+      position: relative;
+      display: grid;
+      place-items: center;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .storybook-main-cover-card:active {
+      transform: scale(0.975) translateY(6px);
+      box-shadow: 0 8px 0 rgba(61,0,92,0.18), 0 16px 34px rgba(0,0,0,0.22);
+    }
+    .storybook-main-cover-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .storybook-main-cover-fallback {
+      width: 100%; height: 100%; display: grid; place-items: center;
+      font-size: clamp(110px, 32vw, 220px);
+      background: linear-gradient(160deg, #FFE9A9 0%, #C084FC 48%, #6D28D9 100%);
+    }
+    .storybook-featured-grid {
+      min-height: calc(100dvh - 120px);
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: clamp(12px, 3vw, 22px) !important;
+      padding: 8px 12px max(18px, env(safe-area-inset-bottom));
+      align-content: center;
+    }
+    .storybook-book-card {
+      min-height: clamp(210px, 40dvh, 330px);
+      border-radius: 26px;
+      border: 5px solid rgba(255,255,255,0.95);
+      overflow: hidden;
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 10px 0 rgba(61,0,92,0.18), 0 18px 32px rgba(0,0,0,0.18);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .storybook-book-card:active {
+      transform: scale(0.965) translateY(5px);
+      box-shadow: 0 5px 0 rgba(61,0,92,0.18), 0 12px 22px rgba(0,0,0,0.18);
+    }
+    .storybook-book-cover {
+      min-height: 0;
+      width: 100%; height: 100%;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg,#FDE68A,#C084FC);
+      overflow: hidden;
+    }
+    .storybook-book-cover img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .storybook-book-fallback {
+      width: 100%; height: 100%; display: grid; place-items: center;
+      font-size: clamp(64px, 20vw, 120px);
+    }
+    .storybook-book-title {
+      min-height: 54px;
+      padding: 8px 10px 10px;
+      display: grid; place-items: center;
+      text-align: center;
+      font-size: clamp(18px, 4.5vw, 26px);
+      font-weight: 900;
+      line-height: 1.15;
+      color: #3B0764;
+      background: #fff;
+    }
+    #storyReaderView {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 120 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      background: #07030f !important;
+      border-radius: 0 !important;
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+    #storyReaderView .story-reader-actions,
+    #storyReaderView .story-voice-controls { display: none !important; }
+    #bookView {
+      width: 100%; height: 100dvh; min-height: 100dvh;
+      display: block !important; overflow: hidden;
+      background: #07030f;
+    }
+    .storybook-reader-book {
+      position: relative;
+      width: 100%; height: 100dvh;
+      min-height: 0;
+      display: block;
+      padding: 0;
+      overflow: hidden;
+      background: #07030f;
+      cursor: pointer;
+    }
+    .storybook-reader-topline {
+      position: absolute;
+      top: max(10px, env(safe-area-inset-top));
+      left: 12px; right: 12px;
+      z-index: 8;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      pointer-events: none;
+    }
+    .storybook-reader-back,
+    .storybook-reader-page {
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.34);
+      border: 1px solid rgba(255,255,255,0.34);
+      color: #fff;
+      font-size: clamp(12px, 2.8vw, 16px);
+      font-weight: 900;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      display: inline-flex; align-items: center; justify-content: center;
+      pointer-events: auto;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    }
+    .storybook-page-illustration {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      min-height: 0;
+      border-radius: 0;
+      border: 0;
+      overflow: hidden;
+      background: #07030f;
+      box-shadow: none;
+      display: grid; place-items: center;
+    }
+    .storybook-page-illustration::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 34%;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.26) 48%, rgba(0,0,0,0.58) 100%);
+      z-index: 2;
+    }
+    .storybook-page-illustration img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+      background: #07030f;
+    }
+    .storybook-page-illustration.image-missing span {
+      font-size: clamp(90px, 28vw, 170px);
+      color: #fff;
+      z-index: 3;
+    }
+    .storybook-reader-text {
+      position: absolute;
+      left: 50%; bottom: max(16px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: 6;
+      width: min(92vw, 920px);
+      max-height: 28dvh;
+      overflow: hidden;
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      pointer-events: none;
+    }
+    .storybook-reader-text::-webkit-scrollbar { display: none; }
+    .storybook-reader-text .story-paragraph {
+      display: none;
+      max-width: 100%;
+      margin: 0;
+      padding: 7px 12px 8px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.48);
+      color: #fff;
+      font-size: clamp(14px, 3.2vw, 22px);
+      line-height: 1.38;
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.72);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .storybook-reader-text .story-paragraph.reading-active {
+      display: block;
+      outline: none;
+      background: rgba(0,0,0,0.50);
+      animation: storyCaptionIn 0.22s ease-out both;
+    }
+    @keyframes storyCaptionIn {
+      from { opacity: 0; transform: translateY(8px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .storybook-reader-text .highlight { color: #FFD93D; }
+    @media (orientation: portrait) {
+      .storybook-page-illustration img { object-fit: contain; }
+      .storybook-reader-text { bottom: max(20px, env(safe-area-inset-bottom)); width: min(94vw, 760px); }
+      .storybook-reader-text .story-paragraph { font-size: clamp(14px, 3.5vw, 20px); }
+    }
+    @media (orientation: landscape) {
+      #storyReaderView, #bookView, .storybook-reader-book { height: 100dvh; min-height: 100dvh; }
+      .storybook-page-illustration img { object-fit: contain; }
+      .storybook-reader-text {
+        bottom: max(14px, env(safe-area-inset-bottom));
+        width: min(78vw, 980px);
+        max-height: 24dvh;
+      }
+      .storybook-reader-text .story-paragraph {
+        font-size: clamp(14px, 2.25vw, 22px);
+        line-height: 1.34;
+        padding: 7px 14px 8px;
+      }
+    }
+    @media (max-width: 480px) {
+      .storybook-main-cover-card { width: 90vw; min-height: 420px; }
+      .storybook-featured-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
     }
 
     body.debug-hotspots .world-zone,
@@ -1304,9 +1339,28 @@ function openStoryTheater(){
     <div class="fullscreen-zone">
       <div class="story-bg"></div>
       <div class="story-stars">${stars}</div>
-      ${makeZoneHead('📖 동화나라')}
+      ${makeZoneHead('📖 동화극장')}
+      <div class="story-search-row">
+        <span class="story-search-icon">🔍</span>
+        <input type="search" id="storySearchInput" class="story-search-input"
+          placeholder="제목이나 주제 검색..."
+          oninput="filterStoriesBySearch(this.value)"
+          aria-label="동화 검색">
+      </div>
+      <nav id="storyFilterNav" class="story-filter-row">
+        <button class="story-filter-btn active" data-theme="전체"      onclick="setStoryFilter('전체')">📚 전체</button>
+        <button class="story-filter-btn"        data-theme="자동차"    onclick="setStoryFilter('자동차')">🚗 자동차</button>
+        <button class="story-filter-btn"        data-theme="공룡"      onclick="setStoryFilter('공룡')">🦕 공룡</button>
+        <button class="story-filter-btn"        data-theme="동물"      onclick="setStoryFilter('동물')">🐰 동물</button>
+        <button class="story-filter-btn"        data-theme="우주"      onclick="setStoryFilter('우주')">🚀 우주</button>
+        <button class="story-filter-btn"        data-theme="바다"      onclick="setStoryFilter('바다')">🌊 바다</button>
+        <button class="story-filter-btn"        data-theme="전래"      onclick="setStoryFilter('전래')">🏮 전래</button>
+        <button class="story-filter-btn"        data-theme="이솝"      onclick="setStoryFilter('이솝')">🌿 이솝</button>
+        <button class="story-filter-btn"        data-theme="잠자리"    onclick="setStoryFilter('잠자리')">🌙 잠자리</button>
+        <button class="story-filter-btn"        data-theme="저장한 동화" onclick="setStoryFilter('저장한 동화')">💖 저장</button>
+      </nav>
       <div class="zone-body">
-        <div id="storyLibraryGrid" class="story-card-grid storybook-intro-grid"></div>
+        <div id="storyLibraryGrid" class="story-card-grid"></div>
         <button class="story-load-more" id="storyLoadMoreBtn" style="display:none;" onclick="loadMoreStories()">
           📖 더 보기
         </button>
@@ -1327,10 +1381,9 @@ function openStoryTheater(){
       </div>
     </div>`;
 
-  if(window.openStorybookIntro) window.openStorybookIntro();
-  else if(window.renderStoryWorld) window.renderStoryWorld();
+  if(window.renderStoryWorld) window.renderStoryWorld();
   else setTimeout(()=>window.renderStoryWorld?.(), 0);
-  speakGuide('동화나라에 도착했어. 큰 그림책을 눌러봐!', true);
+  speakGuide('동화극장에 도착했어. 읽고 싶은 책을 골라봐!', true);
 }
 
 /* ★ 스토리 텍스트 검색 */
@@ -1391,6 +1444,11 @@ if('serviceWorker' in navigator){
 <script src="./js/voice-engine.js"></script>
 <script src="./js/ttokttoki-engine.js"></script>
 <script src="./js/story-data.js"></script>
+<script src="./js/data/story-pack-registry.js"></script>
+<script src="./js/data/classics/classic_three_little_pigs.js"></script>
+<script src="./js/data/classics/classic_ugly_duckling.js"></script>
+<script src="./js/data/classics/classic_snow_white.js"></script>
+<script src="./js/data/classics/classic_jack_and_the_beanstalk.js"></script>
 <script src="./js/story-world.js"></script>
 <script src="./js/games/vehicle-memory.js"></script>
 <script src="./js/games/number-count.js"></script>
