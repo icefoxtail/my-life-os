@@ -906,12 +906,15 @@
 
     mainImg.addEventListener('error', () => {
       imageWrap.classList.add('lt-image-missing');
-      fallbackLetter.style.display = 'grid';
-      fallbackObject.style.display = 'none';
+      const isTransformed = state.isTransforming || mainCard.classList.contains('lt-transformed');
+      fallbackLetter.style.display = isTransformed ? 'none' : 'grid';
+      fallbackObject.style.display = isTransformed ? 'grid' : 'none';
     });
 
     mainImg.addEventListener('load', () => {
       imageWrap.classList.remove('lt-image-missing');
+      fallbackLetter.style.display = 'none';
+      fallbackObject.style.display = 'none';
     });
 
     timer(() => {

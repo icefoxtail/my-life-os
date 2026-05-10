@@ -9,6 +9,7 @@
       title: '손 씻기',
       guide: '손을 깨끗하게 씻어볼까?',
       completeText: '뽀득뽀득! 손이 깨끗해졌어요!',
+      sequenceText: '물을 틀고 비누로 문지르고 수건으로 닦아요.',
       bg: './assets/life-sequence/wash-hands/bg.webp',
       completeImage: './assets/life-sequence/wash-hands/complete.webp',
       sceneEmoji: '🧼',
@@ -24,6 +25,7 @@
       title: '양치하기',
       guide: '이를 반짝반짝 닦아볼까?',
       completeText: '반짝반짝! 이가 깨끗해졌어요!',
+      sequenceText: '치약을 짜고 이를 쓱쓱 닦고 입을 헹궈요.',
       bg: './assets/life-sequence/brush-teeth/bg.webp',
       completeImage: './assets/life-sequence/brush-teeth/complete.webp',
       sceneEmoji: '🪥',
@@ -39,6 +41,7 @@
       title: '밥 먹기',
       guide: '맛있게 밥 먹을 준비를 해볼까?',
       completeText: '냠냠! 맛있게 잘 먹었어요!',
+      sequenceText: '손을 씻고 자리에 앉고 맛있게 먹어요.',
       bg: './assets/life-sequence/eat-meal/bg.webp',
       completeImage: './assets/life-sequence/eat-meal/complete.webp',
       sceneEmoji: '🍚',
@@ -54,6 +57,7 @@
       title: '잠자기',
       guide: '포근하게 잘 준비를 해볼까?',
       completeText: '코오 잘 자요. 내일 또 놀자!',
+      sequenceText: '잠옷을 입고 책을 읽고 불을 끄고 자요.',
       bg: './assets/life-sequence/sleep/bg.webp',
       completeImage: './assets/life-sequence/sleep/complete.webp',
       sceneEmoji: '🌙',
@@ -69,6 +73,7 @@
       title: '외출 준비',
       guide: '밖에 나갈 준비를 해볼까?',
       completeText: '준비 끝! 신나게 나가요!',
+      sequenceText: '옷을 입고 신발을 신고 문 밖으로 나가요.',
       bg: './assets/life-sequence/go-out/bg.webp',
       completeImage: './assets/life-sequence/go-out/complete.webp',
       sceneEmoji: '🎒',
@@ -84,6 +89,7 @@
       title: '장난감 정리',
       guide: '놀고 난 뒤 정리해볼까?',
       completeText: '우와! 방이 반짝반짝 깨끗해졌어요!',
+      sequenceText: '장난감을 모으고 바구니에 넣고 방을 깨끗하게 정리해요.',
       bg: './assets/life-sequence/cleanup/bg.webp',
       completeImage: './assets/life-sequence/cleanup/complete.webp',
       sceneEmoji: '🧸',
@@ -412,10 +418,10 @@
     const slots = Array.from(state.container.querySelectorAll('.ls-slot'));
     slots.forEach((slot, index) => {
       timer(() => {
+        const card = state.placed[index];
+        if (card) slot.dataset.label = card.label;
         slot.classList.add('correct');
-        if (index === 0) speak('먼저, 좋아요!', false);
-        if (index === 1) speak('다음, 맞았어요!', false);
-        if (index === 2) speak('마지막, 완성!', false);
+        if (card) speak(card.label, false);
       }, index * 360);
     });
 
@@ -428,18 +434,23 @@
       if (scene && scene.dataset.complete === '1') scene.classList.add('has-complete');
 
       const comboText = state.combo >= 2 ? ` ${state.combo}번 연속 성공!` : '';
-      const message = `${state.mission.completeText}${comboText}`;
+      const sequenceText = state.mission.sequenceText ? ` ${state.mission.sequenceText}` : '';
+      const message = `${state.mission.completeText} ${sequenceText}${comboText}`.replace(/\s+/g, ' ').trim();
 
       showMessage(message);
       speak(message, true);
       state.options.fireConfetti?.();
       state.options.gainExp?.(10 + Math.min(state.combo, 3) * 2);
-    }, delay);
 
-    timer(() => {
-      state.round += 1;
-      startRound();
-    }, delay + 3150);
+      timer(() => {
+        state.round += 1;
+        startRound();
+      }, getSuccessMessageHoldMs(message));
+    }, delay);
+  }
+
+  function getSuccessMessageHoldMs(message) {
+    return Math.min(9000, Math.max(5200, String(message || '').length * 125));
   }
 
   function showMessage(text) {

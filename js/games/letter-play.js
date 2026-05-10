@@ -2,7 +2,7 @@
  * 시현이 놀이터 OS — 글자놀이터 미니게임 v5 (유아 몰입형 터치 업그레이드)
  * 파일: js/games/letter-play.js
  *
- * 모드 A (기본): 그림을 보고 첫 글자 풍선 터뜨리기
+ * 모드 A (기본): 그림과 글자를 보고 같은 글자 풍선 터뜨리기
  * 모드 B (음절): 모음 선택 → 5문제 짧은 라운드 학습
  */
 
@@ -279,7 +279,7 @@ window.SihyeonGames.letterPlay = {
         border: 3px solid rgba(255,180,220,0.55); pointer-events: none;
       }
 
-      /* 단어 모드 힌트 — 인기 유아앱 벤치마크형: 큰 그림 + 숨은 첫 글자 */
+      /* 단어 모드 힌트 — 큰 그림 + 보이는 목표 글자 */
       .slp-mascot-row {
         width: 100%;
         display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -738,7 +738,7 @@ window.SihyeonGames.letterPlay = {
 
     const round = s.rounds[s.roundIndex];
 
-    // 힌트 카드 — 정답 글자를 직접 보여주지 않고, 그림·소리·빈칸으로 유도
+    // 힌트 카드 — 목표 글자를 그대로 보여주고 같은 글자 풍선을 찾게 유도
     const hiddenTail = round.word.length > 1 ? round.word.slice(1) : '';
     const hintCard = document.createElement('div');
     hintCard.className = 'slp-hint-card';
@@ -749,17 +749,17 @@ window.SihyeonGames.letterPlay = {
       </div>
       <span class="slp-hint-emoji">${round.emoji}</span>
       <div class="slp-hint-word">
-        <span class="slp-first-char">?</span>${hiddenTail}
+        <span class="slp-first-char">${round.answer}</span>${hiddenTail}
       </div>
-      <div class="slp-question-line">첫 글자 풍선을 찾아 톡!</div>
+      <div class="slp-question-line">같은 글자 풍선을 찾아 톡!</div>
     `;
-    hintCard.addEventListener('click', () => this._say(`${round.word}! 첫 글자를 찾아봐!`, true));
+    hintCard.addEventListener('click', () => this._say(`${round.answer}! 같은 글자를 찾아봐!`, true));
     root.appendChild(hintCard);
 
     const speakBtn = document.createElement('button');
     speakBtn.className = 'slp-speak-btn';
     speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', () => this._say(`${round.word}! 첫 글자는 ${round.answer}!`, true));
+    speakBtn.addEventListener('click', () => this._say(`${round.word}! ${round.answer} 글자를 찾아봐!`, true));
     root.appendChild(speakBtn);
 
     // 풍선
@@ -768,7 +768,7 @@ window.SihyeonGames.letterPlay = {
 
     const t = setTimeout(() => {
       playGameVoice('games.letter.question');
-      this._say(`${round.word}! 첫 글자 풍선을 톡 눌러봐!`, false);
+      this._say(`${round.answer}! 같은 글자 풍선을 톡 눌러봐!`, false);
     }, 350);
     this._timers.push(t);
   },
@@ -836,7 +836,8 @@ window.SihyeonGames.letterPlay = {
   _buildBalloons(root, choices, answer, mode, round) {
     const area = document.createElement('div');
     area.className = 'slp-balloons-area';
-    const colors = [0,1,2,3,4].sort(() => Math.random() - 0.5);
+    const wrongColors = [1, 2, 3, 4].sort(() => Math.random() - 0.5);
+    let wrongColorIndex = 0;
 
     choices.forEach((letter, idx) => {
       const btn = document.createElement('button');
@@ -845,7 +846,8 @@ window.SihyeonGames.letterPlay = {
       btn.type = 'button';
 
       const body = document.createElement('div');
-      body.className = `slp-balloon-body slp-balloon-color-${colors[idx % 5]}`;
+      const color = letter === answer ? 0 : wrongColors[wrongColorIndex++ % wrongColors.length];
+      body.className = `slp-balloon-body slp-balloon-color-${color}`;
       const letterSpan = document.createElement('span');
       letterSpan.className = 'slp-balloon-letter';
       letterSpan.textContent = letter;

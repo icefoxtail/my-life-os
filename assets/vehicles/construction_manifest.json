@@ -61,5 +61,131 @@
     "file": "assets/vehicles/construction/forklift.png",
     "name_ko": "지게차",
     "sound_ko": "삐리리 짐을 들어요!"
+  },
+  {
+    "id": "road_roller",
+    "category": "construction",
+    "file": "assets/vehicles/construction/road_roller.webp",
+    "name_ko": "로드롤러",
+    "sound_ko": "꾹꾹! 바닥을 단단하게 눌러요!"
+  },
+  {
+    "id": "asphalt_paver",
+    "category": "construction",
+    "file": "assets/vehicles/construction/asphalt_paver.webp",
+    "name_ko": "아스팔트 포장차",
+    "sound_ko": "쭉쭉! 까만 길을 만들어요!"
+  },
+  {
+    "id": "grader",
+    "category": "construction",
+    "file": "assets/vehicles/construction/grader.webp",
+    "name_ko": "그레이더",
+    "sound_ko": "슥슥! 땅을 반듯하게 골라요!"
+  },
+  {
+    "id": "backhoe_loader",
+    "category": "construction",
+    "file": "assets/vehicles/construction/backhoe_loader.webp",
+    "name_ko": "백호로더",
+    "sound_ko": "앞뒤로 척척! 파고 담아요!"
+  },
+  {
+    "id": "skid_steer_loader",
+    "category": "construction",
+    "file": "assets/vehicles/construction/skid_steer_loader.webp",
+    "name_ko": "스키드로더",
+    "sound_ko": "빙글빙글! 좁은 곳도 잘 움직여요!"
+  },
+  {
+    "id": "tower_crane",
+    "category": "construction",
+    "file": "assets/vehicles/construction/tower_crane.webp",
+    "name_ko": "타워크레인",
+    "sound_ko": "높이높이! 자재를 올려요!"
+  },
+  {
+    "id": "mobile_crane",
+    "category": "construction",
+    "file": "assets/vehicles/construction/mobile_crane.webp",
+    "name_ko": "이동식 크레인",
+    "sound_ko": "번쩍! 어디서든 들어 올려요!"
+  },
+  {
+    "id": "pile_driver",
+    "category": "construction",
+    "file": "assets/vehicles/construction/pile_driver.webp",
+    "name_ko": "항타기",
+    "sound_ko": "쿵쿵! 기둥을 땅속에 세워요!"
+  },
+  {
+    "id": "drilling_rig",
+    "category": "construction",
+    "file": "assets/vehicles/construction/drilling_rig.webp",
+    "name_ko": "천공기",
+    "sound_ko": "드르르! 깊은 구멍을 뚫어요!"
+  },
+  {
+    "id": "excavator_breaker",
+    "category": "construction",
+    "file": "assets/vehicles/construction/excavator_breaker.webp",
+    "name_ko": "브레이커 굴착기",
+    "sound_ko": "콰콰쾅! 단단한 돌을 깨요!"
+  },
+  {
+    "id": "dump_loader",
+    "category": "construction",
+    "file": "assets/vehicles/construction/dump_loader.webp",
+    "name_ko": "광산 덤프로더",
+    "sound_ko": "와르르! 큰 돌을 싣고 가요!"
+  },
+  {
+    "id": "articulated_dump_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+    "name_ko": "굴절식 덤프트럭",
+    "sound_ko": "덜컹덜컹! 험한 길도 지나가요!"
+  },
+  {
+    "id": "water_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/water_truck.webp",
+    "name_ko": "살수차",
+    "sound_ko": "촤아아! 먼지를 가라앉혀요!"
+  },
+  {
+    "id": "sweeper_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/sweeper_truck.webp",
+    "name_ko": "노면 청소차",
+    "sound_ko": "슥슥! 길을 깨끗하게 청소해요!"
+  },
+  {
+    "id": "fuel_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/fuel_truck.webp",
+    "name_ko": "주유차",
+    "sound_ko": "꿀꺽꿀꺽! 힘낼 기름을 넣어요!"
+  },
+  {
+    "id": "lowbed_trailer",
+    "category": "construction",
+    "file": "assets/vehicles/construction/lowbed_trailer.webp",
+    "name_ko": "저상 트레일러",
+    "sound_ko": "천천히! 커다란 차를 옮겨요!"
+  },
+  {
+    "id": "cargo_truck",
+    "category": "construction",
+    "file": "assets/vehicles/construction/cargo_truck.webp",
+    "name_ko": "자재 운반 트럭",
+    "sound_ko": "차곡차곡! 자재를 싣고 가요!"
+  },
+  {
+    "id": "scissor_lift",
+    "category": "construction",
+    "file": "assets/vehicles/construction/scissor_lift.webp",
+    "name_ko": "고소작업대",
+    "sound_ko": "위로위로! 높은 곳까지 올라가요!"
   }
 ]
