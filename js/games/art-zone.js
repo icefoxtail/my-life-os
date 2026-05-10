@@ -1,5 +1,5 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v3.1
+ * 시현이 놀이터 OS — 매직 그림판 v3.1 (태블릿 최적화 + 시현이 맞춤 이모지 UI)
  * 자유 그리기 + 색칠 팡팡 (SVG inline fill 방식)
  */
 (function () {
@@ -93,119 +93,126 @@
         <path class="fillable" d="M 160 75 L 180 75 L 190 105 L 150 105 L 155 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
       </svg>`
     },
-  {
-    id: 'rocket',
-    name: '우주 로켓',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path class="fillable" d="M 80 80 L 50 120 L 80 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 120 80 L 150 120 L 120 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 100 20 C 130 50, 125 110, 100 120 C 75 110, 70 50, 100 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="100" cy="65" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="100" cy="65" r="8" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 85 120 L 100 145 L 115 120 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-    </svg>`
-  },
-  {
-    id: 'dino',
-    name: '공룡',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path class="fillable" d="M 120 90 L 170 110 L 130 115 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="65" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="85" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="110" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="130" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <ellipse class="fillable" cx="105" cy="90" rx="35" ry="25" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 80 80 Q 60 50, 60 30 L 40 30 Q 40 10, 60 15 Q 75 15, 75 30 Q 80 50, 100 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle cx="55" cy="22" r="3" fill="#333"/>
-    </svg>`
-  },
-  {
-    id: 'train',
-    name: '칙칙폭폭 기차',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path class="fillable" d="M 30 110 L 30 50 L 80 50 L 80 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 20 50 L 90 50 L 90 35 L 20 35 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 80 110 L 80 65 L 150 65 L 150 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 150 110 L 170 110 L 150 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 120 65 L 120 35 L 145 35 L 145 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="45" y="65" width="20" height="25" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="55" cy="115" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="100" cy="115" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="135" cy="115" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="132" cy="20" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="115" cy="10" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-    </svg>`
-  },
-  {
-    id: 'airplane',
-    name: '슈웅 비행기',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path class="fillable" d="M 30 75 L 10 40 L 60 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 30 75 L 10 110 L 60 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 20 75 C 20 50, 150 40, 180 75 C 150 110, 20 100, 20 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 80 60 L 130 15 L 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 80 90 L 110 135 L 140 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 150 65 C 160 65, 170 70, 170 75 C 170 80, 160 85, 150 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="120" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="95" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="70" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-    </svg>`
-  },
-  {
-    id: 'lion',
-    name: '어흥 사자',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M 140 90 Q 170 70, 175 45" stroke="#333" stroke-width="4" fill="none"/>
-      <circle class="fillable" cx="175" cy="45" r="8" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="65" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="85" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="115" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <rect class="fillable" x="135" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <ellipse class="fillable" cx="110" cy="85" rx="40" ry="25" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 60 20 C 80 15, 100 30, 105 50 C 115 70, 105 95, 80 105 C 50 115, 25 95, 20 70 C 15 45, 35 25, 60 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="65" cy="65" r="22" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="48" cy="48" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="82" cy="48" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle cx="58" cy="60" r="3" fill="#333"/>
-      <circle cx="72" cy="60" r="3" fill="#333"/>
-      <polygon points="62,68 68,68 65,73" fill="#333"/>
-      <path d="M 65 73 Q 60 80, 55 77" stroke="#333" stroke-width="3" fill="none"/>
-      <path d="M 65 73 Q 70 80, 75 77" stroke="#333" stroke-width="3" fill="none"/>
-    </svg>`
-  },
-  {
-    id: 'whale',
-    name: '고래',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path class="fillable" d="M 120 60 Q 100 30, 90 40 Q 80 50, 110 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 130 60 Q 150 20, 165 35 Q 180 50, 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <line x1="125" y1="30" x2="125" y2="60" stroke="#333" stroke-width="4"/>
-      <path class="fillable" d="M 40 100 L 10 70 C 20 90, 20 110, 10 130 L 40 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 40 100 C 40 50, 180 40, 180 100 C 180 140, 80 140, 40 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path class="fillable" d="M 110 110 Q 130 140, 150 120 Q 130 110, 110 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle cx="155" cy="85" r="5" fill="#333"/>
-      <path d="M 180 100 Q 165 115, 145 105" stroke="#333" stroke-width="4" fill="none"/>
-    </svg>`
-  },
-  {
-    id: 'icecream',
-    name: '아이스크림',
-    svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-      <path class="fillable" d="M 75 90 L 100 140 L 125 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <line x1="85" y1="95" x2="105" y2="130" stroke="#333" stroke-width="3"/>
-      <line x1="115" y1="95" x2="95" y2="130" stroke="#333" stroke-width="3"/>
-      <circle class="fillable" cx="100" cy="70" r="30" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <circle class="fillable" cx="100" cy="35" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
-      <path d="M 100 25 Q 110 15, 120 20" stroke="#333" stroke-width="3" fill="none"/>
-    </svg>`
-  }
+    {
+      id: 'rocket',
+      name: '우주 로켓',
+      emoji: '🚀',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" d="M 80 80 L 50 120 L 80 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 120 80 L 150 120 L 120 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 100 20 C 130 50, 125 110, 100 120 C 75 110, 70 50, 100 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="100" cy="65" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="100" cy="65" r="8" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 85 120 L 100 145 L 115 120 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'dino',
+      name: '공룡',
+      emoji: '🦖',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" d="M 120 90 L 170 110 L 130 115 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="65" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="85" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="110" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="130" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" cx="105" cy="90" rx="35" ry="25" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 80 80 Q 60 50, 60 30 L 40 30 Q 40 10, 60 15 Q 75 15, 75 30 Q 80 50, 100 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle cx="55" cy="22" r="3" fill="#333"/>
+      </svg>`
+    },
+    {
+      id: 'train',
+      name: '칙칙폭폭 기차',
+      emoji: '🚂',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" d="M 30 110 L 30 50 L 80 50 L 80 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 20 50 L 90 50 L 90 35 L 20 35 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 80 110 L 80 65 L 150 65 L 150 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 150 110 L 170 110 L 150 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 120 65 L 120 35 L 145 35 L 145 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="45" y="65" width="20" height="25" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="55" cy="115" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="100" cy="115" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="135" cy="115" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="132" cy="20" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="115" cy="10" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'airplane',
+      name: '슈웅 비행기',
+      emoji: '✈️',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" d="M 30 75 L 10 40 L 60 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 30 75 L 10 110 L 60 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 20 75 C 20 50, 150 40, 180 75 C 150 110, 20 100, 20 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 80 60 L 130 15 L 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 80 90 L 110 135 L 140 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 150 65 C 160 65, 170 70, 170 75 C 170 80, 160 85, 150 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="120" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="95" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="70" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'lion',
+      name: '어흥 사자',
+      emoji: '🦁',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M 140 90 Q 170 70, 175 45" stroke="#333" stroke-width="4" fill="none"/>
+        <circle class="fillable" cx="175" cy="45" r="8" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="65" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="85" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="115" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="135" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" cx="110" cy="85" rx="40" ry="25" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 60 20 C 80 15, 100 30, 105 50 C 115 70, 105 95, 80 105 C 50 115, 25 95, 20 70 C 15 45, 35 25, 60 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="65" cy="65" r="22" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="48" cy="48" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="82" cy="48" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle cx="58" cy="60" r="3" fill="#333"/>
+        <circle cx="72" cy="60" r="3" fill="#333"/>
+        <polygon points="62,68 68,68 65,73" fill="#333"/>
+        <path d="M 65 73 Q 60 80, 55 77" stroke="#333" stroke-width="3" fill="none"/>
+        <path d="M 65 73 Q 70 80, 75 77" stroke="#333" stroke-width="3" fill="none"/>
+      </svg>`
+    },
+    {
+      id: 'whale',
+      name: '고래',
+      emoji: '🐳',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" d="M 120 60 Q 100 30, 90 40 Q 80 50, 110 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 130 60 Q 150 20, 165 35 Q 180 50, 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <line x1="125" y1="30" x2="125" y2="60" stroke="#333" stroke-width="4"/>
+        <path class="fillable" d="M 40 100 L 10 70 C 20 90, 20 110, 10 130 L 40 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 40 100 C 40 50, 180 40, 180 100 C 180 140, 80 140, 40 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 110 110 Q 130 140, 150 120 Q 130 110, 110 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle cx="155" cy="85" r="5" fill="#333"/>
+        <path d="M 180 100 Q 165 115, 145 105" stroke="#333" stroke-width="4" fill="none"/>
+      </svg>`
+    },
+    {
+      id: 'icecream',
+      name: '아이스크림',
+      emoji: '🍦',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" d="M 75 90 L 100 140 L 125 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <line x1="85" y1="95" x2="105" y2="130" stroke="#333" stroke-width="3"/>
+        <line x1="115" y1="95" x2="95" y2="130" stroke="#333" stroke-width="3"/>
+        <circle class="fillable" cx="100" cy="70" r="30" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="100" cy="35" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path d="M 100 25 Q 110 15, 120 20" stroke="#333" stroke-width="3" fill="none"/>
+      </svg>`
+    }
   ];
 
   /* ── State ───────────────────────────────── */
   const state = {
     container: null, options: {},
-    tab: 'free',   // 'free' | 'coloring'
-    mode: 'free',  // 'free' | 'eraser'
+    tab: 'free',   
+    mode: 'free',  
     canvas: null, ctx: null,
     isDrawing: false, currentColor: '#FF4444', currentSize: 15,
     isRainbow: false, hue: 0,
@@ -234,8 +241,11 @@
       .az-mode-tab{padding:11px 26px;border-radius:24px;border:3px solid #ddd;background:#f9f9f9;font-weight:800;font-size:17px;cursor:pointer;transition:all .2s;}
       .az-mode-tab.active{background:#FF7A1A;color:#fff;border-color:#FF7A1A;transform:scale(1.05);}
       .az-sub-row{display:flex;gap:10px;padding:4px 12px 10px;overflow-x:auto;scrollbar-width:none;}
+      
+      /* 이모지 전용 템플릿 버튼 스타일을 위해 폰트 크기 키움 */
       .az-cat-btn{flex-shrink:0;padding:7px 16px;border-radius:18px;border:3px solid #eee;background:#fff;font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;}
       .az-cat-btn.active{border-color:#FF7A1A;color:#FF7A1A;box-shadow:0 4px 10px rgba(255,122,26,.2);}
+      #azTplRow .az-cat-btn { font-size: 26px; padding: 4px 16px; border-radius: 20px; }
 
       /* main canvas area */
       .az-main{flex:1;position:relative;padding:14px;display:flex;align-items:center;justify-content:center;min-height:0;}
@@ -321,7 +331,63 @@
       .az-exhibit-btn{min-height:54px;border-radius:18px;border:0;background:#f2f4f8;color:#233044;font:inherit;font-size:clamp(13px,3.6vw,17px);font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.14);cursor:pointer;}
       .az-exhibit-btn.primary{background:#FF7A1A;color:#fff;box-shadow:0 5px 0 #E65100;}
       .az-exhibit-btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.14);}
-      @media(max-width:420px){.az-exhibit-actions{grid-template-columns:1fr}.az-exhibit-card{padding:14px;border-radius:28px;}}
+
+      /* ────────────────────────────────────────────────
+         1. 태블릿 최적화 (가로폭도 넓고, 높이도 충분한 기기)
+      ──────────────────────────────────────────────── */
+      @media (min-width: 768px) and (min-height: 600px) {
+        .az-header { flex-direction: row; align-items: center; justify-content: space-between; padding: 12px 24px; }
+        .az-mode-tabs { padding: 0; }
+        .az-sub-row { padding: 0; flex-wrap: wrap; justify-content: flex-end; }
+        
+        #azTplRow .az-cat-btn { font-size: 34px; padding: 6px 18px; }
+
+        .az-main { padding: 24px 40px; }
+        .az-canvas-wrap { border-width: 12px; border-radius: 36px; }
+
+        .az-footer { padding: 20px 40px; gap: 20px; }
+        .az-palette-row { justify-content: center; gap: 16px; overflow-x: visible; }
+        .az-color-circle, .az-stamp-circle { width: 72px; height: 72px; border-width: 5px; font-size: 38px; }
+        .az-color-circle.active, .az-stamp-circle.active { transform: scale(1.15) translateY(-8px); }
+        
+        .az-controls { gap: 24px; justify-content: center; }
+        .az-size-group { gap: 12px; }
+        .az-size-btn { width: 64px; height: 64px; font-size: 16px; border-width: 4px; }
+        .az-icon-btns { gap: 12px; }
+        .az-icon-btn { width: 72px; height: 72px; font-size: 34px; border-radius: 22px; }
+        
+        .az-done-btn { flex: none; width: auto; padding: 0 40px; height: 72px; font-size: 24px; border-radius: 24px; }
+      }
+
+      /* ────────────────────────────────────────────────
+         2. 스마트폰 가로 모드 최적화 (높이가 낮고 가로로 긴 화면)
+      ──────────────────────────────────────────────── */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .az-header { flex-direction: row; align-items: center; justify-content: space-between; padding: 4px 16px; border-width: 3px; }
+        .az-mode-tabs { padding: 0; }
+        .az-mode-tab { padding: 6px 16px; font-size: 14px; }
+        .az-cat-btn { padding: 4px 12px; font-size: 13px; }
+        
+        #azTplRow .az-cat-btn { font-size: 20px; padding: 2px 12px; }
+        
+        .az-main { padding: 6px 16px; }
+        .az-canvas-wrap { border-width: 4px; border-radius: 16px; }
+
+        .az-footer { padding: 6px 16px; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; border-width: 3px; }
+        .az-palette-row { padding: 0; gap: 6px; }
+        .az-color-circle, .az-stamp-circle { width: 42px; height: 42px; font-size: 20px; border-width: 3px; }
+        .az-sep { height: 30px; }
+        
+        .az-controls { gap: 10px; }
+        .az-size-btn { width: 38px; height: 38px; font-size: 11px; }
+        .az-icon-btn { width: 42px; height: 42px; font-size: 20px; border-radius: 12px; }
+        .az-done-btn { height: 42px; font-size: 15px; padding: 0 16px; border-radius: 12px; }
+        
+        .az-header, .az-main, .az-footer {
+          padding-left: max(16px, env(safe-area-inset-left));
+          padding-right: max(16px, env(safe-area-inset-right));
+        }
+      }
     `;
     document.head.appendChild(s);
   }
@@ -349,7 +415,7 @@
             ${Object.keys(THEMES).map(k=>`<button class="az-cat-btn${k===state.activeTheme?' active':''}" data-theme="${k}">${THEMES[k].label}</button>`).join('')}
           </div>
           <div class="az-sub-row" id="azTplRow" style="display:none;">
-            ${COLORING_TEMPLATES.map(t=>`<button class="az-cat-btn${t.id===state.activeTemplateId?' active':''}" data-tpl="${t.id}">${t.emoji} ${t.name}</button>`).join('')}
+            ${COLORING_TEMPLATES.map(t=>`<button class="az-cat-btn${t.id===state.activeTemplateId?' active':''}" data-tpl="${t.id}">${t.emoji}</button>`).join('')}
           </div>
         </div>
 
@@ -440,6 +506,7 @@
         btn.classList.add('active');
         const tpl = COLORING_TEMPLATES.find(t => t.id === state.activeTemplateId);
         renderColoringTemplate(tpl);
+        // t.name을 남겨두었기 때문에 TTS는 "경찰차를 같이 색칠해볼까?" 하고 자연스럽게 나옴
         speak(`${tpl?.name || ''}을 같이 색칠해볼까?`);
       };
     });
@@ -516,24 +583,32 @@
       showArtExhibition();
     };
 
-    // canvas draw events (free mode only)
+    // canvas draw events (free mode only) - ★ Pointer Events로 통합 (태블릿 펜/터치 최적화)
     const canvas = state.canvas;
+    canvas.style.touchAction = 'none';
+
     const getPos = (e) => {
-      const r  = canvas.getBoundingClientRect();
-      const cx = e.touches ? e.touches[0].clientX : e.clientX;
-      const cy = e.touches ? e.touches[0].clientY : e.clientY;
-      return { x: cx - r.left, y: cy - r.top };
+      const r = canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
     };
+
     const drawStart = (e) => {
       if (state.tab !== 'free') return;
+      if (e.pointerType === 'touch') e.preventDefault(); 
+
       const pos = getPos(e);
       if (state.activeStamp) { placeStamp(pos.x, pos.y); return; }
+      
       state.isDrawing = true;
       state.ctx.beginPath();
       state.ctx.moveTo(pos.x, pos.y);
+      canvas.setPointerCapture(e.pointerId); 
     };
+
     const drawMove = (e) => {
       if (!state.isDrawing || state.tab !== 'free' || state.activeStamp) return;
+      if (e.pointerType === 'touch') e.preventDefault();
+
       const pos = getPos(e);
       if (state.mode === 'eraser') {
         state.ctx.globalCompositeOperation = 'destination-out';
@@ -542,6 +617,7 @@
         state.ctx.fill();
         return;
       }
+      
       state.ctx.globalCompositeOperation = 'source-over';
       if (state.isRainbow) {
         state.hue = (state.hue + 5) % 360;
@@ -550,15 +626,27 @@
       } else {
         state.ctx.strokeStyle = state.currentColor;
       }
-      state.ctx.lineWidth = state.currentSize;
+      
+      // 태블릿 펜 필압 지원
+      const pressure = e.pointerType === 'pen' ? e.pressure : 1;
+      state.ctx.lineWidth = state.currentSize * (0.8 + (pressure * 0.4));
+      
       state.ctx.lineTo(pos.x, pos.y);
       state.ctx.stroke();
     };
-    canvas.addEventListener('mousedown', drawStart);
-    canvas.addEventListener('mousemove', drawMove);
-    window.addEventListener('mouseup', () => { state.isDrawing = false; });
-    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); drawStart(e); }, { passive: false });
-    canvas.addEventListener('touchmove',  (e) => { e.preventDefault(); drawMove(e); },  { passive: false });
+
+    const drawEnd = (e) => {
+      state.isDrawing = false;
+      if (canvas.hasPointerCapture(e.pointerId)) {
+        canvas.releasePointerCapture(e.pointerId);
+      }
+    };
+
+    canvas.addEventListener('pointerdown', drawStart);
+    canvas.addEventListener('pointermove', drawMove);
+    canvas.addEventListener('pointerup', drawEnd);
+    canvas.addEventListener('pointercancel', drawEnd);
+    canvas.addEventListener('pointerout', drawEnd);
   }
 
   /* ── Tab switch ──────────────────────────── */
@@ -608,7 +696,7 @@
       svg.style.cssText = 'width:100%;height:100%;overflow:visible;';
     }
 
-    // bind fill events to every .fillable element (path, circle, rect, …)
+    // bind fill events to every .fillable element
     wrap.querySelectorAll('.fillable').forEach(el => {
       const applyFill = (cx, cy) => {
         const fillColor = state.isRainbow
@@ -623,12 +711,10 @@
         timer(() => checkColoringComplete(tpl), 450);
       };
 
-      el.addEventListener('click',    (e) => applyFill(e.clientX, e.clientY));
-      el.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        const t = e.changedTouches[0];
-        if (t) applyFill(t.clientX, t.clientY);
-      }, { passive: false });
+      el.addEventListener('pointerup', (e) => {
+        if (state.isDrawing) return; 
+        applyFill(e.clientX, e.clientY);
+      });
     });
   }
 
