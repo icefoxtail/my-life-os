@@ -1,9 +1,12 @@
+/**
+ * 시현이 놀이터 OS — 🚗 자동차 메모리 게임 (Vehicle Memory)
+ * 파일: js/games/vehicle-memory.js
+ * 버전: v5.0 (난이도 선택, 마법 카드 뒷면, 3초 피날레 딜레이 추가)
+ */
 (function () {
   const GAME_KEY = 'vehicleMemory';
   const STYLE_ID = 'sihyeon-vehicle-memory-style';
   const MANIFEST_URL = './assets/vehicles/vehicles_manifest.json';
-  const CARD_COUNT = 12;
-  const PAIR_COUNT = CARD_COUNT / 2;
 
   const EMOJI_CATEGORIES = {
     '🍎과일': [
@@ -58,8 +61,10 @@
       { id:'animal_16', name:'양',     emoji:'🐑' },
     ],
   };
-  let selectedCategory = '🚗탈것'; // 기본값
-  let selectedVehicleCategory = 'all';
+
+  let selectedCategory = '🚗탈것'; // 기본 카테고리
+  let selectedVehicleCategory = 'all'; // 자동차 세부 카테고리
+  let selectedCardCount = 8; // ★ 카드 개수 기본값 8장 (4쌍)
 
   const VEHICLE_CATEGORIES = [
     { id: 'all', label: '🚗전체' },
@@ -100,240 +105,157 @@
     style.id = STYLE_ID;
     style.textContent = `
       .memory-game-container {
-        width: 100%;
-        height: 100%;
-        min-height: 0;
-        padding: 10px 14px 18px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        color: #17324a;
-        overflow: hidden;
+        width: 100%; height: 100%; min-height: 0; padding: 10px 14px 18px;
+        display: flex; flex-direction: column; gap: 12px;
+        color: #17324a; overflow: hidden; font-family: 'Jua', sans-serif;
       }
-      .memory-game-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        flex-shrink: 0;
-      }
+      .memory-game-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-shrink: 0; }
       .memory-game-pill {
-        min-height: 48px;
-        padding: 8px 16px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.88);
-        border: 4px solid #fff;
-        box-shadow: 0 6px 0 rgba(0,0,0,0.16);
-        font-size: clamp(18px, 4.8vw, 26px);
-        font-weight: 900;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+        min-height: 48px; padding: 8px 16px; border-radius: 999px;
+        background: rgba(255,255,255,0.88); border: 4px solid #fff;
+        box-shadow: 0 6px 0 rgba(0,0,0,0.16); font-size: clamp(18px, 4.8vw, 26px);
+        font-weight: 900; display: inline-flex; align-items: center; gap: 8px;
       }
-      .memory-game-actions {
-        display: flex;
-        gap: 8px;
-        flex-shrink: 0;
-      }
+      .memory-game-actions { display: flex; gap: 8px; flex-shrink: 0; }
       .memory-game-btn {
-        min-width: 70px;
-        min-height: 48px;
-        padding: 8px 13px;
-        border-radius: 999px;
+        min-width: 70px; min-height: 48px; padding: 8px 13px; border-radius: 999px;
         background: linear-gradient(180deg,#fff 0%,#ffe577 100%);
-        border: 4px solid #fff;
-        box-shadow: 0 6px 0 rgba(0,0,0,0.16);
-        color: #17324a;
-        font: inherit;
-        font-size: 18px;
-        font-weight: 900;
-        cursor: pointer;
+        border: 4px solid #fff; box-shadow: 0 6px 0 rgba(0,0,0,0.16);
+        color: #17324a; font: inherit; font-size: 18px; font-weight: 900; cursor: pointer;
       }
-      .memory-game-btn:active {
-        transform: translateY(4px);
-        box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+      .memory-game-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.18); }
+
+      /* 카테고리 & 난이도 선택 바 */
+      .memory-filter-row {
+        width: 100%; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+        padding: 0 0 4px; flex-shrink: 0; align-items: center;
       }
+      .memory-filter-row::-webkit-scrollbar { display: none; }
+      
+      .memory-cat-chip, .memory-level-chip {
+        flex-shrink: 0; min-height: 46px; padding: 0 16px; border-radius: 999px;
+        background: rgba(255,255,255,0.82); border: 4px solid #fff;
+        box-shadow: 0 5px 0 rgba(0,0,0,0.14); font-size: clamp(15px, 4vw, 19px);
+        font-weight: 900; cursor: pointer; white-space: nowrap; touch-action: manipulation;
+        transition: transform 0.1s;
+      }
+      .memory-cat-chip:active, .memory-level-chip:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.14); }
+      .memory-cat-chip.active { background: linear-gradient(180deg,#fff 0%,#ffe577 100%); box-shadow: 0 5px 0 rgba(200,140,0,0.25); }
+      
+      /* ★ 난이도 칩 특별 스타일 */
+      .memory-level-chip { border-color: #ffd700; background: #fffdf0; color: #b8860b; }
+      .memory-level-chip.active { background: linear-gradient(180deg,#ffb74d 0%,#ff9800 100%); color: #fff; border-color: #fff; box-shadow: 0 5px 0 rgba(230,81,0,0.3); }
+
+      .memory-vehicle-cat-chip {
+        flex-shrink: 0; min-height: 40px; padding: 0 14px; border-radius: 999px;
+        background: rgba(255,255,255,0.76); border: 3px solid #fff;
+        box-shadow: 0 4px 0 rgba(0,0,0,0.12); font-size: clamp(13px, 3.4vw, 16px);
+        font-weight: 900; cursor: pointer; white-space: nowrap; touch-action: manipulation;
+      }
+      .memory-vehicle-cat-chip.active {
+        background: linear-gradient(180deg,#e8f5ff 0%,#a7e4ff 100%); color: #0d47a1; box-shadow: 0 4px 0 rgba(13,71,161,0.22);
+      }
+
+      /* 게임 보드 */
       .memory-board {
-        flex: 1;
-        min-height: 0;
-        display: grid;
+        flex: 1; min-height: 0; display: grid; gap: clamp(8px, 2.4vw, 14px);
+        /* 카드가 12장, 16장이면 자동으로 크기 조절 */
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: clamp(8px, 2.4vw, 14px);
       }
       .memory-card {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        min-height: 86px;
-        border: 0;
-        background: transparent;
-        perspective: 900px;
-        cursor: pointer;
-        touch-action: manipulation;
+        position: relative; width: 100%; height: 100%; min-height: 70px;
+        border: 0; background: transparent; perspective: 900px; cursor: pointer; touch-action: manipulation;
       }
       .memory-card-inner {
-        position: absolute;
-        inset: 0;
-        transform-style: preserve-3d;
-        transition: transform 0.32s cubic-bezier(0.2,0.8,0.2,1);
+        position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
       }
-      .memory-card.is-open .memory-card-inner,
-      .memory-card.is-matched .memory-card-inner {
+      .memory-card.is-open .memory-card-inner, .memory-card.is-matched .memory-card-inner {
         transform: rotateY(180deg);
       }
       .memory-card-face {
-        position: absolute;
-        inset: 0;
-        backface-visibility: hidden;
-        border-radius: 22px;
-        border: 5px solid #fff;
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-        box-shadow: 0 8px 0 rgba(0,0,0,0.18), inset 0 3px 0 rgba(255,255,255,0.55);
+        position: absolute; inset: 0; backface-visibility: hidden; border-radius: 20px;
+        display: grid; place-items: center; overflow: hidden;
       }
+      
+      /* ★ 반짝반짝 화려한 카드 뒷면 (마법 무지개 애니메이션) */
       .memory-card-back {
-        background:
-          radial-gradient(circle at 28% 22%, rgba(255,255,255,0.45) 0 16%, transparent 17%),
-          linear-gradient(145deg,#1e90ff 0%,#1956d8 100%);
+        background: linear-gradient(45deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #9D4EDD, #FF6B6B);
+        background-size: 400% 400%;
+        animation: magicRainbow 5s ease infinite;
+        border: 5px solid #fff;
+        box-shadow: inset 0 0 15px rgba(255,255,255,0.8), 0 8px 0 rgba(0,0,0,0.18);
         color: #fff;
-        font-size: clamp(34px, 11vw, 58px);
-        text-shadow: 0 3px 0 rgba(0,0,0,0.2);
       }
+      .memory-card-back::before {
+        content: '🌟';
+        font-size: clamp(34px, 10vw, 54px);
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        animation: starPulse 1.5s ease-in-out infinite alternate;
+      }
+      @keyframes magicRainbow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      @keyframes starPulse {
+        0% { transform: scale(0.8) rotate(-15deg); opacity: 0.8; }
+        100% { transform: scale(1.2) rotate(15deg); opacity: 1; }
+      }
+
+      /* 카드 앞면 */
       .memory-card-front {
         transform: rotateY(180deg);
         background: linear-gradient(180deg,#ffffff 0%,#fff6c7 100%);
+        border: 5px solid #fff;
+        box-shadow: 0 8px 0 rgba(0,0,0,0.18), inset 0 3px 0 rgba(255,255,255,0.55);
       }
       .memory-card-front img {
-        max-width: 92%;
-        max-height: 92%;
-        object-fit: contain;
-        filter: drop-shadow(0 8px 0 rgba(0,0,0,0.12));
+        max-width: 90%; max-height: 90%; object-fit: contain; filter: drop-shadow(0 8px 0 rgba(0,0,0,0.12));
       }
-      .memory-card-fallback {
-        font-size: clamp(38px, 12vw, 64px);
-      }
+      .memory-card-fallback { font-size: clamp(38px, 12vw, 64px); }
+      .memory-card-front .memory-emoji-face { font-size: clamp(44px, 14vw, 72px); line-height: 1; filter: drop-shadow(0 6px 0 rgba(0,0,0,0.15)); }
+
+      /* 정답 맞췄을 때 살짝 튀어오르는 효과 */
+      .memory-card.is-matched { z-index: 10; }
       .memory-card.is-matched .memory-card-face {
-        border-color: #7ed957;
-        box-shadow: 0 8px 0 rgba(34,120,54,0.26), 0 0 0 5px rgba(126,217,87,0.25);
+        border-color: #7ed957; box-shadow: 0 8px 0 rgba(34,120,54,0.26), 0 0 0 6px rgba(126,217,87,0.35);
       }
-      .memory-success-panel {
-        position: absolute;
-        inset: 0;
-        z-index: 20;
-        display: grid;
-        place-items: center;
-        padding: 18px;
-        background: rgba(255,122,26,0.18);
-        backdrop-filter: blur(3px);
+      .memory-card.is-matched .memory-card-inner {
+        animation: cardBounce 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
-      .memory-success-box {
-        width: min(92vw, 520px);
-        border-radius: 28px;
-        background: rgba(255,255,255,0.94);
-        border: 6px solid #fff;
-        box-shadow: 0 12px 0 rgba(0,0,0,0.2);
-        padding: 24px 18px;
-        text-align: center;
-        display: grid;
-        gap: 14px;
+      @keyframes cardBounce {
+        0% { transform: rotateY(180deg) scale(1); }
+        50% { transform: rotateY(180deg) scale(1.15) translateY(-10px); }
+        100% { transform: rotateY(180deg) scale(1); }
       }
-      .memory-success-icon {
-        font-size: clamp(72px, 22vw, 120px);
-        line-height: 1;
+
+      /* ★ 피날레 댄스 (3초 대기 시간 동안 춤추기) */
+      .memory-card.is-finale .memory-card-inner {
+        animation: finaleDance 1.5s infinite alternate;
       }
-      .memory-success-title {
-        font-size: clamp(28px, 8vw, 44px);
-        line-height: 1.08;
-        font-weight: 900;
-        color: #17324a;
+      @keyframes finaleDance {
+        0% { transform: rotateY(180deg) translateY(0) rotate(0deg); }
+        33% { transform: rotateY(180deg) translateY(-8px) rotate(-3deg); }
+        66% { transform: rotateY(180deg) translateY(0) rotate(3deg); }
+        100% { transform: rotateY(180deg) translateY(-8px) rotate(0deg); }
       }
-      .memory-success-actions {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      .memory-loading,
-      .memory-error {
-        flex: 1;
-        display: grid;
-        place-items: center;
-        padding: 26px;
-        text-align: center;
-        color: #fff;
-        font-size: clamp(22px, 6vw, 32px);
-        text-shadow: 0 2px 0 rgba(0,0,0,0.2);
-      }
+
+      /* 성공 패널 */
+      .memory-success-panel { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: 18px; background: rgba(255,122,26,0.18); backdrop-filter: blur(4px); animation: fadeIn 0.4s ease-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+      .memory-success-box { width: min(92vw, 520px); border-radius: 28px; background: rgba(255,255,255,0.96); border: 6px solid #fff; box-shadow: 0 12px 0 rgba(0,0,0,0.2); padding: 24px 18px; text-align: center; display: grid; gap: 14px; }
+      .memory-success-icon { font-size: clamp(72px, 22vw, 120px); line-height: 1; animation: starPulse 1s infinite alternate; }
+      .memory-success-title { font-size: clamp(28px, 8vw, 44px); line-height: 1.08; font-weight: 900; color: #17324a; }
+      .memory-success-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      
+      .memory-loading, .memory-error { flex: 1; display: grid; place-items: center; padding: 26px; text-align: center; color: #fff; font-size: clamp(22px, 6vw, 32px); text-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+      
       @media (max-width: 620px) {
         .memory-game-container { padding: 8px 10px 14px; }
         .memory-game-top { align-items: flex-start; }
         .memory-game-actions { flex-direction: column; }
         .memory-game-btn { min-width: 62px; font-size: 16px; }
-        .memory-board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .memory-card-face { border-radius: 18px; border-width: 4px; }
-      }
-      .memory-cat-bar {
-        width: 100%;
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        padding: 0 0 8px;
-        flex-shrink: 0;
-      }
-      .memory-cat-bar::-webkit-scrollbar { display: none; }
-      .memory-cat-chip {
-        flex-shrink: 0;
-        min-height: 52px;
-        padding: 0 18px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.82);
-        border: 4px solid #fff;
-        box-shadow: 0 5px 0 rgba(0,0,0,0.14);
-        font-size: clamp(15px, 4vw, 19px);
-        font-weight: 900;
-        cursor: pointer;
-        white-space: nowrap;
-        touch-action: manipulation;
-        transition: transform 0.1s;
-      }
-      .memory-cat-chip:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.14); }
-      .memory-cat-chip.active {
-        background: linear-gradient(180deg,#fff 0%,#ffe577 100%);
-        box-shadow: 0 5px 0 rgba(200,140,0,0.25);
-      }
-      .memory-vehicle-cat-bar {
-        width: 100%;
-        display: flex;
-        gap: 7px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        padding: 0 0 8px;
-        flex-shrink: 0;
-      }
-      .memory-vehicle-cat-bar::-webkit-scrollbar { display: none; }
-      .memory-vehicle-cat-chip {
-        flex-shrink: 0;
-        min-height: 42px;
-        padding: 0 14px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.76);
-        border: 3px solid #fff;
-        box-shadow: 0 4px 0 rgba(0,0,0,0.12);
-        font-size: clamp(13px, 3.4vw, 16px);
-        font-weight: 900;
-        cursor: pointer;
-        white-space: nowrap;
-        touch-action: manipulation;
-      }
-      .memory-vehicle-cat-chip.active {
-        background: linear-gradient(180deg,#e8f5ff 0%,#a7e4ff 100%);
-        color: #0d47a1;
-        box-shadow: 0 4px 0 rgba(13,71,161,0.22);
-      }
-      .memory-card-front .memory-emoji-face {
-        font-size: clamp(44px, 14vw, 72px);
-        line-height: 1;
+        .memory-card-face { border-radius: 16px; border-width: 4px; }
       }
     `;
     document.head.appendChild(style);
@@ -373,9 +295,13 @@
       ? state.vehicles
       : state.vehicles.filter((vehicle) => vehicle.category === selectedVehicleCategory);
     const sourcePool = pool.length ? pool : state.vehicles;
+    
+    // 선택된 카드 개수(selectedCardCount)의 절반만큼 페어 구성
+    const pairCount = Math.floor(selectedCardCount / 2);
     let expanded = [...sourcePool];
-    while (expanded.length < PAIR_COUNT) expanded = expanded.concat(sourcePool);
-    const source = shuffle(expanded).slice(0, PAIR_COUNT);
+    while (expanded.length < pairCount) expanded = expanded.concat(sourcePool);
+    const source = shuffle(expanded).slice(0, pairCount);
+    
     return shuffle(source.flatMap((vehicle, index) => [
       { ...vehicle, id: `${vehicle.id}-${index}`, uid: `${vehicle.id}-${index}-a` },
       { ...vehicle, id: `${vehicle.id}-${index}`, uid: `${vehicle.id}-${index}-b` }
@@ -384,7 +310,8 @@
 
   function pickRoundEmoji() {
     const pool = EMOJI_CATEGORIES[selectedCategory] || [];
-    const picked = shuffle(pool).slice(0, PAIR_COUNT);
+    const pairCount = Math.floor(selectedCardCount / 2);
+    const picked = shuffle(pool).slice(0, pairCount);
     return shuffle(picked.flatMap(item => [
       { ...item, uid: `${item.id}-a`, isEmoji: true },
       { ...item, uid: `${item.id}-b`, isEmoji: true }
@@ -431,22 +358,28 @@
     renderMemoryBoard();
     playGameVoice('games.memory.intro');
     const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
-    state.options.speakGuide?.(`${label} 카드 두 장을 골라서 같은 친구를 찾아 보자!`, true);
+    
+    // 시현이 이름 부르기 효과 추가
+    state.options.speakGuide?.(`시현아, ${label} 카드 두 장을 골라서 똑같은 친구를 찾아보자!`, true);
   }
 
   function renderMemoryBoard() {
     const availableVehicleCategories = new Set(state.vehicles.map((vehicle) => vehicle.category));
+    
+    // 카테고리 필터 바
     const catBar = `
-      <div class="memory-cat-bar">
+      <div class="memory-filter-row">
         ${['🚗탈것', ...Object.keys(EMOJI_CATEGORIES)].map(cat => `
           <button class="memory-cat-chip ${selectedCategory === cat ? 'active' : ''}"
             type="button" data-cat="${cat}">${cat}</button>
         `).join('')}
       </div>
     `;
+
+    // 자동차 세부 카테고리 필터 바
     const vehicleCatBar = selectedCategory === '🚗탈것'
       ? `
-        <div class="memory-vehicle-cat-bar">
+        <div class="memory-filter-row" style="padding-bottom: 8px;">
           ${VEHICLE_CATEGORIES
             .filter((cat) => cat.id === 'all' || availableVehicleCategories.has(cat.id))
             .map((cat) => `
@@ -457,6 +390,18 @@
       `
       : '';
 
+    // ★ 난이도(카드 개수) 선택 바
+    const levelBar = `
+      <div class="memory-filter-row">
+        ${[8, 12, 16].map(num => `
+          <button class="memory-level-chip ${selectedCardCount === num ? 'active' : ''}"
+            type="button" data-count="${num}">
+            ${num}장
+          </button>
+        `).join('')}
+      </div>
+    `;
+
     state.container.innerHTML = `
       <div class="memory-game-container">
         <div class="memory-game-top">
@@ -466,13 +411,16 @@
             <button class="memory-game-btn" type="button" data-action="home">홈</button>
           </div>
         </div>
+        
+        ${levelBar}
         ${catBar}
         ${vehicleCatBar}
+
         <div class="memory-board" role="grid" aria-label="카드 맞추기">
           ${state.cards.map((card, index) => `
             <button class="memory-card" type="button" data-index="${index}" aria-label="카드">
               <span class="memory-card-inner">
-                <span class="memory-card-face memory-card-back">★</span>
+                <span class="memory-card-face memory-card-back"></span>
                 <span class="memory-card-face memory-card-front">
                   ${card.isEmoji
                     ? `<span class="memory-emoji-face">${card.emoji}</span>`
@@ -503,6 +451,7 @@
       });
     });
 
+    // 메인 카테고리 클릭
     root.querySelectorAll('.memory-cat-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         selectedCategory = chip.dataset.cat;
@@ -510,9 +459,20 @@
         startRound();
       });
     });
+
+    // 서브 카테고리 (자동차용) 클릭
     root.querySelectorAll('.memory-vehicle-cat-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         selectedVehicleCategory = chip.dataset.vehicleCat || 'all';
+        state.round = 1;
+        startRound();
+      });
+    });
+
+    // 난이도 (카드 개수) 클릭
+    root.querySelectorAll('.memory-level-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        selectedCardCount = parseInt(chip.dataset.count, 10);
         state.round = 1;
         startRound();
       });
@@ -524,69 +484,90 @@
     const cardData = state.cards[index];
     const cardEl = state.container?.querySelector(`.memory-card[data-index="${index}"]`);
     if (!cardData || !cardEl || cardEl.classList.contains('is-open') || cardEl.classList.contains('is-matched')) return;
+    
     cardEl.classList.add('is-open');
     state.flipped.push({ index, data: cardData, el: cardEl });
     state.options.speakGuide?.(cardData.sound || cardData.name);
+    
     if (state.flipped.length === 2) checkMemoryMatch();
   }
 
   function checkMemoryMatch() {
     const [first, second] = state.flipped;
     state.locked = true;
+
+    // 정답일 때
     if (first.data.id === second.data.id) {
       window.setTimeout(() => {
         first.el.classList.add('is-matched');
         second.el.classList.add('is-matched');
-        first.el.classList.remove('is-open');
-        second.el.classList.remove('is-open');
         state.matched += 2;
         state.flipped = [];
-        state.locked = false;
         playGameVoice('games.memory.match');
-        state.options.speakGuide?.(`${first.data.sound || first.data.name}. 짝을 찾았어!`, true);
-        if (state.matched >= CARD_COUNT) showMemorySuccess();
+        state.options.speakGuide?.(`우와! ${first.data.sound || first.data.name} 짝을 찾았어!`, true);
+        
+        // 다 맞췄는지 확인
+        if (state.matched >= selectedCardCount) {
+          triggerFinale(); 
+        } else {
+          // 다 맞춘게 아니면 잠시 후 터치 잠금 해제
+          window.setTimeout(() => { state.locked = false; }, 800);
+        }
       }, 400);
       return;
     }
+
+    // 오답일 때
     window.setTimeout(() => {
       first.el.classList.remove('is-open');
       second.el.classList.remove('is-open');
       state.flipped = [];
       state.locked = false;
       playGameVoice('games.memory.no_match');
-    }, 760);
+      state.options.speakGuide?.(`어라? 다르네. 다시 찾아볼까?`, false);
+    }, 900);
+  }
+
+  // ★ 3초 피날레 대기 기능
+  function triggerFinale() {
+    state.locked = true;
+    state.options.fireConfetti?.();
+    playGameVoice('games.memory.complete');
+    
+    const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
+    state.options.speakGuide?.(`시현아, ${label} 짝을 모두 찾았어! 정말 대단해! 최고야!`, true);
+
+    // 맞춘 카드들이 신나게 춤추는 애니메이션 부여
+    state.container.querySelectorAll('.memory-card').forEach((card, idx) => {
+      setTimeout(() => card.classList.add('is-finale'), idx * 80);
+    });
+
+    // 3초 대기 후 성공 패널 띄우기
+    window.setTimeout(() => {
+      showMemorySuccess();
+    }, 3000);
   }
 
   function showMemorySuccess() {
-    state.locked = true;
-    state.options.fireConfetti?.();
-    state.options.gainExp?.(20);
-    playGameVoice('games.memory.complete');
+    if (!state.container || state.container.querySelector('.memory-success-panel')) return;
     
-    // 카테고리 이름 가이드 대응 (완료 멘트)
-    const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
-    state.options.speakGuide?.(`${label} 짝을 모두 찾았어. 정말 멋져!`, true);
-    
-    const matchedCards = Array.from(state.container.querySelectorAll('.memory-card.is-matched'));
-    const totalDelay = matchedCards.length * 80 + 5000;
-    window.setTimeout(() => {
-      if (!state.container || state.matched < CARD_COUNT || state.container.querySelector('.memory-success-panel')) return;
-      const panel = document.createElement('div');
-      panel.className = 'memory-success-panel';
-      panel.innerHTML = `
-        <div class="memory-success-box">
-          <div class="memory-success-icon">🏁</div>
-          <div class="memory-success-title">다 찾았어!</div>
-          <div class="memory-success-actions">
-            <button class="memory-game-btn" type="button" data-action="restart-success">다시 하기</button>
-            <button class="memory-game-btn" type="button" data-action="next">다음 게임</button>
-          </div>
+    state.options.gainExp?.(selectedCardCount * 2); // 카드 개수에 따라 보상 증가
+
+    const panel = document.createElement('div');
+    panel.className = 'memory-success-panel';
+    panel.innerHTML = `
+      <div class="memory-success-box">
+        <div class="memory-success-icon">🏆</div>
+        <div class="memory-success-title">전부 다 찾았어!</div>
+        <div class="memory-success-actions">
+          <button class="memory-game-btn" type="button" data-action="restart-success">다시 하기</button>
+          <button class="memory-game-btn" type="button" data-action="next">다음 판!</button>
         </div>
-      `;
-      state.container.querySelector('.memory-game-container')?.appendChild(panel);
-      panel.querySelector('[data-action="restart-success"]')?.addEventListener('click', restartMemoryGame);
-      panel.querySelector('[data-action="next"]')?.addEventListener('click', nextMemoryGame);
-    }, totalDelay);
+      </div>
+    `;
+    state.container.querySelector('.memory-game-container')?.appendChild(panel);
+    panel.querySelector('[data-action="restart-success"]')?.addEventListener('click', restartMemoryGame);
+    panel.querySelector('[data-action="next"]')?.addEventListener('click', nextMemoryGame);
   }
 
   function restartMemoryGame() {
