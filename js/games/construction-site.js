@@ -1276,7 +1276,7 @@
     setManagedTimeout(() => {
       state.currentRound += 1;
       startRound();
-    }, 4050);
+    }, 7200);
   }
 
   function getSubjectParticle(text) {

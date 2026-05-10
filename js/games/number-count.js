@@ -485,7 +485,7 @@
               this.state.currentLevel++;
               this.state.isAnimating = false;
               this.loadNextQuestion();
-            }, 5500);
+            }, 7600);
           });
         });
         return;

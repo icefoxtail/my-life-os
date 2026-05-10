@@ -465,7 +465,7 @@
       vibrate([90, 60, 90, 60, 240]);
       state.options.fireConfetti?.();
       state.options.gainExp?.(30);
-      setTimer(() => showSuccessOverlay('⭐⭐⭐', '완벽해요!', '숫자 5를 완성했어!', () => startNumberMode(false)), 1800);
+      setTimer(() => showSuccessOverlay('⭐⭐⭐', '완벽해요!', '숫자 5를 완성했어!', () => startNumberMode(false)), 4200);
     } else {
       state.isAnimating = false;
     }
@@ -604,7 +604,7 @@
       state.buildRound += 1;
       state.isAnimating = false;
       startBuildRound();
-    }, 2600);
+    }, 6500);
   }
 
   function showSuccessOverlay(icon, title, sub, replayFn) {

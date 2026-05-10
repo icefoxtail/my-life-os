@@ -228,7 +228,7 @@
           if (!this.state.container) return;
           this.state.currentLevel++;
           this.startLevel();
-        }, 3500);
+        }, 6500);
 
       } else {
         if (balloonEl.classList.contains('cb-wobble')) return;

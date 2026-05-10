@@ -450,7 +450,7 @@
   }
 
   function getSuccessMessageHoldMs(message) {
-    return Math.min(9000, Math.max(5200, String(message || '').length * 125));
+    return Math.min(11000, Math.max(7600, String(message || '').length * 145));
   }
 
   function showMessage(text) {

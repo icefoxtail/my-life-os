@@ -878,7 +878,7 @@ window.SihyeonGames.letterPlay = {
         this._state.score++;
         this._options?.gainExp?.(15);
         this._options?.fireConfetti?.();
-        const t = setTimeout(() => this._showWordRoundResult(round), 1500);
+        const t = setTimeout(() => this._showWordRoundResult(round), 3600);
         this._timers.push(t);
       });
     } else {
@@ -897,7 +897,7 @@ window.SihyeonGames.letterPlay = {
         this._state.score++;
         this._options?.gainExp?.(10);
         this._options?.fireConfetti?.();
-        const t = setTimeout(() => this._advanceSyllable(), 1500);
+        const t = setTimeout(() => this._advanceSyllable(), 3600);
         this._timers.push(t);
       });
     } else {

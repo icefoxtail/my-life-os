@@ -371,7 +371,7 @@
     if (state.options.gainExp) state.options.gainExp(40);
     if (state.options.unlockCar) state.options.unlockCar(v.emoji);
 
-    setTimeout(() => { if (!state.destroyed) startVehicle(); }, 4000);
+    setTimeout(() => { if (!state.destroyed) startVehicle(); }, 7600);
   }
 
   function speak(text) {
