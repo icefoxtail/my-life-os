@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS - NUMBER COUNT GAME MODULE
-   js/games/number-count.js  [v4 — 전면 업그레이드]
+   js/games/number-count.js  [v5.0 — 4살 시현이 맞춤 초고속 몰입 업그레이드]
 ═══════════════════════════════════════════ */
 (function(){
   window.SihyeonGames = window.SihyeonGames || {};
@@ -87,7 +87,6 @@
     return 3;
   }
 
-  /* 7번: 라운드별 선택지 범위 (초반 좁게) */
   function getChoices(answer, level, difficulty){
     const set = [answer];
     const max = getAnswerMax(difficulty, level);
@@ -96,7 +95,6 @@
       attempts++;
       let n;
       if(max <= 5){
-        /* 1~2라운드: ±2 범위 */
         const offset = (Math.floor(Math.random()*4)+1) * (Math.random()<0.5?1:-1);
         n = Math.max(1, Math.min(max, answer + offset));
       } else {
@@ -104,7 +102,6 @@
       }
       if(!set.includes(n)) set.push(n);
     }
-    /* 부족하면 순차 채우기 */
     for(let n=1; n<=max && set.length<3; n++){
       if(!set.includes(n)) set.push(n);
     }
@@ -132,7 +129,51 @@
       styleElement:null,
       isAnimating:false,
       options:{},
-      timeoutIds:[]
+      timeoutIds:[],
+      audioCtx: null
+    },
+
+    /* ── 오디오 시스템 (자체 SFX) ── */
+    initAudio: function() {
+      if (!window.AudioContext && !window.webkitAudioContext) return;
+      if (!this.state.audioCtx) this.state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (this.state.audioCtx.state === 'suspended') this.state.audioCtx.resume().catch(()=>{});
+    },
+
+    playTone: function(type) {
+      if (!this.state.audioCtx) return;
+      const ctx = this.state.audioCtx;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+
+      if (type === 'pop') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        osc.start(now); osc.stop(now + 0.2);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.linearRampToValueAtTime(100, now + 0.2);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        osc.start(now); osc.stop(now + 0.3);
+      } else if (type === 'complete') {
+        [440, 554.37, 659.25, 880].forEach((freq, i) => {
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.type = 'sine';
+          o.frequency.setValueAtTime(freq, now + i * 0.1);
+          g.gain.setValueAtTime(0.2, now + i * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.5);
+          o.connect(g); g.connect(ctx.destination);
+          o.start(now + i * 0.1); o.stop(now + i * 0.1 + 0.6);
+        });
+      }
     },
 
     /* ════════════════════════════
@@ -142,6 +183,7 @@
       this.destroy();
       this.state.container = container;
       this.state.options   = options || {};
+      this.initAudio();
       this.injectStyles();
 
       container.innerHTML = `
@@ -191,9 +233,6 @@
       this.startNewGameSession();
     },
 
-    /* ════════════════════════════
-       loadVehicles
-    ════════════════════════════ */
     loadVehicles: async function(){
       try{
         const res  = await fetch(MANIFEST_URL, {cache:'no-store'});
@@ -208,9 +247,6 @@
       }
     },
 
-    /* ════════════════════════════
-       세션 / 재시작
-    ════════════════════════════ */
     startNewGameSession:function(){
       this.clearTimers();
       const allVehicles = this.state.vehicles.length ? this.state.vehicles : FALLBACK.map(normalizeVehicle).filter(Boolean);
@@ -235,13 +271,11 @@
       const choices = this.query('#ncChoicesArea');
       if(panel)   panel.style.display = 'none';
       if(choices){ choices.style.display='flex'; choices.style.visibility='visible'; }
+      
       playGameVoice('games.number.intro');
       this.loadNextQuestion();
     },
 
-    /* ════════════════════════════
-       문제 로드
-    ════════════════════════════ */
     loadNextQuestion:function(){
       this.clearTimers();
       if(!this.state.container) return;
@@ -255,7 +289,6 @@
       this.applyTheme(this.state.currentLevel - 1);
       this.renderDotProgress();
 
-      /* 차량 그리드 빌드 (초기 오프스크린) */
       const wrapper = this.query('#ncVehiclesWrapper');
       if(!wrapper) return;
       wrapper.innerHTML = '';
@@ -266,7 +299,6 @@
       for(let i=0; i<count; i++){
         const wrap = document.createElement('div');
         wrap.className = 'nc-vehicle-cell';
-        /* 초기: 화면 왼쪽 밖에 숨김 */
         wrap.style.transform  = 'translateX(-110vw)';
         wrap.style.opacity    = '0';
         wrap.style.transition = 'none';
@@ -274,89 +306,47 @@
         const img = document.createElement('img');
         img.src       = this.state.currentVehicle.image;
         img.alt       = '';
-        img.className = 'nc-vehicle-img';
+        img.className = 'nc-vehicle-img nc-idle-anim'; // 살아있는 애니메이션 추가
         img.draggable = false;
         img.onerror   = ()=>{ img.onerror=null; img.src='./assets/vehicles/transport/car.png'; };
 
         wrap.appendChild(img);
         wrapper.appendChild(wrap);
 
-        /* 6번: 차량 탭 시 TTS */
         wrap.addEventListener('click', ()=>{
+          this.initAudio();
+          this.playTone('pop');
           this.say(this.state.currentVehicle.sound, true);
           wrap.style.transition = 'transform 0.15s';
-          wrap.style.transform  = 'scale(1.12) rotate(-3deg)';
+          wrap.style.transform  = 'scale(1.2) rotate(-5deg)';
           this.setManagedTimeout(()=>{ wrap.style.transform=''; }, 160);
         });
       }
 
-      /* 선택지 숨김 */
       const choicesArea = this.query('#ncChoicesArea');
       if(choicesArea){ choicesArea.style.visibility='hidden'; }
 
-      /* ━━━ 3·2·1 카운트다운 후 드라이브인 ━━━ */
-      this.showCountdown(()=>{
-        this.driveIn(wrapper, ()=>{
-          if(choicesArea) choicesArea.style.visibility = 'visible';
-          this.renderChoices();
-          playGameVoice('games.number.question');
-          this.say(`${this.state.currentVehicle.name}! 몇 대일까?`, true);
-        });
+      // ★ 3-2-1 카운트다운 제거하고 바로 쌩~ 들어오게 함!
+      this.driveIn(wrapper, ()=>{
+        if(choicesArea) choicesArea.style.visibility = 'visible';
+        this.renderChoices();
+        playGameVoice('games.number.question');
+        this.say(`시현아! ${this.state.currentVehicle.name}가 몇 대인지 세어볼까?`, true);
       });
     },
 
-    /* ════════════════════════════
-       ★ 3·2·1 카운트다운
-    ════════════════════════════ */
-    showCountdown:function(done){
-      const game = this.query('#ncGame');
-      if(!game){ done(); return; }
-
-      const overlay = document.createElement('div');
-      overlay.className = 'nc-countdown-overlay';
-      game.appendChild(overlay);
-
-      const steps = [
-        { num:'3', tts:'셋' },
-        { num:'2', tts:'둘' },
-        { num:'1', tts:'하나' },
-      ];
-      let idx = 0;
-
-      const next = ()=>{
-        if(idx >= steps.length){
-          this.setManagedTimeout(()=>{
-            if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
-            done();
-          }, 280);
-          return;
-        }
-        const step = steps[idx++];
-        overlay.innerHTML = `<div class="nc-countdown-num">${step.num}</div>`;
-        this.speakDirect(step.tts);
-        this.setManagedTimeout(next, 950);
-      };
-      next();
-    },
-
-    /* ════════════════════════════
-       ★ 차량 드라이브인
-    ════════════════════════════ */
     driveIn:function(wrapper, done){
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
-          cell.style.transition = 'transform 0.45s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s';
-          cell.style.transform  = '';
+          cell.style.transition = 'transform 0.4s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s';
+          cell.style.transform  = 'translateX(0)';
           cell.style.opacity    = '1';
-        }, i * 130);
+        }, i * 100);
       });
-      this.setManagedTimeout(done, cells.length * 130 + 480);
+      this.setManagedTimeout(done, cells.length * 100 + 400);
     },
 
-    /* ════════════════════════════
-       배경 테마
-    ════════════════════════════ */
     applyTheme:function(idx){
       const t    = BG_THEMES[idx] || BG_THEMES[0];
       const game = this.query('#ncGame');
@@ -367,6 +357,11 @@
       if(road){ road.style.background=t.road; road.style.boxShadow=`0 12px 0 ${t.roadShadow}`; }
       if(c1) c1.style.opacity = t.cloud ? '0.82' : '0';
       if(c2) c2.style.opacity = t.cloud ? '0.82' : '0';
+      
+      const area = this.query('#ncObjectsArea');
+      if (area) {
+        area.querySelectorAll('.nc-bg-star, .nc-snowflake').forEach(el => el.remove());
+      }
       if(idx === 2) this.spawnStars();
       if(idx === 3) this.spawnSnowflakes();
     },
@@ -400,9 +395,6 @@
       }
     },
 
-    /* ════════════════════════════
-       진행 도트
-    ════════════════════════════ */
     renderDotProgress:function(){
       const el = this.query('#ncDotProgress');
       if(!el) return;
@@ -416,9 +408,6 @@
       }
     },
 
-    /* ════════════════════════════
-       ★ 선택 버튼 (숫자 + 도트)
-    ════════════════════════════ */
     renderChoices:function(){
       const area = this.query('#ncChoicesArea');
       if(!area) return;
@@ -433,19 +422,21 @@
         btn.dataset.answer  = String(num);
         if(num === ans) btn.dataset.correct = 'true';
 
-        /* 숫자 + 도트 */
         const dotHTML = '<span class="nc-choice-dot"></span>'.repeat(num);
         btn.innerHTML = `
           <div class="nc-choice-num">${num}</div>
           <div class="nc-choice-dots">${dotHTML}</div>
         `;
-        btn.onclick = ()=> this.checkAnswer(num);
+        btn.onclick = ()=> {
+          this.initAudio();
+          this.checkAnswer(num);
+        }
         area.appendChild(btn);
       });
     },
 
     /* ════════════════════════════
-       정답 확인
+       정답 확인 (초고속 진행)
     ════════════════════════════ */
     checkAnswer:function(selected){
       if(this.state.isAnimating || !this.state.container) return;
@@ -453,39 +444,33 @@
       const choices = this.query('#ncChoicesArea');
       if(!wrapper || !choices) return;
 
-      /* ── 정답 ── */
       if(selected === this.state.currentAnswer){
         this.state.isAnimating = true;
         this.state.correctCount++;
         choices.querySelectorAll('button').forEach(b=>{ b.disabled=true; });
 
-        /* ① 카운팅 하이라이트 + TTS 동기화 */
+        // ★ 메가 플래시 & 효과음
+        this.flashScreen();
+        this.playTone('pop');
+        if (navigator.vibrate) try { navigator.vibrate([100, 50, 100]); } catch(e){}
+
         this.runCountingHighlight(wrapper, ()=>{
-
-          /* ② 차량 달려나가기 */
           this.driveOut(wrapper, ()=>{
-
-            /* ③ 숫자 각인 스탬프 */
             this.showNumberStamp(this.state.currentAnswer);
-
-            /* ④ 별 폭죽 + 정답 이모지 */
-            this.createStars(18);
+            this.createParticles(15);
             this.showCorrectEmoji();
             if(this.state.options.fireConfetti) this.state.options.fireConfetti();
 
-            /* ⑤ 음성 */
             const spokenNum = KOREAN_COUNT[this.state.currentAnswer] || this.state.currentAnswer;
-            const vName     = this.state.currentVehicle.name;
-            const vSound    = this.state.currentVehicle.sound;
             playGameVoice('games.number.correct');
-            this.say(`맞았어. ${spokenNum} 대야. 잘했어. ${vName}, ${vSound}`, true);
+            this.say(`우와 맞았어! ${spokenNum} 대야!`, true);
 
-            /* ⑥ 다음 문제 */
+            // ★ 대기시간 대폭 단축 (7.6초 -> 3.2초)
             this.setManagedTimeout(()=>{
               this.state.currentLevel++;
               this.state.isAnimating = false;
               this.loadNextQuestion();
-            }, 7600);
+            }, 3200);
           });
         });
         return;
@@ -494,14 +479,16 @@
       /* ── 오답 ── */
       this.state.isAnimating = true;
       this.state.wrongCount++;
+      this.playTone('wrong');
+      if (navigator.vibrate) try { navigator.vibrate([50, 50]); } catch(e){}
 
-      /* 5번: 2회 이상 오답 → 정답 버튼 글로우 */
-      if(this.state.wrongCount >= 2){
+      /* 1회 오답만으로도 바로 정답 힌트 제공 (관대함) */
+      if(this.state.wrongCount >= 1){
         this.query('.nc-toy-block-btn[data-correct="true"]')?.classList.add('hint-glow');
       }
 
       playGameVoice('games.number.wrong');
-      this.say('괜찮아. 천천히 다시 세어볼까?', true);
+      this.say('어라? 다시 한 번 천천히 세어보자!', true);
       this.showWrongFlash();
       wrapper.classList.add('shake');
       this.setManagedTimeout(()=>{
@@ -510,12 +497,19 @@
       }, 620);
     },
 
-    /* ════════════════════════════
-       ① 카운팅 하이라이트 + TTS
-    ════════════════════════════ */
+    flashScreen: function() {
+      const game = this.query('#ncGame');
+      if(!game) return;
+      const flash = document.createElement('div');
+      flash.className = 'nc-mega-flash';
+      game.appendChild(flash);
+      this.setManagedTimeout(()=>{ if(flash.parentNode) flash.parentNode.removeChild(flash); }, 600);
+    },
+
     runCountingHighlight:function(wrapper, done){
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
-      const delay = 400;
+      // 속도 더 빠르게 (400ms -> 250ms)
+      const delay = 250;
 
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
@@ -523,32 +517,25 @@
           dot.className   = 'nc-count-dot';
           dot.textContent = i+1;
           cell.appendChild(dot);
-          /* ★ 카운팅 TTS 동기화 */
           this.speakDirect(KOREAN_COUNT[i+1] || String(i+1));
         }, i * delay);
       });
 
-      this.setManagedTimeout(done, cells.length * delay + 400);
+      this.setManagedTimeout(done, cells.length * delay + 300);
     },
 
-    /* ════════════════════════════
-       ② 차량 달려나가기
-    ════════════════════════════ */
     driveOut:function(wrapper, done){
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
-          cell.style.transition = 'transform 0.55s cubic-bezier(0.4,0,1,1), opacity 0.5s';
-          cell.style.transform  = 'translateX(130vw) rotate(5deg)';
+          cell.style.transition = 'transform 0.4s cubic-bezier(0.4,0,1,1), opacity 0.4s';
+          cell.style.transform  = 'translateX(130vw) rotate(10deg)';
           cell.style.opacity    = '0';
-        }, i * 80);
+        }, i * 60);
       });
-      this.setManagedTimeout(done, cells.length * 80 + 620);
+      this.setManagedTimeout(done, cells.length * 60 + 400);
     },
 
-    /* ════════════════════════════
-       ★ 숫자 각인 스탬프
-    ════════════════════════════ */
     showNumberStamp:function(num){
       const area = this.query('#ncObjectsArea');
       if(!area) return;
@@ -560,9 +547,6 @@
       this.setManagedTimeout(()=>{ if(stamp.parentNode) stamp.parentNode.removeChild(stamp); }, 1500);
     },
 
-    /* ════════════════════════════
-       정답 이모지 코너 팝업
-    ════════════════════════════ */
     showCorrectEmoji:function(){
       const area = this.query('#ncObjectsArea');
       if(!area) return;
@@ -570,30 +554,24 @@
       ov.className   = 'nc-correct-overlay';
       ov.textContent = ['🎉','🌟','🏆','✨'][Math.floor(Math.random()*4)];
       area.appendChild(ov);
-      this.setManagedTimeout(()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); }, 2200);
+      this.setManagedTimeout(()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); }, 2000);
     },
 
-    /* ════════════════════════════
-       오답 빨간빛 플래시 + 슬픈 이모지
-    ════════════════════════════ */
     showWrongFlash:function(){
       const game = this.query('#ncGame');
       if(!game) return;
       const flash = document.createElement('div');
       flash.className = 'nc-wrong-flash';
       game.appendChild(flash);
-      this.setManagedTimeout(()=>{ if(flash.parentNode) flash.parentNode.removeChild(flash); }, 700);
+      this.setManagedTimeout(()=>{ if(flash.parentNode) flash.parentNode.removeChild(flash); }, 600);
       const sad = document.createElement('div');
       sad.className   = 'nc-sad-emoji';
       sad.textContent = ['😢','🙈','😅'][Math.floor(Math.random()*3)];
       game.appendChild(sad);
-      this.setManagedTimeout(()=>{ if(sad.parentNode) sad.parentNode.removeChild(sad); }, 900);
+      this.setManagedTimeout(()=>{ if(sad.parentNode) sad.parentNode.removeChild(sad); }, 800);
     },
 
-    /* ════════════════════════════
-       별 폭죽
-    ════════════════════════════ */
-    createStars:function(count){
+    createParticles:function(count){
       const area = this.query('#ncObjectsArea');
       if(!area) return;
       const emojis = ['⭐','✨','🌟','💫','🎊'];
@@ -601,17 +579,20 @@
         const s = document.createElement('div');
         s.className   = 'nc-star';
         s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-        s.style.left  = `${5+Math.random()*90}%`;
-        s.style.top   = `${5+Math.random()*75}%`;
-        s.style.animationDelay = `${Math.random()*0.5}s`;
+        s.style.left  = `${20+Math.random()*60}%`;
+        s.style.top   = `${20+Math.random()*60}%`;
+        s.style.animationDelay = `${Math.random()*0.2}s`;
+        
+        const angle = Math.random() * Math.PI * 2;
+        const dist  = 60 + Math.random() * 100;
+        s.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+        s.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+
         area.appendChild(s);
-        this.setManagedTimeout(()=>{ if(s.parentNode) s.parentNode.removeChild(s); }, 1800);
+        this.setManagedTimeout(()=>{ if(s.parentNode) s.parentNode.removeChild(s); }, 1000);
       }
     },
 
-    /* ════════════════════════════
-       완료 화면 (8번: 달려나가기)
-    ════════════════════════════ */
     showCompleteScreen:function(){
       const choices = this.query('#ncChoicesArea');
       const panel   = this.query('#ncSuccessPanel');
@@ -620,38 +601,36 @@
       this.clearTimers();
       this.state.isAnimating = false;
       choices.style.display  = 'none';
+      this.playTone('complete');
 
-      /* 차량 달려나가기 후 패널 표시 */
       if(wrapper){
         this.driveOut(wrapper, ()=>{
           panel.style.display = 'flex';
-          this.createStars(24);
+          this.createParticles(30);
           playGameVoice('games.number.complete');
-          this.say('우와. 다 맞혔어. 시현이 참 잘했어.', true);
+          this.say('우와! 다 맞혔어! 시현이 최고야!', true);
           if(this.state.options.fireConfetti) this.state.options.fireConfetti();
           if(this.state.options.gainExp)      this.state.options.gainExp(30);
         });
       } else {
         panel.style.display = 'flex';
         playGameVoice('games.number.complete');
-        this.say('우와. 다 맞혔어. 시현이 참 잘했어.', true);
+        this.say('우와! 다 맞혔어! 시현이 최고야!', true);
         if(this.state.options.fireConfetti) this.state.options.fireConfetti();
         if(this.state.options.gainExp)      this.state.options.gainExp(30);
       }
     },
 
-    /* ════════════════════════════
-       이벤트 연결
-    ════════════════════════════ */
     attachEvents:function(){
       const restart = this.query('#ncRestartBtn');
       const next    = this.query('#ncNextBtn');
       const home    = this.query('#ncPlazaBtn');
       const home2   = this.query('#ncPlazaBtn2');
-      if(restart) restart.onclick = ()=> this.restart();
-      if(next)    next.onclick    = ()=> this.startNewGameSession();
+      if(restart) restart.onclick = ()=> { this.initAudio(); this.restart(); };
+      if(next)    next.onclick    = ()=> { this.initAudio(); this.startNewGameSession(); };
       this.query('#ncDifficultyTabs')?.querySelectorAll('[data-difficulty]').forEach(btn=>{
         btn.onclick = ()=>{
+          this.initAudio();
           const difficulty = Number(btn.dataset.difficulty) || 1;
           if(this.state.difficulty === difficulty || this.state.isAnimating) return;
           this.state.difficulty = difficulty;
@@ -680,6 +659,7 @@
         `).join('');
       bar.querySelectorAll('[data-vehicle-cat]').forEach(btn=>{
         btn.onclick = ()=>{
+          this.initAudio();
           const category = btn.dataset.vehicleCat || 'all';
           if(this.state.selectedVehicleCategory === category || this.state.isAnimating) return;
           this.state.selectedVehicleCategory = category;
@@ -691,17 +671,16 @@
       });
     },
 
-    /* TTS 헬퍼 */
     say:function(text, force=false){
       const speak = this.state.options && this.state.options.speakGuide;
       if(typeof speak === 'function') speak(text, force);
     },
-    /* 직접 TTS (카운팅 동기화용) */
+
     speakDirect:function(text){
       if(typeof speechSynthesis === 'undefined') return;
       speechSynthesis.cancel();
       const utt = new SpeechSynthesisUtterance(text);
-      utt.lang  = 'ko-KR'; utt.rate = 0.78; utt.pitch = 1.08;
+      utt.lang  = 'ko-KR'; utt.rate = 0.85; utt.pitch = 1.08; // 살짝 경쾌하게
       speechSynthesis.speak(utt);
     },
 
@@ -721,34 +700,29 @@
       this.state.timeoutIds = [];
     },
 
-    /* ════════════════════════════
-       스타일
-    ════════════════════════════ */
     injectStyles:function(){
       const ex = document.getElementById(STYLE_ID);
       if(ex) ex.remove();
       const style = document.createElement('style');
       style.id = STYLE_ID;
       style.textContent = `
-        /* ── 기본 레이아웃 ── */
         .number-count-game{
           width:100%;height:100%;min-height:100%;position:relative;overflow:hidden;
           display:flex;flex-direction:column;
-          font-family:'Jua','Apple SD Gothic Neo',sans-serif;
-          transition:background 1.2s ease;
-          isolation:isolate;
+          font-family:'Jua','Nanum Gothic',sans-serif;
+          transition:background 1s ease; isolation:isolate;
         }
 
-        /* ── 로딩 ── */
-        .nc-loading-card{flex:1;display:flex;align-items:center;justify-content:center;}
-        .nc-loading-icon{
-          font-size:clamp(80px,22vw,160px);
-          filter:drop-shadow(0 12px 0 rgba(0,0,0,.12));
-          animation:ncLoadBounce .9s ease-in-out infinite alternate;
+        .nc-mega-flash{
+          position:absolute;inset:0;z-index:999;pointer-events:none;
+          background:#fff;animation:ncFlashAnim 0.5s ease-out forwards;
         }
+        @keyframes ncFlashAnim { 0% { opacity: 0.9; } 100% { opacity: 0; } }
+
+        .nc-loading-card{flex:1;display:flex;align-items:center;justify-content:center;}
+        .nc-loading-icon{ font-size:clamp(80px,22vw,160px); filter:drop-shadow(0 12px 0 rgba(0,0,0,.12)); animation:ncLoadBounce .9s ease-in-out infinite alternate; }
         @keyframes ncLoadBounce{from{transform:translateY(0) rotate(-3deg);}to{transform:translateY(-16px) rotate(3deg);}}
 
-        /* ── 구름 ── */
         .nc-cloud{position:absolute;background:#fff;border-radius:50px;z-index:0;pointer-events:none;transition:opacity .8s;}
         .nc-cloud:before,.nc-cloud:after{content:'';position:absolute;background:#fff;border-radius:50%;}
         .nc-c1{width:130px;height:44px;top:12%;left:6%;animation:ncCloud 28s linear infinite;}
@@ -759,387 +733,109 @@
         .nc-c2:after{width:52px;height:52px;top:-22px;left:42px;}
         @keyframes ncCloud{from{transform:translateX(-18vw);}to{transform:translateX(115vw);}}
 
-        /* ── 배경 별 ── */
-        .nc-bg-star{
-          position:absolute;width:6px;height:6px;border-radius:50%;
-          background:#fff;pointer-events:none;z-index:1;
-          animation:ncTwinkle 2s ease-in-out infinite alternate;
-        }
-        @keyframes ncTwinkle{from{opacity:.2;transform:scale(.8);}to{opacity:1;transform:scale(1.3);}}
+        .nc-bg-star{ position:absolute;width:8px;height:8px;border-radius:50%; background:#fff;pointer-events:none;z-index:1; animation:ncTwinkle 2s ease-in-out infinite alternate; }
+        @keyframes ncTwinkle{from{opacity:.2;transform:scale(.8);}to{opacity:1;transform:scale(1.5);box-shadow:0 0 10px #fff;}}
 
-        /* ── 눈송이 ── */
-        .nc-snowflake{
-          position:absolute;top:-40px;font-size:clamp(16px,4vw,26px);
-          color:rgba(255,255,255,.8);pointer-events:none;z-index:2;
-          animation:ncSnowFall linear infinite;
-        }
-        @keyframes ncSnowFall{
-          0%{top:-40px;transform:translateX(0) rotate(0deg);}
-          100%{top:110%;transform:translateX(30px) rotate(360deg);}
-        }
+        .nc-snowflake{ position:absolute;top:-40px;font-size:clamp(16px,4vw,26px); color:rgba(255,255,255,.9);pointer-events:none;z-index:2; animation:ncSnowFall linear infinite; }
+        @keyframes ncSnowFall{ 0%{top:-40px;transform:translateX(0) rotate(0deg);} 100%{top:110%;transform:translateX(30px) rotate(360deg);} }
 
-        /* ── 헤더 ── */
-        .nc-game-header{
-          position:relative;z-index:10;
-          display:flex;align-items:center;justify-content:space-between;
-          padding:8px 16px;min-height:52px;
-          background:rgba(255,255,255,.55);
-          backdrop-filter:blur(6px);
-          box-shadow:0 3px 10px rgba(0,0,0,.07);
-          border-radius:0 0 22px 22px;
-        }
+        .nc-game-header{ position:relative;z-index:10; display:flex;align-items:center;justify-content:space-between; padding:10px 16px;min-height:55px; background:rgba(255,255,255,.6); backdrop-filter:blur(8px); box-shadow:0 4px 15px rgba(0,0,0,.08); border-radius:0 0 25px 25px; }
 
-        /* ── 진행 도트 ── */
-        .nc-dot-progress{display:flex;gap:10px;align-items:center;}
-        .nc-dot{
-          width:20px;height:20px;border-radius:50%;
-          background:rgba(255,255,255,.5);
-          border:3px solid rgba(255,255,255,.9);
-          box-shadow:0 2px 6px rgba(0,0,0,.18);
-          transition:background .4s,transform .4s,box-shadow .4s;
-        }
+        .nc-dot-progress{display:flex;gap:12px;align-items:center;}
+        .nc-dot{ width:22px;height:22px;border-radius:50%; background:rgba(255,255,255,.6); border:3px solid rgba(255,255,255,.9); box-shadow:0 2px 6px rgba(0,0,0,.15); transition:background .3s,transform .3s,box-shadow .3s; }
         .nc-dot.done{background:#4CAF50;border-color:#fff;}
-        .nc-dot.active{
-          background:#FF7A1A;border-color:#fff;
-          transform:scale(1.45);
-          box-shadow:0 0 0 5px rgba(255,122,26,.35);
-        }
+        .nc-dot.active{ background:#FF7A1A;border-color:#fff; transform:scale(1.4); box-shadow:0 0 0 4px rgba(255,122,26,.3); }
 
-        /* ── 홈 버튼 ── */
-        .nc-home-btn{
-          font-size:30px;cursor:pointer;user-select:none;
-          line-height:1;transition:transform .15s;
-        }
+        .nc-home-btn{ font-size:32px;cursor:pointer;user-select:none; line-height:1;transition:transform .15s; }
         .nc-home-btn:active{transform:scale(.85);}
-        .nc-difficulty-tabs{
-          position:relative;z-index:10;
-          display:flex;justify-content:center;gap:8px;
-          padding:8px 10px 2px;
-        }
-        .nc-difficulty-tab{
-          min-height:36px;padding:0 12px;
-          border:3px solid rgba(255,255,255,.85);
-          border-radius:18px;
-          background:rgba(255,255,255,.62);
-          color:#1B5E20;
-          font-family:'Jua','Apple SD Gothic Neo',sans-serif;
-          font-size:clamp(14px,3.5vw,18px);
-          font-weight:900;
-          box-shadow:0 4px 0 rgba(0,0,0,.12);
-          cursor:pointer;
-        }
-        .nc-difficulty-tab.active{
-          background:#FFD93D;
-          color:#3E2723;
-          box-shadow:0 4px 0 #F57F17;
-        }
-        .nc-vehicle-cat-tabs{
-          position:relative;z-index:10;
-          display:flex;gap:7px;
-          overflow-x:auto;
-          scrollbar-width:none;
-          padding:6px 10px 4px;
-        }
+
+        .nc-difficulty-tabs{ position:relative;z-index:10; display:flex;justify-content:center;gap:10px; padding:12px 10px 4px; }
+        .nc-difficulty-tab{ min-height:40px;padding:0 15px; border:4px solid rgba(255,255,255,.9); border-radius:20px; background:rgba(255,255,255,.7); color:#1B5E20; font-family:'Jua',sans-serif; font-size:clamp(15px,3.8vw,20px); font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,.1); cursor:pointer; transition:all 0.2s;}
+        .nc-difficulty-tab.active{ background:#FFD93D; color:#3E2723; box-shadow:0 5px 0 #F57F17; transform:translateY(-2px); }
+
+        .nc-vehicle-cat-tabs{ position:relative;z-index:10; display:flex;gap:8px; overflow-x:auto; scrollbar-width:none; padding:8px 12px 6px; }
         .nc-vehicle-cat-tabs::-webkit-scrollbar{display:none;}
-        .nc-vehicle-cat-tab{
-          flex:0 0 auto;
-          min-height:34px;
-          padding:0 12px;
-          border:3px solid rgba(255,255,255,.85);
-          border-radius:999px;
-          background:rgba(255,255,255,.66);
-          color:#263238;
-          font-family:'Jua','Apple SD Gothic Neo',sans-serif;
-          font-size:clamp(13px,3.2vw,16px);
-          font-weight:900;
-          box-shadow:0 4px 0 rgba(0,0,0,.11);
-          cursor:pointer;
-          white-space:nowrap;
-        }
-        .nc-vehicle-cat-tab.active{
-          background:#B3E5FC;
-          color:#0D47A1;
-          box-shadow:0 4px 0 rgba(13,71,161,.24);
-        }
+        .nc-vehicle-cat-tab{ flex:0 0 auto; min-height:38px; padding:0 15px; border:4px solid rgba(255,255,255,.9); border-radius:999px; background:rgba(255,255,255,.7); color:#263238; font-family:'Jua',sans-serif; font-size:clamp(14px,3.5vw,18px); font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,.1); cursor:pointer; white-space:nowrap; transition:all 0.2s;}
+        .nc-vehicle-cat-tab.active{ background:#B3E5FC; color:#0D47A1; box-shadow:0 5px 0 rgba(13,71,161,.25); transform:translateY(-2px);}
 
-        /* ════════════════════════════
-           ★ 3·2·1 카운트다운 오버레이
-        ════════════════════════════ */
-        .nc-countdown-overlay{
-          position:absolute;inset:0;z-index:60;
-          display:flex;align-items:center;justify-content:center;
-          background:rgba(0,0,0,0.25);
-          backdrop-filter:blur(3px);
-          pointer-events:none;
-        }
-        .nc-countdown-num{
-          font-size:clamp(130px,38vw,240px);
-          font-weight:900;
-          color:#fff;
-          text-shadow:
-            0 0 50px rgba(255,255,255,0.6),
-            0 8px 0 rgba(0,0,0,0.2);
-          animation:ncCountdownPop 0.75s cubic-bezier(0.34,1.56,0.64,1);
-          line-height:1;
-          user-select:none;
-        }
-        @keyframes ncCountdownPop{
-          0%  {transform:scale(0) rotate(-12deg);opacity:0;}
-          55% {transform:scale(1.18) rotate(4deg);opacity:1;}
-          100%{transform:scale(1) rotate(0deg);opacity:1;}
-        }
+        .nc-objects-area{ flex:1;min-height:0;position:relative;z-index:5; display:flex;align-items:center;justify-content:center; padding:clamp(10px,2vw,20px); overflow:hidden; }
+        .nc-road-bg{ position:absolute;bottom:8%;left:-15%;right:-15%; height:clamp(50px,10vw,90px); border-radius:50%;transform:rotateX(72deg); border:4px solid rgba(255,255,255,.7); z-index:0;transition:background .8s,box-shadow .8s; }
 
-        /* ── 차량 영역 ── */
-        .nc-objects-area{
-          flex:1;min-height:0;position:relative;z-index:5;
-          display:flex;align-items:center;justify-content:center;
-          padding:clamp(6px,2vw,20px);
-          overflow:hidden;
-        }
-        .nc-road-bg{
-          position:absolute;bottom:6%;left:-12%;right:-12%;
-          height:clamp(44px,8vw,72px);
-          border-radius:50%;transform:rotateX(70deg);
-          border:3px solid rgba(255,255,255,.6);
-          z-index:0;transition:background .8s,box-shadow .8s;
-        }
+        .nc-vehicles-wrapper{ position:relative;z-index:10; width:min(100%, 800px); display:grid; gap:clamp(10px,3vw,30px); padding:5px; justify-items:center;align-items:center; }
+        .nc-vehicle-cell{ position:relative; display:flex;align-items:flex-end;justify-content:center; cursor:pointer; -webkit-tap-highlight-color: transparent;}
+        
+        .nc-vehicle-img{ width:clamp(95px,24vw,230px); max-height:clamp(85px,22vw,210px); object-fit:contain; user-select:none;pointer-events:none; filter:drop-shadow(0 12px 15px rgba(0,0,0,.3)); }
+        
+        /* 자동차가 살아있는 듯한 애니메이션 추가! */
+        .nc-idle-anim { animation: ncIdleBounce 1.5s ease-in-out infinite alternate; }
+        @keyframes ncIdleBounce { from { transform: translateY(0); } to { transform: translateY(-8px); } }
 
-        /* ── 차량 그리드 ── */
-        .nc-vehicles-wrapper{
-          position:relative;z-index:10;
-          width:min(100%, 780px);
-          display:grid;
-          gap:clamp(8px,2.5vw,24px);
-          padding:4px;
-          justify-items:center;align-items:center;
-        }
+        .nc-count-dot{ position:absolute;top:-25px;left:50%;transform:translateX(-50%); width:clamp(32px,8vw,48px);height:clamp(32px,8vw,48px); border-radius:50%; background:radial-gradient(circle at 35% 35%,#fff 0%,#FFD700 50%,#FF8C00 100%); border:4px solid #fff; box-shadow:0 0 15px 5px rgba(255,200,0,.8); display:flex;align-items:center;justify-content:center; font-size:clamp(16px,4vw,24px);font-weight:900;color:#7B3F00; animation:ncCountPop .35s cubic-bezier(.175,.885,.32,1.275); pointer-events:none;z-index:20; }
+        @keyframes ncCountPop{ 0%{transform:translateX(-50%) scale(0);} 70%{transform:translateX(-50%) scale(1.3);} 100%{transform:translateX(-50%) scale(1);} }
 
-        .nc-vehicle-cell{
-          position:relative;
-          display:flex;align-items:flex-end;justify-content:center;
-          cursor:pointer;
-        }
-
-        .nc-vehicle-img{
-          width:clamp(88px,22vw,220px);
-          max-height:clamp(78px,20vw,200px);
-          object-fit:contain;
-          user-select:none;pointer-events:none;
-          filter:drop-shadow(0 10px 12px rgba(0,0,0,.28));
-          transition:filter .2s;
-        }
-
-        /* ── 카운팅 하이라이트 동그라미 ── */
-        .nc-count-dot{
-          position:absolute;top:-20px;left:50%;transform:translateX(-50%);
-          width:clamp(28px,7vw,42px);height:clamp(28px,7vw,42px);
-          border-radius:50%;
-          background:radial-gradient(circle at 35% 35%,#fff 0%,#FFD700 50%,#FF8C00 100%);
-          border:3px solid #fff;
-          box-shadow:0 0 12px 5px rgba(255,200,0,.7);
-          display:flex;align-items:center;justify-content:center;
-          font-size:clamp(13px,3.5vw,20px);font-weight:900;color:#7B3F00;
-          animation:ncCountPop .35s cubic-bezier(.175,.885,.32,1.275);
-          pointer-events:none;z-index:20;
-        }
-        @keyframes ncCountPop{
-          0%{transform:translateX(-50%) scale(0);}
-          70%{transform:translateX(-50%) scale(1.25);}
-          100%{transform:translateX(-50%) scale(1);}
-        }
-
-        /* ── 오답 흔들림 ── */
         .shake{animation:ncShake .45s ease-in-out;}
-        @keyframes ncShake{
-          0%,100%{transform:translateX(0);}
-          22%{transform:translateX(-16px) rotate(-4deg);}
-          66%{transform:translateX(16px) rotate(4deg);}
-        }
+        @keyframes ncShake{ 0%,100%{transform:translateX(0);} 22%{transform:translateX(-16px) rotate(-4deg);} 66%{transform:translateX(16px) rotate(4deg);} }
 
-        /* ── 오답 빨간빛 플래시 ── */
-        .nc-wrong-flash{
-          position:absolute;inset:0;z-index:50;pointer-events:none;
-          background:rgba(220,30,30,.38);
-          animation:ncRedFlash .65s ease-out forwards;
-        }
+        .nc-wrong-flash{ position:absolute;inset:0;z-index:50;pointer-events:none; background:rgba(255,0,0,.3); animation:ncRedFlash .6s ease-out forwards; }
         @keyframes ncRedFlash{0%{opacity:0;}20%{opacity:1;}100%{opacity:0;}}
 
-        /* ── 오답 슬픈 이모지 ── */
-        .nc-sad-emoji{
-          position:absolute;top:50%;left:50%;z-index:55;pointer-events:none;
-          font-size:clamp(60px,18vw,120px);
-          transform:translate(-50%,-50%);
-          animation:ncSadPop .85s cubic-bezier(.175,.885,.32,1.275) forwards;
-        }
-        @keyframes ncSadPop{
-          0%{transform:translate(-50%,-50%) scale(0);opacity:0;}
-          40%{transform:translate(-50%,-50%) scale(1.2);opacity:1;}
-          75%{transform:translate(-50%,-50%) scale(1);opacity:1;}
-          100%{transform:translate(-50%,-50%) scale(0.8);opacity:0;}
-        }
+        .nc-sad-emoji{ position:absolute;top:50%;left:50%;z-index:55;pointer-events:none; font-size:clamp(70px,20vw,140px); transform:translate(-50%,-50%); animation:ncSadPop .8s cubic-bezier(.175,.885,.32,1.275) forwards; }
+        @keyframes ncSadPop{ 0%{transform:translate(-50%,-50%) scale(0);opacity:0;} 40%{transform:translate(-50%,-50%) scale(1.2);opacity:1;} 75%{transform:translate(-50%,-50%) scale(1);opacity:1;} 100%{transform:translate(-50%,-50%) scale(0.8);opacity:0;} }
 
-        /* ── 정답 이모지 코너 팝업 ── */
-        .nc-correct-overlay{
-          position:absolute;top:8%;right:5%;z-index:30;pointer-events:none;
-          font-size:clamp(48px,13vw,100px);
-          animation:ncCornerPop 2.2s cubic-bezier(.175,.885,.32,1.275) forwards;
-        }
-        @keyframes ncCornerPop{
-          0%{transform:scale(0) rotate(-25deg);opacity:0;}
-          30%{transform:scale(1.3) rotate(10deg);opacity:1;}
-          70%{transform:scale(1.1) rotate(-5deg);opacity:1;}
-          100%{transform:scale(1.4) rotate(0);opacity:0;}
-        }
+        .nc-correct-overlay{ position:absolute;top:10%;right:5%;z-index:30;pointer-events:none; font-size:clamp(60px,15vw,120px); animation:ncCornerPop 2s cubic-bezier(.175,.885,.32,1.275) forwards; }
+        @keyframes ncCornerPop{ 0%{transform:scale(0) rotate(-25deg);opacity:0;} 30%{transform:scale(1.4) rotate(10deg);opacity:1;} 70%{transform:scale(1.1) rotate(-5deg);opacity:1;} 100%{transform:scale(1.5) rotate(0);opacity:0;} }
 
-        /* ════════════════════════════
-           ★ 숫자 각인 스탬프
-        ════════════════════════════ */
-        .nc-number-stamp{
-          position:absolute;top:50%;left:50%;
-          transform:translate(-50%,-50%) scale(0);
-          font-size:clamp(130px,38vw,220px);
-          font-weight:900;
-          color:#FFD700;
-          text-shadow:
-            0 0 60px rgba(255,200,0,0.65),
-            0 0 20px rgba(255,150,0,0.4),
-            0 8px 0 rgba(0,0,0,0.12);
-          z-index:300;pointer-events:none;
-          animation:ncStampPop 1.3s cubic-bezier(0.34,1.56,0.64,1) forwards;
-          line-height:1;
-        }
-        @keyframes ncStampPop{
-          0%  {transform:translate(-50%,-50%) scale(0) rotate(-14deg);opacity:1;}
-          42% {transform:translate(-50%,-50%) scale(1.12) rotate(5deg);opacity:1;}
-          72% {transform:translate(-50%,-50%) scale(0.97) rotate(0deg);opacity:1;}
-          100%{transform:translate(-50%,-65%) scale(0.82) rotate(0deg);opacity:0;}
-        }
+        .nc-number-stamp{ position:absolute;top:50%;left:50%; transform:translate(-50%,-50%) scale(0); font-size:clamp(150px,40vw,250px); font-weight:900; color:#FFD700; text-shadow: 0 0 60px rgba(255,200,0,0.8), 0 0 20px rgba(255,150,0,0.5), 0 10px 0 rgba(0,0,0,0.2); z-index:300;pointer-events:none; animation:ncStampPop 1.2s cubic-bezier(0.34,1.56,0.64,1) forwards; line-height:1; }
+        @keyframes ncStampPop{ 0% {transform:translate(-50%,-50%) scale(0) rotate(-15deg);opacity:1;} 40% {transform:translate(-50%,-50%) scale(1.15) rotate(5deg);opacity:1;} 70% {transform:translate(-50%,-50%) scale(1) rotate(0deg);opacity:1;} 100%{transform:translate(-50%,-60%) scale(0.8) rotate(0deg);opacity:0;} }
 
-        /* ── 별 폭죽 ── */
-        .nc-star{
-          position:absolute;pointer-events:none;z-index:20;
-          font-size:clamp(26px,8vw,50px);
-          animation:ncStarBurst 1.5s forwards cubic-bezier(.175,.885,.32,1.275);
-        }
-        @keyframes ncStarBurst{
-          0%{transform:scale(0) rotate(0deg);opacity:1;}
-          55%{transform:scale(1.7) rotate(210deg);opacity:1;}
-          100%{transform:scale(2.3) rotate(400deg);opacity:0;}
-        }
+        .nc-star{ position:absolute;pointer-events:none;z-index:20; font-size:clamp(30px,8vw,60px); animation:ncStarBurst 1s forwards cubic-bezier(0.1, 0.8, 0.2, 1); }
+        @keyframes ncStarBurst{ 0%{transform:scale(0) rotate(0deg);opacity:1;} 100%{transform:translate(var(--dx), var(--dy)) scale(1.5) rotate(360deg);opacity:0;} }
 
-        /* ── 하단 선택 버튼 영역 ── */
-        .nc-interaction-area{
-          position:relative;z-index:10;
-          padding:8px clamp(10px,3vw,20px) max(18px,env(safe-area-inset-bottom));
-        }
-        .nc-choices-area{
-          display:flex;justify-content:center;
-          gap:clamp(12px,3.5vw,26px);flex-wrap:wrap;
-        }
+        .nc-interaction-area{ position:relative;z-index:10; padding:10px clamp(12px,4vw,25px) max(20px,env(safe-area-inset-bottom)); }
+        .nc-choices-area{ display:flex;justify-content:center; gap:clamp(15px,4vw,30px);flex-wrap:wrap; }
 
-        /* ════════════════════════════
-           ★ 숫자 버튼 (숫자 + 도트)
-        ════════════════════════════ */
-        .nc-toy-block-btn{
-          width:clamp(90px,22vw,144px);
-          min-height:clamp(100px,24vw,156px);
-          font-size:clamp(44px,11vw,76px);
-          font-weight:900;font-family:'Jua','Apple SD Gothic Neo',sans-serif;
-          border-radius:26px;border:5px solid #fff;
-          color:#fff;
-          background:linear-gradient(135deg,#FFD93D,#FFAA00);
-          box-shadow:0 10px 0 #E65100,0 14px 22px rgba(0,0,0,.22);
-          transition:transform .1s,box-shadow .1s,filter .15s;
-          cursor:pointer;
-          display:flex;flex-direction:column;align-items:center;justify-content:center;
-          gap:4px;padding:8px 6px;
-        }
-        .nc-toy-block-btn:nth-child(2){background:linear-gradient(135deg,#4CAF50,#2E7D32);box-shadow:0 10px 0 #1B5E20,0 14px 22px rgba(0,0,0,.22);}
-        .nc-toy-block-btn:nth-child(3){background:linear-gradient(135deg,#1E90FF,#1565C0);box-shadow:0 10px 0 #0D47A1,0 14px 22px rgba(0,0,0,.22);}
-        .nc-toy-block-btn:active{transform:translateY(10px);box-shadow:0 0 0 transparent,0 4px 10px rgba(0,0,0,.2);}
-        .nc-toy-block-btn:disabled{filter:saturate(.55) brightness(.88);cursor:default;}
+        .nc-toy-block-btn{ width:clamp(95px,24vw,150px); min-height:clamp(110px,26vw,170px); font-size:clamp(48px,12vw,80px); font-weight:900;font-family:'Jua',sans-serif; border-radius:30px;border:6px solid #fff; color:#fff; background:linear-gradient(135deg,#FFD93D,#FFAA00); box-shadow:0 12px 0 #E65100,0 15px 25px rgba(0,0,0,.25); transition:transform .1s,box-shadow .1s,filter .15s; cursor:pointer; display:flex;flex-direction:column;align-items:center;justify-content:center; gap:5px;padding:10px 8px; -webkit-tap-highlight-color: transparent;}
+        .nc-toy-block-btn:nth-child(2){background:linear-gradient(135deg,#4CAF50,#2E7D32);box-shadow:0 12px 0 #1B5E20,0 15px 25px rgba(0,0,0,.25);}
+        .nc-toy-block-btn:nth-child(3){background:linear-gradient(135deg,#1E90FF,#1565C0);box-shadow:0 12px 0 #0D47A1,0 15px 25px rgba(0,0,0,.25);}
+        .nc-toy-block-btn:active{transform:translateY(12px);box-shadow:0 0 0 transparent,0 5px 10px rgba(0,0,0,.2);}
+        .nc-toy-block-btn:disabled{filter:saturate(.5) brightness(.9);cursor:default;}
 
-        /* ★ 힌트 글로우 */
-        .nc-toy-block-btn.hint-glow{
-          animation:ncBtnGlow 0.6s ease-in-out infinite alternate !important;
-        }
-        @keyframes ncBtnGlow{
-          from{filter:brightness(1) drop-shadow(0 0 4px rgba(255,255,255,0.3));}
-          to  {filter:brightness(1.3) drop-shadow(0 0 22px rgba(255,255,255,1));}
-        }
+        .nc-toy-block-btn.hint-glow{ animation:ncBtnGlow 0.6s ease-in-out infinite alternate !important; }
+        @keyframes ncBtnGlow{ from{filter:brightness(1) drop-shadow(0 0 5px rgba(255,255,255,0.4));} to{filter:brightness(1.3) drop-shadow(0 0 25px rgba(255,255,255,1));} }
 
-        .nc-choice-num{
-          font-size:clamp(44px,11vw,76px);
-          font-weight:900;line-height:1;
-          text-shadow:0 3px 0 rgba(0,0,0,.22);
-        }
+        .nc-choice-num{ font-size:clamp(48px,12vw,80px); font-weight:900;line-height:1; text-shadow:0 4px 0 rgba(0,0,0,.25); }
+        .nc-choice-dots{ display:grid; grid-template-columns:repeat(3,1fr); gap:4px; max-width:40px;margin:0 auto; }
+        .nc-choice-dot{ width:10px;height:10px;border-radius:50%; background:rgba(255,255,255,0.85); box-shadow:0 2px 0 rgba(0,0,0,0.15); }
 
-        /* ★ 도트 그리드 (3열) */
-        .nc-choice-dots{
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:3px;
-          max-width:36px;margin:0 auto;
-        }
-        .nc-choice-dot{
-          width:9px;height:9px;border-radius:50%;
-          background:rgba(255,255,255,0.82);
-          box-shadow:0 1px 0 rgba(0,0,0,0.12);
-        }
-
-        /* ── 완료 패널 ── */
-        .nc-success-panel{
-          position:absolute;bottom:0;left:0;right:0;z-index:40;
-          flex-direction:column;align-items:center;
-          padding:22px 16px max(22px,env(safe-area-inset-bottom));
-          background:rgba(255,255,255,.93);
-          backdrop-filter:blur(8px);
-          border-radius:32px 32px 0 0;
-          box-shadow:0 -10px 36px rgba(0,0,0,.14);
-          animation:ncSlideUp .55s cubic-bezier(.175,.885,.32,1.275);
-        }
+        .nc-success-panel{ position:absolute;bottom:0;left:0;right:0;z-index:100; flex-direction:column;align-items:center; padding:25px 16px max(25px,env(safe-area-inset-bottom)); background:rgba(255,255,255,.95); backdrop-filter:blur(10px); border-radius:35px 35px 0 0; box-shadow:0 -10px 40px rgba(0,0,0,.2); animation:ncSlideUp .5s cubic-bezier(.175,.885,.32,1.275); }
         @keyframes ncSlideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
-        .nc-action-buttons{display:flex;gap:18px;justify-content:center;}
-        .nc-action-btn{
-          width:clamp(82px,20vw,112px);height:clamp(82px,20vw,112px);
-          font-size:clamp(36px,9vw,54px);
-          border-radius:50%;border:5px solid #fff;
-          box-shadow:0 8px 0 rgba(0,0,0,.16);
-          transition:transform .1s,box-shadow .1s;cursor:pointer;
-        }
-        .nc-action-btn:active{transform:translateY(6px);box-shadow:0 2px 0 rgba(0,0,0,.16);}
-        .nc-btn-replay{background:#4CAF50;}
-        .nc-btn-next{background:#2196F3;}
-        .nc-btn-home2{background:#FF9800;}
+        .nc-action-buttons{display:flex;gap:20px;justify-content:center;}
+        .nc-action-btn{ width:clamp(90px,22vw,120px);height:clamp(90px,22vw,120px); font-size:clamp(40px,10vw,60px); border-radius:50%;border:6px solid #fff; box-shadow:0 10px 0 rgba(0,0,0,.15); transition:transform .1s,box-shadow .1s;cursor:pointer; }
+        .nc-action-btn:active{transform:translateY(8px);box-shadow:0 2px 0 rgba(0,0,0,.15);}
+        .nc-btn-replay{background:#4CAF50;} .nc-btn-next{background:#2196F3;} .nc-btn-home2{background:#FF9800;}
 
-        /* ── 반응형 ── */
-        @media (min-width:600px){
-          .nc-vehicle-img{width:clamp(120px,18vw,220px);max-height:clamp(110px,16vw,200px);}
-          .nc-toy-block-btn{width:clamp(112px,14vw,152px);}
-        }
         @media (max-width:380px){
-          .nc-vehicle-img{width:clamp(70px,24vw,110px);max-height:78px;}
-          .nc-toy-block-btn{width:80px;min-height:90px;font-size:36px;}
-          .nc-choice-dots{max-width:28px;}
-          .nc-choice-dot{width:7px;height:7px;}
+          .nc-vehicle-img{width:clamp(75px,24vw,115px);max-height:85px;}
+          .nc-toy-block-btn{width:85px;min-height:95px;font-size:38px;}
+          .nc-choice-dots{max-width:30px;}
+          .nc-choice-dot{width:8px;height:8px;}
         }
         @media (max-height:600px){
-          .nc-vehicle-img{width:clamp(58px,15vw,110px);max-height:74px;}
-          .nc-toy-block-btn{width:74px;min-height:84px;}
-          .nc-game-header{min-height:38px;padding:5px 12px;}
+          .nc-vehicle-img{width:clamp(65px,15vw,115px);max-height:80px;}
+          .nc-toy-block-btn{width:80px;min-height:90px;}
+          .nc-game-header{min-height:42px;padding:6px 14px;}
         }
       `;
       document.head.appendChild(style);
       this.state.styleElement = style;
     },
 
-    /* ════════════════════════════
-       destroy
-    ════════════════════════════ */
     destroy:function(){
       this.clearTimers();
       if(this.state.styleElement){ this.state.styleElement.remove(); this.state.styleElement=null; }
       if(this.state.container)   { this.state.container.innerHTML=''; }
+      if(this.state.audioCtx && this.state.audioCtx.state !== 'closed') { this.state.audioCtx.close().catch(()=>{}); }
+      
       this.state.currentLevel   = 1;
       this.state.currentAnswer  = 0;
       this.state.currentVehicle = null;
@@ -1151,6 +847,7 @@
       this.state.gameVehicles   = [];
       this.state.container      = null;
       this.state.options        = {};
+      this.state.audioCtx       = null;
     }
   };
 })();
