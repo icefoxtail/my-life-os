@@ -96,7 +96,7 @@
 
       playGameVoice('games.color.question');
       if (this.state.options.speakGuide) {
-        this.state.options.speakGuide(`${color.name} 풍선을 찾아봐!`, true);
+        this.state.options.speakGuide(`${color.name} 풍선을 같이 찾아볼까?`, true);
       }
 
       this.clearBalloons();
@@ -215,7 +215,7 @@
 
         playGameVoice('games.color.correct');
         if (this.state.options.speakGuide) {
-          this.state.options.speakGuide(`${color.name} 풍선 팡!`, true);
+          this.state.options.speakGuide(`${color.name} 풍선 팡. 잘했어.`, true);
         }
         if (this.state.options.fireConfetti) this.state.options.fireConfetti();
 
@@ -239,7 +239,7 @@
         }, 800);
 
         if (this.state.options.speakGuide) {
-          this.state.options.speakGuide(`이건 ${color.name}이야. ${this.state.targetColor.name}을 찾아봐!`, true);
+          this.state.options.speakGuide(`이건 ${color.name}이야. 괜찮아. ${this.state.targetColor.name}을 같이 찾아볼까?`, true);
         }
       }
     },
@@ -296,7 +296,7 @@
       wrapper.appendChild(el);
 
       playGameVoice('games.color.complete');
-      if (this.state.options.speakGuide) this.state.options.speakGuide('우와! 풍선을 다 터뜨렸어. 시현이가 최고야!', true);
+      if (this.state.options.speakGuide) this.state.options.speakGuide('우와. 풍선을 다 터뜨렸어. 시현이 참 잘했어.', true);
       if (this.state.options.fireConfetti) this.state.options.fireConfetti();
       if (this.state.options.gainExp)      this.state.options.gainExp(25);
 

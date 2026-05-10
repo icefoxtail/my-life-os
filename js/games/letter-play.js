@@ -605,7 +605,7 @@ window.SihyeonGames.letterPlay = {
     if (typeof speechSynthesis === 'undefined') return;
     speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'ko-KR'; utt.rate = 0.82; utt.pitch = 1.2;
+    utt.lang = 'ko-KR'; utt.rate = 0.78; utt.pitch = 1.08;
     speechSynthesis.speak(utt);
   },
   _say(text, force = false) {
@@ -753,13 +753,13 @@ window.SihyeonGames.letterPlay = {
       </div>
       <div class="slp-question-line">같은 글자 풍선을 찾아 톡!</div>
     `;
-    hintCard.addEventListener('click', () => this._say(`${round.answer}! 같은 글자를 찾아봐!`, true));
+    hintCard.addEventListener('click', () => this._say(`${round.answer}. 같은 글자를 같이 찾아볼까?`, true));
     root.appendChild(hintCard);
 
     const speakBtn = document.createElement('button');
     speakBtn.className = 'slp-speak-btn';
     speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', () => this._say(`${round.word}! ${round.answer} 글자를 찾아봐!`, true));
+    speakBtn.addEventListener('click', () => this._say(`${round.word}. ${round.answer} 글자를 같이 찾아볼까?`, true));
     root.appendChild(speakBtn);
 
     // 풍선
@@ -768,7 +768,7 @@ window.SihyeonGames.letterPlay = {
 
     const t = setTimeout(() => {
       playGameVoice('games.letter.question');
-      this._say(`${round.answer}! 같은 글자 풍선을 톡 눌러봐!`, false);
+      this._say(`${round.answer}. 같은 글자 풍선을 살짝 눌러볼까?`, false);
     }, 350);
     this._timers.push(t);
   },
@@ -820,7 +820,7 @@ window.SihyeonGames.letterPlay = {
     container.appendChild(root);
 
     const t = setTimeout(() => {
-      this._say(`${target}! ${target}을 찾아봐!`, true);
+      this._say(`${target}. ${target}을 같이 찾아볼까?`, true);
     }, 300);
     this._timers.push(t);
   },
@@ -974,9 +974,9 @@ window.SihyeonGames.letterPlay = {
       root.querySelectorAll('.slp-balloon-btn').forEach(b => {
         if (b.dataset.letter === correctAnswer) b.classList.add('hint-glow');
       });
-      this._say(`${correctAnswer} 풍선이 반짝반짝해!`, true);
+      this._say(`${correctAnswer} 풍선이 반짝반짝해. 같이 눌러볼까?`, true);
     } else {
-      this._say(word ? `${word}! 다시 들어볼까?` : '다시 한 번 찾아볼까?', true);
+      this._say(word ? `${word}. 괜찮아. 다시 들어볼까?` : '괜찮아. 다시 한 번 찾아볼까?', true);
     }
 
     const t = setTimeout(() => {
@@ -1166,7 +1166,7 @@ window.SihyeonGames.letterPlay = {
     container.appendChild(root);
 
     playGameVoice('games.letter.complete');
-    this._say(isPerfect ? '완벽해요! 정말 잘했어요!' : `${s.score}개나 맞혔어요!`, true);
+    this._say(isPerfect ? '완벽해요. 정말 잘했어요.' : `${s.score}개나 맞혔어요. 잘했어요.`, true);
     this._options?.fireConfetti?.();
     this._options?.gainExp?.(isPerfect ? 30 : 20);
   },

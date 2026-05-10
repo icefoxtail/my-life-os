@@ -172,7 +172,7 @@
     
     renderUI();
     vibrate(100);
-    speak(`와! 멋진 ${state.currentVehicle.name}가 왔어요!`);
+    speak(`와. ${state.currentVehicle.name}가 왔어요.`);
   }
 
   function renderUI() {
@@ -244,11 +244,11 @@
     if (speech) speech.textContent = '😊 👍';
 
     // 부품별 맞춤 칭찬 보이스
-    if (task === 'wheel') speak("바퀴 끼웠어! 짝짝!");
-    else if (task === 'light') speak("불이 들어왔어! 반짝반짝!");
-    else if (task === 'wash') speak("깨끗해졌어! 우와~!");
-    else if (task === 'gas') speak("에너지 가득! 준비됐어!");
-    else if (task === 'siren') speak("사이렌 소리 멋지다! 삐용삐용!");
+    if (task === 'wheel') speak("바퀴가 딱 맞았어. 잘했어.");
+    else if (task === 'light') speak("불이 들어왔어. 반짝반짝.");
+    else if (task === 'wash') speak("깨끗해졌어. 우와.");
+    else if (task === 'gas') speak("기름 가득. 준비됐어.");
+    else if (task === 'siren') speak("사이렌이 울려요. 삐용삐용.");
 
     // 시각 리액션
     carBody.classList.add('happy-jump');
@@ -278,7 +278,7 @@
     
     btn.classList.add('wrong');
     if (speech) speech.textContent = '😕';
-    speak("아, 이건 나중에! 다른 걸 먼저 해볼까?"); 
+    speak("음, 이건 나중에 해보자. 다른 걸 먼저 볼까?");
 
     setTimeout(() => {
       btn.classList.remove('wrong');
@@ -321,7 +321,7 @@
   function startFinale() {
     state.phase = 'photo';
     vibrate(300);
-    speak("시현아, 김치~! 사진 찍자!");
+    speak("시현아, 김치. 사진 찍자.");
 
     setTimeout(() => {
       const root = state.container.querySelector('.cg-root');
@@ -347,24 +347,24 @@
          { transform: 'rotate(1080deg) scale(1.2) translateX(120vw)' }
        ], { duration: 2500, easing: 'ease-in-out' });
        showBubbles();
-       speak("불을 꺼요! 부릉부릉 출동!");
+       speak("불을 꺼요. 소방차 출동.");
     } else if (v.action === 'police_fin') {
        unit.animate([
          { transform: 'translateX(0) rotate(0)', filter: 'brightness(2)' },
          { transform: 'translateX(40vw) rotate(-10deg)', filter: 'hue-rotate(180deg)', offset: 0.3 },
          { transform: 'translateX(120vw) rotate(0)' }
        ], { duration: 2200 });
-       speak("경찰차 출동! 삐용삐용 잡으러 가자!");
+       speak("경찰차 출동. 삐용삐용.");
     } else if (v.action === 'rocket_fin') {
        unit.animate([
          { transform: 'translateY(0)' },
          { transform: 'translateY(10px)', offset: 0.1 },
          { transform: 'translateY(-180vh) scale(0.4)' }
        ], { duration: 2800 });
-       speak("우주로 발사! 콰아아앙! 대단해!");
+       speak("우주로 발사. 대단해.");
     } else {
        unit.style.transform = 'translateX(120vw) rotate(5deg)';
-       speak("부릉부릉 출발! 시현아 정말 잘했어!");
+       speak("부릉부릉 출발. 시현아, 정말 잘했어.");
     }
 
     if (state.options.fireConfetti) state.options.fireConfetti();

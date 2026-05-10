@@ -385,7 +385,7 @@
 
     initCanvas();
     bindEvents();
-    speak('시현아! 마법 그림판이야. 자유롭게 그리거나 색칠해봐!', true);
+    speak('시현아. 마법 그림판이야. 같이 그리고 색칠해볼까?', true);
   }
 
   /* ── Canvas init ─────────────────────────── */
@@ -427,7 +427,7 @@
         root.querySelectorAll('[data-theme]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         applyThemeBg();
-        speak(THEMES[state.activeTheme].label + ' 테마야!');
+        speak(THEMES[state.activeTheme].label + '이야!');
       };
     });
 
@@ -440,7 +440,7 @@
         btn.classList.add('active');
         const tpl = COLORING_TEMPLATES.find(t => t.id === state.activeTemplateId);
         renderColoringTemplate(tpl);
-        speak(`${tpl?.name || ''} 색칠해보자!`);
+        speak(`${tpl?.name || ''}을 같이 색칠해볼까?`);
       };
     });
 
@@ -466,7 +466,7 @@
         state.isRainbow   = false;
         root.querySelectorAll('.az-color-circle, .az-stamp-circle').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        speak('도장 준비!');
+        speak('도장 준비됐어.');
       };
     });
 
@@ -483,7 +483,7 @@
     document.getElementById('azEraser').onclick = () => {
       state.mode = 'eraser';
       state.activeStamp = null;
-      speak('지우개로 슥싹!');
+      speak('지우개로 슥싹.');
     };
 
     // undo
@@ -501,10 +501,10 @@
         cw?.querySelector('.az-complete-banner')?.remove();
         cw?.querySelectorAll('.fillable').forEach(el => el.setAttribute('fill', '#FFF'));
         state.paintHistory = [];
-        speak('다시 색칠해봐!');
+        speak('괜찮아. 다시 색칠해볼까?');
       } else {
         state.ctx.clearRect(0, 0, state.canvas.width, state.canvas.height);
-        speak('깨끗하게 지웠어!');
+        speak('깨끗하게 지웠어.');
       }
     };
 
@@ -512,7 +512,7 @@
     document.getElementById('azDone').onclick = () => {
       state.options.fireConfetti?.();
       state.options.gainExp?.(state.tab === 'coloring' ? 20 : 10);
-      speak('우와! 정말 멋진 그림이야! 전시회에 걸어볼게!', true);
+      speak('우와. 멋진 그림이야. 전시회에 걸어볼게.', true);
       showArtExhibition();
     };
 
@@ -582,9 +582,9 @@
     if (!isFree) {
       const tpl = COLORING_TEMPLATES.find(t => t.id === state.activeTemplateId);
       renderColoringTemplate(tpl);
-      speak('어떤 그림 색칠해볼까?');
+      speak('어떤 그림을 색칠해볼까?');
     } else {
-      speak('자유롭게 그려봐!');
+      speak('자유롭게 그려볼까?');
     }
   }
 
@@ -647,7 +647,7 @@
     state.coloringCompleted = true;
     wrap.classList.add('az-done');
 
-    speak(`우와! ${tpl.name} 완성! 시현이 최고!`, true);
+    speak(`우와. ${tpl.name} 완성. 시현이 참 잘했어.`, true);
     state.options.fireConfetti?.();
     state.options.gainExp?.(20);
 
@@ -666,7 +666,7 @@
         banner.remove();
         cw.querySelectorAll('.fillable').forEach(el => el.setAttribute('fill', '#FFF'));
         state.paintHistory = [];
-        speak('다시 해보자!');
+        speak('괜찮아. 다시 해보자.');
       };
       banner.querySelector('.next').onclick = () => {
         const idx  = COLORING_TEMPLATES.findIndex(t => t.id === state.activeTemplateId);
@@ -677,7 +677,7 @@
           b.classList.toggle('active', b.dataset.tpl === next.id);
         });
         renderColoringTemplate(next);
-        speak(`${next.name} 색칠해보자!`);
+        speak(`${next.name}을 같이 색칠해볼까?`);
       };
       cw.appendChild(banner);
     }, 850);
@@ -806,7 +806,7 @@
       </div>
     `;
     root.appendChild(overlay);
-    overlay.querySelector('[data-action="continue"]').onclick = () => { overlay.remove(); speak('조금 더 꾸며보자!', true); };
+    overlay.querySelector('[data-action="continue"]').onclick = () => { overlay.remove(); speak('조금 더 꾸며볼까?', true); };
     overlay.querySelector('[data-action="restart"]').onclick  = () => {
       overlay.remove();
       if (state.tab === 'coloring') {
@@ -816,7 +816,7 @@
         state.ctx.clearRect(0, 0, state.canvas.width, state.canvas.height);
         applyThemeBg();
       }
-      speak('새 그림 시작!', true);
+      speak('새 그림을 시작해볼까?', true);
     };
     overlay.querySelector('[data-action="home"]').onclick = () => {
       overlay.remove();

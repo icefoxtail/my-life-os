@@ -314,7 +314,7 @@
       window.SihyeonVoice.play('games.memory.intro').catch(()=>{});
     }
     if (state.options.speakGuide) {
-      state.options.speakGuide('자동차를 알맞은 주차장에 주차해줘!', true);
+      state.options.speakGuide('같은 이름 주차장에 쏙 넣어볼까?', true);
     }
   }
 
@@ -513,7 +513,7 @@
       window.SihyeonVoice.play('games.memory.complete').catch(()=>{});
     }
     if (state.options.speakGuide) {
-      state.options.speakGuide('우와! 주차를 모두 완료했어!', true);
+      state.options.speakGuide('우와. 주차를 다 했어. 참 잘했어.', true);
     }
 
     const overlay = document.createElement('div');

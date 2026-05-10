@@ -201,7 +201,7 @@
     if (typeof speechSynthesis === 'undefined') return;
     speechSynthesis.cancel();
     const msg = new SpeechSynthesisUtterance(text);
-    msg.lang = 'ko-KR'; msg.rate = 0.9;
+    msg.lang = 'ko-KR'; msg.rate = 0.82; msg.pitch = 1.06;
     speechSynthesis.speak(msg);
   }
 
@@ -259,7 +259,7 @@
       card.addEventListener('click', () => startCare(cat));
       row.appendChild(card);
     });
-    speak('시현아, 어떤 야옹이를 돌봐줄까?');
+    speak('시현아, 어떤 야옹이를 같이 돌봐줄까?');
   }
 
   function renderCare() {
@@ -280,7 +280,7 @@
     `;
 
     renderActionBtns();
-    speak(`${cat.name}이 왔어요! 잘 돌봐줘!`);
+    speak(`${cat.name}이 왔어요. 같이 돌봐줄까?`);
   }
 
   function renderActionBtns() {
@@ -328,7 +328,7 @@
       if (typeof window.openGameLand === 'function') window.openGameLand();
       else state.options.closeToParkHome?.();
     });
-    speak(`${cat.name}이 행복해요! 시현아, 정말 잘했어!`);
+    speak(`${cat.name}이 행복해요. 시현아, 정말 잘했어.`);
     state.options.fireConfetti?.();
     state.options.gainExp?.(25);
   }

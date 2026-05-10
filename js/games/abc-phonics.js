@@ -14,9 +14,9 @@
       key: 'abc',
       label: 'ABC',
       title: 'ABC 변신',
-      intro: 'ABC 글자가 장난감으로 변신해요!',
+      intro: '에이, 비, 씨가 장난감으로 변신해요!',
       completeTitle: 'ABC 변신 완료!',
-      completeVoice: 'Wonderful! Great job!',
+      completeVoice: '우와. 에이, 비, 씨를 모두 만났어요.',
       completeExp: 20,
       bg: ['#FFF7D6', '#E8F7FF'],
       items: [
@@ -66,9 +66,9 @@
       key: 'hangul',
       label: '한글',
       title: '한글 변신',
-      intro: '한글 친구들이 귀여운 그림으로 변신해요!',
+      intro: '한글 친구들이 그림으로 변신해요!',
       completeTitle: '한글 변신 완료!',
-      completeVoice: '우와! 한글 친구들을 모두 만났어요!',
+      completeVoice: '우와. 한글 친구들을 모두 만났어요.',
       completeExp: 30,
       bg: ['#FFE6F3', '#FFF7C9'],
       items: [
@@ -756,8 +756,8 @@
       speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang || 'ko-KR';
-      utterance.rate = rate || 0.86;
-      utterance.pitch = 1.12;
+      utterance.rate = rate || 0.82;
+      utterance.pitch = 1.06;
       speechSynthesis.speak(utterance);
     } catch (error) {
       console.warn('[LetterTransform] speak failed:', error);
@@ -767,12 +767,13 @@
   function speakItemText(text, forceLang) {
     if (!text) return;
 
-    if (forceLang === 'ko-KR' && state.options && typeof state.options.speakGuide === 'function') {
+    const hasKorean = /[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(String(text));
+    if ((forceLang === 'ko-KR' || hasKorean) && state.options && typeof state.options.speakGuide === 'function') {
       state.options.speakGuide(text, true);
       return;
     }
 
-    speakDirect(text, forceLang || (state.mode === 'abc' ? 'en-US' : 'ko-KR'), state.mode === 'abc' ? 0.78 : 0.88);
+    speakDirect(text, forceLang || (state.mode === 'abc' ? 'en-US' : 'ko-KR'), state.mode === 'abc' ? 0.76 : 0.82);
   }
 
   function vibrate(pattern) {
@@ -883,7 +884,7 @@
           </button>
 
           <div class="lt-word-label" id="ltWordLabel">${escapeAttr(item.displayWord)}</div>
-          <div class="lt-hint" id="ltHint">👆 눌러봐!</div>
+          <div class="lt-hint" id="ltHint">👆 살짝 눌러볼까?</div>
         </div>
       </div>
     `;

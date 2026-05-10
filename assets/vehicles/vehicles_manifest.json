@@ -222,7 +222,7 @@
       "category": "construction",
       "file": "assets/vehicles/construction/concrete_pump_truck.png",
       "name_ko": "콘크리트 펌프카",
-      "sound_ko": "쭉쭉 뻗어서 보내요!"
+      "sound_ko": "쭉쭉 높이 보내요!"
     },
     {
       "id": "crane_truck",
@@ -278,7 +278,7 @@
       "category": "construction",
       "file": "assets/vehicles/construction/tower_crane.webp",
       "name_ko": "타워크레인",
-      "sound_ko": "높이높이! 자재를 올려요!"
+      "sound_ko": "높이높이! 짐을 올려요!"
     },
     {
       "id": "mobile_crane",
@@ -341,7 +341,7 @@
       "category": "construction",
       "file": "assets/vehicles/construction/fuel_truck.webp",
       "name_ko": "주유차",
-      "sound_ko": "꿀꺽꿀꺽! 힘낼 기름을 넣어요!"
+      "sound_ko": "꿀꺽꿀꺽! 기름을 넣어요!"
     },
     {
       "id": "lowbed_trailer",
@@ -355,7 +355,7 @@
       "category": "construction",
       "file": "assets/vehicles/construction/cargo_truck.webp",
       "name_ko": "자재 운반 트럭",
-      "sound_ko": "차곡차곡! 자재를 싣고 가요!"
+      "sound_ko": "차곡차곡! 짐을 싣고 가요!"
     },
     {
       "id": "scissor_lift",
@@ -495,7 +495,7 @@
       "category": "airport",
       "file": "assets/vehicles/airport/fuel_truck_airport.webp",
       "name_ko": "공항 주유차",
-      "sound_ko": "꿀꺽꿀꺽! 비행기에 연료를 넣어요!"
+      "sound_ko": "꿀꺽꿀꺽! 비행기에 기름을 넣어요!"
     },
     {
       "id": "pushback_tug",
@@ -544,7 +544,7 @@
       "category": "farm",
       "file": "assets/vehicles/farm/sprayer_truck.webp",
       "name_ko": "농약 살포차",
-      "sound_ko": "치익치익! 작물을 돌봐요!"
+      "sound_ko": "치익치익! 식물을 돌봐요!"
     },
     {
       "id": "baler",
@@ -586,7 +586,7 @@
       "category": "port",
       "file": "assets/vehicles/port/container_truck.webp",
       "name_ko": "컨테이너 트럭",
-      "sound_ko": "덜컹덜컹! 컨테이너를 옮겨요!"
+      "sound_ko": "덜컹덜컹! 큰 상자를 옮겨요!"
     },
     {
       "id": "harbor_crane",
@@ -600,7 +600,7 @@
       "category": "port",
       "file": "assets/vehicles/port/reach_stacker.webp",
       "name_ko": "리치스태커",
-      "sound_ko": "척척! 컨테이너를 높이 쌓아요!"
+      "sound_ko": "척척! 큰 상자를 높이 쌓아요!"
     },
     {
       "id": "tugboat",
@@ -656,14 +656,14 @@
       "category": "road_service",
       "file": "assets/vehicles/road_service/traffic_cone_truck.webp",
       "name_ko": "안전콘 트럭",
-      "sound_ko": "착착! 안전콘을 세워요!"
+      "sound_ko": "차근차근! 안전콘을 세워요!"
     },
     {
       "id": "road_sign_truck",
       "category": "road_service",
       "file": "assets/vehicles/road_service/road_sign_truck.webp",
       "name_ko": "도로 표지판 트럭",
-      "sound_ko": "반짝! 길 안내 표지판을 세워요!"
+      "sound_ko": "반짝! 길 안내판을 세워요!"
     },
     {
       "id": "road_sweeper",
@@ -789,7 +789,7 @@
       "category": "military_special",
       "file": "assets/vehicles/military_special/decontamination_truck.webp",
       "name_ko": "제독차",
-      "sound_ko": "치익치익! 깨끗하고 안전하게 씻어내요!"
+      "sound_ko": "치익치익! 깨끗하게 씻어내요!"
     },
     {
       "id": "water_purification_truck",
@@ -810,7 +810,7 @@
       "category": "military_special",
       "file": "assets/vehicles/military_special/drone_control_vehicle.webp",
       "name_ko": "드론 관제차",
-      "sound_ko": "위잉위잉! 드론을 살펴보고 움직여요!"
+      "sound_ko": "위잉위잉! 드론을 움직여요!"
     },
     {
       "id": "eod_robot_vehicle",
@@ -824,7 +824,7 @@
       "category": "military_special",
       "file": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
       "name_ko": "발사대 차량",
-      "sound_ko": "준비 완료! 큰 장비를 안전하게 옮겨요!"
+      "sound_ko": "준비됐어요. 큰 장비를 옮겨요!"
     },
     {
       "id": "school_van",

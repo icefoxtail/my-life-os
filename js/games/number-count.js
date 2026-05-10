@@ -300,7 +300,7 @@
           if(choicesArea) choicesArea.style.visibility = 'visible';
           this.renderChoices();
           playGameVoice('games.number.question');
-          this.say(`${this.state.currentVehicle.name}! 모두 몇 대일까?`, true);
+          this.say(`${this.state.currentVehicle.name}! 몇 대일까?`, true);
         });
       });
     },
@@ -474,11 +474,11 @@
             if(this.state.options.fireConfetti) this.state.options.fireConfetti();
 
             /* ⑤ 음성 */
-            const spokenNum = SINO_KR[this.state.currentAnswer] || this.state.currentAnswer;
+            const spokenNum = KOREAN_COUNT[this.state.currentAnswer] || this.state.currentAnswer;
             const vName     = this.state.currentVehicle.name;
             const vSound    = this.state.currentVehicle.sound;
             playGameVoice('games.number.correct');
-            this.say(`정답은 숫자 ${spokenNum}! ${vName}, ${vSound}`, true);
+            this.say(`맞았어. ${spokenNum} 대야. 잘했어. ${vName}, ${vSound}`, true);
 
             /* ⑥ 다음 문제 */
             this.setManagedTimeout(()=>{
@@ -501,7 +501,7 @@
       }
 
       playGameVoice('games.number.wrong');
-      this.say('괜찮아, 다시 세어보자!', true);
+      this.say('괜찮아. 천천히 다시 세어볼까?', true);
       this.showWrongFlash();
       wrapper.classList.add('shake');
       this.setManagedTimeout(()=>{
@@ -556,7 +556,7 @@
       stamp.className   = 'nc-number-stamp';
       stamp.textContent = num;
       area.appendChild(stamp);
-      this.speakDirect(SINO_KR[num] ? `숫자 ${SINO_KR[num]}` : String(num));
+      this.speakDirect(KOREAN_COUNT[num] ? `${KOREAN_COUNT[num]} 대` : String(num));
       this.setManagedTimeout(()=>{ if(stamp.parentNode) stamp.parentNode.removeChild(stamp); }, 1500);
     },
 
@@ -627,14 +627,14 @@
           panel.style.display = 'flex';
           this.createStars(24);
           playGameVoice('games.number.complete');
-          this.say('우와! 다 맞혔어. 시현이가 숫자 박사야!', true);
+          this.say('우와. 다 맞혔어. 시현이 참 잘했어.', true);
           if(this.state.options.fireConfetti) this.state.options.fireConfetti();
           if(this.state.options.gainExp)      this.state.options.gainExp(30);
         });
       } else {
         panel.style.display = 'flex';
         playGameVoice('games.number.complete');
-        this.say('우와! 다 맞혔어. 시현이가 숫자 박사야!', true);
+        this.say('우와. 다 맞혔어. 시현이 참 잘했어.', true);
         if(this.state.options.fireConfetti) this.state.options.fireConfetti();
         if(this.state.options.gainExp)      this.state.options.gainExp(30);
       }
@@ -701,7 +701,7 @@
       if(typeof speechSynthesis === 'undefined') return;
       speechSynthesis.cancel();
       const utt = new SpeechSynthesisUtterance(text);
-      utt.lang  = 'ko-KR'; utt.rate = 0.82; utt.pitch = 1.2;
+      utt.lang  = 'ko-KR'; utt.rate = 0.78; utt.pitch = 1.08;
       speechSynthesis.speak(utt);
     },
 

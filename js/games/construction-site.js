@@ -74,85 +74,85 @@
     {
       id: 'dig',
       title: '땅을 파야 해요!',
-      question: '땅을 파야 해요. 어떤 차가 필요할까?',
+      question: '땅을 파야 해요. 어떤 차가 좋을까?',
       answerIds: ['excavator', 'mini_excavator'],
       targetIcon: '🟫',
       resultIcon: '🕳️',
       workLabel: '흙 파기',
       successText: '쿠궁쿠궁! 땅을 팠어요!',
-      wrongText: '이 차는 다른 일을 잘해요. 흙을 파는 차를 골라볼까?',
+      wrongText: '괜찮아. 이 차는 다른 일을 잘해요. 땅 파는 차를 같이 찾아볼까?',
       stageClass: 'cs-stage-dig'
     },
     {
       id: 'push',
       title: '흙더미를 밀어야 해요!',
-      question: '흙더미를 앞으로 밀어야 해요. 누가 도와줄까?',
+      question: '흙더미를 밀어야 해요. 어떤 차가 좋을까?',
       answerIds: ['bulldozer'],
       targetIcon: '🧱',
       resultIcon: '🟩',
       workLabel: '밀기',
       successText: '쓱쓱! 흙더미를 밀었어요!',
-      wrongText: '이 차는 밀기보다 다른 일을 잘해요. 다시 골라볼까?',
+      wrongText: '괜찮아. 이 차는 다른 일을 잘해요. 다른 차를 같이 볼까?',
       stageClass: 'cs-stage-push'
     },
     {
       id: 'load',
       title: '흙을 담아야 해요!',
-      question: '흙을 담아서 옮겨야 해요. 어떤 차가 좋을까?',
+      question: '흙을 담아야 해요. 어떤 차가 좋을까?',
       answerIds: ['wheel_loader'],
       targetIcon: '🟤',
       resultIcon: '🪣',
       workLabel: '담기',
       successText: '커다란 삽으로 흙을 담았어요!',
-      wrongText: '이 차는 흙을 담기 어렵대요. 커다란 삽이 있는 차를 찾아볼까?',
+      wrongText: '괜찮아. 이 차는 담기가 어려워요. 큰 삽이 있는 차를 같이 찾아볼까?',
       stageClass: 'cs-stage-load'
     },
     {
       id: 'carry',
       title: '짐을 멀리 옮겨야 해요!',
-      question: '흙과 돌을 다른 곳으로 옮겨야 해요. 어떤 차가 필요할까?',
+      question: '흙과 돌을 옮겨야 해요. 어떤 차가 좋을까?',
       answerIds: ['dump_truck'],
       targetIcon: '📦',
       resultIcon: '🏁',
       workLabel: '',
       successText: '우르르! 짐을 싣고 옮겼어요!',
-      wrongText: '이 차는 많이 싣기 어려워요. 짐을 옮기는 차를 찾아볼까?',
+      wrongText: '괜찮아. 이 차는 많이 싣기 어려워요. 짐 옮기는 차를 같이 찾아볼까?',
       stageClass: 'cs-stage-carry'
     },
     {
       id: 'mix',
       title: '콘크리트를 만들어야 해요!',
-      question: '튼튼한 바닥을 만들 재료가 필요해요. 어떤 차가 필요할까?',
+      question: '콘크리트를 만들어야 해요. 어떤 차가 좋을까?',
       answerIds: ['concrete_mixer'],
       targetIcon: '🌀',
       resultIcon: '⬛',
       workLabel: '섞기',
       successText: '빙글빙글! 콘크리트가 완성됐어요!',
-      wrongText: '이 차는 섞는 차가 아니에요. 빙글빙글 도는 차를 찾아볼까?',
+      wrongText: '괜찮아. 이 차는 섞는 차가 아니에요. 빙글빙글 도는 차를 같이 찾아볼까?',
       stageClass: 'cs-stage-mix'
     },
     {
       id: 'lift',
       title: '무거운 짐을 들어야 해요!',
-      question: '무거운 짐을 높이 들어야 해요. 어떤 차가 필요할까?',
+      question: '무거운 짐을 들어야 해요. 어떤 차가 좋을까?',
       answerIds: ['crane_truck', 'forklift'],
       targetIcon: '📦',
       resultIcon: '✨',
       workLabel: '들기',
       successText: '번쩍! 무거운 짐을 들어 올렸어요!',
-      wrongText: '이 차는 들어 올리는 일이 어려워요. 다시 골라볼까?',
+      wrongText: '괜찮아. 이 차는 들기가 어려워요. 다른 차를 같이 볼까?',
       stageClass: 'cs-stage-lift'
     },
     {
       id: 'pump',
       title: '높은 곳에 보내야 해요!',
-      question: '높은 곳까지 콘크리트를 보내야 해요. 어떤 차가 필요할까?',
+      question: '높은 곳까지 보내야 해요. 어떤 차가 좋을까?',
       answerIds: ['concrete_pump_truck'],
       targetIcon: '⬛',
       resultIcon: '🌟',
       workLabel: '보내기',
       successText: '쭉쭉! 높은 곳까지 보냈어요!',
-      wrongText: '이 차는 높이 보내는 차가 아니에요. 긴 팔이 있는 차를 찾아볼까?',
+      wrongText: '괜찮아. 이 차는 높이 보내기 어려워요. 긴 팔이 있는 차를 같이 찾아볼까?',
       stageClass: 'cs-stage-pump'
     }
   ];
@@ -187,8 +187,8 @@
       speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'ko-KR';
-      utterance.rate = 0.92;
-      utterance.pitch = 1.18;
+      utterance.rate = 0.82;
+      utterance.pitch = 1.06;
       speechSynthesis.speak(utterance);
     } catch (error) {
       console.warn('TTS 재생 실패:', error);

@@ -46,7 +46,7 @@
     "category": "construction",
     "file": "assets/vehicles/construction/concrete_pump_truck.png",
     "name_ko": "콘크리트 펌프카",
-    "sound_ko": "쭉쭉 뻗어서 보내요!"
+    "sound_ko": "쭉쭉 높이 보내요!"
   },
   {
     "id": "crane_truck",
@@ -102,7 +102,7 @@
     "category": "construction",
     "file": "assets/vehicles/construction/tower_crane.webp",
     "name_ko": "타워크레인",
-    "sound_ko": "높이높이! 자재를 올려요!"
+    "sound_ko": "높이높이! 짐을 올려요!"
   },
   {
     "id": "mobile_crane",
@@ -165,7 +165,7 @@
     "category": "construction",
     "file": "assets/vehicles/construction/fuel_truck.webp",
     "name_ko": "주유차",
-    "sound_ko": "꿀꺽꿀꺽! 힘낼 기름을 넣어요!"
+    "sound_ko": "꿀꺽꿀꺽! 기름을 넣어요!"
   },
   {
     "id": "lowbed_trailer",
@@ -179,7 +179,7 @@
     "category": "construction",
     "file": "assets/vehicles/construction/cargo_truck.webp",
     "name_ko": "자재 운반 트럭",
-    "sound_ko": "차곡차곡! 자재를 싣고 가요!"
+    "sound_ko": "차곡차곡! 짐을 싣고 가요!"
   },
   {
     "id": "scissor_lift",

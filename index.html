@@ -875,12 +875,12 @@ const CHARACTER_ASSETS = {
 };
 
 const LAND_CHARACTERS = {
-  game:    { id:'dad',      mainX:'18%', mainY:'17%', landX:'24%', landY:'72%', action:'openMemoryGame()',          greeting:'아빠랑 게임 해볼까?' },
-  numbers: { id:'mom',      mainX:'82%', mainY:'17%', landX:'76%', landY:'72%', action:'openNumberCountGame()',     greeting:'엄마랑 숫자 공부하자!' },
-  letters: { id:'rona',     mainX:'18%', mainY:'42%', landX:'24%', landY:'72%', action:'openLetterGame()',          greeting:'로나랑 글자 놀이!' },
-  cars:    { id:'sicheoni', mainX:'82%', mainY:'43%', landX:'76%', landY:'72%', action:'openCarGarageGame()',       greeting:'시천이랑 차 고쳐보자!' },
+  game:    { id:'dad',      mainX:'18%', mainY:'17%', landX:'24%', landY:'72%', action:'openMemoryGame()',          greeting:'아빠랑 같이 놀아볼까?' },
+  numbers: { id:'mom',      mainX:'82%', mainY:'17%', landX:'76%', landY:'72%', action:'openNumberCountGame()',     greeting:'엄마랑 숫자 놀이 해볼까?' },
+  letters: { id:'rona',     mainX:'18%', mainY:'42%', landX:'24%', landY:'72%', action:'openLetterGame()',          greeting:'로나랑 글자 놀이 해볼까?' },
+  cars:    { id:'sicheoni', mainX:'82%', mainY:'43%', landX:'76%', landY:'72%', action:'openCarGarageGame()',       greeting:'시천이랑 차를 고쳐볼까?' },
   story:   { id:'reumi',    mainX:'18%', mainY:'68%', landX:'24%', landY:'72%', action:'openStoryTheater()',        greeting:'름이랑 동화 읽어볼까?' },
-  voice:   { id:'nuni',     mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'openVoiceZone()', greeting:'눈이랑 말하기 연습!' }
+  voice:   { id:'nuni',     mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'openVoiceZone()', greeting:'눈이랑 말하기 해볼까?' }
 };
 
 const ZONE_CONFIGS = {
@@ -888,7 +888,7 @@ const ZONE_CONFIGS = {
     id:'game', title:'🎮 즐거운놀이터', emoji:'🎮',
     bg:'linear-gradient(160deg,#FF7A1A 0%,#FFD93D 100%)',
     character:'dad',
-    greeting:'아빠랑 게임 해볼까? 하고 싶은 게임을 골라봐!',
+    greeting:'아빠랑 같이 놀아볼까? 하고 싶은 걸 하나 골라보자.',
     games: [
       { id:'memory',   title:'짝맞추기',  emoji:'🃏', image:'./assets/games/cards/vehicle-memory.webp',  desc:'같은 차를 찾아요',    action:'openMemoryGame()',          isNew:false },
       { id:'balloon',  title:'색깔 풍선', emoji:'🎈', image:'./assets/games/cards/color-balloon.webp',  desc:'색깔을 맞춰요',      action:'openColorBalloonGame()',    isNew:true  },
@@ -901,7 +901,7 @@ const ZONE_CONFIGS = {
     id:'numbers', title:'🔢 숫자놀이터', emoji:'🔢',
     bg:'linear-gradient(160deg,#1E90FF 0%,#87CEEB 100%)',
     character:'mom',
-    greeting:'엄마랑 숫자 공부해볼까? 어떤 게임 할래?',
+    greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games: [
       { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.webp', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
       { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.webp', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
@@ -911,10 +911,10 @@ const ZONE_CONFIGS = {
     id:'letters', title:'🔤 글자놀이터', emoji:'🔤',
     bg:'linear-gradient(160deg,#FF85C2 0%,#FFD4E8 100%)',
     character:'rona',
-    greeting:'로나랑 글자 공부! 어떤 놀이 할까?',
+    greeting:'로나랑 글자 놀이 해볼까? 어떤 걸 해볼래?',
     games: [
       { id:'letter',  title:'글자 풍선',  emoji:'🎈', image:'./assets/games/cards/letter-play.webp',  desc:'첫 글자를 찾아요',   action:'openLetterGame()',       isNew:false },
-      { id:'abcphon', title:'ABC 변신',   emoji:'🔤', image:'./assets/games/cards/abc-phonics.webp',  desc:'A,B,C가 변신해요',  action:'openAbcPhonicsGame()',   isNew:true  },
+      { id:'abcphon', title:'ABC 변신',   emoji:'🔤', image:'./assets/games/cards/abc-phonics.webp',  desc:'ABC가 변신해요',  action:'openAbcPhonicsGame()',   isNew:true  },
     ]
   },
   cars: {
@@ -1019,14 +1019,14 @@ function speakText(text,opts={}){
   if(!text||!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='ko-KR'; u.rate=opts.rate||db.settings.voiceGuide.rate||0.85;
-  u.pitch=opts.pitch||db.settings.voiceGuide.pitch||1.1;
+  u.lang='ko-KR'; u.rate=opts.rate||db.settings.voiceGuide.rate||0.82;
+  u.pitch=opts.pitch||db.settings.voiceGuide.pitch||1.04;
   window.speechSynthesis.speak(u);
 }
 function speakGuide(text,force=false){
   if(!force&&isStoryPlaying()) return;
   if(!db.settings.voiceGuide.enabled) return;
-  speakText(text,{rate:0.88,pitch:1.08});
+  speakText(text,{rate:0.82,pitch:1.04});
 }
 function speakStory(text){ speakText(text,{rate:0.82,pitch:1.03}); }
 function stopSpeaking(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }
@@ -1045,7 +1045,7 @@ function gainExp(amount){
   db.progress.exp=Number(db.progress.exp||0)+Number(amount||0);
   while(db.progress.exp>=100){
     db.progress.level=Number(db.progress.level||1)+1; db.progress.exp-=100;
-    fireConfetti(); speakGuide('레벨이 올라갔어! 시현이 최고!');
+    fireConfetti(); speakGuide('레벨이 올라갔어. 시현이 참 잘했어.');
   }
   save();
 }
@@ -1130,7 +1130,7 @@ function goWithLandCharacter(zoneId){
   runner.classList.add('is-moving');
   runner.style.left=info.landX;
   runner.style.top=info.landY;
-  speakGuide(`${info.meta.name}이랑 같이 가볼게!`, true);
+  speakGuide(`${info.meta.name}이랑 같이 가볼게.`, true);
   setTimeout(()=>{
     runner.classList.remove('is-moving');
     runLandAction(zoneId);
@@ -1148,7 +1148,7 @@ function moveSihyeonToLandCharacter(zoneId){
   if(!info||!runner) return;
   runner.classList.add('is-moving');
   runner.style.left=info.landX; runner.style.top=info.landY;
-  speakGuide(`${info.meta.name}에게 가볼게!`, true);
+  speakGuide(`${info.meta.name}에게 가볼게.`, true);
   setTimeout(()=>runner.classList.remove('is-moving'), 900);
 }
 function travelToZoneFromCharacter(zoneId){
@@ -1195,7 +1195,7 @@ function renderWorldMapHome(){
             <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
             <div class="avatar-emoji">👦🏻</div>
           </div>
-          <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 지도에서 가고 싶은 곳을 눌러봐!', true)" aria-label="안내">🎤</button>
+          <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 가고 싶은 곳을 살짝 눌러볼까?', true)" aria-label="안내">🎤</button>
         </div>
       </div>
     </section>`;
@@ -1226,7 +1226,7 @@ function openImageLand(zoneId, title, imageSrc, hotspots){
         </div>
       </div>
     </section>`;
-  speakGuide(`${title}에 도착했어! 캐릭터나 게임을 눌러봐!`, true);
+  speakGuide(`${title}에 도착했어. 하고 싶은 걸 살짝 눌러볼까?`, true);
 }
 
 /* ═══════════════════════════════════════════
@@ -1311,7 +1311,7 @@ function travelToZone(zoneId){
     }
   }
 
-  speakGuide(`시현이가 ${zone.label}으로 걸어가요! 하나 둘, 하나 둘!`, true);
+  speakGuide(`시현이가 ${zone.label}으로 걸어가요. 하나, 둘. 하나, 둘.`, true);
 
   let entered = false;
   const safeEnter = () => {
@@ -1385,7 +1385,7 @@ function closeToParkHome(){
   cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
   if(window.stopStoryReading) window.stopStoryReading(true);
   renderWorldMapHome();
-  speakGuide('놀이터로 돌아왔어! 다음은 어디로 갈까?', true);
+  speakGuide('놀이터로 돌아왔어. 다음은 어디로 가볼까?', true);
 }
 function makeZoneHead(title){
   return `<div class="zone-head">
@@ -1413,7 +1413,7 @@ function renderPlaceholderZone(zoneId){
         <div class="placeholder-text">재미있는 놀이를 준비하고 있어!</div>
       </div>
     </div>`;
-  speakGuide(`${zone.label}에 도착했어! 재미있는 놀이를 준비하고 있어!`);
+  speakGuide(`${zone.label}에 도착했어. 놀이를 준비하고 있어.`);
 }
 
 /* ═══════════════════════════════════════════
@@ -1530,7 +1530,7 @@ function openFullscreenGarage(){
         </div>
       </div>
     </div>`;
-  speakGuide('자동차놀이터 정비소 도착! 자동차를 빈칸에 끌어다 놓아봐!', true);
+  speakGuide('자동차 정비소에 도착했어. 자동차를 빈칸에 살짝 넣어볼까?', true);
   initGarageRound();
 }
 function initGarageRound(){
@@ -1558,14 +1558,14 @@ function initGarageRound(){
     if(part.hasPointerCapture(pointerId)) part.releasePointerCapture(pointerId);
     const tr=target.getBoundingClientRect(), pr2=part.getBoundingClientRect();
     const hit=!(pr2.right<tr.left-30||pr2.left>tr.right+30||pr2.bottom<tr.top-30||pr2.top>tr.bottom+30);
-    if(!hit){ message.textContent='조금만 더 가까이!'; speakGuide('조금만 더 가까이 가 볼까?'); return; }
+    if(!hit){ message.textContent='조금만 더 가까이!'; speakGuide('조금만 더 가까이 가볼까?'); return; }
     target.classList.add('filled'); target.textContent=carIcon;
     part.style.pointerEvents='none';
     part.style.left=`${target.offsetLeft-part.offsetWidth/2}px`;
     part.style.top=`${target.offsetTop-part.offsetHeight/2}px`;
     part.style.transform='scale(1.2)';
     message.textContent='착! 자동차가 딱 맞았어! 🎉';
-    fireConfetti(); speakGuide('착! 자동차가 딱 맞았어. 시현이 최고!');
+    fireConfetti(); speakGuide('착. 자동차가 딱 맞았어. 시현이 참 잘했어.');
     gainExp(15); unlockCar(carIcon);
     setTimeout(()=>{ if(document.getElementById('garageStage')) initGarageRound(); }, 1400);
   };
@@ -1635,7 +1635,7 @@ function openStoryTheater(){
       else window.renderStoryGrid?.('전체');
     }, 0);
   }
-  speakGuide('동화극장에 도착했어. 읽고 싶은 책을 골라봐!', true);
+  speakGuide('동화극장에 도착했어. 읽고 싶은 책을 하나 골라볼까?', true);
 }
 
 function filterStoriesBySearch(query){
@@ -1952,7 +1952,7 @@ window.addEventListener('load', () => {
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>speakGuide('시현아 안녕! 놀이공원에 온 걸 환영해!', true), 600);
+  setTimeout(()=>speakGuide('시현아 안녕. 놀이공원에 온 걸 환영해.', true), 600);
 }
 
 if('serviceWorker' in navigator){

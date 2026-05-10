@@ -24,12 +24,12 @@
       scene: '🌈',
       complete: '🏡',
       color: '#FF7A1A',
-      guide: '블록 세 개로 예쁜 집을 만들어보자!',
-      completeText: '집 완성! 창문에 불이 반짝 켜졌어요!',
+      guide: '블록 세 개로 집을 만들어볼까?',
+      completeText: '집 완성. 창문에 불이 반짝 켜졌어요.',
       steps: [
-        { id: 'body', label: '네모 집', emoji: '🟦', say: '먼저 네모 집 블록!' },
-        { id: 'roof', label: '세모 지붕', emoji: '🔺', say: '지붕을 올려볼까?' },
-        { id: 'door', label: '문', emoji: '🚪', say: '문을 붙이면 완성!' }
+        { id: 'body', label: '네모 집', emoji: '🟦', say: '먼저 네모 집이에요.' },
+        { id: 'roof', label: '세모 지붕', emoji: '🔺', say: '지붕을 올려요.' },
+        { id: 'door', label: '문', emoji: '🚪', say: '문을 붙이면 완성.' }
       ],
       wrongs: [
         { id: 'tree', label: '나무', emoji: '🌳' },
@@ -43,12 +43,12 @@
       scene: '🛤️',
       complete: '🚂',
       color: '#1E90FF',
-      guide: '칙칙폭폭 기차를 만들어보자!',
-      completeText: '기차 완성! 칙칙폭폭 출발해요!',
+      guide: '기차를 만들어볼까?',
+      completeText: '기차 완성. 칙칙폭폭 출발해요.',
       steps: [
-        { id: 'engine', label: '기관차', emoji: '🚂', say: '기관차를 놓고!' },
-        { id: 'wheel', label: '바퀴', emoji: '⚙️', say: '바퀴를 착 붙이고!' },
-        { id: 'car', label: '객차', emoji: '🚃', say: '객차를 연결하면 출발!' }
+        { id: 'engine', label: '기관차', emoji: '🚂', say: '기관차를 놓아요.' },
+        { id: 'wheel', label: '바퀴', emoji: '⚙️', say: '바퀴를 붙여요.' },
+        { id: 'car', label: '객차', emoji: '🚃', say: '객차를 연결하면 출발.' }
       ],
       wrongs: [
         { id: 'ship', label: '배', emoji: '⛵' },
@@ -62,12 +62,12 @@
       scene: '🌌',
       complete: '🚀',
       color: '#9C27B0',
-      guide: '슈우웅 로켓을 만들어볼까?',
-      completeText: '로켓 완성! 하늘로 슈우웅 날아가요!',
+      guide: '로켓을 만들어볼까?',
+      completeText: '로켓 완성. 하늘로 슈우웅 날아가요.',
       steps: [
-        { id: 'body', label: '몸통', emoji: '🟪', say: '몸통을 세우고!' },
-        { id: 'wing', label: '날개', emoji: '🪽', say: '날개를 붙이고!' },
-        { id: 'fire', label: '불꽃', emoji: '🔥', say: '불꽃을 붙이면 발사!' }
+        { id: 'body', label: '몸통', emoji: '🟪', say: '몸통을 세워요.' },
+        { id: 'wing', label: '날개', emoji: '🪽', say: '날개를 붙여요.' },
+        { id: 'fire', label: '불꽃', emoji: '🔥', say: '불꽃을 붙이면 발사.' }
       ],
       wrongs: [
         { id: 'moon', label: '달', emoji: '🌙' },
@@ -187,8 +187,8 @@
     speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(text);
     utt.lang = 'ko-KR';
-    utt.rate = rate;
-    utt.pitch = 1.24;
+    utt.rate = Math.min(rate, 0.94);
+    utt.pitch = 1.08;
     speechSynthesis.speak(utt);
   }
 
@@ -356,7 +356,7 @@
     state.targetNumber = 5;
     state.centerBlock = null;
     setTimer(startNumberLevel, 260);
-    if (announce) speak('숫자 만들기! 블록을 톡톡 눌러보자!', 1.05);
+    if (announce) speak('숫자 만들기. 블록을 살짝 눌러볼까?', 0.94);
   }
 
   function startNumberLevel() {
@@ -386,7 +386,7 @@
       wrap.appendChild(block);
       tray.appendChild(wrap);
     });
-    speak(`숫자 ${state.targetNumber}을 만들어보자!`, 1.08);
+    speak(`숫자 ${state.targetNumber}를 만들어볼까?`, 0.94);
   }
 
   function handleNumberBlockClick(blockEl, val) {
@@ -447,7 +447,7 @@
     const mergedEl = createBlockElement(sum, true);
     mergedEl.style.transform = 'scale(0)';
     stage.appendChild(mergedEl);
-    speak(`${BLOCK_META[oldVal].name}이랑 ${BLOCK_META[newVal].name}이 만나서 ${BLOCK_META[sum].name}!`, 1.02);
+    speak(`${BLOCK_META[oldVal].name}이랑 ${BLOCK_META[newVal].name}. 그래서 ${BLOCK_META[sum].name}.`, 0.94);
     requestAnimationFrame(() => {
       mergedEl.style.transition = 'transform .42s cubic-bezier(.34,1.56,.64,1)';
       mergedEl.style.transform = 'scale(1)';
@@ -465,7 +465,7 @@
       vibrate([90, 60, 90, 60, 240]);
       state.options.fireConfetti?.();
       state.options.gainExp?.(30);
-      setTimer(() => showSuccessOverlay('⭐⭐⭐', '완벽해요!', '숫자 5를 완성했어!', () => startNumberMode(false)), 4200);
+      setTimer(() => showSuccessOverlay('⭐⭐⭐', '완벽해요.', '숫자 5를 완성했어.', () => startNumberMode(false)), 4200);
     } else {
       state.isAnimating = false;
     }
@@ -476,17 +476,17 @@
     setTitle('뚝딱 블록 만들기!');
     state.buildRound = 0;
     state.isAnimating = false;
-    if (announce) speak('블록 만들기! 세 개를 차례차례 붙여보자!', 1.05);
+    if (announce) speak('블록 만들기. 차례대로 붙여볼까?', 0.94);
     setTimer(startBuildRound, 260);
   }
 
   function startBuildRound() {
     if (!state.container || state.destroyed || state.mode !== 'build') return;
     if (state.buildRound >= BUILD_MISSIONS.length) {
-      showSuccessOverlay('🏆', '블록 작품 완료!', '집, 기차, 로켓을 모두 만들었어요!', () => startBuildMode(false));
+      showSuccessOverlay('🏆', '블록 작품 완료.', '집, 기차, 로켓을 모두 만들었어요.', () => startBuildMode(false));
       state.options.fireConfetti?.();
       state.options.gainExp?.(40);
-      speak('우와! 블록 작품을 모두 완성했어!', 1.05);
+      speak('우와. 블록 작품을 다 만들었어.', 0.94);
       return;
     }
 
@@ -556,7 +556,7 @@
       const slot = state.container?.querySelector(`[data-slot="${Math.max(nextIndex, 0)}"]`);
       card?.classList.add('wrong');
       slot?.classList.add('wrong');
-      speak('이 블록은 아닌가 봐. 다른 블록을 찾아볼까?', 1.05);
+      speak('괜찮아. 이 블록은 아닌가 봐. 다른 블록을 찾아볼까?', 0.94);
       setTimer(() => {
         card?.classList.remove('wrong');
         slot?.classList.remove('wrong');
@@ -643,7 +643,7 @@
     state.centerBlock = null;
     state.isAnimating = false;
     startNumberMode(false);
-    speak('숫자 블록이야! 숫자 만들기랑 블록 만들기를 해보자!', 1.05);
+    speak('숫자 블록이야. 숫자도 만들고, 그림도 만들어볼까?', 0.94);
   }
 
   function destroy() {
