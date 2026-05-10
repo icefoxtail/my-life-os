@@ -1,8 +1,8 @@
 /**
- * 시현이 놀이터 OS — 말하기놀이터 (Voice Zone) v3.1
+ * 시현이 놀이터 OS — 말하기놀이터 (Voice Zone) v5.0
  * 파일: js/zones/voice-zone.js
  *
- * 기능: 설명글 전면 제거(그림/버튼 대폭 확대) + 음성 가이드 강화 + 한 번 톡 토글 방식
+ * 기능: 요술 마이크(변조) + 유튜브 재생 + 30초 시각 타이머 + 권한/메모리 무결점 방어
  */
 
 (function () {
@@ -21,20 +21,24 @@
     container: null,
     mediaRecorder: null,
     audioChunks: [],
-    playbackAudio: new Audio(),
+    audioMimeType: '',
+    playbackAudio: null, // ★ 생성/소멸 관리
     ytPlayer: null,
     ytReady: false,
+    ytLoadTimer: null,   // ★ 유튜브 로딩 타임아웃
     isRecording: false,
     isPlaying: false,
     isBgmPlaying: false,
     locked: false,
     destroyed: false,
     audioCtx: null,
+    currentSource: null,
     rippleInterval: null,
-    recordTimer: null
+    recordTimer: null,
+    voiceMode: 'normal'
   };
 
-  // ─── 터치 효과음 (SFX) ──────────────────────────────────
+  // ─── 오디오 엔진 (효과음 & 재생) ──────────────────────────────────
   function initAudio() {
     if (!window.AudioContext && !window.webkitAudioContext) return;
     if (!state.audioCtx) state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -83,7 +87,7 @@
     speechSynthesis.speak(utt);
   }
 
-  // ─── 화려한 스타일 주입 (설명글 제거 & 버튼 확대) ─────────────────
+  // ─── 화려한 스타일 주입 ─────────────────
   function injectStyle() {
     if (document.getElementById(STYLE_ID)) return;
     const style = document.createElement('style');
@@ -102,7 +106,7 @@
       
       .vz-header { position: relative; z-index: 2; width: min(100%, 820px); display: grid; justify-items: center; gap: 8px; margin-bottom: 12px; }
       .vz-character {
-        width: clamp(100px, 26vw, 150px); height: clamp(100px, 26vw, 150px); /* 캐릭터 확대 */
+        width: clamp(100px, 26vw, 150px); height: clamp(100px, 26vw, 150px);
         background: #fff; border-radius: 50%; border: 6px solid #ffb6c1;
         box-shadow: 0 8px 16px rgba(255, 182, 193, 0.4);
         display: flex; align-items: center; justify-content: center;
@@ -111,11 +115,7 @@
       }
       @keyframes vz-float { from { transform: translateY(0); } to { transform: translateY(-10px); } }
       .vz-character img { width: 80%; height: 80%; object-fit: contain; border-radius: 50%; }
-      .vz-title {
-        margin: 0; color: #263238; text-align: center;
-        font-size: clamp(26px, 7vw, 42px); line-height: 1.12; /* 타이틀 확대 */
-        text-shadow: 0 2px 0 rgba(255,255,255,0.9);
-      }
+      .vz-title { margin: 0; color: #263238; text-align: center; font-size: clamp(26px, 7vw, 42px); line-height: 1.12; text-shadow: 0 2px 0 rgba(255,255,255,0.9); }
       
       .vz-card-grid {
         position: relative; z-index: 2; width: min(100%, 920px);
@@ -123,12 +123,11 @@
         gap: clamp(16px, 4vw, 26px); padding: 4px 0 max(12px, env(safe-area-inset-bottom));
       }
       
-      /* 설명글이 빠진 만큼 카드를 간결하고 큼직하게 유지 */
       .vz-card {
         min-height: 250px; border: 6px solid #fff; border-radius: 35px;
         background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,254,0.95));
         box-shadow: 0 12px 0 rgba(123, 31, 162, 0.1), 0 20px 30px rgba(0,0,0,0.1);
-        display: flex; flex-direction: column; gap: 15px; padding: 20px;
+        display: flex; flex-direction: column; gap: 12px; padding: 20px;
       }
       .vz-card-visual {
         position: relative; flex: 1 1 auto; min-height: 150px; border-radius: 25px;
@@ -139,21 +138,36 @@
       .vz-card-img { width: 100%; height: 100%; min-height: 150px; object-fit: cover; display: block; }
       .vz-card-fallback { width: 100%; height: 100%; min-height: 150px; display: grid; place-items: center; font-size: clamp(75px, 20vw, 120px); }
       
-      .vz-card-title { 
-        color: #283593; font-size: clamp(26px, 6vw, 36px); 
-        font-weight: 900; line-height: 1.1; text-align: center; 
-        margin-top: 5px;
+      .vz-card-title { color: #283593; font-size: clamp(26px, 6vw, 36px); font-weight: 900; line-height: 1.1; text-align: center; margin-top: 5px; }
+      
+      /* 요술 마이크 모드 선택기 */
+      .vz-voice-modes { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+      .vz-mode-btn {
+        width: clamp(55px, 14vw, 75px); height: clamp(55px, 14vw, 75px);
+        border-radius: 50%; font-size: clamp(28px, 7vw, 40px);
+        background: #fff; border: 4px solid #ddd;
+        box-shadow: 0 4px 0 #ccc; display: grid; place-items: center;
+        cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+      }
+      .vz-mode-btn:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+      .vz-mode-btn.active {
+        border-color: #FF7A1A; background: #FFF3E0;
+        box-shadow: 0 4px 0 #E65100, 0 0 15px rgba(255,122,26,0.4);
+        transform: scale(1.15) translateY(-2px); z-index: 5;
       }
       
+      /* ★ 7번: 모드 선택 피드백 (Pop 효과) */
+      .vz-pop-anim { animation: btnPop 0.3s ease-out; }
+      @keyframes btnPop { 0% { transform: scale(1.15); } 50% { transform: scale(1.35) rotate(-5deg); } 100% { transform: scale(1.15); } }
+
       .vz-card-actions { display: flex; justify-content: center; align-items: center; min-height: 120px; position: relative; }
       
-      /* 마이크 버튼 (메가 사이즈) */
+      /* 마이크 버튼 및 시각 타이머 */
       .vz-mic-wrap { position: relative; display: grid; place-items: center; width: 100%; height: 100%; touch-action: manipulation; }
       .vz-mic-btn {
         position: relative; z-index: 10;
-        width: clamp(120px, 30vw, 170px); height: clamp(120px, 30vw, 170px); /* 설명이 빠져서 버튼을 더 키움 */
-        border-radius: 50%;
-        background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        width: clamp(120px, 30vw, 170px); height: clamp(120px, 30vw, 170px);
+        border-radius: 50%; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
         border: 8px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         font-size: clamp(65px, 16vw, 95px); display: flex; align-items: center; justify-content: center;
         cursor: pointer; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
@@ -161,84 +175,66 @@
       }
       .vz-mic-btn:active { transform: scale(0.85); box-shadow: 0 5px 10px rgba(0,0,0,0.15); }
       
-      /* 녹음 중 상태 (빨간불 + 정지 아이콘) */
-      .vz-mic-btn.recording {
-        background: linear-gradient(135deg, #ff8a80 0%, #ff5252 100%);
-        transform: scale(1.1); border-color: #ffebee;
-      }
-      
-      /* 재생 중 상태 */
-      .vz-mic-btn.playing {
-        background: linear-gradient(135deg, #81c784 0%, #4caf50 100%);
-        border-color: #e8f5e9; animation: vz-bounce 0.8s infinite alternate; pointer-events: none;
-      }
+      .vz-mic-btn.recording { background: linear-gradient(135deg, #ff8a80 0%, #ff5252 100%); transform: scale(1.1); border-color: #ffebee; }
+      .vz-mic-btn.playing { background: linear-gradient(135deg, #81c784 0%, #4caf50 100%); border-color: #e8f5e9; animation: vz-bounce 0.8s infinite alternate; pointer-events: none; }
 
-      /* 사운드 웨이브 이펙트 */
+      /* ★ 5번: 시각적 타이머 (30초 카운트다운) */
+      .vz-mic-progress {
+        position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+        z-index: 11; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+      }
+      .vz-mic-progress circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+      .vz-mic-track { stroke: rgba(255,255,255,0.4); }
+      .vz-mic-bar {
+        stroke: #FF5252; stroke-dasharray: 283; stroke-dashoffset: 0;
+        transform-origin: 50% 50%; transform: rotate(-90deg);
+      }
+      .vz-mic-btn.recording ~ .vz-mic-progress { opacity: 1; }
+      .vz-mic-btn.recording ~ .vz-mic-progress .vz-mic-bar { animation: vz-timer-countdown 30s linear forwards; }
+      @keyframes vz-timer-countdown { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 283; } }
+
       .vz-ripple {
         position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         width: clamp(120px, 30vw, 170px); height: clamp(120px, 30vw, 170px);
         border-radius: 50%; border: 8px solid #ff5252;
-        animation: rippleAnim 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        pointer-events: none; z-index: 1;
+        animation: rippleAnim 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards; pointer-events: none; z-index: 1;
       }
-      @keyframes rippleAnim {
-        0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-        100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; border-width: 0px; }
-      }
+      @keyframes rippleAnim { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; border-width: 0px; } }
 
       /* 뮤직 버튼 */
       .vz-music-btn {
         position: relative; z-index: 10;
-        width: clamp(110px, 28vw, 160px); height: clamp(110px, 28vw, 160px); /* 설명이 빠져서 버튼을 더 키움 */
+        width: clamp(110px, 28vw, 160px); height: clamp(110px, 28vw, 160px);
         border-radius: 50%; background: linear-gradient(135deg, #ffd54f 0%, #ffb300 100%);
         border: 8px solid #fff; box-shadow: 0 10px 0 rgba(230,126,0,0.3), 0 15px 25px rgba(0,0,0,0.15);
         font-size: clamp(60px, 15vw, 85px); display: flex; align-items: center; justify-content: center;
-        cursor: pointer; transition: transform 0.1s, opacity 0.3s, box-shadow 0.1s;
-        -webkit-tap-highlight-color: transparent;
+        cursor: pointer; transition: transform 0.1s, opacity 0.3s, box-shadow 0.1s; -webkit-tap-highlight-color: transparent;
       }
       .vz-music-btn:active { transform: scale(0.9) translateY(5px); box-shadow: 0 4px 0 rgba(230,126,0,0.3), 0 8px 15px rgba(0,0,0,0.15); }
       .vz-music-btn.playing { animation: vz-music-dance 0.5s infinite alternate; }
-      .vz-music-btn.disabled { opacity: 0.5; pointer-events: none; }
+      .vz-music-btn.disabled { opacity: 0.5; filter: grayscale(0.5); pointer-events: none; }
       
-      @keyframes vz-music-dance {
-        from { transform: translateY(0) rotate(-5deg); }
-        to { transform: translateY(-15px) rotate(5deg); }
-      }
-      @keyframes vz-bounce {
-        from { transform: scale(1); }
-        to { transform: scale(1.15); }
-      }
+      @keyframes vz-music-dance { from { transform: translateY(0) rotate(-5deg); } to { transform: translateY(-15px) rotate(5deg); } }
+      @keyframes vz-bounce { from { transform: scale(1); } to { transform: scale(1.15); } }
 
       /* 댄싱 이퀄라이저 */
       .vz-visualizer {
-        position: absolute; bottom: -5px; display: flex; gap: 8px;
-        align-items: flex-end; justify-content: center; height: 35px; z-index: 20;
-        opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        position: absolute; bottom: -5px; display: flex; gap: 8px; align-items: flex-end; justify-content: center; height: 35px; z-index: 20; opacity: 0; transition: opacity 0.3s; pointer-events: none;
       }
       .vz-music-btn.playing ~ .vz-visualizer { opacity: 1; }
-      .vz-visualizer span {
-        width: 10px; background: #FF5252; border-radius: 5px;
-        animation: eqDance 0.5s ease-in-out infinite alternate;
-      }
+      .vz-visualizer span { width: 10px; background: #FF5252; border-radius: 5px; animation: eqDance 0.5s ease-in-out infinite alternate; }
       .vz-visualizer span:nth-child(1) { height: 15px; animation-delay: 0.1s; background: #FF5252; }
       .vz-visualizer span:nth-child(2) { height: 30px; animation-delay: 0.3s; background: #4CAF50; }
       .vz-visualizer span:nth-child(3) { height: 20px; animation-delay: 0.0s; background: #2196F3; }
       .vz-visualizer span:nth-child(4) { height: 35px; animation-delay: 0.2s; background: #FFC107; }
-      
-      @keyframes eqDance {
-        0% { transform: scaleY(0.4); }
-        100% { transform: scaleY(1.6); }
-      }
+      @keyframes eqDance { 0% { transform: scaleY(0.4); } 100% { transform: scaleY(1.6); } }
 
-      @media (max-width: 680px) {
-        .vz-card-grid { grid-template-columns: 1fr; gap: 20px; }
-        .vz-card { min-height: 250px; }
-      }
+      @media (max-width: 680px) { .vz-card-grid { grid-template-columns: 1fr; gap: 20px; } .vz-card { min-height: 250px; } }
     `;
     document.head.appendChild(style);
   }
 
-  // ─── 유튜브 연동 ───────────────────────────────────────
+  // ─── 유튜브 연동 (에러 타임아웃 추가) ───────────────────────────────────────
   function initYouTubePlayer() {
     if (window.YT && window.YT.Player) {
       createPlayer();
@@ -256,6 +252,17 @@
         if (!state.destroyed) createPlayer();
       };
     }
+
+    // ★ 3번: 로딩 실패 방어 타임아웃 (8초)
+    state.ytLoadTimer = setTimeout(() => {
+      if (!state.ytReady && state.container) {
+        const musicBtn = state.container.querySelector('.vz-music-btn');
+        if (musicBtn) {
+          musicBtn.innerHTML = '⚠️';
+          musicBtn.style.background = '#ccc';
+        }
+      }
+    }, 8000);
   }
 
   function createPlayer() {
@@ -263,30 +270,53 @@
 
     state.ytPlayer = new window.YT.Player('vz-yt-player', {
       height: '1', width: '1',
-      playerVars: {
-        listType: 'playlist', list: YOUTUBE_PLAYLIST_ID,
-        autoplay: 0, controls: 0, disablekb: 1, fs: 0,
-      },
+      playerVars: { listType: 'playlist', list: YOUTUBE_PLAYLIST_ID, autoplay: 0, controls: 0, disablekb: 1, fs: 0 },
       events: {
         onReady: (e) => {
-          e.target.setVolume(50);
-          e.target.setShuffle(true);
+          clearTimeout(state.ytLoadTimer);
+          e.target.setVolume(50); e.target.setShuffle(true);
           state.ytReady = true;
           updateMusicUI();
         },
         onStateChange: (e) => {
-          if (e.data === window.YT.PlayerState.PLAYING) {
-            state.isBgmPlaying = true;
-          } else if (e.data === window.YT.PlayerState.PAUSED || e.data === window.YT.PlayerState.ENDED) {
-            state.isBgmPlaying = false;
-          }
+          if (e.data === window.YT.PlayerState.PLAYING) state.isBgmPlaying = true;
+          else if (e.data === window.YT.PlayerState.PAUSED || e.data === window.YT.PlayerState.ENDED) state.isBgmPlaying = false;
           updateMusicUI();
+        },
+        onError: () => {
+          clearTimeout(state.ytLoadTimer);
+          updateMusicUI(true); // 에러 UI
         }
       }
     });
   }
 
-  // ─── 녹음 기능 (클릭 토글 방식 + 자동종료) ───────────────────────────────
+  // ─── 요술 마이크 (모드 변경 + 시각 피드백) ─────────────────────────────────
+  function setVoiceMode(mode, btnEl) {
+    if (state.isPlaying || state.isRecording) return;
+    initAudio();
+    playTone('down');
+    if (navigator.vibrate) navigator.vibrate(30);
+    
+    state.voiceMode = mode;
+    
+    const buttons = state.container.querySelectorAll('.vz-mode-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('active', 'vz-pop-anim');
+      if (btn.dataset.mode === mode) btn.classList.add('active');
+    });
+
+    // 팝 애니메이션 추가 (피드백)
+    if (btnEl) {
+      void btnEl.offsetWidth; 
+      btnEl.classList.add('vz-pop-anim');
+    }
+
+    const msg = { normal: '내 목소리!', helium: '헬륨가스 목소리!', robot: '로봇 목소리!', monster: '괴물 목소리!' };
+    speakMsg(msg[mode]);
+  }
+
+  // ─── 녹음 기능 (클릭 토글 + 자동종료) ───────────────────────────────
   function spawnRipple() {
     const wrap = state.container?.querySelector('.vz-mic-wrap');
     if (!wrap || !state.isRecording) return;
@@ -299,54 +329,65 @@
   async function toggleRecording(e) {
     if (state.locked || state.isPlaying) return;
 
-    // 이미 녹음 중이면 종료
     if (state.isRecording) {
       stopRecording();
       return;
     }
 
-    // 녹음 시작
     initAudio();
     playTone('down');
     if (navigator.vibrate) navigator.vibrate(50);
-
-    stopBgm(); // 노래 멈추기
+    stopBgm(); 
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      state.mediaRecorder = new MediaRecorder(stream);
+      
+      // ★ 6번: 모바일 폴백 (MIME 타입 감지 강화)
+      let options = {};
+      if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) options = { mimeType: 'audio/webm;codecs=opus' };
+      else if (MediaRecorder.isTypeSupported('audio/mp4')) options = { mimeType: 'audio/mp4' }; // iOS
+      
+      try {
+        state.mediaRecorder = new MediaRecorder(stream, options);
+      } catch (e) {
+        state.mediaRecorder = new MediaRecorder(stream); // 최후의 폴백
+      }
+      
+      state.audioMimeType = state.mediaRecorder.mimeType || 'audio/webm'; 
       state.audioChunks = [];
 
       state.mediaRecorder.ondataavailable = event => {
         if (event.data.size > 0) state.audioChunks.push(event.data);
       };
 
-      state.mediaRecorder.onstop = () => {
+      state.mediaRecorder.onstop = async () => {
         if (state.destroyed) {
           stream.getTracks().forEach(track => track.stop());
           return;
         }
-        const audioBlob = new Blob(state.audioChunks, { type: 'audio/webm' });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        playRecordedAudio(audioUrl);
+        
+        const audioBlob = new Blob(state.audioChunks, { type: state.audioMimeType });
         stream.getTracks().forEach(track => track.stop());
+        playWithWebAudioAPI(audioBlob);
       };
 
       state.mediaRecorder.start();
       state.isRecording = true;
       updateMicUI();
       
-      // 물결 이펙트 시작
       spawnRipple();
       state.rippleInterval = setInterval(spawnRipple, 400);
 
-      // 7초 뒤 자동 종료 타이머 설정
+      // 30초 뒤 자동 종료 타이머
       state.recordTimer = setTimeout(() => {
         if (state.isRecording) stopRecording();
-      }, 7000);
+      }, 30000);
 
     } catch (err) {
+      // ★ 2번: 마이크 권한 거부 시 상태 원상복구
       console.warn('Microphone access denied:', err);
+      state.isRecording = false;
+      updateMicUI();
       speakMsg('시현아, 마이크 권한을 허락해줘!');
     }
   }
@@ -354,10 +395,10 @@
   function stopRecording() {
     if (state.mediaRecorder && state.isRecording) {
       clearInterval(state.rippleInterval);
-      clearTimeout(state.recordTimer); // 타이머 취소
+      clearTimeout(state.recordTimer); 
       
       state.isRecording = false;
-      state.mediaRecorder.stop();
+      state.mediaRecorder.stop(); // 이 순간 onstop 트리거 -> playWithWebAudioAPI
       
       playTone('up');
       if (navigator.vibrate) navigator.vibrate([30, 50]);
@@ -365,27 +406,67 @@
     }
   }
 
-  function playRecordedAudio(url) {
+  // Web Audio API를 사용한 마법 재생
+  async function playWithWebAudioAPI(blob) {
     state.isPlaying = true;
     updateMicUI();
-    speakMsg('시현이 목소리 들어보자!');
+    speakMsg('들어보자!');
 
-    setTimeout(() => {
-      state.playbackAudio.src = url;
-      state.playbackAudio.play().catch(e => {
-        console.error('Audio playback failed:', e);
-        finishPlayback();
-      });
+    setTimeout(async () => {
+      try {
+        if (!state.audioCtx) initAudio();
+        
+        const arrayBuffer = await blob.arrayBuffer();
+        const audioBuffer = await state.audioCtx.decodeAudioData(arrayBuffer);
+        
+        const source = state.audioCtx.createBufferSource();
+        source.buffer = audioBuffer;
+        let finalNode = source;
 
-      state.playbackAudio.onended = () => {
-        URL.revokeObjectURL(url);
-        finishPlayback();
-      };
-    }, 1200); // 안내 멘트 후 재생
+        if (state.voiceMode === 'helium') {
+          source.playbackRate.value = 1.6;
+        } 
+        else if (state.voiceMode === 'monster') {
+          source.playbackRate.value = 0.65;
+        } 
+        else if (state.voiceMode === 'robot') {
+          const osc = state.audioCtx.createOscillator();
+          osc.type = 'sawtooth';
+          osc.frequency.value = 45; 
+          
+          const gainNode = state.audioCtx.createGain();
+          source.connect(gainNode);
+          osc.connect(gainNode.gain);
+          
+          finalNode = gainNode;
+          
+          osc.start();
+          source.onended = () => { osc.stop(); finishPlayback(); };
+        }
+
+        finalNode.connect(state.audioCtx.destination);
+        
+        if (state.voiceMode !== 'robot') {
+          source.onended = () => finishPlayback();
+        }
+
+        state.currentSource = source;
+        source.start(0);
+
+      } catch (e) {
+        console.error('Web Audio API fallback:', e);
+        // ★ 4번: iOS Autoplay 대응을 위해 playsInline 설정
+        const url = URL.createObjectURL(blob);
+        state.playbackAudio.src = url;
+        state.playbackAudio.play().catch(console.error);
+        state.playbackAudio.onended = () => { URL.revokeObjectURL(url); finishPlayback(); };
+      }
+    }, 1200);
   }
 
   function finishPlayback() {
     state.isPlaying = false;
+    state.currentSource = null;
     updateMicUI();
   }
 
@@ -398,7 +479,7 @@
 
     if (state.isRecording) {
       micBtn.classList.add('recording');
-      micBtn.innerHTML = '⏹️'; // 녹음 중엔 멈춤 버튼
+      micBtn.innerHTML = '⏹️'; 
     } else if (state.isPlaying) {
       micBtn.classList.add('playing');
       micBtn.innerHTML = '🔊';
@@ -413,11 +494,8 @@
     initAudio();
     playTone('down');
 
-    if (state.isBgmPlaying) {
-      stopBgm();
-    } else {
-      playBgm();
-    }
+    if (state.isBgmPlaying) stopBgm();
+    else playBgm();
   }
 
   function playBgm() {
@@ -425,9 +503,7 @@
     if (navigator.vibrate) navigator.vibrate(50);
     speakMsg('신나는 노래 틀어줄게!');
     state.ytPlayer.nextVideo(); 
-    setTimeout(() => {
-      state.ytPlayer.playVideo();
-    }, 1200);
+    setTimeout(() => { state.ytPlayer.playVideo(); }, 1200);
   }
 
   function stopBgm() {
@@ -438,10 +514,16 @@
     updateMusicUI();
   }
 
-  function updateMusicUI() {
+  function updateMusicUI(hasError = false) {
     if (!state.container) return;
     const musicBtn = state.container.querySelector('.vz-music-btn');
     if (!musicBtn) return;
+
+    if (hasError) {
+      musicBtn.classList.add('disabled');
+      musicBtn.innerHTML = '⚠️';
+      return;
+    }
 
     if (!state.ytReady) {
       musicBtn.classList.add('disabled');
@@ -465,10 +547,14 @@
     state.container = container;
     state.options = options;
     state.destroyed = false;
+    state.voiceMode = 'normal';
+
+    // ★ 1번: playbackAudio 라이프사이클 관리
+    state.playbackAudio = new Audio();
+    state.playbackAudio.playsInline = true;
 
     const nuniImgUrl = './assets/characters/nuni.png';
 
-    // 설명글(.vz-card-desc) 모두 제거하고, 그림과 버튼만 남김!
     container.innerHTML = `
       <div class="vz-root">
         <div id="vz-yt-player"></div>
@@ -477,18 +563,26 @@
             <img src="${nuniImgUrl}" alt="눈이" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <span class="vz-character-fallback" style="display:none; font-size: 80px;">🐱</span>
           </div>
-          <h2 class="vz-title">시현아, 목소리를 들려줘!</h2>
+          <h2 class="vz-title">시현아, 요술 마이크야!</h2>
         </div>
 
         <div class="vz-card-grid">
-          <section class="vz-card" aria-label="내 목소리 듣기">
-            <div class="vz-card-visual">
-              <img class="vz-card-img" src="./assets/voice/cards/voice-record.webp" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
-              <span class="vz-card-fallback" style="display:none;">🎙️</span>
+          <section class="vz-card" aria-label="요술 마이크">
+            <div class="vz-card-title">요술 마이크 🎙️</div>
+            
+            <div class="vz-voice-modes">
+              <button class="vz-mode-btn active" data-mode="normal">🧒</button>
+              <button class="vz-mode-btn" data-mode="helium">🎈</button>
+              <button class="vz-mode-btn" data-mode="robot">🤖</button>
+              <button class="vz-mode-btn" data-mode="monster">👻</button>
             </div>
-            <div class="vz-card-title">내 목소리 듣기</div>
+
             <div class="vz-card-actions">
               <div class="vz-mic-wrap">
+                <svg class="vz-mic-progress" viewBox="0 0 100 100">
+                  <circle class="vz-mic-track" cx="50" cy="50" r="45"></circle>
+                  <circle class="vz-mic-bar" cx="50" cy="50" r="45"></circle>
+                </svg>
                 <button class="vz-mic-btn" type="button" aria-label="마이크 켜고 끄기">🎤</button>
               </div>
             </div>
@@ -513,12 +607,16 @@
 
     const micBtn = container.querySelector('.vz-mic-btn');
     const musicBtn = container.querySelector('.vz-music-btn');
+    const modeBtns = container.querySelectorAll('.vz-mode-btn');
 
     micBtn.addEventListener('click', toggleRecording);
     musicBtn.addEventListener('click', toggleBgm);
 
-    // ★ 화면 진입 시 안내 멘트로 설명을 모두 대체합니다!
-    speakMsg("시현아! 마이크를 한 번 톡 누르고 말해보거나, 음표 버튼을 눌러 노래를 들어보자!");
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => setVoiceMode(btn.dataset.mode, btn));
+    });
+
+    speakMsg("시현아! 요술 마이크를 톡! 누르고 말해봐! 목소리가 변신할 거야!");
 
     initYouTubePlayer();
   }
@@ -527,13 +625,22 @@
     state.destroyed = true;
     clearInterval(state.rippleInterval);
     clearTimeout(state.recordTimer);
+    clearTimeout(state.ytLoadTimer);
 
     if (state.mediaRecorder && state.isRecording) {
       state.mediaRecorder.stop();
     }
 
-    state.playbackAudio.pause();
-    state.playbackAudio.src = '';
+    if (state.currentSource) {
+      try { state.currentSource.stop(); } catch(e){}
+    }
+    
+    // ★ playbackAudio 완벽 초기화
+    if (state.playbackAudio) {
+      state.playbackAudio.pause();
+      state.playbackAudio.src = '';
+      state.playbackAudio = null;
+    }
 
     if (state.ytPlayer && typeof state.ytPlayer.destroy === 'function') {
       state.ytPlayer.destroy();
@@ -556,6 +663,7 @@
     state.isPlaying = false;
     state.isBgmPlaying = false;
     state.locked = false;
+    state.currentSource = null;
   }
 
   window.SihyeonZones = window.SihyeonZones || {};
