@@ -1,78 +1,55 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS - NUMBER BLOCKS GAME MODULE
    js/games/number-blocks.js
-   v4.1 — 숫자 만들기 + 뚝딱 블록 만들기 탭 통합 확장본
+   v5.0 — 4살 시현이 맞춤 (초거대 블록, 초강력 이펙트, 화려한 피날레)
 ═══════════════════════════════════════════ */
 
 (function() {
   const GAME_KEY = 'numberBlocks';
   const STYLE_ID = 'sihyeon-number-blocks-style';
 
+  // ★ 블록 메타데이터 (더 화려한 색상과 그림자)
   const BLOCK_META = {
-    1: { color: 'blue',   gradient: 'radial-gradient(circle at 30% 30%, #a1c4fd, #4facfe)', shadow: '#1565C0', name: '하나', w: 1, h: 1, face: 'normal' },
-    2: { color: 'red',    gradient: 'linear-gradient(135deg, #ff9a9e, #ff5252)',            shadow: '#CC1F1F', name: '둘',   w: 2, h: 1, face: 'smile' },
-    3: { color: 'yellow', gradient: 'linear-gradient(135deg, #fff176, #ffb300)',            shadow: '#D4A017', name: '셋',   w: 1, h: 3, face: 'star' },
-    4: { color: 'green',  gradient: 'linear-gradient(135deg, #9cff8a, #31c95b)',            shadow: '#2E7D32', name: '넷',   w: 2, h: 2, face: 'square' },
-    5: { color: 'purple', gradient: 'linear-gradient(135deg, #e1bee7, #8e24aa)',            shadow: '#4A148C', name: '다섯', w: 5, h: 1, face: 'magic', aura: true }
+    1: { color: 'blue',   gradient: 'radial-gradient(circle at 30% 30%, #a1c4fd, #2196F3)', shadow: '#0D47A1', name: '하나', w: 1, h: 1 },
+    2: { color: 'red',    gradient: 'linear-gradient(135deg, #ff9a9e, #FF1744)',            shadow: '#B71C1C', name: '둘',   w: 2, h: 1 },
+    3: { color: 'yellow', gradient: 'linear-gradient(135deg, #FFF59D, #FFC107)',            shadow: '#F57F17', name: '셋',   w: 1, h: 3 },
+    4: { color: 'green',  gradient: 'linear-gradient(135deg, #B9F6CA, #00E676)',            shadow: '#1B5E20', name: '넷',   w: 2, h: 2 },
+    5: { color: 'purple', gradient: 'linear-gradient(135deg, #E1BEE7, #D500F9)',            shadow: '#4A148C', name: '다섯', w: 5, h: 1, aura: true }
   };
 
   const BUILD_MISSIONS = [
     {
-      id: 'house',
-      title: '집 만들기',
-      icon: '🏠',
-      scene: '🌈',
-      complete: '🏡',
-      color: '#FF7A1A',
-      guide: '블록 세 개로 집을 만들어볼까?',
-      completeText: '집 완성. 창문에 불이 반짝 켜졌어요.',
+      id: 'house', title: '집 만들기', icon: '🏠', scene: '🌈', complete: '🏡', color: '#FF7A1A',
+      guide: '시현아, 블록 세 개로 멋진 집을 만들어볼까?',
+      completeText: '우와! 튼튼한 집 완성! 창문에 불이 반짝반짝!',
       steps: [
-        { id: 'body', label: '네모 집', emoji: '🟦', say: '먼저 네모 집이에요.' },
-        { id: 'roof', label: '세모 지붕', emoji: '🔺', say: '지붕을 올려요.' },
-        { id: 'door', label: '문', emoji: '🚪', say: '문을 붙이면 완성.' }
+        { id: 'body', label: '네모 집', emoji: '🟦', say: '네모 집 쿵!' },
+        { id: 'roof', label: '세모 지붕', emoji: '🔺', say: '세모 지붕 쿵!' },
+        { id: 'door', label: '문', emoji: '🚪', say: '문까지 달면 완성!' }
       ],
-      wrongs: [
-        { id: 'tree', label: '나무', emoji: '🌳' },
-        { id: 'cloud', label: '구름', emoji: '☁️' }
-      ]
+      wrongs: [ { id: 'tree', label: '나무', emoji: '🌳' }, { id: 'cloud', label: '구름', emoji: '☁️' } ]
     },
     {
-      id: 'train',
-      title: '기차 만들기',
-      icon: '🚂',
-      scene: '🛤️',
-      complete: '🚂',
-      color: '#1E90FF',
-      guide: '기차를 만들어볼까?',
-      completeText: '기차 완성. 칙칙폭폭 출발해요.',
+      id: 'train', title: '기차 만들기', icon: '🚂', scene: '🛤️', complete: '🚂', color: '#1E90FF',
+      guide: '시현아, 칙칙폭폭 기차를 만들어볼까?',
+      completeText: '기차 완성! 칙칙폭폭 출발해요! 빠아앙!',
       steps: [
-        { id: 'engine', label: '기관차', emoji: '🚂', say: '기관차를 놓아요.' },
-        { id: 'wheel', label: '바퀴', emoji: '⚙️', say: '바퀴를 붙여요.' },
-        { id: 'car', label: '객차', emoji: '🚃', say: '객차를 연결하면 출발.' }
+        { id: 'engine', label: '기관차', emoji: '🚂', say: '기관차 쿵!' },
+        { id: 'wheel', label: '바퀴', emoji: '⚙️', say: '바퀴 쿵!' },
+        { id: 'car', label: '객차', emoji: '🚃', say: '객차까지 연결 완료!' }
       ],
-      wrongs: [
-        { id: 'ship', label: '배', emoji: '⛵' },
-        { id: 'balloon', label: '풍선', emoji: '🎈' }
-      ]
+      wrongs: [ { id: 'ship', label: '배', emoji: '⛵' }, { id: 'balloon', label: '풍선', emoji: '🎈' } ]
     },
     {
-      id: 'rocket',
-      title: '로켓 만들기',
-      icon: '🚀',
-      scene: '🌌',
-      complete: '🚀',
-      color: '#9C27B0',
-      guide: '로켓을 만들어볼까?',
-      completeText: '로켓 완성. 하늘로 슈우웅 날아가요.',
+      id: 'rocket', title: '로켓 만들기', icon: '🚀', scene: '🌌', complete: '🚀', color: '#9C27B0',
+      guide: '시현아, 우주로 가는 로켓을 만들어볼까?',
+      completeText: '우와아! 로켓 완성! 우주로 슈우우웅~ 날아가요!',
       steps: [
-        { id: 'body', label: '몸통', emoji: '🟪', say: '몸통을 세워요.' },
-        { id: 'wing', label: '날개', emoji: '🪽', say: '날개를 붙여요.' },
-        { id: 'fire', label: '불꽃', emoji: '🔥', say: '불꽃을 붙이면 발사.' }
+        { id: 'body', label: '몸통', emoji: '🟪', say: '로켓 몸통 쿵!' },
+        { id: 'wing', label: '날개', emoji: '🪽', say: '날개 쿵!' },
+        { id: 'fire', label: '불꽃', emoji: '🔥', say: '불꽃 발사 준비 완료!' }
       ],
-      wrongs: [
-        { id: 'moon', label: '달', emoji: '🌙' },
-        { id: 'star', label: '별', emoji: '⭐' }
-      ]
+      wrongs: [ { id: 'moon', label: '달', emoji: '🌙' }, { id: 'star', label: '별', emoji: '⭐' } ]
     }
   ];
 
@@ -93,6 +70,7 @@
     destroyed: false
   };
 
+  // ─── 오디오 시스템 ───
   function initAudio() {
     if (!window.AudioContext && !window.webkitAudioContext) return;
     if (!state.audioCtx) state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -126,32 +104,27 @@
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(520, now);
       osc.frequency.exponentialRampToValueAtTime(1180, now + 0.14);
-      gain.gain.setValueAtTime(0.35, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
-      osc.start(now); osc.stop(now + 0.24);
-      return;
-    }
-    if (type === 'wrong') {
+      gain.gain.setValueAtTime(0.4, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.24);
+      osc.start(now); osc.stop(now + 0.25);
+    } else if (type === 'wrong') {
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(180, now);
       osc.frequency.linearRampToValueAtTime(110, now + 0.2);
-      gain.gain.setValueAtTime(0.16, now);
+      gain.gain.setValueAtTime(0.2, now);
       gain.gain.exponentialRampToValueAtTime(0.01, now + 0.24);
       osc.start(now); osc.stop(now + 0.26);
-      return;
-    }
-    if (type === 'complete') {
-      [392, 523.25, 659.25, 783.99].forEach((freq, i) => {
+    } else if (type === 'complete') { // 웅장한 화음
+      [392, 523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
         const o = ctx.createOscillator();
         const g = ctx.createGain();
         o.type = 'sine';
-        o.frequency.setValueAtTime(freq, now + i * 0.09);
-        g.gain.setValueAtTime(0.22, now + i * 0.09);
-        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.09 + 0.28);
+        o.frequency.setValueAtTime(freq, now + i * 0.1);
+        g.gain.setValueAtTime(0.3, now + i * 0.1);
+        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.5);
         o.connect(g); g.connect(ctx.destination);
-        o.start(now + i * 0.09); o.stop(now + i * 0.09 + 0.3);
+        o.start(now + i * 0.1); o.stop(now + i * 0.1 + 0.6);
       });
-      return;
     }
   }
 
@@ -163,13 +136,13 @@
     osc.connect(gain);
     gain.connect(ctx.destination);
     const now = ctx.currentTime;
-    const freq = 300 + val * 150;
+    const freq = 200 + val * 100;
     osc.type = val === 5 ? 'sine' : val % 2 ? 'triangle' : 'square';
     osc.frequency.setValueAtTime(freq, now);
-    osc.frequency.exponentialRampToValueAtTime(freq * 1.8, now + 0.22);
-    gain.gain.setValueAtTime(0.26, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.36);
-    osc.start(now); osc.stop(now + 0.38);
+    osc.frequency.exponentialRampToValueAtTime(freq * 2, now + 0.3);
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+    osc.start(now); osc.stop(now + 0.45);
   }
 
   function vibrate(pattern) {
@@ -201,27 +174,131 @@
     return arr;
   }
 
+  // ─── 초호화 CSS 스타일 (크기, 빛, 이펙트 강화) ───
   function injectStyle() {
     const prev = document.getElementById(STYLE_ID);
     if (prev) prev.remove();
     const style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = `
-      .nb-root{width:100%;height:100%;min-height:100%;display:flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,#311B92 0%,#1A237E 44%,#00B8D4 100%);font-family:'Jua','Apple SD Gothic Neo',sans-serif;position:relative;overflow:hidden;user-select:none;touch-action:none;color:#222;isolation:isolate}
-      .nb-bg-glow{position:absolute;inset:-20%;z-index:0;background:radial-gradient(circle at 22% 18%,rgba(255,255,255,.35),transparent 20%),radial-gradient(circle at 78% 24%,rgba(255,217,61,.42),transparent 22%),radial-gradient(circle at 50% 72%,rgba(255,122,26,.36),transparent 28%);animation:nbBgFloat 7s ease-in-out infinite alternate;pointer-events:none}
-      @keyframes nbBgFloat{from{transform:translate(-2%,1%) scale(1)}to{transform:translate(2%,-2%) scale(1.04)}}
-      .nb-stars{position:absolute;inset:0;z-index:1;pointer-events:none}.nb-star{position:absolute;width:5px;height:5px;background:#fff;border-radius:50%;animation:nbTwinkle 2s infinite ease-in-out alternate}.nb-star:nth-child(3n){background:#fff176}.nb-star:nth-child(4n){background:#80deea}@keyframes nbTwinkle{0%{opacity:.25;transform:scale(.75)}100%{opacity:1;transform:scale(1.65);box-shadow:0 0 12px currentColor}}
-      .nb-header{position:relative;z-index:30;width:100%;display:grid;gap:10px;padding:12px 12px 8px;box-sizing:border-box;flex-shrink:0}.nb-title-badge{justify-self:center;min-height:46px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.94);padding:6px 20px;border-radius:999px;color:#311B92;font-size:clamp(18px,5vw,25px);font-weight:900;box-shadow:0 6px 0 rgba(0,0,0,.2);border:4px solid #fff;text-align:center}.nb-mode-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(94vw,520px);justify-self:center}.nb-mode-tab{min-height:80px;border-radius:26px;border:5px solid #fff;background:linear-gradient(180deg,#fff,#ffe577);box-shadow:0 8px 0 rgba(0,0,0,.18);font:inherit;font-size:clamp(18px,5vw,26px);font-weight:900;color:#24324a;display:grid;place-items:center;cursor:pointer;touch-action:manipulation}.nb-mode-tab.active{background:linear-gradient(180deg,#fff,#90f7ec 48%,#32ccbc);color:#0a4051;transform:translateY(-3px);box-shadow:0 11px 0 rgba(0,0,0,.18),0 0 0 5px rgba(255,255,255,.22)}.nb-mode-tab:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.18)}
-      .nb-stage{flex:1;width:100%;min-height:0;position:relative;z-index:10;display:flex;align-items:center;justify-content:center;perspective:1000px;padding:8px 12px;box-sizing:border-box}.nb-tray{min-height:160px;width:100%;z-index:10;background:rgba(255,255,255,.16);backdrop-filter:blur(12px);border-top:5px solid rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center;gap:16px;padding:18px 14px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box;flex-wrap:wrap;flex-shrink:0}
-      .nb-block{position:relative;display:grid;place-items:center;border-radius:22px;cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1),opacity .3s;box-shadow:inset 3px 3px 10px rgba(255,255,255,.64),inset -4px -4px 15px rgba(0,0,0,.25),0 12px 20px rgba(0,0,0,.34);--sz:clamp(58px,14vw,84px);-webkit-tap-highlight-color:transparent}.nb-block:active{transform:scale(.9)!important}.nb-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:calc(var(--sz)*.78);font-weight:900;color:rgba(255,255,255,.95);text-shadow:0 4px 8px rgba(0,0,0,.3);pointer-events:none}.nb-tray-item{width:clamp(84px,22vw,112px);height:clamp(84px,22vw,112px);display:flex;align-items:center;justify-content:center}.nb-flying{position:fixed;z-index:100;pointer-events:none;transition:all .6s cubic-bezier(.34,1.56,.64,1)}.nb-aura{position:absolute;inset:-15px;border-radius:30px;z-index:-1;background:conic-gradient(from 0deg,red,yellow,lime,aqua,blue,magenta,red);animation:nbSpin 3s linear infinite;opacity:.6;filter:blur(10px)}@keyframes nbSpin{100%{transform:rotate(360deg)}}
-      .nb-particle{position:absolute;border-radius:50%;pointer-events:none;animation:nbExplode .85s cubic-bezier(.1,.8,.3,1) forwards;z-index:70}.nb-emoji-pop{position:absolute;z-index:80;pointer-events:none;font-size:clamp(34px,10vw,58px);animation:nbEmojiPop 1s cubic-bezier(.2,1.35,.3,1) forwards}@keyframes nbExplode{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}@keyframes nbEmojiPop{0%{transform:translate(-50%,-50%) scale(.25) rotate(-12deg);opacity:0}35%{transform:translate(-50%,-70%) scale(1.35) rotate(8deg);opacity:1}100%{transform:translate(-50%,-132%) scale(.8) rotate(0);opacity:0}}
-      .nb-golden-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border:15px solid #FFD700;border-radius:50%;opacity:1;pointer-events:none;z-index:5;animation:nbRingExpand 1s ease-out forwards}@keyframes nbRingExpand{100%{width:420px;height:420px;opacity:0;border-width:2px}}.nb-block.stage-block{animation:nbFloatStage 3s ease-in-out infinite alternate}@keyframes nbFloatStage{from{transform:translateY(-6px)}to{transform:translateY(7px)}}.nb-dance{animation:nbDanceAnim 1s ease-in-out!important}@keyframes nbDanceAnim{0%{transform:scale(1) rotate(0)}50%{transform:scale(1.32) rotate(180deg)}100%{transform:scale(1) rotate(360deg)}}
-      .nb-success-overlay{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,.48);backdrop-filter:blur(7px);display:grid;place-items:center;padding:18px;animation:nbFadeIn .28s}@keyframes nbFadeIn{from{opacity:0}to{opacity:1}}.nb-success-box{width:min(92vw,540px);border-radius:34px;text-align:center;box-shadow:0 18px 0 rgba(0,0,0,.25),0 28px 56px rgba(0,0,0,.28);border:8px solid #fff;background:linear-gradient(180deg,#fff,#fff3b0);padding:26px 18px;display:grid;gap:16px}.nb-success-icon{font-size:clamp(78px,22vw,126px);animation:nbSuccessFloat 1s ease-in-out infinite alternate}.nb-success-title{font-size:clamp(30px,8vw,46px);font-weight:900;color:#311B92;line-height:1.05}.nb-success-sub{font-size:clamp(17px,5vw,25px);font-weight:900;color:#6d4b00}.nb-success-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.nb-round-btn{min-height:84px;border-radius:26px;border:5px solid #fff;box-shadow:0 8px 0 rgba(0,0,0,.18);font:inherit;font-size:clamp(28px,8vw,42px);font-weight:900}.nb-round-btn:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.18)}.nb-btn-green{background:#4CAF50}.nb-btn-orange{background:#FF9800}.nb-btn-blue{background:#29B6F6}@keyframes nbSuccessFloat{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-10px) rotate(3deg)}}
-      .nb-build-stage{position:relative;width:min(94vw,720px);height:100%;min-height:300px;border-radius:34px;border:7px solid rgba(255,255,255,.92);background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.28));box-shadow:0 14px 0 rgba(0,0,0,.18),inset 0 4px 0 rgba(255,255,255,.45);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}.nb-build-sky{position:absolute;inset:0;opacity:.96;background:linear-gradient(180deg,#91e7ff,#fff1a7 70%,#a7ef8a);pointer-events:none}.nb-build-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:0;padding:10px}.nb-build-scene-emoji{font-size:clamp(92px,28vw,170px);filter:drop-shadow(0 16px 0 rgba(0,0,0,.12));animation:nbBuildFloat 2.5s ease-in-out infinite alternate}.nb-build-title{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px}.nb-build-pill{min-height:48px;padding:8px 16px;border-radius:999px;border:4px solid #fff;background:rgba(255,255,255,.9);box-shadow:0 5px 0 rgba(0,0,0,.14);font-size:clamp(17px,4.8vw,24px);font-weight:900}.nb-build-slots{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 12px 12px}.nb-build-slot{min-height:clamp(84px,21vw,126px);border-radius:24px;border:5px dashed rgba(255,255,255,.96);background:rgba(255,255,255,.42);display:grid;place-items:center;box-shadow:inset 0 0 18px rgba(255,255,255,.22),0 6px 0 rgba(0,0,0,.12);position:relative;overflow:hidden}.nb-build-slot::before{content:attr(data-step);position:absolute;left:50%;top:6px;transform:translateX(-50%);padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.9);font-size:clamp(12px,3.5vw,16px);font-weight:900;color:#47351d}.nb-build-slot.filled{border-style:solid;background:rgba(255,255,255,.78);animation:nbSlotFill .42s cubic-bezier(.2,1.4,.35,1)}.nb-build-slot.wrong{animation:nbWrongShake .42s ease;border-color:#ff6f91}.nb-build-piece{width:100%;height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:22px 4px 7px;box-sizing:border-box}.nb-build-piece-emoji{font-size:clamp(38px,11vw,68px);line-height:1;filter:drop-shadow(0 8px 0 rgba(0,0,0,.12))}.nb-build-piece-label{font-size:clamp(12px,3.5vw,17px);font-weight:900;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.82);white-space:nowrap}
-      .nb-build-tray{width:100%;z-index:10;background:rgba(255,255,255,.16);backdrop-filter:blur(12px);border-top:5px solid rgba(255,255,255,.42);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;padding:14px 10px calc(14px + env(safe-area-inset-bottom));box-sizing:border-box;flex-shrink:0}.nb-build-card{min-height:92px;border-radius:24px;border:5px solid #fff;background:linear-gradient(180deg,#fff,#fff1b8);box-shadow:0 8px 0 rgba(0,0,0,.16);font:inherit;display:grid;grid-template-rows:1fr auto;place-items:center;padding:7px 4px;color:#26344d;font-weight:900;touch-action:manipulation}.nb-build-card.used{opacity:.34;filter:grayscale(.2);pointer-events:none;transform:scale(.94)}.nb-build-card:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.16)}.nb-build-card .nb-build-piece-emoji{font-size:clamp(34px,10vw,58px)}.nb-build-complete .nb-build-scene-emoji{animation:nbBuildComplete 1.2s cubic-bezier(.2,1.3,.35,1) infinite alternate}.nb-build-complete.house .nb-build-sky{background:linear-gradient(180deg,#89e8ff,#fff3b5 62%,#78dd65)}.nb-build-complete.train .nb-build-scene-emoji{animation:nbTrainRun 1.1s ease-in-out infinite}.nb-build-complete.rocket .nb-build-scene-emoji{animation:nbRocketFly 1.1s ease-in-out infinite}.nb-build-progress{position:relative;z-index:2;display:flex;gap:7px}.nb-build-dot{width:18px;height:18px;border-radius:50%;border:3px solid #fff;background:rgba(255,255,255,.55);box-shadow:0 2px 0 rgba(0,0,0,.14)}.nb-build-dot.done{background:#7ed957}.nb-build-dot.active{background:#ffb300;transform:scale(1.18)}
-      @keyframes nbBuildFloat{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-10px) rotate(2deg)}}@keyframes nbBuildComplete{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.1) rotate(3deg);filter:drop-shadow(0 0 25px #fff)}}@keyframes nbTrainRun{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}@keyframes nbRocketFly{0%{transform:translateY(16px) scale(1)}100%{transform:translateY(-20px) scale(1.1)}}@keyframes nbSlotFill{0%{transform:scale(.72);opacity:.5}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}@keyframes nbWrongShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-2deg)}50%{transform:translateX(7px) rotate(2deg)}75%{transform:translateX(-4px) rotate(-1deg)}}
-      @media(max-height:680px){.nb-mode-tab{min-height:68px}.nb-header{gap:7px;padding:8px 10px 6px}.nb-title-badge{min-height:40px}.nb-tray{min-height:138px;padding-top:12px;padding-bottom:12px}.nb-build-tray{padding-top:10px;padding-bottom:10px}.nb-build-card{min-height:78px}.nb-build-stage{min-height:240px}.nb-build-slot{min-height:76px}}
-      @media(max-width:430px){.nb-mode-tabs{gap:8px}.nb-mode-tab{min-height:74px;border-radius:22px;font-size:clamp(16px,5.2vw,22px)}.nb-tray-item{width:84px;height:84px}.nb-build-tray{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding-left:7px;padding-right:7px}.nb-build-card{border-width:4px;border-radius:20px;min-height:84px}.nb-build-card .nb-build-piece-label{font-size:11px;padding:2px 4px}.nb-build-slots{gap:7px;padding-left:8px;padding-right:8px}.nb-build-slot{border-radius:20px;border-width:4px}}
+      .nb-root { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; background: linear-gradient(135deg, #1A237E 0%, #0D47A1 44%, #00838F 100%); font-family: 'Jua', sans-serif; position: relative; overflow: hidden; user-select: none; touch-action: none; color: #222; isolation: isolate; }
+      
+      /* 우주 배경 글로우 */
+      .nb-bg-glow { position: absolute; inset: -20%; z-index: 0; background: radial-gradient(circle at 22% 18%, rgba(255,255,255,0.4), transparent 25%), radial-gradient(circle at 78% 24%, rgba(255,217,61,0.5), transparent 25%), radial-gradient(circle at 50% 72%, rgba(255,122,26,0.4), transparent 30%); animation: nbBgFloat 7s ease-in-out infinite alternate; pointer-events: none; }
+      @keyframes nbBgFloat { from { transform: translate(-2%, 1%) scale(1); } to { transform: translate(2%, -2%) scale(1.08); } }
+      
+      .nb-stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+      .nb-star { position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: nbTwinkle 2s infinite ease-in-out alternate; }
+      .nb-star:nth-child(3n) { background: #FFF59D; width: 8px; height: 8px; }
+      .nb-star:nth-child(4n) { background: #80DEEA; }
+      @keyframes nbTwinkle { 0% { opacity: 0.2; transform: scale(0.6); } 100% { opacity: 1; transform: scale(1.8); box-shadow: 0 0 15px currentColor; } }
+
+      /* 헤더 */
+      .nb-header { position: relative; z-index: 30; width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 12px 14px 8px; box-sizing: border-box; flex-shrink: 0; align-items: center; }
+      .nb-mode-tabs { display: flex; gap: 15px; width: min(96vw, 600px); justify-content: center; }
+      .nb-mode-tab { flex: 1; min-height: 85px; border-radius: 30px; border: 6px solid #fff; background: linear-gradient(180deg, #ffffff, #FFE082); box-shadow: 0 10px 0 rgba(0,0,0,0.2); font: inherit; font-size: clamp(20px, 5.5vw, 30px); font-weight: 900; color: #17324A; display: grid; place-items: center; cursor: pointer; touch-action: manipulation; transition: all 0.2s; }
+      .nb-mode-tab.active { background: linear-gradient(180deg, #ffffff, #80DEEA); color: #004D40; transform: translateY(-4px); box-shadow: 0 14px 0 rgba(0,0,0,0.2), 0 0 20px rgba(128, 222, 234, 0.6); border-color: #E0F7FA; }
+      .nb-mode-tab:active { transform: translateY(6px); box-shadow: 0 4px 0 rgba(0,0,0,0.2); }
+
+      /* 보드 & 트레이 */
+      .nb-stage { flex: 1; width: 100%; min-height: 0; position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; perspective: 1000px; padding: 10px; }
+      .nb-tray { width: 100%; z-index: 10; background: rgba(255,255,255,0.2); backdrop-filter: blur(15px); border-top: 6px solid rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 10px calc(20px + env(safe-area-inset-bottom)); flex-wrap: wrap; box-shadow: 0 -10px 30px rgba(0,0,0,0.2); }
+
+      /* ★ 초대형 화려한 숫자 블록 */
+      .nb-block {
+        position: relative; display: grid; place-items: center; border-radius: 28px; cursor: pointer;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+        /* 훨씬 더 크고 화려한 블록! */
+        box-shadow: inset 4px 4px 15px rgba(255,255,255,0.8), inset -6px -6px 20px rgba(0,0,0,0.3), 0 15px 25px rgba(0,0,0,0.4);
+        --sz: clamp(80px, 18vw, 120px); 
+        border: 4px solid rgba(255,255,255,0.4);
+      }
+      .nb-block:active { transform: scale(0.9) !important; }
+      
+      /* 숫자가 적히는 면 */
+      .nb-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: calc(var(--sz) * 0.85); font-weight: 900; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.5); pointer-events: none; }
+      .nb-tray-item { width: clamp(100px, 25vw, 140px); height: clamp(100px, 25vw, 140px); display: flex; align-items: center; justify-content: center; }
+      
+      .nb-flying { position: fixed; z-index: 150; pointer-events: none; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); }
+      
+      /* 오라 이펙트 (5번 블록) */
+      .nb-aura { position: absolute; inset: -20px; border-radius: 40px; z-index: -1; background: conic-gradient(from 0deg, #FF1744, #FFEA00, #00E676, #00B0FF, #D500F9, #FF1744); animation: nbSpin 2s linear infinite; opacity: 0.8; filter: blur(15px); }
+      @keyframes nbSpin { 100% { transform: rotate(360deg); } }
+
+      /* ★ 메가 플래시 효과 (블록 합쳐질 때 화면 번쩍임) */
+      .nb-mega-flash::after { content: ''; position: absolute; inset: 0; background: #fff; z-index: 999; animation: megaFlash 0.5s ease-out forwards; pointer-events: none; }
+      @keyframes megaFlash { 0% { opacity: 0.8; } 100% { opacity: 0; } }
+
+      /* 화면 흔들림 효과 */
+      .nb-shake { animation: stageShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+      @keyframes stageShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-15px) rotate(-2deg); } 40% { transform: translateX(15px) rotate(2deg); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } }
+
+      /* 파티클 & 팝 효과 강화 */
+      .nb-particle { position: absolute; border-radius: 50%; pointer-events: none; animation: nbExplode 1s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; z-index: 70; box-shadow: 0 0 10px currentColor; }
+      .nb-emoji-pop { position: absolute; z-index: 80; pointer-events: none; font-size: clamp(60px, 18vw, 100px); font-weight: 900; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4)); animation: nbEmojiPop 1.2s cubic-bezier(0.2, 1.35, 0.3, 1) forwards; }
+      @keyframes nbExplode { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--dx),var(--dy)) scale(0); opacity: 0; } }
+      @keyframes nbEmojiPop { 0% { transform: translate(-50%,-50%) scale(0.2) rotate(-20deg); opacity: 0; } 30% { transform: translate(-50%,-80%) scale(1.5) rotate(10deg); opacity: 1; } 100% { transform: translate(-50%,-150%) scale(1) rotate(0); opacity: 0; } }
+
+      /* 골든 링 (엄청 크게) */
+      .nb-golden-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 0; height: 0; border: 25px solid #FFD700; border-radius: 50%; opacity: 1; pointer-events: none; z-index: 5; animation: nbRingExpand 1.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; box-shadow: 0 0 40px #FFD700, inset 0 0 40px #FFD700; }
+      @keyframes nbRingExpand { 100% { width: 800px; height: 800px; opacity: 0; border-width: 2px; } }
+
+      /* 타겟 블록 전용 (더 큼) */
+      .nb-block.stage-block { --sz: clamp(100px, 24vw, 160px); animation: nbFloatStage 3s ease-in-out infinite alternate; z-index: 50; }
+      @keyframes nbFloatStage { from { transform: translateY(-10px); } to { transform: translateY(10px); } }
+      .nb-dance { animation: nbDanceAnim 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+      @keyframes nbDanceAnim { 0% { transform: scale(1) rotate(0); } 30% { transform: scale(1.6) rotate(15deg); } 70% { transform: scale(1.6) rotate(-15deg); } 100% { transform: scale(1) rotate(360deg); } }
+
+      /* 블록 만들기 (Build) 모드 스타일 */
+      .nb-build-stage { position: relative; width: min(96vw, 750px); height: 100%; min-height: 350px; border-radius: 40px; border: 8px solid #fff; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 5px 20px rgba(0,0,0,0.1); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+      .nb-build-sky { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; transition: background 1s; }
+      .nb-build-title { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; }
+      .nb-build-pill { padding: 10px 20px; border-radius: 999px; border: 5px solid #fff; background: rgba(255,255,255,0.95); box-shadow: 0 8px 0 rgba(0,0,0,0.15); font-size: clamp(20px, 5.5vw, 30px); font-weight: 900; }
+      
+      .nb-build-scene { position: relative; z-index: 1; display: grid; place-items: center; min-height: 0; padding: 10px; }
+      .nb-build-scene-emoji { font-size: clamp(110px, 32vw, 220px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+      
+      .nb-build-slots { position: relative; z-index: 3; display: flex; justify-content: center; gap: 15px; padding: 0 15px 20px; }
+      .nb-build-slot { flex: 1; max-width: 180px; min-height: clamp(100px, 25vw, 150px); border-radius: 30px; border: 6px dashed #ccc; background: rgba(255,255,255,0.6); display: grid; place-items: center; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
+      .nb-build-slot.filled { border-style: solid; background: #fff; border-color: #FFD700; box-shadow: 0 10px 20px rgba(0,0,0,0.15); animation: nbSlotFill 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+      .nb-build-slot.wrong { animation: nbWrongShake 0.4s ease; border-color: #FF1744; background: #ffebee; }
+      
+      /* 슬롯 안의 조각 */
+      .nb-build-piece { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+      .nb-build-piece-emoji { font-size: clamp(50px, 14vw, 80px); line-height: 1; filter: drop-shadow(0 8px 0 rgba(0,0,0,0.15)); }
+
+      /* 빌드 모드 트레이 (카드를 엄청 크게) */
+      .nb-build-tray { width: 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 15px; z-index: 10; background: rgba(255,255,255,0.25); border-top: 6px solid rgba(255,255,255,0.5); box-shadow: 0 -10px 30px rgba(0,0,0,0.2); }
+      .nb-build-card { width: clamp(100px, 28vw, 150px); min-height: clamp(100px, 28vw, 150px); border-radius: 30px; border: 6px solid #fff; background: linear-gradient(180deg, #ffffff, #FFF9C4); box-shadow: 0 10px 0 rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+      .nb-build-card:active { transform: translateY(8px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }
+      .nb-build-card.used { opacity: 0.3; filter: grayscale(1); transform: scale(0.9); pointer-events: none; }
+      .nb-build-card .nb-build-piece-emoji { font-size: clamp(55px, 16vw, 90px); }
+
+      /* 메가 완성 애니메이션 */
+      .nb-build-mega-complete .nb-build-scene-emoji { animation: megaCompleteFloat 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate; filter: drop-shadow(0 0 40px #FFD700) drop-shadow(0 20px 30px rgba(0,0,0,0.3)); transform: scale(1.4); }
+      @keyframes megaCompleteFloat { from { transform: scale(1.4) translateY(0) rotate(-3deg); } to { transform: scale(1.5) translateY(-20px) rotate(3deg); } }
+
+      /* 성공 패널 */
+      .nb-success-overlay { position: absolute; inset: 0; z-index: 999; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); display: grid; place-items: center; animation: nbFadeIn 0.3s; }
+      .nb-success-box { width: min(92vw, 600px); border-radius: 40px; text-align: center; border: 10px solid #FFD700; background: #fff; padding: 40px 20px; display: grid; gap: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,215,0,0.3); }
+      .nb-success-icon { font-size: clamp(100px, 28vw, 160px); animation: nbSuccessFloat 1s ease-in-out infinite alternate; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.2)); }
+      .nb-success-title { font-size: clamp(36px, 10vw, 55px); font-weight: 900; color: #1A237E; margin: 0; }
+      .nb-success-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 10px; }
+      .nb-round-btn { min-height: 90px; border-radius: 35px; border: 6px solid #fff; box-shadow: 0 10px 0 rgba(0,0,0,0.2); font-size: clamp(30px, 8vw, 45px); cursor: pointer; }
+      .nb-round-btn:active { transform: translateY(8px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+      .nb-btn-green { background: #00E676; color: white; }
+      .nb-btn-orange { background: #FF9100; color: white; }
+
+      @keyframes nbSlotFill { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
+      @keyframes nbWrongShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-15px) rotate(-5deg); } 40% { transform: translateX(15px) rotate(5deg); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } }
+      
+      @media(max-height: 600px) {
+        .nb-mode-tab { min-height: 65px; border-radius: 20px; font-size: 20px; }
+        .nb-header { padding: 5px; }
+        .nb-tray { padding: 10px; min-height: 120px; }
+        .nb-build-tray { padding: 10px; }
+        .nb-build-card { min-height: 80px; }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -229,13 +306,13 @@
   function renderBgStars(root) {
     const starsDiv = document.createElement('div');
     starsDiv.className = 'nb-stars';
-    for (let i = 0; i < 36; i += 1) {
+    for (let i = 0; i < 40; i += 1) {
       const s = document.createElement('div');
       s.className = 'nb-star';
       s.style.left = `${Math.random() * 100}%`;
       s.style.top = `${Math.random() * 100}%`;
       s.style.animationDelay = `${Math.random() * 2}s`;
-      s.style.animationDuration = `${1.2 + Math.random() * 2.6}s`;
+      s.style.animationDuration = `${1 + Math.random() * 2}s`;
       starsDiv.appendChild(s);
     }
     root.appendChild(starsDiv);
@@ -244,10 +321,9 @@
   function renderShell() {
     if (!state.container) return;
     state.container.innerHTML = `
-      <div class="nb-root">
+      <div class="nb-root" id="mainRoot">
         <div class="nb-bg-glow"></div>
         <div class="nb-header">
-          <div class="nb-title-badge" id="nbTitleBadge">숫자 블록</div>
           <div class="nb-mode-tabs">
             <button class="nb-mode-tab ${state.mode === 'number' ? 'active' : ''}" type="button" data-mode="number">🔢 숫자 만들기</button>
             <button class="nb-mode-tab ${state.mode === 'build' ? 'active' : ''}" type="button" data-mode="build">🏗️ 블록 만들기</button>
@@ -267,21 +343,15 @@
     });
   }
 
-  function setTitle(text) {
-    const title = state.container?.querySelector('#nbTitleBadge');
-    if (title) title.textContent = text;
-  }
-
   function createBlockElement(value, isStage = false) {
-    const meta = BLOCK_META[value];
+    const meta = BLOCK_META[value] || BLOCK_META[1];
     const el = document.createElement('div');
     el.className = `nb-block ${isStage ? 'stage-block' : ''}`;
     el.dataset.val = value;
-    const sz = isStage ? 'clamp(66px, 16vw, 92px)' : 'clamp(54px, 13vw, 76px)';
-    el.style.setProperty('--sz', sz);
+    el.style.background = meta.gradient;
     el.style.width = `calc(var(--sz) * ${meta.w})`;
     el.style.height = `calc(var(--sz) * ${meta.h})`;
-    el.style.background = meta.gradient;
+    
     if (meta.aura) {
       const aura = document.createElement('div');
       aura.className = 'nb-aura';
@@ -294,39 +364,40 @@
     return el;
   }
 
-  function createParticles(x, y, color, count = 22) {
+  function createParticles(x, y, color, count = 40) {
     const stage = state.container?.querySelector('#nbStage');
     if (!stage) return;
     const stageRect = stage.getBoundingClientRect();
     for (let i = 0; i < count; i += 1) {
       const p = document.createElement('div');
       p.className = 'nb-particle';
-      p.style.background = i % 3 === 0 ? '#fff176' : i % 3 === 1 ? color : '#80deea';
+      // 무지개 파티클 섞기
+      p.style.background = i % 4 === 0 ? '#FFF59D' : i % 4 === 1 ? color : i % 4 === 2 ? '#FF1744' : '#00E676';
       p.style.left = `${x - stageRect.left}px`;
       p.style.top = `${y - stageRect.top}px`;
-      const size = Math.random() * 16 + 10;
+      const size = Math.random() * 25 + 15; // 파티클 엄청 큼
       p.style.width = `${size}px`;
       p.style.height = `${size}px`;
       const angle = Math.random() * Math.PI * 2;
-      const dist = Math.random() * 170 + 65;
+      const dist = Math.random() * 250 + 80; // 멀리 퍼짐
       p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
       p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
       stage.appendChild(p);
-      setTimer(() => p.remove(), 900);
+      setTimer(() => p.remove(), 1100);
     }
   }
 
-  function createEmojiPop(x, y, emoji) {
+  function createEmojiPop(x, y, textOrEmoji) {
     const stage = state.container?.querySelector('#nbStage');
     if (!stage) return;
     const stageRect = stage.getBoundingClientRect();
     const pop = document.createElement('div');
     pop.className = 'nb-emoji-pop';
-    pop.textContent = emoji;
+    pop.textContent = textOrEmoji;
     pop.style.left = `${x - stageRect.left}px`;
     pop.style.top = `${y - stageRect.top}px`;
     stage.appendChild(pop);
-    setTimer(() => pop.remove(), 1100);
+    setTimer(() => pop.remove(), 1300);
   }
 
   function createGoldenRing(x, y) {
@@ -338,7 +409,15 @@
     ring.style.left = `${x - stageRect.left}px`;
     ring.style.top = `${y - stageRect.top}px`;
     stage.appendChild(ring);
-    setTimer(() => ring.remove(), 1000);
+    setTimer(() => ring.remove(), 1300);
+  }
+
+  function flashScreen() {
+    const root = state.container?.querySelector('#mainRoot');
+    if (!root) return;
+    root.classList.remove('nb-mega-flash', 'nb-shake');
+    void root.offsetWidth; // reflow
+    root.classList.add('nb-mega-flash', 'nb-shake');
   }
 
   function restartCurrentMode(announce) {
@@ -351,12 +430,11 @@
 
   function startNumberMode(announce) {
     renderShell();
-    setTitle('숫자 블록 합치기!');
     state.currentLevel = 1;
     state.targetNumber = 5;
     state.centerBlock = null;
-    setTimer(startNumberLevel, 260);
-    if (announce) speak('숫자 만들기. 블록을 살짝 눌러볼까?', 0.94);
+    setTimer(startNumberLevel, 300);
+    if (announce) speak('시현아! 숫자를 합쳐서 5를 만들어볼까?', 0.94);
   }
 
   function startNumberLevel() {
@@ -386,13 +464,12 @@
       wrap.appendChild(block);
       tray.appendChild(wrap);
     });
-    speak(`숫자 ${state.targetNumber}를 만들어볼까?`, 0.94);
   }
 
   function handleNumberBlockClick(blockEl, val) {
     if (state.isAnimating || state.destroyed || state.mode !== 'number') return;
     initAudio();
-    vibrate(55);
+    vibrate(60);
     playBlockSound(val);
     state.isAnimating = true;
 
@@ -412,26 +489,29 @@
     const stageRect = stage.getBoundingClientRect();
     const targetX = stageRect.left + stageRect.width / 2 - rect.width / 2;
     const targetY = stageRect.top + stageRect.height / 2 - rect.height / 2;
+    
     requestAnimationFrame(() => {
       clone.style.left = `${targetX}px`;
       clone.style.top = `${targetY}px`;
-      clone.style.transform = 'scale(1.2)';
+      clone.style.transform = 'scale(1.5)'; // 날아갈 때 엄청 커짐
     });
+    
     setTimer(() => {
       clone.remove();
       if (state.destroyed || state.mode !== 'number') return;
       processNumberMerge(val, stageRect.left + stageRect.width / 2, stageRect.top + stageRect.height / 2);
-    }, 600);
+    }, 550);
   }
 
   function processNumberMerge(newVal, cx, cy) {
     const stage = state.container?.querySelector('#nbStage');
     if (!stage) return;
+    
     if (state.centerBlock === null) {
       state.centerBlock = newVal;
       stage.appendChild(createBlockElement(newVal, true));
-      createEmojiPop(cx, cy, '톡!');
-      speak(BLOCK_META[newVal].name, 1.15);
+      createEmojiPop(cx, cy, '쿵!');
+      speak(BLOCK_META[newVal].name, 1.1);
       state.isAnimating = false;
       return;
     }
@@ -440,19 +520,26 @@
     const sum = Math.min(state.targetNumber, oldVal + newVal);
     stage.innerHTML = '';
     state.centerBlock = sum;
-    vibrate([80, 40, 160]);
-    createParticles(cx, cy, BLOCK_META[sum].shadow, 26);
-    createEmojiPop(cx, cy, '✨');
+    
+    // ★ 초강력 합체 이펙트
+    flashScreen();
+    vibrate([100, 50, 200]);
+    createParticles(cx, cy, BLOCK_META[sum].shadow, 45);
+    createEmojiPop(cx, cy, '쾅!!💥');
     playBlockSound(sum);
+    
     const mergedEl = createBlockElement(sum, true);
-    mergedEl.style.transform = 'scale(0)';
+    mergedEl.style.transform = 'scale(0.2)';
     stage.appendChild(mergedEl);
-    speak(`${BLOCK_META[oldVal].name}이랑 ${BLOCK_META[newVal].name}. 그래서 ${BLOCK_META[sum].name}.`, 0.94);
+    
+    speak(`${BLOCK_META[oldVal].name}이랑 ${BLOCK_META[newVal].name} 합체! 그래서 ${BLOCK_META[sum].name}!`, 0.94);
+    
     requestAnimationFrame(() => {
-      mergedEl.style.transition = 'transform .42s cubic-bezier(.34,1.56,.64,1)';
+      mergedEl.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
       mergedEl.style.transform = 'scale(1)';
     });
-    setTimer(() => checkNumberWin(mergedEl, cx, cy), 1350);
+    
+    setTimer(() => checkNumberWin(mergedEl, cx, cy), 1500);
   }
 
   function checkNumberWin(mergedEl, cx, cy) {
@@ -461,32 +548,32 @@
       state.isAnimating = true;
       mergedEl.classList.add('nb-dance');
       createGoldenRing(cx, cy);
-      createParticles(cx, cy, '#FFD700', 34);
-      vibrate([90, 60, 90, 60, 240]);
+      createParticles(cx, cy, '#FFD700', 60); // 엄청난 파티클
+      vibrate([100, 60, 100, 60, 300]);
       state.options.fireConfetti?.();
-      state.options.gainExp?.(30);
-      setTimer(() => showSuccessOverlay('⭐⭐⭐', '완벽해요.', '숫자 5를 완성했어.', () => startNumberMode(false)), 4200);
+      state.options.gainExp?.(40); // 보상 증가
+      
+      setTimer(() => showSuccessOverlay('🌟', '우와 대단해!', '시현이가 5를 만들었어!', () => startNumberMode(false)), 4000);
     } else {
       state.isAnimating = false;
     }
   }
 
+  // ─── 블록 만들기 모드 ───
   function startBuildMode(announce) {
     renderShell();
-    setTitle('뚝딱 블록 만들기!');
     state.buildRound = 0;
     state.isAnimating = false;
-    if (announce) speak('블록 만들기. 차례대로 붙여볼까?', 0.94);
-    setTimer(startBuildRound, 260);
+    if (announce) speak('시현아, 순서대로 블록을 올려서 예쁘게 만들어볼까?', 0.94);
+    setTimer(startBuildRound, 300);
   }
 
   function startBuildRound() {
     if (!state.container || state.destroyed || state.mode !== 'build') return;
     if (state.buildRound >= BUILD_MISSIONS.length) {
-      showSuccessOverlay('🏆', '블록 작품 완료.', '집, 기차, 로켓을 모두 만들었어요.', () => startBuildMode(false));
+      showSuccessOverlay('🏆', '최고의 건축가!', '집, 기차, 로켓을 모두 멋지게 만들었어!', () => startBuildMode(false));
       state.options.fireConfetti?.();
-      state.options.gainExp?.(40);
-      speak('우와. 블록 작품을 다 만들었어.', 0.94);
+      state.options.gainExp?.(50);
       return;
     }
 
@@ -495,7 +582,7 @@
     state.buildPool = shuffle([...state.buildMission.steps.map((s) => ({ ...s, correct: true })), ...state.buildMission.wrongs.map((w) => ({ ...w, correct: false }))]);
     state.isAnimating = false;
     drawBuildRound();
-    speak(state.buildMission.guide, 1.04);
+    speak(state.buildMission.guide, 1.0);
   }
 
   function drawBuildRound() {
@@ -503,40 +590,49 @@
     const stage = state.container?.querySelector('#nbStage');
     const mission = state.buildMission;
     if (!tray || !stage || !mission) return;
+    
     tray.className = 'nb-build-tray';
+    const isComplete = state.buildPlaced.every(Boolean);
+    
     stage.innerHTML = `
-      <div class="nb-build-stage ${state.buildPlaced.every(Boolean) ? `nb-build-complete ${mission.id}` : ''}">
+      <div class="nb-build-stage ${isComplete ? `nb-build-mega-complete ${mission.id}` : ''}">
         <div class="nb-build-sky" style="background:linear-gradient(180deg, ${mission.color}55 0%, #fff6bd 62%, #9cf28a 100%)"></div>
         <div class="nb-build-title">
           <div class="nb-build-pill">${mission.icon} ${mission.title}</div>
-          <div class="nb-build-progress">${BUILD_MISSIONS.map((_, i) => `<span class="nb-build-dot ${i < state.buildRound ? 'done' : i === state.buildRound ? 'active' : ''}"></span>`).join('')}</div>
         </div>
         <div class="nb-build-scene">
-          <div class="nb-build-scene-emoji">${state.buildPlaced.every(Boolean) ? mission.complete : mission.scene}</div>
+          <div class="nb-build-scene-emoji">${isComplete ? mission.complete : mission.scene}</div>
         </div>
+        ${!isComplete ? `
         <div class="nb-build-slots">
           ${state.buildPlaced.map((piece, index) => renderBuildSlot(piece, index)).join('')}
-        </div>
+        </div>` : ''}
       </div>
     `;
-    tray.innerHTML = state.buildPool.map((piece) => renderBuildCard(piece)).join('');
-    tray.querySelectorAll('[data-piece]').forEach((btn) => {
-      btn.addEventListener('click', () => handleBuildPieceClick(btn.dataset.piece));
-    });
+    
+    // 카드를 그림 위주로 (텍스트 제거 또는 최소화)
+    if (!isComplete) {
+      tray.innerHTML = state.buildPool.map((piece) => {
+        const used = state.buildPlaced.some((placed) => placed && placed.id === piece.id);
+        return `
+          <button class="nb-build-card ${used ? 'used' : ''}" type="button" data-piece="${piece.id}">
+            <span class="nb-build-piece-emoji">${piece.emoji}</span>
+          </button>
+        `;
+      }).join('');
+      
+      tray.querySelectorAll('[data-piece]').forEach((btn) => {
+        btn.addEventListener('click', () => handleBuildPieceClick(btn.dataset.piece));
+      });
+    } else {
+      tray.innerHTML = ''; // 완성되면 트레이 비우기
+    }
   }
 
   function renderBuildSlot(piece, index) {
-    const labels = ['1번', '2번', '3번'];
-    return `<div class="nb-build-slot ${piece ? 'filled' : ''}" data-slot="${index}" data-step="${labels[index] || `${index + 1}번`}">${piece ? renderBuildPiece(piece) : `<span class="nb-build-piece-emoji">${index + 1}️⃣</span>`}</div>`;
-  }
-
-  function renderBuildPiece(piece) {
-    return `<div class="nb-build-piece"><div class="nb-build-piece-emoji">${piece.emoji}</div><div class="nb-build-piece-label">${piece.label}</div></div>`;
-  }
-
-  function renderBuildCard(piece) {
-    const used = state.buildPlaced.some((placed) => placed && placed.id === piece.id);
-    return `<button class="nb-build-card ${used ? 'used' : ''}" type="button" data-piece="${piece.id}">${renderBuildPiece(piece)}</button>`;
+    return `<div class="nb-build-slot ${piece ? 'filled' : ''}" data-slot="${index}">
+      ${piece ? `<span class="nb-build-piece-emoji">${piece.emoji}</span>` : ''}
+    </div>`;
   }
 
   function handleBuildPieceClick(pieceId) {
@@ -550,61 +646,66 @@
     initAudio();
 
     if (!piece.correct || !expected || piece.id !== expected.id) {
-      vibrate([55, 35, 55]);
+      vibrate([50, 50, 50]);
       playTone('wrong');
       const card = state.container?.querySelector(`[data-piece="${pieceId}"]`);
       const slot = state.container?.querySelector(`[data-slot="${Math.max(nextIndex, 0)}"]`);
       card?.classList.add('wrong');
       slot?.classList.add('wrong');
-      speak('괜찮아. 이 블록은 아닌가 봐. 다른 블록을 찾아볼까?', 0.94);
+      speak('어라? 이 블록은 안 맞네. 다른 걸 찾아볼까?', 1.0);
       setTimer(() => {
         card?.classList.remove('wrong');
         slot?.classList.remove('wrong');
-      }, 520);
+      }, 500);
       return;
     }
 
     state.isAnimating = true;
-    vibrate(80);
+    vibrate(100);
     playTone('pop');
     state.buildPlaced[nextIndex] = piece;
     drawBuildRound();
+    
     const slot = state.container?.querySelector(`[data-slot="${nextIndex}"]`);
     if (slot) {
       const rect = slot.getBoundingClientRect();
-      createParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, mission.color, 20);
-      createEmojiPop(rect.left + rect.width / 2, rect.top + rect.height / 2, '착!');
+      createParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, mission.color, 30);
+      createEmojiPop(rect.left + rect.width / 2, rect.top + rect.height / 2, '착!!');
     }
-    speak(piece.say || '딱 맞았어!', 1.05);
+    speak(piece.say || '우와! 딱 맞았어!', 1.05);
 
     if (state.buildPlaced.every(Boolean)) {
-      setTimer(completeBuildRound, 900);
+      setTimer(completeBuildRound, 1200);
     } else {
-      setTimer(() => { state.isAnimating = false; }, 360);
+      setTimer(() => { state.isAnimating = false; }, 500);
     }
   }
 
   function completeBuildRound() {
     if (state.destroyed || state.mode !== 'build') return;
     const mission = state.buildMission;
-    drawBuildRound();
+    drawBuildRound(); // 다시 그려서 메가 완성 애니메이션 적용
+    
+    flashScreen();
     const stage = state.container?.querySelector('#nbStage');
     const rect = stage?.getBoundingClientRect();
     if (rect) {
       createGoldenRing(rect.left + rect.width / 2, rect.top + rect.height / 2);
-      createParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, mission.color, 38);
-      createEmojiPop(rect.left + rect.width / 2, rect.top + rect.height / 2, '🎉');
+      createParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, mission.color, 60);
+      createEmojiPop(rect.left + rect.width / 2, rect.top + rect.height / 2, '✨완성!✨');
     }
-    vibrate([80, 60, 80, 60, 220]);
+    vibrate([100, 60, 100, 60, 300]);
     playTone('complete');
     state.options.fireConfetti?.();
-    state.options.gainExp?.(15);
-    speak(mission.completeText, 1.03);
+    
+    speak(mission.completeText, 1.0);
+    
+    // 시현이가 웅장한 애니메이션을 충분히 볼 수 있도록 대기 시간 대폭 연장
     setTimer(() => {
       state.buildRound += 1;
       state.isAnimating = false;
       startBuildRound();
-    }, 6500);
+    }, 6000); 
   }
 
   function showSuccessOverlay(icon, title, sub, replayFn) {
@@ -615,15 +716,15 @@
       <div class="nb-success-box">
         <div class="nb-success-icon">${icon}</div>
         <div class="nb-success-title">${title}</div>
-        <div class="nb-success-sub">${sub}</div>
+        <div class="nb-success-sub" style="font-size: 26px; font-weight: 900; color: #555;">${sub}</div>
         <div class="nb-success-actions">
-          <button class="nb-round-btn nb-btn-green" type="button" id="nbReplay">🔁</button>
-          <button class="nb-round-btn nb-btn-orange" type="button" id="nbHome">🏠</button>
+          <button class="nb-round-btn nb-btn-green" type="button" id="nbReplay">또 할래! 🔁</button>
+          <button class="nb-round-btn nb-btn-orange" type="button" id="nbHome">놀이터로 🏠</button>
         </div>
       </div>
     `;
     state.container.appendChild(overlay);
-    speak(title, 1.05);
+    speak(title, 1.0);
     overlay.querySelector('#nbReplay')?.addEventListener('click', () => {
       overlay.remove();
       replayFn?.();
@@ -638,12 +739,8 @@
     state.options = options || {};
     state.destroyed = false;
     state.mode = 'number';
-    state.currentLevel = 1;
-    state.targetNumber = 5;
-    state.centerBlock = null;
-    state.isAnimating = false;
     startNumberMode(false);
-    speak('숫자 블록이야. 숫자도 만들고, 그림도 만들어볼까?', 0.94);
+    speak('시현아! 신나는 숫자 블록 놀이를 시작해볼까?', 0.94);
   }
 
   function destroy() {
