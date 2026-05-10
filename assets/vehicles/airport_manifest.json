@@ -1,0 +1,65 @@
+[
+  {
+    "id": "passenger_airplane",
+    "category": "airport",
+    "file": "assets/vehicles/airport/passenger_airplane.webp",
+    "name_ko": "여객기",
+    "sound_ko": "슈우웅! 하늘을 날아요!"
+  },
+  {
+    "id": "airport_bus",
+    "category": "airport",
+    "file": "assets/vehicles/airport/airport_bus.webp",
+    "name_ko": "공항버스",
+    "sound_ko": "부릉부릉! 승객을 태워요!"
+  },
+  {
+    "id": "baggage_cart",
+    "category": "airport",
+    "file": "assets/vehicles/airport/baggage_cart.webp",
+    "name_ko": "수하물 카트",
+    "sound_ko": "덜컹덜컹! 짐을 끌고 가요!"
+  },
+  {
+    "id": "pushback_tug",
+    "category": "airport",
+    "file": "assets/vehicles/airport/pushback_tug.webp",
+    "name_ko": "푸시백 토잉카",
+    "sound_ko": "영차영차! 비행기를 밀어요!"
+  },
+  {
+    "id": "fuel_truck_airport",
+    "category": "airport",
+    "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+    "name_ko": "항공 주유차",
+    "sound_ko": "꿀꺽꿀꺽! 비행기에 연료를 넣어요!"
+  },
+  {
+    "id": "catering_truck",
+    "category": "airport",
+    "file": "assets/vehicles/airport/catering_truck.webp",
+    "name_ko": "기내식 트럭",
+    "sound_ko": "쓱 올라가요! 기내식을 실어줘요!"
+  },
+  {
+    "id": "stair_truck",
+    "category": "airport",
+    "file": "assets/vehicles/airport/stair_truck.webp",
+    "name_ko": "계단차",
+    "sound_ko": "차르르! 탑승 계단을 펼쳐요!"
+  },
+  {
+    "id": "de_icing_truck",
+    "category": "airport",
+    "file": "assets/vehicles/airport/de_icing_truck.webp",
+    "name_ko": "제빙차",
+    "sound_ko": "촤아아! 날개의 얼음을 녹여요!"
+  },
+  {
+    "id": "airport_follow_me_car",
+    "category": "airport",
+    "file": "assets/vehicles/airport/airport_follow_me_car.webp",
+    "name_ko": "공항 안내차",
+    "sound_ko": "반짝반짝! 비행기를 길 안내해요!"
+  }
+]

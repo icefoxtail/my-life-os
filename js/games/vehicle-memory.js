@@ -59,6 +59,22 @@
     ],
   };
   let selectedCategory = '🚗탈것'; // 기본값
+  let selectedVehicleCategory = 'all';
+
+  const VEHICLE_CATEGORIES = [
+    { id: 'all', label: '🚗전체' },
+    { id: 'fire', label: '🚒소방' },
+    { id: 'police', label: '🚓경찰' },
+    { id: 'rescue', label: '🚑구조' },
+    { id: 'construction', label: '🏗️공사' },
+    { id: 'transport', label: '🚌교통' },
+    { id: 'airport', label: '✈️공항' },
+    { id: 'farm', label: '🚜농장' },
+    { id: 'port', label: '⚓항구' },
+    { id: 'road_service', label: '🛣️도로' },
+    { id: 'military_special', label: '🛡️특수' },
+    { id: 'town', label: '🏘️동네' },
+  ];
 
   const state = {
     container: null,
@@ -286,6 +302,35 @@
         background: linear-gradient(180deg,#fff 0%,#ffe577 100%);
         box-shadow: 0 5px 0 rgba(200,140,0,0.25);
       }
+      .memory-vehicle-cat-bar {
+        width: 100%;
+        display: flex;
+        gap: 7px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 0 8px;
+        flex-shrink: 0;
+      }
+      .memory-vehicle-cat-bar::-webkit-scrollbar { display: none; }
+      .memory-vehicle-cat-chip {
+        flex-shrink: 0;
+        min-height: 42px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.76);
+        border: 3px solid #fff;
+        box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+        font-size: clamp(13px, 3.4vw, 16px);
+        font-weight: 900;
+        cursor: pointer;
+        white-space: nowrap;
+        touch-action: manipulation;
+      }
+      .memory-vehicle-cat-chip.active {
+        background: linear-gradient(180deg,#e8f5ff 0%,#a7e4ff 100%);
+        color: #0d47a1;
+        box-shadow: 0 4px 0 rgba(13,71,161,0.22);
+      }
       .memory-card-front .memory-emoji-face {
         font-size: clamp(44px, 14vw, 72px);
         line-height: 1;
@@ -310,6 +355,7 @@
       id: vehicle.id || `${file}-${index}`,
       name,
       file,
+      category: vehicle.category || 'transport',
       sound: vehicle.sound_ko || name
     };
   }
@@ -323,10 +369,16 @@
   }
 
   function pickRoundVehicles() {
-    const source = shuffle(state.vehicles).slice(0, PAIR_COUNT);
-    return shuffle(source.flatMap((vehicle) => [
-      { ...vehicle, uid: `${vehicle.id}-a` },
-      { ...vehicle, uid: `${vehicle.id}-b` }
+    const pool = selectedVehicleCategory === 'all'
+      ? state.vehicles
+      : state.vehicles.filter((vehicle) => vehicle.category === selectedVehicleCategory);
+    const sourcePool = pool.length ? pool : state.vehicles;
+    let expanded = [...sourcePool];
+    while (expanded.length < PAIR_COUNT) expanded = expanded.concat(sourcePool);
+    const source = shuffle(expanded).slice(0, PAIR_COUNT);
+    return shuffle(source.flatMap((vehicle, index) => [
+      { ...vehicle, id: `${vehicle.id}-${index}`, uid: `${vehicle.id}-${index}-a` },
+      { ...vehicle, id: `${vehicle.id}-${index}`, uid: `${vehicle.id}-${index}-b` }
     ]));
   }
 
@@ -383,6 +435,7 @@
   }
 
   function renderMemoryBoard() {
+    const availableVehicleCategories = new Set(state.vehicles.map((vehicle) => vehicle.category));
     const catBar = `
       <div class="memory-cat-bar">
         ${['🚗탈것', ...Object.keys(EMOJI_CATEGORIES)].map(cat => `
@@ -391,6 +444,18 @@
         `).join('')}
       </div>
     `;
+    const vehicleCatBar = selectedCategory === '🚗탈것'
+      ? `
+        <div class="memory-vehicle-cat-bar">
+          ${VEHICLE_CATEGORIES
+            .filter((cat) => cat.id === 'all' || availableVehicleCategories.has(cat.id))
+            .map((cat) => `
+              <button class="memory-vehicle-cat-chip ${selectedVehicleCategory === cat.id ? 'active' : ''}"
+                type="button" data-vehicle-cat="${cat.id}">${cat.label}</button>
+            `).join('')}
+        </div>
+      `
+      : '';
 
     state.container.innerHTML = `
       <div class="memory-game-container">
@@ -402,6 +467,7 @@
           </div>
         </div>
         ${catBar}
+        ${vehicleCatBar}
         <div class="memory-board" role="grid" aria-label="카드 맞추기">
           ${state.cards.map((card, index) => `
             <button class="memory-card" type="button" data-index="${index}" aria-label="카드">
@@ -440,6 +506,13 @@
     root.querySelectorAll('.memory-cat-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         selectedCategory = chip.dataset.cat;
+        state.round = 1;
+        startRound();
+      });
+    });
+    root.querySelectorAll('.memory-vehicle-cat-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        selectedVehicleCategory = chip.dataset.vehicleCat || 'all';
         state.round = 1;
         startRound();
       });

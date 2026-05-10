@@ -1,0 +1,128 @@
+[
+  {
+    "id": "school_van",
+    "category": "town",
+    "file": "assets/vehicles/town/school_van.webp",
+    "name_ko": "어린이 통학차",
+    "sound_ko": "부릉부릉! 친구들을 태우러 가요!"
+  },
+  {
+    "id": "bakery_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/bakery_truck.webp",
+    "name_ko": "빵 배달차",
+    "sound_ko": "고소한 빵을 가득 싣고 가요!"
+  },
+  {
+    "id": "flower_delivery_van",
+    "category": "town",
+    "file": "assets/vehicles/town/flower_delivery_van.webp",
+    "name_ko": "꽃 배달차",
+    "sound_ko": "향기로운 꽃을 배달해요!"
+  },
+  {
+    "id": "pet_grooming_van",
+    "category": "town",
+    "file": "assets/vehicles/town/pet_grooming_van.webp",
+    "name_ko": "반려동물 미용차",
+    "sound_ko": "멍멍! 예쁘게 단장해요!"
+  },
+  {
+    "id": "utility_repair_van",
+    "category": "town",
+    "file": "assets/vehicles/town/utility_repair_van.webp",
+    "name_ko": "수리 서비스차",
+    "sound_ko": "뚝딱뚝딱! 고장 난 곳을 고쳐요!"
+  },
+  {
+    "id": "maintenance_pickup",
+    "category": "town",
+    "file": "assets/vehicles/town/maintenance_pickup.webp",
+    "name_ko": "동네 관리차",
+    "sound_ko": "슥슥! 동네를 정리해요!"
+  },
+  {
+    "id": "beverage_delivery_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/beverage_delivery_truck.webp",
+    "name_ko": "음료 배달차",
+    "sound_ko": "찰랑찰랑! 음료를 배달해요!"
+  },
+  {
+    "id": "toy_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/toy_truck.webp",
+    "name_ko": "장난감 판매차",
+    "sound_ko": "와글와글! 장난감을 싣고 왔어요!"
+  },
+  {
+    "id": "community_bus",
+    "category": "town",
+    "file": "assets/vehicles/town/community_bus.webp",
+    "name_ko": "마을버스",
+    "sound_ko": "부릉부릉! 동네를 달려요!"
+  },
+  {
+    "id": "mail_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/mail_truck.webp",
+    "name_ko": "우편차",
+    "sound_ko": "딸랑딸랑! 편지를 배달해요!"
+  },
+  {
+    "id": "delivery_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/delivery_truck.webp",
+    "name_ko": "택배차",
+    "sound_ko": "차곡차곡! 택배를 전해줘요!"
+  },
+  {
+    "id": "food_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/food_truck.webp",
+    "name_ko": "푸드트럭",
+    "sound_ko": "맛있는 음식을 만들어요!"
+  },
+  {
+    "id": "ice_cream_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/ice_cream_truck.webp",
+    "name_ko": "아이스크림차",
+    "sound_ko": "달콤한 아이스크림이 왔어요!"
+  },
+  {
+    "id": "moving_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/moving_truck.webp",
+    "name_ko": "이삿짐차",
+    "sound_ko": "영차영차! 짐을 옮겨요!"
+  },
+  {
+    "id": "laundry_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/laundry_truck.webp",
+    "name_ko": "세탁 배달차",
+    "sound_ko": "뽀송뽀송! 빨래를 가져다줘요!"
+  },
+  {
+    "id": "recycling_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/recycling_truck.webp",
+    "name_ko": "재활용 수거차",
+    "sound_ko": "쓱쓱! 재활용품을 모아요!"
+  },
+  {
+    "id": "library_bus",
+    "category": "town",
+    "file": "assets/vehicles/town/library_bus.webp",
+    "name_ko": "이동 도서관 버스",
+    "sound_ko": "책을 가득 싣고 찾아가요!"
+  },
+  {
+    "id": "street_vendor_truck",
+    "category": "town",
+    "file": "assets/vehicles/town/street_vendor_truck.webp",
+    "name_ko": "이동 판매차",
+    "sound_ko": "싱싱한 물건을 팔아요!"
+  }
+]

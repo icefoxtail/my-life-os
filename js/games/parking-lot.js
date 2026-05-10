@@ -15,6 +15,12 @@
     rescue:       { label: '🚑구조대', color: '#FF9800' },
     construction: { label: '🏗️공사차', color: '#FFC107' },
     transport:    { label: '🚌교통',   color: '#2196F3' },
+    airport:      { label: '✈️공항',   color: '#42A5F5' },
+    farm:         { label: '🚜농장',   color: '#66BB6A' },
+    port:         { label: '⚓항구',   color: '#26A69A' },
+    road_service: { label: '🛣️도로',   color: '#78909C' },
+    military_special: { label: '🛡️특수', color: '#8D6E63' },
+    town:         { label: '🏘️동네',   color: '#EC407A' },
   };
 
   const state = {

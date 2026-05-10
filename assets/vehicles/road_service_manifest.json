@@ -1,0 +1,65 @@
+[
+  {
+    "id": "snow_plow",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/snow_plow.webp",
+    "name_ko": "제설차",
+    "sound_ko": "쓱쓱! 눈을 밀어내요!"
+  },
+  {
+    "id": "salt_spreader",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/salt_spreader.webp",
+    "name_ko": "염화칼슘 살포차",
+    "sound_ko": "촤르르! 미끄럽지 않게 뿌려요!"
+  },
+  {
+    "id": "road_sweeper",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/road_sweeper.webp",
+    "name_ko": "도로 청소차",
+    "sound_ko": "슥슥! 길을 깨끗하게 청소해요!"
+  },
+  {
+    "id": "line_painting_truck",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/line_painting_truck.webp",
+    "name_ko": "차선 도색차",
+    "sound_ko": "쭉쭉! 길 위에 선을 그려요!"
+  },
+  {
+    "id": "road_sign_truck",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/road_sign_truck.webp",
+    "name_ko": "도로 표지 작업차",
+    "sound_ko": "척척! 표지판을 세워요!"
+  },
+  {
+    "id": "traffic_cone_truck",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/traffic_cone_truck.webp",
+    "name_ko": "라바콘 작업차",
+    "sound_ko": "차곡차곡! 안전콘을 놓아요!"
+  },
+  {
+    "id": "bridge_inspection_truck",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+    "name_ko": "교량 점검차",
+    "sound_ko": "슝! 높은 곳까지 올라가 살펴봐요!"
+  },
+  {
+    "id": "tunnel_cleaning_truck",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+    "name_ko": "터널 청소차",
+    "sound_ko": "촤아아! 터널을 깨끗하게 씻어요!"
+  },
+  {
+    "id": "road_repair_truck",
+    "category": "road_service",
+    "file": "assets/vehicles/road_service/road_repair_truck.webp",
+    "name_ko": "도로 보수차",
+    "sound_ko": "뚝딱뚝딱! 길을 고쳐요!"
+  }
+]

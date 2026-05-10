@@ -8,6 +8,20 @@
   const STYLE_ID     = 'sihyeon-number-count-style';
   const MANIFEST_URL = './assets/vehicles/vehicles_manifest.json';
   const TOTAL_ROUNDS = 5;
+  const VEHICLE_CATEGORIES = [
+    { id: 'all', label: '🚗전체' },
+    { id: 'fire', label: '🚒소방' },
+    { id: 'police', label: '🚓경찰' },
+    { id: 'rescue', label: '🚑구조' },
+    { id: 'construction', label: '🏗️공사' },
+    { id: 'transport', label: '🚌교통' },
+    { id: 'airport', label: '✈️공항' },
+    { id: 'farm', label: '🚜농장' },
+    { id: 'port', label: '⚓항구' },
+    { id: 'road_service', label: '🛣️도로' },
+    { id: 'military_special', label: '🛡️특수' },
+    { id: 'town', label: '🏘️동네' },
+  ];
 
   /* ── 한국어 수사 (카운팅 TTS) ── */
   const KOREAN_COUNT = ['','하나','둘','셋','넷','다섯','여섯','일곱','여덟','아홉'];
@@ -113,6 +127,7 @@
       vehicles:[],
       gameVehicles:[],
       difficulty:1,
+      selectedVehicleCategory:'all',
       container:null,
       styleElement:null,
       isAnimating:false,
@@ -152,6 +167,7 @@
             <button type="button" class="nc-difficulty-tab active" data-difficulty="1">⭐1단계 1~5</button>
             <button type="button" class="nc-difficulty-tab" data-difficulty="2">⭐⭐2단계 1~9</button>
           </div>
+          <div class="nc-vehicle-cat-tabs" id="ncVehicleCatTabs"></div>
 
           <div class="nc-objects-area" id="ncObjectsArea">
             <div class="nc-road-bg" id="ncRoadBg"></div>
@@ -197,7 +213,11 @@
     ════════════════════════════ */
     startNewGameSession:function(){
       this.clearTimers();
-      const pool = this.state.vehicles.length ? this.state.vehicles : FALLBACK.map(normalizeVehicle).filter(Boolean);
+      const allVehicles = this.state.vehicles.length ? this.state.vehicles : FALLBACK.map(normalizeVehicle).filter(Boolean);
+      const filtered = this.state.selectedVehicleCategory === 'all'
+        ? allVehicles
+        : allVehicles.filter(v => v.category === this.state.selectedVehicleCategory);
+      const pool = filtered.length ? filtered : allVehicles;
       this.state.gameVehicles = shuffle(pool).slice(0, TOTAL_ROUNDS);
       this.restart();
     },
@@ -641,9 +661,34 @@
           this.startNewGameSession();
         };
       });
+      this.renderVehicleCategoryTabs();
       const goHome = ()=>{ if(this.state.options.closeToParkHome) this.state.options.closeToParkHome(); };
       if(home)  home.onclick  = goHome;
       if(home2) home2.onclick = goHome;
+    },
+
+    renderVehicleCategoryTabs:function(){
+      const bar = this.query('#ncVehicleCatTabs');
+      if(!bar) return;
+      const available = new Set(this.state.vehicles.map(v => v.category));
+      bar.innerHTML = VEHICLE_CATEGORIES
+        .filter(cat => cat.id === 'all' || available.has(cat.id))
+        .map(cat => `
+          <button type="button"
+            class="nc-vehicle-cat-tab ${this.state.selectedVehicleCategory === cat.id ? 'active' : ''}"
+            data-vehicle-cat="${cat.id}">${cat.label}</button>
+        `).join('');
+      bar.querySelectorAll('[data-vehicle-cat]').forEach(btn=>{
+        btn.onclick = ()=>{
+          const category = btn.dataset.vehicleCat || 'all';
+          if(this.state.selectedVehicleCategory === category || this.state.isAnimating) return;
+          this.state.selectedVehicleCategory = category;
+          bar.querySelectorAll('[data-vehicle-cat]').forEach(tab=>{
+            tab.classList.toggle('active', tab.dataset.vehicleCat === category);
+          });
+          this.startNewGameSession();
+        };
+      });
     },
 
     /* TTS 헬퍼 */
@@ -787,6 +832,34 @@
           background:#FFD93D;
           color:#3E2723;
           box-shadow:0 4px 0 #F57F17;
+        }
+        .nc-vehicle-cat-tabs{
+          position:relative;z-index:10;
+          display:flex;gap:7px;
+          overflow-x:auto;
+          scrollbar-width:none;
+          padding:6px 10px 4px;
+        }
+        .nc-vehicle-cat-tabs::-webkit-scrollbar{display:none;}
+        .nc-vehicle-cat-tab{
+          flex:0 0 auto;
+          min-height:34px;
+          padding:0 12px;
+          border:3px solid rgba(255,255,255,.85);
+          border-radius:999px;
+          background:rgba(255,255,255,.66);
+          color:#263238;
+          font-family:'Jua','Apple SD Gothic Neo',sans-serif;
+          font-size:clamp(13px,3.2vw,16px);
+          font-weight:900;
+          box-shadow:0 4px 0 rgba(0,0,0,.11);
+          cursor:pointer;
+          white-space:nowrap;
+        }
+        .nc-vehicle-cat-tab.active{
+          background:#B3E5FC;
+          color:#0D47A1;
+          box-shadow:0 4px 0 rgba(13,71,161,.24);
         }
 
         /* ════════════════════════════
@@ -1074,6 +1147,7 @@
       this.state.wrongCount     = 0;
       this.state.isAnimating    = false;
       this.state.difficulty     = 1;
+      this.state.selectedVehicleCategory = 'all';
       this.state.gameVehicles   = [];
       this.state.container      = null;
       this.state.options        = {};

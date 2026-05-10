@@ -1,0 +1,65 @@
+[
+  {
+    "id": "tractor",
+    "category": "farm",
+    "file": "assets/vehicles/farm/tractor.webp",
+    "name_ko": "트랙터",
+    "sound_ko": "부릉부릉! 밭으로 달려가요!"
+  },
+  {
+    "id": "combine_harvester",
+    "category": "farm",
+    "file": "assets/vehicles/farm/combine_harvester.webp",
+    "name_ko": "콤바인",
+    "sound_ko": "쓱쓱! 곡식을 수확해요!"
+  },
+  {
+    "id": "rice_transplanter",
+    "category": "farm",
+    "file": "assets/vehicles/farm/rice_transplanter.webp",
+    "name_ko": "이앙기",
+    "sound_ko": "차곡차곡! 모를 심어요!"
+  },
+  {
+    "id": "sprayer_truck",
+    "category": "farm",
+    "file": "assets/vehicles/farm/sprayer_truck.webp",
+    "name_ko": "농약 살포차",
+    "sound_ko": "촤아아! 밭에 물약을 뿌려요!"
+  },
+  {
+    "id": "baler",
+    "category": "farm",
+    "file": "assets/vehicles/farm/baler.webp",
+    "name_ko": "베일러",
+    "sound_ko": "꽁꽁! 건초를 둥글게 묶어요!"
+  },
+  {
+    "id": "farm_trailer",
+    "category": "farm",
+    "file": "assets/vehicles/farm/farm_trailer.webp",
+    "name_ko": "농장 트레일러",
+    "sound_ko": "덜컹덜컹! 수확물을 실어 나르요!"
+  },
+  {
+    "id": "plow_tractor",
+    "category": "farm",
+    "file": "assets/vehicles/farm/plow_tractor.webp",
+    "name_ko": "쟁기 트랙터",
+    "sound_ko": "슥슥! 밭을 갈아요!"
+  },
+  {
+    "id": "fruit_harvest_truck",
+    "category": "farm",
+    "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+    "name_ko": "과일 수확 트럭",
+    "sound_ko": "차곡차곡! 과일 상자를 실어요!"
+  },
+  {
+    "id": "milk_tanker",
+    "category": "farm",
+    "file": "assets/vehicles/farm/milk_tanker.webp",
+    "name_ko": "우유 탱크차",
+    "sound_ko": "출렁출렁! 우유를 옮겨요!"
+  }
+]

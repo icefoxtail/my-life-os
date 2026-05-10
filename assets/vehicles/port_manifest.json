@@ -1,0 +1,65 @@
+[
+  {
+    "id": "container_truck",
+    "category": "port",
+    "file": "assets/vehicles/port/container_truck.webp",
+    "name_ko": "컨테이너 트럭",
+    "sound_ko": "덜컹덜컹! 큰 컨테이너를 싣고 가요!"
+  },
+  {
+    "id": "reach_stacker",
+    "category": "port",
+    "file": "assets/vehicles/port/reach_stacker.webp",
+    "name_ko": "리치스태커",
+    "sound_ko": "번쩍! 컨테이너를 높이 들어요!"
+  },
+  {
+    "id": "harbor_crane",
+    "category": "port",
+    "file": "assets/vehicles/port/harbor_crane.webp",
+    "name_ko": "항구 크레인",
+    "sound_ko": "높이높이! 짐을 들어 올려요!"
+  },
+  {
+    "id": "tugboat",
+    "category": "port",
+    "file": "assets/vehicles/port/tugboat.webp",
+    "name_ko": "예인선",
+    "sound_ko": "부우웅! 큰 배를 밀어줘요!"
+  },
+  {
+    "id": "cargo_ship",
+    "category": "port",
+    "file": "assets/vehicles/port/cargo_ship.webp",
+    "name_ko": "화물선",
+    "sound_ko": "차곡차곡! 짐을 가득 싣고 가요!"
+  },
+  {
+    "id": "ferry",
+    "category": "port",
+    "file": "assets/vehicles/port/ferry.webp",
+    "name_ko": "여객선",
+    "sound_ko": "둥실둥실! 사람들을 태우고 가요!"
+  },
+  {
+    "id": "fishing_boat",
+    "category": "port",
+    "file": "assets/vehicles/port/fishing_boat.webp",
+    "name_ko": "어선",
+    "sound_ko": "철썩철썩! 바다에서 물고기를 잡아요!"
+  },
+  {
+    "id": "coast_guard_boat",
+    "category": "port",
+    "file": "assets/vehicles/port/coast_guard_boat.webp",
+    "name_ko": "해경 보트",
+    "sound_ko": "위잉위잉! 바다를 지켜요!"
+  },
+  {
+    "id": "rescue_boat",
+    "category": "port",
+    "file": "assets/vehicles/port/rescue_boat.webp",
+    "name_ko": "구조 보트",
+    "sound_ko": "어서어서! 바다에서 도와줘요!"
+  }
+]

@@ -22,6 +22,30 @@
     {
       "id": "transport",
       "name_ko": "기본 이동/확장"
+    },
+    {
+      "id": "airport",
+      "name_ko": "공항"
+    },
+    {
+      "id": "farm",
+      "name_ko": "농장"
+    },
+    {
+      "id": "port",
+      "name_ko": "항구"
+    },
+    {
+      "id": "road_service",
+      "name_ko": "도로 관리"
+    },
+    {
+      "id": "military_special",
+      "name_ko": "특수 차량"
+    },
+    {
+      "id": "town",
+      "name_ko": "동네 차량"
     }
   ],
   "vehicles": [
@@ -215,6 +239,132 @@
       "sound_ko": "삐리리 짐을 들어요!"
     },
     {
+      "id": "road_roller",
+      "category": "construction",
+      "file": "assets/vehicles/construction/road_roller.webp",
+      "name_ko": "로드롤러",
+      "sound_ko": "꾹꾹! 바닥을 단단하게 눌러요!"
+    },
+    {
+      "id": "asphalt_paver",
+      "category": "construction",
+      "file": "assets/vehicles/construction/asphalt_paver.webp",
+      "name_ko": "아스팔트 포장차",
+      "sound_ko": "쭉쭉! 까만 길을 만들어요!"
+    },
+    {
+      "id": "grader",
+      "category": "construction",
+      "file": "assets/vehicles/construction/grader.webp",
+      "name_ko": "그레이더",
+      "sound_ko": "슥슥! 땅을 반듯하게 골라요!"
+    },
+    {
+      "id": "backhoe_loader",
+      "category": "construction",
+      "file": "assets/vehicles/construction/backhoe_loader.webp",
+      "name_ko": "백호로더",
+      "sound_ko": "앞뒤로 척척! 파고 담아요!"
+    },
+    {
+      "id": "skid_steer_loader",
+      "category": "construction",
+      "file": "assets/vehicles/construction/skid_steer_loader.webp",
+      "name_ko": "스키드로더",
+      "sound_ko": "빙글빙글! 좁은 곳도 잘 움직여요!"
+    },
+    {
+      "id": "tower_crane",
+      "category": "construction",
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "name_ko": "타워크레인",
+      "sound_ko": "높이높이! 자재를 올려요!"
+    },
+    {
+      "id": "mobile_crane",
+      "category": "construction",
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "name_ko": "이동식 크레인",
+      "sound_ko": "번쩍! 어디서든 들어 올려요!"
+    },
+    {
+      "id": "pile_driver",
+      "category": "construction",
+      "file": "assets/vehicles/construction/pile_driver.webp",
+      "name_ko": "항타기",
+      "sound_ko": "쿵쿵! 기둥을 땅속에 세워요!"
+    },
+    {
+      "id": "drilling_rig",
+      "category": "construction",
+      "file": "assets/vehicles/construction/drilling_rig.webp",
+      "name_ko": "천공기",
+      "sound_ko": "드르르! 깊은 구멍을 뚫어요!"
+    },
+    {
+      "id": "excavator_breaker",
+      "category": "construction",
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "name_ko": "브레이커 굴착기",
+      "sound_ko": "콰콰쾅! 단단한 돌을 깨요!"
+    },
+    {
+      "id": "dump_loader",
+      "category": "construction",
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "name_ko": "광산 덤프로더",
+      "sound_ko": "와르르! 큰 돌을 싣고 가요!"
+    },
+    {
+      "id": "articulated_dump_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "name_ko": "굴절식 덤프트럭",
+      "sound_ko": "덜컹덜컹! 험한 길도 지나가요!"
+    },
+    {
+      "id": "water_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/water_truck.webp",
+      "name_ko": "살수차",
+      "sound_ko": "촤아아! 먼지를 가라앉혀요!"
+    },
+    {
+      "id": "sweeper_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/sweeper_truck.webp",
+      "name_ko": "노면 청소차",
+      "sound_ko": "슥슥! 길을 깨끗하게 청소해요!"
+    },
+    {
+      "id": "fuel_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/fuel_truck.webp",
+      "name_ko": "주유차",
+      "sound_ko": "꿀꺽꿀꺽! 힘낼 기름을 넣어요!"
+    },
+    {
+      "id": "lowbed_trailer",
+      "category": "construction",
+      "file": "assets/vehicles/construction/lowbed_trailer.webp",
+      "name_ko": "저상 트레일러",
+      "sound_ko": "천천히! 커다란 차를 옮겨요!"
+    },
+    {
+      "id": "cargo_truck",
+      "category": "construction",
+      "file": "assets/vehicles/construction/cargo_truck.webp",
+      "name_ko": "자재 운반 트럭",
+      "sound_ko": "차곡차곡! 자재를 싣고 가요!"
+    },
+    {
+      "id": "scissor_lift",
+      "category": "construction",
+      "file": "assets/vehicles/construction/scissor_lift.webp",
+      "name_ko": "고소작업대",
+      "sound_ko": "위로위로! 높은 곳까지 올라가요!"
+    },
+    {
       "id": "train",
       "category": "transport",
       "file": "assets/vehicles/transport/train.png",
@@ -297,6 +447,510 @@
       "file": "assets/vehicles/transport/helicopter.png",
       "name_ko": "헬리콥터",
       "sound_ko": "두두두두 날아가요!"
+    },
+    {
+      "id": "passenger_airplane",
+      "category": "airport",
+      "file": "assets/vehicles/airport/passenger_airplane.webp",
+      "name_ko": "여객기",
+      "sound_ko": "슈우웅! 하늘 높이 날아가요!"
+    },
+    {
+      "id": "airport_bus",
+      "category": "airport",
+      "file": "assets/vehicles/airport/airport_bus.webp",
+      "name_ko": "공항버스",
+      "sound_ko": "부릉부릉! 손님을 비행기까지 데려다줘요!"
+    },
+    {
+      "id": "airport_follow_me_car",
+      "category": "airport",
+      "file": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "name_ko": "공항 유도차",
+      "sound_ko": "따라오세요! 비행기를 안내해요!"
+    },
+    {
+      "id": "baggage_cart",
+      "category": "airport",
+      "file": "assets/vehicles/airport/baggage_cart.webp",
+      "name_ko": "수하물 카트",
+      "sound_ko": "달그락달그락! 짐을 싣고 가요!"
+    },
+    {
+      "id": "catering_truck",
+      "category": "airport",
+      "file": "assets/vehicles/airport/catering_truck.webp",
+      "name_ko": "기내식 트럭",
+      "sound_ko": "맛있는 밥을 비행기에 실어요!"
+    },
+    {
+      "id": "de_icing_truck",
+      "category": "airport",
+      "file": "assets/vehicles/airport/de_icing_truck.webp",
+      "name_ko": "제빙 트럭",
+      "sound_ko": "칙칙! 비행기 얼음을 녹여요!"
+    },
+    {
+      "id": "fuel_truck_airport",
+      "category": "airport",
+      "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "name_ko": "공항 주유차",
+      "sound_ko": "꿀꺽꿀꺽! 비행기에 연료를 넣어요!"
+    },
+    {
+      "id": "pushback_tug",
+      "category": "airport",
+      "file": "assets/vehicles/airport/pushback_tug.webp",
+      "name_ko": "토잉카",
+      "sound_ko": "영차영차! 비행기를 밀어줘요!"
+    },
+    {
+      "id": "stair_truck",
+      "category": "airport",
+      "file": "assets/vehicles/airport/stair_truck.webp",
+      "name_ko": "탑승 계단차",
+      "sound_ko": "차근차근! 비행기에 올라가요!"
+    },
+    {
+      "id": "farm_tractor",
+      "category": "farm",
+      "file": "assets/vehicles/farm/tractor.webp",
+      "name_ko": "농장 트랙터",
+      "sound_ko": "덜컹덜컹! 밭을 힘차게 지나가요!"
+    },
+    {
+      "id": "plow_tractor",
+      "category": "farm",
+      "file": "assets/vehicles/farm/plow_tractor.webp",
+      "name_ko": "쟁기 트랙터",
+      "sound_ko": "슥슥! 밭을 갈아요!"
+    },
+    {
+      "id": "combine_harvester",
+      "category": "farm",
+      "file": "assets/vehicles/farm/combine_harvester.webp",
+      "name_ko": "콤바인",
+      "sound_ko": "사각사각! 곡식을 거둬요!"
+    },
+    {
+      "id": "rice_transplanter",
+      "category": "farm",
+      "file": "assets/vehicles/farm/rice_transplanter.webp",
+      "name_ko": "이앙기",
+      "sound_ko": "콕콕! 모를 심어요!"
+    },
+    {
+      "id": "sprayer_truck",
+      "category": "farm",
+      "file": "assets/vehicles/farm/sprayer_truck.webp",
+      "name_ko": "농약 살포차",
+      "sound_ko": "치익치익! 작물을 돌봐요!"
+    },
+    {
+      "id": "baler",
+      "category": "farm",
+      "file": "assets/vehicles/farm/baler.webp",
+      "name_ko": "베일러",
+      "sound_ko": "돌돌! 짚을 동그랗게 묶어요!"
+    },
+    {
+      "id": "farm_trailer",
+      "category": "farm",
+      "file": "assets/vehicles/farm/farm_trailer.webp",
+      "name_ko": "농장 트레일러",
+      "sound_ko": "차곡차곡! 수확물을 실어요!"
+    },
+    {
+      "id": "fruit_harvest_truck",
+      "category": "farm",
+      "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "name_ko": "과일 수확차",
+      "sound_ko": "상큼상큼! 과일을 싣고 가요!"
+    },
+    {
+      "id": "milk_tanker",
+      "category": "farm",
+      "file": "assets/vehicles/farm/milk_tanker.webp",
+      "name_ko": "우유 탱크로리",
+      "sound_ko": "출렁출렁! 신선한 우유를 옮겨요!"
+    },
+    {
+      "id": "cargo_ship",
+      "category": "port",
+      "file": "assets/vehicles/port/cargo_ship.webp",
+      "name_ko": "화물선",
+      "sound_ko": "뿌우! 큰 짐을 싣고 바다를 건너요!"
+    },
+    {
+      "id": "container_truck",
+      "category": "port",
+      "file": "assets/vehicles/port/container_truck.webp",
+      "name_ko": "컨테이너 트럭",
+      "sound_ko": "덜컹덜컹! 컨테이너를 옮겨요!"
+    },
+    {
+      "id": "harbor_crane",
+      "category": "port",
+      "file": "assets/vehicles/port/harbor_crane.webp",
+      "name_ko": "항만 크레인",
+      "sound_ko": "번쩍! 큰 짐을 들어 올려요!"
+    },
+    {
+      "id": "reach_stacker",
+      "category": "port",
+      "file": "assets/vehicles/port/reach_stacker.webp",
+      "name_ko": "리치스태커",
+      "sound_ko": "척척! 컨테이너를 높이 쌓아요!"
+    },
+    {
+      "id": "tugboat",
+      "category": "port",
+      "file": "assets/vehicles/port/tugboat.webp",
+      "name_ko": "예인선",
+      "sound_ko": "영차! 큰 배를 밀고 끌어요!"
+    },
+    {
+      "id": "ferry",
+      "category": "port",
+      "file": "assets/vehicles/port/ferry.webp",
+      "name_ko": "페리",
+      "sound_ko": "출발! 사람과 차를 태우고 가요!"
+    },
+    {
+      "id": "fishing_boat",
+      "category": "port",
+      "file": "assets/vehicles/port/fishing_boat.webp",
+      "name_ko": "어선",
+      "sound_ko": "통통통! 물고기를 잡으러 가요!"
+    },
+    {
+      "id": "coast_guard_boat",
+      "category": "port",
+      "file": "assets/vehicles/port/coast_guard_boat.webp",
+      "name_ko": "해경정",
+      "sound_ko": "쌩쌩! 바다를 안전하게 지켜요!"
+    },
+    {
+      "id": "rescue_boat",
+      "category": "port",
+      "file": "assets/vehicles/port/rescue_boat.webp",
+      "name_ko": "구조정",
+      "sound_ko": "부웅! 바다에서 도와주러 가요!"
+    },
+    {
+      "id": "road_repair_truck",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/road_repair_truck.webp",
+      "name_ko": "도로 보수차",
+      "sound_ko": "뚝딱뚝딱! 길을 고쳐요!"
+    },
+    {
+      "id": "line_painting_truck",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/line_painting_truck.webp",
+      "name_ko": "차선 도색차",
+      "sound_ko": "쭉쭉! 하얀 선을 그려요!"
+    },
+    {
+      "id": "traffic_cone_truck",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "name_ko": "안전콘 트럭",
+      "sound_ko": "착착! 안전콘을 세워요!"
+    },
+    {
+      "id": "road_sign_truck",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/road_sign_truck.webp",
+      "name_ko": "도로 표지판 트럭",
+      "sound_ko": "반짝! 길 안내 표지판을 세워요!"
+    },
+    {
+      "id": "road_sweeper",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/road_sweeper.webp",
+      "name_ko": "도로 청소차",
+      "sound_ko": "슥슥! 도로를 깨끗하게 청소해요!"
+    },
+    {
+      "id": "salt_spreader",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/salt_spreader.webp",
+      "name_ko": "제설 염화칼슘 살포차",
+      "sound_ko": "솔솔! 미끄러운 길을 안전하게 해요!"
+    },
+    {
+      "id": "snow_plow",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/snow_plow.webp",
+      "name_ko": "제설차",
+      "sound_ko": "쓱쓱! 눈을 밀어내요!"
+    },
+    {
+      "id": "bridge_inspection_truck",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "name_ko": "교량 점검차",
+      "sound_ko": "꼼꼼히! 다리를 살펴봐요!"
+    },
+    {
+      "id": "tunnel_cleaning_truck",
+      "category": "road_service",
+      "file": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "name_ko": "터널 청소차",
+      "sound_ko": "쓱싹쓱싹! 터널을 환하게 닦아요!"
+    },
+    {
+      "id": "military_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/military_truck.webp",
+      "name_ko": "특수 트럭",
+      "sound_ko": "튼튼하게! 필요한 물건을 옮겨요!"
+    },
+    {
+      "id": "command_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/command_truck.webp",
+      "name_ko": "지휘 트럭",
+      "sound_ko": "척척! 현장을 살피며 안내해요!"
+    },
+    {
+      "id": "communication_relay_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/communication_relay_truck.webp",
+      "name_ko": "통신 중계차",
+      "sound_ko": "삐빅삐빅! 멀리까지 소식을 전해요!"
+    },
+    {
+      "id": "radar_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/radar_truck.webp",
+      "name_ko": "레이더 차량",
+      "sound_ko": "빙글빙글! 주변을 살펴봐요!"
+    },
+    {
+      "id": "searchlight_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/searchlight_truck.webp",
+      "name_ko": "탐조등 차량",
+      "sound_ko": "번쩍! 어두운 곳을 환하게 비춰요!"
+    },
+    {
+      "id": "mobile_hospital",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/mobile_hospital.webp",
+      "name_ko": "이동 병원차",
+      "sound_ko": "도움이 필요하면 바로 치료해요!"
+    },
+    {
+      "id": "armored_rescue_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/armored_rescue_vehicle.webp",
+      "name_ko": "장갑 구조차",
+      "sound_ko": "튼튼하게! 안전하게 구조하러 가요!"
+    },
+    {
+      "id": "mrap_patrol_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/mrap_patrol_vehicle.webp",
+      "name_ko": "특수 순찰차",
+      "sound_ko": "부릉부릉! 안전하게 순찰해요!"
+    },
+    {
+      "id": "tracked_carrier",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/tracked_carrier.webp",
+      "name_ko": "궤도 운반차",
+      "sound_ko": "철컥철컥! 울퉁불퉁한 길도 지나가요!"
+    },
+    {
+      "id": "amphibious_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/amphibious_vehicle.webp",
+      "name_ko": "수륙양용차",
+      "sound_ko": "첨벙첨벙! 땅과 물을 모두 지나가요!"
+    },
+    {
+      "id": "engineering_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/engineering_vehicle.webp",
+      "name_ko": "공병 작업차",
+      "sound_ko": "뚝딱뚝딱! 길을 만들고 고쳐요!"
+    },
+    {
+      "id": "bridge_layer_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/bridge_layer_truck.webp",
+      "name_ko": "교량 설치차",
+      "sound_ko": "쭉쭉! 건널 다리를 놓아요!"
+    },
+    {
+      "id": "decontamination_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/decontamination_truck.webp",
+      "name_ko": "제독차",
+      "sound_ko": "치익치익! 깨끗하고 안전하게 씻어내요!"
+    },
+    {
+      "id": "water_purification_truck",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/water_purification_truck.webp",
+      "name_ko": "정수 차량",
+      "sound_ko": "졸졸! 깨끗한 물을 만들어요!"
+    },
+    {
+      "id": "snow_rescue_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "name_ko": "설상 구조차",
+      "sound_ko": "사각사각! 눈길에서도 도와주러 가요!"
+    },
+    {
+      "id": "drone_control_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/drone_control_vehicle.webp",
+      "name_ko": "드론 관제차",
+      "sound_ko": "위잉위잉! 드론을 살펴보고 움직여요!"
+    },
+    {
+      "id": "eod_robot_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/eod_robot_vehicle.webp",
+      "name_ko": "로봇 작업차",
+      "sound_ko": "삐빅! 로봇이 조심조심 작업해요!"
+    },
+    {
+      "id": "missile_launcher_vehicle",
+      "category": "military_special",
+      "file": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
+      "name_ko": "발사대 차량",
+      "sound_ko": "준비 완료! 큰 장비를 안전하게 옮겨요!"
+    },
+    {
+      "id": "school_van",
+      "category": "town",
+      "file": "assets/vehicles/town/school_van.webp",
+      "name_ko": "어린이 통학차",
+      "sound_ko": "부릉부릉! 친구들을 태우러 가요!"
+    },
+    {
+      "id": "bakery_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/bakery_truck.webp",
+      "name_ko": "빵 배달차",
+      "sound_ko": "고소한 빵을 가득 싣고 가요!"
+    },
+    {
+      "id": "flower_delivery_van",
+      "category": "town",
+      "file": "assets/vehicles/town/flower_delivery_van.webp",
+      "name_ko": "꽃 배달차",
+      "sound_ko": "향기로운 꽃을 배달해요!"
+    },
+    {
+      "id": "pet_grooming_van",
+      "category": "town",
+      "file": "assets/vehicles/town/pet_grooming_van.webp",
+      "name_ko": "반려동물 미용차",
+      "sound_ko": "멍멍! 예쁘게 단장해요!"
+    },
+    {
+      "id": "utility_repair_van",
+      "category": "town",
+      "file": "assets/vehicles/town/utility_repair_van.webp",
+      "name_ko": "수리 서비스차",
+      "sound_ko": "뚝딱뚝딱! 고장 난 곳을 고쳐요!"
+    },
+    {
+      "id": "maintenance_pickup",
+      "category": "town",
+      "file": "assets/vehicles/town/maintenance_pickup.webp",
+      "name_ko": "동네 관리차",
+      "sound_ko": "슥슥! 동네를 정리해요!"
+    },
+    {
+      "id": "beverage_delivery_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/beverage_delivery_truck.webp",
+      "name_ko": "음료 배달차",
+      "sound_ko": "찰랑찰랑! 음료를 배달해요!"
+    },
+    {
+      "id": "toy_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/toy_truck.webp",
+      "name_ko": "장난감 판매차",
+      "sound_ko": "와글와글! 장난감을 싣고 왔어요!"
+    },
+    {
+      "id": "community_bus",
+      "category": "town",
+      "file": "assets/vehicles/town/community_bus.webp",
+      "name_ko": "마을버스",
+      "sound_ko": "부릉부릉! 동네를 달려요!"
+    },
+    {
+      "id": "mail_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/mail_truck.webp",
+      "name_ko": "우편차",
+      "sound_ko": "딸랑딸랑! 편지를 배달해요!"
+    },
+    {
+      "id": "delivery_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/delivery_truck.webp",
+      "name_ko": "택배차",
+      "sound_ko": "차곡차곡! 택배를 전해줘요!"
+    },
+    {
+      "id": "food_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/food_truck.webp",
+      "name_ko": "푸드트럭",
+      "sound_ko": "맛있는 음식을 만들어요!"
+    },
+    {
+      "id": "ice_cream_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/ice_cream_truck.webp",
+      "name_ko": "아이스크림차",
+      "sound_ko": "달콤한 아이스크림이 왔어요!"
+    },
+    {
+      "id": "moving_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/moving_truck.webp",
+      "name_ko": "이삿짐차",
+      "sound_ko": "영차영차! 짐을 옮겨요!"
+    },
+    {
+      "id": "laundry_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/laundry_truck.webp",
+      "name_ko": "세탁 배달차",
+      "sound_ko": "뽀송뽀송! 빨래를 가져다줘요!"
+    },
+    {
+      "id": "recycling_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/recycling_truck.webp",
+      "name_ko": "재활용 수거차",
+      "sound_ko": "쓱쓱! 재활용품을 모아요!"
+    },
+    {
+      "id": "library_bus",
+      "category": "town",
+      "file": "assets/vehicles/town/library_bus.webp",
+      "name_ko": "이동 도서관 버스",
+      "sound_ko": "책을 가득 싣고 찾아가요!"
+    },
+    {
+      "id": "street_vendor_truck",
+      "category": "town",
+      "file": "assets/vehicles/town/street_vendor_truck.webp",
+      "name_ko": "이동 판매차",
+      "sound_ko": "싱싱한 물건을 팔아요!"
     }
   ]
 }
