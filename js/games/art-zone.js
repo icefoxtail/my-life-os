@@ -801,7 +801,7 @@
         <div class="az-exhibit-actions">
           <button type="button" class="az-exhibit-btn" data-action="continue">계속 그리기</button>
           <button type="button" class="az-exhibit-btn" data-action="restart">다시 그리기</button>
-          <button type="button" class="az-exhibit-btn primary" data-action="home">게임랜드 👋</button>
+          <button type="button" class="az-exhibit-btn primary" data-action="home">즐거운놀이터 👋</button>
         </div>
       </div>
     `;

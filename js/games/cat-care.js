@@ -314,7 +314,7 @@
         <div class="cc-complete-sub">${cat.name}이 너무 기뻐해요!<br>시현이 최고야 ⭐</div>
         <div class="cc-complete-btns">
           <button class="cc-c-btn cc-c-btn-primary" id="cc-replay">다시 하기 🔄</button>
-          <button class="cc-c-btn cc-c-btn-secondary" id="cc-to-land">게임랜드로 👋</button>
+          <button class="cc-c-btn cc-c-btn-secondary" id="cc-to-land">즐거운놀이터로 👋</button>
         </div>
       </div>
     `;

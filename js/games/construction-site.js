@@ -114,7 +114,7 @@
       answerIds: ['dump_truck'],
       targetIcon: '📦',
       resultIcon: '🏁',
-      workLabel: '옮기기',
+      workLabel: '',
       successText: '우르르! 짐을 싣고 옮겼어요!',
       wrongText: '이 차는 많이 싣기 어려워요. 짐을 옮기는 차를 찾아볼까?',
       stageClass: 'cs-stage-carry'
@@ -545,7 +545,14 @@
       }
 
       .cs-root.is-working .cs-worker-vehicle {
+        width: min(75%, 560px);
+        height: min(65%, 360px);
         animation: csVehicleWork 2.35s cubic-bezier(0.18, 0.88, 0.22, 1) forwards;
+      }
+
+      .cs-root.is-success .cs-worker-vehicle {
+        width: min(75%, 560px);
+        height: min(65%, 360px);
       }
 
       .cs-root.is-working .cs-target-zone {
@@ -1132,7 +1139,7 @@
 
         <div class="cs-stage" aria-label="공사장">
           <div class="cs-stage-sky-shine"></div>
-          <div class="cs-site-board">🚧 ${escapeHtml(mission.workLabel)}</div>
+          ${mission.workLabel ? `<div class="cs-site-board">🚧 ${escapeHtml(mission.workLabel)}</div>` : ''}
           <div class="cs-sun"></div>
           <div class="cs-ground"></div>
           <div class="cs-road"></div>
@@ -1207,14 +1214,13 @@
     const selectedVehicle = getVehicleById(vehicleId);
     const isCorrect = mission.answerIds.includes(vehicleId);
 
-    if (selectedVehicle) speak(selectedVehicle.sound || selectedVehicle.name, false);
-
     if (!isCorrect) {
+      const wrongMessage = buildVehicleWrongText(selectedVehicle, mission.wrongText || '다시 골라볼까?');
       button.classList.add('is-wrong');
       vibrate([70, 40, 70]);
       playGameVoice('games.common.wrong');
-      showMessage(mission.wrongText || '다시 골라볼까?');
-      speak(mission.wrongText || '다시 골라볼까?', true);
+      showMessage(wrongMessage);
+      speak(wrongMessage, true);
 
       setManagedTimeout(() => {
         button.classList.remove('is-wrong');
@@ -1255,13 +1261,14 @@
       if (fallback) fallback.hidden = false;
     });
 
+    const successMessage = buildVehicleSuccessText(vehicle, mission);
+
     root.classList.add('is-working');
-    speak(vehicle.sound || mission.successText, true);
 
     setManagedTimeout(() => {
       root.classList.add('is-success');
-      showMessage(mission.successText);
-      speak(mission.successText, true);
+      showMessage(successMessage);
+      speak(successMessage, true);
       state.options.fireConfetti?.();
       state.options.gainExp?.(8);
     }, 1500);
@@ -1270,6 +1277,25 @@
       state.currentRound += 1;
       startRound();
     }, 4050);
+  }
+
+  function getSubjectParticle(text) {
+    const last = String(text || '').trim().slice(-1);
+    if (!last) return '는';
+    const code = last.charCodeAt(0);
+    if (code < 0xac00 || code > 0xd7a3) return '는';
+    return (code - 0xac00) % 28 === 0 ? '는' : '은';
+  }
+
+  function buildVehicleWrongText(vehicle, text) {
+    if (!vehicle?.name) return text;
+    const subject = `${vehicle.name}${getSubjectParticle(vehicle.name)}`;
+    if (text.startsWith('이 차는')) return subject + text.slice('이 차는'.length);
+    return `${subject} ${text}`;
+  }
+
+  function buildVehicleSuccessText(vehicle, mission) {
+    return `${vehicle.name} ${mission.successText}`;
   }
 
   function showMessage(text) {

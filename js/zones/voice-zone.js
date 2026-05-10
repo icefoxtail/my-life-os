@@ -1,5 +1,5 @@
 /**
- * 시현이 놀이터 OS — 말하기광장 (Voice Zone)
+ * 시현이 놀이터 OS — 말하기놀이터 (Voice Zone)
  * 파일: js/zones/voice-zone.js
  *
  * 기능: 누르고 말하기(MediaRecorder API) + 유튜브 동요 자동 재생(IFrame API)

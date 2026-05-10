@@ -846,12 +846,12 @@ const WORLD_ASSETS = {
 };
 
 const WORLD_ZONES = {
-  game:    { x:'29%', y:'23%', w:'30%', h:'20%', label:'게임랜드',   emoji:'🎮' },
+  game:    { x:'29%', y:'23%', w:'30%', h:'20%', label:'즐거운놀이터', emoji:'🎮' },
   numbers: { x:'72%', y:'24%', w:'30%', h:'21%', label:'숫자놀이터', emoji:'🔢' },
   letters: { x:'27%', y:'47%', w:'32%', h:'22%', label:'글자놀이터', emoji:'🔤' },
-  cars:    { x:'73%', y:'49%', w:'32%', h:'24%', label:'자동차마을', emoji:'🚗' },
-  story:   { x:'29%', y:'74%', w:'34%', h:'24%', label:'동화나라',   emoji:'🏰' },
-  voice:   { x:'72%', y:'76%', w:'32%', h:'23%', label:'말하기광장', emoji:'🎤' },
+  cars:    { x:'73%', y:'49%', w:'32%', h:'24%', label:'자동차놀이터', emoji:'🚗' },
+  story:   { x:'29%', y:'74%', w:'34%', h:'24%', label:'동화놀이터',   emoji:'🏰' },
+  voice:   { x:'72%', y:'76%', w:'32%', h:'23%', label:'말하기놀이터', emoji:'🎤' },
   station: { x:'50%', y:'88%', label:'중앙역', emoji:'🚉' }
 };
 
@@ -885,7 +885,7 @@ const LAND_CHARACTERS = {
 
 const ZONE_CONFIGS = {
   game: {
-    id:'game', title:'🎮 게임랜드', emoji:'🎮',
+    id:'game', title:'🎮 즐거운놀이터', emoji:'🎮',
     bg:'linear-gradient(160deg,#FF7A1A 0%,#FFD93D 100%)',
     character:'dad',
     greeting:'아빠랑 게임 해볼까? 하고 싶은 게임을 골라봐!',
@@ -918,7 +918,7 @@ const ZONE_CONFIGS = {
     ]
   },
   cars: {
-    id:'cars', title:'🚗 자동차마을', emoji:'🚗',
+    id:'cars', title:'🚗 자동차놀이터', emoji:'🚗',
     bg:'linear-gradient(160deg,#4CAF50 0%,#A5D6A7 100%)',
     character:'sicheoni',
     greeting:'시천이랑 자동차 놀이! 뭐 하고 싶어?',
@@ -1280,12 +1280,12 @@ function openLetterLand()  { renderZoneLand(ZONE_CONFIGS.letters); }
 function openCarLand()     { renderZoneLand(ZONE_CONFIGS.cars);    }
 
 function openStoryLand(){
-  openImageLand('story','📖 동화나라', WORLD_ASSETS.story,[
+  openImageLand('story','📖 동화놀이터', WORLD_ASSETS.story,[
     { x:'50%', y:'43%', w:'62%', h:'48%', label:'동화극장', emoji:'📖', action:'openStoryTheater()' }
   ]);
 }
 function openVoiceLand(){
-  openImageLand('voice','🎤 말하기광장', WORLD_ASSETS.voice,[
+  openImageLand('voice','🎤 말하기놀이터', WORLD_ASSETS.voice,[
     { x:'50%', y:'45%', w:'62%', h:'46%', label:'말하기 놀이', emoji:'🎤', action:'openVoiceZone()' }
   ]);
 }
@@ -1376,8 +1376,8 @@ function enterZone(zoneId){
   else if(zoneId==='game')    openGameLand();
   else if(zoneId==='numbers') openNumberLand();
   else if(zoneId==='letters') openLetterLand();
-  else if(zoneId==='story')   openStoryLand();
-  else if(zoneId==='voice')   openVoiceLand();
+  else if(zoneId==='story')   openStoryTheater();
+  else if(zoneId==='voice')   openVoiceZone();
   else renderPlaceholderZone(zoneId);
 }
 function closeToParkHome(){
@@ -1385,12 +1385,12 @@ function closeToParkHome(){
   cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
   if(window.stopStoryReading) window.stopStoryReading(true);
   renderWorldMapHome();
-  speakGuide('광장으로 돌아왔어! 다음은 어디로 갈까?', true);
+  speakGuide('놀이터로 돌아왔어! 다음은 어디로 갈까?', true);
 }
 function makeZoneHead(title){
   return `<div class="zone-head">
     <button class="zone-home-btn" onclick="closeToParkHome()" aria-label="홈으로">
-      <span>🏠</span><span>광장</span>
+      <span>🏠</span>
     </button>
     <h1 class="zone-title">${title}</h1>
   </div>`;
@@ -1480,10 +1480,10 @@ function openCarGarageGame(){
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">자동차 정비소를 불러오지 못했어요.</div>';
 }
 function openVoiceZone(){
-  const t=openGameShell('🎤 말하기광장','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
+  const t=openGameShell('🎤 말하기놀이터','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
   if(window.SihyeonZones?.voiceZone?.render){
     window.SihyeonZones.voiceZone.render(t,{speakGuide,closeToParkHome});
-  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기광장을 불러오지 못했어요.</div>';
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기놀이터를 불러오지 못했어요.</div>';
 }
 function openLifeSequenceGame(){
   const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)');
@@ -1530,7 +1530,7 @@ function openFullscreenGarage(){
         </div>
       </div>
     </div>`;
-  speakGuide('자동차마을 정비소 도착! 자동차를 빈칸에 끌어다 놓아봐!', true);
+  speakGuide('자동차놀이터 정비소 도착! 자동차를 빈칸에 끌어다 놓아봐!', true);
   initGarageRound();
 }
 function initGarageRound(){
@@ -1835,9 +1835,9 @@ function renderParentDashboard() {
         </div>
 
         <div class="dash-card">
-          <div class="dash-card-title">오늘 방문한 랜드</div>
+          <div class="dash-card-title">오늘 방문한 놀이터</div>
           <div class="visited-lands">
-            ${todayLog.landsVisited.length ? todayLog.landsVisited.map(l => `<span class="visited-chip">${l}</span>`).join('') : '<span class="story-empty-lbl">아직 방문한 랜드가 없어요.</span>'}
+            ${todayLog.landsVisited.length ? todayLog.landsVisited.map(l => `<span class="visited-chip">${l}</span>`).join('') : '<span class="story-empty-lbl">아직 방문한 놀이터가 없어요.</span>'}
           </div>
         </div>
 
