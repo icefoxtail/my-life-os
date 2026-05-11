@@ -2,6 +2,7 @@
 /**
  * 시현이 놀이터 OS — 주차장 미니게임 (Parking Lot)
  * 파일: js/games/parking-lot.js
+ * 수정: 글자 힌트 제거 및 실루엣(그림자) 힌트 도입, 자동차 이름 텍스트 제거
  */
 
 (function () {
@@ -111,19 +112,17 @@
         box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
         transition: all 0.3s;
       }
-      .pl-slot-hint {
-        font-size: clamp(20px, 5.5vw, 28px);
-        font-weight: 900;
-        color: #888;
-        text-align: center;
-        word-break: keep-all;
-      }
+
+      /* 힌트 이미지 (연한 그림자) */
       .pl-slot-img {
         max-width: 85%; max-height: 85%;
         object-fit: contain;
-        display: none;
-        animation: pl-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: block;
+        opacity: 0.15;
+        filter: grayscale(100%) brightness(0.8);
+        transition: all 0.4s ease;
       }
+
       .pl-slot-check {
         position: absolute;
         top: -12px; right: -12px;
@@ -131,14 +130,19 @@
         background: #fff; border-radius: 50%;
         display: none;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        z-index: 5;
       }
       
+      /* 정답 시 효과: 선명해지고 체크 마크 표시 */
       .pl-slot.correct {
         border-color: #4CAF50 !important;
         background: #e8f5e9;
       }
-      .pl-slot.correct .pl-slot-hint { display: none; }
-      .pl-slot.correct .pl-slot-img { display: block; }
+      .pl-slot.correct .pl-slot-img { 
+        opacity: 1; 
+        filter: grayscale(0%) brightness(1); 
+        animation: pl-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
       .pl-slot.correct .pl-slot-check { display: block; }
 
       /* 대기 차량 (아래) */
@@ -171,15 +175,11 @@
         opacity: 0.85;
         box-shadow: 0 16px 32px rgba(0,0,0,0.3);
       }
+      
+      /* 글자가 없어졌으므로 이미지를 조금 더 크게 키움 */
       .pl-car-drag img {
-        max-width: 75%; max-height: 60%;
+        max-width: 85%; max-height: 85%;
         object-fit: contain;
-        pointer-events: none;
-      }
-      .pl-car-name {
-        font-size: clamp(14px, 3.5vw, 18px);
-        font-weight: 900; color: #444;
-        margin-top: 6px;
         pointer-events: none;
       }
       
@@ -311,10 +311,10 @@
     renderBoard();
     
     if (window.SihyeonVoice && window.SihyeonVoice.play) {
-      window.SihyeonVoice.play('games.parking.intro', '같은 이름 주차장에 쏙 넣어볼까?').catch(()=>{});
+      window.SihyeonVoice.play('games.parking.intro', '똑같은 모양 주차장에 쏙 넣어볼까?').catch(()=>{});
     }
     if (state.options.speakGuide) {
-      state.options.speakGuide('같은 이름 주차장에 쏙 넣어볼까?', true);
+      state.options.speakGuide('똑같은 모양 주차장에 쏙 넣어볼까?', true);
     }
   }
 
@@ -338,7 +338,6 @@
       <div class="pl-slots-area">
         ${state.slots.map(s => `
           <div class="pl-slot" data-slot-id="${s.vehicle.instanceId}" style="border-color: ${catColor}">
-            <div class="pl-slot-hint">${s.vehicle.name}</div>
             <img class="pl-slot-img" src="${s.vehicle.file}" alt="${s.vehicle.name}">
             <div class="pl-slot-check">✅</div>
           </div>
@@ -351,8 +350,7 @@
         ${state.cars.map(c => `
           <div class="pl-car-drag" data-vehicle-id="${c.instanceId}">
             <img src="${c.file}" alt="${c.name}">
-            <div class="pl-car-name">${c.name}</div>
-          </div>
+            </div>
         `).join('')}
       </div>
     `;
