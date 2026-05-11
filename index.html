@@ -926,6 +926,7 @@ const ZONE_CONFIGS = {
       { id:'garage',  title:'자동차 정비소', emoji:'🔧', image:'./assets/games/cards/car-garage.webp', desc:'드래그로 차를 고쳐요', action:'openCarGarageGame()',    isNew:false },
       { id:'parking', title:'주차장',       emoji:'🅿️', image:'./assets/games/cards/parking-lot.webp', desc:'차를 주차해요',       action:'openParkingGame()',      isNew:true  },
       { id:'construction', title:'공사장',  emoji:'🏗️', image:'./assets/games/cards/construction-site.webp', desc:'공사차를 골라요',     action:'openConstructionSiteGame()', isNew:true  },
+      { id:'codingcar', title:'코딩카', emoji:'🏁', image:'./assets/games/cards/coding-car.png', desc:'화살표로 길을 만들어요', action:'openCodingCarGame()', isNew:true  },
     ]
   },
   voice: {
@@ -1098,7 +1099,7 @@ function closeGarageHandlers(){ if(typeof garageCleanup==='function') garageClea
    ★ 통합 cleanupActiveGame
 ═══════════════════════════════════════════ */
 function cleanupActiveGame(){
-  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','lifeSequence','artZone','abcPhonics','catCare'].forEach(key=>{
+  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare'].forEach(key=>{
     window.SihyeonGames?.[key]?.destroy?.();
   });
   window.SihyeonZones?.voiceZone?.destroy?.();
@@ -1529,6 +1530,12 @@ function openCarGarageGame(){
   if(window.SihyeonGames?.carGarage?.render){
     window.SihyeonGames.carGarage.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">자동차 정비소를 불러오지 못했어요.</div>';
+}
+function openCodingCarGame(){
+  const t=openGameShell('🏁 코딩카','codingCarTarget','linear-gradient(180deg,#81D4FA 0%,#C8E6C9 100%)');
+  if(window.SihyeonGames?.codingCar?.render){
+    window.SihyeonGames.codingCar.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+  } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">코딩카를 불러오지 못했어요.</div>';
 }
 function openVoiceZone(){
   const t=openGameShell('🎤 말하기놀이터','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
@@ -1985,7 +1992,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone, openKaraokeZone,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberCountGame, openNumberBlocksGame, openLetterGame, openColorBalloonGame, openParkingGame, openConstructionSiteGame, openCarGarageGame, openLifeSequenceGame, openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
+  openMemoryGame, openNumberCountGame, openNumberBlocksGame, openLetterGame, openColorBalloonGame, openParkingGame, openConstructionSiteGame, openCarGarageGame, openCodingCarGame, openLifeSequenceGame, openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
   filterStoriesBySearch, loadMoreStories,
   renderStoryGrid, _renderStoryGridPage,
@@ -2066,6 +2073,7 @@ if('serviceWorker' in navigator){
 <script src="./js/games/letter-play.js"></script>
 <script src="./js/games/color-balloon.js"></script>
 <script src="./js/games/car-garage.js"></script>
+<script src="./js/games/coding-car.js"></script>
 <script src="./js/games/parking-lot.js"></script>
 <script src="./js/games/construction-site.js"></script>
 <script src="./js/games/life-sequence.js"></script>

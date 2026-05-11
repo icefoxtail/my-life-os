@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.0.25';
+const CACHE_NAME = 'sihyeon-play-os-v1.0.26';
 
 const ASSETS = [
   './',
@@ -21,6 +21,7 @@ const ASSETS = [
   './js/games/letter-play.js',
   './js/games/color-balloon.js',
   './js/games/car-garage.js',
+  './js/games/coding-car.js',
 
   './assets/games/cards/vehicle-memory.webp',
   './assets/games/cards/color-balloon.webp',
@@ -28,9 +29,16 @@ const ASSETS = [
   './assets/games/cards/number-blocks.webp',
   './assets/games/cards/letter-play.webp',
   './assets/games/cards/car-garage.webp',
+  './assets/games/cards/coding-car.png',
   './assets/games/cards/parking-lot.webp',
   './assets/games/cards/construction-site.webp',
   './assets/games/cards/karaoke-zone.webp',
+
+  './assets/games/codingCar/garage.png',
+  './assets/games/codingCar/arrow-up.webp',
+  './assets/games/codingCar/arrow-down.webp',
+  './assets/games/codingCar/arrow-left.webp',
+  './assets/games/codingCar/arrow-right.webp',
 
   './assets/karaoke/three_bears.wav',
   './assets/karaoke/twinkle.wav',

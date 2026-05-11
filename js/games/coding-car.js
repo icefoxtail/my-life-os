@@ -247,10 +247,10 @@
           </div>
           
           <div class="cc-controls">
-            <button class="cc-btn-arrow" data-dir="up"><img src="./assets/games/codingCar/arrow-up.png" alt="위"></button>
-            <button class="cc-btn-arrow" data-dir="down"><img src="./assets/games/codingCar/arrow-down.png" alt="아래"></button>
-            <button class="cc-btn-arrow" data-dir="left"><img src="./assets/games/codingCar/arrow-left.png" alt="왼쪽"></button>
-            <button class="cc-btn-arrow" data-dir="right"><img src="./assets/games/codingCar/arrow-right.png" alt="오른쪽"></button>
+            <button class="cc-btn-arrow" data-dir="up"><img src="./assets/games/codingCar/arrow-up.webp" alt="위"></button>
+            <button class="cc-btn-arrow" data-dir="down"><img src="./assets/games/codingCar/arrow-down.webp" alt="아래"></button>
+            <button class="cc-btn-arrow" data-dir="left"><img src="./assets/games/codingCar/arrow-left.webp" alt="왼쪽"></button>
+            <button class="cc-btn-arrow" data-dir="right"><img src="./assets/games/codingCar/arrow-right.webp" alt="오른쪽"></button>
             <button class="cc-btn-go" id="ccGoBtn">GO!</button>
           </div>
         </div>
@@ -303,7 +303,7 @@
       slot.classList.remove('active');
       if (i < state.commands.length) {
         const dir = state.commands[i];
-        slot.innerHTML = `<img src="./assets/games/codingCar/arrow-${dir}.png">`;
+        slot.innerHTML = `<img src="./assets/games/codingCar/arrow-${dir}.webp">`;
         slot.classList.add('active');
       }
     });
