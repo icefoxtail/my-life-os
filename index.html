@@ -856,13 +856,15 @@ const WORLD_ZONES = {
 };
 
 const ZONE_PATHS = {
-  game:    [ {x:'50%',y:'88%'}, {x:'50%',y:'72%'}, {x:'38%',y:'58%'}, {x:'29%',y:'23%'} ],
-  numbers: [ {x:'50%',y:'88%'}, {x:'50%',y:'72%'}, {x:'62%',y:'58%'}, {x:'72%',y:'24%'} ],
-  letters: [ {x:'50%',y:'88%'}, {x:'38%',y:'78%'}, {x:'29%',y:'65%'}, {x:'27%',y:'47%'} ],
-  cars:    [ {x:'50%',y:'88%'}, {x:'62%',y:'78%'}, {x:'72%',y:'65%'}, {x:'73%',y:'49%'} ],
-  story:   [ {x:'50%',y:'88%'}, {x:'38%',y:'82%'}, {x:'29%',y:'74%'} ],
-  voice:   [ {x:'50%',y:'88%'}, {x:'62%',y:'82%'}, {x:'72%',y:'76%'} ],
+  game:    [ {x:'50%',y:'88%'}, {x:'50%',y:'80%'}, {x:'47%',y:'72%'}, {x:'42%',y:'64%'}, {x:'37%',y:'55%'}, {x:'33%',y:'45%'}, {x:'30%',y:'34%'}, {x:'29%',y:'23%'} ],
+  numbers: [ {x:'50%',y:'88%'}, {x:'50%',y:'80%'}, {x:'53%',y:'72%'}, {x:'58%',y:'64%'}, {x:'63%',y:'56%'}, {x:'67%',y:'46%'}, {x:'70%',y:'35%'}, {x:'72%',y:'24%'} ],
+  letters: [ {x:'50%',y:'88%'}, {x:'45%',y:'84%'}, {x:'40%',y:'79%'}, {x:'36%',y:'73%'}, {x:'32%',y:'66%'}, {x:'29%',y:'59%'}, {x:'27%',y:'52%'}, {x:'27%',y:'47%'} ],
+  cars:    [ {x:'50%',y:'88%'}, {x:'55%',y:'84%'}, {x:'60%',y:'79%'}, {x:'64%',y:'73%'}, {x:'68%',y:'66%'}, {x:'71%',y:'59%'}, {x:'73%',y:'53%'}, {x:'73%',y:'49%'} ],
+  story:   [ {x:'50%',y:'88%'}, {x:'45%',y:'86%'}, {x:'40%',y:'84%'}, {x:'35%',y:'81%'}, {x:'31%',y:'78%'}, {x:'29%',y:'74%'} ],
+  voice:   [ {x:'50%',y:'88%'}, {x:'55%',y:'86%'}, {x:'60%',y:'84%'}, {x:'65%',y:'81%'}, {x:'69%',y:'78%'}, {x:'72%',y:'76%'} ],
 };
+const WALK_STEP_MS = 1050;
+const WALK_ENTER_BUFFER_MS = 900;
 
 const CHARACTER_ASSETS = {
   sihyeon:  { name:'시현',   file:'./assets/characters/sihyeon.png',  emoji:'👦🏻' },
@@ -1371,7 +1373,7 @@ function travelToZone(zoneId){
   };
 
   const pathLen = (ZONE_PATHS[zoneId]?.length || 2) - 1;
-  const totalMs = pathLen * 620 + 400;
+  const totalMs = pathLen * WALK_STEP_MS + WALK_ENTER_BUFFER_MS;
 
   walkAvatarToZone(zoneId, safeEnter);
   setTimeout(safeEnter, totalMs);
@@ -1407,13 +1409,13 @@ function walkAvatarToZone(zoneId, onComplete) {
       const prev = path[idx - 1];
       const goLeft = parseFloat(wp.x) < parseFloat(prev.x);
 
-      avatar.style.transition = 'left 0.6s ease-in-out, top 0.6s ease-in-out, transform 0.25s ease';
+      avatar.style.transition = `left ${WALK_STEP_MS}ms ease-in-out, top ${WALK_STEP_MS}ms ease-in-out, transform 0.25s ease`;
       avatar.style.left       = wp.x;
       avatar.style.top        = wp.y;
       avatar.style.transform  = `translate(-50%, -50%) scaleX(${goLeft ? -1 : 1})`;
 
       idx++;
-      setTimeout(step, 620);
+      setTimeout(step, WALK_STEP_MS + 40);
     }
 
     step();

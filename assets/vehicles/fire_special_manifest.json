@@ -1,0 +1,83 @@
+[
+  {
+    "id": "aerial_ladder_truck",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+    "name_ko": "고가 사다리차",
+    "role_ko": "높은 건물의 사람을 구하거나 높은 곳에서 물을 뿌려요.",
+    "voice_ko": "높은 곳까지 사다리가 쭉쭉 올라가요!",
+    "sound_ko": "높은 곳까지 사다리가 쭉쭉 올라가요!"
+  },
+  {
+    "id": "fire_tank",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/fire_tank.webp",
+    "name_ko": "무한궤도 소방차",
+    "role_ko": "바퀴 대신 무한궤도로 산길이나 무너진 곳을 지나가요.",
+    "voice_ko": "철컥철컥, 험한 길도 지나가요!",
+    "sound_ko": "철컥철컥, 험한 길도 지나가요!"
+  },
+  {
+    "id": "airport_crash_tender",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/airport_crash_tender.webp",
+    "name_ko": "공항 소방차",
+    "role_ko": "공항에서 비행기 사고가 나면 아주 빠르게 출동해요.",
+    "voice_ko": "커다란 물대포로 슈우욱 불을 꺼요!",
+    "sound_ko": "커다란 물대포로 슈우욱 불을 꺼요!"
+  },
+  {
+    "id": "wildfire_6x6_truck",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+    "name_ko": "산불 소방차",
+    "role_ko": "산과 숲에서 난 불을 끄러 험한 길을 달려가요.",
+    "voice_ko": "울퉁불퉁 산길도 힘차게 올라가요!",
+    "sound_ko": "울퉁불퉁 산길도 힘차게 올라가요!"
+  },
+  {
+    "id": "robot_demolition_fire_vehicle",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+    "name_ko": "로봇 파쇄 소방차",
+    "role_ko": "사람이 가기 위험한 곳에서 로봇 팔로 길을 만들고 불을 꺼요.",
+    "voice_ko": "드르르르, 단단한 곳을 뚫고 들어가요!",
+    "sound_ko": "드르르르, 단단한 곳을 뚫고 들어가요!"
+  },
+  {
+    "id": "smoke_extraction_fan_truck",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+    "name_ko": "연기 배출차",
+    "role_ko": "불이 난 곳의 연기를 밖으로 빼서 구조를 도와요.",
+    "voice_ko": "커다란 선풍기가 후우우 연기를 밀어내요!",
+    "sound_ko": "커다란 선풍기가 후우우 연기를 밀어내요!"
+  },
+  {
+    "id": "water_tanker",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/water_tanker.webp",
+    "name_ko": "소방 물탱크차",
+    "role_ko": "물이 부족한 곳에 큰 물탱크를 싣고 달려가요.",
+    "voice_ko": "출렁출렁, 물을 가득 싣고 가요!",
+    "sound_ko": "출렁출렁, 물을 가득 싣고 가요!"
+  },
+  {
+    "id": "articulating_boom_truck",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+    "name_ko": "굴절 붐 소방차",
+    "role_ko": "구부러지는 긴 팔로 높은 곳과 좁은 곳에 다가가요.",
+    "voice_ko": "긴 팔이 꺾이며 슈욱 움직여요!",
+    "sound_ko": "긴 팔이 꺾이며 슈욱 움직여요!"
+  },
+  {
+    "id": "fire_command_suv",
+    "category": "fire_special",
+    "file": "assets/vehicles/fire_special/fire_command_suv.webp",
+    "name_ko": "소방 지휘차",
+    "role_ko": "소방대가 어디로 가야 할지 현장에서 지휘하고 도와요.",
+    "voice_ko": "삐뽀삐뽀, 현장을 살피며 알려줘요!",
+    "sound_ko": "삐뽀삐뽀, 현장을 살피며 알려줘요!"
+  }
+]
