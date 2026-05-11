@@ -944,6 +944,7 @@ const ZONE_CONFIGS = {
 const CARS = ['🚗','🚕','🚙','🚌','🚒','🚑','🚓','🚚','🚜','🏎️','🚛','🚐'];
 let garageCleanup = null;
 let _gameTimer = null;
+let activeGameZoneId = '';
 
 function startGameTimer() {
   clearGameTimer();
@@ -1035,18 +1036,16 @@ function speakText(text,opts={}){
   window.speechSynthesis.speak(u);
 }
 function speakGuide(text,force=false){
-  if(!force&&isStoryPlaying()) return;
-  if(!db.settings.voiceGuide.enabled) return;
-  speakText(text,{rate:0.82,pitch:1.04});
+  // Voice actor mp3 is the only normal guide path now.
+  // Keep this as a silent compatibility hook for older game modules.
+  return;
 }
 function playVoiceGuide(id,text,force=false){
   if(!force&&isStoryPlaying()) return;
   if(!db.settings.voiceGuide.enabled) return;
   if(window.SihyeonVoice&&typeof window.SihyeonVoice.play==='function'){
-    window.SihyeonVoice.play(id,text,{rate:0.82,pitch:1.04}).catch(()=>speakText(text,{rate:0.82,pitch:1.04}));
-    return;
+    window.SihyeonVoice.play(id,'',{rate:0.82,pitch:1.04}).catch(()=>{});
   }
-  speakText(text,{rate:0.82,pitch:1.04});
 }
 const LAND_VOICE_IDS={
   game:'common.land.game',
@@ -1061,15 +1060,17 @@ function playVoiceSequenceGuide(items,force=false){
   if(!force&&isStoryPlaying()) return;
   if(!db.settings.voiceGuide.enabled) return;
   if(window.SihyeonVoice&&typeof window.SihyeonVoice.playSequence==='function'){
-    window.SihyeonVoice.playSequence(items,{rate:0.82,pitch:1.04}).catch(()=>{});
-    return;
+    const cleanItems=Array.isArray(items)
+      ? items.map(item=>Array.isArray(item)?[item[0],'']:item)
+      : [];
+    window.SihyeonVoice.playSequence(cleanItems,{rate:0.82,pitch:1.04}).catch(()=>{});
   }
-  const last=Array.isArray(items)&&items.length?items[items.length-1]:null;
-  const text=Array.isArray(last)?last[1]:(last&&last.text)||'';
-  if(text) speakText(text,{rate:0.82,pitch:1.04});
 }
 function speakStory(text){ speakText(text,{rate:0.82,pitch:1.03}); }
-function stopSpeaking(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+function stopSpeaking(){
+  if(window.SihyeonVoice&&typeof window.SihyeonVoice.stop==='function') window.SihyeonVoice.stop();
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
 function fireConfetti(){
   const c=document.getElementById('particle-container');
   if(!c) return;
@@ -1431,15 +1432,35 @@ function enterZone(zoneId){
 }
 function closeToParkHome(){
   clearGameTimer();
+  activeGameZoneId = '';
   cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
   if(window.stopStoryReading) window.stopStoryReading(true);
   renderWorldMapHome();
   playVoiceGuide('common.backToPark','놀이터로 돌아왔어. 다음은 어디로 가볼까?', true);
 }
-function makeZoneHead(title){
+function returnToZoneLand(zoneId){
+  clearGameTimer();
+  activeGameZoneId = '';
+  cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
+  if(window.stopStoryReading) window.stopStoryReading(true);
+  if(zoneId==='cars')         openCarLand();
+  else if(zoneId==='game')    openGameLand();
+  else if(zoneId==='numbers') openNumberLand();
+  else if(zoneId==='letters') openLetterLand();
+  else if(zoneId==='voice')   openVoiceLand();
+  else if(zoneId==='story')   openStoryLand();
+  else renderWorldMapHome();
+}
+function returnToCurrentGameLand(){
+  returnToZoneLand(activeGameZoneId);
+}
+function gameOptions(zoneId, extras={}){
+  return Object.assign({ speakGuide, fireConfetti, gainExp, closeToParkHome:()=>returnToZoneLand(zoneId) }, extras);
+}
+function makeZoneHead(title, action='closeToParkHome()', icon='🏠', aria='홈으로'){
   return `<div class="zone-head">
-    <button class="zone-home-btn" onclick="closeToParkHome()" aria-label="홈으로">
-      <span>🏠</span>
+    <button class="zone-home-btn" onclick="${action}" aria-label="${aria}">
+      <span>${icon}</span>
     </button>
     <h1 class="zone-title">${title}</h1>
   </div>`;
@@ -1471,76 +1492,77 @@ function renderPlaceholderZone(zoneId){
 /* ═══════════════════════════════════════════
    GAME SHELL & GAME OPEN FUNCTIONS
 ═══════════════════════════════════════════ */
-function openGameShell(title, bodyId, bg='linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)'){
+function openGameShell(title, bodyId, bg='linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)', zoneId='game'){
   cleanupActiveGame(); closeGarageHandlers();
+  activeGameZoneId = zoneId;
   startGameTimer();
   const root=document.getElementById('sihyeonPlayOS');
   root.innerHTML=`
     <div class="game-play-screen" style="background:${bg}">
-      ${makeZoneHead(title)}
+      ${makeZoneHead(title,'returnToCurrentGameLand()','↩','놀이터로')}
       <div class="game-play-body" id="${bodyId}"></div>
     </div>`;
   return document.getElementById(bodyId);
 }
 
 function openNumberCountGame(){
-  const t=openGameShell('🔢 몇 대일까?','numberCountTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
+  const t=openGameShell('🔢 몇 대일까?','numberCountTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)','numbers');
   if(window.SihyeonGames?.numberCount?.render){
-    window.SihyeonGames.numberCount.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.numberCount.render(t,gameOptions('numbers'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">숫자놀이를 불러오지 못했어요.</div>';
 }
 function openNumberBlocksGame(){
-  const t=openGameShell('🔢 숫자 블록','numberBlocksTarget','linear-gradient(135deg,#1A237E 0%,#311B92 100%)');
+  const t=openGameShell('🔢 숫자 블록','numberBlocksTarget','linear-gradient(135deg,#1A237E 0%,#311B92 100%)','numbers');
   if(window.SihyeonGames?.numberBlocks?.render){
-    window.SihyeonGames.numberBlocks.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.numberBlocks.render(t,gameOptions('numbers'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">숫자 블록을 불러오지 못했어요.</div>';
 }
 function openMemoryGame(){
-  const t=openGameShell('🎮 자동차 짝맞추기','memoryGameTarget');
+  const t=openGameShell('🎮 자동차 짝맞추기','memoryGameTarget','linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)','game');
   if(window.SihyeonGames?.vehicleMemory?.render){
-    window.SihyeonGames.vehicleMemory.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.vehicleMemory.render(t,gameOptions('game'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">카드 게임을 불러오지 못했어요.</div>';
 }
 function openLetterGame(){
-  const t=openGameShell('🔤 글자놀이터','letterGameTarget','linear-gradient(180deg,#FF85C2 0%,#FFD4E8 100%)');
+  const t=openGameShell('🔤 글자놀이터','letterGameTarget','linear-gradient(180deg,#FF85C2 0%,#FFD4E8 100%)','letters');
   if(window.SihyeonGames?.letterPlay?.render){
-    window.SihyeonGames.letterPlay.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.letterPlay.render(t,gameOptions('letters'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">글자놀이터를 불러오지 못했어요.</div>';
 }
 function openColorBalloonGame(){
-  const t=openGameShell('🎈 색깔 풍선','colorBalloonTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)');
+  const t=openGameShell('🎈 색깔 풍선','colorBalloonTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)','game');
   if(window.SihyeonGames?.colorBalloon?.render){
-    window.SihyeonGames.colorBalloon.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.colorBalloon.render(t,gameOptions('game'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">색깔 풍선을 불러오지 못했어요.</div>';
 }
 function openParkingGame(){
-  const t=openGameShell('🅿️ 주차장','parkingTarget','linear-gradient(160deg,#e0f7fa 0%,#4CAF50 100%)');
+  const t=openGameShell('🅿️ 주차장','parkingTarget','linear-gradient(160deg,#e0f7fa 0%,#4CAF50 100%)','cars');
   if(window.SihyeonGames?.parkingLot?.render){
-    window.SihyeonGames.parkingLot.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.parkingLot.render(t,gameOptions('cars'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">주차장을 불러오지 못했어요.</div>';
 }
 function openConstructionSiteGame(){
-  const t=openGameShell('🏗️ 공사장','constructionSiteTarget','linear-gradient(180deg,#60c8ff 0%,#f7b143 100%)');
+  const t=openGameShell('🏗️ 공사장','constructionSiteTarget','linear-gradient(180deg,#60c8ff 0%,#f7b143 100%)','cars');
   if(window.SihyeonGames?.constructionSite?.render){
-    window.SihyeonGames.constructionSite.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.constructionSite.render(t,gameOptions('cars'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">공사장을 불러오지 못했어요.</div>';
 }
 function openCarGarageGame(){
-  const t=openGameShell('🔧 자동차 정비소','carGarageTarget','linear-gradient(180deg,#1a2a33 0%,#000 100%)');
+  const t=openGameShell('🔧 자동차 정비소','carGarageTarget','linear-gradient(180deg,#1a2a33 0%,#000 100%)','cars');
   if(window.SihyeonGames?.carGarage?.render){
-    window.SihyeonGames.carGarage.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.carGarage.render(t,gameOptions('cars'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">자동차 정비소를 불러오지 못했어요.</div>';
 }
 function openCodingCarGame(){
-  const t=openGameShell('🏁 코딩카','codingCarTarget','linear-gradient(180deg,#81D4FA 0%,#C8E6C9 100%)');
+  const t=openGameShell('🏁 코딩카','codingCarTarget','linear-gradient(180deg,#81D4FA 0%,#C8E6C9 100%)','cars');
   if(window.SihyeonGames?.codingCar?.render){
-    window.SihyeonGames.codingCar.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.codingCar.render(t,gameOptions('cars'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">코딩카를 불러오지 못했어요.</div>';
 }
 function openVoiceZone(){
-  const t=openGameShell('🎤 말하기놀이터','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)');
+  const t=openGameShell('🎤 말하기놀이터','voiceZoneTarget','linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)','voice');
   if(window.SihyeonZones?.voiceZone?.render){
-    window.SihyeonZones.voiceZone.render(t,{speakGuide,closeToParkHome});
+    window.SihyeonZones.voiceZone.render(t,gameOptions('voice'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기놀이터를 불러오지 못했어요.</div>';
 }
 function openKaraokeZone() {
@@ -1569,31 +1591,31 @@ function openKaraokeZone() {
     speakGuide,
     fireConfetti,
     gainExp,
-    closeToParkHome: renderWorldMapHome
+    closeToParkHome: ()=>returnToZoneLand('voice')
   });
 }
 function openLifeSequenceGame(){
-  const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)');
+  const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)','game');
   if(window.SihyeonGames?.lifeSequence?.render){
-    window.SihyeonGames.lifeSequence.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.lifeSequence.render(t,gameOptions('game'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">하루 순서 게임을 불러오지 못했어요.</div>';
 }
 function openArtZoneGame(){
-  const t=openGameShell('🎨 매직 그림판','artZoneTarget','linear-gradient(160deg,#f0f4f8 0%,#fce4ec 100%)');
+  const t=openGameShell('🎨 매직 그림판','artZoneTarget','linear-gradient(160deg,#f0f4f8 0%,#fce4ec 100%)','game');
   if(window.SihyeonGames?.artZone?.render){
-    window.SihyeonGames.artZone.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.artZone.render(t,gameOptions('game'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">매직 그림판을 불러오지 못했어요.</div>';
 }
 function openAbcPhonicsGame(){
-  const t=openGameShell('🔤 ABC 변신','abcPhonicsTarget','linear-gradient(160deg,#e8f5e9 0%,#fff9c4 100%)');
+  const t=openGameShell('🔤 ABC 변신','abcPhonicsTarget','linear-gradient(160deg,#e8f5e9 0%,#fff9c4 100%)','letters');
   if(window.SihyeonGames?.abcPhonics?.render){
-    window.SihyeonGames.abcPhonics.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.abcPhonics.render(t,gameOptions('letters'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">ABC 게임을 불러오지 못했어요.</div>';
 }
 function openCatCareGame(){
-  const t=openGameShell('🐱 고양이 돌보기','catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)');
+  const t=openGameShell('🐱 고양이 돌보기','catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)','game');
   if(window.SihyeonGames?.catCare?.render){
-    window.SihyeonGames.catCare.render(t,{speakGuide,fireConfetti,gainExp,closeToParkHome});
+    window.SihyeonGames.catCare.render(t,gameOptions('game'));
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#333;">고양이 돌보기를 불러오지 못했어요.</div>';
 }
 
@@ -1988,7 +2010,7 @@ Object.assign(window,{
   speakText, speakGuide, speakStory, stopSpeaking,
   refreshLegacyCompatibility,
   renderWorldMapHome, travelToZone, travelToZoneFromCharacter, moveSihyeonToLandCharacter,
-  goWithLandCharacter, runLandAction, enterZone, closeToParkHome,
+  goWithLandCharacter, runLandAction, enterZone, closeToParkHome, returnToZoneLand, returnToCurrentGameLand,
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone, openKaraokeZone,
   cleanupActiveGame, openGameShell,

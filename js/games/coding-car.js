@@ -220,9 +220,7 @@
     renderBoard();
     
     if (window.SihyeonVoice && window.SihyeonVoice.play) {
-      window.SihyeonVoice.play('games.coding.intro', '차고지까지 화살표를 눌러서 길을 만들어줘!');
-    } else if (state.options.speakGuide) {
-      state.options.speakGuide('차고지까지 화살표를 눌러서 길을 만들어줘!', true);
+      window.SihyeonVoice.play('games.coding.intro', '');
     }
   }
 
@@ -316,7 +314,7 @@
     const goBtn = state.container.querySelector('#ccGoBtn');
     goBtn.disabled = true;
 
-    if (window.SihyeonVoice) window.SihyeonVoice.play('games.coding.go', '부릉부릉 출발!');
+    if (window.SihyeonVoice) window.SihyeonVoice.play('games.coding.go', '');
 
     // 명령 순차 실행
     for (let i = 0; i < state.commands.length; i++) {
@@ -400,8 +398,7 @@
       showSuccess();
     } else {
       // 실패 시 원래 자리로 돌아가기
-      if (window.SihyeonVoice) window.SihyeonVoice.play('games.coding.fail', '어라? 길을 잃었네. 다시 해보자!');
-      else if (state.options.speakGuide) state.options.speakGuide('어라? 길을 잃었네. 다시 해보자!', true);
+      if (window.SihyeonVoice) window.SihyeonVoice.play('games.coding.fail', '');
       
       setTimeout(() => {
         startGame(); // 상태 초기화 후 다시 시작
@@ -411,8 +408,7 @@
 
   function showSuccess() {
     if (state.options.fireConfetti) state.options.fireConfetti();
-    if (window.SihyeonVoice) window.SihyeonVoice.play('games.coding.success', '우와! 차고지에 도착했어. 참 잘했어!');
-    else if (state.options.speakGuide) state.options.speakGuide('우와! 차고지에 도착했어. 참 잘했어!', true);
+    if (window.SihyeonVoice) window.SihyeonVoice.play('games.coding.success', '');
 
     const overlay = document.createElement('div');
     overlay.className = 'cc-success-overlay';

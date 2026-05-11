@@ -334,16 +334,10 @@ window.SihyeonGames.letterPlay = {
 
   // ─── TTS ────────────────────────────────────────────────
   _speak(text) {
-    if (typeof speechSynthesis === 'undefined') return;
-    speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'ko-KR'; utt.rate = 0.85; utt.pitch = 1.08;
-    speechSynthesis.speak(utt);
+    return;
   },
   _say(text, force = false) {
-    const fn = this._options?.speakGuide;
-    if (typeof fn === 'function') fn(text, force);
-    else this._speak(text);
+    return;
   },
 
   // ─── 배경 도트 & 파티클 ───────────────────────────────────────────

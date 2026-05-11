@@ -360,7 +360,6 @@
     const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
     
     // 시현이 이름 부르기 효과 추가
-    state.options.speakGuide?.(`시현아, ${label} 카드 두 장을 골라서 똑같은 친구를 찾아보자!`, true);
   }
 
   function renderMemoryBoard() {
@@ -487,7 +486,6 @@
     
     cardEl.classList.add('is-open');
     state.flipped.push({ index, data: cardData, el: cardEl });
-    state.options.speakGuide?.(cardData.sound || cardData.name);
     
     if (state.flipped.length === 2) checkMemoryMatch();
   }
@@ -504,7 +502,6 @@
         state.matched += 2;
         state.flipped = [];
         playGameVoice('games.memory.correct');
-        state.options.speakGuide?.(`우와! ${first.data.sound || first.data.name} 짝을 찾았어!`, true);
         
         // 다 맞췄는지 확인
         if (state.matched >= selectedCardCount) {
@@ -524,7 +521,6 @@
       state.flipped = [];
       state.locked = false;
       playGameVoice('games.memory.wrong');
-      state.options.speakGuide?.(`어라? 다르네. 다시 찾아볼까?`, false);
     }, 900);
   }
 
@@ -535,7 +531,6 @@
     playGameVoice('games.memory.complete');
     
     const label = selectedCategory === '🚗탈것' ? '자동차' : selectedCategory.slice(2);
-    state.options.speakGuide?.(`시현아, ${label} 짝을 모두 찾았어! 정말 대단해! 최고야!`, true);
 
     // 맞춘 카드들이 신나게 춤추는 애니메이션 부여
     state.container.querySelectorAll('.memory-card').forEach((card, idx) => {

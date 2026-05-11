@@ -104,10 +104,6 @@
       playGameVoice(`games.color.${color.id}`);
       
       // ★ 시현이 맞춤 멘트 (이름 부르기 + 확실한 지시)
-      if (this.state.options.speakGuide) {
-        this.state.options.speakGuide(`시현아! ${color.name} 풍선을 팡! 터뜨려볼까?`, true);
-      }
-
       this.clearBalloons();
       this.startSpawningBalloons();
     },
@@ -232,9 +228,6 @@
         
         // ★ 시현이 맞춤 칭찬! 짧고 굵게
         playGameVoice('games.color.wrong');
-        if (this.state.options.speakGuide) {
-          this.state.options.speakGuide(`우와! ${color.name} 팡! 잘했어!`, true);
-        }
         if (this.state.options.fireConfetti) this.state.options.fireConfetti();
 
         // 오답 풍선들 빠르게 퇴장
@@ -263,9 +256,6 @@
         }, 800);
 
         // ★ 오답 멘트 짧고 다정하게 변경
-        if (this.state.options.speakGuide) {
-          this.state.options.speakGuide(`어라? 이건 ${color.name}이네~ ${this.state.targetColor.name}을 찾아보자!`, false);
-        }
       }
     },
 
@@ -344,7 +334,6 @@
       wrapper.appendChild(el);
 
       playGameVoice('games.color.complete');
-      if (this.state.options.speakGuide) this.state.options.speakGuide('우와! 풍선을 전부 다 터뜨렸어! 시현이 최고야!', true);
       if (this.state.options.fireConfetti) this.state.options.fireConfetti();
       if (this.state.options.gainExp)      this.state.options.gainExp(30); // 보상 증가
 

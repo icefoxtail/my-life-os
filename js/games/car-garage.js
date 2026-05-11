@@ -474,12 +474,11 @@
       state.skipNextSpeak = false;
       return;
     }
-    if (state.options.speakGuide) state.options.speakGuide(text, true);
   }
   function playGarageVoice(id, fallbackText) {
     if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
       state.skipNextSpeak = true;
-      window.SihyeonVoice.play(id, fallbackText || '').catch(() => {});
+      window.SihyeonVoice.play(id, '').catch(() => {});
     }
   }
 

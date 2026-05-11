@@ -751,17 +751,7 @@
   }
 
   function speakDirect(text, lang, rate) {
-    if (!text || typeof speechSynthesis === 'undefined') return;
-    try {
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang || 'ko-KR';
-      utterance.rate = rate || 0.82;
-      utterance.pitch = 1.06;
-      speechSynthesis.speak(utterance);
-    } catch (error) {
-      console.warn('[LetterTransform] speak failed:', error);
-    }
+    return;
   }
 
   function speakItemText(text, forceLang) {
@@ -803,17 +793,9 @@
     };
     const voiceId = voiceIds[text];
     if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(voiceId, text).catch(() => {});
+      window.SihyeonVoice.play(voiceId, '').catch(() => {});
       return;
     }
-
-    const hasKorean = /[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(String(text));
-    if ((forceLang === 'ko-KR' || hasKorean) && state.options && typeof state.options.speakGuide === 'function') {
-      state.options.speakGuide(text, true);
-      return;
-    }
-
-    speakDirect(text, forceLang || (state.mode === 'abc' ? 'en-US' : 'ko-KR'), state.mode === 'abc' ? 0.76 : 0.82);
   }
 
   function vibrate(pattern) {

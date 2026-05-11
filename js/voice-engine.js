@@ -326,9 +326,10 @@
     fallbackText = fallbackText || '';
 
     var voiceId = normalizeId(id);
+    var allowTtsFallback = options.allowTtsFallback === true;
 
     if (!voiceId) {
-      return speak(fallbackText, options);
+      return allowTtsFallback ? speak(fallbackText, options) : Promise.resolve(false);
     }
 
     return loadManifest()
@@ -336,16 +337,16 @@
         var src = resolveVoiceSrc(data, voiceId);
 
         if (!src) {
-          return speak(fallbackText, options);
+          return allowTtsFallback ? speak(fallbackText, options) : false;
         }
 
         return playAudio(src, options).then(function (ok) {
           if (ok) return true;
-          return speak(fallbackText, options);
+          return allowTtsFallback ? speak(fallbackText, options) : false;
         });
       })
       .catch(function () {
-        return speak(fallbackText, options);
+        return allowTtsFallback ? speak(fallbackText, options) : false;
       });
   }
 

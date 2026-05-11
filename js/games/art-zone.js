@@ -1131,10 +1131,9 @@
     };
     const voiceId = voiceIds[msg];
     if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(voiceId, msg).catch(() => {});
+      window.SihyeonVoice.play(voiceId, '').catch(() => {});
       return;
     }
-    if (state.options.speakGuide) state.options.speakGuide(msg, force);
   }
 
   function destroy() {

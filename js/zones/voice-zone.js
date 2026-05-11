@@ -88,18 +88,9 @@
     };
     const voiceId = voiceIds[text];
     if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(voiceId, text).catch(() => {});
+      window.SihyeonVoice.play(voiceId, '').catch(() => {});
       return;
     }
-    if (state.options && typeof state.options.speakGuide === 'function') {
-      state.options.speakGuide(text, true);
-      return;
-    }
-    if (typeof speechSynthesis === 'undefined') return;
-    speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'ko-KR'; utt.rate = 1.0; utt.pitch = 1.15;
-    speechSynthesis.speak(utt);
   }
 
   // ─── 화려한 스타일 주입 ─────────────────

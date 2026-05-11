@@ -76,19 +76,6 @@
 
   function speak(text, force) {
     if (!text) return;
-    if (state.options && typeof state.options.speakGuide === 'function') {
-      state.options.speakGuide(text, !!force);
-      return;
-    }
-    if (typeof speechSynthesis === 'undefined') return;
-    try {
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ko-KR';
-      utterance.rate = 0.82;
-      utterance.pitch = 1.06;
-      speechSynthesis.speak(utterance);
-    } catch (error) {}
   }
 
   function vibrate(pattern) {
@@ -519,8 +506,8 @@
     const successMessage = `우와! 시현이가 고른 ${vehicle.name}야! ${mission.successText}`;
     if (window.SihyeonVoice && typeof window.SihyeonVoice.playSequence === 'function') {
       window.SihyeonVoice.playSequence([
-        [getConstructionVehicleVoiceId(vehicle, 'name'), vehicle.name],
-        [getConstructionVehicleVoiceId(vehicle, 'sound'), vehicle.sound]
+        [getConstructionVehicleVoiceId(vehicle, 'name'), ''],
+        [getConstructionVehicleVoiceId(vehicle, 'sound'), '']
       ]).catch(() => {});
     }
     root.classList.add('is-working');

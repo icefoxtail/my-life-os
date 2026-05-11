@@ -688,16 +688,11 @@
     },
 
     say:function(text, force=false){
-      const speak = this.state.options && this.state.options.speakGuide;
-      if(typeof speak === 'function') speak(text, force);
+      return;
     },
 
     speakDirect:function(text){
-      if(typeof speechSynthesis === 'undefined') return;
-      speechSynthesis.cancel();
-      const utt = new SpeechSynthesisUtterance(text);
-      utt.lang  = 'ko-KR'; utt.rate = 0.85; utt.pitch = 1.08; // 살짝 경쾌하게
-      speechSynthesis.speak(utt);
+      return;
     },
 
     query:function(sel){

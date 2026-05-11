@@ -210,14 +210,9 @@
     };
     const voiceId = voiceIds[text];
     if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(voiceId, text).catch(() => {});
+      window.SihyeonVoice.play(voiceId, '').catch(() => {});
       return;
     }
-    if (typeof speechSynthesis === 'undefined') return;
-    speechSynthesis.cancel();
-    const msg = new SpeechSynthesisUtterance(text);
-    msg.lang = 'ko-KR'; msg.rate = 0.82; msg.pitch = 1.06;
-    speechSynthesis.speak(msg);
   }
 
   function burst(x, y, emoji, count = 16) {

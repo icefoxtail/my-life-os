@@ -185,21 +185,6 @@
 
   function speak(text, force) {
     if (!text) return;
-    if (state.options && typeof state.options.speakGuide === 'function') {
-      state.options.speakGuide(text, !!force);
-      return;
-    }
-    if (typeof speechSynthesis === 'undefined') return;
-    try {
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ko-KR';
-      utterance.rate = 0.82;
-      utterance.pitch = 1.06;
-      speechSynthesis.speak(utterance);
-    } catch (error) {
-      console.warn(error);
-    }
   }
 
   function vibrate(pattern) {
