@@ -27,185 +27,374 @@
   /* ── 색칠 팡팡 템플릿 ─────────────────────── */
   const COLORING_TEMPLATES = [
     {
-      id: 'police',
-      name: '경찰차',
-      emoji: '🚓',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 30 90 L 30 60 C 30 50, 50 40, 70 40 L 130 40 C 150 40, 170 50, 170 60 L 170 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 50 40 L 70 20 L 130 20 L 150 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 90 20 L 90 10 L 110 10 L 110 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 70 25 L 95 25 L 95 40 L 55 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 105 25 L 130 25 L 145 40 L 105 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="60" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="60" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="140" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="140" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'ambulance',
-      name: '구급차',
-      emoji: '🚑',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 20 90 L 20 30 L 120 30 L 120 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 120 90 L 120 50 L 160 50 L 180 70 L 180 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 60 50 L 80 50 L 80 40 L 90 40 L 90 50 L 110 50 L 110 60 L 90 60 L 90 70 L 80 70 L 80 60 L 60 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 40 30 L 40 20 L 60 20 L 60 30 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 130 55 L 155 55 L 170 70 L 130 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="50" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="50" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'firetruck',
-      name: '소방차',
-      emoji: '🚒',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 20 90 L 20 40 L 130 40 L 130 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 130 90 L 130 50 L 170 50 C 180 50, 185 60, 185 70 L 185 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 30 30 L 120 30 L 120 20 L 30 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <line x1="45" y1="20" x2="45" y2="30" stroke="#333" stroke-width="4"/>
-        <line x1="65" y1="20" x2="65" y2="30" stroke="#333" stroke-width="4"/>
-        <line x1="85" y1="20" x2="85" y2="30" stroke="#333" stroke-width="4"/>
-        <line x1="105" y1="20" x2="105" y2="30" stroke="#333" stroke-width="4"/>
-        <path class="fillable" d="M 140 50 L 140 40 L 160 40 L 160 50 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 140 55 L 165 55 C 170 55, 175 60, 175 70 L 140 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="45" cy="90" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="85" cy="90" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="155" cy="90" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'excavator',
-      name: '포크레인',
-      emoji: '🚧',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <rect class="fillable" x="30" y="90" width="80" height="24" rx="12" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="45" cy="102" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <circle class="fillable" cx="70" cy="102" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <circle class="fillable" cx="95" cy="102" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <path class="fillable" d="M 40 90 L 40 50 L 100 50 L 100 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 45 55 L 75 55 L 75 85 L 45 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 85 70 L 140 30 L 150 40 L 95 80 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 135 30 L 170 70 L 160 80 L 125 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 160 75 L 180 75 L 190 105 L 150 105 L 155 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'rocket',
-      name: '우주 로켓',
-      emoji: '🚀',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 80 80 L 50 120 L 80 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 120 80 L 150 120 L 120 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 100 20 C 130 50, 125 110, 100 120 C 75 110, 70 50, 100 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="100" cy="65" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="100" cy="65" r="8" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 85 120 L 100 145 L 115 120 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'dino',
-      name: '공룡',
-      emoji: '🦖',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 120 90 L 170 110 L 130 115 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="65" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="85" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="110" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="130" y="100" width="15" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <ellipse class="fillable" cx="105" cy="90" rx="35" ry="25" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 80 80 Q 60 50, 60 30 L 40 30 Q 40 10, 60 15 Q 75 15, 75 30 Q 80 50, 100 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle cx="55" cy="22" r="3" fill="#333"/>
-      </svg>`
-    },
-    {
-      id: 'train',
-      name: '칙칙폭폭 기차',
-      emoji: '🚂',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 30 110 L 30 50 L 80 50 L 80 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 20 50 L 90 50 L 90 35 L 20 35 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 80 110 L 80 65 L 150 65 L 150 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 150 110 L 170 110 L 150 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 120 65 L 120 35 L 145 35 L 145 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="45" y="65" width="20" height="25" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="55" cy="115" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="100" cy="115" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="135" cy="115" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="132" cy="20" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="115" cy="10" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'airplane',
-      name: '슈웅 비행기',
-      emoji: '✈️',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 30 75 L 10 40 L 60 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 30 75 L 10 110 L 60 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 20 75 C 20 50, 150 40, 180 75 C 150 110, 20 100, 20 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 80 60 L 130 15 L 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 80 90 L 110 135 L 140 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 150 65 C 160 65, 170 70, 170 75 C 170 80, 160 85, 150 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="120" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="95" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="70" cy="75" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`
-    },
-    {
-      id: 'lion',
-      name: '어흥 사자',
-      emoji: '🦁',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M 140 90 Q 170 70, 175 45" stroke="#333" stroke-width="4" fill="none"/>
-        <circle class="fillable" cx="175" cy="45" r="8" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="65" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="85" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="115" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="135" y="95" width="16" height="30" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <ellipse class="fillable" cx="110" cy="85" rx="40" ry="25" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 60 20 C 80 15, 100 30, 105 50 C 115 70, 105 95, 80 105 C 50 115, 25 95, 20 70 C 15 45, 35 25, 60 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="65" cy="65" r="22" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="48" cy="48" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="82" cy="48" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle cx="58" cy="60" r="3" fill="#333"/>
-        <circle cx="72" cy="60" r="3" fill="#333"/>
-        <polygon points="62,68 68,68 65,73" fill="#333"/>
-        <path d="M 65 73 Q 60 80, 55 77" stroke="#333" stroke-width="3" fill="none"/>
-        <path d="M 65 73 Q 70 80, 75 77" stroke="#333" stroke-width="3" fill="none"/>
-      </svg>`
-    },
-    {
-      id: 'whale',
-      name: '고래',
-      emoji: '🐳',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 120 60 Q 100 30, 90 40 Q 80 50, 110 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 130 60 Q 150 20, 165 35 Q 180 50, 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <line x1="125" y1="30" x2="125" y2="60" stroke="#333" stroke-width="4"/>
-        <path class="fillable" d="M 40 100 L 10 70 C 20 90, 20 110, 10 130 L 40 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 40 100 C 40 50, 180 40, 180 100 C 180 140, 80 140, 40 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 110 110 Q 130 140, 150 120 Q 130 110, 110 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle cx="155" cy="85" r="5" fill="#333"/>
-        <path d="M 180 100 Q 165 115, 145 105" stroke="#333" stroke-width="4" fill="none"/>
-      </svg>`
-    },
-    {
-      id: 'icecream',
-      name: '아이스크림',
-      emoji: '🍦',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 75 90 L 100 140 L 125 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <line x1="85" y1="95" x2="105" y2="130" stroke="#333" stroke-width="3"/>
-        <line x1="115" y1="95" x2="95" y2="130" stroke="#333" stroke-width="3"/>
-        <circle class="fillable" cx="100" cy="70" r="30" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="100" cy="35" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path d="M 100 25 Q 110 15, 120 20" stroke="#333" stroke-width="3" fill="none"/>
-      </svg>`
-    }
+      id: 'police',
+      name: '경찰차',
+      emoji: '🚓',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 경광등 (좌/우 분리) -->
+        <path class="fillable" d="M 75 20 L 75 10 L 95 10 L 95 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 95 20 L 95 10 L 115 10 L 115 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 차체 상/하 분리 -->
+        <path class="fillable" d="M 25 90 L 25 60 C 25 50, 45 40, 65 40 L 145 40 C 165 40, 185 50, 185 60 L 185 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 45 40 L 70 20 L 120 20 L 145 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 창문 (앞/뒤 분리) -->
+        <path class="fillable" d="M 70 25 L 90 25 L 90 40 L 50 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 100 25 L 120 25 L 140 40 L 100 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 헤드라이트/테일램프 -->
+        <circle class="fillable" cx="30" cy="70" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="180" cy="70" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 바퀴 -->
+        <circle class="fillable" cx="60" cy="90" r="18" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="60" cy="90" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="90" r="18" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="90" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'police_bus',
+      name: '경찰 버스',
+      emoji: '🚌',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 양쪽 경광등 -->
+        <rect class="fillable" x="30" y="15" width="16" height="10" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="154" y="15" width="16" height="10" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 버스 차체 윗부분 -->
+        <path class="fillable" d="M 20 25 L 180 25 C 185 25, 190 30, 190 40 L 190 70 L 10 70 L 10 40 C 10 30, 15 25, 20 25 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 버스 차체 아랫부분 (띠 도색용) -->
+        <path class="fillable" d="M 10 70 L 190 70 L 190 85 C 190 95, 185 100, 175 100 L 25 100 C 15 100, 10 95, 10 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 창문 4개 -->
+        <rect class="fillable" x="25" y="35" width="30" height="25" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="65" y="35" width="30" height="25" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="105" y="35" width="30" height="25" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="145" y="35" width="30" height="25" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 바퀴 -->
+        <circle class="fillable" cx="50" cy="100" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="50" cy="100" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="100" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="100" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'fire_pump',
+      name: '소방 펌프차',
+      emoji: '🚒',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 경광등 -->
+        <rect class="fillable" x="135" y="15" width="20" height="10" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종석 (Cab) -->
+        <path class="fillable" d="M 120 90 L 120 40 C 120 30, 130 25, 140 25 L 165 25 C 180 25, 185 45, 185 60 L 185 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 130 50 L 130 35 L 155 35 C 165 35, 170 40, 175 50 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 장비 수납부 (몸체) -->
+        <rect class="fillable" x="15" y="35" width="105" height="55" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 펌프/캐비닛 디테일 -->
+        <rect class="fillable" x="25" y="45" width="30" height="35" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="65" y="45" width="45" height="35" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 호스 릴 -->
+        <circle class="fillable" cx="87" cy="62" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="87" cy="62" r="3" stroke="#333" stroke-width="2" fill="#FFF"/>
+        <!-- 헤드라이트 -->
+        <rect class="fillable" x="180" y="70" width="8" height="12" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 바퀴 -->
+        <circle class="fillable" cx="45" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="45" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'fire_ladder',
+      name: '소방 사다리차',
+      emoji: '🪜',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 경광등 -->
+        <rect class="fillable" x="150" y="35" width="15" height="8" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 사다리 -->
+        <path class="fillable" d="M 20 40 L 130 15 L 135 25 L 25 50 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <line x1="40" y1="36" x2="45" y2="45" stroke="#333" stroke-width="3"/>
+        <line x1="60" y1="31" x2="65" y2="41" stroke="#333" stroke-width="3"/>
+        <line x1="80" y1="26" x2="85" y2="36" stroke="#333" stroke-width="3"/>
+        <line x1="100" y1="22" x2="105" y2="31" stroke="#333" stroke-width="3"/>
+        <line x1="120" y1="17" x2="125" y2="27" stroke="#333" stroke-width="3"/>
+        <!-- 사다리 지지대 -->
+        <path class="fillable" d="M 40 45 L 60 70 L 30 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 차량 몸체 뒷부분 -->
+        <rect class="fillable" x="15" y="70" width="115" height="25" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="25" y="75" width="20" height="15" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="55" y="75" width="20" height="15" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 차량 몸체 앞부분 (Cab) -->
+        <path class="fillable" d="M 130 95 L 130 55 C 130 45, 140 43, 145 43 L 175 43 C 185 43, 190 65, 190 75 L 190 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 140 65 L 140 52 L 165 52 C 175 52, 178 58, 180 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 바퀴 (사다리차는 3개 배치) -->
+        <circle class="fillable" cx="35" cy="95" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="35" cy="95" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="75" cy="95" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="75" cy="95" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="160" cy="95" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="160" cy="95" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+{
+      id: 'ambulance',
+      name: '구급차',
+      emoji: '🚑',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 경광등 (좌/우 분리) -->
+        <rect class="fillable" x="80" y="15" width="20" height="12" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="105" y="15" width="20" height="12" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 뒷칸 (의료실) -->
+        <path class="fillable" d="M 15 90 L 15 27 L 105 27 L 105 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 앞칸 (조종석) -->
+        <path class="fillable" d="M 105 90 L 105 45 L 150 45 L 180 65 L 180 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종석 창문 -->
+        <path class="fillable" d="M 115 52 L 145 52 L 165 65 L 115 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 십자가 마크 (가로/세로 분할) -->
+        <rect class="fillable" x="45" y="55" width="30" height="10" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="55" y="45" width="10" height="30" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 헤드라이트 -->
+        <rect class="fillable" x="175" y="75" width="8" height="10" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 바퀴 -->
+        <circle class="fillable" cx="45" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="45" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="150" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'excavator',
+      name: '포크레인',
+      emoji: '🚧',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 무한궤도 (Tracks) -->
+        <rect class="fillable" x="20" y="95" width="90" height="26" rx="13" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="35" cy="108" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="65" cy="108" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="95" cy="108" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 조종석 및 엔진룸 -->
+        <path class="fillable" d="M 30 95 L 30 45 L 85 45 L 95 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종석 창문 -->
+        <rect class="fillable" x="40" y="52" width="35" height="25" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 붐 (Boom - 큰 팔) -->
+        <path class="fillable" d="M 75 75 L 125 25 L 145 40 L 95 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 스틱 (Stick - 작은 팔) -->
+        <path class="fillable" d="M 130 30 L 160 85 L 145 95 L 115 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 버킷 (Bucket - 삽) -->
+        <path class="fillable" d="M 150 85 L 175 85 L 185 115 L 155 115 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 175 85 L 190 80 L 180 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 180 100 L 195 95 L 185 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'dump_truck',
+      name: '덤프트럭',
+      emoji: '🚛',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 거대한 적재함 (Dump Box) -->
+        <path class="fillable" d="M 15 30 L 115 30 L 115 85 L 15 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 적재함 측면 패널 장식 -->
+        <rect class="fillable" x="25" y="40" width="20" height="35" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="55" y="40" width="20" height="35" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="85" y="40" width="20" height="35" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 앞칸 조종석 (Cab) -->
+        <path class="fillable" d="M 120 85 L 120 40 L 160 40 L 185 65 L 185 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종석 창문 -->
+        <path class="fillable" d="M 128 48 L 155 48 L 172 65 L 128 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 앞바퀴 1개, 뒷바퀴 2개 (헤비듀티) -->
+        <circle class="fillable" cx="40" cy="95" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="40" cy="95" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="90" cy="95" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="90" cy="95" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="155" cy="95" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="155" cy="95" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'bulldozer',
+      name: '불도저',
+      emoji: '🚜',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 무한궤도 (Tracks) -->
+        <rect class="fillable" x="25" y="90" width="95" height="28" rx="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="42" cy="104" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="72" cy="104" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="102" cy="104" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 조종석 (Cab) -->
+        <path class="fillable" d="M 35 90 L 35 40 L 80 40 L 80 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종석 창문 -->
+        <rect class="fillable" x="45" y="48" width="28" height="24" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 앞 엔진룸 -->
+        <path class="fillable" d="M 80 90 L 80 55 L 135 55 L 140 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 엔진룸 배기구/그릴 장식 -->
+        <rect class="fillable" x="95" y="65" width="8" height="18" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="115" y="65" width="8" height="18" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 거대한 앞 블레이드 (삽) -->
+        <path class="fillable" d="M 140 120 L 140 45 C 165 45, 180 75, 180 120 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 블레이드 연결 지지대 -->
+        <path class="fillable" d="M 105 85 L 145 85 L 145 95 L 105 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+{
+      id: 'rocket',
+      name: '우주 로켓',
+      emoji: '🚀',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 중앙 날개 -->
+        <path class="fillable" d="M 95 90 L 95 115 L 105 115 L 105 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 좌우 날개 -->
+        <path class="fillable" d="M 80 75 L 45 105 L 80 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 120 75 L 155 105 L 120 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 추진기 불꽃 (겉/속) -->
+        <path class="fillable" d="M 85 105 L 100 145 L 115 105 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 93 105 L 100 128 L 107 105 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 로켓 몸통 및 머리 -->
+        <rect class="fillable" x="80" y="45" width="40" height="60" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 80 45 Q 100 5, 120 45 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 창문 -->
+        <circle class="fillable" cx="100" cy="65" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="100" cy="65" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'dino',
+      name: '공룡',
+      emoji: '🦕',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 다리 4개 -->
+        <rect class="fillable" x="65" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="85" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="125" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="145" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 꼬리, 몸통, 머리 -->
+        <path class="fillable" d="M 40 90 Q 30 55, 100 55 Q 150 55, 170 70 Q 190 75, 185 90 Q 140 115, 100 115 Q 60 115, 40 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 배부분 분할 -->
+        <path class="fillable" d="M 50 100 Q 100 115, 155 95 Q 100 105, 50 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 등껍질 골판 4개 -->
+        <path class="fillable" d="M 60 60 L 70 25 L 85 57 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 80 55 L 100 15 L 115 55 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 110 57 L 130 25 L 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 135 65 L 150 40 L 160 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 눈 -->
+        <circle cx="165" cy="78" r="4" fill="#333"/>
+      </svg>`
+    },
+    {
+      id: 'train',
+      name: '칙칙폭폭 기차',
+      emoji: '🚂',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 증기 연기 -->
+        <circle class="fillable" cx="135" cy="15" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="110" cy="20" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="95" cy="10" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 배장기 (앞 범퍼) -->
+        <path class="fillable" d="M 140 100 L 180 100 L 155 75 L 140 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종실 지붕 -->
+        <path class="fillable" d="M 15 45 L 75 45 L 70 25 L 20 25 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 조종실 -->
+        <rect class="fillable" x="20" y="45" width="50" height="55" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="30" y="55" width="30" height="20" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 보일러통 및 띠 -->
+        <rect class="fillable" x="70" y="60" width="75" height="40" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" x="85" y="60" width="8" height="40" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="115" y="60" width="8" height="40" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 연통 -->
+        <path class="fillable" d="M 125 60 L 125 40 L 140 40 L 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" d="M 120 40 L 145 40 L 140 25 L 125 25 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 바퀴 -->
+        <circle class="fillable" cx="45" cy="100" r="18" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="45" cy="100" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="95" cy="105" r="12" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="95" cy="105" r="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="130" cy="105" r="12" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="130" cy="105" r="4" stroke="#333" stroke-width="4" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'airplane',
+      name: '비행기',
+      emoji: '✈️',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 꼬리 날개 -->
+        <path class="fillable" d="M 40 70 L 25 35 L 50 35 L 60 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 뒤쪽 메인 날개 -->
+        <path class="fillable" d="M 85 65 L 130 30 L 145 35 L 110 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 둥근 동체 -->
+        <path class="fillable" d="M 30 75 C 20 60, 140 50, 170 75 C 190 100, 30 90, 30 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 앞쪽 메인 날개 -->
+        <path class="fillable" d="M 85 80 L 120 120 L 135 115 L 115 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 제트 엔진 -->
+        <ellipse class="fillable" cx="105" cy="100" rx="14" ry="8" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 창문들 -->
+        <path class="fillable" d="M 145 70 L 155 75 L 145 80 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="125" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="105" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="85" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="65" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+      </svg>`
+    },
+    {
+      id: 'lion',
+      name: '어흥 사자',
+      emoji: '🦁',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 갈기 (지그재그 폴리곤) -->
+        <polygon class="fillable" points="100,10 120,25 145,15 145,40 170,45 155,65 175,85 150,100 160,125 130,120 100,140 70,120 40,125 50,100 25,85 45,65 30,45 55,40 55,15 80,25" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 귀 -->
+        <circle class="fillable" cx="72" cy="50" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" cx="128" cy="50" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 얼굴 -->
+        <circle class="fillable" cx="100" cy="75" r="38" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 주둥이 (Snout) -->
+        <ellipse class="fillable" cx="100" cy="88" rx="18" ry="12" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 코 -->
+        <path class="fillable" d="M 90 82 L 110 82 L 100 92 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <!-- 눈과 입 -->
+        <circle cx="85" cy="65" r="5" fill="#333"/>
+        <circle cx="115" cy="65" r="5" fill="#333"/>
+        <path d="M 95 96 Q 100 100, 105 96" stroke="#333" stroke-width="3" fill="none"/>
+      </svg>`
+    },
+    {
+      id: 'whale',
+      name: '고래',
+      emoji: '🐳',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 꼬리 -->
+        <path class="fillable" d="M 50 90 L 15 60 L 30 90 L 10 120 L 50 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 몸통 -->
+        <path class="fillable" d="M 45 80 Q 45 35, 120 40 Q 185 50, 185 85 Q 185 125, 120 125 Q 45 125, 45 80 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 주름진 배 -->
+        <path class="fillable" d="M 55 105 Q 120 130, 180 95 Q 120 115, 55 105 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 옆 지느러미 -->
+        <path class="fillable" d="M 105 100 Q 130 140, 145 105 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 물줄기 (분수) -->
+        <circle class="fillable" cx="95" cy="15" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="115" cy="10" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="135" cy="22" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path d="M 115 35 Q 110 25, 105 20" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- 눈 -->
+        <circle cx="155" cy="70" r="5" fill="#333"/>
+      </svg>`
+    },
+    {
+      id: 'icecream',
+      name: '아이스크림',
+      emoji: '🍦',
+      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <!-- 콘 -->
+        <path class="fillable" d="M 75 100 L 100 145 L 125 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 콘 테두리(림) -->
+        <ellipse class="fillable" cx="100" cy="98" rx="28" ry="8" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 1단 스쿱 (아래) -->
+        <path class="fillable" d="M 65 95 C 65 60, 135 60, 135 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 2단 스쿱 (중간) -->
+        <path class="fillable" d="M 75 75 C 75 45, 125 45, 125 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 3단 스쿱 (위) -->
+        <path class="fillable" d="M 85 55 C 85 30, 115 30, 115 55 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <!-- 꼭대기 체리 -->
+        <circle class="fillable" cx="100" cy="25" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path d="M 100 15 Q 110 5, 120 10" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg>`
+    }
   ];
 
   /* ── State ───────────────────────────────── */

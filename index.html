@@ -1328,7 +1328,7 @@ function openCarLand()     { renderZoneLand(ZONE_CONFIGS.cars);    }
 
 function openStoryLand(){
   openImageLand('story','📖 동화놀이터', WORLD_ASSETS.story,[
-    { x:'50%', y:'43%', w:'62%', h:'48%', label:'동화극장', emoji:'📖', action:'openStoryTheater()' }
+    { x:'50%', y:'43%', w:'62%', h:'48%', label:'동화놀이터', emoji:'📖', action:'openStoryTheater()' }
   ]);
 }
 function openVoiceLand(){
@@ -1674,7 +1674,7 @@ function openStoryTheater(){
     <div class="fullscreen-zone">
       <div class="story-bg"></div>
       <div class="story-stars">${stars}</div>
-      ${makeZoneHead('📖 동화극장')}
+      ${makeZoneHead('📖 동화놀이터')}
       <div class="story-search-row">
         <span class="story-search-icon">🔍</span>
         <input type="search" id="storySearchInput" class="story-search-input"
@@ -1717,7 +1717,7 @@ function openStoryTheater(){
   }
   playVoiceSequenceGuide([
     ['common.land.story', '동화놀이터'],
-    ['common.zoneArrive', '동화극장에 도착했어. 놀이를 준비하고 있어.']
+    ['common.landArrive', '동화놀이터에 도착했어. 하고 싶은 걸 살짝 눌러볼까?']
   ], true);
 }
 

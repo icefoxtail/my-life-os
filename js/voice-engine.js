@@ -10,11 +10,30 @@
     volume: 1
   };
 
+  var BUILTIN_VOICES = {
+    'common.breakTime': './assets/voice/games/common-breaktime.mp3',
+    'common.levelUp': './assets/voice/games/common-levelup.mp3',
+    'common.characterTogether': './assets/voice/games/common-charactertogether.mp3',
+    'common.characterGo': './assets/voice/games/common-charactergo.mp3',
+    'common.whereToGo': './assets/voice/games/common-wheretogo.mp3',
+    'common.landArrive': './assets/voice/games/common-landarrive.mp3',
+    'common.walkToZone': './assets/voice/games/common-walktozone.mp3',
+    'common.backToPark': './assets/voice/games/common-backtopark.mp3',
+    'common.zoneArrive': './assets/voice/games/common-zonearrive.mp3',
+    'common.welcome': './assets/voice/games/common-welcome.mp3',
+    'common.land.game': './assets/voice/games/common-land-game.mp3',
+    'common.land.number': './assets/voice/games/common-land-number.mp3',
+    'common.land.letter': './assets/voice/games/common-land-letter.mp3',
+    'common.land.car': './assets/voice/games/common-land-car.mp3',
+    'common.land.story': './assets/voice/games/common-land-story.mp3',
+    'common.land.voice': './assets/voice/games/common-land-voice.mp3'
+  };
+
   var EMPTY_MANIFEST = {
     version: 'missing',
     format: 'mp3',
     basePath: './assets/voice/games/',
-    voices: {}
+    voices: BUILTIN_VOICES
   };
 
   var ID_ALIASES = {
@@ -70,7 +89,11 @@
       version: source.version || 'unknown',
       format: source.format || 'mp3',
       basePath: source.basePath || './assets/voice/games/',
-      voices: source.voices && typeof source.voices === 'object' ? source.voices : {}
+      voices: Object.assign(
+        {},
+        BUILTIN_VOICES,
+        source.voices && typeof source.voices === 'object' ? source.voices : {}
+      )
     };
   }
 
@@ -79,7 +102,7 @@
       version: EMPTY_MANIFEST.version,
       format: EMPTY_MANIFEST.format,
       basePath: EMPTY_MANIFEST.basePath,
-      voices: {}
+      voices: Object.assign({}, EMPTY_MANIFEST.voices)
     };
   }
 
