@@ -1170,7 +1170,7 @@ function goWithLandCharacter(zoneId){
   runner.classList.add('is-moving');
   runner.style.left=info.landX;
   runner.style.top=info.landY;
-  speakGuide(`${info.meta.name}이랑 같이 가볼게.`, true);
+  playVoiceGuide('common.characterTogether', `${info.meta.name}이랑 같이 가볼게.`, true);
   setTimeout(()=>{
     runner.classList.remove('is-moving');
     runLandAction(zoneId);
@@ -1188,7 +1188,7 @@ function moveSihyeonToLandCharacter(zoneId){
   if(!info||!runner) return;
   runner.classList.add('is-moving');
   runner.style.left=info.landX; runner.style.top=info.landY;
-  speakGuide(`${info.meta.name}에게 가볼게.`, true);
+  playVoiceGuide('common.characterGo', `${info.meta.name}에게 가볼게.`, true);
   setTimeout(()=>runner.classList.remove('is-moving'), 900);
 }
 function travelToZoneFromCharacter(zoneId){
@@ -1311,7 +1311,11 @@ function renderZoneLand(config){
       </div>
     </div>`;
 
-  speakGuide(config.greeting, true);
+  const landTitle = String(config.title || '').replace(/^[^\s]+\s*/, '');
+  playVoiceSequenceGuide([
+    [LAND_VOICE_IDS[config.id], landTitle || config.title],
+    ['common.landArrive', `${landTitle || config.title}에 도착했어. 하고 싶은 걸 살짝 눌러볼까?`]
+  ], true);
 }
 
 /* ═══════════════════════════════════════════
@@ -1352,7 +1356,10 @@ function travelToZone(zoneId){
     }
   }
 
-  speakGuide(`시현이가 ${zone.label}으로 걸어가요. 하나, 둘. 하나, 둘.`, true);
+  playVoiceSequenceGuide([
+    [LAND_VOICE_IDS[zoneId], zone.label],
+    ['common.walkToZone', `시현이가 ${zone.label}으로 걸어가요. 하나, 둘. 하나, 둘.`]
+  ], true);
 
   let entered = false;
   const safeEnter = () => {
@@ -1603,7 +1610,7 @@ function openFullscreenGarage(){
         </div>
       </div>
     </div>`;
-  speakGuide('자동차 정비소에 도착했어. 자동차를 빈칸에 살짝 넣어볼까?', true);
+  playVoiceGuide('games.car.intro', '시현아, 자동차가 수리하러 왔어!', true);
   initGarageRound();
 }
 function initGarageRound(){
@@ -1631,14 +1638,14 @@ function initGarageRound(){
     if(part.hasPointerCapture(pointerId)) part.releasePointerCapture(pointerId);
     const tr=target.getBoundingClientRect(), pr2=part.getBoundingClientRect();
     const hit=!(pr2.right<tr.left-30||pr2.left>tr.right+30||pr2.bottom<tr.top-30||pr2.top>tr.bottom+30);
-    if(!hit){ message.textContent='조금만 더 가까이!'; speakGuide('조금만 더 가까이 가볼까?'); return; }
+    if(!hit){ message.textContent='조금만 더 가까이!'; playVoiceGuide('games.car.wrong', '시현아, 그건 지금 안 필요해. 반짝이는 걸 눌러볼까?'); return; }
     target.classList.add('filled'); target.textContent=carIcon;
     part.style.pointerEvents='none';
     part.style.left=`${target.offsetLeft-part.offsetWidth/2}px`;
     part.style.top=`${target.offsetTop-part.offsetHeight/2}px`;
     part.style.transform='scale(1.2)';
     message.textContent='착! 자동차가 딱 맞았어! 🎉';
-    fireConfetti(); speakGuide('착. 자동차가 딱 맞았어. 시현이 참 잘했어.');
+    fireConfetti(); playVoiceGuide('games.car.complete', '시현아, 자동차가 출발한다! 안녕.');
     gainExp(15); unlockCar(carIcon);
     setTimeout(()=>{ if(document.getElementById('garageStage')) initGarageRound(); }, 1400);
   };
@@ -1708,7 +1715,10 @@ function openStoryTheater(){
       else window.renderStoryGrid?.('전체');
     }, 0);
   }
-  speakGuide('동화극장에 도착했어. 읽고 싶은 책을 하나 골라볼까?', true);
+  playVoiceSequenceGuide([
+    ['common.land.story', '동화놀이터'],
+    ['common.zoneArrive', '동화극장에 도착했어. 놀이를 준비하고 있어.']
+  ], true);
 }
 
 function filterStoriesBySearch(query){
