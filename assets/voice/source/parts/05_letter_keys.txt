@@ -1,0 +1,10 @@
+games.letter.findLetter
+games.letter.wordPop
+games.letter.findSyllable
+games.letter.syllablePop
+games.letter.correctWord
+games.letter.correct
+games.letter.shiny
+games.letter.wrong
+games.letter.completeLetters
+games.letter.completeWords

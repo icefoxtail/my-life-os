@@ -766,6 +766,46 @@
 
   function speakItemText(text, forceLang) {
     if (!text) return;
+    const voiceIds = {
+      '에이, 비, 씨가 장난감으로 변신해요!': 'games.abc.intro',
+      '터치 에이!': 'games.abc.touchA',
+      '터치 비!': 'games.abc.touchB',
+      '터치 씨!': 'games.abc.touchC',
+      '에이.': 'games.abc.a',
+      '비.': 'games.abc.b',
+      '씨.': 'games.abc.c',
+      '애플!': 'games.abc.apple',
+      '볼!': 'games.abc.ball',
+      '카!': 'games.abc.car',
+      '터치 더 레터!': 'games.abc.touchLetter',
+      '우와. 에이, 비, 씨를 모두 만났어요.': 'games.abc.complete',
+      '한글 친구들이 그림으로 변신해요!': 'games.korean.intro',
+      '기역! 그, 그.': 'games.korean.giyeok',
+      '니은! 느, 느.': 'games.korean.nieun',
+      '디귿! 드, 드.': 'games.korean.digeut',
+      '리을! 르, 르.': 'games.korean.rieul',
+      '미음! 므, 므.': 'games.korean.mieum',
+      '비읍! 브, 브.': 'games.korean.bieup',
+      '시옷! 스, 스.': 'games.korean.siot',
+      '이응! 으, 으.': 'games.korean.ieung',
+      '지읒! 즈, 즈.': 'games.korean.jieut',
+      '가, 가, 가방!': 'games.korean.ga',
+      '나, 나, 나비!': 'games.korean.na',
+      '도, 도, 도토리!': 'games.korean.do',
+      '로, 로, 로봇!': 'games.korean.ro',
+      '모, 모, 모자!': 'games.korean.mo',
+      '바, 바, 바나나!': 'games.korean.ba',
+      '사, 사, 사자!': 'games.korean.sa',
+      '오, 오, 오리!': 'games.korean.o',
+      '자, 자, 자동차!': 'games.korean.ja',
+      '글자를 눌러볼까?': 'games.korean.touchTarget',
+      '우와. 한글 친구들을 모두 만났어요.': 'games.korean.complete'
+    };
+    const voiceId = voiceIds[text];
+    if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(voiceId, text).catch(() => {});
+      return;
+    }
 
     const hasKorean = /[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(String(text));
     if ((forceLang === 'ko-KR' || hasKorean) && state.options && typeof state.options.speakGuide === 'function') {

@@ -151,6 +151,43 @@
   }
 
   function speak(text, rate = 1.0) {
+    const voiceIds = {
+      '시현아! 신나는 숫자 블록 놀이를 시작해볼까?': 'games.block.intro',
+      '시현아! 숫자를 합쳐서 5를 만들어볼까?': 'games.block.makeFive',
+      '하나': 'games.block.one',
+      '하나.': 'games.block.one',
+      '둘': 'games.block.two',
+      '둘.': 'games.block.two',
+      '셋': 'games.block.three',
+      '셋.': 'games.block.three',
+      '넷': 'games.block.four',
+      '넷.': 'games.block.four',
+      '다섯': 'games.block.five',
+      '다섯.': 'games.block.five',
+      '시현아, 순서대로 블록을 올려서 예쁘게 만들어볼까?': 'games.block.stack',
+      '시현아, 블록 세 개로 멋진 집을 만들어볼까?': 'games.block.houseIntro',
+      '우와! 튼튼한 집 완성! 창문에 불이 반짝반짝!': 'games.block.houseComplete',
+      '네모 집 쿵!': 'games.block.houseStep1',
+      '세모 지붕 쿵!': 'games.block.houseStep2',
+      '문까지 달면 완성!': 'games.block.houseStep3',
+      '시현아, 칙칙폭폭 기차를 만들어볼까?': 'games.block.trainIntro',
+      '기차 완성! 칙칙폭폭 출발해요! 빠아앙!': 'games.block.trainComplete',
+      '기관차 쿵!': 'games.block.trainStep1',
+      '바퀴 쿵!': 'games.block.trainStep2',
+      '객차까지 연결 완료!': 'games.block.trainStep3',
+      '시현아, 우주로 가는 로켓을 만들어볼까?': 'games.block.rocketIntro',
+      '우와아! 로켓 완성! 우주로 슈우우웅 날아가요!': 'games.block.rocketComplete',
+      '로켓 몸통 쿵!': 'games.block.rocketStep1',
+      '날개 쿵!': 'games.block.rocketStep2',
+      '불꽃 발사 준비 완료!': 'games.block.rocketStep3',
+      '어라? 이 블록은 안 맞네. 다른 걸 찾아볼까?': 'games.block.wrong',
+      '우와! 딱 맞았어!': 'games.block.correct'
+    };
+    const voiceId = voiceIds[text];
+    if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(voiceId, text, { rate: Math.min(rate, 0.94), pitch: 1.08 }).catch(() => {});
+      return;
+    }
     const speakGuide = state.options && state.options.speakGuide;
     if (speakGuide) {
       speakGuide(text, true);

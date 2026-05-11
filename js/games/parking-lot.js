@@ -311,7 +311,7 @@
     renderBoard();
     
     if (window.SihyeonVoice && window.SihyeonVoice.play) {
-      window.SihyeonVoice.play('games.memory.intro').catch(()=>{});
+      window.SihyeonVoice.play('games.parking.intro', '같은 이름 주차장에 쏙 넣어볼까?').catch(()=>{});
     }
     if (state.options.speakGuide) {
       state.options.speakGuide('같은 이름 주차장에 쏙 넣어볼까?', true);
@@ -463,7 +463,7 @@
       state.filledCount++;
       
       if (window.SihyeonVoice && window.SihyeonVoice.play) {
-         window.SihyeonVoice.play('games.memory.match').catch(()=>{}); 
+         window.SihyeonVoice.play('games.parking.complete', '우와. 주차를 다 했어. 참 잘했어.').catch(()=>{}); 
       }
       
       if (state.filledCount >= SLOT_COUNT) {
@@ -485,7 +485,7 @@
       }
       
       if (window.SihyeonVoice && window.SihyeonVoice.play) {
-         window.SihyeonVoice.play('games.memory.no_match').catch(()=>{});
+         window.SihyeonVoice.play('games.memory.wrong', '어라? 다르네. 다시 찾아볼까?').catch(()=>{});
       }
       
       // 애니메이션 종료 후 상태 원복 및 placeholder 파기
@@ -510,7 +510,7 @@
     if (state.options.gainExp) state.options.gainExp(20);
     
     if (window.SihyeonVoice && window.SihyeonVoice.play) {
-      window.SihyeonVoice.play('games.memory.complete').catch(()=>{});
+      window.SihyeonVoice.play('games.parking.complete', '우와. 주차를 다 했어. 참 잘했어.').catch(()=>{});
     }
     if (state.options.speakGuide) {
       state.options.speakGuide('우와. 주차를 다 했어. 참 잘했어.', true);

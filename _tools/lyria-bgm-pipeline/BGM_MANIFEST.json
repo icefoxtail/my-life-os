@@ -1,0 +1,146 @@
+[
+  {
+    "id": "three_bears",
+    "title": "곰 세 마리",
+    "file": "./assets/karaoke/three_bears.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "twinkle",
+    "title": "작은 별",
+    "file": "./assets/karaoke/twinkle.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "butterfly",
+    "title": "나비야",
+    "file": "./assets/karaoke/butterfly.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "rabbit",
+    "title": "산토끼",
+    "file": "./assets/karaoke/rabbit.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "birthday",
+    "title": "생일 축하",
+    "file": "./assets/karaoke/birthday.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "airplane",
+    "title": "비행기",
+    "file": "./assets/karaoke/airplane.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "school_bell",
+    "title": "학교종",
+    "file": "./assets/karaoke/school_bell.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "choo_choo_sihyeon",
+    "title": "칙칙폭폭 시현이",
+    "file": "./assets/karaoke/choo_choo_sihyeon.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "shark_family_adventure_v2",
+    "title": "상어 가족 모험 A",
+    "file": "./assets/karaoke/shark_family_adventure_v2.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "penguin_friend_parade",
+    "title": "펭귄 친구 퍼레이드",
+    "file": "./assets/karaoke/penguin_friend_parade.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "dino_rescue_go",
+    "title": "공룡 구조대 고",
+    "file": "./assets/karaoke/dino_rescue_go.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "little_bus_drive_v2",
+    "title": "꼬마 버스 달려요 A",
+    "file": "./assets/karaoke/little_bus_drive_v2.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "shark_family_adventure_chant",
+    "title": "상어 가족 모험 B",
+    "file": "./assets/karaoke/shark_family_adventure_chant.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "penguin_friend_march",
+    "title": "펭귄 친구 행진",
+    "file": "./assets/karaoke/penguin_friend_march.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "dino_rescue_action",
+    "title": "공룡 구조대 출동",
+    "file": "./assets/karaoke/dino_rescue_action.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  },
+  {
+    "id": "little_bus_drive_chant",
+    "title": "꼬마 버스 달려요 B",
+    "file": "./assets/karaoke/little_bus_drive_chant.wav",
+    "durationSec": null,
+    "generator": "Gemini/Lyria",
+    "style": "24+ layer family karaoke instrumental",
+    "status": "pending"
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "three_bears",
+    "title": "곰 세 마리",
+    "filename": "three_bears.wav",
+    "theme": "cute forest family stage",
+    "mood": "bouncy, warm, playful, family animal dance",
+    "specialEffects": "soft bear footsteps, forest sparkle, gentle claps",
+    "antiCopyright": "Do not copy the original Three Bears melody. Make a new child-friendly melody."
+  },
+  {
+    "id": "twinkle",
+    "title": "작은 별",
+    "filename": "twinkle.wav",
+    "theme": "starry night stage",
+    "mood": "dreamy, gentle, sparkling, bedtime friendly",
+    "specialEffects": "star chimes, music box, soft bells, floating pads",
+    "antiCopyright": "Do not copy the original Twinkle Twinkle melody. Make a new original lullaby-like melody."
+  },
+  {
+    "id": "butterfly",
+    "title": "나비야",
+    "filename": "butterfly.wav",
+    "theme": "flower garden stage",
+    "mood": "soft spring, fluttering, light, happy",
+    "specialEffects": "butterfly flutter, flower sparkle, airy bells",
+    "antiCopyright": "Do not copy the original Butterfly melody. Make a new original melody."
+  },
+  {
+    "id": "rabbit",
+    "title": "산토끼",
+    "filename": "rabbit.wav",
+    "theme": "forest jumping stage",
+    "mood": "fast, cute, bouncy, playful",
+    "specialEffects": "jump sounds, small drums, forest leaves",
+    "antiCopyright": "Do not copy the original Rabbit melody. Make a new original melody."
+  },
+  {
+    "id": "birthday",
+    "title": "생일 축하",
+    "filename": "birthday.wav",
+    "theme": "birthday party stage",
+    "mood": "warm, celebratory, loving, family party",
+    "specialEffects": "party chime, claps, tiny fanfare, confetti sparkle",
+    "antiCopyright": "Do not copy the Happy Birthday melody. Make a new original celebration melody."
+  },
+  {
+    "id": "airplane",
+    "title": "비행기",
+    "filename": "airplane.wav",
+    "theme": "bright sky stage",
+    "mood": "flying, open, cheerful, breezy",
+    "specialEffects": "soft whoosh, clouds, light shaker",
+    "antiCopyright": "Do not copy any known airplane song melody. Make a new original melody."
+  },
+  {
+    "id": "school_bell",
+    "title": "학교종",
+    "filename": "school_bell.wav",
+    "theme": "cute bell stage",
+    "mood": "ding-dong, friendly, preschool morning, happy march",
+    "specialEffects": "school bell, bright chimes, soft march rhythm",
+    "antiCopyright": "Do not copy any known school bell song melody. Make a new original melody."
+  },
+  {
+    "id": "choo_choo_sihyeon",
+    "title": "칙칙폭폭 시현이",
+    "filename": "choo_choo_sihyeon.wav",
+    "theme": "train stage",
+    "mood": "chugging, exciting, family trip, cheerful",
+    "specialEffects": "choo-choo rhythm, train whistle, rail percussion",
+    "antiCopyright": "Make a new original train song backing track."
+  },
+  {
+    "id": "shark_family_adventure_v2",
+    "title": "상어 가족 모험 A",
+    "filename": "shark_family_adventure_v2.wav",
+    "theme": "underwater ocean adventure stage",
+    "mood": "playful, splashy, catchy, energetic but not loud",
+    "specialEffects": "bubbles, waves, marimba, ocean sparkle",
+    "antiCopyright": "Do not copy Baby Shark melody. Make a new original shark adventure melody."
+  },
+  {
+    "id": "penguin_friend_parade",
+    "title": "펭귄 친구 퍼레이드",
+    "filename": "penguin_friend_parade.wav",
+    "theme": "snowy penguin parade stage",
+    "mood": "marching, cute, funny, waddling",
+    "specialEffects": "snow sparkle, whistle melody, marching snare",
+    "antiCopyright": "Do not copy Pororo or any known penguin theme melody. Make a new original penguin parade melody."
+  },
+  {
+    "id": "dino_rescue_go",
+    "title": "공룡 구조대 고",
+    "filename": "dino_rescue_go.wav",
+    "theme": "dinosaur rescue team stage",
+    "mood": "heroic, bright action, exciting, kid-safe",
+    "specialEffects": "brass hits, rescue siren sparkle, action drums",
+    "antiCopyright": "Do not copy Go Go Dino melody. Make a new original dinosaur rescue melody."
+  },
+  {
+    "id": "little_bus_drive_v2",
+    "title": "꼬마 버스 달려요 A",
+    "filename": "little_bus_drive_v2.wav",
+    "theme": "little bus city drive stage",
+    "mood": "cheerful driving, friendly, bright, rhythmic",
+    "specialEffects": "bus horn, traffic sparkle, rolling rhythm",
+    "antiCopyright": "Do not copy Tayo melody. Make a new original little bus melody."
+  },
+  {
+    "id": "shark_family_adventure_chant",
+    "title": "상어 가족 모험 B",
+    "filename": "shark_family_adventure_chant.wav",
+    "theme": "ocean chant stage",
+    "mood": "repetitive chant-friendly, energetic, playful",
+    "specialEffects": "bubbles, waves, claps, bells",
+    "antiCopyright": "Original chant-style melody, not Baby Shark."
+  },
+  {
+    "id": "penguin_friend_march",
+    "title": "펭귄 친구 행진",
+    "filename": "penguin_friend_march.wav",
+    "theme": "snow march stage",
+    "mood": "steady, cute, parade, marching",
+    "specialEffects": "snow chimes, whistle, soft snare",
+    "antiCopyright": "Original march-style melody, not Pororo."
+  },
+  {
+    "id": "dino_rescue_action",
+    "title": "공룡 구조대 출동",
+    "filename": "dino_rescue_action.wav",
+    "theme": "dinosaur action stage",
+    "mood": "heroic, playful action, bold but not scary",
+    "specialEffects": "brass, pads, action drums, rescue sparkle",
+    "antiCopyright": "Original action melody, not Go Go Dino."
+  },
+  {
+    "id": "little_bus_drive_chant",
+    "title": "꼬마 버스 달려요 B",
+    "filename": "little_bus_drive_chant.wav",
+    "theme": "city bus chant stage",
+    "mood": "repeatable chant, bright, driving, playful",
+    "specialEffects": "horn, road rhythm, claps, bells",
+    "antiCopyright": "Original chant-style melody, not Tayo."
+  }
+]

@@ -912,6 +912,39 @@
 
   /* ── TTS / Destroy ───────────────────────── */
   function speak(msg, force = false) {
+    const voiceIds = {
+      '시현아. 마법 그림판이야. 같이 그리고 색칠해볼까?': 'games.paint.intro',
+      '빈칸이야!': 'games.paint.blank',
+      '하늘이야!': 'games.paint.sky',
+      '바다야!': 'games.paint.sea',
+      '숲속이야!': 'games.paint.forest',
+      '그림을 같이 색칠해볼까?': 'games.paint.colorTarget',
+      '빨간색!': 'games.paint.red',
+      '주황색!': 'games.paint.orange',
+      '노란색!': 'games.paint.yellow',
+      '초록색!': 'games.paint.green',
+      '파란색!': 'games.paint.blue',
+      '보라색!': 'games.paint.purple',
+      '분홍색!': 'games.paint.pink',
+      '검정색!': 'games.paint.black',
+      '무지개!': 'games.paint.rainbow',
+      '도장 준비됐어.': 'games.paint.stamp',
+      '지우개로 슥싹.': 'games.paint.erase',
+      '괜찮아. 다시 색칠해볼까?': 'games.paint.wrong',
+      '깨끗하게 지웠어.': 'games.paint.clear',
+      '우와. 멋진 그림이야. 전시회에 걸어볼게.': 'games.paint.exhibit',
+      '어떤 그림을 색칠해볼까?': 'games.paint.choose',
+      '자유롭게 그려볼까?': 'games.paint.free',
+      '우와. 그림 완성. 시현이 참 잘했어.': 'games.paint.complete',
+      '괜찮아. 다시 해보자.': 'games.paint.retry',
+      '조금 더 꾸며볼까?': 'games.paint.more',
+      '새 그림을 시작해볼까?': 'games.paint.new'
+    };
+    const voiceId = voiceIds[msg];
+    if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(voiceId, msg).catch(() => {});
+      return;
+    }
     if (state.options.speakGuide) state.options.speakGuide(msg, force);
   }
 

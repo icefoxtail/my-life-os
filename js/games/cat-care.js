@@ -198,6 +198,21 @@
 
   /* ─── 유틸 ─── */
   function speak(text) {
+    const voiceIds = {
+      '시현아, 어떤 야옹이를 같이 돌봐줄까?': 'games.cat.intro',
+      '흰 고양이가 왔어요. 같이 돌봐줄까?': 'games.cat.whiteIntro',
+      '회색 고양이가 왔어요. 같이 돌봐줄까?': 'games.cat.grayIntro',
+      '냠냠 쩝쩝! 맛있어요!': 'games.cat.feed',
+      '보글보글! 깨끗해요!': 'games.cat.wash',
+      '코오... 잘 자요.': 'games.cat.sleep',
+      '흰 고양이가 행복해요. 시현아, 정말 잘했어.': 'games.cat.whiteComplete',
+      '회색 고양이가 행복해요. 시현아, 정말 잘했어.': 'games.cat.grayComplete'
+    };
+    const voiceId = voiceIds[text];
+    if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(voiceId, text).catch(() => {});
+      return;
+    }
     if (typeof speechSynthesis === 'undefined') return;
     speechSynthesis.cancel();
     const msg = new SpeechSynthesisUtterance(text);

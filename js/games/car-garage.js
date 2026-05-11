@@ -211,6 +211,7 @@
     
     renderUI();
     vibrate(100);
+    playGarageVoice('games.car.intro', `시현아, ${state.currentVehicle.name}가 수리하러 왔어!`);
     speak(`시현아, ${state.currentVehicle.name}가 수리하러 왔어!`);
   }
 
@@ -324,11 +325,11 @@
     if (speech) speech.textContent = '우와! 최고야! 😍';
 
     // 부품별 시현이 맞춤 칭찬 보이스
-    if (task === 'wheel') speak("시현아, 바퀴를 튼튼하게 달았어!");
-    else if (task === 'light') speak("반짝반짝! 불이 들어왔네!");
-    else if (task === 'wash') speak("보글보글~ 자동차가 깨끗해졌어!");
-    else if (task === 'gas') speak("시현이가 기름을 빵빵하게 채웠어!");
-    else if (task === 'siren') speak("삐용삐용! 사이렌 소리가 들려!");
+    if (task === 'wheel') { playGarageVoice('games.car.wheel', "시현아, 바퀴를 튼튼하게 달았어!"); speak("시현아, 바퀴를 튼튼하게 달았어!"); }
+    else if (task === 'light') { playGarageVoice('games.car.light', "반짝반짝! 불이 들어왔네!"); speak("반짝반짝! 불이 들어왔네!"); }
+    else if (task === 'wash') { playGarageVoice('games.car.wash', "보글보글! 자동차가 깨끗해졌어!"); speak("보글보글~ 자동차가 깨끗해졌어!"); }
+    else if (task === 'gas') { playGarageVoice('games.car.fuel', "시현이가 기름을 빵빵하게 채웠어!"); speak("시현이가 기름을 빵빵하게 채웠어!"); }
+    else if (task === 'siren') { playGarageVoice('games.car.siren', "삐용삐용! 사이렌 소리가 들려!"); speak("삐용삐용! 사이렌 소리가 들려!"); }
 
     // 시각 리액션
     carBody.classList.add('happy-jump');
@@ -346,6 +347,7 @@
       setTimeout(() => {
         state.phase = 'tuning';
         state.locked = false;
+        playGarageVoice('games.car.decorate', "시현아, 다 고쳤어! 이제 예쁜 스티커로 꾸며주자!");
         speak("시현아, 다 고쳤어! 이제 예쁜 스티커로 꾸며주자!");
         renderUI();
       }, 1500); // 칭찬 충분히 듣고 넘어감
@@ -359,6 +361,7 @@
 
   function handleRepairWrong(btn) {
     // 타겟이 아닌 버튼을 누른 경우 (사실상 is-dimmed 라 눌리지 않지만 만약을 대비해)
+    playGarageVoice('games.car.wrong', "시현아, 그건 지금 안 필요해. 반짝이는 걸 눌러볼까?");
     speak("시현아, 그건 지금 안 필요해~ 반짝이는 걸 눌러볼까?");
   }
 
@@ -396,6 +399,7 @@
     vibrate(300);
     const speech = state.container.querySelector('#speechBubble');
     if (speech) speech.textContent = '출발 준비 완료! 🚀';
+    playGarageVoice('games.car.complete', "시현아, 자동차가 출발한다! 안녕!");
     speak("시현아, 자동차가 출발한다! 안녕~");
 
     setTimeout(() => {
@@ -466,7 +470,17 @@
   }
 
   function speak(text) {
+    if (state.skipNextSpeak) {
+      state.skipNextSpeak = false;
+      return;
+    }
     if (state.options.speakGuide) state.options.speakGuide(text, true);
+  }
+  function playGarageVoice(id, fallbackText) {
+    if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      state.skipNextSpeak = true;
+      window.SihyeonVoice.play(id, fallbackText || '').catch(() => {});
+    }
   }
 
   // ─── LifeCycle API ────────────────────────────────────

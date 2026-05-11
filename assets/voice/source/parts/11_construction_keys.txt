@@ -1,0 +1,11 @@
+games.construction.intro
+games.construction.dig
+games.construction.push
+games.construction.load
+games.construction.move
+games.construction.mix
+games.construction.lift
+games.construction.high
+games.construction.wrong
+games.construction.correct
+games.construction.complete

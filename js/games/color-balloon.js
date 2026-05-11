@@ -101,7 +101,7 @@
       const tint = container.querySelector('#cbBgTint');
       if (tint) tint.style.background = color.bgTint;
 
-      playGameVoice('games.color.question');
+      playGameVoice(`games.color.${color.id}`);
       
       // ★ 시현이 맞춤 멘트 (이름 부르기 + 확실한 지시)
       if (this.state.options.speakGuide) {
@@ -231,6 +231,7 @@
         playGameVoice('games.color.correct');
         
         // ★ 시현이 맞춤 칭찬! 짧고 굵게
+        playGameVoice('games.color.wrong');
         if (this.state.options.speakGuide) {
           this.state.options.speakGuide(`우와! ${color.name} 팡! 잘했어!`, true);
         }

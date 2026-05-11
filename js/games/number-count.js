@@ -69,6 +69,21 @@
     if(window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function')
       window.SihyeonVoice.play(id).catch(()=>{});
   }
+  function getVehicleSoundVoiceId(vehicle){
+    const map = {
+      pump_engine: 'games.number.vehicleSound.siren',
+      ladder_truck: 'games.number.vehicleSound.ladder',
+      ambulance: 'games.number.vehicleSound.ambulance',
+      excavator: 'games.number.vehicleSound.excavator',
+      dump_truck: 'games.number.vehicleSound.dump',
+      concrete_mixer: 'games.number.vehicleSound.mixer',
+      train: 'games.number.vehicleSound.train',
+      bus: 'games.number.vehicleSound.bus',
+      car: 'games.number.vehicleSound.car',
+      airplane: 'games.number.vehicleSound.airplane'
+    };
+    return map[vehicle?.id] || '';
+  }
 
   function getAnswerMax(difficulty, level){
     if(difficulty === 1) return 5;
@@ -316,6 +331,7 @@
         wrap.addEventListener('click', ()=>{
           this.initAudio();
           this.playTone('pop');
+          playGameVoice(getVehicleSoundVoiceId(this.state.currentVehicle));
           this.say(this.state.currentVehicle.sound, true);
           wrap.style.transition = 'transform 0.15s';
           wrap.style.transform  = 'scale(1.2) rotate(-5deg)';
@@ -330,7 +346,7 @@
       this.driveIn(wrapper, ()=>{
         if(choicesArea) choicesArea.style.visibility = 'visible';
         this.renderChoices();
-        playGameVoice('games.number.question');
+        playGameVoice(getVehicleSoundVoiceId(this.state.currentVehicle));
         this.say(`시현아! ${this.state.currentVehicle.name}가 몇 대인지 세어볼까?`, true);
       });
     },

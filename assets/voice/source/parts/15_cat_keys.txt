@@ -1,0 +1,8 @@
+games.cat.intro
+games.cat.whiteIntro
+games.cat.grayIntro
+games.cat.feed
+games.cat.wash
+games.cat.sleep
+games.cat.whiteComplete
+games.cat.grayComplete

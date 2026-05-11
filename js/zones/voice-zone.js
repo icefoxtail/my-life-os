@@ -76,6 +76,21 @@
 
   // ─── TTS 및 가이드 ─────────────────────────────────────
   function speakMsg(text) {
+    const voiceIds = {
+      '내 목소리!': 'zone.voice.myVoice',
+      '헬륨가스 목소리!': 'zone.voice.helium',
+      '로봇 목소리!': 'zone.voice.robot',
+      '괴물 목소리!': 'zone.voice.monster',
+      '시현아, 마이크 권한을 허락해줘!': 'zone.voice.permission',
+      '들어보자!': 'zone.voice.listen',
+      '신나는 노래 틀어줄게!': 'zone.voice.music',
+      '시현아! 요술 마이크를 톡! 누르고 말해봐! 목소리가 변신할 거야!': 'zone.voice.intro'
+    };
+    const voiceId = voiceIds[text];
+    if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+      window.SihyeonVoice.play(voiceId, text).catch(() => {});
+      return;
+    }
     if (state.options && typeof state.options.speakGuide === 'function') {
       state.options.speakGuide(text, true);
       return;

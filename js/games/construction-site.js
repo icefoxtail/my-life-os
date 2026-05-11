@@ -49,9 +49,29 @@
   };
 
   function playGameVoice(id) {
+    const aliases = {
+      'games.common.wrong': 'games.construction.wrong',
+      'games.common.correct': 'games.construction.correct',
+      'games.common.complete': 'games.construction.complete'
+    };
     if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(id).catch(() => {});
+      window.SihyeonVoice.play(aliases[id] || id).catch(() => {});
     }
+  }
+  function getConstructionVehicleVoiceId(vehicle, kind) {
+    const map = {
+      excavator: 'excavator',
+      mini_excavator: 'miniExcavator',
+      bulldozer: 'bulldozer',
+      wheel_loader: 'wheelLoader',
+      dump_truck: 'dumpTruck',
+      concrete_mixer: 'concreteMixer',
+      concrete_pump_truck: 'concretePumpTruck',
+      crane_truck: 'craneTruck',
+      forklift: 'forklift'
+    };
+    const key = map[vehicle?.id];
+    return key ? `vehicles.construction.${key}.${kind}` : '';
   }
 
   function speak(text, force) {
@@ -338,6 +358,7 @@
 
     renderGame();
     playGameVoice('games.construction.intro');
+    playGameVoice(`games.construction.${state.currentMission.id === 'carry' ? 'move' : state.currentMission.id === 'pump' ? 'high' : state.currentMission.id}`);
     
     // ★ 이름 부르기 효과
     speak(`시현아, ${state.currentMission.question}`, true);
@@ -496,6 +517,12 @@
     });
 
     const successMessage = `우와! 시현이가 고른 ${vehicle.name}야! ${mission.successText}`;
+    if (window.SihyeonVoice && typeof window.SihyeonVoice.playSequence === 'function') {
+      window.SihyeonVoice.playSequence([
+        [getConstructionVehicleVoiceId(vehicle, 'name'), vehicle.name],
+        [getConstructionVehicleVoiceId(vehicle, 'sound'), vehicle.sound]
+      ]).catch(() => {});
+    }
     root.classList.add('is-working');
 
     // 거대해지는 타이밍(약 1.2초 후)에 맞추어 칭찬 및 폭죽 발사

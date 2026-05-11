@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.0.24';
+const CACHE_NAME = 'sihyeon-play-os-v1.0.25';
 
 const ASSETS = [
   './',
@@ -9,6 +9,7 @@ const ASSETS = [
   './js/voice-engine.js',
   './js/ttokttoki-engine.js',
   './js/zones/voice-zone.js',
+  './js/zones/karaoke-zone.js',
 
   './js/data/story-pack-registry.js',
 
@@ -29,6 +30,24 @@ const ASSETS = [
   './assets/games/cards/car-garage.webp',
   './assets/games/cards/parking-lot.webp',
   './assets/games/cards/construction-site.webp',
+  './assets/games/cards/karaoke-zone.webp',
+
+  './assets/karaoke/three_bears.wav',
+  './assets/karaoke/twinkle.wav',
+  './assets/karaoke/butterfly.wav',
+  './assets/karaoke/rabbit.wav',
+  './assets/karaoke/birthday.wav',
+  './assets/karaoke/airplane.wav',
+  './assets/karaoke/school_bell.wav',
+  './assets/karaoke/choo_choo_sihyeon.wav',
+  './assets/karaoke/shark_family_adventure_v2.wav',
+  './assets/karaoke/penguin_friend_parade.wav',
+  './assets/karaoke/dino_rescue_go.wav',
+  './assets/karaoke/little_bus_drive_v2.wav',
+  './assets/karaoke/shark_family_adventure_chant.wav',
+  './assets/karaoke/penguin_friend_march.wav',
+  './assets/karaoke/dino_rescue_action.wav',
+  './assets/karaoke/little_bus_drive_chant.wav',
 
   './assets/stories/storybook_main_cover.png'
 ];

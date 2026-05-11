@@ -162,8 +162,24 @@
   }
 
   function playGameVoice(id) {
+    const missionId = state.mission?.id || 'wash_hands';
+    const missionMap = {
+      wash_hands: { intro: 'games.sequence.handIntro', complete: 'games.sequence.handComplete' },
+      brush_teeth: { intro: 'games.sequence.teethIntro', complete: 'games.sequence.teethComplete' },
+      eat_meal: { intro: 'games.sequence.mealIntro', complete: 'games.sequence.mealComplete' },
+      sleep_time: { intro: 'games.sequence.sleepIntro', complete: 'games.sequence.sleepComplete' },
+      go_out: { intro: 'games.sequence.outIntro', complete: 'games.sequence.outComplete' },
+      clean_up: { intro: 'games.sequence.cleanIntro', complete: 'games.sequence.cleanComplete' }
+    };
+    const missionVoice = missionMap[missionId] || missionMap.wash_hands;
+    const aliases = {
+      'games.life.intro': missionVoice.intro,
+      'games.common.wrong': 'games.sequence.wrong',
+      'games.common.correct': missionVoice.complete,
+      'games.common.complete': 'games.sequence.complete'
+    };
     if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(id).catch(() => {});
+      window.SihyeonVoice.play(aliases[id] || id).catch(() => {});
     }
   }
 

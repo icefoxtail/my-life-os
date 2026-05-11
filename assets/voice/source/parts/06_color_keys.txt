@@ -1,0 +1,10 @@
+games.color.red
+games.color.blue
+games.color.yellow
+games.color.green
+games.color.purple
+games.color.pink
+games.color.intro
+games.color.correct
+games.color.wrong
+games.color.complete

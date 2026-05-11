@@ -1,184 +1,236 @@
-/* ═══════════════════════════════════════════
-   SIHYEON PLAY OS - VOICE ENGINE v1
-   js/voice-engine.js
-   - 성우 mp3/webm 재생 전용 준비 엔진
-   - 음성 파일이 없으면 TTS로 대체하지 않음
-   - 게임부터 안전하게 연결하기 위한 1차 기반
-═══════════════════════════════════════════ */
 (function () {
   'use strict';
 
   const MANIFEST_URL = './assets/voice/voice_manifest.json';
-  const DEFAULT_BASE_DIR = './assets/voice/';
+  const DEFAULT_TTS = {
+    lang: 'ko-KR',
+    rate: 0.92,
+    pitch: 1.08,
+    volume: 1
+  };
+  const ID_ALIASES = {
+    'games.memory.match': 'games.memory.correct',
+    'games.memory.no_match': 'games.memory.wrong',
+    'games.color.question': 'games.color.intro',
+    'games.letter.question': 'games.letter.findLetter',
+    'games.letter.intro': 'games.letter.findLetter',
+    'games.letter.complete': 'games.letter.completeLetters',
+    'games.life.intro': 'games.sequence.handIntro',
+    'games.common.wrong': 'games.sequence.wrong',
+    'games.common.correct': 'games.construction.correct',
+    'games.common.complete': 'games.sequence.complete'
+  };
 
+  const previous = window.SihyeonVoice || {};
   let manifest = null;
   let manifestPromise = null;
-  let activeAudio = null;
-  let activeId = '';
-  let muted = false;
+  let currentAudio = null;
+  let unlocked = false;
+  let unlockPromise = null;
 
-  function normalizePath(path) {
-    if (!path) return '';
-    const value = String(path).trim();
-    if (!value) return '';
-    if (/^https?:\/\//i.test(value)) return value;
-    if (value.startsWith('./')) return value;
-    if (value.startsWith('/')) return '.' + value;
-    if (value.startsWith('assets/voice/')) return './' + value;
-    return DEFAULT_BASE_DIR + value.replace(/^\/+/, '');
+  function warn(message, detail) {
+    if (detail) console.warn('[SihyeonVoice] ' + message, detail);
+    else console.warn('[SihyeonVoice] ' + message);
   }
 
-  async function loadManifest(force = false) {
-    if (!force && manifest) return manifest;
-    if (!force && manifestPromise) return manifestPromise;
+  function normalizeId(id) {
+    const key = String(id || '').trim();
+    return ID_ALIASES[key] || key;
+  }
 
-    manifestPromise = fetch(MANIFEST_URL, { cache: force ? 'no-store' : 'force-cache' })
-      .then((res) => {
-        if (!res.ok) throw new Error('VOICE_MANIFEST_LOAD_FAILED_' + res.status);
-        return res.json();
+  function stopSpeech() {
+    try {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    } catch (error) {}
+  }
+
+  function stop() {
+    try {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.removeAttribute('src');
+        currentAudio.load();
+      }
+    } catch (error) {}
+    currentAudio = null;
+    stopSpeech();
+  }
+
+  function loadManifest() {
+    if (manifest) return Promise.resolve(manifest);
+    if (manifestPromise) return manifestPromise;
+
+    manifestPromise = fetch(MANIFEST_URL, { cache: 'force-cache' })
+      .then((response) => {
+        if (!response.ok) throw new Error('manifest status ' + response.status);
+        return response.json();
       })
-      .then((json) => {
-        manifest = json || {};
+      .then((data) => {
+        manifest = data || {};
+        manifest.voices = manifest.voices || {};
         return manifest;
       })
       .catch((error) => {
-        console.warn('[SihyeonVoice] voice manifest load failed:', error);
-        manifest = { version: 'empty', ui: {}, games: {}, stories: {} };
+        warn('manifest load failed', error);
+        manifest = { version: 'missing', format: 'mp3', basePath: './assets/voice/games/', voices: {} };
         return manifest;
       });
 
     return manifestPromise;
   }
 
-  function getNestedValue(obj, dottedPath) {
-    if (!obj || !dottedPath) return '';
-    return String(dottedPath).split('.').reduce((current, key) => {
-      if (!current || current[key] === undefined || current[key] === null) return '';
-      return current[key];
-    }, obj);
+  function getManifest() {
+    return manifest;
   }
 
-  async function getVoiceSrc(voiceId) {
-    const data = await loadManifest(false);
-    const path = getNestedValue(data, voiceId);
-    return normalizePath(path);
+  function isReady() {
+    return Boolean(manifest && manifest.voices);
   }
 
-  function stop() {
-    if (activeAudio) {
+  function speak(text, options = {}) {
+    return new Promise((resolve) => {
+      if (!text) {
+        resolve(false);
+        return;
+      }
+
+      stop();
+      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+        resolve(false);
+        return;
+      }
+
       try {
-        activeAudio.pause();
-        activeAudio.currentTime = 0;
+        const utterance = new SpeechSynthesisUtterance(String(text));
+        utterance.lang = options.lang || DEFAULT_TTS.lang;
+        utterance.rate = Number(options.rate || DEFAULT_TTS.rate);
+        utterance.pitch = Number(options.pitch || DEFAULT_TTS.pitch);
+        utterance.volume = Number(options.volume || DEFAULT_TTS.volume);
+        utterance.onend = () => resolve(true);
+        utterance.onerror = () => resolve(false);
+        window.speechSynthesis.speak(utterance);
       } catch (error) {
-        console.warn('[SihyeonVoice] stop failed:', error);
+        resolve(false);
+      }
+    });
+  }
+
+  function resolveVoiceSrc(data, id) {
+    const voices = data && data.voices ? data.voices : {};
+    return voices[id] || '';
+  }
+
+  function playAudio(src, options = {}) {
+    return new Promise((resolve) => {
+      try {
+        const audio = new Audio(src);
+        currentAudio = audio;
+        audio.preload = 'auto';
+        audio.volume = Math.max(0, Math.min(1, Number(options.volume ?? 1)));
+        audio.onended = () => {
+          if (currentAudio === audio) currentAudio = null;
+          resolve(true);
+        };
+        audio.onerror = () => {
+          if (currentAudio === audio) currentAudio = null;
+          resolve(false);
+        };
+        audio.play().catch(() => {
+          if (currentAudio === audio) currentAudio = null;
+          resolve(false);
+        });
+      } catch (error) {
+        resolve(false);
+      }
+    });
+  }
+
+  async function play(id, fallbackText = '', options = {}) {
+    const voiceId = normalizeId(id);
+    if (!voiceId) return speak(fallbackText, options);
+
+    stop();
+    try {
+      const data = await loadManifest();
+      const src = resolveVoiceSrc(data, voiceId);
+      if (!src) return speak(fallbackText, options);
+
+      const ok = await playAudio(src, options);
+      if (ok) return true;
+      return speak(fallbackText, options);
+    } catch (error) {
+      return speak(fallbackText, options);
+    }
+  }
+
+  async function playSequence(items = [], options = {}) {
+    const list = Array.isArray(items) ? items : [];
+    for (const item of list) {
+      if (Array.isArray(item)) {
+        await play(item[0], item[1] || '', options);
+      } else if (item && typeof item === 'object') {
+        await play(item.id, item.text || item.fallbackText || '', { ...options, ...item.options });
       }
     }
-    activeAudio = null;
-    activeId = '';
+    return true;
   }
 
-  function pause() {
-    if (activeAudio) activeAudio.pause();
-  }
+  function unlock() {
+    if (unlocked) return Promise.resolve(true);
+    if (unlockPromise) return unlockPromise;
 
-  function resume() {
-    if (activeAudio) activeAudio.play().catch(() => {});
-  }
-
-  async function play(voiceId, options = {}) {
-    if (!voiceId || muted) return false;
-    stop();
-
-    const src = await getVoiceSrc(voiceId);
-    if (!src) {
-      console.warn('[SihyeonVoice] missing voice:', voiceId);
-      return false;
-    }
-
-    return new Promise((resolve) => {
-      const audio = new Audio(src);
-      activeAudio = audio;
-      activeId = voiceId;
-      audio.preload = 'auto';
-      audio.volume = Math.max(0, Math.min(1, Number(options.volume ?? 1)));
-
-      audio.onended = () => {
-        if (activeAudio === audio) {
-          activeAudio = null;
-          activeId = '';
+    unlockPromise = new Promise((resolve) => {
+      try {
+        const audio = new Audio();
+        audio.muted = true;
+        audio.playsInline = true;
+        const result = audio.play();
+        if (result && typeof result.then === 'function') {
+          result.then(() => {
+            audio.pause();
+            unlocked = true;
+            resolve(true);
+          }).catch(() => {
+            unlocked = true;
+            resolve(false);
+          });
+        } else {
+          unlocked = true;
+          resolve(true);
         }
-        resolve(true);
-      };
-
-      audio.onerror = () => {
-        console.warn('[SihyeonVoice] audio error:', voiceId, src);
-        if (activeAudio === audio) {
-          activeAudio = null;
-          activeId = '';
-        }
+      } catch (error) {
+        unlocked = true;
         resolve(false);
-      };
-
-      audio.play().catch((error) => {
-        console.warn('[SihyeonVoice] play blocked:', voiceId, error);
-        if (activeAudio === audio) {
-          activeAudio = null;
-          activeId = '';
-        }
-        resolve(false);
-      });
+      }
     });
+
+    return unlockPromise;
   }
 
-  async function preload(voiceIds = []) {
-    const ids = Array.isArray(voiceIds) ? voiceIds : [];
-    const data = await loadManifest(false);
-    ids.forEach((id) => {
-      const src = normalizePath(getNestedValue(data, id));
-      if (!src) return;
-      const audio = new Audio(src);
-      audio.preload = 'auto';
-    });
+  function bindUnlock() {
+    const handler = () => {
+      unlock();
+      window.removeEventListener('pointerdown', handler);
+      window.removeEventListener('touchstart', handler);
+      window.removeEventListener('click', handler);
+    };
+    window.addEventListener('pointerdown', handler, { once: true, passive: true });
+    window.addEventListener('touchstart', handler, { once: true, passive: true });
+    window.addEventListener('click', handler, { once: true, passive: true });
   }
 
-  function setMuted(value) {
-    muted = Boolean(value);
-    if (muted) stop();
-  }
-
-  function isMuted() {
-    return muted;
-  }
-
-  function getActiveId() {
-    return activeId;
-  }
-
-  function getStoryVoiceId(storyId, paragraphIndex) {
-    const safeStoryId = String(storyId || '').trim();
-    const index = Number(paragraphIndex || 0) + 1;
-    return `stories.${safeStoryId}.p${String(index).padStart(3, '0')}`;
-  }
-
-  async function playStoryParagraph(storyId, paragraphIndex, options = {}) {
-    return play(getStoryVoiceId(storyId, paragraphIndex), options);
-  }
+  bindUnlock();
+  loadManifest();
 
   window.SihyeonVoice = {
-    loadManifest,
-    getVoiceSrc,
+    ...previous,
     play,
+    speak,
     stop,
-    pause,
-    resume,
-    preload,
-    setMuted,
-    isMuted,
-    getActiveId,
-    getStoryVoiceId,
-    playStoryParagraph
+    unlock,
+    isReady,
+    getManifest,
+    playSequence,
+    loadManifest
   };
-
-  window.playVoice = play;
-  window.stopVoice = stop;
 })();

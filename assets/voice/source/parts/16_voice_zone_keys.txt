@@ -1,0 +1,8 @@
+zone.voice.myVoice
+zone.voice.helium
+zone.voice.robot
+zone.voice.monster
+zone.voice.permission
+zone.voice.listen
+zone.voice.music
+zone.voice.intro

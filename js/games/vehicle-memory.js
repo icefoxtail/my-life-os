@@ -503,7 +503,7 @@
         second.el.classList.add('is-matched');
         state.matched += 2;
         state.flipped = [];
-        playGameVoice('games.memory.match');
+        playGameVoice('games.memory.correct');
         state.options.speakGuide?.(`우와! ${first.data.sound || first.data.name} 짝을 찾았어!`, true);
         
         // 다 맞췄는지 확인
@@ -523,7 +523,7 @@
       second.el.classList.remove('is-open');
       state.flipped = [];
       state.locked = false;
-      playGameVoice('games.memory.no_match');
+      playGameVoice('games.memory.wrong');
       state.options.speakGuide?.(`어라? 다르네. 다시 찾아볼까?`, false);
     }, 900);
   }

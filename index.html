@@ -927,6 +927,16 @@ const ZONE_CONFIGS = {
       { id:'parking', title:'주차장',       emoji:'🅿️', image:'./assets/games/cards/parking-lot.webp', desc:'차를 주차해요',       action:'openParkingGame()',      isNew:true  },
       { id:'construction', title:'공사장',  emoji:'🏗️', image:'./assets/games/cards/construction-site.webp', desc:'공사차를 골라요',     action:'openConstructionSiteGame()', isNew:true  },
     ]
+  },
+  voice: {
+    id:'voice', title:'🎤 말하기놀이터', emoji:'🎤',
+    bg:'linear-gradient(160deg,#fff0f5 0%,#e0f7fa 100%)',
+    character:'nuni',
+    greeting:'눈이랑 말하기 해볼까? 어떤 걸 해볼래?',
+    games: [
+      { id:'voice', title:'말하기 놀이', emoji:'🎤', image:'', desc:'또박또박 말해요', action:'openVoiceZone()', isNew:false },
+      { id:'karaoke', title:'시현이 노래방', emoji:'🎤', image:'./assets/games/cards/karaoke-zone.webp', desc:'무대에서 노래해요', action:'openKaraokeZone()', isNew:true }
+    ]
   }
 };
 
@@ -937,7 +947,7 @@ let _gameTimer = null;
 function startGameTimer() {
   clearGameTimer();
   _gameTimer = setTimeout(() => {
-    speakGuide('10분이 지났어! 잠깐 쉬어볼까?', true);
+    playVoiceGuide('common.breakTime','10분이 지났어! 잠깐 쉬어볼까?', true);
     const todayStr = getToday();
     if(db.parentLog && db.parentLog.daily[todayStr]) {
       db.parentLog.daily[todayStr].timerCount++;
@@ -1028,6 +1038,35 @@ function speakGuide(text,force=false){
   if(!db.settings.voiceGuide.enabled) return;
   speakText(text,{rate:0.82,pitch:1.04});
 }
+function playVoiceGuide(id,text,force=false){
+  if(!force&&isStoryPlaying()) return;
+  if(!db.settings.voiceGuide.enabled) return;
+  if(window.SihyeonVoice&&typeof window.SihyeonVoice.play==='function'){
+    window.SihyeonVoice.play(id,text,{rate:0.82,pitch:1.04}).catch(()=>speakText(text,{rate:0.82,pitch:1.04}));
+    return;
+  }
+  speakText(text,{rate:0.82,pitch:1.04});
+}
+const LAND_VOICE_IDS={
+  game:'common.land.game',
+  numbers:'common.land.number',
+  letters:'common.land.letter',
+  cars:'common.land.car',
+  story:'common.land.story',
+  voice:'common.land.voice',
+  karaoke:'common.zone.karaoke'
+};
+function playVoiceSequenceGuide(items,force=false){
+  if(!force&&isStoryPlaying()) return;
+  if(!db.settings.voiceGuide.enabled) return;
+  if(window.SihyeonVoice&&typeof window.SihyeonVoice.playSequence==='function'){
+    window.SihyeonVoice.playSequence(items,{rate:0.82,pitch:1.04}).catch(()=>{});
+    return;
+  }
+  const last=Array.isArray(items)&&items.length?items[items.length-1]:null;
+  const text=Array.isArray(last)?last[1]:(last&&last.text)||'';
+  if(text) speakText(text,{rate:0.82,pitch:1.04});
+}
 function speakStory(text){ speakText(text,{rate:0.82,pitch:1.03}); }
 function stopSpeaking(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }
 function fireConfetti(){
@@ -1045,7 +1084,7 @@ function gainExp(amount){
   db.progress.exp=Number(db.progress.exp||0)+Number(amount||0);
   while(db.progress.exp>=100){
     db.progress.level=Number(db.progress.level||1)+1; db.progress.exp-=100;
-    fireConfetti(); speakGuide('레벨이 올라갔어. 시현이 참 잘했어.');
+    fireConfetti(); playVoiceGuide('common.levelUp','레벨이 올라갔어. 시현이 참 잘했어.');
   }
   save();
 }
@@ -1063,6 +1102,7 @@ function cleanupActiveGame(){
     window.SihyeonGames?.[key]?.destroy?.();
   });
   window.SihyeonZones?.voiceZone?.destroy?.();
+  window.SihyeonZones?.karaokeZone?.destroy?.();
 }
 
 /* ═══════════════════════════════════════════
@@ -1195,7 +1235,7 @@ function renderWorldMapHome(){
             <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
             <div class="avatar-emoji">👦🏻</div>
           </div>
-          <button class="mic-button-floating" onclick="speakGuide('어디로 갈까? 가고 싶은 곳을 살짝 눌러볼까?', true)" aria-label="안내">🎤</button>
+          <button class="mic-button-floating" onclick="playVoiceGuide('common.whereToGo','어디로 갈까? 가고 싶은 곳을 살짝 눌러볼까?', true)" aria-label="안내">🎤</button>
         </div>
       </div>
     </section>`;
@@ -1226,7 +1266,10 @@ function openImageLand(zoneId, title, imageSrc, hotspots){
         </div>
       </div>
     </section>`;
-  speakGuide(`${title}에 도착했어. 하고 싶은 걸 살짝 눌러볼까?`, true);
+  playVoiceSequenceGuide([
+    [LAND_VOICE_IDS[zoneId], title],
+    ['common.landArrive', `${title}에 도착했어. 하고 싶은 걸 살짝 눌러볼까?`]
+  ], true);
 }
 
 /* ═══════════════════════════════════════════
@@ -1285,9 +1328,7 @@ function openStoryLand(){
   ]);
 }
 function openVoiceLand(){
-  openImageLand('voice','🎤 말하기놀이터', WORLD_ASSETS.voice,[
-    { x:'50%', y:'45%', w:'62%', h:'46%', label:'말하기 놀이', emoji:'🎤', action:'openVoiceZone()' }
-  ]);
+  renderZoneLand(ZONE_CONFIGS.voice);
 }
 
 /* ═══════════════════════════════════════════
@@ -1385,7 +1426,7 @@ function closeToParkHome(){
   cleanupActiveGame(); closeGarageHandlers(); stopSpeaking();
   if(window.stopStoryReading) window.stopStoryReading(true);
   renderWorldMapHome();
-  speakGuide('놀이터로 돌아왔어. 다음은 어디로 가볼까?', true);
+  playVoiceGuide('common.backToPark','놀이터로 돌아왔어. 다음은 어디로 가볼까?', true);
 }
 function makeZoneHead(title){
   return `<div class="zone-head">
@@ -1413,7 +1454,10 @@ function renderPlaceholderZone(zoneId){
         <div class="placeholder-text">재미있는 놀이를 준비하고 있어!</div>
       </div>
     </div>`;
-  speakGuide(`${zone.label}에 도착했어. 놀이를 준비하고 있어.`);
+  playVoiceSequenceGuide([
+    [LAND_VOICE_IDS[zoneId], zone.label],
+    ['common.zoneArrive', `${zone.label}에 도착했어. 놀이를 준비하고 있어.`]
+  ]);
 }
 
 /* ═══════════════════════════════════════════
@@ -1484,6 +1528,35 @@ function openVoiceZone(){
   if(window.SihyeonZones?.voiceZone?.render){
     window.SihyeonZones.voiceZone.render(t,{speakGuide,closeToParkHome});
   } else t.innerHTML='<div style="padding:30px;text-align:center;font-size:24px;color:#fff;">말하기놀이터를 불러오지 못했어요.</div>';
+}
+function openKaraokeZone() {
+  cleanupActiveGame();
+  closeGarageHandlers?.();
+
+  const root = document.getElementById('sihyeonPlayOS');
+  root.innerHTML = `
+    <section class="game-play-screen">
+      <div class="game-play-body" id="karaokeZoneRoot"></div>
+    </section>
+  `;
+
+  const container = document.getElementById('karaokeZoneRoot');
+
+  if (!window.SihyeonZones || !window.SihyeonZones.karaokeZone || typeof window.SihyeonZones.karaokeZone.render !== 'function') {
+    container.innerHTML = `
+      <div style="width:100%;height:100%;display:grid;place-items:center;font-size:28px;color:#fff;text-align:center;">
+        🎤 노래방을 준비하고 있어요!
+      </div>
+    `;
+    return;
+  }
+
+  window.SihyeonZones.karaokeZone.render(container, {
+    speakGuide,
+    fireConfetti,
+    gainExp,
+    closeToParkHome: renderWorldMapHome
+  });
 }
 function openLifeSequenceGame(){
   const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)');
@@ -1900,7 +1973,7 @@ Object.assign(window,{
   renderWorldMapHome, travelToZone, travelToZoneFromCharacter, moveSihyeonToLandCharacter,
   goWithLandCharacter, runLandAction, enterZone, closeToParkHome,
   openImageLand, renderZoneLand,
-  openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone,
+  openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone, openKaraokeZone,
   cleanupActiveGame, openGameShell,
   openMemoryGame, openNumberCountGame, openNumberBlocksGame, openLetterGame, openColorBalloonGame, openParkingGame, openConstructionSiteGame, openCarGarageGame, openLifeSequenceGame, openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
@@ -1952,7 +2025,7 @@ window.addEventListener('load', () => {
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>speakGuide('시현아 안녕. 놀이공원에 온 걸 환영해.', true), 600);
+  setTimeout(()=>playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.', true), 600);
 }
 
 if('serviceWorker' in navigator){
@@ -1965,6 +2038,7 @@ if('serviceWorker' in navigator){
 <script src="./js/voice-engine.js"></script>
 <script src="./js/ttokttoki-engine.js"></script>
 <script src="./js/zones/voice-zone.js"></script>
+<script src="./js/zones/karaoke-zone.js"></script>
 
 <script src="./js/data/story-pack-registry.js"></script>
 <script src="./js/data/classics/classic_three_little_pigs.js"></script>

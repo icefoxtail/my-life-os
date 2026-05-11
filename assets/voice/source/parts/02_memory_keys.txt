@@ -1,0 +1,7 @@
+games.memory.loading
+games.memory.loadFail
+games.memory.intro
+games.memory.cardSound
+games.memory.correct
+games.memory.wrong
+games.memory.complete
