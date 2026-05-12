@@ -380,11 +380,11 @@
       .bl-board-inner {
         position: absolute;
         inset: 0;
-        background:
-          radial-gradient(circle at 56% 46%, #ffe597 0 5%, transparent 6%),
-          radial-gradient(circle at 48% 48%, rgba(255,204,85,.5), rgba(255,255,255,0) 27%),
-          radial-gradient(circle at 22% 70%, rgba(255,118,214,.35), transparent 23%),
-          radial-gradient(circle at 70% 73%, rgba(67,204,105,.38), transparent 24%);
+        background-image: url('./assets/games/boardland/board.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: rgba(255, 241, 118, 0.3);
       }
 
       .bl-mini-park {

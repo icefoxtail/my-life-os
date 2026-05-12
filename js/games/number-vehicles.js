@@ -1,6 +1,15 @@
 (function(){
   const GAME_KEY = 'numberVehicles';
-  const BLOCKS_PATH = 'assets/games/number-vehicles/blocks';
+  const BLOCKS_PATH = './assets/games/number-vehicles/blocks';
+
+  // SVG fallback for missing block images
+  const BLOCK_FALLBACKS = {
+    'roof_red_1': '<svg viewBox="0 0 100 100"><polygon points="50,20 80,60 20,60" fill="#ff5b5b"/></svg>',
+    'square_blue_2': '<svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="#45c2ff"/></svg>',
+    'triangle_yellow_3': '<svg viewBox="0 0 100 100"><polygon points="50,15 85,85 15,85" fill="#ffd93d"/></svg>',
+    'rectangle_green_4': '<svg viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="40" fill="#82ff4d"/></svg>',
+    'wheel_purple_5': '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="#b366ff"/><circle cx="50" cy="50" r="20" fill="#fff"/></svg>'
+  };
 
   const COLORS = {
     1:'red',
@@ -330,8 +339,9 @@
         block.className = 'block';
         const color = COLORS[slot.number];
         const file = `${slot.shape}_${color}_${slot.number}.webp`;
+        const fallbackKey = `${slot.shape}_${color}_${slot.number}`;
         block.dataset.number = slot.number;
-        block.innerHTML = `<img src="${BLOCKS_PATH}/${file}">`;
+        block.innerHTML = `<img src="${BLOCKS_PATH}/${file}" onerror="this.outerHTML='${BLOCK_FALLBACKS[fallbackKey] || '<svg viewBox=\"0 0 100 100\"><rect x=\"10\" y=\"10\" width=\"80\" height=\"80\" fill=\"#999\"/></svg>'}'" alt="">`;
         block.addEventListener('click', () => this.onBlockClick(block, slot));
         this.blocksWrap.appendChild(block);
       });
@@ -360,7 +370,11 @@
       const targetEl = this.state.slotElements[this.state.currentSlotIndex];
       const color = COLORS[blockData.number];
       const img = document.createElement('img');
+      const fallbackKey = `${blockData.shape}_${color}_${blockData.number}`;
       img.src = `${BLOCKS_PATH}/${blockData.shape}_${color}_${blockData.number}.webp`;
+      img.onerror = () => {
+        img.outerHTML = BLOCK_FALLBACKS[fallbackKey] || '<svg viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="#999"/></svg>';
+      };
       targetEl.classList.remove('active');
       targetEl.classList.add('filled');
       targetEl.appendChild(img);

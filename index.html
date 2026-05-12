@@ -1632,7 +1632,7 @@ const ZONE_CONFIGS = {
     greeting:'눈이랑 말하기 해볼까? 어떤 걸 해볼래?',
     games:[
       { id:'voice', title:'말하기 놀이', emoji:'🎤', image:'', desc:'또박또박 말해요', action:'openVoiceZone()', isNew:false },
-      { id:'karaoke', title:'시현이 노래방', emoji:'🎤', image:'./assets/games/cards/karaoke-zone.webp', desc:'무대에서 노래해요', action:'openKaraokeZone()', isNew:true }
+      { id:'karaoke', title:'시현이 노래방', emoji:'🎤', image:'./assets/games/cards/karaoke-zone.png', desc:'무대에서 노래해요', action:'openKaraokeZone()', isNew:true }
     ]
   }
 };
@@ -1651,7 +1651,7 @@ function addZoneGameOnce(zoneId, game) {
       id: 'boardland',
       title: '보드랜드',
       emoji: '🎲',
-      image: '',
+      image: './assets/games/cards/boardland-zone.png',
       desc: '빙글빙글 보드게임',
       action: 'openBoardLandGame()',
       isNew: true
@@ -1663,7 +1663,7 @@ function addZoneGameOnce(zoneId, game) {
       id: 'robotcoding',
       title: '로봇 코딩',
       emoji: '🤖',
-      image: '',
+      image: './assets/games/cards/robotCoding.png',
       desc: '명령으로 별을 모아요',
       action: 'openRobotCodingGame()',
       isNew: true
@@ -1675,7 +1675,7 @@ function addZoneGameOnce(zoneId, game) {
       id: 'megadispatch',
       title: '소방 출동',
       emoji: '🚒',
-      image: '',
+      image: './assets/games/cards/megadispatch.png',
       desc: '소방차를 순서대로 찾아요',
       action: 'openMegaDispatchGame()',
       isNew: true
