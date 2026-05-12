@@ -45,7 +45,7 @@
       .md14-root { width: 100%; height: 100%; display: flex; flex-direction: column; background: #050505; position: relative; overflow: hidden; font-family: 'Jua', sans-serif; }
       
       /* [배경] 도시 & 불꽃 */
-      .md14-city-bg { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/games/dispatch/city_night.webp') center bottom / cover; opacity: 0.7; z-index: 1; pointer-events: none; }
+      .md14-city-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 100%, rgba(255,82,0,0.35), transparent 42%), linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.82)), linear-gradient(180deg, #263238 0%, #0b0b0d 58%, #250606 100%); opacity: 0.92; z-index: 1; pointer-events: none; }
       .md14-fire-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; background: linear-gradient(transparent, rgba(255, 80, 0, 0.3)); z-index: 2; pointer-events: none; animation: md14Fire 3s infinite alternate; }
       @keyframes md14Fire { from { opacity: 0.2; } to { opacity: 0.5; } }
 
@@ -146,14 +146,14 @@
           ${state.mission.map((m, i) => `
             <div class="md-mission-card ${i === state.userIndex ? 'preview-large active' : (i < state.userIndex ? 'done' : '')}">
               <div style="font-size:14px; position:absolute; top:-8px; right:-8px; background:#fff; border-radius:50%; width:24px; height:24px; display:grid; place-items:center; color:#000; box-shadow:0 2px 4px #000;">${ROLE_ICONS[m.id] || '🚒'}</div>
-              <img src="${m.file}" onerror="this.src='./assets/default-truck.png'; this.style.background='linear-gradient(45deg, #ff6b6b, #4ecdc4)';">
+              <img src="${m.file}" onerror="this.outerHTML='<span style=&quot;font-size:42px;&quot;>🚒</span>';">
             </div>
           `).join('')}
         </div>
         <div class="md14-garage grid-${state.gridSize}">
           ${state.displayTrucks.map(t => `
             <button class="md14-truck-btn" data-game-id="${t.gameId}">
-              <img src="${t.file}" onerror="this.src='./assets/default-truck.png'; this.style.background='linear-gradient(45deg, #ff6b6b, #4ecdc4)';">
+              <img src="${t.file}" onerror="this.outerHTML='<span style=&quot;font-size:42px;&quot;>🚒</span>';">
             </button>
           `).join('')}
         </div>
@@ -252,7 +252,20 @@
   }
 
   window.SihyeonGames[GAME_KEY] = { 
-    render: (c, o) => { state.container=c; state.options=o; injectStyle(); showModeSelection(); }, 
-    destroy: () => { state.destroyed = true; }
+    render: (c, o) => {
+      state.container = c;
+      state.options = o || {};
+      state.destroyed = false;
+      state.gameStarted = false;
+      state.isBusy = false;
+      injectStyle();
+      showModeSelection();
+    },
+    destroy: () => {
+      state.destroyed = true;
+      state.gameStarted = false;
+      const style = document.getElementById(STYLE_ID);
+      if (style) style.remove();
+    }
   };
 })();

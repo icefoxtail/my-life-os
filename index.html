@@ -1598,7 +1598,9 @@ const ZONE_CONFIGS = {
     greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
       { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.webp', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
-      { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.webp', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true }
+      { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.webp', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
+      { id:'basket', title:'숫자 바구니', emoji:'🧺', image:'./assets/games/cards/number-basket.webp', desc:'숫자를 더해봐요', action:'openNumberBasketGame()', isNew:true },
+      { id:'vehicles', title:'숫자 탈것 만들기', emoji:'🚙', image:'./assets/games/cards/number-vehicles.png', desc:'탈것을 숫자로 조립해요', action:'openNumberVehiclesGame()', isNew:true }
     ]
   },
   letters: {
@@ -1634,6 +1636,52 @@ const ZONE_CONFIGS = {
     ]
   }
 };
+
+function addZoneGameOnce(zoneId, game) {
+  const zone = ZONE_CONFIGS[zoneId];
+  if (!zone || !Array.isArray(zone.games)) return;
+  if (zone.games.some(item => item.id === game.id || item.action === game.action)) return;
+  zone.games.push(game);
+}
+
+[
+  {
+    zoneId: 'game',
+    game: {
+      id: 'boardland',
+      title: '보드랜드',
+      emoji: '🎲',
+      image: '',
+      desc: '빙글빙글 보드게임',
+      action: 'openBoardLandGame()',
+      isNew: true
+    }
+  },
+  {
+    zoneId: 'game',
+    game: {
+      id: 'robotcoding',
+      title: '로봇 코딩',
+      emoji: '🤖',
+      image: '',
+      desc: '명령으로 별을 모아요',
+      action: 'openRobotCodingGame()',
+      isNew: true
+    }
+  },
+  {
+    zoneId: 'cars',
+    game: {
+      id: 'megadispatch',
+      title: '소방 출동',
+      emoji: '🚒',
+      image: '',
+      desc: '소방차를 순서대로 찾아요',
+      action: 'openMegaDispatchGame()',
+      isNew: true
+    }
+  }
+].forEach(item => addZoneGameOnce(item.zoneId, item.game));
 
 const CARS = ['🚗','🚕','🚙','🚌','🚒','🚑','🚓','🚚','🚜','🏎️','🚛','🚐'];
 let garageCleanup = null;
@@ -1814,11 +1862,12 @@ function closeGarageHandlers(){
 }
 
 function cleanupActiveGame(){
-  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare'].forEach(key=>{
+  ['vehicleMemory','numberCount','numberBlocks','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare','robotCoding','megaDispatch'].forEach(key=>{
     window.SihyeonGames?.[key]?.destroy?.();
   });
   window.SihyeonZones?.voiceZone?.destroy?.();
   window.SihyeonZones?.karaokeZone?.destroy?.();
+  window.SihyeonZones?.boardland?.close?.();
 }
 
 function handleMapImageError(img){
@@ -2231,6 +2280,18 @@ function openNumberBlocksGame(){
   else renderGameLoadError(t,'숫자 블록을 불러오지 못했어요.');
 }
 
+function openNumberBasketGame(){
+  const t=openGameShell('🧺 숫자 바구니','numberBasketTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)','numbers');
+  if(window.SihyeonGames?.numberBasket?.render) window.SihyeonGames.numberBasket.render(t,gameOptions('numbers'));
+  else renderGameLoadError(t,'숫자 바구니를 불러오지 못했어요.');
+}
+
+function openNumberVehiclesGame(){
+  const t=openGameShell('🚙 숫자 탈것 만들기','numberVehiclesTarget','linear-gradient(135deg,#1A237E 0%,#311B92 100%)','numbers');
+  if(window.SihyeonGames?.numberVehicles?.render) window.SihyeonGames.numberVehicles.render(t,gameOptions('numbers'));
+  else renderGameLoadError(t,'숫자 탈것 만들기를 불러오지 못했어요.');
+}
+
 function openMemoryGame(){
   const t=openGameShell('🎮 자동차 짝맞추기','memoryGameTarget','linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)','game');
   if(window.SihyeonGames?.vehicleMemory?.render) window.SihyeonGames.vehicleMemory.render(t,gameOptions('game'));
@@ -2315,6 +2376,25 @@ function openCatCareGame(){
   const t=openGameShell('🐱 고양이 돌보기','catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)','game');
   if(window.SihyeonGames?.catCare?.render) window.SihyeonGames.catCare.render(t,gameOptions('game'));
   else renderGameLoadError(t,'고양이 돌보기를 불러오지 못했어요.','#333');
+}
+
+function openRobotCodingGame(){
+  const t=openGameShell('🤖 로봇 코딩','robotCodingTarget','linear-gradient(180deg,#020208 0%,#17104a 100%)','game');
+  if(window.SihyeonGames?.robotCoding?.render) window.SihyeonGames.robotCoding.render(t,gameOptions('game'));
+  else renderGameLoadError(t,'로봇 코딩을 불러오지 못했어요.');
+}
+
+function openMegaDispatchGame(){
+  const t=openGameShell('🚒 소방 출동','megaDispatchTarget','linear-gradient(180deg,#111 0%,#7f1010 100%)','cars');
+  if(window.SihyeonGames?.megaDispatch?.render) window.SihyeonGames.megaDispatch.render(t,gameOptions('cars'));
+  else renderGameLoadError(t,'소방 출동을 불러오지 못했어요.');
+}
+
+function openBoardLandGame(){
+  cleanupActiveGame();
+  closeGarageHandlers?.();
+  if(typeof window.openBoardLandZone === 'function') window.openBoardLandZone();
+  else renderGameLoadError(openGameShell('🎲 보드랜드','boardLandTarget','linear-gradient(180deg,#74d680 0%,#f8e36a 100%)','game'),'보드랜드를 불러오지 못했어요.','#333');
 }
 
 function openFullscreenGarage(){
@@ -2794,6 +2874,7 @@ if('serviceWorker' in navigator){
 <script src="./js/ttokttoki-engine.js"></script>
 <script src="./js/zones/voice-zone.js"></script>
 <script src="./js/zones/karaoke-zone.js"></script>
+<script src="./js/zones/boardland-zone.js"></script>
 
 <script src="./js/data/story-pack-registry.js"></script>
 <script src="./js/data/classics/classic_three_little_pigs.js"></script>
@@ -2807,6 +2888,8 @@ if('serviceWorker' in navigator){
 
 <script src="./js/games/vehicle-memory.js"></script>
 <script src="./js/games/number-count.js"></script>
+<script src="./js/games/number-basket.js"></script>
+<script src="./js/games/number-vehicles.js"></script>
 <script src="./js/games/number-blocks.js"></script>
 <script src="./js/games/letter-play.js"></script>
 <script src="./js/games/color-balloon.js"></script>
@@ -2818,5 +2901,7 @@ if('serviceWorker' in navigator){
 <script src="./js/games/art-zone.js"></script>
 <script src="./js/games/abc-phonics.js"></script>
 <script src="./js/games/cat-care.js"></script>
+<script src="./js/games/robotCoding.js"></script>
+<script src="./js/games/megaDispatch.js"></script>
 </body>
 </html>

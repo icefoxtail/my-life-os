@@ -18,6 +18,8 @@ const ASSETS = [
 
   './js/games/vehicle-memory.js',
   './js/games/number-count.js',
+  './js/games/number-basket.js',
+  './js/games/number-vehicles.js',
   './js/games/letter-play.js',
   './js/games/color-balloon.js',
   './js/games/car-garage.js',
@@ -26,6 +28,8 @@ const ASSETS = [
   './assets/games/cards/vehicle-memory.webp',
   './assets/games/cards/color-balloon.webp',
   './assets/games/cards/number-count.webp',
+  './assets/games/cards/number-basket.webp',
+  './assets/games/cards/number-vehicles.png',
   './assets/games/cards/number-blocks.webp',
   './assets/games/cards/letter-play.webp',
   './assets/games/cards/car-garage.webp',
