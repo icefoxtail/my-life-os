@@ -1162,37 +1162,6 @@
       background:rgba(255,255,255,.96);
     }
 
-    #storyReaderView { display:none; }
-    #storyReaderView .story-reader-actions,
-    #storyReaderView .story-voice-controls { display:none !important; }
-
-    #bookView {
-      min-height:0;
-      display:grid;
-      gap:12px;
-      font-size:18px;
-      line-height:1.7;
-      color:#2D1060;
-    }
-
-    .book-title {
-      text-align:center;
-      font-size:clamp(26px,6vw,42px);
-      color:#5B21B6;
-      line-height:1.15;
-    }
-
-    .story-paragraph {
-      padding:12px 14px;
-      border-radius:14px;
-      background:rgba(255,255,255,.85);
-    }
-
-    .story-paragraph.active,
-    .story-paragraph.reading-active {
-      outline:5px solid #FFD700;
-    }
-
     @media (orientation:landscape) and (min-width:740px) {
       .storybook-featured-grid {
         grid-template-columns:repeat(4,minmax(0,1fr));
@@ -1463,7 +1432,7 @@ const WORLD_ZONES_PORTRAIT = {
   numbers: { x:'72%', y:'24%', w:'30%', h:'21%', label:'숫자놀이터', emoji:'🔢' },
   letters: { x:'27%', y:'47%', w:'32%', h:'22%', label:'글자놀이터', emoji:'🔤' },
   cars: { x:'73%', y:'49%', w:'32%', h:'24%', label:'자동차놀이터', emoji:'🚗' },
-  story: { x:'29%', y:'74%', w:'34%', h:'24%', label:'동화놀이터', emoji:'🏰' },
+  story: { x:'29%', y:'74%', w:'34%', h:'24%', label:'만화극장', emoji:'🏰' },
   voice: { x:'72%', y:'76%', w:'32%', h:'23%', label:'말하기놀이터', emoji:'🎤' },
   station: { x:'50%', y:'88%', label:'중앙역', emoji:'🚉' }
 };
@@ -1473,7 +1442,7 @@ const WORLD_ZONES_LANDSCAPE = {
   numbers: { x:'83%', y:'24%', w:'25%', h:'30%', label:'숫자놀이터', emoji:'🔢' },
   letters: { x:'17%', y:'53%', w:'27%', h:'25%', label:'글자놀이터', emoji:'🔤' },
   cars: { x:'77%', y:'55%', w:'27%', h:'25%', label:'자동차놀이터', emoji:'🚗' },
-  story: { x:'18%', y:'80%', w:'28%', h:'28%', label:'동화놀이터', emoji:'🏰' },
+  story: { x:'18%', y:'80%', w:'28%', h:'28%', label:'만화극장', emoji:'🏰' },
   voice: { x:'79%', y:'80%', w:'29%', h:'28%', label:'말하기놀이터', emoji:'🎤' },
   station: { x:'50%', y:'92%', label:'중앙역', emoji:'🚉' }
 };
@@ -1573,7 +1542,7 @@ const LAND_CHARACTERS = {
   numbers: { id:'mom', mainX:'82%', mainY:'17%', landX:'76%', landY:'72%', action:'openNumberCountGame()', greeting:'엄마랑 숫자 놀이 해볼까?' },
   letters: { id:'rona', mainX:'18%', mainY:'42%', landX:'24%', landY:'72%', action:'openLetterGame()', greeting:'로나랑 글자 놀이 해볼까?' },
   cars: { id:'sicheoni', mainX:'82%', mainY:'43%', landX:'76%', landY:'72%', action:'openCarGarageGame()', greeting:'시천이랑 차를 고쳐볼까?' },
-  story: { id:'reumi', mainX:'18%', mainY:'68%', landX:'24%', landY:'72%', action:'openStoryTheater()', greeting:'름이랑 동화 읽어볼까?' },
+  story: { id:'reumi', mainX:'18%', mainY:'68%', landX:'24%', landY:'72%', action:'openStoryTheater()', greeting:'름이랑 만화 볼까?' },
   voice: { id:'nuni', mainX:'82%', mainY:'69%', landX:'76%', landY:'72%', action:'openVoiceZone()', greeting:'눈이랑 말하기 해볼까?' }
 };
 
@@ -2091,8 +2060,8 @@ function openLetterLand(){ renderZoneLand(ZONE_CONFIGS.letters); }
 function openCarLand(){ renderZoneLand(ZONE_CONFIGS.cars); }
 
 function openStoryLand(){
-  openImageLand('story','📖 동화놀이터',WORLD_ASSETS.story,[
-    { x:'50%', y:'43%', w:'62%', h:'48%', label:'동화놀이터', emoji:'📖', action:'openStoryTheater()' }
+  openImageLand('story','🎬 만화극장',WORLD_ASSETS.story,[
+    { x:'50%', y:'43%', w:'62%', h:'48%', label:'만화극장', emoji:'📖', action:'openStoryTheater()' }
   ]);
 }
 
@@ -2246,7 +2215,7 @@ function renderPlaceholderZone(zoneId){
     </div>`;
   playVoiceSequenceGuide([
     [LAND_VOICE_IDS[zoneId],zone.label],
-    ['common.zoneArrive',`${zone.label}에 도착했어. 놀이를 준비하고 있어.`]
+    ['common.zoneArrive',`${zone.label}에 도착했어. 재미있는 걸 준비하고 있어.`]
   ]);
 }
 
@@ -2501,151 +2470,35 @@ function initGarageRound(){
 function openStoryTheater(){
   cleanupActiveGame();
   closeGarageHandlers();
+  if(window.stopStoryReading) window.stopStoryReading(true);
   const root=document.getElementById('sihyeonPlayOS');
   const stars=Array.from({length:24},(_,i)=>`<div class="star" style="left:${Math.random()*100}%;top:${Math.random()*35}%;animation-delay:${(i*.37)%3}s;width:${Math.random()>.6?6:4}px;height:${Math.random()>.6?6:4}px"></div>`).join('');
   root.innerHTML=`
     <div class="fullscreen-zone">
       <div class="story-bg"></div>
       <div class="story-stars">${stars}</div>
-      ${makeZoneHead('📖 동화놀이터')}
+      ${makeZoneHead('🎬 만화극장')}
       <div class="story-search-row">
         <span class="story-search-icon">🔍</span>
         <input type="search" id="storySearchInput" class="story-search-input"
-          placeholder="제목이나 주제 검색..."
-          oninput="filterStoriesBySearch(this.value)"
-          aria-label="동화 검색">
+          placeholder="보고 싶은 만화 검색..."
+          oninput="window.renderStoryWorld && window.renderStoryWorld()"
+          aria-label="만화 검색">
       </div>
-      <nav id="storyFilterNav" class="story-filter-row">
-        <button class="story-filter-btn active" data-theme="전체" onclick="renderStoryGrid('전체')">📚 전체</button>
-        <button class="story-filter-btn" data-theme="자동차" onclick="renderStoryGrid('자동차')">🚗 자동차</button>
-        <button class="story-filter-btn" data-theme="공룡" onclick="renderStoryGrid('공룡')">🦕 공룡</button>
-        <button class="story-filter-btn" data-theme="동물" onclick="renderStoryGrid('동물')">🐰 동물</button>
-        <button class="story-filter-btn" data-theme="우주" onclick="renderStoryGrid('우주')">🚀 우주</button>
-        <button class="story-filter-btn" data-theme="바다" onclick="renderStoryGrid('바다')">🌊 바다</button>
-        <button class="story-filter-btn" data-theme="전래" onclick="renderStoryGrid('전래')">🏮 전래</button>
-        <button class="story-filter-btn" data-theme="이솝" onclick="renderStoryGrid('이솝')">🌿 이솝</button>
-        <button class="story-filter-btn" data-theme="잠자리" onclick="renderStoryGrid('잠자리')">🌙 잠자리</button>
-        <button class="story-filter-btn" data-theme="저장한 동화" onclick="renderStoryGrid('저장한 동화')">💖 저장</button>
-      </nav>
       <div class="zone-body">
         <div id="storyLibraryGrid" class="story-card-grid"></div>
-        <button class="story-load-more" id="storyLoadMoreBtn" style="display:none;" onclick="loadMoreStories()">📖 더 보기</button>
       </div>
-      <section id="storyReaderView" style="display:none; position:absolute; inset:0; z-index:50; overflow-y:auto; background:linear-gradient(180deg,#2D0060 0%,#6A0DAD 60%,#1A0040 100%); padding:max(14px,env(safe-area-inset-top)) 10px max(14px,env(safe-area-inset-bottom));">
-        <div id="bookView"></div>
-      </section>
     </div>`;
 
   if(window.renderStoryWorld) window.renderStoryWorld();
-  else if(window.renderStoryGrid) window.renderStoryGrid('전체');
-  else setTimeout(()=>{ if(window.renderStoryWorld) window.renderStoryWorld(); else window.renderStoryGrid?.('전체'); },0);
+  else setTimeout(()=>window.renderStoryWorld?.(),0);
 
   playVoiceSequenceGuide([
-    ['common.land.story','동화놀이터'],
-    ['common.landArrive','동화놀이터에 도착했어. 하고 싶은 걸 살짝 눌러볼까?']
+    ['common.land.story','만화극장'],
+    ['common.landArrive','만화극장에 도착했어. 보고 싶은 만화를 살짝 눌러볼까?']
   ],true);
 }
 
-function filterStoriesBySearch(query){
-  _renderStoryGridPage(window.currentStoryFilter||'전체',query.trim());
-}
-
-window._storyPage=1;
-
-function loadMoreStories(){
-  window._storyPage=(window._storyPage||1)+1;
-  _renderStoryGridPage(window.currentStoryFilter||'전체');
-}
-
-const STORY_PAGE_SIZE=12;
-
-function _storyCoverEmoji(theme){
-  const t=String(theme||'');
-  if(t.includes('자동차')) return '🚜';
-  if(t.includes('공룡')) return '🦖';
-  if(t.includes('우주')) return '🚀';
-  if(t.includes('바다')) return '🐳';
-  if(t.includes('잠자리')) return '🌙';
-  if(t.includes('전래')) return '🐯';
-  if(t.includes('이솝')) return '🌿';
-  if(t.includes('세계명작')||t.includes('명작')) return '🏰';
-  if(t.includes('동물')) return '🐰';
-  return '📖';
-}
-
-function renderStoryGrid(theme){
-  window.currentStoryFilter=theme||'전체';
-  window._storyPage=1;
-  document.querySelectorAll('[data-theme]').forEach(b=>{
-    b.classList.toggle('active',b.dataset.theme===(theme||'전체'));
-  });
-  const si=document.getElementById('storySearchInput');
-  if(si) si.value='';
-  _renderStoryGridPage(theme,'');
-}
-
-function _renderStoryGridPage(theme,query){
-  const grid=document.getElementById('storyLibraryGrid');
-  if(!grid) return;
-
-  const reader=document.getElementById('storyReaderView');
-  if(reader){ reader.style.display='none'; reader.classList.remove('active'); }
-
-  grid.style.display='grid';
-  grid.className='story-card-grid storybook-featured-grid';
-
-  document.querySelector('.story-search-row')?.classList.remove('story-ui-hidden');
-  document.querySelector('.story-filter-row')?.classList.remove('story-ui-hidden');
-
-  const library=Array.isArray(window.STORY_LIBRARY)?window.STORY_LIBRARY:[];
-  const saved=Array.isArray(db.playground.storyWorld.savedStories)?db.playground.storyWorld.savedStories:[];
-  const filter=theme||window.currentStoryFilter||'전체';
-  const q=(query||'').trim().toLowerCase();
-  const page=window._storyPage||1;
-
-  let list;
-  if(filter==='저장한 동화'){
-    list=saved;
-  }else{
-    list=library.filter(s=>{
-      if(filter!=='전체'&&!String(s.theme||'').includes(filter)) return false;
-      if(q){
-        const haystack=(s.title+' '+(s.desc||'')+' '+(s.theme||'')+' '+(s.plotSeed||'')).toLowerCase();
-        return haystack.includes(q);
-      }
-      return true;
-    });
-  }
-
-  const total=list.length;
-  const paged=list.slice(0,page*STORY_PAGE_SIZE);
-
-  if(!paged.length){
-    grid.innerHTML=`<div class="story-empty">📚 "찾는 동화"가 없어요</div>`;
-    const btn=document.getElementById('storyLoadMoreBtn');
-    if(btn) btn.style.display='none';
-    return;
-  }
-
-  grid.innerHTML=paged.map(story=>{
-    const id=story.id||story.savedId;
-    const emoji=_storyCoverEmoji(story.theme);
-    const img=story.coverImage||'';
-    return `
-      <button class="storybook-book-card" type="button"
-        onclick="readStoryById('${escapeHtml(id)}')"
-        aria-label="${escapeHtml(story.title)} 읽기">
-        <span class="storybook-book-cover">
-          ${img ? `<img src="${img}" alt="${escapeHtml(story.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid';">` : ''}
-          <span class="storybook-book-fallback" ${img?'style="display:none;"':''}>${emoji}</span>
-        </span>
-        <span class="storybook-book-title">${escapeHtml(story.title)}</span>
-      </button>`;
-  }).join('');
-
-  const btn=document.getElementById('storyLoadMoreBtn');
-  if(btn) btn.style.display=paged.length<total?'block':'none';
-}
 
 let currentPin='';
 
@@ -2741,9 +2594,9 @@ function renderParentDashboard(){
           </div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-title">오늘 읽은 동화</div>
+          <div class="dash-card-title">오늘 본 만화</div>
           <ul class="story-list">
-            ${todayLog.storiesWatched.length ? todayLog.storiesWatched.map(s=>`<li>📖 ${escapeHtml(s)}</li>`).join('') : '<li class="story-empty-lbl">아직 읽은 동화가 없어요.</li>'}
+            ${todayLog.storiesWatched.length ? todayLog.storiesWatched.map(s=>`<li>📖 ${escapeHtml(s)}</li>`).join('') : '<li class="story-empty-lbl">아직 본 만화가 없어요.</li>'}
           </ul>
         </div>
         <div class="dash-card">
@@ -2769,7 +2622,6 @@ function renderParentDashboard(){
 function isStoryUsageTimerPaused(){
   return Boolean(
     document.getElementById('storyLibraryGrid') ||
-    document.getElementById('storyReaderView') ||
     document.getElementById('classicVideoTheater')
   );
 }
@@ -2797,8 +2649,6 @@ Object.assign(window,{
   openParkingGame, openConstructionSiteGame, openCarGarageGame, openCodingCarGame, openLifeSequenceGame,
   openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
-  filterStoriesBySearch, loadMoreStories,
-  renderStoryGrid, _renderStoryGridPage,
   showPinOverlay, handlePinPad, closePinOverlay, renderParentDashboard
 });
 
@@ -2807,35 +2657,6 @@ preloadWorldImages();
 renderWorldMapHome();
 
 window.addEventListener('load',()=>{
-  const _origClose=window.closeStoryReader;
-  window.closeStoryReader=function(){
-    if(typeof _origClose==='function') _origClose();
-    setTimeout(()=>{
-      if(document.getElementById('storyLibraryGrid')){
-        window.renderStoryGrid(window.currentStoryFilter||'전체');
-      }
-    },0);
-  };
-
-  setTimeout(()=>{
-    const origRead=window.readStoryById;
-    if(typeof origRead==='function'){
-      window.readStoryById=function(id){
-        const story=window.STORY_LIBRARY?.find(s=>s.id===id||s.savedId===id);
-        if(story){
-          const todayStr=getToday();
-          if(db.parentLog&&db.parentLog.daily[todayStr]){
-            if(!db.parentLog.daily[todayStr].storiesWatched.includes(story.title)){
-              db.parentLog.daily[todayStr].storiesWatched.push(story.title);
-              save();
-            }
-          }
-        }
-        return origRead.apply(this,arguments);
-      };
-    }
-  },500);
-
   setTimeout(()=>{
     if(document.getElementById('storyLibraryGrid')&&window.bootStoryWorldIfMounted){
       window.bootStoryWorldIfMounted();
@@ -2871,19 +2692,12 @@ if('serviceWorker' in navigator){
 </script>
 
 <script src="./js/voice-engine.js"></script>
-<script src="./js/ttokttoki-engine.js"></script>
 <script src="./js/zones/voice-zone.js"></script>
 <script src="./js/zones/karaoke-zone.js"></script>
 <script src="./js/zones/boardland-zone.js"></script>
 
-<script src="./js/data/story-pack-registry.js"></script>
-<script src="./js/data/classics/classic_three_little_pigs.js"></script>
-<script src="./js/data/classics/classic_ugly_duckling.js"></script>
-<script src="./js/data/classics/classic_snow_white.js"></script>
-<script src="./js/data/classics/classic_jack_and_the_beanstalk.js"></script>
 <script src="./js/data/classic-video-registry.js"></script>
 
-<script src="./js/story-data.js"></script>
 <script src="./js/story-world.js"></script>
 
 <script src="./js/games/vehicle-memory.js"></script>
