@@ -1,0 +1,18 @@
+{
+    "sourceFile": "sw.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1778602092726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1778602092726,
+            "name": "Commit-0",
+            "content": "const CACHE_NAME = 'sihyeon-play-os-v1.0.26';\r\n\r\nconst ASSETS = [\r\n  './',\r\n  './index.html',\r\n  './manifest.json',\r\n  './icon.png',\r\n\r\n  './js/voice-engine.js',\r\n  './js/ttokttoki-engine.js',\r\n  './js/zones/voice-zone.js',\r\n  './js/zones/karaoke-zone.js',\r\n\r\n  './js/data/story-pack-registry.js',\r\n\r\n  './js/story-data.js',\r\n  './js/story-world.js',\r\n\r\n  './js/games/vehicle-memory.js',\r\n  './js/games/number-count.js',\r\n  './js/games/number-basket.js',\r\n  './js/games/number-vehicles.js',\r\n  './js/games/letter-play.js',\r\n  './js/games/color-balloon.js',\r\n  './js/games/car-garage.js',\r\n  './js/games/coding-car.js',\r\n\r\n  './assets/games/cards/vehicle-memory.webp',\r\n  './assets/games/cards/color-balloon.webp',\r\n  './assets/games/cards/number-count.webp',\r\n  './assets/games/cards/number-basket.webp',\r\n  './assets/games/cards/number-vehicles.png',\r\n  './assets/games/cards/number-blocks.webp',\r\n  './assets/games/cards/letter-play.webp',\r\n  './assets/games/cards/car-garage.webp',\r\n  './assets/games/cards/coding-car.png',\r\n  './assets/games/cards/parking-lot.webp',\r\n  './assets/games/cards/construction-site.webp',\r\n  './assets/games/cards/karaoke-zone.webp',\r\n\r\n  './assets/games/codingCar/garage.png',\r\n  './assets/games/codingCar/arrow-up.webp',\r\n  './assets/games/codingCar/arrow-down.webp',\r\n  './assets/games/codingCar/arrow-left.webp',\r\n  './assets/games/codingCar/arrow-right.webp',\r\n\r\n  './assets/karaoke/three_bears.wav',\r\n  './assets/karaoke/twinkle.wav',\r\n  './assets/karaoke/butterfly.wav',\r\n  './assets/karaoke/rabbit.wav',\r\n  './assets/karaoke/birthday.wav',\r\n  './assets/karaoke/airplane.wav',\r\n  './assets/karaoke/school_bell.wav',\r\n  './assets/karaoke/choo_choo_sihyeon.wav',\r\n  './assets/karaoke/shark_family_adventure_v2.wav',\r\n  './assets/karaoke/penguin_friend_parade.wav',\r\n  './assets/karaoke/dino_rescue_go.wav',\r\n  './assets/karaoke/little_bus_drive_v2.wav',\r\n  './assets/karaoke/shark_family_adventure_chant.wav',\r\n  './assets/karaoke/penguin_friend_march.wav',\r\n  './assets/karaoke/dino_rescue_action.wav',\r\n  './assets/karaoke/little_bus_drive_chant.wav',\r\n\r\n  './assets/stories/storybook_main_cover.png'\r\n];\r\n\r\nself.addEventListener('install', (e) => {\r\n  e.waitUntil(\r\n    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))\r\n  );\r\n  self.skipWaiting();\r\n});\r\n\r\nself.addEventListener('activate', (e) => {\r\n  e.waitUntil(\r\n    caches.keys().then((keys) => {\r\n      return Promise.all(\r\n        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))\r\n      );\r\n    })\r\n  );\r\n  self.clients.claim();\r\n});\r\n\r\nself.addEventListener('fetch', (e) => {\r\n  if (e.request.method !== 'GET') return;\r\n\r\n  e.respondWith(\r\n    fetch(e.request)\r\n      .then((response) => {\r\n        const copy = response.clone();\r\n        caches.open(CACHE_NAME).then((cache) => {\r\n          cache.put(e.request, copy).catch(() => {});\r\n        });\r\n        return response;\r\n      })\r\n      .catch(() => caches.match(e.request))\r\n  );\r\n});\r\n"
+        }
+    ]
+}
