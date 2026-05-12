@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.0.28';
+const CACHE_NAME = 'sihyeon-play-os-v1.0.29';
 
 const ASSETS = [
   './',
@@ -75,17 +75,47 @@ const ASSETS = [
   './assets/karaoke/dino_rescue_action.wav',
   './assets/karaoke/little_bus_drive_chant.wav',
 
+  './assets/stories/folk_covers/folk_bedtime_moon.png',
   './assets/stories/folk_covers/folk_bedtime_moon.webp',
+  './assets/stories/folk_covers/folk_bedtime_moon.jpg',
+  './assets/stories/folk_covers/folk_bedtime_moon.jpeg',
+  './assets/stories/folk_covers/folk_collection_main.png',
   './assets/stories/folk_covers/folk_collection_main.webp',
+  './assets/stories/folk_covers/folk_collection_main.jpg',
+  './assets/stories/folk_covers/folk_collection_main.jpeg',
+  './assets/stories/folk_covers/folk_dokkaebi_magic.png',
   './assets/stories/folk_covers/folk_dokkaebi_magic.webp',
+  './assets/stories/folk_covers/folk_dokkaebi_magic.jpg',
+  './assets/stories/folk_covers/folk_dokkaebi_magic.jpeg',
+  './assets/stories/folk_covers/folk_longplay_adventure.png',
   './assets/stories/folk_covers/folk_longplay_adventure.webp',
+  './assets/stories/folk_covers/folk_longplay_adventure.jpg',
+  './assets/stories/folk_covers/folk_longplay_adventure.jpeg',
+  './assets/stories/folk_covers/folk_popular_collection.png',
   './assets/stories/folk_covers/folk_popular_collection.webp',
+  './assets/stories/folk_covers/folk_popular_collection.jpg',
+  './assets/stories/folk_covers/folk_popular_collection.jpeg',
+  './assets/stories/folk_covers/folk_tiger_magpie.png',
   './assets/stories/folk_covers/folk_tiger_magpie.webp',
+  './assets/stories/folk_covers/folk_tiger_magpie.jpg',
+  './assets/stories/folk_covers/folk_tiger_magpie.jpeg',
 
+  './assets/stories/classic_covers/classic_three_little_pigs.png',
   './assets/stories/classic_covers/classic_three_little_pigs.webp',
+  './assets/stories/classic_covers/classic_three_little_pigs.jpg',
+  './assets/stories/classic_covers/classic_three_little_pigs.jpeg',
+  './assets/stories/classic_covers/classic_ugly_duckling.png',
   './assets/stories/classic_covers/classic_ugly_duckling.webp',
+  './assets/stories/classic_covers/classic_ugly_duckling.jpg',
+  './assets/stories/classic_covers/classic_ugly_duckling.jpeg',
+  './assets/stories/classic_covers/classic_snow_white.png',
   './assets/stories/classic_covers/classic_snow_white.webp',
-  './assets/stories/classic_covers/classic_jack_and_the_beanstalk.webp'
+  './assets/stories/classic_covers/classic_snow_white.jpg',
+  './assets/stories/classic_covers/classic_snow_white.jpeg',
+  './assets/stories/classic_covers/classic_jack_and_the_beanstalk.png',
+  './assets/stories/classic_covers/classic_jack_and_the_beanstalk.webp',
+  './assets/stories/classic_covers/classic_jack_and_the_beanstalk.jpg',
+  './assets/stories/classic_covers/classic_jack_and_the_beanstalk.jpeg'
 ];
 
 function safeCacheAssets(cache, assets) {

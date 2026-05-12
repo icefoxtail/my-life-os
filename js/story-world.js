@@ -90,15 +90,91 @@
     return src;
   }
 
-  function buildFallbackCoverPath(item, id, groupName) {
+  function getCoverBaseDir(item, id, groupName) {
     const haystack = [id, item?.title, item?.theme, item?.group, groupName, ...(Array.isArray(item?.tags) ? item.tags : [])].join(' ').toLowerCase();
-    if (/folk|전래|옛이야기/.test(haystack)) {
-      return `./assets/stories/folk_covers/${id}.webp`;
-    }
-    if (/classic|명작|세계명작/.test(haystack)) {
-      return `./assets/stories/classic_covers/${id}.webp`;
-    }
+    if (/folk|전래|옛이야기/.test(haystack)) return './assets/stories/folk_covers/';
+    if (/classic|명작|세계명작/.test(haystack)) return './assets/stories/classic_covers/';
     return '';
+  }
+
+  function resolveFallbackCoverSlug(item, id, groupName) {
+    const haystack = [id, item?.title, item?.desc, item?.theme, item?.group, groupName, ...(Array.isArray(item?.tags) ? item.tags : [])].join(' ').toLowerCase();
+
+    if (/전래|folk|옛이야기/.test(haystack)) {
+      if (/도깨비|dokkaebi|magic/.test(haystack)) return 'folk_dokkaebi_magic';
+      if (/호랑이|까치|tiger|magpie/.test(haystack)) return 'folk_tiger_magpie';
+      if (/잠자리|달|밤|bedtime|moon/.test(haystack)) return 'folk_bedtime_moon';
+      if (/모험|긴|long|adventure/.test(haystack)) return 'folk_longplay_adventure';
+      if (/12|인기|popular/.test(haystack)) return 'folk_popular_collection';
+      if (/모아|모음|collection|main/.test(haystack)) return 'folk_collection_main';
+    }
+
+    return String(id || '').trim();
+  }
+
+  function buildFallbackCoverPath(item, id, groupName) {
+    const baseDir = getCoverBaseDir(item, id, groupName);
+    const slug = resolveFallbackCoverSlug(item, id, groupName);
+    return baseDir && slug ? `${baseDir}${slug}.png` : '';
+  }
+
+  function buildCoverFallbackCandidates(src, item, id, groupName) {
+    const candidates = [];
+    const add = value => {
+      const clean = String(value || '').trim();
+      if (clean && !candidates.includes(clean)) candidates.push(clean);
+    };
+
+    add(src);
+
+    const baseDir = getCoverBaseDir(item, id, groupName);
+    const fallbackSlug = resolveFallbackCoverSlug(item, id, groupName);
+    [fallbackSlug, id].filter(Boolean).forEach(slug => {
+      if (baseDir) {
+        add(`${baseDir}${slug}.png`);
+        add(`${baseDir}${slug}.webp`);
+        add(`${baseDir}${slug}.jpg`);
+        add(`${baseDir}${slug}.jpeg`);
+      }
+    });
+
+    const current = String(src || '').trim();
+    const extMatch = current.match(/^(.*)\.(png|webp|jpg|jpeg)$/i);
+    if (extMatch) {
+      const stem = extMatch[1];
+      add(`${stem}.png`);
+      add(`${stem}.webp`);
+      add(`${stem}.jpg`);
+      add(`${stem}.jpeg`);
+    }
+
+    return candidates;
+  }
+
+  function encodeCoverFallbacks(values) {
+    return escapeAttr(JSON.stringify(values));
+  }
+
+  function handleStoryCoverError(img) {
+    if (!img) return;
+    let candidates = [];
+    try {
+      candidates = JSON.parse(img.dataset.coverFallbacks || '[]');
+    } catch (error) {
+      candidates = [];
+    }
+
+    const current = img.getAttribute('src') || '';
+    const next = candidates.find(src => src && src !== current && !img.dataset[`tried_${hashString(src)}`]);
+    if (next) {
+      img.dataset[`tried_${hashString(next)}`] = '1';
+      img.src = next;
+      return;
+    }
+
+    img.onerror = null;
+    img.style.display = 'none';
+    if (img.nextElementSibling) img.nextElementSibling.style.display = 'grid';
   }
 
   function resolveVideoCoverImage(item, id, groupName) {
@@ -401,12 +477,14 @@
     const fallbackIcon = String(item.group || item.theme || '').includes('전래') ? '🐯' : '🏰';
     const loadingMode = index < 9 ? 'eager' : 'lazy';
     const videoCount = collectVideoIds(item).length;
+    const coverFallbacks = buildCoverFallbackCandidates(cover, item, item.id, item.group || item.theme || '');
+    const firstCover = coverFallbacks[0] || '';
 
     return `
       <button class="story-youtube-card" type="button" onclick="openClassicVideoTheater('${escapeAttr(item.id)}')" aria-label="${escapeAttr(item.title)} 보기">
         <span class="story-youtube-cover">
-          ${cover ? `<img src="${escapeAttr(cover)}" alt="${escapeAttr(item.title)}" loading="${loadingMode}" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid';">` : ''}
-          <span class="story-youtube-fallback" ${cover ? 'style="display:none;"' : ''}>${fallbackIcon}</span>
+          ${firstCover ? `<img src="${escapeAttr(firstCover)}" data-cover-fallbacks='${encodeCoverFallbacks(coverFallbacks)}' alt="${escapeAttr(item.title)}" loading="${loadingMode}" decoding="async" onerror="handleStoryCoverError(this)">` : ''}
+          <span class="story-youtube-fallback" ${firstCover ? 'style="display:none;"' : ''}>${fallbackIcon}</span>
         </span>
         <span class="story-youtube-card-title">${escapeHtml(item.title)}</span>
         <span class="story-youtube-play">▶ 랜덤 보기${videoCount > 1 ? ` ${videoCount}` : ''}</span>
@@ -511,6 +589,7 @@
   window.closeClassicVideoTheater = closeClassicVideoTheater;
   window.buildYoutubeEmbedUrl = buildYoutubeEmbedUrl;
   window.reshuffleStoryVideos = reshuffleStoryVideos;
+  window.handleStoryCoverError = handleStoryCoverError;
   window.generateStoryFromSeed = noop;
   window.saveCurrentStory = noop;
   window.exportCurrentStoryPack = noop;
