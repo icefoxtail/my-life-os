@@ -12,6 +12,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235BC8F5'/%3E%3Ccircle cx='22' cy='42' r='7' fill='%231A2E3B'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%231A2E3B'/%3E%3Cpath d='M10 37h44l-5-15H24L15 31z' fill='%23FFD93D'/%3E%3Cpath d='M24 22h17l4 11H18z' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./assets/world/park_main.webp">
+  <link rel="preload" as="image" href="./assets/world/park_main_landscape.webp">
   <style>
     :root {
       --sky-top:#5BC8F5;
@@ -390,6 +392,53 @@
 
     @media (min-aspect-ratio:9/16) { .world-map-frame { height:100dvh; width:auto; } }
     @media (max-aspect-ratio:9/16) { .world-map-frame { width:100vw; height:auto; } }
+
+
+    .world-map-screen.is-landscape-home .world-map-frame {
+      aspect-ratio:16/9;
+    }
+
+    .world-map-screen.is-landscape-home .world-map-bg {
+      object-fit:fill;
+    }
+
+    .world-map-screen.is-landscape-home .zone-label,
+    .world-map-screen.is-portrait-art-home .zone-label {
+      display:none;
+    }
+
+    .world-map-screen.is-landscape-home.map-fallback .zone-label,
+    .world-map-screen.is-portrait-art-home.map-fallback .zone-label {
+      display:block;
+    }
+
+    .sihyeon-avatar.home-art-avatar {
+      opacity:0;
+    }
+
+    .sihyeon-avatar.home-art-avatar.is-walking {
+      opacity:1;
+    }
+
+    @media (orientation:landscape) {
+      .world-map-screen.is-landscape-home .world-map-frame {
+        width:min(100vw, calc(100dvh * 16 / 9));
+        height:auto;
+      }
+    }
+
+    @media (orientation:landscape) and (min-aspect-ratio:16/9) {
+      .world-map-screen.is-landscape-home .world-map-frame {
+        height:100dvh;
+        width:auto;
+      }
+    }
+
+    @media (orientation:portrait) {
+      .world-map-screen.is-portrait-art-home .world-map-frame {
+        aspect-ratio:9/16;
+      }
+    }
 
     .fullscreen-zone {
       position:absolute;
@@ -1387,6 +1436,7 @@ window.currentStoryFilter = currentStoryFilter;
 
 const WORLD_ASSETS = {
   main: './assets/world/park_main.webp',
+  mainLandscape: './assets/world/park_main_landscape.webp',
   game: './assets/world/game_land_map.webp',
   numbers: './assets/world/number_land_map.webp',
   letters: './assets/world/letter_land_map.webp',
@@ -1395,7 +1445,20 @@ const WORLD_ASSETS = {
   voice: './assets/world/voice_land_map.webp'
 };
 
-const WORLD_ZONES = {
+function preloadWorldImages() {
+  const sources = [
+    WORLD_ASSETS.main,
+    WORLD_ASSETS.mainLandscape
+  ].filter(Boolean);
+
+  sources.forEach(src => {
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = src;
+  });
+}
+
+const WORLD_ZONES_PORTRAIT = {
   game: { x:'29%', y:'23%', w:'30%', h:'20%', label:'즐거운놀이터', emoji:'🎮' },
   numbers: { x:'72%', y:'24%', w:'30%', h:'21%', label:'숫자놀이터', emoji:'🔢' },
   letters: { x:'27%', y:'47%', w:'32%', h:'22%', label:'글자놀이터', emoji:'🔤' },
@@ -1405,7 +1468,35 @@ const WORLD_ZONES = {
   station: { x:'50%', y:'88%', label:'중앙역', emoji:'🚉' }
 };
 
-const ZONE_PATHS = {
+const WORLD_ZONES_LANDSCAPE = {
+  game: { x:'17%', y:'25%', w:'25%', h:'30%', label:'즐거운놀이터', emoji:'🎮' },
+  numbers: { x:'83%', y:'24%', w:'25%', h:'30%', label:'숫자놀이터', emoji:'🔢' },
+  letters: { x:'17%', y:'53%', w:'27%', h:'25%', label:'글자놀이터', emoji:'🔤' },
+  cars: { x:'77%', y:'55%', w:'27%', h:'25%', label:'자동차놀이터', emoji:'🚗' },
+  story: { x:'18%', y:'80%', w:'28%', h:'28%', label:'동화놀이터', emoji:'🏰' },
+  voice: { x:'79%', y:'80%', w:'29%', h:'28%', label:'말하기놀이터', emoji:'🎤' },
+  station: { x:'50%', y:'92%', label:'중앙역', emoji:'🚉' }
+};
+
+const WORLD_ZONES = WORLD_ZONES_PORTRAIT;
+
+function isLandscapeHomeMode() {
+  return window.innerWidth > window.innerHeight;
+}
+
+function getWorldZones() {
+  return isLandscapeHomeMode() ? WORLD_ZONES_LANDSCAPE : WORLD_ZONES_PORTRAIT;
+}
+
+function getWorldZone(zoneId) {
+  return getWorldZones()[zoneId] || WORLD_ZONES_PORTRAIT[zoneId];
+}
+
+function getWorldMainAsset() {
+  return isLandscapeHomeMode() ? WORLD_ASSETS.mainLandscape : WORLD_ASSETS.main;
+}
+
+const ZONE_PATHS_PORTRAIT = {
   game: [ {x:'50%',y:'88%'}, {x:'50%',y:'80%'}, {x:'47%',y:'72%'}, {x:'42%',y:'64%'}, {x:'37%',y:'55%'}, {x:'33%',y:'45%'}, {x:'30%',y:'34%'}, {x:'29%',y:'23%'} ],
   numbers: [ {x:'50%',y:'88%'}, {x:'50%',y:'80%'}, {x:'53%',y:'72%'}, {x:'58%',y:'64%'}, {x:'63%',y:'56%'}, {x:'67%',y:'46%'}, {x:'70%',y:'35%'}, {x:'72%',y:'24%'} ],
   letters: [ {x:'50%',y:'88%'}, {x:'45%',y:'84%'}, {x:'40%',y:'79%'}, {x:'36%',y:'73%'}, {x:'32%',y:'66%'}, {x:'29%',y:'59%'}, {x:'27%',y:'52%'}, {x:'27%',y:'47%'} ],
@@ -1413,6 +1504,25 @@ const ZONE_PATHS = {
   story: [ {x:'50%',y:'88%'}, {x:'45%',y:'86%'}, {x:'40%',y:'84%'}, {x:'35%',y:'81%'}, {x:'31%',y:'78%'}, {x:'29%',y:'74%'} ],
   voice: [ {x:'50%',y:'88%'}, {x:'55%',y:'86%'}, {x:'60%',y:'84%'}, {x:'65%',y:'81%'}, {x:'69%',y:'78%'}, {x:'72%',y:'76%'} ],
 };
+
+const ZONE_PATHS_LANDSCAPE = {
+  game: [ {x:'50%',y:'78%'}, {x:'43%',y:'68%'}, {x:'35%',y:'57%'}, {x:'27%',y:'43%'}, {x:'17%',y:'25%'} ],
+  numbers: [ {x:'50%',y:'78%'}, {x:'57%',y:'66%'}, {x:'66%',y:'52%'}, {x:'75%',y:'38%'}, {x:'83%',y:'24%'} ],
+  letters: [ {x:'50%',y:'78%'}, {x:'42%',y:'72%'}, {x:'33%',y:'65%'}, {x:'24%',y:'59%'}, {x:'17%',y:'53%'} ],
+  cars: [ {x:'50%',y:'78%'}, {x:'58%',y:'72%'}, {x:'66%',y:'65%'}, {x:'72%',y:'60%'}, {x:'77%',y:'55%'} ],
+  story: [ {x:'50%',y:'78%'}, {x:'42%',y:'82%'}, {x:'32%',y:'84%'}, {x:'24%',y:'82%'}, {x:'18%',y:'80%'} ],
+  voice: [ {x:'50%',y:'78%'}, {x:'60%',y:'82%'}, {x:'69%',y:'84%'}, {x:'75%',y:'82%'}, {x:'79%',y:'80%'} ],
+};
+
+const ZONE_PATHS = ZONE_PATHS_PORTRAIT;
+
+function getZonePaths() {
+  return isLandscapeHomeMode() ? ZONE_PATHS_LANDSCAPE : ZONE_PATHS_PORTRAIT;
+}
+
+function getZonePath(zoneId) {
+  return getZonePaths()[zoneId] || ZONE_PATHS_PORTRAIT[zoneId];
+}
 
 const WALK_MIN_STEP_MS = 260;
 const WALK_MAX_STEP_MS = 560;
@@ -1439,7 +1549,7 @@ function getWalkStepDuration(prev, next) {
 }
 
 function estimateWalkDuration(zoneId) {
-  const path = ZONE_PATHS[zoneId];
+  const path = getZonePath(zoneId);
   if (!Array.isArray(path) || path.length < 2) return 900;
   let total = 0;
   for (let i = 1; i < path.length; i++) {
@@ -1810,25 +1920,30 @@ function travelToZoneFromCharacter(zoneId){
   travelToZone(zoneId);
 }
 
-function renderWorldMapHome(){
+function renderWorldMapHome(options={}){
+  const shouldCountLaunch = options.countLaunch !== false;
   const todayStr=getToday();
-  if(db.parentLog?.daily[todayStr]!==undefined){
+  if(shouldCountLaunch && db.parentLog?.daily[todayStr]!==undefined){
     db.parentLog.daily[todayStr].launchCount=(db.parentLog.daily[todayStr].launchCount||0)+1;
     save();
   }
   cleanupActiveGame();
   closeGarageHandlers();
   const root=document.getElementById('sihyeonPlayOS');
-  const bg=WORLD_ASSETS.main;
+  const zones=getWorldZones();
+  const isLandscape=isLandscapeHomeMode();
+  const bg=getWorldMainAsset();
+  const screenClass=isLandscape?'world-map-screen is-landscape-home':'world-map-screen is-portrait-art-home';
+  const station=zones.station || WORLD_ZONES_PORTRAIT.station;
   root.innerHTML=`
-    <section class="world-map-screen" id="worldMapScreen" style="--map-bg:url('${bg}')">
+    <section class="${screenClass}" id="worldMapScreen" data-home-mode="${isLandscape?'landscape':'portrait'}" style="--map-bg:url('${bg}')">
       <div class="world-blur-bg"></div>
       <div class="world-map-frame">
         <img src="${bg}" class="world-map-bg" alt="시현이 큰 놀이동산" onerror="handleMapImageError(this)">
         <button class="btn-parent-lock" onclick="showPinOverlay()" aria-label="부모 대시보드">🔒</button>
         <div class="world-map-content">
           ${['game','numbers','letters','cars','story','voice'].map(id=>{
-            const z=WORLD_ZONES[id];
+            const z=zones[id];
             return `
               <button class="world-zone" style="left:${z.x}; top:${z.y}; width:${z.w}; height:${z.h};"
                 onclick="travelToZone('${id}')" aria-label="${escapeHtml(z.label)}">
@@ -1836,12 +1951,11 @@ function renderWorldMapHome(){
                 <span class="zone-label">${z.emoji} ${z.label}</span>
               </button>`;
           }).join('')}
-          ${renderMainCharacters()}
-          <div id="trainSprite" class="train-sprite" style="left:${WORLD_ZONES.station.x}; top:${WORLD_ZONES.station.y};">
+          <div id="trainSprite" class="train-sprite" style="left:${station.x}; top:${station.y}; display:none;">
             <img src="./assets/vehicles/transport/train.png" alt="기차" onerror="this.style.display='none'">
             <div class="train-emoji">🚂</div>
           </div>
-          <div id="sihyeonAvatar" class="sihyeon-avatar">
+          <div id="sihyeonAvatar" class="sihyeon-avatar home-art-avatar">
             <img src="./assets/characters/sihyeon.png" alt="시현이" onerror="this.style.display='none'">
             <div class="avatar-emoji">👦🏻</div>
           </div>
@@ -1973,7 +2087,7 @@ function walkAvatarToZone(zoneId,onComplete){
   const avatar=document.getElementById('sihyeonAvatar');
   if(!avatar){ onComplete?.(); return; }
 
-  const path=ZONE_PATHS[zoneId];
+  const path=getZonePath(zoneId);
   if(!path||!path.length){ onComplete?.(); return; }
 
   avatar.style.transition='none';
@@ -2069,7 +2183,7 @@ function makeZoneHead(title,action='closeToParkHome()',icon='🏠',aria='홈으�
 function renderPlaceholderZone(zoneId){
   cleanupActiveGame();
   closeGarageHandlers();
-  const zone=WORLD_ZONES[zoneId];
+  const zone=getWorldZone(zoneId);
   const root=document.getElementById('sihyeonPlayOS');
   root.innerHTML=`
     <div class="fullscreen-zone">
@@ -2609,6 +2723,7 @@ Object.assign(window,{
 });
 
 refreshLegacyCompatibility();
+preloadWorldImages();
 renderWorldMapHome();
 
 window.addEventListener('load',()=>{
@@ -2652,6 +2767,21 @@ if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
   setTimeout(()=>playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true),600);
 }
+
+
+let _homeResizeTimer = null;
+window.addEventListener('resize', () => {
+  const screen = document.getElementById('worldMapScreen');
+  if (!screen) return;
+  clearTimeout(_homeResizeTimer);
+  _homeResizeTimer = setTimeout(() => {
+    const currentMode = screen.dataset.homeMode || '';
+    const nextMode = isLandscapeHomeMode() ? 'landscape' : 'portrait';
+    if (currentMode !== nextMode) {
+      renderWorldMapHome({ countLaunch:false });
+    }
+  }, 180);
+});
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
