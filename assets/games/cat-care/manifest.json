@@ -1,23 +1,23 @@
 {
   "catCareImages": {
     "white": {
-      "selectImg": "assets/games/cat-care/white_select.jpg",
+      "selectImg": "assets/games/cat-care/white_select.webp",
       "steps": {
-        "default": "assets/games/cat-care/white_default.jpg",
-        "eat": "assets/games/cat-care/white_eat.jpg",
-        "bath": "assets/games/cat-care/white_bath.jpg",
-        "sleep": "assets/games/cat-care/white_sleep.jpg"
+        "default": "assets/games/cat-care/white_default.webp",
+        "eat": "assets/games/cat-care/white_eat.webp",
+        "bath": "assets/games/cat-care/white_bath.webp",
+        "sleep": "assets/games/cat-care/white_sleep.webp"
       }
     },
     "gray": {
-      "selectImg": "assets/games/cat-care/gray_select.jpg",
+      "selectImg": "assets/games/cat-care/gray_select.webp",
       "steps": {
-        "default": "assets/games/cat-care/gray_default.jpg",
-        "eat": "assets/games/cat-care/gray_eat.jpg",
-        "bath": "assets/games/cat-care/gray_bath.jpg",
-        "sleep": "assets/games/cat-care/gray_sleep.jpg"
+        "default": "assets/games/cat-care/gray_default.webp",
+        "eat": "assets/games/cat-care/gray_eat.webp",
+        "bath": "assets/games/cat-care/gray_bath.webp",
+        "sleep": "assets/games/cat-care/gray_sleep.webp"
       }
     }
   },
-  "note": "select 이미지는 현재 default 컷을 복제했습니다."
+  "note": "모든 이미지 경로를 webp로 통일했습니다. select 이미지는 배경 정리본을 사용했습니다."
 }

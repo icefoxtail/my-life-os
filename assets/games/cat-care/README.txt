@@ -1,19 +1,22 @@
-cat-care 이미지 파일명 정리본
+cat-care webp 정리본
 
 경로:
 assets/games/cat-care/
 
-CAT_DATA 코드 기준 파일명:
-white_select.jpg
-white_default.jpg
-white_eat.jpg
-white_bath.jpg
-white_sleep.jpg
-gray_select.jpg
-gray_default.jpg
-gray_eat.jpg
-gray_bath.jpg
-gray_sleep.jpg
+포함 파일:
+white_select.webp
+white_default.webp
+white_eat.webp
+white_bath.webp
+white_sleep.webp
+gray_select.webp
+gray_default.webp
+gray_eat.webp
+gray_bath.webp
+gray_sleep.webp
 
-참고:
-업로드된 원본은 흰 고양이 4컷, 회색 고양이 4컷이라 select 이미지는 default 컷을 복제했습니다.
+코드 파일:
+js/games/cat-care.js
+
+주의:
+기존 jpg/png 파일은 중복 방지를 위해 삭제하거나 다른 곳으로 옮기세요.

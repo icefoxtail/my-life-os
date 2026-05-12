@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS — 꼬마 고양이 돌보기
    파일: js/games/cat-care.js
-   버전: v1.3.0
-   수정: 모바일 세로형 + 태블릿 가로형 이중 DOM/레이아웃 적용
+   버전: v1.3.1
+   수정: 모든 고양이 이미지 webp 전환 + 코드 경로 동기화
 ═══════════════════════════════════════════ */
 
 (function () {
@@ -18,14 +18,14 @@
       name: '눈이',
       emoji: '🐱',
       color: '#FFB74D',
-      selectImg: BASE + 'white_select.jpg',
+      selectImg: BASE + 'white_select.webp',
       introVoiceId: 'games.cat.whiteIntro',
       completeVoiceId: 'games.cat.whiteComplete',
       steps: {
-        default: BASE + 'white_default.jpg',
-        eat: BASE + 'white_eat.jpg',
-        bath: BASE + 'white_bath.jpg',
-        sleep: BASE + 'white_sleep.jpg'
+        default: BASE + 'white_default.webp',
+        eat: BASE + 'white_eat.webp',
+        bath: BASE + 'white_bath.webp',
+        sleep: BASE + 'white_sleep.webp'
       }
     },
     gray: {
@@ -33,14 +33,14 @@
       name: '름이',
       emoji: '🐈',
       color: '#64B5F6',
-      selectImg: BASE + 'gray_select.jpg',
+      selectImg: BASE + 'gray_select.webp',
       introVoiceId: 'games.cat.grayIntro',
       completeVoiceId: 'games.cat.grayComplete',
       steps: {
-        default: BASE + 'gray_default.jpg',
-        eat: BASE + 'gray_eat.jpg',
-        bath: BASE + 'gray_bath.jpg',
-        sleep: BASE + 'gray_sleep.jpg'
+        default: BASE + 'gray_default.webp',
+        eat: BASE + 'gray_eat.webp',
+        bath: BASE + 'gray_bath.webp',
+        sleep: BASE + 'gray_sleep.webp'
       }
     }
   };
