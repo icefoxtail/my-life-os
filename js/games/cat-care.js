@@ -1,11 +1,13 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS — 꼬마 고양이 돌보기
    파일: js/games/cat-care.js
-   버전: v1.2.1
-   수정: 눈이/름이 명칭 통일 + 고양이별 voiceId 직접 호출 + 밥 주기 아이콘 밥그릇 적용
+   버전: v1.3.0
+   수정: 모바일 세로형 + 태블릿 가로형 이중 DOM/레이아웃 적용
 ═══════════════════════════════════════════ */
 
 (function () {
+  'use strict';
+
   const GAME_KEY = 'catCare';
   const STYLE_ID = 'sihyeon-cat-care-style';
   const BASE = './assets/games/cat-care/';
@@ -21,9 +23,9 @@
       completeVoiceId: 'games.cat.whiteComplete',
       steps: {
         default: BASE + 'white_default.jpg',
-        eat:     BASE + 'white_eat.jpg',
-        bath:    BASE + 'white_bath.jpg',
-        sleep:   BASE + 'white_sleep.jpg'
+        eat: BASE + 'white_eat.jpg',
+        bath: BASE + 'white_bath.jpg',
+        sleep: BASE + 'white_sleep.jpg'
       }
     },
     gray: {
@@ -36,9 +38,9 @@
       completeVoiceId: 'games.cat.grayComplete',
       steps: {
         default: BASE + 'gray_default.jpg',
-        eat:     BASE + 'gray_eat.jpg',
-        bath:    BASE + 'gray_bath.jpg',
-        sleep:   BASE + 'gray_sleep.jpg'
+        eat: BASE + 'gray_eat.jpg',
+        bath: BASE + 'gray_bath.jpg',
+        sleep: BASE + 'gray_sleep.jpg'
       }
     }
   };
@@ -48,6 +50,7 @@
       id: 'eat',
       emoji: '🥣',
       label: '밥 주기',
+      shortLabel: '밥',
       color: '#FFB74D',
       voiceId: 'games.cat.feed',
       particle: '💛'
@@ -56,6 +59,7 @@
       id: 'bath',
       emoji: '🫧',
       label: '목욕하기',
+      shortLabel: '목욕',
       color: '#81D4FA',
       voiceId: 'games.cat.wash',
       particle: '🫧'
@@ -64,6 +68,7 @@
       id: 'sleep',
       emoji: '🌙',
       label: '재우기',
+      shortLabel: '잠',
       color: '#9575CD',
       voiceId: 'games.cat.sleep',
       particle: '⭐'
@@ -96,7 +101,8 @@
   }
 
   function injectStyle() {
-    if (document.getElementById(STYLE_ID)) return;
+    const old = document.getElementById(STYLE_ID);
+    if (old) old.remove();
 
     const s = document.createElement('style');
     s.id = STYLE_ID;
@@ -105,49 +111,90 @@
         position: relative;
         width: 100%;
         height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(160deg, #fff9e6 0%, #fff0f9 100%);
+        overflow: hidden;
+        font-family: 'Jua', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #2d2d2d;
+        touch-action: manipulation;
+      }
+
+      .cc-root * {
+        box-sizing: border-box;
+      }
+
+      .cc-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      /* ═══════════════════════════════════════
+         선택 화면 — 모바일 기본
+      ═══════════════════════════════════════ */
+
+      .cc-select-screen {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        background: linear-gradient(160deg, #fff9e6 0%, #fff0f9 100%);
-        overflow: hidden;
-        font-family: 'Jua', sans-serif;
-        touch-action: manipulation;
+        padding: clamp(18px, 5vh, 40px) 16px 20px;
+        gap: clamp(14px, 3vh, 24px);
+      }
+
+      .cc-select-hero {
+        width: 100%;
+        text-align: center;
+        flex-shrink: 0;
       }
 
       .cc-select-title {
-        font-size: clamp(22px, 6vw, 34px);
+        font-size: clamp(24px, 7vw, 38px);
         color: #333;
-        margin: clamp(20px,5vh,40px) 0 clamp(14px,3vh,24px);
+        margin: 0;
         text-align: center;
         font-weight: 900;
+        line-height: 1.15;
+      }
+
+      .cc-select-sub {
+        margin: 10px 0 0;
+        font-size: clamp(14px, 4vw, 20px);
+        color: #776b61;
+        font-weight: 800;
+        line-height: 1.35;
       }
 
       .cc-select-row {
+        width: 100%;
         display: flex;
-        gap: clamp(16px,5vw,32px);
+        gap: clamp(14px, 4vw, 28px);
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        padding: 0 16px;
+        padding: 0;
       }
 
       .cc-cat-card {
-        width: clamp(130px, 38vw, 220px);
+        width: clamp(138px, 40vw, 220px);
         cursor: pointer;
         background: #fff;
         padding: 12px;
-        border-radius: 36px;
+        border-radius: 34px;
         box-shadow: 0 12px 28px rgba(0,0,0,0.12);
         border: 5px solid #fff;
-        transition: transform 0.15s, box-shadow 0.15s;
+        transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
         text-align: center;
         -webkit-tap-highlight-color: transparent;
         font-family: inherit;
       }
 
       .cc-cat-card:active {
-        transform: scale(0.91);
+        transform: scale(0.92);
         box-shadow: 0 4px 10px rgba(0,0,0,0.12);
       }
 
@@ -172,45 +219,64 @@
       .cc-cat-img-fallback {
         position: absolute;
         inset: 0;
-        display: grid;
+        display: none;
         place-items: center;
-        font-size: clamp(52px, 16vw, 90px);
-        background: linear-gradient(135deg,#ffe0f0,#fff9c4);
+        font-size: clamp(56px, 16vw, 92px);
+        background: linear-gradient(135deg, #ffe0f0, #fff9c4);
       }
 
       .cc-cat-name {
-        font-size: clamp(18px, 5vw, 25px);
+        font-size: clamp(19px, 5vw, 27px);
         color: #444;
         margin-top: 10px;
         font-weight: 900;
       }
 
+      /* ═══════════════════════════════════════
+         돌보기 화면 — 모바일 기본
+      ═══════════════════════════════════════ */
+
+      .cc-care-layout {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .cc-left-panel {
+        display: none;
+      }
+
       .cc-main-display {
-        flex: 1;
+        flex: 1 1 auto;
         min-height: 0;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px 16px 0;
+        padding: clamp(10px, 2vh, 18px) 16px 0;
       }
 
       .cc-main-wrap {
         position: relative;
-        width: clamp(220px, 68vw, 400px);
-        aspect-ratio: 1;
+        width: clamp(230px, 74vw, 430px);
+        aspect-ratio: 1 / 1;
+        flex-shrink: 0;
       }
 
       .cc-main-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 50px;
-        border: 10px solid #fff;
+        border-radius: clamp(34px, 9vw, 54px);
+        border: clamp(7px, 2vw, 10px) solid #fff;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         animation: ccFloat 3s ease-in-out infinite;
         transition: opacity 0.25s;
         display: block;
+        background: #fff;
       }
 
       .cc-main-fallback {
@@ -218,26 +284,34 @@
         inset: 0;
         display: none;
         place-items: center;
-        font-size: clamp(80px,24vw,160px);
-        border-radius: 50px;
-        background: linear-gradient(135deg,#ffe0f0,#fff9c4);
-        border: 10px solid #fff;
+        font-size: clamp(86px, 25vw, 160px);
+        border-radius: clamp(34px, 9vw, 54px);
+        background: linear-gradient(135deg, #ffe0f0, #fff9c4);
+        border: clamp(7px, 2vw, 10px) solid #fff;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       }
 
       @keyframes ccFloat {
-        0%,100% { transform: translateY(0); }
+        0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-14px); }
       }
 
+      .cc-action-panel {
+        flex: 0 0 auto;
+        width: 100%;
+        padding: 10px 14px max(22px, env(safe-area-inset-bottom));
+      }
+
+      .cc-panel-title {
+        display: none;
+      }
+
       .cc-action-bar {
-        flex-shrink: 0;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: clamp(10px, 3.5vw, 22px);
-        padding: clamp(10px,2vh,18px) 14px clamp(14px,3.5vh,28px);
       }
 
       .cc-btn {
@@ -246,8 +320,8 @@
         align-items: center;
         justify-content: center;
         gap: 6px;
-        width: clamp(80px, 26vw, 120px);
-        height: clamp(80px, 26vw, 120px);
+        width: clamp(82px, 27vw, 122px);
+        height: clamp(82px, 27vw, 122px);
         border-radius: 50%;
         border: 6px solid #fff;
         cursor: pointer;
@@ -255,7 +329,7 @@
         transition: transform 0.12s, box-shadow 0.12s, opacity 0.2s;
         -webkit-tap-highlight-color: transparent;
         position: relative;
-        font-size: clamp(30px, 9vw, 48px);
+        font-size: clamp(31px, 9vw, 50px);
         font-family: inherit;
       }
 
@@ -302,35 +376,42 @@
           opacity: 1;
         }
         100% {
-          transform: translate(var(--tx),var(--ty)) scale(0);
+          transform: translate(var(--tx), var(--ty)) scale(0);
           opacity: 0;
         }
       }
 
+      /* ═══════════════════════════════════════
+         완료 화면
+      ═══════════════════════════════════════ */
+
       .cc-complete {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: clamp(14px,3.5vh,22px);
-        padding: 28px 20px clamp(20px,5vh,36px);
-        height: 100%;
+        gap: clamp(14px, 3.5vh, 22px);
+        padding: 28px 20px clamp(20px, 5vh, 36px);
         text-align: center;
+        overflow: hidden;
       }
 
       .cc-complete-emoji {
-        font-size: clamp(72px,20vw,110px);
+        font-size: clamp(72px, 20vw, 120px);
         animation: ccFloat 2.5s ease-in-out infinite;
       }
 
       .cc-complete-title {
-        font-size: clamp(26px,7vw,42px);
+        font-size: clamp(27px, 7vw, 44px);
         font-weight: 900;
         color: #333;
       }
 
       .cc-complete-sub {
-        font-size: clamp(15px,4.5vw,24px);
+        font-size: clamp(15px, 4.5vw, 24px);
         color: #666;
         line-height: 1.45;
         font-weight: 700;
@@ -340,7 +421,7 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        width: min(100%, 280px);
+        width: min(100%, 300px);
         margin-top: 6px;
       }
 
@@ -348,7 +429,7 @@
         min-height: 60px;
         border-radius: 18px;
         border: none;
-        font-size: clamp(16px,4.5vw,21px);
+        font-size: clamp(16px, 4.5vw, 21px);
         font-weight: 900;
         cursor: pointer;
         touch-action: manipulation;
@@ -374,6 +455,456 @@
         border: 4px solid #eee !important;
         box-shadow: 0 5px 0 #ddd;
       }
+
+      /* ═══════════════════════════════════════
+         태블릿 가로 모드 — 좌측 정보 / 중앙 고양이 / 우측 행동
+      ═══════════════════════════════════════ */
+
+      @media (min-width: 768px) and (min-height: 560px) and (orientation: landscape) {
+        .cc-root {
+          background:
+            radial-gradient(circle at 18% 18%, rgba(255,255,255,0.9) 0 10%, transparent 30%),
+            linear-gradient(135deg, #fff7da 0%, #ffeaf5 54%, #eaf7ff 100%);
+        }
+
+        .cc-select-screen {
+          display: grid;
+          grid-template-columns: 0.85fr 1.15fr;
+          gap: 22px;
+          padding: 22px;
+          align-items: stretch;
+        }
+
+        .cc-select-hero {
+          height: 100%;
+          border-radius: 36px;
+          background: rgba(255,255,255,0.82);
+          border: 6px solid #fff;
+          box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+
+        .cc-select-title {
+          font-size: clamp(34px, 4vw, 54px);
+          line-height: 1.16;
+        }
+
+        .cc-select-sub {
+          font-size: clamp(19px, 2vw, 28px);
+          margin-top: 16px;
+        }
+
+        .cc-select-row {
+          height: 100%;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 20px;
+          align-items: stretch;
+          justify-content: stretch;
+        }
+
+        .cc-cat-card {
+          width: 100%;
+          height: 100%;
+          min-height: 0;
+          border-radius: 38px;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          border-width: 7px;
+        }
+
+        .cc-cat-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 18px 34px rgba(0,0,0,0.13);
+        }
+
+        .cc-cat-img-wrap {
+          border-radius: 30px;
+        }
+
+        .cc-cat-img-wrap img,
+        .cc-cat-img-fallback {
+          border-radius: 30px;
+        }
+
+        .cc-cat-name {
+          font-size: clamp(28px, 3vw, 40px);
+          margin-top: 14px;
+        }
+
+        .cc-care-layout {
+          display: grid;
+          grid-template-columns: 230px minmax(0, 1fr) 230px;
+          grid-template-rows: minmax(0, 1fr);
+          gap: 16px;
+          padding: 16px;
+        }
+
+        .cc-left-panel {
+          display: flex;
+          min-height: 0;
+          height: 100%;
+          flex-direction: column;
+          gap: 14px;
+          overflow: hidden;
+        }
+
+        .cc-info-card,
+        .cc-mini-actions,
+        .cc-action-panel {
+          background: rgba(255,255,255,0.86);
+          border: 5px solid #fff;
+          border-radius: 32px;
+          box-shadow: 0 16px 34px rgba(0,0,0,0.10);
+        }
+
+        .cc-info-card {
+          flex: 1 1 auto;
+          min-height: 0;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          overflow: hidden;
+        }
+
+        .cc-info-emoji {
+          font-size: clamp(60px, 7vw, 96px);
+          line-height: 1;
+          margin-bottom: 10px;
+        }
+
+        .cc-info-name {
+          font-size: clamp(28px, 3vw, 42px);
+          font-weight: 900;
+          color: #333;
+          line-height: 1.1;
+        }
+
+        .cc-info-sub {
+          margin-top: 10px;
+          font-size: clamp(16px, 1.6vw, 22px);
+          font-weight: 800;
+          color: #776b61;
+          line-height: 1.35;
+        }
+
+        .cc-mini-actions {
+          flex: 0 0 auto;
+          padding: 12px;
+        }
+
+        .cc-small-btn {
+          width: 100%;
+          min-height: 58px;
+          border: 0;
+          border-radius: 22px;
+          background: #fff;
+          color: #333;
+          font-family: inherit;
+          font-size: 18px;
+          font-weight: 900;
+          box-shadow: 0 6px 0 rgba(0,0,0,0.12);
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .cc-small-btn:active {
+          transform: translateY(4px);
+          box-shadow: 0 2px 0 rgba(0,0,0,0.12);
+        }
+
+        .cc-main-display {
+          min-width: 0;
+          min-height: 0;
+          height: 100%;
+          padding: 0;
+        }
+
+        .cc-main-wrap {
+          width: min(100%, calc(100vh - 68px));
+          height: min(100%, calc(100vh - 68px));
+          max-width: 100%;
+          max-height: 100%;
+        }
+
+        .cc-main-img,
+        .cc-main-fallback {
+          border-radius: 54px;
+          border-width: 12px;
+          box-shadow: 0 24px 54px rgba(0,0,0,0.16);
+        }
+
+        .cc-action-panel {
+          min-height: 0;
+          height: 100%;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        .cc-panel-title {
+          display: block;
+          flex: 0 0 auto;
+          font-size: clamp(22px, 2.2vw, 30px);
+          font-weight: 900;
+          color: #333;
+          text-align: center;
+          margin-bottom: 14px;
+        }
+
+        .cc-action-bar {
+          flex: 1 1 auto;
+          min-height: 0;
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-auto-rows: minmax(96px, 1fr);
+          gap: 14px;
+          align-items: stretch;
+          justify-content: stretch;
+        }
+
+        .cc-btn {
+          width: 100%;
+          height: 100%;
+          min-height: 96px;
+          border-radius: 28px;
+          font-size: clamp(38px, 4.5vw, 62px);
+          border-width: 6px;
+        }
+
+        .cc-btn-label {
+          position: static;
+          transform: none;
+          font-size: clamp(17px, 1.65vw, 23px);
+          color: rgba(40,40,40,0.82);
+          margin-top: 2px;
+        }
+
+        .cc-btn.done::after {
+          top: 8px;
+          right: 10px;
+          font-size: 28px;
+        }
+
+        .cc-complete {
+          width: min(720px, calc(100% - 48px));
+          height: auto;
+          min-height: min(620px, calc(100% - 48px));
+          margin: auto;
+          border-radius: 42px;
+          border: 7px solid #fff;
+          background: rgba(255,255,255,0.88);
+          box-shadow: 0 22px 48px rgba(0,0,0,0.14);
+        }
+
+        .cc-complete-emoji {
+          font-size: clamp(100px, 10vw, 150px);
+        }
+
+        .cc-complete-title {
+          font-size: clamp(40px, 4vw, 58px);
+        }
+
+        .cc-complete-sub {
+          font-size: clamp(22px, 2.2vw, 30px);
+        }
+
+        .cc-complete-btns {
+          width: min(100%, 460px);
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+
+        .cc-c-btn {
+          min-height: 72px;
+          font-size: 22px;
+          border-radius: 24px;
+        }
+      }
+
+      /* 작은 가로 화면 방어 */
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-screen {
+          display: grid;
+          grid-template-columns: 0.7fr 1.3fr;
+          gap: 12px;
+          padding: 12px;
+        }
+
+        .cc-select-hero {
+          border-radius: 24px;
+          padding: 14px;
+        }
+
+        .cc-select-title {
+          font-size: clamp(24px, 4vw, 34px);
+        }
+
+        .cc-select-sub {
+          font-size: 15px;
+        }
+
+        .cc-select-row {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        .cc-cat-card {
+          width: 100%;
+          padding: 10px;
+          border-radius: 24px;
+        }
+
+        .cc-cat-img-wrap {
+          border-radius: 18px;
+        }
+
+        .cc-cat-img-wrap img,
+        .cc-cat-img-fallback {
+          border-radius: 18px;
+        }
+
+        .cc-cat-name {
+          font-size: 20px;
+          margin-top: 6px;
+        }
+
+        .cc-care-layout {
+          display: grid;
+          grid-template-columns: 170px minmax(0, 1fr) 170px;
+          gap: 8px;
+          padding: 8px;
+        }
+
+        .cc-left-panel {
+          display: flex;
+          min-height: 0;
+          height: 100%;
+          flex-direction: column;
+          gap: 8px;
+          overflow: hidden;
+        }
+
+        .cc-info-card,
+        .cc-mini-actions,
+        .cc-action-panel {
+          border-radius: 20px;
+          border: 4px solid #fff;
+          background: rgba(255,255,255,0.88);
+          box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+        }
+
+        .cc-info-card {
+          flex: 1 1 auto;
+          min-height: 0;
+          padding: 10px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .cc-info-emoji {
+          font-size: 46px;
+        }
+
+        .cc-info-name {
+          font-size: 23px;
+          font-weight: 900;
+        }
+
+        .cc-info-sub {
+          font-size: 13px;
+          font-weight: 800;
+          color: #776b61;
+          margin-top: 5px;
+        }
+
+        .cc-mini-actions {
+          padding: 8px;
+        }
+
+        .cc-small-btn {
+          min-height: 40px;
+          border: 0;
+          border-radius: 14px;
+          background: #fff;
+          font-family: inherit;
+          font-size: 14px;
+          font-weight: 900;
+          box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+        }
+
+        .cc-main-display {
+          padding: 0;
+        }
+
+        .cc-main-wrap {
+          width: min(100%, calc(100vh - 24px));
+          height: min(100%, calc(100vh - 24px));
+        }
+
+        .cc-main-img,
+        .cc-main-fallback {
+          border-radius: 28px;
+          border-width: 6px;
+        }
+
+        .cc-action-panel {
+          height: 100%;
+          min-height: 0;
+          padding: 8px;
+          display: flex;
+          flex-direction: column;
+          overflow-y: auto;
+        }
+
+        .cc-panel-title {
+          display: block;
+          font-size: 16px;
+          font-weight: 900;
+          text-align: center;
+          margin-bottom: 8px;
+        }
+
+        .cc-action-bar {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-auto-rows: minmax(54px, 1fr);
+          gap: 8px;
+          flex: 1;
+        }
+
+        .cc-btn {
+          width: 100%;
+          height: 100%;
+          min-height: 54px;
+          border-radius: 18px;
+          border-width: 4px;
+          font-size: 28px;
+        }
+
+        .cc-btn-label {
+          position: static;
+          transform: none;
+          font-size: 12px;
+          margin-top: 2px;
+        }
+      }
     `;
 
     document.head.appendChild(s);
@@ -387,6 +918,8 @@
 
   function burst(x, y, emoji, count = 16) {
     const root = document.body;
+    const startX = Number.isFinite(x) ? x : window.innerWidth / 2;
+    const startY = Number.isFinite(y) ? y : window.innerHeight / 2;
 
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
@@ -399,8 +932,8 @@
 
       p.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
       p.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
-      p.style.left = `${x}px`;
-      p.style.top = `${y}px`;
+      p.style.left = `${startX}px`;
+      p.style.top = `${startY}px`;
 
       root.appendChild(p);
       setTimeout(() => p.remove(), 900);
@@ -420,22 +953,32 @@
     img.style.opacity = '0';
 
     timer(() => {
+      if (!state.container) return;
+
+      img.style.display = 'block';
       img.src = src;
       img.style.opacity = '1';
-    }, 120);
 
-    if (fallback) {
-      fallback.textContent = state.currentCat.emoji;
-    }
+      if (fallback) {
+        fallback.textContent = state.currentCat.emoji;
+        fallback.style.display = 'none';
+      }
+    }, 120);
   }
 
   function renderSelect() {
     if (state.destroyed || !state.container) return;
 
     const root = state.container.querySelector('.cc-root');
+
     root.innerHTML = `
-      <div class="cc-select-title">어떤 야옹이를 돌볼까?</div>
-      <div class="cc-select-row" id="cc-select-row"></div>
+      <div class="cc-screen cc-select-screen">
+        <div class="cc-select-hero">
+          <h2 class="cc-select-title">어떤 야옹이를<br>돌볼까?</h2>
+          <p class="cc-select-sub">눈이와 름이가<br>시현이를 기다려요</p>
+        </div>
+        <div class="cc-select-row" id="cc-select-row"></div>
+      </div>
     `;
 
     const row = root.querySelector('#cc-select-row');
@@ -445,6 +988,7 @@
       card.className = 'cc-cat-card';
       card.type = 'button';
       card.setAttribute('aria-label', cat.name);
+      card.style.borderColor = '#fff';
       card.innerHTML = `
         <div class="cc-cat-img-wrap">
           <img src="${cat.selectImg}" alt="${cat.name}"
@@ -468,16 +1012,43 @@
     const root = state.container.querySelector('.cc-root');
 
     root.innerHTML = `
-      <div class="cc-main-display">
-        <div class="cc-main-wrap">
-          <img id="cc-main-img" class="cc-main-img"
-            src="${cat.steps.default}" alt="${cat.name}"
-            onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
-          <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
-        </div>
+      <div class="cc-screen cc-care-layout">
+        <aside class="cc-left-panel">
+          <div class="cc-info-card">
+            <div class="cc-info-emoji">${cat.emoji}</div>
+            <div class="cc-info-name">${cat.name}</div>
+            <div class="cc-info-sub">밥 먹고<br>목욕하고<br>코 잘 시간이에요</div>
+          </div>
+          <div class="cc-mini-actions">
+            <button class="cc-small-btn" id="cc-change-cat" type="button">고양이 바꾸기</button>
+          </div>
+        </aside>
+
+        <main class="cc-main-display">
+          <div class="cc-main-wrap">
+            <img id="cc-main-img" class="cc-main-img"
+              src="${cat.steps.default}" alt="${cat.name}"
+              onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
+            <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
+          </div>
+        </main>
+
+        <aside class="cc-action-panel">
+          <div class="cc-panel-title">${cat.name} 돌보기</div>
+          <div class="cc-action-bar" id="cc-action-bar"></div>
+        </aside>
       </div>
-      <div class="cc-action-bar" id="cc-action-bar"></div>
     `;
+
+    const changeBtn = root.querySelector('#cc-change-cat');
+    if (changeBtn) {
+      changeBtn.addEventListener('click', () => {
+        state.currentCat = null;
+        state.completed = null;
+        state.activeStep = 'default';
+        renderSelect();
+      });
+    }
 
     renderActionBtns();
     playVoiceId(cat.introVoiceId);
@@ -515,7 +1086,7 @@
     const root = state.container.querySelector('.cc-root');
 
     root.innerHTML = `
-      <div class="cc-complete">
+      <div class="cc-screen cc-complete">
         <div class="cc-complete-emoji">${cat.emoji}</div>
         <div class="cc-complete-title">${cat.name} 행복해요! 🎉</div>
         <div class="cc-complete-sub">${cat.name}가 너무 기뻐해요!<br>시현이 최고야 ⭐</div>
