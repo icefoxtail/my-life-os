@@ -235,7 +235,7 @@
     if (item.videoId) raw.push(item.videoId);
     if (item.youtubeId) raw.push(item.youtubeId);
 
-    ['videoIds', 'youtubeIds', 'randomVideoIds'].forEach(key => {
+    ['videoIds', 'backupVideoIds', 'youtubeIds', 'backupYoutubeIds', 'randomVideoIds'].forEach(key => {
       if (Array.isArray(item[key])) raw.push(...item[key]);
     });
 
