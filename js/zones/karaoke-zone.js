@@ -643,7 +643,7 @@
     state.activeLine = 0;
     state.ytLyricClock = 0;
     state.fanSignShown = false;
-    state.currentVolume = Math.max(10, Math.min(100, Number(state.song.volume || state.currentVolume || 70)));
+    state.currentVolume = Math.max(10, Math.min(100, Number(state.currentVolume || 70)));
     state.cheerScore = 0;
     state.combo = 0;
     clearTimer('comboTimer');
@@ -651,6 +651,27 @@
     state.destroyed = false;
     ensurePlaybackAudio();
     renderList();
+    
+    // ★ 폰트 로드 대기 + 레이아웃 재계산 유도 (카드 크기 초기화 문제 해결)
+    const kzRoot = state.container?.querySelector('.kz-root');
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (state.container && kzRoot && !state.destroyed) {
+          // 강제 리플로우를 통한 레이아웃 재계산
+          void kzRoot.offsetHeight;
+        }
+      });
+    } else {
+      // 폰트 API 미지원 환경: 짧은 딜레이로 대체
+      if (!state.destroyed) {
+        setTimeout(() => {
+          if (state.container && kzRoot) {
+            void kzRoot.offsetHeight;
+          }
+        }, 100);
+      }
+    }
+    
     speak('시현아, 라이브 콘서트장에 온 걸 환영해! 부르고 싶은 노래를 골라봐.', true);
   }
 
@@ -1176,7 +1197,7 @@
         events: {
           onReady: (event) => {
             state.ytPlayerReady = true;
-            try { event.target.setVolume(state.currentVolume || state.song.volume || 70); } catch (e) {}
+            try { event.target.setVolume(state.currentVolume || (state.song && state.song.volume) || 70); } catch (e) {}
             if (!resolved) {
               resolved = true;
               resolve(event.target);
@@ -1264,7 +1285,7 @@
 
       const player = await ensureYouTubePlayer();
       if (!player) return;
-      try { player.setVolume(state.currentVolume || state.song.volume || 70); } catch (e) {}
+      try { player.setVolume(state.currentVolume || (state.song && state.song.volume) || 70); } catch (e) {}
       updateVolumeUI();
       player.playVideo();
       startLyricTimer();

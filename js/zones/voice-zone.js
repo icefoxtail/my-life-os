@@ -249,7 +249,11 @@
         const tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
         const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        if (firstScriptTag && firstScriptTag.parentNode) {
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        } else {
+          document.head.appendChild(tag);
+        }
       }
 
       const prevHook = window.onYouTubeIframeAPIReady;
@@ -615,12 +619,32 @@
     const musicBtn = container.querySelector('.vz-music-btn');
     const modeBtns = container.querySelectorAll('.vz-mode-btn');
 
-    micBtn.addEventListener('click', toggleRecording);
-    musicBtn.addEventListener('click', toggleBgm);
+    if (micBtn) micBtn.addEventListener('click', toggleRecording);
+    if (musicBtn) musicBtn.addEventListener('click', toggleBgm);
 
     modeBtns.forEach(btn => {
       btn.addEventListener('click', () => setVoiceMode(btn.dataset.mode, btn));
     });
+
+    // ★ 폰트 로드 대기 + 레이아웃 재계산 유도 (카드 크기 초기화 문제 해결)
+    const wzRoot = container.querySelector('.vz-root');
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (state.container && wzRoot && !state.destroyed) {
+          // 강제 리플로우를 통한 레이아웃 재계산
+          void wzRoot.offsetHeight;
+        }
+      });
+    } else {
+      // 폰트 API 미지원 환경: 짧은 딜레이로 대체
+      if (!state.destroyed) {
+        setTimeout(() => {
+          if (state.container && wzRoot) {
+            void wzRoot.offsetHeight;
+          }
+        }, 100);
+      }
+    }
 
     speakMsg("시현아! 요술 마이크를 톡! 누르고 말해봐! 목소리가 변신할 거야!");
 
