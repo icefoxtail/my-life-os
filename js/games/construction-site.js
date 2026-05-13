@@ -45,7 +45,12 @@
     completedVehicles: [], // ★ 피날레를 위해 성공한 차량 기록
     locked: false,
     destroyed: false,
-    timers: []
+    timers: [],
+    layoutMode: 'portrait',
+    resizeTimer: null,
+    handleResizeBound: null,
+    successRewardGiven: false,
+    completeRewardGiven: false
   };
 
   function playGameVoice(id) {
@@ -97,6 +102,71 @@
     state.timers = [];
   }
 
+  function isLandscapeMode() {
+    try {
+      return window.matchMedia('(orientation: landscape) and (min-width: 768px) and (min-height: 520px)').matches;
+    } catch (error) {
+      return window.innerWidth >= 768 && window.innerWidth > window.innerHeight;
+    }
+  }
+
+  function getLayoutMode() {
+    return isLandscapeMode() ? 'landscape' : 'portrait';
+  }
+
+  function getRootLayoutClass() {
+    const mode = getLayoutMode();
+    state.layoutMode = mode;
+    return `construction-root construction-${mode}`;
+  }
+
+  function applyRootLayoutClass() {
+    const root = state.container?.querySelector('.cs-root');
+    if (!root) return;
+    root.classList.remove('construction-portrait', 'construction-landscape');
+    root.classList.add('construction-root', `construction-${getLayoutMode()}`);
+  }
+
+  function bindResizeEvents() {
+    if (state.handleResizeBound) return;
+    state.handleResizeBound = handleResize;
+    window.addEventListener('resize', state.handleResizeBound, { passive: true });
+    window.addEventListener('orientationchange', state.handleResizeBound, { passive: true });
+  }
+
+  function unbindResizeEvents() {
+    if (!state.handleResizeBound) return;
+    window.removeEventListener('resize', state.handleResizeBound);
+    window.removeEventListener('orientationchange', state.handleResizeBound);
+    state.handleResizeBound = null;
+  }
+
+  function handleResize() {
+    if (state.destroyed || !state.container) return;
+    if (state.resizeTimer) window.clearTimeout(state.resizeTimer);
+    state.resizeTimer = window.setTimeout(() => {
+      state.resizeTimer = null;
+      refreshLayoutOnly();
+    }, 120);
+  }
+
+  function refreshLayoutOnly() {
+    if (state.destroyed || !state.container) return;
+    const nextMode = getLayoutMode();
+    if (state.layoutMode === nextMode) {
+      applyRootLayoutClass();
+      return;
+    }
+    state.layoutMode = nextMode;
+
+    if (state.locked || !state.currentMission) {
+      applyRootLayoutClass();
+      return;
+    }
+
+    renderGame();
+  }
+
   function injectStyle() {
     const prev = document.getElementById(STYLE_ID);
     if (prev) prev.remove();
@@ -107,6 +177,24 @@
       .cs-root { width: 100%; height: 100%; min-height: 0; display: flex; flex-direction: column; position: relative; overflow: hidden; color: #223047; background: radial-gradient(circle at 18% 14%, rgba(255,255,255,0.95) 0 0.8%, transparent 1.2%), radial-gradient(circle at 76% 18%, rgba(255,255,255,0.9) 0 0.7%, transparent 1.1%), linear-gradient(180deg, #60c8ff 0%, #9ee7ff 36%, #ffe59c 36.4%, #f8b24d 100%); font-family: 'Jua', sans-serif; user-select: none; touch-action: manipulation; }
       .cs-root::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 18% 21%, rgba(255,255,255,0.85) 0 7%, transparent 7.4%), radial-gradient(ellipse at 28% 18%, rgba(255,255,255,0.76) 0 6%, transparent 6.4%), radial-gradient(ellipse at 68% 25%, rgba(255,255,255,0.74) 0 8%, transparent 8.4%), radial-gradient(ellipse at 81% 21%, rgba(255,255,255,0.82) 0 6%, transparent 6.5%); opacity: 0.96; pointer-events: none; animation: csCloudFloat 7s ease-in-out infinite alternate; }
       .cs-root::after { content: ""; position: absolute; left: -8%; right: -8%; bottom: -10%; height: 34%; background: repeating-linear-gradient(-18deg, rgba(255,255,255,0.16) 0 12px, transparent 12px 26px), linear-gradient(180deg, #d28b34 0%, #a76524 100%); border-radius: 50% 50% 0 0 / 22% 22% 0 0; box-shadow: inset 0 18px 0 rgba(255,255,255,0.18); pointer-events: none; }
+
+      .construction-root { isolation: isolate; }
+      .construction-portrait { flex-direction: column; }
+      .construction-landscape { display: grid; grid-template-columns: minmax(220px, 27%) minmax(360px, 1fr) minmax(230px, 28%); grid-template-rows: auto auto 1fr; gap: 12px; padding: 12px; align-items: stretch; }
+      .construction-landscape::before, .construction-landscape::after { z-index: 0; }
+      .construction-landscape .cs-top { grid-column: 1; grid-row: 1; padding: 0; align-self: start; flex-direction: column; align-items: stretch; gap: 10px; }
+      .construction-landscape .cs-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .construction-landscape .cs-pill, .construction-landscape .cs-btn { width: 100%; min-height: 48px; display: grid; place-items: center; text-align: center; }
+      .construction-landscape .cs-progress { grid-column: 1; grid-row: 2; padding: 0; align-self: start; justify-content: flex-start; }
+      .construction-landscape .cs-question-card { grid-column: 1; grid-row: 3; margin: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+      .construction-landscape .cs-stage { grid-column: 2; grid-row: 1 / span 3; margin: 0; min-height: 0; height: 100%; }
+      .construction-landscape .cs-choices { grid-column: 3; grid-row: 1 / span 3; padding: 0; display: grid; grid-template-columns: 1fr; align-content: center; gap: 12px; min-height: 0; }
+      .construction-landscape .cs-choice { min-height: clamp(126px, 25vh, 190px); padding: 10px; }
+      .construction-landscape .cs-choice-img { max-height: clamp(92px, 20vh, 150px); }
+      .construction-landscape .cs-message { left: 50%; bottom: 24px; width: min(54vw, 560px); }
+      .construction-landscape .cs-worker-vehicle { width: min(92%, 760px); height: min(86%, 560px); }
+      .construction-landscape .cs-target-zone { width: clamp(190px, 24vw, 340px); height: clamp(128px, 17vw, 210px); }
+      .construction-landscape .cs-road { width: min(34vw, 430px); }
 
       .cs-top { position: relative; z-index: 5; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 6px; }
       .cs-pill { padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.9); border: 4px solid #fff; box-shadow: 0 6px 0 rgba(102,60,14,0.22); font-size: clamp(17px, 4.6vw, 24px); font-weight: 900; }
@@ -205,6 +293,24 @@
         .cs-question { font-size: 26px; }
         .cs-choice { min-height: 220px; border-radius: 36px; border-width: 8px; }
         .cs-choice-img { max-height: 160px; }
+      }
+
+      @media (orientation: landscape) and (min-width: 1024px) and (min-height: 640px) {
+        .construction-landscape { grid-template-columns: minmax(250px, 25%) minmax(460px, 1fr) minmax(270px, 27%); gap: 16px; padding: 16px; }
+        .construction-landscape .cs-stage { border-radius: 36px; border-width: 8px; }
+        .construction-landscape .cs-title { font-size: clamp(30px, 3vw, 44px); }
+        .construction-landscape .cs-question { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
+        .construction-landscape .cs-choice { border-radius: 32px; border-width: 7px; }
+      }
+
+      @media (orientation: landscape) and (max-width: 900px) {
+        .construction-landscape { grid-template-columns: minmax(180px, 26%) minmax(280px, 1fr) minmax(190px, 28%); gap: 8px; padding: 8px; }
+        .construction-landscape .cs-pill, .construction-landscape .cs-btn { min-height: 40px; font-size: 16px; padding: 6px 10px; }
+        .construction-landscape .cs-question-card { padding: 8px; border-radius: 20px; }
+        .construction-landscape .cs-title { font-size: 20px; }
+        .construction-landscape .cs-question { font-size: 15px; }
+        .construction-landscape .cs-choice { min-height: 88px; border-radius: 18px; border-width: 4px; padding: 5px; }
+        .construction-landscape .cs-choice-img { max-height: 72px; }
       }
 
       /* 스마트폰 가로모드 최적화 */
@@ -312,6 +418,10 @@
     state.currentMission = null;
     state.currentChoices = [];
     state.completedVehicles = [];
+    state.layoutMode = getLayoutMode();
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
+    bindResizeEvents();
 
     container.innerHTML = `
       <div class="cs-loading">
@@ -342,6 +452,7 @@
 
     state.currentMission = state.missions[state.currentRound - 1];
     state.currentChoices = makeChoices(state.currentMission);
+    state.successRewardGiven = false;
 
     renderGame();
     playGameVoice('games.construction.intro');
@@ -356,7 +467,7 @@
     if (!mission) return;
 
     state.container.innerHTML = `
-      <div class="cs-root ${escapeAttr(mission.stageClass || '')}">
+      <div class="cs-root ${getRootLayoutClass()} ${escapeAttr(mission.stageClass || '')}">
         <div class="cs-top">
           <div class="cs-pill">🏗️ ${state.currentRound}번 공사</div>
           <div class="cs-actions">
@@ -517,8 +628,11 @@
       root.classList.add('is-success');
       showMessage(successMessage);
       speak(successMessage, true);
-      state.options.fireConfetti?.();
-      state.options.gainExp?.(10); // 라운드 축소로 획득 경험치 상향
+      if (!state.successRewardGiven) {
+        state.successRewardGiven = true;
+        state.options.fireConfetti?.();
+        state.options.gainExp?.(10); // 라운드 축소로 획득 경험치 상향
+      }
     }, 1200);
 
     // 차 구경할 시간 보장 및 4.5초 뒤 다음 라운드로
@@ -558,10 +672,13 @@
     clearTimers();
     state.locked = true;
 
-    state.options.fireConfetti?.();
-    state.options.gainExp?.(30);
-    playGameVoice('games.common.complete');
-    speak('뚝딱뚝딱! 시현이가 멋진 공사장을 완성했어요!', true);
+    if (!state.completeRewardGiven) {
+      state.completeRewardGiven = true;
+      state.options.fireConfetti?.();
+      state.options.gainExp?.(30);
+      playGameVoice('games.common.complete');
+      speak('뚝딱뚝딱! 시현이가 멋진 공사장을 완성했어요!', true);
+    }
 
     // ★ 피날레 뷰: 시현이가 고른 3대의 차를 나란히 배치
     const finaleImages = state.completedVehicles.map((v) => 
@@ -569,7 +686,7 @@
     ).join('');
 
     state.container.innerHTML = `
-      <div class="cs-root is-complete">
+      <div class="cs-root ${getRootLayoutClass()} is-complete">
         <div class="cs-stage" style="flex:1; margin:12px;">
           <div class="cs-stage-sky-shine"></div>
           <div class="cs-site-board">🏁 멋지게 완성!</div>
@@ -612,12 +729,19 @@
     clearTimers();
     state.currentRound = 1;
     state.completedVehicles = [];
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
     state.missions = pickMissions();
     startRound();
   }
 
   function destroy() {
     clearTimers();
+    if (state.resizeTimer) {
+      window.clearTimeout(state.resizeTimer);
+      state.resizeTimer = null;
+    }
+    unbindResizeEvents();
     state.destroyed = true;
     const prev = document.getElementById(STYLE_ID);
     if (prev) prev.remove();
@@ -631,6 +755,8 @@
     state.currentChoices = [];
     state.completedVehicles = [];
     state.locked = false;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
   }
 
   function escapeHtml(value) {

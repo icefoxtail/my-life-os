@@ -1,7 +1,13 @@
 /**
  * 시현이 놀이터 OS — 🚗 자동차 메모리 게임 (Vehicle Memory)
  * 파일: js/games/vehicle-memory.js
- * 버전: v5.3.0 (큰 카드 + 기억 반짝 힌트 + 종류 선택 바텀시트 + 시작 미리보기)
+ * 버전: v5.4.0
+ * 수정:
+ * - 원본 v5.3.0 기능 유지
+ * - 모바일 세로 / 태블릿 가로 DOM 이원화
+ * - resize/orientationchange 대응
+ * - resize 시 현재 카드 상태, 매칭 상태, 힌트 상태 유지
+ * - 성공 보상 중복 방지
  */
 (function () {
   const GAME_KEY = 'vehicleMemory';
@@ -105,6 +111,7 @@
     cards: [],
     flipped: [],
     matched: 0,
+    matchedPairKeys: new Set(),
     locked: false,
     round: 1,
     destroyed: false,
@@ -112,13 +119,26 @@
     noticeTimer: null,
     finaleTimer: null,
     previewTimer: null,
+    resizeTimer: null,
+    handleResizeBound: null,
     pendingVoiceToken: 0,
     seenCards: new Set(),
     seenPairs: {},
     hintPairs: {},
     wrongCount: 0,
-    hintColorIndex: 0
+    hintColorIndex: 0,
+    layoutMode: 'portrait',
+    currentScreen: 'game',
+    successRewardGiven: false
   };
+
+  function isLandscapeMode() {
+    return window.innerWidth > window.innerHeight && window.innerWidth >= 768;
+  }
+
+  function getLayoutMode() {
+    return isLandscapeMode() ? 'landscape' : 'portrait';
+  }
 
   function playGameVoice(id) {
     if (!id) return Promise.resolve(false);
@@ -148,6 +168,63 @@
         font-family: 'Jua', sans-serif;
       }
 
+      .memory-game-container.memory-portrait {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .memory-game-container.memory-landscape {
+        display: grid;
+        grid-template-columns: minmax(250px, 0.74fr) minmax(420px, 1.26fr);
+        grid-template-rows: 1fr;
+        gap: clamp(12px, 1.8vw, 22px);
+        padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      }
+
+      .memory-land-left {
+        min-height: 0;
+        min-width: 0;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 14px;
+      }
+
+      .memory-land-title-card {
+        border: 6px solid #fff;
+        border-radius: 32px;
+        background: rgba(255,255,255,0.82);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.13);
+        padding: 16px;
+        text-align: center;
+        display: grid;
+        gap: 7px;
+      }
+
+      .memory-land-title-emoji {
+        font-size: clamp(46px, 6vw, 76px);
+        line-height: 1;
+      }
+
+      .memory-land-title {
+        font-size: clamp(22px, 2.5vw, 34px);
+        font-weight: 900;
+        line-height: 1.08;
+        color: #17324a;
+      }
+
+      .memory-land-sub {
+        font-size: clamp(14px, 1.35vw, 18px);
+        font-weight: 900;
+        color: #0d47a1;
+        line-height: 1.32;
+      }
+
+      .memory-land-main {
+        min-height: 0;
+        min-width: 0;
+        display: grid;
+      }
+
       .memory-control-panel {
         flex-shrink: 0;
         display: grid;
@@ -158,6 +235,25 @@
         gap: 6px 8px;
         padding: 0;
         align-items: center;
+      }
+
+      .memory-landscape .memory-control-panel {
+        height: 100%;
+        min-height: 0;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "levels"
+          "cats"
+          "picker";
+        grid-template-rows: auto 1fr auto;
+        align-items: stretch;
+        gap: 12px;
+        border: 6px solid #fff;
+        border-radius: 32px;
+        background: rgba(255,255,255,0.72);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.13);
+        padding: 14px;
+        overflow: hidden;
       }
 
       .memory-level-row {
@@ -190,6 +286,12 @@
         text-align: center;
       }
 
+      .memory-landscape .memory-category-picker-btn {
+        min-width: 0;
+        min-height: 58px;
+        font-size: clamp(15px, 1.55vw, 20px);
+      }
+
       .memory-category-picker-btn:active {
         transform: translateY(3px);
         box-shadow: 0 2px 0 rgba(13,71,161,0.2);
@@ -204,6 +306,20 @@
         padding: 0 2px 4px;
         align-items: center;
         flex-shrink: 0;
+      }
+
+      .memory-landscape .memory-filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 0 2px 4px;
+      }
+
+      .memory-landscape .memory-level-row {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
       }
 
       .memory-filter-row::-webkit-scrollbar {
@@ -243,6 +359,12 @@
         color: #b8860b;
       }
 
+      .memory-landscape .memory-level-chip {
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: clamp(14px, 1.35vw, 18px);
+      }
+
       .memory-level-chip.active {
         background: linear-gradient(180deg,#ffb74d 0%,#ff9800 100%);
         color: #fff;
@@ -254,6 +376,12 @@
         min-height: 40px;
         padding: 0 15px;
         font-size: clamp(15px, 3.8vw, 18px);
+      }
+
+      .memory-landscape .memory-cat-chip {
+        width: 100%;
+        min-height: 46px;
+        font-size: clamp(15px, 1.45vw, 19px);
       }
 
       .memory-cat-chip.active {
@@ -282,6 +410,17 @@
         gap: clamp(7px, 2vw, 12px);
         align-items: stretch;
         justify-items: stretch;
+      }
+
+      .memory-landscape .memory-board {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        border: 6px solid rgba(255,255,255,0.78);
+        border-radius: 34px;
+        background: rgba(255,255,255,0.22);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.13);
+        padding: clamp(10px, 1.5vw, 18px);
       }
 
       .memory-board.count-8 {
@@ -548,6 +687,11 @@
         animation: speechPop 0.22s ease-out;
       }
 
+      .memory-landscape .memory-speech-banner {
+        bottom: max(18px, env(safe-area-inset-bottom));
+        width: min(58vw, 620px);
+      }
+
       .memory-speech-banner.preview {
         background: linear-gradient(180deg,#ffffff 0%,#c9f7ff 100%);
         color: #0d47a1;
@@ -652,6 +796,18 @@
         display: grid;
         gap: 12px;
         animation: sheetSlideUp 0.22s cubic-bezier(0.2,0.8,0.2,1);
+      }
+
+      .memory-landscape .memory-category-sheet {
+        align-items: center;
+        justify-items: center;
+      }
+
+      .memory-landscape .memory-category-sheet-box {
+        width: min(640px, 74vw);
+        max-height: min(82vh, 620px);
+        border-radius: 30px;
+        border-bottom: 6px solid #fff;
       }
 
       @keyframes sheetSlideUp {
@@ -850,6 +1006,64 @@
           font-size: 14px;
         }
       }
+
+      @media (orientation: landscape) and (max-height: 540px) {
+        .memory-game-container.memory-landscape {
+          grid-template-columns: minmax(210px, 0.7fr) minmax(360px, 1.3fr);
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .memory-land-left {
+          gap: 8px;
+        }
+
+        .memory-land-title-card,
+        .memory-landscape .memory-control-panel,
+        .memory-landscape .memory-board {
+          border-width: 4px;
+          border-radius: 24px;
+          padding: 10px;
+        }
+
+        .memory-land-title-emoji {
+          font-size: 38px;
+        }
+
+        .memory-land-title {
+          font-size: 20px;
+        }
+
+        .memory-land-sub {
+          font-size: 13px;
+        }
+
+        .memory-landscape .memory-level-chip {
+          min-height: 34px;
+          font-size: 13px;
+          padding: 0 10px;
+        }
+
+        .memory-landscape .memory-cat-chip {
+          min-height: 36px;
+          font-size: 13px;
+          padding: 0 10px;
+        }
+
+        .memory-landscape .memory-category-picker-btn {
+          min-height: 42px;
+          font-size: 13px;
+        }
+
+        .memory-landscape .memory-board {
+          gap: 6px;
+        }
+
+        .memory-landscape .memory-speech-banner {
+          min-height: 42px;
+          font-size: 18px;
+        }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -952,12 +1166,19 @@
     state.options = options;
     state.destroyed = false;
     state.round = 1;
+    state.layoutMode = getLayoutMode();
+    state.currentScreen = 'game';
+    state.successRewardGiven = false;
 
     container.innerHTML = `
-      <div class="memory-game-container">
+      <div class="memory-game-container memory-${state.layoutMode}">
         <div class="memory-loading">자동차 카드를 준비하고 있어요!</div>
       </div>
     `;
+
+    state.handleResizeBound = handleResize;
+    window.addEventListener('resize', state.handleResizeBound);
+    window.addEventListener('orientationchange', state.handleResizeBound);
 
     fetchMemoryVehicles()
       .then((vehicles) => {
@@ -969,7 +1190,7 @@
         console.warn(error);
         if (!state.container || state.destroyed) return;
         state.container.innerHTML = `
-          <div class="memory-game-container">
+          <div class="memory-game-container memory-${getLayoutMode()}">
             <div class="memory-error">자동차 카드를 불러오지 못했어요.</div>
           </div>
         `;
@@ -987,6 +1208,7 @@
 
     state.flipped = [];
     state.matched = 0;
+    state.matchedPairKeys = new Set();
     state.locked = false;
     state.isPreviewing = false;
     state.seenCards = new Set();
@@ -994,14 +1216,16 @@
     state.hintPairs = {};
     state.wrongCount = 0;
     state.hintColorIndex = 0;
+    state.currentScreen = 'game';
+    state.successRewardGiven = false;
 
     renderMemoryBoard();
     playGameVoice('games.memory.intro');
     startPreview();
   }
 
-  function renderMemoryBoard() {
-    const levelBar = `
+  function getLevelBarMarkup() {
+    return `
       <div class="memory-filter-row memory-level-row" aria-label="카드 개수 선택">
         ${[8, 12, 16].map(num => `
           <button class="memory-level-chip ${selectedCardCount === num ? 'active' : ''}"
@@ -1011,8 +1235,10 @@
         `).join('')}
       </div>
     `;
+  }
 
-    const catBar = `
+  function getCategoryBarMarkup() {
+    return `
       <div class="memory-filter-row memory-main-cat-row" aria-label="카테고리 선택">
         ${['🚗탈것', ...Object.keys(EMOJI_CATEGORIES)].map(cat => `
           <button class="memory-cat-chip ${selectedCategory === cat ? 'active' : ''}"
@@ -1020,48 +1246,126 @@
         `).join('')}
       </div>
     `;
+  }
 
-    const pickerButton = selectedCategory === '🚗탈것'
+  function getPickerButtonMarkup() {
+    return selectedCategory === '🚗탈것'
       ? `
         <button class="memory-category-picker-btn" type="button" data-action="open-category-sheet">
           ${getSelectedVehicleCategoryLabel()}<br>바꾸기
         </button>
       `
       : '';
+  }
 
-    state.container.innerHTML = `
-      <div class="memory-game-container">
-        <div class="memory-control-panel ${selectedCategory === '🚗탈것' ? 'has-picker' : 'no-picker'}">
-          ${levelBar}
-          ${catBar}
-          ${pickerButton}
-        </div>
+  function getControlPanelMarkup() {
+    return `
+      <div class="memory-control-panel ${selectedCategory === '🚗탈것' ? 'has-picker' : 'no-picker'}">
+        ${getLevelBarMarkup()}
+        ${getCategoryBarMarkup()}
+        ${getPickerButtonMarkup()}
+      </div>
+    `;
+  }
 
-        <div class="memory-board count-${selectedCardCount}" role="grid" aria-label="카드 맞추기">
-          ${state.cards.map((card, index) => {
-            const scale = Number(card.scale || 0);
-            const scaleStyle = scale > 0 ? ` style="--vehicle-scale:${escapeAttr(scale)}"` : '';
-            return `
-              <button class="memory-card" type="button" data-index="${index}" data-pair-key="${escapeAttr(card.pairKey)}" aria-label="카드">
-                <span class="memory-card-inner">
-                  <span class="memory-card-face memory-card-back"></span>
-                  <span class="memory-card-face memory-card-front">
-                    ${card.isEmoji
-                      ? `<span class="memory-emoji-face">${card.emoji}</span>`
-                      : `<img src="./${card.file}" alt="${escapeAttr(card.name)}" draggable="false"${scaleStyle}>
-                         <span class="memory-card-fallback" hidden>🚗</span>`
-                    }
-                  </span>
+  function getCardClass(card, index) {
+    const classes = ['memory-card'];
+
+    if (state.isPreviewing) classes.push('is-preview');
+    if (state.matchedPairKeys.has(card.pairKey)) classes.push('is-matched');
+    if (state.flipped.some((item) => item.index === index)) classes.push('is-open');
+
+    return classes.join(' ');
+  }
+
+  function getBoardMarkup() {
+    return `
+      <div class="memory-board count-${selectedCardCount}" role="grid" aria-label="카드 맞추기">
+        ${state.cards.map((card, index) => {
+          const scale = Number(card.scale || 0);
+          const scaleStyle = scale > 0 ? ` style="--vehicle-scale:${escapeAttr(scale)}"` : '';
+
+          return `
+            <button class="${getCardClass(card, index)}" type="button" data-index="${index}" data-pair-key="${escapeAttr(card.pairKey)}" aria-label="카드">
+              <span class="memory-card-inner">
+                <span class="memory-card-face memory-card-back"></span>
+                <span class="memory-card-face memory-card-front">
+                  ${card.isEmoji
+                    ? `<span class="memory-emoji-face">${card.emoji}</span>`
+                    : `<img src="./${card.file}" alt="${escapeAttr(card.name)}" draggable="false"${scaleStyle}>
+                       <span class="memory-card-fallback" hidden>🚗</span>`
+                  }
                 </span>
-              </button>
-            `;
-          }).join('')}
+              </span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+
+  function getMemorySuccessMarkup() {
+    if (state.currentScreen !== 'success') return '';
+
+    return `
+      <div class="memory-success-panel">
+        <div class="memory-success-box">
+          <div class="memory-success-icon">🏆</div>
+          <div class="memory-success-title">다 찾았다!<br>다음 판 갈까?</div>
+          <div class="memory-success-actions">
+            <button class="memory-game-btn" type="button" data-action="restart-success">다시 하기</button>
+            <button class="memory-game-btn" type="button" data-action="next">다음 판!</button>
+          </div>
         </div>
       </div>
     `;
+  }
+
+  function renderMemoryBoard() {
+    const layoutMode = getLayoutMode();
+    state.layoutMode = layoutMode;
+
+    if (layoutMode === 'landscape') {
+      state.container.innerHTML = `
+        <div class="memory-game-container memory-landscape">
+          <aside class="memory-land-left">
+            <div class="memory-land-title-card">
+              <div class="memory-land-title-emoji">🚗🧠</div>
+              <div class="memory-land-title">메모리 게임</div>
+              <div class="memory-land-sub">카드를 기억해서<br>같은 짝을 찾아요</div>
+            </div>
+            ${getControlPanelMarkup()}
+          </aside>
+
+          <main class="memory-land-main">
+            ${getBoardMarkup()}
+          </main>
+
+          ${getMemorySuccessMarkup()}
+        </div>
+      `;
+    } else {
+      state.container.innerHTML = `
+        <div class="memory-game-container memory-portrait">
+          ${getControlPanelMarkup()}
+          ${getBoardMarkup()}
+          ${getMemorySuccessMarkup()}
+        </div>
+      `;
+    }
 
     bindBoardEvents();
+    refreshFlippedElements();
     applyHintClasses();
+  }
+
+  function refreshFlippedElements() {
+    if (!state.container || !state.flipped.length) return;
+
+    state.flipped = state.flipped.map((item) => ({
+      ...item,
+      el: state.container.querySelector(`.memory-card[data-index="${item.index}"]`)
+    })).filter((item) => item.el);
   }
 
   function bindBoardEvents() {
@@ -1096,6 +1400,9 @@
         startRound();
       });
     });
+
+    root.querySelector('[data-action="restart-success"]')?.addEventListener('click', restartMemoryGame);
+    root.querySelector('[data-action="next"]')?.addEventListener('click', nextMemoryGame);
   }
 
   function startPreview() {
@@ -1195,7 +1502,7 @@
   }
 
   function handleMemoryCardClick(index) {
-    if (state.locked || state.isPreviewing) return;
+    if (state.locked || state.isPreviewing || state.currentScreen === 'success') return;
 
     const cardData = state.cards[index];
     const cardEl = state.container?.querySelector(`.memory-card[data-index="${index}"]`);
@@ -1245,7 +1552,7 @@
 
     const hasMatchedCard = uniqueIndexes.some((index) => {
       const cardEl = state.container?.querySelector(`.memory-card[data-index="${index}"]`);
-      return cardEl?.classList.contains('is-matched');
+      return cardEl?.classList.contains('is-matched') || state.matchedPairKeys.has(pairKey);
     });
 
     if (hasMatchedCard) return;
@@ -1293,6 +1600,10 @@
     applyHintClasses();
   }
 
+  function getCardElement(index, fallbackEl) {
+    return state.container?.querySelector(`.memory-card[data-index="${index}"]`) || fallbackEl;
+  }
+
   function checkMemoryMatch() {
     const [first, second] = state.flipped;
     state.locked = true;
@@ -1300,14 +1611,19 @@
     if (first.data.pairKey === second.data.pairKey || first.data.id === second.data.id) {
       window.setTimeout(() => {
         const pairKey = first.data.pairKey || first.data.id;
+        const firstEl = getCardElement(first.index, first.el);
+        const secondEl = getCardElement(second.index, second.el);
 
-        first.el.classList.add('is-matched');
-        second.el.classList.add('is-matched');
+        if (!firstEl || !secondEl || state.destroyed) return;
+
+        firstEl.classList.add('is-matched');
+        secondEl.classList.add('is-matched');
         HINT_COLORS.forEach((color) => {
-          first.el.classList.remove(`hint-${color}`);
-          second.el.classList.remove(`hint-${color}`);
+          firstEl.classList.remove(`hint-${color}`);
+          secondEl.classList.remove(`hint-${color}`);
         });
 
+        state.matchedPairKeys.add(pairKey);
         clearHintForPair(pairKey);
 
         state.matched += 2;
@@ -1330,16 +1646,22 @@
 
     state.wrongCount += 1;
 
-    first.el.classList.add('is-wrong');
-    second.el.classList.add('is-wrong');
+    const firstEl = getCardElement(first.index, first.el);
+    const secondEl = getCardElement(second.index, second.el);
+
+    firstEl?.classList.add('is-wrong');
+    secondEl?.classList.add('is-wrong');
     showSpeechBanner('다시 찾아보자!');
     playGameVoice('games.memory.wrong');
 
     window.setTimeout(() => {
-      first.el.classList.remove('is-wrong');
-      second.el.classList.remove('is-wrong');
-      first.el.classList.remove('is-open');
-      second.el.classList.remove('is-open');
+      const latestFirstEl = getCardElement(first.index, firstEl);
+      const latestSecondEl = getCardElement(second.index, secondEl);
+
+      latestFirstEl?.classList.remove('is-wrong');
+      latestSecondEl?.classList.remove('is-wrong');
+      latestFirstEl?.classList.remove('is-open');
+      latestSecondEl?.classList.remove('is-open');
 
       state.flipped = [];
       state.locked = false;
@@ -1505,9 +1827,17 @@
   }
 
   function showMemorySuccess() {
-    if (!state.container || state.container.querySelector('.memory-success-panel')) return;
+    if (!state.container) return;
 
-    state.options.gainExp?.(selectedCardCount * 2);
+    state.currentScreen = 'success';
+    state.locked = true;
+
+    if (!state.successRewardGiven) {
+      state.options.gainExp?.(selectedCardCount * 2);
+      state.successRewardGiven = true;
+    }
+
+    if (state.container.querySelector('.memory-success-panel')) return;
 
     const panel = document.createElement('div');
     panel.className = 'memory-success-panel';
@@ -1537,13 +1867,31 @@
     startRound();
   }
 
+  function handleResize() {
+    if (state.destroyed || !state.container) return;
+
+    clearTimeout(state.resizeTimer);
+
+    state.resizeTimer = window.setTimeout(() => {
+      if (state.destroyed || !state.container) return;
+
+      const nextMode = getLayoutMode();
+
+      if (nextMode !== state.layoutMode) {
+        renderMemoryBoard();
+      }
+    }, 150);
+  }
+
   function clearTimers() {
     clearTimeout(state.noticeTimer);
     clearTimeout(state.finaleTimer);
     clearTimeout(state.previewTimer);
+    clearTimeout(state.resizeTimer);
     state.noticeTimer = null;
     state.finaleTimer = null;
     state.previewTimer = null;
+    state.resizeTimer = null;
     state.pendingVoiceToken += 1;
   }
 
@@ -1558,6 +1906,12 @@
 
     state.destroyed = true;
 
+    if (state.handleResizeBound) {
+      window.removeEventListener('resize', state.handleResizeBound);
+      window.removeEventListener('orientationchange', state.handleResizeBound);
+      state.handleResizeBound = null;
+    }
+
     if (state.container) state.container.innerHTML = '';
 
     state.container = null;
@@ -1565,6 +1919,7 @@
     state.cards = [];
     state.flipped = [];
     state.matched = 0;
+    state.matchedPairKeys = new Set();
     state.locked = false;
     state.isPreviewing = false;
     state.seenCards = new Set();
@@ -1572,6 +1927,9 @@
     state.hintPairs = {};
     state.wrongCount = 0;
     state.hintColorIndex = 0;
+    state.layoutMode = 'portrait';
+    state.currentScreen = 'game';
+    state.successRewardGiven = false;
   }
 
   function escapeAttr(value) {

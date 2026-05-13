@@ -200,8 +200,61 @@
     currentIndex: 0,
     isTransforming: false,
     destroyed: false,
-    timers: []
+    timers: [],
+    layoutMode: 'portrait',
+    resizeTimer: null,
+    handleResizeBound: null,
+    successRewardGiven: false,
+    completeRewardGiven: false
   };
+
+  function isLandscapeMode() {
+    const width = window.innerWidth || document.documentElement.clientWidth || 0;
+    const height = window.innerHeight || document.documentElement.clientHeight || 0;
+    return width >= 760 && width > height;
+  }
+
+  function getLayoutMode() {
+    return isLandscapeMode() ? 'landscape' : 'portrait';
+  }
+
+  function getRootClass() {
+    state.layoutMode = getLayoutMode();
+    return `lt-root abc-phonics-root abc-phonics-${state.layoutMode}`;
+  }
+
+  function updateRootLayoutClass() {
+    const root = state.container?.querySelector('.lt-root');
+    if (!root) return;
+    const nextMode = getLayoutMode();
+    root.classList.remove('abc-phonics-portrait', 'abc-phonics-landscape');
+    root.classList.add(`abc-phonics-${nextMode}`);
+    state.layoutMode = nextMode;
+  }
+
+  function bindLayoutEvents() {
+    if (state.handleResizeBound) return;
+    state.handleResizeBound = handleResize;
+    window.addEventListener('resize', state.handleResizeBound, { passive: true });
+    window.addEventListener('orientationchange', state.handleResizeBound, { passive: true });
+  }
+
+  function unbindLayoutEvents() {
+    if (!state.handleResizeBound) return;
+    window.removeEventListener('resize', state.handleResizeBound);
+    window.removeEventListener('orientationchange', state.handleResizeBound);
+    state.handleResizeBound = null;
+  }
+
+  function handleResize() {
+    if (state.destroyed || !state.container) return;
+    if (state.resizeTimer) window.clearTimeout(state.resizeTimer);
+    state.resizeTimer = window.setTimeout(() => {
+      state.resizeTimer = null;
+      if (state.destroyed || !state.container) return;
+      updateRootLayoutClass();
+    }, 120);
+  }
 
   function timer(fn, ms) {
     const id = setTimeout(() => {
@@ -215,6 +268,10 @@
   function clearTimers() {
     state.timers.forEach((id) => clearTimeout(id));
     state.timers = [];
+    if (state.resizeTimer) {
+      window.clearTimeout(state.resizeTimer);
+      state.resizeTimer = null;
+    }
   }
 
   function getDataset() {
@@ -251,6 +308,14 @@
         touch-action: manipulation;
         isolation: isolate;
         transition: background 0.45s ease, opacity 0.28s ease;
+      }
+
+      .abc-phonics-root {
+        box-sizing: border-box;
+      }
+
+      .abc-phonics-root * {
+        box-sizing: border-box;
       }
 
       .lt-root::before {
@@ -693,6 +758,205 @@
         box-shadow: 0 5px 0 #ddd;
       }
 
+      .abc-phonics-landscape {
+        display: grid;
+        grid-template-columns: minmax(210px, 24vw) minmax(360px, 1fr) minmax(230px, 26vw);
+        grid-template-rows: 1fr;
+        gap: 12px;
+        padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+      }
+
+      .abc-phonics-landscape .lt-top {
+        height: 100%;
+        min-height: 0;
+        grid-column: 1;
+        grid-row: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        align-items: stretch;
+        gap: 14px;
+        padding: 14px;
+        border-radius: 32px;
+        background: rgba(255,255,255,.42);
+        border: 5px solid rgba(255,255,255,.72);
+        box-shadow: inset 0 2px 0 rgba(255,255,255,.28), 0 14px 30px rgba(0,0,0,.14);
+      }
+
+      .abc-phonics-landscape .lt-mode-tabs {
+        width: 100%;
+        min-width: 0;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 7px;
+        border-radius: 28px;
+      }
+
+      .abc-phonics-landscape .lt-mode-tab {
+        min-height: 62px;
+        font-size: clamp(20px, 2.4vw, 30px);
+        border-radius: 22px;
+      }
+
+      .abc-phonics-landscape .lt-progress {
+        width: 100%;
+        min-height: 0;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .abc-phonics-landscape .lt-dot {
+        width: clamp(15px, 2vw, 22px);
+        height: clamp(15px, 2vw, 22px);
+      }
+
+      .abc-phonics-landscape .lt-home-btn {
+        justify-self: center;
+        align-self: end;
+        min-width: 68px;
+        min-height: 68px;
+        font-size: 31px;
+      }
+
+      .abc-phonics-landscape .lt-title-wrap {
+        position: absolute;
+        z-index: 12;
+        left: calc(24vw + 34px);
+        top: max(18px, env(safe-area-inset-top));
+        padding: 0;
+        pointer-events: none;
+      }
+
+      .abc-phonics-landscape .lt-title {
+        min-height: 54px;
+        font-size: clamp(24px, 3vw, 40px);
+        box-shadow: 0 8px 0 rgba(0,0,0,.11);
+      }
+
+      .abc-phonics-landscape .lt-stage {
+        grid-column: 2 / 4;
+        grid-row: 1;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: minmax(360px, 1fr) minmax(220px, 26vw);
+        gap: 12px;
+        padding: 76px 0 0;
+      }
+
+      .abc-phonics-landscape .lt-stage-inner {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        grid-column: 1 / 3;
+        display: grid;
+        grid-template-columns: minmax(360px, 1fr) minmax(220px, 26vw);
+        grid-template-rows: 1fr;
+        gap: 12px;
+        align-items: stretch;
+        justify-items: stretch;
+      }
+
+      .abc-phonics-landscape .lt-main-card {
+        grid-column: 1;
+        align-self: stretch;
+        justify-self: stretch;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        border-radius: 42px;
+      }
+
+      .abc-phonics-landscape .lt-image-wrap {
+        width: 88%;
+        height: 88%;
+      }
+
+      .abc-phonics-landscape .lt-fallback-letter,
+      .abc-phonics-landscape .lt-fallback-object {
+        width: min(34vw, 360px);
+        height: min(34vw, 360px);
+      }
+
+      .abc-phonics-landscape .lt-fallback-letter {
+        font-size: clamp(150px, 22vw, 280px);
+      }
+
+      .abc-phonics-landscape .lt-fallback-object {
+        font-size: clamp(138px, 20vw, 260px);
+      }
+
+      .abc-phonics-landscape .lt-word-label,
+      .abc-phonics-landscape .lt-hint {
+        grid-column: 2;
+        width: 100%;
+        align-self: center;
+        justify-self: stretch;
+      }
+
+      .abc-phonics-landscape .lt-word-label {
+        position: absolute;
+        right: 0;
+        top: 28%;
+        width: min(25vw, 330px);
+        min-height: 96px;
+        font-size: clamp(44px, 6vw, 86px);
+        border-radius: 32px;
+      }
+
+      .abc-phonics-landscape .lt-hint {
+        position: absolute;
+        right: 0;
+        bottom: 8%;
+        width: min(25vw, 330px);
+        min-height: 88px;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-size: clamp(24px, 3vw, 38px);
+      }
+
+      .abc-phonics-landscape .lt-complete-screen {
+        grid-column: 1 / 4;
+        grid-row: 1;
+        padding: max(20px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+      }
+
+      .abc-phonics-landscape .lt-complete-box {
+        width: min(760px, 78vw);
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+          "emoji title"
+          "emoji sub"
+          "buttons buttons";
+        align-items: center;
+        text-align: left;
+        padding: 34px 30px 28px;
+      }
+
+      .abc-phonics-landscape .lt-complete-emoji {
+        grid-area: emoji;
+        font-size: clamp(100px, 13vw, 160px);
+      }
+
+      .abc-phonics-landscape .lt-complete-title {
+        grid-area: title;
+        font-size: clamp(38px, 5vw, 62px);
+      }
+
+      .abc-phonics-landscape .lt-complete-sub {
+        grid-area: sub;
+        font-size: clamp(22px, 2.8vw, 34px);
+      }
+
+      .abc-phonics-landscape .lt-complete-btns {
+        grid-area: buttons;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
       @media (max-width: 560px) {
         .lt-top {
           grid-template-columns: 1fr auto;
@@ -758,27 +1022,27 @@
     if (!text) return;
     const voiceIds = {
       '에이, 비, 씨가 장난감으로 변신해요!': 'games.abc.intro',
-      '터치 에이!': 'games.abc.touchA',
-      '터치 비!': 'games.abc.touchB',
-      '터치 씨!': 'games.abc.touchC',
-      '에이.': 'games.abc.a',
-      '비.': 'games.abc.b',
-      '씨.': 'games.abc.c',
-      '애플!': 'games.abc.apple',
-      '볼!': 'games.abc.ball',
-      '카!': 'games.abc.car',
-      '터치 더 레터!': 'games.abc.touchLetter',
+      'Touch A!': 'games.abc.touchA',
+      'Touch B!': 'games.abc.touchB',
+      'Touch C!': 'games.abc.touchC',
+      'A': 'games.abc.a',
+      'B': 'games.abc.b',
+      'C': 'games.abc.c',
+      'Apple!': 'games.abc.apple',
+      'Ball!': 'games.abc.ball',
+      'Car!': 'games.abc.car',
+      'Touch the letter!': 'games.abc.touchLetter',
       '우와. 에이, 비, 씨를 모두 만났어요.': 'games.abc.complete',
       '한글 친구들이 그림으로 변신해요!': 'games.korean.intro',
-      '기역! 그, 그.': 'games.korean.giyeok',
-      '니은! 느, 느.': 'games.korean.nieun',
-      '디귿! 드, 드.': 'games.korean.digeut',
-      '리을! 르, 르.': 'games.korean.rieul',
-      '미음! 므, 므.': 'games.korean.mieum',
-      '비읍! 브, 브.': 'games.korean.bieup',
-      '시옷! 스, 스.': 'games.korean.siot',
-      '이응! 으, 으.': 'games.korean.ieung',
-      '지읒! 즈, 즈.': 'games.korean.jieut',
+      '기역! 그, 그': 'games.korean.giyeok',
+      '니은! 느, 느': 'games.korean.nieun',
+      '디귿! 드, 드': 'games.korean.digeut',
+      '리을! 르, 르': 'games.korean.rieul',
+      '미음! 므, 므': 'games.korean.mieum',
+      '비읍! 브, 브': 'games.korean.bieup',
+      '시옷! 스, 스': 'games.korean.siot',
+      '이응! 으, 으': 'games.korean.ieung',
+      '지읒! 즈, 즈': 'games.korean.jieut',
       '가, 가, 가방!': 'games.korean.ga',
       '나, 나, 나비!': 'games.korean.na',
       '도, 도, 도토리!': 'games.korean.do',
@@ -819,7 +1083,7 @@
       p.style.left = `${x}px`;
       p.style.top = `${y}px`;
       root.appendChild(p);
-      setTimeout(() => p.remove(), 1000);
+      timer(() => p.remove(), 1000);
     }
 
     const stars = ['⭐', '✨', '🌟', '💫', '🎊'];
@@ -834,7 +1098,7 @@
       s.style.left = `${x}px`;
       s.style.top = `${y}px`;
       root.appendChild(s);
-      setTimeout(() => s.remove(), 1000);
+      timer(() => s.remove(), 1000);
     }
   }
 
@@ -863,6 +1127,8 @@
     state.mode = nextMode;
     state.currentIndex = 0;
     state.isTransforming = false;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
     renderScene(true);
     timer(() => {
       const dataset = getDataset();
@@ -879,6 +1145,8 @@
 
     if (!root || !item) return;
 
+    state.successRewardGiven = false;
+    updateRootLayoutClass();
     updateRootBackground(root, item);
 
     root.innerHTML = `
@@ -982,7 +1250,10 @@
           state.mode === 'abc' ? 'en-US' : 'ko-KR'
         );
 
-        state.options.fireConfetti?.();
+        if (!state.successRewardGiven) {
+          state.successRewardGiven = true;
+          state.options.fireConfetti?.();
+        }
       }, 760);
 
       timer(() => {
@@ -995,7 +1266,7 @@
       timer(() => {
         const guide = state.mode === 'abc'
           ? `Touch ${item.letter}!`
-          : `${item.letterName}을 눌러볼까?`;
+          : '글자를 눌러볼까?';
         speakItemText(guide, state.mode === 'abc' ? 'en-US' : 'ko-KR');
       }, 450);
     }
@@ -1012,6 +1283,7 @@
     timer(() => {
       state.currentIndex += 1;
       state.isTransforming = false;
+      state.successRewardGiven = false;
       root.style.opacity = '1';
 
       if (state.currentIndex >= getItems().length) {
@@ -1030,6 +1302,7 @@
 
     if (!root) return;
 
+    updateRootLayoutClass();
     root.style.setProperty('--lt-color', '#FF7A1A');
     root.style.background = 'linear-gradient(180deg, #fff9c4 0%, #ffe082 48%, #ffd6e8 100%)';
 
@@ -1048,13 +1321,18 @@
       </div>
     `;
 
-    speakItemText(dataset.completeVoice, state.mode === 'abc' ? 'en-US' : 'ko-KR');
-    state.options.fireConfetti?.();
-    state.options.gainExp?.(dataset.completeExp || 20);
+    if (!state.completeRewardGiven) {
+      state.completeRewardGiven = true;
+      speakItemText(dataset.completeVoice, state.mode === 'abc' ? 'en-US' : 'ko-KR');
+      state.options.fireConfetti?.();
+      state.options.gainExp?.(dataset.completeExp || 20);
+    }
 
     root.querySelector('#ltReplay')?.addEventListener('click', () => {
       state.currentIndex = 0;
       state.isTransforming = false;
+      state.successRewardGiven = false;
+      state.completeRewardGiven = false;
       renderScene(true);
       timer(() => {
         const msg = state.mode === 'abc' ? 'Touch the letter!' : '글자를 눌러볼까?';
@@ -1083,8 +1361,13 @@
     state.isTransforming = false;
     state.timers = [];
     state.mode = options.initialMode === 'hangul' ? 'hangul' : 'abc';
+    state.layoutMode = getLayoutMode();
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
 
-    container.innerHTML = `<div class="lt-root"></div>`;
+    bindLayoutEvents();
+
+    container.innerHTML = `<div class="${getRootClass()}"></div>`;
     renderScene(true);
 
     timer(() => {
@@ -1096,6 +1379,7 @@
   function destroy() {
     state.destroyed = true;
     clearTimers();
+    unbindLayoutEvents();
 
     if (typeof speechSynthesis !== 'undefined') {
       try { speechSynthesis.cancel(); } catch (error) {}
@@ -1103,6 +1387,8 @@
 
     if (state.container) state.container.innerHTML = '';
     state.container = null;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
   }
 
   window.SihyeonGames = window.SihyeonGames || {};

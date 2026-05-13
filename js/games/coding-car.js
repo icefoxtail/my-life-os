@@ -56,8 +56,77 @@
     locked: false,
     destroyed: false,
     noticeTimer: null,
-    resetTimer: null
+    resetTimer: null,
+    timers: [],
+    layoutMode: 'portrait',
+    resizeTimer: null,
+    handleResizeBound: null,
+    successRewardGiven: false,
+    completeRewardGiven: false
   };
+
+  function isLandscapeMode() {
+    const width = window.innerWidth || document.documentElement.clientWidth || 0;
+    const height = window.innerHeight || document.documentElement.clientHeight || 0;
+    return width >= 760 && width > height;
+  }
+
+  function getLayoutMode() {
+    return isLandscapeMode() ? 'landscape' : 'portrait';
+  }
+
+  function getRootClass() {
+    state.layoutMode = getLayoutMode();
+    return `cc-root coding-car-root coding-car-${state.layoutMode}`;
+  }
+
+  function applyRootLayoutClass() {
+    const root = state.container?.querySelector('.cc-root');
+    if (!root) return;
+
+    const nextMode = getLayoutMode();
+    root.classList.remove('coding-car-portrait', 'coding-car-landscape');
+    root.classList.add(`coding-car-${nextMode}`);
+    state.layoutMode = nextMode;
+  }
+
+  function bindLayoutEvents() {
+    if (state.handleResizeBound) return;
+    state.handleResizeBound = handleResize;
+    window.addEventListener('resize', state.handleResizeBound, { passive: true });
+    window.addEventListener('orientationchange', state.handleResizeBound, { passive: true });
+  }
+
+  function unbindLayoutEvents() {
+    if (!state.handleResizeBound) return;
+    window.removeEventListener('resize', state.handleResizeBound);
+    window.removeEventListener('orientationchange', state.handleResizeBound);
+    state.handleResizeBound = null;
+  }
+
+  function handleResize() {
+    if (state.destroyed || !state.container) return;
+    if (state.resizeTimer) window.clearTimeout(state.resizeTimer);
+
+    state.resizeTimer = window.setTimeout(() => {
+      state.resizeTimer = null;
+      if (state.destroyed || !state.container) return;
+
+      const nextMode = getLayoutMode();
+      if (state.layoutMode === nextMode) return;
+
+      applyRootLayoutClass();
+    }, 120);
+  }
+
+  function setManagedTimeout(fn, ms) {
+    const id = window.setTimeout(() => {
+      state.timers = state.timers.filter((timerId) => timerId !== id);
+      if (!state.destroyed) fn();
+    }, ms);
+    state.timers.push(id);
+    return id;
+  }
 
   function injectStyle() {
     if (document.getElementById(STYLE_ID)) return;
@@ -81,6 +150,14 @@
         touch-action: none;
         overflow: hidden;
         color: #17324a;
+      }
+
+      .coding-car-root {
+        box-sizing: border-box;
+      }
+
+      .coding-car-root * {
+        box-sizing: border-box;
       }
 
       .cc-top {
@@ -641,6 +718,162 @@
         to { opacity: 1; }
       }
 
+      .coding-car-portrait {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .coding-car-landscape {
+        display: grid;
+        grid-template-columns: minmax(220px, 24vw) minmax(360px, 1fr) minmax(250px, 28vw);
+        grid-template-rows: 1fr;
+        gap: 12px;
+        padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+      }
+
+      .coding-car-landscape .cc-top {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        min-height: 0;
+        padding: 14px;
+        align-content: start;
+        gap: 16px;
+        border-radius: 32px;
+        border: 5px solid rgba(255,255,255,0.68);
+        background: rgba(255,255,255,0.42);
+        box-shadow: inset 0 2px 0 rgba(255,255,255,0.28), 0 14px 30px rgba(0,0,0,0.14);
+      }
+
+      .coding-car-landscape .cc-header {
+        display: block;
+      }
+
+      .coding-car-landscape .cc-title {
+        min-height: 102px;
+        padding: 18px 14px;
+        border-radius: 30px;
+        font-size: clamp(24px, 2.7vw, 36px);
+        line-height: 1.18;
+      }
+
+      .coding-car-landscape .cc-difficulty-row {
+        flex-direction: column;
+        overflow: visible;
+        padding: 0;
+        gap: 12px;
+      }
+
+      .coding-car-landscape .cc-diff-btn {
+        width: 100%;
+        min-width: 0;
+        min-height: 68px;
+        border-radius: 26px;
+        font-size: clamp(20px, 2.2vw, 28px);
+      }
+
+      .coding-car-landscape .cc-map-container {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .coding-car-landscape .cc-map {
+        width: min(100%, 72vh, 620px);
+        height: min(100%, 72vh, 620px);
+        min-width: 340px;
+        min-height: 340px;
+        border-width: 9px;
+        border-radius: 34px;
+      }
+
+      .coding-car-landscape .cc-ui-area {
+        grid-column: 3;
+        grid-row: 1;
+        height: 100%;
+        min-height: 0;
+        align-content: center;
+        border-radius: 32px;
+        border-top: 0;
+        border: 5px solid rgba(255,255,255,0.82);
+        padding: 16px max(14px, env(safe-area-inset-right)) 16px 14px;
+        gap: 12px;
+        overflow: hidden auto;
+      }
+
+      .coding-car-landscape .cc-guide-text {
+        min-height: 72px;
+        padding: 8px 10px;
+        border-radius: 24px;
+        background: rgba(255,255,255,0.72);
+        border: 4px solid #fff;
+        font-size: clamp(20px, 2.3vw, 30px);
+      }
+
+      .coding-car-landscape .cc-slots {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+        min-height: 0;
+      }
+
+      .coding-car-landscape .cc-slot {
+        width: 100%;
+        height: clamp(54px, 8vh, 72px);
+        border-radius: 18px;
+      }
+
+      .coding-car-landscape .cc-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .coding-car-landscape .cc-btn-arrow {
+        height: clamp(70px, 12vh, 98px);
+        border-radius: 24px;
+      }
+
+      .coding-car-landscape .cc-bottom-guide {
+        min-height: 58px;
+        padding: 8px 10px;
+        border-radius: 22px;
+        background: rgba(255,241,200,0.72);
+        border: 4px solid #fff;
+        font-size: clamp(18px, 2vw, 26px);
+      }
+
+      .coding-car-landscape .cc-bottom-actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .coding-car-landscape .cc-btn-edit,
+      .coding-car-landscape .cc-btn-go {
+        min-height: clamp(60px, 9vh, 82px);
+        border-radius: 24px;
+        font-size: clamp(20px, 2.2vw, 30px);
+      }
+
+      .coding-car-landscape .cc-speech {
+        left: 50%;
+        bottom: max(18px, env(safe-area-inset-bottom));
+        width: min(44vw, 620px);
+        font-size: clamp(20px, 2.4vw, 32px);
+      }
+
+      .coding-car-landscape .cc-success-box {
+        width: min(720px, 72vw);
+      }
+
+      .coding-car-landscape .cc-success-actions {
+        grid-template-columns: 1.4fr 1fr 0.9fr;
+      }
+
       @media (max-width: 620px) {
         .cc-top {
           padding: 8px 8px 3px;
@@ -785,6 +1018,35 @@
           bottom: calc(156px + env(safe-area-inset-bottom));
           min-height: 42px;
           font-size: 18px;
+        }
+
+        .coding-car-landscape .cc-title {
+          min-height: 82px;
+          font-size: clamp(19px, 2.3vw, 30px);
+        }
+
+        .coding-car-landscape .cc-diff-btn {
+          min-height: 54px;
+          font-size: clamp(17px, 2vw, 24px);
+        }
+
+        .coding-car-landscape .cc-map {
+          width: min(100%, 68vh, 560px);
+          height: min(100%, 68vh, 560px);
+        }
+
+        .coding-car-landscape .cc-guide-text {
+          min-height: 54px;
+          font-size: clamp(17px, 2vw, 24px);
+        }
+
+        .coding-car-landscape .cc-btn-arrow {
+          height: clamp(56px, 10vh, 78px);
+        }
+
+        .coding-car-landscape .cc-btn-edit,
+        .coding-car-landscape .cc-btn-go {
+          min-height: clamp(50px, 8vh, 70px);
         }
       }
     `;
@@ -938,6 +1200,8 @@
     state.failCount = 0;
     state.hasFirstInput = false;
     state.locked = false;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
     state.vehicle = pickVehicle();
 
     chooseMission();
@@ -957,7 +1221,7 @@
     const bottomGuideText = getGoGuideText();
 
     state.container.innerHTML = `
-      <div class="cc-root">
+      <div class="${getRootClass()}">
         <div class="cc-top">
           <div class="cc-header">
             <div class="cc-title">🏁 ${escapeHtml(carName)}를 차고지로 보내요!</div>
@@ -984,7 +1248,7 @@
             }).join('')}
             <div class="cc-start-flag"></div>
             <div class="cc-garage" id="ccGarage"></div>
-            <div class="cc-car-wrapper" id="ccCar" style="transform: translate(${state.startX * 100}%, ${state.startY * 100}%);" role="button" aria-label="자동차">
+            <div class="cc-car-wrapper" id="ccCar" style="transform: translate(${state.carX * 100}%, ${state.carY * 100}%);" role="button" aria-label="자동차">
               <img src="${escapeAttr(carFile)}" class="cc-car-img" alt="${escapeAttr(carName)}" draggable="false">
             </div>
           </div>
@@ -1157,8 +1421,8 @@
     void carEl.offsetWidth;
     carEl.classList.add('is-guide-shake');
 
-    window.setTimeout(() => {
-      carEl.classList.remove('is-guide-shake');
+    setManagedTimeout(() => {
+      if (carEl.isConnected) carEl.classList.remove('is-guide-shake');
     }, 520);
   }
 
@@ -1233,8 +1497,9 @@
 
     notice.textContent = text;
 
-    state.noticeTimer = window.setTimeout(() => {
+    state.noticeTimer = setManagedTimeout(() => {
       if (notice && notice.parentNode) notice.remove();
+      state.noticeTimer = null;
     }, 1500);
   }
 
@@ -1385,7 +1650,7 @@
 
     revealHintAfterFail();
 
-    state.resetTimer = window.setTimeout(() => {
+    state.resetTimer = setManagedTimeout(() => {
       if (state.destroyed) return;
       resetCarToStart();
 
@@ -1404,6 +1669,8 @@
       } else {
         showNotice('하나 지우고 다시 눌러요!');
       }
+
+      state.resetTimer = null;
     }, 1300);
   }
 
@@ -1455,6 +1722,11 @@
   }
 
   function showSuccess() {
+    if (state.destroyed || !state.container || state.successRewardGiven) return;
+
+    state.successRewardGiven = true;
+    state.locked = true;
+
     if (state.options.fireConfetti) state.options.fireConfetti();
     state.options.gainExp?.(20);
     vibrate([30, 40, 30, 40, 60]);
@@ -1503,6 +1775,8 @@
     state.failCount = 0;
     state.hasFirstInput = false;
     state.locked = false;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
     state.carX = state.startX;
     state.carY = state.startY;
 
@@ -1516,11 +1790,15 @@
     state.container = container;
     state.options = options;
     state.destroyed = false;
+    state.layoutMode = getLayoutMode();
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
 
     injectStyle();
+    bindLayoutEvents();
 
     container.innerHTML = `
-      <div class="cc-root">
+      <div class="${getRootClass()}">
         <div class="memory-loading" style="flex:1; display:grid; place-items:center; padding:30px; text-align:center; color:#17324a; font-size:24px; font-weight:900;">
           자동차 부르는 중...
         </div>
@@ -1536,18 +1814,27 @@
   function clearTimers() {
     clearTimeout(state.noticeTimer);
     clearTimeout(state.resetTimer);
+    if (state.resizeTimer) window.clearTimeout(state.resizeTimer);
+    state.timers.forEach((timerId) => window.clearTimeout(timerId));
     state.noticeTimer = null;
     state.resetTimer = null;
+    state.resizeTimer = null;
+    state.timers = [];
   }
 
   function wait(ms) {
     return new Promise((resolve) => {
-      window.setTimeout(resolve, ms);
+      const id = window.setTimeout(() => {
+        state.timers = state.timers.filter((timerId) => timerId !== id);
+        resolve();
+      }, ms);
+      state.timers.push(id);
     });
   }
 
   function destroy() {
     clearTimers();
+    unbindLayoutEvents();
 
     state.destroyed = true;
 
@@ -1559,6 +1846,8 @@
     state.commands = [];
     state.locked = false;
     state.hasFirstInput = false;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
   }
 
   function escapeAttr(value) {

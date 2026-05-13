@@ -5,6 +5,7 @@
 (function(){
   window.SihyeonGames = window.SihyeonGames || {};
 
+  const GAME_KEY     = 'numberCount';
   const STYLE_ID     = 'sihyeon-number-count-style';
   const MANIFEST_URL = './assets/vehicles/vehicles_manifest.json';
   const TOTAL_ROUNDS = 5;
@@ -126,7 +127,7 @@
   /* ══════════════════════════════════════════════
      메인 게임 오브젝트
   ══════════════════════════════════════════════ */
-  window.SihyeonGames.numberCount = {
+  window.SihyeonGames[GAME_KEY] = {
     id:'numberCount',
     title:'🚗',
 
@@ -145,7 +146,12 @@
       isAnimating:false,
       options:{},
       timeoutIds:[],
-      audioCtx: null
+      audioCtx: null,
+      layoutMode:'portrait',
+      resizeTimer:null,
+      handleResizeBound:null,
+      successRewardGiven:false,
+      completeRewardGiven:false
     },
 
     /* ── 오디오 시스템 (자체 SFX) ── */
@@ -200,9 +206,11 @@
       this.state.options   = options || {};
       this.initAudio();
       this.injectStyles();
+      this.state.layoutMode = this.getLayoutMode();
+      this.bindResizeEvents();
 
       container.innerHTML = `
-        <div class="number-count-game">
+        <div class="number-count-game number-count-root ${this.getLayoutClass()}">
           <div class="nc-loading-card">
             <div class="nc-loading-icon">🚗</div>
           </div>
@@ -212,7 +220,7 @@
       if(this.state.container !== container) return;
 
       container.innerHTML = `
-        <div class="number-count-game" id="ncGame">
+        <div class="number-count-game number-count-root ${this.getLayoutClass()}" id="ncGame">
           <div class="nc-cloud nc-c1"></div>
           <div class="nc-cloud nc-c2"></div>
 
@@ -270,6 +278,7 @@
         : allVehicles.filter(v => v.category === this.state.selectedVehicleCategory);
       const pool = filtered.length ? filtered : allVehicles;
       this.state.gameVehicles = shuffle(pool).slice(0, TOTAL_ROUNDS);
+      this.state.completeRewardGiven = false;
       this.restart();
     },
 
@@ -282,6 +291,8 @@
       this.state.wrongCount     = 0;
       this.state.isAnimating    = false;
       this.state.difficulty     = this.state.difficulty || 1;
+      this.state.successRewardGiven = false;
+      this.state.completeRewardGiven = false;
       const panel   = this.query('#ncSuccessPanel');
       const choices = this.query('#ncChoicesArea');
       if(panel)   panel.style.display = 'none';
@@ -298,6 +309,7 @@
 
       this.state.isAnimating   = false;
       this.state.wrongCount    = 0;
+      this.state.successRewardGiven = false;
       this.state.currentAnswer  = pickAnswer(this.state.currentLevel, this.state.difficulty);
       this.state.currentVehicle = this.state.gameVehicles[(this.state.currentLevel-1) % this.state.gameVehicles.length];
 
@@ -475,11 +487,13 @@
             this.showNumberStamp(this.state.currentAnswer);
             this.createParticles(15);
             this.showCorrectEmoji();
-            if(this.state.options.fireConfetti) this.state.options.fireConfetti();
-
             const spokenNum = KOREAN_COUNT[this.state.currentAnswer] || this.state.currentAnswer;
-            playGameVoice('games.number.correct');
-            this.say(`우와 맞았어! ${spokenNum} 대야!`, true);
+            if(!this.state.successRewardGiven){
+              this.state.successRewardGiven = true;
+              if(this.state.options.fireConfetti) this.state.options.fireConfetti();
+              playGameVoice('games.number.correct');
+              this.say(`우와 맞았어! ${spokenNum} 대야!`, true);
+            }
 
             // ★ 대기시간 대폭 단축 (7.6초 -> 3.2초)
             this.setManagedTimeout(()=>{
@@ -619,21 +633,24 @@
       choices.style.display  = 'none';
       this.playTone('complete');
 
-      if(wrapper){
-        this.driveOut(wrapper, ()=>{
-          panel.style.display = 'flex';
-          this.createParticles(30);
-          playGameVoice('games.number.complete');
-          this.say('우와! 다 맞혔어! 시현이 최고야!', true);
-          if(this.state.options.fireConfetti) this.state.options.fireConfetti();
-          if(this.state.options.gainExp)      this.state.options.gainExp(30);
-        });
-      } else {
-        panel.style.display = 'flex';
+      const runCompleteReward = ()=>{
+        if(this.state.completeRewardGiven) return;
+        this.state.completeRewardGiven = true;
         playGameVoice('games.number.complete');
         this.say('우와! 다 맞혔어! 시현이 최고야!', true);
         if(this.state.options.fireConfetti) this.state.options.fireConfetti();
         if(this.state.options.gainExp)      this.state.options.gainExp(30);
+      };
+
+      if(wrapper){
+        this.driveOut(wrapper, ()=>{
+          panel.style.display = 'flex';
+          this.createParticles(30);
+          runCompleteReward();
+        });
+      } else {
+        panel.style.display = 'flex';
+        runCompleteReward();
       }
     },
 
@@ -687,12 +704,146 @@
       });
     },
 
+    isLandscapeMode:function(){
+      try{
+        return window.matchMedia('(orientation: landscape) and (min-width: 768px) and (min-height: 520px)').matches;
+      }catch(e){
+        return window.innerWidth >= 768 && window.innerWidth > window.innerHeight;
+      }
+    },
+
+    getLayoutMode:function(){
+      return this.isLandscapeMode() ? 'landscape' : 'portrait';
+    },
+
+    getLayoutClass:function(){
+      const mode = this.getLayoutMode();
+      this.state.layoutMode = mode;
+      return `number-count-${mode}`;
+    },
+
+    applyLayoutClass:function(){
+      const game = this.query('#ncGame') || this.state.container?.querySelector('.number-count-game');
+      if(!game) return;
+      game.classList.add('number-count-root');
+      game.classList.remove('number-count-portrait', 'number-count-landscape');
+      game.classList.add(`number-count-${this.getLayoutMode()}`);
+    },
+
+    bindResizeEvents:function(){
+      if(this.state.handleResizeBound) return;
+      this.state.handleResizeBound = ()=>this.handleResize();
+      window.addEventListener('resize', this.state.handleResizeBound, { passive:true });
+      window.addEventListener('orientationchange', this.state.handleResizeBound, { passive:true });
+    },
+
+    unbindResizeEvents:function(){
+      if(!this.state.handleResizeBound) return;
+      window.removeEventListener('resize', this.state.handleResizeBound);
+      window.removeEventListener('orientationchange', this.state.handleResizeBound);
+      this.state.handleResizeBound = null;
+    },
+
+    handleResize:function(){
+      if(!this.state.container) return;
+      if(this.state.resizeTimer) clearTimeout(this.state.resizeTimer);
+      this.state.resizeTimer = setTimeout(()=>{
+        this.state.resizeTimer = null;
+        this.refreshLayoutOnly();
+      }, 120);
+    },
+
+    refreshLayoutOnly:function(){
+      if(!this.state.container) return;
+      const nextMode = this.getLayoutMode();
+      this.state.layoutMode = nextMode;
+      this.applyLayoutClass();
+    },
+
     say:function(text, force=false){
-      return;
+      if(!text) return;
+
+      const raw = String(text).trim();
+
+      const guideMap = [
+        {
+          test: /몇 대인지 세어볼까/,
+          ids: ['games.number.guide.countQuestion', 'games.number.countQuestion']
+        }
+      ];
+
+      const found = guideMap.find(item => item.test.test(raw));
+      if(found){
+        this.playFirstVoice(found.ids);
+      }
     },
 
     speakDirect:function(text){
-      return;
+      if(!text) return;
+
+      const raw = String(text).trim();
+
+      const countMap = {
+        '하나': 1,
+        '둘': 2,
+        '셋': 3,
+        '넷': 4,
+        '다섯': 5,
+        '여섯': 6,
+        '일곱': 7,
+        '여덟': 8,
+        '아홉': 9
+      };
+
+      const unitMap = {
+        '하나': 1,
+        '한': 1,
+        '둘': 2,
+        '두': 2,
+        '셋': 3,
+        '세': 3,
+        '넷': 4,
+        '네': 4,
+        '다섯': 5,
+        '여섯': 6,
+        '일곱': 7,
+        '여덟': 8,
+        '아홉': 9
+      };
+
+      const unitMatch = raw.match(/^(하나|한|둘|두|셋|세|넷|네|다섯|여섯|일곱|여덟|아홉)\s*대$/);
+      if(unitMatch){
+        const n = unitMap[unitMatch[1]];
+        this.playFirstVoice([
+          `games.number.countVehicle.${n}`,
+          `games.number.countUnit.${n}`,
+          `games.number.count.${n}`
+        ]);
+        return;
+      }
+
+      if(Object.prototype.hasOwnProperty.call(countMap, raw)){
+        const n = countMap[raw];
+        this.playFirstVoice([
+          `games.number.count.${n}`,
+          `games.number.koreanCount.${n}`
+        ]);
+      }
+    },
+
+    playFirstVoice:function(ids){
+      if(!window.SihyeonVoice || typeof window.SihyeonVoice.play !== 'function') return;
+
+      const list = Array.isArray(ids) ? ids.filter(Boolean) : [ids].filter(Boolean);
+      let index = 0;
+
+      const next = () => {
+        const id = list[index++];
+        if(!id) return;
+        window.SihyeonVoice.play(id).catch(next);
+      };
+
+      next();
     },
 
     query:function(sel){
@@ -723,6 +874,34 @@
           font-family:'Jua','Nanum Gothic',sans-serif;
           transition:background 1s ease; isolation:isolate;
         }
+
+        .number-count-root{box-sizing:border-box;}
+        .number-count-root *{box-sizing:border-box;}
+        .number-count-portrait{display:flex;flex-direction:column;}
+        .number-count-landscape{
+          display:grid;
+          grid-template-columns:minmax(220px,26%) minmax(360px,1fr) minmax(230px,28%);
+          grid-template-rows:auto auto 1fr;
+          gap:12px;
+          padding:12px;
+          align-items:stretch;
+        }
+        .number-count-landscape .nc-cloud{z-index:0;}
+        .number-count-landscape .nc-game-header{grid-column:1;grid-row:1;margin:0;border-radius:24px;min-height:58px;align-self:start;}
+        .number-count-landscape .nc-dot-progress{gap:8px;flex-wrap:wrap;}
+        .number-count-landscape .nc-home-btn{font-size:28px;}
+        .number-count-landscape .nc-difficulty-tabs{grid-column:1;grid-row:2;display:grid;grid-template-columns:1fr;gap:8px;padding:0;align-self:start;}
+        .number-count-landscape .nc-difficulty-tab{width:100%;min-height:48px;font-size:clamp(16px,1.7vw,22px);}
+        .number-count-landscape .nc-vehicle-cat-tabs{grid-column:1;grid-row:3;display:grid;grid-auto-rows:min-content;align-content:start;gap:8px;overflow-y:auto;overflow-x:hidden;padding:0 2px 6px;min-height:0;}
+        .number-count-landscape .nc-vehicle-cat-tab{width:100%;min-height:44px;font-size:clamp(15px,1.5vw,20px);}
+        .number-count-landscape .nc-objects-area{grid-column:2;grid-row:1 / span 3;padding:clamp(10px,1.4vw,20px);border-radius:34px;border:6px solid rgba(255,255,255,.55);background:rgba(255,255,255,.16);box-shadow:inset 0 4px 0 rgba(255,255,255,.22),0 10px 28px rgba(0,0,0,.08);}
+        .number-count-landscape .nc-vehicles-wrapper{width:min(100%, 860px);gap:clamp(12px,2.2vw,30px);}
+        .number-count-landscape .nc-vehicle-img{width:clamp(110px,15vw,230px);max-height:clamp(90px,15vw,210px);}
+        .number-count-landscape .nc-road-bg{height:clamp(54px,7vw,92px);bottom:7%;}
+        .number-count-landscape .nc-interaction-area{grid-column:3;grid-row:1 / span 3;display:flex;align-items:center;justify-content:center;padding:0;min-height:0;}
+        .number-count-landscape .nc-choices-area{width:100%;display:grid;grid-template-columns:1fr;gap:14px;align-content:center;justify-items:center;}
+        .number-count-landscape .nc-toy-block-btn{width:min(100%, 190px);min-height:clamp(118px,22vh,180px);font-size:clamp(48px,7vw,78px);}
+        .number-count-landscape .nc-success-panel{left:50%;right:auto;bottom:20px;width:min(520px,46vw);transform:translateX(-50%);border-radius:35px;padding:24px;}
 
         .nc-mega-flash{
           position:absolute;inset:0;z-index:999;pointer-events:none;
@@ -825,6 +1004,28 @@
         .nc-action-btn:active{transform:translateY(8px);box-shadow:0 2px 0 rgba(0,0,0,.15);}
         .nc-btn-replay{background:#4CAF50;} .nc-btn-next{background:#2196F3;} .nc-btn-home2{background:#FF9800;}
 
+        @media (orientation:landscape) and (min-width:1024px) and (min-height:640px){
+          .number-count-landscape{grid-template-columns:minmax(260px,24%) minmax(480px,1fr) minmax(280px,26%);gap:16px;padding:16px;}
+          .number-count-landscape .nc-objects-area{border-radius:40px;border-width:8px;}
+          .number-count-landscape .nc-toy-block-btn{width:min(100%, 210px);min-height:clamp(136px,23vh,200px);}
+          .number-count-landscape .nc-choice-num{font-size:clamp(58px,6vw,86px);}
+        }
+
+        @media (orientation:landscape) and (max-width:900px){
+          .number-count-landscape{grid-template-columns:minmax(170px,26%) minmax(280px,1fr) minmax(180px,28%);gap:8px;padding:8px;}
+          .number-count-landscape .nc-game-header{min-height:42px;padding:6px 10px;border-radius:18px;}
+          .number-count-landscape .nc-dot{width:16px;height:16px;border-width:2px;}
+          .number-count-landscape .nc-home-btn{font-size:22px;}
+          .number-count-landscape .nc-difficulty-tab{min-height:36px;font-size:14px;border-width:3px;}
+          .number-count-landscape .nc-vehicle-cat-tab{min-height:34px;font-size:13px;border-width:3px;padding:0 10px;}
+          .number-count-landscape .nc-objects-area{border-width:4px;border-radius:24px;}
+          .number-count-landscape .nc-vehicle-img{width:clamp(70px,13vw,125px);max-height:clamp(64px,13vw,110px);}
+          .number-count-landscape .nc-toy-block-btn{width:min(100%, 140px);min-height:88px;border-width:4px;border-radius:22px;}
+          .number-count-landscape .nc-choice-num{font-size:40px;}
+          .number-count-landscape .nc-choice-dots{max-width:30px;}
+          .number-count-landscape .nc-choice-dot{width:8px;height:8px;}
+        }
+
         @media (max-width:380px){
           .nc-vehicle-img{width:clamp(75px,24vw,115px);max-height:85px;}
           .nc-toy-block-btn{width:85px;min-height:95px;font-size:38px;}
@@ -843,6 +1044,8 @@
 
     destroy:function(){
       this.clearTimers();
+      if(this.state.resizeTimer){ clearTimeout(this.state.resizeTimer); this.state.resizeTimer = null; }
+      this.unbindResizeEvents();
       if(this.state.styleElement){ this.state.styleElement.remove(); this.state.styleElement=null; }
       if(this.state.container)   { this.state.container.innerHTML=''; }
       if(this.state.audioCtx && this.state.audioCtx.state !== 'closed') { this.state.audioCtx.close().catch(()=>{}); }
@@ -859,6 +1062,9 @@
       this.state.container      = null;
       this.state.options        = {};
       this.state.audioCtx       = null;
+      this.state.layoutMode     = 'portrait';
+      this.state.successRewardGiven = false;
+      this.state.completeRewardGiven = false;
     }
   };
 })();

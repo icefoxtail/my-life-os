@@ -67,8 +67,61 @@
     buildMission: null,
     buildPlaced: [],
     buildPool: [],
-    destroyed: false
+    destroyed: false,
+    layoutMode: 'portrait',
+    resizeTimer: null,
+    handleResizeBound: null,
+    successRewardGiven: false,
+    completeRewardGiven: false
   };
+
+  function isLandscapeMode() {
+    const width = window.innerWidth || document.documentElement.clientWidth || 0;
+    const height = window.innerHeight || document.documentElement.clientHeight || 0;
+    return width >= 760 && width > height;
+  }
+
+  function getLayoutMode() {
+    return isLandscapeMode() ? 'landscape' : 'portrait';
+  }
+
+  function getRootClass() {
+    state.layoutMode = getLayoutMode();
+    return `nb-root number-blocks-root number-blocks-${state.layoutMode}`;
+  }
+
+  function updateRootLayoutClass() {
+    const root = state.container?.querySelector('#mainRoot');
+    if (!root) return;
+    const nextMode = getLayoutMode();
+    root.classList.remove('number-blocks-portrait', 'number-blocks-landscape');
+    root.classList.add(`number-blocks-${nextMode}`);
+    state.layoutMode = nextMode;
+  }
+
+  function bindLayoutEvents() {
+    if (state.handleResizeBound) return;
+    state.handleResizeBound = handleResize;
+    window.addEventListener('resize', state.handleResizeBound, { passive: true });
+    window.addEventListener('orientationchange', state.handleResizeBound, { passive: true });
+  }
+
+  function unbindLayoutEvents() {
+    if (!state.handleResizeBound) return;
+    window.removeEventListener('resize', state.handleResizeBound);
+    window.removeEventListener('orientationchange', state.handleResizeBound);
+    state.handleResizeBound = null;
+  }
+
+  function handleResize() {
+    if (state.destroyed || !state.container) return;
+    if (state.resizeTimer) window.clearTimeout(state.resizeTimer);
+    state.resizeTimer = window.setTimeout(() => {
+      state.resizeTimer = null;
+      if (state.destroyed || !state.container) return;
+      updateRootLayoutClass();
+    }, 120);
+  }
 
   // ─── 오디오 시스템 ───
   function initAudio() {
@@ -89,6 +142,10 @@
   function clearTimers() {
     state.timers.forEach(clearTimeout);
     state.timers = [];
+    if (state.resizeTimer) {
+      window.clearTimeout(state.resizeTimer);
+      state.resizeTimer = null;
+    }
   }
 
   function playTone(type) {
@@ -114,7 +171,7 @@
       gain.gain.setValueAtTime(0.2, now);
       gain.gain.exponentialRampToValueAtTime(0.01, now + 0.24);
       osc.start(now); osc.stop(now + 0.26);
-    } else if (type === 'complete') { // 웅장한 화음
+    } else if (type === 'complete') {
       [392, 523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
         const o = ctx.createOscillator();
         const g = ctx.createGain();
@@ -199,7 +256,6 @@
     return arr;
   }
 
-  // ─── 초호화 CSS 스타일 (크기, 빛, 이펙트 강화) ───
   function injectStyle() {
     const prev = document.getElementById(STYLE_ID);
     if (prev) prev.remove();
@@ -207,103 +263,69 @@
     style.id = STYLE_ID;
     style.textContent = `
       .nb-root { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; background: linear-gradient(135deg, #1A237E 0%, #0D47A1 44%, #00838F 100%); font-family: 'Jua', sans-serif; position: relative; overflow: hidden; user-select: none; touch-action: none; color: #222; isolation: isolate; }
-      
-      /* 우주 배경 글로우 */
+      .number-blocks-root { box-sizing: border-box; min-height: 0; }
+      .number-blocks-root * { box-sizing: border-box; }
+      .number-blocks-portrait { display: flex; flex-direction: column; align-items: center; }
       .nb-bg-glow { position: absolute; inset: -20%; z-index: 0; background: radial-gradient(circle at 22% 18%, rgba(255,255,255,0.4), transparent 25%), radial-gradient(circle at 78% 24%, rgba(255,217,61,0.5), transparent 25%), radial-gradient(circle at 50% 72%, rgba(255,122,26,0.4), transparent 30%); animation: nbBgFloat 7s ease-in-out infinite alternate; pointer-events: none; }
       @keyframes nbBgFloat { from { transform: translate(-2%, 1%) scale(1); } to { transform: translate(2%, -2%) scale(1.08); } }
-      
       .nb-stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
       .nb-star { position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: nbTwinkle 2s infinite ease-in-out alternate; }
       .nb-star:nth-child(3n) { background: #FFF59D; width: 8px; height: 8px; }
       .nb-star:nth-child(4n) { background: #80DEEA; }
       @keyframes nbTwinkle { 0% { opacity: 0.2; transform: scale(0.6); } 100% { opacity: 1; transform: scale(1.8); box-shadow: 0 0 15px currentColor; } }
-
-      /* 헤더 */
       .nb-header { position: relative; z-index: 30; width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 12px 14px 8px; box-sizing: border-box; flex-shrink: 0; align-items: center; }
       .nb-mode-tabs { display: flex; gap: 15px; width: min(96vw, 600px); justify-content: center; }
       .nb-mode-tab { flex: 1; min-height: 85px; border-radius: 30px; border: 6px solid #fff; background: linear-gradient(180deg, #ffffff, #FFE082); box-shadow: 0 10px 0 rgba(0,0,0,0.2); font: inherit; font-size: clamp(20px, 5.5vw, 30px); font-weight: 900; color: #17324A; display: grid; place-items: center; cursor: pointer; touch-action: manipulation; transition: all 0.2s; }
       .nb-mode-tab.active { background: linear-gradient(180deg, #ffffff, #80DEEA); color: #004D40; transform: translateY(-4px); box-shadow: 0 14px 0 rgba(0,0,0,0.2), 0 0 20px rgba(128, 222, 234, 0.6); border-color: #E0F7FA; }
       .nb-mode-tab:active { transform: translateY(6px); box-shadow: 0 4px 0 rgba(0,0,0,0.2); }
-
-      /* 보드 & 트레이 */
       .nb-stage { flex: 1; width: 100%; min-height: 0; position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; perspective: 1000px; padding: 10px; }
       .nb-tray { width: 100%; z-index: 10; background: rgba(255,255,255,0.2); backdrop-filter: blur(15px); border-top: 6px solid rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 10px calc(20px + env(safe-area-inset-bottom)); flex-wrap: wrap; box-shadow: 0 -10px 30px rgba(0,0,0,0.2); }
-
-      /* ★ 초대형 화려한 숫자 블록 */
       .nb-block {
         position: relative; display: grid; place-items: center; border-radius: 28px; cursor: pointer;
         transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
-        /* 훨씬 더 크고 화려한 블록! */
         box-shadow: inset 4px 4px 15px rgba(255,255,255,0.8), inset -6px -6px 20px rgba(0,0,0,0.3), 0 15px 25px rgba(0,0,0,0.4);
-        --sz: clamp(80px, 18vw, 120px); 
+        --sz: clamp(80px, 18vw, 120px);
         border: 4px solid rgba(255,255,255,0.4);
       }
       .nb-block:active { transform: scale(0.9) !important; }
-      
-      /* 숫자가 적히는 면 */
       .nb-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: calc(var(--sz) * 0.85); font-weight: 900; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.5); pointer-events: none; }
       .nb-tray-item { width: clamp(100px, 25vw, 140px); height: clamp(100px, 25vw, 140px); display: flex; align-items: center; justify-content: center; }
-      
       .nb-flying { position: fixed; z-index: 150; pointer-events: none; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); }
-      
-      /* 오라 이펙트 (5번 블록) */
       .nb-aura { position: absolute; inset: -20px; border-radius: 40px; z-index: -1; background: conic-gradient(from 0deg, #FF1744, #FFEA00, #00E676, #00B0FF, #D500F9, #FF1744); animation: nbSpin 2s linear infinite; opacity: 0.8; filter: blur(15px); }
       @keyframes nbSpin { 100% { transform: rotate(360deg); } }
-
-      /* ★ 메가 플래시 효과 (블록 합쳐질 때 화면 번쩍임) */
       .nb-mega-flash::after { content: ''; position: absolute; inset: 0; background: #fff; z-index: 999; animation: megaFlash 0.5s ease-out forwards; pointer-events: none; }
       @keyframes megaFlash { 0% { opacity: 0.8; } 100% { opacity: 0; } }
-
-      /* 화면 흔들림 효과 */
       .nb-shake { animation: stageShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
       @keyframes stageShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-15px) rotate(-2deg); } 40% { transform: translateX(15px) rotate(2deg); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } }
-
-      /* 파티클 & 팝 효과 강화 */
       .nb-particle { position: absolute; border-radius: 50%; pointer-events: none; animation: nbExplode 1s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; z-index: 70; box-shadow: 0 0 10px currentColor; }
       .nb-emoji-pop { position: absolute; z-index: 80; pointer-events: none; font-size: clamp(60px, 18vw, 100px); font-weight: 900; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4)); animation: nbEmojiPop 1.2s cubic-bezier(0.2, 1.35, 0.3, 1) forwards; }
       @keyframes nbExplode { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--dx),var(--dy)) scale(0); opacity: 0; } }
       @keyframes nbEmojiPop { 0% { transform: translate(-50%,-50%) scale(0.2) rotate(-20deg); opacity: 0; } 30% { transform: translate(-50%,-80%) scale(1.5) rotate(10deg); opacity: 1; } 100% { transform: translate(-50%,-150%) scale(1) rotate(0); opacity: 0; } }
-
-      /* 골든 링 (엄청 크게) */
       .nb-golden-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 0; height: 0; border: 25px solid #FFD700; border-radius: 50%; opacity: 1; pointer-events: none; z-index: 5; animation: nbRingExpand 1.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; box-shadow: 0 0 40px #FFD700, inset 0 0 40px #FFD700; }
       @keyframes nbRingExpand { 100% { width: 800px; height: 800px; opacity: 0; border-width: 2px; } }
-
-      /* 타겟 블록 전용 (더 큼) */
       .nb-block.stage-block { --sz: clamp(100px, 24vw, 160px); animation: nbFloatStage 3s ease-in-out infinite alternate; z-index: 50; }
       @keyframes nbFloatStage { from { transform: translateY(-10px); } to { transform: translateY(10px); } }
       .nb-dance { animation: nbDanceAnim 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
       @keyframes nbDanceAnim { 0% { transform: scale(1) rotate(0); } 30% { transform: scale(1.6) rotate(15deg); } 70% { transform: scale(1.6) rotate(-15deg); } 100% { transform: scale(1) rotate(360deg); } }
-
-      /* 블록 만들기 (Build) 모드 스타일 */
       .nb-build-stage { position: relative; width: min(96vw, 750px); height: 100%; min-height: 350px; border-radius: 40px; border: 8px solid #fff; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 5px 20px rgba(0,0,0,0.1); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
       .nb-build-sky { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; transition: background 1s; }
       .nb-build-title { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; }
       .nb-build-pill { padding: 10px 20px; border-radius: 999px; border: 5px solid #fff; background: rgba(255,255,255,0.95); box-shadow: 0 8px 0 rgba(0,0,0,0.15); font-size: clamp(20px, 5.5vw, 30px); font-weight: 900; }
-      
       .nb-build-scene { position: relative; z-index: 1; display: grid; place-items: center; min-height: 0; padding: 10px; }
       .nb-build-scene-emoji { font-size: clamp(110px, 32vw, 220px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-      
       .nb-build-slots { position: relative; z-index: 3; display: flex; justify-content: center; gap: 15px; padding: 0 15px 20px; }
       .nb-build-slot { flex: 1; max-width: 180px; min-height: clamp(100px, 25vw, 150px); border-radius: 30px; border: 6px dashed #ccc; background: rgba(255,255,255,0.6); display: grid; place-items: center; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
       .nb-build-slot.filled { border-style: solid; background: #fff; border-color: #FFD700; box-shadow: 0 10px 20px rgba(0,0,0,0.15); animation: nbSlotFill 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
       .nb-build-slot.wrong { animation: nbWrongShake 0.4s ease; border-color: #FF1744; background: #ffebee; }
-      
-      /* 슬롯 안의 조각 */
       .nb-build-piece { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
       .nb-build-piece-emoji { font-size: clamp(50px, 14vw, 80px); line-height: 1; filter: drop-shadow(0 8px 0 rgba(0,0,0,0.15)); }
-
-      /* 빌드 모드 트레이 (카드를 엄청 크게) */
       .nb-build-tray { width: 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 15px; z-index: 10; background: rgba(255,255,255,0.25); border-top: 6px solid rgba(255,255,255,0.5); box-shadow: 0 -10px 30px rgba(0,0,0,0.2); }
       .nb-build-card { width: clamp(100px, 28vw, 150px); min-height: clamp(100px, 28vw, 150px); border-radius: 30px; border: 6px solid #fff; background: linear-gradient(180deg, #ffffff, #FFF9C4); box-shadow: 0 10px 0 rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
       .nb-build-card:active { transform: translateY(8px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }
       .nb-build-card.used { opacity: 0.3; filter: grayscale(1); transform: scale(0.9); pointer-events: none; }
       .nb-build-card .nb-build-piece-emoji { font-size: clamp(55px, 16vw, 90px); }
-
-      /* 메가 완성 애니메이션 */
       .nb-build-mega-complete .nb-build-scene-emoji { animation: megaCompleteFloat 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate; filter: drop-shadow(0 0 40px #FFD700) drop-shadow(0 20px 30px rgba(0,0,0,0.3)); transform: scale(1.4); }
       @keyframes megaCompleteFloat { from { transform: scale(1.4) translateY(0) rotate(-3deg); } to { transform: scale(1.5) translateY(-20px) rotate(3deg); } }
-
-      /* 성공 패널 */
       .nb-success-overlay { position: absolute; inset: 0; z-index: 999; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); display: grid; place-items: center; animation: nbFadeIn 0.3s; }
       .nb-success-box { width: min(92vw, 600px); border-radius: 40px; text-align: center; border: 10px solid #FFD700; background: #fff; padding: 40px 20px; display: grid; gap: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,215,0,0.3); }
       .nb-success-icon { font-size: clamp(100px, 28vw, 160px); animation: nbSuccessFloat 1s ease-in-out infinite alternate; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.2)); }
@@ -313,10 +335,115 @@
       .nb-round-btn:active { transform: translateY(8px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
       .nb-btn-green { background: #00E676; color: white; }
       .nb-btn-orange { background: #FF9100; color: white; }
-
       @keyframes nbSlotFill { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
       @keyframes nbWrongShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-15px) rotate(-5deg); } 40% { transform: translateX(15px) rotate(5deg); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } }
-      
+      .number-blocks-landscape {
+        display: grid;
+        grid-template-columns: minmax(210px, 24vw) minmax(340px, 1fr) minmax(230px, 28vw);
+        grid-template-rows: 1fr;
+        gap: 12px;
+        align-items: stretch;
+        padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+      }
+      .number-blocks-landscape .nb-header {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        padding: 12px;
+        align-items: stretch;
+        justify-content: flex-start;
+        border-radius: 32px;
+        border: 5px solid rgba(255,255,255,0.26);
+        background: rgba(255,255,255,0.16);
+        backdrop-filter: blur(16px);
+        box-shadow: inset 0 2px 0 rgba(255,255,255,0.18), 0 14px 28px rgba(0,0,0,0.24);
+      }
+      .number-blocks-landscape .nb-mode-tabs {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        flex-direction: column;
+        gap: 14px;
+        justify-content: center;
+      }
+      .number-blocks-landscape .nb-mode-tab {
+        min-height: 104px;
+        font-size: clamp(22px, 2.5vw, 34px);
+        border-radius: 32px;
+      }
+      .number-blocks-landscape .nb-stage {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .number-blocks-landscape .nb-tray,
+      .number-blocks-landscape .nb-build-tray {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden auto;
+        border-top: 0;
+        border-left: 6px solid rgba(255,255,255,0.5);
+        border-radius: 32px;
+        padding: 16px max(14px, env(safe-area-inset-right)) 16px 14px;
+      }
+      .number-blocks-landscape .nb-tray {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 14px;
+      }
+      .number-blocks-landscape .nb-tray-item {
+        width: clamp(96px, 10vw, 136px);
+        height: clamp(96px, 10vw, 136px);
+        flex: 0 0 auto;
+      }
+      .number-blocks-landscape .nb-block {
+        --sz: clamp(76px, 8vw, 112px);
+      }
+      .number-blocks-landscape .nb-block.stage-block {
+        --sz: clamp(120px, 15vw, 190px);
+      }
+      .number-blocks-landscape .nb-build-stage {
+        width: min(100%, 760px);
+        height: 100%;
+        min-height: 0;
+      }
+      .number-blocks-landscape .nb-build-title {
+        padding: 14px 18px 8px;
+      }
+      .number-blocks-landscape .nb-build-pill {
+        font-size: clamp(22px, 2.5vw, 34px);
+      }
+      .number-blocks-landscape .nb-build-scene-emoji {
+        font-size: clamp(118px, 20vw, 250px);
+      }
+      .number-blocks-landscape .nb-build-slots {
+        padding: 0 14px 18px;
+        gap: 12px;
+      }
+      .number-blocks-landscape .nb-build-slot {
+        min-height: clamp(92px, 14vh, 140px);
+      }
+      .number-blocks-landscape .nb-build-card {
+        width: clamp(104px, 10.5vw, 150px);
+        min-height: clamp(104px, 10.5vw, 150px);
+        flex: 0 0 auto;
+      }
+      .number-blocks-portrait .nb-header {
+        grid-area: auto;
+      }
+      .number-blocks-portrait .nb-stage {
+        grid-area: auto;
+      }
+      .number-blocks-portrait .nb-tray,
+      .number-blocks-portrait .nb-build-tray {
+        grid-area: auto;
+      }
       @media(max-height: 600px) {
         .nb-mode-tab { min-height: 65px; border-radius: 20px; font-size: 20px; }
         .nb-header { padding: 5px; }
@@ -346,7 +473,7 @@
   function renderShell() {
     if (!state.container) return;
     state.container.innerHTML = `
-      <div class="nb-root" id="mainRoot">
+      <div class="${getRootClass()}" id="mainRoot">
         <div class="nb-bg-glow"></div>
         <div class="nb-header">
           <div class="nb-mode-tabs">
@@ -376,7 +503,7 @@
     el.style.background = meta.gradient;
     el.style.width = `calc(var(--sz) * ${meta.w})`;
     el.style.height = `calc(var(--sz) * ${meta.h})`;
-    
+
     if (meta.aura) {
       const aura = document.createElement('div');
       aura.className = 'nb-aura';
@@ -396,15 +523,14 @@
     for (let i = 0; i < count; i += 1) {
       const p = document.createElement('div');
       p.className = 'nb-particle';
-      // 무지개 파티클 섞기
       p.style.background = i % 4 === 0 ? '#FFF59D' : i % 4 === 1 ? color : i % 4 === 2 ? '#FF1744' : '#00E676';
       p.style.left = `${x - stageRect.left}px`;
       p.style.top = `${y - stageRect.top}px`;
-      const size = Math.random() * 25 + 15; // 파티클 엄청 큼
+      const size = Math.random() * 25 + 15;
       p.style.width = `${size}px`;
       p.style.height = `${size}px`;
       const angle = Math.random() * Math.PI * 2;
-      const dist = Math.random() * 250 + 80; // 멀리 퍼짐
+      const dist = Math.random() * 250 + 80;
       p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
       p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
       stage.appendChild(p);
@@ -441,7 +567,7 @@
     const root = state.container?.querySelector('#mainRoot');
     if (!root) return;
     root.classList.remove('nb-mega-flash', 'nb-shake');
-    void root.offsetWidth; // reflow
+    void root.offsetWidth;
     root.classList.add('nb-mega-flash', 'nb-shake');
   }
 
@@ -456,6 +582,8 @@
   function startNumberMode(announce) {
     renderShell();
     state.currentLevel = 1;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
     state.targetNumber = 5;
     state.centerBlock = null;
     setTimer(startNumberLevel, 300);
@@ -466,6 +594,7 @@
     if (!state.container || state.destroyed || state.mode !== 'number') return;
     state.centerBlock = null;
     state.isAnimating = false;
+    state.successRewardGiven = false;
     const tray = state.container.querySelector('#nbTray');
     const stage = state.container.querySelector('#nbStage');
     if (!tray || !stage) return;
@@ -514,13 +643,13 @@
     const stageRect = stage.getBoundingClientRect();
     const targetX = stageRect.left + stageRect.width / 2 - rect.width / 2;
     const targetY = stageRect.top + stageRect.height / 2 - rect.height / 2;
-    
+
     requestAnimationFrame(() => {
       clone.style.left = `${targetX}px`;
       clone.style.top = `${targetY}px`;
-      clone.style.transform = 'scale(1.5)'; // 날아갈 때 엄청 커짐
+      clone.style.transform = 'scale(1.5)';
     });
-    
+
     setTimer(() => {
       clone.remove();
       if (state.destroyed || state.mode !== 'number') return;
@@ -531,7 +660,7 @@
   function processNumberMerge(newVal, cx, cy) {
     const stage = state.container?.querySelector('#nbStage');
     if (!stage) return;
-    
+
     if (state.centerBlock === null) {
       state.centerBlock = newVal;
       stage.appendChild(createBlockElement(newVal, true));
@@ -545,25 +674,24 @@
     const sum = Math.min(state.targetNumber, oldVal + newVal);
     stage.innerHTML = '';
     state.centerBlock = sum;
-    
-    // ★ 초강력 합체 이펙트
+
     flashScreen();
     vibrate([100, 50, 200]);
     createParticles(cx, cy, BLOCK_META[sum].shadow, 45);
     createEmojiPop(cx, cy, '쾅!!💥');
     playBlockSound(sum);
-    
+
     const mergedEl = createBlockElement(sum, true);
     mergedEl.style.transform = 'scale(0.2)';
     stage.appendChild(mergedEl);
-    
+
     speak(`${BLOCK_META[oldVal].name}이랑 ${BLOCK_META[newVal].name} 합체! 그래서 ${BLOCK_META[sum].name}!`, 0.94);
-    
+
     requestAnimationFrame(() => {
       mergedEl.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
       mergedEl.style.transform = 'scale(1)';
     });
-    
+
     setTimer(() => checkNumberWin(mergedEl, cx, cy), 1500);
   }
 
@@ -573,21 +701,25 @@
       state.isAnimating = true;
       mergedEl.classList.add('nb-dance');
       createGoldenRing(cx, cy);
-      createParticles(cx, cy, '#FFD700', 60); // 엄청난 파티클
+      createParticles(cx, cy, '#FFD700', 60);
       vibrate([100, 60, 100, 60, 300]);
-      state.options.fireConfetti?.();
-      state.options.gainExp?.(40); // 보상 증가
-      
+      if (!state.successRewardGiven) {
+        state.successRewardGiven = true;
+        state.options.fireConfetti?.();
+        state.options.gainExp?.(40);
+      }
+
       setTimer(() => showSuccessOverlay('🌟', '우와 대단해!', '시현이가 5를 만들었어!', () => startNumberMode(false)), 4000);
     } else {
       state.isAnimating = false;
     }
   }
 
-  // ─── 블록 만들기 모드 ───
   function startBuildMode(announce) {
     renderShell();
     state.buildRound = 0;
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
     state.isAnimating = false;
     if (announce) speak('시현아, 순서대로 블록을 올려서 예쁘게 만들어볼까?', 0.94);
     setTimer(startBuildRound, 300);
@@ -597,11 +729,15 @@
     if (!state.container || state.destroyed || state.mode !== 'build') return;
     if (state.buildRound >= BUILD_MISSIONS.length) {
       showSuccessOverlay('🏆', '최고의 건축가!', '집, 기차, 로켓을 모두 멋지게 만들었어!', () => startBuildMode(false));
-      state.options.fireConfetti?.();
-      state.options.gainExp?.(50);
+      if (!state.completeRewardGiven) {
+        state.completeRewardGiven = true;
+        state.options.fireConfetti?.();
+        state.options.gainExp?.(50);
+      }
       return;
     }
 
+    state.successRewardGiven = false;
     state.buildMission = BUILD_MISSIONS[state.buildRound];
     state.buildPlaced = new Array(state.buildMission.steps.length).fill(null);
     state.buildPool = shuffle([...state.buildMission.steps.map((s) => ({ ...s, correct: true })), ...state.buildMission.wrongs.map((w) => ({ ...w, correct: false }))]);
@@ -615,10 +751,10 @@
     const stage = state.container?.querySelector('#nbStage');
     const mission = state.buildMission;
     if (!tray || !stage || !mission) return;
-    
+
     tray.className = 'nb-build-tray';
     const isComplete = state.buildPlaced.every(Boolean);
-    
+
     stage.innerHTML = `
       <div class="nb-build-stage ${isComplete ? `nb-build-mega-complete ${mission.id}` : ''}">
         <div class="nb-build-sky" style="background:linear-gradient(180deg, ${mission.color}55 0%, #fff6bd 62%, #9cf28a 100%)"></div>
@@ -634,8 +770,7 @@
         </div>` : ''}
       </div>
     `;
-    
-    // 카드를 그림 위주로 (텍스트 제거 또는 최소화)
+
     if (!isComplete) {
       tray.innerHTML = state.buildPool.map((piece) => {
         const used = state.buildPlaced.some((placed) => placed && placed.id === piece.id);
@@ -645,12 +780,12 @@
           </button>
         `;
       }).join('');
-      
+
       tray.querySelectorAll('[data-piece]').forEach((btn) => {
         btn.addEventListener('click', () => handleBuildPieceClick(btn.dataset.piece));
       });
     } else {
-      tray.innerHTML = ''; // 완성되면 트레이 비우기
+      tray.innerHTML = '';
     }
   }
 
@@ -690,7 +825,7 @@
     playTone('pop');
     state.buildPlaced[nextIndex] = piece;
     drawBuildRound();
-    
+
     const slot = state.container?.querySelector(`[data-slot="${nextIndex}"]`);
     if (slot) {
       const rect = slot.getBoundingClientRect();
@@ -709,8 +844,8 @@
   function completeBuildRound() {
     if (state.destroyed || state.mode !== 'build') return;
     const mission = state.buildMission;
-    drawBuildRound(); // 다시 그려서 메가 완성 애니메이션 적용
-    
+    drawBuildRound();
+
     flashScreen();
     const stage = state.container?.querySelector('#nbStage');
     const rect = stage?.getBoundingClientRect();
@@ -721,16 +856,18 @@
     }
     vibrate([100, 60, 100, 60, 300]);
     playTone('complete');
-    state.options.fireConfetti?.();
-    
+    if (!state.successRewardGiven) {
+      state.successRewardGiven = true;
+      state.options.fireConfetti?.();
+    }
+
     speak(mission.completeText, 1.0);
-    
-    // 시현이가 웅장한 애니메이션을 충분히 볼 수 있도록 대기 시간 대폭 연장
+
     setTimer(() => {
       state.buildRound += 1;
       state.isAnimating = false;
       startBuildRound();
-    }, 6000); 
+    }, 6000);
   }
 
   function showSuccessOverlay(icon, title, sub, replayFn) {
@@ -764,6 +901,10 @@
     state.options = options || {};
     state.destroyed = false;
     state.mode = 'number';
+    state.layoutMode = getLayoutMode();
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
+    bindLayoutEvents();
     startNumberMode(false);
     speak('시현아! 신나는 숫자 블록 놀이를 시작해볼까?', 0.94);
   }
@@ -771,6 +912,7 @@
   function destroy() {
     state.destroyed = true;
     clearTimers();
+    unbindLayoutEvents();
     if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
     if (state.audioCtx && state.audioCtx.state !== 'closed') {
       state.audioCtx.close().catch?.(() => {});
@@ -784,6 +926,8 @@
     state.buildMission = null;
     state.buildPlaced = [];
     state.buildPool = [];
+    state.successRewardGiven = false;
+    state.completeRewardGiven = false;
   }
 
   window.SihyeonGames = window.SihyeonGames || {};
