@@ -1,23 +1,54 @@
 /**
- * 시현이 놀이터 OS — 숫자 바구니 v1.4.1
+ * 시현이 놀이터 OS — 숫자 바구니 v1.5.1
  * 파일: js/games/number-basket.js
- * 기준: number-basket v1.3
+ * 기준: number-basket v1.5.0
  * 변경:
- * - 숫자 블록 1.webp ~ 10.webp 전체 유지
- * - 숫자 블록 CSS 사각형 → 이미지 블록 적용
- * - 모바일 세로 / 태블릿 가로 레이아웃 보강
+ * - animateToBasket 호출부/정의부 인자 불일치 정리
+ * - 최종 완료 음성/기차/경험치 중복 실행 방어 강화
+ * - AudioContext 재사용 방식으로 안정화
+ * - 모바일 세로 DOM / 태블릿 가로 DOM 이원화 렌더링 유지
+ * - 기존 숫자 블록 1.webp ~ 10.webp 전체 유지
  * - 기존 5 → 8 → 12 레벨 흐름 유지
  */
-(function() {
+
+(function () {
+  'use strict';
+
   const GAME_KEY = 'numberBasket';
+  const STYLE_ID = 'sihyeon-number-basket-style';
   const ASSET_BASE = './assets/games/number-basket';
   const ALL_NUMBER_BLOCKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  function playPopSound() {
+  let sharedAudioCtx = null;
+
+  function isLandscapeMode() {
+    return window.innerWidth > window.innerHeight && window.innerWidth >= 768;
+  }
+
+  function getAudioContext() {
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      const ctx = new AudioContext();
+      if (!AudioContext) return null;
+
+      if (!sharedAudioCtx || sharedAudioCtx.state === 'closed') {
+        sharedAudioCtx = new AudioContext();
+      }
+
+      if (sharedAudioCtx.state === 'suspended') {
+        sharedAudioCtx.resume().catch(() => {});
+      }
+
+      return sharedAudioCtx;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function playPopSound() {
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
@@ -38,22 +69,47 @@
     }
   }
 
-  const styleHTML = `
-    <style>
+  function injectStyle() {
+    if (document.getElementById(STYLE_ID)) return;
+
+    const style = document.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = `
       .nb-root {
         width: 100%;
         height: 100%;
         min-height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        font-family: 'Jua', 'Pretendard', system-ui, sans-serif;
+        position: relative;
+        touch-action: manipulation;
+      }
+
+      .nb-root * {
+        box-sizing: border-box;
+      }
+
+      .nb-root.nb-portrait {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
         padding: max(14px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
-        box-sizing: border-box;
-        overflow: hidden;
-        font-family: 'Jua', 'Pretendard', sans-serif;
-        position: relative;
-        touch-action: manipulation;
+      }
+
+      .nb-root.nb-landscape {
+        display: grid;
+        grid-template-columns: minmax(260px, 38%) minmax(420px, 62%);
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+          "status blocks"
+          "basket blocks"
+          "undo blocks";
+        align-items: center;
+        justify-items: center;
+        gap: 10px 22px;
+        padding: max(16px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
       }
 
       .nb-status-board {
@@ -72,6 +128,14 @@
         white-space: nowrap;
       }
 
+      .nb-landscape .nb-status-board {
+        grid-area: status;
+        align-self: end;
+        font-size: clamp(23px, 3.2vw, 34px);
+        padding: 13px 28px;
+        max-width: 100%;
+      }
+
       .nb-basket-area {
         flex: 0 0 auto;
         position: relative;
@@ -81,6 +145,14 @@
         align-items: center;
         justify-content: center;
         margin: 4px 0 2px;
+      }
+
+      .nb-landscape .nb-basket-area {
+        grid-area: basket;
+        width: min(34vw, 320px);
+        height: min(34vw, 320px);
+        margin: 0;
+        align-self: center;
       }
 
       .nb-basket-img {
@@ -103,6 +175,10 @@
         pointer-events: none;
       }
 
+      .nb-landscape .nb-basket-sum {
+        font-size: clamp(58px, 8vw, 86px);
+      }
+
       .nb-character {
         position: absolute;
         right: -28px;
@@ -112,6 +188,12 @@
         filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
         transition: transform 0.2s;
         pointer-events: none;
+      }
+
+      .nb-landscape .nb-character {
+        right: -24px;
+        top: -28px;
+        width: clamp(70px, 9vw, 104px);
       }
 
       .nb-char-jump {
@@ -138,6 +220,23 @@
         min-height: 0;
       }
 
+      .nb-landscape .nb-blocks-area {
+        grid-area: blocks;
+        align-self: stretch;
+        justify-self: stretch;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        padding: 16px 10px;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(84px, 1fr));
+        grid-template-rows: repeat(2, minmax(84px, 1fr));
+        place-items: center;
+        align-content: center;
+        justify-content: center;
+        gap: clamp(12px, 2vw, 22px);
+      }
+
       .nb-block {
         position: relative;
         width: clamp(56px, 17vw, 108px);
@@ -156,6 +255,14 @@
         padding: 0;
         overflow: visible;
         touch-action: manipulation;
+      }
+
+      .nb-landscape .nb-block {
+        width: min(12.8vw, 142px);
+        height: min(12.8vw, 142px);
+        max-width: 142px;
+        max-height: 142px;
+        border-radius: 30px;
       }
 
       .nb-block:active {
@@ -207,9 +314,22 @@
         white-space: nowrap;
       }
 
+      .nb-landscape .nb-undo-btn {
+        grid-area: undo;
+        position: static;
+        transform: none;
+        align-self: start;
+        font-size: 22px;
+        padding: 12px 30px;
+      }
+
       .nb-undo-btn:active {
         transform: translateX(-50%) translateY(4px);
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      .nb-landscape .nb-undo-btn:active {
+        transform: translateY(4px);
       }
 
       .nb-shake-error {
@@ -307,6 +427,12 @@
         display: none;
       }
 
+      .nb-landscape .nb-train-box {
+        bottom: 4%;
+        width: 340px;
+        height: 170px;
+      }
+
       .nb-train-active {
         display: block;
         animation: nbTrainRun 4.5s linear forwards;
@@ -320,7 +446,7 @@
       }
 
       @media (orientation: portrait) and (max-height: 720px) {
-        .nb-root { padding-top: 10px; }
+        .nb-root.nb-portrait { padding-top: 10px; }
         .nb-status-board { font-size: 20px; padding: 9px 18px; }
         .nb-basket-area { width: 150px; height: 150px; }
         .nb-blocks-area { gap: 6px; padding-top: 6px; padding-bottom: 66px; }
@@ -328,123 +454,115 @@
         .nb-undo-btn { font-size: 19px; padding: 9px 22px; }
       }
 
-      @media (orientation: landscape) and (min-width: 740px) {
-        .nb-root {
-          display: grid;
-          grid-template-columns: minmax(260px, 38%) minmax(420px, 62%);
-          grid-template-rows: auto 1fr auto;
-          grid-template-areas:
-            "status blocks"
-            "basket blocks"
-            "undo blocks";
-          align-items: center;
-          justify-items: center;
-          gap: 10px 22px;
-          padding: max(16px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
-        }
-
-        .nb-status-board {
-          grid-area: status;
-          align-self: end;
-          font-size: clamp(23px, 3.2vw, 34px);
-          padding: 13px 28px;
-          max-width: 100%;
-        }
-
-        .nb-basket-area {
-          grid-area: basket;
-          width: min(34vw, 320px);
-          height: min(34vw, 320px);
-          margin: 0;
-          align-self: center;
-        }
-
-        .nb-character {
-          right: -24px;
-          top: -28px;
-          width: clamp(70px, 9vw, 104px);
-        }
-
-        .nb-basket-sum {
-          font-size: clamp(58px, 8vw, 86px);
-        }
-
-        .nb-blocks-area {
-          grid-area: blocks;
-          align-self: stretch;
-          justify-self: stretch;
-          width: 100%;
-          height: 100%;
-          max-width: none;
-          padding: 16px 10px;
-          display: grid;
-          grid-template-columns: repeat(5, minmax(84px, 1fr));
-          grid-template-rows: repeat(2, minmax(84px, 1fr));
-          place-items: center;
-          align-content: center;
-          justify-content: center;
-          gap: clamp(12px, 2vw, 22px);
-        }
-
-        .nb-block {
-          width: min(12.8vw, 142px);
-          height: min(12.8vw, 142px);
-          max-width: 142px;
-          max-height: 142px;
-          border-radius: 30px;
-        }
-
-        .nb-undo-btn {
-          grid-area: undo;
-          position: static;
-          transform: none;
-          align-self: start;
-          font-size: 22px;
-          padding: 12px 30px;
-        }
-
-        .nb-undo-btn:active {
-          transform: translateY(4px);
-        }
-
-        .nb-train-box {
-          bottom: 4%;
-          width: 340px;
-          height: 170px;
-        }
-      }
-
       @media (orientation: landscape) and (min-width: 1000px) {
-        .nb-root {
+        .nb-root.nb-landscape {
           grid-template-columns: minmax(360px, 38%) minmax(620px, 62%);
           gap: 12px 30px;
         }
 
-        .nb-basket-area {
+        .nb-landscape .nb-basket-area {
           width: min(31vw, 370px);
           height: min(31vw, 370px);
         }
 
-        .nb-blocks-area {
+        .nb-landscape .nb-blocks-area {
           grid-template-columns: repeat(5, minmax(112px, 156px));
           grid-template-rows: repeat(2, minmax(112px, 156px));
           justify-content: center;
         }
 
-        .nb-block {
+        .nb-landscape .nb-block {
           width: min(12.5vw, 156px);
           height: min(12.5vw, 156px);
           max-width: 156px;
           max-height: 156px;
         }
       }
-    </style>
-  `;
+
+      @media (orientation: landscape) and (max-height: 540px) {
+        .nb-root.nb-landscape {
+          grid-template-columns: minmax(220px, 34%) minmax(420px, 66%);
+          gap: 8px 14px;
+          padding: 10px 14px;
+        }
+
+        .nb-landscape .nb-status-board {
+          font-size: 20px;
+          padding: 9px 20px;
+        }
+
+        .nb-landscape .nb-basket-area {
+          width: min(28vw, 220px);
+          height: min(28vw, 220px);
+        }
+
+        .nb-landscape .nb-basket-sum {
+          font-size: 54px;
+        }
+
+        .nb-landscape .nb-character {
+          width: 66px;
+          right: -16px;
+          top: -20px;
+        }
+
+        .nb-landscape .nb-blocks-area {
+          gap: 8px;
+          padding: 8px;
+        }
+
+        .nb-landscape .nb-block {
+          width: min(11vw, 96px);
+          height: min(11vw, 96px);
+          max-width: 96px;
+          max-height: 96px;
+          border-radius: 22px;
+        }
+
+        .nb-landscape .nb-undo-btn {
+          font-size: 18px;
+          padding: 9px 22px;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function getBasketMarkup() {
+    return `
+      <div class="nb-basket-area" id="nbBasketArea">
+        <img src="${ASSET_BASE}/basket.webp" class="nb-basket-img" alt="바구니" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><path d=\\'M10 30 L90 30 L80 90 L20 90 Z\\' fill=\\'%23FFD93D\\' stroke=\\'%23E65100\\' stroke-width=\\'4\\'/></svg>'">
+        <img src="./assets/characters/sicheoni.png" class="nb-character" id="nbCompanion" alt="도우미 친구" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 50 50\\'><circle cx=\\'25\\' cy=\\'25\\' r=\\'20\\' fill=\\'%23FFB6C1\\'/><circle cx=\\'15\\' cy=\\'20\\' r=\\'3\\'/><circle cx=\\'35\\' cy=\\'20\\' r=\\'3\\'/><path d=\\'M20 35 Q25 40 30 35\\' stroke=\\'%23000\\' stroke-width=\\'2\\' fill=\\'none\\'/></svg>'">
+        <div class="nb-basket-sum" id="nbCurrentSumText">0</div>
+      </div>
+    `;
+  }
+
+  function getBlocksMarkup() {
+    return `<div class="nb-blocks-area" id="nbBlocksList"></div>`;
+  }
+
+  function getUndoMarkup() {
+    return `<button class="nb-undo-btn" id="nbUndoBtn" type="button">↩ 하나 빼기</button>`;
+  }
+
+  function getTrainMarkup() {
+    return `
+      <div class="nb-train-box" id="nbGoldenTrain">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><rect width='100' height='40' y='10' fill='%23FF7A1A' rx='10'/><circle cx='20' cy='50' r='8'/><circle cx='80' cy='50' r='8'/></svg>" style="width:100%;" alt="축하 기차">
+      </div>
+    `;
+  }
 
   window.SihyeonGames = window.SihyeonGames || {};
+
   window.SihyeonGames[GAME_KEY] = {
     container: null,
     options: {},
+    resizeTimer: null,
+    handleResizeBound: null,
+    finalCompleteLocked: false,
     state: {
       level: 1,
       targetNum: 5,
@@ -453,49 +571,87 @@
       hintTimer: null,
       isAnimating: false,
       errorCount: 0,
-      history: []
+      history: [],
+      layoutMode: 'portrait',
+      finalRewardGiven: false
     },
 
-    render: function(container, options) {
+    render: function (container, options) {
+      this.destroy();
+
+      injectStyle();
+
       this.container = container;
       this.options = options || {};
-      this.initUI();
-      this.startLevel(1);
+      this.finalCompleteLocked = false;
+
+      this.state.level = 1;
+      this.state.targetNum = 5;
+      this.state.currentSum = 0;
+      this.state.availableBlocks = [];
+      this.state.hintTimer = null;
+      this.state.isAnimating = false;
+      this.state.errorCount = 0;
+      this.state.history = [];
+      this.state.layoutMode = isLandscapeMode() ? 'landscape' : 'portrait';
+      this.state.finalRewardGiven = false;
+
+      this.renderLayout();
+      this.startLevel(1, { silent: false });
+
+      this.handleResizeBound = this.handleResize.bind(this);
+      window.addEventListener('resize', this.handleResizeBound);
+      window.addEventListener('orientationchange', this.handleResizeBound);
     },
 
-    initUI: function() {
-      this.container.innerHTML = styleHTML + `
-        <div class="nb-root">
-          <div class="nb-status-board">미션: <span id="nbTargetNum" style="color:#FFD93D; font-size:1.2em;">5</span> 만들기</div>
+    renderLayout: function () {
+      if (!this.container) return;
 
-          <div class="nb-basket-area" id="nbBasketArea">
-            <img src="${ASSET_BASE}/basket.webp" class="nb-basket-img" alt="바구니" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><path d=\\'M10 30 L90 30 L80 90 L20 90 Z\\' fill=\\'%23FFD93D\\' stroke=\\'%23E65100\\' stroke-width=\\'4\\'/></svg>'">
-            <img src="./assets/characters/sicheoni.png" class="nb-character" id="nbCompanion" alt="도우미 친구" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 50 50\\'><circle cx=\\'25\\' cy=\\'25\\' r=\\'20\\' fill=\\'%23FFB6C1\\'/><circle cx=\\'15\\' cy=\\'20\\' r=\\'3\\'/><circle cx=\\'35\\' cy=\\'20\\' r=\\'3\\'/><path d=\\'M20 35 Q25 40 30 35\\' stroke=\\'%23000\\' stroke-width=\\'2\\' fill=\\'none\\'/></svg>'">
-            <div class="nb-basket-sum" id="nbCurrentSumText">0</div>
-          </div>
+      const mode = isLandscapeMode() ? 'landscape' : 'portrait';
+      this.state.layoutMode = mode;
 
-          <div class="nb-blocks-area" id="nbBlocksList"></div>
-
-          <button class="nb-undo-btn" id="nbUndoBtn" type="button">↩ 하나 빼기</button>
-
-          <div class="nb-train-box" id="nbGoldenTrain">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><rect width='100' height='40' y='10' fill='%23FF7A1A' rx='10'/><circle cx='20' cy='50' r='8'/><circle cx='80' cy='50' r='8'/></svg>" style="width:100%;" alt="축하 기차">
-          </div>
+      this.container.innerHTML = `
+        <div class="nb-root nb-${mode}">
+          <div class="nb-status-board">미션: <span id="nbTargetNum" style="color:#FFD93D; font-size:1.2em;">${this.state.targetNum}</span> 만들기</div>
+          ${getBasketMarkup()}
+          ${getBlocksMarkup()}
+          ${getUndoMarkup()}
+          ${getTrainMarkup()}
         </div>
       `;
 
-      const undoBtn = document.getElementById('nbUndoBtn');
+      const undoBtn = this.container.querySelector('#nbUndoBtn');
       if (undoBtn) {
         undoBtn.onclick = () => this.undoLastBlock();
+        undoBtn.style.display = this.state.history.length > 0 ? 'block' : 'none';
       }
+
+      this.renderBlocks();
+      this.updateSumDisplay();
     },
 
-    startLevel: function(level) {
+    handleResize: function () {
+      if (!this.container) return;
+
+      clearTimeout(this.resizeTimer);
+
+      this.resizeTimer = setTimeout(() => {
+        if (!this.container) return;
+
+        const nextMode = isLandscapeMode() ? 'landscape' : 'portrait';
+
+        if (nextMode !== this.state.layoutMode) {
+          this.renderLayout();
+        }
+      }, 150);
+    },
+
+    startLevel: function (level, renderOpts) {
+      const opts = renderOpts || {};
+
       this.state.level = level;
       this.state.history = [];
-
-      const undoBtn = document.getElementById('nbUndoBtn');
-      if (undoBtn) undoBtn.style.display = 'none';
+      this.finalCompleteLocked = false;
 
       if (level === 1) {
         this.state.targetNum = 5;
@@ -503,6 +659,7 @@
         this.state.targetNum = 8;
       } else {
         this.state.targetNum = 12;
+        this.state.finalRewardGiven = false;
       }
 
       this.state.availableBlocks = ALL_NUMBER_BLOCKS.slice();
@@ -510,17 +667,30 @@
       this.state.errorCount = 0;
       this.state.isAnimating = false;
 
-      const targetEl = document.getElementById('nbTargetNum');
+      if (!this.container || !this.container.querySelector('.nb-root')) {
+        this.renderLayout();
+      }
+
+      const undoBtn = this.container.querySelector('#nbUndoBtn');
+      if (undoBtn) undoBtn.style.display = 'none';
+
+      const targetEl = this.container.querySelector('#nbTargetNum');
       if (targetEl) targetEl.innerText = this.state.targetNum;
 
       this.updateSumDisplay();
       this.renderBlocks();
-      this.speak(`시현아, 우리 숫자 ${this.state.targetNum}을 만들어볼까?`, true);
+
+      if (!opts.silent) {
+        this.speak(`시현아, 우리 숫자 ${this.state.targetNum}을 만들어볼까?`, true);
+      }
+
       this.resetHintTimer();
     },
 
-    renderBlocks: function() {
-      const list = document.getElementById('nbBlocksList');
+    renderBlocks: function () {
+      if (!this.container) return;
+
+      const list = this.container.querySelector('#nbBlocksList');
       if (!list) return;
 
       list.innerHTML = '';
@@ -538,8 +708,9 @@
 
         const img = b.querySelector('.nb-block-img');
         const fallback = b.querySelector('.nb-block-fallback');
+
         if (img && fallback) {
-          img.onerror = function() {
+          img.onerror = function () {
             img.style.display = 'none';
             fallback.style.display = 'flex';
           };
@@ -550,24 +721,28 @@
       });
     },
 
-    speak: function(text, force) {
+    speak: function (text, force) {
       if (this.options.speakGuide) this.options.speakGuide(text, force !== false);
     },
 
-    handleBlockTouch: function(val, blockEl, event) {
-      if (this.state.isAnimating) return;
+    handleBlockTouch: function (val, blockEl, event) {
+      if (this.state.isAnimating || this.finalCompleteLocked) return;
+
       clearTimeout(this.state.hintTimer);
       this.clearHints();
 
       if (this.state.currentSum + val > this.state.targetNum) {
         const over = (this.state.currentSum + val) - this.state.targetNum;
+
         this.state.errorCount++;
+
         if (navigator.vibrate) navigator.vibrate([80, 50, 80]);
 
         blockEl.classList.add('nb-shake-error');
         setTimeout(() => blockEl.classList.remove('nb-shake-error'), 500);
 
-        const basketArea = document.getElementById('nbBasketArea');
+        const basketArea = this.container.querySelector('#nbBasketArea');
+
         if (basketArea) {
           basketArea.classList.add('nb-basket-shake');
           setTimeout(() => basketArea.classList.remove('nb-basket-shake'), 450);
@@ -585,6 +760,7 @@
           `이런! 바구니가 넘칠 뻔했어!`,
           `조심해! ${over}만큼 많아!`
         ];
+
         const extra = this.state.errorCount >= 3 ? ' 힌트 봐봐~' : '';
         this.speak(msgs[Math.floor(Math.random() * msgs.length)] + extra);
 
@@ -596,15 +772,17 @@
       this.state.currentSum += val;
       this.state.history.push(val);
 
-      const undoBtn = document.getElementById('nbUndoBtn');
+      const undoBtn = this.container.querySelector('#nbUndoBtn');
       if (undoBtn) undoBtn.style.display = 'block';
 
       if (navigator.vibrate) navigator.vibrate(30);
+
       playPopSound();
       this.addRipple(blockEl, event);
-      this.animateToBasket(blockEl, val);
+      this.animateToBasket(blockEl);
 
-      const companion = document.getElementById('nbCompanion');
+      const companion = this.container.querySelector('#nbCompanion');
+
       if (companion) {
         companion.classList.remove('nb-char-jump');
         void companion.offsetWidth;
@@ -612,8 +790,8 @@
       }
     },
 
-    undoLastBlock: function() {
-      if (this.state.history.length === 0 || this.state.isAnimating) return;
+    undoLastBlock: function () {
+      if (this.state.history.length === 0 || this.state.isAnimating || this.finalCompleteLocked) return;
 
       const lastVal = this.state.history.pop();
       this.state.currentSum -= lastVal;
@@ -622,24 +800,30 @@
       this.speak(`${lastVal}을 뺐어! 다시 해보자~`);
 
       if (this.state.history.length === 0) {
-        const undoBtn = document.getElementById('nbUndoBtn');
+        const undoBtn = this.container.querySelector('#nbUndoBtn');
         if (undoBtn) undoBtn.style.display = 'none';
       }
+
       this.resetHintTimer();
     },
 
-    addRipple: function(blockEl) {
+    addRipple: function (blockEl) {
       const r = document.createElement('div');
       r.className = 'nb-ripple';
+
       const size = Math.max(blockEl.offsetWidth, blockEl.offsetHeight);
+
       r.style.cssText = `width:${size}px;height:${size}px;left:${blockEl.offsetWidth / 2 - size / 2}px;top:${blockEl.offsetHeight / 2 - size / 2}px;`;
+
       blockEl.style.position = 'relative';
       blockEl.appendChild(r);
+
       setTimeout(() => r.remove(), 450);
     },
 
-    animateToBasket: function(el) {
-      const basket = document.getElementById('nbBasketArea');
+    animateToBasket: function (el) {
+      const basket = this.container ? this.container.querySelector('#nbBasketArea') : null;
+
       if (!basket) {
         this.updateSumDisplay();
         this.state.isAnimating = false;
@@ -656,6 +840,7 @@
       clone.style.width = start.width + 'px';
       clone.style.height = start.height + 'px';
       clone.style.margin = '0';
+
       document.body.appendChild(clone);
 
       requestAnimationFrame(() => {
@@ -667,12 +852,16 @@
 
       setTimeout(() => {
         if (clone.parentNode) clone.parentNode.removeChild(clone);
+
         this.updateSumDisplay();
 
-        const sumEl = document.getElementById('nbCurrentSumText');
+        const sumEl = this.container ? this.container.querySelector('#nbCurrentSumText') : null;
+
         if (sumEl) {
           sumEl.style.transform = 'scale(1.7)';
-          setTimeout(() => { sumEl.style.transform = 'scale(1)'; }, 200);
+          setTimeout(() => {
+            if (sumEl) sumEl.style.transform = 'scale(1)';
+          }, 200);
         }
 
         if (this.state.currentSum === this.state.targetNum) {
@@ -685,14 +874,17 @@
       }, 450);
     },
 
-    updateSumDisplay: function() {
-      const el = document.getElementById('nbCurrentSumText');
+    updateSumDisplay: function () {
+      if (!this.container) return;
+
+      const el = this.container.querySelector('#nbCurrentSumText');
       if (!el) return;
 
       el.innerText = this.state.currentSum;
       el.style.display = this.state.currentSum === 0 ? 'none' : 'block';
 
       const ratio = this.state.currentSum / this.state.targetNum;
+
       if (ratio >= 1) {
         el.style.color = '#00FF88';
       } else if (ratio >= 0.7) {
@@ -702,15 +894,19 @@
       }
     },
 
-    resetHintTimer: function() {
+    resetHintTimer: function () {
       clearTimeout(this.state.hintTimer);
       this.clearHints();
-      if (this.state.currentSum >= this.state.targetNum) return;
+
+      if (this.state.currentSum >= this.state.targetNum || this.finalCompleteLocked) return;
 
       this.state.hintTimer = setTimeout(() => {
+        if (!this.container || this.finalCompleteLocked) return;
+
         const diff = this.state.targetNum - this.state.currentSum;
-        const blocks = Array.from(document.querySelectorAll('.nb-block'));
+        const blocks = Array.from(this.container.querySelectorAll('.nb-block'));
         const hint = blocks.reverse().find(b => parseInt(b.dataset.val, 10) <= diff);
+
         if (hint) {
           hint.classList.add('nb-hint-pulse');
           this.speak(`시현아, ${diff}을 만들 수 있는 친구를 골라봐~`);
@@ -718,23 +914,27 @@
       }, 2800);
     },
 
-    clearHints: function() {
-      document.querySelectorAll('.nb-block').forEach(b => b.classList.remove('nb-hint-pulse'));
+    clearHints: function () {
+      if (!this.container) return;
+      this.container.querySelectorAll('.nb-block').forEach(b => b.classList.remove('nb-hint-pulse'));
     },
 
-    handleLevelClear: function() {
+    handleLevelClear: function () {
       clearTimeout(this.state.hintTimer);
       this.clearHints();
 
-      const undoBtn = document.getElementById('nbUndoBtn');
+      const undoBtn = this.container ? this.container.querySelector('#nbUndoBtn') : null;
       if (undoBtn) undoBtn.style.display = 'none';
 
-      document.querySelectorAll('.nb-block').forEach((b, i) => {
+      const blocks = this.container ? Array.from(this.container.querySelectorAll('.nb-block')) : [];
+
+      blocks.forEach((b, i) => {
         const angle = (i / this.state.availableBlocks.length) * 360;
         const dist = 120 + Math.random() * 80;
         const sx = Math.cos(angle * Math.PI / 180) * dist + 'px';
         const sy = Math.sin(angle * Math.PI / 180) * dist + 'px';
         const sr = (Math.random() * 720 - 360) + 'deg';
+
         b.style.setProperty('--sx', sx);
         b.style.setProperty('--sy', sy);
         b.style.setProperty('--sr', sr);
@@ -743,7 +943,8 @@
 
       if (this.options.fireConfetti) this.options.fireConfetti();
 
-      const companion = document.getElementById('nbCompanion');
+      const companion = this.container ? this.container.querySelector('#nbCompanion') : null;
+
       if (companion) {
         companion.classList.remove('nb-char-jump');
         void companion.offsetWidth;
@@ -752,26 +953,43 @@
 
       if (this.state.level === 1) {
         this.speak('와아아아!! 정확히 맞췄어!! 시현이 최고! 다음엔 8을 만들어보자!');
-        setTimeout(() => { this.state.isAnimating = false; this.startLevel(2); }, 3500);
+        setTimeout(() => {
+          this.state.isAnimating = false;
+          this.startLevel(2, { silent: false });
+        }, 3500);
       } else if (this.state.level === 2) {
         this.speak('대단해! 8 완성! 마지막으로 12까지 도전해볼까?');
-        setTimeout(() => { this.state.isAnimating = false; this.startLevel(3); }, 3500);
+        setTimeout(() => {
+          this.state.isAnimating = false;
+          this.startLevel(3, { silent: false });
+        }, 3500);
       } else {
-        this.speak('우와! 12 완성! 시현이가 정말 최고야! 숫자 왕 탄생!', true);
-        this.runTrain();
-        if (this.options.gainExp) this.options.gainExp(50);
+        if (this.finalCompleteLocked) return;
+
+        this.finalCompleteLocked = true;
+
+        if (!this.state.finalRewardGiven) {
+          this.speak('우와! 12 완성! 시현이가 정말 최고야! 숫자 왕 탄생!', true);
+          this.runTrain();
+
+          if (this.options.gainExp) this.options.gainExp(50);
+
+          this.state.finalRewardGiven = true;
+        }
       }
     },
 
-    runTrain: function() {
-      const train = document.getElementById('nbGoldenTrain');
+    runTrain: function () {
+      const train = this.container ? this.container.querySelector('#nbGoldenTrain') : null;
+
       if (train) {
         train.style.display = 'block';
         train.classList.remove('nb-train-active');
         void train.offsetWidth;
         train.classList.add('nb-train-active');
+
         setTimeout(() => {
-          train.classList.remove('nb-train-active');
+          if (train) train.classList.remove('nb-train-active');
           this.state.isAnimating = false;
         }, 5000);
       } else {
@@ -779,10 +997,22 @@
       }
     },
 
-    destroy: function() {
+    destroy: function () {
       clearTimeout(this.state.hintTimer);
+      clearTimeout(this.resizeTimer);
+
+      if (this.handleResizeBound) {
+        window.removeEventListener('resize', this.handleResizeBound);
+        window.removeEventListener('orientationchange', this.handleResizeBound);
+        this.handleResizeBound = null;
+      }
+
       this.state.isAnimating = false;
+      this.finalCompleteLocked = false;
+
       if (this.container) this.container.innerHTML = '';
+
+      this.container = null;
     }
   };
 })();

@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS — 꼬마 고양이 돌보기
    파일: js/games/cat-care.js
-   버전: v1.3.1
-   수정: 모든 고양이 이미지 webp 전환 + 코드 경로 동기화
+   버전: v1.5.0
+   수정: resize 중복 보상/음성 버그 수정 및 상태 플래그 도입
 ═══════════════════════════════════════════ */
 
 (function () {
@@ -82,8 +82,18 @@
     activeStep: 'default',
     completed: null,
     destroyed: false,
-    timers: []
+    timers: [],
+    currentScreen: 'select', // 'select', 'care', 'complete'
+    resizeTimer: null,
+    // 보상 및 음성 중복 방지 플래그
+    selectIntroPlayed: false,
+    careIntroPlayed: false,
+    completeRewardGiven: false
   };
+
+  function isLandscapeMode() {
+    return window.innerWidth > window.innerHeight && window.innerWidth >= 768;
+  }
 
   function timer(fn, ms) {
     const id = setTimeout(() => {
@@ -121,6 +131,12 @@
         touch-action: manipulation;
       }
 
+      .cc-root.is-landscape {
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255,255,255,0.9) 0 10%, transparent 30%),
+          linear-gradient(135deg, #fff7da 0%, #ffeaf5 54%, #eaf7ff 100%);
+      }
+
       .cc-root * {
         box-sizing: border-box;
       }
@@ -133,11 +149,7 @@
         overflow: hidden;
       }
 
-      /* ═══════════════════════════════════════
-         선택 화면 — 모바일 기본
-      ═══════════════════════════════════════ */
-
-      .cc-select-screen {
+      .cc-select-portrait {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -146,10 +158,46 @@
         gap: clamp(14px, 3vh, 24px);
       }
 
+      .cc-select-landscape {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 22px;
+        padding: 22px;
+        align-items: stretch;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape {
+          grid-template-columns: 0.7fr 1.3fr;
+          gap: 12px;
+          padding: 12px;
+        }
+      }
+
       .cc-select-hero {
         width: 100%;
         text-align: center;
         flex-shrink: 0;
+      }
+
+      .cc-select-landscape .cc-select-hero {
+        height: 100%;
+        border-radius: 36px;
+        background: rgba(255,255,255,0.82);
+        border: 6px solid #fff;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-select-hero {
+          border-radius: 24px;
+          padding: 14px;
+        }
       }
 
       .cc-select-title {
@@ -161,12 +209,34 @@
         line-height: 1.15;
       }
 
+      .cc-select-landscape .cc-select-title {
+        font-size: clamp(34px, 4vw, 54px);
+        line-height: 1.16;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-select-title {
+          font-size: clamp(24px, 4vw, 34px);
+        }
+      }
+
       .cc-select-sub {
         margin: 10px 0 0;
         font-size: clamp(14px, 4vw, 20px);
         color: #776b61;
         font-weight: 800;
         line-height: 1.35;
+      }
+
+      .cc-select-landscape .cc-select-sub {
+        font-size: clamp(19px, 2vw, 28px);
+        margin-top: 16px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-select-sub {
+          font-size: 15px;
+        }
       }
 
       .cc-select-row {
@@ -177,6 +247,21 @@
         justify-content: center;
         flex-wrap: wrap;
         padding: 0;
+      }
+
+      .cc-select-landscape .cc-select-row {
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-select-row {
+          gap: 12px;
+        }
       }
 
       .cc-cat-card {
@@ -193,9 +278,33 @@
         font-family: inherit;
       }
 
+      .cc-select-landscape .cc-cat-card {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        border-radius: 38px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-width: 7px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-cat-card {
+          padding: 10px;
+          border-radius: 24px;
+        }
+      }
+
       .cc-cat-card:active {
         transform: scale(0.92);
         box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      }
+
+      .cc-select-landscape .cc-cat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 34px rgba(0,0,0,0.13);
       }
 
       .cc-cat-img-wrap {
@@ -207,6 +316,16 @@
         background: #f5f5f5;
       }
 
+      .cc-select-landscape .cc-cat-img-wrap {
+        border-radius: 30px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-cat-img-wrap {
+          border-radius: 18px;
+        }
+      }
+
       .cc-cat-img-wrap img {
         position: absolute;
         inset: 0;
@@ -216,6 +335,16 @@
         border-radius: 26px;
       }
 
+      .cc-select-landscape .cc-cat-img-wrap img {
+        border-radius: 30px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-cat-img-wrap img {
+          border-radius: 18px;
+        }
+      }
+
       .cc-cat-img-fallback {
         position: absolute;
         inset: 0;
@@ -223,6 +352,17 @@
         place-items: center;
         font-size: clamp(56px, 16vw, 92px);
         background: linear-gradient(135deg, #ffe0f0, #fff9c4);
+        border-radius: 26px;
+      }
+
+      .cc-select-landscape .cc-cat-img-fallback {
+        border-radius: 30px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-cat-img-fallback {
+          border-radius: 18px;
+        }
       }
 
       .cc-cat-name {
@@ -232,11 +372,19 @@
         font-weight: 900;
       }
 
-      /* ═══════════════════════════════════════
-         돌보기 화면 — 모바일 기본
-      ═══════════════════════════════════════ */
+      .cc-select-landscape .cc-cat-name {
+        font-size: clamp(28px, 3vw, 40px);
+        margin-top: 14px;
+      }
 
-      .cc-care-layout {
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-select-landscape .cc-cat-name {
+          font-size: 20px;
+          margin-top: 6px;
+        }
+      }
+
+      .cc-care-portrait {
         width: 100%;
         height: 100%;
         min-height: 0;
@@ -245,8 +393,156 @@
         overflow: hidden;
       }
 
+      .cc-care-landscape {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr) 230px;
+        grid-template-rows: minmax(0, 1fr);
+        gap: 16px;
+        padding: 16px;
+        overflow: hidden;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-care-landscape {
+          grid-template-columns: 170px minmax(0, 1fr) 170px;
+          gap: 8px;
+          padding: 8px;
+        }
+      }
+
       .cc-left-panel {
-        display: none;
+        display: flex;
+        min-height: 0;
+        height: 100%;
+        flex-direction: column;
+        gap: 14px;
+        overflow: hidden;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-left-panel {
+          gap: 8px;
+        }
+      }
+
+      .cc-info-card,
+      .cc-mini-actions,
+      .cc-action-panel-landscape {
+        background: rgba(255,255,255,0.86);
+        border: 5px solid #fff;
+        border-radius: 32px;
+        box-shadow: 0 16px 34px rgba(0,0,0,0.10);
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-info-card,
+        .cc-mini-actions,
+        .cc-action-panel-landscape {
+          border-radius: 20px;
+          border: 4px solid #fff;
+          box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+        }
+      }
+
+      .cc-info-card {
+        flex: 1 1 auto;
+        min-height: 0;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-info-card {
+          padding: 10px;
+        }
+      }
+
+      .cc-info-emoji {
+        font-size: clamp(60px, 7vw, 96px);
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-info-emoji {
+          font-size: 46px;
+        }
+      }
+
+      .cc-info-name {
+        font-size: clamp(28px, 3vw, 42px);
+        font-weight: 900;
+        color: #333;
+        line-height: 1.1;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-info-name {
+          font-size: 23px;
+        }
+      }
+
+      .cc-info-sub {
+        margin-top: 10px;
+        font-size: clamp(16px, 1.6vw, 22px);
+        font-weight: 800;
+        color: #776b61;
+        line-height: 1.35;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-info-sub {
+          font-size: 13px;
+          margin-top: 5px;
+        }
+      }
+
+      .cc-mini-actions {
+        flex: 0 0 auto;
+        padding: 12px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-mini-actions {
+          padding: 8px;
+        }
+      }
+
+      .cc-small-btn {
+        width: 100%;
+        min-height: 58px;
+        border: 0;
+        border-radius: 22px;
+        background: #fff;
+        color: #333;
+        font-family: inherit;
+        font-size: 18px;
+        font-weight: 900;
+        box-shadow: 0 6px 0 rgba(0,0,0,0.12);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-small-btn {
+          min-height: 40px;
+          border-radius: 14px;
+          font-size: 14px;
+          box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+        }
+      }
+
+      .cc-small-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 rgba(0,0,0,0.12);
       }
 
       .cc-main-display {
@@ -256,22 +552,46 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .cc-care-portrait .cc-main-display {
         padding: clamp(10px, 2vh, 18px) 16px 0;
+      }
+
+      .cc-care-landscape .cc-main-display {
+        min-width: 0;
+        height: 100%;
+        padding: 0;
       }
 
       .cc-main-wrap {
         position: relative;
+        flex-shrink: 0;
+      }
+
+      .cc-care-portrait .cc-main-wrap {
         width: clamp(230px, 74vw, 430px);
         aspect-ratio: 1 / 1;
-        flex-shrink: 0;
+      }
+
+      .cc-care-landscape .cc-main-wrap {
+        width: min(100%, calc(100vh - 68px));
+        height: min(100%, calc(100vh - 68px));
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-care-landscape .cc-main-wrap {
+          width: min(100%, calc(100vh - 24px));
+          height: min(100%, calc(100vh - 24px));
+        }
       }
 
       .cc-main-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: clamp(34px, 9vw, 54px);
-        border: clamp(7px, 2vw, 10px) solid #fff;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         animation: ccFloat 3s ease-in-out infinite;
         transition: opacity 0.25s;
@@ -279,16 +599,50 @@
         background: #fff;
       }
 
+      .cc-care-portrait .cc-main-img {
+        border-radius: clamp(34px, 9vw, 54px);
+        border: clamp(7px, 2vw, 10px) solid #fff;
+      }
+
+      .cc-care-landscape .cc-main-img {
+        border-radius: 54px;
+        border: 12px solid #fff;
+        box-shadow: 0 24px 54px rgba(0,0,0,0.16);
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-care-landscape .cc-main-img {
+          border-radius: 28px;
+          border-width: 6px;
+        }
+      }
+
       .cc-main-fallback {
         position: absolute;
         inset: 0;
         display: none;
         place-items: center;
+        background: linear-gradient(135deg, #ffe0f0, #fff9c4);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      }
+
+      .cc-care-portrait .cc-main-fallback {
         font-size: clamp(86px, 25vw, 160px);
         border-radius: clamp(34px, 9vw, 54px);
-        background: linear-gradient(135deg, #ffe0f0, #fff9c4);
         border: clamp(7px, 2vw, 10px) solid #fff;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      }
+
+      .cc-care-landscape .cc-main-fallback {
+        font-size: clamp(86px, 25vw, 160px);
+        border-radius: 54px;
+        border: 12px solid #fff;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-care-landscape .cc-main-fallback {
+          border-radius: 28px;
+          border-width: 6px;
+        }
       }
 
       @keyframes ccFloat {
@@ -296,22 +650,69 @@
         50% { transform: translateY(-14px); }
       }
 
-      .cc-action-panel {
+      .cc-action-panel-portrait {
         flex: 0 0 auto;
         width: 100%;
         padding: 10px 14px max(22px, env(safe-area-inset-bottom));
       }
 
-      .cc-panel-title {
-        display: none;
+      .cc-action-panel-landscape {
+        min-height: 0;
+        height: 100%;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
 
-      .cc-action-bar {
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-action-panel-landscape {
+          padding: 8px;
+        }
+      }
+
+      .cc-action-panel-landscape .cc-panel-title {
+        display: block;
+        flex: 0 0 auto;
+        font-size: clamp(22px, 2.2vw, 30px);
+        font-weight: 900;
+        color: #333;
+        text-align: center;
+        margin-bottom: 14px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-action-panel-landscape .cc-panel-title {
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+      }
+
+      .cc-action-bar-portrait {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: clamp(10px, 3.5vw, 22px);
+      }
+
+      .cc-action-bar-landscape {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(96px, 1fr);
+        gap: 14px;
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-action-bar-landscape {
+          grid-auto-rows: minmax(54px, 1fr);
+          gap: 8px;
+        }
       }
 
       .cc-btn {
@@ -320,17 +721,39 @@
         align-items: center;
         justify-content: center;
         gap: 6px;
+        cursor: pointer;
+        transition: transform 0.12s, box-shadow 0.12s, opacity 0.2s;
+        -webkit-tap-highlight-color: transparent;
+        position: relative;
+        font-family: inherit;
+      }
+
+      .cc-action-bar-portrait .cc-btn {
         width: clamp(82px, 27vw, 122px);
         height: clamp(82px, 27vw, 122px);
         border-radius: 50%;
         border: 6px solid #fff;
-        cursor: pointer;
         box-shadow: 0 10px 0 rgba(0,0,0,0.12), 0 14px 20px rgba(0,0,0,0.10);
-        transition: transform 0.12s, box-shadow 0.12s, opacity 0.2s;
-        -webkit-tap-highlight-color: transparent;
-        position: relative;
         font-size: clamp(31px, 9vw, 50px);
-        font-family: inherit;
+      }
+
+      .cc-action-bar-landscape .cc-btn {
+        width: 100%;
+        height: 100%;
+        min-height: 96px;
+        border-radius: 28px;
+        border: 6px solid #fff;
+        box-shadow: 0 10px 0 rgba(0,0,0,0.12), 0 14px 20px rgba(0,0,0,0.10);
+        font-size: clamp(38px, 4.5vw, 62px);
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-action-bar-landscape .cc-btn {
+          min-height: 54px;
+          border-radius: 18px;
+          border-width: 4px;
+          font-size: 28px;
+        }
       }
 
       .cc-btn:active {
@@ -339,14 +762,31 @@
       }
 
       .cc-btn-label {
+        color: #555;
+        white-space: nowrap;
+        font-weight: 900;
+      }
+
+      .cc-action-bar-portrait .cc-btn-label {
         position: absolute;
         bottom: -28px;
         left: 50%;
         transform: translateX(-50%);
         font-size: clamp(11px, 3.2vw, 15px);
-        color: #555;
-        white-space: nowrap;
-        font-weight: 900;
+      }
+
+      .cc-action-bar-landscape .cc-btn-label {
+        position: static;
+        transform: none;
+        font-size: clamp(17px, 1.65vw, 23px);
+        color: rgba(40,40,40,0.82);
+        margin-top: 2px;
+      }
+
+      @media (max-height: 540px) and (orientation: landscape) {
+        .cc-action-bar-landscape .cc-btn-label {
+          font-size: 12px;
+        }
       }
 
       .cc-btn.done {
@@ -357,33 +797,20 @@
       .cc-btn.done::after {
         content: '✅';
         position: absolute;
-        top: -8px;
-        right: -8px;
-        font-size: 24px;
         filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
       }
 
-      .cc-particle {
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        animation: ccExplode 0.8s ease-out forwards;
+      .cc-action-bar-portrait .cc-btn.done::after {
+        top: -8px;
+        right: -8px;
+        font-size: 24px;
       }
 
-      @keyframes ccExplode {
-        0% {
-          transform: translate(0,0) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translate(var(--tx), var(--ty)) scale(0);
-          opacity: 0;
-        }
+      .cc-action-bar-landscape .cc-btn.done::after {
+        top: 8px;
+        right: 10px;
+        font-size: 28px;
       }
-
-      /* ═══════════════════════════════════════
-         완료 화면
-      ═══════════════════════════════════════ */
 
       .cc-complete {
         width: 100%;
@@ -399,15 +826,34 @@
         overflow: hidden;
       }
 
+      .cc-complete.is-landscape {
+        width: min(720px, calc(100% - 48px));
+        height: auto;
+        min-height: min(620px, calc(100% - 48px));
+        margin: auto;
+        border-radius: 42px;
+        border: 7px solid #fff;
+        background: rgba(255,255,255,0.88);
+        box-shadow: 0 22px 48px rgba(0,0,0,0.14);
+      }
+
       .cc-complete-emoji {
         font-size: clamp(72px, 20vw, 120px);
         animation: ccFloat 2.5s ease-in-out infinite;
+      }
+
+      .cc-complete.is-landscape .cc-complete-emoji {
+        font-size: clamp(100px, 10vw, 150px);
       }
 
       .cc-complete-title {
         font-size: clamp(27px, 7vw, 44px);
         font-weight: 900;
         color: #333;
+      }
+
+      .cc-complete.is-landscape .cc-complete-title {
+        font-size: clamp(40px, 4vw, 58px);
       }
 
       .cc-complete-sub {
@@ -417,12 +863,23 @@
         font-weight: 700;
       }
 
+      .cc-complete.is-landscape .cc-complete-sub {
+        font-size: clamp(22px, 2.2vw, 30px);
+      }
+
       .cc-complete-btns {
         display: flex;
         flex-direction: column;
         gap: 12px;
         width: min(100%, 300px);
         margin-top: 6px;
+      }
+
+      .cc-complete.is-landscape .cc-complete-btns {
+        width: min(100%, 460px);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
       }
 
       .cc-c-btn {
@@ -439,471 +896,23 @@
         font-family: inherit;
       }
 
+      .cc-complete.is-landscape .cc-c-btn {
+        min-height: 72px;
+        font-size: 22px;
+        border-radius: 24px;
+      }
+
       .cc-c-btn:active {
         transform: translateY(4px);
         box-shadow: 0 2px 0 rgba(0,0,0,0.15);
       }
 
-      .cc-c-btn-primary {
-        background: #FF7A1A;
-        color: #fff;
-      }
-
+      .cc-c-btn-primary { background: #FF7A1A; color: #fff; }
       .cc-c-btn-secondary {
         background: #fff;
         color: #333;
         border: 4px solid #eee !important;
         box-shadow: 0 5px 0 #ddd;
-      }
-
-      /* ═══════════════════════════════════════
-         태블릿 가로 모드 — 좌측 정보 / 중앙 고양이 / 우측 행동
-      ═══════════════════════════════════════ */
-
-      @media (min-width: 768px) and (min-height: 560px) and (orientation: landscape) {
-        .cc-root {
-          background:
-            radial-gradient(circle at 18% 18%, rgba(255,255,255,0.9) 0 10%, transparent 30%),
-            linear-gradient(135deg, #fff7da 0%, #ffeaf5 54%, #eaf7ff 100%);
-        }
-
-        .cc-select-screen {
-          display: grid;
-          grid-template-columns: 0.85fr 1.15fr;
-          gap: 22px;
-          padding: 22px;
-          align-items: stretch;
-        }
-
-        .cc-select-hero {
-          height: 100%;
-          border-radius: 36px;
-          background: rgba(255,255,255,0.82);
-          border: 6px solid #fff;
-          box-shadow: 0 18px 40px rgba(0,0,0,0.10);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-        }
-
-        .cc-select-title {
-          font-size: clamp(34px, 4vw, 54px);
-          line-height: 1.16;
-        }
-
-        .cc-select-sub {
-          font-size: clamp(19px, 2vw, 28px);
-          margin-top: 16px;
-        }
-
-        .cc-select-row {
-          height: 100%;
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 20px;
-          align-items: stretch;
-          justify-content: stretch;
-        }
-
-        .cc-cat-card {
-          width: 100%;
-          height: 100%;
-          min-height: 0;
-          border-radius: 38px;
-          padding: 16px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          border-width: 7px;
-        }
-
-        .cc-cat-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 18px 34px rgba(0,0,0,0.13);
-        }
-
-        .cc-cat-img-wrap {
-          border-radius: 30px;
-        }
-
-        .cc-cat-img-wrap img,
-        .cc-cat-img-fallback {
-          border-radius: 30px;
-        }
-
-        .cc-cat-name {
-          font-size: clamp(28px, 3vw, 40px);
-          margin-top: 14px;
-        }
-
-        .cc-care-layout {
-          display: grid;
-          grid-template-columns: 230px minmax(0, 1fr) 230px;
-          grid-template-rows: minmax(0, 1fr);
-          gap: 16px;
-          padding: 16px;
-        }
-
-        .cc-left-panel {
-          display: flex;
-          min-height: 0;
-          height: 100%;
-          flex-direction: column;
-          gap: 14px;
-          overflow: hidden;
-        }
-
-        .cc-info-card,
-        .cc-mini-actions,
-        .cc-action-panel {
-          background: rgba(255,255,255,0.86);
-          border: 5px solid #fff;
-          border-radius: 32px;
-          box-shadow: 0 16px 34px rgba(0,0,0,0.10);
-        }
-
-        .cc-info-card {
-          flex: 1 1 auto;
-          min-height: 0;
-          padding: 16px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          overflow: hidden;
-        }
-
-        .cc-info-emoji {
-          font-size: clamp(60px, 7vw, 96px);
-          line-height: 1;
-          margin-bottom: 10px;
-        }
-
-        .cc-info-name {
-          font-size: clamp(28px, 3vw, 42px);
-          font-weight: 900;
-          color: #333;
-          line-height: 1.1;
-        }
-
-        .cc-info-sub {
-          margin-top: 10px;
-          font-size: clamp(16px, 1.6vw, 22px);
-          font-weight: 800;
-          color: #776b61;
-          line-height: 1.35;
-        }
-
-        .cc-mini-actions {
-          flex: 0 0 auto;
-          padding: 12px;
-        }
-
-        .cc-small-btn {
-          width: 100%;
-          min-height: 58px;
-          border: 0;
-          border-radius: 22px;
-          background: #fff;
-          color: #333;
-          font-family: inherit;
-          font-size: 18px;
-          font-weight: 900;
-          box-shadow: 0 6px 0 rgba(0,0,0,0.12);
-          cursor: pointer;
-          -webkit-tap-highlight-color: transparent;
-        }
-
-        .cc-small-btn:active {
-          transform: translateY(4px);
-          box-shadow: 0 2px 0 rgba(0,0,0,0.12);
-        }
-
-        .cc-main-display {
-          min-width: 0;
-          min-height: 0;
-          height: 100%;
-          padding: 0;
-        }
-
-        .cc-main-wrap {
-          width: min(100%, calc(100vh - 68px));
-          height: min(100%, calc(100vh - 68px));
-          max-width: 100%;
-          max-height: 100%;
-        }
-
-        .cc-main-img,
-        .cc-main-fallback {
-          border-radius: 54px;
-          border-width: 12px;
-          box-shadow: 0 24px 54px rgba(0,0,0,0.16);
-        }
-
-        .cc-action-panel {
-          min-height: 0;
-          height: 100%;
-          padding: 16px;
-          display: flex;
-          flex-direction: column;
-          overflow-y: auto;
-          overflow-x: hidden;
-        }
-
-        .cc-panel-title {
-          display: block;
-          flex: 0 0 auto;
-          font-size: clamp(22px, 2.2vw, 30px);
-          font-weight: 900;
-          color: #333;
-          text-align: center;
-          margin-bottom: 14px;
-        }
-
-        .cc-action-bar {
-          flex: 1 1 auto;
-          min-height: 0;
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-auto-rows: minmax(96px, 1fr);
-          gap: 14px;
-          align-items: stretch;
-          justify-content: stretch;
-        }
-
-        .cc-btn {
-          width: 100%;
-          height: 100%;
-          min-height: 96px;
-          border-radius: 28px;
-          font-size: clamp(38px, 4.5vw, 62px);
-          border-width: 6px;
-        }
-
-        .cc-btn-label {
-          position: static;
-          transform: none;
-          font-size: clamp(17px, 1.65vw, 23px);
-          color: rgba(40,40,40,0.82);
-          margin-top: 2px;
-        }
-
-        .cc-btn.done::after {
-          top: 8px;
-          right: 10px;
-          font-size: 28px;
-        }
-
-        .cc-complete {
-          width: min(720px, calc(100% - 48px));
-          height: auto;
-          min-height: min(620px, calc(100% - 48px));
-          margin: auto;
-          border-radius: 42px;
-          border: 7px solid #fff;
-          background: rgba(255,255,255,0.88);
-          box-shadow: 0 22px 48px rgba(0,0,0,0.14);
-        }
-
-        .cc-complete-emoji {
-          font-size: clamp(100px, 10vw, 150px);
-        }
-
-        .cc-complete-title {
-          font-size: clamp(40px, 4vw, 58px);
-        }
-
-        .cc-complete-sub {
-          font-size: clamp(22px, 2.2vw, 30px);
-        }
-
-        .cc-complete-btns {
-          width: min(100%, 460px);
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
-        }
-
-        .cc-c-btn {
-          min-height: 72px;
-          font-size: 22px;
-          border-radius: 24px;
-        }
-      }
-
-      /* 작은 가로 화면 방어 */
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-screen {
-          display: grid;
-          grid-template-columns: 0.7fr 1.3fr;
-          gap: 12px;
-          padding: 12px;
-        }
-
-        .cc-select-hero {
-          border-radius: 24px;
-          padding: 14px;
-        }
-
-        .cc-select-title {
-          font-size: clamp(24px, 4vw, 34px);
-        }
-
-        .cc-select-sub {
-          font-size: 15px;
-        }
-
-        .cc-select-row {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
-        }
-
-        .cc-cat-card {
-          width: 100%;
-          padding: 10px;
-          border-radius: 24px;
-        }
-
-        .cc-cat-img-wrap {
-          border-radius: 18px;
-        }
-
-        .cc-cat-img-wrap img,
-        .cc-cat-img-fallback {
-          border-radius: 18px;
-        }
-
-        .cc-cat-name {
-          font-size: 20px;
-          margin-top: 6px;
-        }
-
-        .cc-care-layout {
-          display: grid;
-          grid-template-columns: 170px minmax(0, 1fr) 170px;
-          gap: 8px;
-          padding: 8px;
-        }
-
-        .cc-left-panel {
-          display: flex;
-          min-height: 0;
-          height: 100%;
-          flex-direction: column;
-          gap: 8px;
-          overflow: hidden;
-        }
-
-        .cc-info-card,
-        .cc-mini-actions,
-        .cc-action-panel {
-          border-radius: 20px;
-          border: 4px solid #fff;
-          background: rgba(255,255,255,0.88);
-          box-shadow: 0 10px 22px rgba(0,0,0,0.10);
-        }
-
-        .cc-info-card {
-          flex: 1 1 auto;
-          min-height: 0;
-          padding: 10px;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .cc-info-emoji {
-          font-size: 46px;
-        }
-
-        .cc-info-name {
-          font-size: 23px;
-          font-weight: 900;
-        }
-
-        .cc-info-sub {
-          font-size: 13px;
-          font-weight: 800;
-          color: #776b61;
-          margin-top: 5px;
-        }
-
-        .cc-mini-actions {
-          padding: 8px;
-        }
-
-        .cc-small-btn {
-          min-height: 40px;
-          border: 0;
-          border-radius: 14px;
-          background: #fff;
-          font-family: inherit;
-          font-size: 14px;
-          font-weight: 900;
-          box-shadow: 0 4px 0 rgba(0,0,0,0.12);
-        }
-
-        .cc-main-display {
-          padding: 0;
-        }
-
-        .cc-main-wrap {
-          width: min(100%, calc(100vh - 24px));
-          height: min(100%, calc(100vh - 24px));
-        }
-
-        .cc-main-img,
-        .cc-main-fallback {
-          border-radius: 28px;
-          border-width: 6px;
-        }
-
-        .cc-action-panel {
-          height: 100%;
-          min-height: 0;
-          padding: 8px;
-          display: flex;
-          flex-direction: column;
-          overflow-y: auto;
-        }
-
-        .cc-panel-title {
-          display: block;
-          font-size: 16px;
-          font-weight: 900;
-          text-align: center;
-          margin-bottom: 8px;
-        }
-
-        .cc-action-bar {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-auto-rows: minmax(54px, 1fr);
-          gap: 8px;
-          flex: 1;
-        }
-
-        .cc-btn {
-          width: 100%;
-          height: 100%;
-          min-height: 54px;
-          border-radius: 18px;
-          border-width: 4px;
-          font-size: 28px;
-        }
-
-        .cc-btn-label {
-          position: static;
-          transform: none;
-          font-size: 12px;
-          margin-top: 2px;
-        }
       }
     `;
 
@@ -966,20 +975,36 @@
     }, 120);
   }
 
-  function renderSelect() {
+  function renderSelect(renderOpts = {}) {
     if (state.destroyed || !state.container) return;
-
+    state.currentScreen = 'select';
+    
     const root = state.container.querySelector('.cc-root');
+    const isLand = isLandscapeMode();
+    
+    root.className = 'cc-root' + (isLand ? ' is-landscape' : '');
 
-    root.innerHTML = `
-      <div class="cc-screen cc-select-screen">
-        <div class="cc-select-hero">
-          <h2 class="cc-select-title">어떤 야옹이를<br>돌볼까?</h2>
-          <p class="cc-select-sub">눈이와 름이가<br>시현이를 기다려요</p>
+    if (isLand) {
+      root.innerHTML = `
+        <div class="cc-screen cc-select-landscape">
+          <div class="cc-select-hero">
+            <h2 class="cc-select-title">어떤 야옹이를<br>돌볼까?</h2>
+            <p class="cc-select-sub">눈이와 름이가<br>시현이를 기다려요</p>
+          </div>
+          <div class="cc-select-row" id="cc-select-row"></div>
         </div>
-        <div class="cc-select-row" id="cc-select-row"></div>
-      </div>
-    `;
+      `;
+    } else {
+      root.innerHTML = `
+        <div class="cc-screen cc-select-portrait">
+          <div class="cc-select-hero">
+            <h2 class="cc-select-title">어떤 야옹이를<br>돌볼까?</h2>
+            <p class="cc-select-sub">눈이와 름이가<br>시현이를 기다려요</p>
+          </div>
+          <div class="cc-select-row" id="cc-select-row"></div>
+        </div>
+      `;
+    }
 
     const row = root.querySelector('#cc-select-row');
 
@@ -1002,43 +1027,67 @@
       row.appendChild(card);
     });
 
-    playVoiceId('games.cat.intro');
+    // 최초 진입 렌더링에서만 인트로 음성 재생
+    if (!renderOpts.silent && !state.selectIntroPlayed) {
+      playVoiceId('games.cat.intro');
+      state.selectIntroPlayed = true;
+    }
   }
 
-  function renderCare() {
+  function renderCare(renderOpts = {}) {
     if (state.destroyed || !state.container) return;
+    state.currentScreen = 'care';
 
     const cat = state.currentCat;
     const root = state.container.querySelector('.cc-root');
+    const isLand = isLandscapeMode();
+    
+    root.className = 'cc-root' + (isLand ? ' is-landscape' : '');
 
-    root.innerHTML = `
-      <div class="cc-screen cc-care-layout">
-        <aside class="cc-left-panel">
-          <div class="cc-info-card">
-            <div class="cc-info-emoji">${cat.emoji}</div>
-            <div class="cc-info-name">${cat.name}</div>
-            <div class="cc-info-sub">밥 먹고<br>목욕하고<br>코 잘 시간이에요</div>
-          </div>
-          <div class="cc-mini-actions">
-            <button class="cc-small-btn" id="cc-change-cat" type="button">고양이 바꾸기</button>
-          </div>
-        </aside>
-
-        <main class="cc-main-display">
-          <div class="cc-main-wrap">
-            <img id="cc-main-img" class="cc-main-img"
-              src="${cat.steps.default}" alt="${cat.name}"
-              onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
-            <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
-          </div>
-        </main>
-
-        <aside class="cc-action-panel">
-          <div class="cc-panel-title">${cat.name} 돌보기</div>
-          <div class="cc-action-bar" id="cc-action-bar"></div>
-        </aside>
-      </div>
-    `;
+    if (isLand) {
+      root.innerHTML = `
+        <div class="cc-screen cc-care-landscape">
+          <aside class="cc-left-panel">
+            <div class="cc-info-card">
+              <div class="cc-info-emoji">${cat.emoji}</div>
+              <div class="cc-info-name">${cat.name}</div>
+              <div class="cc-info-sub">밥 먹고<br>목욕하고<br>코 잘 시간이에요</div>
+            </div>
+            <div class="cc-mini-actions">
+              <button class="cc-small-btn" id="cc-change-cat" type="button">고양이 바꾸기</button>
+            </div>
+          </aside>
+          <main class="cc-main-display">
+            <div class="cc-main-wrap">
+              <img id="cc-main-img" class="cc-main-img"
+                src="${cat.steps[state.activeStep]}" alt="${cat.name}"
+                onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
+              <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
+            </div>
+          </main>
+          <aside class="cc-action-panel-landscape">
+            <div class="cc-panel-title">${cat.name} 돌보기</div>
+            <div class="cc-action-bar-landscape" id="cc-action-bar"></div>
+          </aside>
+        </div>
+      `;
+    } else {
+      root.innerHTML = `
+        <div class="cc-screen cc-care-portrait">
+          <main class="cc-main-display">
+            <div class="cc-main-wrap">
+              <img id="cc-main-img" class="cc-main-img"
+                src="${cat.steps[state.activeStep]}" alt="${cat.name}"
+                onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
+              <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
+            </div>
+          </main>
+          <aside class="cc-action-panel-portrait">
+            <div class="cc-action-bar-portrait" id="cc-action-bar"></div>
+          </aside>
+        </div>
+      `;
+    }
 
     const changeBtn = root.querySelector('#cc-change-cat');
     if (changeBtn) {
@@ -1046,12 +1095,18 @@
         state.currentCat = null;
         state.completed = null;
         state.activeStep = 'default';
+        state.careIntroPlayed = false; // 고양이 변경 시 인사 다시 재생 가능하도록 초기화
         renderSelect();
       });
     }
 
     renderActionBtns();
-    playVoiceId(cat.introVoiceId);
+    
+    // 최초 고양이 선택 진입 렌더링에서만 인사 음성 재생
+    if (!renderOpts.silent && !state.careIntroPlayed) {
+      playVoiceId(cat.introVoiceId);
+      state.careIntroPlayed = true;
+    }
   }
 
   function renderActionBtns() {
@@ -1079,14 +1134,19 @@
     });
   }
 
-  function renderComplete() {
+  function renderComplete(renderOpts = {}) {
     if (state.destroyed || !state.container) return;
+    state.currentScreen = 'complete';
 
     const cat = state.currentCat;
     const root = state.container.querySelector('.cc-root');
+    const isLand = isLandscapeMode();
+    
+    root.className = 'cc-root' + (isLand ? ' is-landscape' : '');
+    const completeClass = 'cc-screen cc-complete' + (isLand ? ' is-landscape' : '');
 
     root.innerHTML = `
-      <div class="cc-screen cc-complete">
+      <div class="${completeClass}">
         <div class="cc-complete-emoji">${cat.emoji}</div>
         <div class="cc-complete-title">${cat.name} 행복해요! 🎉</div>
         <div class="cc-complete-sub">${cat.name}가 너무 기뻐해요!<br>시현이 최고야 ⭐</div>
@@ -1101,6 +1161,10 @@
       state.currentCat = null;
       state.completed = null;
       state.activeStep = 'default';
+      // 모든 진행 플래그 초기화
+      state.selectIntroPlayed = false;
+      state.careIntroPlayed = false;
+      state.completeRewardGiven = false;
       renderSelect();
     });
 
@@ -1112,15 +1176,20 @@
       }
     });
 
-    playVoiceId(cat.completeVoiceId);
-    state.options.fireConfetti?.();
-    state.options.gainExp?.(25);
+    // 최초 게임 완료 렌더링에서만 보상 및 축하 효과 실행
+    if (!renderOpts.silent && !state.completeRewardGiven) {
+      playVoiceId(cat.completeVoiceId);
+      state.options.fireConfetti?.();
+      state.options.gainExp?.(25);
+      state.completeRewardGiven = true; // 지급 완료 표시
+    }
   }
 
   function startCare(cat) {
     state.currentCat = cat;
     state.completed = new Set();
     state.activeStep = 'default';
+    state.careIntroPlayed = false; // 선택 직후 인사가 나오도록 보장
     renderCare();
   }
 
@@ -1138,6 +1207,18 @@
     }
   }
 
+  function handleResize() {
+    if (state.destroyed) return;
+    
+    clearTimeout(state.resizeTimer);
+    state.resizeTimer = setTimeout(() => {
+      // 재렌더링 시에는 보상 및 음성 재생을 하지 않도록 silent 옵션 전달
+      if (state.currentScreen === 'select') renderSelect({ silent: true });
+      else if (state.currentScreen === 'care') renderCare({ silent: true });
+      else if (state.currentScreen === 'complete') renderComplete({ silent: true });
+    }, 150);
+  }
+
   function render(container, options = {}) {
     destroy();
     injectStyle();
@@ -1149,14 +1230,23 @@
     state.completed = null;
     state.activeStep = 'default';
     state.timers = [];
+    state.currentScreen = 'select';
+    // 게임 시작 시 모든 플래그 초기화
+    state.selectIntroPlayed = false;
+    state.careIntroPlayed = false;
+    state.completeRewardGiven = false;
 
     container.innerHTML = `<div class="cc-root"></div>`;
     renderSelect();
+
+    window.addEventListener('resize', handleResize);
   }
 
   function destroy() {
     state.destroyed = true;
     clearTimers();
+    clearTimeout(state.resizeTimer);
+    window.removeEventListener('resize', handleResize);
 
     if (typeof speechSynthesis !== 'undefined') {
       speechSynthesis.cancel();

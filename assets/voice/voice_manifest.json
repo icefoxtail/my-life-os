@@ -324,7 +324,7 @@
     "robot.collision": "./assets/voice/games/robot-collision.mp3",
     "robot.starCollected": "./assets/voice/games/robot-starcollected.mp3",
     "robot.levelComplete": "./assets/voice/games/robot-levelcomplete.mp3",
-    "boardland.intro": "./assets/voice/games/boardland-intro.mp3",
+    "boardland.intro": "./assets/voice/games/boardland-startgame.mp3",
     "boardland.move1": "./assets/voice/games/boardland-move1.mp3",
     "boardland.move2": "./assets/voice/games/boardland-move2.mp3",
     "boardland.move3": "./assets/voice/games/boardland-move3.mp3",
