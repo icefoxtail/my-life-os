@@ -24,11 +24,11 @@
   };
 
   const CMDS = [
-    { id: 'up', sym: '↑', col: '#ff2d55', dr: -1, dc: 0, voice: "위로 출동! 삑!" },
-    { id: 'down', sym: '↓', col: '#00d4ff', dr: 1, dc: 0, voice: "아래로 슈웅! 뽀옥!" },
-    { id: 'left', sym: '←', col: '#ffd600', dr: 0, dc: -1, voice: "왼쪽으로 가자! 치익!" },
-    { id: 'right', sym: '→', col: '#39ff14', dr: 0, dc: 1, voice: "오른쪽으로 변신! 콰쾅!" },
-    { id: 'loop', sym: '🔁', col: '#ff00ff', dr: 0, dc: 0, voice: "빙글빙글 반복!" }
+    { id: 'up', sym: '↑', col: '#ff2d55', dr: -1, dc: 0, voice: "robot.up" },
+    { id: 'down', sym: '↓', col: '#00d4ff', dr: 1, dc: 0, voice: "robot.down" },
+    { id: 'left', sym: '←', col: '#ffd600', dr: 0, dc: -1, voice: "robot.left" },
+    { id: 'right', sym: '→', col: '#39ff14', dr: 0, dc: 1, voice: "robot.right" },
+    { id: 'loop', sym: '🔁', col: '#ff00ff', dr: 0, dc: 0, voice: "robot.loop" }
   ];
 
   function injectStyle() {
@@ -126,7 +126,9 @@
 
     render();
     if (state.options.speakGuide && state.isInitialized) {
-        state.options.speakGuide(`레벨 ${state.currentLevel}! 별을 모두 모으자!`, true);
+        if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+          window.SihyeonVoice.play('robot.levelStart', '').catch(() => {});
+        }
     }
   }
 
@@ -165,7 +167,11 @@
       btn.onclick = () => {
         if (state.isExecuting || state.commands.length >= 14) return;
         const cmd = CMDS.find(c => c.id === btn.dataset.id);
-        if (state.options.speakGuide) state.options.speakGuide(cmd.voice, true);
+        if (state.options.speakGuide) {
+          if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+            window.SihyeonVoice.play(cmd.voice, '').catch(() => {});
+          }
+        }
         state.commands.push(cmd);
         render();
       };
@@ -196,7 +202,11 @@
     if (hasLoop) {
         const base = commandQueue.filter(c => c.id !== 'loop');
         commandQueue = [...base, ...base];
-        if (state.options.speakGuide) state.options.speakGuide("빙글빙글 반복 모드!", true);
+        if (state.options.speakGuide) {
+          if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+            window.SihyeonVoice.play('robot.loopMode', '').catch(() => {});
+          }
+        }
     }
 
     const robotEl = state.container.querySelector('#robot');
@@ -209,7 +219,11 @@
       
       if (state.obstacles.some(o => o.r === nextR && o.c === nextC)) {
         createVFX(robotEl.getBoundingClientRect().left + 45, robotEl.getBoundingClientRect().top + 45, '#ff0000', 40);
-        if (state.options.speakGuide) state.options.speakGuide("아이쿠! 부딪혔어요!", true);
+        if (state.options.speakGuide) {
+          if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+            window.SihyeonVoice.play('robot.collision', '').catch(() => {});
+          }
+        }
         break;
       }
 
@@ -232,7 +246,11 @@
               starEl.style.opacity = '0';
               setTimeout(() => starEl.remove(), 400);
           }
-          if (state.options.speakGuide) state.options.speakGuide("별 수집 완료!", true);
+          if (state.options.speakGuide) {
+            if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+              window.SihyeonVoice.play('robot.starCollected', '').catch(() => {});
+            }
+          }
       }
 
       if (navigator.vibrate) navigator.vibrate(50);
@@ -246,7 +264,11 @@
       // [서식 보완] 경험치 획득 시스템 연동
       if (state.options.gainExp) state.options.gainExp(50 + state.currentLevel * 10);
 
-      if (state.options.speakGuide) state.options.speakGuide("우와아아아!!! 별을 다 모았어요! 시현이 최고!!!", true);
+      if (state.options.speakGuide) {
+        if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+          window.SihyeonVoice.play('robot.levelComplete', '').catch(() => {});
+        }
+      }
       
       setTimeout(() => {
         stageEl.classList.remove('rb11-flash');

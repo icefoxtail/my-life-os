@@ -202,8 +202,9 @@
       setTimeout(() => el.style.transform = '', 300);
 
       if (state.options.speakGuide) {
-        const msg = isSuper ? "초강력!! " : "";
-        state.options.speakGuide(`${msg}${target.name_ko} 출동!`, true);
+        if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+          window.SihyeonVoice.play('dispatch.dispatch', '').catch(() => {});
+        }
       }
       
       if (state.userIndex >= state.mission.length) {
@@ -216,7 +217,11 @@
     } else {
       state.combo = 0;
       if (root) { root.classList.add('md-shake'); setTimeout(() => root.classList.remove('md-shake'), 450); }
-      if (state.options.speakGuide) state.options.speakGuide("다시 골라보자!", true);
+      if (state.options.speakGuide) {
+        if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+          window.SihyeonVoice.play('dispatch.tryAgain', '').catch(() => {});
+        }
+      }
     }
   }
 
@@ -248,7 +253,11 @@
         </div>
       </div>
     `;
-    if (state.options.speakGuide) state.options.speakGuide("시현 본부장님 만세! 모든 미션을 완료했습니다!", true);
+    if (state.options.speakGuide) {
+      if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+        window.SihyeonVoice.play('dispatch.missionComplete', '').catch(() => {});
+      }
+    }
   }
 
   window.SihyeonGames[GAME_KEY] = { 

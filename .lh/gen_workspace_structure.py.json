@@ -1,0 +1,18 @@
+{
+    "sourceFile": "gen_workspace_structure.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1778630944874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1778630944874,
+            "name": "Commit-0",
+            "content": "from pathlib import Path\r\n\r\nroot = Path('.').resolve()\r\nignore_files = {'workspace-dirs.txt', 'workspace-tree.txt', 'workspace-folder-structure.md', 'gen_workspace_structure.py'}\r\nroot_files = sorted([p.name for p in root.iterdir() if p.is_file() and p.name not in ignore_files])\r\nlines = Path('workspace-dirs.txt').read_text(encoding='utf-8').splitlines()\r\nroot_tree = {}\r\nfor line in lines:\r\n    rel = line.replace(str(root) + '\\\\', '')\r\n    parts = rel.split('\\\\')\r\n    node = root_tree\r\n    for part in parts:\r\n        node = node.setdefault(part, {})\r\n\r\n\r\ndef render(node, indent=0):\r\n    out = []\r\n    for name in sorted(node):\r\n        out.append('  ' * indent + '- ' + name + '/')\r\n        out.extend(render(node[name], indent + 1))\r\n    return out\r\n\r\nmd = ['# Workspace Folder Structure', '', '## Root Files']\r\nmd.extend(f'- {name}' for name in root_files)\r\nmd.append('')\r\nmd.append('## Directories')\r\nmd.extend(render(root_tree))\r\nPath('workspace-folder-structure.md').write_text('\\n'.join(md), encoding='utf-8')\r\nprint('workspace-folder-structure.md generated')\r\n"
+        }
+    ]
+}

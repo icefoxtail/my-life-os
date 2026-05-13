@@ -18,41 +18,41 @@
   const ROOT_ID = 'sihyeon-boardland-root';
 
   const ROULETTE_ITEMS = [
-    { id: 'move_1', emoji: '➡️', label: '한 칸 앞으로', type: 'move', value: 1, voice: '한 칸 앞으로 가요!' },
-    { id: 'move_2', emoji: '⏩', label: '두 칸 앞으로', type: 'move', value: 2, voice: '두 칸 앞으로 출발!' },
-    { id: 'move_3', emoji: '⏩⏩', label: '세 칸 앞으로', type: 'move', value: 3, voice: '세 칸 앞으로 가요!' },
-    { id: 'spin_again', emoji: '🔁', label: '한 번 더', type: 'bonus', value: 'spin_again', voice: '우와! 한 번 더 돌려요!' },
-    { id: 'animal_mission', emoji: '🐶', label: '동물 미션', type: 'mission', value: 'animal', voice: '동물 친구를 따라 해 볼까요?' },
-    { id: 'car_mission', emoji: '🚗', label: '자동차 미션', type: 'mission', value: 'car', voice: '자동차 소리를 내 볼까요?' },
-    { id: 'family_mission', emoji: '👨‍👩‍👧', label: '가족 미션', type: 'mission', value: 'family', voice: '가족이랑 함께하는 미션이에요!' },
-    { id: 'gift_card', emoji: '🎁', label: '선물 카드', type: 'card', value: 'gift', voice: '선물 카드가 나왔어요!' }
+    { id: 'move_1', emoji: '➡️', label: '한 칸 앞으로', type: 'move', value: 1, voice: 'boardland.move1' },
+    { id: 'move_2', emoji: '⏩', label: '두 칸 앞으로', type: 'move', value: 2, voice: 'boardland.move2' },
+    { id: 'move_3', emoji: '⏩⏩', label: '세 칸 앞으로', type: 'move', value: 3, voice: 'boardland.move3' },
+    { id: 'spin_again', emoji: '🔁', label: '한 번 더', type: 'bonus', value: 'spin_again', voice: 'boardland.spinAgain' },
+    { id: 'animal_mission', emoji: '🐶', label: '동물 미션', type: 'mission', value: 'animal', voice: 'boardland.animalMission' },
+    { id: 'car_mission', emoji: '🚗', label: '자동차 미션', type: 'mission', value: 'car', voice: 'boardland.carMission' },
+    { id: 'family_mission', emoji: '👨‍👩‍👧', label: '가족 미션', type: 'mission', value: 'family', voice: 'boardland.familyMission' },
+    { id: 'gift_card', emoji: '🎁', label: '선물 카드', type: 'card', value: 'gift', voice: 'boardland.giftCard' }
   ];
 
   const BOARD_CELLS = [
-    { icon: '🚩', kind: 'start', voice: '출발해요!' },
-    { icon: '⭐', kind: 'star', voice: '별을 만났어요!' },
-    { icon: '🌈', kind: 'rainbow', voice: '무지개가 반짝반짝!' },
-    { icon: '💗', kind: 'heart', voice: '하트가 나왔어요!' },
-    { icon: '🚓', kind: 'car', voice: '경찰차가 지나가요!' },
-    { icon: '🐶', kind: 'animal', voice: '강아지처럼 멍멍!' },
-    { icon: '🚗', kind: 'car', voice: '부릉부릉 자동차!' },
-    { icon: '⭐', kind: 'star', voice: '반짝 별이에요!' },
-    { icon: '🚑', kind: 'rescue', voice: '구급차가 도와주러 가요!' },
-    { icon: '💗', kind: 'heart', voice: '사랑 하트예요!' },
-    { icon: '👑', kind: 'crown', voice: '멋진 왕관이에요!' },
-    { icon: '🐧', kind: 'animal', voice: '펭귄처럼 뒤뚱뒤뚱!' },
-    { icon: '🎁', kind: 'gift', voice: '선물을 찾았어요!' },
-    { icon: '⭐', kind: 'star', voice: '별 하나를 더 모아요!' },
-    { icon: '🚒', kind: 'fire', voice: '소방차가 출동해요!' },
-    { icon: '🍀', kind: 'lucky', voice: '행운의 네잎클로버!' },
-    { icon: '🦁', kind: 'animal', voice: '사자처럼 어흥!' },
-    { icon: '🌈', kind: 'rainbow', voice: '무지개 길을 지나가요!' },
-    { icon: '🐼', kind: 'animal', voice: '판다처럼 귀엽게!' },
-    { icon: '🎁', kind: 'gift', voice: '선물 카드 하나!' },
-    { icon: '⭐', kind: 'star', voice: '반짝반짝 별이에요!' },
-    { icon: '🐵', kind: 'animal', voice: '원숭이처럼 우끼끼!' },
-    { icon: '🎈', kind: 'balloon', voice: '풍선이 둥실둥실!' },
-    { icon: '🏁', kind: 'finish', voice: '도착했어요! 정말 잘했어요!' }
+    { icon: '🚩', kind: 'start', voice: 'boardland.cell.start' },
+    { icon: '⭐', kind: 'star', voice: 'boardland.cell.star1' },
+    { icon: '🌈', kind: 'rainbow', voice: 'boardland.cell.rainbow1' },
+    { icon: '💗', kind: 'heart', voice: 'boardland.cell.heart1' },
+    { icon: '🚓', kind: 'car', voice: 'boardland.cell.police' },
+    { icon: '🐶', kind: 'animal', voice: 'boardland.cell.dog' },
+    { icon: '🚗', kind: 'car', voice: 'boardland.cell.car' },
+    { icon: '⭐', kind: 'star', voice: 'boardland.cell.star2' },
+    { icon: '🚑', kind: 'rescue', voice: 'boardland.cell.ambulance' },
+    { icon: '💗', kind: 'heart', voice: 'boardland.cell.heart2' },
+    { icon: '👑', kind: 'crown', voice: 'boardland.cell.crown' },
+    { icon: '🐧', kind: 'animal', voice: 'boardland.cell.penguin' },
+    { icon: '🎁', kind: 'gift', voice: 'boardland.cell.gift1' },
+    { icon: '⭐', kind: 'star', voice: 'boardland.cell.star3' },
+    { icon: '🚒', kind: 'fire', voice: 'boardland.cell.firetruck' },
+    { icon: '🍀', kind: 'lucky', voice: 'boardland.cell.clover' },
+    { icon: '🦁', kind: 'animal', voice: 'boardland.cell.lion' },
+    { icon: '🌈', kind: 'rainbow', voice: 'boardland.cell.rainbow2' },
+    { icon: '🐼', kind: 'animal', voice: 'boardland.cell.panda' },
+    { icon: '🎁', kind: 'gift', voice: 'boardland.cell.gift2' },
+    { icon: '⭐', kind: 'star', voice: 'boardland.cell.star4' },
+    { icon: '🐵', kind: 'animal', voice: 'boardland.cell.monkey' },
+    { icon: '🎈', kind: 'balloon', voice: 'boardland.cell.balloon' },
+    { icon: '🏁', kind: 'finish', voice: 'boardland.cell.finish' }
   ];
 
   const BOARD_POSITIONS = [
@@ -84,27 +84,27 @@
 
   const MISSIONS = {
     animal: [
-      { icon: '🐶', title: '동물 미션', voice: '강아지처럼 멍멍 해볼까요?', effect: '🔊 멍멍!' },
-      { icon: '🐱', title: '동물 미션', voice: '고양이처럼 야옹 해볼까요?', effect: '🔊 야옹!' },
-      { icon: '🦁', title: '동물 미션', voice: '사자처럼 어흥 해볼까요?', effect: '🔊 어흥!' },
-      { icon: '🐰', title: '동물 미션', voice: '토끼처럼 깡충 뛰어볼까요?', effect: '⬆️ 깡충!' }
+      { icon: '🐶', title: '동물 미션', voice: 'boardland.mission.dog', effect: '🔊 멍멍!' },
+      { icon: '🐱', title: '동물 미션', voice: 'boardland.mission.cat', effect: '🔊 야옹!' },
+      { icon: '🦁', title: '동물 미션', voice: 'boardland.mission.lion', effect: '🔊 어흥!' },
+      { icon: '🐰', title: '동물 미션', voice: 'boardland.mission.rabbit', effect: '⬆️ 깡충!' }
     ],
     car: [
-      { icon: '🚗', title: '자동차 미션', voice: '자동차처럼 부릉부릉 해볼까요?', effect: '🔊 부릉!' },
-      { icon: '🚒', title: '자동차 미션', voice: '소방차처럼 출동해볼까요?', effect: '🚨 출동!' },
-      { icon: '🚓', title: '자동차 미션', voice: '경찰차처럼 순찰해볼까요?', effect: '🚨 순찰!' },
-      { icon: '🚑', title: '자동차 미션', voice: '구급차처럼 도와주러 가볼까요?', effect: '💗 도움!' }
+      { icon: '🚗', title: '자동차 미션', voice: 'boardland.mission.car', effect: '🔊 부릉!' },
+      { icon: '🚒', title: '자동차 미션', voice: 'boardland.mission.firetruck', effect: '🚨 출동!' },
+      { icon: '🚓', title: '자동차 미션', voice: 'boardland.mission.police', effect: '🚨 순찰!' },
+      { icon: '🚑', title: '자동차 미션', voice: 'boardland.mission.ambulance', effect: '💗 도움!' }
     ],
     family: [
-      { icon: '👏', title: '가족 미션', voice: '가족이랑 손뼉을 짝짝 쳐볼까요?', effect: '👏 짝짝!' },
-      { icon: '🤗', title: '가족 미션', voice: '가족을 꼭 안아줘 볼까요?', effect: '💗 포옹!' },
-      { icon: '🙌', title: '가족 미션', voice: '가족이랑 하이파이브 해볼까요?', effect: '🙌 하이파이브!' },
-      { icon: '😊', title: '가족 미션', voice: '가족에게 예쁜 웃음을 보여줄까요?', effect: '😊 방긋!' }
+      { icon: '👏', title: '가족 미션', voice: 'boardland.mission.clap', effect: '👏 짝짝!' },
+      { icon: '🤗', title: '가족 미션', voice: 'boardland.mission.hug', effect: '💗 포옹!' },
+      { icon: '🙌', title: '가족 미션', voice: 'boardland.mission.highfive', effect: '🙌 하이파이브!' },
+      { icon: '😊', title: '가족 미션', voice: 'boardland.mission.smile', effect: '😊 방긋!' }
     ],
     gift: [
-      { icon: '🎁', title: '선물 카드', voice: '선물 카드예요! 별 하나를 받아요!', effect: '⭐ +1' },
-      { icon: '💗', title: '선물 카드', voice: '하트 선물이에요! 하트 하나를 받아요!', effect: '💗 +1' },
-      { icon: '🔁', title: '선물 카드', voice: '한 번 더 기회예요!', effect: '🔁 한 번 더!' }
+      { icon: '🎁', title: '선물 카드', voice: 'boardland.mission.giftStar', effect: '⭐ +1' },
+      { icon: '💗', title: '선물 카드', voice: 'boardland.mission.giftHeart', effect: '💗 +1' },
+      { icon: '🔁', title: '선물 카드', voice: 'boardland.mission.giftSpin', effect: '🔁 한 번 더!' }
     ]
   };
 
@@ -921,19 +921,14 @@
     return list[randomInt(0, list.length - 1)];
   }
 
-  function speak(text) {
-    if (!state.audioEnabled || !text) return;
+  function speak(voiceId) {
+    if (!state.audioEnabled || !voiceId) return;
     try {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'ko-KR';
-      utter.rate = 0.92;
-      utter.pitch = 1.18;
-      utter.volume = 1;
-      window.speechSynthesis.speak(utter);
+      if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
+        window.SihyeonVoice.play(voiceId, '').catch(() => {});
+      }
     } catch (error) {
-      console.warn('[BoardLand] speech failed', error);
+      console.warn('[BoardLand] voice play failed', error);
     }
   }
 
@@ -1039,7 +1034,7 @@
     bindEvents(root);
     updateAll(root);
     state.isOpen = true;
-    setTimeout(() => speak('시현아, 룰렛을 빙글빙글 돌려볼까?'), 350);
+    setTimeout(() => speak('boardland.startGame'), 350);
   }
 
   function renderBoardCells(root) {
@@ -1081,17 +1076,17 @@
           break;
         case 'cheer':
           showToast(root, '🏆 참 잘했어요!');
-          speak('참 잘했어요!');
+          speak('boardland.wellDone');
           break;
         case 'album':
           showToast(root, '📘 도감은 다음에 열어요!');
-          speak('도감은 다음에 열어요!');
+          speak('boardland.collectionNextTime');
           break;
         case 'gift':
           state.gifts += 1;
           updateStats(root);
           showToast(root, '🎁 선물 하나!');
-          speak('선물 하나를 받았어요!');
+          speak('boardland.giftReceived');
           break;
         case 'family':
           setMission(root, pickRandomMission('family'));
@@ -1106,7 +1101,7 @@
     state.audioEnabled = !state.audioEnabled;
     const pill = root.querySelector('.bl-speaker-pill');
     if (pill) pill.textContent = state.audioEnabled ? '🔊' : '🔇';
-    if (state.audioEnabled) speak('음성 안내를 켰어요!');
+    if (state.audioEnabled) speak('boardland.audioEnabled');
   }
 
   function resetGame(root) {
@@ -1128,7 +1123,7 @@
     updateAll(root);
     setMission(root, { icon: '🐶', effect: '🔊 멍멍!', voice: '룰렛을 돌려볼까요?' }, false);
     showToast(root, '🚩 처음부터!');
-    speak('처음부터 다시 시작해요!');
+    speak('boardland.restart');
   }
 
   function spinRoulette(root) {
@@ -1154,7 +1149,7 @@
     wheel.style.transitionDuration = `${duration}ms`;
     wheel.style.transform = `rotate(${state.rotation}deg)`;
     showToast(root, '🎡 빙글빙글!');
-    speak('빙글빙글 돌아가요!');
+    speak('boardland.spinning');
 
     window.setTimeout(() => {
       state.isSpinning = false;
@@ -1281,7 +1276,7 @@
     state.stars += 1;
     updateStats(root);
     showToast(root, '✅ 성공!');
-    speak('성공! 정말 잘했어요!');
+    speak('boardland.missionSuccess');
   }
 
   function celebrateFinish(root) {
@@ -1292,7 +1287,7 @@
     setMission(root, { icon: '🏁', effect: '🎉 도착!', voice: '도착했어요! 정말 정말 잘했어요!' }, false);
     showToast(root, '🎉 도착!');
     showFinishReplay(root);
-    speak('도착했어요! 정말 정말 잘했어요! 다시 놀고 싶으면 초록색 다시 버튼을 눌러요!');
+    speak('boardland.gameComplete');
   }
 
   function updateAll(root) {
