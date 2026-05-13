@@ -1757,6 +1757,139 @@ const LAND_VOICE_IDS={
   karaoke:'common.zone.karaoke'
 };
 
+
+const BGM_TRACKS = Array.from({ length: 15 }, (_, index) => {
+  const no = String(index + 1).padStart(2, '0');
+  return `./assets/audio/bgm/global/bgm_${no}.mp3`;
+});
+
+const BGM_STORAGE_KEY = 'SIHYEON_PLAY_BGM_MUTED';
+const BGM_VOLUME = 0.18;
+
+const SihyeonBGM = (() => {
+  let audio = null;
+  let currentIndex = Math.floor(Math.random() * BGM_TRACKS.length);
+  let unlocked = false;
+  let started = false;
+  let muted = localStorage.getItem(BGM_STORAGE_KEY) === '1';
+
+  function getAudio() {
+    if (audio) return audio;
+
+    audio = new Audio();
+    audio.preload = 'auto';
+    audio.loop = false;
+    audio.volume = muted ? 0 : BGM_VOLUME;
+
+    audio.addEventListener('ended', () => {
+      playNext();
+    });
+
+    audio.addEventListener('error', () => {
+      if (!started || muted) return;
+      setTimeout(() => playNext(), 500);
+    });
+
+    return audio;
+  }
+
+  function setTrack(index) {
+    const safeIndex = ((index % BGM_TRACKS.length) + BGM_TRACKS.length) % BGM_TRACKS.length;
+    currentIndex = safeIndex;
+    const player = getAudio();
+    const nextSrc = BGM_TRACKS[currentIndex];
+
+    if (!player.src || !player.src.endsWith(nextSrc.replace('./', ''))) {
+      player.src = nextSrc;
+      player.load();
+    }
+  }
+
+  function playTrack(index = currentIndex) {
+    if (!BGM_TRACKS.length || muted) return;
+
+    const player = getAudio();
+    setTrack(index);
+    player.volume = BGM_VOLUME;
+    started = true;
+
+    const playPromise = player.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  }
+
+  function playNext() {
+    if (!BGM_TRACKS.length || muted) return;
+    playTrack(currentIndex + 1);
+  }
+
+  function unlock() {
+    if (unlocked) return;
+    unlocked = true;
+    playTrack(currentIndex);
+  }
+
+  function pause() {
+    if (!audio) return;
+    audio.pause();
+  }
+
+  function resume() {
+    if (!unlocked) return;
+    playTrack(currentIndex);
+  }
+
+  function setVolume(value) {
+    const player = getAudio();
+    const nextVolume = Math.max(0, Math.min(1, Number(value)));
+    player.volume = muted ? 0 : nextVolume;
+  }
+
+  function setMuted(nextMuted) {
+    muted = Boolean(nextMuted);
+    localStorage.setItem(BGM_STORAGE_KEY, muted ? '1' : '0');
+
+    const player = getAudio();
+    player.volume = muted ? 0 : BGM_VOLUME;
+
+    if (muted) {
+      player.pause();
+      return;
+    }
+
+    if (unlocked) playTrack(currentIndex);
+  }
+
+  function toggleMute() {
+    setMuted(!muted);
+    return muted;
+  }
+
+  function isMuted() {
+    return muted;
+  }
+
+  return {
+    unlock,
+    play: resume,
+    pause,
+    playNext,
+    setVolume,
+    setMuted,
+    toggleMute,
+    isMuted
+  };
+})();
+
+function initBGMUnlockEvents() {
+  const unlock = () => SihyeonBGM.unlock();
+  window.addEventListener('pointerdown', unlock, { passive: true });
+  window.addEventListener('touchstart', unlock, { passive: true });
+  window.addEventListener('click', unlock, { passive: true });
+  window.addEventListener('keydown', unlock, { passive: true });
+}
+
 function playVoiceSequenceGuide(items,force=false){
   if(!force&&isStoryPlaying()) return;
   if(!db.settings.voiceGuide.enabled) return;
@@ -2639,6 +2772,7 @@ Object.assign(window,{
   getToday, escapeHtml, loadStoredDB, loadDB, save,
   gainExp, unlockCar, fireConfetti,
   speakText, speakGuide, speakStory, stopSpeaking,
+  SihyeonBGM,
   refreshLegacyCompatibility,
   renderWorldMapHome, travelToZone, travelToZoneFromCharacter, moveSihyeonToLandCharacter,
   goWithLandCharacter, runLandAction, enterZone, closeToParkHome, returnToZoneLand, returnToCurrentGameLand,
@@ -2653,6 +2787,7 @@ Object.assign(window,{
 });
 
 refreshLegacyCompatibility();
+initBGMUnlockEvents();
 preloadWorldImages();
 renderWorldMapHome();
 
