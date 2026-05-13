@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.0.30';
+const CACHE_NAME = 'sihyeon-play-os-v1.0.29';
 
 const ASSETS = [
   './',
@@ -18,6 +18,8 @@ const ASSETS = [
   './js/games/number-count.js',
   './js/games/number-basket.js',
   './js/games/number-vehicles.js',
+  './js/engine/pixi-runtime.js',
+  './js/games-pixi/number-vehicles-pixi.js',
   './js/games/number-blocks.js',
   './js/games/letter-play.js',
   './js/games/color-balloon.js',
@@ -74,22 +76,6 @@ const ASSETS = [
   './assets/karaoke/penguin_friend_march.wav',
   './assets/karaoke/dino_rescue_action.wav',
   './assets/karaoke/little_bus_drive_chant.wav',
-
-  './assets/audio/bgm/global/bgm_01.mp3',
-  './assets/audio/bgm/global/bgm_02.mp3',
-  './assets/audio/bgm/global/bgm_03.mp3',
-  './assets/audio/bgm/global/bgm_04.mp3',
-  './assets/audio/bgm/global/bgm_05.mp3',
-  './assets/audio/bgm/global/bgm_06.mp3',
-  './assets/audio/bgm/global/bgm_07.mp3',
-  './assets/audio/bgm/global/bgm_08.mp3',
-  './assets/audio/bgm/global/bgm_09.mp3',
-  './assets/audio/bgm/global/bgm_10.mp3',
-  './assets/audio/bgm/global/bgm_11.mp3',
-  './assets/audio/bgm/global/bgm_12.mp3',
-  './assets/audio/bgm/global/bgm_13.mp3',
-  './assets/audio/bgm/global/bgm_14.mp3',
-  './assets/audio/bgm/global/bgm_15.mp3',
 
   './assets/stories/folk_covers/folk_bedtime_moon.png',
   './assets/stories/folk_covers/folk_bedtime_moon.webp',
