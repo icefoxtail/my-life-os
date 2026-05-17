@@ -1,9 +1,10 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS - NUMBER COUNT GAME MODULE
-   js/games/number-count.js  [v5.2 — 자동차 우선 가로 최적화 완성본]
+   js/games/number-count.js  [v5.3 — 5개 보기 + 모바일/태블릿 가로 최적화]
    - 세로모드 기존 흐름 유지
    - 가로모드: 좌측 자동차 종류 우선 / 중앙 자동차 최대 / 우측 숫자 보기
    - 자동차 1~9대 개수별 출력 크기 보정
+   - 1단계 1~5 보기 5개 고정 / 2단계 1~9 중 5개 보기
 ═══════════════════════════════════════════ */
 (function(){
   'use strict';
@@ -117,23 +118,25 @@
   }
 
   function getChoices(answer, level, difficulty){
-    const set = [answer];
     const max = getAnswerMax(difficulty, level);
-    let attempts = 0;
+    const targetCount = Math.min(5, max);
 
-    while(set.length < 3 && attempts < 80){
-      attempts += 1;
-      let n;
-      if(max <= 5){
-        const offset = (Math.floor(Math.random() * 4) + 1) * (Math.random() < 0.5 ? 1 : -1);
-        n = Math.max(1, Math.min(max, answer + offset));
-      } else {
-        n = Math.floor(Math.random() * max) + 1;
-      }
-      if(!set.includes(n)) set.push(n);
+    if(max <= 5){
+      const all = [];
+      for(let n = 1; n <= max; n += 1) all.push(n);
+      return shuffle(all);
     }
 
-    for(let n = 1; n <= max && set.length < 3; n += 1){
+    const set = [answer];
+    const offsets = [1, -1, 2, -2, 3, -3, 4, -4];
+
+    offsets.forEach(offset => {
+      if(set.length >= targetCount) return;
+      const n = answer + offset;
+      if(n >= 1 && n <= max && !set.includes(n)) set.push(n);
+    });
+
+    for(let n = 1; n <= max && set.length < targetCount; n += 1){
       if(!set.includes(n)) set.push(n);
     }
 
@@ -744,9 +747,9 @@
 
     isLandscapeMode:function(){
       try{
-        return window.matchMedia('(orientation: landscape) and (min-width: 768px) and (min-height: 520px)').matches;
+        return window.matchMedia('(orientation: landscape) and (min-width: 560px) and (min-height: 320px)').matches;
       }catch(e){
-        return window.innerWidth >= 768 && window.innerWidth > window.innerHeight;
+        return window.innerWidth >= 560 && window.innerWidth > window.innerHeight;
       }
     },
 
@@ -950,9 +953,9 @@
           display:flex;align-items:center;justify-content:center;padding:0;min-height:0;z-index:20;
         }
         .number-count-landscape .nc-choices-area{
-          width:100%;display:grid;grid-template-columns:1fr;gap:14px;align-content:center;justify-items:center;
+          width:100%;display:grid;grid-template-columns:1fr;gap:10px;align-content:center;justify-items:center;
         }
-        .number-count-landscape .nc-toy-block-btn{width:min(100%,194px);min-height:clamp(120px,22vh,180px);font-size:clamp(48px,7vw,78px);}
+        .number-count-landscape .nc-toy-block-btn{width:min(100%,194px);min-height:clamp(96px,16vh,142px);font-size:clamp(44px,6vw,72px);}
         .number-count-landscape .nc-choice-num{font-size:clamp(48px,6vw,80px);}
         .number-count-landscape .nc-success-panel{left:50%;right:auto;bottom:20px;width:min(520px,46vw);transform:translateX(-50%);border-radius:35px;padding:24px;}
 
@@ -1034,6 +1037,8 @@
         .nc-toy-block-btn{width:clamp(95px,24vw,150px);min-height:clamp(110px,26vw,170px);font-size:clamp(48px,12vw,80px);font-weight:900;font-family:'Jua',sans-serif;border-radius:30px;border:6px solid #fff;color:#fff;background:linear-gradient(135deg,#FFD93D,#FFAA00);box-shadow:0 12px 0 #E65100,0 15px 25px rgba(0,0,0,.25);transition:transform .1s,box-shadow .1s,filter .15s;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 8px;-webkit-tap-highlight-color:transparent;}
         .nc-toy-block-btn:nth-child(2){background:linear-gradient(135deg,#4CAF50,#2E7D32);box-shadow:0 12px 0 #1B5E20,0 15px 25px rgba(0,0,0,.25);}
         .nc-toy-block-btn:nth-child(3){background:linear-gradient(135deg,#1E90FF,#1565C0);box-shadow:0 12px 0 #0D47A1,0 15px 25px rgba(0,0,0,.25);}
+        .nc-toy-block-btn:nth-child(4){background:linear-gradient(135deg,#FF88CC,#D81B60);box-shadow:0 12px 0 #AD1457,0 15px 25px rgba(0,0,0,.25);}
+        .nc-toy-block-btn:nth-child(5){background:linear-gradient(135deg,#9C6BFF,#5E35B1);box-shadow:0 12px 0 #4527A0,0 15px 25px rgba(0,0,0,.25);}
         .nc-toy-block-btn:active{transform:translateY(12px);box-shadow:0 0 0 transparent,0 5px 10px rgba(0,0,0,.2);}
         .nc-toy-block-btn:disabled{filter:saturate(.5) brightness(.9);cursor:default;}
         .nc-toy-block-btn.hint-glow{animation:ncBtnGlow .6s ease-in-out infinite alternate !important;}
@@ -1053,7 +1058,7 @@
           .number-count-landscape{grid-template-columns:200px minmax(0,1fr) 240px;gap:12px;padding:12px;}
           .number-count-landscape .nc-objects-area{border-radius:38px;border-width:7px;}
           .number-count-landscape .nc-vehicles-wrapper{width:min(100%,1180px);}
-          .number-count-landscape .nc-toy-block-btn{width:min(100%,214px);min-height:clamp(136px,23vh,200px);}
+          .number-count-landscape .nc-toy-block-btn{width:min(100%,214px);min-height:clamp(104px,16vh,148px);}
           .number-count-landscape .nc-choice-num{font-size:clamp(58px,6vw,86px);}
         }
 
@@ -1085,6 +1090,8 @@
           .number-count-landscape .nc-toy-block-btn{width:min(100%,106px);min-height:78px;border-width:3px;border-radius:16px;padding:6px 4px;box-shadow:0 6px 0 #E65100,0 8px 14px rgba(0,0,0,.18);}
           .number-count-landscape .nc-toy-block-btn:nth-child(2){box-shadow:0 6px 0 #1B5E20,0 8px 14px rgba(0,0,0,.18);}
           .number-count-landscape .nc-toy-block-btn:nth-child(3){box-shadow:0 6px 0 #0D47A1,0 8px 14px rgba(0,0,0,.18);}
+          .number-count-landscape .nc-toy-block-btn:nth-child(4){box-shadow:0 6px 0 #AD1457,0 8px 14px rgba(0,0,0,.18);}
+          .number-count-landscape .nc-toy-block-btn:nth-child(5){box-shadow:0 6px 0 #4527A0,0 8px 14px rgba(0,0,0,.18);}
           .number-count-landscape .nc-choice-num{font-size:36px;}
           .number-count-landscape .nc-choice-dots{max-width:28px;gap:3px;}
           .number-count-landscape .nc-choice-dot{width:7px;height:7px;}
@@ -1101,6 +1108,44 @@
           .nc-vehicle-img{width:clamp(65px,15vw,115px);max-height:80px;}
           .nc-toy-block-btn{width:80px;min-height:90px;}
           .nc-game-header{min-height:42px;padding:6px 14px;}
+        }
+
+        .number-count-portrait .nc-interaction-area{
+          flex:0 0 auto;
+          padding:8px clamp(6px,2.2vw,12px) max(10px,env(safe-area-inset-bottom));
+        }
+        .number-count-portrait .nc-choices-area{
+          width:100%;
+          display:grid;
+          grid-template-columns:repeat(5,minmax(0,1fr));
+          gap:clamp(4px,1.4vw,8px);
+          flex-wrap:nowrap;
+          align-items:stretch;
+          justify-content:stretch;
+        }
+        .number-count-portrait .nc-toy-block-btn{
+          width:100%;
+          min-width:0;
+          min-height:clamp(76px,18vw,106px);
+          border-width:4px;
+          border-radius:18px;
+          padding:6px 3px;
+          box-shadow:0 7px 0 #E65100,0 9px 16px rgba(0,0,0,.2);
+        }
+        .number-count-portrait .nc-toy-block-btn:nth-child(2){box-shadow:0 7px 0 #1B5E20,0 9px 16px rgba(0,0,0,.2);}
+        .number-count-portrait .nc-toy-block-btn:nth-child(3){box-shadow:0 7px 0 #0D47A1,0 9px 16px rgba(0,0,0,.2);}
+        .number-count-portrait .nc-toy-block-btn:nth-child(4){box-shadow:0 7px 0 #AD1457,0 9px 16px rgba(0,0,0,.2);}
+        .number-count-portrait .nc-toy-block-btn:nth-child(5){box-shadow:0 7px 0 #4527A0,0 9px 16px rgba(0,0,0,.2);}
+        .number-count-portrait .nc-choice-num{
+          font-size:clamp(30px,9vw,54px);
+        }
+        .number-count-portrait .nc-choice-dots{
+          max-width:30px;
+          gap:3px;
+        }
+        .number-count-portrait .nc-choice-dot{
+          width:7px;
+          height:7px;
         }
       `;
       document.head.appendChild(style);
