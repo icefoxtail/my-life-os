@@ -1,6 +1,9 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v4.1
- * 태블릿 꽉차기 + SVG 퀄리티 업
+ * 시현이 놀이터 OS — 매직 그림판 v4.2
+ * v4.1 원본 기준 유지 + 태블릿/폰 가로모드 꽉차기 레이아웃
+ * - 세로모드 기존 유지
+ * - 가로모드 하단 플로팅 제거
+ * - 가로모드 좌측: 모드별 선택 영역 / 가운데: SVG·캔버스 최대화 / 우측: 색깔+도구+완료
  */
 (function () {
   'use strict';
@@ -15,9 +18,16 @@
     { c: '#FFD700', n: '노란색' },
     { c: '#44CC44', n: '초록색' },
     { c: '#4488FF', n: '파란색' },
+    { c: '#1E40AF', n: '진파랑' },
     { c: '#9944FF', n: '보라색' },
     { c: '#FF88CC', n: '분홍색' },
+    { c: '#FFFFFF', n: '흰색' },
+    { c: '#F6E7C8', n: '바닐라색' },
+    { c: '#C0C0C0', n: '은색' },
+    { c: '#9E9E9E', n: '회색' },
     { c: '#1A1A1A', n: '검정색' },
+    { c: '#8B5A2B', n: '갈색' },
+    { c: '#7ED957', n: '연두색' },
     { c: 'rainbow', n: '무지개' },
   ];
 
@@ -487,9 +497,7 @@
         box-sizing:border-box;
       }
 
-      .az-left-panel{
-        order:1;
-      }
+      .az-left-panel{ order:1; }
 
       .az-main{
         order:2;
@@ -503,9 +511,7 @@
         box-sizing:border-box;
       }
 
-      .az-right-panel{
-        order:3;
-      }
+      .az-right-panel{ order:3; }
 
       .az-panel-section{
         background:rgba(255,255,255,.92);
@@ -538,9 +544,7 @@
         padding:2px 2px 6px;
       }
 
-      .az-panel-row::-webkit-scrollbar{
-        display:none;
-      }
+      .az-panel-row::-webkit-scrollbar{ display:none; }
 
       .az-cat-btn{
         flex:0 0 auto;
@@ -621,9 +625,7 @@
         pointer-events:fill;
       }
 
-      .az-coloring-wrap .fillable:active{
-        opacity:.7;
-      }
+      .az-coloring-wrap .fillable:active{ opacity:.7; }
 
       .az-coloring-wrap.az-done svg{
         animation:az-glow-bounce .7s cubic-bezier(.2,1.4,.35,1) forwards;
@@ -952,17 +954,11 @@
       }
 
       @media (max-width:767px), (orientation:portrait) {
-        .az-root{
-          overflow:hidden;
-        }
+        .az-root{ overflow:hidden; }
 
-        .az-topbar{
-          min-height:58px;
-        }
+        .az-topbar{ min-height:58px; }
 
-        .az-workspace{
-          overflow:hidden;
-        }
+        .az-workspace{ overflow:hidden; }
 
         .az-left-panel{
           max-height:138px;
@@ -991,42 +987,40 @@
           flex:0 0 auto;
         }
 
-        .az-main{
-          min-height:300px;
-        }
+        .az-main{ min-height:300px; }
 
-        .az-canvas-wrap{
-          min-height:300px;
-        }
+        .az-canvas-wrap{ min-height:300px; }
 
-        .az-finish-section{
-          padding-bottom:8px;
-        }
+        .az-finish-section{ padding-bottom:8px; }
       }
 
-      @media (min-width:768px) and (min-height:600px) and (orientation:landscape) {
+      @media (min-width:768px) and (min-height:501px) and (orientation:landscape) {
         .az-topbar{
           min-height:48px;
-          padding:4px 8px;
+          height:48px;
+          padding:4px 10px;
           border-bottom-width:4px;
         }
 
         .az-mode-tabs{
-          max-width:560px;
+          max-width:620px;
+          gap:10px;
         }
 
         .az-mode-tab{
           min-height:40px;
+          padding:5px 16px;
           font-size:17px;
           border-radius:22px;
         }
 
         .az-workspace{
           display:grid;
-          grid-template-columns:130px minmax(0,1fr) 130px;
+          grid-template-columns:180px minmax(0,1fr) 180px;
           grid-template-rows:minmax(0,1fr);
           gap:6px;
           padding:0;
+          overflow:hidden;
         }
 
         .az-left-panel,
@@ -1036,11 +1030,12 @@
           height:100%;
           overflow-y:auto;
           overflow-x:hidden;
-          padding:6px;
+          padding:7px;
+          gap:8px;
           border-radius:18px;
           background:rgba(255,255,255,.78);
           border:2px solid rgba(36,45,66,.08);
-          box-shadow:0 16px 38px rgba(31,45,61,.08);
+          box-shadow:0 10px 24px rgba(31,45,61,.08);
           backdrop-filter:blur(8px);
         }
 
@@ -1054,6 +1049,7 @@
           min-width:0;
           min-height:0;
           height:100%;
+          padding:0;
         }
 
         .az-right-panel{
@@ -1062,14 +1058,14 @@
 
         .az-panel-section{
           background:#fff;
-          border-radius:18px;
-          padding:8px;
-          box-shadow:0 7px 18px rgba(31,45,61,.06);
+          border-radius:16px;
+          padding:7px;
+          box-shadow:0 6px 14px rgba(31,45,61,.05);
         }
 
         .az-panel-title{
-          font-size:13px;
-          margin-bottom:7px;
+          font-size:12px;
+          margin-bottom:6px;
         }
 
         .az-panel-row,
@@ -1086,16 +1082,33 @@
         .az-cat-btn{
           width:100%;
           min-width:0;
-          min-height:56px;
-          padding:6px;
-          font-size:14px;
+          min-height:50px;
+          padding:5px;
+          font-size:13px;
+          border-width:2px;
           border-radius:14px;
         }
 
         #azTplRow .az-cat-btn{
-          min-height:64px;
+          min-height:62px;
           min-width:0;
-          font-size:30px;
+          font-size:31px;
+          border-radius:16px;
+        }
+
+        .az-color-section{
+          flex:1 1 auto;
+          min-height:0;
+          overflow:visible;
+          display:flex;
+          flex-direction:column;
+        }
+
+        .az-color-section .az-palette-row{
+          flex:0 0 auto;
+          min-height:0;
+          overflow:visible;
+          align-content:start;
         }
 
         .az-color-circle{
@@ -1106,41 +1119,50 @@
           border-width:4px;
         }
 
+        .az-color-circle.active{
+          transform:scale(1.06) translateY(-1px);
+          border-color:#222;
+        }
+
         .az-stamp-circle{
           width:100%;
           height:auto;
           aspect-ratio:1/1;
           flex:auto;
-          font-size:28px;
+          font-size:30px;
           border-radius:16px;
+          border-width:3px;
         }
 
         .az-size-btn{
           width:100%;
           min-width:0;
-          height:48px;
-          font-size:13px;
+          height:44px;
+          font-size:12px;
           border-radius:14px;
+          border-width:2px;
         }
 
         .az-icon-btns{
           display:grid;
-          grid-template-columns:1fr;
-          gap:8px;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:7px;
           padding:0;
           overflow:visible;
         }
 
         .az-icon-btn{
-          height:54px;
-          font-size:26px;
-          border-radius:16px;
+          height:46px;
+          font-size:23px;
+          border-radius:14px;
+          box-shadow:0 4px 0 #dce1ea;
         }
 
         .az-done-btn{
-          min-height:60px;
-          font-size:19px;
-          border-radius:20px;
+          min-height:54px;
+          font-size:17px;
+          border-radius:18px;
+          box-shadow:0 5px 0 #E65100;
         }
 
         .az-canvas-wrap{
@@ -1153,17 +1175,26 @@
         }
 
         .az-coloring-wrap{
-          padding:4px;
+          padding:0;
+        }
+
+        .az-coloring-wrap svg{
+          width:100%;
+          height:100%;
+          max-width:100%;
+          max-height:100%;
+          overflow:visible;
+          display:block;
         }
 
         .az-complete-banner{
-          bottom:20px;
+          bottom:14px;
         }
       }
 
       @media (min-width:1024px) and (min-height:680px) and (orientation:landscape) {
         .az-workspace{
-          grid-template-columns:145px minmax(0,1fr) 145px;
+          grid-template-columns:190px minmax(0,1fr) 190px;
           gap:6px;
           padding:0;
         }
@@ -1173,62 +1204,105 @@
         }
 
         .az-cat-btn{
-          min-height:62px;
-          font-size:15px;
+          min-height:54px;
+          font-size:14px;
         }
 
         #azTplRow .az-cat-btn{
-          min-height:70px;
+          min-height:66px;
           font-size:34px;
         }
 
+        .az-color-circle{
+          border-width:4px;
+        }
+
+        .az-size-btn{
+          height:46px;
+          font-size:13px;
+        }
+
         .az-icon-btn{
-          height:58px;
+          height:48px;
+          font-size:24px;
         }
 
         .az-done-btn{
-          min-height:64px;
+          min-height:58px;
+          font-size:18px;
         }
       }
 
       @media (max-height:500px) and (orientation:landscape) {
         .az-topbar{
-          min-height:46px;
-          padding:4px 12px;
+          min-height:40px;
+          height:40px;
+          padding:3px 8px;
           border-bottom-width:3px;
         }
 
+        .az-mode-tabs{
+          gap:6px;
+        }
+
         .az-mode-tab{
-          min-height:34px;
-          padding:4px 12px;
-          font-size:13px;
+          min-height:31px;
+          padding:3px 10px;
+          font-size:12px;
           border-width:2px;
+          border-radius:16px;
         }
 
         .az-workspace{
           display:grid;
-          grid-template-columns:120px minmax(0,1fr) 120px;
-          gap:4px;
+          grid-template-columns:104px minmax(0,1fr) 104px;
+          grid-template-rows:minmax(0,1fr);
+          gap:3px;
           padding:0;
+          overflow:hidden;
         }
 
         .az-left-panel,
         .az-right-panel{
+          order:initial;
           height:100%;
           min-height:0;
           overflow-y:auto;
           overflow-x:hidden;
+          padding:3px;
+          gap:4px;
+          border-radius:10px;
+          background:rgba(255,255,255,.78);
+          border:1px solid rgba(36,45,66,.08);
+          box-shadow:none;
+        }
+
+        .az-left-panel{
+          grid-column:1;
+        }
+
+        .az-main{
+          order:initial;
+          grid-column:2;
+          min-width:0;
+          min-height:0;
+          height:100%;
           padding:0;
         }
 
+        .az-right-panel{
+          grid-column:3;
+        }
+
         .az-panel-section{
-          padding:6px;
-          border-radius:14px;
+          padding:4px;
+          border-radius:10px;
+          box-shadow:none;
         }
 
         .az-panel-title{
-          font-size:11px;
-          margin-bottom:5px;
+          font-size:9px;
+          margin-bottom:4px;
         }
 
         .az-panel-row,
@@ -1237,23 +1311,40 @@
         .az-size-group{
           display:grid;
           grid-template-columns:repeat(2,minmax(0,1fr));
-          gap:6px;
+          gap:4px;
           overflow:visible;
           padding:0;
         }
 
         .az-cat-btn{
           min-width:0;
-          min-height:42px;
-          font-size:12px;
-          padding:4px;
-          border-width:2px;
-          border-radius:12px;
+          min-height:34px;
+          font-size:9px;
+          padding:2px;
+          border-width:1px;
+          border-radius:8px;
+          box-shadow:0 2px 0 rgba(0,0,0,.08);
         }
 
         #azTplRow .az-cat-btn{
-          min-height:46px;
-          font-size:23px;
+          min-height:40px;
+          font-size:21px;
+          border-radius:9px;
+        }
+
+        .az-color-section{
+          flex:1 1 auto;
+          min-height:0;
+          overflow:visible;
+          display:flex;
+          flex-direction:column;
+        }
+
+        .az-color-section .az-palette-row{
+          flex:0 0 auto;
+          min-height:0;
+          overflow:visible;
+          align-content:start;
         }
 
         .az-color-circle,
@@ -1262,47 +1353,77 @@
           height:auto;
           aspect-ratio:1/1;
           flex:auto;
-          border-width:3px;
+          border-width:2px;
         }
 
         .az-stamp-circle{
-          font-size:22px;
-          border-radius:14px;
+          font-size:19px;
+          border-radius:9px;
+          box-shadow:0 2px 0 rgba(0,0,0,.08);
         }
 
         .az-size-btn{
           min-width:0;
           width:100%;
-          height:38px;
-          font-size:11px;
-          border-radius:12px;
-          border-width:2px;
+          height:30px;
+          font-size:9px;
+          border-radius:8px;
+          border-width:1px;
+          box-shadow:0 2px 0 rgba(0,0,0,.08);
         }
 
         .az-icon-btns{
           display:grid;
-          grid-template-columns:1fr;
-          gap:6px;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:4px;
           padding:0;
           overflow:visible;
         }
 
         .az-icon-btn{
-          height:40px;
-          font-size:20px;
-          border-radius:12px;
+          height:32px;
+          font-size:17px;
+          border-radius:8px;
+          box-shadow:0 2px 0 #dce1ea;
         }
 
         .az-done-btn{
-          min-height:42px;
-          font-size:15px;
-          border-radius:14px;
+          min-height:36px;
+          font-size:11px;
+          border-radius:10px;
+          box-shadow:0 3px 0 #E65100;
         }
 
         .az-canvas-wrap{
+          width:100%;
+          height:100%;
           min-height:0;
-          border-width:3px;
-          border-radius:14px;
+          border-width:2px;
+          border-radius:10px;
+          box-shadow:0 6px 14px rgba(0,0,0,.10);
+        }
+
+        .az-coloring-wrap{
+          padding:0;
+        }
+
+        .az-coloring-wrap svg{
+          width:100%;
+          height:100%;
+          max-width:100%;
+          max-height:100%;
+          display:block;
+        }
+
+        .az-complete-banner{
+          bottom:8px;
+          gap:6px;
+        }
+
+        .az-cbtn{
+          padding:8px 10px;
+          border-radius:12px;
+          font-size:12px;
         }
       }
     `;
@@ -1314,7 +1435,7 @@
 
     state.container = container;
     state.options = options;
-    state.tab = 'free';
+    state.tab = options.initialTab === 'coloring' ? 'coloring' : 'free';
     state.mode = 'free';
     state.paintHistory = [];
     state.coloringCompleted = false;
@@ -1325,34 +1446,40 @@
     state.isRainbow = false;
     state.hue = 0;
 
+    if (options.initialTemplateId && COLORING_TEMPLATES.some((t) => t.id === options.initialTemplateId)) {
+      state.activeTemplateId = options.initialTemplateId;
+    }
+
     injectStyle();
 
+    const isInitialColoring = state.tab === 'coloring';
+
     container.innerHTML = `
-      <div class="az-root">
+      <div class="az-root" data-tab="${state.tab}">
         <div class="az-topbar">
           <div class="az-mode-tabs">
-            <button type="button" class="az-mode-tab active" data-tab="free">🎨 자유 그리기</button>
-            <button type="button" class="az-mode-tab" data-tab="coloring">🌈 색칠 팡팡</button>
+            <button type="button" class="az-mode-tab${!isInitialColoring ? ' active' : ''}" data-tab="free">🎨 자유 그리기</button>
+            <button type="button" class="az-mode-tab${isInitialColoring ? ' active' : ''}" data-tab="coloring">🌈 색칠 팡팡</button>
           </div>
         </div>
 
         <div class="az-workspace">
           <div class="az-left-panel">
-            <section class="az-panel-section free-section">
+            <section class="az-panel-section free-section"${isInitialColoring ? ' style="display:none;"' : ''}>
               <div class="az-panel-title">배경 고르기</div>
               <div class="az-panel-row" id="azThemeRow">
                 ${Object.keys(THEMES).map((k) => `<button type="button" class="az-cat-btn${k === state.activeTheme ? ' active' : ''}" data-theme="${k}">${THEMES[k].label}</button>`).join('')}
               </div>
             </section>
 
-            <section class="az-panel-section coloring-section" style="display:none;">
+            <section class="az-panel-section coloring-section"${!isInitialColoring ? ' style="display:none;"' : ''}>
               <div class="az-panel-title">색칠 그림</div>
               <div class="az-panel-row" id="azTplRow">
                 ${COLORING_TEMPLATES.map((t) => `<button type="button" class="az-cat-btn${t.id === state.activeTemplateId ? ' active' : ''}" data-tpl="${t.id}" aria-label="${t.name}">${t.emoji}</button>`).join('')}
               </div>
             </section>
 
-            <section class="az-panel-section free-section">
+            <section class="az-panel-section free-section"${isInitialColoring ? ' style="display:none;"' : ''}>
               <div class="az-panel-title">도장 찍기</div>
               <div class="az-stamp-row" id="azStampRow">
                 ${STAMPS.map((stamp) => `<button type="button" class="az-stamp-circle" data-stamp="${stamp}" aria-label="도장 ${stamp}">${stamp}</button>`).join('')}
@@ -1362,20 +1489,20 @@
 
           <div class="az-main">
             <div class="az-canvas-wrap" id="azCanvasWrap">
-              <canvas id="azCanvas"></canvas>
-              <div class="az-coloring-wrap" id="azColoringWrap"></div>
+              <canvas id="azCanvas"${isInitialColoring ? ' style="display:none;"' : ''}></canvas>
+              <div class="az-coloring-wrap" id="azColoringWrap"${isInitialColoring ? ' style="display:flex;"' : ''}></div>
             </div>
           </div>
 
           <div class="az-right-panel">
-            <section class="az-panel-section">
+            <section class="az-panel-section az-color-section">
               <div class="az-panel-title">색깔 고르기</div>
               <div class="az-palette-row" id="azPaletteRow">
                 ${COLORS.map((color) => `<button type="button" class="az-color-circle${color.c === 'rainbow' ? ' az-rainbow' : ''}${state.currentColor === color.c ? ' active' : ''}" ${color.c !== 'rainbow' ? `style="background:${color.c}"` : ''} data-color="${color.c}" data-name="${color.n}" aria-label="${color.n}"></button>`).join('')}
               </div>
             </section>
 
-            <section class="az-panel-section free-section">
+            <section class="az-panel-section az-size-section free-section"${isInitialColoring ? ' style="display:none;"' : ''}>
               <div class="az-panel-title">펜 굵기</div>
               <div class="az-size-group" id="azSizeGroup">
                 <button type="button" class="az-size-btn" data-size="6">작음</button>
@@ -1384,11 +1511,11 @@
               </div>
             </section>
 
-            <section class="az-panel-section">
+            <section class="az-panel-section az-tool-section">
               <div class="az-panel-title">도구</div>
               <div class="az-icon-btns" id="azToolButtons">
-                <button type="button" class="az-icon-btn free-section" id="azEraser" aria-label="지우개">🧽</button>
-                <button type="button" class="az-icon-btn coloring-section" id="azUndo" style="display:none;" aria-label="되돌리기">↩️</button>
+                <button type="button" class="az-icon-btn free-section" id="azEraser" aria-label="지우개"${isInitialColoring ? ' style="display:none;"' : ''}>🧽</button>
+                <button type="button" class="az-icon-btn coloring-section" id="azUndo" aria-label="되돌리기"${!isInitialColoring ? ' style="display:none;"' : ''}>↩️</button>
                 <button type="button" class="az-icon-btn" id="azClear" aria-label="전체 지우기">🗑️</button>
               </div>
             </section>
@@ -1408,6 +1535,11 @@
     requestAnimationFrame(() => {
       resizeCanvasPreserve(true);
       applyThemeBg();
+
+      if (isInitialColoring) {
+        const tpl = COLORING_TEMPLATES.find((t) => t.id === state.activeTemplateId);
+        renderColoringTemplate(tpl);
+      }
     });
 
     speak('시현아. 마법 그림판이야. 같이 그리고 색칠해볼까?', true);
@@ -1715,6 +1847,8 @@
     state.coloringCompleted = false;
 
     const isFree = tab === 'free';
+    const root = state.container?.querySelector('.az-root');
+    if (root) root.dataset.tab = tab;
 
     document.getElementById('azCanvas').style.display = isFree ? 'block' : 'none';
     document.getElementById('azColoringWrap').style.display = isFree ? 'none' : 'flex';
@@ -1757,7 +1891,7 @@
     const svg = wrap.querySelector('svg');
     if (svg) {
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      svg.style.cssText = 'width:100%;height:auto;max-width:100%;max-height:100%;overflow:visible;display:block;';
+      svg.style.cssText = 'width:100%;height:100%;max-width:100%;max-height:100%;overflow:visible;display:block;';
     }
 
     wrap.querySelectorAll('.fillable').forEach((el) => {
@@ -2044,9 +2178,16 @@
       '노란색!': 'games.paint.yellow',
       '초록색!': 'games.paint.green',
       '파란색!': 'games.paint.blue',
+      '진파랑!': 'games.paint.blue',
       '보라색!': 'games.paint.purple',
       '분홍색!': 'games.paint.pink',
+      '흰색!': 'games.paint.blank',
+      '바닐라색!': 'games.paint.blank',
+      '은색!': 'games.paint.clear',
+      '회색!': 'games.paint.clear',
       '검정색!': 'games.paint.black',
+      '갈색!': 'games.paint.orange',
+      '연두색!': 'games.paint.green',
       '무지개!': 'games.paint.rainbow',
       '도장 준비됐어.': 'games.paint.stamp',
       '지우개로 슥싹.': 'games.paint.erase',
