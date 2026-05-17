@@ -857,6 +857,10 @@
     .game-play-screen {
       position:fixed;
       inset:0;
+      width:100vw;
+      height:100dvh;
+      min-width:0;
+      min-height:0;
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -866,25 +870,72 @@
     }
 
     .game-play-body {
-      flex:1;
+      flex:1 1 auto;
+      min-width:0;
       min-height:0;
-      width:100%;
-      max-width:1180px;
-      margin:0 auto;
-      padding:clamp(8px,2vw,24px);
+      width:100vw;
+      height:100%;
+      max-width:none;
+      max-height:none;
+      margin:0;
+      padding:0;
       display:flex;
       align-items:stretch;
-      justify-content:center;
+      justify-content:stretch;
       overflow:hidden;
     }
 
     .game-play-body > * {
       width:100%;
+      height:100%;
+      min-width:0;
       min-height:0;
     }
 
-    @media (max-width:520px) { .game-play-body { max-width:none; padding:8px; } }
-    @media (min-width:768px) { .game-play-body { padding:22px; } }
+    .game-back-floating {
+      position:fixed;
+      left:max(8px,env(safe-area-inset-left));
+      top:max(8px,env(safe-area-inset-top));
+      z-index:9000;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:linear-gradient(180deg,#fff 0%,#ffe577 100%);
+      border:4px solid #fff;
+      color:var(--ink);
+      display:grid;
+      place-items:center;
+      font-size:28px;
+      font-weight:900;
+      box-shadow:0 6px 0 rgba(0,0,0,.18),0 10px 20px rgba(0,0,0,.12);
+      pointer-events:auto;
+      transition:transform .1s,box-shadow .1s;
+    }
+
+    .game-back-floating:active {
+      transform:translateY(4px) scale(.96);
+      box-shadow:0 2px 0 rgba(0,0,0,.18),0 5px 12px rgba(0,0,0,.12);
+    }
+
+    @media (orientation:portrait) and (max-width:520px) {
+      .game-back-floating {
+        width:48px;
+        height:48px;
+        border-width:3px;
+        font-size:24px;
+      }
+    }
+
+    @media (orientation:landscape) and (max-height:520px) {
+      .game-back-floating {
+        left:max(6px,env(safe-area-inset-left));
+        top:max(6px,env(safe-area-inset-top));
+        width:42px;
+        height:42px;
+        border-width:3px;
+        font-size:22px;
+      }
+    }
 
     .placeholder-body {
       flex:1;
@@ -1841,13 +1892,32 @@ function closeGarageHandlers(){
   garageCleanup=null;
 }
 
+function cleanupDetachedPlayLayers(){
+  const root=document.getElementById('sihyeonPlayOS');
+  const selectors=[
+    '.voice-zone-root', '.voice-zone', '.voice-play-root', '.voice-game-root',
+    '.karaoke-zone-root', '.karaoke-zone', '.karaoke-root',
+    '.game-play-screen', '.game-play-fullscreen'
+  ];
+
+  selectors.forEach(selector=>{
+    document.querySelectorAll(selector).forEach(el=>{
+      if(root && root.contains(el)) return;
+      if(el && el.parentNode) el.parentNode.removeChild(el);
+    });
+  });
+}
+
 function cleanupActiveGame(){
   ['vehicleMemory','numberCount','numberBlocks','numberVehiclesPixi','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare','robotCoding','megaDispatch'].forEach(key=>{
-    window.SihyeonGames?.[key]?.destroy?.();
+    try{ window.SihyeonGames?.[key]?.destroy?.(); }catch(error){}
   });
-  window.SihyeonZones?.voiceZone?.destroy?.();
-  window.SihyeonZones?.karaokeZone?.destroy?.();
-  window.SihyeonZones?.boardland?.close?.();
+
+  try{ window.SihyeonZones?.voiceZone?.destroy?.(); }catch(error){}
+  try{ window.SihyeonZones?.karaokeZone?.destroy?.(); }catch(error){}
+  try{ window.SihyeonZones?.boardland?.close?.(); }catch(error){}
+
+  cleanupDetachedPlayLayers();
 }
 
 function handleMapImageError(img){
@@ -2163,7 +2233,7 @@ function enterZone(zoneId){
   else if(zoneId==='numbers') openNumberLand();
   else if(zoneId==='letters') openLetterLand();
   else if(zoneId==='story') openStoryTheater();
-  else if(zoneId==='voice') openVoiceZone();
+  else if(zoneId==='voice') openVoiceLand();
   else renderPlaceholderZone(zoneId);
 }
 
@@ -2237,8 +2307,8 @@ function openGameShell(title,bodyId,bg='linear-gradient(180deg,#FF7A1A 0%,#FFD93
   startGameTimer();
   const root=document.getElementById('sihyeonPlayOS');
   root.innerHTML=`
-    <div class="game-play-screen" style="background:${bg}">
-      ${makeZoneHead(title,'returnToCurrentGameLand()','↩','놀이터로')}
+    <div class="game-play-screen game-play-fullscreen" style="background:${bg}" data-game-title="${escapeHtml(title)}">
+      <button class="game-back-floating" onclick="returnToCurrentGameLand()" aria-label="놀이터로">↩</button>
       <div class="game-play-body" id="${bodyId}"></div>
     </div>`;
   return document.getElementById(bodyId);
@@ -2331,7 +2401,11 @@ function openKaraokeZone(){
   closeGarageHandlers?.();
   activeGameZoneId='voice';
   const root=document.getElementById('sihyeonPlayOS');
-  root.innerHTML=`<section class="game-play-screen"><div class="game-play-body" id="karaokeZoneRoot"></div></section>`;
+  root.innerHTML=`
+    <section class="game-play-screen game-play-fullscreen" data-game-title="🎤 시현이 노래방">
+      <button class="game-back-floating" onclick="returnToZoneLand('voice')" aria-label="놀이터로">↩</button>
+      <div class="game-play-body" id="karaokeZoneRoot"></div>
+    </section>`;
   const container=document.getElementById('karaokeZoneRoot');
   if(!window.SihyeonZones?.karaokeZone?.render){
     renderGameLoadError(container,'🎤 노래방을 준비하고 있어요!');
