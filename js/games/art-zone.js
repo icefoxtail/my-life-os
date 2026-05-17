@@ -1,7 +1,6 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v4.0
- * 1단계 완성본: 모바일 세로형 + 태블릿 가로형 이중 레이아웃
- * 자유 그리기 + 색칠 팡팡 (SVG inline fill 방식)
+ * 시현이 놀이터 OS — 매직 그림판 v4.1
+ * 태블릿 꽉차기 + SVG 퀄리티 업
  */
 (function () {
   'use strict';
@@ -36,19 +35,32 @@
       id: 'police',
       name: '경찰차',
       emoji: '🚓',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" d="M 75 20 L 75 10 L 95 10 L 95 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 95 20 L 95 10 L 115 10 L 115 20 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 25 90 L 25 60 C 25 50, 45 40, 65 40 L 145 40 C 165 40, 185 50, 185 60 L 185 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 45 40 L 70 20 L 120 20 L 145 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 70 25 L 90 25 L 90 40 L 50 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 100 25 L 120 25 L 140 40 L 100 40 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="30" cy="70" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="180" cy="70" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="60" cy="90" r="18" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="60" cy="90" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="18" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" x="88" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="110" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" d="M 52 110 L 52 72 C 52 60,72 48,92 48 L 172 48 C 192 48,210 58,210 72 L 210 110 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 70 48 L 88 22 L 148 22 L 168 48 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 88 30 L 108 30 L 108 48 L 72 48 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" d="M 120 30 L 144 30 L 164 48 L 120 48 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="80" y="60" width="30" height="36" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="120" y="60" width="30" height="36" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect x="103" y="76" width="6" height="4" rx="1.5" stroke="#333" stroke-width="2" fill="none"/>
+        <rect x="143" y="76" width="6" height="4" rx="1.5" stroke="#333" stroke-width="2" fill="none"/>
+        <rect class="fillable" x="48" y="104" width="168" height="10" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="58" cy="88" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="204" cy="88" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="80" cy="118" r="22" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <circle class="fillable" cx="80" cy="118" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="80" cy="107" r="2.5" fill="#333"/>
+        <circle cx="80" cy="129" r="2.5" fill="#333"/>
+        <circle cx="69" cy="118" r="2.5" fill="#333"/>
+        <circle cx="91" cy="118" r="2.5" fill="#333"/>
+        <circle class="fillable" cx="180" cy="118" r="22" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <circle class="fillable" cx="180" cy="118" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="180" cy="107" r="2.5" fill="#333"/>
+        <circle cx="180" cy="129" r="2.5" fill="#333"/>
+        <circle cx="169" cy="118" r="2.5" fill="#333"/>
+        <circle cx="191" cy="118" r="2.5" fill="#333"/>
       </svg>`,
     },
     {
@@ -74,20 +86,34 @@
       id: 'fire_pump',
       name: '소방 펌프차',
       emoji: '🚒',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <rect class="fillable" x="135" y="15" width="20" height="10" rx="4" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 120 90 L 120 40 C 120 30, 130 25, 140 25 L 165 25 C 180 25, 185 45, 185 60 L 185 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 130 50 L 130 35 L 155 35 C 165 35, 170 40, 175 50 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="15" y="35" width="105" height="55" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="25" y="45" width="30" height="35" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="65" y="45" width="45" height="35" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="87" cy="62" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <circle class="fillable" cx="87" cy="62" r="3" stroke="#333" stroke-width="2" fill="#FFF"/>
-        <rect class="fillable" x="180" y="70" width="8" height="12" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <circle class="fillable" cx="45" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="45" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" x="158" y="14" width="22" height="11" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" d="M 138 108 L 138 46 C 138 34,150 28,164 28 L 196 28 C 213 28,218 52,218 68 L 218 108 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 148 60 L 148 40 L 180 40 C 195 40,202 50,204 60 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="18" y="40" width="120" height="68" rx="6" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <line x1="18" y1="74" x2="138" y2="74" stroke="#333" stroke-width="2.5"/>
+        <line x1="78" y1="40" x2="78" y2="108" stroke="#333" stroke-width="2.5"/>
+        <rect class="fillable" x="28" y="48" width="38" height="20" rx="3" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="86" y="48" width="38" height="20" rx="3" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="52" cy="90" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="52" cy="90" r="4" stroke="#333" stroke-width="2" fill="#FFF"/>
+        <circle class="fillable" cx="105" cy="90" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="105" cy="90" r="4" stroke="#333" stroke-width="2" fill="#FFF"/>
+        <rect class="fillable" x="14" y="104" width="208" height="10" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="212" cy="90" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="208" y="78" width="8" height="14" rx="3" stroke="#333" stroke-width="2.5" fill="#FFF"/>
+        <circle class="fillable" cx="52" cy="120" r="22" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <circle class="fillable" cx="52" cy="120" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="52" cy="109" r="2.5" fill="#333"/>
+        <circle cx="52" cy="131" r="2.5" fill="#333"/>
+        <circle cx="41" cy="120" r="2.5" fill="#333"/>
+        <circle cx="63" cy="120" r="2.5" fill="#333"/>
+        <circle class="fillable" cx="178" cy="120" r="22" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <circle class="fillable" cx="178" cy="120" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="178" cy="109" r="2.5" fill="#333"/>
+        <circle cx="178" cy="131" r="2.5" fill="#333"/>
+        <circle cx="167" cy="120" r="2.5" fill="#333"/>
+        <circle cx="189" cy="120" r="2.5" fill="#333"/>
       </svg>`,
     },
     {
@@ -120,19 +146,32 @@
       id: 'ambulance',
       name: '구급차',
       emoji: '🚑',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <rect class="fillable" x="80" y="15" width="20" height="12" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="105" y="15" width="20" height="12" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 15 90 L 15 27 L 105 27 L 105 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 105 90 L 105 45 L 150 45 L 180 65 L 180 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 115 52 L 145 52 L 165 65 L 115 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="45" y="55" width="30" height="10" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="55" y="45" width="10" height="30" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="175" y="75" width="8" height="10" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <circle class="fillable" cx="45" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="45" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle class="fillable" cx="150" cy="90" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" x="95" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="118" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" d="M 125 108 L 125 50 L 180 50 L 214 74 L 214 108 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 135 60 L 170 60 L 194 74 L 135 74 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="18" y="30" width="107" height="78" rx="4" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <rect class="fillable" x="22" y="38" width="30" height="60" rx="3" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="56" y="38" width="30" height="60" rx="3" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <line x1="86" y1="64" x2="86" y2="70" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+        <rect class="fillable" x="100" y="54" width="14" height="40" rx="3" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="92" y="66" width="30" height="16" rx="3" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="208" y="82" width="8" height="14" rx="3" stroke="#333" stroke-width="2.5" fill="#FFF"/>
+        <circle class="fillable" cx="208" cy="98" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" x="14" y="104" width="204" height="10" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" cx="52" cy="120" r="22" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <circle class="fillable" cx="52" cy="120" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="52" cy="109" r="2.5" fill="#333"/>
+        <circle cx="52" cy="131" r="2.5" fill="#333"/>
+        <circle cx="41" cy="120" r="2.5" fill="#333"/>
+        <circle cx="63" cy="120" r="2.5" fill="#333"/>
+        <circle class="fillable" cx="178" cy="120" r="22" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <circle class="fillable" cx="178" cy="120" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="178" cy="109" r="2.5" fill="#333"/>
+        <circle cx="178" cy="131" r="2.5" fill="#333"/>
+        <circle cx="167" cy="120" r="2.5" fill="#333"/>
+        <circle cx="189" cy="120" r="2.5" fill="#333"/>
       </svg>`,
     },
     {
@@ -210,18 +249,25 @@
       id: 'dino',
       name: '공룡',
       emoji: '🦕',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <rect class="fillable" x="65" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="85" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="125" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" x="145" y="95" width="16" height="30" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 40 90 Q 30 55, 100 55 Q 150 55, 170 70 Q 190 75, 185 90 Q 140 115, 100 115 Q 60 115, 40 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 50 100 Q 100 115, 155 95 Q 100 105, 50 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 60 60 L 70 25 L 85 57 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 80 55 L 100 15 L 115 55 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 110 57 L 130 25 L 140 60 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" d="M 135 65 L 150 40 L 160 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <circle cx="165" cy="78" r="4" fill="#333"/>
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" x="74" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <rect class="fillable" x="100" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <rect class="fillable" x="146" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <rect class="fillable" x="172" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path d="M74 156 Q79 162 84 156" stroke="#333" stroke-width="2" fill="none"/>
+        <path d="M100 156 Q105 162 110 156" stroke="#333" stroke-width="2" fill="none"/>
+        <path d="M146 156 Q151 162 156 156" stroke="#333" stroke-width="2" fill="none"/>
+        <path d="M172 156 Q177 162 182 156" stroke="#333" stroke-width="2" fill="none"/>
+        <path class="fillable" d="M 46 110 Q 38 68, 108 62 Q 162 58, 188 76 Q 210 88, 206 110 Q 166 136, 120 136 Q 68 136, 46 110 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 74 68 L 86 30 L 100 66 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 98 64 L 118 18 L 132 63 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 128 64 L 148 30 L 158 66 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 156 72 L 172 46 L 180 74 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
+        <path class="fillable" d="M 46 110 Q 18 105, 12 90 Q 10 78, 28 82 Q 38 90, 46 110 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle cx="186" cy="90" r="6" fill="#333"/>
+        <circle cx="188" cy="88" r="2" fill="#fff"/>
+        <circle cx="200" cy="97" r="2.5" fill="#555"/>
+        <path d="M 194 104 Q 205 110, 212 106" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
       </svg>`,
     },
     {
@@ -555,17 +601,18 @@
         display:none;
         align-items:center;
         justify-content:center;
-        padding:10px;
+        padding:2px;
         background:#fffbf5;
         box-sizing:border-box;
       }
 
       .az-coloring-wrap svg{
         width:100%;
-        height:100%;
+        height:auto;
         max-width:100%;
         max-height:100%;
         overflow:visible;
+        display:block;
       }
 
       .az-coloring-wrap .fillable{
@@ -959,8 +1006,9 @@
 
       @media (min-width:768px) and (min-height:600px) and (orientation:landscape) {
         .az-topbar{
-          min-height:60px;
-          padding:8px 18px;
+          min-height:48px;
+          padding:4px 8px;
+          border-bottom-width:4px;
         }
 
         .az-mode-tabs{
@@ -968,17 +1016,17 @@
         }
 
         .az-mode-tab{
-          min-height:46px;
-          font-size:18px;
-          border-radius:24px;
+          min-height:40px;
+          font-size:17px;
+          border-radius:22px;
         }
 
         .az-workspace{
           display:grid;
-          grid-template-columns:220px minmax(0,1fr) 220px;
+          grid-template-columns:130px minmax(0,1fr) 130px;
           grid-template-rows:minmax(0,1fr);
-          gap:14px;
-          padding:14px;
+          gap:6px;
+          padding:0;
         }
 
         .az-left-panel,
@@ -988,8 +1036,8 @@
           height:100%;
           overflow-y:auto;
           overflow-x:hidden;
-          padding:10px;
-          border-radius:26px;
+          padding:6px;
+          border-radius:18px;
           background:rgba(255,255,255,.78);
           border:2px solid rgba(36,45,66,.08);
           box-shadow:0 16px 38px rgba(31,45,61,.08);
@@ -1014,14 +1062,14 @@
 
         .az-panel-section{
           background:#fff;
-          border-radius:22px;
-          padding:10px;
+          border-radius:18px;
+          padding:8px;
           box-shadow:0 7px 18px rgba(31,45,61,.06);
         }
 
         .az-panel-title{
-          font-size:15px;
-          margin-bottom:9px;
+          font-size:13px;
+          margin-bottom:7px;
         }
 
         .az-panel-row,
@@ -1030,7 +1078,7 @@
         .az-size-group{
           display:grid;
           grid-template-columns:repeat(2,minmax(0,1fr));
-          gap:9px;
+          gap:7px;
           overflow:visible;
           padding:0;
         }
@@ -1038,16 +1086,16 @@
         .az-cat-btn{
           width:100%;
           min-width:0;
-          min-height:64px;
-          padding:8px;
-          font-size:17px;
-          border-radius:18px;
+          min-height:56px;
+          padding:6px;
+          font-size:14px;
+          border-radius:14px;
         }
 
         #azTplRow .az-cat-btn{
-          min-height:76px;
+          min-height:64px;
           min-width:0;
-          font-size:36px;
+          font-size:30px;
         }
 
         .az-color-circle{
@@ -1055,7 +1103,7 @@
           height:auto;
           aspect-ratio:1/1;
           flex:auto;
-          border-width:5px;
+          border-width:4px;
         }
 
         .az-stamp-circle{
@@ -1063,49 +1111,49 @@
           height:auto;
           aspect-ratio:1/1;
           flex:auto;
-          font-size:36px;
-          border-radius:22px;
+          font-size:28px;
+          border-radius:16px;
         }
 
         .az-size-btn{
           width:100%;
           min-width:0;
-          height:56px;
-          font-size:15px;
-          border-radius:18px;
+          height:48px;
+          font-size:13px;
+          border-radius:14px;
         }
 
         .az-icon-btns{
           display:grid;
           grid-template-columns:1fr;
-          gap:10px;
+          gap:8px;
           padding:0;
           overflow:visible;
         }
 
         .az-icon-btn{
-          height:62px;
-          font-size:30px;
-          border-radius:20px;
+          height:54px;
+          font-size:26px;
+          border-radius:16px;
         }
 
         .az-done-btn{
-          min-height:70px;
-          font-size:23px;
-          border-radius:24px;
+          min-height:60px;
+          font-size:19px;
+          border-radius:20px;
         }
 
         .az-canvas-wrap{
           width:100%;
           height:100%;
           min-height:0;
-          border-width:10px;
-          border-radius:34px;
-          box-shadow:0 18px 42px rgba(0,0,0,.16);
+          border-width:4px;
+          border-radius:20px;
+          box-shadow:0 12px 32px rgba(0,0,0,.14);
         }
 
         .az-coloring-wrap{
-          padding:18px;
+          padding:4px;
         }
 
         .az-complete-banner{
@@ -1115,31 +1163,31 @@
 
       @media (min-width:1024px) and (min-height:680px) and (orientation:landscape) {
         .az-workspace{
-          grid-template-columns:260px minmax(0,1fr) 260px;
-          gap:16px;
-          padding:16px;
+          grid-template-columns:145px minmax(0,1fr) 145px;
+          gap:6px;
+          padding:0;
         }
 
         .az-panel-section{
-          padding:12px;
+          padding:8px;
         }
 
         .az-cat-btn{
-          min-height:70px;
-          font-size:18px;
+          min-height:62px;
+          font-size:15px;
         }
 
         #azTplRow .az-cat-btn{
-          min-height:84px;
-          font-size:40px;
+          min-height:70px;
+          font-size:34px;
         }
 
         .az-icon-btn{
-          height:66px;
+          height:58px;
         }
 
         .az-done-btn{
-          min-height:74px;
+          min-height:64px;
         }
       }
 
@@ -1159,9 +1207,9 @@
 
         .az-workspace{
           display:grid;
-          grid-template-columns:170px minmax(0,1fr) 170px;
-          gap:8px;
-          padding:8px;
+          grid-template-columns:120px minmax(0,1fr) 120px;
+          gap:4px;
+          padding:0;
         }
 
         .az-left-panel,
@@ -1253,8 +1301,8 @@
 
         .az-canvas-wrap{
           min-height:0;
-          border-width:4px;
-          border-radius:16px;
+          border-width:3px;
+          border-radius:14px;
         }
       }
     `;
@@ -1709,7 +1757,7 @@
     const svg = wrap.querySelector('svg');
     if (svg) {
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      svg.style.cssText = 'width:100%;height:100%;max-width:100%;max-height:100%;overflow:visible;';
+      svg.style.cssText = 'width:100%;height:auto;max-width:100%;max-height:100%;overflow:visible;display:block;';
     }
 
     wrap.querySelectorAll('.fillable').forEach((el) => {
