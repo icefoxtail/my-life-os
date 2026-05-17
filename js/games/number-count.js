@@ -538,8 +538,8 @@
 
     runCountingHighlight:function(wrapper, done){
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
-      // 속도 더 빠르게 (400ms -> 250ms)
-      const delay = 250;
+      // 화면 숫자는 1부터 차례로 표시하되, 음성은 마지막 개수만 한 번 재생
+      const delay = 650;
 
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
@@ -547,7 +547,10 @@
           dot.className   = 'nc-count-dot';
           dot.textContent = i+1;
           cell.appendChild(dot);
-          this.speakDirect(KOREAN_COUNT[i+1] || String(i+1));
+          
+          if(i === cells.length - 1){
+            this.speakDirect(KOREAN_COUNT[i+1] || String(i+1));
+          }
         }, i * delay);
       });
 
@@ -573,7 +576,9 @@
       stamp.className   = 'nc-number-stamp';
       stamp.textContent = num;
       area.appendChild(stamp);
-      this.speakDirect(KOREAN_COUNT[num] ? `${KOREAN_COUNT[num]} 대` : String(num));
+      
+      this.speakDirect(KOREAN_COUNT[num] || String(num));
+      
       this.setManagedTimeout(()=>{ if(stamp.parentNode) stamp.parentNode.removeChild(stamp); }, 1500);
     },
 
