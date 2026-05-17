@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════
    SIHYEON PLAY OS — 꼬마 고양이 돌보기
    파일: js/games/cat-care.js
-   버전: v1.5.0
-   수정: resize 중복 보상/음성 버그 수정 및 상태 플래그 도입
+   버전: v1.6.1
+   수정: 첫 화면 눈이/름이 선택 카드 세로형 확대 및 이미지 잘림 방지
 ═══════════════════════════════════════════ */
 
 (function () {
@@ -92,7 +92,7 @@
   };
 
   function isLandscapeMode() {
-    return window.innerWidth > window.innerHeight && window.innerWidth >= 768;
+    return window.innerWidth > window.innerHeight && window.innerHeight >= 320;
   }
 
   function timer(fn, ms) {
@@ -124,7 +124,9 @@
         min-height: 0;
         display: flex;
         flex-direction: column;
-        background: linear-gradient(160deg, #fff9e6 0%, #fff0f9 100%);
+        background:
+          radial-gradient(circle at 18% 14%, rgba(255,255,255,0.86) 0 9%, transparent 31%),
+          linear-gradient(160deg, #fff9e6 0%, #fff0f9 62%, #eaf7ff 100%);
         overflow: hidden;
         font-family: 'Jua', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         color: #2d2d2d;
@@ -133,7 +135,8 @@
 
       .cc-root.is-landscape {
         background:
-          radial-gradient(circle at 18% 18%, rgba(255,255,255,0.9) 0 10%, transparent 30%),
+          radial-gradient(circle at 15% 16%, rgba(255,255,255,0.95) 0 9%, transparent 30%),
+          radial-gradient(circle at 85% 18%, rgba(255,255,255,0.76) 0 8%, transparent 27%),
           linear-gradient(135deg, #fff7da 0%, #ffeaf5 54%, #eaf7ff 100%);
       }
 
@@ -149,29 +152,16 @@
         overflow: hidden;
       }
 
+      /* ─────────────────────────────
+         선택 화면: 세로
+      ───────────────────────────── */
       .cc-select-portrait {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding: clamp(18px, 5vh, 40px) 16px 20px;
-        gap: clamp(14px, 3vh, 24px);
-      }
-
-      .cc-select-landscape {
-        display: grid;
-        grid-template-columns: 0.85fr 1.15fr;
-        gap: 22px;
-        padding: 22px;
-        align-items: stretch;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape {
-          grid-template-columns: 0.7fr 1.3fr;
-          gap: 12px;
-          padding: 12px;
-        }
+        padding: clamp(10px, 3vh, 24px) 14px max(14px, env(safe-area-inset-bottom));
+        gap: clamp(8px, 2vh, 16px);
       }
 
       .cc-select-hero {
@@ -180,44 +170,14 @@
         flex-shrink: 0;
       }
 
-      .cc-select-landscape .cc-select-hero {
-        height: 100%;
-        border-radius: 36px;
-        background: rgba(255,255,255,0.82);
-        border: 6px solid #fff;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.10);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-select-hero {
-          border-radius: 24px;
-          padding: 14px;
-        }
-      }
-
       .cc-select-title {
-        font-size: clamp(24px, 7vw, 38px);
+        font-size: clamp(25px, 7vw, 38px);
         color: #333;
         margin: 0;
         text-align: center;
         font-weight: 900;
-        line-height: 1.15;
-      }
-
-      .cc-select-landscape .cc-select-title {
-        font-size: clamp(34px, 4vw, 54px);
-        line-height: 1.16;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-select-title {
-          font-size: clamp(24px, 4vw, 34px);
-        }
+        line-height: 1.12;
+        text-shadow: 0 3px 0 rgba(255,255,255,0.72);
       }
 
       .cc-select-sub {
@@ -228,102 +188,53 @@
         line-height: 1.35;
       }
 
-      .cc-select-landscape .cc-select-sub {
-        font-size: clamp(19px, 2vw, 28px);
-        margin-top: 16px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-select-sub {
-          font-size: 15px;
-        }
-      }
-
       .cc-select-row {
-        width: 100%;
-        display: flex;
-        gap: clamp(14px, 4vw, 28px);
-        align-items: center;
+        width: min(100%, 560px);
+        flex: 1 1 auto;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: clamp(10px, 2.4vh, 18px);
+        align-items: stretch;
         justify-content: center;
-        flex-wrap: wrap;
         padding: 0;
       }
 
-      .cc-select-landscape .cc-select-row {
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
-        align-items: stretch;
-        justify-content: stretch;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-select-row {
-          gap: 12px;
-        }
-      }
-
       .cc-cat-card {
-        width: clamp(138px, 40vw, 220px);
+        width: 100%;
+        min-width: 0;
         cursor: pointer;
-        background: #fff;
-        padding: 12px;
-        border-radius: 34px;
+        background: rgba(255,255,255,0.94);
+        padding: clamp(10px, 2.8vw, 16px);
+        border-radius: clamp(26px, 7vw, 36px);
         box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-        border: 5px solid #fff;
+        border: clamp(5px, 1.5vw, 7px) solid #fff;
         transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
         text-align: center;
         -webkit-tap-highlight-color: transparent;
         font-family: inherit;
-      }
-
-      .cc-select-landscape .cc-cat-card {
-        width: 100%;
-        height: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: 1fr;
+        align-items: center;
+        gap: clamp(10px, 3vw, 18px);
         min-height: 0;
-        border-radius: 38px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border-width: 7px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-cat-card {
-          padding: 10px;
-          border-radius: 24px;
-        }
       }
 
       .cc-cat-card:active {
-        transform: scale(0.92);
+        transform: scale(0.94);
         box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-      }
-
-      .cc-select-landscape .cc-cat-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 18px 34px rgba(0,0,0,0.13);
       }
 
       .cc-cat-img-wrap {
         position: relative;
         width: 100%;
-        padding-top: 100%;
-        border-radius: 26px;
+        height: 100%;
+        min-height: 0;
+        border-radius: clamp(20px, 6vw, 30px);
         overflow: hidden;
-        background: #f5f5f5;
-      }
-
-      .cc-select-landscape .cc-cat-img-wrap {
-        border-radius: 30px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-cat-img-wrap {
-          border-radius: 18px;
-        }
+        background: linear-gradient(135deg, #fffaf0, #fff6fb);
       }
 
       .cc-cat-img-wrap img {
@@ -331,18 +242,8 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        border-radius: 26px;
-      }
-
-      .cc-select-landscape .cc-cat-img-wrap img {
-        border-radius: 30px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-cat-img-wrap img {
-          border-radius: 18px;
-        }
+        object-fit: contain;
+        border-radius: inherit;
       }
 
       .cc-cat-img-fallback {
@@ -350,40 +251,92 @@
         inset: 0;
         display: none;
         place-items: center;
-        font-size: clamp(56px, 16vw, 92px);
+        font-size: clamp(58px, 16vw, 94px);
         background: linear-gradient(135deg, #ffe0f0, #fff9c4);
-        border-radius: 26px;
-      }
-
-      .cc-select-landscape .cc-cat-img-fallback {
-        border-radius: 30px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-cat-img-fallback {
-          border-radius: 18px;
-        }
+        border-radius: inherit;
       }
 
       .cc-cat-name {
-        font-size: clamp(19px, 5vw, 27px);
+        min-width: clamp(72px, 18vw, 110px);
+        font-size: clamp(24px, 6vw, 36px);
         color: #444;
-        margin-top: 10px;
+        margin-top: 0;
         font-weight: 900;
+        line-height: 1.05;
+      }
+
+      /* ─────────────────────────────
+         선택 화면: 태블릿/폰 가로 공통
+      ───────────────────────────── */
+      .cc-select-landscape {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+        gap: 14px;
+        padding: 14px;
+        align-items: stretch;
+      }
+
+      .cc-select-landscape .cc-select-hero {
+        height: 100%;
+        border-radius: 30px;
+        background: rgba(255,255,255,0.82);
+        border: 5px solid #fff;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cc-select-landscape .cc-select-title {
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.08;
+      }
+
+      .cc-select-landscape .cc-select-sub {
+        font-size: clamp(16px, 1.8vw, 22px);
+        margin-top: 8px;
+      }
+
+      .cc-select-landscape .cc-select-row {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .cc-select-landscape .cc-cat-card {
+        width: 100%;
+        height: 100%;
+        border-radius: 34px;
+        padding: 14px;
+        border-width: 7px;
+        grid-template-columns: minmax(0, 1fr) 128px;
+      }
+
+      .cc-select-landscape .cc-cat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 34px rgba(0,0,0,0.13);
+      }
+
+      .cc-select-landscape .cc-cat-img-wrap {
+        height: 100%;
+        min-height: 0;
+        border-radius: 28px;
       }
 
       .cc-select-landscape .cc-cat-name {
-        font-size: clamp(28px, 3vw, 40px);
-        margin-top: 14px;
+        min-width: 112px;
+        font-size: clamp(32px, 3.2vw, 48px);
+        margin-top: 0;
       }
 
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-select-landscape .cc-cat-name {
-          font-size: 20px;
-          margin-top: 6px;
-        }
-      }
-
+      /* ─────────────────────────────
+         돌보기 화면: 세로
+      ───────────────────────────── */
       .cc-care-portrait {
         width: 100%;
         height: 100%;
@@ -391,158 +344,6 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-      }
-
-      .cc-care-landscape {
-        width: 100%;
-        height: 100%;
-        min-height: 0;
-        display: grid;
-        grid-template-columns: 230px minmax(0, 1fr) 230px;
-        grid-template-rows: minmax(0, 1fr);
-        gap: 16px;
-        padding: 16px;
-        overflow: hidden;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-care-landscape {
-          grid-template-columns: 170px minmax(0, 1fr) 170px;
-          gap: 8px;
-          padding: 8px;
-        }
-      }
-
-      .cc-left-panel {
-        display: flex;
-        min-height: 0;
-        height: 100%;
-        flex-direction: column;
-        gap: 14px;
-        overflow: hidden;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-left-panel {
-          gap: 8px;
-        }
-      }
-
-      .cc-info-card,
-      .cc-mini-actions,
-      .cc-action-panel-landscape {
-        background: rgba(255,255,255,0.86);
-        border: 5px solid #fff;
-        border-radius: 32px;
-        box-shadow: 0 16px 34px rgba(0,0,0,0.10);
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-info-card,
-        .cc-mini-actions,
-        .cc-action-panel-landscape {
-          border-radius: 20px;
-          border: 4px solid #fff;
-          box-shadow: 0 10px 22px rgba(0,0,0,0.10);
-        }
-      }
-
-      .cc-info-card {
-        flex: 1 1 auto;
-        min-height: 0;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-info-card {
-          padding: 10px;
-        }
-      }
-
-      .cc-info-emoji {
-        font-size: clamp(60px, 7vw, 96px);
-        line-height: 1;
-        margin-bottom: 10px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-info-emoji {
-          font-size: 46px;
-        }
-      }
-
-      .cc-info-name {
-        font-size: clamp(28px, 3vw, 42px);
-        font-weight: 900;
-        color: #333;
-        line-height: 1.1;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-info-name {
-          font-size: 23px;
-        }
-      }
-
-      .cc-info-sub {
-        margin-top: 10px;
-        font-size: clamp(16px, 1.6vw, 22px);
-        font-weight: 800;
-        color: #776b61;
-        line-height: 1.35;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-info-sub {
-          font-size: 13px;
-          margin-top: 5px;
-        }
-      }
-
-      .cc-mini-actions {
-        flex: 0 0 auto;
-        padding: 12px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-mini-actions {
-          padding: 8px;
-        }
-      }
-
-      .cc-small-btn {
-        width: 100%;
-        min-height: 58px;
-        border: 0;
-        border-radius: 22px;
-        background: #fff;
-        color: #333;
-        font-family: inherit;
-        font-size: 18px;
-        font-weight: 900;
-        box-shadow: 0 6px 0 rgba(0,0,0,0.12);
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-small-btn {
-          min-height: 40px;
-          border-radius: 14px;
-          font-size: 14px;
-          box-shadow: 0 4px 0 rgba(0,0,0,0.12);
-        }
-      }
-
-      .cc-small-btn:active {
-        transform: translateY(4px);
-        box-shadow: 0 2px 0 rgba(0,0,0,0.12);
       }
 
       .cc-main-display {
@@ -555,13 +356,7 @@
       }
 
       .cc-care-portrait .cc-main-display {
-        padding: clamp(10px, 2vh, 18px) 16px 0;
-      }
-
-      .cc-care-landscape .cc-main-display {
-        min-width: 0;
-        height: 100%;
-        padding: 0;
+        padding: clamp(10px, 2vh, 18px) 14px 0;
       }
 
       .cc-main-wrap {
@@ -570,22 +365,9 @@
       }
 
       .cc-care-portrait .cc-main-wrap {
-        width: clamp(230px, 74vw, 430px);
-        aspect-ratio: 1 / 1;
-      }
-
-      .cc-care-landscape .cc-main-wrap {
-        width: min(100%, calc(100vh - 68px));
-        height: min(100%, calc(100vh - 68px));
-        max-width: 100%;
+        width: min(92vw, 470px);
         max-height: 100%;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-care-landscape .cc-main-wrap {
-          width: min(100%, calc(100vh - 24px));
-          height: min(100%, calc(100vh - 24px));
-        }
+        aspect-ratio: 1 / 1;
       }
 
       .cc-main-img {
@@ -604,19 +386,6 @@
         border: clamp(7px, 2vw, 10px) solid #fff;
       }
 
-      .cc-care-landscape .cc-main-img {
-        border-radius: 54px;
-        border: 12px solid #fff;
-        box-shadow: 0 24px 54px rgba(0,0,0,0.16);
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-care-landscape .cc-main-img {
-          border-radius: 28px;
-          border-width: 6px;
-        }
-      }
-
       .cc-main-fallback {
         position: absolute;
         inset: 0;
@@ -632,19 +401,6 @@
         border: clamp(7px, 2vw, 10px) solid #fff;
       }
 
-      .cc-care-landscape .cc-main-fallback {
-        font-size: clamp(86px, 25vw, 160px);
-        border-radius: 54px;
-        border: 12px solid #fff;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-care-landscape .cc-main-fallback {
-          border-radius: 28px;
-          border-width: 6px;
-        }
-      }
-
       @keyframes ccFloat {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-14px); }
@@ -653,66 +409,16 @@
       .cc-action-panel-portrait {
         flex: 0 0 auto;
         width: 100%;
-        padding: 10px 14px max(22px, env(safe-area-inset-bottom));
-      }
-
-      .cc-action-panel-landscape {
-        min-height: 0;
-        height: 100%;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-action-panel-landscape {
-          padding: 8px;
-        }
-      }
-
-      .cc-action-panel-landscape .cc-panel-title {
-        display: block;
-        flex: 0 0 auto;
-        font-size: clamp(22px, 2.2vw, 30px);
-        font-weight: 900;
-        color: #333;
-        text-align: center;
-        margin-bottom: 14px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-action-panel-landscape .cc-panel-title {
-          font-size: 16px;
-          margin-bottom: 8px;
-        }
+        padding: 10px 12px max(22px, env(safe-area-inset-bottom));
       }
 
       .cc-action-bar-portrait {
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(10px, 3.5vw, 22px);
-      }
-
-      .cc-action-bar-landscape {
-        flex: 1 1 auto;
-        min-height: 0;
         display: grid;
-        grid-template-columns: 1fr;
-        grid-auto-rows: minmax(96px, 1fr);
-        gap: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(10px, 3vw, 18px);
         align-items: stretch;
-        justify-content: stretch;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-action-bar-landscape {
-          grid-auto-rows: minmax(54px, 1fr);
-          gap: 8px;
-        }
+        justify-content: center;
       }
 
       .cc-btn {
@@ -729,31 +435,12 @@
       }
 
       .cc-action-bar-portrait .cc-btn {
-        width: clamp(82px, 27vw, 122px);
-        height: clamp(82px, 27vw, 122px);
-        border-radius: 50%;
-        border: 6px solid #fff;
-        box-shadow: 0 10px 0 rgba(0,0,0,0.12), 0 14px 20px rgba(0,0,0,0.10);
-        font-size: clamp(31px, 9vw, 50px);
-      }
-
-      .cc-action-bar-landscape .cc-btn {
         width: 100%;
-        height: 100%;
-        min-height: 96px;
-        border-radius: 28px;
+        min-height: clamp(88px, 24vw, 124px);
+        border-radius: 26px;
         border: 6px solid #fff;
         box-shadow: 0 10px 0 rgba(0,0,0,0.12), 0 14px 20px rgba(0,0,0,0.10);
-        font-size: clamp(38px, 4.5vw, 62px);
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-action-bar-landscape .cc-btn {
-          min-height: 54px;
-          border-radius: 18px;
-          border-width: 4px;
-          font-size: 28px;
-        }
+        font-size: clamp(30px, 8vw, 46px);
       }
 
       .cc-btn:active {
@@ -768,25 +455,10 @@
       }
 
       .cc-action-bar-portrait .cc-btn-label {
-        position: absolute;
-        bottom: -28px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: clamp(11px, 3.2vw, 15px);
-      }
-
-      .cc-action-bar-landscape .cc-btn-label {
         position: static;
         transform: none;
-        font-size: clamp(17px, 1.65vw, 23px);
-        color: rgba(40,40,40,0.82);
+        font-size: clamp(12px, 3.2vw, 15px);
         margin-top: 2px;
-      }
-
-      @media (max-height: 540px) and (orientation: landscape) {
-        .cc-action-bar-landscape .cc-btn-label {
-          font-size: 12px;
-        }
       }
 
       .cc-btn.done {
@@ -806,12 +478,181 @@
         font-size: 24px;
       }
 
+      /* ─────────────────────────────
+         돌보기 화면: 태블릿/폰 가로
+      ───────────────────────────── */
+      .cc-care-landscape {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr) 240px;
+        grid-template-rows: minmax(0, 1fr);
+        gap: 12px;
+        padding: 12px;
+        overflow: hidden;
+      }
+
+      .cc-care-landscape .cc-main-display {
+        min-width: 0;
+        height: 100%;
+        padding: 0;
+      }
+
+      .cc-care-landscape .cc-main-wrap {
+        width: min(100%, calc(100vh - 44px));
+        height: min(100%, calc(100vh - 44px));
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .cc-care-landscape .cc-main-img {
+        border-radius: 46px;
+        border: 10px solid #fff;
+        box-shadow: 0 24px 54px rgba(0,0,0,0.16);
+      }
+
+      .cc-care-landscape .cc-main-fallback {
+        font-size: clamp(86px, 16vw, 160px);
+        border-radius: 46px;
+        border: 10px solid #fff;
+      }
+
+      .cc-left-panel {
+        display: flex;
+        min-height: 0;
+        height: 100%;
+        flex-direction: column;
+        gap: 12px;
+        overflow: hidden;
+      }
+
+      .cc-info-card,
+      .cc-mini-actions,
+      .cc-action-panel-landscape {
+        background: rgba(255,255,255,0.86);
+        border: 5px solid #fff;
+        border-radius: 28px;
+        box-shadow: 0 16px 34px rgba(0,0,0,0.10);
+      }
+
+      .cc-info-card {
+        flex: 1 1 auto;
+        min-height: 0;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .cc-info-emoji {
+        font-size: clamp(58px, 6.5vw, 90px);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .cc-info-name {
+        font-size: clamp(27px, 3vw, 40px);
+        font-weight: 900;
+        color: #333;
+        line-height: 1.08;
+      }
+
+      .cc-info-sub {
+        margin-top: 10px;
+        font-size: clamp(15px, 1.45vw, 20px);
+        font-weight: 800;
+        color: #776b61;
+        line-height: 1.35;
+      }
+
+      .cc-mini-actions {
+        flex: 0 0 auto;
+        padding: 10px;
+      }
+
+      .cc-small-btn {
+        width: 100%;
+        min-height: 54px;
+        border: 0;
+        border-radius: 20px;
+        background: #fff;
+        color: #333;
+        font-family: inherit;
+        font-size: 17px;
+        font-weight: 900;
+        box-shadow: 0 6px 0 rgba(0,0,0,0.12);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .cc-small-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 rgba(0,0,0,0.12);
+      }
+
+      .cc-action-panel-landscape {
+        min-height: 0;
+        height: 100%;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .cc-action-panel-landscape .cc-panel-title {
+        display: block;
+        flex: 0 0 auto;
+        font-size: clamp(21px, 2vw, 29px);
+        font-weight: 900;
+        color: #333;
+        text-align: center;
+        margin-bottom: 12px;
+        line-height: 1.12;
+      }
+
+      .cc-action-bar-landscape {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      .cc-action-bar-landscape .cc-btn {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        border-radius: 28px;
+        border: 6px solid #fff;
+        box-shadow: 0 10px 0 rgba(0,0,0,0.12), 0 14px 20px rgba(0,0,0,0.10);
+        font-size: clamp(38px, 4.2vw, 60px);
+      }
+
+      .cc-action-bar-landscape .cc-btn-label {
+        position: static;
+        transform: none;
+        font-size: clamp(16px, 1.55vw, 22px);
+        color: rgba(40,40,40,0.82);
+        margin-top: 2px;
+      }
+
       .cc-action-bar-landscape .cc-btn.done::after {
         top: 8px;
         right: 10px;
         font-size: 28px;
       }
 
+      /* ─────────────────────────────
+         완료 화면
+      ───────────────────────────── */
       .cc-complete {
         width: 100%;
         height: 100%;
@@ -913,6 +754,287 @@
         color: #333;
         border: 4px solid #eee !important;
         box-shadow: 0 5px 0 #ddd;
+      }
+
+      .cc-particle {
+        position: fixed;
+        z-index: 9999;
+        pointer-events: none;
+        line-height: 1;
+        transform: translate(-50%, -50%);
+        animation: ccParticleBurst 0.9s ease-out forwards;
+      }
+
+      @keyframes ccParticleBurst {
+        0% { opacity: 1; transform: translate(-50%, -50%) scale(0.7) rotate(0deg); }
+        100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(220deg); }
+      }
+
+      /* ─────────────────────────────
+         큰 태블릿 가로
+      ───────────────────────────── */
+      @media (orientation: landscape) and (min-width: 1200px) and (min-height: 720px) {
+        .cc-select-landscape {
+          grid-template-columns: 260px minmax(0, 1fr);
+          grid-template-rows: minmax(0, 1fr);
+          gap: 18px;
+          padding: 18px;
+        }
+
+        .cc-select-landscape .cc-select-hero {
+          border-radius: 34px;
+        }
+
+        .cc-select-landscape .cc-select-title {
+          font-size: clamp(42px, 3.6vw, 58px);
+        }
+
+        .cc-select-landscape .cc-select-sub {
+          font-size: clamp(20px, 1.8vw, 28px);
+        }
+
+        .cc-select-landscape .cc-select-row {
+          gap: 18px;
+        }
+
+        .cc-select-landscape .cc-cat-card {
+          border-radius: 42px;
+          padding: 20px;
+          grid-template-columns: minmax(0, 1fr) 150px;
+        }
+
+        .cc-select-landscape .cc-cat-img-wrap {
+          border-radius: 34px;
+        }
+
+        .cc-care-landscape {
+          grid-template-columns: 240px minmax(0, 1fr) 260px;
+          gap: 16px;
+          padding: 16px;
+        }
+
+        .cc-care-landscape .cc-main-wrap {
+          width: min(100%, calc(100vh - 52px));
+          height: min(100%, calc(100vh - 52px));
+        }
+      }
+
+      /* ─────────────────────────────
+         폰 가로 / 낮은 높이
+      ───────────────────────────── */
+      @media (orientation: landscape) and (max-height: 540px) {
+        .cc-select-landscape {
+          grid-template-columns: 96px minmax(0, 1fr);
+          grid-template-rows: minmax(0, 1fr);
+          gap: 6px;
+          padding: 6px;
+        }
+
+        .cc-select-landscape .cc-select-hero {
+          border-radius: 18px;
+          border-width: 3px;
+          box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        }
+
+        .cc-select-landscape .cc-select-title {
+          font-size: clamp(20px, 4vw, 30px);
+        }
+
+        .cc-select-landscape .cc-select-title br,
+        .cc-select-landscape .cc-select-sub {
+          display: none;
+        }
+
+        .cc-select-landscape .cc-select-row {
+          gap: 8px;
+        }
+
+        .cc-select-landscape .cc-cat-card {
+          padding: 8px;
+          border-radius: 18px;
+          border-width: 4px;
+          grid-template-columns: minmax(0, 1fr) 54px;
+          gap: 7px;
+        }
+
+        .cc-select-landscape .cc-cat-img-wrap {
+          border-radius: 14px;
+        }
+
+        .cc-select-landscape .cc-cat-name {
+          min-width: 48px;
+          font-size: 18px;
+          margin-top: 0;
+        }
+
+        .cc-care-landscape {
+          grid-template-columns: 128px minmax(0, 1fr) 138px;
+          gap: 6px;
+          padding: 6px;
+        }
+
+        .cc-left-panel {
+          gap: 6px;
+        }
+
+        .cc-info-card,
+        .cc-mini-actions,
+        .cc-action-panel-landscape {
+          border-radius: 16px;
+          border-width: 3px;
+          box-shadow: 0 8px 18px rgba(0,0,0,0.09);
+        }
+
+        .cc-info-card {
+          padding: 6px;
+        }
+
+        .cc-info-emoji {
+          font-size: 34px;
+          margin-bottom: 4px;
+        }
+
+        .cc-info-name {
+          font-size: 19px;
+        }
+
+        .cc-info-sub {
+          display: none;
+        }
+
+        .cc-mini-actions {
+          padding: 5px;
+        }
+
+        .cc-small-btn {
+          min-height: 34px;
+          border-radius: 11px;
+          font-size: 12px;
+          box-shadow: 0 3px 0 rgba(0,0,0,0.12);
+        }
+
+        .cc-care-landscape .cc-main-wrap {
+          width: min(100%, calc(100vh - 16px));
+          height: min(100%, calc(100vh - 16px));
+        }
+
+        .cc-care-landscape .cc-main-img,
+        .cc-care-landscape .cc-main-fallback {
+          border-radius: 22px;
+          border-width: 5px;
+        }
+
+        .cc-action-panel-landscape {
+          padding: 6px;
+        }
+
+        .cc-action-panel-landscape .cc-panel-title {
+          font-size: 13px;
+          margin-bottom: 6px;
+        }
+
+        .cc-action-bar-landscape {
+          gap: 6px;
+        }
+
+        .cc-action-bar-landscape .cc-btn {
+          border-radius: 14px;
+          border-width: 3px;
+          font-size: 25px;
+          box-shadow: 0 5px 0 rgba(0,0,0,0.12), 0 7px 12px rgba(0,0,0,0.09);
+        }
+
+        .cc-action-bar-landscape .cc-btn-label {
+          font-size: 11px;
+          margin-top: 0;
+        }
+
+        .cc-action-bar-landscape .cc-btn.done::after {
+          top: 3px;
+          right: 5px;
+          font-size: 18px;
+        }
+
+        .cc-complete.is-landscape {
+          min-height: calc(100% - 18px);
+          width: min(620px, calc(100% - 18px));
+          border-radius: 24px;
+          border-width: 5px;
+          padding: 16px;
+          gap: 10px;
+        }
+
+        .cc-complete.is-landscape .cc-complete-emoji {
+          font-size: 70px;
+        }
+
+        .cc-complete.is-landscape .cc-complete-title {
+          font-size: 30px;
+        }
+
+        .cc-complete.is-landscape .cc-complete-sub {
+          font-size: 15px;
+        }
+
+        .cc-complete.is-landscape .cc-c-btn {
+          min-height: 46px;
+          font-size: 16px;
+          border-radius: 16px;
+        }
+      }
+
+      /* ─────────────────────────────
+         작은 폰 세로
+      ───────────────────────────── */
+      @media (orientation: portrait) and (max-height: 700px) {
+        .cc-select-portrait {
+          padding-top: 12px;
+          gap: 10px;
+        }
+
+        .cc-select-title {
+          font-size: clamp(22px, 6.2vw, 30px);
+        }
+
+        .cc-select-sub {
+          margin-top: 5px;
+          font-size: 13px;
+        }
+
+        .cc-cat-card {
+          padding: 9px;
+          border-radius: 24px;
+          gap: 8px;
+        }
+
+        .cc-cat-name {
+          min-width: 58px;
+          font-size: 20px;
+          margin-top: 0;
+        }
+
+        .cc-care-portrait .cc-main-display {
+          padding-top: 8px;
+        }
+
+        .cc-care-portrait .cc-main-wrap {
+          width: min(84vw, 390px);
+        }
+
+        .cc-action-panel-portrait {
+          padding-top: 6px;
+        }
+
+        .cc-action-bar-portrait .cc-btn {
+          min-height: 78px;
+          border-radius: 22px;
+          font-size: 27px;
+          border-width: 5px;
+        }
+
+        .cc-action-bar-portrait .cc-btn-label {
+          font-size: 11px;
+        }
       }
     `;
 
@@ -1240,6 +1362,7 @@
     renderSelect();
 
     window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
   }
 
   function destroy() {
@@ -1247,6 +1370,7 @@
     clearTimers();
     clearTimeout(state.resizeTimer);
     window.removeEventListener('resize', handleResize);
+    window.removeEventListener('orientationchange', handleResize);
 
     if (typeof speechSynthesis !== 'undefined') {
       speechSynthesis.cancel();
