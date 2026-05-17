@@ -1,9 +1,9 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v4.2
+ * 시현이 놀이터 OS — 매직 그림판 v4.3.3
  * v4.1 원본 기준 유지 + 시현이 전용 단순 그림놀이 레이아웃
  * - 큰 매직 그림판 헤더 제거
  * - 도구/되돌리기/휴지통/완료/저장 UI 제거
- * - 가로모드: 좌측 도안/SVG 선택, 가운데 큰 정사각형 그림판, 우측 색깔 선택
+ * - 가로모드: 좌측 도안/SVG 선택, 가운데 화면 꽉찬 그림판, 우측 색깔 선택
  * - 세로모드: 상단 모드 선택, 도안/SVG 가로 스크롤, 중앙 큰 그림판, 하단 색깔 2줄
  * - SVG는 캔버스 안에서 가로/세로 정중앙
  */
@@ -23,10 +23,10 @@
     { c: '#1E40AF', n: '진파랑' },
     { c: '#9944FF', n: '보라색' },
     { c: '#FF88CC', n: '분홍색' },
-    { c: '#FFFFFF', n: '흰색' },
+    { c: '#FFF8E7', n: '아이보리색' },
     { c: '#F6E7C8', n: '바닐라색' },
     { c: '#C0C0C0', n: '은색' },
-    { c: '#9E9E9E', n: '회색' },
+    { c: '#8EF6D1', n: '민트색' },
     { c: '#1A1A1A', n: '검정색' },
     { c: '#8B5A2B', n: '갈색' },
     { c: '#7ED957', n: '연두색' },
@@ -430,59 +430,44 @@
       }
 
       .az-topbar{
-        flex:0 0 48px;
-        height:48px;
-        min-height:48px;
+        flex:0 0 64px;
+        height:64px;
+        min-height:64px;
         display:flex;
         align-items:center;
-        gap:8px;
-        padding:4px 10px;
+        justify-content:center;
+        gap:12px;
+        padding:7px 14px;
         background:#fff;
-        border-bottom:4px solid #FF7A1A;
+        border-bottom:5px solid #FF7A1A;
         box-sizing:border-box;
         z-index:5;
+        position:relative;
       }
 
-      .az-back-btn{
-        flex:0 0 42px;
-        width:42px;
-        height:40px;
-        border-radius:16px;
-        border:3px solid #edf0f5;
-        background:#fff;
-        color:#233044;
-        font:inherit;
-        font-size:22px;
-        font-weight:900;
-        box-shadow:0 4px 0 rgba(0,0,0,.08);
-        cursor:pointer;
-        -webkit-tap-highlight-color:transparent;
-      }
-
-      .az-back-btn:active{
-        transform:translateY(2px);
-        box-shadow:0 2px 0 rgba(0,0,0,.08);
-      }
 
       .az-mode-tabs{
         display:flex;
-        gap:8px;
+        gap:10px;
         align-items:center;
-        flex:0 1 430px;
+        justify-content:center;
+        flex:0 1 560px;
+        width:min(600px, calc(100vw - 260px));
+        margin:0 auto;
       }
 
       .az-mode-tab{
         flex:1 1 0;
         min-width:0;
-        height:40px;
-        padding:5px 12px;
-        border-radius:19px;
+        height:48px;
+        padding:7px 16px;
+        border-radius:23px;
         border:3px solid #e6e9ef;
         background:#f9fafc;
         color:#233044;
         font:inherit;
         font-weight:900;
-        font-size:16px;
+        font-size:18px;
         cursor:pointer;
         transition:transform .16s ease, background .16s ease, border-color .16s ease;
         -webkit-tap-highlight-color:transparent;
@@ -498,8 +483,11 @@
       }
 
       .az-brand{
-        margin-left:auto;
-        font-size:15px;
+        position:absolute;
+        right:18px;
+        top:50%;
+        transform:translateY(-50%);
+        font-size:16px;
         font-weight:900;
         color:#6b7280;
         opacity:.82;
@@ -510,9 +498,9 @@
         flex:1 1 auto;
         min-height:0;
         display:grid;
-        grid-template-columns:160px minmax(0,1fr) 150px;
+        grid-template-columns:220px minmax(0,1fr) 220px;
         grid-template-rows:minmax(0,1fr);
-        gap:8px;
+        gap:10px;
         padding:8px;
         box-sizing:border-box;
         overflow:hidden;
@@ -524,7 +512,7 @@
         min-height:0;
         display:flex;
         flex-direction:column;
-        gap:8px;
+        gap:10px;
         overflow:hidden;
         box-sizing:border-box;
       }
@@ -543,8 +531,8 @@
       .az-panel-section{
         background:rgba(255,255,255,.94);
         border:2px solid rgba(36,45,66,.08);
-        border-radius:18px;
-        padding:8px;
+        border-radius:22px;
+        padding:12px;
         box-shadow:0 8px 22px rgba(31,45,61,.06);
         box-sizing:border-box;
       }
@@ -553,8 +541,8 @@
         display:flex;
         align-items:center;
         justify-content:space-between;
-        margin:0 0 7px;
-        font-size:12px;
+        margin:0 0 10px;
+        font-size:14px;
         line-height:1;
         font-weight:900;
         color:#6b7280;
@@ -606,28 +594,31 @@
         display:grid;
         grid-template-columns:repeat(2,minmax(0,1fr));
         align-content:start;
-        gap:8px;
-        padding:0 1px 4px;
+        gap:10px;
+        padding:1px 2px 6px;
       }
 
       #azTplRow .az-cat-btn{
         width:100%;
         min-width:0;
-        min-height:64px;
-        font-size:32px;
+        min-height:86px;
+        font-size:42px;
         display:grid;
         place-items:center;
         padding:6px;
       }
 
       .az-canvas-shell{
-        width:min(100%, calc(100dvh - 72px));
-        max-width:800px;
+        width:100%;
+        height:100%;
+        max-width:none;
         max-height:100%;
-        aspect-ratio:1 / 1;
+        aspect-ratio:auto;
         display:flex;
         align-items:center;
         justify-content:center;
+        min-width:0;
+        min-height:0;
       }
 
       .az-canvas-wrap{
@@ -636,7 +627,7 @@
         height:100%;
         background:#fff;
         border:5px solid #222;
-        border-radius:24px;
+        border-radius:26px;
         box-shadow:0 16px 38px rgba(0,0,0,.14);
         overflow:hidden;
         transition:background .25s ease;
@@ -664,10 +655,10 @@
       }
 
       .az-coloring-wrap svg{
-        width:auto;
-        height:auto;
-        max-width:88%;
-        max-height:88%;
+        width:100%;
+        height:100%;
+        max-width:98%;
+        max-height:98%;
         overflow:visible;
         display:block;
       }
@@ -705,7 +696,7 @@
         min-height:0;
         display:grid;
         grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
+        gap:10px;
         align-content:start;
         overflow-y:auto;
         overflow-x:hidden;
@@ -719,8 +710,8 @@
         width:100%;
         aspect-ratio:1 / 1;
         border-radius:50%;
-        border:4px solid #fff;
-        box-shadow:0 5px 12px rgba(0,0,0,.14);
+        border:5px solid #fff;
+        box-shadow:0 7px 16px rgba(0,0,0,.16);
         cursor:pointer;
         transition:transform .15s ease, border-color .15s ease;
         box-sizing:border-box;
@@ -784,17 +775,10 @@
           border-bottom-width:3px;
         }
 
-        .az-back-btn{
-          flex-basis:40px;
-          width:40px;
-          height:38px;
-          border-radius:15px;
-          font-size:20px;
-          border-width:2px;
-        }
 
         .az-mode-tabs{
-          flex:1 1 auto;
+          flex:0 1 420px;
+          width:min(420px, calc(100vw - 24px));
           gap:6px;
         }
 
@@ -880,6 +864,7 @@
 
         .az-canvas-shell{
           width:min(96vw,100%);
+          height:auto;
           max-width:none;
           max-height:100%;
           aspect-ratio:1 / 1;
@@ -921,9 +906,16 @@
       }
 
       @media (min-width:768px) and (min-height:501px) and (orientation:landscape) {
+        .az-topbar{
+          flex-basis:64px;
+          height:64px;
+          min-height:64px;
+          padding:7px 14px;
+        }
+
         .az-workspace{
-          grid-template-columns:160px minmax(0,1fr) 150px;
-          gap:8px;
+          grid-template-columns:220px minmax(0,1fr) 220px;
+          gap:10px;
           padding:8px;
         }
 
@@ -934,25 +926,41 @@
         }
 
         .az-canvas-shell{
-          width:min(100%, calc(100dvh - 72px));
-          max-width:800px;
+          width:100%;
+          height:100%;
+          max-width:none;
+          max-height:100%;
+          aspect-ratio:auto;
         }
 
         .az-color-circle{
-          min-height:48px;
+          min-height:72px;
+        }
+
+        #azTplRow .az-cat-btn{
+          min-height:86px;
+          font-size:42px;
         }
       }
 
       @media (min-width:1024px) and (min-height:680px) and (orientation:landscape) {
         .az-workspace{
-          grid-template-columns:160px minmax(0,1fr) 150px;
-          gap:8px;
+          grid-template-columns:240px minmax(0,1fr) 240px;
+          gap:10px;
           padding:8px;
         }
 
+        .az-mode-tabs{
+          flex-basis:600px;
+          width:min(600px, calc(100vw - 340px));
+        }
+
         .az-canvas-shell{
-          width:min(100%, calc(100dvh - 74px));
-          max-width:812px;
+          width:100%;
+          height:100%;
+          max-width:none;
+          max-height:100%;
+          aspect-ratio:auto;
         }
       }
 
@@ -965,18 +973,10 @@
           border-bottom-width:3px;
         }
 
-        .az-back-btn{
-          flex-basis:34px;
-          width:34px;
-          height:32px;
-          border-radius:12px;
-          font-size:17px;
-          border-width:2px;
-          box-shadow:0 2px 0 rgba(0,0,0,.08);
-        }
 
         .az-mode-tabs{
-          flex:0 1 340px;
+          flex:0 1 380px;
+          width:min(390px, calc(100vw - 24px));
           gap:6px;
         }
 
@@ -993,7 +993,7 @@
         }
 
         .az-workspace{
-          grid-template-columns:112px minmax(0,1fr) 108px;
+          grid-template-columns:132px minmax(0,1fr) 132px;
           grid-template-rows:minmax(0,1fr);
           gap:4px;
           padding:4px;
@@ -1017,8 +1017,8 @@
         }
 
         #azTplRow .az-cat-btn{
-          min-height:39px;
-          font-size:21px;
+          min-height:48px;
+          font-size:25px;
           border-radius:9px;
           border-width:1px;
           box-shadow:0 2px 0 rgba(0,0,0,.08);
@@ -1035,8 +1035,11 @@
         }
 
         .az-canvas-shell{
-          width:min(100%, calc(100dvh - 50px));
+          width:100%;
+          height:100%;
           max-width:none;
+          max-height:100%;
+          aspect-ratio:auto;
         }
 
         .az-canvas-wrap{
@@ -1047,7 +1050,7 @@
 
         .az-palette-row{
           grid-template-columns:repeat(2,minmax(0,1fr));
-          gap:4px;
+          gap:5px;
         }
 
         .az-color-circle{
@@ -1072,7 +1075,7 @@
 
     state.container = container;
     state.options = options;
-    state.tab = options.initialTab === 'coloring' ? 'coloring' : 'free';
+    state.tab = 'coloring';
     state.mode = 'free';
     state.paintHistory = [];
     state.coloringCompleted = false;
@@ -1093,9 +1096,8 @@
     container.innerHTML = `
       <div class="az-root" data-tab="${state.tab}">
         <header class="az-topbar">
-          <button type="button" class="az-back-btn" id="azBackBtn" aria-label="뒤로가기">←</button>
           <div class="az-mode-tabs">
-            <button type="button" class="az-mode-tab${!isInitialColoring ? ' active' : ''}" data-tab="free">🎨 자유 그리기</button>
+            <button type="button" class="az-mode-tab${!isInitialColoring ? ' active' : ''}" data-tab="free">🎨 그림 팡팡</button>
             <button type="button" class="az-mode-tab${isInitialColoring ? ' active' : ''}" data-tab="coloring">🌈 색칠 팡팡</button>
           </div>
           <div class="az-brand">🎨 매직 그림판</div>
@@ -1247,25 +1249,6 @@
 
   function bindEvents() {
     const root = state.container.querySelector('.az-root');
-    const backBtn = document.getElementById('azBackBtn');
-
-    if (backBtn) {
-      backBtn.onclick = () => {
-        if (typeof state.options.closeToParkHome === 'function') {
-          state.options.closeToParkHome();
-          return;
-        }
-
-        if (typeof state.options.onBack === 'function') {
-          state.options.onBack();
-          return;
-        }
-
-        if (window.history.length > 1) {
-          window.history.back();
-        }
-      };
-    }
 
     root.querySelectorAll('.az-mode-tab').forEach((btn) => {
       btn.onclick = () => {
@@ -1441,7 +1424,7 @@
     const svg = wrap.querySelector('svg');
     if (svg) {
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      svg.style.cssText = 'width:auto;height:auto;max-width:88%;max-height:88%;overflow:visible;display:block;';
+      svg.style.cssText = 'width:100%;height:100%;max-width:98%;max-height:98%;overflow:visible;display:block;';
     }
 
     wrap.querySelectorAll('.fillable').forEach((el) => {
@@ -1553,16 +1536,9 @@
       '노란색!': 'games.paint.yellow',
       '초록색!': 'games.paint.green',
       '파란색!': 'games.paint.blue',
-      '진파랑!': 'games.paint.blue',
       '보라색!': 'games.paint.purple',
       '분홍색!': 'games.paint.pink',
-      '흰색!': 'games.paint.blank',
-      '바닐라색!': 'games.paint.blank',
-      '은색!': 'games.paint.clear',
-      '회색!': 'games.paint.clear',
       '검정색!': 'games.paint.black',
-      '갈색!': 'games.paint.orange',
-      '연두색!': 'games.paint.green',
       '무지개!': 'games.paint.rainbow',
       '어떤 그림을 색칠해볼까?': 'games.paint.choose',
       '자유롭게 그려볼까?': 'games.paint.free',
