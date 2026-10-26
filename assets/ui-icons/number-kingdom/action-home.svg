@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="hmRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#E03131"/>
+    </linearGradient>
+    <linearGradient id="hmWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9DB"/>
+      <stop offset="100%" stop-color="#FFE066"/>
+    </linearGradient>
+    <filter id="hmShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#1E375F" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <g filter="url(#hmShadow)">
+    <rect x="29" y="9" width="6" height="12" rx="2" fill="#FA5252" stroke="#C92A2A" stroke-width="2"/>
+    <rect x="10" y="21" width="28" height="21" rx="4" fill="url(#hmWall)" stroke="#F59F00" stroke-width="2.5"/>
+    <polygon points="24,4 5,21 43,21" fill="url(#hmRoof)" stroke="#C92A2A" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M19 42 V28 A5 5 0 0 1 29 28 V42 Z" fill="#7950F2" stroke="#5F3DC4" stroke-width="2"/>
+    <circle cx="24" cy="15" r="3.5" fill="#E7F5FF" stroke="#339AF0" stroke-width="2"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="zpRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#FA5252"/></linearGradient>
+    <linearGradient id="zpYel" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#FCC419"/></linearGradient>
+    <linearGradient id="zpGrn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#51CF66"/><stop offset="100%" stop-color="#40C057"/></linearGradient>
+    <linearGradient id="zpBlu" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#339AF0"/><stop offset="100%" stop-color="#228BE6"/></linearGradient>
+  </defs>
+  <path d="M 6 40 A 18 18 0 0 1 42 40" fill="none" stroke="url(#zpRed)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 11 40 A 13 13 0 0 1 37 40" fill="none" stroke="url(#zpYel)" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 16 40 A 8 8 0 0 1 32 40" fill="none" stroke="url(#zpGrn)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 20 40 A 4 4 0 0 1 28 40" fill="none" stroke="url(#zpBlu)" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="7" cy="40" r="5" fill="#FFFFFF" stroke="#CED4DA" stroke-width="2"/>
+  <circle cx="41" cy="40" r="5" fill="#FFFFFF" stroke="#CED4DA" stroke-width="2"/>
+</svg>

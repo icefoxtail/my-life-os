@@ -251,12 +251,13 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   pointer-events: none;
   filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
 }
-.pillIconSvg {
-  width: 28px;
-  height: 28px;
+.btnSvg, .pillIconSvg {
+  width: 32px;
+  height: 32px;
   pointer-events: none;
   display: block;
   margin: auto;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18));
 }
 .toyBadgeTxt {
   font-size: 13px;
@@ -466,14 +467,14 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ── V2.1: 글을 읽지 않는 아이를 위한 큰 그림 버튼 ── */
-#top{gap:7px}
-#right{gap:7px;padding:5px 7px}
-#right .pill{min-width:54px;min-height:56px;font-size:28px;border-radius:18px;padding:5px}
-#zones{gap:8px;padding:5px 7px}
-#zones .pill{min-width:66px;min-height:58px;border-radius:18px;background:#fffdfa;border:2px solid #d6e7ff}
-#zones .pill.active{background:#ffdf7b;border-color:#f7bd48}
-.pill .zIcon{font-size:30px;line-height:1.1}
+/* ── V2.1: 글을 읽지 않는 아이를 위한 100% 비주얼 3D 장난감 버튼 ── */
+#top{gap:6px;align-items:center}
+#brand{display:flex;padding:3px;align-items:center;flex-shrink:0}
+#right{gap:6px;padding:3px 5px;align-items:center}
+#right .pill{min-width:52px;min-height:52px;border-radius:18px;padding:4px}
+#zones{gap:6px;padding:3px 5px;align-items:center;justify-content:center}
+#zones .pill{min-width:56px;min-height:52px;border-radius:18px;background:#fffdfa;border:2px solid #d6e7ff;padding:3px}
+#zones .pill.active{background:linear-gradient(180deg,#FFF3BF 0%,#FFD43B 100%);border-color:#FFA94D;box-shadow:0 4px 14px rgba(255,170,0,0.38),inset 0 -3px 0 #E8590C}
 #trayWrap{width:min(99vw,1050px);padding:8px;gap:8px;border-radius:24px}
 #pinnedTools{gap:5px}
 .toy{min-width:70px;height:76px;border-radius:20px;padding:7px 9px;gap:4px}
@@ -493,14 +494,14 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 #drawer button{min-width:78px;min-height:70px;border-radius:18px}
 #toast{top:132px}
 @media(max-width:820px){
-  #top{flex-direction:column;align-items:stretch}
-  #brand{display:none}
-  #right{order:0;justify-content:space-around;gap:2px;width:100%}
-  #right .pill{min-width:48px;min-height:54px;font-size:27px}
-  #zones{order:1;flex:none;min-height:63px;width:100%;justify-content:space-between}
-  #zones .pill{min-width:61px;min-height:55px}
-  .pill .zIcon{font-size:29px}
-  .pill .zName{display:none}
+  #top{flex-direction:row;align-items:center;gap:4px}
+  #brand{display:flex;padding:2px}
+  #brand strong,#brand span{display:none}
+  #right{order:2;justify-content:flex-end;gap:3px;padding:2px}
+  #right .pill{min-width:44px;min-height:46px;padding:2px}
+  #zones{order:1;flex:1;min-width:0;min-height:46px;justify-content:flex-start;gap:3px;padding:2px}
+  #zones .pill{min-width:48px;min-height:46px;padding:2px}
+  .btnSvg,.pillIconSvg{width:27px;height:27px}
 }
 @media(max-width:400px){
   .toy{min-width:64px;height:72px}
@@ -508,8 +509,9 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   #trayWrap{gap:4px;padding:6px 5px}
   #tray{gap:5px}
   #actions,#drawer{bottom:96px}
-  #right .pill{min-width:47px;min-height:52px;font-size:25px}
-  #zones .pill{min-width:59px}
+  #right .pill{min-width:40px;min-height:42px;padding:2px}
+  #zones .pill{min-width:42px;min-height:42px;padding:2px}
+  .btnSvg,.pillIconSvg{width:24px;height:24px}
 }
 @media(max-height:520px){
   #top{gap:3px;top:3px}
@@ -533,28 +535,120 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 
   <header id="top">
     <div id="brand" class="glass">
-      <button id="exitBtn" class="pill" title="놀이터 홈으로 가기" aria-label="놀이터 홈으로 가기" onclick="returnToPlayOS()">🔙</button>
-      <strong>🌈 시현이의 숫자 왕국</strong><span>3D</span>
+      <button id="exitBtn" class="pill" title="홈으로 가기" aria-label="홈으로 가기" onclick="returnToPlayOS()">
+        <svg viewBox="0 0 48 48" class="btnSvg" width="32" height="32">
+          <defs>
+            <linearGradient id="hmRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#E03131"/></linearGradient>
+            <linearGradient id="hmWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFF9DB"/><stop offset="100%" stop-color="#FFE066"/></linearGradient>
+          </defs>
+          <rect x="29" y="9" width="6" height="12" rx="2" fill="#FA5252" stroke="#C92A2A" stroke-width="2"/>
+          <rect x="10" y="21" width="28" height="21" rx="4" fill="url(#hmWall)" stroke="#F59F00" stroke-width="2.5"/>
+          <polygon points="24,4 5,21 43,21" fill="url(#hmRoof)" stroke="#C92A2A" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M19 42 V28 A5 5 0 0 1 29 28 V42 Z" fill="#7950F2" stroke="#5F3DC4" stroke-width="2"/>
+          <circle cx="24" cy="15" r="3.5" fill="#E7F5FF" stroke="#339AF0" stroke-width="2"/>
+        </svg>
+      </button>
     </div>
     <nav id="zones" class="glass" aria-label="놀이 지역 바로가기"></nav>
     <div id="right" class="glass">
-      <button id="camBtn" class="pill toyPill" title="3D 카메라 각도 바꾸기" aria-label="3D 카메라 각도 바꾸기">
-        <img src="../assets/ui-icons/number-kingdom/action-camera.svg" class="pillIconSvg" alt="카메라"/>
+      <button id="camBtn" class="pill toyPill" title="카메라 각도" aria-label="카메라 각도">
+        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
+          <defs>
+            <linearGradient id="camBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DABF7"/><stop offset="100%" stop-color="#1C7ED6"/></linearGradient>
+            <linearGradient id="camLens" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1864AB"/><stop offset="100%" stop-color="#0B2B4F"/></linearGradient>
+          </defs>
+          <rect x="13" y="8" width="8" height="4" rx="2" fill="#FFA94D" stroke="#D9480F" stroke-width="1.5"/>
+          <circle cx="31" cy="10" r="2.5" fill="#FF6B6B"/>
+          <rect x="6" y="12" width="32" height="24" rx="6" fill="url(#camBody)" stroke="#1864AB" stroke-width="2"/>
+          <circle cx="22" cy="24" r="9" fill="url(#camLens)" stroke="#FFD43B" stroke-width="2.5"/>
+          <circle cx="22" cy="24" r="6" fill="#1864AB"/>
+          <circle cx="20" cy="22" r="2" fill="#FFFFFF" opacity="0.8"/>
+        </svg>
       </button>
       <button id="undo" class="pill toyPill" title="되돌리기" aria-label="되돌리기">
-        <img src="../assets/ui-icons/number-kingdom/action-undo.svg" class="pillIconSvg" alt="되돌리기"/>
+        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
+          <defs>
+            <linearGradient id="undoGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38D9A9"/><stop offset="100%" stop-color="#0CA678"/></linearGradient>
+          </defs>
+          <path d="M 17 12 L 8 20 L 17 28 L 17 22 C 27 22 34 26 34 34 C 34 22 26 16 17 16 Z" fill="url(#undoGrad)" stroke="#099268" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M 10 20 L 16 14 L 16 18 C 24 18 30 22 32 29 C 30 24 24 20 16 20 Z" fill="#A9E34B" opacity="0.6"/>
+        </svg>
       </button>
-      <button id="sound" class="pill" title="효과음 켜기 또는 끄기" aria-label="효과음 켜기 또는 끄기" aria-pressed="true">🔊</button>
-      <button id="voice" class="pill" title="숫자 읽기 목소리 켜기 또는 끄기" aria-label="숫자 읽기 목소리 켜기 또는 끄기" aria-pressed="true">🗣️</button>
-      <button id="helpBtn" class="pill" title="보호자 도움말" aria-label="보호자 도움말">🧸</button>
-      <button id="reset" class="pill" title="놀이터 초기화" aria-label="놀이터 초기화">🔄</button>
+      <button id="sound" class="pill toyPill" title="소리" aria-label="소리 켜기/끄기" aria-pressed="true">
+        <svg viewBox="0 0 44 44" class="btnSvg soundIcon" width="32" height="32">
+          <defs>
+            <linearGradient id="sndGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#F59F00"/></linearGradient>
+          </defs>
+          <path d="M 7 16 H 13 L 23 8 V 36 L 13 28 H 7 Z" fill="url(#sndGrad)" stroke="#D9480F" stroke-width="2.2" stroke-linejoin="round"/>
+          <path class="sndWave1" d="M 28 17 A 8 8 0 0 1 28 27" fill="none" stroke="#FF922B" stroke-width="3" stroke-linecap="round"/>
+          <path class="sndWave2" d="M 33 13 A 14 14 0 0 1 33 31" fill="none" stroke="#E8590C" stroke-width="3" stroke-linecap="round"/>
+          <line class="sndMuteCross" x1="28" y1="16" x2="38" y2="28" stroke="#FA5252" stroke-width="3.5" stroke-linecap="round" style="display:none;"/>
+          <line class="sndMuteCross" x1="38" y1="16" x2="28" y2="28" stroke="#FA5252" stroke-width="3.5" stroke-linecap="round" style="display:none;"/>
+        </svg>
+      </button>
+      <button id="voice" class="pill toyPill" title="목소리" aria-label="목소리 켜기/끄기" aria-pressed="true">
+        <svg viewBox="0 0 44 44" class="btnSvg voiceIcon" width="32" height="32">
+          <defs>
+            <linearGradient id="vcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF922B"/><stop offset="100%" stop-color="#E8590C"/></linearGradient>
+          </defs>
+          <path d="M 7 9 H 37 A 5 5 0 0 1 42 14 V 27 A 5 5 0 0 1 37 32 H 20 L 12 39 V 32 H 7 A 5 5 0 0 1 2 27 V 14 A 5 5 0 0 1 7 9 Z" fill="url(#vcGrad)" stroke="#D9480F" stroke-width="2"/>
+          <circle cx="15" cy="20" r="2.5" fill="#FFFFFF"/>
+          <circle cx="29" cy="20" r="2.5" fill="#FFFFFF"/>
+          <path d="M 17 24 Q 22 29 27 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+          <line class="voiceMuteCross" x1="6" y1="6" x2="38" y2="38" stroke="#FA5252" stroke-width="3.5" stroke-linecap="round" style="display:none;"/>
+        </svg>
+      </button>
+      <button id="reset" class="pill toyPill" title="새 놀이터" aria-label="새 놀이터">
+        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
+          <defs>
+            <linearGradient id="rstStick" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#748FFC"/><stop offset="100%" stop-color="#4C6EF5"/></linearGradient>
+            <linearGradient id="rstStar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE066"/><stop offset="100%" stop-color="#FAB005"/></linearGradient>
+          </defs>
+          <rect x="20" y="15" width="6" height="26" rx="3" transform="rotate(-45 23 28)" fill="url(#rstStick)" stroke="#364FC7" stroke-width="2"/>
+          <polygon points="14,2 17,9 25,10 19,16 21,24 14,20 7,24 9,16 3,10 11,9" fill="url(#rstStar)" stroke="#E67700" stroke-width="1.8" stroke-linejoin="round"/>
+          <circle cx="32" cy="7" r="2.2" fill="#FFD43B"/>
+          <circle cx="36" cy="14" r="1.8" fill="#FF922B"/>
+        </svg>
+      </button>
+      <button id="helpBtn" class="pill toyPill" title="도움말" aria-label="도움말">
+        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
+          <defs>
+            <linearGradient id="bearGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F59F00"/><stop offset="100%" stop-color="#D9480F"/></linearGradient>
+          </defs>
+          <circle cx="12" cy="14" r="5.5" fill="url(#bearGrad)" stroke="#D9480F" stroke-width="1.5"/>
+          <circle cx="12" cy="14" r="2.8" fill="#FFE8CC"/>
+          <circle cx="32" cy="14" r="5.5" fill="url(#bearGrad)" stroke="#D9480F" stroke-width="1.5"/>
+          <circle cx="32" cy="14" r="2.8" fill="#FFE8CC"/>
+          <circle cx="22" cy="24" r="13" fill="url(#bearGrad)" stroke="#D9480F" stroke-width="2"/>
+          <ellipse cx="22" cy="27" rx="6.5" ry="5" fill="#FFF9DB"/>
+          <ellipse cx="22" cy="25" rx="2.8" ry="1.8" fill="#343A40"/>
+          <circle cx="17" cy="21" r="2.2" fill="#343A40"/>
+          <circle cx="27" cy="21" r="2.2" fill="#343A40"/>
+        </svg>
+      </button>
     </div>
   </header>
 
-  <div id="townGuides" class="glass" aria-label="건축 예시 그림 카드">
-    <button class="guideBtn" data-guide="house" title="집 모양 가이드">🏠</button>
-    <button class="guideBtn" data-guide="tower" title="탑 모양 가이드">🗼</button>
-    <button class="guideBtn" data-guide="stairs" title="계단 모양 가이드">🪜</button>
+  <div id="townGuides" class="glass" aria-label="건축 가이드">
+    <button class="guideBtn" data-guide="house" title="집 가이드">
+      <svg viewBox="0 0 32 32" class="btnSvg" width="28" height="28">
+        <polygon points="16,3 3,14 29,14" fill="#FF6B6B" stroke="#C92A2A" stroke-width="2"/>
+        <rect x="6" y="14" width="20" height="15" rx="2" fill="#FFE066" stroke="#F59F00" stroke-width="2"/>
+        <rect x="12" y="20" width="8" height="9" rx="1.5" fill="#7950F2"/>
+      </svg>
+    </button>
+    <button class="guideBtn" data-guide="tower" title="탑 가이드">
+      <svg viewBox="0 0 32 32" class="btnSvg" width="28" height="28">
+        <polygon points="16,2 10,10 22,10" fill="#FCC419" stroke="#E67700" stroke-width="1.8"/>
+        <rect x="11" y="10" width="10" height="19" rx="2" fill="#4DABF7" stroke="#1864AB" stroke-width="2"/>
+        <rect x="13" y="14" width="6" height="5" rx="1" fill="#E7F5FF"/>
+      </svg>
+    </button>
+    <button class="guideBtn" data-guide="stairs" title="계단 가이드">
+      <svg viewBox="0 0 32 32" class="btnSvg" width="28" height="28">
+        <path d="M 4 28 V 22 H 12 V 15 H 20 V 8 H 28 V 28 Z" fill="#51CF66" stroke="#2B8A3E" stroke-width="2"/>
+      </svg>
+    </button>
   </div>
 
   <div id="toast" role="status" aria-live="polite"></div>
@@ -572,7 +666,7 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
     <!-- 자유 분해 장난감 버튼 -->
     <button id="actionDecomp" class="toyActBtn decompBtn" title="숫자 친구 나누기" aria-label="숫자 친구 나누기">
       <img src="../assets/ui-icons/number-kingdom/action-decompose.svg" alt="나누기" class="toyIconSvg"/>
-      <span class="toyBadgeTxt" id="decompSummaryTxt">나누기</span>
+      <span class="toyBadgeTxt" id="decompSummaryTxt">✂️</span>
     </button>
     <!-- 호환성 더미 버튼 (기존 테스트 및 외부 스크립트 안전용) -->
     <button id="mergeAll" style="display:none" aria-hidden="true"></button>
@@ -1342,7 +1436,7 @@ function buildMathToyHud3D(){
   decompGroup.add(sparkMesh);
 
   // 3D 뱃지 스프라이트
-  const decompBadgeSprite = createToyBadgeSprite('나누기');
+  const decompBadgeSprite = createToyBadgeSprite('✂️');
   decompBadgeSprite.position.set(0, -0.92, 0);
   decompGroup.add(decompBadgeSprite);
 
@@ -1462,7 +1556,7 @@ function updateMathToyHudLayout(){
 
   if(aspect >= 1.0){
     // 데스크톱 / 가로 화면: 우측 상단 하늘에 여유 있게 배치
-    const toyY = halfH - 1.25;
+    const toyY = halfH - 1.45;
     const rightMargin = halfW - 0.9;
     mathToys.hammer.baseX = rightMargin - 0.6;
     mathToys.hammer.baseY = toyY;
@@ -1473,7 +1567,7 @@ function updateMathToyHudLayout(){
     mathToys.group.scale.setScalar(1.0);
   } else {
     // 스마트폰 세로 화면: 상단 하늘에 세 장난감을 균등 배치하여 넉넉한 터치 영역 확보
-    const toyY = halfH - 1.35;
+    const toyY = halfH - 1.55;
     const span = Math.min(halfW * 0.72, 1.7);
     mathToys.decomp.baseX = -span;
     mathToys.decomp.baseY = toyY;
@@ -1516,11 +1610,12 @@ function updateMathToyHud3D(dt, now){
     p.orbitCubes[i].rotation.y += dt * 3;
   }
 
+  // 한글 없는 직관적인 수식 뱃지
   if(group.length > 1){
     const total = group.reduce((v, f) => v + f.n, 0);
-    p.badge.setText(`${group.length}개 → ${total}`, '#FF922B');
+    p.badge.setText(`${group.length} ➔ ${total}`, '#FF922B');
   } else if(pair){
-    p.badge.setText(`${pair.a.n}+${pair.b.n}=${pair.sum}`, '#FF922B');
+    p.badge.setText(`${pair.a.n} + ${pair.b.n} = ${pair.sum}`, '#FF922B');
   } else {
     p.badge.setText('', '#FF922B');
   }
@@ -1545,8 +1640,9 @@ function updateMathToyHud3D(dt, now){
   const targetDScale = (hasDecomp ? 1.12 : 0.92) * d.scaleSpring;
   dGroup.scale.setScalar(targetDScale);
 
+  // 한글 없는 직관적인 분해 뱃지
   if(hasDecomp){
-    d.badge.setText(`${sel.n} 나누기`, '#20C997');
+    d.badge.setText(`${sel.n} ➔ ✂️`, '#20C997');
   } else {
     d.badge.setText('', '#20C997');
   }
@@ -3499,8 +3595,10 @@ function updateVoiceButton(){
   const b = $('voice');
   if(!b) return;
   b.disabled = !speechAvailable;
-  b.textContent = !speechAvailable ? '🗣️✕' : state.voice ? '🗣️' : '🤫';
   b.setAttribute('aria-pressed', String(Boolean(state.voice)));
+  const cross = b.querySelector('.voiceMuteCross');
+  if(cross) cross.style.display = (!speechAvailable || !state.voice) ? 'block' : 'none';
+  b.style.opacity = (!speechAvailable || !state.voice) ? '0.5' : '1';
 }
 if(speechAvailable){
   refreshKoreanVoice();
@@ -3889,12 +3987,12 @@ function updateUI(){
       const total = group.reduce((v, f) => v + f.n, 0);
       actAdd.style.display = 'inline-flex';
       const summary = $('addSummaryTxt');
-      if(summary) summary.textContent = `${group.length}개 → ${total}`;
+      if(summary) summary.textContent = `${group.length} ➔ ${total}`;
       actAdd.setAttribute('aria-label', `${group.length}개 숫자 친구 합체하기 (합계 ${total})`);
     } else if(pair){
       actAdd.style.display = 'inline-flex';
       const summary = $('addSummaryTxt');
-      if(summary) summary.textContent = `${pair.a.n}+${pair.b.n}=${pair.sum}`;
+      if(summary) summary.textContent = `${pair.a.n} + ${pair.b.n} = ${pair.sum}`;
       actAdd.setAttribute('aria-label', `${pair.a.n} 더하기 ${pair.b.n}은 ${pair.sum}`);
     } else {
       actAdd.style.display = 'none';
@@ -3907,7 +4005,7 @@ function updateUI(){
     if(sel.n > 1 && !sel.train){
       actDecomp.style.display = 'inline-flex';
       const summary = $('decompSummaryTxt');
-      if(summary) summary.textContent = `${sel.n} 나누기`;
+      if(summary) summary.textContent = `${sel.n} ➔ ✂️`;
       actDecomp.setAttribute('aria-label', `${sel.n} 나누기 선택지 열기`);
     } else {
       actDecomp.style.display = 'none';
@@ -4266,13 +4364,21 @@ function onResize(){
 }
 
 function mountUI(){
+  const zoneSVGs = {
+    plaza: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="zpRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#FA5252"/></linearGradient><linearGradient id="zpYel" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#FCC419"/></linearGradient><linearGradient id="zpGrn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#51CF66"/><stop offset="100%" stop-color="#40C057"/></linearGradient><linearGradient id="zpBlu" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#339AF0"/><stop offset="100%" stop-color="#228BE6"/></linearGradient></defs><path d="M 6 40 A 18 18 0 0 1 42 40" fill="none" stroke="url(#zpRed)" stroke-width="5" stroke-linecap="round"/><path d="M 11 40 A 13 13 0 0 1 37 40" fill="none" stroke="url(#zpYel)" stroke-width="4.5" stroke-linecap="round"/><path d="M 16 40 A 8 8 0 0 1 32 40" fill="none" stroke="url(#zpGrn)" stroke-width="4" stroke-linecap="round"/><path d="M 20 40 A 4 4 0 0 1 28 40" fill="none" stroke="url(#zpBlu)" stroke-width="3.5" stroke-linecap="round"/><circle cx="7" cy="40" r="5" fill="#FFFFFF" stroke="#CED4DA" stroke-width="2"/><circle cx="41" cy="40" r="5" fill="#FFFFFF" stroke="#CED4DA" stroke-width="2"/></svg>`,
+    river: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="zrWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DABF7"/><stop offset="100%" stop-color="#1C7ED6"/></linearGradient><linearGradient id="zrWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#E8590C"/></linearGradient></defs><rect x="4" y="26" width="40" height="18" rx="6" fill="url(#zrWater)"/><path d="M 8 32 Q 13 28 18 32 T 28 32 T 38 32" fill="none" stroke="#E7F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M 4 23 C 14 13 34 13 44 23 L 44 28 C 34 18 14 18 4 28 Z" fill="url(#zrWood)" stroke="#D9480F" stroke-width="2"/><line x1="14" y1="18" x2="14" y2="25" stroke="#FFF3BF" stroke-width="2.5"/><line x1="24" y1="14" x2="24" y2="21" stroke="#FFF3BF" stroke-width="2.5"/><line x1="34" y1="18" x2="34" y2="25" stroke="#FFF3BF" stroke-width="2.5"/></svg>`,
+    orchard: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="zoTree" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#82C91E"/><stop offset="100%" stop-color="#5C940D"/></linearGradient><linearGradient id="zoApple" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#C92A2A"/></linearGradient></defs><rect x="20" y="28" width="8" height="16" rx="2" fill="#845EF7" stroke="#5F3DC4" stroke-width="2"/><circle cx="24" cy="20" r="16" fill="url(#zoTree)" stroke="#2B8A3E" stroke-width="2.5"/><circle cx="22" cy="19" r="7.5" fill="url(#zoApple)" stroke="#A61E4D" stroke-width="2"/><path d="M 22 12 Q 24 9 27 10" fill="none" stroke="#2F9E44" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="17" r="1.8" fill="#FFFFFF"/></svg>`,
+    train: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="ztBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFA94D"/><stop offset="100%" stop-color="#D9480F"/></linearGradient><linearGradient id="ztCab" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DABF7"/><stop offset="100%" stop-color="#1971C2"/></linearGradient></defs><rect x="9" y="11" width="6" height="11" rx="2" fill="#495057"/><circle cx="12" cy="5.5" r="3" fill="#CED4DA"/><circle cx="17" cy="2.5" r="4.5" fill="#E9ECEF"/><rect x="6" y="21" width="24" height="16" rx="4" fill="url(#ztBody)" stroke="#C92A2A" stroke-width="2"/><rect x="25" y="14" width="17" height="23" rx="4" fill="url(#ztCab)" stroke="#1864AB" stroke-width="2"/><rect x="29" y="18" width="9" height="8" rx="2" fill="#E7F5FF"/><circle cx="13" cy="38" r="5" fill="#343A40" stroke="#FFD43B" stroke-width="2.5"/><circle cx="25" cy="38" r="5" fill="#343A40" stroke="#FFD43B" stroke-width="2.5"/><circle cx="37" cy="38" r="5" fill="#343A40" stroke="#FFD43B" stroke-width="2.5"/></svg>`,
+    town: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="ztwWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D0BFFF"/><stop offset="100%" stop-color="#845EF7"/></linearGradient><linearGradient id="ztwRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#F59F00"/></linearGradient></defs><rect x="8" y="19" width="32" height="23" rx="4" fill="url(#ztwWall)" stroke="#5F3DC4" stroke-width="2.5"/><rect x="8" y="14" width="7" height="7" fill="url(#ztwWall)"/><rect x="20.5" y="14" width="7" height="7" fill="url(#ztwWall)"/><rect x="33" y="14" width="7" height="7" fill="url(#ztwWall)"/><polygon points="24,3 17,14 31,14" fill="url(#ztwRoof)" stroke="#E67700" stroke-width="2"/><line x1="24" y1="3" x2="24" y2="0" stroke="#495057" stroke-width="2"/><polygon points="24,0 30,3 24,6" fill="#FF6B6B"/><path d="M 19 42 V 31 A 5 5 0 0 1 29 31 V 42 Z" fill="#343A40"/></svg>`
+  };
+
   for(const [i, z] of zones.entries()){
     const b = document.createElement('button');
     b.className = 'pill' + (i === 0 ? ' active' : '');
     b.dataset.zone = z.id;
     b.title = z.name;
     b.setAttribute('aria-label', z.name);
-    b.innerHTML = `<span class="zIcon">${z.icon}</span><span class="zName">${z.name}</span>`;
+    b.innerHTML = zoneSVGs[z.id] || `<span class="zIcon">${z.icon}</span>`;
     b.onclick = () => flyToZone(i);
     $('zones').appendChild(b);
   }
@@ -4286,7 +4392,21 @@ function mountUI(){
   }
 
   const brickBtn = $('brickBtn');
-  brickBtn.innerHTML = `<span class="numTxt" style="font-size:29px">🧱</span><svg class="miniSil" viewBox="0 0 12 10"><rect x="1" y="2" width="10" height="7" rx="2" fill="#FFF2EE" stroke="#8F3524" stroke-width="1"/><rect x="3" y="0.5" width="6" height="2" rx="1" fill="#FFD3C8"/></svg>`;
+  brickBtn.title = '1×1 브릭';
+  brickBtn.setAttribute('aria-label', '1×1 브릭');
+  brickBtn.innerHTML = `
+    <svg viewBox="0 0 36 36" class="btnSvg" width="34" height="34" style="filter:drop-shadow(0 3px 5px rgba(217,72,15,0.3))">
+      <defs>
+        <linearGradient id="brkTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF922B"/><stop offset="100%" stop-color="#F76707"/></linearGradient>
+        <linearGradient id="brkFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F76707"/><stop offset="100%" stop-color="#D9480F"/></linearGradient>
+        <linearGradient id="brkStud" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFA94D"/><stop offset="100%" stop-color="#FD7E14"/></linearGradient>
+      </defs>
+      <polygon points="18,6 33,14 18,22 3,14" fill="url(#brkTop)"/>
+      <polygon points="3,14 18,22 18,33 3,25" fill="url(#brkFront)"/>
+      <polygon points="33,14 18,22 18,33 33,25" fill="#C92A2A"/>
+      <ellipse cx="18" cy="11.5" rx="5" ry="2.8" fill="url(#brkStud)" stroke="#E8590C" stroke-width="0.8"/>
+      <ellipse cx="18" cy="9.8" rx="5" ry="2.8" fill="#FFE8CC"/>
+    </svg>`;
   brickBtn.onclick = () => spawnProp('brick');
 
   const tray = $('tray');
@@ -4309,22 +4429,43 @@ function mountUI(){
   const propBtn = document.createElement('button');
   propBtn.className = 'toy toolBtn';
   propBtn.style.background = '#dff7e4';
-  propBtn.title = '3D 건축 소품 상자';
-  propBtn.setAttribute('aria-label', '3D 건축 소품 상자');
-  propBtn.innerHTML = `<span class="numTxt" style="font-size:30px">🏠</span>`;
+  propBtn.title = '소품 상자';
+  propBtn.setAttribute('aria-label', '소품 상자');
+  propBtn.innerHTML = `
+    <svg viewBox="0 0 36 36" class="btnSvg" width="34" height="34" style="filter:drop-shadow(0 3px 5px rgba(43,138,62,0.3))">
+      <defs>
+        <linearGradient id="tbRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#69DB7C"/><stop offset="100%" stop-color="#2F9E44"/></linearGradient>
+        <linearGradient id="tbWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFF9DB"/><stop offset="100%" stop-color="#FFE066"/></linearGradient>
+      </defs>
+      <polygon points="18,3 4,14 32,14" fill="url(#tbRoof)" stroke="#2B8A3E" stroke-width="1.8" stroke-linejoin="round"/>
+      <rect x="7" y="14" width="22" height="18" rx="3" fill="url(#tbWall)" stroke="#F59F00" stroke-width="1.8"/>
+      <rect x="13" y="19" width="10" height="13" rx="2" fill="#4DABF7" stroke="#1864AB" stroke-width="1.5"/>
+      <circle cx="16" cy="25" r="1.5" fill="#FFE066"/>
+    </svg>`;
   propBtn.onclick = () => toggleDrawer('props');
   tray.appendChild(propBtn);
 
   const hammerBtn = document.createElement('button');
   hammerBtn.id = 'hammer';
   hammerBtn.className = 'toy hammer';
-  hammerBtn.title = '블록 하나 지우기 망치';
-  hammerBtn.setAttribute('aria-label', '블록 하나 지우기 망치');
-  hammerBtn.innerHTML = `<img src="../assets/ui-icons/number-kingdom/action-hammer.svg" class="toyIconSvg" alt="망치"/>`;
+  hammerBtn.title = '망치';
+  hammerBtn.setAttribute('aria-label', '망치');
+  hammerBtn.innerHTML = `
+    <svg viewBox="0 0 44 44" class="btnSvg" width="34" height="34" style="filter:drop-shadow(0 3px 5px rgba(134,46,156,0.3))">
+      <defs>
+        <linearGradient id="hmrHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B8B"/><stop offset="100%" stop-color="#C92A2A"/></linearGradient>
+        <linearGradient id="hmrHdl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FFE8CC"/><stop offset="100%" stop-color="#D9480F"/></linearGradient>
+      </defs>
+      <g transform="rotate(-38 22 22)">
+        <rect x="19" y="16" width="6" height="24" rx="3" fill="url(#hmrHdl)" stroke="#D9480F" stroke-width="1"/>
+        <rect x="9" y="6" width="26" height="13" rx="4" fill="url(#hmrHead)" stroke="#861B32" stroke-width="1.5"/>
+        <polygon points="22,9 23,12 26,12 24,14 25,17 22,15 19,17 20,14 18,12 21,12" fill="#FFD43B"/>
+      </g>
+    </svg>`;
   hammerBtn.onclick = () => {
     setHammer(!state.hammer);
     sfx('grab');
-    toast(state.hammer ? '🔨 지울 블록을 한 번 톡 눌러요!' : '🔨 망치를 내려놓았어요');
+    toast(state.hammer ? '🔨 톡!' : '🔨 ✨');
   };
   $('pinnedTools').appendChild(hammerBtn);
 
@@ -4381,12 +4522,25 @@ function mountUI(){
     toast(`🎥 ${CAM_PRESETS[state.camPresetIdx].name}`);
   };
   $('undo').onclick = () => undo(state);
+
+  function updateSoundButton(){
+    const b = $('sound');
+    if(!b) return;
+    b.setAttribute('aria-pressed', String(state.sound));
+    const waves = b.querySelectorAll('.sndWave1, .sndWave2');
+    const mute = b.querySelectorAll('.sndMuteCross');
+    waves.forEach(el => el.style.display = state.sound ? 'block' : 'none');
+    mute.forEach(el => el.style.display = state.sound ? 'none' : 'block');
+    b.style.opacity = state.sound ? '1' : '0.55';
+  }
+
   $('sound').onclick = () => {
     state.sound = !state.sound;
-    $('sound').textContent = state.sound ? '🔊' : '🔇';
-    $('sound').setAttribute('aria-pressed', String(state.sound));
+    updateSoundButton();
     if(!state.sound && state.soundCtx) state.soundCtx.suspend().catch(() => {});
   };
+  updateSoundButton();
+
   $('voice').onclick = toggleVoice;
   updateVoiceButton();
 
