@@ -399,15 +399,18 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   <canvas id="scene3d" aria-label="3차원 숫자 친구와 블록을 손가락으로 움직이는 놀이 공간"></canvas>
 
   <header id="top">
-    <div id="brand" class="glass"><strong>🌈 시현이의 1~10 놀이터</strong><span>3D</span></div>
+    <div id="brand" class="glass">
+      <button id="exitBtn" class="pill" title="놀이터 홈으로 가기" aria-label="놀이터 홈으로 가기" onclick="returnToPlayOS()">🔙</button>
+      <strong>🌈 시현이의 숫자 왕국</strong><span>3D</span>
+    </div>
     <nav id="zones" class="glass" aria-label="놀이 지역 바로가기"></nav>
     <div id="right" class="glass">
-      <button id="camBtn" class="pill" title="3D 카메라 각도 바꾸기" aria-label="3D 카메라 각도 바꾸기">👀</button>
+      <button id="camBtn" class="pill" title="3D 카메라 각도 바꾸기" aria-label="3D 카메라 각도 바꾸기">🎥</button>
       <button id="undo" class="pill" title="되돌리기" aria-label="되돌리기">↩️</button>
       <button id="sound" class="pill" title="효과음 켜기 또는 끄기" aria-label="효과음 켜기 또는 끄기" aria-pressed="true">🔊</button>
       <button id="voice" class="pill" title="숫자 읽기 목소리 켜기 또는 끄기" aria-label="숫자 읽기 목소리 켜기 또는 끄기" aria-pressed="true">🗣️</button>
       <button id="helpBtn" class="pill" title="보호자 도움말" aria-label="보호자 도움말">🧸</button>
-      <button id="reset" class="pill" title="새 놀이터" aria-label="새 놀이터">🌱</button>
+      <button id="reset" class="pill" title="놀이터 초기화" aria-label="놀이터 초기화">🔄</button>
     </div>
   </header>
 
@@ -477,11 +480,11 @@ if(typeof THREE === 'undefined'){
 const WORLD_W = 112;
 const MIN_GZ = -4, MAX_GZ = 4;
 const MAX_ENTITIES = 110;
-const PLAY_MAX = 100; // 넘버블록스 에디션: 10 초과 무제한 합체 허용
+const PLAY_MAX = 200; // 넘버블록스 에디션: 100 및 100+ 안전 무제한 합체 지원
 const GRAVITY_3D = 32;
 
 const zones = [
-  {id:'plaza',   name:'말랑 광장',      icon:'🌱', a:0,  b:22,  grass:'#7ee095', soil:'#5cb874', sky:'#bfe8ff'},
+  {id:'plaza',   name:'말랑 광장',      icon:'🌈', a:0,  b:22,  grass:'#7ee095', soil:'#5cb874', sky:'#bfe8ff'},
   {id:'river',   name:'징검다리 시냇물', icon:'🌉', a:22, b:46,  grass:'#8ce8ce', soil:'#5bb8a0', sky:'#b5f0fa'},
   {id:'orchard', name:'키다리 과수원',   icon:'🍎', a:46, b:68,  grass:'#a8e05a', soil:'#7db538', sky:'#fff0bc'},
   {id:'train',   name:'10칸 기차역',    icon:'🚂', a:68, b:90,  grass:'#ffd296', soil:'#d9a362', sky:'#e5dcff'},
@@ -594,8 +597,8 @@ function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
  * 2. 수학 엔진 및 3차원 블록 포즈 (1~20 전수 불변조건 보장)
  * ============================================================================ */
 function assertNumber(n){
-  if(!Number.isInteger(n) || n < 1 || n > 100){
-    throw new RangeError('숫자는 1~100 정수만 허용됩니다: ' + n);
+  if(!Number.isInteger(n) || n < 1 || n > 200){
+    throw new RangeError('숫자는 1~200 정수만 허용됩니다: ' + n);
   }
 }
 
@@ -645,7 +648,7 @@ function poses(n){
   if(n <= 10) p.push('tall');
   if(n >= 2 && n <= 20) p.push('bridge');
   if([3, 6, 10, 15, 21].includes(n)) p.push('stairs');
-  const rect = {4:2, 6:2, 8:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5};
+  const rect = {4:2, 6:2, 8:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5, 100:10};
   if(rect[n]) p.push('rect' + rect[n]);
   if([4, 6, 7, 8, 9, 10, 12, 16, 20].includes(n)) p.push('cube3d');
   if(n >= 6 && n <= 20) p.push('super');
@@ -953,23 +956,32 @@ const FACE_MAT = {
 };
 
 const badgeTexCache = new Map();
-function getBadgeMaterial(n, selected = false){
-  const key = `${n}:${selected ? 1 : 0}`;
+function getBadgeMaterial(n, mode = false){
+  const isSelected = (mode === true || mode === 'selected');
+  const isCandidate = (mode === 'candidate');
+  const key = `${n}:${isSelected ? 'sel' : (isCandidate ? 'cand' : 'norm')}`;
   if(badgeTexCache.has(key)) return badgeTexCache.get(key);
   const cvs = document.createElement('canvas');
   cvs.width = 128;
   cvs.height = 80;
   const c = cvs.getContext('2d');
 
-  c.fillStyle = selected ? '#293F66' : getBadgeMainColor(n);
+  if(isSelected){
+    c.fillStyle = '#293F66';
+  } else if(isCandidate){
+    c.fillStyle = '#FF9100'; // 합체 대상: 밝은 주황빛 하이라이트
+  } else {
+    c.fillStyle = getBadgeMainColor(n);
+  }
   c.beginPath();
   c.roundRect(10, 10, 108, 60, 26);
   c.fill();
-  c.lineWidth = selected ? 7 : 5;
-  c.strokeStyle = selected ? '#FFE066' : '#FFFFFF';
+
+  c.lineWidth = isSelected ? 8 : (isCandidate ? 9 : 5);
+  c.strokeStyle = isSelected ? '#FFE066' : (isCandidate ? '#FFFF66' : '#FFFFFF');
   c.stroke();
 
-  c.font = '900 40px system-ui,-apple-system,sans-serif';
+  c.font = n >= 100 ? '900 32px system-ui,-apple-system,sans-serif' : '900 40px system-ui,-apple-system,sans-serif';
   c.textAlign = 'center';
   c.textBaseline = 'middle';
   c.fillStyle = '#FFFFFF';
@@ -981,6 +993,7 @@ function getBadgeMaterial(n, selected = false){
   else if(n === 5) c.fillText('⭐', 102, 26);
   else if(n === 7) c.fillText('🌈', 102, 26);
   else if(n === 8 || n === 18) c.fillText('🐙', 102, 26);
+  else if(n >= 100) c.fillText('👑', 102, 26);
   else if(n >= 10) c.fillText('🚀', 102, 26);
 
   const tex = new THREE.CanvasTexture(cvs);
@@ -2461,26 +2474,48 @@ function findPair3D(w = state){
   return best ? {a, b: best, sum: a.n + best.n} : null;
 }
 
-// 연속 생성한 숫자들은 한 그룹으로 묶어, 1+1+1 또는 2+3+4를 한 번에 합체한다.
-// 그 밖의 경우에는 선택한 친구와 아주 가까이 있는 친구만 포함한다.
+function areNeighbors(a, b){
+  if(!a || !b || a === b || a.train || b.train || a.bridge || b.bridge) return false;
+  const ba = getBoundsLocal(a.cells);
+  const bb = getBoundsLocal(b.cells);
+  const acx = a.gx + ba.w / 2, acz = a.gz + (ba.minZ + ba.maxZ) / 2;
+  const bcx = b.gx + bb.w / 2, bcz = b.gz + (bb.minZ + bb.maxZ) / 2;
+  const dx = Math.abs(acx - bcx) - (ba.w + bb.w) / 2;
+  const dz = Math.abs(acz - bcz) - (ba.d + bb.d) / 2;
+  const dy = Math.abs(a.gy - b.gy);
+  return dx <= 2.4 && dz <= 2.2 && dy <= Math.max(ba.h, bb.h) + 1.8;
+}
+
+// 선택한 숫자 친구와 가까이 모인 친구들만 합체 대상으로 선정 (BFS 공간 클러스터 탐색)
 function getMergeGroup(w = state){
   const anchor = w.friends.find(f => f.id === w.selected);
   if(!anchor || anchor.train || anchor.bridge) return [];
   const ready = f => f && !f.train && !f.bridge && w.friends.includes(f);
-  const recent = (w.recentSpawnIds || []).map(key => w.friends.find(f => f.id === key)).filter(ready);
-  if(recent.length >= 2 && recent.includes(anchor)) return recent;
-  const near = w.friends.filter(f => ready(f) &&
-    Math.abs(f.gx - anchor.gx) <= 2 && Math.abs(f.gz - anchor.gz) <= 1 &&
-    Math.abs(f.gy - anchor.gy) <= 3);
-  return near.length >= 2 ? near : [];
+
+  const cluster = [anchor];
+  const queue = [anchor];
+  const visited = new Set([anchor.id]);
+  const candidates = w.friends.filter(ready);
+
+  while(queue.length > 0){
+    const curr = queue.shift();
+    for(const f of candidates){
+      if(!visited.has(f.id) && areNeighbors(curr, f)){
+        visited.add(f.id);
+        cluster.push(f);
+        queue.push(f);
+      }
+    }
+  }
+  return cluster.length >= 2 ? cluster : [];
 }
 
 function mergeGroup(w = state){
   const list = getMergeGroup(w);
   if(list.length < 2) return null;
   const sum = list.reduce((n, f) => n + f.n, 0);
-  if(sum > 100){
-    if(!w.headless){ toast('🙌 100보다 커! 다른 친구들끼리 모아보자!'); sfx('grab'); }
+  if(sum > 200){
+    if(!w.headless){ toast('🌟 200보다 더 커졌어! 숫자 친구들이 가득 찼어!'); sfx('grab'); }
     return null;
   }
   if(list.some(f => !w.friends.includes(f) || f.train || f.bridge)) return null;
@@ -2501,10 +2536,9 @@ function mergeGroup(w = state){
   w.friends.push(o);
   recalcSupport3D(w);
   if(!w.headless){
-    w.recentSpawnIds = [o.id];
     selectEntity(o.id);
     triggerSquash(o, 1.35);
-    burst3D(o.gx, o.gy + 1.4, o.gz, sum === 8 ? '#FF529A' : '#FFE470', 24, sum === 7);
+    burst3D(o.gx, o.gy + 1.4, o.gz, sum === 8 ? '#FF529A' : (sum === 100 ? '#FFD700' : '#FFE470'), sum >= 100 ? 32 : 24, sum === 7);
     sfx('merge', sum);
     say(`${list.map(f=>getSinoName(f.n)).join(' 더하기 ')}는 ${getNumberblockNick(sum)}!`, true);
     toast(`✨ ${list.map(f=>f.n).join(' + ')} = ${sum}`);
@@ -2518,10 +2552,15 @@ function selectEntity(id){
   refreshSelectionHighlight();
 }
 
-function refreshSelectionHighlight(){
-  for(const f of state.friends){
+function refreshSelectionHighlight(w = state){
+  const group = getMergeGroup(w);
+  const groupIds = new Set(group.map(f => f.id));
+  for(const f of w.friends){
     if(f.faceParts?.badge){
-      f.faceParts.badge.material = getBadgeMaterial(f.n, state.selected === f.id);
+      let mode = 'normal';
+      if(w.selected === f.id) mode = 'selected';
+      else if(groupIds.has(f.id)) mode = 'candidate';
+      f.faceParts.badge.material = getBadgeMaterial(f.n, mode);
     }
   }
 }
@@ -3130,10 +3169,12 @@ function update3D(dt, now){
   }
 
   let maxH = 4;
+  let maxW = 4;
   for(const o of all()){
-    if(Math.abs(o.gx - state.cameraX) < 12){
+    if(Math.abs(o.gx - state.cameraX) < 14){
       const b = getBoundsLocal(o.cells);
       maxH = Math.max(maxH, o.gy + b.h + 2);
+      maxW = Math.max(maxW, b.w + 2);
     }
   }
   if(state.zone === 'orchard') maxH = Math.max(maxH, 11);
@@ -3142,15 +3183,17 @@ function update3D(dt, now){
   const aspect = Math.max(0.5, innerWidth / Math.max(300, innerHeight));
   const portraitPullback = aspect < 0.8 ? (0.8 - aspect) * 14 : 0;
   const heightPullback = Math.max(0, (maxH - 6) * 0.75);
+  const widthPullback = Math.max(0, (maxW - 6) * 0.85);
+  const pullback = Math.max(heightPullback, widthPullback);
 
   const targetCamX = state.cameraX + preset.dx;
-  const targetCamY = preset.dy + heightPullback * 0.7 + portraitPullback * 0.35;
-  const targetCamZ = preset.dz + heightPullback * 0.9 + portraitPullback;
+  const targetCamY = preset.dy + pullback * 0.7 + portraitPullback * 0.35;
+  const targetCamZ = preset.dz + pullback * 0.95 + portraitPullback;
 
   camera.position.x += (targetCamX - camera.position.x) * Math.min(1, dt * 7);
   camera.position.y += (targetCamY - camera.position.y) * Math.min(1, dt * 6);
   camera.position.z += (targetCamZ - camera.position.z) * Math.min(1, dt * 6);
-  camera.lookAt(state.cameraX, Math.min(4.5, maxH * 0.25), 0);
+  camera.lookAt(state.cameraX, Math.min(5.5, maxH * 0.25), 0);
 
   dirLight.position.set(state.cameraX + 14, 28, 18);
   dirLight.target.position.set(state.cameraX, 0, 0);
@@ -3495,6 +3538,9 @@ function mountUI(){
   $('helpBtn').onclick = () => { $('help').style.display = 'flex'; };
   $('helpClose').onclick = () => { $('help').style.display = 'none'; };
 
+  const exitBtn = $('exitBtn');
+  if(exitBtn) exitBtn.onclick = returnToPlayOS;
+
   canvas.addEventListener('pointerdown', beginDrag);
   canvas.addEventListener('pointermove', moveDrag);
   canvas.addEventListener('pointerup', e => endDrag(e));
@@ -3502,6 +3548,19 @@ function mountUI(){
   window.addEventListener('resize', onResize);
   setTimeout(updateTrayArrows, 60);
 }
+
+function returnToPlayOS(){
+  try {
+    if(window.parent && window.parent !== window && typeof window.parent.returnToCurrentGameLand === 'function'){
+      window.parent.returnToCurrentGameLand();
+      return;
+    }
+  } catch(e) {
+    console.warn('Parent frame communication fallback:', e);
+  }
+  window.location.href = '../index.html';
+}
+window.returnToPlayOS = returnToPlayOS;
 
 function toggleDrawer(mode){
   const dr = $('drawer');
@@ -3578,7 +3637,42 @@ function selfTest(){
     }
   }
 
-  // 3) PHY-3D: 격리 월드에서 3단 적층, 앞뒤(Z축) 배치, 받침 이동·제거 낙하 검증
+  // 3) MATH-03: 아동 UX R1 정정본 필수 검증 테이블 전수 합체 및 단위 셀 수 일치 검증
+  const r1MergeCases = [
+    { inputs: [1, 1, 1, 1, 1, 1, 1], expected: 7 },
+    { inputs: [2, 3, 4], expected: 9 },
+    { inputs: [1, 2, 3, 4], expected: 10 },
+    { inputs: [7, 5], expected: 12 },
+    { inputs: [8, 7], expected: 15 },
+    { inputs: [10, 10], expected: 20 },
+    { inputs: [10, 20], expected: 30 },
+    { inputs: [20, 30, 50], expected: 100 }
+  ];
+  for(const tc of r1MergeCases){
+    clearAllEntities(mathWorld);
+    let curX = 2;
+    const group = [];
+    for(const n of tc.inputs){
+      const f = friend(n, curX, 0, 0, {}, mathWorld);
+      mathWorld.friends.push(f);
+      group.push(f);
+      const b = getBoundsLocal(f.cells);
+      curX += b.w + 0.4;
+    }
+    mathWorld.selected = group[0].id;
+    const preSnapshot = capture(mathWorld);
+    const merged = mergeGroup(mathWorld);
+    if(!merged || merged.n !== tc.expected || merged.cells.length !== tc.expected){
+      errors.push(`MATH-03 merge failed for [${tc.inputs.join('+')}] -> expected ${tc.expected}, got ${merged ? merged.n : 'null'} (cells: ${merged ? merged.cells.length : 0})`);
+    } else if(tc.expected === 100){
+      restore(preSnapshot, mathWorld);
+      if(mathWorld.friends.length !== 3 || mathWorld.friends.reduce((s, f) => s + f.n, 0) !== 100){
+        errors.push(`MATH-03 undo failed to restore 20+30+50 pre-merge state: count=${mathWorld.friends.length}`);
+      }
+    }
+  }
+
+  // 4) PHY-3D: 격리 월드에서 3단 적층, 앞뒤(Z축) 배치, 받침 이동·제거 낙하 검증
   const phyWorld = createWorldContext(true);
   const f7 = friend(7, 8, 0, 0, {}, phyWorld);
   const frontBrick = prop('brick', 8, 0, 1, phyWorld);

@@ -1617,6 +1617,7 @@ const ZONE_CONFIGS = {
     character:'mom',
     greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
+      { id:'kingdom3d', title:'숫자 왕국 3D', emoji:'🌈', image:'./assets/games/cards/number-blocks.webp', desc:'3D 블록으로 숫자를 합쳐요', action:'openNumberKingdom3DGame()', isNew:true },
       { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.webp', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
       { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.webp', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
       { id:'basket', title:'숫자 바구니', emoji:'🧺', image:'./assets/games/cards/number-basket.webp', desc:'숫자를 더해봐요', action:'openNumberBasketGame()', isNew:true },
@@ -2318,6 +2319,11 @@ function renderGameLoadError(target, message, color='#fff'){
   target.innerHTML=`<div style="padding:30px;text-align:center;font-size:24px;color:${color};">${message}</div>`;
 }
 
+function openNumberKingdom3DGame(){
+  const t=openGameShell('🌈 숫자 왕국 3D','numberKingdom3DTarget','#d8f1ff','numbers');
+  t.innerHTML=`<iframe id="numberKingdomFrame" src="./games/number-kingdom-3d.html" style="width:100%;height:100%;border:0;display:block;touch-action:none;" allow="autoplay" title="숫자 왕국 3D"></iframe>`;
+}
+
 function openNumberCountGame(){
   const t=openGameShell('🔢 몇 대일까?','numberCountTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)','numbers');
   if(window.SihyeonGames?.numberCount?.render) window.SihyeonGames.numberCount.render(t,gameOptions('numbers'));
@@ -2736,7 +2742,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone, openKaraokeZone,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberCountGame, openNumberBlocksGame, openNumberVehiclesPixiGame, openLetterGame, openColorBalloonGame,
+  openMemoryGame, openNumberKingdom3DGame, openNumberCountGame, openNumberBlocksGame, openNumberVehiclesPixiGame, openLetterGame, openColorBalloonGame,
   openParkingGame, openConstructionSiteGame, openCarGarageGame, openCodingCarGame, openLifeSequenceGame,
   openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
