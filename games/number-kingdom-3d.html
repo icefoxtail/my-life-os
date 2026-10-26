@@ -467,14 +467,34 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ── V2.1: 글을 읽지 않는 아이를 위한 100% 비주얼 3D 장난감 버튼 ── */
-#top{gap:6px;align-items:center}
+/* ── V2.2: 아동 최적화 상단 바 (홈 + 5개 구역 중앙 시원한 노출 + 빠른 도구 3개) ── */
+#top{gap:6px;align-items:center;padding:4px 8px;width:100%;box-sizing:border-box}
 #brand{display:flex;padding:3px;align-items:center;flex-shrink:0}
-#right{gap:6px;padding:3px 5px;align-items:center}
-#right .pill{min-width:52px;min-height:52px;border-radius:18px;padding:4px}
-#zones{gap:6px;padding:3px 5px;align-items:center;justify-content:center}
-#zones .pill{min-width:56px;min-height:52px;border-radius:18px;background:#fffdfa;border:2px solid #d6e7ff;padding:3px}
+#right{gap:6px;padding:3px 5px;align-items:center;flex-shrink:0}
+#right .pill{min-width:48px;min-height:50px;border-radius:18px;padding:4px}
+#zones{gap:6px;padding:3px 5px;align-items:center;justify-content:center;flex:1;min-width:0}
+#zones .pill{min-width:50px;max-width:62px;min-height:50px;border-radius:18px;background:#fffdfa;border:2px solid #d6e7ff;padding:3px;flex:1}
 #zones .pill.active{background:linear-gradient(180deg,#FFF3BF 0%,#FFD43B 100%);border-color:#FFA94D;box-shadow:0 4px 14px rgba(255,170,0,0.38),inset 0 -3px 0 #E8590C}
+
+/* 플로팅 퀵 설정 패널 */
+#settingsPop {
+  position: fixed;
+  top: 66px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 8px;
+  border-radius: 20px;
+  z-index: 120;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+}
+#settingsPop .pill {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 16px;
+  padding: 4px;
+}
 #trayWrap{width:min(99vw,1050px);padding:8px;gap:8px;border-radius:24px}
 #pinnedTools{gap:5px}
 .toy{min-width:70px;height:76px;border-radius:20px;padding:7px 9px;gap:4px}
@@ -494,24 +514,30 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 #drawer button{min-width:78px;min-height:70px;border-radius:18px}
 #toast{top:132px}
 @media(max-width:820px){
-  #top{flex-direction:row;align-items:center;gap:4px}
+  #top{flex-direction:row;align-items:center;gap:4px;padding:3px 5px}
   #brand{display:flex;padding:2px}
   #brand strong,#brand span{display:none}
-  #right{order:2;justify-content:flex-end;gap:3px;padding:2px}
-  #right .pill{min-width:44px;min-height:46px;padding:2px}
-  #zones{order:1;flex:1;min-width:0;min-height:46px;justify-content:flex-start;gap:3px;padding:2px}
-  #zones .pill{min-width:48px;min-height:46px;padding:2px}
-  .btnSvg,.pillIconSvg{width:27px;height:27px}
+  #right{order:2;justify-content:flex-end;gap:3px;padding:2px;flex-shrink:0}
+  #right .pill{min-width:40px;min-height:44px;padding:2px}
+  #zones{order:1;flex:1;min-width:0;min-height:44px;justify-content:center;gap:3px;padding:2px}
+  #zones .pill{min-width:38px;max-width:52px;min-height:44px;padding:2px;flex:1}
+  .btnSvg,.pillIconSvg{width:26px;height:26px}
+  #settingsPop{top:56px;right:6px;gap:5px;padding:6px}
+  #settingsPop .pill{min-width:42px;min-height:42px;padding:3px}
 }
 @media(max-width:400px){
+  #top{gap:2px;padding:2px}
   .toy{min-width:64px;height:72px}
-  .toy.brickBtn,.toy.hammer{min-width:57px}
+  .toy.brickBtn{min-width:57px}
   #trayWrap{gap:4px;padding:6px 5px}
   #tray{gap:5px}
   #actions,#drawer{bottom:96px}
-  #right .pill{min-width:40px;min-height:42px;padding:2px}
-  #zones .pill{min-width:42px;min-height:42px;padding:2px}
-  .btnSvg,.pillIconSvg{width:24px;height:24px}
+  #brand .pill{min-width:38px;min-height:40px;padding:1px}
+  #right .pill{min-width:36px;min-height:40px;padding:1px}
+  #zones{gap:2px;padding:1px}
+  #zones .pill{min-width:34px;max-width:46px;min-height:40px;padding:1px}
+  .btnSvg,.pillIconSvg{width:23px;height:23px}
+  #settingsPop{top:50px;right:4px}
 }
 @media(max-height:520px){
   #top{gap:3px;top:3px}
@@ -536,98 +562,41 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   <header id="top">
     <div id="brand" class="glass">
       <button id="exitBtn" class="pill" title="홈으로 가기" aria-label="홈으로 가기" onclick="returnToPlayOS()">
-        <svg viewBox="0 0 48 48" class="btnSvg" width="32" height="32">
-          <defs>
-            <linearGradient id="hmRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#E03131"/></linearGradient>
-            <linearGradient id="hmWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFF9DB"/><stop offset="100%" stop-color="#FFE066"/></linearGradient>
-          </defs>
-          <rect x="29" y="9" width="6" height="12" rx="2" fill="#FA5252" stroke="#C92A2A" stroke-width="2"/>
-          <rect x="10" y="21" width="28" height="21" rx="4" fill="url(#hmWall)" stroke="#F59F00" stroke-width="2.5"/>
-          <polygon points="24,4 5,21 43,21" fill="url(#hmRoof)" stroke="#C92A2A" stroke-width="2.5" stroke-linejoin="round"/>
-          <path d="M19 42 V28 A5 5 0 0 1 29 28 V42 Z" fill="#7950F2" stroke="#5F3DC4" stroke-width="2"/>
-          <circle cx="24" cy="15" r="3.5" fill="#E7F5FF" stroke="#339AF0" stroke-width="2"/>
-        </svg>
+        <img src="../assets/ui-icons/number-kingdom/action-home.svg" class="btnSvg" alt="홈"/>
       </button>
     </div>
     <nav id="zones" class="glass" aria-label="놀이 지역 바로가기"></nav>
     <div id="right" class="glass">
-      <button id="camBtn" class="pill toyPill" title="카메라 각도" aria-label="카메라 각도">
-        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
-          <defs>
-            <linearGradient id="camBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DABF7"/><stop offset="100%" stop-color="#1C7ED6"/></linearGradient>
-            <linearGradient id="camLens" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1864AB"/><stop offset="100%" stop-color="#0B2B4F"/></linearGradient>
-          </defs>
-          <rect x="13" y="8" width="8" height="4" rx="2" fill="#FFA94D" stroke="#D9480F" stroke-width="1.5"/>
-          <circle cx="31" cy="10" r="2.5" fill="#FF6B6B"/>
-          <rect x="6" y="12" width="32" height="24" rx="6" fill="url(#camBody)" stroke="#1864AB" stroke-width="2"/>
-          <circle cx="22" cy="24" r="9" fill="url(#camLens)" stroke="#FFD43B" stroke-width="2.5"/>
-          <circle cx="22" cy="24" r="6" fill="#1864AB"/>
-          <circle cx="20" cy="22" r="2" fill="#FFFFFF" opacity="0.8"/>
-        </svg>
-      </button>
       <button id="undo" class="pill toyPill" title="되돌리기" aria-label="되돌리기">
-        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
-          <defs>
-            <linearGradient id="undoGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38D9A9"/><stop offset="100%" stop-color="#0CA678"/></linearGradient>
-          </defs>
-          <path d="M 17 12 L 8 20 L 17 28 L 17 22 C 27 22 34 26 34 34 C 34 22 26 16 17 16 Z" fill="url(#undoGrad)" stroke="#099268" stroke-width="2.5" stroke-linejoin="round"/>
-          <path d="M 10 20 L 16 14 L 16 18 C 24 18 30 22 32 29 C 30 24 24 20 16 20 Z" fill="#A9E34B" opacity="0.6"/>
-        </svg>
+        <img src="../assets/ui-icons/number-kingdom/action-undo.svg" class="btnSvg" alt="되돌리기"/>
       </button>
       <button id="sound" class="pill toyPill" title="소리" aria-label="소리 켜기/끄기" aria-pressed="true">
-        <svg viewBox="0 0 44 44" class="btnSvg soundIcon" width="32" height="32">
-          <defs>
-            <linearGradient id="sndGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#F59F00"/></linearGradient>
-          </defs>
-          <path d="M 7 16 H 13 L 23 8 V 36 L 13 28 H 7 Z" fill="url(#sndGrad)" stroke="#D9480F" stroke-width="2.2" stroke-linejoin="round"/>
-          <path class="sndWave1" d="M 28 17 A 8 8 0 0 1 28 27" fill="none" stroke="#FF922B" stroke-width="3" stroke-linecap="round"/>
-          <path class="sndWave2" d="M 33 13 A 14 14 0 0 1 33 31" fill="none" stroke="#E8590C" stroke-width="3" stroke-linecap="round"/>
-          <line class="sndMuteCross" x1="28" y1="16" x2="38" y2="28" stroke="#FA5252" stroke-width="3.5" stroke-linecap="round" style="display:none;"/>
-          <line class="sndMuteCross" x1="38" y1="16" x2="28" y2="28" stroke="#FA5252" stroke-width="3.5" stroke-linecap="round" style="display:none;"/>
-        </svg>
+        <img src="../assets/ui-icons/number-kingdom/action-sound.svg" class="btnSvg" id="soundIconImg" alt="소리"/>
       </button>
-      <button id="voice" class="pill toyPill" title="목소리" aria-label="목소리 켜기/끄기" aria-pressed="true">
-        <svg viewBox="0 0 44 44" class="btnSvg voiceIcon" width="32" height="32">
-          <defs>
-            <linearGradient id="vcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF922B"/><stop offset="100%" stop-color="#E8590C"/></linearGradient>
-          </defs>
-          <path d="M 7 9 H 37 A 5 5 0 0 1 42 14 V 27 A 5 5 0 0 1 37 32 H 20 L 12 39 V 32 H 7 A 5 5 0 0 1 2 27 V 14 A 5 5 0 0 1 7 9 Z" fill="url(#vcGrad)" stroke="#D9480F" stroke-width="2"/>
-          <circle cx="15" cy="20" r="2.5" fill="#FFFFFF"/>
-          <circle cx="29" cy="20" r="2.5" fill="#FFFFFF"/>
-          <path d="M 17 24 Q 22 29 27 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-          <line class="voiceMuteCross" x1="6" y1="6" x2="38" y2="38" stroke="#FA5252" stroke-width="3.5" stroke-linecap="round" style="display:none;"/>
-        </svg>
-      </button>
-      <button id="reset" class="pill toyPill" title="새 놀이터" aria-label="새 놀이터">
-        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
-          <defs>
-            <linearGradient id="rstStick" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#748FFC"/><stop offset="100%" stop-color="#4C6EF5"/></linearGradient>
-            <linearGradient id="rstStar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE066"/><stop offset="100%" stop-color="#FAB005"/></linearGradient>
-          </defs>
-          <rect x="20" y="15" width="6" height="26" rx="3" transform="rotate(-45 23 28)" fill="url(#rstStick)" stroke="#364FC7" stroke-width="2"/>
-          <polygon points="14,2 17,9 25,10 19,16 21,24 14,20 7,24 9,16 3,10 11,9" fill="url(#rstStar)" stroke="#E67700" stroke-width="1.8" stroke-linejoin="round"/>
-          <circle cx="32" cy="7" r="2.2" fill="#FFD43B"/>
-          <circle cx="36" cy="14" r="1.8" fill="#FF922B"/>
-        </svg>
-      </button>
-      <button id="helpBtn" class="pill toyPill" title="도움말" aria-label="도움말">
-        <svg viewBox="0 0 44 44" class="btnSvg" width="32" height="32">
-          <defs>
-            <linearGradient id="bearGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F59F00"/><stop offset="100%" stop-color="#D9480F"/></linearGradient>
-          </defs>
-          <circle cx="12" cy="14" r="5.5" fill="url(#bearGrad)" stroke="#D9480F" stroke-width="1.5"/>
-          <circle cx="12" cy="14" r="2.8" fill="#FFE8CC"/>
-          <circle cx="32" cy="14" r="5.5" fill="url(#bearGrad)" stroke="#D9480F" stroke-width="1.5"/>
-          <circle cx="32" cy="14" r="2.8" fill="#FFE8CC"/>
-          <circle cx="22" cy="24" r="13" fill="url(#bearGrad)" stroke="#D9480F" stroke-width="2"/>
-          <ellipse cx="22" cy="27" rx="6.5" ry="5" fill="#FFF9DB"/>
-          <ellipse cx="22" cy="25" rx="2.8" ry="1.8" fill="#343A40"/>
-          <circle cx="17" cy="21" r="2.2" fill="#343A40"/>
-          <circle cx="27" cy="21" r="2.2" fill="#343A40"/>
+      <button id="settingsBtn" class="pill toyPill" title="설정" aria-label="설정 메뉴 열기" aria-expanded="false">
+        <svg viewBox="0 0 44 44" class="btnSvg" width="28" height="28">
+          <circle cx="22" cy="22" r="7" fill="#7950F2"/>
+          <path d="M22 6 V11 M22 33 V38 M6 22 H11 M33 22 H38 M10.7 10.7 L14.2 14.2 M29.8 29.8 L33.3 33.3 M10.7 33.3 L14.2 29.8 M29.8 14.2 L33.3 10.7" stroke="#7950F2" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       </button>
     </div>
   </header>
+
+  <!-- 플로팅 퀵 설정 패널 (설정성 버튼 분리하여 5개 놀이 구역 가시성 100% 확보) -->
+  <div id="settingsPop" class="glass" role="dialog" aria-label="놀이터 설정" style="display:none;">
+    <button id="camBtn" class="pill toyPill" title="카메라 각도" aria-label="카메라 각도">
+      <img src="../assets/ui-icons/number-kingdom/action-camera.svg" class="btnSvg" alt="카메라"/>
+    </button>
+    <button id="voice" class="pill toyPill" title="목소리" aria-label="목소리 켜기/끄기" aria-pressed="true">
+      <img src="../assets/ui-icons/number-kingdom/action-voice.svg" class="btnSvg" id="voiceIconImg" alt="목소리"/>
+    </button>
+    <button id="reset" class="pill toyPill" title="새 놀이터" aria-label="새 놀이터">
+      <img src="../assets/ui-icons/number-kingdom/action-reset.svg" class="btnSvg" alt="새 놀이터"/>
+    </button>
+    <button id="helpBtn" class="pill toyPill" title="도움말" aria-label="도움말">
+      <img src="../assets/ui-icons/number-kingdom/action-help.svg" class="btnSvg" alt="도움말"/>
+    </button>
+  </div>
 
   <div id="townGuides" class="glass" aria-label="건축 가이드">
     <button class="guideBtn" data-guide="house" title="집 가이드">
@@ -656,25 +625,17 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   <!-- 자유 분해 플로팅 선택지 팔레트 -->
   <div id="decompPalette" class="glass" role="dialog" aria-label="숫자 나누기 선택지" style="display:none"></div>
 
-  <!-- 3D 말랑 수학 장난감 액션 독 -->
-  <div id="actions" class="glass toyActionDock" role="toolbar" aria-label="3D 수학 장난감 도구">
-    <!-- 통합 합체 (+) 장난감 버튼 -->
-    <button id="actionAdd" class="toyActBtn addBtn" title="숫자 친구 합체하기 (+)" aria-label="숫자 친구 합체하기">
-      <img src="../assets/ui-icons/number-kingdom/action-add.svg" alt="+" class="toyIconSvg"/>
-      <span class="toyBadgeTxt" id="addSummaryTxt">+</span>
-    </button>
-    <!-- 자유 분해 장난감 버튼 -->
-    <button id="actionDecomp" class="toyActBtn decompBtn" title="숫자 친구 나누기" aria-label="숫자 친구 나누기">
-      <img src="../assets/ui-icons/number-kingdom/action-decompose.svg" alt="나누기" class="toyIconSvg"/>
-      <span class="toyBadgeTxt" id="decompSummaryTxt">✂️</span>
-    </button>
-    <!-- 호환성 더미 버튼 (기존 테스트 및 외부 스크립트 안전용) -->
-    <button id="mergeAll" style="display:none" aria-hidden="true"></button>
-    <button id="merge" style="display:none" aria-hidden="true"></button>
-    <button id="split" style="display:none" aria-hidden="true"></button>
+  <!-- 3D 모양 변신 독 (공중 3D 장난감과 중복되는 하단 +, 분해 버튼은 완전히 제거) -->
+  <div id="actions" class="glass toyActionDock" role="toolbar" aria-label="3D 블록 모양 변신" style="display:none;">
     <!-- 3D 모양 변신 카드 리스트 -->
     <div id="poseList" role="group" aria-label="3D 모양 바꾸기 카드"></div>
     <button id="morph" class="act" title="다음 모양으로 변신" aria-label="다음 모양으로 변신" style="display:none">🔄</button>
+    <!-- 호환성 안전용 숨김 요소 -->
+    <button id="mergeAll" style="display:none" aria-hidden="true"></button>
+    <button id="merge" style="display:none" aria-hidden="true"></button>
+    <button id="split" style="display:none" aria-hidden="true"></button>
+    <button id="actionAdd" style="display:none" aria-hidden="true"></button>
+    <button id="actionDecomp" style="display:none" aria-hidden="true"></button>
   </div>
 
   <section id="drawer" class="glass" aria-label="보조 숫자 및 3D 건축 소품 서랍"></section>
@@ -3593,11 +3554,13 @@ function toggleVoice(){
 }
 function updateVoiceButton(){
   const b = $('voice');
+  const img = $('voiceIconImg');
   if(!b) return;
   b.disabled = !speechAvailable;
   b.setAttribute('aria-pressed', String(Boolean(state.voice)));
-  const cross = b.querySelector('.voiceMuteCross');
-  if(cross) cross.style.display = (!speechAvailable || !state.voice) ? 'block' : 'none';
+  if(img){
+    img.style.opacity = (!speechAvailable || !state.voice) ? '0.45' : '1';
+  }
   b.style.opacity = (!speechAvailable || !state.voice) ? '0.5' : '1';
 }
 if(speechAvailable){
@@ -3979,74 +3942,32 @@ function updateUI(){
     return;
   }
 
-  // 1. 통합 3D 말랑 합체 (+) 액션 버튼
-  const group = getMergeGroup();
-  const actAdd = $('actionAdd');
-  if(actAdd){
-    if(group.length > 1){
-      const total = group.reduce((v, f) => v + f.n, 0);
-      actAdd.style.display = 'inline-flex';
-      const summary = $('addSummaryTxt');
-      if(summary) summary.textContent = `${group.length} ➔ ${total}`;
-      actAdd.setAttribute('aria-label', `${group.length}개 숫자 친구 합체하기 (합계 ${total})`);
-    } else if(pair){
-      actAdd.style.display = 'inline-flex';
-      const summary = $('addSummaryTxt');
-      if(summary) summary.textContent = `${pair.a.n} + ${pair.b.n} = ${pair.sum}`;
-      actAdd.setAttribute('aria-label', `${pair.a.n} 더하기 ${pair.b.n}은 ${pair.sum}`);
-    } else {
-      actAdd.style.display = 'none';
-    }
-  }
-
-  // 2. 3D 자유 분해 액션 버튼
-  const actDecomp = $('actionDecomp');
-  if(actDecomp){
-    if(sel.n > 1 && !sel.train){
-      actDecomp.style.display = 'inline-flex';
-      const summary = $('decompSummaryTxt');
-      if(summary) summary.textContent = `${sel.n} ➔ ✂️`;
-      actDecomp.setAttribute('aria-label', `${sel.n} 나누기 선택지 열기`);
-    } else {
-      actDecomp.style.display = 'none';
-      closeDecompPalette();
-    }
-  }
-
-  // 호환성 버튼 숨김 유지
-  const mergeAllBtn = $('mergeAll');
-  if(mergeAllBtn) mergeAllBtn.style.display = 'none';
-  const mergeBtn = $('merge');
-  if(mergeBtn) mergeBtn.style.display = 'none';
-  const splitBtn = $('split');
-  if(splitBtn) splitBtn.style.display = 'none';
-
-  // 3. 3D 모양 변신 카드 리스트
+  // 3D 모양 변신 카드 리스트 (합체·분해·망치는 공중의 3D 장난감으로 일원화)
   const poseList = $('poseList');
   const morphBtn = $('morph');
-  poseList.innerHTML = '';
-  const pList = poses(sel.n);
-  if(pList.length > 1 && !sel.train){
-    poseList.style.display = 'flex';
-    morphBtn.style.display = 'inline-flex';
-    for(const pose of pList){
-      const card = document.createElement('button');
-      card.className = 'poseCard' + (sel.pose === pose ? ' active' : '');
-      card.title = `3D 모양 (${pose})`;
-      card.setAttribute('aria-label', `3D 모양 ${pose}`);
-      card.appendChild(renderPoseCardCanvas3D(sel.n, pose));
-      card.onclick = () => morphTo(sel, pose);
-      poseList.appendChild(card);
+  if(morphBtn) morphBtn.style.display = 'none';
+  if(poseList){
+    poseList.innerHTML = '';
+    const pList = poses(sel.n);
+    if(pList.length > 1 && !sel.train){
+      poseList.style.display = 'flex';
+      for(const pose of pList){
+        const card = document.createElement('button');
+        card.className = 'poseCard' + (sel.pose === pose ? ' active' : '');
+        card.title = `3D 모양 (${pose})`;
+        card.setAttribute('aria-label', `3D 모양 ${pose}`);
+        card.appendChild(renderPoseCardCanvas3D(sel.n, pose));
+        card.onclick = () => morphTo(sel, pose);
+        poseList.appendChild(card);
+      }
+      acts.style.display = 'flex';
+    } else {
+      poseList.style.display = 'none';
+      acts.style.display = 'none';
     }
   } else {
-    poseList.style.display = 'none';
-    morphBtn.style.display = 'none';
+    acts.style.display = 'none';
   }
-
-  const anyVisible = (actAdd && actAdd.style.display !== 'none') ||
-                     (actDecomp && actDecomp.style.display !== 'none') ||
-                     (poseList && poseList.style.display !== 'none');
-  acts.style.display = anyVisible ? 'flex' : 'none';
   refreshSelectionHighlight();
 }
 
@@ -4364,21 +4285,13 @@ function onResize(){
 }
 
 function mountUI(){
-  const zoneSVGs = {
-    plaza: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="zpRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#FA5252"/></linearGradient><linearGradient id="zpYel" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#FCC419"/></linearGradient><linearGradient id="zpGrn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#51CF66"/><stop offset="100%" stop-color="#40C057"/></linearGradient><linearGradient id="zpBlu" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#339AF0"/><stop offset="100%" stop-color="#228BE6"/></linearGradient></defs><path d="M 6 40 A 18 18 0 0 1 42 40" fill="none" stroke="url(#zpRed)" stroke-width="5" stroke-linecap="round"/><path d="M 11 40 A 13 13 0 0 1 37 40" fill="none" stroke="url(#zpYel)" stroke-width="4.5" stroke-linecap="round"/><path d="M 16 40 A 8 8 0 0 1 32 40" fill="none" stroke="url(#zpGrn)" stroke-width="4" stroke-linecap="round"/><path d="M 20 40 A 4 4 0 0 1 28 40" fill="none" stroke="url(#zpBlu)" stroke-width="3.5" stroke-linecap="round"/><circle cx="7" cy="40" r="5" fill="#FFFFFF" stroke="#CED4DA" stroke-width="2"/><circle cx="41" cy="40" r="5" fill="#FFFFFF" stroke="#CED4DA" stroke-width="2"/></svg>`,
-    river: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="zrWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DABF7"/><stop offset="100%" stop-color="#1C7ED6"/></linearGradient><linearGradient id="zrWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#E8590C"/></linearGradient></defs><rect x="4" y="26" width="40" height="18" rx="6" fill="url(#zrWater)"/><path d="M 8 32 Q 13 28 18 32 T 28 32 T 38 32" fill="none" stroke="#E7F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M 4 23 C 14 13 34 13 44 23 L 44 28 C 34 18 14 18 4 28 Z" fill="url(#zrWood)" stroke="#D9480F" stroke-width="2"/><line x1="14" y1="18" x2="14" y2="25" stroke="#FFF3BF" stroke-width="2.5"/><line x1="24" y1="14" x2="24" y2="21" stroke="#FFF3BF" stroke-width="2.5"/><line x1="34" y1="18" x2="34" y2="25" stroke="#FFF3BF" stroke-width="2.5"/></svg>`,
-    orchard: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="zoTree" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#82C91E"/><stop offset="100%" stop-color="#5C940D"/></linearGradient><linearGradient id="zoApple" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF6B6B"/><stop offset="100%" stop-color="#C92A2A"/></linearGradient></defs><rect x="20" y="28" width="8" height="16" rx="2" fill="#845EF7" stroke="#5F3DC4" stroke-width="2"/><circle cx="24" cy="20" r="16" fill="url(#zoTree)" stroke="#2B8A3E" stroke-width="2.5"/><circle cx="22" cy="19" r="7.5" fill="url(#zoApple)" stroke="#A61E4D" stroke-width="2"/><path d="M 22 12 Q 24 9 27 10" fill="none" stroke="#2F9E44" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="17" r="1.8" fill="#FFFFFF"/></svg>`,
-    train: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="ztBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFA94D"/><stop offset="100%" stop-color="#D9480F"/></linearGradient><linearGradient id="ztCab" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DABF7"/><stop offset="100%" stop-color="#1971C2"/></linearGradient></defs><rect x="9" y="11" width="6" height="11" rx="2" fill="#495057"/><circle cx="12" cy="5.5" r="3" fill="#CED4DA"/><circle cx="17" cy="2.5" r="4.5" fill="#E9ECEF"/><rect x="6" y="21" width="24" height="16" rx="4" fill="url(#ztBody)" stroke="#C92A2A" stroke-width="2"/><rect x="25" y="14" width="17" height="23" rx="4" fill="url(#ztCab)" stroke="#1864AB" stroke-width="2"/><rect x="29" y="18" width="9" height="8" rx="2" fill="#E7F5FF"/><circle cx="13" cy="38" r="5" fill="#343A40" stroke="#FFD43B" stroke-width="2.5"/><circle cx="25" cy="38" r="5" fill="#343A40" stroke="#FFD43B" stroke-width="2.5"/><circle cx="37" cy="38" r="5" fill="#343A40" stroke="#FFD43B" stroke-width="2.5"/></svg>`,
-    town: `<svg viewBox="0 0 48 48" class="btnSvg"><defs><linearGradient id="ztwWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D0BFFF"/><stop offset="100%" stop-color="#845EF7"/></linearGradient><linearGradient id="ztwRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD43B"/><stop offset="100%" stop-color="#F59F00"/></linearGradient></defs><rect x="8" y="19" width="32" height="23" rx="4" fill="url(#ztwWall)" stroke="#5F3DC4" stroke-width="2.5"/><rect x="8" y="14" width="7" height="7" fill="url(#ztwWall)"/><rect x="20.5" y="14" width="7" height="7" fill="url(#ztwWall)"/><rect x="33" y="14" width="7" height="7" fill="url(#ztwWall)"/><polygon points="24,3 17,14 31,14" fill="url(#ztwRoof)" stroke="#E67700" stroke-width="2"/><line x1="24" y1="3" x2="24" y2="0" stroke="#495057" stroke-width="2"/><polygon points="24,0 30,3 24,6" fill="#FF6B6B"/><path d="M 19 42 V 31 A 5 5 0 0 1 29 31 V 42 Z" fill="#343A40"/></svg>`
-  };
-
   for(const [i, z] of zones.entries()){
     const b = document.createElement('button');
     b.className = 'pill' + (i === 0 ? ' active' : '');
     b.dataset.zone = z.id;
     b.title = z.name;
     b.setAttribute('aria-label', z.name);
-    b.innerHTML = zoneSVGs[z.id] || `<span class="zIcon">${z.icon}</span>`;
+    b.innerHTML = `<img src="../assets/ui-icons/number-kingdom/zone-${z.id}.svg" class="btnSvg" alt="${z.name}"/>`;
     b.onclick = () => flyToZone(i);
     $('zones').appendChild(b);
   }
@@ -4445,64 +4358,34 @@ function mountUI(){
   propBtn.onclick = () => toggleDrawer('props');
   tray.appendChild(propBtn);
 
-  const hammerBtn = document.createElement('button');
-  hammerBtn.id = 'hammer';
-  hammerBtn.className = 'toy hammer';
-  hammerBtn.title = '망치';
-  hammerBtn.setAttribute('aria-label', '망치');
-  hammerBtn.innerHTML = `
-    <svg viewBox="0 0 44 44" class="btnSvg" width="34" height="34" style="filter:drop-shadow(0 3px 5px rgba(134,46,156,0.3))">
-      <defs>
-        <linearGradient id="hmrHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B8B"/><stop offset="100%" stop-color="#C92A2A"/></linearGradient>
-        <linearGradient id="hmrHdl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FFE8CC"/><stop offset="100%" stop-color="#D9480F"/></linearGradient>
-      </defs>
-      <g transform="rotate(-38 22 22)">
-        <rect x="19" y="16" width="6" height="24" rx="3" fill="url(#hmrHdl)" stroke="#D9480F" stroke-width="1"/>
-        <rect x="9" y="6" width="26" height="13" rx="4" fill="url(#hmrHead)" stroke="#861B32" stroke-width="1.5"/>
-        <polygon points="22,9 23,12 26,12 24,14 25,17 22,15 19,17 20,14 18,12 21,12" fill="#FFD43B"/>
-      </g>
-    </svg>`;
-  hammerBtn.onclick = () => {
-    setHammer(!state.hammer);
-    sfx('grab');
-    toast(state.hammer ? '🔨 톡!' : '🔨 ✨');
-  };
-  $('pinnedTools').appendChild(hammerBtn);
-
   tray.addEventListener('scroll', updateTrayArrows, {passive: true});
   $('trayLeft').onclick = () => tray.scrollBy({left: -160, behavior: 'smooth'});
   $('trayRight').onclick = () => tray.scrollBy({left: 160, behavior: 'smooth'});
 
-  // 3D 말랑 수학 장난감 액션 버튼 이벤트 연결
-  const actAdd = $('actionAdd');
-  if(actAdd){
-    actAdd.onclick = () => {
-      const group = getMergeGroup();
-      if(group.length > 1){
-        mergeGroup();
-      } else {
-        const p = findPair3D();
-        if(p) merge(p.a, p.b);
-      }
-    };
-  }
-
-  const actDecomp = $('actionDecomp');
-  if(actDecomp){
-    actDecomp.onclick = (e) => {
+  // 퀵 설정 패널 토글 및 외부 클릭 시 닫기
+  const setBtn = $('settingsBtn');
+  const setPop = $('settingsPop');
+  if(setBtn && setPop){
+    setBtn.onclick = (e) => {
       e.stopPropagation();
-      const sel = getEntity(state.selected);
-      if(sel) toggleDecompPalette(sel);
+      const isHidden = setPop.style.display === 'none';
+      setPop.style.display = isHidden ? 'flex' : 'none';
+      setBtn.setAttribute('aria-expanded', String(isHidden));
     };
   }
 
-  // 외부 클릭 시 분해 팔레트 닫기
+  // 외부 클릭 시 분해 팔레트 및 설정 팝오버 닫기
   document.addEventListener('pointerdown', (e) => {
     const pal = $('decompPalette');
-    const decompBtn = $('actionDecomp');
     if(pal && pal.style.display !== 'none'){
-      if(!pal.contains(e.target) && (!decompBtn || !decompBtn.contains(e.target))){
+      if(!pal.contains(e.target)){
         closeDecompPalette();
+      }
+    }
+    if(setPop && setPop.style.display !== 'none'){
+      if(!setPop.contains(e.target) && (!setBtn || !setBtn.contains(e.target))){
+        setPop.style.display = 'none';
+        if(setBtn) setBtn.setAttribute('aria-expanded', 'false');
       }
     }
   });
@@ -4525,13 +4408,15 @@ function mountUI(){
 
   function updateSoundButton(){
     const b = $('sound');
+    const img = $('soundIconImg');
     if(!b) return;
     b.setAttribute('aria-pressed', String(state.sound));
-    const waves = b.querySelectorAll('.sndWave1, .sndWave2');
-    const mute = b.querySelectorAll('.sndMuteCross');
-    waves.forEach(el => el.style.display = state.sound ? 'block' : 'none');
-    mute.forEach(el => el.style.display = state.sound ? 'none' : 'block');
-    b.style.opacity = state.sound ? '1' : '0.55';
+    if(img){
+      img.src = state.sound
+        ? '../assets/ui-icons/number-kingdom/action-sound.svg'
+        : '../assets/ui-icons/number-kingdom/action-sound-mute.svg';
+    }
+    b.style.opacity = state.sound ? '1' : '0.65';
   }
 
   $('sound').onclick = () => {
