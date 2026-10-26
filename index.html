@@ -1617,7 +1617,7 @@ const ZONE_CONFIGS = {
     character:'mom',
     greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
-      { id:'kingdom3d', title:'숫자 왕국 3D', emoji:'🌈', image:'./assets/games/cards/number-blocks.webp', desc:'3D 블록으로 숫자를 합쳐요', action:'openNumberKingdom3DGame()', isNew:true },
+      { id:'kingdom3d', title:'숫자 왕국 3D', emoji:'🌈', image:'./assets/games/cards/number-kingdom-3d.png', desc:'3D 블록으로 숫자를 합쳐요', action:'openNumberKingdom3DGame()', isNew:true },
       { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.webp', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
       { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.webp', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
       { id:'basket', title:'숫자 바구니', emoji:'🧺', image:'./assets/games/cards/number-basket.webp', desc:'숫자를 더해봐요', action:'openNumberBasketGame()', isNew:true },
@@ -1970,7 +1970,7 @@ function getLandCharacterInfo(zoneId){
 function runLandAction(zoneId){
   const actionMap={
     game:openMemoryGame,
-    numbers:openNumberCountGame,
+    numbers:openNumberKingdom3DGame,
     letters:openLetterGame,
     cars:openFullscreenGarage,
     story:openStoryTheater,
