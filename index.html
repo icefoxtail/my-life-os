@@ -1618,6 +1618,7 @@ const ZONE_CONFIGS = {
     greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
       { id:'kingdom3d', title:'숫자 왕국 3D', emoji:'🌈', image:'./assets/games/cards/number-kingdom-3d.png', desc:'3D 블록으로 숫자를 합쳐요', action:'openNumberKingdom3DGame()', isNew:true },
+      { id:'hangulworld3d', title:'말랑 한글·숫자 3D', emoji:'🌸', image:'./assets/games/cards/hangul-world-3d.png', desc:'숫자와 한글이 만나는 마법 놀이터', action:'openHangulWorld3DGame()', isNew:true },
       { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.webp', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false },
       { id:'blocks', title:'숫자 블록', emoji:'🔢', image:'./assets/games/cards/number-blocks.webp', desc:'블록을 합쳐 5를 만들어요', action:'openNumberBlocksGame()', isNew:true },
       { id:'basket', title:'숫자 바구니', emoji:'🧺', image:'./assets/games/cards/number-basket.webp', desc:'숫자를 더해봐요', action:'openNumberBasketGame()', isNew:true },
@@ -1630,6 +1631,7 @@ const ZONE_CONFIGS = {
     character:'rona',
     greeting:'로나랑 글자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
+      { id:'hangulworld3d', title:'말랑 한글·숫자 3D', emoji:'🌸', image:'./assets/games/cards/hangul-world-3d.png', desc:'자석 글자를 합쳐 장난감을 소환해요', action:'openHangulWorld3DGame()', isNew:true },
       { id:'letter', title:'글자 풍선', emoji:'🎈', image:'./assets/games/cards/letter-play.webp', desc:'첫 글자를 찾아요', action:'openLetterGame()', isNew:false },
       { id:'abcphon', title:'ABC 변신', emoji:'🔤', image:'./assets/games/cards/abc-phonics.webp', desc:'ABC가 변신해요', action:'openAbcPhonicsGame()', isNew:true }
     ]
@@ -2322,6 +2324,11 @@ function renderGameLoadError(target, message, color='#fff'){
 function openNumberKingdom3DGame(){
   const t=openGameShell('🌈 숫자 왕국 3D','numberKingdom3DTarget','#d8f1ff','numbers');
   t.innerHTML=`<iframe id="numberKingdomFrame" src="./games/number-kingdom-3d.html" style="width:100%;height:100%;border:0;display:block;touch-action:none;" allow="autoplay" title="숫자 왕국 3D"></iframe>`;
+}
+
+function openHangulWorld3DGame(){
+  const t=openGameShell('🌸 말랑 한글·숫자 3D','hangulWorld3DTarget','#d8f1ff','letters');
+  t.innerHTML=`<iframe id="hangulWorldFrame" src="./games/hangul-number-world.html" style="width:100%;height:100%;border:0;display:block;touch-action:none;" allow="autoplay" title="말랑 한글·숫자 3D"></iframe>`;
 }
 
 function openNumberCountGame(){
