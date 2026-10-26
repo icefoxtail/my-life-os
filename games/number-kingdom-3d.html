@@ -977,7 +977,10 @@ const entitiesGroup = new THREE.Group();
 const fxGroup = new THREE.Group();
 const ghostGroup = new THREE.Group();
 const blueprintGroup = new THREE.Group();
-scene.add(worldGroup, entitiesGroup, fxGroup, ghostGroup, blueprintGroup);
+const toyHudGroup = new THREE.Group();
+toyHudGroup.name = 'toyHudGroup';
+camera.add(toyHudGroup);
+scene.add(worldGroup, entitiesGroup, fxGroup, ghostGroup, blueprintGroup, camera);
 
 function createRoundedCubeGeometry(size = 0.80, radius = 0.08, segments = 3){
   const s = size, r = radius;
@@ -1000,6 +1003,37 @@ function createRoundedCubeGeometry(size = 0.80, radius = 0.08, segments = 3){
     steps: 1,
     bevelSize: r,
     bevelThickness: r
+  });
+  geo.center();
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function create3DPlusGeometry(size = 1.25, thickness = 0.38, armWidth = 0.46, bevel = 0.08){
+  const s = size / 2;
+  const w = armWidth / 2;
+  const shape = new THREE.Shape();
+  shape.moveTo(-w, s);
+  shape.lineTo(w, s);
+  shape.lineTo(w, w);
+  shape.lineTo(s, w);
+  shape.lineTo(s, -w);
+  shape.lineTo(w, -w);
+  shape.lineTo(w, -s);
+  shape.lineTo(-w, -s);
+  shape.lineTo(-w, -w);
+  shape.lineTo(-s, -w);
+  shape.lineTo(-s, w);
+  shape.lineTo(-w, w);
+  shape.closePath();
+
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth: thickness,
+    bevelEnabled: true,
+    bevelSegments: 3,
+    steps: 1,
+    bevelSize: bevel,
+    bevelThickness: bevel
   });
   geo.center();
   geo.computeVertexNormals();
@@ -1153,6 +1187,448 @@ function getBadgeMaterial(n, mode = false){
   const mat = new THREE.SpriteMaterial({map: tex, transparent: true, depthTest: false});
   badgeTexCache.set(key, mat);
   return mat;
+}
+
+/* ============================================================================
+ * 3-B. 카메라 부착 3D 수학 장난감 조형물 (+, 분해, 망치)
+ * ============================================================================ */
+let mathToys = null;
+
+function createToyBadgeSprite(initialText = '', bgColor = '#FF922B'){
+  const cvs = document.createElement('canvas');
+  cvs.width = 192;
+  cvs.height = 64;
+  const tex = new THREE.CanvasTexture(cvs);
+  const mat = new THREE.SpriteMaterial({map: tex, transparent: true, depthTest: false});
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(1.5, 0.5, 1);
+  sprite.visible = false;
+  sprite.userData = {cvs, tex, currentText: ''};
+
+  sprite.setText = (text, bg = bgColor) => {
+    if(!text){
+      sprite.visible = false;
+      return;
+    }
+    sprite.visible = true;
+    if(sprite.userData.currentText === `${text}:${bg}`) return;
+    sprite.userData.currentText = `${text}:${bg}`;
+    const ctx = cvs.getContext('2d');
+    ctx.clearRect(0, 0, 192, 64);
+
+    // 둥근 젤리 알약 배경
+    ctx.fillStyle = bg;
+    ctx.beginPath();
+    ctx.roundRect(6, 6, 180, 52, 26);
+    ctx.fill();
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.stroke();
+
+    // 두껍고 또렷한 텍스트
+    ctx.font = '900 24px system-ui, -apple-system, sans-serif';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, 96, 32);
+
+    tex.needsUpdate = true;
+  };
+
+  sprite.setText(initialText, bgColor);
+  return sprite;
+}
+
+function buildMathToyHud3D(){
+  while(toyHudGroup.children.length) toyHudGroup.remove(toyHudGroup.children[0]);
+
+  // 장난감 전용 부드러운 포인트 조명
+  const toyLight = new THREE.PointLight(0xffffff, 0.65, 25);
+  toyLight.position.set(0, 3, 5);
+  toyHudGroup.add(toyLight);
+
+  // 1. 3D 말랑 플러스 장난감 (+)
+  const plusGroup = new THREE.Group();
+  plusGroup.userData = {toyType: 'plus'};
+
+  const plusMainMat = new THREE.MeshStandardMaterial({
+    color: 0xFFAA00,
+    emissive: 0xEE7700,
+    emissiveIntensity: 0.18,
+    roughness: 0.22,
+    metalness: 0.08
+  });
+  const plusGeo = create3DPlusGeometry(1.22, 0.38, 0.46, 0.08);
+  const plusMesh = new THREE.Mesh(plusGeo, plusMainMat);
+  plusMesh.castShadow = true;
+  plusMesh.userData = {toyType: 'plus'};
+  plusGroup.add(plusMesh);
+
+  // 내부 햇살 노란색 하이라이트 면
+  const plusInnerGeo = create3DPlusGeometry(0.92, 0.42, 0.34, 0.04);
+  const plusInnerMat = new THREE.MeshStandardMaterial({
+    color: 0xFFD43B,
+    emissive: 0xF59F00,
+    emissiveIntensity: 0.15,
+    roughness: 0.2
+  });
+  const plusInnerMesh = new THREE.Mesh(plusInnerGeo, plusInnerMat);
+  plusInnerMesh.userData = {toyType: 'plus'};
+  plusGroup.add(plusInnerMesh);
+
+  // 주변을 맴도는 4개의 미니 큐브 (합체 시 중심을 향해 모여드는 애니메이션)
+  const orbitCubes = [];
+  const cubeColors = [0x38D9A9, 0xFF6B6B, 0x748FFC, 0xFFD43B];
+  const miniCubeGeo = createRoundedCubeGeometry(0.24, 0.04, 2);
+  for(let i = 0; i < 4; i++){
+    const mat = new THREE.MeshStandardMaterial({
+      color: cubeColors[i],
+      roughness: 0.25,
+      metalness: 0.05
+    });
+    const m = new THREE.Mesh(miniCubeGeo, mat);
+    m.userData = {toyType: 'plus'};
+    plusGroup.add(m);
+    orbitCubes.push(m);
+  }
+
+  // 3D 뱃지 스프라이트
+  const plusBadgeSprite = createToyBadgeSprite('+');
+  plusBadgeSprite.position.set(0, -0.92, 0);
+  plusGroup.add(plusBadgeSprite);
+
+  // 유아 터치용 넉넉한 히트 구체
+  const plusHit = new THREE.Mesh(
+    new THREE.SphereGeometry(0.95, 8, 8),
+    new THREE.MeshBasicMaterial({visible: false})
+  );
+  plusHit.userData = {toyType: 'plus'};
+  plusGroup.add(plusHit);
+
+  // 2. 3D 분해 조형물 장난감 (갈라지는 큐브)
+  const decompGroup = new THREE.Group();
+  decompGroup.userData = {toyType: 'decomp'};
+
+  const decompCubeGeo = createRoundedCubeGeometry(0.68, 0.09, 3);
+  const decompLMat = new THREE.MeshStandardMaterial({
+    color: 0x20C997,
+    emissive: 0x0CA678,
+    emissiveIntensity: 0.15,
+    roughness: 0.22,
+    metalness: 0.05
+  });
+  const decompRMat = new THREE.MeshStandardMaterial({
+    color: 0xFF6B6B,
+    emissive: 0xF03E3E,
+    emissiveIntensity: 0.15,
+    roughness: 0.22,
+    metalness: 0.05
+  });
+
+  const cubeL = new THREE.Mesh(decompCubeGeo, decompLMat);
+  cubeL.castShadow = true;
+  cubeL.userData = {toyType: 'decomp'};
+  const cubeR = new THREE.Mesh(decompCubeGeo, decompRMat);
+  cubeR.castShadow = true;
+  cubeR.userData = {toyType: 'decomp'};
+  decompGroup.add(cubeL, cubeR);
+
+  // 분리 시 중앙에서 반짝이는 스파크 별
+  const starGeo = new THREE.ShapeGeometry(createStarShape(0.08, 0.22, 4));
+  const starMat = new THREE.MeshBasicMaterial({color: 0xFFF3BF, side: THREE.DoubleSide});
+  const sparkMesh = new THREE.Mesh(starGeo, starMat);
+  sparkMesh.position.set(0, 0, 0.38);
+  sparkMesh.userData = {toyType: 'decomp'};
+  decompGroup.add(sparkMesh);
+
+  // 3D 뱃지 스프라이트
+  const decompBadgeSprite = createToyBadgeSprite('나누기');
+  decompBadgeSprite.position.set(0, -0.92, 0);
+  decompGroup.add(decompBadgeSprite);
+
+  // 터치 히트 구체
+  const decompHit = new THREE.Mesh(
+    new THREE.SphereGeometry(0.95, 8, 8),
+    new THREE.MeshBasicMaterial({visible: false})
+  );
+  decompHit.userData = {toyType: 'decomp'};
+  decompGroup.add(decompHit);
+
+  // 3. 3D 장난감 망치 (손잡이 + 머리 + 타격 고무패드)
+  const hammerGroup = new THREE.Group();
+  hammerGroup.userData = {toyType: 'hammer'};
+
+  // 원통형 자작나무 손잡이
+  const handleGeo = new THREE.CylinderGeometry(0.09, 0.11, 1.3, 16);
+  handleGeo.translate(0, -0.35, 0);
+  const handleMat = new THREE.MeshStandardMaterial({
+    color: 0xF8D8B0,
+    roughness: 0.35,
+    metalness: 0.05
+  });
+  const handleMesh = new THREE.Mesh(handleGeo, handleMat);
+  handleMesh.castShadow = true;
+  handleMesh.userData = {toyType: 'hammer'};
+  hammerGroup.add(handleMesh);
+
+  // 파란 망치 머리
+  const headGeo = createRoundedCubeGeometry(0.72, 0.1, 3);
+  headGeo.scale(1.2, 0.85, 0.85);
+  headGeo.translate(0, 0.35, 0);
+  const headMat = new THREE.MeshStandardMaterial({
+    color: 0x339AF0,
+    emissive: 0x1C7ED6,
+    emissiveIntensity: 0.15,
+    roughness: 0.22,
+    metalness: 0.2
+  });
+  const headMesh = new THREE.Mesh(headGeo, headMat);
+  headMesh.castShadow = true;
+  headMesh.userData = {toyType: 'hammer'};
+  hammerGroup.add(headMesh);
+
+  // 양옆 노란 고무 타격 패드
+  const capGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.12, 16);
+  capGeo.rotateZ(Math.PI / 2);
+  const capMat = new THREE.MeshStandardMaterial({
+    color: 0xFFD43B,
+    roughness: 0.3,
+    metalness: 0.05
+  });
+  const capL = new THREE.Mesh(capGeo, capMat);
+  capL.position.set(-0.46, 0.35, 0);
+  capL.userData = {toyType: 'hammer'};
+  const capR = new THREE.Mesh(capGeo, capMat);
+  capR.position.set(0.46, 0.35, 0);
+  capR.userData = {toyType: 'hammer'};
+  hammerGroup.add(capL, capR);
+
+  // 터치 히트 구체
+  const hammerHit = new THREE.Mesh(
+    new THREE.SphereGeometry(1.0, 8, 8),
+    new THREE.MeshBasicMaterial({visible: false})
+  );
+  hammerHit.position.set(0, 0.1, 0);
+  hammerHit.userData = {toyType: 'hammer'};
+  hammerGroup.add(hammerHit);
+
+  toyHudGroup.add(plusGroup, decompGroup, hammerGroup);
+
+  mathToys = {
+    group: toyHudGroup,
+    plus: {
+      group: plusGroup,
+      mesh: plusMesh,
+      orbitCubes,
+      badge: plusBadgeSprite,
+      baseX: 0, baseY: 0,
+      scaleSpring: 1.0,
+      active: false
+    },
+    decomp: {
+      group: decompGroup,
+      cubeL, cubeR,
+      spark: sparkMesh,
+      badge: decompBadgeSprite,
+      baseX: 0, baseY: 0,
+      scaleSpring: 1.0,
+      active: false
+    },
+    hammer: {
+      group: hammerGroup,
+      handle: handleMesh,
+      head: headMesh,
+      baseX: 0, baseY: 0,
+      scaleSpring: 1.0,
+      swingProgress: 0,
+      active: false
+    }
+  };
+
+  updateMathToyHudLayout();
+}
+
+function updateMathToyHudLayout(){
+  if(!mathToys) return;
+  const aspect = Math.max(0.4, camera.aspect || (innerWidth / innerHeight));
+  const vFovRad = (camera.fov * Math.PI) / 180;
+  const D = 10; // 카메라로부터의 고정 거리
+  const visibleH = 2 * Math.tan(vFovRad / 2) * D;
+  const visibleW = visibleH * aspect;
+  const halfH = visibleH / 2;
+  const halfW = visibleW / 2;
+
+  toyHudGroup.position.set(0, 0, -D);
+
+  if(aspect >= 1.0){
+    // 데스크톱 / 가로 화면: 우측 상단 하늘에 여유 있게 배치
+    const toyY = halfH - 1.25;
+    const rightMargin = halfW - 0.9;
+    mathToys.hammer.baseX = rightMargin - 0.6;
+    mathToys.hammer.baseY = toyY;
+    mathToys.plus.baseX   = rightMargin - 2.4;
+    mathToys.plus.baseY   = toyY;
+    mathToys.decomp.baseX = rightMargin - 4.2;
+    mathToys.decomp.baseY = toyY;
+    mathToys.group.scale.setScalar(1.0);
+  } else {
+    // 스마트폰 세로 화면: 상단 하늘에 세 장난감을 균등 배치하여 넉넉한 터치 영역 확보
+    const toyY = halfH - 1.35;
+    const span = Math.min(halfW * 0.72, 1.7);
+    mathToys.decomp.baseX = -span;
+    mathToys.decomp.baseY = toyY;
+    mathToys.plus.baseX   = 0;
+    mathToys.plus.baseY   = toyY;
+    mathToys.hammer.baseX = span;
+    mathToys.hammer.baseY = toyY;
+    const s = clamp(aspect / 0.85, 0.75, 0.95);
+    mathToys.group.scale.setScalar(s);
+  }
+}
+
+function updateMathToyHud3D(dt, now){
+  if(!mathToys) return;
+
+  const group = getMergeGroup();
+  const pair = findPair3D();
+  const sel = getEntity(state.selected);
+
+  // 1. Plus Toy 3D 업데이트
+  const p = mathToys.plus;
+  const pGroup = p.group;
+  const hasMerge = (group.length > 1 || !!pair);
+  p.active = hasMerge;
+
+  const pBob = Math.sin(now * 0.003) * 0.08;
+  pGroup.position.set(p.baseX, p.baseY + pBob, 0);
+  pGroup.rotation.y = Math.sin(now * 0.0018) * 0.28;
+  pGroup.rotation.z = Math.cos(now * 0.0022) * 0.08;
+
+  p.scaleSpring += (1.0 - p.scaleSpring) * Math.min(1, dt * 10);
+  const targetPScale = (hasMerge ? 1.15 : 0.95) * p.scaleSpring;
+  pGroup.scale.setScalar(targetPScale);
+
+  const orbitR = hasMerge ? (0.75 + Math.sin(now * 0.006) * 0.15) : 0.88;
+  for(let i = 0; i < p.orbitCubes.length; i++){
+    const ang = (Math.PI / 2) * i + now * (hasMerge ? 0.0035 : 0.0015);
+    p.orbitCubes[i].position.set(Math.cos(ang) * orbitR, Math.sin(ang) * orbitR, Math.sin(ang * 2) * 0.1);
+    p.orbitCubes[i].rotation.x += dt * 2;
+    p.orbitCubes[i].rotation.y += dt * 3;
+  }
+
+  if(group.length > 1){
+    const total = group.reduce((v, f) => v + f.n, 0);
+    p.badge.setText(`${group.length}개 → ${total}`, '#FF922B');
+  } else if(pair){
+    p.badge.setText(`${pair.a.n}+${pair.b.n}=${pair.sum}`, '#FF922B');
+  } else {
+    p.badge.setText('', '#FF922B');
+  }
+
+  // 2. Decomposition Toy 3D 업데이트
+  const d = mathToys.decomp;
+  const dGroup = d.group;
+  const hasDecomp = (sel && sel.kind === 'friend' && sel.n > 1 && !sel.train);
+  d.active = hasDecomp;
+
+  const dBob = Math.cos(now * 0.0032) * 0.08;
+  dGroup.position.set(d.baseX, d.baseY + dBob, 0);
+  dGroup.rotation.y = Math.cos(now * 0.0016) * 0.22;
+
+  const splitDist = 0.22 + Math.max(0, Math.sin(now * 0.003)) * (hasDecomp ? 0.38 : 0.18);
+  d.cubeL.position.x = -splitDist;
+  d.cubeR.position.x = splitDist;
+  d.spark.scale.setScalar(hasDecomp ? (0.8 + Math.sin(now * 0.008) * 0.3) : 0.01);
+  d.spark.rotation.z += dt * 3;
+
+  d.scaleSpring += (1.0 - d.scaleSpring) * Math.min(1, dt * 10);
+  const targetDScale = (hasDecomp ? 1.12 : 0.92) * d.scaleSpring;
+  dGroup.scale.setScalar(targetDScale);
+
+  if(hasDecomp){
+    d.badge.setText(`${sel.n} 나누기`, '#20C997');
+  } else {
+    d.badge.setText('', '#20C997');
+  }
+
+  // 3. Hammer Toy 3D 업데이트
+  const h = mathToys.hammer;
+  const hGroup = h.group;
+  const isHammerOn = Boolean(state.hammer);
+  h.active = isHammerOn;
+
+  const hBob = Math.sin(now * 0.0028 + 1.2) * 0.08;
+  hGroup.position.set(h.baseX, h.baseY + hBob, 0);
+
+  if(h.swingProgress > 0){
+    h.swingProgress = Math.max(0, h.swingProgress - dt * 4.5);
+    const swingAng = Math.sin(h.swingProgress * Math.PI) * 0.85;
+    hGroup.rotation.z = -0.45 - swingAng;
+    hGroup.rotation.x = 0.2 + swingAng * 0.5;
+  } else if(isHammerOn){
+    hGroup.rotation.z = -0.85 + Math.sin(now * 0.006) * 0.12;
+    hGroup.rotation.x = 0.45 + Math.cos(now * 0.005) * 0.08;
+    hGroup.rotation.y = 0.3;
+  } else {
+    hGroup.rotation.z = -0.45 + Math.sin(now * 0.002) * 0.06;
+    hGroup.rotation.x = 0.18;
+    hGroup.rotation.y = 0.32;
+  }
+
+  h.scaleSpring += (1.0 - h.scaleSpring) * Math.min(1, dt * 10);
+  const targetHScale = (isHammerOn ? (1.2 + Math.sin(now * 0.008) * 0.08) : 1.0) * h.scaleSpring;
+  hGroup.scale.setScalar(targetHScale);
+}
+
+function triggerToySquash(toyKey){
+  if(!mathToys || !mathToys[toyKey]) return;
+  mathToys[toyKey].scaleSpring = 1.45;
+}
+
+function triggerHammerSwing(){
+  if(!mathToys || !mathToys.hammer) return;
+  mathToys.hammer.swingProgress = 1.0;
+  mathToys.hammer.scaleSpring = 1.35;
+}
+
+function triggerToyAction(type){
+  if(type === 'plus'){
+    triggerToySquash('plus');
+    const group = getMergeGroup();
+    if(group.length > 1){
+      mergeGroup();
+    } else {
+      const p = findPair3D();
+      if(p) merge(p.a, p.b);
+      else {
+        sfx('grab');
+        toast('➕ 가까이 모인 숫자 친구들을 합쳐요!');
+      }
+    }
+    return true;
+  }
+
+  if(type === 'decomp'){
+    triggerToySquash('decomp');
+    const sel = getEntity(state.selected);
+    if(sel && sel.n > 1 && !sel.train){
+      toggleDecompPalette(sel);
+    } else {
+      sfx('grab');
+      toast('✂️ 2 이상의 숫자 친구를 먼저 골라보세요!');
+    }
+    return true;
+  }
+
+  if(type === 'hammer'){
+    triggerHammerSwing();
+    setHammer(!state.hammer);
+    sfx('grab');
+    toast(state.hammer ? '🔨 지울 블록을 한 번 톡 눌러요!' : '🔨 망치를 내려놓았어요');
+    return true;
+  }
+
+  return false;
 }
 
 /* ============================================================================
@@ -3123,6 +3599,18 @@ function pickEntity3D(clientX, clientY){
   return null;
 }
 
+function pickMathToy3D(clientX, clientY){
+  if(!toyHudGroup || !toyHudGroup.children.length) return null;
+  setRayFromEvent(clientX, clientY);
+  const hits = raycaster.intersectObjects(toyHudGroup.children, true);
+  for(const h of hits){
+    let obj = h.object;
+    while(obj && !obj.userData?.toyType && obj !== toyHudGroup) obj = obj.parent;
+    if(obj?.userData?.toyType) return obj.userData.toyType;
+  }
+  return null;
+}
+
 function intersectGround(clientX, clientY){
   setRayFromEvent(clientX, clientY);
   const hit = raycaster.ray.intersectPlane(groundPlane, rayHitPoint);
@@ -3185,6 +3673,16 @@ function beginDrag(e){
   state.pointer = e.pointerId;
   try{ canvas.setPointerCapture?.(e.pointerId); }catch{}
   $('drawer').style.display = 'none';
+
+  // 1. 공중에 떠 있는 3D 수학 장난감 직접 터치 판정 (최우선)
+  const toyType = pickMathToy3D(e.clientX, e.clientY);
+  if(toyType){
+    triggerToyAction(toyType);
+    state.pointer = null;
+    try{ canvas.releasePointerCapture?.(e.pointerId); }catch{}
+    return;
+  }
+
   closeDecompPalette();
 
   const picked = pickEntity3D(e.clientX, e.clientY);
@@ -3732,6 +4230,9 @@ function update3D(dt, now){
     if(p.life <= 0) fxGroup.remove(p.mesh);
   }
   state.particles = state.particles.filter(p => p.life > 0);
+
+  // 공중 부유 3D 수학 장난감 (+, 분해, 망치) 애니메이션 및 상태 실시간 갱신
+  updateMathToyHud3D(dt, now);
 }
 
 function animate(now){
@@ -3760,6 +4261,7 @@ function onResize(){
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   renderer.setSize(w, h);
+  updateMathToyHudLayout();
   updateTrayArrows();
 }
 
@@ -3902,7 +4404,13 @@ function mountUI(){
   if(exitBtn) exitBtn.onclick = returnToPlayOS;
 
   canvas.addEventListener('pointerdown', beginDrag);
-  canvas.addEventListener('pointermove', moveDrag);
+  canvas.addEventListener('pointermove', (e) => {
+    moveDrag(e);
+    if(!state.drag && !state.pan){
+      const isToy = Boolean(pickMathToy3D(e.clientX, e.clientY));
+      canvas.style.cursor = isToy ? 'pointer' : 'default';
+    }
+  });
   canvas.addEventListener('pointerup', e => endDrag(e));
   canvas.addEventListener('pointercancel', e => endDrag(e, true));
   window.addEventListener('resize', onResize);
@@ -4434,7 +4942,27 @@ function selfTest(){
     }
   }
 
-  // 7) ISO-01: 테스트 전후 실제 게임 상태(선택·ID·기차 상태·Undo) 100% 보존 검증
+  // 7) TOY3D-01: 카메라 부착 3D 수학 장난감 3종(Plus, Decomp, Hammer) 및 계층 구조 검증
+  if(!toyHudGroup || toyHudGroup.children.length < 3){
+    errors.push('TOY3D-01 toyHudGroup missing or insufficient children');
+  }
+  if(!mathToys || !mathToys.plus || !mathToys.decomp || !mathToys.hammer){
+    errors.push('TOY3D-01 mathToys structure missing required 3 toys');
+  }
+  if(mathToys?.plus?.group?.userData?.toyType !== 'plus'){
+    errors.push('TOY3D-01 plus toy missing userData.toyType');
+  }
+  if(mathToys?.decomp?.group?.userData?.toyType !== 'decomp'){
+    errors.push('TOY3D-01 decomp toy missing userData.toyType');
+  }
+  if(mathToys?.hammer?.group?.userData?.toyType !== 'hammer'){
+    errors.push('TOY3D-01 hammer toy missing userData.toyType');
+  }
+  if(!mathToys?.plus?.mesh?.geometry || mathToys.plus.mesh.geometry.type !== 'ExtrudeGeometry'){
+    errors.push('TOY3D-01 plus toy mesh not ExtrudeGeometry');
+  }
+
+  // 8) ISO-01: 테스트 전후 실제 게임 상태(선택·ID·기차 상태·Undo) 100% 보존 검증
   if(state.selected !== beforeSelected ||
      state.friends.map(f => f.id).join(',') !== beforeFriendIds ||
      state.props.map(p => p.id).join(',') !== beforePropIds ||
@@ -4456,6 +4984,7 @@ function selfTest(){
  * 15. 부트스트랩 및 디버그 인터페이스 노출
  * ============================================================================ */
 buildWorld3D();
+buildMathToyHud3D();
 mountUI();
 onResize();
 reset();
@@ -4486,6 +5015,9 @@ window.NumberKingdomDebug = {
   selectEntity,
   getBoundsLocal,
   getState: () => state,
+  get3DMathToys: () => mathToys,
+  pickMathToy3D,
+  triggerToyAction,
   inspect: () => ({
     zone: state.zone,
     selected: state.selected,
