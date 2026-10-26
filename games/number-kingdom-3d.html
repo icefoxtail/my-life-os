@@ -969,8 +969,29 @@ function getBoundsLocal(cells){
   };
 }
 
-function findHeadCluster3D(cells){
-  const topY = Math.max(...cells.map(c => c.dy));
+function findHeadCluster3D(cells, pose = null){
+  const minY = Math.min(...cells.map(c => c.dy));
+  const maxY = Math.max(...cells.map(c => c.dy));
+  const minX = Math.min(...cells.map(c => c.dx));
+  const maxX = Math.max(...cells.map(c => c.dx));
+
+  // 1) 수평(가로) 포즈 (bridge 포즈이거나 높이가 1이고 가로로 2칸 이상 긴 경우)
+  // 원작 넘버블록스 불변 법칙: 가로일 때는 몸통 배가 아닌 진행 방향 '맨 처음(선두 dx=minX)' 블록에 얼굴 배치!
+  const isHorizontal = (pose === 'bridge') || (maxY - minY === 0 && maxX - minX >= 1);
+  if(isHorizontal){
+    const frontZ = Math.max(...cells.map(c => c.dz));
+    const headCell = cells.find(c => c.dx === minX && c.dz === frontZ) || cells[0];
+    return {
+      topY: headCell.dy,
+      avgX: headCell.dx,
+      frontZ: headCell.dz,
+      isHorizontal: true,
+      count: 1
+    };
+  }
+
+  // 2) 세로/블록형 포즈: 가장 높은 최상단(topY) 블록 정면 클러스터 (단 하나의 얼굴)
+  const topY = maxY;
   const topCells = cells.filter(c => c.dy === topY);
   const frontZ = Math.max(...topCells.map(c => c.dz));
   const rowCells = topCells.filter(c => c.dz === frontZ).sort((a, b) => a.dx - b.dx);
@@ -985,7 +1006,13 @@ function findHeadCluster3D(cells){
     if(curRun.length > bestRun.length) bestRun = curRun;
   }
   const avgX = (bestRun[0].dx + bestRun[bestRun.length - 1].dx) / 2;
-  return {topY, avgX, frontZ, count: bestRun.length};
+  return {
+    topY,
+    avgX,
+    frontZ,
+    isHorizontal: false,
+    count: bestRun.length
+  };
 }
 
 /* ============================================================================
@@ -1159,6 +1186,9 @@ const SHARED_GEO = {
   squareEyeWhite: createRoundedCubeGeometry(0.24, 0.03, 2),
   squareEyePupil: createRoundedCubeGeometry(0.12, 0.02, 2),
   squareEyebrow: new THREE.BoxGeometry(0.24, 0.04, 0.04),
+  squareGlassesRim: createRoundedCubeGeometry(0.28, 0.035, 2),
+  sneezeNose: new THREE.SphereGeometry(0.048, 8, 8),
+  sneezeSpark: new THREE.OctahedronGeometry(0.055, 0),
   starShape: new THREE.ShapeGeometry(createStarShape(0.075, 0.19, 5)),
   octoMask: createOctoMaskGeometry(),
   octoSuction: new THREE.CylinderGeometry(0.075, 0.075, 0.05, 12)
@@ -1194,6 +1224,9 @@ const FACE_MAT = {
   glassesRim: new THREE.MeshStandardMaterial({color: 0xd85600, roughness: 0.3}),
   clownRed: new THREE.MeshStandardMaterial({color: 0xee2026, roughness: 0.3}),
   fourGreen: new THREE.MeshStandardMaterial({color: 0x1f7a35, roughness: 0.3}),
+  fourBlue: new THREE.MeshStandardMaterial({color: 0x1892ee, roughness: 0.25}),
+  nineNose: new THREE.MeshStandardMaterial({color: 0xff8ba7, roughness: 0.35}),
+  nineSpark: new THREE.MeshStandardMaterial({color: 0x6ee7b7, roughness: 0.25, emissive: 0x34d399, emissiveIntensity: 0.35}),
   diceDot: new THREE.MeshStandardMaterial({color: 0x311b5e, roughness: 0.3})
 };
 
@@ -2008,7 +2041,7 @@ function buildNumberblocksFace(o, head, visual, w){
     faceGroup.add(leftEye, rightEye, btn1, btn2, btn3, cheekL, cheekR, mouthSmile, mouthO);
   }
   else if(num === 4){
-    // 4: 넘버블록스 포 — 네모 마니아 (네모난 눈과 눈썹)
+    // 4: 넘버블록스 포 — 파란색 네모 안경 마니아 (원작 시그니처 사각 뿔테)
     leftEye = new THREE.Group();
     leftEye.position.set(-0.19, 0.04, 0);
     const sqEW = new THREE.Mesh(SHARED_GEO.squareEyeWhite, FACE_MAT.white);
@@ -2021,14 +2054,16 @@ function buildNumberblocksFace(o, head, visual, w){
     rightEye = leftEye.clone();
     rightEye.position.set(0.19, 0.04, 0);
 
-    const browL = new THREE.Mesh(SHARED_GEO.squareEyebrow, FACE_MAT.fourGreen);
-    browL.position.set(-0.19, 0.20, 0.04);
-    browL.rotation.z = 0.08;
-    const browR = new THREE.Mesh(SHARED_GEO.squareEyebrow, FACE_MAT.fourGreen);
-    browR.position.set(0.19, 0.20, 0.04);
-    browR.rotation.z = -0.08;
+    // 원작의 상징: 파란색 네모 뿔테 안경과 브릿지
+    const rimL = new THREE.Mesh(SHARED_GEO.squareGlassesRim, FACE_MAT.fourBlue);
+    rimL.position.set(-0.19, 0.04, 0.06);
+    rimL.scale.set(1.05, 1.05, 0.35);
+    const rimR = rimL.clone();
+    rimR.position.set(0.19, 0.04, 0.06);
+    const bridge = new THREE.Mesh(SHARED_GEO.glassesBridge, FACE_MAT.fourBlue);
+    bridge.position.set(0, 0.04, 0.07);
 
-    faceGroup.add(leftEye, rightEye, browL, browR, cheekL, cheekR, mouthSmile, mouthO);
+    faceGroup.add(leftEye, rightEye, rimL, rimR, bridge, cheekL, cheekR, mouthSmile, mouthO);
   }
   else if(num === 5){
     // 5: 넘버블록스 파이브 — 황금 5각 별눈 안경 & 하이파이브
@@ -2085,6 +2120,17 @@ function buildNumberblocksFace(o, head, visual, w){
     }
     faceGroup.add(leftEye, rightEye, mask, octoGroup, cheekL, cheekR, mouthSmile, mouthO);
   }
+  else if(num === 9){
+    // 9: 넘버블록스 나인 — 3x3 사각형의 귀여운 재채기 친구 (에취!)
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+    const nose = new THREE.Mesh(SHARED_GEO.sneezeNose, FACE_MAT.nineNose);
+    nose.position.set(0, -0.02, 0.06);
+    const spark = new THREE.Mesh(SHARED_GEO.sneezeSpark, FACE_MAT.nineSpark);
+    spark.position.set(0.16, -0.08, 0.08);
+
+    faceGroup.add(leftEye, rightEye, nose, spark, cheekL, cheekR, mouthSmile, mouthO);
+  }
   else if(num === 10){
     // 10: 캡틴 텐 — 양쪽 눈 모두 빛나는 황금 별눈
     const starL = new THREE.Group();
@@ -2117,7 +2163,8 @@ function buildNumberblocksFace(o, head, visual, w){
 
   const badge = new THREE.Sprite(getBadgeMaterial(o.n, w.selected === o.id));
   badge.scale.set(1.35, 0.85, 1);
-  badge.position.set(head.avgX, head.topY + 1.52, head.frontZ);
+  const badgeY = head.isHorizontal ? (head.topY + 1.15) : (head.topY + 1.52);
+  badge.position.set(head.avgX, badgeY, head.frontZ);
   visual.add(badge);
 
   o.faceParts = {leftEye, rightEye, mouthSmile, mouthO, badge};
@@ -2148,6 +2195,7 @@ function buildEntityMesh3D(o, w = state){
       cubeMeshes.push({mesh, cell: c});
     }
 
+    const head = findHeadCluster3D(o.cells, o.pose);
     if(o.n === 7){
       const starRing = new THREE.Group();
       for(let i = 0; i < 3; i++){
@@ -2156,15 +2204,13 @@ function buildEntityMesh3D(o, w = state){
         st.position.set(Math.cos(ang) * 0.78, 0, Math.sin(ang) * 0.78);
         starRing.add(st);
       }
-      const head = findHeadCluster3D(o.cells);
-      starRing.position.set(head.avgX, head.topY + 0.85, head.frontZ);
+      starRing.position.set(head.avgX, head.topY + (head.isHorizontal ? 0.75 : 0.85), head.frontZ);
       visual.add(starRing);
       o.starRing = starRing;
     } else {
       o.starRing = null;
     }
 
-    const head = findHeadCluster3D(o.cells);
     buildNumberblocksFace(o, head, visual, w);
   } else {
     const s = specs[o.type];
@@ -5220,6 +5266,8 @@ requestAnimationFrame(animate);
 window.NumberKingdomDebug = {
   selfTest,
   spawnFriend,
+  findHeadCluster3D,
+  cellsFor,
   handleFriendTap,
   getNumberblockNick,
   NUMBER_VOICE_PROFILES,
