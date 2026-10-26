@@ -1695,6 +1695,22 @@ function triggerSquash(o, amount = 0.9){
 /* ============================================================================
  * 9. 상호작용 핵심 로직: 숫자 합체/분해 + 한글 합체/분해 + 숫자×글자 뻥튀기 콜라보!
  * ============================================================================ */
+// 시현이를 위한 스마트 나누기(가르기) 대상 자동 조준
+function findHangulDecompTarget3D(w = state){
+  const sel = getEntity(w.selected, w);
+  if(sel){
+    if(sel.kind === 'hangul' && sel.role === 'syllable') return sel;
+    if(sel.kind === 'friend' && sel.n > 1) return sel;
+  }
+  const camX = typeof w.cameraX === 'number' ? w.cameraX : 11;
+  const cSyl = w.hanguls.filter(h => h.role === 'syllable');
+  const cNum = w.friends.filter(f => f.n > 1);
+  const candidates = [...cSyl, ...cNum];
+  if(!candidates.length) return null;
+  candidates.sort((a, b) => Math.abs(a.gx - camX) - Math.abs(b.gx - camX));
+  return candidates[0] || null;
+}
+
 function findClosestPartner3D(anchor, w = state){
   if(!anchor || anchor.bridge) return null;
   const ba = getBoundsLocal(anchor.cells);
@@ -2389,13 +2405,19 @@ function triggerToyAction(type){
   }
   if(type === 'decomp'){
     mathToys.decomp.scaleSpring = 1.45;
-    if(sel && sel.kind === 'hangul' && sel.role === 'syllable'){
-      splitHangul(sel, state);
-    } else if(sel && sel.kind === 'friend' && sel.n > 1){
-      toggleDecompPalette(sel);
+    closeDecompPalette();
+    const target = findHangulDecompTarget3D(state);
+    if(target){
+      if(target.kind === 'hangul' && target.role === 'syllable'){
+        splitHangul(target, state);
+      } else if(target.kind === 'friend' && target.n > 1){
+        const pr = (typeof getDecompositionPresets === 'function' ? getDecompositionPresets(target.n, target.history)[0] : null) || [Math.ceil(target.n / 2), Math.floor(target.n / 2)];
+        const created = decomposeNumber(target, pr, state);
+        if(created && created.length > 0) selectEntity(created[0].id);
+      }
     } else {
       sfx('grab');
-      toast('✂️ 나눌 수 있는 합체 글자(가,나,고)나 2 이상 숫자를 먼저 골라보세요!');
+      toast('✂️ 나눌 수 있는 2 이상의 숫자나 합체 글자를 먼저 만들어 볼까요?');
     }
     return true;
   }
@@ -2613,6 +2635,8 @@ function closeDecompPalette(){
 }
 
 function toggleDecompPalette(sel){
+  closeDecompPalette();
+  return;
   const pal = $('decompPalette');
   if(!pal || !sel || sel.kind !== 'friend' || sel.n <= 1){ closeDecompPalette(); return; }
   pal.innerHTML = '';
@@ -3146,6 +3170,7 @@ window.OpenWorldDebug = {
   spawnHangul,
   mergeHangul,
   splitHangul,
+  triggerToyAction,
   triggerNumberHangulMultiplier,
   executeInteraction,
   canEntitiesCombine,

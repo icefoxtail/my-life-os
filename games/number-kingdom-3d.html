@@ -1617,7 +1617,8 @@ function updateMathToyHud3D(dt, now){
   // 2. Decomposition Toy 3D 업데이트
   const d = mathToys.decomp;
   const dGroup = d.group;
-  const hasDecomp = (sel && sel.kind === 'friend' && sel.n > 1 && !sel.train);
+  const decompTarget = findDecompTarget3D(state);
+  const hasDecomp = Boolean(decompTarget);
   d.active = hasDecomp;
 
   const dBob = Math.cos(now * 0.0032) * 0.08;
@@ -1634,9 +1635,9 @@ function updateMathToyHud3D(dt, now){
   const targetDScale = (hasDecomp ? 1.12 : 0.92) * d.scaleSpring;
   dGroup.scale.setScalar(targetDScale);
 
-  // 한글 없는 직관적인 분해 뱃지
-  if(hasDecomp){
-    d.badge.setText(`${sel.n} ➔ ✂️`, '#20C997');
+  // 한글 없는 직관적인 분해 뱃지 (스마트 타겟이 있으면 바로 쪼갤 대상 표시)
+  if(decompTarget){
+    d.badge.setText(`${decompTarget.n} ➔ ✂️`, '#20C997');
   } else {
     d.badge.setText('', '#20C997');
   }
@@ -1700,12 +1701,17 @@ function triggerToyAction(type){
 
   if(type === 'decomp'){
     triggerToySquash('decomp');
-    const sel = getEntity(state.selected);
-    if(sel && sel.n > 1 && !sel.train){
-      toggleDecompPalette(sel);
+    closeDecompPalette();
+    const target = findDecompTarget3D(state);
+    if(target){
+      const created = split(target, state);
+      if(created && created.length > 0){
+        selectEntity(created[0].id);
+      }
     } else {
       sfx('grab');
-      toast('✂️ 2 이상의 숫자 친구를 먼저 골라보세요!');
+      toast('✂️ 나눌 수 있는 2 이상의 숫자 친구를 먼저 만들어 볼까요?');
+      say('숫자를 더 크게 합치면 나눌 수 있어요!', false);
     }
     return true;
   }
@@ -3213,6 +3219,8 @@ function closeDecompPalette(){
 }
 
 function toggleDecompPalette(sel){
+  closeDecompPalette();
+  return;
   const pal = $('decompPalette');
   if(!pal || !sel || sel.kind !== 'friend' || sel.n <= 1){
     closeDecompPalette();
@@ -3326,6 +3334,28 @@ function deleteObject(o, w = state){
     sfx('hammer');
     updateUI();
   }
+}
+
+// 시현이를 위한 스마트 나누기(가르기) 대상 자동 조준
+function findDecompTarget3D(w = state){
+  // 1. 현재 선택된 친구가 2 이상이고 탑승/다리 상태가 아니면 최우선
+  const sel = w.friends.find(f => f.id === w.selected);
+  if(sel && sel.n > 1 && !sel.train && !sel.bridge) return sel;
+
+  // 2. 선택된 친구가 없거나 1이라면, 화면 안(카메라 중심 x = w.cameraX)에서 유효한 2 이상 친구 탐색
+  const candidates = w.friends.filter(f => f.n > 1 && !f.train && !f.bridge);
+  if(!candidates.length) return null;
+
+  // 카메라 중심 x와 가장 가까운 친구 (화면 중심에 가장 잘 보이는 큰 숫자 우선)
+  const camX = typeof w.cameraX === 'number' ? w.cameraX : 11;
+  candidates.sort((a, b) => {
+    const distA = Math.abs(a.gx - camX);
+    const distB = Math.abs(b.gx - camX);
+    if(Math.abs(distA - distB) > 2.5) return distA - distB;
+    return b.n - a.n; // 크기가 큰 수 우선
+  });
+
+  return candidates[0] || null;
 }
 
 function findPair3D(w = state){
@@ -5283,6 +5313,7 @@ window.NumberKingdomDebug = {
   closeDecompPalette,
   toggleDecompPalette,
   findPair3D,
+  findDecompTarget3D,
   getMergeGroup,
   selectEntity,
   getBoundsLocal,
