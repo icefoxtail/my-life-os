@@ -13,7 +13,7 @@
       completeText: '뽀득뽀득. 손이 깨끗해졌어요.',
       sequenceText: '물을 틀고 비누로 문지르고 수건으로 닦아요.',
       bg: './assets/life-sequence/wash-hands/bg.webp',
-      completeImage: './assets/life-sequence/wash-hands/complete.webp',
+      completeImage: './assets/life-sequence/wash-hands/step3.webp',
       sceneEmoji: '🧼',
       completeEmoji: '✨',
       steps: [
@@ -29,7 +29,7 @@
       completeText: '반짝반짝. 이가 깨끗해졌어요.',
       sequenceText: '치약을 짜고 이를 쓱쓱 닦고 입을 헹궈요.',
       bg: './assets/life-sequence/brush-teeth/bg.webp',
-      completeImage: './assets/life-sequence/brush-teeth/complete.webp',
+      completeImage: './assets/life-sequence/brush-teeth/step3.webp',
       sceneEmoji: '🪥',
       completeEmoji: '😁',
       steps: [
@@ -45,7 +45,7 @@
       completeText: '냠냠. 맛있게 잘 먹었어요.',
       sequenceText: '손을 씻고 자리에 앉고 맛있게 먹어요.',
       bg: './assets/life-sequence/eat-meal/bg.webp',
-      completeImage: './assets/life-sequence/eat-meal/complete.webp',
+      completeImage: './assets/life-sequence/eat-meal/step3.webp',
       sceneEmoji: '🍚',
       completeEmoji: '😋',
       steps: [
@@ -61,7 +61,7 @@
       completeText: '코오 잘 자요. 내일 또 놀자!',
       sequenceText: '잠옷을 입고 책을 읽고 불을 끄고 자요.',
       bg: './assets/life-sequence/sleep/bg.webp',
-      completeImage: './assets/life-sequence/sleep/complete.webp',
+      completeImage: './assets/life-sequence/sleep/step3.webp',
       sceneEmoji: '🌙',
       completeEmoji: '😴',
       steps: [
@@ -77,7 +77,7 @@
       completeText: '준비 끝. 신나게 나가요.',
       sequenceText: '옷을 입고 신발을 신고 문 밖으로 나가요.',
       bg: './assets/life-sequence/go-out/bg.webp',
-      completeImage: './assets/life-sequence/go-out/complete.webp',
+      completeImage: './assets/life-sequence/go-out/step3.webp',
       sceneEmoji: '🎒',
       completeEmoji: '🚪',
       steps: [
@@ -93,7 +93,7 @@
       completeText: '우와. 방이 깨끗해졌어요.',
       sequenceText: '장난감을 모으고 바구니에 넣고 정리해요.',
       bg: './assets/life-sequence/cleanup/bg.webp',
-      completeImage: './assets/life-sequence/cleanup/complete.webp',
+      completeImage: './assets/life-sequence/cleanup/step3.webp',
       sceneEmoji: '🧸',
       completeEmoji: '🏠',
       steps: [

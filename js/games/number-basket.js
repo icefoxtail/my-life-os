@@ -17,6 +17,7 @@
   const GAME_KEY = 'numberBasket';
   const STYLE_ID = 'sihyeon-number-basket-style';
   const ASSET_BASE = './assets/games/number-basket';
+  const BLOCKS_BASE = './assets/games/number-basket/blocks';
   const ALL_NUMBER_BLOCKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   let sharedAudioCtx = null;
@@ -702,7 +703,7 @@
         b.type = 'button';
         b.setAttribute('aria-label', `숫자 ${n}`);
         b.innerHTML = `
-          <img class="nb-block-img" src="${ASSET_BASE}/${n}.webp" alt="숫자 ${n}" draggable="false">
+          <img class="nb-block-img" src="${BLOCKS_BASE}/${n}.webp" alt="숫자 ${n}" draggable="false">
           <span class="nb-block-fallback">${n}</span>
         `;
 

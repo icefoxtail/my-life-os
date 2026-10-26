@@ -461,15 +461,7 @@
   function createBlockImage(slot){
     const color = COLORS[slot.number];
     const fallbackKey = `${slot.shape}_${color}_${slot.number}`;
-    const img = document.createElement('img');
-    img.src = `${BLOCKS_PATH}/${slot.shape}_${color}_${slot.number}.webp`;
-    img.alt = '';
-    img.draggable = false;
-    img.onerror = () => {
-      const fallback = createFallbackElement(fallbackKey);
-      img.replaceWith(fallback);
-    };
-    return img;
+    return createFallbackElement(fallbackKey);
   }
 
   const game = {
