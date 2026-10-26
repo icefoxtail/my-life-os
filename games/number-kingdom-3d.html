@@ -477,7 +477,7 @@ if(typeof THREE === 'undefined'){
 const WORLD_W = 112;
 const MIN_GZ = -4, MAX_GZ = 4;
 const MAX_ENTITIES = 110;
-const PLAY_MAX = 10; // 이 놀이터의 플레이 한도; 공통 수학 함수는 20까지 보존
+const PLAY_MAX = 100; // 넘버블록스 에디션: 10 초과 무제한 합체 허용
 const GRAVITY_3D = 32;
 
 const zones = [
@@ -490,7 +490,7 @@ const zones = [
 
 const PALETTE_10 = [
   '#FA5B62', '#FF9A3B', '#FFD34B', '#4CCB75', '#43B4F4',
-  '#9876F5', '#FF78B0', '#F675A9', '#34D0B4', '#F7CF68'
+  '#8E68F5', '#FF78B0', '#FF529A', '#78909C', '#E53935'
 ];
 
 const RAINBOW_7 = [
@@ -594,28 +594,46 @@ function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
  * 2. 수학 엔진 및 3차원 블록 포즈 (1~20 전수 불변조건 보장)
  * ============================================================================ */
 function assertNumber(n){
-  if(!Number.isInteger(n) || n < 1 || n > 20){
-    throw new RangeError('숫자는 1~20 정수만 허용됩니다: ' + n);
+  if(!Number.isInteger(n) || n < 1 || n > 100){
+    throw new RangeError('숫자는 1~100 정수만 허용됩니다: ' + n);
   }
 }
 
 function getCellColor(n, cellIndex, group){
   if(n === 7) return RAINBOW_7[cellIndex % 7];
+  if(n === 8) return '#FF529A';
+  if(n === 9) return ['#90A4AE', '#78909C', '#607D8B'][Math.floor(cellIndex / 3) % 3];
   if(n === 10) return PALETTE_10[9];
   if(n > 10 && n < 20){
     if(group === 0 || cellIndex < 10) return PALETTE_10[9];
     const rem = n - 10;
     const remIdx = cellIndex - 10;
     if(rem === 7) return RAINBOW_7[remIdx % 7];
+    if(rem === 8) return '#FF529A';
+    if(rem === 9) return ['#90A4AE', '#78909C', '#607D8B'][Math.floor(remIdx / 3) % 3];
     return PALETTE_10[(rem - 1) % 10];
   }
-  if(n === 20) return group === 1 ? '#F2B949' : '#F7CF68';
+  if(n === 20) return group === 1 ? '#FA5B62' : '#E53935';
+  if(n > 20){
+    const tens = Math.floor(n / 10);
+    const rem = n % 10;
+    if(cellIndex < tens * 10){
+      return (Math.floor(cellIndex / 10) % 2 === 0) ? '#E53935' : '#FF767E';
+    }
+    const remIdx = cellIndex - tens * 10;
+    if(rem === 7) return RAINBOW_7[remIdx % 7];
+    if(rem === 8) return '#FF529A';
+    return PALETTE_10[(rem - 1) % 10];
+  }
   return PALETTE_10[(n - 1) % 10];
 }
 
 function getBadgeMainColor(n){
   if(n === 7) return '#6C5CE7';
-  if(n >= 10) return '#D99B26';
+  if(n === 8) return '#E91E63';
+  if(n === 10) return '#D32F2F';
+  if(n > 10 && n < 20) return '#D99B26';
+  if(n >= 20) return '#FF8F00';
   return PALETTE_10[(n - 1) % 10];
 }
 
@@ -623,14 +641,15 @@ function poses(n){
   assertNumber(n);
   const p = [];
   if(n > 10 && n < 20) p.push('ten');
-  else if(n === 20) p.push('double');
+  else if(n >= 20) p.push('ten', 'double');
   if(n <= 10) p.push('tall');
-  if(n >= 2 && n <= 10) p.push('bridge');
-  if([3, 6, 10, 15].includes(n)) p.push('stairs');
-  const rect = {4:2, 6:2, 8:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4};
+  if(n >= 2 && n <= 20) p.push('bridge');
+  if([3, 6, 10, 15, 21].includes(n)) p.push('stairs');
+  const rect = {4:2, 6:2, 8:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5};
   if(rect[n]) p.push('rect' + rect[n]);
   if([4, 6, 7, 8, 9, 10, 12, 16, 20].includes(n)) p.push('cube3d');
-  if(n >= 6 && n <= 15) p.push('super');
+  if(n >= 6 && n <= 20) p.push('super');
+  if(!p.length) p.push(n <= 10 ? 'tall' : 'ten');
   return p;
 }
 
@@ -641,23 +660,22 @@ function cellsFor(n, pose){
   const a = [];
 
   if(p === 'ten' || p === 'double'){
-    for(let k = 0; k < 10; k++){
-      a.push({dx: k % 2, dy: Math.floor(k / 2), dz: 0, group: 0, idx: k});
-    }
-    for(let k = 10; k < n; k++){
-      const r = k - 10;
-      if(p === 'double'){
-        a.push({dx: 2 + (r % 2), dy: Math.floor(r / 2), dz: 0, group: 1, idx: k});
-      } else {
-        const twoCol = (n - 10) > 5;
-        a.push({
-          dx: 2 + (twoCol ? (r % 2) : 0),
-          dy: twoCol ? Math.floor(r / 2) : r,
-          dz: 0,
-          group: 1,
-          idx: k
-        });
+    const tens = Math.floor(n / 10);
+    const rem = n % 10;
+    for(let t = 0; t < tens; t++){
+      for(let k = 0; k < 10; k++){
+        a.push({dx: t * 2 + (k % 2), dy: Math.floor(k / 2), dz: 0, group: t, idx: t * 10 + k});
       }
+    }
+    for(let k = 0; k < rem; k++){
+      const idx = tens * 10 + k;
+      a.push({
+        dx: tens * 2 + (rem > 5 ? (k % 2) : 0),
+        dy: rem > 5 ? Math.floor(k / 2) : k,
+        dz: 0,
+        group: tens,
+        idx
+      });
     }
   } else if(p === 'stairs'){
     let s = 0;
@@ -832,6 +850,48 @@ function createRoundedCubeGeometry(size = 0.80, radius = 0.08, segments = 3){
   return geo;
 }
 
+function createStarShape(innerR, outerR, points = 5){
+  const s = new THREE.Shape();
+  const step = Math.PI / points;
+  for(let i = 0; i < 2 * points; i++){
+    const r = (i % 2 === 0) ? outerR : innerR;
+    const a = i * step - Math.PI / 2;
+    const x = Math.cos(a) * r;
+    const y = Math.sin(a) * r;
+    if(i === 0) s.moveTo(x, y);
+    else s.lineTo(x, y);
+  }
+  s.closePath();
+  return s;
+}
+
+function createOctoMaskGeometry(){
+  const s = new THREE.Shape();
+  s.moveTo(0, 0.08);
+  s.bezierCurveTo(-0.08, 0.18, -0.26, 0.22, -0.42, 0.14);
+  s.bezierCurveTo(-0.46, 0.02, -0.42, -0.10, -0.34, -0.12);
+  s.bezierCurveTo(-0.20, -0.14, -0.10, -0.04, 0, -0.01);
+  s.bezierCurveTo(0.10, -0.04, 0.20, -0.14, 0.34, -0.12);
+  s.bezierCurveTo(0.42, -0.10, 0.46, 0.02, 0.42, 0.14);
+  s.bezierCurveTo(0.26, 0.22, 0.08, 0.18, 0, 0.08);
+
+  const holeL = new THREE.Path();
+  holeL.absellipse(-0.19, 0.04, 0.11, 0.08, 0, Math.PI * 2, true);
+  s.holes.push(holeL);
+
+  const holeR = new THREE.Path();
+  holeR.absellipse(0.19, 0.04, 0.11, 0.08, 0, Math.PI * 2, true);
+  s.holes.push(holeR);
+
+  return new THREE.ExtrudeGeometry(s, {
+    depth: 0.035,
+    bevelEnabled: true,
+    bevelThickness: 0.01,
+    bevelSize: 0.01,
+    bevelSegments: 2
+  });
+}
+
 const SHARED_GEO = {
   unitCube: createRoundedCubeGeometry(0.80, 0.08, 3),
   stud:     new THREE.CylinderGeometry(0.18, 0.19, 0.12, 16),
@@ -843,7 +903,20 @@ const SHARED_GEO = {
   mouthO:     new THREE.TorusGeometry(0.065, 0.024, 8, 16),
   star:     new THREE.OctahedronGeometry(0.16, 0),
   particle: new THREE.SphereGeometry(0.11, 8, 8),
-  roof:     new THREE.ConeGeometry(0.75, 0.95, 4)
+  roof:     new THREE.ConeGeometry(0.75, 0.95, 4),
+  // 넘버블록스 고유 얼굴 지오메트리
+  eyeWhiteOne: new THREE.SphereGeometry(0.20, 16, 16),
+  eyePupilOne: new THREE.SphereGeometry(0.10, 14, 14),
+  eyeSparkOne: new THREE.SphereGeometry(0.038, 8, 8),
+  glassesRim:  new THREE.TorusGeometry(0.155, 0.024, 8, 20),
+  glassesBridge: new THREE.BoxGeometry(0.14, 0.024, 0.02),
+  clownButton: new THREE.SphereGeometry(0.065, 10, 10),
+  squareEyeWhite: createRoundedCubeGeometry(0.24, 0.03, 2),
+  squareEyePupil: createRoundedCubeGeometry(0.12, 0.02, 2),
+  squareEyebrow: new THREE.BoxGeometry(0.24, 0.04, 0.04),
+  starShape: new THREE.ShapeGeometry(createStarShape(0.075, 0.19, 5)),
+  octoMask: createOctoMaskGeometry(),
+  octoSuction: new THREE.CylinderGeometry(0.075, 0.075, 0.05, 12)
 };
 
 const materialCache = new Map();
@@ -868,7 +941,15 @@ const FACE_MAT = {
   white: new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.2}),
   pupil: new THREE.MeshStandardMaterial({color: 0x1d2c46, roughness: 0.15}),
   cheek: new THREE.MeshStandardMaterial({color: 0xff769b, roughness: 0.4, transparent: true, opacity: 0.65}),
-  mouth: new THREE.MeshStandardMaterial({color: 0x22324d, roughness: 0.3})
+  mouth: new THREE.MeshStandardMaterial({color: 0x22324d, roughness: 0.3}),
+  // 넘버블록스 전용 머티리얼
+  goldStar: new THREE.MeshStandardMaterial({color: 0xffd214, metalness: 0.35, roughness: 0.2, emissive: 0xffa000, emissiveIntensity: 0.25}),
+  octoMask: new THREE.MeshStandardMaterial({color: 0x3d1768, roughness: 0.25, metalness: 0.15}),
+  octoSuction: new THREE.MeshStandardMaterial({color: 0xff529a, roughness: 0.3}),
+  glassesRim: new THREE.MeshStandardMaterial({color: 0xd85600, roughness: 0.3}),
+  clownRed: new THREE.MeshStandardMaterial({color: 0xee2026, roughness: 0.3}),
+  fourGreen: new THREE.MeshStandardMaterial({color: 0x1f7a35, roughness: 0.3}),
+  diceDot: new THREE.MeshStandardMaterial({color: 0x311b5e, roughness: 0.3})
 };
 
 const badgeTexCache = new Map();
@@ -894,13 +975,13 @@ function getBadgeMaterial(n, selected = false){
   c.fillStyle = '#FFFFFF';
   c.fillText(String(n), 64, 42);
 
-  if(n === 7){
-    c.font = '24px system-ui';
-    c.fillText('🌈', 102, 26);
-  } else if(n >= 10){
-    c.font = '22px system-ui';
-    c.fillText('⭐', 102, 26);
-  }
+  c.font = '24px system-ui';
+  if(n === 1) c.fillText('❤️', 102, 26);
+  else if(n === 4) c.fillText('🟩', 102, 26);
+  else if(n === 5) c.fillText('⭐', 102, 26);
+  else if(n === 7) c.fillText('🌈', 102, 26);
+  else if(n === 8 || n === 18) c.fillText('🐙', 102, 26);
+  else if(n >= 10) c.fillText('🚀', 102, 26);
 
   const tex = new THREE.CanvasTexture(cvs);
   const mat = new THREE.SpriteMaterial({map: tex, transparent: true, depthTest: false});
@@ -1150,6 +1231,199 @@ function createAnimState(){
   };
 }
 
+function createStandardEye(x, y){
+  const grp = new THREE.Group();
+  grp.position.set(x, y, 0);
+  const leW = new THREE.Mesh(SHARED_GEO.eyeWhite, FACE_MAT.white);
+  const leP = new THREE.Mesh(SHARED_GEO.eyePupil, FACE_MAT.pupil);
+  leP.position.set(0, 0, 0.08);
+  const leS = new THREE.Mesh(SHARED_GEO.eyeSpark, FACE_MAT.white);
+  leS.position.set(-0.025, 0.03, 0.13);
+  grp.add(leW, leP, leS);
+  return grp;
+}
+
+function buildNumberblocksFace(o, head, visual, w){
+  const faceGroup = new THREE.Group();
+  faceGroup.position.set(head.avgX, head.topY + 0.52, head.frontZ + 0.48);
+
+  let leftEye, rightEye;
+  const cheekL = new THREE.Mesh(SHARED_GEO.cheek, FACE_MAT.cheek);
+  cheekL.scale.set(1.2, 0.75, 0.4);
+  cheekL.position.set(-0.30, -0.08, 0.01);
+  const cheekR = cheekL.clone();
+  cheekR.position.set(0.30, -0.08, 0.01);
+
+  const mouthSmile = new THREE.Mesh(SHARED_GEO.mouthSmile, FACE_MAT.mouth);
+  mouthSmile.rotation.z = Math.PI;
+  mouthSmile.position.set(0, -0.09, 0.03);
+
+  const mouthO = new THREE.Mesh(SHARED_GEO.mouthO, FACE_MAT.mouth);
+  mouthO.position.set(0, -0.12, 0.03);
+  mouthO.visible = false;
+
+  const num = o.n;
+
+  if(num === 1){
+    // 1: 넘버블록스 원 — 정중앙 커다란 외눈
+    const eyeCenter = new THREE.Group();
+    eyeCenter.position.set(0, 0.04, 0);
+    const eW = new THREE.Mesh(SHARED_GEO.eyeWhiteOne, FACE_MAT.white);
+    const eP = new THREE.Mesh(SHARED_GEO.eyePupilOne, FACE_MAT.pupil);
+    eP.position.set(0, 0, 0.12);
+    const eS = new THREE.Mesh(SHARED_GEO.eyeSparkOne, FACE_MAT.white);
+    eS.position.set(-0.035, 0.035, 0.18);
+    eyeCenter.add(eW, eP, eS);
+
+    faceGroup.add(eyeCenter, cheekL, cheekR, mouthSmile, mouthO);
+    leftEye = eyeCenter;
+    rightEye = new THREE.Group();
+    faceGroup.add(rightEye);
+  }
+  else if(num === 2){
+    // 2: 넘버블록스 투 — 주황 동글 안경 탐험가
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+
+    const rimL = new THREE.Mesh(SHARED_GEO.glassesRim, FACE_MAT.glassesRim);
+    rimL.position.set(-0.19, 0.04, 0.08);
+    const rimR = new THREE.Mesh(SHARED_GEO.glassesRim, FACE_MAT.glassesRim);
+    rimR.position.set(0.19, 0.04, 0.08);
+    const bridge = new THREE.Mesh(SHARED_GEO.glassesBridge, FACE_MAT.glassesRim);
+    bridge.position.set(0, 0.04, 0.08);
+
+    faceGroup.add(leftEye, rightEye, rimL, rimR, bridge, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 3){
+    // 3: 넘버블록스 쓰리 — 장난꾸러기 3개 빨강 방울 단추
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+
+    const btn1 = new THREE.Mesh(SHARED_GEO.clownButton, FACE_MAT.clownRed);
+    btn1.position.set(0, 0.28, 0.03);
+    const btn2 = new THREE.Mesh(SHARED_GEO.clownButton, FACE_MAT.clownRed);
+    btn2.position.set(0, -0.23, 0.03);
+    const btn3 = new THREE.Mesh(SHARED_GEO.clownButton, FACE_MAT.clownRed);
+    btn3.position.set(0, -0.38, 0.03);
+
+    faceGroup.add(leftEye, rightEye, btn1, btn2, btn3, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 4){
+    // 4: 넘버블록스 포 — 네모 마니아 (네모난 눈과 눈썹)
+    leftEye = new THREE.Group();
+    leftEye.position.set(-0.19, 0.04, 0);
+    const sqEW = new THREE.Mesh(SHARED_GEO.squareEyeWhite, FACE_MAT.white);
+    const sqEP = new THREE.Mesh(SHARED_GEO.squareEyePupil, FACE_MAT.pupil);
+    sqEP.position.set(0, 0, 0.08);
+    const sqES = new THREE.Mesh(SHARED_GEO.eyeSpark, FACE_MAT.white);
+    sqES.position.set(-0.03, 0.03, 0.14);
+    leftEye.add(sqEW, sqEP, sqES);
+
+    rightEye = leftEye.clone();
+    rightEye.position.set(0.19, 0.04, 0);
+
+    const browL = new THREE.Mesh(SHARED_GEO.squareEyebrow, FACE_MAT.fourGreen);
+    browL.position.set(-0.19, 0.20, 0.04);
+    browL.rotation.z = 0.08;
+    const browR = new THREE.Mesh(SHARED_GEO.squareEyebrow, FACE_MAT.fourGreen);
+    browR.position.set(0.19, 0.20, 0.04);
+    browR.rotation.z = -0.08;
+
+    faceGroup.add(leftEye, rightEye, browL, browR, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 5){
+    // 5: 넘버블록스 파이브 — 황금 5각 별눈 안경 & 하이파이브
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+
+    const starEyeMesh = new THREE.Mesh(SHARED_GEO.starShape, FACE_MAT.goldStar);
+    starEyeMesh.position.set(0.19, 0.04, 0.08);
+    starEyeMesh.scale.set(1.15, 1.15, 1.15);
+
+    faceGroup.add(leftEye, rightEye, starEyeMesh, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 6){
+    // 6: 넘버블록스 식스 — 양옆 6개 주사위 점 (3+3)
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+
+    for(let i = -1; i <= 1; i++){
+      const dL = new THREE.Mesh(SHARED_GEO.clownButton, FACE_MAT.diceDot);
+      dL.scale.set(0.65, 0.65, 0.65);
+      dL.position.set(-0.36, -0.05 + i * 0.14, 0.02);
+      const dR = dL.clone();
+      dR.position.set(0.36, -0.05 + i * 0.14, 0.02);
+      faceGroup.add(dL, dR);
+    }
+    faceGroup.add(leftEye, rightEye, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 7){
+    // 7: 럭키 세븐 무지개
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+    cheekL.material = getSoftMaterial('#FF767E');
+    cheekR.material = getSoftMaterial('#6CC6FF');
+    faceGroup.add(leftEye, rightEye, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 8 || num === 18){
+    // 8: 옥토블록(Octoblock!) — 히어로 마스크 & 8개 문어발 빨판
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+
+    const mask = new THREE.Mesh(SHARED_GEO.octoMask, FACE_MAT.octoMask);
+    mask.position.set(0, 0, 0.06);
+
+    const octoGroup = new THREE.Group();
+    for(let i = 0; i < 4; i++){
+      const yPos = -0.24 + i * 0.16;
+      const sucL = new THREE.Mesh(SHARED_GEO.octoSuction, FACE_MAT.octoSuction);
+      sucL.rotation.z = Math.PI / 2;
+      sucL.position.set(-0.46, yPos, 0);
+      const sucR = new THREE.Mesh(SHARED_GEO.octoSuction, FACE_MAT.octoSuction);
+      sucR.rotation.z = -Math.PI / 2;
+      sucR.position.set(0.46, yPos, 0);
+      octoGroup.add(sucL, sucR);
+    }
+    faceGroup.add(leftEye, rightEye, mask, octoGroup, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else if(num === 10){
+    // 10: 캡틴 텐 — 양쪽 눈 모두 빛나는 황금 별눈
+    const starL = new THREE.Group();
+    starL.position.set(-0.19, 0.04, 0);
+    const starMeshL = new THREE.Mesh(SHARED_GEO.starShape, FACE_MAT.goldStar);
+    starMeshL.position.set(0, 0, 0.06);
+    const starMeshL_white = new THREE.Mesh(SHARED_GEO.eyeSpark, FACE_MAT.white);
+    starMeshL_white.position.set(0, 0, 0.14);
+    starL.add(starMeshL, starMeshL_white);
+
+    const starR = new THREE.Group();
+    starR.position.set(0.19, 0.04, 0);
+    const starMeshR = new THREE.Mesh(SHARED_GEO.starShape, FACE_MAT.goldStar);
+    starMeshR.position.set(0, 0, 0.06);
+    const starMeshR_white = new THREE.Mesh(SHARED_GEO.eyeSpark, FACE_MAT.white);
+    starMeshR_white.position.set(0, 0, 0.14);
+    starR.add(starMeshR, starMeshR_white);
+
+    leftEye = starL;
+    rightEye = starR;
+    faceGroup.add(leftEye, rightEye, cheekL, cheekR, mouthSmile, mouthO);
+  }
+  else {
+    leftEye = createStandardEye(-0.19, 0.04);
+    rightEye = createStandardEye(0.19, 0.04);
+    faceGroup.add(leftEye, rightEye, cheekL, cheekR, mouthSmile, mouthO);
+  }
+
+  visual.add(faceGroup);
+
+  const badge = new THREE.Sprite(getBadgeMaterial(o.n, w.selected === o.id));
+  badge.scale.set(1.35, 0.85, 1);
+  badge.position.set(head.avgX, head.topY + 1.52, head.frontZ);
+  visual.add(badge);
+
+  o.faceParts = {leftEye, rightEye, mouthSmile, mouthO, badge};
+}
+
 function buildEntityMesh3D(o, w = state){
   if(w.headless) return;
   if(o.mesh){
@@ -1192,44 +1466,7 @@ function buildEntityMesh3D(o, w = state){
     }
 
     const head = findHeadCluster3D(o.cells);
-    const faceGroup = new THREE.Group();
-    faceGroup.position.set(head.avgX, head.topY + 0.52, head.frontZ + 0.48);
-
-    const leftEye = new THREE.Group();
-    leftEye.position.set(-0.19, 0.04, 0);
-    const leW = new THREE.Mesh(SHARED_GEO.eyeWhite, FACE_MAT.white);
-    const leP = new THREE.Mesh(SHARED_GEO.eyePupil, FACE_MAT.pupil);
-    leP.position.set(0, 0, 0.08);
-    const leS = new THREE.Mesh(SHARED_GEO.eyeSpark, FACE_MAT.white);
-    leS.position.set(-0.025, 0.03, 0.13);
-    leftEye.add(leW, leP, leS);
-
-    const rightEye = leftEye.clone();
-    rightEye.position.set(0.19, 0.04, 0);
-
-    const cheekL = new THREE.Mesh(SHARED_GEO.cheek, FACE_MAT.cheek);
-    cheekL.scale.set(1.2, 0.75, 0.4);
-    cheekL.position.set(-0.30, -0.08, 0.01);
-    const cheekR = cheekL.clone();
-    cheekR.position.set(0.30, -0.08, 0.01);
-
-    const mouthSmile = new THREE.Mesh(SHARED_GEO.mouthSmile, FACE_MAT.mouth);
-    mouthSmile.rotation.z = Math.PI;
-    mouthSmile.position.set(0, -0.09, 0.03);
-
-    const mouthO = new THREE.Mesh(SHARED_GEO.mouthO, FACE_MAT.mouth);
-    mouthO.position.set(0, -0.12, 0.03);
-    mouthO.visible = false;
-
-    faceGroup.add(leftEye, rightEye, cheekL, cheekR, mouthSmile, mouthO);
-    visual.add(faceGroup);
-
-    const badge = new THREE.Sprite(getBadgeMaterial(o.n, w.selected === o.id));
-    badge.scale.set(1.35, 0.85, 1);
-    badge.position.set(head.avgX, head.topY + 1.52, head.frontZ);
-    visual.add(badge);
-
-    o.faceParts = {leftEye, rightEye, mouthSmile, mouthO, badge};
+    buildNumberblocksFace(o, head, visual, w);
   } else {
     const s = specs[o.type];
     const mat = getSoftMaterial(s.c);
@@ -1738,16 +1975,17 @@ function reset(push = false){
   if(push) snapshot(state);
   clearAllEntities(state);
 
-  const f1  = friend(1,  4, 0,  1);
-  const f3  = friend(3,  6, 0,  0);
-  const f7  = friend(7,  9, 0,  0);
-  const f10 = friend(10, 12, 0, -1);
+  const f1  = friend(1,  3, 0,  1);
+  const f4  = friend(4,  5, 0,  0);
+  const f7  = friend(7,  8, 0,  0);
+  const f8  = friend(8, 11, 0,  1);
+  const f10 = friend(10, 14, 0, -1);
 
   const fRiver = friend(3, 23, 0, 1, {pose:'bridge'});
   const fTrain7 = friend(7, 69, 0, 1);
   const fTrain3 = friend(3, 71, 0, 2);
 
-  state.friends.push(f1, f3, f7, f10, fRiver, fTrain7, fTrain3);
+  state.friends.push(f1, f4, f7, f8, f10, fRiver, fTrain7, fTrain3);
 
   const b1 = prop('brick', 15, 0, 1);
   const b2 = prop('brick', 15, 1, 1);
@@ -2040,7 +2278,7 @@ function checkFruit3D(f, w = state){
 
 function merge(a, b, w = state){
   if(!a || !b || a === b || a.kind !== 'friend' || b.kind !== 'friend') return null;
-  if(a.train || b.train || a.bridge || b.bridge || a.n + b.n > PLAY_MAX) return null;
+  if(a.train || b.train || a.bridge || b.bridge || a.n + b.n > 100) return null;
   const n = a.n + b.n;
   const gx = Math.round((a.gx + b.gx) / 2);
   const gz = Math.round((a.gz + b.gz) / 2);
@@ -2071,10 +2309,12 @@ function merge(a, b, w = state){
   if(!w.headless){
     selectEntity(f.id);
     if(n === 7) burst3D(f.gx, f.gy + 1.5, f.gz, null, 20, true);
+    else if(n === 8) burst3D(f.gx, f.gy + 1.5, f.gz, '#FF529A', 26);
+    else if(n === 10) burst3D(f.gx, f.gy + 1.5, f.gz, '#FFD34B', 28);
     else burst3D(f.gx, f.gy + 1.5, f.gz, '#FFD34B', 22);
-    sfx('merge');
+    sfx('merge', n);
     toast(`🎉 ${a.n} + ${b.n} = ${n} !`);
-    say(`${sinoNames[a.n]} 더하기 ${sinoNames[b.n]}는 ${sinoNames[n]}! ${counterNames[n]}!`, true);
+    say(`${getSinoName(a.n)} 더하기 ${getSinoName(b.n)}는 ${getNumberblockNick(n)}!`, true);
   }
   checkFruit3D(f, w);
   tryTrain3D(w);
@@ -2239,8 +2479,8 @@ function mergeGroup(w = state){
   const list = getMergeGroup(w);
   if(list.length < 2) return null;
   const sum = list.reduce((n, f) => n + f.n, 0);
-  if(sum > PLAY_MAX){
-    if(!w.headless){ toast('🙌 열보다 커! 다른 친구들끼리 모아보자!'); sfx('grab'); }
+  if(sum > 100){
+    if(!w.headless){ toast('🙌 100보다 커! 다른 친구들끼리 모아보자!'); sfx('grab'); }
     return null;
   }
   if(list.some(f => !w.friends.includes(f) || f.train || f.bridge)) return null;
@@ -2264,9 +2504,9 @@ function mergeGroup(w = state){
     w.recentSpawnIds = [o.id];
     selectEntity(o.id);
     triggerSquash(o, 1.35);
-    burst3D(o.gx, o.gy + 1.4, o.gz, '#FFE470', 22, sum === 7);
-    sfx('merge');
-    say(`${list.map(f=>sinoNames[f.n]).join(' 더하기 ')}는 ${sinoNames[sum]}!`, true);
+    burst3D(o.gx, o.gy + 1.4, o.gz, sum === 8 ? '#FF529A' : '#FFE470', 24, sum === 7);
+    sfx('merge', sum);
+    say(`${list.map(f=>getSinoName(f.n)).join(' 더하기 ')}는 ${getNumberblockNick(sum)}!`, true);
     toast(`✨ ${list.map(f=>f.n).join(' + ')} = ${sum}`);
     updateUI();
   }
@@ -2309,8 +2549,73 @@ function burst3D(gx, gy, gz, hex = '#FFD34B', count = 12, rainbowStars = false){
   }
 }
 
-const sinoNames = ['','일','이','삼','사','오','육','칠','팔','구','십','십일','십이','십삼','십사','십오','십육','십칠','십팔','십구','이십'];
-const counterNames = ['','한 칸','두 칸','세 칸','네 칸','다섯 칸','여섯 칸','일곱 칸','여덟 칸','아홉 칸','열 칸','열한 칸','열두 칸','열세 칸','열네 칸','열다섯 칸','열여섯 칸','열일곱 칸','열여덟 칸','열아홉 칸','스무 칸'];
+const SINO_NAMES = ['','일','이','삼','사','오','육','칠','팔','구','십','십일','십이','십삼','십사','십오','십육','십칠','십팔','십구','이십'];
+const COUNTER_NAMES = ['','한 칸','두 칸','세 칸','네 칸','다섯 칸','여섯 칸','일곱 칸','여덟 칸','아홉 칸','열 칸','열한 칸','열두 칸','열세 칸','열네 칸','열다섯 칸','열여섯 칸','열일곱 칸','열여덟 칸','열아홉 칸','스무 칸'];
+
+const NUMBERBLOCK_NICKS = {
+  1: '원! 하나!',
+  2: '투! 둘!',
+  3: '쓰리! 셋!',
+  4: '포! 넷! 네모가 좋아!',
+  5: '파이브! 다섯! 하이파이브!',
+  6: '식스! 여섯! 주사위 굴려!',
+  7: '럭키 세븐! 일곱!',
+  8: '옥토블록 에잇! 여덟!',
+  9: '나인! 아홉!',
+  10: '슈퍼 텐! 열! 로켓 발사!',
+  11: '일레븐! 열하나!',
+  12: '트웰브! 열둘! 슈퍼 렉탱글!',
+  13: '써틴! 열셋!',
+  14: '포틴! 열넷! 스케이터!',
+  15: '피프틴! 열다섯! 스텝 스쿼드!',
+  16: '식스틴! 열여섯! 슈퍼 스퀘어!',
+  17: '세븐틴! 열일곱! 페인터!',
+  18: '에이틴! 열여덟! 슈퍼 스피드!',
+  19: '나인틴! 열아홉!',
+  20: '트웬티! 스물! 투 텐스!',
+  100: '원 헌드레드! 백!',
+  1000: '원 사우전드! 천!'
+};
+
+function getSinoName(n){
+  if(SINO_NAMES[n]) return SINO_NAMES[n];
+  if(n < 100){
+    const tens = Math.floor(n / 10);
+    const ones = n % 10;
+    const tStr = tens === 1 ? '십' : (SINO_NAMES[tens] || tens) + '십';
+    return ones === 0 ? tStr : tStr + (SINO_NAMES[ones] || ones);
+  }
+  if(n === 100) return '백';
+  if(n === 1000) return '천';
+  return String(n);
+}
+
+function getCounterName(n){
+  if(COUNTER_NAMES[n]) return COUNTER_NAMES[n];
+  return `${getSinoName(n)} 칸`;
+}
+
+function getNumberblockNick(n){
+  if(NUMBERBLOCK_NICKS[n]) return NUMBERBLOCK_NICKS[n];
+  return `${getSinoName(n)}! ${getCounterName(n)}!`;
+}
+
+const sinoNames = new Proxy(SINO_NAMES, {
+  get: (target, prop) => {
+    const idx = Number(prop);
+    if(Number.isInteger(idx) && idx > 0) return getSinoName(idx);
+    return target[prop];
+  }
+});
+
+const counterNames = new Proxy(COUNTER_NAMES, {
+  get: (target, prop) => {
+    const idx = Number(prop);
+    if(Number.isInteger(idx) && idx > 0) return getCounterName(idx);
+    return target[prop];
+  }
+});
+
 const speechAvailable = typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance === 'function';
 const voiceStatus = {lastAt: 0, lastText: '', chosen: null};
 state.voice = speechAvailable;
@@ -2346,8 +2651,8 @@ function say(text, force = false){
   }catch{ return false; }
 }
 function sayNumber(n, withCount = false, force = false){
-  if(!Number.isInteger(n) || n < 1 || n > 20) return false;
-  return say(withCount ? `${sinoNames[n]}, ${counterNames[n]}.` : `${sinoNames[n]}!`, force);
+  if(!Number.isInteger(n) || n < 1 || n > 100) return false;
+  return say(withCount ? `${getSinoName(n)}, ${getCounterName(n)}.` : getNumberblockNick(n), force);
 }
 function toggleVoice(){
   if(!speechAvailable){
@@ -2405,10 +2710,24 @@ function sfx(kind, n = 1){
   else if(kind === 'land')   tone(230, 0.14, 'triangle', 150);
   else if(kind === 'stack')  tone(460, 0.11, 'triangle', 660);
   else if(kind === 'splash') tone(280, 0.18, 'sine', 120);
-  else if(kind === 'spawn')  tone(360 + n * 20, 0.13, 'sine', 520 + n * 20);
+  else if(kind === 'spawn'){
+    const basePitches = [0, 261.6, 293.7, 329.6, 349.2, 392.0, 440.0, 493.9, 523.3, 587.3, 659.3];
+    const p = (n >= 1 && n <= 10) ? basePitches[n] : (360 + n * 15);
+    tone(p, 0.14, 'triangle', p * 1.04);
+  }
   else if(kind === 'split'){ tone(620, 0.09, 'sine', 480); tone(540, 0.11, 'sine', 720, 0.08); }
   else if(kind === 'morph'){ [523, 659, 880].forEach((f, i) => tone(f, 0.11, 'triangle', null, i * 0.055)); }
-  else if(kind === 'merge'){ [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.16, 'triangle', null, i * 0.065)); }
+  else if(kind === 'merge'){
+    if(n === 8){
+      // 옥토블록 히어로 팡파르
+      [523, 659, 784, 1046, 1318].forEach((f, i) => tone(f, 0.18, 'triangle', null, i * 0.05));
+    } else if(n === 10){
+      // 캡틴 텐 로켓 발사 화음
+      [392, 523, 659, 784, 1046].forEach((f, i) => tone(f, 0.22, 'triangle', f * 1.05, i * 0.055));
+    } else {
+      [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.16, 'triangle', null, i * 0.065));
+    }
+  }
   else if(kind === 'hammer') tone(440, 0.14, 'sine', 170);
   else if(kind === 'undo')   tone(480, 0.11, 'sine', 380);
 }
@@ -2699,7 +3018,7 @@ function renderPoseCardCanvas3D(n, pose){
 
 function updateUI(){
   const pair = findPair3D();
-  state.merging = pair && pair.sum <= PLAY_MAX ? pair : null;
+  state.merging = pair;
   const sel = getEntity(state.selected);
   const acts = $('actions');
 
@@ -3032,10 +3351,6 @@ function update3D(dt, now){
   if(key !== state.lastPair){
     state.lastPair = key;
     updateUI();
-    if(pair && pair.sum > PLAY_MAX){
-      sfx('grab', 6);
-      toast('🙌 열보다 크네! 다른 블록끼리 해보자!');
-    }
   }
 
   for(const p of state.particles){
@@ -3149,12 +3464,6 @@ function mountUI(){
   $('merge').onclick = () => {
     const p = findPair3D();
     if(!p) return;
-    if(p.sum > PLAY_MAX){
-      sfx('grab', 6);
-      toast('🙌 열보다 크네! 다른 블록끼리 해보자!');
-      say('열보다 더 크네! 다른 숫자를 골라 볼까?', true);
-      return;
-    }
     merge(p.a, p.b);
   };
   $('mergeAll').onclick = () => mergeGroup();
@@ -3242,24 +3551,25 @@ function selfTest(){
     }
   }
 
-  // 2) MATH-02: 합체(<=20 보존, >20 차단) 및 분리(2..20 합계 보존) 전수 검사
+  // 2) MATH-02: 합체(1~10 전수 및 12+8=20 보존) 및 분리(2..20 합계 보존) 전수 검사
   const mathWorld = createWorldContext(true);
-  for(let a = 1; a <= 20; a++){
-    for(let b = 1; b <= 20; b++){
+  for(let a = 1; a <= 10; a++){
+    for(let b = 1; b <= 10; b++){
       const fa = friend(a, 2, 0, 0, {}, mathWorld);
       const fb = friend(b, 4, 0, 0, {}, mathWorld);
       mathWorld.friends = [fa, fb];
       const m = merge(fa, fb, mathWorld);
-      if(a + b <= PLAY_MAX){
-        if(!m || m.n !== a + b || m.cells.length !== a + b){
-          errors.push(`MATH-02 merge failed for ${a}+${b}`);
-        }
-      } else {
-        if(m !== null || mathWorld.friends.length !== 2){
-          errors.push(`MATH-02 merge >10 not blocked for ${a}+${b}`);
-        }
+      if(!m || m.n !== a + b || m.cells.length !== a + b){
+        errors.push(`MATH-02 merge failed for ${a}+${b}`);
       }
     }
+  }
+  const f12 = friend(12, 2, 0, 0, {}, mathWorld);
+  const f8 = friend(8, 4, 0, 0, {}, mathWorld);
+  mathWorld.friends = [f12, f8];
+  const m20 = merge(f12, f8, mathWorld);
+  if(!m20 || m20.n !== 20 || m20.cells.length !== 20){
+    errors.push('MATH-02 merge failed for 12+8=20');
   }
   for(let n = 2; n <= 20; n++){
     const parts = getSplitParts({n, history: []});
