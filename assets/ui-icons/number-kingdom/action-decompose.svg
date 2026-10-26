@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <filter id="shadow-decomp" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#0CA678" flood-opacity="0.45"/>
+    </filter>
+    <linearGradient id="grad-mint-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38E8C6"/>
+      <stop offset="50%" stop-color="#20C997"/>
+      <stop offset="100%" stop-color="#099268"/>
+    </linearGradient>
+    <linearGradient id="grad-mint-depth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#087F5B"/>
+      <stop offset="100%" stop-color="#05513A"/>
+    </linearGradient>
+    <linearGradient id="grad-coral" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF922B"/>
+      <stop offset="100%" stop-color="#E8590C"/>
+    </linearGradient>
+    <linearGradient id="grad-pink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B8B"/>
+      <stop offset="100%" stop-color="#D6336C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Big Combined Block on Left -->
+  <g filter="url(#shadow-decomp)">
+    <!-- 3D Underside -->
+    <rect x="8" y="24" width="34" height="54" rx="8" fill="url(#grad-mint-depth)"/>
+    <!-- Main Body -->
+    <rect x="8" y="20" width="34" height="54" rx="8" fill="url(#grad-mint-base)"/>
+    <!-- Highlight -->
+    <rect x="11" y="23" width="28" height="6" rx="3" fill="#E6FCF5" opacity="0.8"/>
+    <!-- Segment Grid Line indicating it's composed of parts -->
+    <line x1="8" y1="47" x2="42" y2="47" stroke="#087F5B" stroke-width="2.5" stroke-dasharray="3,3"/>
+    <!-- Cute Eyes on Big Block -->
+    <circle cx="20" cy="38" r="2.5" fill="#05513A"/>
+    <circle cx="30" cy="38" r="2.5" fill="#05513A"/>
+  </g>
+
+  <!-- Dynamic Split Sparks & Energy Arrow in Center -->
+  <g transform="translate(43, 44)">
+    <!-- Motion Trails / Burst Arcs -->
+    <path d="M4 6 Q10 0 16 -8" stroke="#FFA94D" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M4 8 Q10 12 16 18" stroke="#FFA94D" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Sparkles -->
+    <polygon points="12,5 15,7 12,9 10,7" fill="#FFD43B"/>
+    <polygon points="16,-2 18,-1 16,0 15,-1" fill="#FFD43B"/>
+  </g>
+
+  <!-- Top Right Separated Small Block (Coral) -->
+  <g filter="url(#shadow-decomp)" transform="translate(62, 14)">
+    <rect x="0" y="3" width="28" height="28" rx="6" fill="#A83200"/>
+    <rect x="0" y="0" width="28" height="28" rx="6" fill="url(#grad-coral)"/>
+    <rect x="3" y="3" width="22" height="4" rx="2" fill="#FFE8CC" opacity="0.8"/>
+    <!-- Happy Eye -->
+    <circle cx="11" cy="14" r="2.5" fill="#5C1D00"/>
+    <circle cx="19" cy="14" r="2.5" fill="#5C1D00"/>
+    <path d="M13 18 Q15 21 17 18" stroke="#5C1D00" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Bottom Right Separated Small Block (Pink) -->
+  <g filter="url(#shadow-decomp)" transform="translate(62, 54)">
+    <rect x="0" y="3" width="28" height="28" rx="6" fill="#9C1748"/>
+    <rect x="0" y="0" width="28" height="28" rx="6" fill="url(#grad-pink)"/>
+    <rect x="3" y="3" width="22" height="4" rx="2" fill="#FFDEEB" opacity="0.8"/>
+    <!-- Smiling Eye -->
+    <circle cx="11" cy="14" r="2.5" fill="#490C22"/>
+    <circle cx="19" cy="14" r="2.5" fill="#490C22"/>
+    <path d="M13 18 Q15 21 17 18" stroke="#490C22" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

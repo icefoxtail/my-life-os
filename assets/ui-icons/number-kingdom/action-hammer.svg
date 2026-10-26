@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <filter id="shadow-ham" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#862E9C" flood-opacity="0.35"/>
+    </filter>
+    <linearGradient id="grad-ham-head" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B8B"/>
+      <stop offset="60%" stop-color="#FA5252"/>
+      <stop offset="100%" stop-color="#C92A2A"/>
+    </linearGradient>
+    <linearGradient id="grad-ham-handle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD8A8"/>
+      <stop offset="50%" stop-color="#FFA94D"/>
+      <stop offset="100%" stop-color="#D9480F"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#shadow-ham)">
+    <!-- Hammer Handle -->
+    <g transform="rotate(-38 50 50)">
+      <!-- Handle Depth -->
+      <rect x="44" y="38" width="12" height="48" rx="6" fill="#A61E4D" transform="translate(0, 3)"/>
+      <!-- Main Handle -->
+      <rect x="44" y="38" width="12" height="48" rx="6" fill="url(#grad-ham-handle)"/>
+      <rect x="46" y="42" width="8" height="40" rx="4" fill="#FFE8CC" opacity="0.4"/>
+      <!-- Grip rings -->
+      <line x1="44" y1="64" x2="56" y2="64" stroke="#D9480F" stroke-width="2"/>
+      <line x1="44" y1="72" x2="56" y2="72" stroke="#D9480F" stroke-width="2"/>
+      <line x1="44" y1="80" x2="56" y2="80" stroke="#D9480F" stroke-width="2"/>
+
+      <!-- Hammer Head Base / Depth -->
+      <path d="M22 18 L78 18 C83 18 86 21 86 26 L86 42 C86 47 83 50 78 50 L22 50 C17 50 14 47 14 42 L14 26 C14 21 17 18 22 18 Z"
+            fill="#861B32" transform="translate(0, 5)"/>
+      <!-- Main Head -->
+      <path d="M22 16 L78 16 C83 16 86 19 86 24 L86 40 C86 45 83 48 78 48 L22 48 C17 48 14 45 14 40 L14 24 C14 19 17 16 22 16 Z"
+            fill="url(#grad-ham-head)"/>
+      <!-- Top Gloss -->
+      <path d="M24 19 L76 19 C79 19 81 21 81 24 L81 28 C81 29 80 30 78 30 L22 30 C20 30 19 29 19 28 L19 24 C19 21 21 19 24 19 Z"
+            fill="#FFF0F3" opacity="0.8"/>
+      <!-- Star Decal on Head -->
+      <polygon points="50,26 52,32 58,32 53,36 55,42 50,38 45,42 47,36 42,32 48,32" fill="#FFD43B"/>
+    </g>
+  </g>
+
+  <!-- Impact / Bounce Sparkles at top right -->
+  <polygon points="84,18 87,23 92,23 88,27 90,32 85,29 80,32 82,27 78,23 83,23" fill="#FFD43B"/>
+  <circle cx="70" cy="14" r="3" fill="#FFA94D"/>
+  <circle cx="92" cy="38" r="2.5" fill="#FFA94D"/>
+</svg>

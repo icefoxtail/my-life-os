@@ -205,6 +205,139 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 }
 .act.primary{background:linear-gradient(180deg,#ffe896,#ffd25a);color:#4f350e}
 .act.pink{background:linear-gradient(180deg,#ffe0ec,#ffc3da);color:#5c2641}
+
+/* 3D 말랑 수학 장난감 액션 버튼 */
+.toyActBtn {
+  border: 3px solid rgba(255,255,255,0.95);
+  border-radius: 22px;
+  min-width: 76px;
+  min-height: 66px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.14s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.14s ease;
+  user-select: none;
+  touch-action: manipulation;
+  flex-shrink: 0;
+  padding: 5px 10px;
+}
+.toyActBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+.toyActBtn:active {
+  transform: translateY(3px) scale(0.96);
+}
+.toyActBtn.addBtn {
+  background: linear-gradient(180deg, #FFE870 0%, #FFA826 100%);
+  box-shadow: 0 6px 0 #D96B00, 0 10px 16px rgba(217, 107, 0, 0.35);
+}
+.toyActBtn.addBtn:active {
+  box-shadow: 0 2px 0 #D96B00, 0 4px 8px rgba(217, 107, 0, 0.25);
+}
+.toyActBtn.decompBtn {
+  background: linear-gradient(180deg, #51E8CD 0%, #15B892 100%);
+  box-shadow: 0 6px 0 #087F5B, 0 10px 16px rgba(8, 127, 91, 0.35);
+}
+.toyActBtn.decompBtn:active {
+  box-shadow: 0 2px 0 #087F5B, 0 4px 8px rgba(8, 127, 91, 0.25);
+}
+.toyIconSvg {
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+}
+.pillIconSvg {
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  display: block;
+  margin: auto;
+}
+.toyBadgeTxt {
+  font-size: 13px;
+  font-weight: 950;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* 자유 분해 플로팅 선택지 팝업 팔레트 */
+#decompPalette {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 185px;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 3px solid #63E6BE;
+  border-radius: 26px;
+  box-shadow: 0 8px 24px rgba(12, 166, 120, 0.28), 0 4px 0 #20C997;
+  max-width: 95vw;
+  overflow-x: auto;
+  animation: popBounce 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes popBounce {
+  0% { transform: translateX(-50%) scale(0.7); opacity: 0; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+.decompOptionCard {
+  border: 2px solid #C3FAE8;
+  border-radius: 18px;
+  background: #F8F9FA;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  min-width: 76px;
+  box-shadow: 0 4px 0 #A9E34B, 0 6px 12px rgba(0,0,0,0.08);
+  transition: transform 0.12s ease;
+}
+.decompOptionCard:hover {
+  transform: translateY(-2px);
+  background: #E6FCF5;
+  border-color: #38D9A9;
+}
+.decompOptionCard:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #A9E34B;
+}
+.decompMiniRow {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.decompFormulaTxt {
+  font-size: 14px;
+  font-weight: 950;
+  color: #099268;
+}
+#undo.bouncing {
+  animation: spinBounce 0.35s ease;
+}
+@keyframes spinBounce {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(0.85) rotate(-35deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toyActBtn, .decompOptionCard, #decompPalette, #undo.bouncing {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 .miniChip{
   display:inline-flex;
   align-items:center;
@@ -405,8 +538,12 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
     </div>
     <nav id="zones" class="glass" aria-label="놀이 지역 바로가기"></nav>
     <div id="right" class="glass">
-      <button id="camBtn" class="pill" title="3D 카메라 각도 바꾸기" aria-label="3D 카메라 각도 바꾸기">🎥</button>
-      <button id="undo" class="pill" title="되돌리기" aria-label="되돌리기">↩️</button>
+      <button id="camBtn" class="pill toyPill" title="3D 카메라 각도 바꾸기" aria-label="3D 카메라 각도 바꾸기">
+        <img src="../assets/ui-icons/number-kingdom/action-camera.svg" class="pillIconSvg" alt="카메라"/>
+      </button>
+      <button id="undo" class="pill toyPill" title="되돌리기" aria-label="되돌리기">
+        <img src="../assets/ui-icons/number-kingdom/action-undo.svg" class="pillIconSvg" alt="되돌리기"/>
+      </button>
       <button id="sound" class="pill" title="효과음 켜기 또는 끄기" aria-label="효과음 켜기 또는 끄기" aria-pressed="true">🔊</button>
       <button id="voice" class="pill" title="숫자 읽기 목소리 켜기 또는 끄기" aria-label="숫자 읽기 목소리 켜기 또는 끄기" aria-pressed="true">🗣️</button>
       <button id="helpBtn" class="pill" title="보호자 도움말" aria-label="보호자 도움말">🧸</button>
@@ -422,10 +559,26 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 
   <div id="toast" role="status" aria-live="polite"></div>
 
-  <div id="actions" class="glass" role="toolbar" aria-label="3D 블록 변형 도구">
-    <button id="mergeAll" class="act primary mergeAll" title="여러 숫자 한번에 합체" aria-label="여러 숫자 모두 합체">🧲</button>
-    <button id="merge" class="act primary" title="두 숫자 합체하기" aria-label="두 숫자 합체하기"></button>
-    <button id="split" class="act pink" title="나누기" aria-label="나누기"></button>
+  <!-- 자유 분해 플로팅 선택지 팔레트 -->
+  <div id="decompPalette" class="glass" role="dialog" aria-label="숫자 나누기 선택지" style="display:none"></div>
+
+  <!-- 3D 말랑 수학 장난감 액션 독 -->
+  <div id="actions" class="glass toyActionDock" role="toolbar" aria-label="3D 수학 장난감 도구">
+    <!-- 통합 합체 (+) 장난감 버튼 -->
+    <button id="actionAdd" class="toyActBtn addBtn" title="숫자 친구 합체하기 (+)" aria-label="숫자 친구 합체하기">
+      <img src="../assets/ui-icons/number-kingdom/action-add.svg" alt="+" class="toyIconSvg"/>
+      <span class="toyBadgeTxt" id="addSummaryTxt">+</span>
+    </button>
+    <!-- 자유 분해 장난감 버튼 -->
+    <button id="actionDecomp" class="toyActBtn decompBtn" title="숫자 친구 나누기" aria-label="숫자 친구 나누기">
+      <img src="../assets/ui-icons/number-kingdom/action-decompose.svg" alt="나누기" class="toyIconSvg"/>
+      <span class="toyBadgeTxt" id="decompSummaryTxt">나누기</span>
+    </button>
+    <!-- 호환성 더미 버튼 (기존 테스트 및 외부 스크립트 안전용) -->
+    <button id="mergeAll" style="display:none" aria-hidden="true"></button>
+    <button id="merge" style="display:none" aria-hidden="true"></button>
+    <button id="split" style="display:none" aria-hidden="true"></button>
+    <!-- 3D 모양 변신 카드 리스트 -->
     <div id="poseList" role="group" aria-label="3D 모양 바꾸기 카드"></div>
     <button id="morph" class="act" title="다음 모양으로 변신" aria-label="다음 모양으로 변신" style="display:none">🔄</button>
   </div>
@@ -1975,14 +2128,17 @@ function restore(raw, w = state){
   if(!w.headless) updateUI();
 }
 
-function undo(){
-  if(!state.undo.length){
-    toast('↩️ 되돌릴 동작이 없어요');
-    return;
+function undo(w = state){
+  if(!w.undo.length){
+    if(!w.headless) toast('↩️ 되돌릴 동작이 없어요');
+    return false;
   }
-  restore(state.undo.pop(), state);
-  sfx('undo');
-  toast('↩️ 이전 모습으로 돌아왔어!');
+  restore(w.undo.pop(), w);
+  if(!w.headless){
+    sfx('undo');
+    toast('↩️ 이전 모습으로 돌아왔어!');
+  }
+  return true;
 }
 
 function reset(push = false){
@@ -2354,56 +2510,185 @@ function getSplitParts(f){
   };
 }
 
-function split(f, w = state){
+function getDecompositionPresets(n, history = []){
+  const presets = [];
+  const seen = new Set();
+  const add = (arr) => {
+    if(!arr || arr.length < 2) return;
+    if(arr.reduce((s, x) => s + x, 0) !== n) return;
+    if(arr.some(x => !Number.isInteger(x) || x < 1)) return;
+    const key = arr.join('+');
+    if(!seen.has(key)){
+      seen.add(key);
+      presets.push(arr);
+    }
+  };
+
+  // 1. 합체 이력이 있으면 원래 결합되었던 부품을 최우선 선택지로 제공
+  if(history && history.length > 0){
+    const h = history[history.length - 1];
+    if(h.left?.n && h.right?.n && h.left.n + h.right.n === n){
+      add([h.left.n, h.right.n]);
+    }
+  }
+
+  // 2. 유아 인지 발달 및 필수 검증 기준 분해 테이블
+  const table = {
+    2: [[1, 1]],
+    3: [[1, 2]],
+    4: [[2, 2], [1, 3], [1, 1, 1, 1]],
+    5: [[2, 3], [1, 4], [1, 1, 1, 2]],
+    6: [[3, 3], [2, 4], [2, 2, 2], [1, 5]],
+    7: [[3, 4], [2, 5], [1, 6], [2, 2, 3]],
+    8: [[4, 4], [3, 5], [2, 2, 2, 2], [2, 6]],
+    9: [[4, 5], [3, 3, 3], [1, 8], [2, 2, 2, 3]],
+    10: [[5, 5], [3, 3, 4], [1, 9], [2, 8]],
+    11: [[10, 1], [5, 6], [3, 4, 4]],
+    12: [[10, 2], [6, 6], [4, 4, 4], [3, 3, 3, 3]],
+    14: [[10, 4], [7, 7], [4, 5, 5]],
+    15: [[10, 5], [5, 5, 5], [7, 8]],
+    16: [[10, 6], [8, 8], [4, 4, 4, 4]],
+    18: [[10, 8], [9, 9], [6, 6, 6]],
+    20: [[10, 10], [5, 5, 5, 5], [4, 4, 4, 4, 4]],
+    30: [[10, 10, 10], [15, 15], [20, 10]],
+    40: [[20, 20], [10, 10, 10, 10]],
+    50: [[25, 25], [10, 10, 10, 10, 10], [20, 30]],
+    100: [[50, 50], [20, 30, 50], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]
+  };
+
+  if(table[n]){
+    for(const p of table[n]) add(p);
+  }
+
+  // 3. 일반적인 수에 대한 안전 보완 규칙
+  if(n > 10){
+    const tens = Math.floor(n / 10) * 10;
+    const rem = n - tens;
+    if(rem > 0) add([tens, rem]);
+  }
+  if(n % 2 === 0) add([n / 2, n / 2]);
+  else add([Math.floor(n / 2), Math.ceil(n / 2)]);
+
+  if(n % 3 === 0 && n >= 6) add([n / 3, n / 3, n / 3]);
+  if(n > 2) add([1, n - 1]);
+
+  return presets.slice(0, 4);
+}
+
+function decompose(f, parts, w = state){
   if(!f || f.kind !== 'friend' || f.n <= 1 || f.train) return null;
+  if(!Array.isArray(parts) || parts.length < 2) return null;
+  const sum = parts.reduce((s, x) => s + x, 0);
+  if(sum !== f.n) throw new Error(`분해 수량 불일치: f.n=${f.n}, sum=${sum}`);
+
   if(!w.headless) snapshot(w);
   releaseBridge(f, w);
-  const {left: l, right: r} = getSplitParts(f);
-  if(l.n < 1 || r.n < 1 || l.n + r.n !== f.n){
-    throw new Error('3D 분리 칸 수 보존 실패');
-  }
   for(const ch of childrenOf(f.id, w)) ch.carrier = null;
   const origGX = f.gx, origGZ = f.gz;
   removeEntityMesh(f, w);
   w.friends = w.friends.filter(x => x !== f);
   if(!w.headless) w.recentSpawnIds = [];
 
-  const aCells = cellsFor(l.n, l.pose || poses(l.n)[0]);
-  const bCells = cellsFor(r.n, r.pose || poses(r.n)[0]);
-  const aB = getBoundsLocal(aCells);
-  const bB = getBoundsLocal(bCells);
-  const totalW = aB.w + 1 + bB.w;
-  let startX = origGX;
-  if(startX + totalW > WORLD_W){
-    startX = Math.max(0, WORLD_W - totalW);
+  const partBounds = parts.map(pn => getBoundsLocal(cellsFor(pn, poses(pn)[0])));
+  const totalW = partBounds.reduce((s, b) => s + b.w, 0) + (parts.length - 1);
+  let curX = Math.round(origGX + getBoundsLocal(f.cells).w / 2 - totalW / 2);
+  if(curX + totalW > WORLD_W - 1) curX = Math.max(0, WORLD_W - 1 - totalW);
+  if(curX < 0) curX = 0;
+
+  const created = [];
+  for(let i = 0; i < parts.length; i++){
+    const pn = parts[i];
+    const b = partBounds[i];
+    const newFriend = friend(pn, curX, 0, origGZ, {}, w);
+    const land = computeLanding3D(newFriend, newFriend.gx, newFriend.gz, null, w);
+    applyPlacement3D(newFriend, land, w);
+    w.friends.push(newFriend);
+    created.push(newFriend);
+
+    newFriend.anim.slideX = (i - (parts.length - 1) / 2) * 1.2;
+    triggerSquash(newFriend, 1.2);
+    newFriend.anim.happyTimer = 1.2;
+
+    curX += b.w + 1;
   }
-
-  const a = friend(l.n, startX, 0, origGZ, {pose: l.pose, history: l.history}, w);
-  const landA = computeLanding3D(a, a.gx, a.gz, null, w);
-  applyPlacement3D(a, landA, w);
-  w.friends.push(a);
-
-  const b = friend(r.n, a.gx + aB.w + 1, 0, origGZ, {pose: r.pose, history: r.history}, w);
-  const landB = computeLanding3D(b, b.gx, b.gz, null, w);
-  applyPlacement3D(b, landB, w);
-  w.friends.push(b);
-
-  a.anim.slideX = 1.2;
-  b.anim.slideX = -1.2;
-  triggerSquash(a, 1.15);
-  triggerSquash(b, 1.15);
-  a.anim.happyTimer = b.anim.happyTimer = 1.0;
 
   recalcSupport3D(w);
   tryTrain3D(w);
   if(!w.headless){
-    selectEntity(a.id);
-    burst3D(origGX, a.gy + 1.0, origGZ, '#7ED6FC', 18);
+    selectEntity(created[0].id);
+    burst3D(origGX, f.gy + 1.2, origGZ, '#2BD9C6', 22);
     sfx('split');
-    say(`${sinoNames[l.n]}하고 ${sinoNames[r.n]}!`, true);
+    toast(`✂️ ${f.n} = ${parts.join(' + ')}`);
+    say(`${getSinoName(f.n)}를 ${parts.map(p => getSinoName(p)).join('와 ')}로 나누었어요!`, true);
     updateUI();
   }
-  return [a, b];
+  return created;
+}
+
+function split(f, w = state){
+  if(!f || f.kind !== 'friend' || f.n <= 1 || f.train) return null;
+  const parts = getSplitParts(f);
+  return decompose(f, [parts.left.n, parts.right.n], w);
+}
+
+function closeDecompPalette(){
+  const pal = $('decompPalette');
+  if(pal) pal.style.display = 'none';
+}
+
+function toggleDecompPalette(sel){
+  const pal = $('decompPalette');
+  if(!pal || !sel || sel.kind !== 'friend' || sel.n <= 1){
+    closeDecompPalette();
+    return;
+  }
+  if(pal.style.display === 'flex' && pal.dataset.forId === String(sel.id)){
+    closeDecompPalette();
+    return;
+  }
+  pal.innerHTML = '';
+  pal.dataset.forId = String(sel.id);
+  const presets = getDecompositionPresets(sel.n, sel.history);
+  for(const pr of presets){
+    const card = document.createElement('button');
+    card.className = 'decompOptionCard';
+    card.title = `${sel.n} = ${pr.join(' + ')}`;
+    card.setAttribute('aria-label', `${sel.n}을 ${pr.join(' 더하기 ')}로 나누기`);
+
+    const row = document.createElement('div');
+    row.className = 'decompMiniRow';
+    for(let i = 0; i < pr.length; i++){
+      if(i > 0){
+        const plus = document.createElement('span');
+        plus.textContent = '+';
+        plus.style.fontSize = '13px';
+        plus.style.fontWeight = '950';
+        plus.style.color = '#FFA94D';
+        plus.style.margin = '0 2px';
+        row.appendChild(plus);
+      }
+      const chip = document.createElement('span');
+      chip.className = 'miniChip';
+      chip.style.background = getCellColor(pr[i], 0, 0);
+      chip.textContent = pr[i];
+      row.appendChild(chip);
+      row.insertAdjacentHTML('beforeend', makeMiniBlockSVG(pr[i], null, 18));
+    }
+    card.appendChild(row);
+
+    const txt = document.createElement('div');
+    txt.className = 'decompFormulaTxt';
+    txt.textContent = pr.join(' + ');
+    card.appendChild(txt);
+
+    card.onclick = (e) => {
+      e.stopPropagation();
+      decompose(sel, pr);
+      closeDecompPalette();
+    };
+    pal.appendChild(card);
+  }
+  pal.style.display = 'flex';
 }
 
 function morphTo(f, targetPose = null, w = state){
@@ -2572,7 +2857,7 @@ function selectEntity(id){
       state.goalX = clamp(midX, 5, WORLD_W - 6);
     }
   }
-  refreshSelectionHighlight();
+  updateUI();
 }
 
 function refreshSelectionHighlight(w = state){
@@ -2900,6 +3185,7 @@ function beginDrag(e){
   state.pointer = e.pointerId;
   try{ canvas.setPointerCapture?.(e.pointerId); }catch{}
   $('drawer').style.display = 'none';
+  closeDecompPalette();
 
   const picked = pickEntity3D(e.clientX, e.clientY);
   const o = picked?.entity || null;
@@ -3093,47 +3379,53 @@ function updateUI(){
 
   if(!sel || sel.kind !== 'friend'){
     acts.style.display = 'none';
+    closeDecompPalette();
     return;
   }
 
+  // 1. 통합 3D 말랑 합체 (+) 액션 버튼
   const group = getMergeGroup();
+  const actAdd = $('actionAdd');
+  if(actAdd){
+    if(group.length > 1){
+      const total = group.reduce((v, f) => v + f.n, 0);
+      actAdd.style.display = 'inline-flex';
+      const summary = $('addSummaryTxt');
+      if(summary) summary.textContent = `${group.length}개 → ${total}`;
+      actAdd.setAttribute('aria-label', `${group.length}개 숫자 친구 합체하기 (합계 ${total})`);
+    } else if(pair){
+      actAdd.style.display = 'inline-flex';
+      const summary = $('addSummaryTxt');
+      if(summary) summary.textContent = `${pair.a.n}+${pair.b.n}=${pair.sum}`;
+      actAdd.setAttribute('aria-label', `${pair.a.n} 더하기 ${pair.b.n}은 ${pair.sum}`);
+    } else {
+      actAdd.style.display = 'none';
+    }
+  }
+
+  // 2. 3D 자유 분해 액션 버튼
+  const actDecomp = $('actionDecomp');
+  if(actDecomp){
+    if(sel.n > 1 && !sel.train){
+      actDecomp.style.display = 'inline-flex';
+      const summary = $('decompSummaryTxt');
+      if(summary) summary.textContent = `${sel.n} 나누기`;
+      actDecomp.setAttribute('aria-label', `${sel.n} 나누기 선택지 열기`);
+    } else {
+      actDecomp.style.display = 'none';
+      closeDecompPalette();
+    }
+  }
+
+  // 호환성 버튼 숨김 유지
   const mergeAllBtn = $('mergeAll');
-  mergeAllBtn.style.display = group.length > 1 ? 'inline-flex' : 'none';
-  if(group.length > 1){
-    const total = group.reduce((v,f)=>v+f.n,0);
-    mergeAllBtn.innerHTML = `<span class="actIcon">🧲</span><span class="bigCount">${group.length}개 → ${total}</span>`;
-    mergeAllBtn.setAttribute('aria-label', `${group.length}개 숫자 모두 합치기`);
-  }
-
+  if(mergeAllBtn) mergeAllBtn.style.display = 'none';
   const mergeBtn = $('merge');
-  if(state.merging){
-    const {a, b, sum} = state.merging;
-    mergeBtn.style.display = 'inline-flex';
-    mergeBtn.innerHTML =
-      `<span class="actIcon">🤝</span>` +
-      `<span class="miniChip" style="background:${getCellColor(a.n,0,0)}">${a.n}</span>` +
-      `<span>+</span>` +
-      `<span class="miniChip" style="background:${getCellColor(b.n,0,0)}">${b.n}</span>` +
-      `<span>=</span>` +
-      `<span class="miniChip" style="background:${getCellColor(sum,0,0)}">${sum}</span>`;
-  } else {
-    mergeBtn.style.display = 'none';
-  }
-
+  if(mergeBtn) mergeBtn.style.display = 'none';
   const splitBtn = $('split');
-  if(sel.n > 1 && !sel.train){
-    const parts = getSplitParts(sel);
-    splitBtn.style.display = 'inline-flex';
-    splitBtn.innerHTML =
-      `<span class="miniChip" style="background:${getCellColor(parts.left.n,0,0)}">${parts.left.n}</span>` +
-      `${makeMiniBlockSVG(parts.left.n, null, 16)}` +
-      `<span class="actIcon">✂️</span>` +
-      `${makeMiniBlockSVG(parts.right.n, null, 16)}` +
-      `<span class="miniChip" style="background:${getCellColor(parts.right.n,0,0)}">${parts.right.n}</span>`;
-  } else {
-    splitBtn.style.display = 'none';
-  }
+  if(splitBtn) splitBtn.style.display = 'none';
 
+  // 3. 3D 모양 변신 카드 리스트
   const poseList = $('poseList');
   const morphBtn = $('morph');
   poseList.innerHTML = '';
@@ -3155,8 +3447,11 @@ function updateUI(){
     morphBtn.style.display = 'none';
   }
 
-  const anyVisible = mergeAllBtn.style.display !== 'none' || mergeBtn.style.display !== 'none' || splitBtn.style.display !== 'none' || poseList.style.display !== 'none';
+  const anyVisible = (actAdd && actAdd.style.display !== 'none') ||
+                     (actDecomp && actDecomp.style.display !== 'none') ||
+                     (poseList && poseList.style.display !== 'none');
   acts.style.display = anyVisible ? 'flex' : 'none';
+  refreshSelectionHighlight();
 }
 
 /* ============================================================================
@@ -3523,7 +3818,7 @@ function mountUI(){
   hammerBtn.className = 'toy hammer';
   hammerBtn.title = '블록 하나 지우기 망치';
   hammerBtn.setAttribute('aria-label', '블록 하나 지우기 망치');
-  hammerBtn.innerHTML = `<span style="font-size:32px">🔨</span>`;
+  hammerBtn.innerHTML = `<img src="../assets/ui-icons/number-kingdom/action-hammer.svg" class="toyIconSvg" alt="망치"/>`;
   hammerBtn.onclick = () => {
     setHammer(!state.hammer);
     sfx('grab');
@@ -3534,6 +3829,40 @@ function mountUI(){
   tray.addEventListener('scroll', updateTrayArrows, {passive: true});
   $('trayLeft').onclick = () => tray.scrollBy({left: -160, behavior: 'smooth'});
   $('trayRight').onclick = () => tray.scrollBy({left: 160, behavior: 'smooth'});
+
+  // 3D 말랑 수학 장난감 액션 버튼 이벤트 연결
+  const actAdd = $('actionAdd');
+  if(actAdd){
+    actAdd.onclick = () => {
+      const group = getMergeGroup();
+      if(group.length > 1){
+        mergeGroup();
+      } else {
+        const p = findPair3D();
+        if(p) merge(p.a, p.b);
+      }
+    };
+  }
+
+  const actDecomp = $('actionDecomp');
+  if(actDecomp){
+    actDecomp.onclick = (e) => {
+      e.stopPropagation();
+      const sel = getEntity(state.selected);
+      if(sel) toggleDecompPalette(sel);
+    };
+  }
+
+  // 외부 클릭 시 분해 팔레트 닫기
+  document.addEventListener('pointerdown', (e) => {
+    const pal = $('decompPalette');
+    const decompBtn = $('actionDecomp');
+    if(pal && pal.style.display !== 'none'){
+      if(!pal.contains(e.target) && (!decompBtn || !decompBtn.contains(e.target))){
+        closeDecompPalette();
+      }
+    }
+  });
 
   $('merge').onclick = () => {
     const p = findPair3D();
@@ -3549,7 +3878,7 @@ function mountUI(){
     sfx('grab');
     toast(`🎥 ${CAM_PRESETS[state.camPresetIdx].name}`);
   };
-  $('undo').onclick = undo;
+  $('undo').onclick = () => undo(state);
   $('sound').onclick = () => {
     state.sound = !state.sound;
     $('sound').textContent = state.sound ? '🔊' : '🔇';
@@ -3780,6 +4109,112 @@ function selfTest(){
       const wx = testF.gx + c.dx;
       if(wx < 0 || wx >= WORLD_W){
         errors.push(`MATH-04 cell overhang for n=${testN}: cell.wx=${wx}`);
+      }
+    }
+  }
+
+  // 5) MATH-05: 자유 분해 프리셋, n=9/20 분해, 재합체, Undo 및 격자 안전성 전수 검증
+  // 5-1: 분해 프리셋 정합성 검증 (9, 10, 12, 20, 30)
+  const p9 = getDecompositionPresets(9);
+  const p9Keys = p9.map(a => a.join('+'));
+  if(!p9Keys.includes('4+5') || !p9Keys.includes('3+3+3') || !p9Keys.includes('1+8') || !p9Keys.includes('2+2+2+3')){
+    errors.push(`MATH-05 presets for 9 missing required combinations: ${p9Keys.join(', ')}`);
+  }
+  for(const testN of [9, 10, 12, 20, 30]){
+    const presets = getDecompositionPresets(testN);
+    if(presets.length < 2) errors.push(`MATH-05 insufficient presets for ${testN}`);
+    for(const pr of presets){
+      if(pr.reduce((s, x) => s + x, 0) !== testN){
+        errors.push(`MATH-05 preset sum mismatch for ${testN}: [${pr.join('+')}]`);
+      }
+    }
+  }
+
+  // 5-2: 9의 4가지 분해 실행 및 단위 셀 일치 검증
+  const dec9Cases = [
+    [4, 5],
+    [3, 3, 3],
+    [1, 8],
+    [2, 2, 2, 3]
+  ];
+  for(const parts of dec9Cases){
+    clearAllEntities(mathWorld);
+    const fOrig = friend(9, 10, 0, 0, {}, mathWorld);
+    mathWorld.friends.push(fOrig);
+    const decRes = decompose(fOrig, parts, mathWorld);
+    if(!decRes || decRes.length !== parts.length){
+      errors.push(`MATH-05 decompose 9 into [${parts.join('+')}] returned invalid parts`);
+    } else {
+      const sumN = decRes.reduce((s, f) => s + f.n, 0);
+      const sumCells = decRes.reduce((s, f) => s + f.cells.length, 0);
+      if(sumN !== 9 || sumCells !== 9){
+        errors.push(`MATH-05 decompose 9 into [${parts.join('+')}] cells/sum mismatch: n=${sumN}, cells=${sumCells}`);
+      }
+      for(let i = 0; i < parts.length; i++){
+        if(decRes[i].n !== parts[i] || decRes[i].cells.length !== parts[i]){
+          errors.push(`MATH-05 decompose part ${i} mismatch: expected ${parts[i]}, got ${decRes[i].n}`);
+        }
+      }
+    }
+  }
+
+  // 5-3: 20 분해 [10, 10] 검증
+  clearAllEntities(mathWorld);
+  const f20 = friend(20, 10, 0, 0, {}, mathWorld);
+  mathWorld.friends.push(f20);
+  const dec20 = decompose(f20, [10, 10], mathWorld);
+  if(!dec20 || dec20.length !== 2 || dec20[0].n !== 10 || dec20[1].n !== 10 || dec20[0].cells.length !== 10 || dec20[1].cells.length !== 10){
+    errors.push('MATH-05 decompose 20 into [10, 10] failed');
+  }
+
+  // 5-4: 재합체 검증 (9 -> [4, 5] -> 4+5=9)
+  clearAllEntities(mathWorld);
+  const f9_re = friend(9, 10, 0, 0, {}, mathWorld);
+  mathWorld.friends.push(f9_re);
+  const dec_re = decompose(f9_re, [4, 5], mathWorld);
+  if(dec_re && dec_re.length === 2){
+    const reMerged = merge(dec_re[0], dec_re[1], mathWorld);
+    if(!reMerged || reMerged.n !== 9 || reMerged.cells.length !== 9){
+      errors.push(`MATH-05 re-merge 4+5 failed: got ${reMerged ? reMerged.n : 'null'}`);
+    }
+  }
+
+  // 5-5: 분해 후 Undo 복원 검증
+  clearAllEntities(mathWorld);
+  const f9_undo = friend(9, 12, 0, 0, {}, mathWorld);
+  mathWorld.friends.push(f9_undo);
+  mathWorld.undo.push(capture(mathWorld));
+  decompose(f9_undo, [4, 5], mathWorld);
+  if(mathWorld.friends.length !== 2) errors.push('MATH-05 pre-undo friends count mismatch');
+  undo(mathWorld);
+  if(mathWorld.friends.length !== 1 || mathWorld.friends[0].n !== 9 || mathWorld.friends[0].cells.length !== 9){
+    errors.push(`MATH-05 undo decompose 9 failed: count=${mathWorld.friends.length}, n=${mathWorld.friends[0]?.n}`);
+  }
+
+  // 5-6: 망치 삭제 후 Undo 복원 검증
+  clearAllEntities(mathWorld);
+  const fHammer = friend(9, 12, 0, 0, {}, mathWorld);
+  mathWorld.friends.push(fHammer);
+  mathWorld.undo.push(capture(mathWorld));
+  deleteObject(fHammer, mathWorld);
+  if(mathWorld.friends.length !== 0) errors.push('MATH-05 hammer delete failed');
+  undo(mathWorld);
+  if(mathWorld.friends.length !== 1 || mathWorld.friends[0].n !== 9){
+    errors.push(`MATH-05 hammer undo failed: count=${mathWorld.friends.length}`);
+  }
+
+  // 5-7: 격자 경계(오른쪽 끝) 분해 시 돌출 방지 검증
+  clearAllEntities(mathWorld);
+  const fEdge = friend(20, WORLD_W - 2, 0, 0, {}, mathWorld);
+  mathWorld.friends.push(fEdge);
+  const decEdge = decompose(fEdge, [10, 10], mathWorld);
+  if(!decEdge || decEdge.length !== 2){
+    errors.push('MATH-05 boundary decompose failed');
+  } else {
+    for(const f of decEdge){
+      const b = getBoundsLocal(f.cells);
+      if(f.gx < 0 || f.gx + b.w > WORLD_W){
+        errors.push(`MATH-05 boundary overhang on decompose: gx=${f.gx}, w=${b.w}, max=${WORLD_W}`);
       }
     }
   }
@@ -4040,6 +4475,14 @@ window.NumberKingdomDebug = {
   merge,
   mergeGroup,
   split,
+  decompose,
+  getDecompositionPresets,
+  undo,
+  deleteObject,
+  closeDecompPalette,
+  toggleDecompPalette,
+  findPair3D,
+  getMergeGroup,
   selectEntity,
   getBoundsLocal,
   getState: () => state,
