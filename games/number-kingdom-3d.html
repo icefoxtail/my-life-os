@@ -862,7 +862,7 @@ const PLAY_MAX = 200; // 넘버블록스 에디션: 최대 200까지 안전 합�
 const GRAVITY_3D = 32;
 
 const zones = [
-  {id:'plaza',   name:'말랑 광장',      icon:'🌈', a:0,  b:22,  grass:'#7ee095', soil:'#5cb874', sky:'#bfe8ff'},
+  {id:'plaza',   name:'말랑 광장',      icon:'🌈', a:0,  b:22,  grass:'#46C65A', soil:'#339845', sky:'#48B5FF'},
   {id:'river',   name:'징검다리 시냇물', icon:'🌉', a:22, b:46,  grass:'#8ce8ce', soil:'#5bb8a0', sky:'#b5f0fa'},
   {id:'orchard', name:'키다리 과수원',   icon:'🍎', a:46, b:68,  grass:'#a8e05a', soil:'#7db538', sky:'#fff0bc'},
   {id:'train',   name:'10칸 기차역',    icon:'🚂', a:68, b:90,  grass:'#ffd296', soil:'#d9a362', sky:'#e5dcff'},
@@ -870,12 +870,12 @@ const zones = [
 ];
 
 const PALETTE_10 = [
-  '#FA5B62', '#FF9A3B', '#FFD34B', '#4CCB75', '#43B4F4',
-  '#8E68F5', '#FF78B0', '#FF529A', '#78909C', '#E53935'
+  '#E8272C', '#FF7800', '#FFD000', '#1EBA36', '#008CE8',
+  '#7A32C2', '#FF78B0', '#E61575', '#4A6D84', '#E8272C'
 ];
 
 const RAINBOW_7 = [
-  '#FA5B62', '#FF9A3B', '#FFD34B', '#4CCB75', '#43B4F4', '#5E72EB', '#A569BD'
+  '#E8272C', '#FF7800', '#FFD000', '#1EBA36', '#00C4E8', '#006CE8', '#7A32C2'
 ];
 
 const specs = {
@@ -1335,8 +1335,8 @@ function getNumberblockFaceSVG(n){
  * 3. Three.js 씬, 카메라, 조명, 공유 리소스 풀 초기화
  * ============================================================================ */
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#68c6ff');
-scene.fog = new THREE.Fog('#a6e3ff', 55, 130);
+scene.background = new THREE.Color('#48B5FF');
+scene.fog = null; // 안개 완전 제거 (탁하고 흐린 느낌 100% 해소)
 
 const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.5, 160);
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true, powerPreference: 'high-performance'});
@@ -1346,15 +1346,17 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 if('outputEncoding' in renderer) renderer.outputEncoding = THREE.sRGBEncoding;
 if('toneMapping' in renderer){
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
+  // ACESFilmic은 원색을 뿌옇게 물빠지게 만드므로 NoToneMapping으로 쨍한 장난감 본래 색감 보존
+  renderer.toneMapping = THREE.NoToneMapping;
+  renderer.toneMappingExposure = 1.0;
 }
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x82db8a, 0.88);
+// 과도한 백색 조명 대신 산뜻한 자연광으로 조정
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x3da850, 0.55);
 hemiLight.position.set(0, 30, 0);
 scene.add(hemiLight);
 
-const dirLight = new THREE.DirectionalLight(0xfffaed, 0.95);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
 dirLight.position.set(18, 28, 20);
 dirLight.castShadow = true;
 dirLight.shadow.mapSize.width = 1024;
@@ -1517,10 +1519,10 @@ function getSoftMaterial(hex, opts = {}){
   const color = new THREE.Color(hex);
   const mat = new THREE.MeshStandardMaterial({
     color,
-    roughness: opts.roughness ?? 0.32,
-    metalness: opts.goldRim ? 0.18 : 0.04,
-    emissive: color,
-    emissiveIntensity: opts.ghost ? 0.25 : 0.07,
+    roughness: opts.roughness ?? 0.18,
+    metalness: opts.goldRim ? 0.2 : 0.02,
+    emissive: opts.ghost ? color : new THREE.Color(0x000000),
+    emissiveIntensity: opts.ghost ? 0.3 : 0,
     transparent: Boolean(opts.ghost),
     opacity: opts.ghost ? 0.48 : 1.0
   });
@@ -3081,23 +3083,26 @@ function reset(push = false){
   if(push) snapshot(state);
   clearAllEntities(state);
 
-  const f1  = friend(1,  3, 0,  1);
-  const f4  = friend(4,  5, 0,  0);
-  const f7  = friend(7,  8, 0,  0);
-  const f8  = friend(8, 11, 0,  1);
-  const f10 = friend(10, 14, 0, -1);
+  // 1부터 10까지 순서대로 2칸 간격(1칸 여백)으로 일렬 정렬 (x: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
+  const initialFriends = [];
+  for(let n = 1; n <= 10; n++){
+    const gx = 2 + (n - 1) * 2;
+    const f = friend(n, gx, 0, 0);
+    initialFriends.push(f);
+  }
 
-  const fRiver = friend(3, 23, 0, 1, {pose:'bridge'});
-  const fTrain7 = friend(7, 69, 0, 1);
-  const fTrain3 = friend(3, 71, 0, 2);
+  // 시냇물 다리와 기차역 샘플 친구 유지
+  const fRiver = friend(3, 27, 0, 1, {pose:'bridge'});
+  const fTrain7 = friend(7, 73, 0, 1);
+  const fTrain3 = friend(3, 75, 0, 2);
 
-  state.friends.push(f1, f4, f7, f8, f10, fRiver, fTrain7, fTrain3);
+  state.friends.push(...initialFriends, fRiver, fTrain7, fTrain3);
 
-  const b1 = prop('brick', 15, 0, 1);
-  const b2 = prop('brick', 15, 1, 1);
+  // 주변 건축 소품
+  const b1 = prop('brick', 22, 0, 1);
+  const b2 = prop('brick', 22, 1, 1);
   b2.carrier = b1.id;
-  const b3 = prop('brick', 16, 0, 0);
-  const gr = prop('grass', 17, 0, -1);
+  const gr = prop('grass', 23, 0, -1);
 
   const w1 = prop('wood', 48, 0, 0);
   const w2 = prop('wood', 48, 1, 0);
@@ -3108,13 +3113,14 @@ function reset(push = false){
   const rf  = prop('roof', 96, 2, 0);
   rf.carrier = win.id;
 
-  state.props.push(b1, b2, b3, gr, w1, w2, bed, win, rf);
+  state.props.push(b1, b2, gr, w1, w2, bed, win, rf);
 
-  state.selected = f7.id;
+  // 1~10 열의 정중앙인 11.0 위치로 카메라 포커스
+  state.selected = initialFriends[0].id;
   state.recentSpawnIds = [];
   state.recentSpawnZone = 'plaza';
   setHammer(false);
-  state.goalX = state.cameraX = 9.5;
+  state.goalX = state.cameraX = 11.0;
   state.merging = null;
   state.drag = null;
   state.pan = null;
