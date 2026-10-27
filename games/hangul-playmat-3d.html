@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#dff4ff">
+<title>시현이의 3D 한글 블록 놀이터</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        onerror="this.onerror=null;this.src='https://unpkg.com/three@0.128.0/build/three.min.js'"></script>
+<style>
+:root{
+  font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color:#223454;
+  --shadow:0 8px 24px rgba(30,55,95,0.16);
+  --glass:rgba(255,255,255,0.92);
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;background:#dff4ff}
+button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+#game{
+  width:100%;
+  height:100dvh;
+  min-height:320px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,#bae6ff 0%,#eef9ff 65%,#dff7e6 100%);
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+#scene3d{display:block;width:100%;height:100%;touch-action:none;outline:none}
+.glass{
+  background:var(--glass);
+  box-shadow:var(--shadow);
+  border:2.5px solid #ffffff;
+  border-radius:22px;
+  backdrop-filter:blur(8px);
+}
+
+/* 상단 바 */
+#top{
+  position:absolute;
+  left:max(10px,env(safe-area-inset-left));
+  right:max(10px,env(safe-area-inset-right));
+  top:max(10px,env(safe-area-inset-top));
+  z-index:5;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  pointer-events:none;
+}
+#top>*{pointer-events:auto}
+#leftTop{display:flex;align-items:center;gap:8px}
+#brand{
+  padding:8px 14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+#brand strong{font-size:16px;font-weight:950;color:#223454}
+#brand span{
+  font-size:12px;
+  background:#FFE066;
+  color:#5c3d14;
+  padding:3px 9px;
+  border-radius:12px;
+  font-weight:900;
+}
+#rightTop{display:flex;gap:6px;padding:5px 7px}
+.pill{
+  border:2px solid #d6e7ff;
+  border-radius:16px;
+  background:#fffdfa;
+  padding:6px 12px;
+  font-size:14px;
+  font-weight:900;
+  color:#324b72;
+  min-width:46px;
+  min-height:46px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,0.08);
+  transition:transform .08s,background .15s;
+}
+.pill:active,.jamoBtn:active{transform:scale(.91)}
+.pill .btnTxt{font-size:13px;font-weight:900}
+
+/* 토스트 알림 */
+#toast{
+  position:absolute;
+  z-index:7;
+  left:50%;
+  top:72px;
+  transform:translateX(-50%);
+  border-radius:24px;
+  background:#fff9db;
+  border:3px solid #ffd43b;
+  color:#2b3a55;
+  font-weight:950;
+  font-size:18px;
+  padding:10px 22px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  pointer-events:none;
+  max-width:92vw;
+  text-align:center;
+  transition:opacity .18s,transform .18s;
+}
+
+/* 하단 2단 고정 자음·모음 트레이 */
+#trayWrap{
+  position:absolute;
+  bottom:max(8px,env(safe-area-inset-bottom));
+  left:50%;
+  transform:translateX(-50%);
+  z-index:5;
+  width:min(98vw,980px);
+  padding:8px 10px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  border-radius:26px;
+}
+.trayRow{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding:2px 2px;
+}
+.trayRow::-webkit-scrollbar{display:none}
+.rowBadge{
+  flex:0 0 auto;
+  font-size:12px;
+  font-weight:950;
+  padding:6px 10px;
+  border-radius:14px;
+  color:#fff;
+  text-align:center;
+  min-width:48px;
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,0.18);
+}
+.rowBadge.choBadge{background:linear-gradient(145deg,#FF6B6B,#FF922B)}
+.rowBadge.jungBadge{background:linear-gradient(145deg,#339AF0,#20C997)}
+
+.jamoBtn{
+  flex:1 0 auto;
+  min-width:54px;
+  height:54px;
+  border:2px solid rgba(255,255,255,0.85);
+  border-radius:17px;
+  padding:2px 4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,0.20),inset 0 2px 0 rgba(255,255,255,0.65),0 3px 6px rgba(27,49,74,0.14);
+  transition:transform .08s;
+}
+.jamoBtn .charTxt{
+  font-size:25px;
+  line-height:1.05;
+  font-weight:950;
+  color:#fff;
+  text-shadow:0 2px 3px rgba(0,0,0,0.28);
+}
+.jamoBtn .nameTxt{
+  font-size:10px;
+  font-weight:900;
+  color:rgba(255,255,255,0.96);
+  background:rgba(0,0,0,0.16);
+  padding:1px 5px;
+  border-radius:6px;
+  margin-top:1px;
+}
+
+@media(max-width:700px){
+  #brand span,.pill .btnTxt{display:none}
+  #brand strong{font-size:14px}
+  .jamoBtn{min-width:48px;height:48px;border-radius:14px}
+  .jamoBtn .charTxt{font-size:22px}
+  .jamoBtn .nameTxt{font-size:9px}
+  .rowBadge{min-width:40px;font-size:11px;padding:5px 7px}
+  #toast{font-size:15px;padding:8px 16px}
+}
+</style>
+</head>
+<body>
+<main id="game" aria-label="시현이의 3D 한글 블록 놀이터">
+  <canvas id="scene3d" aria-label="3D 자음과 모음 통블록을 손가락으로 끌어다 합치는 놀이 매트"></canvas>
+
+  <header id="top">
+    <div id="leftTop">
+      <button id="homeBtn" class="pill glass" title="놀이터 홈으로" aria-label="놀이터 홈" onclick="returnToPlayOS()">
+        <span style="font-size:20px;line-height:1">🏠</span>
+      </button>
+      <div id="brand" class="glass">
+        <span style="font-size:21px">🧸</span>
+        <strong>시현이의 한글 블록 놀이터</strong>
+        <span>통블록 자석 놀이</span>
+      </div>
+    </div>
+
+    <div id="rightTop" class="glass">
+      <button id="undoBtn" class="pill" title="되돌리기" aria-label="되돌리기">
+        <span style="font-size:19px">↩️</span><span class="btnTxt">되돌리기</span>
+      </button>
+      <button id="clearBtn" class="pill" title="모두 치우기" aria-label="모두 치우기">
+        <span style="font-size:19px">🧹</span><span class="btnTxt">싹치우기</span>
+      </button>
+      <button id="soundBtn" class="pill" title="소리 켜기/끄기" aria-label="소리" aria-pressed="true">
+        <span id="soundIcon" style="font-size:20px">🔊</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <footer id="trayWrap" class="glass" aria-label="자음과 모음 블록 상자">
+    <div class="trayRow" id="choRow" role="region" aria-label="자음 14개 줄">
+      <div class="rowBadge choBadge">자음</div>
+    </div>
+    <div class="trayRow" id="jungRow" role="region" aria-label="모음 10개 줄">
+      <div class="rowBadge jungBadge">모음</div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(() => {
+'use strict';
+
+if(typeof THREE === 'undefined'){
+  alert('Three.js 라이브러리를 불러오지 못했습니다.');
+  return;
+}
+
+/* ============================================================================
+ * 1. 자음 14종 & 모음 10종 정의 + 유니코드 140음절 조합 + 대표 단어/3D 장난감 사전
+ * ============================================================================ */
+const CHO_LIST = [
+  {id:'ㄱ', uIdx:0,  name:'기역', sound:'그', color:'#FF595E'},
+  {id:'ㄴ', uIdx:2,  name:'니은', sound:'느', color:'#FF922B'},
+  {id:'ㄷ', uIdx:3,  name:'디귿', sound:'드', color:'#FCC419'},
+  {id:'ㄹ', uIdx:5,  name:'리을', sound:'르', color:'#F06595'},
+  {id:'ㅁ', uIdx:6,  name:'미음', sound:'므', color:'#FF6B6B'},
+  {id:'ㅂ', uIdx:7,  name:'비읍', sound:'브', color:'#FD7E14'},
+  {id:'ㅅ', uIdx:9,  name:'시옷', sound:'스', color:'#FAB005'},
+  {id:'ㅇ', uIdx:11, name:'이응', sound:'으', color:'#FA5252'},
+  {id:'ㅈ', uIdx:12, name:'지읒', sound:'즈', color:'#E64980'},
+  {id:'ㅊ', uIdx:14, name:'치읓', sound:'츠', color:'#FF8787'},
+  {id:'ㅋ', uIdx:15, name:'키읔', sound:'크', color:'#FFA94D'},
+  {id:'ㅌ', uIdx:16, name:'티읕', sound:'트', color:'#FFD43B'},
+  {id:'ㅍ', uIdx:17, name:'피읖', sound:'프', color:'#FF6B8B'},
+  {id:'ㅎ', uIdx:18, name:'히읗', sound:'흐', color:'#FF758F'}
+];
+
+const JUNG_LIST = [
+  {id:'ㅏ', uIdx:0,  name:'아', dir:'right',  color:'#339AF0'},
+  {id:'ㅑ', uIdx:2,  name:'야', dir:'right',  color:'#22B8CF'},
+  {id:'ㅓ', uIdx:4,  name:'어', dir:'right',  color:'#20C997'},
+  {id:'ㅕ', uIdx:6,  name:'여', dir:'right',  color:'#51CF66'},
+  {id:'ㅗ', uIdx:8,  name:'오', dir:'bottom', color:'#5C7CFA'},
+  {id:'ㅛ', uIdx:12, name:'요', dir:'bottom', color:'#7950F2'},
+  {id:'ㅜ', uIdx:13, name:'우', dir:'bottom', color:'#15AABF'},
+  {id:'ㅠ', uIdx:17, name:'유', dir:'bottom', color:'#12B886'},
+  {id:'ㅡ', uIdx:18, name:'으', dir:'bottom', color:'#4C6EF5'},
+  {id:'ㅣ', uIdx:20, name:'이', dir:'right',  color:'#845EF7'}
+];
+
+const CHO_MAP = Object.fromEntries(CHO_LIST.map(c => [c.id, c]));
+const JUNG_MAP = Object.fromEntries(JUNG_LIST.map(j => [j.id, j]));
+
+function composeHangul(cho, jung){
+  const c = CHO_MAP[cho], j = JUNG_MAP[jung];
+  if(!c || !j) return '';
+  return String.fromCharCode(0xAC00 + (c.uIdx * 21 + j.uIdx) * 28);
+}
+
+// 아이가 좋아하는 친숙한 음절별 대표 단어 & 3D 장난감 매핑 (나머지 모든 글자도 자동 대응)
+const WORD_DICT = {
+  '가': {word:'가방',   emoji:'🎒', toy:'bag'},
+  '거': {word:'거미',   emoji:'🕷️', toy:'star'},
+  '고': {word:'고래',   emoji:'🐳', toy:'whale'},
+  '구': {word:'구름',   emoji:'☁️', toy:'cloud'},
+  '기': {word:'기차',   emoji:'🚂', toy:'train'},
+  '나': {word:'나비',   emoji:'🦋', toy:'butterfly'},
+  '너': {word:'너구리', emoji:'🦝', toy:'duck'},
+  '노': {word:'노래',   emoji:'🎵', toy:'star'},
+  '누': {word:'눈사람', emoji:'⛄', toy:'snowman'},
+  '다': {word:'다람쥐', emoji:'🐿️', toy:'duck'},
+  '도': {word:'도토리', emoji:'🌰', toy:'apple'},
+  '두': {word:'두부',   emoji:'⬜', toy:'star'},
+  '라': {word:'라디오', emoji:'📻', toy:'bag'},
+  '로': {word:'로봇',   emoji:'🤖', toy:'train'},
+  '루': {word:'루돌프', emoji:'🦌', toy:'duck'},
+  '리': {word:'리본',   emoji:'🎀', toy:'butterfly'},
+  '마': {word:'마법별', emoji:'🌟', toy:'star'},
+  '머': {word:'머리띠', emoji:'👑', toy:'hat'},
+  '모': {word:'모자',   emoji:'🎩', toy:'hat'},
+  '무': {word:'무지개', emoji:'🌈', toy:'cloud'},
+  '미': {word:'미소',   emoji:'😊', toy:'star'},
+  '바': {word:'바나나', emoji:'🍌', toy:'banana'},
+  '버': {word:'버스',   emoji:'🚌', toy:'car'},
+  '보': {word:'보물',   emoji:'💎', toy:'star'},
+  '부': {word:'부엉이', emoji:'🦉', toy:'duck'},
+  '비': {word:'비행기', emoji:'✈️', toy:'airplane'},
+  '사': {word:'사과',   emoji:'🍎', toy:'apple'},
+  '서': {word:'선물',   emoji:'🎁', toy:'bag'},
+  '소': {word:'송아지', emoji:'🐮', toy:'duck'},
+  '수': {word:'수박',   emoji:'🍉', toy:'apple'},
+  '시': {word:'시계',   emoji:'⏰', toy:'star'},
+  '아': {word:'아기오리',emoji:'🐤', toy:'duck'},
+  '야': {word:'야구공', emoji:'⚾', toy:'apple'},
+  '어': {word:'어항',   emoji:'🐠', toy:'whale'},
+  '여': {word:'여우',   emoji:'🦊', toy:'duck'},
+  '오': {word:'오렌지', emoji:'🍊', toy:'apple'},
+  '요': {word:'요술봉', emoji:'🪄', toy:'star'},
+  '우': {word:'우산',   emoji:'☔', toy:'umbrella'},
+  '유': {word:'유모차', emoji:'🍼', toy:'car'},
+  '이': {word:'이슬',   emoji:'💧', toy:'cloud'},
+  '자': {word:'자동차', emoji:'🚗', toy:'car'},
+  '저': {word:'저금통', emoji:'🐷', toy:'duck'},
+  '조': {word:'조개',   emoji:'🐚', toy:'whale'},
+  '주': {word:'주사위', emoji:'🎲', toy:'star'},
+  '지': {word:'지구',   emoji:'🌍', toy:'apple'},
+  '차': {word:'자동차', emoji:'🚙', toy:'car'},
+  '초': {word:'초콜릿', emoji:'🍫', toy:'bag'},
+  '추': {word:'축구공', emoji:'⚽', toy:'apple'},
+  '치': {word:'치즈',   emoji:'🧀', toy:'banana'},
+  '카': {word:'카메라', emoji:'📷', toy:'bag'},
+  '코': {word:'코끼리', emoji:'🐘', toy:'whale'},
+  '쿠': {word:'쿠키',   emoji:'🍪', toy:'star'},
+  '키': {word:'키위',   emoji:'🥝', toy:'apple'},
+  '타': {word:'타조',   emoji:'🦩', toy:'duck'},
+  '토': {word:'토끼',   emoji:'🐰', toy:'duck'},
+  '투': {word:'투구',   emoji:'⛑️', toy:'hat'},
+  '티': {word:'티셔츠', emoji:'👕', toy:'bag'},
+  '파': {word:'파인애플',emoji:'🍍', toy:'banana'},
+  '포': {word:'포도',   emoji:'🍇', toy:'apple'},
+  '푸': {word:'풍선',   emoji:'🎈', toy:'apple'},
+  '피': {word:'피아노', emoji:'🎹', toy:'train'},
+  '하': {word:'하마',   emoji:'🦛', toy:'whale'},
+  '허': {word:'허수아비',emoji:'🌻', toy:'hat'},
+  '호': {word:'호랑이', emoji:'🐯', toy:'duck'},
+  '후': {word:'후라이팬',emoji:'🍳', toy:'star'},
+  '히': {word:'히어로', emoji:'🦸', toy:'airplane'}
+};
+
+// 진열대에 나란히 놓았을 때 보너스 축제가 열리는 친숙한 단어들
+const SHELF_WORDS = {
+  '나비': {emoji:'🦋', toy:'butterfly'},
+  '기차': {emoji:'🚂', toy:'train'},
+  '우유': {emoji:'🥛', toy:'cloud'},
+  '나무': {emoji:'🌳', toy:'apple'},
+  '바나나':{emoji:'🍌', toy:'banana'},
+  '비누': {emoji:'🫧', toy:'cloud'},
+  '오리': {emoji:'🐤', toy:'duck'},
+  '하마': {emoji:'🦛', toy:'whale'},
+  '모자': {emoji:'🎩', toy:'hat'},
+  '구두': {emoji:'👞', toy:'bag'},
+  '포도': {emoji:'🍇', toy:'apple'},
+  '사자': {emoji:'🦁', toy:'duck'},
+  '고래': {emoji:'🐳', toy:'whale'},
+  '우산': {emoji:'☔', toy:'umbrella'},
+  '토끼': {emoji:'🐰', toy:'duck'},
+  '자동차':{emoji:'🚗', toy:'car'}
+};
+
+function getSyllableMeta(cho, jung){
+  const char = composeHangul(cho, jung);
+  const cSpec = CHO_MAP[cho], jSpec = JUNG_MAP[jung];
+  const entry = WORD_DICT[char];
+  if(entry){
+    return {
+      char,
+      word: entry.word,
+      emoji: entry.emoji,
+      toy: entry.toy,
+      speech: `${cSpec.name} ${jSpec.name}, ${char}! ${entry.word}!`
+    };
+  }
+  const fallbackToys = ['star', 'butterfly', 'cloud', 'duck', 'apple'];
+  const t = fallbackToys[char.charCodeAt(0) % fallbackToys.length];
+  return {
+    char,
+    word: `${char} 블록`,
+    emoji: '✨',
+    toy: t,
+    speech: `${cSpec.name} ${jSpec.name}, ${char}! 반짝반짝 ${char}!`
+  };
+}
+
+/* ============================================================================
+ * 2. 24개 한글 자모 3D 통블록(ExtrudeGeometry) 벡터 생성 엔진
+ *    - 복셀이 아닌 매끈하고 도톰한 통블록
+ *    - 단독 블록일 때와 합체 블록(좌우형/상하형)일 때 비율 자동 맞춤
+ * ============================================================================ */
+function makePolygonShape(pts){
+  const s = new THREE.Shape();
+  pts.forEach(([x, y], i) => { if(i === 0) s.moveTo(x, y); else s.lineTo(x, y); });
+  s.closePath();
+  return s;
+}
+
+function makeHolePath(pts){
+  const p = new THREE.Path();
+  pts.forEach(([x, y], i) => { if(i === 0) p.moveTo(x, y); else p.lineTo(x, y); });
+  p.closePath();
+  return p;
+}
+
+// 중심 X=0, 바닥 Y=0 기준으로 폭 W, 높이 H, 획 두께 rawT 인 2D Shape 배열 생성
+function buildJamoShapes(jamo, W, H, rawT){
+  const ox = -W / 2;
+  const P = (x, y) => [ox + x, y];
+  const t = Math.min(rawT, W * 0.28, H * 0.28);
+
+  switch(jamo){
+    // ---------------- 자음 14종 ----------------
+    case 'ㄱ':
+      return [makePolygonShape([P(0,H), P(W,H), P(W,0), P(W-t,0), P(W-t,H-t), P(0,H-t)])];
+
+    case 'ㄴ':
+      return [makePolygonShape([P(0,H), P(t,H), P(t,t), P(W,t), P(W,0), P(0,0)])];
+
+    case 'ㄷ':
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,H-t), P(t,H-t), P(t,t), P(W,t), P(W,0), P(0,0)
+      ])];
+
+    case 'ㄹ': {
+      const ts = Math.min(t, H * 0.21);
+      const ym = (H - ts) / 2;
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,ym), P(ts,ym), P(ts,ts), P(W,ts),
+        P(W,0), P(0,0), P(0,ym+ts), P(W-ts,ym+ts), P(W-ts,H-ts), P(0,H-ts)
+      ])];
+    }
+
+    case 'ㅁ': {
+      const s = makePolygonShape([P(0,0), P(W,0), P(W,H), P(0,H)]);
+      s.holes.push(makeHolePath([P(t,t), P(W-t,t), P(W-t,H-t), P(t,H-t)]));
+      return [s];
+    }
+
+    case 'ㅂ': {
+      const ts = Math.min(t, H * 0.23, W * 0.25);
+      const ym = H * 0.58;
+      const s = makePolygonShape([
+        P(0,H), P(ts,H), P(ts,ym), P(W-ts,ym), P(W-ts,H), P(W,H), P(W,0), P(0,0)
+      ]);
+      s.holes.push(makeHolePath([P(ts,ts), P(W-ts,ts), P(W-ts,ym-ts), P(ts,ym-ts)]));
+      return [s];
+    }
+
+    case 'ㅅ': {
+      const foot = Math.min(t * 1.12, W * 0.34);
+      const topW = Math.min(t * 0.55, W * 0.22);
+      return [makePolygonShape([
+        P(W/2 - topW, H), P(W/2 + topW, H),
+        P(W, 0), P(W - foot, 0),
+        P(W/2, H * 0.54),
+        P(foot, 0), P(0, 0)
+      ])];
+    }
+
+    case 'ㅇ': {
+      const rx = W / 2, ry = H / 2;
+      const ts = Math.min(t, rx * 0.52, ry * 0.52);
+      const s = new THREE.Shape();
+      s.absellipse(0, ry, rx, ry, 0, Math.PI * 2, false, 0);
+      const hole = new THREE.Path();
+      hole.absellipse(0, ry, rx - ts, ry - ts, 0, Math.PI * 2, true, 0);
+      s.holes.push(hole);
+      return [s];
+    }
+
+    case 'ㅈ': {
+      const ts = Math.min(t, H * 0.24);
+      const foot = Math.min(ts * 1.12, W * 0.34);
+      const neck = Math.min(ts * 0.52, W * 0.20);
+      const topY = H - ts;
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,topY),
+        P(W/2 + neck, topY), P(W,0), P(W - foot, 0),
+        P(W/2, topY * 0.54),
+        P(foot, 0), P(0,0), P(W/2 - neck, topY), P(0,topY)
+      ])];
+    }
+
+    case 'ㅊ': {
+      const ts = Math.min(t * 0.88, H * 0.20);
+      const bodyH = H * 0.78;
+      const topY = bodyH - ts;
+      const foot = Math.min(ts * 1.12, W * 0.34);
+      const neck = Math.min(ts * 0.52, W * 0.20);
+      const body = makePolygonShape([
+        P(0,bodyH), P(W,bodyH), P(W,topY),
+        P(W/2 + neck, topY), P(W,0), P(W - foot, 0),
+        P(W/2, topY * 0.54),
+        P(foot, 0), P(0,0), P(W/2 - neck, topY), P(0,topY)
+      ]);
+      const cap = makePolygonShape([
+        P(W * 0.26, H), P(W * 0.74, H), P(W * 0.74, H - ts * 0.9), P(W * 0.26, H - ts * 0.9)
+      ]);
+      return [body, cap];
+    }
+
+    case 'ㅋ': {
+      const ts = Math.min(t, H * 0.24);
+      const ym = H * 0.44;
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,0), P(W-ts,0), P(W-ts,ym),
+        P(W*0.08,ym), P(W*0.08,ym+ts), P(W-ts,ym+ts), P(W-ts,H-ts), P(0,H-ts)
+      ])];
+    }
+
+    case 'ㅌ': {
+      const ts = Math.min(t, H * 0.21);
+      const ym = (H - ts) / 2;
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,H-ts), P(ts,H-ts), P(ts,ym+ts),
+        P(W*0.88,ym+ts), P(W*0.88,ym), P(ts,ym), P(ts,ts), P(W,ts), P(W,0), P(0,0)
+      ])];
+    }
+
+    case 'ㅍ': {
+      const ts = Math.min(t, H * 0.23, W * 0.22);
+      const inset = ts * 0.65;
+      const s = makePolygonShape([
+        P(0,H), P(W,H), P(W,H-ts), P(W-inset,H-ts), P(W-inset,ts),
+        P(W,ts), P(W,0), P(0,0), P(0,ts), P(inset,ts), P(inset,H-ts), P(0,H-ts)
+      ]);
+      s.holes.push(makeHolePath([
+        P(inset + ts*0.95, ts), P(W - inset - ts*0.95, ts),
+        P(W - inset - ts*0.95, H-ts), P(inset + ts*0.95, H-ts)
+      ]));
+      return [s];
+    }
+
+    case 'ㅎ': {
+      const ts = Math.min(t * 0.85, H * 0.17);
+      const cap = makePolygonShape([
+        P(W*0.28, H), P(W*0.72, H), P(W*0.72, H - ts*0.85), P(W*0.28, H - ts*0.85)
+      ]);
+      const barY = H * 0.67;
+      const bar = makePolygonShape([
+        P(0, barY + ts*0.85), P(W, barY + ts*0.85), P(W, barY), P(0, barY)
+      ]);
+      const rx = W * 0.42, ry = H * 0.29;
+      const ring = new THREE.Shape();
+      ring.absellipse(0, ry, rx, ry, 0, Math.PI * 2, false, 0);
+      const hole = new THREE.Path();
+      const rt = Math.min(ts * 0.9, rx * 0.5, ry * 0.5);
+      hole.absellipse(0, ry, rx - rt, ry - rt, 0, Math.PI * 2, true, 0);
+      ring.holes.push(hole);
+      return [cap, bar, ring];
+    }
+
+    // ---------------- 모음 10종 ----------------
+    case 'ㅣ': {
+      const bx = (W - t) / 2;
+      return [makePolygonShape([P(bx,0), P(bx+t,0), P(bx+t,H), P(bx,H)])];
+    }
+
+    case 'ㅡ': {
+      const by = (H - t) / 2;
+      return [makePolygonShape([P(0,by), P(W,by), P(W,by+t), P(0,by+t)])];
+    }
+
+    case 'ㅏ': {
+      const ym = (H - t) / 2;
+      return [makePolygonShape([
+        P(0,H), P(t,H), P(t,ym+t), P(W,ym+t), P(W,ym), P(t,ym), P(t,0), P(0,0)
+      ])];
+    }
+
+    case 'ㅑ': {
+      const ts = Math.min(t, H * 0.19);
+      const y1 = H * 0.62, y2 = H * 0.27;
+      return [makePolygonShape([
+        P(0,H), P(ts,H),
+        P(ts,y1+ts), P(W,y1+ts), P(W,y1), P(ts,y1),
+        P(ts,y2+ts), P(W,y2+ts), P(W,y2), P(ts,y2),
+        P(ts,0), P(0,0)
+      ])];
+    }
+
+    case 'ㅓ': {
+      const ym = (H - t) / 2;
+      return [makePolygonShape([
+        P(W-t,H), P(W,H), P(W,0), P(W-t,0), P(W-t,ym), P(0,ym), P(0,ym+t), P(W-t,ym+t)
+      ])];
+    }
+
+    case 'ㅕ': {
+      const ts = Math.min(t, H * 0.19);
+      const y1 = H * 0.62, y2 = H * 0.27;
+      return [makePolygonShape([
+        P(W-ts,H), P(W,H), P(W,0), P(W-ts,0),
+        P(W-ts,y2), P(0,y2), P(0,y2+ts), P(W-ts,y2+ts),
+        P(W-ts,y1), P(0,y1), P(0,y1+ts), P(W-ts,y1+ts)
+      ])];
+    }
+
+    case 'ㅗ': {
+      const xm = (W - t) / 2;
+      return [makePolygonShape([
+        P(xm,H), P(xm+t,H), P(xm+t,t), P(W,t), P(W,0), P(0,0), P(0,t), P(xm,t)
+      ])];
+    }
+
+    case 'ㅛ': {
+      const ts = Math.min(t, W * 0.19);
+      const x1 = W * 0.24, x2 = W - ts - W * 0.24;
+      return [makePolygonShape([
+        P(0,0), P(W,0), P(W,ts),
+        P(x2+ts,ts), P(x2+ts,H), P(x2,H), P(x2,ts),
+        P(x1+ts,ts), P(x1+ts,H), P(x1,H), P(x1,ts),
+        P(0,ts)
+      ])];
+    }
+
+    case 'ㅜ': {
+      const xm = (W - t) / 2;
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,H-t), P(xm+t,H-t), P(xm+t,0), P(xm,0), P(xm,H-t), P(0,H-t)
+      ])];
+    }
+
+    case 'ㅠ': {
+      const ts = Math.min(t, W * 0.19);
+      const x1 = W * 0.24, x2 = W - ts - W * 0.24;
+      return [makePolygonShape([
+        P(0,H), P(W,H), P(W,H-ts),
+        P(x2+ts,H-ts), P(x2+ts,0), P(x2,0), P(x2,H-ts),
+        P(x1+ts,H-ts), P(x1+ts,0), P(x1,0), P(x1,H-ts),
+        P(0,H-ts)
+      ])];
+    }
+  }
+  return [];
+}
+
+const geoCache = new Map();
+function getJamoExtrudeGeometry(jamo, W, H, strokeT, depth = 0.56){
+  const key = `${jamo}:${W.toFixed(2)}:${H.toFixed(2)}:${strokeT.toFixed(2)}:${depth.toFixed(2)}`;
+  if(geoCache.has(key)) return geoCache.get(key);
+  const shapes = buildJamoShapes(jamo, W, H, strokeT);
+  const geo = new THREE.ExtrudeGeometry(shapes, {
+    depth,
+    bevelEnabled: true,
+    bevelSegments: 5,
+    steps: 1,
+    bevelSize: 0.09,
+    bevelThickness: 0.11
+  });
+  geo.translate(0, 0, -depth / 2);
+  geo.computeVertexNormals();
+  geoCache.set(key, geo);
+  return geo;
+}
+
+const matCache = new Map();
+function getToyMaterial(hex, opts = {}){
+  const key = `${hex}:${opts.roughness ?? 0.24}:${opts.opacity ?? 1}`;
+  if(matCache.has(key)) return matCache.get(key);
+  const color = new THREE.Color(hex);
+  const mat = new THREE.MeshStandardMaterial({
+    color,
+    roughness: opts.roughness ?? 0.24,
+    metalness: 0.04,
+    emissive: color,
+    emissiveIntensity: 0.07,
+    transparent: (opts.opacity ?? 1) < 1,
+    opacity: opts.opacity ?? 1
+  });
+  matCache.set(key, mat);
+  return mat;
+}
+
+// 3D 통블록 메쉬 생성기 (단독 자음, 단독 모음, 또는 투톤 완성 글자)
+function buildHangulBlockMesh(block){
+  const root = new THREE.Group();
+  root.userData.blockId = block.id;
+  const visual = new THREE.Group();
+  root.add(visual);
+
+  if(block.role === 'cho'){
+    const spec = CHO_MAP[block.cho];
+    const geo = getJamoExtrudeGeometry(block.cho, 1.65, 1.75, 0.34, 0.58);
+    const mesh = new THREE.Mesh(geo, getToyMaterial(spec.color));
+    mesh.position.set(0, 0.10, 0);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.userData.blockId = block.id;
+    visual.add(mesh);
+  } else if(block.role === 'jung'){
+    const spec = JUNG_MAP[block.jung];
+    let W = 1.45, H = 1.85, yOff = 0.10;
+    if(block.jung === 'ㅣ'){ W = 0.60; H = 1.95; }
+    else if(block.jung === 'ㅡ'){ W = 1.85; H = 0.50; yOff = 0.68; }
+    else if(spec.dir === 'bottom'){ W = 1.80; H = 1.32; yOff = 0.25; }
+    const geo = getJamoExtrudeGeometry(block.jung, W, H, 0.34, 0.58);
+    const mesh = new THREE.Mesh(geo, getToyMaterial(spec.color));
+    mesh.position.set(0, yOff, 0);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.userData.blockId = block.id;
+    visual.add(mesh);
+  } else if(block.role === 'syllable'){
+    // ★ 투톤 완성 음절 통블록: 자음 색과 모음 색을 그대로 유지하며 음절 비율로 일체화 ★
+    const cSpec = CHO_MAP[block.cho];
+    const jSpec = JUNG_MAP[block.jung];
+
+    if(jSpec.dir === 'right'){
+      // 우측 모음 결합형 (가, 나, 다, 거, 기 등)
+      const cGeo = getJamoExtrudeGeometry(block.cho, 1.08, 1.72, 0.28, 0.60);
+      const cMesh = new THREE.Mesh(cGeo, getToyMaterial(cSpec.color));
+      cMesh.position.set(-0.56, 0.22, 0);
+      cMesh.castShadow = true;
+      cMesh.receiveShadow = true;
+      cMesh.userData.blockId = block.id;
+
+      const jW = block.jung === 'ㅣ' ? 0.52 : 0.95;
+      const jX = block.jung === 'ㅣ' ? 0.44 : 0.58;
+      const jGeo = getJamoExtrudeGeometry(block.jung, jW, 2.02, 0.28, 0.60);
+      const jMesh = new THREE.Mesh(jGeo, getToyMaterial(jSpec.color));
+      jMesh.position.set(jX, 0.08, 0);
+      jMesh.castShadow = true;
+      jMesh.receiveShadow = true;
+      jMesh.userData.blockId = block.id;
+
+      visual.add(cMesh, jMesh);
+    } else {
+      // 하단 모음 결합형 (고, 노, 도, 구, 그 등)
+      const cGeo = getJamoExtrudeGeometry(block.cho, 1.66, 1.04, 0.25, 0.60);
+      const cMesh = new THREE.Mesh(cGeo, getToyMaterial(cSpec.color));
+      cMesh.position.set(0, 1.12, 0);
+      cMesh.castShadow = true;
+      cMesh.receiveShadow = true;
+      cMesh.userData.blockId = block.id;
+
+      const jH = block.jung === 'ㅡ' ? 0.42 : 0.90;
+      const jY = block.jung === 'ㅡ' ? 0.44 : 0.08;
+      const jGeo = getJamoExtrudeGeometry(block.jung, 2.04, jH, 0.25, 0.60);
+      const jMesh = new THREE.Mesh(jGeo, getToyMaterial(jSpec.color));
+      jMesh.position.set(0, jY, 0);
+      jMesh.castShadow = true;
+      jMesh.receiveShadow = true;
+      jMesh.userData.blockId = block.id;
+
+      visual.add(cMesh, jMesh);
+    }
+
+    // 합체된 글자 뒤쪽에서 두 조각을 하나로 단단히 잡아주는 투명 자석 홀더 + 터치 히트박스
+    const connector = new THREE.Mesh(
+      new THREE.BoxGeometry(1.75, 1.55, 0.22),
+      new THREE.MeshStandardMaterial({color:0xffffff, roughness:0.3, transparent:true, opacity:0.45})
+    );
+    connector.position.set(0, 1.05, -0.22);
+    connector.userData.blockId = block.id;
+    visual.add(connector);
+  }
+
+  // 손가락 터치가 빈 공간(ㅇ 구멍 등)을 눌러도 무조건 잡히도록 투명 히트박스 부착
+  const hitBox = new THREE.Mesh(
+    new THREE.BoxGeometry(2.3, 2.3, 1.1),
+    new THREE.MeshBasicMaterial({visible:false})
+  );
+  hitBox.position.set(0, 1.1, 0);
+  hitBox.userData.blockId = block.id;
+  visual.add(hitBox);
+
+  block.mesh = root;
+  block.visual = visual;
+  root.position.set(block.x, block.y, block.z);
+  return root;
+}
+
+/* ============================================================================
+ * 3. 글자 합체·터치 시 튀어나오는 귀여운 3D 미니 장난감 (눈동자 포함!)
+ * ============================================================================ */
+const eyePupilMat = new THREE.MeshStandardMaterial({color:0x1d2c46, roughness:0.15});
+
+function buildMiniToy3D(toyType){
+  const g = new THREE.Group();
+  const mPink   = getToyMaterial('#FF6B8B');
+  const mYellow = getToyMaterial('#FFD43B');
+  const mBlue   = getToyMaterial('#339AF0');
+  const mRed    = getToyMaterial('#FF5252');
+  const mGreen  = getToyMaterial('#51CF66');
+  const mWhite  = getToyMaterial('#FFFFFF');
+  const mDark   = getToyMaterial('#2B3A55');
+  const mPurple = getToyMaterial('#845EF7');
+
+  if(toyType === 'butterfly'){
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.55, 10), mDark);
+    body.rotation.x = Math.PI / 2;
+    const wingGeo = new THREE.SphereGeometry(0.34, 12, 10);
+    wingGeo.scale(1.15, 0.18, 0.85);
+    const wingL = new THREE.Mesh(wingGeo, mPink);
+    wingL.position.set(-0.28, 0.05, 0);
+    const wingR = new THREE.Mesh(wingGeo, mYellow);
+    wingR.position.set(0.28, 0.05, 0);
+    g.add(body, wingL, wingR);
+    g.userData.wings = [wingL, wingR];
+  } else if(toyType === 'whale'){
+    const body = new THREE.Mesh(new THREE.SphereGeometry(0.40, 16, 14), mBlue);
+    body.scale.set(1.15, 0.85, 1.35);
+    const tail = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.40, 8), mBlue);
+    tail.rotation.x = -Math.PI / 2;
+    tail.position.set(0, 0, -0.50);
+    const spout = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.03, 0.35, 10), mWhite);
+    spout.position.set(0, 0.46, 0.05);
+    g.add(body, tail, spout);
+  } else if(toyType === 'car'){
+    const base = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.32, 0.48), mRed);
+    const top = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.28, 0.42), mYellow);
+    top.position.set(0, 0.28, 0);
+    g.add(base, top);
+  } else if(toyType === 'train'){
+    const base = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.40, 0.46), mBlue);
+    const cab = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.36, 0.42), mRed);
+    cab.position.set(-0.15, 0.34, 0);
+    const chim = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.08, 0.30, 10), mYellow);
+    chim.position.set(0.22, 0.30, 0);
+    g.add(base, cab, chim);
+  } else if(toyType === 'airplane'){
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.12, 0.78, 12), mWhite);
+    body.rotation.z = Math.PI / 2;
+    const wings = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.06, 0.88), mBlue);
+    g.add(body, wings);
+  } else if(toyType === 'apple'){
+    const body = new THREE.Mesh(new THREE.SphereGeometry(0.38, 16, 14), mRed);
+    const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.14, 10, 8), mGreen);
+    leaf.scale.set(1.6, 0.5, 0.8);
+    leaf.position.set(0.12, 0.40, 0);
+    g.add(body, leaf);
+  } else if(toyType === 'banana'){
+    const body = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.12, 10, 18, Math.PI * 0.85), mYellow);
+    body.rotation.z = Math.PI * 0.6;
+    g.add(body);
+  } else if(toyType === 'umbrella'){
+    const canopy = new THREE.Mesh(new THREE.ConeGeometry(0.48, 0.36, 14), mPink);
+    canopy.position.set(0, 0.16, 0);
+    const stick = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.58, 8), mYellow);
+    g.add(canopy, stick);
+  } else if(toyType === 'hat'){
+    const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.08, 16), mPurple);
+    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.30, 0.42, 16), mPurple);
+    top.position.set(0, 0.22, 0);
+    g.add(brim, top);
+  } else if(toyType === 'bag'){
+    const bag = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.58, 0.34), mYellow);
+    const flap = new THREE.Mesh(new THREE.BoxGeometry(0.58, 0.22, 0.36), mRed);
+    flap.position.set(0, 0.16, 0);
+    g.add(bag, flap);
+  } else if(toyType === 'snowman'){
+    const b1 = new THREE.Mesh(new THREE.SphereGeometry(0.32, 14, 12), mWhite);
+    const b2 = new THREE.Mesh(new THREE.SphereGeometry(0.22, 14, 12), mWhite);
+    b2.position.set(0, 0.40, 0);
+    g.add(b1, b2);
+  } else if(toyType === 'cloud'){
+    const p1 = new THREE.Mesh(new THREE.SphereGeometry(0.32, 12, 10), mWhite);
+    const p2 = new THREE.Mesh(new THREE.SphereGeometry(0.24, 12, 10), mWhite);
+    p2.position.set(0.26, -0.05, 0);
+    const p3 = new THREE.Mesh(new THREE.SphereGeometry(0.24, 12, 10), mWhite);
+    p3.position.set(-0.26, -0.05, 0);
+    g.add(p1, p2, p3);
+  } else if(toyType === 'duck'){
+    const body = new THREE.Mesh(new THREE.SphereGeometry(0.32, 14, 12), mYellow);
+    const beak = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.22, 8), mRed);
+    beak.rotation.x = Math.PI / 2;
+    beak.position.set(0, 0.04, 0.36);
+    g.add(body, beak);
+  } else {
+    const star = new THREE.Mesh(new THREE.OctahedronGeometry(0.38, 0), mYellow);
+    g.add(star);
+  }
+
+  // 장난감의 귀여운 눈동자
+  const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 8), eyePupilMat);
+  eyeL.position.set(-0.13, 0.10, 0.34);
+  const eyeR = eyeL.clone();
+  eyeR.position.set(0.13, 0.10, 0.34);
+  g.add(eyeL, eyeR);
+  return g;
+}
+
+/* ============================================================================
+ * 4. Three.js 씬, 고정 카메라, 아늑한 2층 놀이매트(조립석 + 진열대 + 바구니)
+ * ============================================================================ */
+const $ = id => document.getElementById(id);
+const canvas = $('scene3d');
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#d2f0ff');
+
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.5, 100);
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+if('outputEncoding' in renderer) renderer.outputEncoding = THREE.sRGBEncoding;
+
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0xb2f2bb, 0.88);
+hemiLight.position.set(0, 25, 0);
+scene.add(hemiLight);
+
+const dirLight = new THREE.DirectionalLight(0xfffdf6, 0.80);
+dirLight.position.set(8, 22, 14);
+dirLight.castShadow = true;
+dirLight.shadow.mapSize.width = 1024;
+dirLight.shadow.mapSize.height = 1024;
+const dCam = 12;
+dirLight.shadow.camera.left = -dCam;
+dirLight.shadow.camera.right = dCam;
+dirLight.shadow.camera.top = dCam;
+dirLight.shadow.camera.bottom = -dCam;
+scene.add(dirLight);
+
+const matGroup = new THREE.Group();
+const blocksGroup = new THREE.Group();
+const toysGroup = new THREE.Group();
+const fxGroup = new THREE.Group();
+scene.add(matGroup, blocksGroup, toysGroup, fxGroup);
+
+// 진열대 5개 슬롯 & 앞마당 스폰 슬롯 좌표
+const SHELF_Z = -3.1;
+const SHELF_SLOTS_X = [-5.0, -2.5, 0.0, 2.5, 5.0];
+const FRONT_CHO_SLOTS = [
+  {x:-2.1, z:1.1}, {x:-4.4, z:1.1}, {x:-2.1, z:-0.8}
+];
+const FRONT_JUNG_SLOTS = [
+  {x:2.1, z:1.1},  {x:4.4, z:1.1},  {x:2.1, z:-0.8}
+];
+const BASKET_POS = {x:5.8, z:2.1};
+
+let magnetRingMesh = null;
+let basketGroup = null;
+const shelfPedestals = [];
+
+function buildPlaymatWorld(){
+  while(matGroup.children.length) matGroup.remove(matGroup.children[0]);
+  shelfPedestals.length = 0;
+
+  // 1) 부드러운 잔디 배경 바닥
+  const grass = new THREE.Mesh(
+    new THREE.BoxGeometry(36, 0.6, 24),
+    getToyMaterial('#a9efc0', {roughness:0.75})
+  );
+  grass.position.set(0, -0.35, -1);
+  grass.receiveShadow = true;
+  matGroup.add(grass);
+
+  // 2) 앞마당 메인 놀이 매트 (따뜻한 크림색 보드)
+  const mainMat = new THREE.Mesh(
+    new THREE.BoxGeometry(15.2, 0.16, 8.6),
+    getToyMaterial('#FFF9DB', {roughness:0.55})
+  );
+  mainMat.position.set(0, -0.06, -0.4);
+  mainMat.receiveShadow = true;
+  matGroup.add(mainMat);
+
+  const borderMat = new THREE.Mesh(
+    new THREE.BoxGeometry(15.6, 0.12, 9.0),
+    getToyMaterial('#FFD43B', {roughness:0.45})
+  );
+  borderMat.position.set(0, -0.09, -0.4);
+  matGroup.add(borderMat);
+
+  // 3) 앞마당 자음 자리(왼쪽 웜링) & 모음 자리(오른쪽 쿨링) 가이드
+  const choPad = new THREE.Mesh(
+    new THREE.RingGeometry(0.95, 1.18, 28),
+    new THREE.MeshBasicMaterial({color:0xFF8787, transparent:true, opacity:0.45, side:THREE.DoubleSide})
+  );
+  choPad.rotation.x = -Math.PI / 2;
+  choPad.position.set(-2.1, 0.03, 1.1);
+  matGroup.add(choPad);
+
+  const jungPad = new THREE.Mesh(
+    new THREE.RingGeometry(0.95, 1.18, 28),
+    new THREE.MeshBasicMaterial({color:0x4DABF7, transparent:true, opacity:0.45, side:THREE.DoubleSide})
+  );
+  jungPad.rotation.x = -Math.PI / 2;
+  jungPad.position.set(2.1, 0.03, 1.1);
+  matGroup.add(jungPad);
+
+  // 4) 뒷마당 완성 글자 진열대 (5칸 단상)
+  const shelfBar = new THREE.Mesh(
+    new THREE.BoxGeometry(13.2, 0.26, 2.3),
+    getToyMaterial('#E5DBFF', {roughness:0.45})
+  );
+  shelfBar.position.set(0, 0.12, SHELF_Z);
+  shelfBar.receiveShadow = true;
+  matGroup.add(shelfBar);
+
+  for(let i = 0; i < SHELF_SLOTS_X.length; i++){
+    const ped = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.05, 1.12, 0.10, 24),
+      getToyMaterial('#B197FC', {roughness:0.35})
+    );
+    ped.position.set(SHELF_SLOTS_X[i], 0.28, SHELF_Z);
+    ped.receiveShadow = true;
+    matGroup.add(ped);
+    shelfPedestals.push(ped);
+  }
+
+  // 5) 오른쪽 아래 3D 블록 정리 바구니 (🗑️)
+  basketGroup = new THREE.Group();
+  basketGroup.position.set(BASKET_POS.x, 0, BASKET_POS.z);
+  const bBody = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.05, 0.80, 1.1, 18),
+    getToyMaterial('#FF922B', {roughness:0.35})
+  );
+  bBody.position.set(0, 0.55, 0);
+  const bRim = new THREE.Mesh(
+    new THREE.TorusGeometry(1.05, 0.12, 10, 24),
+    getToyMaterial('#FFD43B', {roughness:0.25})
+  );
+  bRim.rotation.x = Math.PI / 2;
+  bRim.position.set(0, 1.1, 0);
+  const bHole = new THREE.Mesh(
+    new THREE.CircleGeometry(0.92, 18),
+    new THREE.MeshBasicMaterial({color:0x495057})
+  );
+  bHole.rotation.x = -Math.PI / 2;
+  bHole.position.set(0, 1.08, 0);
+  basketGroup.add(bBody, bRim, bHole);
+  matGroup.add(basketGroup);
+
+  // 6) 자석 스냅 가이드 링 (평소엔 숨김)
+  magnetRingMesh = new THREE.Mesh(
+    new THREE.RingGeometry(1.2, 1.55, 32),
+    new THREE.MeshBasicMaterial({color:0xFF6B8B, transparent:true, opacity:0.75, side:THREE.DoubleSide})
+  );
+  magnetRingMesh.rotation.x = -Math.PI / 2;
+  magnetRingMesh.position.set(0, 0.05, 0);
+  magnetRingMesh.visible = false;
+  matGroup.add(magnetRingMesh);
+}
+
+function adjustCameraForViewport(){
+  const w = Math.max(300, innerWidth);
+  const h = Math.max(300, innerHeight);
+  const aspect = w / h;
+  camera.aspect = aspect;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+
+  // 가로/세로 화면비에 맞춰 놀이매트 전체가 한눈에 들어오도록 고정 카메라 거리 자동 계산
+  if(aspect >= 1.25){
+    camera.position.set(0, 11.8, 12.6);
+    camera.lookAt(0, 0.3, -0.1);
+  } else if(aspect >= 0.85){
+    camera.position.set(0, 14.2, 15.2);
+    camera.lookAt(0, 0.1, 0.0);
+  } else {
+    const pull = (0.85 - aspect) * 14;
+    camera.position.set(0, 16.5 + pull * 0.7, 17.5 + pull);
+    camera.lookAt(0, -0.2, 0.2);
+  }
+}
+
+/* ============================================================================
+ * 5. 상태 관리, 블록 생성, 스마트 스폰, 자동 진열대 이동, 자석 합체
+ * ============================================================================ */
+const state = {
+  blocks: [],
+  toys: [],
+  particles: [],
+  undoStack: [],
+  drag: null,
+  pointerId: null,
+  sound: true,
+  soundCtx: null,
+  toastTimer: 0,
+  lastTick: performance.now()
+};
+
+let uid = 0;
+function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
+
+function captureState(){
+  return JSON.stringify(state.blocks.map(b => ({
+    role: b.role, cho: b.cho, jung: b.jung, x: b.x, z: b.z, onShelf: b.onShelf, shelfIdx: b.shelfIdx
+  })));
+}
+
+function saveUndo(){
+  state.undoStack.push(captureState());
+  if(state.undoStack.length > 20) state.undoStack.shift();
+}
+
+function clearAllBlocks(){
+  for(const b of state.blocks){
+    if(b.mesh) blocksGroup.remove(b.mesh);
+  }
+  state.blocks = [];
+  for(const t of state.toys){
+    if(t.mesh) toysGroup.remove(t.mesh);
+  }
+  state.toys = [];
+}
+
+function restoreState(jsonStr){
+  clearAllBlocks();
+  const list = JSON.parse(jsonStr);
+  for(const item of list){
+    createBlock(item, item.x, item.z, item.onShelf, item.shelfIdx, false);
+  }
+}
+
+function createBlock(spec, x, z, onShelf = false, shelfIdx = -1, animateDrop = true){
+  const role = spec.role; // 'cho' | 'jung' | 'syllable'
+  const cho = spec.cho || null;
+  const jung = spec.jung || null;
+  const char = role === 'cho' ? cho : (role === 'jung' ? jung : composeHangul(cho, jung));
+
+  const block = {
+    id: 'blk_' + (++uid),
+    role,
+    cho,
+    jung,
+    char,
+    x,
+    y: animateDrop ? 2.4 : (onShelf ? 0.32 : 0),
+    z,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    targetX: null,
+    targetZ: null,
+    onShelf,
+    shelfIdx,
+    squash: animateDrop ? 0.85 : 0,
+    squashVel: 0,
+    tiltX: 0,
+    tiltZ: 0,
+    spinY: 0,
+    mesh: null,
+    visual: null
+  };
+
+  const mesh = buildHangulBlockMesh(block);
+  blocksGroup.add(mesh);
+  state.blocks.push(block);
+  return block;
+}
+
+function removeBlock(block){
+  if(!block) return;
+  if(block.mesh) blocksGroup.remove(block.mesh);
+  state.blocks = state.blocks.filter(b => b !== block);
+}
+
+// 앞마당에 완성 글자가 있으면 뒷마당 진열대 빈칸으로 자동 이동시켜 앞마당을 비워줌
+function promoteFrontSyllablesToShelf(){
+  const frontSyllables = state.blocks.filter(b => b.role === 'syllable' && !b.onShelf);
+  for(const syl of frontSyllables){
+    const emptyIdx = findEmptyShelfSlot();
+    if(emptyIdx !== -1){
+      placeBlockOnShelf(syl, emptyIdx);
+    }
+  }
+}
+
+function findEmptyShelfSlot(){
+  for(let i = 0; i < SHELF_SLOTS_X.length; i++){
+    const occupied = state.blocks.some(b => b.onShelf && b.shelfIdx === i);
+    if(!occupied) return i;
+  }
+  // 진열대가 꽉 찼으면 가장 왼쪽(오래된) 진열대 글자를 정리하고 맨 오른쪽 칸을 비움
+  const oldest = state.blocks.find(b => b.onShelf && b.shelfIdx === 0);
+  if(oldest){
+    removeBlock(oldest);
+    for(const b of state.blocks){
+      if(b.onShelf && b.shelfIdx > 0){
+        b.shelfIdx -= 1;
+        b.targetX = SHELF_SLOTS_X[b.shelfIdx];
+        b.targetZ = SHELF_Z;
+      }
+    }
+    return SHELF_SLOTS_X.length - 1;
+  }
+  return 0;
+}
+
+function placeBlockOnShelf(block, slotIdx){
+  block.onShelf = true;
+  block.shelfIdx = slotIdx;
+  block.targetX = SHELF_SLOTS_X[slotIdx];
+  block.targetZ = SHELF_Z;
+  block.vy = 4.5;
+  triggerSquash(block, 0.7);
+  setTimeout(() => checkShelfBonusWords(), 350);
+}
+
+// 앞마당에서 겹치지 않는 최적의 스폰 위치 탐색
+function findBestSpawnSlot(role){
+  const slots = role === 'cho' ? FRONT_CHO_SLOTS : FRONT_JUNG_SLOTS;
+  for(const s of slots){
+    const busy = state.blocks.some(b => !b.onShelf && Math.hypot((b.targetX ?? b.x) - s.x, (b.targetZ ?? b.z) - s.z) < 1.65);
+    if(!busy) return {x: s.x, z: s.z};
+  }
+  // 앞마당에 낱자가 너무 많으면 가장 오래된 같은 역할 블록 하나를 정리하고 기본 자리 반환
+  const sameRoleFront = state.blocks.filter(b => !b.onShelf && b.role === role);
+  if(sameRoleFront.length >= 3){
+    removeBlock(sameRoleFront[0]);
+  }
+  return {
+    x: slots[0].x + (Math.random() - 0.5) * 0.8,
+    z: slots[0].z + (Math.random() - 0.5) * 0.6
+  };
+}
+
+// 트레이에서 자음 또는 모음 버튼을 눌렀을 때
+function spawnFromTray(role, id){
+  saveUndo();
+  // 앞마당에 이미 완성된 글자가 있으면 먼저 위쪽 진열대로 스르륵 올려보냄
+  promoteFrontSyllablesToShelf();
+
+  const pos = findBestSpawnSlot(role);
+  const spec = role === 'cho' ? {role:'cho', cho:id} : {role:'jung', jung:id};
+  const blk = createBlock(spec, pos.x, pos.z, false, -1, true);
+
+  sfx('spawn');
+  if(role === 'cho'){
+    const c = CHO_MAP[id];
+    say(`${c.name}! ${c.sound}~`);
+    toast(`🧩 자음 [${c.id}] ${c.name}! 모음 블록과 붙여보세요`);
+  } else {
+    const j = JUNG_MAP[id];
+    say(`${j.name}!`);
+    toast(`🌸 모음 [${j.id}] ${j.name}! 자음 블록과 붙여보세요`);
+  }
+  return blk;
+}
+
+// ★ 자음 + 모음 자석 합체 실행 ★
+function mergeChoAndJung(choBlock, jungBlock){
+  if(!choBlock || !jungBlock) return null;
+  saveUndo();
+
+  const cho = choBlock.cho;
+  const jung = jungBlock.jung;
+  const meta = getSyllableMeta(cho, jung);
+
+  const midX = clamp((choBlock.x + jungBlock.x) / 2, -3.5, 3.5);
+  const midZ = clamp((choBlock.z + jungBlock.z) / 2, -1.2, 1.8);
+
+  removeBlock(choBlock);
+  removeBlock(jungBlock);
+
+  const syl = createBlock({role:'syllable', cho, jung}, midX, midZ, false, -1, false);
+  syl.y = 0.6;
+  syl.vy = 5.5;
+  triggerSquash(syl, 1.35);
+
+  burstParticles(midX, 1.4, midZ, CHO_MAP[cho].color, JUNG_MAP[jung].color, 26);
+  spawnMiniToyPopup(syl, meta);
+  sfx('merge');
+  say(meta.speech);
+  toast(`✨ ${cho} + ${jung} = [${meta.char}]! ${meta.emoji} ${meta.word}!`);
+  return syl;
+}
+
+function spawnMiniToyPopup(block, meta){
+  // 기존 장난감이 너무 많으면 정리
+  while(state.toys.length >= 4){
+    const old = state.toys.shift();
+    if(old.mesh) toysGroup.remove(old.mesh);
+  }
+  const mesh = buildMiniToy3D(meta.toy);
+  mesh.position.set(block.x, block.y + 2.6, block.z);
+  mesh.scale.setScalar(0.1);
+  toysGroup.add(mesh);
+
+  state.toys.push({
+    id: 'toy_' + (++uid),
+    anchorBlock: block,
+    mesh,
+    word: meta.word,
+    emoji: meta.emoji,
+    age: 0,
+    maxAge: 5.5
+  });
+}
+
+// 진열대에 나란히 놓인 글자들이 단어를 이루는지 확인 (예: 나+비, 기+차, 바+나+나)
+function checkShelfBonusWords(){
+  const shelfBlocks = state.blocks
+    .filter(b => b.onShelf && b.role === 'syllable')
+    .sort((a, b) => a.shelfIdx - b.shelfIdx);
+  if(shelfBlocks.length < 2) return;
+
+  // 인접한 2~3글자 조합 검사
+  for(let len = 3; len >= 2; len--){
+    for(let i = 0; i <= shelfBlocks.length - len; i++){
+      const slice = shelfBlocks.slice(i, i + len);
+      let contiguous = true;
+      for(let k = 1; k < slice.length; k++){
+        if(slice[k].shelfIdx !== slice[k - 1].shelfIdx + 1) contiguous = false;
+      }
+      if(!contiguous) continue;
+      const wordStr = slice.map(b => b.char).join('');
+      const bonus = SHELF_WORDS[wordStr];
+      if(bonus && state.lastBonusWord !== wordStr){
+        state.lastBonusWord = wordStr;
+        slice.forEach((b, idx) => {
+          b.vy = 5.0 + idx * 0.8;
+          triggerSquash(b, 1.2);
+          burstParticles(b.x, 1.5, b.z, '#FFD43B', '#FF6B8B', 16);
+        });
+        spawnMiniToyPopup(slice[Math.floor(slice.length / 2)], {word:wordStr, emoji:bonus.emoji, toy:bonus.toy});
+        sfx('fanfare');
+        say(`우와! ${wordStr} 완성!`);
+        toast(`🎊 진열대 단어 완성! [${wordStr}] ${bonus.emoji}`);
+        return;
+      }
+    }
+  }
+}
+
+function triggerSquash(block, amount = 0.9){
+  if(!block) return;
+  block.squash = clamp(amount, -0.8, 1.5);
+  block.squashVel = 0;
+}
+
+// 블록을 손가락으로 톡! 눌렀을 때의 반응 (분해되지 않고 항상 즐거운 소리 + 장난감 반응!)
+function handleBlockTap(block, slotPitchIdx = 0){
+  if(!block) return;
+  block.vy = 4.8;
+  block.spinY = Math.PI * 2;
+  triggerSquash(block, 1.15);
+
+  if(block.role === 'cho'){
+    const c = CHO_MAP[block.cho];
+    sfx('tap', slotPitchIdx);
+    say(`${c.name}! ${c.sound}~`);
+    toast(`🧩 [${c.id}] ${c.name}`);
+  } else if(block.role === 'jung'){
+    const j = JUNG_MAP[block.jung];
+    sfx('tap', slotPitchIdx + 2);
+    say(`${j.name}!`);
+    toast(`🌸 [${j.id}] ${j.name}`);
+  } else {
+    const meta = getSyllableMeta(block.cho, block.jung);
+    sfx('xylophone', block.onShelf ? block.shelfIdx : 2);
+    burstParticles(block.x, 1.4, block.z, CHO_MAP[block.cho].color, JUNG_MAP[block.jung].color, 14);
+    spawnMiniToyPopup(block, meta);
+    say(meta.speech);
+    toast(`✨ [${meta.char}] ${meta.emoji} ${meta.word}!`);
+  }
+}
+
+/* ============================================================================
+ * 6. 마우스/터치 Raycaster 드래그 앤 드롭 & 자석 스냅 감지
+ * ============================================================================ */
+const raycaster = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+const hitPoint = new THREE.Vector3();
+
+function setRay(clientX, clientY){
+  const rect = canvas.getBoundingClientRect();
+  ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(ndc, camera);
+}
+
+function getGroundPoint(clientX, clientY){
+  setRay(clientX, clientY);
+  const hit = raycaster.ray.intersectPlane(groundPlane, hitPoint);
+  return hit ? hitPoint.clone() : null;
+}
+
+function pickBlock(clientX, clientY){
+  setRay(clientX, clientY);
+  const hits = raycaster.intersectObjects(blocksGroup.children, true);
+  for(const h of hits){
+    let obj = h.object;
+    while(obj && !obj.userData?.blockId) obj = obj.parent;
+    if(obj?.userData?.blockId){
+      return state.blocks.find(b => b.id === obj.userData.blockId) || null;
+    }
+  }
+  return null;
+}
+
+// 드래그 중인 블록과 자석 합체가 가능한 가장 가까운 짝꿍 탐색
+function findMagnetPartner(dragBlock){
+  if(!dragBlock || (dragBlock.role !== 'cho' && dragBlock.role !== 'jung')) return null;
+  const needRole = dragBlock.role === 'cho' ? 'jung' : 'cho';
+  let best = null, bestDist = 3.35; // 자석 반응 반경
+
+  for(const other of state.blocks){
+    if(other === dragBlock || other.role !== needRole || other.onShelf) continue;
+    const d = Math.hypot(dragBlock.x - other.x, dragBlock.z - other.z);
+    if(d < bestDist){
+      bestDist = d;
+      best = other;
+    }
+  }
+  return best;
+}
+
+function onPointerDown(e){
+  if(state.pointerId !== null) return;
+  const blk = pickBlock(e.clientX, e.clientY);
+  if(!blk) return;
+
+  state.pointerId = e.pointerId;
+  try{ canvas.setPointerCapture?.(e.pointerId); }catch{}
+
+  const pt = getGroundPoint(e.clientX, e.clientY) || new THREE.Vector3(blk.x, 0, blk.z);
+  blk.targetX = null;
+  blk.targetZ = null;
+  triggerSquash(blk, 0.65);
+  sfx('grab');
+
+  state.drag = {
+    block: blk,
+    startX: e.clientX,
+    startY: e.clientY,
+    offsetX: blk.x - pt.x,
+    offsetZ: blk.z - pt.z,
+    moved: false,
+    partner: null
+  };
+}
+
+function onPointerMove(e){
+  if(state.pointerId !== e.pointerId || !state.drag) return;
+  const d = state.drag;
+  const blk = d.block;
+
+  if(Math.hypot(e.clientX - d.startX, e.clientY - d.startY) > 7){
+    d.moved = true;
+  }
+
+  const pt = getGroundPoint(e.clientX, e.clientY);
+  if(!pt) return;
+
+  const newX = clamp(pt.x + d.offsetX, -6.5, 6.5);
+  const newZ = clamp(pt.z + d.offsetZ, -3.7, 3.0);
+
+  // 이동 방향에 따른 말랑한 기울기 연출
+  blk.tiltZ = clamp(-(newX - blk.x) * 0.45, -0.30, 0.30);
+  blk.tiltX = clamp((newZ - blk.z) * 0.45, -0.30, 0.30);
+
+  blk.x = newX;
+  blk.z = newZ;
+  blk.y = 0.55;
+  blk.onShelf = false;
+  blk.shelfIdx = -1;
+
+  // 자석 짝꿍 탐색 및 링 표시
+  d.partner = findMagnetPartner(blk);
+  if(d.partner){
+    magnetRingMesh.visible = true;
+    magnetRingMesh.position.set((blk.x + d.partner.x) / 2, 0.06, (blk.z + d.partner.z) / 2);
+  } else {
+    magnetRingMesh.visible = false;
+  }
+}
+
+function onPointerUp(e){
+  if(state.pointerId !== e.pointerId) return;
+  const d = state.drag;
+  state.drag = null;
+  state.pointerId = null;
+  magnetRingMesh.visible = false;
+
+  if(!d) return;
+  const blk = d.block;
+  blk.tiltX = 0;
+  blk.tiltZ = 0;
+
+  // 1) 드래그하지 않고 제자리에서 톡! 누른 경우 -> 소리 & 장난감 반응
+  if(!d.moved){
+    handleBlockTap(blk);
+    return;
+  }
+
+  // 2) 오른쪽 아래 정리 바구니(🗑️)에 넣은 경우 -> 퐁당 정리!
+  if(Math.hypot(blk.x - BASKET_POS.x, blk.z - BASKET_POS.z) < 1.65){
+    saveUndo();
+    burstParticles(BASKET_POS.x, 1.2, BASKET_POS.z, '#FFD43B', '#FF922B', 14);
+    removeBlock(blk);
+    sfx('basket');
+    toast('🗑️ 퐁당! 블록 바구니에 정리했어요');
+    return;
+  }
+
+  // 3) 자석 짝꿍이 근처에 있으면 즉시 자석 합체!
+  const partner = findMagnetPartner(blk);
+  if(partner){
+    const choBlk = blk.role === 'cho' ? blk : partner;
+    const jungBlk = blk.role === 'jung' ? blk : partner;
+    mergeChoAndJung(choBlk, jungBlk);
+    return;
+  }
+
+  // 4) 위쪽 진열대 근처(`z < -2.0`)에 놓았으면 가장 가까운 진열대 슬롯에 착! 정렬
+  if(blk.z < -2.0){
+    let bestIdx = 0, bestDist = Infinity;
+    SHELF_SLOTS_X.forEach((sx, idx) => {
+      const dist = Math.abs(blk.x - sx);
+      if(dist < bestDist){ bestDist = dist; bestIdx = idx; }
+    });
+    // 해당 슬롯에 다른 블록이 있으면 앞마당으로 살짝 밀어냄
+    const prev = state.blocks.find(b => b !== blk && b.onShelf && b.shelfIdx === bestIdx);
+    if(prev){
+      prev.onShelf = false;
+      prev.shelfIdx = -1;
+      prev.targetX = clamp(prev.x, -4, 4);
+      prev.targetZ = 0.8;
+    }
+    placeBlockOnShelf(blk, bestIdx);
+    sfx('tap', bestIdx);
+    return;
+  }
+
+  // 5) 일반 앞마당에 내려놓음
+  triggerSquash(blk, 0.85);
+  sfx('land');
+}
+
+/* ============================================================================
+ * 7. 물리·애니메이션 루프 (블록끼리 탄성 충돌, 젤리 텐션, 장난감 비행)
+ * ============================================================================ */
+const partGeo = new THREE.SphereGeometry(0.13, 8, 8);
+
+function burstParticles(x, y, z, hex1, hex2, count = 18){
+  for(let i = 0; i < count; i++){
+    const ang = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.3;
+    const spd = 2.0 + Math.random() * 3.0;
+    const mat = getToyMaterial(i % 2 === 0 ? hex1 : hex2);
+    const m = new THREE.Mesh(partGeo, mat);
+    m.position.set(x, y, z);
+    fxGroup.add(m);
+    state.particles.push({
+      mesh: m,
+      vx: Math.cos(ang) * spd,
+      vy: 2.8 + Math.random() * 3.2,
+      vz: Math.sin(ang) * spd,
+      life: 0.65
+    });
+  }
+}
+
+function updatePhysics(dt, now){
+  const draggedBlock = state.drag?.block || null;
+  const magnetPartner = state.drag?.partner || null;
+
+  // 1) 앞마당 블록끼리 겹치지 않도록 말랑하게 밀어내는 탄성 물리 + 자석 끌림 연출
+  for(let i = 0; i < state.blocks.length; i++){
+    const a = state.blocks[i];
+    if(a.onShelf || a === draggedBlock) continue;
+
+    for(let j = i + 1; j < state.blocks.length; j++){
+      const b = state.blocks[j];
+      if(b.onShelf || b === draggedBlock) continue;
+
+      const dx = b.x - a.x;
+      const dz = b.z - a.z;
+      const dist = Math.hypot(dx, dz) || 0.001;
+      const minDist = 2.15;
+
+      if(dist < minDist){
+        // 만약 자음과 모음이 스스로 부딪혔다면 자동 합체!
+        if((a.role === 'cho' && b.role === 'jung') || (a.role === 'jung' && b.role === 'cho')){
+          const choB = a.role === 'cho' ? a : b;
+          const jungB = a.role === 'jung' ? a : b;
+          mergeChoAndJung(choB, jungB);
+          return;
+        }
+        // 합체 대상이 아닌 블록끼리는 통! 하고 탄성 있게 밀어냄
+        const overlap = (minDist - dist) * 0.5;
+        const nx = dx / dist, nz = dz / dist;
+        a.x = clamp(a.x - nx * overlap, -6.2, 4.5);
+        a.z = clamp(a.z - nz * overlap, -1.6, 2.6);
+        b.x = clamp(b.x + nx * overlap, -6.2, 4.5);
+        b.z = clamp(b.z + nz * overlap, -1.6, 2.6);
+      }
+    }
+  }
+
+  // 2) 개별 블록 위치·점프·젤리 스프링 업데이트
+  for(const b of state.blocks){
+    const isDragged = (b === draggedBlock);
+    const isPartner = (b === magnetPartner);
+
+    // 목표 위치(자동 진열대 이동 등)가 있으면 부드럽게 이동
+    if(!isDragged && b.targetX !== null && b.targetZ !== null){
+      b.x += (b.targetX - b.x) * Math.min(1, dt * 9);
+      b.z += (b.targetZ - b.z) * Math.min(1, dt * 9);
+      if(Math.hypot(b.targetX - b.x, b.targetZ - b.z) < 0.04){
+        b.x = b.targetX;
+        b.z = b.targetZ;
+        b.targetX = null;
+        b.targetZ = null;
+      }
+    }
+
+    // 자석 짝꿍으로 지목된 블록은 드래그 중인 블록 쪽으로 살짝 들썩이며 반김
+    if(isPartner && draggedBlock){
+      const targetY = 0.25 + Math.abs(Math.sin(now * 0.012)) * 0.22;
+      b.y += (targetY - b.y) * Math.min(1, dt * 12);
+    } else if(!isDragged){
+      const floorY = b.onShelf ? 0.32 : 0.0;
+      if(b.y > floorY || b.vy !== 0){
+        b.vy -= 26 * dt;
+        b.y += b.vy * dt;
+        if(b.y <= floorY){
+          b.y = floorY;
+          if(b.vy < -2.0) triggerSquash(b, 0.65);
+          b.vy = 0;
+        }
+      }
+    }
+
+    // 젤리 텐션 스프링
+    const springF = -110 * b.squash - 12 * b.squashVel;
+    b.squashVel += springF * dt;
+    b.squash += b.squashVel * dt;
+
+    // 회전 복원
+    if(b.spinY > 0){
+      b.spinY = Math.max(0, b.spinY - dt * 14);
+    }
+
+    if(b.mesh && b.visual){
+      b.mesh.position.set(b.x, b.y, b.z);
+      const breath = !isDragged ? Math.sin(now * 0.0035 + b.x) * 0.02 : 0;
+      const sx = 1 + b.squash * 0.16 + breath;
+      const sy = Math.max(0.60, 1 - b.squash * 0.15 - breath);
+      const sz = 1 + b.squash * 0.16 + breath;
+      b.visual.scale.set(sx, sy, sz);
+      b.visual.rotation.set(b.tiltX, b.spinY, b.tiltZ);
+    }
+  }
+
+  // 3) 자석 링 회전 연출
+  if(magnetRingMesh && magnetRingMesh.visible){
+    magnetRingMesh.rotation.z = now * 0.004;
+    const s = 1 + Math.sin(now * 0.012) * 0.12;
+    magnetRingMesh.scale.set(s, s, 1);
+  }
+
+  // 4) 소환된 3D 미니 장난감 비행 연출
+  for(const t of state.toys){
+    t.age += dt;
+    const enterScale = Math.min(1, t.age * 5.5);
+    const exitScale = clamp((t.maxAge - t.age) * 3.0, 0, 1);
+    const s = enterScale * exitScale * 1.15;
+    t.mesh.scale.setScalar(Math.max(0.01, s));
+
+    const ax = t.anchorBlock ? t.anchorBlock.x : 0;
+    const az = t.anchorBlock ? t.anchorBlock.z : 0;
+    const orbitAng = t.age * 2.6;
+    t.mesh.position.x = ax + Math.cos(orbitAng) * 0.55;
+    t.mesh.position.z = az + Math.sin(orbitAng) * 0.45;
+    t.mesh.position.y = 2.55 + Math.sin(t.age * 5.0) * 0.22;
+    t.mesh.rotation.y = -orbitAng + Math.PI / 2;
+
+    if(t.mesh.userData.wings){
+      const flap = Math.sin(now * 0.022) * 0.6;
+      t.mesh.userData.wings[0].rotation.z = flap;
+      t.mesh.userData.wings[1].rotation.z = -flap;
+    }
+    if(t.age >= t.maxAge){
+      toysGroup.remove(t.mesh);
+    }
+  }
+  state.toys = state.toys.filter(t => t.age < t.maxAge);
+
+  // 5) 파티클 업데이트
+  for(const p of state.particles){
+    p.mesh.position.x += p.vx * dt;
+    p.mesh.position.y += p.vy * dt;
+    p.mesh.position.z += p.vz * dt;
+    p.vy -= 12 * dt;
+    p.life -= dt;
+    p.mesh.scale.setScalar(Math.max(0.01, p.life / 0.65));
+    if(p.life <= 0) fxGroup.remove(p.mesh);
+  }
+  state.particles = state.particles.filter(p => p.life > 0);
+}
+
+/* ============================================================================
+ * 8. 음성(TTS) & 효과음(Web Audio) & UI 마운트
+ * ============================================================================ */
+const speechAvailable = typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance === 'function';
+
+function say(text){
+  if(!state.sound || !speechAvailable || !text) return;
+  try{
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ko-KR';
+    u.pitch = 1.1;
+    u.rate = 0.96;
+    window.speechSynthesis.speak(u);
+  }catch{}
+}
+
+function tone(freq = 520, ms = 0.12, type = 'sine', slideTo = null, delay = 0){
+  if(!state.sound) return;
+  try{
+    if(!state.soundCtx) state.soundCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ac = state.soundCtx;
+    if(ac.state === 'suspended') ac.resume().catch(() => {});
+    const start = ac.currentTime + delay;
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, start);
+    if(slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, start + ms);
+    g.gain.setValueAtTime(0.0001, start);
+    g.gain.exponentialRampToValueAtTime(0.08, start + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, start + ms);
+    o.connect(g); g.connect(ac.destination);
+    o.start(start); o.stop(start + ms + 0.01);
+  }catch{}
+}
+
+const XYLO_NOTES = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50];
+
+function sfx(kind, idx = 0){
+  if(!state.sound) return;
+  if(kind === 'spawn')          tone(420, 0.12, 'triangle', 580);
+  else if(kind === 'grab')      tone(380, 0.08, 'sine', 520);
+  else if(kind === 'land')      tone(240, 0.11, 'triangle', 170);
+  else if(kind === 'tap')       tone(XYLO_NOTES[idx % XYLO_NOTES.length], 0.14, 'triangle');
+  else if(kind === 'xylophone') tone(XYLO_NOTES[idx % XYLO_NOTES.length], 0.18, 'triangle', XYLO_NOTES[idx % XYLO_NOTES.length] * 1.02);
+  else if(kind === 'basket'){   tone(520, 0.10, 'sine', 240); tone(300, 0.12, 'triangle', 180, 0.09); }
+  else if(kind === 'merge'){    [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.16, 'triangle', null, i * 0.055)); }
+  else if(kind === 'fanfare'){  [523.3, 659.3, 784.0, 1046.5, 1318.5].forEach((f, i) => tone(f, 0.20, 'triangle', null, i * 0.06)); }
+}
+
+function toast(msg){
+  const el = $('toast');
+  el.textContent = msg;
+  el.style.opacity = '1';
+  clearTimeout(state.toastTimer);
+  state.toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 2400);
+}
+
+function mountUI(){
+  const choRow = $('choRow');
+  for(const c of CHO_LIST){
+    const btn = document.createElement('button');
+    btn.className = 'jamoBtn';
+    btn.style.background = c.color;
+    btn.innerHTML = `<span class="charTxt">${c.id}</span><span class="nameTxt">${c.name}</span>`;
+    btn.onclick = () => spawnFromTray('cho', c.id);
+    choRow.appendChild(btn);
+  }
+
+  const jungRow = $('jungRow');
+  for(const j of JUNG_LIST){
+    const btn = document.createElement('button');
+    btn.className = 'jamoBtn';
+    btn.style.background = j.color;
+    btn.innerHTML = `<span class="charTxt">${j.id}</span><span class="nameTxt">${j.name}</span>`;
+    btn.onclick = () => spawnFromTray('jung', j.id);
+    jungRow.appendChild(btn);
+  }
+
+  $('undoBtn').onclick = () => {
+    if(!state.undoStack.length){ toast('↩️ 되돌릴 동작이 없어요'); return; }
+    restoreState(state.undoStack.pop());
+    sfx('tap', 1);
+    toast('↩️ 이전 모습으로 되돌렸어요');
+  };
+
+  $('clearBtn').onclick = () => {
+    saveUndo();
+    resetInitialBlocks();
+    sfx('basket');
+    toast('🧹 놀이터를 깨끗하게 정리했어요!');
+  };
+
+  $('soundBtn').onclick = () => {
+    state.sound = !state.sound;
+    $('soundIcon').textContent = state.sound ? '🔊' : '🔇';
+    toast(state.sound ? '🔊 소리를 켰어요' : '🔇 소리를 껐어요');
+  };
+
+  canvas.addEventListener('pointerdown', onPointerDown);
+  canvas.addEventListener('pointermove', onPointerMove);
+  canvas.addEventListener('pointerup', onPointerUp);
+  canvas.addEventListener('pointercancel', onPointerUp);
+  window.addEventListener('resize', adjustCameraForViewport);
+}
+
+// 초기 시작 시 아이가 바로 끌어다 붙여볼 수 있도록 앞마당에 'ㄱ'과 'ㅏ'를 마중 배치
+function resetInitialBlocks(){
+  clearAllBlocks();
+  state.lastBonusWord = '';
+  createBlock({role:'cho', cho:'ㄱ'}, -2.1, 1.1, false, -1, true);
+  createBlock({role:'jung', jung:'ㅏ'}, 2.1, 1.1, false, -1, true);
+}
+
+function animate(now){
+  const dt = Math.min(0.04, (now - state.lastTick) / 1000);
+  state.lastTick = now;
+  updatePhysics(dt, now);
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
+function returnToPlayOS(){
+  try{
+    if(window.parent && window.parent !== window && typeof window.parent.returnToCurrentGameLand === 'function'){
+      window.parent.returnToCurrentGameLand();
+      return;
+    }
+  }catch(e){}
+  window.location.href = '../index.html';
+}
+window.returnToPlayOS = returnToPlayOS;
+
+// 초기화 및 실행
+buildPlaymatWorld();
+adjustCameraForViewport();
+mountUI();
+resetInitialBlocks();
+toast('👆 큰 [ㄱ] 블록과 [ㅏ] 블록을 끌어다 붙여보세요!');
+requestAnimationFrame(animate);
+
+window.OpenWorldDebug = {
+  state,
+  composeHangul,
+  spawnFromTray,
+  mergeChoAndJung,
+  resetInitialBlocks,
+  returnToPlayOS
+};
+})();
+</script>
+</body>
+</html>
