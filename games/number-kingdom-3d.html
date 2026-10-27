@@ -855,18 +855,18 @@ if(typeof THREE === 'undefined'){
 /* ============================================================================
  * 1. 3D 월드 격자 상수 및 팔레트 정의
  * ============================================================================ */
-const WORLD_W = 112;
+const WORLD_W = 126;
 const MIN_GZ = -4, MAX_GZ = 4;
 const MAX_ENTITIES = 110;
 const PLAY_MAX = 200; // 넘버블록스 에디션: 최대 200까지 안전 합체 지원 (100 및 100+ 대형 숫자 포함)
 const GRAVITY_3D = 32;
 
 const zones = [
-  {id:'plaza',   name:'말랑 광장',      icon:'🌈', a:0,  b:22,  grass:'#46C65A', soil:'#339845', sky:'#48B5FF'},
-  {id:'river',   name:'징검다리 시냇물', icon:'🌉', a:22, b:46,  grass:'#8ce8ce', soil:'#5bb8a0', sky:'#b5f0fa'},
-  {id:'orchard', name:'키다리 과수원',   icon:'🍎', a:46, b:68,  grass:'#a8e05a', soil:'#7db538', sky:'#fff0bc'},
-  {id:'train',   name:'10칸 기차역',    icon:'🚂', a:68, b:90,  grass:'#ffd296', soil:'#d9a362', sky:'#e5dcff'},
-  {id:'town',    name:'블록 건축 마을',  icon:'🏠', a:90, b:112, grass:'#acebbd', soil:'#77c28b', sky:'#ffdce8'}
+  {id:'plaza',   name:'말랑 광장',      icon:'🌈', a:0,  b:34,  grass:'#46C65A', soil:'#339845', sky:'#48B5FF'},
+  {id:'river',   name:'징검다리 시냇물', icon:'🌉', a:34, b:58,  grass:'#8ce8ce', soil:'#5bb8a0', sky:'#b5f0fa'},
+  {id:'orchard', name:'키다리 과수원',   icon:'🍎', a:58, b:80,  grass:'#a8e05a', soil:'#7db538', sky:'#fff0bc'},
+  {id:'train',   name:'10칸 기차역',    icon:'🚂', a:80, b:102, grass:'#ffd296', soil:'#d9a362', sky:'#e5dcff'},
+  {id:'town',    name:'블록 건축 마을',  icon:'🏠', a:102, b:126, grass:'#acebbd', soil:'#77c28b', sky:'#ffdce8'}
 ];
 
 const PALETTE_10 = [
@@ -891,22 +891,22 @@ const specs = {
 };
 
 const gaps = [
-  {id:'g3', gx:25, n:3, gz:0},
-  {id:'g5', gx:31, n:5, gz:0},
-  {id:'g8', gx:38, n:8, gz:0}
+  {id:'g3', gx:36, n:3, gz:0},
+  {id:'g5', gx:42, n:5, gz:0},
+  {id:'g8', gx:49, n:8, gz:0}
 ];
 
 const fruits = [
-  {id:'fr4',  gx:50, gy:4,  gz:0, n:4,  emoji:'🍎', color:'#FF5252', state:'ready', timer:0, vy:0, dropY:3.5, mesh:null},
-  {id:'fr7',  gx:55, gy:7,  gz:0, n:7,  emoji:'🍐', color:'#A3E635', state:'ready', timer:0, vy:0, dropY:6.5, mesh:null},
-  {id:'fr10', gx:60, gy:10, gz:0, n:10, emoji:'🍊', color:'#FB923C', state:'ready', timer:0, vy:0, dropY:9.5, mesh:null}
+  {id:'fr4',  gx:61, gy:4,  gz:0, n:4,  emoji:'🍎', color:'#FF5252', state:'ready', timer:0, vy:0, dropY:3.5, mesh:null},
+  {id:'fr7',  gx:66, gy:7,  gz:0, n:7,  emoji:'🍐', color:'#A3E635', state:'ready', timer:0, vy:0, dropY:6.5, mesh:null},
+  {id:'fr10', gx:71, gy:10, gz:0, n:10, emoji:'🍊', color:'#FB923C', state:'ready', timer:0, vy:0, dropY:9.5, mesh:null}
 ];
 
-const TRAIN_BASE_GX = 73;
+const TRAIN_BASE_GX = 84;
 const TRAIN_SLOTS = 10;
 
 const CAM_PRESETS = [
-  {name:'기본 쿼터뷰', dx:0,    dy:12.5, dz:17.5},
+  {name:'기본 쿼터뷰', dx:0,    dy:18.0, dz:24.5},
   {name:'우측 입체뷰', dx:7.5,  dy:12.5, dz:16.0},
   {name:'좌측 입체뷰', dx:-7.5, dy:12.5, dz:16.0},
   {name:'높은 조감뷰', dx:0,    dy:16.5, dz:14.0}
@@ -2217,29 +2217,49 @@ function buildWorld3D(){
   trainGroup3D.position.set(TRAIN_BASE_GX, 0, 0);
   worldGroup.add(trainGroup3D);
 
-  // 1) 만화풍 둥글둥글 초록 동산 (Rolling Cartoon Hills in background)
+      // 1) 웅장한 첫 번째 만화 동산 (배경 z=-28에 위치하여 시원하게 1~10 무대 뒤를 감싸줌)
+  const hill1Geo = new THREE.SphereGeometry(28, 32, 24);
+  const hill1Mat = getSoftMaterial('#46C65A', {roughness: 0.85});
+  const hill1Mesh = new THREE.Mesh(hill1Geo, hill1Mat);
+  hill1Mesh.position.set(15.5, -28 + 9.5, -28.0);
+  worldGroup.add(hill1Mesh);
+
+  // 첫 동산 좌우 보조 능선
+  const hillLeftGeo = new THREE.SphereGeometry(24, 26, 18);
+  const hillLeftMat = getSoftMaterial('#39B54D', {roughness: 0.88});
+  const hillLeftMesh = new THREE.Mesh(hillLeftGeo, hillLeftMat);
+  hillLeftMesh.position.set(-8.0, -24 + 7.5, -30.0);
+  worldGroup.add(hillLeftMesh);
+
+  const hillRightGeo = new THREE.SphereGeometry(26, 26, 20);
+  const hillRightMat = getSoftMaterial('#52C41A', {roughness: 0.88});
+  const hillRightMesh = new THREE.Mesh(hillRightGeo, hillRightMat);
+  hillRightMesh.position.set(38.0, -26 + 8.5, -29.0);
+  worldGroup.add(hillRightMesh);
+
+  // 이후 구역(시냇물, 과수원, 기차, 건축마을) 배경 동산
   const hillColors = ['#52C41A', '#49AA19', '#73D13D', '#389E0D'];
-  for(let hx = -6; hx <= WORLD_W + 12; hx += 7.5){
-    const hillR = 8.5 + ((Math.abs(hx) * 11) % 4);
+  for(let hx = 55; hx <= WORLD_W + 15; hx += 14){
+    const hillR = 16.0 + ((Math.abs(hx) * 7) % 5);
     const hillGeo = new THREE.SphereGeometry(hillR, 18, 14);
-    const hillMat = getSoftMaterial(hillColors[Math.floor(Math.abs(hx) / 7) % hillColors.length], {roughness: 0.85});
+    const hillMat = getSoftMaterial(hillColors[Math.floor(Math.abs(hx) / 12) % hillColors.length], {roughness: 0.85});
     const hillMesh = new THREE.Mesh(hillGeo, hillMat);
-    hillMesh.position.set(hx, -hillR + 2.2 + ((Math.abs(hx) % 5) * 0.35), -14.5 - ((Math.abs(hx) % 3) * 1.5));
+    hillMesh.position.set(hx, -hillR + 5.5, -28.0 - ((Math.abs(hx) % 3) * 1.5));
     worldGroup.add(hillMesh);
   }
 
-  // 2) 넘버랜드 시그니처 3D 무지개 아치 (Rainbow Arch)
+  // 2) 넘버랜드 시그니처 3D 무지개 아치 (1~10 첫 동산 위로 웅장하게 걸치기)
   const rainbowColors = [0xFF4D4F, 0xFF7A45, 0xFFC53D, 0x52C41A, 0x13C2C2, 0x1890FF, 0x722ED1];
   const rainbowGroup = new THREE.Group();
-  const rRadiusBase = 18;
-  const rTube = 0.38;
+  const rRadiusBase = 26;
+  const rTube = 0.46;
   for(let ri = 0; ri < rainbowColors.length; ri++){
     const rMat = new THREE.MeshBasicMaterial({color: rainbowColors[ri]});
-    const rGeo = new THREE.TorusGeometry(rRadiusBase + ri * (rTube * 1.9), rTube, 8, 36, Math.PI);
+    const rGeo = new THREE.TorusGeometry(rRadiusBase + ri * (rTube * 1.85), rTube, 8, 44, Math.PI);
     const rMesh = new THREE.Mesh(rGeo, rMat);
     rainbowGroup.add(rMesh);
   }
-  rainbowGroup.position.set(38, -1.2, -18);
+  rainbowGroup.position.set(15.5, 0.5, -31.0);
   worldGroup.add(rainbowGroup);
 
   const rainbowGroup2 = rainbowGroup.clone();
@@ -2272,7 +2292,7 @@ function updateTownBlueprint(kind){
   if(!kind) return;
 
   const guideCells = [];
-  const baseGX = 98, baseGZ = 0;
+  const baseGX = 106, baseGZ = 0;
   if(kind === 'house'){
     for(let y = 0; y < 3; y++){
       guideCells.push({x: baseGX, y, z: baseGZ, c:'#F27861'});
@@ -3083,44 +3103,40 @@ function reset(push = false){
   if(push) snapshot(state);
   clearAllEntities(state);
 
-  // 1부터 10까지 순서대로 2칸 간격(1칸 여백)으로 일렬 정렬 (x: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
+      // 1부터 10까지 3칸 간격(2칸 여백)으로 넓고 웅장하게 일렬 정렬 (x: 2, 5, 8, 11, 14, 17, 20, 23, 26, 29)
+  // 6부터 10 구역도 넉넉한 공간을 완벽히 확보하여 어떤 블록 변신도 여유롭게 즐길 수 있음!
   const initialFriends = [];
   for(let n = 1; n <= 10; n++){
-    const gx = 2 + (n - 1) * 2;
+    const gx = 2 + (n - 1) * 3;
     const f = friend(n, gx, 0, 0);
     initialFriends.push(f);
   }
 
   // 시냇물 다리와 기차역 샘플 친구 유지
-  const fRiver = friend(3, 27, 0, 1, {pose:'bridge'});
-  const fTrain7 = friend(7, 73, 0, 1);
-  const fTrain3 = friend(3, 75, 0, 2);
+  const fRiver = friend(3, gaps[0].gx + 3, 0, 1, {pose:'bridge'});
+  const fTrain7 = friend(7, TRAIN_BASE_GX, 0, 1);
+  const fTrain3 = friend(3, TRAIN_BASE_GX + 2, 0, 2);
 
   state.friends.push(...initialFriends, fRiver, fTrain7, fTrain3);
 
-  // 주변 건축 소품
-  const b1 = prop('brick', 22, 0, 1);
-  const b2 = prop('brick', 22, 1, 1);
-  b2.carrier = b1.id;
-  const gr = prop('grass', 23, 0, -1);
-
-  const w1 = prop('wood', 48, 0, 0);
-  const w2 = prop('wood', 48, 1, 0);
+  // 건축 소품 (과수원 및 건축마을에 배치)
+  const w1 = prop('wood', 60, 0, 0);
+  const w2 = prop('wood', 60, 1, 0);
   w2.carrier = w1.id;
 
-  const bed = prop('bed', 93, 0, -1);
-  const win = prop('window', 97, 0, 0);
-  const rf  = prop('roof', 96, 2, 0);
+  const bed = prop('bed', 105, 0, -1);
+  const win = prop('window', 109, 0, 0);
+  const rf  = prop('roof', 108, 2, 0);
   rf.carrier = win.id;
 
-  state.props.push(b1, b2, gr, w1, w2, bed, win, rf);
+  state.props.push(w1, w2, bed, win, rf);
 
-  // 1~10 열의 정중앙인 11.0 위치로 카메라 포커스
+  // 1~10 열의 정중앙인 15.5 위치로 카메라 포커스
   state.selected = initialFriends[0].id;
   state.recentSpawnIds = [];
   state.recentSpawnZone = 'plaza';
   setHammer(false);
-  state.goalX = state.cameraX = 11.0;
+  state.goalX = state.cameraX = 15.5;
   state.merging = null;
   state.drag = null;
   state.pan = null;
@@ -5409,36 +5425,36 @@ function selfTest(){
   // 4) BRG-3D: 다리 3·5·8칸 완성, 다리 제거 후 상단 낙하 및 누락 반례 전수 검증
   const brgWorld = createWorldContext(true);
   // 반례 A: 3칸 홈(g3: 25..27)에 4칸 가로 다리 -> 거부
-  const fBr4 = friend(4, 25, 0, 0, {pose:'bridge'}, brgWorld);
+  const fBr4 = friend(4, gaps[0].gx, 0, 0, {pose:'bridge'}, brgWorld);
   brgWorld.friends.push(fBr4);
-  applyPlacement3D(fBr4, computeLanding3D(fBr4, 25, 0, null, brgWorld), brgWorld);
+  applyPlacement3D(fBr4, computeLanding3D(fBr4, gaps[0].gx, 0, null, brgWorld), brgWorld);
   if(fBr4.bridge === 'g3' || isGapComplete(gaps[0], brgWorld)){
     errors.push('BRG-3D counterexample failed: 4-cell bridge accepted in g3');
   }
   deleteObject(fBr4, brgWorld);
 
   // 반례 B: 3칸 홈(g3)에 숫자는 3이지만 세로(tall) 포즈 -> 거부
-  const fTall3 = friend(3, 25, 0, 0, {pose:'tall'}, brgWorld);
+  const fTall3 = friend(3, gaps[0].gx, 0, 0, {pose:'tall'}, brgWorld);
   brgWorld.friends.push(fTall3);
-  applyPlacement3D(fTall3, computeLanding3D(fTall3, 25, 0, null, brgWorld), brgWorld);
+  applyPlacement3D(fTall3, computeLanding3D(fTall3, gaps[0].gx, 0, null, brgWorld), brgWorld);
   if(fTall3.bridge === 'g3' || isGapComplete(gaps[0], brgWorld)){
     errors.push('BRG-3D counterexample failed: vertical 3 accepted in g3');
   }
   deleteObject(fTall3, brgWorld);
 
   // 반례 C: 5칸 홈(g5: 31..35)에 3칸 다리만 배치(빈칸 2개) -> 미완성
-  const fShort3 = friend(3, 31, 0, 0, {pose:'bridge'}, brgWorld);
+  const fShort3 = friend(3, gaps[1].gx, 0, 0, {pose:'bridge'}, brgWorld);
   brgWorld.friends.push(fShort3);
-  applyPlacement3D(fShort3, computeLanding3D(fShort3, 31, 0, null, brgWorld), brgWorld);
+  applyPlacement3D(fShort3, computeLanding3D(fShort3, gaps[1].gx, 0, null, brgWorld), brgWorld);
   if(isGapComplete(gaps[1], brgWorld)){
     errors.push('BRG-3D counterexample failed: 3-cell bridge marked 5-cell g5 complete');
   }
   deleteObject(fShort3, brgWorld);
 
   // 반례 D: 8칸 홈(g8: 38..45)에 7칸 다리만 배치(빈칸 1개) -> 미완성
-  const fShort7 = friend(7, 38, 0, 0, {pose:'bridge'}, brgWorld);
+  const fShort7 = friend(7, gaps[2].gx, 0, 0, {pose:'bridge'}, brgWorld);
   brgWorld.friends.push(fShort7);
-  applyPlacement3D(fShort7, computeLanding3D(fShort7, 38, 0, null, brgWorld), brgWorld);
+  applyPlacement3D(fShort7, computeLanding3D(fShort7, gaps[2].gx, 0, null, brgWorld), brgWorld);
   if(isGapComplete(gaps[2], brgWorld)){
     errors.push('BRG-3D counterexample failed: 7-cell bridge marked 8-cell g8 complete');
   }
@@ -5470,15 +5486,15 @@ function selfTest(){
   // 5) TRN-3D: 트레이 생성/드래그/복원 통일, 7+3·6+4·2+3+5·10 조합, 반례, 상단 블록 안전 대피
   const trnWorld = createWorldContext(true);
   trnWorld.zone = 'train';
-  trnWorld.cameraX = 76;
+  trnWorld.cameraX = TRAIN_BASE_GX + 3;
 
   // 결함 1 검증: 기차역에서 트레이로 7 생성 시 자동으로 bridge 포즈 변환 및 7칸 점유
-  const spawned7 = spawnFriend(7, trnWorld, 75, 0);
-  if(spawned7.pose !== 'bridge' || spawned7.savedPose !== 'tall' || spawned7.gx !== 73 || spawned7.gy !== 1){
+  const spawned7 = spawnFriend(7, trnWorld, TRAIN_BASE_GX + 2, 0);
+  if(spawned7.pose !== 'bridge' || spawned7.savedPose !== 'tall' || spawned7.gx !== TRAIN_BASE_GX || spawned7.gy !== 1){
     errors.push(`TRN-SPAWN tray spawn did not convert 7 to horizontal train pose: pose=${spawned7.pose}, gx=${spawned7.gx}`);
   }
   // 기차 밖으로 이동 시 원래 세로(tall) 포즈 복원 확인
-  applyPlacement3D(spawned7, computeLanding3D(spawned7, 69, 2, null, trnWorld), trnWorld);
+  applyPlacement3D(spawned7, computeLanding3D(spawned7, TRAIN_BASE_GX - 4, 2, null, trnWorld), trnWorld);
   if(spawned7.pose !== 'tall' || spawned7.savedPose !== undefined){
     errors.push(`TRN-SPAWN moving off train did not restore tall pose: pose=${spawned7.pose}`);
   }
@@ -5526,16 +5542,16 @@ function selfTest(){
 
   // 결함 4 검증: 승객 위 다층 블록 안전 대피(충돌 0) 및 도착 후 원래 포즈 복원
   clearAllEntities(trnWorld);
-  const p7 = spawnFriend(7, trnWorld, 73, 0);
+  const p7 = spawnFriend(7, trnWorld, TRAIN_BASE_GX, 0);
   // p7 위에 2단 브릭 적층 + (73, 0, 1)에 장애물 배치
-  const obstacle = prop('brick', 73, 0, 1, trnWorld);
-  const rider1   = prop('brick', 73, 2, 0, trnWorld);
+  const obstacle = prop('brick', TRAIN_BASE_GX, 0, 1, trnWorld);
+  const rider1   = prop('brick', TRAIN_BASE_GX, 2, 0, trnWorld);
   rider1.carrier = p7.id;
-  const rider2   = prop('brick', 73, 3, 0, trnWorld);
+  const rider2   = prop('brick', TRAIN_BASE_GX, 3, 0, trnWorld);
   rider2.carrier = rider1.id;
   trnWorld.props.push(obstacle, rider1, rider2);
   // 마지막 3칸 승객 생성 -> 즉시 출발 트리거
-  const p3 = spawnFriend(3, trnWorld, 80, 0);
+  const p3 = spawnFriend(3, trnWorld, TRAIN_BASE_GX + 7, 0);
   if(!trnWorld.train.departing){
     errors.push('TRN-SAFE-RIDER train did not depart on 7+3');
   }
@@ -5555,7 +5571,7 @@ function selfTest(){
   // 6) ORC-3D: 과수원 4·7·10·15 실제 접촉 수확 및 공중 드래그/높이 미달/깊이 이탈 반례 검증
   const orcWorld = createWorldContext(true);
   // 반례 1: 드래그 중 공중 접촉 -> 수확 금지
-  const dragF4 = friend(4, 50, 0, 0, {pose:'tall'}, orcWorld);
+  const dragF4 = friend(4, fruits[0].gx, 0, 0, {pose:'tall'}, orcWorld);
   orcWorld.friends.push(dragF4);
   orcWorld.drag = {o: dragF4};
   if(checkFruit3D(dragF4, orcWorld) || orcWorld.fruits[0].state !== 'ready'){
@@ -5565,7 +5581,7 @@ function selfTest(){
   deleteObject(dragF4, orcWorld);
 
   // 반례 2: 4칸 열매(gy=4) 아래에 3칸 블록(top=3) 배치 -> 높이 미달로 수확 금지
-  const shortF3 = friend(3, 50, 0, 0, {pose:'tall'}, orcWorld);
+  const shortF3 = friend(3, fruits[0].gx, 0, 0, {pose:'tall'}, orcWorld);
   orcWorld.friends.push(shortF3);
   if(checkFruit3D(shortF3, orcWorld) || orcWorld.fruits[0].state !== 'ready'){
     errors.push('ORC-3D counterexample failed: 3-tall block harvested 4-high fruit');
@@ -5573,7 +5589,7 @@ function selfTest(){
   deleteObject(shortF3, orcWorld);
 
   // 반례 3: Z축 깊이 불일치(gz=3) -> 수확 금지
-  const farZ4 = friend(4, 50, 0, 3, {pose:'tall'}, orcWorld);
+  const farZ4 = friend(4, fruits[0].gx, 0, 3, {pose:'tall'}, orcWorld);
   orcWorld.friends.push(farZ4);
   if(checkFruit3D(farZ4, orcWorld) || orcWorld.fruits[0].state !== 'ready'){
     errors.push('ORC-3D counterexample failed: block at gz=3 harvested fruit at gz=0');
@@ -5582,9 +5598,9 @@ function selfTest(){
 
   // 정상 케이스: 4, 7, 10, 15칸 높이 실제 착지 접촉 시 수확
   const orcCases = [
-    {idx:0, n:4,  gx:50, pose:'tall'},
-    {idx:1, n:7,  gx:55, pose:'super'},
-    {idx:2, n:10, gx:60, pose:'super'}
+    {idx:0, n:4,  gx:fruits[0].gx, pose:'tall'},
+    {idx:1, n:7,  gx:fruits[1].gx, pose:'super'},
+    {idx:2, n:10, gx:fruits[2].gx, pose:'super'}
   ];
   for(const tc of orcCases){
     const fo = friend(tc.n, tc.gx, 0, 0, {pose: tc.pose}, orcWorld);
