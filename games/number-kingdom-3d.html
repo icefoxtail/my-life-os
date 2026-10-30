@@ -904,16 +904,17 @@ function cellsFor(n, pose){
   if(p === 'double' && n >= 20){
     // V3.1 수정 ②: double 포즈는 ten 포즈와 중복되지 않도록 앞뒤 2겹(dz = 0, -1) 입체 구조로 차별화!
     if(n >= 100){
-      const wx = 5, wz = 2, layer = wx * wz; // 한 층에 10칸(가로5 × 깊이2)씩 쌓아 올림
-      for(let k = 0; k < n; k++){
-        const inLayer = k % layer;
-        a.push({
-          dx: inLayer % wx,
-          dy: Math.floor(k / layer),
-          dz: -Math.floor(inLayer / wx),
-          group: Math.floor(k / 100),
-          idx: k
-        });
+      // 100 이상 double: 10단위마다 높이5×깊이2 기둥 (20~99와 동일 공식)
+      const totalTens = Math.floor(n / 10);
+      const ones = n % 10;
+      let idx = 0;
+      for(let t = 0; t < totalTens; t++){
+        for(let k = 0; k < 10; k++){
+          a.push({dx: t, dy: Math.floor(k / 2), dz: -(k % 2), group: Math.floor(t / 10), idx: idx++});
+        }
+      }
+      for(let k = 0; k < ones; k++){
+        a.push({dx: totalTens, dy: Math.floor(k / 2), dz: -(k % 2), group: Math.floor(totalTens / 10), idx: idx++});
       }
     } else {
       const tens = Math.floor(n / 10);
