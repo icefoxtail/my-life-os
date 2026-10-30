@@ -961,22 +961,17 @@ function cellsFor(n, pose){
         a.push({dx: offsetX, dy: k, dz: 0, group: hundreds + tens, idx: idx++});
       }
     } else {
+      // 20~99: 10단위마다 가로 1칸×높이 10 기둥 → 100의 10×10과 자연스럽게 연결
       const tens = Math.floor(n / 10);
       const rem = n % 10;
       for(let t = 0; t < tens; t++){
         for(let k = 0; k < 10; k++){
-          a.push({dx: t * 2 + (k % 2), dy: Math.floor(k / 2), dz: 0, group: t, idx: t * 10 + k});
+          a.push({dx: t, dy: k, dz: 0, group: t, idx: t * 10 + k});
         }
       }
       for(let k = 0; k < rem; k++){
         const idx = tens * 10 + k;
-        a.push({
-          dx: tens * 2 + (rem > 5 ? (k % 2) : 0),
-          dy: rem > 5 ? Math.floor(k / 2) : k,
-          dz: 0,
-          group: tens,
-          idx
-        });
+        a.push({dx: tens, dy: k, dz: 0, group: tens, idx});
       }
     }
   } else if(p === 'stairs'){
