@@ -937,32 +937,20 @@ function cellsFor(n, pose){
     }
   } else if(p === 'ten' || p === 'double'){
     if(n >= 100){
-      // 100 이상 기본(ten) 포즈: 10×10 정사각형 판 + 나머지 10단 기둥을 옆에 배치하여 100 vs 110 크기 비교가 한눈에 보이도록 구성!
-      const hundreds = Math.floor(n / 100);
-      const remAfterHundred = n % 100;
+      // 100 이상 ten: 10단위마다 높이10 기둥 하나 (20~99와 완전 동일 공식)
+      const totalTens = Math.floor(n / 10);
+      const ones = n % 10;
       let idx = 0;
-      let offsetX = 0;
-      for(let h = 0; h < hundreds; h++){
-        for(let y = 0; y < 10; y++){
-          for(let x = 0; x < 10; x++){
-            a.push({dx: offsetX + x, dy: y, dz: 0, group: h, idx: idx++});
-          }
-        }
-        offsetX += 10;
-      }
-      const tens = Math.floor(remAfterHundred / 10);
-      const ones = remAfterHundred % 10;
-      for(let t = 0; t < tens; t++){
-        for(let y = 0; y < 10; y++){
-          a.push({dx: offsetX + t, dy: y, dz: 0, group: hundreds + t, idx: idx++});
+      for(let t = 0; t < totalTens; t++){
+        for(let k = 0; k < 10; k++){
+          a.push({dx: t, dy: k, dz: 0, group: Math.floor(t / 10), idx: idx++});
         }
       }
-      offsetX += tens;
       for(let k = 0; k < ones; k++){
-        a.push({dx: offsetX, dy: k, dz: 0, group: hundreds + tens, idx: idx++});
+        a.push({dx: totalTens, dy: k, dz: 0, group: Math.floor(totalTens / 10), idx: idx++});
       }
     } else {
-      // 20~99: 10단위마다 가로 1칸×높이 10 기둥 → 100의 10×10과 자연스럽게 연결
+      // 20~99: 10단위마다 가로 1칸×높이 10 기둥
       const tens = Math.floor(n / 10);
       const rem = n % 10;
       for(let t = 0; t < tens; t++){
