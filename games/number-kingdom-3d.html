@@ -1151,7 +1151,8 @@ function getNumberblockFaceSVG(n){
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#48B5FF');
 
-const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 0.5, 180);
+let camFov = 40; // 핀치/휠 줌 (32~58 범위)
+const camera = new THREE.PerspectiveCamera(camFov, innerWidth / innerHeight, 0.5, 180);
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true, powerPreference: 'high-performance'});
 renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
 renderer.setSize(innerWidth, innerHeight);
@@ -1294,7 +1295,7 @@ function createOctoMaskGeometry(){
 }
 
 const SHARED_GEO = {
-  unitCube: createRoundedCubeGeometry(0.82, 0.08, 3),
+  unitCube: createRoundedCubeGeometry(0.74, 0.08, 3),
   stud:     new THREE.CylinderGeometry(0.18, 0.19, 0.12, 16),
   eyeWhite: new THREE.SphereGeometry(0.125, 14, 14),
   eyePupil: new THREE.SphereGeometry(0.068, 12, 12),
@@ -4535,6 +4536,40 @@ function mountUI(){
   });
   canvas.addEventListener('pointerup', e => endDrag(e));
   canvas.addEventListener('pointercancel', e => endDrag(e, true));
+
+  // ── 핀치 줌 (두 손가락) + 마우스 휠 줌 ──
+  const pinchState = { active: false, dist: 0 };
+  function getPinchDist(e1, e2) {
+    return Math.hypot(e1.clientX - e2.clientX, e1.clientY - e2.clientY);
+  }
+  const activePointers = new Map();
+  canvas.addEventListener('pointerdown', (e) => { activePointers.set(e.pointerId, e); });
+  canvas.addEventListener('pointermove', (e) => {
+    activePointers.set(e.pointerId, e);
+    if(activePointers.size === 2) {
+      const [p1, p2] = [...activePointers.values()];
+      const dist = getPinchDist(p1, p2);
+      if(pinchState.active) {
+        const delta = pinchState.dist - dist;
+        camFov = Math.max(28, Math.min(58, camFov + delta * 0.08));
+        camera.fov = camFov;
+        camera.updateProjectionMatrix();
+      }
+      pinchState.active = true;
+      pinchState.dist = dist;
+    } else {
+      pinchState.active = false;
+    }
+  });
+  canvas.addEventListener('pointerup', (e) => { activePointers.delete(e.pointerId); pinchState.active = false; });
+  canvas.addEventListener('pointercancel', (e) => { activePointers.delete(e.pointerId); pinchState.active = false; });
+  // 마우스 휠 줌
+  canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    camFov = Math.max(28, Math.min(58, camFov + e.deltaY * 0.04));
+    camera.fov = camFov;
+    camera.updateProjectionMatrix();
+  }, { passive: false });
   window.addEventListener('resize', onResize);
   setTimeout(updateTrayArrows, 60);
 }
