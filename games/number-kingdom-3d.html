@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -518,6 +518,37 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   .dockSvg { width: 36px; height: 36px; }
   .dockTxt { font-size: 13px; }
   .pill { min-width: 52px; min-height: 52px; }
+}
+
+/* ── 모바일 전용: 버튼 크기 축소 (max-width: 600px) ── */
+@media (max-width: 600px) {
+  .toy { min-width: 48px !important; height: 54px !important; border-radius: 15px !important; padding: 4px 5px !important; gap: 2px !important; }
+  .toy .numTxt { font-size: 20px !important; }
+  .toy .miniSil { height: 18px !important; }
+  .toy.brickBtn, .toy.hammer { min-width: 44px !important; }
+  #trayWrap { padding: 5px 6px !important; gap: 5px !important; }
+  #tray { gap: 5px !important; }
+  #pinnedTools { gap: 4px !important; }
+  #sideActionDock { right: 7px !important; bottom: 76px !important; gap: 7px !important; }
+  .dockBtn { width: 48px !important; height: 48px !important; border-radius: 15px !important; border-width: 2.5px !important; }
+  .dockSvg { width: 24px !important; height: 24px !important; }
+  .dockTxt { font-size: 10px !important; }
+  #zones .pill { min-width: 36px !important; max-width: 46px !important; min-height: 42px !important; padding: 2px !important; }
+  .pill .zIcon { font-size: 17px !important; }
+  #right .pill { min-width: 38px !important; min-height: 42px !important; padding: 2px !important; }
+  .btnSvg, .pillIconSvg { width: 22px !important; height: 22px !important; }
+  .act { min-height: 48px !important; min-width: 50px !important; border-radius: 14px !important; font-size: 14px !important; padding: 5px 8px !important; }
+  .actIcon { font-size: 22px !important; }
+  #actions { bottom: 76px !important; gap: 6px !important; padding: 6px !important; }
+  #drawer button { min-width: 60px !important; min-height: 56px !important; font-size: 13px !important; }
+  #drawer { bottom: 76px !important; }
+  .poseCard { min-width: 48px !important; min-height: 48px !important; border-radius: 13px !important; }
+  .poseCard canvas { width: 36px !important; height: 36px !important; }
+  .nbFaceSvg { width: 26px !important; height: 26px !important; }
+  #decompPalette { bottom: 148px !important; gap: 7px !important; padding: 7px 10px !important; }
+  .decompOptionCard { min-width: 60px !important; padding: 6px 9px !important; }
+  .decompFormulaTxt { font-size: 12px !important; }
+  #toast { top: 102px !important; font-size: 13px !important; }
 }
 </style>
 </head>
@@ -2572,24 +2603,21 @@ function reset(push = false){
   closeDecompPalette();
   clearAllEntities(state);
 
-  // 첫 화면 중앙(gx=8~15)을 텅 비워두어, 시작하자마자 5를 4개 꺼내거나 100을 꺼내도 1층 바닥에 착착 놓이도록 설계
-  // 1열(gz=+2, 맨 앞줄): 1, 2, 3
-  const f1 = friend(1, 4,  0, 2);
-  const f2 = friend(2, 6,  0, 2);
-  const f3 = friend(3, 17, 0, 2);
-  // 2열(gz=0, 가운데 줄): 4, 6
-  const f4 = friend(4, 4,  0, 0);
-  const f6 = friend(6, 17, 0, 0);
-  // 3열(gz=-2, 뒷줄): 8, 10
-  const f8  = friend(8,  4,  0, -2);
-  const f10 = friend(10, 18, 0, -2);
+  // 1~10 블록을 너비 고려해 겹치지 않고 한 줄로 예쁘게 배치
+  // 블록 N의 너비=N칸, 여백 3칸씩. gx: 3,7,12,18,25,33,42,52,63,75
+  const LINEUP_GXS = [3, 7, 12, 18, 25, 33, 42, 52, 63, 75];
+  const initFriends = [];
+  for(let n = 1; n <= 10; n++){
+    const f = friend(n, LINEUP_GXS[n-1], 0, 0);
+    initFriends.push(f);
+  }
 
   // 시냇물 다리와 기차역 샘플 친구 유지
   const fRiver = friend(3, gaps[0].gx + 3, 0, 1, {pose:'bridge'});
   const fTrain7 = friend(7, TRAIN_BASE_GX, 0, 1);
   const fTrain3 = friend(3, TRAIN_BASE_GX + 2, 0, 2);
 
-  state.friends.push(f1, f2, f3, f4, f6, f8, f10, fRiver, fTrain7, fTrain3);
+  state.friends.push(...initFriends, fRiver, fTrain7, fTrain3);
 
   const w1 = prop('wood', 60, 0, 0);
   const w2 = prop('wood', 60, 1, 0);
@@ -2602,12 +2630,13 @@ function reset(push = false){
 
   state.props.push(w1, w2, bed, win, rf);
 
-  state.selected = f6.id;
+  state.selected = initFriends[0].id;
   state.recentSpawnIds = [];
   state.recentSpawnZone = 'plaza';
-  state.lastSpawnMeta = { n: 0, gx: 7, gz: 0, at: 0, firstGX: 7 };
+  state.lastSpawnMeta = { n: 0, gx: 3, gz: 0, at: 0, firstGX: 3 };
   setHammer(false);
-  state.goalX = state.cameraX = 11.0;
+  // 카메라: 1~10 블록 중앙(gx 3~85의 중심 ~39)
+  state.goalX = state.cameraX = 39;
   state.merging = null;
   state.drag = null;
   state.pan = null;
