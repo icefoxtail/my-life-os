@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -937,10 +937,10 @@ scene.add(matGroup, blocksGroup, toysGroup, fxGroup);
 const SHELF_Z = -3.1;
 const SHELF_SLOTS_X = [-5.0, -2.5, 0.0, 2.5, 5.0];
 const FRONT_CHO_SLOTS = [
-  {x:-2.1, z:1.1}, {x:-4.4, z:1.1}, {x:-2.1, z:-0.8}
+  {x:-3.2, z:0.8}, {x:-5.2, z:0.8}, {x:-3.2, z:-1.0}
 ];
 const FRONT_JUNG_SLOTS = [
-  {x:2.1, z:1.1},  {x:4.4, z:1.1},  {x:2.1, z:-0.8}
+  {x:3.2,  z:0.8},  {x:5.2,  z:0.8},  {x:3.2,  z:-1.0}
 ];
 const BASKET_POS = {x:5.8, z:2.1};
 
@@ -983,7 +983,7 @@ function buildPlaymatWorld(){
     new THREE.MeshBasicMaterial({color:0xFF8787, transparent:true, opacity:0.45, side:THREE.DoubleSide})
   );
   choPad.rotation.x = -Math.PI / 2;
-  choPad.position.set(-2.1, 0.03, 1.1);
+  choPad.position.set(-3.2, 0.03, 0.8);
   matGroup.add(choPad);
 
   const jungPad = new THREE.Mesh(
@@ -991,7 +991,7 @@ function buildPlaymatWorld(){
     new THREE.MeshBasicMaterial({color:0x4DABF7, transparent:true, opacity:0.45, side:THREE.DoubleSide})
   );
   jungPad.rotation.x = -Math.PI / 2;
-  jungPad.position.set(2.1, 0.03, 1.1);
+  jungPad.position.set(3.2, 0.03, 0.8);
   matGroup.add(jungPad);
 
   // 4) 뒷마당 완성 글자 진열대 (5칸 단상)
@@ -1058,15 +1058,15 @@ function adjustCameraForViewport(){
 
   // 가로/세로 화면비에 맞춰 놀이매트 전체가 한눈에 들어오도록 고정 카메라 거리 자동 계산
   if(aspect >= 1.25){
-    camera.position.set(0, 11.8, 12.6);
-    camera.lookAt(0, 0.3, -0.1);
+    camera.position.set(0, 5.5, 13.5);
+    camera.lookAt(0, 1.4, -0.8);
   } else if(aspect >= 0.85){
-    camera.position.set(0, 14.2, 15.2);
-    camera.lookAt(0, 0.1, 0.0);
+    camera.position.set(0, 7.0, 15.5);
+    camera.lookAt(0, 1.0, -0.5);
   } else {
     const pull = (0.85 - aspect) * 14;
-    camera.position.set(0, 16.5 + pull * 0.7, 17.5 + pull);
-    camera.lookAt(0, -0.2, 0.2);
+    camera.position.set(0, 9.0 + pull * 0.5, 18.0 + pull);
+    camera.lookAt(0, 0.5, -0.2);
   }
 }
 
@@ -1401,7 +1401,7 @@ function pickBlock(clientX, clientY){
 function findMagnetPartner(dragBlock){
   if(!dragBlock || (dragBlock.role !== 'cho' && dragBlock.role !== 'jung')) return null;
   const needRole = dragBlock.role === 'cho' ? 'jung' : 'cho';
-  let best = null, bestDist = 3.35; // 자석 반응 반경
+  let best = null, bestDist = 2.5; // 자석 반응 반경
 
   for(const other of state.blocks){
     if(other === dragBlock || other.role !== needRole || other.onShelf) continue;
