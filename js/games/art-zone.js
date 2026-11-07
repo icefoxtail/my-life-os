@@ -1,5 +1,5 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v4.3.3
+ * 시현이 놀이터 OS — 매직 그림판 v4.4.0
  * v4.1 원본 기준 유지 + 시현이 전용 단순 그림놀이 레이아웃
  * - 큰 매직 그림판 헤더 제거
  * - 도구/되돌리기/휴지통/완료/저장 UI 제거
@@ -15,6 +15,8 @@
   const LEGACY_STYLE_IDS = ['sihyeon-art-v3-style', 'sihyeon-art-v2-style', 'sihyeon-art-style'];
 
   const COLORS = [
+    { c: 'rainbow', n: '무지개' },
+    { c: '#1A1A1A', n: '검정색' },
     { c: '#FF4444', n: '빨간색' },
     { c: '#FF9900', n: '주황색' },
     { c: '#FFD700', n: '노란색' },
@@ -27,10 +29,8 @@
     { c: '#F6E7C8', n: '바닐라색' },
     { c: '#C0C0C0', n: '은색' },
     { c: '#8EF6D1', n: '민트색' },
-    { c: '#1A1A1A', n: '검정색' },
     { c: '#8B5A2B', n: '갈색' },
     { c: '#7ED957', n: '연두색' },
-    { c: 'rainbow', n: '무지개' },
   ];
 
   const THEMES = {
@@ -71,7 +71,12 @@
         <circle cx="180" cy="129" r="2.5" fill="#333"/>
         <circle cx="169" cy="118" r="2.5" fill="#333"/>
         <circle cx="191" cy="118" r="2.5" fill="#333"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M156 95 L156 77 Q169 73 182 77 L182 90 Q169 101 156 95 Z" fill="none"/>
+<path d="M169 79 L172 86 L179 86 L173 90 L175 96 L169 92 L163 96 L165 90 L159 86 L166 86 Z" fill="#333" stroke="none"/>
+<path d="M112 101 H143"/>
+</g>
+</svg>`,
     },
     {
       id: 'police_bus',
@@ -90,7 +95,10 @@
         <circle class="fillable" cx="50" cy="100" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="150" cy="100" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="150" cy="100" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M104 72 V91 M100 91 H112"/><path d="M113 80 L120 73 L127 80 L125 88 L120 91 L115 88 Z" fill="none"/><path d="M18 81 H94"/>
+</g>
+</svg>`,
     },
     {
       id: 'fire_pump',
@@ -124,7 +132,10 @@
         <circle cx="178" cy="131" r="2.5" fill="#333"/>
         <circle cx="167" cy="120" r="2.5" fill="#333"/>
         <circle cx="189" cy="120" r="2.5" fill="#333"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M25 77 H38 M118 77 H131"/><path d="M155 71 V87 H179"/><circle cx="169" cy="90" r="7" fill="none"/><path d="M169 83 V97 M162 90 H176"/>
+</g>
+</svg>`,
     },
     {
       id: 'fire_ladder',
@@ -150,7 +161,10 @@
         <circle class="fillable" cx="75" cy="95" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="160" cy="95" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="160" cy="95" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M28 56 H56 M68 50 L118 39"/><circle cx="45" cy="67" r="5" fill="none"/><path d="M170 77 H183 M145 84 H155"/>
+</g>
+</svg>`,
     },
     {
       id: 'ambulance',
@@ -182,7 +196,10 @@
         <circle cx="178" cy="131" r="2.5" fill="#333"/>
         <circle cx="167" cy="120" r="2.5" fill="#333"/>
         <circle cx="189" cy="120" r="2.5" fill="#333"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M37 48 H43 V57 H49 V64 H43 V73 H37 V64 H31 V57 H37 Z" fill="none"/><path d="M65 87 H77 M140 88 H160"/><path d="M145 78 H170"/>
+</g>
+</svg>`,
     },
     {
       id: 'excavator',
@@ -200,7 +217,10 @@
         <path class="fillable" d="M 150 85 L 175 85 L 185 115 L 155 115 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 175 85 L 190 80 L 180 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 180 100 L 195 95 L 185 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M27 117 H104 M47 88 H79"/><circle cx="88" cy="82" r="4" fill="none"/><path d="M162 97 H176 M154 107 H183"/>
+</g>
+</svg>`,
     },
     {
       id: 'dump_truck',
@@ -219,7 +239,10 @@
         <circle class="fillable" cx="90" cy="95" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="155" cy="95" r="16" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="155" cy="95" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M18 28 L12 23 H118 L126 32"/><path d="M22 81 H108"/><path d="M132 73 H161 M137 78 H153"/><path d="M184 83 H190"/>
+</g>
+</svg>`,
     },
     {
       id: 'bulldozer',
@@ -237,7 +260,10 @@
         <rect class="fillable" x="115" y="65" width="8" height="18" rx="2" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path class="fillable" d="M 140 120 L 140 45 C 165 45, 180 75, 180 120 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 105 85 L 145 85 L 145 95 L 105 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M47 77 H69 M96 59 H122"/><path d="M146 110 H174"/><path d="M155 54 Q164 56 167 65"/><path d="M35 118 H118"/>
+</g>
+</svg>`,
     },
     {
       id: 'rocket',
@@ -253,7 +279,10 @@
         <path class="fillable" d="M 80 45 Q 100 5, 120 45 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="100" cy="65" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="100" cy="65" r="6" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M86 85 H93 M107 85 H114"/><path d="M93 98 H107"/><path d="M95 30 L100 23 L105 30"/><path d="M49 117 l7 -5 m93 5 l-7 -5"/>
+</g>
+</svg>`,
     },
     {
       id: 'dino',
@@ -278,7 +307,10 @@
         <circle cx="188" cy="88" r="2" fill="#fff"/>
         <circle cx="200" cy="97" r="2.5" fill="#555"/>
         <path d="M 194 104 Q 205 110, 212 106" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M196 111 Q188 119 178 115"/><circle cx="204" cy="92" r="2" fill="#333" stroke="none"/><path d="M79 151 L84 156 M109 151 L114 156 M156 151 L161 156"/>
+</g>
+</svg>`,
     },
     {
       id: 'train',
@@ -303,7 +335,10 @@
         <circle class="fillable" cx="95" cy="105" r="4" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="130" cy="105" r="12" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="130" cy="105" r="4" stroke="#333" stroke-width="4" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M16 99 H161"/><path d="M35 83 H60"/><path d="M75 53 H142"/><path d="M150 84 H164"/><circle cx="174" cy="96" r="4" fill="none"/>
+</g>
+</svg>`,
     },
     {
       id: 'airplane',
@@ -320,7 +355,10 @@
         <circle class="fillable" cx="105" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
         <circle class="fillable" cx="85" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
         <circle class="fillable" cx="65" cy="74" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M33 75 Q40 70 52 70"/><path d="M90 63 L125 38"/><path d="M101 87 L124 111"/><path d="M160 73 Q168 78 165 83"/>
+</g>
+</svg>`,
     },
     {
       id: 'lion',
@@ -336,7 +374,10 @@
         <circle cx="85" cy="65" r="5" fill="#333"/>
         <circle cx="115" cy="65" r="5" fill="#333"/>
         <path d="M 95 96 Q 100 100, 105 96" stroke="#333" stroke-width="3" fill="none"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M72 92 L46 88 M70 99 L42 102 M128 92 L154 88 M130 99 L158 102"/><path d="M93 99 Q100 110 107 99"/><circle cx="91" cy="82" r="2" fill="#333" stroke="none"/><circle cx="109" cy="82" r="2" fill="#333" stroke="none"/>
+</g>
+</svg>`,
     },
     {
       id: 'whale',
@@ -352,7 +393,10 @@
         <circle class="fillable" cx="135" cy="22" r="5" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path d="M 115 35 Q 110 25, 105 20" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/>
         <circle cx="155" cy="70" r="5" fill="#333"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M151 95 Q161 102 173 94"/><path d="M119 31 Q123 28 125 24"/><path d="M130 57 Q137 54 144 58"/><path d="M41 86 Q35 92 41 98"/>
+</g>
+</svg>`,
     },
     {
       id: 'icecream',
@@ -366,7 +410,10 @@
         <path class="fillable" d="M 85 55 C 85 30, 115 30, 115 55 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="100" cy="25" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path d="M 100 15 Q 110 5, 120 10" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/>
-      </svg>`,
+      <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M84 112 L115 134 M115 112 L87 133"/><path d="M91 59 L95 63 M108 62 L113 59 M99 83 L104 80"/><path d="M90 42 L94 45"/>
+</g>
+</svg>`,
     },
   ];
 
@@ -390,6 +437,7 @@
     timers: [],
     resizeHandler: null,
     resizeTimer: null,
+    speechToken: 0,
   };
 
   function timer(fn, ms) {
@@ -900,8 +948,8 @@
         }
 
         .az-coloring-wrap svg{
-          max-width:90%;
-          max-height:90%;
+          max-width:94%;
+          max-height:94%;
         }
       }
 
@@ -1062,8 +1110,8 @@
         }
 
         .az-coloring-wrap svg{
-          max-width:90%;
-          max-height:90%;
+          max-width:94%;
+          max-height:94%;
         }
       }
     `;
@@ -1084,6 +1132,7 @@
     state.currentSize = 18;
     state.isRainbow = false;
     state.hue = 0;
+    state.speechToken += 1;
 
     if (options.initialTemplateId && COLORING_TEMPLATES.some((t) => t.id === options.initialTemplateId)) {
       state.activeTemplateId = options.initialTemplateId;
@@ -1264,7 +1313,8 @@
         root.querySelectorAll('[data-theme]').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         applyThemeBg();
-        speak(THEMES[state.activeTheme].label.replace(/^[^\s]+ /, '') + '이야!');
+        const themeName = THEMES[state.activeTheme].label.replace(/^[^\s]+ /, '');
+        speak(themeName === '바다' ? '바다야!' : `${themeName}이야!`);
       };
     });
 
@@ -1277,7 +1327,7 @@
 
         const tpl = COLORING_TEMPLATES.find((t) => t.id === state.activeTemplateId);
         renderColoringTemplate(tpl);
-        speak(`${tpl?.name || '그림'}을 같이 색칠해볼까?`);
+        speak(`${tpl?.name || '그림'}! 같이 색칠해 볼까?`);
       };
     });
 
@@ -1423,8 +1473,22 @@
 
     const svg = wrap.querySelector('svg');
     if (svg) {
+      // Normalize to the *visible drawing bounds*, not the template author's viewBox.
+      // getBBox() ignores empty margins; padding reserves space for thick strokes.
+      try {
+        const box = svg.getBBox();
+        if (box.width > 0 && box.height > 0 &&
+            [box.x, box.y, box.width, box.height].every(Number.isFinite)) {
+          const pad = Math.max(box.width, box.height) * 0.095 + 5;
+          const cx = box.x + box.width / 2;
+          const cy = box.y + box.height / 2;
+          const width = box.width + pad * 2;
+          const height = box.height + pad * 2;
+          svg.setAttribute('viewBox', `${cx - width / 2} ${cy - height / 2} ${width} ${height}`);
+        }
+      } catch (_) { /* Keep the authored viewBox on unsupported browsers. */ }
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      svg.style.cssText = 'width:100%;height:100%;max-width:98%;max-height:98%;overflow:visible;display:block;';
+      svg.style.cssText = 'width:100%;height:100%;max-width:94%;max-height:94%;overflow:hidden;display:block;';
     }
 
     wrap.querySelectorAll('.fillable').forEach((el) => {
@@ -1461,12 +1525,25 @@
     const wrap = document.getElementById('azColoringWrap');
     if (!wrap) return;
 
-    const allDone = Array.from(wrap.querySelectorAll('.fillable')).every((el) => {
-      const fill = el.getAttribute('fill') || '';
-      return fill !== '' && fill !== '#FFF' && fill !== '#fff' && fill !== 'white' && fill !== 'none';
+    const allAreas = Array.from(wrap.querySelectorAll('.fillable'));
+    const svg = wrap.querySelector('svg');
+    const whole = svg && svg.getBBox ? svg.getBBox() : { width: 1, height: 1 };
+    const minArea = Math.max(60, whole.width * whole.height * 0.012);
+    const major = allAreas.filter((el) => {
+      try {
+        const box = el.getBBox();
+        return box.width * box.height >= minArea;
+      } catch (_) { return true; }
     });
-
-    if (!allDone) return;
+    const targets = major.length >= 3 ? major : allAreas;
+    if (targets.length < 2) return;
+    const colored = targets.filter((el) => {
+      const fill = (el.getAttribute('fill') || '').toLowerCase();
+      return fill !== '' && fill !== '#fff' && fill !== '#ffffff' && fill !== 'white' && fill !== 'none';
+    }).length;
+    // At least three meaningful taps (or all when fewer), with 75% coverage.
+    const needed = Math.max(Math.min(3, targets.length), Math.ceil(targets.length * .75));
+    if (colored < needed) return;
 
     state.coloringCompleted = true;
     wrap.classList.add('az-done');
@@ -1523,6 +1600,7 @@
   }
 
   function speak(msg, force = false) {
+    if (!msg || state.destroyed) return;
     const voiceIds = {
       '시현아. 마법 그림판이야. 같이 그리고 색칠해볼까?': 'games.paint.intro',
       '빈칸이야!': 'games.paint.blank',
@@ -1544,19 +1622,29 @@
       '자유롭게 그려볼까?': 'games.paint.free',
     };
 
-    const voiceId = voiceIds[msg];
-
-    if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(voiceId, '').catch(() => {});
+    // All 16 palette names and all 15 template names now speak, not only the
+    // old pre-recorded subset. Cancel pending audio as the child taps again.
+    const token = ++state.speechToken;
+    const voice = window.SihyeonVoice;
+    if (voice && typeof voice.stop === 'function') voice.stop();
+    if (voice && typeof voice.play === 'function' && voiceIds[msg]) {
+      voice.play(voiceIds[msg], msg, {
+        allowTtsFallback: true,
+        shouldPlay: () => !state.destroyed && state.speechToken === token,
+      }).catch(() => {});
       return;
     }
-
-    if (!force) return;
-
-    if (window.SihyeonVoice && typeof window.SihyeonVoice.speak === 'function') {
-      try {
-        window.SihyeonVoice.speak(msg);
-      } catch (_) {}
+    if (voice && typeof voice.speak === 'function') {
+      // Synchronous within the tap gesture so Android permits TTS playback.
+      voice.speak(msg, { lang: 'ko-KR', rate: 0.93, pitch: 1.06 }).catch(() => {});
+      return;
+    }
+    if (typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance === 'function') {
+      const utterance = new window.SpeechSynthesisUtterance(msg);
+      utterance.lang = 'ko-KR';
+      utterance.rate = 0.93;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
     }
   }
 
@@ -1574,7 +1662,10 @@
       state.resizeHandler = null;
     }
 
-    if (typeof speechSynthesis !== 'undefined') {
+    state.speechToken += 1;
+    if (window.SihyeonVoice && typeof window.SihyeonVoice.stop === 'function') {
+      window.SihyeonVoice.stop();
+    } else if (typeof speechSynthesis !== 'undefined') {
       speechSynthesis.cancel();
     }
 

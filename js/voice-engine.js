@@ -327,6 +327,7 @@
 
     var voiceId = normalizeId(id);
     var allowTtsFallback = options.allowTtsFallback === true;
+    var shouldPlay = typeof options.shouldPlay === 'function' ? options.shouldPlay : function () { return true; };
 
     if (!voiceId) {
       return allowTtsFallback ? speak(fallbackText, options) : Promise.resolve(false);
@@ -334,6 +335,7 @@
 
     return loadManifest()
       .then(function (data) {
+        if (!shouldPlay()) return false;
         var src = resolveVoiceSrc(data, voiceId);
 
         if (!src) {
@@ -342,11 +344,11 @@
 
         return playAudio(src, options).then(function (ok) {
           if (ok) return true;
-          return allowTtsFallback ? speak(fallbackText, options) : false;
+          return allowTtsFallback && shouldPlay() ? speak(fallbackText, options) : false;
         });
       })
       .catch(function () {
-        return allowTtsFallback ? speak(fallbackText, options) : false;
+        return allowTtsFallback && shouldPlay() ? speak(fallbackText, options) : false;
       });
   }
 
