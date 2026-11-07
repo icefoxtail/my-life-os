@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <base href="../">
+  <title>시현이 놀이터 — 기존 모듈 조작 검수</title>
+  <link rel="stylesheet" href="./css/play-settings.css">
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+    body{display:flex;flex-direction:column;font:16px system-ui,sans-serif;color:#243c34;background:#e7f1ed}
+    #qaToolbar{flex:0 0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px;border-bottom:1px solid #acc3b8;background:#fff;z-index:10000}
+    #qaToolbar strong{margin-right:6px;font-size:14px}#qaToolbar button{min-height:42px;padding:7px 12px;border:1px solid #709184;border-radius:8px;background:#edf6f1;font:inherit;cursor:pointer}
+    #qaState{font-size:13px;margin-left:auto}#qaStage{flex:1;min-height:0;position:relative;overflow:hidden}
+    #qaStage>iframe{width:100%;height:100%;border:0;display:block}
+    .qa-intro{display:grid;place-content:center;height:100%;padding:24px;text-align:center;gap:12px}
+    .qa-intro h1{font-size:25px;margin:0}.qa-intro p{max-width:620px;line-height:1.6;margin:0}
+    #particle-container{position:fixed;inset:0;pointer-events:none;z-index:9000;overflow:hidden}
+    .particle{position:absolute;animation:qaFall 2s ease-in forwards}@keyframes qaFall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+  </style>
+</head>
+<body>
+  <header id="qaToolbar">
+    <strong>검수 전용 · 제품 모듈 직접 실행</strong>
+    <button type="button" data-game="megaDispatch">소방 출동</button>
+    <button type="button" data-game="constructionSite">공사장</button>
+    <button type="button" data-frame="numbers">숫자 2D 대체</button>
+    <button type="button" data-game="lifeSequence">하루 순서</button>
+    <button type="button" data-game="numberCount">숫자세기</button>
+    <button type="button" data-game="artZone">그림판</button>
+    <button type="button" id="qaBack">검수 메뉴</button>
+    <span id="qaState" role="status">준비</span>
+  </header>
+  <main id="qaStage"></main>
+  <div id="particle-container" aria-hidden="true"></div>
+  <script src="./js/voice-engine.js"></script>
+  <script src="./js/play-settings.js"></script>
+  <script src="./js/vehicle-display.js"></script>
+  <script src="./js/games/megaDispatch.js"></script>
+  <script src="./js/games/construction-site.js"></script>
+  <script src="./js/games/life-sequence.js"></script>
+  <script src="./js/games/number-count.js"></script>
+  <script src="./js/games/art-zone.js"></script>
+  <script>
+    const qaStage=document.querySelector('#qaStage');
+    const qaState=document.querySelector('#qaState');
+    let qaModule=null,qaRewards=0;
+    function qaClose(){
+      qaModule?.destroy?.();qaModule=null;
+      window.SihyeonVoice?.stop?.();
+      qaStage.innerHTML='<section class="qa-intro"><h1>기존 모듈 실제 조작 검수</h1><p>위 버튼은 제품의 공개 render API 또는 실제 게임 HTML을 엽니다. 게임 상태나 정답을 주입하지 않습니다. 전체 놀이터 메뉴 통합·실제 모바일 기기 검수와는 구분합니다.</p></section>';
+      qaState.textContent='검수 메뉴';
+    }
+    function qaConfetti(){
+      const colors=['#FFD93D','#FF7A1A','#3478F6','#00C2A8'];
+      for(let i=0;i<50;i++){
+        const dot=document.createElement('div');dot.className='particle';
+        const size=Math.random()*13+8;
+        dot.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}vw;top:-24px;background:${colors[i%colors.length]};animation-duration:${Math.random()*1.4+1.4}s;animation-delay:${Math.random()*.3}s;border-radius:50%`;
+        document.querySelector('#particle-container').appendChild(dot);setTimeout(()=>dot.remove(),3600);
+      }
+    }
+    function qaSay(text){try{return Promise.resolve(window.SihyeonVoice?.speak(text,{rate:.85,pitch:1.04})).catch(()=>false);}catch(error){return Promise.resolve(false);}}
+    document.querySelectorAll('[data-game]').forEach(button=>button.addEventListener('click',()=>{
+      qaClose();qaModule=window.SihyeonGames?.[button.dataset.game];
+      qaState.textContent=button.textContent;
+      qaModule?.render(qaStage,{
+        speakGuide:()=>{},say:qaSay,fireConfetti:qaConfetti,
+        gainExp:amount=>{qaRewards+=Number(amount)||0;qaState.textContent=button.textContent+' · 완료 보상 호출 '+qaRewards;},
+        ageMode:window.SihyeonPlaySettings?.getAge?.()||4,
+        openSettings:()=>window.SihyeonPlaySettings?.openSettings?.(),closeToParkHome:qaClose
+      });
+    }));
+    document.querySelector('[data-frame]').addEventListener('click',()=>{
+      qaClose();qaState.textContent='숫자 블록 · 명시적 2D 검수';
+      const frame=document.createElement('iframe');frame.id='qaNumberFrame';frame.title='숫자 2D 대체 놀이';
+      frame.src='./games/number-kingdom-3d.html?view=2d';qaStage.replaceChildren(frame);
+    });
+    document.querySelector('#qaBack').addEventListener('click',qaClose);
+    window.returnToCurrentGameLand=qaClose;
+    qaClose();
+  </script>
+</body>
+</html>

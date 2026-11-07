@@ -14,7 +14,7 @@ jsFiles.forEach(file=>syntax(path.join(root,file)));
 let inline=0;
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'sihyeon-syntax-'));
 try{
-  for(const file of ['index.html','games/number-kingdom-3d.html','games/hangul-playmat-3d.html','scripts/qa-responsive.html','scripts/qa/post-office-failure.html']){
+  for(const file of ['index.html','games/number-kingdom-3d.html','games/hangul-playmat-3d.html','scripts/qa-responsive.html','scripts/qa-legacy-play.html','scripts/qa/post-office-failure.html']){
     const html=fs.readFileSync(path.join(root,file),'utf8');
     for(const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
       if(!match[2].trim()||/\btype\s*=\s*["'](?:application\/[^"']+|importmap)["']/i.test(match[1]))continue;

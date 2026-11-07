@@ -513,14 +513,14 @@
       choices.forEach(num => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'nc-toy-block-btn';
+        btn.className = 'nc-toy-block-btn' + (num > 10 ? ' nc-choice-many' : '');
         btn.dataset.answer = String(num);
         if(num === ans) btn.dataset.correct = 'true';
 
         const dotHTML = '<span class="nc-choice-dot"></span>'.repeat(num);
         btn.innerHTML = `
           <div class="nc-choice-num">${num}</div>
-          <div class="nc-choice-dots">${dotHTML}</div>
+          <div class="nc-choice-dots${num > 10 ? ' nc-choice-dots--many' : ''}" aria-hidden="true">${dotHTML}</div>
         `;
         btn.onclick = ()=>{
           this.initAudio();
@@ -1197,7 +1197,10 @@
         .nc-many .nc-vehicle-cell{padding:5px 2px;background:#ffffffa0;border:1px solid #7ba7b4;border-radius:9px}
         .nc-many .nc-vehicle-cell:nth-child(10n+1),.nc-many .nc-vehicle-cell:nth-child(10n+2),.nc-many .nc-vehicle-cell:nth-child(10n+3),.nc-many .nc-vehicle-cell:nth-child(10n+4),.nc-many .nc-vehicle-cell:nth-child(10n+5){border-top:4px solid #4f9188}
         .nc-many .nc-tap-count{min-width:21px;height:21px;font-size:13px;border-width:1px}
-        .nc-choice-dots{max-height:50px;overflow:hidden}.nc-idle-anim{animation:none}
+        .nc-choice-dots.nc-choice-dots--many{grid-template-columns:repeat(5,6px);gap:2px;max-width:none!important;max-height:none;overflow:visible}
+        .nc-choice-dots--many .nc-choice-dot{width:6px;height:6px}
+        .nc-choice-many .nc-choice-num{font-size:clamp(30px,5vw,64px)}
+        .nc-idle-anim{animation:none}
         @media(orientation:landscape) and (max-height:520px){.number-count-landscape{grid-template-columns:120px minmax(0,1fr) 120px;gap:6px}.number-count-landscape .nc-difficulty-tabs{display:flex;flex-direction:column;gap:3px}.nc-range-label{font-size:14px}.nc-difficulty-tabs select{min-height:46px;font-size:16px;padding:5px}.number-count-landscape .nc-vehicle-cat-tab{font-size:14px;min-height:44px;padding:4px}.number-count-landscape .nc-toy-block-btn{min-height:48px;height:54px;width:104px}.number-count-landscape .nc-choice-num{font-size:30px}.number-count-landscape .nc-choice-dots{display:none}.nc-objects-area{overflow-y:auto}.nc-many{min-height:calc(var(--nc-rows)*54px)}}
       `;
       document.head.appendChild(style);

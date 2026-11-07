@@ -1,0 +1,137 @@
+{
+  "mode": 4,
+  "environment": "qa-legacy-play.html actual product module",
+  "clicks": [
+    {
+      "round": 1,
+      "step": 1,
+      "target": "연기 배출차"
+    },
+    {
+      "round": 1,
+      "step": 2,
+      "target": "공항소방차"
+    },
+    {
+      "round": 2,
+      "step": 1,
+      "target": "고가사다리차"
+    },
+    {
+      "round": 2,
+      "step": 2,
+      "target": "사다리차"
+    },
+    {
+      "round": 3,
+      "step": 1,
+      "target": "펌프차"
+    },
+    {
+      "round": 3,
+      "step": 2,
+      "target": "물탱크차"
+    },
+    {
+      "round": 3,
+      "step": 3,
+      "target": "산불 소방차"
+    },
+    {
+      "round": 4,
+      "step": 1,
+      "target": "공항 소방차"
+    },
+    {
+      "round": 4,
+      "step": 2,
+      "target": "로봇 파쇄 소방차"
+    },
+    {
+      "round": 4,
+      "step": 3,
+      "target": "구조공작차"
+    },
+    {
+      "round": 5,
+      "step": 1,
+      "target": "로봇 파쇄 소방차"
+    },
+    {
+      "round": 5,
+      "step": 2,
+      "target": "고가 사다리차"
+    },
+    {
+      "round": 5,
+      "step": 3,
+      "target": "소방 물탱크차"
+    },
+    {
+      "round": 6,
+      "step": 1,
+      "target": "고가 사다리차"
+    },
+    {
+      "round": 6,
+      "step": 2,
+      "target": "구조공작차"
+    },
+    {
+      "round": 6,
+      "step": 3,
+      "target": "소방 물탱크차"
+    },
+    {
+      "round": 6,
+      "step": 4,
+      "target": "사다리차"
+    },
+    {
+      "round": 6,
+      "step": 4,
+      "target": "사다리차"
+    },
+    {
+      "round": 7,
+      "step": 1,
+      "target": "펌프차"
+    },
+    {
+      "round": 7,
+      "step": 2,
+      "target": "소방 물탱크차"
+    },
+    {
+      "round": 7,
+      "step": 3,
+      "target": "로봇 파쇄 소방차"
+    },
+    {
+      "round": 7,
+      "step": 4,
+      "target": "고가사다리차"
+    },
+    {
+      "round": 8,
+      "step": 1,
+      "target": "로봇 파쇄 소방차"
+    },
+    {
+      "round": 8,
+      "step": 2,
+      "target": "포소화차"
+    },
+    {
+      "round": 8,
+      "step": 3,
+      "target": "고가 사다리차"
+    },
+    {
+      "round": 8,
+      "step": 4,
+      "target": "굴절사다리차"
+    }
+  ],
+  "ignoredExtraClick": "round 6 step 4 while busy; no skipped stage"
+}
