@@ -550,6 +550,159 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   .decompFormulaTxt { font-size: 12px !important; }
   #toast { top: 102px !important; font-size: 13px !important; }
 }
+
+/* Number Kingdom responsive controls v2 */
+#numberExtrasBtn{display:none}
+body.embedded #brand{display:none!important}
+body.embedded #top{left:max(64px,env(safe-area-inset-left))}
+#game[data-layout="desktop"] #actions,#game[data-layout="desktop"] #drawer,#game[data-layout="desktop"] #decompPalette{bottom:var(--nk-overlay-bottom,98px);max-height:calc(100% - var(--nk-overlay-bottom,98px) - 72px)}
+#game[data-layout="desktop"] #sideActionDock{bottom:calc(var(--nk-overlay-bottom,98px) + 6px)}
+#game[data-layout="phonePortrait"],#game[data-layout="tabletPortrait"]{
+ display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 54px 116px;gap:0;padding-bottom:max(3px,env(safe-area-inset-bottom))
+}
+#game[data-layout="tabletPortrait"]{grid-template-rows:minmax(0,1fr) 70px 90px}
+#game[data-layout="phonePortrait"] #scene3d,#game[data-layout="tabletPortrait"] #scene3d{
+ grid-column:1;grid-row:1;min-width:0;min-height:0;width:100%;height:100%
+}
+#game[data-layout="phonePortrait"] #trayWrap,#game[data-layout="tabletPortrait"] #trayWrap{
+ grid-column:1;grid-row:3;position:relative;left:auto;bottom:auto;transform:none;display:flex;flex-direction:column;
+ width:100%;max-width:none;height:100%;min-width:0;min-height:0;overflow:hidden;box-shadow:none;
+ padding:4px 6px!important;gap:0!important;border-radius:12px
+}
+#game[data-layout="phonePortrait"] #pinnedTools,#game[data-layout="tabletPortrait"] #pinnedTools{display:none}
+#game[data-layout="phonePortrait"] #trayScrollBox,#game[data-layout="tabletPortrait"] #trayScrollBox{flex:1;min-height:0;width:100%}
+#game[data-layout="phonePortrait"] #tray,#game[data-layout="tabletPortrait"] #tray{
+ display:grid;overflow-x:hidden;overflow-y:hidden;scroll-behavior:auto;width:100%;height:100%;gap:4px!important;padding:0!important
+}
+#game[data-layout="phonePortrait"] #tray{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+#game[data-layout="tabletPortrait"] #tray{grid-template-columns:repeat(10,minmax(0,1fr));grid-template-rows:minmax(0,1fr)}
+#game[data-layout="phonePortrait"] #tray .toy,#game[data-layout="tabletPortrait"] #tray .toy{
+ min-width:0!important;width:100%;min-height:44px;height:100%!important;padding:2px!important;gap:0!important;border-radius:12px!important
+}
+#game[data-layout="phonePortrait"] #tray .numTxt{font-size:25px!important}
+#game[data-layout="tabletPortrait"] #tray .numTxt{font-size:29px!important}
+#game[data-layout="phonePortrait"] #tray .nbFaceSvg{display:none}
+#game[data-layout="phonePortrait"] #tray .bigNumBtn,#game[data-layout="phonePortrait"] #tray .toolBtn,
+#game[data-layout="tabletPortrait"] #tray .bigNumBtn,#game[data-layout="tabletPortrait"] #tray .toolBtn{display:none!important}
+#game[data-layout="phonePortrait"] .scrollHint,#game[data-layout="tabletPortrait"] .scrollHint{display:none!important}
+#game[data-layout="phonePortrait"] #sideActionDock,#game[data-layout="tabletPortrait"] #sideActionDock{
+ grid-column:1;grid-row:2;position:relative;left:0!important;right:0!important;top:auto;bottom:0!important;
+ width:100%;height:100%;display:flex;flex-direction:row;align-items:center;justify-content:center;
+ gap:12px!important;padding:2px;box-sizing:border-box;z-index:5
+}
+#game[data-layout="phonePortrait"] .dockBtn{width:50px!important;height:50px!important;border-radius:15px!important;flex:0 0 auto}
+#game[data-layout="tabletPortrait"] .dockBtn{width:62px!important;height:62px!important;border-radius:19px!important;flex:0 0 auto}
+#game[data-layout="phonePortrait"] .dockSvg{width:27px!important;height:27px!important}
+#game[data-layout="phonePortrait"] .dockTxt{display:none}
+#game[data-layout="phonePortrait"] #top{
+ left:max(56px,calc(48px + env(safe-area-inset-left)));right:max(5px,env(safe-area-inset-right));
+ top:max(4px,env(safe-area-inset-top));gap:3px
+}
+body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(safe-area-inset-left))}
+#game[data-layout="phonePortrait"] #right{gap:2px;padding:2px}
+#game[data-layout="phonePortrait"] #right .pill{min-width:44px!important;min-height:44px!important;padding:2px!important}
+#game[data-layout="phonePortrait"] #zones{justify-content:flex-start;gap:2px}
+#game[data-layout="phonePortrait"] #zones .pill{min-width:44px!important;min-height:44px!important;padding:1px!important}
+#game[data-layout="phonePortrait"] #camLeft{left:max(5px,env(safe-area-inset-left))}
+#game[data-layout="phonePortrait"] #camRight{right:max(5px,env(safe-area-inset-right))}
+#game[data-layout="phonePortrait"] .camNavBtn{width:44px;height:50px;font-size:20px}
+#game[data-layout="phonePortrait"] #actions,#game[data-layout="tabletPortrait"] #actions,
+#game[data-layout="phonePortrait"] #drawer,#game[data-layout="tabletPortrait"] #drawer,
+#game[data-layout="phonePortrait"] #decompPalette,#game[data-layout="tabletPortrait"] #decompPalette{
+ bottom:var(--nk-overlay-bottom,180px)!important;max-height:calc(100% - var(--nk-overlay-bottom,180px) - 58px);
+ max-width:96%;overflow-x:auto;overflow-y:auto
+}
+#game[data-layout="phonePortrait"] #numberExtrasBtn,#game[data-layout="tabletPortrait"] #numberExtrasBtn{display:inline-flex}
+#game[data-layout="phonePortrait"] #settingsPop,#game[data-layout="tabletPortrait"] #settingsPop{
+ position:absolute;top:max(53px,calc(48px + env(safe-area-inset-top)));right:max(8px,env(safe-area-inset-right));
+ max-height:65%;overflow-y:auto
+}
+#game[data-layout="phoneLandscape"],#game[data-layout="tabletLandscape"]{
+ --nk-left-w:122px;--nk-right-w:76px;display:grid;min-height:0;
+ grid-template-columns:var(--nk-left-w) minmax(0,1fr) var(--nk-right-w);
+ grid-template-rows:minmax(0,1fr);column-gap:4px;
+ padding:4px max(4px,env(safe-area-inset-right)) max(4px,env(safe-area-inset-bottom)) max(4px,env(safe-area-inset-left))
+}
+#game[data-layout="tabletLandscape"]{--nk-left-w:156px;--nk-right-w:84px}
+#game[data-layout="phoneLandscape"] #scene3d,#game[data-layout="tabletLandscape"] #scene3d{
+ grid-column:2;grid-row:1;width:100%;height:100%;min-width:0;min-height:0;border-radius:12px
+}
+#game[data-layout="phoneLandscape"] #trayWrap,#game[data-layout="tabletLandscape"] #trayWrap{
+ grid-column:1;grid-row:1;position:relative;left:auto;bottom:auto;transform:none;
+ width:100%;height:100%;max-width:none;min-width:0;min-height:0;
+ display:flex;flex-direction:column;overflow:hidden;box-shadow:none;border-radius:12px;
+ padding:51px 4px 4px!important;gap:0!important
+}
+#game[data-layout="tabletLandscape"] #trayWrap{padding-top:64px!important}
+#game[data-layout="phoneLandscape"] #pinnedTools,#game[data-layout="tabletLandscape"] #pinnedTools{display:none}
+#game[data-layout="phoneLandscape"] #trayScrollBox,#game[data-layout="tabletLandscape"] #trayScrollBox{
+ flex:1;min-height:0;min-width:0;width:100%;align-items:stretch;overflow:hidden
+}
+#game[data-layout="phoneLandscape"] #tray,#game[data-layout="tabletLandscape"] #tray{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:49px;gap:4px!important;padding:0!important;
+ overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scroll-behavior:auto;
+ width:100%;height:100%;align-content:start
+}
+#game[data-layout="tabletLandscape"] #tray{grid-auto-rows:64px;gap:6px!important}
+#game[data-layout="phoneLandscape"] #tray .toy,#game[data-layout="tabletLandscape"] #tray .toy{
+ min-width:0!important;width:100%;height:100%!important;padding:2px!important;gap:0!important;border-radius:12px!important
+}
+#game[data-layout="phoneLandscape"] #tray .numTxt{font-size:23px!important}
+#game[data-layout="tabletLandscape"] #tray .numTxt{font-size:24px!important}
+#game[data-layout="phoneLandscape"] #tray .nbFaceSvg{display:none}
+#game[data-layout="phoneLandscape"] #tray .bigNumBtn,#game[data-layout="phoneLandscape"] #tray .toolBtn,
+#game[data-layout="tabletLandscape"] #tray .bigNumBtn,#game[data-layout="tabletLandscape"] #tray .toolBtn{display:none!important}
+#game[data-layout="phoneLandscape"] .scrollHint,#game[data-layout="tabletLandscape"] .scrollHint{display:none!important}
+#game[data-layout="phoneLandscape"] #sideActionDock,#game[data-layout="tabletLandscape"] #sideActionDock{
+ grid-column:3;grid-row:1;position:relative;top:auto;left:0!important;right:0!important;bottom:0!important;
+ width:100%;height:100%;min-width:0;min-height:0;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px!important;z-index:5;overflow:hidden
+}
+#game[data-layout="phoneLandscape"] .dockBtn,#game[data-layout="tabletLandscape"] .dockBtn{
+ width:54px!important;height:54px!important;flex:0 0 auto;border-radius:17px!important
+}
+#game[data-layout="tabletLandscape"] .dockBtn{width:62px!important;height:62px!important}
+#game[data-layout="phoneLandscape"] .dockSvg{width:27px!important;height:27px!important}
+#game[data-layout="phoneLandscape"] .dockTxt{display:none}
+#game[data-layout="phoneLandscape"] #top,#game[data-layout="tabletLandscape"] #top{
+ left:calc(var(--nk-left-w) + 12px + env(safe-area-inset-left));
+ right:calc(var(--nk-right-w) + 12px + env(safe-area-inset-right));
+ top:max(5px,env(safe-area-inset-top));gap:3px;min-width:0
+}
+#game[data-layout="phoneLandscape"] #right,#game[data-layout="tabletLandscape"] #right{gap:3px;padding:2px}
+#game[data-layout="phoneLandscape"] #right .pill{min-width:44px!important;min-height:44px!important;padding:2px!important;font-size:17px}
+#game[data-layout="phoneLandscape"] #zones,#game[data-layout="tabletLandscape"] #zones{justify-content:flex-start;gap:2px}
+#game[data-layout="phoneLandscape"] #zones .pill{min-width:44px!important;min-height:44px!important;padding:1px!important}
+#game[data-layout="phoneLandscape"] #numberExtrasBtn,#game[data-layout="tabletLandscape"] #numberExtrasBtn{display:inline-flex}
+#game[data-layout="phoneLandscape"] #camLeft,#game[data-layout="tabletLandscape"] #camLeft{
+ left:calc(var(--nk-left-w) + 12px + env(safe-area-inset-left))
+}
+#game[data-layout="phoneLandscape"] #camRight,#game[data-layout="tabletLandscape"] #camRight{
+ right:calc(var(--nk-right-w) + 12px + env(safe-area-inset-right))
+}
+#game[data-layout="phoneLandscape"] .camNavBtn{width:44px;height:54px;font-size:20px}
+#game[data-layout="phoneLandscape"] #actions,#game[data-layout="phoneLandscape"] #drawer,
+#game[data-layout="phoneLandscape"] #decompPalette,#game[data-layout="tabletLandscape"] #actions,
+#game[data-layout="tabletLandscape"] #drawer,#game[data-layout="tabletLandscape"] #decompPalette{
+ left:calc(var(--nk-left-w) + 12px + env(safe-area-inset-left));
+ right:calc(var(--nk-right-w) + 12px + env(safe-area-inset-right));
+ top:auto;bottom:6px!important;transform:none;width:auto;max-width:none;
+ max-height:calc(100% - 62px);overflow-x:auto;overflow-y:auto
+}
+#game[data-layout="phoneLandscape"] #settingsPop,#game[data-layout="tabletLandscape"] #settingsPop{
+ position:absolute;top:50px;right:calc(var(--nk-right-w) + 12px + env(safe-area-inset-right));
+ max-height:calc(100% - 58px);overflow-y:auto
+}
+#game[data-layout="phoneLandscape"] #townGuides,#game[data-layout="tabletLandscape"] #townGuides{
+ top:48px;right:calc(var(--nk-right-w) + 12px + env(safe-area-inset-right))
+}
+@media (max-height:360px) and (orientation:landscape){
+ #game[data-layout="phoneLandscape"] #trayWrap{padding-top:46px!important}
+ #game[data-layout="phoneLandscape"] #tray{grid-auto-rows:46px}
+ #game[data-layout="phoneLandscape"] .dockBtn{width:48px!important;height:48px!important}
+ #game[data-layout="phoneLandscape"] #sideActionDock{gap:5px!important}
+}
+
 </style>
 </head>
 <body>
@@ -574,6 +727,7 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
       <button id="sound" class="pill toyPill" title="소리" aria-label="소리 켜기/끄기" aria-pressed="true">
         <svg viewBox="0 0 36 36" class="btnSvg" id="soundIconSvg"><polygon points="6,14 13,14 21,7 21,29 13,22 6,22" fill="#51CF66" stroke="#2B8A3E" stroke-width="2" stroke-linejoin="round"/><path d="M25 12 Q30 18 25 24 M28 8 Q35 18 28 28" fill="none" stroke="#2B8A3E" stroke-width="2.8" stroke-linecap="round"/></svg>
       </button>
+      <button id="numberExtrasBtn" class="pill toyPill" title="큰 수와 건축 소품" aria-label="큰 수와 건축 소품 열기" aria-expanded="false">🧱</button>
       <button id="settingsBtn" class="pill toyPill" title="설정" aria-label="설정 메뉴 열기" aria-expanded="false">
         <svg viewBox="0 0 44 44" class="btnSvg" width="28" height="28">
           <circle cx="22" cy="22" r="7" fill="#7950F2"/>
@@ -798,7 +952,7 @@ const state = {
   pointer: null,
   cameraX: 11,
   goalX: 11,
-  camPresetIdx: 0,
+  camPresetIdx: 1,
   hammer: false,
   sound: true,
   voice: false,
@@ -1151,11 +1305,12 @@ function getNumberblockFaceSVG(n){
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#48B5FF');
 
-let camFov = 52; // 핀치/휠 줌 (28~62 범위)
+const DEFAULT_CAM_FOV = 42;
+let camFov = DEFAULT_CAM_FOV; // 사용자 확대/축소는 유지하고 새 놀이터에서 초기화
 const camera = new THREE.PerspectiveCamera(camFov, innerWidth / innerHeight, 0.5, 180);
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true, powerPreference: 'high-performance'});
 renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
-renderer.setSize(innerWidth, innerHeight);
+renderer.setSize(innerWidth, innerHeight, false); // 초기 캔버스 CSS 폭은 반응형 그리드에 맡김
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 if('outputEncoding' in renderer) renderer.outputEncoding = THREE.sRGBEncoding;
@@ -1295,7 +1450,7 @@ function createOctoMaskGeometry(){
 }
 
 const SHARED_GEO = {
-  unitCube: createRoundedCubeGeometry(0.60, 0.08, 3),
+  unitCube: createRoundedCubeGeometry(0.82, 0.08, 3),
   stud:     new THREE.CylinderGeometry(0.18, 0.19, 0.12, 16),
   eyeWhite: new THREE.SphereGeometry(0.125, 14, 14),
   eyePupil: new THREE.SphereGeometry(0.068, 12, 12),
@@ -2604,13 +2759,14 @@ function reset(push = false){
   closeDecompPalette();
   clearAllEntities(state);
 
-  // 1~10 블록을 너비 고려해 겹치지 않고 한 줄로 예쁘게 배치
-  // 블록 N의 너비=N칸, 여백 3칸씩. gx: 3,7,12,18,25,33,42,52,63,75
-  const LINEUP_GXS = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55];
+  // 1~10 모두 생성. 기본 포즈 실제 폭을 사용해 블록 사이 빈 격자 1칸 확보
   const initFriends = [];
+  let lineupGX = 1;
   for(let n = 1; n <= 10; n++){
-    const f = friend(n, LINEUP_GXS[n-1], 0, 0);
-    initFriends.push(f);
+    const pose = poses(n)[0];
+    const bounds = getBoundsLocal(cellsFor(n, pose));
+    initFriends.push(friend(n, lineupGX, 0, 0, {pose}));
+    lineupGX += bounds.w + 1; // 실제 블록 폭 + 빈 격자 정확히 1칸
   }
 
   // 시냇물 다리와 기차역 샘플 친구 유지
@@ -2631,13 +2787,17 @@ function reset(push = false){
 
   state.props.push(w1, w2, bed, win, rf);
 
-  state.selected = initFriends[0].id;
+  state.selected = null; // 시작 시 선택된 블록이 없어 의도치 않은 자동 합체 후보가 생기지 않음
   state.recentSpawnIds = [];
   state.recentSpawnZone = 'plaza';
   state.lastSpawnMeta = { n: 0, gx: 3, gz: 0, at: 0, firstGX: 3 };
   setHammer(false);
-  // 카메라: 1~10 블록 중앙(gx 3~85의 중심 ~39)
-  state.goalX = state.cameraX = 33;
+  // 첫 장면은 1~5 근처에서 크게 시작하며 전체 1~10 시야는 카메라 버튼으로 전환
+  state.goalX = state.cameraX = 6;
+  state.camPresetIdx = 1;
+  camFov = DEFAULT_CAM_FOV;
+  camera.fov = camFov;
+  camera.updateProjectionMatrix();
   state.merging = null;
   state.drag = null;
   state.pan = null;
@@ -3889,7 +4049,7 @@ function moveDrag(e){
   } else if(state.pan){
     const dx = e.clientX - state.pan.x;
     state.pan.moved = Math.abs(dx) > 6;
-    const worldPerPx = 48 / Math.max(320, innerWidth);
+    const worldPerPx = 48 / Math.max(240, canvas.getBoundingClientRect().width);
     state.goalX = clamp(state.pan.from - dx * worldPerPx, 4, WORLD_W - 6);
   }
 }
@@ -4086,8 +4246,9 @@ function update3D(dt, now){
   if(state.zone === 'orchard') maxH = Math.max(maxH, 10);
 
   const preset = CAM_PRESETS[state.camPresetIdx];
-  const aspect = Math.max(0.5, innerWidth / Math.max(300, innerHeight));
-  const portraitPullback = aspect < 0.8 ? (0.8 - aspect) * 10 : 0;
+  const canvasRect = canvas.getBoundingClientRect();
+  const aspect = Math.max(0.4, canvasRect.width / Math.max(1, canvasRect.height));
+  const portraitPullback = aspect < 0.85 ? (0.85 - aspect) * 17 : 0;
   const heightPullback = Math.max(0, (maxH - 8) * 0.55);
   const widthPullback = Math.max(0, (maxW - 8) * 0.65);
   const pullback = Math.max(heightPullback, widthPullback);
@@ -4343,13 +4504,45 @@ function updateTrayArrows(){
   $('trayRight').style.display = tray.scrollLeft + tray.clientWidth < tray.scrollWidth - 6 ? 'inline-flex' : 'none';
 }
 
+let activeLayoutProfile = null;
+function chooseNumberKingdomLayout(){
+  const root = $('game');
+  const w = root?.clientWidth || window.innerWidth;
+  const h = root?.clientHeight || window.innerHeight;
+  const touch = (window.matchMedia?.('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
+  if(!touch) return 'desktop';
+  if(w > h) return h <= 500 ? 'phoneLandscape' : 'tabletLandscape';
+  return w < 600 ? 'phonePortrait' : 'tabletPortrait';
+}
+function applyNumberKingdomLayout(){
+  const next = chooseNumberKingdomLayout();
+  if(next === activeLayoutProfile) return;
+  if(state.pointer !== null) endDrag({pointerId:state.pointer}, true);
+  state.pan = null;
+  const drawer = $('drawer');
+  if(drawer) drawer.style.display = 'none';
+  closeDecompPalette();
+  const pop = $('settingsPop');
+  if(pop) pop.style.display = 'none';
+  $('game').dataset.layout = next;
+  document.body.classList.toggle('embedded', window.parent !== window);
+  activeLayoutProfile = next;
+}
 function onResize(){
-  const r = $('game').getBoundingClientRect();
-  const w = Math.max(300, r.width);
-  const h = Math.max(300, r.height);
+  applyNumberKingdomLayout();
+  const rect = canvas.getBoundingClientRect();
+  if(rect.width < 10 || rect.height < 10) return;
+  const w = Math.max(1, Math.round(rect.width));
+  const h = Math.max(1, Math.round(rect.height));
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
-  renderer.setSize(w, h);
+  renderer.setSize(w, h, false);
+  const rootRect = $('game').getBoundingClientRect();
+  const trayRect = $('trayWrap').getBoundingClientRect();
+  const bottom = (activeLayoutProfile === 'desktop')
+    ? rootRect.bottom - trayRect.top + 8
+    : rootRect.bottom - rect.bottom + 8;
+  $('game').style.setProperty('--nk-overlay-bottom', Math.max(8, Math.round(bottom)) + 'px');
   updateMathToyHudLayout();
   updateTrayArrows();
 }
@@ -4452,6 +4645,11 @@ function mountUI(){
   tray.addEventListener('scroll', updateTrayArrows, {passive: true});
   $('trayLeft').onclick = () => tray.scrollBy({left: -180, behavior: 'smooth'});
   $('trayRight').onclick = () => tray.scrollBy({left: 180, behavior: 'smooth'});
+  const extraBtn = $('numberExtrasBtn');
+  if(extraBtn) extraBtn.onclick = () => {
+    toggleDrawer('numbers');
+    extraBtn.setAttribute('aria-expanded', String($('drawer').style.display === 'flex'));
+  };
 
   const dockAdd = $('dockAddBtn');
   if(dockAdd) dockAdd.onclick = () => triggerToyAction('plus');
@@ -4543,7 +4741,16 @@ function mountUI(){
     return Math.hypot(e1.clientX - e2.clientX, e1.clientY - e2.clientY);
   }
   const activePointers = new Map();
-  canvas.addEventListener('pointerdown', (e) => { activePointers.set(e.pointerId, e); });
+  canvas.addEventListener('pointerdown', (e) => {
+    activePointers.set(e.pointerId, e);
+    if(activePointers.size === 2){
+      // Two fingers mean zoom, never drag a character at the same time.
+      if(state.pointer !== null) endDrag({pointerId:state.pointer}, true);
+      const [p1, p2] = [...activePointers.values()];
+      pinchState.active = true;
+      pinchState.dist = getPinchDist(p1, p2);
+    }
+  });
   canvas.addEventListener('pointermove', (e) => {
     activePointers.set(e.pointerId, e);
     if(activePointers.size === 2) {
@@ -4587,22 +4794,35 @@ window.returnToPlayOS = returnToPlayOS;
 
 function toggleDrawer(mode){
   const dr = $('drawer');
+  const extraBtn = $('numberExtrasBtn');
   if(dr.style.display === 'flex' && dr.dataset.mode === mode){
     dr.style.display = 'none';
+    extraBtn?.setAttribute('aria-expanded', 'false');
     return;
   }
   dr.dataset.mode = mode;
   dr.innerHTML = '';
-  for(const key of Object.keys(specs)){
-    const s = specs[key];
+  const addOption = (label, icon, action) => {
     const b = document.createElement('button');
     b.className = 'itemProp';
     b.style.background = '#F2F7FF';
-    b.innerHTML = `<span style="font-size:28px">${s.icon}</span><span>${s.label}</span>`;
-    b.onclick = () => { dr.style.display = 'none'; spawnProp(key); };
+    b.textContent = icon + ' ' + label;
+    b.setAttribute('aria-label', label);
+    b.onclick = () => { dr.style.display = 'none'; extraBtn?.setAttribute('aria-expanded', 'false'); action(); };
     dr.appendChild(b);
+  };
+  if(mode === 'numbers'){
+    for(const n of [20, 50, 100]) addOption('숫자 ' + n, '🔢', () => spawnFriend(n));
+    addOption('1칸 브릭', '🧱', () => spawnProp('brick'));
+    addOption('건축 소품', '🏠', () => toggleDrawer('props'));
+  } else {
+    for(const key of Object.keys(specs)){
+      const s = specs[key];
+      addOption(s.label, s.icon, () => spawnProp(key));
+    }
   }
   dr.style.display = 'flex';
+  extraBtn?.setAttribute('aria-expanded', String(mode === 'numbers'));
 }
 
 /* ============================================================================
@@ -4751,6 +4971,11 @@ buildWorld3D();
 buildMathToyHud3D();
 mountUI();
 onResize();
+const nkLayoutObserver = (typeof ResizeObserver === 'function')
+  ? new ResizeObserver(() => onResize()) : null;
+nkLayoutObserver?.observe(canvas);
+window.addEventListener('orientationchange', onResize);
+window.visualViewport?.addEventListener('resize', onResize);
 reset();
 
 const audit = selfTest();
@@ -4798,6 +5023,10 @@ window.NumberKingdomDebug = {
   reset: () => reset(true),
   dispose: () => {
     state.destroyed = true;
+    nkLayoutObserver?.disconnect();
+    window.removeEventListener('resize', onResize);
+    window.removeEventListener('orientationchange', onResize);
+    window.visualViewport?.removeEventListener('resize', onResize);
     stopSpeech();
     renderer.dispose();
   }
