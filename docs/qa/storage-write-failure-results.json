@@ -1,0 +1,36 @@
+{
+  "suite": "Readable stale storage with rejected writes — production closure regressions",
+  "sourceSha256": {
+    "postOffice": "15ab59dc8ce55e599ffc59811a75dffa2e02d9e9836e2b729d4a3fd3e82ef234",
+    "art": "a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5"
+  },
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "post office restores the latest three items after an age/range round trip when only writes fail",
+      "status": "PASS",
+      "detail": {
+        "persistedItems": 1,
+        "latestItems": 3,
+        "restoredItems": 3,
+        "readSucceeded": true,
+        "writesRejected": 10,
+        "readCopyDetached": true
+      }
+    },
+    {
+      "name": "art restores latest free PNG and per-template coloring when old storage reads succeed but writes fail",
+      "status": "PASS",
+      "detail": {
+        "readSucceeded": true,
+        "writesRejected": 1,
+        "latestPngPreserved": true,
+        "latestTemplateFill": "#FF0000"
+      }
+    }
+  ],
+  "limits": [
+    "Node VM with controlled localStorage behavior; no actual browser quota, private-mode, or device validation.",
+    "Memory protects progress within the same loaded page; a real reload cannot recover writes the browser rejected."
+  ]
+}

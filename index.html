@@ -9,6 +9,9 @@
   <meta name="theme-color" content="#5BC8F5">
   <title>시현이 놀이터 OS</title>
   <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./css/play-settings.css">
+  <link id="sihyeon-number-post-office-style" rel="stylesheet" href="./css/games/number-post-office.css">
+  <script src="./js/play-settings.js"></script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235BC8F5'/%3E%3Ccircle cx='22' cy='42' r='7' fill='%231A2E3B'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%231A2E3B'/%3E%3Cpath d='M10 37h44l-5-15H24L15 31z' fill='%23FFD93D'/%3E%3Cpath d='M24 22h17l4 11H18z' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -1617,6 +1620,7 @@ const ZONE_CONFIGS = {
     character:'mom',
     greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
+      { id:'postoffice', title:'숫자 배달 우체국', emoji:'📮', image:'./assets/games/number-post-office/card.svg', desc:'세고 담아 친구에게 배달해요', action:'openNumberPostOfficeGame()', isNew:true },
       { id:'kingdom3d', title:'숫자 왕국 3D', emoji:'🌈', image:'./assets/games/cards/number-kingdom-3d.png', desc:'3D 블록으로 숫자를 합쳐요', action:'openNumberKingdom3DGame()', isNew:true },
       { id:'count', title:'몇 대일까?', emoji:'🚗', image:'./assets/games/cards/number-count.webp', desc:'차량 수를 세어요', action:'openNumberCountGame()', isNew:false }
     ]
@@ -1662,18 +1666,6 @@ function addZoneGameOnce(zoneId, game) {
 }
 
 [
-  {
-    zoneId: 'game',
-    game: {
-      id: 'boardland',
-      title: '보드랜드',
-      emoji: '🎲',
-      image: './assets/games/cards/boardland-zone.png',
-      desc: '빙글빙글 보드게임',
-      action: 'openBoardLandGame()',
-      isNew: true
-    }
-  },
   {
     zoneId: 'cars',
     game: {
@@ -1883,13 +1875,12 @@ function cleanupDetachedPlayLayers(){
 }
 
 function cleanupActiveGame(){
-  ['vehicleMemory','numberCount','numberBlocks','numberVehiclesPixi','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare','robotCoding','megaDispatch'].forEach(key=>{
+  ['vehicleMemory','numberPostOffice','numberCount','numberBlocks','numberVehiclesPixi','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare','robotCoding','megaDispatch'].forEach(key=>{
     try{ window.SihyeonGames?.[key]?.destroy?.(); }catch(error){}
   });
 
   try{ window.SihyeonZones?.voiceZone?.destroy?.(); }catch(error){}
   try{ window.SihyeonZones?.karaokeZone?.destroy?.(); }catch(error){}
-  try{ window.SihyeonZones?.boardland?.close?.(); }catch(error){}
 
   cleanupDetachedPlayLayers();
 }
@@ -2013,6 +2004,7 @@ function renderWorldMapHome(options={}){
       <div class="world-blur-bg"></div>
       <div class="world-map-frame">
         <img src="${bg}" class="world-map-bg" alt="시현이 큰 놀이동산" onerror="handleMapImageError(this)">
+        <div class="ps-home-ages" aria-label="놀이 나이 선택">${[4,5,6,7].map(age=>`<button type="button" data-home-age="${age}" data-play-age="${age}" aria-label="${age}세 놀이" aria-pressed="${window.SihyeonPlaySettings.getAge()===age}"><span>${({4:'🐣',5:'🐰',6:'🦊',7:'🐻'})[age]}</span><b>${age}세</b></button>`).join('')}</div>
         <button class="btn-parent-lock" onclick="showPinOverlay()" aria-label="부모 대시보드">🔒</button>
         <div class="world-map-content">
           ${['game','numbers','letters','cars','story','voice'].map(id=>{
@@ -2240,8 +2232,14 @@ function returnToZoneLand(zoneId){
 
 function returnToCurrentGameLand(){ returnToZoneLand(activeGameZoneId); }
 
+function playDynamicGuide(text){
+  if(!db.settings.voiceGuide.enabled) return Promise.resolve(false);
+  try { return window.SihyeonVoice?.speak?.(text,{rate:0.85,pitch:1.04}) || Promise.resolve(false); }
+  catch(_){return Promise.resolve(false);}
+}
+
 function gameOptions(zoneId,extras={}){
-  return Object.assign({speakGuide,fireConfetti,gainExp,closeToParkHome:()=>returnToZoneLand(zoneId)},extras);
+  return Object.assign({speakGuide,fireConfetti,gainExp,ageMode:window.SihyeonPlaySettings.getAge(),openSettings:()=>window.SihyeonPlaySettings.openSettings(),say:playDynamicGuide,closeToParkHome:()=>returnToZoneLand(zoneId)},extras);
 }
 
 function makeZoneHead(title,action='closeToParkHome()',icon='🏠',aria='홈으로'){
@@ -2306,9 +2304,17 @@ function openHangulWorld3DGame(){
   openHangulPlaymat3DGame();
 }
 
+function openNumberPostOfficeGame(){
+  const t=openGameShell('📮 숫자 배달 우체국','numberPostOfficeTarget','#f8f1db','numbers');
+  if(window.SihyeonGames?.numberPostOffice?.render){
+    t.parentElement.querySelector('.game-back-floating')?.remove();
+    window.SihyeonGames.numberPostOffice.render(t,gameOptions('numbers'));
+  } else renderGameLoadError(t,'우체국을 불러오지 못했어요. 놀이터로 돌아가 다시 열어 주세요.','#23464c');
+}
+
 function openNumberCountGame(){
   const t=openGameShell('🔢 몇 대일까?','numberCountTarget','linear-gradient(180deg,#87CEEB 0%,#E0F7FA 100%)','numbers');
-  if(window.SihyeonGames?.numberCount?.render) window.SihyeonGames.numberCount.render(t,gameOptions('numbers'));
+  if(window.SihyeonGames?.numberCount?.render){t.parentElement.querySelector('.game-back-floating')?.remove();window.SihyeonGames.numberCount.render(t,gameOptions('numbers'));}
   else renderGameLoadError(t,'숫자놀이를 불러오지 못했어요.');
 }
 
@@ -2391,7 +2397,7 @@ function openKaraokeZone(){
   const root=document.getElementById('sihyeonPlayOS');
   root.innerHTML=`
     <section class="game-play-screen game-play-fullscreen" data-game-title="🎤 시현이 노래방">
-      <button class="game-back-floating" onclick="returnToZoneLand('voice')" aria-label="놀이터로">↩</button>
+
       <div class="game-play-body" id="karaokeZoneRoot"></div>
     </section>`;
   const container=document.getElementById('karaokeZoneRoot');
@@ -2436,13 +2442,6 @@ function openMegaDispatchGame(){
   const t=openGameShell('🚒 소방 출동','megaDispatchTarget','linear-gradient(180deg,#111 0%,#7f1010 100%)','cars');
   if(window.SihyeonGames?.megaDispatch?.render) window.SihyeonGames.megaDispatch.render(t,gameOptions('cars'));
   else renderGameLoadError(t,'소방 출동을 불러오지 못했어요.');
-}
-
-function openBoardLandGame(){
-  cleanupActiveGame();
-  closeGarageHandlers?.();
-  if(typeof window.openBoardLandZone === 'function') window.openBoardLandZone();
-  else renderGameLoadError(openGameShell('🎲 보드랜드','boardLandTarget','linear-gradient(180deg,#74d680 0%,#f8e36a 100%)','game'),'보드랜드를 불러오지 못했어요.','#333');
 }
 
 function openFullscreenGarage(){
@@ -2652,6 +2651,7 @@ function renderParentDashboard(){
         <button class="dash-close-btn" onclick="renderWorldMapHome()">닫기</button>
       </div>
       <div class="dash-content">
+        <div class="dash-card"><div class="dash-card-title">놀이 나이와 수량</div><button type="button" class="ps-parent-open" onclick="SihyeonPlaySettings.openSettings()">⚙️ <span data-play-age-label>${SihyeonPlaySettings.getAge()}세</span> · 놀이 설정</button><p style="margin-top:12px">연령은 추천값이며 모든 놀이를 자유롭게 선택할 수 있어요. 완료 횟수로 학습 능력을 평가하지 않아요.</p></div>
         <div class="summary-grid">
           <div class="summary-item">
             <div class="summary-val">${todayLog.totalMinutes}분</div>
@@ -2724,7 +2724,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone, openKaraokeZone,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberKingdom3DGame, openHangulPlaymat3DGame, openHangulWorld3DGame, openNumberCountGame, openColorBalloonGame,
+  openMemoryGame, openNumberPostOfficeGame, openNumberKingdom3DGame, openHangulPlaymat3DGame, openHangulWorld3DGame, openNumberCountGame, openColorBalloonGame,
   openParkingGame, openConstructionSiteGame, openCarGarageGame, openCodingCarGame, openLifeSequenceGame,
   openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
@@ -2773,7 +2773,6 @@ if('serviceWorker' in navigator){
 <script src="./js/voice-engine.js"></script>
 <script src="./js/zones/voice-zone.js"></script>
 <script src="./js/zones/karaoke-zone.js"></script>
-<script src="./js/zones/boardland-zone.js"></script>
 
 <script src="./js/data/classic-video-registry.js"></script>
 
@@ -2783,7 +2782,10 @@ if('serviceWorker' in navigator){
 <script src="./js/games-pixi/number-vehicles-pixi.js"></script>
 
 <script src="./js/games/vehicle-memory.js"></script>
+<script src="./js/vehicle-display.js"></script>
 <script src="./js/games/number-count.js"></script>
+<script src="./js/games/number-post-office-model.js"></script>
+<script src="./js/games/number-post-office.js"></script>
 <script src="./js/games/number-basket.js"></script>
 <script src="./js/games/number-vehicles.js"></script>
 <script src="./js/games/number-blocks.js"></script>

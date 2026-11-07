@@ -1,0 +1,70 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>우체국 실패·입력 검수</title>
+<link id="sihyeon-number-post-office-style" rel="stylesheet" href="../../css/games/number-post-office.css">
+<style>html,body{margin:0;height:100%;font-family:system-ui}body{display:flex;flex-direction:column}#qa-tools{display:flex;gap:6px;align-items:center;padding:8px;background:#243b3b;color:white;flex-wrap:wrap}#qa-tools button{font:inherit;padding:8px;border:0;border-radius:6px}#qa-status{font-size:14px;margin-left:8px}#game{flex:1;min-height:0}button{font:inherit}</style>
+<div id="qa-tools"><b>합성 입력·실패 환경 검수</b><button id="cancel">포인터 취소</button><button id="outside">화면 밖 놓기</button><button id="blur">포커스 이탈</button><button id="rotate">회전 이벤트</button><button id="double">연타</button><button id="reopen">나갔다 다시 열기</button><button id="leave-delivery">배달 중 이탈·복귀</button><span id="qa-status">이미지 경로 없음 / 음성 엔진 없음 / 저장 거부 — 실제 기기·음질 검증 아님</span></div><div id="game"></div>
+<script>
+// Deliberately isolated QA fixture. It has no product menu link or SW cache entry.
+// Storage is a denied adapter so this fixture cannot overwrite other local QA saves.
+Object.defineProperty(window,'localStorage',{value:{getItem(){return null},setItem(){throw new DOMException('QA denied','SecurityError')}}});
+window.SihyeonPlaySettings={getAge(){return 4},getChallenge(){return '11-15'}};
+</script><script src="../../js/games/number-post-office-model.js"></script><script src="../../js/games/number-post-office.js"></script>
+<script>
+const game=window.SihyeonGames.numberPostOffice;
+const target=document.getElementById('game');
+function open(){game.render(target,{closeToParkHome(){game.destroy();target.innerHTML='<button id="qa-open">우체국 다시 열기</button>';document.getElementById('qa-open').onclick=open}})}
+function result(text){document.getElementById('qa-status').textContent=text}
+open();
+function inputRecovery(kind){
+ const item=target.querySelector('.npo-stock-item:not(:disabled)');const before=JSON.stringify(game.getSnapshot().state.positions);const b=item.getBoundingClientRect();
+ item.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerId:801,pointerType:'touch',isPrimary:true,clientX:b.left+10,clientY:b.top+10}));
+ item.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,pointerId:801,pointerType:'touch',isPrimary:true,clientX:b.left+80,clientY:b.top+30}));
+ if(kind==='cancel') item.dispatchEvent(new PointerEvent('pointercancel',{bubbles:true,pointerId:801,pointerType:'touch',isPrimary:true}));
+ if(kind==='outside') item.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,pointerId:801,pointerType:'touch',isPrimary:true,clientX:1,clientY:1}));
+ if(kind==='blur') window.dispatchEvent(new Event('blur'));
+ if(kind==='rotate') window.dispatchEvent(new Event('orientationchange'));
+ // A late compatibility click must not undo a cancelled gesture.
+ item.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1}));
+ const unchanged=before===JSON.stringify(game.getSnapshot().state.positions);const ghost=document.querySelectorAll('.npo-drag-ghost').length;
+ result('합성 '+kind+': '+(unchanged&&ghost===0?'PASS':'FAIL')+' / 수량·위치 보존 / 드래그 잔상 '+ghost+'개');
+}
+['cancel','outside','blur','rotate'].forEach(id=>document.getElementById(id).onclick=()=>inputRecovery(id));
+document.getElementById('double').onclick=function(){
+ const item=target.querySelector('.npo-stock-item:not(:disabled)');const id=item.dataset.item;const before=Object.values(game.getSnapshot().state.positions).filter(x=>x>=0).length;
+ item.click();
+ target.querySelector('.npo-cargo-item[data-item="'+id+'"]').click();
+ const after=Object.values(game.getSnapshot().state.positions).filter(x=>x>=0).length;
+ result('합성 즉시 연타: '+(after===before+1?'PASS':'FAIL')+' / 물건 '+before+'→'+after+' / 두 번째 전환 억제');
+};
+document.getElementById('reopen').onclick=function(){
+ const before=JSON.stringify(game.getSnapshot().state.positions);game.destroy();open();
+ result('저장 거부 중 메모리 복귀: '+(before===JSON.stringify(game.getSnapshot().state.positions)?'PASS':'FAIL'));
+};
+document.getElementById('leave-delivery').onclick=async function(){
+ const controls=Array.from(document.querySelectorAll('#qa-tools button'));controls.forEach(button=>button.disabled=true);
+ try {
+  target.querySelector('[data-action="reset"]').click();
+  while(!target.querySelector('[data-action="stock-prev"]').disabled) target.querySelector('[data-action="stock-prev"]').click();
+  await new Promise(resolve=>setTimeout(resolve,400));
+  const wanted=parseInt(target.querySelector('.npo-goal strong').textContent,10);
+  let steps=0;
+  while(Number(target.querySelector('.npo-truck-tab strong').textContent)<wanted && steps++<60){
+   const item=target.querySelector('.npo-stock-item:not(:disabled)');
+   if(item) item.click();
+   else {
+    const next=target.querySelector('[data-action="stock-next"]');
+    if(next.disabled) throw Error('No remaining visible stock');next.click();
+   }
+  }
+  target.querySelector('[data-action="deliver"]').click();
+  if(game.getSnapshot().state.phase!=='DELIVERING') throw Error('Delivery did not begin');
+  const before=JSON.stringify(game.getSnapshot().state.positions);
+  game.destroy();open();
+  result('합성 배달 이탈: 복귀 수량 확인 중…');
+  await new Promise(resolve=>setTimeout(resolve,2600));
+  const state=game.getSnapshot().state;
+  const pass=before===JSON.stringify(state.positions)&&state.phase==='SELECTING'&&state.completionCount===0;
+  result('합성 배달 중 이탈·복귀: '+(pass?'PASS':'FAIL')+' / 수량 보존 / 이전 타이머 완료 없음');
+ }catch(error){result('FAIL: '+error.message)}
+ finally{controls.forEach(button=>button.disabled=false)}
+};
+</script></html>

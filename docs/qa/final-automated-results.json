@@ -1,0 +1,251 @@
+{
+  "environment": "Node in managed Linux workspace",
+  "status": "PASS",
+  "scope": "Code/model and synthetic checks; not physical device validation",
+  "runs": [
+    {
+      "script": "qa-static.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS: 13 JS files, 6 inline scripts, Boardland removal, load order and new asset cache paths.\n"
+    },
+    {
+      "script": "qa-play-settings.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS: all four ages retain independent challenge choices, counting 1–5 persists, malformed/denied storage remains playable, invalid values rejected.\n"
+    },
+    {
+      "script": "qa-number-post-office-independent.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": {
+        "suite": "Independent quantity/state QA",
+        "modelSha256": "e38eb927b6e5a4678bf151284f1961de92fc3c87aee289e5a0c2174514347c0d",
+        "status": "PASS",
+        "missionsChecked": 600,
+        "actionsChecked": 19141,
+        "checks": [
+          {
+            "name": "every age can select every target 1..30, with enough unique physical stock",
+            "status": "PASS",
+            "detail": {
+              "missions": 600,
+              "targetRange": "1..30",
+              "ages": [
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          },
+          {
+            "name": "wrong total and wrong type are retained for the child to repair",
+            "status": "PASS",
+            "detail": null
+          },
+          {
+            "name": "bundling, unbundling, moving, undoing and resetting conserve actual objects",
+            "status": "PASS",
+            "detail": null
+          },
+          {
+            "name": "all valid two-truck arrangements are accepted, including mirrored solutions",
+            "status": "PASS",
+            "detail": {
+              "arrangements": 260
+            }
+          },
+          {
+            "name": "random input sequences preserve unique objects and never double complete",
+            "status": "PASS",
+            "detail": null
+          },
+          {
+            "name": "interrupted delivery and corrupted saves recover without false reward or lockup",
+            "status": "PASS",
+            "detail": null
+          }
+        ],
+        "limits": [
+          "Node model checks only. No browser DOM, layout, touch device, TTS listening, or child observation is claimed."
+        ]
+      }
+    },
+    {
+      "script": "qa-art-restore-independent.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": {
+        "suite": "Independent art asynchronous restore QA",
+        "sourceSha256": "a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5",
+        "status": "PASS",
+        "checks": [
+          {
+            "name": "newest restore wins when image callbacks finish in reverse order",
+            "status": "PASS"
+          },
+          {
+            "name": "new paper invalidates a pending restore",
+            "status": "PASS"
+          },
+          {
+            "name": "a pointer stroke waits for the pending picture and works after restore",
+            "status": "PASS"
+          },
+          {
+            "name": "destroy invalidates callbacks even if a new lifecycle reuses the canvas",
+            "status": "PASS"
+          },
+          {
+            "name": "an empty newer restore request cancels the older pending request",
+            "status": "PASS"
+          },
+          {
+            "name": "ordinary current restore still draws the requested picture",
+            "status": "PASS"
+          }
+        ],
+        "limits": [
+          "Node callback simulation only; no browser canvas pixels, touch device, or child observation is claimed."
+        ]
+      }
+    },
+    {
+      "script": "qa-art-pending-save.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": {
+        "suite": "Art pending-save production closure regression",
+        "sourceSha256": "a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5",
+        "status": "PASS",
+        "checks": [
+          {
+            "name": "save during initial decode preserves the loaded PNG",
+            "status": "PASS"
+          },
+          {
+            "name": "exit before decode preserves PNG and rejects the late callback",
+            "status": "PASS"
+          },
+          {
+            "name": "successful restore enables drawing and later saves the actual new stroke",
+            "status": "PASS"
+          },
+          {
+            "name": "early drawing does not replace the picture still being loaded",
+            "status": "PASS"
+          },
+          {
+            "name": "decode error keeps the original and offers explicit new-paper recovery",
+            "status": "PASS"
+          },
+          {
+            "name": "destroy and return with the same canvas cannot revive the old callback",
+            "status": "PASS"
+          },
+          {
+            "name": "new restore owns saving while older load and error callbacks are ignored",
+            "status": "PASS"
+          },
+          {
+            "name": "new paper during loading can undo back to the original canonical PNG",
+            "status": "PASS"
+          },
+          {
+            "name": "empty restore cancels pending work and makes an intentional blank writable",
+            "status": "PASS"
+          },
+          {
+            "name": "canvas draw failure protects the source just like decode failure",
+            "status": "PASS"
+          },
+          {
+            "name": "template and mode metadata can still save while free drawing restores",
+            "status": "PASS"
+          },
+          {
+            "name": "a first visit without a saved drawing stays immediately drawable",
+            "status": "PASS"
+          }
+        ],
+        "limits": [
+          "Node callback simulation with distinct PNG markers; no actual PNG decoding or browser pixel comparison.",
+          "Loading touch is intentionally deferred until restore completes; explicit new paper recovers from a decode failure."
+        ]
+      }
+    },
+    {
+      "script": "qa-storage-write-failure.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": {
+        "suite": "Readable stale storage with rejected writes — production closure regressions",
+        "sourceSha256": {
+          "postOffice": "15ab59dc8ce55e599ffc59811a75dffa2e02d9e9836e2b729d4a3fd3e82ef234",
+          "art": "a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5"
+        },
+        "status": "PASS",
+        "checks": [
+          {
+            "name": "post office restores the latest three items after an age/range round trip when only writes fail",
+            "status": "PASS",
+            "detail": {
+              "persistedItems": 1,
+              "latestItems": 3,
+              "restoredItems": 3,
+              "readSucceeded": true,
+              "writesRejected": 10,
+              "readCopyDetached": true
+            }
+          },
+          {
+            "name": "art restores latest free PNG and per-template coloring when old storage reads succeed but writes fail",
+            "status": "PASS",
+            "detail": {
+              "readSucceeded": true,
+              "writesRejected": 1,
+              "latestPngPreserved": true,
+              "latestTemplateFill": "#FF0000"
+            }
+          }
+        ],
+        "limits": [
+          "Node VM with controlled localStorage behavior; no actual browser quota, private-mode, or device validation.",
+          "Memory protects progress within the same loaded page; a real reload cannot recover writes the browser rejected."
+        ]
+      }
+    },
+    {
+      "script": "test-legacy-models.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS 22963 model scenarios: quantity conservation, undoable parts, saved-data validation, 140 Hangul compositions.\n"
+    },
+    {
+      "script": "test-legacy-inputs.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy and secondary pointer.\nPASS handwashing: all 24 four-step arrangements, required rinse step, delayed-check edit lock, and correct-slot preservation.\n"
+    },
+    {
+      "script": "test-legacy-fallback.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS 7 fault-boundary scenarios: unavailable GPU, two CDN errors, working 3D, context loss, explicit 2D, denied storage, invalid and restored progress.\n"
+    },
+    {
+      "script": "test-vehicle-display.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS 234 uniform-scale layouts for all 39 clean assets; tall rocket, replacement bounds, idempotent apply and cleanup.\n"
+    },
+    {
+      "script": "qa-sw-independent.cjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "PASS SW: 132 assets visited once, max 4 concurrent fetches, optional network/404/cache errors continue, 6 boundary lengths, only two old matching-prefix caches deleted.\n"
+    }
+  ]
+}

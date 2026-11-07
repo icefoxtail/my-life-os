@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,8 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#d8f1ff">
 <title>시현이의 숫자 왕국 V3.1 — 입체 4열 & 묶음·절반 수학 놀이터</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
-        onerror="this.onerror=null;this.src='https://unpkg.com/three@0.128.0/build/three.min.js'"></script>
+<script src="../js/engine/webgl-fallback.js"></script>
 <style>
 :root{
   font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -856,13 +855,11 @@ body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(saf
 </main>
 
 <script>
-(() => {
+(async () => {
 'use strict';
 
-if(typeof THREE === 'undefined'){
-  alert('Three.js 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');
-  return;
-}
+if (!await window.Sihyeon2DFallback.prepare('numbers')) return;
+try {
 
 /* ============================================================================
  * 1. 3D 월드 격자 상수 (Z축 합창단 4열 확장: MIN_GZ = -5 ~ MAX_GZ = +3)
@@ -5031,6 +5028,11 @@ window.NumberKingdomDebug = {
     renderer.dispose();
   }
 };
+window.Sihyeon2DFallback.ready('numbers', () => window.NumberKingdomDebug?.dispose());
+} catch (error) {
+  console.warn('3D block play is unavailable; opening picture blocks.', error);
+  window.Sihyeon2DFallback.show('numbers');
+}
 })();
 </script>
 </body>

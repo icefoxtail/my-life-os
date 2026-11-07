@@ -1,12 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#dff4ff">
 <title>시현이의 3D 한글 블록 놀이터</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
-        onerror="this.onerror=null;this.src='https://unpkg.com/three@0.128.0/build/three.min.js'"></script>
+<script src="../js/engine/webgl-fallback.js"></script>
 <style>
 :root{
   font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -232,13 +231,11 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 </main>
 
 <script>
-(() => {
+(async () => {
 'use strict';
 
-if(typeof THREE === 'undefined'){
-  alert('Three.js 라이브러리를 불러오지 못했습니다.');
-  return;
-}
+if (!await window.Sihyeon2DFallback.prepare('hangul')) return;
+try {
 
 /* ============================================================================
  * 1. 자음 14종 & 모음 10종 정의 + 유니코드 140음절 조합 + 대표 단어/3D 장난감 사전
@@ -1813,6 +1810,7 @@ function resetInitialBlocks(){
 }
 
 function animate(now){
+  if (state.destroyed) return;
   const dt = Math.min(0.04, (now - state.lastTick) / 1000);
   state.lastTick = now;
   updatePhysics(dt, now);
@@ -1847,6 +1845,11 @@ window.OpenWorldDebug = {
   resetInitialBlocks,
   returnToPlayOS
 };
+window.Sihyeon2DFallback.ready('hangul', () => { state.destroyed = true; renderer.dispose(); window.removeEventListener('resize', adjustCameraForViewport); });
+} catch (error) {
+  console.warn('3D block play is unavailable; opening picture blocks.', error);
+  window.Sihyeon2DFallback.show('hangul');
+}
 })();
 </script>
 </body>

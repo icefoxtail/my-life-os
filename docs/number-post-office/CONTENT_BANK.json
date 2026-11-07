@@ -1,0 +1,470 @@
+{
+  "version": 1,
+  "gameId": "number-post-office",
+  "challenges": {
+    "1-10": [
+      1,
+      10
+    ],
+    "11-15": [
+      11,
+      15
+    ],
+    "16-20": [
+      16,
+      20
+    ],
+    "21-30": [
+      21,
+      30
+    ]
+  },
+  "patterns": [
+    {
+      "id": "post-a01",
+      "age": 4,
+      "kind": "exact",
+      "title": "인형을 기다려요",
+      "type": "teddy",
+      "example": {
+        "target": 11,
+        "available": 14,
+        "generator": {
+          "age": 4,
+          "challenge": "11-15",
+          "seed": 0,
+          "round": 0,
+          "target": 11
+        },
+        "availableByKind": {
+          "teddy": 14
+        }
+      }
+    },
+    {
+      "id": "post-a02",
+      "age": 4,
+      "kind": "exact",
+      "title": "소풍 간식",
+      "type": "apple",
+      "example": {
+        "target": 5,
+        "available": 8,
+        "generator": {
+          "age": 4,
+          "challenge": "1-10",
+          "seed": 1,
+          "round": 0,
+          "target": 5
+        },
+        "availableByKind": {
+          "apple": 8
+        }
+      }
+    },
+    {
+      "id": "post-a03",
+      "age": 4,
+      "kind": "exact",
+      "title": "공놀이 날",
+      "type": "ball",
+      "example": {
+        "target": 15,
+        "available": 18,
+        "generator": {
+          "age": 4,
+          "challenge": "11-15",
+          "seed": 2,
+          "round": 0,
+          "target": 15
+        },
+        "availableByKind": {
+          "ball": 18
+        }
+      }
+    },
+    {
+      "id": "post-a04",
+      "age": 4,
+      "kind": "exact",
+      "title": "텃밭 친구",
+      "type": "carrot",
+      "example": {
+        "target": 20,
+        "available": 23,
+        "generator": {
+          "age": 4,
+          "challenge": "16-20",
+          "seed": 3,
+          "round": 0,
+          "target": 20
+        },
+        "availableByKind": {
+          "carrot": 23
+        }
+      }
+    },
+    {
+      "id": "post-b01",
+      "age": 5,
+      "kind": "two-kinds",
+      "title": "두 가지 선물",
+      "types": [
+        "teddy",
+        "ball"
+      ],
+      "example": {
+        "target": 12,
+        "parts": [
+          6,
+          6
+        ],
+        "generator": {
+          "age": 5,
+          "challenge": "11-15",
+          "seed": 0,
+          "round": 0,
+          "target": 12
+        },
+        "availableByKind": {
+          "teddy": 10,
+          "ball": 10
+        }
+      }
+    },
+    {
+      "id": "post-b02",
+      "age": 5,
+      "kind": "fill-missing",
+      "title": "조금 더 담아 줘",
+      "types": [
+        "apple",
+        "cookie"
+      ],
+      "example": {
+        "target": 14,
+        "parts": [
+          7,
+          7
+        ],
+        "generator": {
+          "age": 5,
+          "challenge": "11-15",
+          "seed": 1,
+          "round": 0,
+          "target": 14
+        },
+        "availableByKind": {
+          "apple": 13,
+          "cookie": 10
+        },
+        "prefilledByKind": {
+          "apple": 3,
+          "cookie": 3
+        }
+      }
+    },
+    {
+      "id": "post-b03",
+      "age": 5,
+      "kind": "two-kinds",
+      "title": "소풍 꾸러미",
+      "types": [
+        "carrot",
+        "apple"
+      ],
+      "example": {
+        "target": 17,
+        "parts": [
+          8,
+          9
+        ],
+        "generator": {
+          "age": 5,
+          "challenge": "16-20",
+          "seed": 2,
+          "round": 0,
+          "target": 17
+        },
+        "availableByKind": {
+          "carrot": 10,
+          "apple": 11
+        }
+      }
+    },
+    {
+      "id": "post-b04",
+      "age": 5,
+      "kind": "fill-missing",
+      "title": "함께 준비한 상자",
+      "types": [
+        "block",
+        "teddy"
+      ],
+      "example": {
+        "target": 9,
+        "parts": [
+          4,
+          5
+        ],
+        "generator": {
+          "age": 5,
+          "challenge": "1-10",
+          "seed": 3,
+          "round": 0,
+          "target": 9
+        },
+        "availableByKind": {
+          "block": 8,
+          "teddy": 10
+        },
+        "prefilledByKind": {
+          "block": 3,
+          "teddy": 3
+        }
+      }
+    },
+    {
+      "id": "post-c01",
+      "age": 6,
+      "kind": "ten-and-ones",
+      "title": "열 개와 두 개",
+      "type": "teddy",
+      "example": {
+        "target": 12,
+        "available": 15,
+        "generator": {
+          "age": 6,
+          "challenge": "11-15",
+          "seed": 0,
+          "round": 0,
+          "target": 12
+        },
+        "availableByKind": {
+          "teddy": 15
+        }
+      }
+    },
+    {
+      "id": "post-c02",
+      "age": 6,
+      "kind": "ten-and-ones",
+      "title": "배달 순서 정하기",
+      "type": "cookie",
+      "example": {
+        "target": 17,
+        "available": 20,
+        "generator": {
+          "age": 6,
+          "challenge": "16-20",
+          "seed": 1,
+          "round": 0,
+          "target": 17
+        },
+        "availableByKind": {
+          "cookie": 20
+        }
+      }
+    },
+    {
+      "id": "post-c03",
+      "age": 6,
+      "kind": "ten-and-ones",
+      "title": "묶고 다시 풀기",
+      "type": "block",
+      "example": {
+        "target": 20,
+        "available": 23,
+        "generator": {
+          "age": 6,
+          "challenge": "16-20",
+          "seed": 2,
+          "round": 0,
+          "target": 20
+        },
+        "availableByKind": {
+          "block": 23
+        }
+      }
+    },
+    {
+      "id": "post-c04",
+      "age": 6,
+      "kind": "ten-and-ones",
+      "title": "작은 상자 큰 상자",
+      "type": "apple",
+      "example": {
+        "target": 27,
+        "available": 30,
+        "generator": {
+          "age": 6,
+          "challenge": "21-30",
+          "seed": 3,
+          "round": 0,
+          "target": 27
+        },
+        "availableByKind": {
+          "apple": 30
+        }
+      }
+    },
+    {
+      "id": "post-d01",
+      "age": 7,
+      "kind": "split-any",
+      "title": "두 차에 나눠 싣기",
+      "type": "ball",
+      "example": {
+        "target": 23,
+        "acceptedSplits": [
+          [
+            11,
+            12
+          ],
+          [
+            10,
+            13
+          ],
+          [
+            13,
+            10
+          ]
+        ],
+        "generator": {
+          "age": 7,
+          "challenge": "21-30",
+          "seed": 0,
+          "round": 0,
+          "target": 23
+        },
+        "availableByKind": {
+          "ball": 26
+        }
+      }
+    },
+    {
+      "id": "post-d02",
+      "age": 7,
+      "kind": "split-near",
+      "title": "비슷하게 나눠 싣기",
+      "type": "carrot",
+      "example": {
+        "target": 15,
+        "acceptedSplits": [
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            7
+          ]
+        ],
+        "generator": {
+          "age": 7,
+          "challenge": "11-15",
+          "seed": 1,
+          "round": 0,
+          "target": 15
+        },
+        "availableByKind": {
+          "carrot": 18
+        }
+      }
+    },
+    {
+      "id": "post-d03",
+      "age": 7,
+      "kind": "split-any",
+      "title": "다른 방법으로 나누기",
+      "type": "teddy",
+      "example": {
+        "target": 30,
+        "acceptedSplits": [
+          [
+            10,
+            20
+          ],
+          [
+            15,
+            15
+          ],
+          [
+            20,
+            10
+          ]
+        ],
+        "generator": {
+          "age": 7,
+          "challenge": "21-30",
+          "seed": 2,
+          "round": 0,
+          "target": 30
+        },
+        "availableByKind": {
+          "teddy": 33
+        }
+      }
+    },
+    {
+      "id": "post-d04",
+      "age": 7,
+      "kind": "split-near",
+      "title": "나란한 두 상자",
+      "type": "cookie",
+      "example": {
+        "target": 20,
+        "acceptedSplits": [
+          [
+            10,
+            10
+          ]
+        ],
+        "generator": {
+          "age": 7,
+          "challenge": "16-20",
+          "seed": 3,
+          "round": 0,
+          "target": 20
+        },
+        "availableByKind": {
+          "cookie": 23
+        }
+      }
+    }
+  ],
+  "generation": {
+    "seeded": true,
+    "itemsUnique": true,
+    "availableExtraPerKind": {
+      "age5": [
+        2,
+        6
+      ],
+      "otherAges": 3
+    },
+    "oneScreenOneOrder": true,
+    "ordersPerRoute": 3,
+    "ageIndependentChallenge": true
+  },
+  "voiceExamples": [
+    "물건을 톡 눌러 차에 실어 줘.",
+    "짐칸의 물건을 누르면 다시 꺼낼 수 있어.",
+    "곰 인형 열한 개를 보내 줘.",
+    "사과와 공을 각각 담아 줘.",
+    "이미 담긴 물건은 두고 더 담아 줘.",
+    "열 개를 묶어 볼까?",
+    "묶음을 누르면 다시 풀 수 있어.",
+    "어느 친구에게 먼저 갈까?",
+    "두 차에 나눠 실어 줘.",
+    "두 차가 비슷하게 가져가면 좋겠어.",
+    "조금 더 담아 볼까?",
+    "조금 내려 볼까?",
+    "상자를 닫고 출발!",
+    "친구가 선물을 받았어.",
+    "고마워! 잘 받았어.",
+    "세 친구에게 모두 배달했어.",
+    "소리가 없어도 그림을 보고 할 수 있어.",
+    "담던 상자는 보관했어."
+  ]
+}

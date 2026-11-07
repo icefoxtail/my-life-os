@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시현이 놀이터 — 화면 크기 검수</title>
+<style>body{margin:0;padding:18px;font:16px system-ui;background:#e5e7eb;color:#26323b}header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}button{font:inherit;padding:10px 16px;border:1px solid #788a94;border-radius:8px;background:white}iframe{display:block;border:0;background:white;box-shadow:0 0 0 1px #788a94;width:390px;height:844px}p{margin:0;max-width:700px}</style>
+<header><button id="portrait">세로 390 × 844</button><button id="landscape">가로 844 × 390</button><button id="small">작은 화면 360 × 640</button><p>브라우저 프레임 크기 검수입니다. 실제 모바일 기기·터치 에뮬레이션 검수가 아닙니다.</p></header>
+<iframe id="game" src="../index.html" title="시현이 놀이터 검수 화면"></iframe>
+<script>
+const frame=document.querySelector('#game');
+for(const [id,width,height] of [['portrait',390,844],['landscape',844,390],['small',360,640]])document.querySelector('#'+id).onclick=()=>{frame.style.width=width+'px';frame.style.height=height+'px';};
+</script>
+</html>

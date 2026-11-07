@@ -11,15 +11,16 @@
       title: '손 씻기',
       guide: '손을 깨끗하게 씻어볼까?',
       completeText: '뽀득뽀득. 손이 깨끗해졌어요.',
-      sequenceText: '물을 틀고 비누로 문지르고 수건으로 닦아요.',
+      sequenceText: '손을 적시고 비누로 문질러요. 흐르는 물에 헹구고 수건으로 닦아요.',
       bg: './assets/life-sequence/wash-hands/bg.webp',
       completeImage: './assets/life-sequence/wash-hands/step3.webp',
       sceneEmoji: '🧼',
       completeEmoji: '✨',
       steps: [
-        { id: 'water', order: 1, label: '물을 틀어요', shortLabel: '물', emoji: '🚰', image: './assets/life-sequence/wash-hands/step1.webp', effect: '물이 졸졸 나와요.', hint: '먼저 물을 틀어야 해요.' },
+        { id: 'water', order: 1, label: '손을 물에 적셔요', shortLabel: '물', emoji: '🚰', image: './assets/life-sequence/wash-hands/step1.webp', effect: '흐르는 물에 손을 적셔요.', hint: '먼저 손을 물에 적셔요.' },
         { id: 'soap', order: 2, label: '비누로 문질러요', shortLabel: '비누', emoji: '🫧', image: './assets/life-sequence/wash-hands/step2.webp', effect: '보글보글 거품이 생겼어요.', hint: '비누는 그 다음이에요.' },
-        { id: 'towel', order: 3, label: '수건으로 닦아요', shortLabel: '수건', emoji: '🧻', image: './assets/life-sequence/wash-hands/step3.webp', effect: '보송보송 닦았어요.', hint: '수건은 마지막에 써요.' }
+        { id: 'rinse', order: 3, label: '흐르는 물에 헹궈요', shortLabel: '헹구기', emoji: '👐💧', image: '', visual: 'rinse-hands', effect: '흐르는 물에 비누 거품을 헹궈요.', hint: '비누 거품은 물로 헹궈야 해요.' },
+        { id: 'towel', order: 4, label: '수건으로 닦아요', shortLabel: '수건', emoji: '🧻', image: './assets/life-sequence/wash-hands/step3.webp', effect: '보송보송 닦았어요.', hint: '수건은 마지막에 써요.' }
       ]
     },
     {
@@ -149,11 +150,20 @@
       @media(max-width:620px) and (orientation:portrait){.ls-play-shell{padding:7px;gap:7px}.ls-mini-status{width:100%;min-height:46px;padding:5px 8px;gap:8px;border-width:3px}.ls-mission-icon,.ls-icon-btn{width:36px;height:36px;font-size:21px}.ls-dot{width:12px;height:12px}.ls-scene{border-radius:24px;border-width:5px}.ls-pool{height:clamp(96px,21vh,132px);gap:7px}.ls-pool-card{border-radius:18px;border-width:4px;padding:5px;box-shadow:0 5px 0 rgba(50,70,120,.16)}.ls-slots{left:7px;right:7px;bottom:7px;gap:6px}.ls-slot{min-height:70px;border-radius:16px;border-width:3px}.ls-slot::before{left:5px;top:5px;width:24px;height:24px;font-size:14px;border-width:2px}.ls-placeholder{font-size:32px}.ls-success-actions{grid-template-columns:1fr}.ls-message{font-size:22px;border-width:4px}}
       @media(max-height:610px) and (orientation:portrait){.life-sequence-portrait .ls-pool{height:96px}.life-sequence-portrait .ls-slot{min-height:62px}.ls-mini-status{min-height:40px}.ls-mission-icon,.ls-icon-btn{width:32px;height:32px;font-size:19px}.ls-dot{width:10px;height:10px}}
     `;
+    style.textContent += `
+      .ls-root[data-step-count="4"] .ls-pool, .ls-root[data-step-count="4"] .ls-slots { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .ls-root[data-step-count="4"] .ls-pool { grid-template-rows: repeat(2,minmax(0,1fr)); }
+      .ls-root[data-step-count="4"].life-sequence-portrait .ls-pool { height: clamp(180px,28vh,230px); }
+      .ls-root[data-step-count="4"] .ls-slots { top: 12px; bottom: 12px; grid-template-rows: repeat(2,minmax(0,1fr)); }
+      .ls-root[data-step-count="4"] .ls-slot,
+      .ls-root[data-step-count="4"] .ls-slot-card { min-height: 0; }
+    `;
     document.head.appendChild(style);
   }
 
   function playGameVoice(id) {
     const missionId = state.mission?.id || 'wash_hands';
+    if (missionId === 'wash_hands' && ['games.life.intro', 'games.common.wrong', 'games.common.correct'].includes(id)) return;
     const missionMap = {
       wash_hands: { intro: 'games.sequence.handIntro', complete: 'games.sequence.handComplete' },
       brush_teeth: { intro: 'games.sequence.teethIntro', complete: 'games.sequence.teethComplete' },
@@ -175,7 +185,9 @@
   }
 
   function speak(text, force) {
-    if (!text) return;
+    if (!text || state.mission?.id !== 'wash_hands') return;
+    // The four-step handwashing wording must include rinsing in both text and audio.
+    try { state.options.say?.(text); } catch (error) {}
   }
 
   function vibrate(pattern) {
@@ -299,7 +311,7 @@
     if (!mission || !state.container) return;
 
     state.container.innerHTML = `
-      <div class="ls-root ${getRootLayoutClass()}">
+      <div class="ls-root ${getRootLayoutClass()}" data-step-count="${mission.steps.length}">
         <div class="ls-play-shell">
           <section class="ls-left-work">
             <div class="ls-mini-status" aria-label="진행 상태">
@@ -330,6 +342,18 @@
   }
 
   function renderVisual(card) {
+    if (card.visual === 'rinse-hands') {
+      return `<svg class="ls-card-img" viewBox="0 0 160 140" role="img" aria-label="흐르는 물로 손의 거품을 헹구기">
+        <rect width="160" height="140" rx="20" fill="#e8f8ff"/>
+        <path d="M21 38h56v19H61V50H21z" fill="#647c8b" stroke="#304d60" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M42 35V22m-12 0h24" stroke="#304d60" stroke-width="7" stroke-linecap="round"/>
+        <path d="M65 64v18m10-16v23m-20-21v20" stroke="#48b8ef" stroke-width="5" stroke-linecap="round"/>
+        <path d="M27 112c-7-10-3-17 5-16l25 6-14-15c-4-5 1-10 6-7l26 18 19 3c13 2 19 16 11 23H42z" fill="#eeb485" stroke="#9b643d" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M139 105c4-8-1-14-8-12l-25 5 13-15c4-5-2-10-7-6L90 95l-11 5" fill="#f4c49b" stroke="#9b643d" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="63" cy="96" r="6" fill="#fff" stroke="#82cff2" stroke-width="2"/><circle cx="78" cy="91" r="4" fill="#fff" stroke="#82cff2" stroke-width="2"/>
+        <path d="M49 125c-5 5-7 8-4 11 5 3 10-2 4-11m43-2c-6 6-7 9-3 12 5 2 9-3 3-12" fill="#48b8ef"/>
+      </svg>`;
+    }
     return `<img class="ls-card-img" src="${escapeAttr(card.image)}" alt="${escapeAttr(card.label)}" draggable="false"><span class="ls-card-emoji" hidden>${escapeHtml(card.emoji || '✨')}</span>`;
   }
 
@@ -411,7 +435,10 @@
     vibrate(40);
     draw();
 
-    if (state.placed.every(Boolean)) timer(checkAnswer, 280);
+    if (state.placed.every(Boolean)) {
+      state.locked = true;
+      timer(checkAnswer, 280);
+    }
   }
 
   function removeCard(index) {
@@ -448,6 +475,7 @@
 
     timer(() => {
       wrongIndexes.forEach((index) => { state.placed[index] = null; });
+      state.locked = false;
       draw();
     }, 1150);
   }

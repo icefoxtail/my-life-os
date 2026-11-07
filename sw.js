@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.0.29';
+const CACHE_NAME = 'sihyeon-play-os-v1.1.0-post-office';
 
 const ASSETS = [
   './',
@@ -7,9 +7,33 @@ const ASSETS = [
   './icon.png',
 
   './js/voice-engine.js',
+  './js/play-settings.js',
+  './css/play-settings.css',
+  './js/vehicle-display.js',
+  './js/games/number-post-office-model.js',
+  './js/games/number-post-office.js',
+  './css/games/number-post-office.css',
+  './assets/games/number-post-office/apple.svg',
+  './assets/games/number-post-office/ball.svg',
+  './assets/games/number-post-office/bear.svg',
+  './assets/games/number-post-office/block.svg',
+  './assets/games/number-post-office/card.svg',
+  './assets/games/number-post-office/carrot.svg',
+  './assets/games/number-post-office/cat.svg',
+  './assets/games/number-post-office/cookie.svg',
+  './assets/games/number-post-office/dog.svg',
+  './assets/games/number-post-office/fox.svg',
+  './assets/games/number-post-office/panda.svg',
+  './assets/games/number-post-office/rabbit.svg',
+  './assets/games/number-post-office/teddy.svg',
+  './assets/games/number-post-office/truck-blue.svg',
+  './assets/games/number-post-office/truck-mint.svg',
+  './assets/games/number-post-office/truck-orange.svg',
+  './js/engine/webgl-fallback.js',
+  './games/number-kingdom-3d.html',
+  './games/hangul-playmat-3d.html',
   './js/zones/voice-zone.js',
   './js/zones/karaoke-zone.js',
-  './js/zones/boardland-zone.js',
 
   './js/data/classic-video-registry.js',
   './js/story-world.js',
@@ -39,7 +63,6 @@ const ASSETS = [
   './assets/games/cards/life-sequence.webp',
   './assets/games/cards/art-zone.webp',
   './assets/games/cards/cat-care.webp',
-  './assets/games/cards/boardland-zone.png',
   './assets/games/cards/robotCoding.png',
   './assets/games/cards/number-count.webp',
   './assets/games/cards/number-basket.webp',
@@ -120,15 +143,19 @@ const ASSETS = [
   './assets/stories/classic_covers/classic_jack_and_the_beanstalk.jpeg'
 ];
 
-function safeCacheAssets(cache, assets) {
-  return Promise.allSettled(
-    assets.map((asset) => fetch(asset, { cache: 'reload' })
-      .then((response) => {
-        if (!response || !response.ok) return null;
-        return cache.put(asset, response);
-      })
-      .catch(() => null))
-  );
+async function safeCacheAssets(cache, assets) {
+  // Large legacy cards should not all occupy the network and memory together.
+  let cursor = 0;
+  async function worker() {
+    while (cursor < assets.length) {
+      const asset = assets[cursor++];
+      try {
+        const response = await fetch(asset, { cache: 'reload' });
+        if (response && response.ok) await cache.put(asset, response);
+      } catch (_) { /* A missing optional asset must not block installation. */ }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(4, assets.length) }, worker));
 }
 
 self.addEventListener('install', (e) => {
@@ -142,7 +169,7 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys.filter((key) => key.startsWith('sihyeon-play-os-') && key !== CACHE_NAME).map((key) => caches.delete(key))
       );
     })
   );

@@ -1,11 +1,11 @@
 /**
  * 시현이 놀이터 OS — 주차장 미니게임 (Parking Lot)
  * 파일: js/games/parking-lot.js
- * 버전: v1.5.1
+ * 버전: v1.6.0
  * 수정:
  * - 모바일 세로 DOM / 태블릿 가로 DOM 이원화 유지
  * - 기존 카테고리, 슬롯, 차량 드래그/드롭, 성공 처리 유지
- * - 드래그 중 resize/orientationchange 무시
+ * - 드래그 취소/포커스 이탈/화면 회전 시 동기 복구 및 탭 주차
  * - 성공/오답 setTimeout 관리 타이머로 교체
  * - 주차 완료 보이스 중복 방지
  * - destroy 시 style/timer/event 정리 보강
@@ -49,14 +49,18 @@
     handleResizeBound: null,
     successRewardGiven: false,
     isDragging: false,
+    selectedCarId: null,
+    cancelPointer: null,
+    inputCleanup: null,
+    renderVersion: 0,
     timers: []
   };
 
   function isLandscapeMode() {
     try {
-      return window.matchMedia('(orientation: landscape) and (min-width: 768px) and (min-height: 520px)').matches;
+      return window.matchMedia('(orientation: landscape) and (min-width: 640px)').matches;
     } catch (error) {
-      return window.innerWidth > window.innerHeight && window.innerWidth >= 768;
+      return window.innerWidth > window.innerHeight && window.innerWidth >= 640;
     }
   }
 
@@ -66,7 +70,7 @@
 
   function normalizeVehicleFile(file) {
     const raw = String(file || '');
-    if (!raw) return './assets/vehicles/transport/bus.webp';
+    if (!raw) return './assets/vehicles/transport/bus.png';
     if (raw.startsWith('./')) return raw;
     if (raw.startsWith('/')) return `.${raw}`;
     return `./${raw}`;
@@ -406,9 +410,24 @@
         cursor: grabbing;
       }
 
-      .pl-car-drag.dragging {
-        opacity: 0.85;
-        box-shadow: 0 16px 32px rgba(0,0,0,0.3);
+      .pl-car-drag { border: 3px solid transparent; }
+      .pl-car-drag.selected { border-color: #1473c9; box-shadow: 0 0 0 4px #b5e3ff; }
+      .pl-car-drag.dragging { opacity: .35; }
+      .pl-car-drag:focus-visible, .pl-slot:focus-visible { outline: 4px solid #1473c9; outline-offset: 3px; }
+      .pl-slot { cursor: pointer; touch-action: manipulation; font: inherit; }
+      .pl-slot:disabled { cursor: default; }
+      .pl-slot.wrong { animation: pl-wrong .3s ease; }
+      .pl-drag-ghost { position: fixed; z-index: 9999; pointer-events: none; display: flex; align-items: center; justify-content: center; background: #fff; border: 3px solid #1473c9; border-radius: 18px; box-shadow: 0 12px 24px #24415a55; }
+      .pl-drag-ghost img { max-width: 85%; max-height: 85%; object-fit: contain; }
+      .pl-instruction { flex: 0 0 auto; margin: 0; padding: 7px 12px; text-align: center; font-size: 17px; color: #214259; }
+      @keyframes pl-wrong { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+      @media (orientation: landscape) and (max-height: 520px) {
+        .pl-root.pl-landscape { padding: 8px; gap: 8px; grid-template-columns: 136px minmax(0,1fr) 124px; }
+        .pl-land-title-card { display: none; }
+        .pl-landscape .pl-cat-bar { padding-top: 50px; grid-template-columns: 1fr; overflow-y: auto; }
+        .pl-landscape .pl-cat-chip { min-height: 44px; font-size: 13px; }
+        .pl-landscape .pl-cars-area { padding: 6px; gap: 6px; }
+        .pl-landscape .pl-slots-area { gap: 8px; }
       }
 
       .pl-car-drag img {
@@ -416,19 +435,6 @@
         max-height: 85%;
         object-fit: contain;
         pointer-events: none;
-      }
-
-      .pl-car-placeholder {
-        border-radius: 16px;
-        background: rgba(0,0,0,0.05);
-        border: 2px dashed rgba(0,0,0,0.1);
-        box-sizing: border-box;
-      }
-
-      .pl-landscape .pl-car-placeholder {
-        width: 100% !important;
-        height: 100% !important;
-        border-radius: 24px;
       }
 
       .pl-success-overlay {
@@ -647,22 +653,22 @@
 
       return {
         fire: [
-          { id: 'pump_engine', name: '펌프차', file: './assets/vehicles/fire/pump_engine.webp' },
-          { id: 'ladder_truck', name: '사다리차', file: './assets/vehicles/fire/ladder_truck.webp' }
+          { id: 'pump_engine', name: '펌프차', file: './assets/vehicles/fire/pump_engine.png' },
+          { id: 'ladder_truck', name: '사다리차', file: './assets/vehicles/fire/ladder_truck.png' }
         ],
         rescue: [
-          { id: 'ambulance', name: '구급차', file: './assets/vehicles/rescue/ambulance.webp' }
+          { id: 'ambulance', name: '구급차', file: './assets/vehicles/rescue/ambulance.png' }
         ],
         construction: [
-          { id: 'excavator', name: '포크레인', file: './assets/vehicles/construction/excavator.webp' },
-          { id: 'dump_truck', name: '덤프트럭', file: './assets/vehicles/construction/dump_truck.webp' },
-          { id: 'concrete_mixer', name: '레미콘', file: './assets/vehicles/construction/concrete_mixer.webp' }
+          { id: 'excavator', name: '포크레인', file: './assets/vehicles/construction/excavator.png' },
+          { id: 'dump_truck', name: '덤프트럭', file: './assets/vehicles/construction/dump_truck.png' },
+          { id: 'concrete_mixer', name: '레미콘', file: './assets/vehicles/construction/concrete_mixer.png' }
         ],
         transport: [
-          { id: 'train', name: '기차', file: './assets/vehicles/transport/train.webp' },
-          { id: 'bus', name: '버스', file: './assets/vehicles/transport/bus.webp' },
-          { id: 'car', name: '자동차', file: './assets/vehicles/transport/car.webp' },
-          { id: 'airplane', name: '비행기', file: './assets/vehicles/transport/airplane.webp' }
+          { id: 'train', name: '기차', file: './assets/vehicles/transport/train.png' },
+          { id: 'bus', name: '버스', file: './assets/vehicles/transport/bus.png' },
+          { id: 'car', name: '자동차', file: './assets/vehicles/transport/car.png' },
+          { id: 'airplane', name: '비행기', file: './assets/vehicles/transport/airplane.png' }
         ]
       };
     }
@@ -701,6 +707,8 @@
     state.locked = false;
     state.filledCount = 0;
     state.successRewardGiven = false;
+    state.cancelPointer?.();
+    state.selectedCarId = null;
     state.isDragging = false;
     clearTimers();
 
@@ -756,10 +764,11 @@
     return `
       <div class="pl-slots-area">
         ${state.slots.map(s => `
-          <div class="pl-slot ${s.filled ? 'correct' : ''}" data-slot-id="${s.vehicle.instanceId}" style="border-color: ${catColor}">
-            <img class="pl-slot-img" src="${s.vehicle.file}" alt="${s.vehicle.name}" onerror="this.style.opacity='0';">
-            <div class="pl-slot-check">✅</div>
-          </div>
+          <button type="button" class="pl-slot ${s.filled ? 'correct' : ''}" data-slot-id="${s.vehicle.instanceId}" aria-label="${s.vehicle.name} 주차칸" ${s.filled ? 'disabled' : ''} style="border-color: ${catColor}">
+            <img class="pl-slot-img" src="${s.vehicle.file}" alt="${s.vehicle.name}" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">
+            <span hidden>🚗 ${s.vehicle.name}</span>
+            <span class="pl-slot-check">✅</span>
+          </button>
         `).join('')}
       </div>
     `;
@@ -769,9 +778,10 @@
     return `
       <div class="pl-cars-area">
         ${state.cars.map(c => `
-          <div class="pl-car-drag" data-vehicle-id="${c.instanceId}" style="${c.parked ? 'display:none;' : ''}">
-            <img src="${c.file}" alt="${c.name}" onerror="this.style.display='none';">
-          </div>
+          <button type="button" class="pl-car-drag ${state.selectedCarId === c.instanceId ? 'selected' : ''}" data-vehicle-id="${c.instanceId}" aria-label="${c.name} 선택" aria-pressed="${state.selectedCarId === c.instanceId}" style="${c.parked ? 'display:none;' : ''}">
+            <img src="${c.file}" alt="${c.name}" draggable="false" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">
+            <span hidden>🚗 ${c.name}</span>
+          </button>
         `).join('')}
       </div>
     `;
@@ -779,6 +789,7 @@
 
   function renderBoard() {
     if (!state.container) return;
+    state.inputCleanup?.();
 
     const mode = getLayoutMode();
     state.layoutMode = mode;
@@ -794,7 +805,7 @@
             <div class="pl-land-title-card">
               <div class="pl-land-title-emoji">🅿️🚗</div>
               <div class="pl-land-title">주차장 놀이</div>
-              <div class="pl-land-sub">오른쪽 자동차를<br>같은 그림 주차칸에 넣어요</div>
+              <div class="pl-land-sub">차를 누르고<br>같은 그림 칸을 눌러요</div>
             </div>
             ${categoryBarHTML}
           </aside>
@@ -810,6 +821,7 @@
       state.container.innerHTML = `
         <div class="pl-root pl-portrait">
           ${categoryBarHTML}
+          <p class="pl-instruction">👆 자동차 → 같은 그림 칸 · 끌어도 좋아요</p>
           ${slotsHTML}
           ${carsHTML}
         </div>
@@ -817,6 +829,14 @@
     }
 
     bindEvents();
+  }
+
+  function updateSelection() {
+    state.container?.querySelectorAll('.pl-car-drag').forEach(card => {
+      const selected = card.dataset.vehicleId === state.selectedCarId;
+      card.classList.toggle('selected', selected);
+      card.setAttribute('aria-pressed', String(selected));
+    });
   }
 
   function bindEvents() {
@@ -832,161 +852,141 @@
       });
     });
 
-    let activeCard = null;
-    let startX = 0;
-    let startY = 0;
-    let initialRect = null;
-    let placeholder = null;
+    let gesture = null;
+    let suppressClickUntil = 0;
 
-    function cleanupDraggingCard(card) {
-      if (!card) return;
-
-      card.style.position = '';
-      card.style.left = '';
-      card.style.top = '';
-      card.style.margin = '';
-      card.style.transform = '';
-      card.style.transition = '';
-      card.style.zIndex = '';
-      card.style.width = '';
-      card.style.height = '';
-      card.style.visibility = '';
-    }
-
-    function cleanupPlaceholder() {
-      if (placeholder && placeholder.parentNode) placeholder.remove();
-      placeholder = null;
-    }
-
-    function onPointerDown(e) {
-      if (state.locked || state.isDragging) return;
-
-      const card = e.currentTarget;
-      if (card.style.display === 'none') return;
-
-      activeCard = card;
-      state.isDragging = true;
-      initialRect = card.getBoundingClientRect();
-
-      placeholder = document.createElement('div');
-      placeholder.className = 'pl-car-placeholder';
-      placeholder.style.width = initialRect.width + 'px';
-      placeholder.style.height = initialRect.height + 'px';
-
-      card.parentNode.insertBefore(placeholder, card);
-
-      card.style.position = 'fixed';
-      card.style.left = initialRect.left + 'px';
-      card.style.top = initialRect.top + 'px';
-      card.style.width = initialRect.width + 'px';
-      card.style.height = initialRect.height + 'px';
-      card.style.margin = '0';
-      card.style.zIndex = 100;
-      card.style.transition = 'none';
-
-      startX = e.clientX;
-      startY = e.clientY;
-
-      card.classList.add('dragging');
-
-      try {
-        card.setPointerCapture(e.pointerId);
-      } catch (error) {}
-
-      vibrate(8);
-    }
-
-    function onPointerMove(e) {
-      if (!activeCard) return;
-
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-
-      activeCard.style.transform = `translate(${dx}px, ${dy}px)`;
-    }
-
-    function onPointerUp(e) {
-      if (!activeCard) return;
-
-      const card = activeCard;
-      activeCard = null;
-
-      try {
-        card.releasePointerCapture(e.pointerId);
-      } catch (error) {}
-
-      card.classList.remove('dragging');
-
-      card.style.visibility = 'hidden';
-      const elUnder = document.elementFromPoint(e.clientX, e.clientY);
-      card.style.visibility = '';
-
-      const slot = elUnder ? elUnder.closest('.pl-slot') : null;
-
-      checkDrop(card, slot, placeholder, initialRect, cleanupDraggingCard, cleanupPlaceholder);
-
-      placeholder = null;
-      initialRect = null;
+    // The real card never leaves its layout cell. Every exit removes only a ghost,
+    // synchronously, so cancelled gestures cannot leave a placeholder or a stale timer.
+    function cancelGesture() {
+      if (!gesture) return;
+      const previous = gesture;
+      gesture = null;
+      previous.ghost?.remove();
+      previous.card.classList.remove('dragging');
       state.isDragging = false;
+      try {
+        if (previous.card.hasPointerCapture?.(previous.pointerId)) {
+          previous.card.releasePointerCapture(previous.pointerId);
+        }
+      } catch (error) {}
+    }
+
+    function onPointerDown(event) {
+      if (state.locked || gesture || event.isPrimary === false || event.button > 0) return;
+      const card = event.currentTarget;
+      if (card.style.display === 'none') return;
+      gesture = { card, pointerId: event.pointerId, x: event.clientX, y: event.clientY,
+        rect: card.getBoundingClientRect(), moved: false, ghost: null };
+      state.isDragging = true;
+      try { card.setPointerCapture(event.pointerId); } catch (error) {}
+    }
+
+    function onPointerMove(event) {
+      if (!gesture || gesture.pointerId !== event.pointerId) return;
+      const dx = event.clientX - gesture.x;
+      const dy = event.clientY - gesture.y;
+      if (!gesture.moved && Math.hypot(dx, dy) < 9) return;
+      event.preventDefault();
+      if (!gesture.moved) {
+        gesture.moved = true;
+        gesture.ghost = gesture.card.cloneNode(true);
+        gesture.ghost.className = 'pl-drag-ghost';
+        gesture.ghost.removeAttribute('data-vehicle-id');
+        gesture.ghost.setAttribute('aria-hidden', 'true');
+        gesture.ghost.tabIndex = -1;
+        Object.assign(gesture.ghost.style, {
+          left: gesture.rect.left + 'px', top: gesture.rect.top + 'px',
+          width: gesture.rect.width + 'px', height: gesture.rect.height + 'px'
+        });
+        document.body.appendChild(gesture.ghost);
+        gesture.card.classList.add('dragging');
+        state.selectedCarId = gesture.card.dataset.vehicleId;
+        updateSelection();
+      }
+      gesture.ghost.style.transform = `translate(${dx}px, ${dy}px)`;
+    }
+
+    function onPointerUp(event) {
+      if (!gesture || gesture.pointerId !== event.pointerId) return;
+      const previous = gesture;
+      const slot = previous.moved
+        ? document.elementFromPoint(event.clientX, event.clientY)?.closest('.pl-slot') : null;
+      cancelGesture();
+      if (!previous.moved) return; // Native click provides the tap and keyboard path.
+      suppressClickUntil = Date.now() + 350;
+      if (slot && root.contains(slot)) parkCar(previous.card, slot);
+    }
+
+    function onPointerCancel(event) {
+      if (!gesture || gesture.pointerId !== event.pointerId) return;
+      suppressClickUntil = Date.now() + 350;
+      cancelGesture();
     }
 
     root.querySelectorAll('.pl-car-drag').forEach(card => {
       card.addEventListener('pointerdown', onPointerDown);
       card.addEventListener('pointermove', onPointerMove);
       card.addEventListener('pointerup', onPointerUp);
-      card.addEventListener('pointercancel', onPointerUp);
+      card.addEventListener('pointercancel', onPointerCancel);
+      card.addEventListener('lostpointercapture', onPointerCancel);
+      card.addEventListener('click', event => {
+        if (state.locked || (event.detail !== 0 && Date.now() < suppressClickUntil)) return;
+        state.selectedCarId = state.selectedCarId === card.dataset.vehicleId ? null : card.dataset.vehicleId;
+        updateSelection();
+      });
     });
+
+    root.querySelectorAll('.pl-slot').forEach(slot => {
+      slot.addEventListener('click', () => {
+        if (!state.selectedCarId || state.locked) return;
+        const card = [...root.querySelectorAll('.pl-car-drag')].find(item => item.dataset.vehicleId === state.selectedCarId);
+        if (card) parkCar(card, slot);
+      });
+    });
+
+    window.addEventListener('blur', cancelGesture);
+    state.cancelPointer = cancelGesture;
+    state.inputCleanup = () => {
+      cancelGesture();
+      window.removeEventListener('blur', cancelGesture);
+      state.cancelPointer = null;
+      state.inputCleanup = null;
+    };
   }
 
-  function checkDrop(card, slot, ph, initRect, cleanupDraggingCard, cleanupPlaceholder) {
-    const vId = card.dataset.vehicleId;
+  function parkCar(card, slot) {
+    if (state.locked || state.destroyed) return;
+    const carData = state.cars.find(item => item.instanceId === card.dataset.vehicleId);
+    const slotData = state.slots.find(item => item.vehicle.instanceId === slot.dataset.slotId);
+    if (!carData || carData.parked || !slotData || slotData.filled) return;
 
-    if (slot && slot.dataset.slotId === vId && !slot.classList.contains('correct')) {
-      const slotData = state.slots.find(item => item.vehicle.instanceId === vId);
-      const carData = state.cars.find(item => item.instanceId === vId);
-
-      if (slotData) slotData.filled = true;
-      if (carData) carData.parked = true;
-
+    // Duplicate-looking cars may appear in small categories; either identical car
+    // belongs in either matching picture, independent of the shuffled instance ID.
+    if (carData.id === slotData.vehicle.id) {
+      slotData.filled = true;
+      carData.parked = true;
+      state.selectedCarId = null;
       slot.classList.add('correct');
-
+      slot.disabled = true;
       card.style.display = 'none';
-
-      if (ph) ph.remove();
-
-      state.filledCount += 1;
-
+      updateSelection();
+      state.filledCount = state.slots.filter(item => item.filled).length;
       vibrate([20, 30, 20]);
-
-      if (state.filledCount >= SLOT_COUNT) {
+      if (state.filledCount === state.slots.length) {
         state.locked = true;
         setManagedTimeout(showSuccess, 500);
       } else {
         playVoice('games.parking.correct');
       }
-
       return;
     }
 
-    if (ph && initRect) {
-      const phRect = ph.getBoundingClientRect();
-      const targetX = phRect.left - initRect.left;
-      const targetY = phRect.top - initRect.top;
-
-      card.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      card.style.transform = `translate(${targetX}px, ${targetY}px)`;
-    } else {
-      card.style.transition = 'transform 0.3s';
-      card.style.transform = 'translate(0px, 0px)';
-    }
-
+    slot.classList.remove('wrong');
+    void slot.offsetWidth;
+    slot.classList.add('wrong');
+    setManagedTimeout(() => slot.classList.remove('wrong'), 350);
     vibrate([40, 25, 40]);
     playVoice('games.parking.wrong');
-
-    setManagedTimeout(() => {
-      cleanupDraggingCard?.(card);
-      cleanupPlaceholder?.();
-    }, 300);
   }
 
   function showSuccess() {
@@ -1030,6 +1030,7 @@
 
   function handleResize() {
     if (state.destroyed || !state.container) return;
+    state.cancelPointer?.();
 
     if (state.resizeTimer) window.clearTimeout(state.resizeTimer);
 
@@ -1062,6 +1063,7 @@
   function render(container, options = {}) {
     destroy();
 
+    const renderVersion = ++state.renderVersion;
     state.container = container;
     state.options = options;
     state.destroyed = false;
@@ -1079,7 +1081,7 @@
     container.innerHTML = '<div style="padding:30px;text-align:center;color:#fff;font-size:22px;height:100%;background:linear-gradient(160deg, #e0f7fa 0%, #b2ebf2 100%);">주차장 준비 중...</div>';
 
     fetchVehicles().then(map => {
-      if (state.destroyed) return;
+      if (state.destroyed || state.renderVersion !== renderVersion) return;
 
       state.allVehicles = map;
 
@@ -1096,6 +1098,9 @@
 
   function destroy() {
     state.destroyed = true;
+    state.renderVersion += 1;
+    state.inputCleanup?.();
+    state.selectedCarId = null;
 
     clearTimers();
     unbindResizeEvents();

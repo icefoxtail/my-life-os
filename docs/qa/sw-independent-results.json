@@ -1,0 +1,50 @@
+{
+  "reviewedAt": "2026-11-07T15:26:24.373Z",
+  "source": "sw.js",
+  "sourceSha256": "9a609c52bc5ef7c760267959234a0d6bbc04ee4c6c424b0f0405ba9b70f61e16",
+  "result": "PASS",
+  "verification": "Node VM contract checks with asynchronous fetch/cache doubles; not browser installation evidence",
+  "fullInstall": {
+    "assets": 132,
+    "maxFetching": 4,
+    "maxPutting": 4,
+    "skipped": 1,
+    "claimed": 0
+  },
+  "failures": {
+    "requested": [
+      "first",
+      "fetch-fails",
+      "second",
+      "not-found",
+      "put-fails",
+      "last"
+    ],
+    "written": [
+      "first",
+      "last",
+      "second"
+    ],
+    "maxFetching": 4,
+    "maxPutting": 2,
+    "skipped": 0,
+    "claimed": 0
+  },
+  "lengthCases": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    17
+  ],
+  "activation": {
+    "deleted": [
+      "sihyeon-play-os-v0",
+      "sihyeon-play-os-v1-old"
+    ],
+    "currentPreserved": true,
+    "otherPrefixesPreserved": true
+  },
+  "limitation": "Existing network-first fetch behavior and actual browser activation/offline behavior are outside these two requested change checks."
+}
