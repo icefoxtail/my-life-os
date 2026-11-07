@@ -1,0 +1,59 @@
+{
+  "suite": "Art pending-save production closure regression",
+  "sourceSha256": "a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "save during initial decode preserves the loaded PNG",
+      "status": "PASS"
+    },
+    {
+      "name": "exit before decode preserves PNG and rejects the late callback",
+      "status": "PASS"
+    },
+    {
+      "name": "successful restore enables drawing and later saves the actual new stroke",
+      "status": "PASS"
+    },
+    {
+      "name": "early drawing does not replace the picture still being loaded",
+      "status": "PASS"
+    },
+    {
+      "name": "decode error keeps the original and offers explicit new-paper recovery",
+      "status": "PASS"
+    },
+    {
+      "name": "destroy and return with the same canvas cannot revive the old callback",
+      "status": "PASS"
+    },
+    {
+      "name": "new restore owns saving while older load and error callbacks are ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "new paper during loading can undo back to the original canonical PNG",
+      "status": "PASS"
+    },
+    {
+      "name": "empty restore cancels pending work and makes an intentional blank writable",
+      "status": "PASS"
+    },
+    {
+      "name": "canvas draw failure protects the source just like decode failure",
+      "status": "PASS"
+    },
+    {
+      "name": "template and mode metadata can still save while free drawing restores",
+      "status": "PASS"
+    },
+    {
+      "name": "a first visit without a saved drawing stays immediately drawable",
+      "status": "PASS"
+    }
+  ],
+  "limits": [
+    "Node callback simulation with distinct PNG markers; no actual PNG decoding or browser pixel comparison.",
+    "Loading touch is intentionally deferred until restore completes; explicit new paper recovers from a decode failure."
+  ]
+}

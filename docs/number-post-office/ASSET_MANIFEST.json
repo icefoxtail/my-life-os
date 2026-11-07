@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "gameId": "number-post-office",
+  "source": "Original project-authored vector shapes; no external images, fonts or recordings required",
+  "items": [
+    {
+      "id": "teddy",
+      "nameKo": "곰 인형",
+      "file": "assets/games/number-post-office/teddy.svg",
+      "fallback": "🧸",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "targetVisibleBox": [
+        10,
+        10,
+        90,
+        90
+      ],
+      "targetBaseline": 88,
+      "boundsStatus": "design target; actual rendered alpha bounds pending",
+      "targetMinTapCssPx": 48,
+      "targetValidation": "See browser QA; layout targets are not physical-device evidence"
+    },
+    {
+      "id": "apple",
+      "nameKo": "사과",
+      "file": "assets/games/number-post-office/apple.svg",
+      "fallback": "🍎",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "targetVisibleBox": [
+        10,
+        10,
+        90,
+        90
+      ],
+      "targetBaseline": 88,
+      "boundsStatus": "design target; actual rendered alpha bounds pending",
+      "targetMinTapCssPx": 48,
+      "targetValidation": "See browser QA; layout targets are not physical-device evidence"
+    },
+    {
+      "id": "ball",
+      "nameKo": "공",
+      "file": "assets/games/number-post-office/ball.svg",
+      "fallback": "⚽",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "targetVisibleBox": [
+        10,
+        10,
+        90,
+        90
+      ],
+      "targetBaseline": 88,
+      "boundsStatus": "design target; actual rendered alpha bounds pending",
+      "targetMinTapCssPx": 48,
+      "targetValidation": "See browser QA; layout targets are not physical-device evidence"
+    },
+    {
+      "id": "carrot",
+      "nameKo": "당근",
+      "file": "assets/games/number-post-office/carrot.svg",
+      "fallback": "🥕",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "targetVisibleBox": [
+        10,
+        10,
+        90,
+        90
+      ],
+      "targetBaseline": 88,
+      "boundsStatus": "design target; actual rendered alpha bounds pending",
+      "targetMinTapCssPx": 48,
+      "targetValidation": "See browser QA; layout targets are not physical-device evidence"
+    },
+    {
+      "id": "block",
+      "nameKo": "블록",
+      "file": "assets/games/number-post-office/block.svg",
+      "fallback": "🧱",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "targetVisibleBox": [
+        10,
+        10,
+        90,
+        90
+      ],
+      "targetBaseline": 88,
+      "boundsStatus": "design target; actual rendered alpha bounds pending",
+      "targetMinTapCssPx": 48,
+      "targetValidation": "See browser QA; layout targets are not physical-device evidence"
+    },
+    {
+      "id": "cookie",
+      "nameKo": "별 과자",
+      "file": "assets/games/number-post-office/cookie.svg",
+      "fallback": "⭐",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "targetVisibleBox": [
+        10,
+        10,
+        90,
+        90
+      ],
+      "targetBaseline": 88,
+      "boundsStatus": "design target; actual rendered alpha bounds pending",
+      "targetMinTapCssPx": 48,
+      "targetValidation": "See browser QA; layout targets are not physical-device evidence"
+    }
+  ],
+  "animals": [
+    {
+      "id": "rabbit",
+      "nameKo": "토끼",
+      "file": "assets/games/number-post-office/rabbit.svg",
+      "fallback": "🐰",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "id": "bear",
+      "nameKo": "곰",
+      "file": "assets/games/number-post-office/bear.svg",
+      "fallback": "🐻",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "id": "fox",
+      "nameKo": "여우",
+      "file": "assets/games/number-post-office/fox.svg",
+      "fallback": "🦊",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "id": "panda",
+      "nameKo": "판다",
+      "file": "assets/games/number-post-office/panda.svg",
+      "fallback": "🐼",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "id": "cat",
+      "nameKo": "고양이",
+      "file": "assets/games/number-post-office/cat.svg",
+      "fallback": "🐱",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "id": "dog",
+      "nameKo": "강아지",
+      "file": "assets/games/number-post-office/dog.svg",
+      "fallback": "🐶",
+      "viewBox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "truck-orange",
+      "file": "assets/games/number-post-office/truck-orange.svg",
+      "viewBox": [
+        0,
+        0,
+        180,
+        100
+      ],
+      "baseline": 90
+    },
+    {
+      "id": "truck-mint",
+      "file": "assets/games/number-post-office/truck-mint.svg",
+      "viewBox": [
+        0,
+        0,
+        180,
+        100
+      ],
+      "baseline": 90
+    },
+    {
+      "id": "truck-blue",
+      "file": "assets/games/number-post-office/truck-blue.svg",
+      "viewBox": [
+        0,
+        0,
+        180,
+        100
+      ],
+      "baseline": 90
+    }
+  ],
+  "menuCard": "assets/games/number-post-office/card.svg",
+  "trays": {
+    "warehouse": "CSS two rows of five, 10 items per page",
+    "cargo": "CSS two rows of five, 10 loose items per page; each bundle contains exactly 10 IDs"
+  },
+  "audio": {
+    "engine": "gameOptions.say (global voice setting) with existing SihyeonVoice.speak fallback",
+    "newRecordedFiles": [],
+    "failureFallback": "countable order drawings and non-mutating pointer demonstration",
+    "mute": true
+  },
+  "motion": {
+    "stages": [
+      "close-box",
+      "drive",
+      "receive"
+    ],
+    "reducedMotionSupported": true
+  }
+}

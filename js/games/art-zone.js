@@ -438,7 +438,127 @@
     resizeHandler: null,
     resizeTimer: null,
     speechToken: 0,
+    templateWork: {},
+    freeImage: '',
+    freeHistory: [],
+    freeRestoreToken: 0,
+    freeRestorePending: 0,
+    freeCanvasReady: false,
+    freeRestoreFailed: false,
+    pointerId: null,
+    lastPoint: null,
+    pageHideHandler: null,
   };
+
+  const WORK_KEY = 'sihyeon-art-work-v1';
+  let memoryWork = null;
+  function saveWork() {
+    try {
+      // A newly sized canvas is blank until the saved PNG has decoded. Keep the
+      // canonical PNG when leaving, changing tabs, or saving during that interval.
+      if (state.freeCanvasReady && state.canvas && state.canvas.width > 1) state.freeImage = state.canvas.toDataURL('image/png');
+      const serialized = JSON.stringify({templates:state.templateWork, freeImage:state.freeImage, activeTemplateId:state.activeTemplateId, activeTheme:state.activeTheme, tab:state.tab});
+      // A write can fail while reads keep returning an older picture. Preserve
+      // a detached canonical snapshot before attempting persistent storage.
+      memoryWork = JSON.parse(serialized);
+      localStorage.setItem(WORK_KEY, serialized);
+    } catch (_) { /* In-memory work stays available when storage is full. */ }
+  }
+  function loadWork() {
+    try {
+      const data=memoryWork || JSON.parse(localStorage.getItem(WORK_KEY)||'null');
+      if (!data || typeof data!=='object') return;
+      if (COLORING_TEMPLATES.some(t=>t.id===data.activeTemplateId)) state.activeTemplateId=data.activeTemplateId;
+      if (THEMES[data.activeTheme]) state.activeTheme=data.activeTheme;
+      if (data.tab==='free'||data.tab==='coloring') state.tab=data.tab;
+      if (typeof data.freeImage==='string' && data.freeImage.startsWith('data:image/png;base64,') && data.freeImage.length<4000000) state.freeImage=data.freeImage;
+      if (data.templates && typeof data.templates==='object') {
+        COLORING_TEMPLATES.forEach(t=>{
+          const item=data.templates[t.id];
+          if(item && Array.isArray(item.fills)) state.templateWork[t.id]={fills:item.fills.slice(0,1000).map(f=>typeof f==='string'&&/^(#[0-9a-f]{3,8}|hsl\([0-9.,% ]+\)|white|none)$/i.test(f)?f:'#FFF'),completed:!!item.completed,history:[]};
+        });
+      }
+    } catch (_) {}
+  }
+  function updateFreeRestoreNotice() {
+    const notice = state.container?.querySelector?.('#azRestoreNotice');
+    if (!notice) return;
+    notice.hidden = state.destroyed || state.tab !== 'free' || state.freeCanvasReady;
+    notice.textContent = state.freeRestoreFailed
+      ? '그림을 불러오지 못했어요. 📄 새 종이를 누르면 다시 그릴 수 있어요.'
+      : '그림을 불러오고 있어요…';
+  }
+  function restoreFreeImage(source) {
+    const token = ++state.freeRestoreToken;
+    state.freeRestorePending = 0;
+    state.freeCanvasReady = false;
+    state.freeRestoreFailed = false;
+    if (!state.canvas) { updateFreeRestoreNotice(); return; }
+    if (!source) {
+      const rect = getCanvasCssRect();
+      state.ctx.clearRect(0, 0, rect.width, rect.height);
+      state.freeImage = '';
+      state.freeCanvasReady = true;
+      updateFreeRestoreNotice();
+      return;
+    }
+    state.freeImage = source;
+    state.freeRestorePending = token;
+    updateFreeRestoreNotice();
+    const image=new Image(); const canvas=state.canvas;
+    const isCurrent = () => !state.destroyed && state.canvas === canvas && state.freeRestoreToken === token && state.freeRestorePending === token;
+    const failed = () => {
+      if (!isCurrent()) return;
+      state.freeRestorePending = 0;
+      state.freeRestoreFailed = true;
+      // Keep the original PNG for retry or undo after an explicit new paper.
+      // A failed decode never makes the blank canvas an authoritative picture.
+      updateFreeRestoreNotice();
+    };
+    image.onload=()=>{
+      // A late image must not erase a newer undo, a blank page, or a new stroke.
+      if (!isCurrent()) return;
+      try {
+        const rect=getCanvasCssRect();state.ctx.clearRect(0,0,rect.width,rect.height);state.ctx.drawImage(image,0,0,rect.width,rect.height);
+        state.freeRestorePending = 0;
+        state.freeCanvasReady = true;
+        state.freeRestoreFailed = false;
+        updateFreeRestoreNotice();
+      } catch (_) { failed(); }
+    };
+    image.onerror = failed;
+    try { image.src=source; } catch (_) { failed(); }
+  }
+  function undoWork() {
+    if(state.tab==='coloring') {
+      const work=state.templateWork[state.activeTemplateId]; const item=work?.history?.pop();
+      if(!item)return;
+      if(item.fills)work.fills=item.fills;else work.fills[item.index]=item.prev;work.completed=false;
+      renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
+    } else {
+      const prior=state.freeHistory.pop();if(prior===undefined)return;
+      state.freeImage=prior;restoreFreeImage(prior);
+    }
+    timer(saveWork,100);
+  }
+  function clearWork() {
+    if(state.tab==='coloring') {
+      const work=state.templateWork[state.activeTemplateId];
+      if(work){work.history.push({fills:work.fills.slice()});work.fills=work.fills.map(()=>'#FFF');}
+      if(work)work.completed=false;
+      renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
+    } else {
+      const prior = state.freeCanvasReady ? state.canvas.toDataURL('image/png') : state.freeImage;
+      state.freeHistory.push(prior);state.freeHistory=state.freeHistory.slice(-12);
+      state.freeRestoreToken += 1;
+      state.freeRestorePending = 0;
+      state.freeRestoreFailed = false;
+      const rect=getCanvasCssRect();state.ctx.clearRect(0,0,rect.width,rect.height);
+      state.freeCanvasReady = true;
+      updateFreeRestoreNotice();
+    }
+    saveWork();speak('새 종이야. 되돌리면 그림이 돌아와!');
+  }
 
   function timer(fn, ms) {
     const id = setTimeout(fn, ms);
@@ -771,6 +891,8 @@
         border-color:#222;
       }
 
+      .az-work-actions{display:flex;flex:0 0 auto;gap:6px}.az-work-actions button{width:48px;height:48px;background:#fff;border:2px solid #bac7d1;border-radius:14px;font-size:25px}.az-topbar{padding-left:70px!important;padding-right:10px!important}.az-brand{display:none}
+      @media(max-width:520px){.az-brand{display:none}.az-topbar{padding-right:8px!important;gap:5px}.az-work-actions button{width:42px;height:44px}.az-mode-tab{font-size:14px!important;padding:8px!important}}
       .az-rainbow{
         background:linear-gradient(45deg,#ff0000,#ffeb3b,#00ff00,#00bcd4,#0044ff,#9c27b0);
         position:relative;
@@ -1115,6 +1237,11 @@
         }
       }
     `;
+    s.textContent += `
+      .az-mode-tabs{min-width:0;max-width:600px;flex:1 1 auto}
+      @media(max-width:767px),(orientation:portrait){.az-topbar{flex-basis:60px;height:60px;min-height:60px}.az-work-actions button{height:44px}}
+      @media(orientation:landscape) and (max-height:500px){.az-topbar{flex-basis:56px;height:56px;min-height:56px}.az-work-actions button{height:44px}}
+    `;
     document.head.appendChild(s);
   }
 
@@ -1124,6 +1251,7 @@
     state.container = container;
     state.options = options;
     state.tab = 'coloring';
+    loadWork();
     state.mode = 'free';
     state.paintHistory = [];
     state.coloringCompleted = false;
@@ -1150,6 +1278,7 @@
             <button type="button" class="az-mode-tab${isInitialColoring ? ' active' : ''}" data-tab="coloring">🌈 색칠 팡팡</button>
           </div>
           <div class="az-brand">🎨 매직 그림판</div>
+          <div class="az-work-actions"><button type="button" id="azUndo" aria-label="되돌리기">↶</button><button type="button" id="azNewPaper" aria-label="새 종이">📄</button></div>
         </header>
 
         <main class="az-workspace">
@@ -1174,6 +1303,7 @@
               <div class="az-canvas-wrap" id="azCanvasWrap">
                 <canvas id="azCanvas"${isInitialColoring ? ' style="display:none;"' : ''}></canvas>
                 <div class="az-coloring-wrap" id="azColoringWrap"${isInitialColoring ? ' style="display:flex;"' : ''}></div>
+                <div id="azRestoreNotice" role="status" hidden style="position:absolute;z-index:3;left:50%;top:12px;transform:translateX(-50%);max-width:90%;padding:9px 13px;border-radius:14px;background:#fff8e7;color:#5e5143;font-size:14px;text-align:center;pointer-events:none;"></div>
               </div>
             </div>
           </section>
@@ -1208,12 +1338,16 @@
   }
 
   function initCanvas() {
+    state.freeCanvasReady = false;
+    state.freeRestorePending = 0;
+    state.freeRestoreFailed = false;
     state.canvas = document.getElementById('azCanvas');
     state.ctx = state.canvas.getContext('2d');
     resizeCanvasPreserve(false);
     state.ctx.lineCap = 'round';
     state.ctx.lineJoin = 'round';
     applyThemeBg();
+    restoreFreeImage(state.freeImage);
   }
 
   function getCanvasCssRect() {
@@ -1289,6 +1423,9 @@
 
     window.addEventListener('resize', state.resizeHandler, { passive: true });
     window.addEventListener('orientationchange', state.resizeHandler, { passive: true });
+    state.pageHideHandler=()=>{state.isDrawing=false;state.pointerId=null;saveWork();};
+    window.addEventListener('pagehide',state.pageHideHandler);
+    window.addEventListener('blur',state.pageHideHandler);
   }
 
   function applyThemeBg() {
@@ -1298,6 +1435,8 @@
 
   function bindEvents() {
     const root = state.container.querySelector('.az-root');
+    root.querySelector('#azUndo').onclick=undoWork;
+    root.querySelector('#azNewPaper').onclick=clearWork;
 
     root.querySelectorAll('.az-mode-tab').forEach((btn) => {
       btn.onclick = () => {
@@ -1313,6 +1452,7 @@
         root.querySelectorAll('[data-theme]').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         applyThemeBg();
+        saveWork();
         const themeName = THEMES[state.activeTheme].label.replace(/^[^\s]+ /, '');
         speak(themeName === '바다' ? '바다야!' : `${themeName}이야!`);
       };
@@ -1362,15 +1502,21 @@
     };
 
     const drawStart = (e) => {
-      if (state.tab !== 'free') return;
+      if (state.tab !== 'free' || state.isDrawing || !state.freeCanvasReady || (e.isPrimary === false)) return;
       e.preventDefault();
 
       const pos = getPos(e);
 
+      state.freeRestoreToken += 1;
+      state.freeRestorePending = 0;
       state.isDrawing = true;
+      state.pointerId=e.pointerId;state.lastPoint=pos;
+      state.freeHistory.push(canvas.toDataURL('image/png'));state.freeHistory=state.freeHistory.slice(-12);
       state.ctx.globalCompositeOperation = 'source-over';
       state.ctx.beginPath();
       state.ctx.moveTo(pos.x, pos.y);
+      state.ctx.fillStyle=state.isRainbow?`hsl(${state.hue},90%,60%)`:state.currentColor;
+      state.ctx.arc(pos.x,pos.y,state.currentSize/2,0,Math.PI*2);state.ctx.fill();state.ctx.beginPath();state.ctx.moveTo(pos.x,pos.y);
 
       if (canvas.setPointerCapture) {
         try {
@@ -1380,7 +1526,7 @@
     };
 
     const drawMove = (e) => {
-      if (!state.isDrawing || state.tab !== 'free') return;
+      if (!state.isDrawing || state.tab !== 'free' || e.pointerId!==state.pointerId) return;
       e.preventDefault();
 
       const pos = getPos(e);
@@ -1399,13 +1545,18 @@
         : 1;
 
       state.ctx.lineWidth = state.currentSize * (0.8 + pressure * 0.4);
+      state.ctx.beginPath();
+      state.ctx.moveTo(state.lastPoint.x,state.lastPoint.y);
       state.ctx.lineTo(pos.x, pos.y);
       state.ctx.stroke();
+      state.lastPoint=pos;
     };
 
     const drawEnd = (e) => {
-      if (!state.isDrawing) return;
+      if (!state.isDrawing || e.pointerId!==state.pointerId) return;
       state.isDrawing = false;
+      state.pointerId=null;
+      saveWork();
       state.ctx.closePath();
 
       if (canvas.hasPointerCapture && canvas.hasPointerCapture(e.pointerId)) {
@@ -1419,12 +1570,13 @@
     canvas.addEventListener('pointermove', drawMove);
     canvas.addEventListener('pointerup', drawEnd);
     canvas.addEventListener('pointercancel', drawEnd);
-    canvas.addEventListener('pointerleave', drawEnd);
+    canvas.addEventListener('lostpointercapture', drawEnd);
   }
 
   function switchTab(tab) {
+    state.isDrawing=false;state.pointerId=null;
     state.tab = tab;
-    state.mode = 'free';
+    saveWork();    state.mode = 'free';
     state.coloringCompleted = false;
 
     const isFree = tab === 'free';
@@ -1436,6 +1588,7 @@
 
     if (canvas) canvas.style.display = isFree ? 'block' : 'none';
     if (coloringWrap) coloringWrap.style.display = isFree ? 'none' : 'flex';
+    updateFreeRestoreNotice();
 
     state.container.querySelectorAll('.free-section').forEach((el) => {
       el.style.display = isFree ? '' : 'none';
@@ -1465,8 +1618,10 @@
     const wrap = document.getElementById('azColoringWrap');
     if (!wrap) return;
 
-    state.paintHistory = [];
-    state.coloringCompleted = false;
+    const work=state.templateWork[tpl.id]||(state.templateWork[tpl.id]={fills:[],completed:false,history:[]});
+    work.history=work.history||[];
+    state.paintHistory=work.history;
+    state.coloringCompleted=work.completed;
 
     wrap.classList.remove('az-done');
     wrap.innerHTML = tpl.svg;
@@ -1491,7 +1646,9 @@
       svg.style.cssText = 'width:100%;height:100%;max-width:94%;max-height:94%;overflow:hidden;display:block;';
     }
 
-    wrap.querySelectorAll('.fillable').forEach((el) => {
+    wrap.querySelectorAll('.fillable').forEach((el,index) => {
+      if(work.fills[index]) el.setAttribute('fill',work.fills[index]);
+      else work.fills[index]=el.getAttribute('fill')||'#FFF';
       const applyFill = (clientX, clientY) => {
         const fillColor = state.isRainbow
           ? `hsl(${(state.hue = (state.hue + 35) % 360)},90%,55%)`
@@ -1501,14 +1658,16 @@
 
         if (prev === fillColor) return;
 
-        state.paintHistory.push({ el, prev });
+        work.history.push({index,prev});
         el.setAttribute('fill', fillColor);
+        work.fills[index]=fillColor;
+        saveWork();
 
         burstSparkles(clientX, clientY);
 
         if (navigator.vibrate) navigator.vibrate(25);
 
-        timer(() => checkColoringComplete(tpl), 450);
+        timer(() => {if(state.activeTemplateId===tpl.id)checkColoringComplete(tpl);}, 450);
       };
 
       el.addEventListener('pointerup', (e) => {
@@ -1546,7 +1705,8 @@
     if (colored < needed) return;
 
     state.coloringCompleted = true;
-    wrap.classList.add('az-done');
+    state.templateWork[tpl.id].completed=true;
+    saveWork();    wrap.classList.add('az-done');
 
     speak(`우와. ${tpl.name} 완성. 시현이 참 잘했어.`, true);
     state.options.fireConfetti?.();
@@ -1649,6 +1809,12 @@
   }
 
   function destroy(clearDom = true) {
+    state.freeRestoreToken += 1;
+    if(state.container&&!state.destroyed)saveWork();
+    state.freeRestorePending = 0;
+    state.freeCanvasReady = false;
+    state.isDrawing=false;state.pointerId=null;
+    if(state.pageHideHandler){window.removeEventListener('pagehide',state.pageHideHandler);window.removeEventListener('blur',state.pageHideHandler);state.pageHideHandler=null;}
     clearTimers();
 
     if (state.resizeTimer) {

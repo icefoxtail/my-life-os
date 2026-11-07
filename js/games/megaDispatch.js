@@ -31,7 +31,8 @@
     successRewardGiven: false,
     completeRewardGiven: false,
     isEnding: false,
-    timers: []
+    timers: [],
+    roundToken: 0
   };
 
   const ROLE_ICONS = {
@@ -795,6 +796,8 @@
   }
 
   window.setV14Mode = (size) => {
+    if (![4, 9, 16].includes(size) || state.destroyed) return;
+    clearManagedTimers();
     state.gridSize = size;
     state.currentLevel = 1;
     state.gameStarted = true;
@@ -805,7 +808,10 @@
 
   async function startRound() {
     if (state.destroyed || !state.gameStarted) return;
+    const roundToken = ++state.roundToken;
+    state.isBusy = true;
     await loadAllTrucks();
+    if (state.destroyed || !state.gameStarted || roundToken !== state.roundToken || !state.container) return;
     state.isBusy = false;
     state.userIndex = 0;
     state.combo = 0;
@@ -845,7 +851,7 @@
             ${state.mission.map((m, i) => `
               <div class="md-mission-card ${i === state.userIndex ? 'preview-large active' : (i < state.userIndex ? 'done' : '')}">
                 <div class="md14-role-badge">${ROLE_ICONS[m.id] || '🚒'}</div>
-                <img src="${m.file}" onerror="this.outerHTML='<span style=&quot;font-size:42px;&quot;>🚒</span>';">
+                <img src="${m.file}" alt="${m.name_ko || m.name || '소방차'}" onerror="this.outerHTML='<span style=&quot;font-size:42px;&quot;>🚒</span>';">
               </div>
             `).join('')}
           </div>
@@ -864,8 +870,8 @@
         <section class="md14-action-panel" aria-label="차량 선택">
           <div class="md14-garage grid-${state.gridSize}">
             ${state.displayTrucks.map(t => `
-              <button class="md14-truck-btn" type="button" data-game-id="${t.gameId}">
-                <img src="${t.file}" onerror="this.outerHTML='<span style=&quot;font-size:42px;&quot;>🚒</span>';">
+              <button class="md14-truck-btn" type="button" data-game-id="${t.gameId}" aria-label="${t.name_ko || t.name || '소방차'} 출동">
+                <img src="${t.file}" alt="${t.name_ko || t.name || '소방차'}" onerror="this.outerHTML='<span style=&quot;font-size:42px;&quot;>🚒</span>';">
               </button>
             `).join('')}
           </div>
@@ -902,8 +908,9 @@
   }
 
   function handleTouch(gameId, el, e) {
-    if (state.isBusy) return;
+    if (state.isBusy || state.destroyed || !state.container || !el.isConnected) return;
     const target = state.mission[state.userIndex];
+    if (!target) return;
     const root = state.container.querySelector('.md14-root');
 
     if (gameId === target.gameId) {
@@ -984,13 +991,18 @@
         <div class="md14-start-screen">
           <h1 style="font-size: clamp(34px, 8vw, 48px); color: gold; text-shadow: 0 0 20px red; margin: 0;">👑 전설의 본부장 시현 👑</h1>
           <p style="font-size: clamp(20px, 5vw, 26px); margin: 20px 0;">시현이가 마을을 지켜냈어요!</p>
-          <button class="mode-btn" style="font-size:32px;" type="button" data-action="reload">출동! 🔄</button>
+          <button class="mode-btn" style="font-size:28px;" type="button" data-action="replay">다시 출동! 🔄</button>
+          <button class="mode-btn" style="font-size:22px;" type="button" data-action="home">놀이터로 🏠</button>
         </div>
       </div>
     `;
 
-    state.container.querySelector('[data-action="reload"]')?.addEventListener('click', () => {
-      location.reload();
+    state.container.querySelector('[data-action="replay"]')?.addEventListener('click', () => {
+      if (!state.isEnding) return;
+      window.setV14Mode(state.gridSize);
+    });
+    state.container.querySelector('[data-action="home"]')?.addEventListener('click', () => {
+      state.options.closeToParkHome?.();
     });
 
     if (playCompleteVoice && !state.completeRewardGiven) {
@@ -1022,6 +1034,7 @@
     },
     destroy: () => {
       state.destroyed = true;
+      state.roundToken += 1;
       state.gameStarted = false;
       state.isBusy = false;
       state.isEnding = false;

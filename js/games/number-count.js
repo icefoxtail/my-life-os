@@ -31,7 +31,7 @@
     { id: 'town', label: '🏘️동네' },
   ];
 
-  const KOREAN_COUNT = ['', '하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉'];
+  const KOREAN_COUNT = ['', '하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '열', '열하나', '열둘', '열셋', '열넷', '열다섯', '열여섯', '열일곱', '열여덟', '열아홉', '스물', '스물하나', '스물둘', '스물셋', '스물넷', '스물다섯', '스물여섯', '스물일곱', '스물여덟', '스물아홉', '서른'];
   const SINO_KR      = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
 
   const BG_THEMES = [
@@ -102,16 +102,21 @@
 
   function getAnswerMax(difficulty, level){
     if(difficulty === 1) return 5;
-    if(difficulty === 2) return 9;
+    if(difficulty === 2) return 10;
+    if(difficulty === 3) return 15;
+    if(difficulty === 4) return 20;
+    if(difficulty === 5) return 30;
     return level <= 3 ? 5 : 9;
   }
 
   function pickAnswer(level, difficulty){
     const max = getAnswerMax(difficulty, level);
-    return Math.floor(Math.random() * max) + 1;
+    const min = difficulty === 3 ? 11 : difficulty === 4 ? 16 : difficulty === 5 ? 21 : 1;
+    return Math.floor(Math.random() * (max-min+1)) + min;
   }
 
   function colsFor(n){
+    if(n >= 10) return 5;
     if(n === 1) return 1;
     if(n <= 4) return 2;
     return 3;
@@ -229,6 +234,8 @@
       this.destroy();
       this.state.container = container;
       this.state.options = options || {};
+      const challenge=window.SihyeonPlaySettings?.getChallenge('numberCount','1-10');
+      this.state.difficulty=({'1-5':1,'1-10':2,'11-15':3,'16-20':4,'21-30':5})[challenge]||2;
       this.initAudio();
       this.injectStyles();
       this.state.layoutMode = this.getLayoutMode();
@@ -251,12 +258,11 @@
 
           <div class="nc-game-header">
             <div class="nc-dot-progress" id="ncDotProgress"></div>
-            <div class="nc-home-btn" id="ncPlazaBtn">🏠</div>
+            <button type="button" class="nc-home-btn" id="ncPlazaBtn" aria-label="놀이터로">🏠</button>
           </div>
 
           <div class="nc-difficulty-tabs" id="ncDifficultyTabs">
-            <button type="button" class="nc-difficulty-tab active" data-difficulty="1">⭐1단계 1~5</button>
-            <button type="button" class="nc-difficulty-tab" data-difficulty="2">⭐⭐2단계 1~9</button>
+            <label for="ncRange" class="nc-range-label">몇 대 세어볼까?</label><select id="ncRange" aria-label="자동차 수량 고르기">${[[1,'1~5대'],[2,'1~10대'],[3,'11~15대'],[4,'16~20대'],[5,'21~30대']].map(([n,label])=>`<option value="${n}" ${this.state.difficulty===n?'selected':''}>${label}</option>`).join('')}</select>
           </div>
 
           <div class="nc-vehicle-cat-tabs" id="ncVehicleCatTabs"></div>
@@ -301,7 +307,7 @@
       this.clearTimers();
       const allVehicles = this.state.vehicles.length ? this.state.vehicles : FALLBACK.map(normalizeVehicle).filter(Boolean);
       const filtered = this.state.selectedVehicleCategory === 'all'
-        ? allVehicles
+        ? allVehicles.filter(v=>!window.SihyeonVehicleDisplay || window.SihyeonVehicleDisplay.isClean(v.image))
         : allVehicles.filter(v => v.category === this.state.selectedVehicleCategory);
       const pool = filtered.length ? filtered : allVehicles;
       this.state.gameVehicles = shuffle(pool).slice(0, TOTAL_ROUNDS);
@@ -354,13 +360,16 @@
       if(!wrapper) return;
 
       const count = this.state.currentAnswer;
+      this.state.countedIds = new Map();
       const cols = colsFor(count);
       wrapper.innerHTML = '';
-      wrapper.className = `nc-vehicles-wrapper nc-count-${count}`;
+      wrapper.className = `nc-vehicles-wrapper nc-count-${count}${count>=10?' nc-many':''}`;
+      wrapper.style.setProperty('--nc-rows',Math.ceil(count/colsFor(count)));
       wrapper.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
 
       for(let i = 0; i < count; i += 1){
-        const wrap = document.createElement('div');
+        const wrap = document.createElement('button');
+        wrap.type='button';wrap.setAttribute('aria-label',`${this.state.currentVehicle.name} ${i+1}번 세기`);
         wrap.className = 'nc-vehicle-cell';
         wrap.style.transform = 'translateX(-110vw)';
         wrap.style.opacity = '0';
@@ -371,19 +380,38 @@
         img.alt = '';
         img.className = 'nc-vehicle-img nc-idle-anim';
         img.draggable = false;
+        let usedFallback = false;
         img.onerror = ()=>{
+          if(!usedFallback){
+            usedFallback = true;
+            img.src = './assets/vehicles/transport/car.png';
+            // Reuse the frame with the replacement's own bounds and ratio.
+            window.SihyeonVehicleDisplay?.apply(img);
+            return;
+          }
           img.onerror = null;
-          img.src = './assets/vehicles/transport/car.png';
+          window.SihyeonVehicleDisplay?.reset(img);
+          img.hidden = true;
+          const fallback = document.createElement('span');
+          fallback.className = 'nc-vehicle-emoji';
+          fallback.setAttribute('aria-hidden','true');
+          fallback.textContent = '🚗';
+          wrap.appendChild(fallback);
         };
 
         wrap.appendChild(img);
+        window.SihyeonVehicleDisplay?.apply(img);
         wrapper.appendChild(wrap);
 
         wrap.addEventListener('click', ()=>{
           this.initAudio();
           this.playTone('pop');
-          playGameVoice(getVehicleSoundVoiceId(this.state.currentVehicle));
-          this.say(this.state.currentVehicle.sound, true);
+          if(this.state.isAnimating)return;
+          if(!this.state.countedIds.has(i)){
+            const n=this.state.countedIds.size+1;this.state.countedIds.set(i,n);
+            const badge=document.createElement('span');badge.className='nc-tap-count';badge.textContent=n;wrap.appendChild(badge);
+          }
+          const n=this.state.countedIds.get(i);this.state.options.say?.(KOREAN_COUNT[n]||String(n));
           wrap.style.transition = 'transform 0.15s';
           wrap.style.transform = 'scale(1.2) rotate(-5deg)';
           this.setManagedTimeout(()=>{ wrap.style.transform = ''; }, 160);
@@ -485,14 +513,14 @@
       choices.forEach(num => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'nc-toy-block-btn';
+        btn.className = 'nc-toy-block-btn' + (num > 10 ? ' nc-choice-many' : '');
         btn.dataset.answer = String(num);
         if(num === ans) btn.dataset.correct = 'true';
 
         const dotHTML = '<span class="nc-choice-dot"></span>'.repeat(num);
         btn.innerHTML = `
           <div class="nc-choice-num">${num}</div>
-          <div class="nc-choice-dots">${dotHTML}</div>
+          <div class="nc-choice-dots${num > 10 ? ' nc-choice-dots--many' : ''}" aria-hidden="true">${dotHTML}</div>
         `;
         btn.onclick = ()=>{
           this.initAudio();
@@ -713,6 +741,13 @@
         };
       });
 
+      const range=this.query('#ncRange');
+      if(range)range.onchange=()=>{
+        if(this.state.isAnimating){range.value=this.state.difficulty;return;}
+        this.state.difficulty=Number(range.value);
+        window.SihyeonPlaySettings?.setChallenge('numberCount',({1:'1-5',2:'1-10',3:'11-15',4:'16-20',5:'21-30'})[this.state.difficulty]);
+        this.startNewGameSession();
+      };
       this.renderVehicleCategoryTabs();
       const goHome = ()=>{ if(this.state.options.closeToParkHome) this.state.options.closeToParkHome(); };
       if(home) home.onclick = goHome;
@@ -815,6 +850,7 @@
       if(!text) return;
       const raw = String(text).trim();
 
+      if(KOREAN_COUNT.indexOf(raw)>=10){this.state.options.say?.(raw);return;}
       const countMap = {
         '하나': 1,
         '둘': 2,
@@ -1147,6 +1183,25 @@
           width:7px;
           height:7px;
         }
+      `;
+      style.textContent += `
+        .nc-range-label{font-size:18px;align-self:center;color:#194b56}.nc-difficulty-tabs select{font:inherit;font-size:18px;min-height:50px;border:3px solid white;border-radius:16px;background:#fff7cf;color:#174b51;max-width:100%;padding:8px}
+        .nc-vehicles-wrapper{height:100%;grid-auto-rows:minmax(0,1fr);gap:12px;max-height:640px}
+        .nc-vehicle-cell{width:100%;height:100%;min-height:50px;align-items:center;padding:8px;background:transparent;border-radius:16px}
+        .nc-vehicle-cell .sv-vehicle-frame{width:90%!important;height:88%!important;max-height:none}
+        .nc-vehicle-cell>.nc-vehicle-img{width:90%!important;height:90%;max-height:90%!important;object-fit:contain}
+        .nc-vehicle-cell .sv-vehicle-frame img{max-width:none}
+        .nc-vehicle-emoji{font-size:clamp(28px,9vw,90px);line-height:1}
+        .nc-tap-count{position:absolute;right:2px;top:0;background:#17695a;color:white;border:2px solid white;min-width:26px;height:26px;border-radius:50%;font-size:16px;display:grid;place-items:center}
+        .nc-many{gap:6px!important;align-content:center!important;grid-auto-rows:minmax(50px,1fr);padding:5px!important}
+        .nc-many .nc-vehicle-cell{padding:5px 2px;background:#ffffffa0;border:1px solid #7ba7b4;border-radius:9px}
+        .nc-many .nc-vehicle-cell:nth-child(10n+1),.nc-many .nc-vehicle-cell:nth-child(10n+2),.nc-many .nc-vehicle-cell:nth-child(10n+3),.nc-many .nc-vehicle-cell:nth-child(10n+4),.nc-many .nc-vehicle-cell:nth-child(10n+5){border-top:4px solid #4f9188}
+        .nc-many .nc-tap-count{min-width:21px;height:21px;font-size:13px;border-width:1px}
+        .nc-choice-dots.nc-choice-dots--many{grid-template-columns:repeat(5,6px);gap:2px;max-width:none!important;max-height:none;overflow:visible}
+        .nc-choice-dots--many .nc-choice-dot{width:6px;height:6px}
+        .nc-choice-many .nc-choice-num{font-size:clamp(30px,5vw,64px)}
+        .nc-idle-anim{animation:none}
+        @media(orientation:landscape) and (max-height:520px){.number-count-landscape{grid-template-columns:120px minmax(0,1fr) 120px;gap:6px}.number-count-landscape .nc-difficulty-tabs{display:flex;flex-direction:column;gap:3px}.nc-range-label{font-size:14px}.nc-difficulty-tabs select{min-height:46px;font-size:16px;padding:5px}.number-count-landscape .nc-vehicle-cat-tab{font-size:14px;min-height:44px;padding:4px}.number-count-landscape .nc-toy-block-btn{min-height:48px;height:54px;width:104px}.number-count-landscape .nc-choice-num{font-size:30px}.number-count-landscape .nc-choice-dots{display:none}.nc-objects-area{overflow-y:auto}.nc-many{min-height:calc(var(--nc-rows)*54px)}}
       `;
       document.head.appendChild(style);
       this.state.styleElement = style;

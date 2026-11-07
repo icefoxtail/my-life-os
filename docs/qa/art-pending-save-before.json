@@ -1,0 +1,26 @@
+{
+  "sourceSha256": "1d5f2b509054d16c9b76a69cafafa0a4b942833ae953dbaaa524f5a554aa6d9b",
+  "scope": "Node production-closure callback simulation; PNG values are distinct markers, not browser pixels",
+  "cases": [
+    {
+      "action": "loadWork → restoreFreeImage pending → saveWork",
+      "pendingImages": 1,
+      "before": "data:image/png;base64,T1JJR0lOQUxfRFJBV0lORw==",
+      "after": "data:image/png;base64,QkxBTktfQ0FOVkFT",
+      "originalPreserved": false,
+      "blankOverwrote": true
+    },
+    {
+      "action": "loadWork → restoreFreeImage pending → destroy",
+      "pendingImages": 1,
+      "before": "data:image/png;base64,T1JJR0lOQUxfRFJBV0lORw==",
+      "after": "data:image/png;base64,QkxBTktfQ0FOVkFT",
+      "originalPreserved": false,
+      "blankOverwrote": true
+    },
+    {
+      "action": "loadWork → restore completes → saveWork",
+      "originalPreserved": true
+    }
+  ]
+}

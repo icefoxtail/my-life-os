@@ -1,0 +1,53 @@
+{
+  "suite": "Independent quantity/state QA",
+  "modelSha256": "e38eb927b6e5a4678bf151284f1961de92fc3c87aee289e5a0c2174514347c0d",
+  "status": "PASS",
+  "missionsChecked": 600,
+  "actionsChecked": 19141,
+  "checks": [
+    {
+      "name": "every age can select every target 1..30, with enough unique physical stock",
+      "status": "PASS",
+      "detail": {
+        "missions": 600,
+        "targetRange": "1..30",
+        "ages": [
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "name": "wrong total and wrong type are retained for the child to repair",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "bundling, unbundling, moving, undoing and resetting conserve actual objects",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "all valid two-truck arrangements are accepted, including mirrored solutions",
+      "status": "PASS",
+      "detail": {
+        "arrangements": 260
+      }
+    },
+    {
+      "name": "random input sequences preserve unique objects and never double complete",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "interrupted delivery and corrupted saves recover without false reward or lockup",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "limits": [
+    "Node model checks only. No browser DOM, layout, touch device, TTS listening, or child observation is claimed."
+  ]
+}

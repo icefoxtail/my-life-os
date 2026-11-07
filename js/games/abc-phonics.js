@@ -82,8 +82,8 @@
           color: '#FF4D4D',
           fallbackLetter: 'ㄱ',
           fallbackObject: '🎒',
-          letterImg: './assets/letter-transform/hangul/giyeok.png',
-          objectImg: './assets/letter-transform/hangul/bag.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㄴ',
@@ -95,8 +95,8 @@
           color: '#FF9F1C',
           fallbackLetter: 'ㄴ',
           fallbackObject: '🦋',
-          letterImg: './assets/letter-transform/hangul/nieun.png',
-          objectImg: './assets/letter-transform/hangul/butterfly.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㄷ',
@@ -108,8 +108,8 @@
           color: '#8B5CF6',
           fallbackLetter: 'ㄷ',
           fallbackObject: '🌰',
-          letterImg: './assets/letter-transform/hangul/digeut.png',
-          objectImg: './assets/letter-transform/hangul/acorn.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㄹ',
@@ -121,8 +121,8 @@
           color: '#00AEEF',
           fallbackLetter: 'ㄹ',
           fallbackObject: '🤖',
-          letterImg: './assets/letter-transform/hangul/rieul.png',
-          objectImg: './assets/letter-transform/hangul/robot.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㅁ',
@@ -134,8 +134,8 @@
           color: '#2EC4B6',
           fallbackLetter: 'ㅁ',
           fallbackObject: '🧢',
-          letterImg: './assets/letter-transform/hangul/mieum.png',
-          objectImg: './assets/letter-transform/hangul/hat.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㅂ',
@@ -147,8 +147,8 @@
           color: '#FFD93D',
           fallbackLetter: 'ㅂ',
           fallbackObject: '🍌',
-          letterImg: './assets/letter-transform/hangul/bieup.png',
-          objectImg: './assets/letter-transform/hangul/banana.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㅅ',
@@ -160,8 +160,8 @@
           color: '#FF7A1A',
           fallbackLetter: 'ㅅ',
           fallbackObject: '🦁',
-          letterImg: './assets/letter-transform/hangul/siot.png',
-          objectImg: './assets/letter-transform/hangul/lion.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㅇ',
@@ -173,8 +173,8 @@
           color: '#5BC8F5',
           fallbackLetter: 'ㅇ',
           fallbackObject: '🦆',
-          letterImg: './assets/letter-transform/hangul/ieung.png',
-          objectImg: './assets/letter-transform/hangul/duck.png'
+          letterImg: '',
+          objectImg: ''
         },
         {
           letter: 'ㅈ',
@@ -186,8 +186,8 @@
           color: '#3478F6',
           fallbackLetter: 'ㅈ',
           fallbackObject: '🚗',
-          letterImg: './assets/letter-transform/hangul/jieut.png',
-          objectImg: './assets/letter-transform/hangul/car.png'
+          letterImg: '',
+          objectImg: ''
         }
       ]
     }
@@ -199,6 +199,7 @@
     mode: 'abc',
     currentIndex: 0,
     isTransforming: false,
+    phase: 'LETTER',
     destroyed: false,
     timers: [],
     layoutMode: 'portrait',
@@ -637,8 +638,12 @@
         opacity: 0;
         transform: translateY(12px);
         transition: opacity .25s ease, transform .25s ease;
-        pointer-events: none;
+        pointer-events: auto;
+        cursor: pointer;
       }
+
+      .lt-hint:disabled { cursor: default; }
+      .lt-hint:focus-visible, .lt-main-card:focus-visible { outline: 4px solid #1473c9; outline-offset: 4px; }
 
       .lt-hint.visible {
         opacity: 1;
@@ -1127,6 +1132,7 @@
     state.mode = nextMode;
     state.currentIndex = 0;
     state.isTransforming = false;
+    state.phase = 'LETTER';
     state.successRewardGiven = false;
     state.completeRewardGiven = false;
     renderScene(true);
@@ -1138,12 +1144,16 @@
 
   function renderScene(skipIntroVoice) {
     if (state.destroyed || !state.container) return;
+    clearTimers();
+    state.phase = 'LETTER';
+    state.isTransforming = false;
 
     const root = state.container.querySelector('.lt-root');
     const item = getCurrentItem();
     const dataset = getDataset();
 
     if (!root || !item) return;
+    root.style.opacity = '1';
 
     state.successRewardGiven = false;
     updateRootLayoutClass();
@@ -1156,7 +1166,6 @@
           <button type="button" class="lt-mode-tab ${state.mode === 'hangul' ? 'active' : ''}" data-mode="hangul">한글</button>
         </div>
         <div class="lt-progress" aria-label="진행도">${makeProgressHTML()}</div>
-        <button type="button" class="lt-home-btn" data-action="home" aria-label="글자놀이터로">🏠</button>
       </div>
 
       <div class="lt-title-wrap">
@@ -1167,14 +1176,14 @@
         <div class="lt-stage-inner">
           <button type="button" class="lt-main-card" id="ltMainCard" aria-label="${escapeAttr(item.letterName)} 변신">
             <span class="lt-image-wrap" id="ltImageWrap">
-              <img src="${escapeAttr(item.letterImg)}" class="lt-display-img" id="ltMainImg" alt="${escapeAttr(item.letter)}" draggable="false">
+              <img class="lt-display-img" id="ltMainImg" alt="${escapeAttr(item.letter)}" draggable="false" hidden>
               <span class="lt-fallback-letter" id="ltFallbackLetter">${item.fallbackLetter}</span>
               <span class="lt-fallback-object" id="ltFallbackObject" style="display:none;">${item.fallbackObject}</span>
             </span>
           </button>
 
           <div class="lt-word-label" id="ltWordLabel">${escapeAttr(item.displayWord)}</div>
-          <div class="lt-hint" id="ltHint">👆 살짝 눌러볼까?</div>
+          <button type="button" class="lt-hint" id="ltHint" aria-label="글자 변신">✨ 변신</button>
         </div>
       </div>
     `;
@@ -1190,35 +1199,53 @@
       btn.addEventListener('click', () => resetMode(btn.dataset.mode));
     });
 
-    root.querySelector('[data-action="home"]')?.addEventListener('click', () => {
-      if (typeof window.openLetterLand === 'function') window.openLetterLand();
-      else state.options.closeToParkHome?.();
-    });
-
-    mainImg.addEventListener('error', () => {
+    let visualIsObject = false;
+    function showFallback() {
+      mainImg.hidden = true;
       imageWrap.classList.add('lt-image-missing');
-      const isTransformed = state.isTransforming || mainCard.classList.contains('lt-transformed');
-      fallbackLetter.style.display = isTransformed ? 'none' : 'grid';
-      fallbackObject.style.display = isTransformed ? 'grid' : 'none';
-    });
-
-    mainImg.addEventListener('load', () => {
+      fallbackLetter.style.display = visualIsObject ? 'none' : 'grid';
+      fallbackObject.style.display = visualIsObject ? 'grid' : 'none';
+    }
+    function showLoadedImage() {
+      if (!mainImg.getAttribute('src') || !mainImg.naturalWidth) return;
+      mainImg.hidden = false;
       imageWrap.classList.remove('lt-image-missing');
       fallbackLetter.style.display = 'none';
       fallbackObject.style.display = 'none';
-    });
+    }
+    function showVisual(source, isObject) {
+      visualIsObject = isObject;
+      mainImg.alt = isObject ? item.word : item.letter;
+      showFallback();
+      // Hangul has no raster assets in the repository. Render its large letter and
+      // familiar object directly; do not issue 18 known-broken image requests.
+      if (source) {
+        mainImg.src = source;
+        if (mainImg.complete) showLoadedImage();
+      } else {
+        mainImg.removeAttribute('src');
+      }
+    }
+    mainImg.addEventListener('error', showFallback);
+    mainImg.addEventListener('load', showLoadedImage);
+    showVisual(item.letterImg, false);
 
     timer(() => {
       if (!state.destroyed) hint.classList.add('visible');
     }, 650);
 
-    mainCard.addEventListener('click', () => {
-      if (state.isTransforming) {
+    function transformOrAdvance() {
+      if (state.destroyed || !root.contains(mainCard)) return;
+      if (state.phase === 'OBJECT') {
         advanceRound();
         return;
       }
+      if (state.phase !== 'LETTER') return;
 
+      state.phase = 'TRANSFORMING';
       state.isTransforming = true;
+      mainCard.disabled = true;
+      hint.disabled = true;
       vibrate(70);
       hint.classList.remove('visible');
 
@@ -1233,11 +1260,7 @@
       mainCard.classList.add('lt-transformed');
 
       timer(() => {
-        mainImg.src = item.objectImg;
-        mainImg.alt = item.word;
-        fallbackLetter.style.display = 'none';
-        fallbackObject.style.display = 'grid';
-        imageWrap.classList.remove('lt-image-missing');
+        showVisual(item.objectImg, true);
         vibrate([45, 40, 45]);
       }, 230);
 
@@ -1257,10 +1280,16 @@
       }, 760);
 
       timer(() => {
-        hint.textContent = '👆 다음';
+        state.phase = 'OBJECT';
+        mainCard.disabled = false;
+        hint.disabled = false;
+        hint.textContent = '다음 ▶';
+        hint.setAttribute('aria-label', '다음 글자');
         hint.classList.add('visible');
       }, 2100);
-    });
+    }
+    mainCard.addEventListener('click', transformOrAdvance);
+    hint.addEventListener('click', transformOrAdvance);
 
     if (!skipIntroVoice) {
       timer(() => {
@@ -1273,11 +1302,14 @@
   }
 
   function advanceRound() {
-    if (state.destroyed || !state.container) return;
+    if (state.destroyed || !state.container || state.phase !== 'OBJECT') return;
+    state.phase = 'ADVANCING';
+    clearTimers();
 
     const root = state.container.querySelector('.lt-root');
     if (!root) return;
 
+    root.querySelectorAll('#ltMainCard, #ltHint').forEach(button => { button.disabled = true; });
     root.style.opacity = '0';
 
     timer(() => {
@@ -1296,6 +1328,8 @@
 
   function showComplete() {
     if (state.destroyed || !state.container) return;
+    state.phase = 'COMPLETE';
+    clearTimers();
 
     const root = state.container.querySelector('.lt-root');
     const dataset = getDataset();

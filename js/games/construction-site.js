@@ -31,7 +31,7 @@
     { id: 'carry', title: '짐을 멀리 옮겨야 해요!', question: '흙과 돌을 옮겨야 해. 어떤 차가 좋을까?', answerIds: ['dump_truck'], targetIcon: '📦', resultIcon: '🏁', workLabel: '', successText: '우르르! 짐을 싣고 옮겼어!', wrongText: '괜찮아. 짐 옮기는 차를 같이 찾아볼까?', stageClass: 'cs-stage-carry' },
     { id: 'mix', title: '콘크리트를 만들어야 해요!', question: '콘크리트를 만들어야 해. 어떤 차가 좋을까?', answerIds: ['concrete_mixer'], targetIcon: '🌀', resultIcon: '⬛', workLabel: '섞기', successText: '빙글빙글! 콘크리트가 완성됐어!', wrongText: '괜찮아. 빙글빙글 도는 차를 같이 찾아볼까?', stageClass: 'cs-stage-mix' },
     { id: 'lift', title: '무거운 짐을 들어야 해요!', question: '무거운 짐을 들어야 해. 어떤 차가 좋을까?', answerIds: ['crane_truck', 'forklift'], targetIcon: '📦', resultIcon: '✨', workLabel: '들기', successText: '번쩍! 무거운 짐을 들어 올렸어!', wrongText: '괜찮아. 들기 대장을 같이 찾아볼까?', stageClass: 'cs-stage-lift' },
-    { id: 'pump', title: '높은 곳에 보내야 해요!', question: '높은 곳까지 보내야 해. 어떤 차가 좋을까?', answerIds: ['concrete_pump_truck'], targetIcon: '⬛', resultIcon: '🌟', workLabel: '보내기', successText: '쭉쭉! 높은 곳까지 보냈어!', wrongText: '괜찮아. 긴 팔이 있는 차를 같이 찾아볼까?', stageClass: 'cs-stage-pump' }
+    { id: 'pump', title: '콘크리트를 높은 곳으로!', question: '긴 관으로 콘크리트를 높은 곳에 보내요. 어떤 차가 필요할까?', answerIds: ['concrete_pump_truck'], targetIcon: '🏢', resultIcon: '🌟', workLabel: '콘크리트 보내기', successText: '쭉쭉! 긴 관으로 콘크리트를 보냈어!', wrongText: '괜찮아. 콘크리트를 보낼 긴 관이 있는 차를 찾아볼까?', stageClass: 'cs-stage-pump' }
   ];
 
   const state = {
@@ -80,7 +80,8 @@
   }
 
   function speak(text, force) {
-    if (!text) return;
+    if (!text || state.currentMission?.id !== 'pump') return;
+    try { state.options.say?.(text); } catch (error) {}
   }
 
   function vibrate(pattern) {
@@ -455,11 +456,13 @@
     state.successRewardGiven = false;
 
     renderGame();
-    playGameVoice('games.construction.intro');
-    playGameVoice(`games.construction.${state.currentMission.id === 'carry' ? 'move' : state.currentMission.id === 'pump' ? 'high' : state.currentMission.id}`);
-    
-    // ★ 이름 부르기 효과
-    speak(`시현아, ${state.currentMission.question}`, true);
+    if (state.currentMission.id === 'pump') {
+      // The old "high" recording did not name the material and made several trucks valid.
+      speak(state.currentMission.question, true);
+    } else {
+      playGameVoice('games.construction.intro');
+      playGameVoice(`games.construction.${state.currentMission.id === 'carry' ? 'move' : state.currentMission.id}`);
+    }
   }
 
   function renderGame() {
@@ -485,6 +488,7 @@
         <div class="cs-question-card">
           <div class="cs-title">${escapeHtml(mission.title)}</div>
           <div class="cs-question">${escapeHtml(mission.question)}</div>
+          ${mission.id === 'pump' ? '<button class="cs-btn" type="button" data-action="listen" aria-label="주문 다시 듣기">🔊</button>' : ''}
         </div>
 
         <div class="cs-stage" aria-label="공사장">
@@ -535,6 +539,7 @@
     if (!root) return;
 
     root.querySelector('[data-action="restart"]')?.addEventListener('click', restartGame);
+    root.querySelector('[data-action="listen"]')?.addEventListener('click', () => speak(state.currentMission?.question, true));
     root.querySelector('[data-action="home"]')?.addEventListener('click', () => {
       state.options.closeToParkHome?.();
     });

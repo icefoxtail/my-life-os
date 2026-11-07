@@ -1,0 +1,36 @@
+name: Playground checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quantity-and-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Syntax and integration
+        run: |
+          node scripts/qa-static.cjs
+          node scripts/qa-play-settings.cjs
+      - name: Independent post office quantity and state checks
+        run: node scripts/qa-number-post-office-independent.cjs
+      - name: Independent asynchronous art restore checks
+        run: |
+          node scripts/qa-art-restore-independent.cjs
+          node scripts/qa-art-pending-save.cjs
+          node scripts/qa-storage-write-failure.cjs
+      - name: Existing game and fallback regression
+        run: |
+          node scripts/test-legacy-models.cjs
+          node scripts/test-legacy-inputs.cjs
+          node scripts/test-legacy-fallback.cjs
+          node scripts/test-vehicle-display.cjs
+      - name: Independent service worker checks
+        run: node scripts/qa-sw-independent.cjs
