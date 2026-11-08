@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../"><title>실제 차량 세기 배치</title><style>*{box-sizing:border-box}html,body,#stage{width:100%;height:100%;margin:0;overflow:hidden}#stage{position:relative}</style></head><body><main id="stage"></main>
+<script src="js/vehicle-display.js"></script><script src="js/games/number-count.js"></script>
+<script>
+'use strict';
+let active=null;const stage=document.querySelector('#stage');
+window.vehicleQA={
+  async render(vehicle,count){
+    const game=window.SihyeonGames.numberCount;
+    await game.render(stage,{say:()=>Promise.resolve(false),closeToParkHome:()=>{game.destroy();stage.textContent='검수 메뉴로 돌아왔어요';}});
+    game.clearTimers();
+    const v={id:vehicle.id,category:vehicle.category,name:vehicle.name_ko,image:vehicle.file,sound:vehicle.sound_ko};
+    game.state.gameVehicles=Array(5).fill(v);game.state.currentLevel=1;
+    const difficulty=count<=5?1:count<=10?2:count<=15?3:count<=20?4:5;
+    const min=difficulty===3?11:difficulty===4?16:difficulty===5?21:1;
+    const max=[0,5,10,15,20,30][difficulty];
+    game.state.difficulty=difficulty;
+    stage.querySelector('#ncRange').value=String(difficulty);
+    const previousRandom=Math.random;
+    try{Math.random=()=>((count-min)+.25)/(max-min+1);game.loadNextQuestion();}finally{Math.random=previousRandom;}
+    active={path:vehicle.file,id:vehicle.id,expectedCount:count};
+  },
+  inspect(){
+    const cells=[...document.querySelectorAll('.nc-vehicle-cell')];
+    const images=cells.map(c=>c.querySelector('img'));
+    const frameRects=cells.map(c=>{const el=c.querySelector('.sv-vehicle-frame')||c.querySelector('img');const r=el.getBoundingClientRect();return {width:r.width,height:r.height};});
+    const imageFailures=images.filter(i=>!i||!i.complete||!i.naturalWidth).length;
+    const settled=cells.every(c=>getComputedStyle(c).opacity==='1');
+    const sizesEqual=frameRects.every(r=>Math.abs(r.width-frameRects[0].width)<.1&&Math.abs(r.height-frameRects[0].height)<.1);
+    return {...active,viewport:[innerWidth,innerHeight],renderedCount:cells.length,imageFailures,settled,sizesEqual,frames:document.querySelectorAll('.sv-vehicle-frame').length,uniformAspectFit:[...document.querySelectorAll('.sv-vehicle-frame')].every(e=>(e.getAttribute('preserveAspectRatio')||'').endsWith(' meet')),pass:!!active&&cells.length===active.expectedCount&&!imageFailures&&settled&&sizesEqual};
+  }
+};
+</script></body></html>

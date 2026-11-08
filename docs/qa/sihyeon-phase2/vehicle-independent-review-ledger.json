@@ -1,0 +1,875 @@
+{
+  "reviewer": "/root/independent_qa",
+  "scope": "Independent visual comparison and decoded final-delivery readback; game/browser performance is separate",
+  "baselineMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+  "finalReadbackCount": 28,
+  "finalReadbacks": [
+    {
+      "file": "assets/vehicles/construction/asphalt_paver.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 87146,
+      "originalBytes": 31844,
+      "deliverySha256": "5156649557e0d8064d8537a502b120511ed14b7e6c0dbb22af595bc0216e5789",
+      "generatedPngSha256": "6893ad9b6c71048ae13c95a9185b1ea7f8922c2001124c028e0854b4960d0e73",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        21,
+        204,
+        749,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/grader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 95538,
+      "originalBytes": 36210,
+      "deliverySha256": "5674f20f7c1eb94ae5d6a9e56455bb7821c970b3c705cab1da4ebf664c663f83",
+      "generatedPngSha256": "6c6d7d50e965afdf51db902d794c7752e13bb10c926aa35bef59853d218433c6",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        16,
+        223,
+        748,
+        623
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/backhoe_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 111508,
+      "originalBytes": 39112,
+      "deliverySha256": "42fc97ad3518d9688f2ef4c8f5e9a3289633c97b461a7dd8353c85b3581c9a4b",
+      "generatedPngSha256": "87ef9f6200953bf1883f594345d971912794ab86cc1cd2845d5f1f2cf936edd1",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        3,
+        93,
+        762,
+        627
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/skid_steer_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 97730,
+      "originalBytes": 41022,
+      "deliverySha256": "b38ba13242f98aff6842345bac8fcb408364ab965684a3134297ca7a29c1d16d",
+      "generatedPngSha256": "f1463a073114c95f8396d0a4e1eff035bf9e51aa757d3c126c97e64811fa5f23",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        5,
+        93,
+        707,
+        640
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/road_roller.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 79764,
+      "originalBytes": 33280,
+      "deliverySha256": "14d7efe351999c6e739467999588d9d49a73310ff2969f8d6e4df175dcf3841e",
+      "generatedPngSha256": "3b9187e2cdf68a7368a0652d3f9e128cef2d1170cca8b67760690b48070c3394",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        19,
+        142,
+        729,
+        659
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 122212,
+      "deliverySha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "generatedPngSha256": "c13d579d36b8f3223e17b152de710c9c54baf6d278a80422be1186a75116f484",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        49,
+        35,
+        741,
+        679
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 126862,
+      "deliverySha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "generatedPngSha256": "936fa179b25f55b6e7c1d634689e1cb79f47b136417f101eda93ede05a10cdd9",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        28,
+        120,
+        736,
+        722
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 84856,
+      "deliverySha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "generatedPngSha256": "48cd4698f954fe2b4e008c9edd8b1195e9f8ba9907ffcd82f4c37a3f03a3f0f7",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        3,
+        233,
+        746,
+        669
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 93618,
+      "deliverySha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+      "generatedPngSha256": "c2268d2696fc64c0fcb5480881bff15694c35716a3e7c92961190660511d822d",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        20,
+        271,
+        739,
+        650
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/water_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 98396,
+      "deliverySha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+      "generatedPngSha256": "15a49ff64894771d5c416c079725984e23598edab52dca3201ce17a14c633db0",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        21,
+        193,
+        743,
+        612
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/sweeper_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 104614,
+      "deliverySha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+      "generatedPngSha256": "7d4f56739e3333ba837775efa4df1fecb753afb771c4e7eb2857908aa2582c9b",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        14,
+        193,
+        739,
+        631
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/fuel_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 84738,
+      "deliverySha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+      "generatedPngSha256": "9300cda724d1bb6ca0f17c933ae5c25f3205400ea424e8c4c96a7f4d4a938c68",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        30,
+        231,
+        747,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/lowbed_trailer.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Long deck, front supports and two rear ramps preserved.",
+      "candidateComparisonSha256": "51d211cd7c1a2d19411cefd05a1479c9f35ec874bae5ace91519ae55eb0bdb99",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 66280,
+      "deliverySha256": "586d0b8f6423e2b2fbb9984cb985a1c22fdaff61bc16871b25f014d7593343b4",
+      "generatedPngSha256": "b867979c40d08a107c81cbd1f8f4b5b059d58bfb1483acf8f1b49357c0f02adf",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        33,
+        199,
+        731,
+        566
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/construction/cargo_truck.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Loaded pipes, timber, folding crane and truck frame preserved.",
+      "candidateComparisonSha256": "6cc7fb5099f7b29d5cb1615048e9d5f2a1017f004de89d97b182cab8bfb13805",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 99372,
+      "deliverySha256": "ee43488e43ed604ed2432b9792b177db32deb0e4fe0ffcae70af294ff71ad17a",
+      "generatedPngSha256": "43ce172836fec0991a9abf6e7abcebbdb65c9ed23bceefdf291ef41491999b58",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        25,
+        115,
+        742,
+        608
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/construction/scissor_lift.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Guardrails, crossed lifting links and four-wheel base preserved.",
+      "candidateComparisonSha256": "9f35c412fe1dc6c0820dfa08eaf46b77de13e5980fff3ece18cde20e679ddd7b",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 116548,
+      "deliverySha256": "72351f8ad22a202e1c9b7079b27e45ed290f8d6508e8f9c3d1661803c0d8553f",
+      "generatedPngSha256": "65c0e8844bd3625cbad7879b71d8394aa354c5637c08aeed16125b30f873f76f",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        145,
+        28,
+        562,
+        648
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Retry candidate has no three invented outrigger feet; boom, cables, hook and wheels preserved.",
+      "candidateComparisonSha256": "425accd8c707327fd065ee6755e214a60371ca96d7bf9c3edb889d0e4fdaf089",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 126606,
+      "deliverySha256": "2df3607b1290aebb0647631229b38e4e1cd1c27e11c4af0dc372b0ddd4f7b3eb",
+      "generatedPngSha256": "866436f075cc20643b861a64c98be85e5ec3d91c5dca99c2f8e94068340e6c0d",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        40,
+        16,
+        731,
+        682
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/airport_bus.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "White body, windows, doors and mirrors preserved.",
+      "candidateComparisonSha256": "442b610f7738b1f0add248f0b33e996ba8a329845c57adefb91e975560c448d0",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 65692,
+      "deliverySha256": "0f8b75f0137effa7e229ad3d2edfd10614fa190df2612c6b5dbe803f7a3dbfd3",
+      "generatedPngSha256": "07109076a98c70dc5c6173b1356ed57bc2fcb5f9b3212a3d606fb9729e0a9379",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        29,
+        246,
+        739,
+        615
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Yellow/black vehicle paint kept, unlike removed pale backdrop checkerboard; left source margin is small.",
+      "candidateComparisonSha256": "9f08149c8bbfce19c4b67afde465493eeea2b610757c9527a43ade8a4697d045",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 78122,
+      "deliverySha256": "49863d451c3e5f4e728c352ac051a2c9116609dd55b03972c2c062395c852eb0",
+      "generatedPngSha256": "6b71b1a284bff71c90190cdf22cd3e9a20a1265475b3ee6be25d4f594ca79032",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        1,
+        172,
+        731,
+        583
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/baggage_cart.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "White tractor and three linked luggage carts, thin railings and wheels preserved.",
+      "candidateComparisonSha256": "88a4f5d355658cff56561774640110ff206d0f2aab30e2bb24b0fe724c11957d",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 68006,
+      "deliverySha256": "978f11bc4d655eed9c8b38de598b428fab115d66c11b7c8e9f99e879dde679e1",
+      "generatedPngSha256": "c5d2529d1ac6dd3adae5ec48db85f9b2678f5e0619264dd3f8d020b12b96aa66",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        6,
+        286,
+        754,
+        565
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/catering_truck.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "White elevated box, door railing, scissor lift, side ladder and truck body preserved.",
+      "candidateComparisonSha256": "9b2279bd5d459608e7978ab6edae588790189e7ed53d43b35022b6387ee5dba3",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 100534,
+      "deliverySha256": "a4295b76893e381259b519902d01b113c9c51df07b4191a7b5e075c4cdfec5ea",
+      "generatedPngSha256": "94b780046074899831104959f8bad8fc633720b11056348371f62b2c1dc71589",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        7,
+        88,
+        738,
+        655
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/de_icing_truck.webp",
+      "candidateComparisonSha256": "04adc528314df9e95b53164285d271590b4bb1e359f37233484912bef65d9c49",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "제빙차의 흰 차체, 높은 노란 조종석, 사다리·상부 난간, 노즐 및 두 가는 노즐 막대를 세 배경에서 확인. 새 잘림·차체 구멍·배경 조각은 보이지 않음.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 107704,
+      "deliverySha256": "4fe3897f3dde3157abe8a89aa3090ba798169ee515576b0687679b708186a5fd",
+      "generatedPngSha256": "f913a18b7f2c1f708a57d21c03077d3a95da085b952839bd45adec6e3887ae68",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        27,
+        42,
+        719,
+        630
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        27,
+        42,
+        719,
+        630
+      ]
+    },
+    {
+      "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "candidateComparisonSha256": "5899be411b173ce7d4e9f7ee896062a6dc1a9714e9ee7b71ca7f0bf9b82e9f32",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "흰 탱크와 차체, 운전석 뒤 세로 사다리, 탱크 위 난간, 아래 배관·측면 보호대·경고 도장 보존을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 82590,
+      "deliverySha256": "22c0a0af077f5aa93370fd59f84596dc5e7424c1f169157bb68d9993f8e54a86",
+      "generatedPngSha256": "6cc4c99a0364e10d253209a5f5e79ed7495d475536073f0772f0be1d266a6552",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        28,
+        188,
+        748,
+        584
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        28,
+        188,
+        748,
+        584
+      ]
+    },
+    {
+      "file": "assets/vehicles/airport/pushback_tug.webp",
+      "candidateComparisonSha256": "c75b12b5289865bcd1b515ded8383ae976e5d23ced07ef287e758e732ced9a4a",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "낮고 넓은 흰 차체, 큰 타이어, 창문·와이퍼·거울, 노랑검정 전면 도장, 전면 견인 연결부 보존을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 68742,
+      "deliverySha256": "01dda38387ec48347690cd23bde56e72fdf91ba3815dfae77fc248013c8b2582",
+      "generatedPngSha256": "f8e23be950f840f1e3ce1d2c2e74e92ca39588988c187cb42de0ee2ea169b4eb",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        10,
+        244,
+        754,
+        529
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        10,
+        244,
+        754,
+        529
+      ]
+    },
+    {
+      "file": "assets/vehicles/airport/stair_truck.webp",
+      "candidateComparisonSha256": "3876b2006fae15bad23b1832cbf2b30234b7ea9b398eb89f486d71bbcf4f11fa",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "계단의 흰 측판, 상부 승강판·가느다란 난간, 계단 아래 지지 구조·바퀴·기존 전방 지지발을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 136122,
+      "deliverySha256": "4d3367d058919d4e9c50f9e7f467966cd7c9745d1c95b38e42dc06086095edea",
+      "generatedPngSha256": "aa8508e0903adad49f13b901da437d2d1b019a16a6395bb471e31dfc47ca94d7",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        58,
+        56,
+        736,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        59,
+        56,
+        736,
+        622
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/baler.webp",
+      "candidateComparisonSha256": "67cb9e249a3eeb452f55ffe292e6547469885573672302fc2ebe2939f3f83405",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 몸통, 가는 픽업 이빨, 검은 롤러, 견인 연결부와 작은 보조바퀴를 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 96852,
+      "deliverySha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+      "generatedPngSha256": "392bdbf09a8dafe82871fbb572c51f55e24e64b5730f7cde34d30aee7f8f6541",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        34,
+        117,
+        697,
+        665
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        34,
+        117,
+        697,
+        665
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/combine_harvester.webp",
+      "candidateComparisonSha256": "d86096615273c70b1788a8a613d0472467bd6093c2aaa268829d2746cf59c584",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 차체, 앞 리일·이빨·회전 구조, 계단·난간·캐빈, 상부 호퍼와 긴 배출관을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 132254,
+      "deliverySha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+      "generatedPngSha256": "46832b84098c97c998a1c6129bcbeae99a8f7844faa63e3b465a9709eb271962",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        12,
+        140,
+        754,
+        649
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        12,
+        140,
+        754,
+        649
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/farm_trailer.webp",
+      "candidateComparisonSha256": "f0cc9d37f8b9591cbb631d7cbe3b440e603f53db32bed7d9e7078905d8c9e990",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 적재함의 판/기둥, 견인바와 앞 지지발, 차축·타이어가 유지됨을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 89034,
+      "deliverySha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+      "generatedPngSha256": "967f974ae9edbe95785090fb773fbce0375263d32f87d5ad03b52c11c62220ef",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        17,
+        164,
+        732,
+        593
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        17,
+        164,
+        732,
+        593
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/milk_tanker.webp",
+      "candidateComparisonSha256": "96d20cf6f45f254a2794c3a04e332fdbb32f0bc8451849bb1d1cf92be0fe1bd7",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "은색 탱크, 덮개3개, 후방 사다리·배관, 노란 캐빈·바퀴를 세 배경에서 확인. 앞유리는 부분 투명 알파가 있지만 완전 투명 삭제 구멍은 아니며 창틀·와이퍼·내부 형상이 유지된다.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 91674,
+      "deliverySha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+      "generatedPngSha256": "42d03bc1d847c7b07f93e00b64b1e0eccb372cd76e125a24d3e41600adbc4f8e",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        19,
+        170,
+        754,
+        582
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        19,
+        170,
+        754,
+        582
+      ]
+    }
+  ],
+  "candidateOnly": [
+    {
+      "file": "assets/vehicles/farm/plow_tractor.webp",
+      "candidateComparisonSha256": "99d668d83708cd3c1433422098a191e470d2042d2c2892ed221df519aa411637",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 트랙터의 캐빈·거울·계단·바퀴와 뒤쪽 위/아래 쟁기날·연결 프레임을 세 배경에서 확인."
+    },
+    {
+      "file": "assets/vehicles/farm/rice_transplanter.webp",
+      "candidateComparisonSha256": "58562da30be68e2625bb0502999d31b09cc1290a0d2aba04f88df5bbbd152d91",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "차양의 가는 지지대, 좌석·핸들, 녹색 모판과 흰 거치대, 하부 이식 장치·금속바퀴를 세 배경에서 확인."
+    },
+    {
+      "file": "assets/vehicles/farm/sprayer_truck.webp",
+      "candidateComparisonSha256": "02654bc8ca0d5e2541942880b3c972c6c072dd5cb355330a075d9305c16d0f79",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "높은 차체, 흰 탱크, 접힌 노란 격자 붐·호스, 큰 바퀴·거울·안테나를 세 배경에서 확인."
+    },
+    {
+      "file": "assets/vehicles/farm/tractor.webp",
+      "candidateComparisonSha256": "8a8b9c971f006aace22e8c6d532e57fe9c9eccff66bc99f2e95eae55880dddca",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "캐빈의 유리·핸들, 배기관·거울·경광등, 계단·앞 무게추·타이어 형상 유지."
+    },
+    {
+      "file": "assets/vehicles/transport/helicopter.png",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "candidateComparisonSha256": "5217d6cfc53a4b999afeda8a9d1250066d5335aeb482146c4577b8c5987cd911",
+      "note": "원본 왼쪽 부유 조각과 흰 바닥을 제거하고 주황/흰 차체·창문·로터 끝·꼬리/스키드 유지 확인."
+    },
+    {
+      "file": "assets/vehicles/transport/garbage_truck.png",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "candidateComparisonSha256": "515dcbac5752b37b6d03b23664da097f8a8961f3f878ff8be373ab06dd8bd99d",
+      "note": "원본의 세로 이어붙임 경계와 잔여선을 제거하고 녹색 차체·압축함·후부 장치·바퀴 유지 확인."
+    },
+    {
+      "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "candidateComparisonSha256": "c5135e604f2aa7f657af60b50b4319f68351cb4aa8cf593aa08209ae83e61683",
+      "note": "작은 원본의 흰 사각을 제거하고 붉은 차체·파란 유리·루프 조명/난간·궤도 형상 유지 확인. 생성 PNG도 크게 읽음."
+    }
+  ],
+  "rejected": [
+    {
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "candidate": "first",
+      "reason": "Three outrigger feet were added although absent from original; do not use this candidate.",
+      "retainedComparison": "comparisons/rejected-construction-mobile_crane-first.jpg"
+    },
+    {
+      "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "candidate": "first",
+      "reason": "원본의 흰 앞유리 부분이 후보에서 배경색·격자가 그대로 비치는 투명 구멍으로 바뀐다. 차체 내부를 배경으로 오인한 것으로 보이며 적용하지 않는다.",
+      "comparisonSha256": "e4c84f636bfc51a256bbc6349d0c8bb3a9fb3196256aba0da78ba1bdc3578c58",
+      "retainedComparison": "comparisons/rejected-farm-fruit_harvest_truck-first.jpg"
+    }
+  ],
+  "originalMilitaryPrecisionRecheck": {
+    "reviewMethod": "Read-only nearest-neighbour enlargement of the original central image area; no source edits. All 18 images visually inspected.",
+    "inspectionImages": [
+      {
+        "fileName": "military-detail-1.png",
+        "sha256": "d8816753f9cd5c5c8e8dd37ad64fb206866591a11dc1d3db3e51ab065192d3d1",
+        "repositoryEvidence": "contact/military-detail-1.png"
+      },
+      {
+        "fileName": "military-detail-2.png",
+        "sha256": "d0c564f20cd76d6383d215cffd44f1855a92d247da3e49ac4f89afb509095f69",
+        "repositoryEvidence": "contact/military-detail-2.png"
+      },
+      {
+        "fileName": "military-detail-3.png",
+        "sha256": "04d641cac8b6d4662025239acde7f928d2b81b1f25a4f265f7dc2c91a41f71ec",
+        "repositoryEvidence": "contact/military-detail-3.png"
+      }
+    ],
+    "counts": {
+      "clearSourcePartLoss": 16,
+      "minorBottomAmbiguous": 1,
+      "backgroundExtractionCandidate": 1
+    },
+    "entries": [
+      {
+        "file": "assets/vehicles/military_special/amphibious_vehicle.webp",
+        "baselineSha256": "bea935e8874bf8e3a2d9b9c03c7428d6e65e574ef9937f910c5653687e98b38f",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "가까운 앞 타이어 하부가 흰 그림 영역의 수평 하단에서 끊긴다."
+      },
+      {
+        "file": "assets/vehicles/military_special/armored_rescue_vehicle.webp",
+        "baselineSha256": "056ff3bf49c4b491927c07feb8fd5203d32a204bc3291436beabc67bd7a1605c",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "전면 양쪽 타이어 하부가 그림 영역의 수평 하단에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/bridge_layer_truck.webp",
+        "baselineSha256": "bd9984b36fe15798d5937a20fa8135f2f1e6716380696ed51d259d5cf932b9e3",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 바퀴와 차체 하부가 수평 하단에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/command_truck.webp",
+        "baselineSha256": "b8f238e08f02d97770df8dd1008e0cbf7a6a5fc6b3721a2ee0f2cdbe1c0d1364",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞 바퀴·후방 차체 하부와 뒤 바퀴가 수평 하단에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/communication_relay_truck.webp",
+        "baselineSha256": "20169f5fbe5b1a003cbfa4630ebb8ec90367375c0c6dbb1b416f56f50cfec5c5",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞 범퍼와 바퀴 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/decontamination_truck.webp",
+        "baselineSha256": "1d743c7e7834156ebc93947f5ad43d01b9c5e618f898014847133750ce0cd876",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 타이어 하부가 수평 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/drone_control_vehicle.webp",
+        "baselineSha256": "2c81f0af96977d24383426d42130105128892609795360718a02013d34b068a9",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "범퍼와 타이어 하부가 크게 잘려 있다. 위 드론은 그림 일부로 보존 대상이다."
+      },
+      {
+        "file": "assets/vehicles/military_special/engineering_vehicle.webp",
+        "baselineSha256": "d48cd727c8d3bb52027f81c29e56efdf8681b2ee8832ccf6c4f76ab9446f4a12",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "블레이드와 궤도 하부가 수평 경계에서 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/eod_robot_vehicle.webp",
+        "baselineSha256": "028df848e582299fffb286779e661aa5a71c88e6ae3d3e0fdf6525c965d567e7",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "양쪽 트레드 하부가 그림 영역 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/military_truck.webp",
+        "baselineSha256": "fd64c01082997bc0d627fd4a9819054c693a519d0eb4ccca7032a1cd2fbca39c",
+        "status": "PRECISION_HOLD_AMBIGUOUS_BOTTOM",
+        "independentObservation": "앞 타이어의 최하단이 흰 사각 하단에 닿아 소량 소실 여부가 모호하다. 큰 하부 소실 16개와 구분하고 정상 전체 외곽으로 단정하지 않는다."
+      },
+      {
+        "file": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
+        "baselineSha256": "21e5c6b593591bb1e78c697c381efef1228b286af94f0405c2f2e0838a216dc4",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 바퀴 및 차체 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/mobile_hospital.webp",
+        "baselineSha256": "298deafd2dae4e98ed6181b0b9a208a77d591429844c9f291de59792f7d44c00",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 바퀴와 차체 하부가 수평 경계에서 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/mrap_patrol_vehicle.webp",
+        "baselineSha256": "44350e0a30dd600041e8fdd48a15b1044d0f174d2b409474896bb99da24d07d5",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "전면과 측면 타이어 하부가 수평 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/radar_truck.webp",
+        "baselineSha256": "e0f126e849daa1be0772ea62fb406ec781cce94d22711a16a1e4320d11ba056e",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 타이어와 차체 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/searchlight_truck.webp",
+        "baselineSha256": "1097e5528f8fc4d363dd37a2e82f2199a98ccd06cb73c779db31ebd0edb5692a",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞 범퍼 및 바퀴 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+        "baselineSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+        "status": "BACKGROUND_EXTRACTION_CANDIDATE",
+        "independentObservation": "차체·궤도·루프 장비 대부분의 외곽이 확인되어 추출을 시도할 수 있다. 최하단 여유가 얇아 결과에서 임의 새 장비·큰 외곽 변화 여부를 다시 확인해야 한다."
+      },
+      {
+        "file": "assets/vehicles/military_special/tracked_carrier.webp",
+        "baselineSha256": "5ad72a6d6792da1da196ddf77b13787e5085b3c0957c564ceed979b1f48ecaa6",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "궤도의 낮은 부분과 작은 휠 하부가 수평 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/water_purification_truck.webp",
+        "baselineSha256": "690c397999c49c3a10f96ef6f735bf627d92322e9b81ff205c154d6b51b056b6",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 타이어와 차체 하부가 수평 경계에서 잘려 있다."
+      }
+    ]
+  },
+  "originalPortPrecisionRecheck": [
+    {
+      "file": "assets/vehicles/port/cargo_ship.webp",
+      "baselineSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+      "independentObservation": "좌측 x=0에서 선수의 곡선 외곽이 수직 단면으로 끊겨 원래 외곽을 확인할 수 없다. 전체 원본과 (0,150,100,270) 읽기전용6배 확대 확인. 사라진 외곽을 임의 생성하여 원형 보존이라고 보고하지 않는다."
+    }
+  ]
+}

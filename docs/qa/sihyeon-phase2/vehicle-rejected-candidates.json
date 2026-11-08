@@ -1,0 +1,19 @@
+[
+  {
+    "file": "assets/vehicles/construction/mobile_crane.webp",
+    "candidateSha256": "6b3d24a6e7d6dd0acd92fbcb32ae1aaac4d7840fd38b40a5cfaee18bc862a1f4",
+    "candidateName": "exec-c616e6dd-f697-49f8-a56d-cee8882a2732.png",
+    "status": "REJECTED_RETRY",
+    "reason": "Generated three downward outrigger/stabilizer feet absent from the original. Independent reviewer confirmed altered equipment structure; original remains unchanged.",
+    "evidence": "comparisons/rejected-construction-mobile_crane-first.jpg"
+  },
+  {
+    "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+    "candidateSha256": "45d02bd80242f3e0ed1fe5c232cb4c833d7ae0276ff3642377dd6fcfc2a2f675",
+    "candidateName": "exec-9682afaf-46bd-413e-8796-d0ff488e6878.png",
+    "status": "REJECTED_RETRY",
+    "reason": "First extraction turned the light left windshield pane into a completely transparent hole, visible on dark/checker backgrounds. Original preserved; retry must preserve opaque glazing/highlights. Independently confirmed.",
+    "evidence": "comparisons/rejected-farm-fruit_harvest_truck-first.jpg",
+    "comparisonSha256": "e4c84f636bfc51a256bbc6349d0c8bb3a9fb3196256aba0da78ba1bdc3578c58"
+  }
+]

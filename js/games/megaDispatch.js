@@ -262,6 +262,9 @@
         height: 85%;
         object-fit: contain;
       }
+      .md-mission-card > .sv-vehicle-frame { max-width: 85%; max-height: 85%; }
+      .md14-scene-target > .sv-vehicle-frame { max-width: 86%; max-height: 86%; }
+      .md14-truck-btn > .sv-vehicle-frame { max-width: 90%; max-height: 90%; }
 
       .md-mission-card.done {
         opacity: 0.2;
@@ -764,7 +767,9 @@
       ]);
       const list1 = res1.map(t => ({ ...t, gameId: `n_${t.id}` }));
       const list2 = res2.map(t => ({ ...t, gameId: `s_${t.id}` }));
-      state.allTrucks = [...list1, ...list2];
+      const combined = [...list1, ...list2];
+      state.allTrucks = window.SihyeonVehicleDisplay?.filterAvailable(combined) || combined;
+      if (!state.allTrucks.length) throw new Error('No approved fire vehicles available');
     } catch (e) {
       state.allTrucks = [{ gameId: 'n_pump', id: 'pump_engine', file: 'assets/vehicles/fire/pump_engine.png', name_ko: '펌프차' }];
     }
@@ -782,7 +787,7 @@
           <div class="md14-mode-row">
             <button class="mode-btn" type="button" data-mode-size="4">쉬움 🚒 (4대)</button>
             <button class="mode-btn" type="button" data-mode-size="9">보통 🚒🚒 (9대)</button>
-            <button class="mode-btn" type="button" data-mode-size="16">도전 🚒🚒🚒 (16대)</button>
+            <button class="mode-btn" type="button" data-mode-size="16">도전 🚒🚒🚒 (최대 16대)</button>
           </div>
         </div>
       </div>
@@ -879,6 +884,7 @@
       </div>
     `;
 
+    state.container.querySelectorAll('.md-mission-card img, .md14-scene-target img, .md14-truck-btn img').forEach(img => window.SihyeonVehicleDisplay?.apply(img));
     state.container.querySelectorAll('.md14-truck-btn').forEach(btn => {
       btn.onclick = (e) => handleTouch(btn.dataset.gameId, btn, e);
     });

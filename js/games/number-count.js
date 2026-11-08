@@ -295,7 +295,8 @@
         if(!res.ok) throw new Error('manifest fail');
         const data = await res.json();
         const raw = Array.isArray(data.vehicles) ? data.vehicles : (Array.isArray(data) ? data : []);
-        const list = raw.map(normalizeVehicle).filter(v => v && v.id && v.image && v.name);
+        const normalized = raw.map(normalizeVehicle).filter(v => v && v.id && v.image && v.name);
+        const list = window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
         if(list.length < TOTAL_ROUNDS) throw new Error('too few');
         this.state.vehicles = list;
       }catch(e){
@@ -1195,7 +1196,7 @@
         .nc-tap-count{position:absolute;right:2px;top:0;background:#17695a;color:white;border:2px solid white;min-width:26px;height:26px;border-radius:50%;font-size:16px;display:grid;place-items:center}
         .nc-many{gap:6px!important;align-content:center!important;grid-auto-rows:minmax(50px,1fr);padding:5px!important}
         .nc-many .nc-vehicle-cell{padding:5px 2px;background:#ffffffa0;border:1px solid #7ba7b4;border-radius:9px}
-        .nc-many .nc-vehicle-cell:nth-child(10n+1),.nc-many .nc-vehicle-cell:nth-child(10n+2),.nc-many .nc-vehicle-cell:nth-child(10n+3),.nc-many .nc-vehicle-cell:nth-child(10n+4),.nc-many .nc-vehicle-cell:nth-child(10n+5){border-top:4px solid #4f9188}
+        .nc-many .nc-vehicle-cell:nth-child(10n+1),.nc-many .nc-vehicle-cell:nth-child(10n+2),.nc-many .nc-vehicle-cell:nth-child(10n+3),.nc-many .nc-vehicle-cell:nth-child(10n+4),.nc-many .nc-vehicle-cell:nth-child(10n+5){box-shadow:inset 0 3px 0 #4f9188}
         .nc-many .nc-tap-count{min-width:21px;height:21px;font-size:13px;border-width:1px}
         .nc-choice-dots.nc-choice-dots--many{grid-template-columns:repeat(5,6px);gap:2px;max-width:none!important;max-height:none;overflow:visible}
         .nc-choice-dots--many .nc-choice-dot{width:6px;height:6px}

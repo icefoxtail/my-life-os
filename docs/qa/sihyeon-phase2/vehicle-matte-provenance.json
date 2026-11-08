@@ -1,0 +1,1641 @@
+{
+  "method": "Original RGB preserved; reviewed alpha masks and explicit source-pixel restorations only",
+  "model": "BiRefNet-general-lite",
+  "modelSha256": "5600024376f572a557870a5eb0afb1e5961636bef4e1e22132025467d0f03333",
+  "reviewsAreIndependentAgents": false,
+  "entries": [
+    {
+      "source": "assets/vehicles/farm/tractor.webp",
+      "sourceSha256": "e5b7cc3b7d73d4746743360ef73aa2294b75fdca8a45d1f1e1add953a013b70e",
+      "candidate": "tractor.png",
+      "candidateSha256": "5149c665994421d55e606b74329cf9b663b04b4a8cb423c281884a2ddf829369",
+      "size": [
+        418,
+        418
+      ],
+      "artifactId": 13617547293,
+      "artifactSha256": "b8998b602fe047b58a0f17a2d2810388cc332c38b21300becee6b0e28b8fa029",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "c134894a7f8a920da98db8c81cb297af11b73bfaeba7cd335dc9bba1d50d4ef5",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Cab glazing, mirror, exhaust, roof light and tire lobes intact. Removed baked checker and ground field; original RGB and thin source-antialias edge retained.",
+      "outputSha256": "e5e998034857ecec8aeebd8efca824fbd765043d491e48d1f46ab8b345063f8f",
+      "outputBytes": 127150,
+      "outputRgbaSha256": "c134894a7f8a920da98db8c81cb297af11b73bfaeba7cd335dc9bba1d50d4ef5",
+      "displayBounds": {
+        "box": [
+          28,
+          72,
+          380,
+          352
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/farm/plow_tractor.webp",
+      "sourceSha256": "8fba0936b9ddfa6dae0ad6c6578f4aaaaa02645e14218d75a708a7852d2462f0",
+      "candidate": "plow_tractor.png",
+      "candidateSha256": "3c2a7ed87db0835f4ec3a4729be83c6bc19e903c4de8d5cbaaede8ca80936112",
+      "size": [
+        418,
+        418
+      ],
+      "artifactId": 13617547293,
+      "artifactSha256": "b8998b602fe047b58a0f17a2d2810388cc332c38b21300becee6b0e28b8fa029",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ed834a9b1e47a89099ecb744a4cb10e8d5a58b2401a63ad3fc015855edf31592",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Upper and lower plow blades, frame ties, wheel edges and cab retained; blade gaps open.",
+      "outputSha256": "9d621651fb89a744a44bcab6c8e7db330cd04e0eb8079c9a1c4845d86a4f3714",
+      "outputBytes": 118850,
+      "outputRgbaSha256": "ed834a9b1e47a89099ecb744a4cb10e8d5a58b2401a63ad3fc015855edf31592",
+      "displayBounds": {
+        "box": [
+          5,
+          71,
+          404,
+          306
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/farm/rice_transplanter.webp",
+      "sourceSha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
+      "candidate": "rice_transplanter.png",
+      "candidateSha256": "cafcbcfb46652f07005223cc5e8d49fdefa274e4cee206081ff61e3b343031ea",
+      "size": [
+        418,
+        418
+      ],
+      "artifactId": 13617547293,
+      "artifactSha256": "b8998b602fe047b58a0f17a2d2810388cc332c38b21300becee6b0e28b8fa029",
+      "alphaRepairs": [
+        {
+          "op": "restore_green_source",
+          "box": [
+            235,
+            130,
+            360,
+            166
+          ],
+          "greenMinusRedMin": 1,
+          "greenMinusBlueMin": 6
+        }
+      ],
+      "reviewedRgbaSha256": "c4f73b37df7a9cde67299af069e8c5f49d3e376c21f5d32f1253c446f48536d2",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Initial mask rejected because upper rice seedlings were deleted. Restored 1432 original green pixel alpha values within the inspected ROI, without synthesizing RGB. White bumper, wheel holes, canopy posts, seedling trays and planting mechanism retained.",
+      "outputSha256": "fc55c95cf3e16a07fcea384358929817b5361820674b275727a6937b08fe511c",
+      "outputBytes": 140782,
+      "outputRgbaSha256": "c4f73b37df7a9cde67299af069e8c5f49d3e376c21f5d32f1253c446f48536d2",
+      "displayBounds": {
+        "box": [
+          20,
+          67,
+          386,
+          342
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/farm/sprayer_truck.webp",
+      "sourceSha256": "94f15a90cdcf5f135b1703d3950274679386a2d3e0a6c4fbd01642e89da7a9b4",
+      "candidate": "sprayer_truck.png",
+      "candidateSha256": "57cd49d01240e27a5a77cf527b659035d6b684909d44b43145f34f20eb8422ae",
+      "size": [
+        418,
+        418
+      ],
+      "artifactId": 13617547293,
+      "artifactSha256": "b8998b602fe047b58a0f17a2d2810388cc332c38b21300becee6b0e28b8fa029",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "aae40fbe4acf5efd989ba070219a44aac80a0e6c9a4e107411e0c74dfb92c85a",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White tank, antenna, boom truss and nozzles, and high wheels retained. Inner boom gaps remain open.",
+      "outputSha256": "8f46df77a971d352175b82f46843fda9fa26aacac0899f31fe3cb863ae33743f",
+      "outputBytes": 137170,
+      "outputRgbaSha256": "aae40fbe4acf5efd989ba070219a44aac80a0e6c9a4e107411e0c74dfb92c85a",
+      "displayBounds": {
+        "box": [
+          17,
+          71,
+          410,
+          329
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "sourceSha256": "b576e23499a1198f2c1e4f13d3d944ed0cde18339331731935afea27993ec47b",
+      "candidate": "fruit_harvest_truck.png",
+      "candidateSha256": "737ae63c2c09bfc77d1fe6508df3a26ce6a0a99234c28a7e342f01b56c3f023c",
+      "size": [
+        418,
+        418
+      ],
+      "artifactId": 13617547293,
+      "artifactSha256": "b8998b602fe047b58a0f17a2d2810388cc332c38b21300becee6b0e28b8fa029",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "81589f6898307250debc2ffd38608dc3cf4bcf0504034cc55282113c58d1ebde",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Windshield highlight remains opaque, fruit and crates preserved. A faint roof feature was enlarged and verified as the original antenna, not removed as a fragment.",
+      "outputSha256": "03e19f51b348175495f985fa8b9d9037e9fb4702586ad697dfbd5cb7b0ce6440",
+      "outputBytes": 129150,
+      "outputRgbaSha256": "81589f6898307250debc2ffd38608dc3cf4bcf0504034cc55282113c58d1ebde",
+      "displayBounds": {
+        "box": [
+          11,
+          78,
+          407,
+          320
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/road_repair_truck.webp",
+      "sourceSha256": "6e1c30573fc874db0ac595af19094a5feb40459b7357301a1b052542f80d964b",
+      "candidate": "road_repair_truck.png",
+      "candidateSha256": "f4bf817e1eb2f64b04225282913d39855bd0f85849581dfeb2bd1afdc47d93e6",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "5e93d30d4fe23cfb383081caa717b317e8fe5af7b77e9bb0ab38f92290b753ff",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Hopper, pipework, rear rollers, white cab and full wheel outlines retained; baked checker and ground removed.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+      "outputBytes": 126912,
+      "outputRgbaSha256": "5e93d30d4fe23cfb383081caa717b317e8fe5af7b77e9bb0ab38f92290b753ff",
+      "displayBounds": {
+        "box": [
+          9,
+          84,
+          409,
+          347
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/line_painting_truck.webp",
+      "sourceSha256": "000a6f84903e5794f67c3e9571c68c0ef1942bf573a398117c528971b0c0f37a",
+      "candidate": "line_painting_truck.png",
+      "candidateSha256": "d13929ecbce09571e0732c6297bdea03aba9a7d178db2b915cda4d420d271d61",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f968ec0c1896d785fb2837718c3ed4a0224141efe5ca9be9fe2b9f80a076541d",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White cab/tank, safety rails and front nozzle/caster retained. Painted stripe on the ground is background, not a removed vehicle component.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+      "outputBytes": 107566,
+      "outputRgbaSha256": "f968ec0c1896d785fb2837718c3ed4a0224141efe5ca9be9fe2b9f80a076541d",
+      "displayBounds": {
+        "box": [
+          19,
+          77,
+          401,
+          334
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "sourceSha256": "2735a7d73b23c17c31eb86a41a4544780cd38caceeaab6980adb2c88dbb4a18a",
+      "candidate": "traffic_cone_truck.png",
+      "candidateSha256": "11788c1a611b46f26ab363894cb9bc234b987d542a07573b1142241227145f81",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ec70811d555c897469865858a7db6ab1daf8bd407f5fd7035891411dadd67594",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Cones and their white bands, arrow board and cargo rails intact; no new clipping or interior deletion observed.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+      "outputBytes": 126986,
+      "outputRgbaSha256": "ec70811d555c897469865858a7db6ab1daf8bd407f5fd7035891411dadd67594",
+      "displayBounds": {
+        "box": [
+          13,
+          70,
+          407,
+          343
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/road_sweeper.webp",
+      "sourceSha256": "6bfc0635d1d32f64983b59bad6fdf036257d4aafbdbe9419be68beccbe3c99d2",
+      "candidate": "road_sweeper.png",
+      "candidateSha256": "9fd1df5e75ef05806120a597d71163fd044a7c82530fb167eef9c8ccf0cd3289",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f79040dc31db4d3748a09467bd297d1d679968f2e0fda63015b19bb402632564",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White body, front/rear brushes and suction hose preserved; inspected open gaps and wheels.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+      "outputBytes": 109254,
+      "outputRgbaSha256": "f79040dc31db4d3748a09467bd297d1d679968f2e0fda63015b19bb402632564",
+      "displayBounds": {
+        "box": [
+          16,
+          93,
+          406,
+          357
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/salt_spreader.webp",
+      "sourceSha256": "b8cb0270b5264a8cb7451e0fff7d540410d43d00a184ed55dfea9f55d42424ee",
+      "candidate": "salt_spreader.png",
+      "candidateSha256": "ffb54da3f43c1539baa96ad0ef85d725710c8f4b26f280cf7d54799c5f401621",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "20228d0d445910c7b8a22b0e55075becc345647ba5b7541eb9d6e23efd593d8a",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White salt load is retained with hopper, rails and spreading disc; not mistaken for background.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+      "outputBytes": 130084,
+      "outputRgbaSha256": "20228d0d445910c7b8a22b0e55075becc345647ba5b7541eb9d6e23efd593d8a",
+      "displayBounds": {
+        "box": [
+          18,
+          70,
+          392,
+          348
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/snow_plow.webp",
+      "sourceSha256": "25e12e2edd1a7d0da559ccf42697c46ade6fd0871230027669a268bf34fe6167",
+      "candidate": "snow_plow.png",
+      "candidateSha256": "8b551ed040721e5a746009db98c76bf0fc5e989fb63f8d4835361626a6cff905",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "6daac21e5804241f6654d995d5761d35233877bf7f9bd1a920fb296974eba7f8",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Blade, cutting edge, upright marker flags and roof lights preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+      "outputBytes": 126864,
+      "outputRgbaSha256": "6daac21e5804241f6654d995d5761d35233877bf7f9bd1a920fb296974eba7f8",
+      "displayBounds": {
+        "box": [
+          6,
+          71,
+          403,
+          369
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "sourceSha256": "878cca912fba2a3c4ea01ba254668fd8b2106b3ac0e6bac9f1b6c4cb2e18f66b",
+      "candidate": "bridge_inspection_truck.png",
+      "candidateSha256": "4e2377ffb9559529430f97c195c88caa6469bb8cafa237497d116e7b1f982ddc",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "71b02d1a0ef6715b8841883173d0e3f792d199be382b80d38243e7cdbd97aa71",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Extended articulated boom, inspection basket rails, stabilizers and thin hydraulic members retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+      "outputBytes": 120898,
+      "outputRgbaSha256": "71b02d1a0ef6715b8841883173d0e3f792d199be382b80d38243e7cdbd97aa71",
+      "displayBounds": {
+        "box": [
+          11,
+          12,
+          402,
+          343
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "sourceSha256": "72a5b06bb5d463eb250934903a00943cfdadba8d51337892189cd4027fa3f8a3",
+      "candidate": "tunnel_cleaning_truck.png",
+      "candidateSha256": "bc08c066b83a41b010180c8ecb7db0f96181b13085cf8dee4f50fd521186f557",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "e58aa86e46f64507901b46f4761825d3e5777156cfcac98c784a69c347c47a37",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White tank, pipework and front cleaning head retained; checked dark composite for holes.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+      "outputBytes": 114660,
+      "outputRgbaSha256": "e58aa86e46f64507901b46f4761825d3e5777156cfcac98c784a69c347c47a37",
+      "displayBounds": {
+        "box": [
+          6,
+          60,
+          396,
+          345
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/container_truck.webp",
+      "sourceSha256": "26db2e3e7528c4ea8c40a8603464b45501445af2ad4ec945955ff8c7a67a35e3",
+      "candidate": "container_truck.png",
+      "candidateSha256": "c48f4aea8e9de416f5681aa4ecd918b33d15d40b40377f2498d3cfe46f6aaf33",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "394c5b6c13cff2429d34c7e37624b6a5a39e1d6e1b4ef786469c0987e2050d0b",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White cab, long container proportions and all wheel edges retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+      "outputBytes": 95960,
+      "outputRgbaSha256": "394c5b6c13cff2429d34c7e37624b6a5a39e1d6e1b4ef786469c0987e2050d0b",
+      "displayBounds": {
+        "box": [
+          22,
+          125,
+          400,
+          359
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/reach_stacker.webp",
+      "sourceSha256": "c56aec7a3e0208ecb9e07b30c90428a0e3c36e68aeebbd515ea7a7fe03d63609",
+      "candidate": "reach_stacker.png",
+      "candidateSha256": "ead9d056501ed267009e48dfb33c406f83171f5dc9312339c6d6f58f34d95b0a",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ef3338a2888b525e0140bbc0fa28ac210347e9d3895546368aa9ee2cb8b04ff9",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Spreader, long boom, hydraulic pistons, cab glazing and full wheel outlines preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+      "outputBytes": 108264,
+      "outputRgbaSha256": "ef3338a2888b525e0140bbc0fa28ac210347e9d3895546368aa9ee2cb8b04ff9",
+      "displayBounds": {
+        "box": [
+          9,
+          58,
+          387,
+          372
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/tugboat.webp",
+      "sourceSha256": "5bbb5332eef850211d68b7265a350a576539dfe2a165d39a818d6f8474e4e5ba",
+      "candidate": "tugboat.png",
+      "candidateSha256": "3a31c38c2e19da44d3749e014ad24e231d77beccef9559d8f46d18ac3e06529b",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "6839e4d11a1123ecbd9ac0b756023b95a1523252f504c02811f221c076bbc334",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Mast antennas, dark fenders, white bridge and intact hull retained; no invented structure.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+      "outputBytes": 93036,
+      "outputRgbaSha256": "6839e4d11a1123ecbd9ac0b756023b95a1523252f504c02811f221c076bbc334",
+      "displayBounds": {
+        "box": [
+          21,
+          32,
+          394,
+          349
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/fishing_boat.webp",
+      "sourceSha256": "e8a29ff62fd6a44ba24a73291575455bd41504da822b8b49c7e237e42249a19f",
+      "candidate": "fishing_boat.png",
+      "candidateSha256": "d1158fd80aea093c67ba01a6a0ae8a999fefb4273d8ce5be19700c49189f0434",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "0dae74734152ccecd5a29ef7b274d91800fd5ea92b2d025c0dc2b2c579b6df40",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Masts, rigging, boom, winch, railing and entire hull remain. Original thin antialiased edges retained rather than claiming pixel-perfect background decontamination.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+      "outputBytes": 133654,
+      "outputRgbaSha256": "0dae74734152ccecd5a29ef7b274d91800fd5ea92b2d025c0dc2b2c579b6df40",
+      "displayBounds": {
+        "box": [
+          11,
+          39,
+          404,
+          351
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/coast_guard_boat.webp",
+      "sourceSha256": "343575fa357ef4ce91733eee376d27cdd63d120521304a41385a0ed617ef7ba5",
+      "candidate": "coast_guard_boat.png",
+      "candidateSha256": "b46b96f0597f36d7380539bb2cbc0f41b23a9bff202488638b5709138aafee64",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ae5b930df7ffa8a353869fb70a7eb38a914c4ce344ec4ee262020802caf6f5ee",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White superstructure, navigation equipment, mast antennas and rail geometry retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+      "outputBytes": 88236,
+      "outputRgbaSha256": "ae5b930df7ffa8a353869fb70a7eb38a914c4ce344ec4ee262020802caf6f5ee",
+      "displayBounds": {
+        "box": [
+          12,
+          52,
+          405,
+          339
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/rescue_boat.webp",
+      "sourceSha256": "8931833134ae4bdbc89245ec5bdce8f37cc8dcc8adb1dd56d67866a63d45c759",
+      "candidate": "rescue_boat.png",
+      "candidateSha256": "180a341eb572454a7e713d626aab8343f75dbb4eed06b0cd34ec83a4c87752e9",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "23b645d7220d80b38ec6a1ddb58551a25cd36c15dc03fda125539de3a3903989",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Orange cabin, black collar, mast and guardrail retained; checked fine exterior structures.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+      "outputBytes": 103166,
+      "outputRgbaSha256": "23b645d7220d80b38ec6a1ddb58551a25cd36c15dc03fda125539de3a3903989",
+      "displayBounds": {
+        "box": [
+          11,
+          53,
+          403,
+          353
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/school_van.webp",
+      "sourceSha256": "3a6a24a79c725a869667227c9520dc7aa05758476ae3e0248ebe76a11161cafb",
+      "candidate": "school_van.png",
+      "candidateSha256": "3533274c5d693b9bbda692f58878e292781333773e1364dd1205879e5122bee7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "87fc2bfff1c89b8ed9cf4ecb90cadf7bc1b79de8110f522ddcbae039ce1f62f5",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Cab glazing, mirrors, roof antenna, wheel tread and body paint retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "9b900324c9eb473d4905b17170d8a7f2ae94282f1d04b9929e73bef17717ce03",
+      "outputBytes": 151234,
+      "outputRgbaSha256": "87fc2bfff1c89b8ed9cf4ecb90cadf7bc1b79de8110f522ddcbae039ce1f62f5",
+      "displayBounds": {
+        "box": [
+          5,
+          142,
+          491,
+          460
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/bakery_truck.webp",
+      "sourceSha256": "4652192e2c512b18d9625f6ed71f7be142228fd83ab1f7cacd2c84ae8ba09ac3",
+      "candidate": "bakery_truck.png",
+      "candidateSha256": "f3af0ed67b31fb7d1f25b2b57935ec100ba6050c76ec05817a5fac82b2e28ecc",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "5d713b9f8d2b1b30e50a83dcb6993af517579804d4a5fd702e30f3e0d29a36b0",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Striped awning, cream-white body and bakery display trays remain opaque and complete.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "dc97ed8f676e6bb6ddfc549173b4174f782e78d7e7cd6fbf300fa9952258074b",
+      "outputBytes": 167554,
+      "outputRgbaSha256": "5d713b9f8d2b1b30e50a83dcb6993af517579804d4a5fd702e30f3e0d29a36b0",
+      "displayBounds": {
+        "box": [
+          3,
+          124,
+          498,
+          459
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/flower_delivery_van.webp",
+      "sourceSha256": "2008c92d27b10bbf0887f22510dd564d32614e2b3f4c1f5789796852ebe51bb3",
+      "candidate": "flower_delivery_van.png",
+      "candidateSha256": "998a8cf2a7329e81ab288d7c2301b47e0c245b3adf9a5ec4817e565bccc063ef",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "c0bc5de3e5a5d54b8f9630754861d19abf95eaa90cd6206dcdb7f16044799e5e",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Printed flower petals, white details and glazing preserved as body content.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "05078b7967a41fcf3f077eaea54b60e10b2372753a1b8c4ad3354b72763bc561",
+      "outputBytes": 154462,
+      "outputRgbaSha256": "c0bc5de3e5a5d54b8f9630754861d19abf95eaa90cd6206dcdb7f16044799e5e",
+      "displayBounds": {
+        "box": [
+          3,
+          157,
+          497,
+          464
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/pet_grooming_van.webp",
+      "sourceSha256": "526b5ab00dc0435c5f97bb5f77fa738af4f3efee2947fed9660ea307857c2303",
+      "candidate": "pet_grooming_van.png",
+      "candidateSha256": "6d52a51ccbc55480f42740d502d7d3c42bfc1a069b3c41a60905bd33a17fe808",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f53044eb38c16ed92eb9220b474becc662b0c5ef05fd7d9af7ed957b4e4b1846",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Printed pets/shears and white markings retained; wheels and mirrors intact.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "626b843288ed39bf4cfa86610c41db97b613b9a6efbcc29554c9b9297a27c2e3",
+      "outputBytes": 157468,
+      "outputRgbaSha256": "f53044eb38c16ed92eb9220b474becc662b0c5ef05fd7d9af7ed957b4e4b1846",
+      "displayBounds": {
+        "box": [
+          0,
+          116,
+          488,
+          437
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/utility_repair_van.webp",
+      "sourceSha256": "1fca139c79fc43b074d542481029c314aa33b77d9becbfb2fca0ba703d7c21d7",
+      "candidate": "utility_repair_van.png",
+      "candidateSha256": "871f12156ad25a9896d93b19b148909262b6065581f8e23cfad54f368585819a",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "15b817ee9e9914db70de2fc2ba905603a9e88dbc7865109d06e820ac8d685bf3",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Roof ladder, its rungs and open gaps, white body and mirrors retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "b29fa4e62a529cdec489103a23c5ff274e8e1ca0dbd92f2af8ff72526ee46bb9",
+      "outputBytes": 147826,
+      "outputRgbaSha256": "15b817ee9e9914db70de2fc2ba905603a9e88dbc7865109d06e820ac8d685bf3",
+      "displayBounds": {
+        "box": [
+          0,
+          88,
+          490,
+          442
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/maintenance_pickup.webp",
+      "sourceSha256": "144aff41026bf20166251f1c7ebedbfd97ddd2aa6bfe873166d942cc19368c41",
+      "candidate": "maintenance_pickup.png",
+      "candidateSha256": "4a33d174058c23350d28ea3f5c85e3c1f8a78d9f6d6224f5602d8679c0ff0096",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "7878b2455dd56872c8d63b57f8bcf537977d25af0280d7352346d89de6052bab",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Thin rake and shovel handles, cone and bed contents retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "c794d77b8e0d0744e8bd07ef72ded8c900a9afad75e2d6e838e08010968e7e6e",
+      "outputBytes": 136464,
+      "outputRgbaSha256": "7878b2455dd56872c8d63b57f8bcf537977d25af0280d7352346d89de6052bab",
+      "displayBounds": {
+        "box": [
+          5,
+          124,
+          495,
+          446
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/beverage_delivery_truck.webp",
+      "sourceSha256": "a2d0f8b9ee4fce986689b9083908096f48261718e39560dfc735c155b2e87897",
+      "candidate": "beverage_delivery_truck.png",
+      "candidateSha256": "99b4880a4874b1405bc524d628df180646495976a7809bba57e051b75e3156a0",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "23d6c322fa10220ddb6dd3597029b2dae1caf27393afe77b7c0fba45b64233bb",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Cargo print, cab windows, wheels and body outline preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "b9e59a2aed22989417381d59ebf8e620e325e118606e38016777cc1c63f49c4c",
+      "outputBytes": 166126,
+      "outputRgbaSha256": "23d6c322fa10220ddb6dd3597029b2dae1caf27393afe77b7c0fba45b64233bb",
+      "displayBounds": {
+        "box": [
+          10,
+          81,
+          493,
+          379
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/toy_truck.webp",
+      "sourceSha256": "ff5e13d8a00f6ad2a5629165c79c82e35f94da3d0ada9d0c94768d9d1017ac2b",
+      "candidate": "toy_truck.png",
+      "candidateSha256": "d76f4b0cd0fa8af28631349d8a33b107a897b4fcece1b8d580c0735df2c7e20b",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "1a67b9d4440e5786cb0736ad2935ab408de08a99ce51abe439ee8cdbb4258155",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Bear, robot, stacking rings and small white toy behind bear retained as original cargo, not erased.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "ab14605d34ad123c49b80099f4ba7778917821d70bb13226c1df44b3fa4a1c91",
+      "outputBytes": 197248,
+      "outputRgbaSha256": "1a67b9d4440e5786cb0736ad2935ab408de08a99ce51abe439ee8cdbb4258155",
+      "displayBounds": {
+        "box": [
+          12,
+          81,
+          490,
+          420
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/community_bus.webp",
+      "sourceSha256": "832e347b3de35540859c39a767123db4a6ec757c73ccc2352abb0c2426add3e5",
+      "candidate": "community_bus.png",
+      "candidateSha256": "222e13a158bf719363c5f8188a0ce713bdad500b5d86250e03f3a4848cd0c775",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617962127,
+      "artifactSha256": "6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "806a7b50321b6b576fda664990d5dcec40ab6c7401146c4a1cc87973bfab6a76",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White body band, glazing, mirrors and full wheel outlines retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-a",
+      "outputSha256": "25d190e147fd5094791419376cbad7f98db134b882b0b2a23f3851a20203e250",
+      "outputBytes": 154438,
+      "outputRgbaSha256": "806a7b50321b6b576fda664990d5dcec40ab6c7401146c4a1cc87973bfab6a76",
+      "displayBounds": {
+        "box": [
+          13,
+          95,
+          501,
+          401
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/mail_truck.webp",
+      "sourceSha256": "8169af7b0e22fa51d1f81141ce48359e86aab10eaa1975882df24cd54f35441e",
+      "candidate": "mail_truck.png",
+      "candidateSha256": "08486189478b501a6b0a8402ea0fd81b98ff0606a0574ee6a9a72f0f2a47a562",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "be1ae76d642662b4eb114661913581d25c5dab8c47e4b1ca1f9e5ab3bd2a2340",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Enlarged both original and result to verify the narrow left mirror remains; white body and windshield highlights are opaque.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+      "outputBytes": 137842,
+      "outputRgbaSha256": "be1ae76d642662b4eb114661913581d25c5dab8c47e4b1ca1f9e5ab3bd2a2340",
+      "displayBounds": {
+        "box": [
+          16,
+          112,
+          479,
+          432
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/delivery_truck.webp",
+      "sourceSha256": "875b86b0bd8f4bf71c03dea68fc146538e0dadd81f6c377ff3a0198106ad8bab",
+      "candidate": "delivery_truck.png",
+      "candidateSha256": "99e67b58097f55b77d977077b3caeb355603e07eeae321a108a8e9c6b3812ebb",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "5bf8c61b0359214247dd658df604badecc4d5cfe52773c9c76b43096e99c8331",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Entire cargo box, cab, mirrors and wheel edges preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+      "outputBytes": 142202,
+      "outputRgbaSha256": "5bf8c61b0359214247dd658df604badecc4d5cfe52773c9c76b43096e99c8331",
+      "displayBounds": {
+        "box": [
+          18,
+          100,
+          489,
+          419
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/food_truck.webp",
+      "sourceSha256": "c472b5f1bdfbe4fa33b8e80d404d6d377c9286516bad005b9fdbbd8e1f0317d4",
+      "candidate": "food_truck.png",
+      "candidateSha256": "dba4362bd8c750821874880833821592ab5ffd1999f02adff71bacb5d90eeabc",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "77ffedb65ff2975e8d50091b8f82f8a1572415a144f87471e79cdb8e2a25a925",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Striped awning, roof vent, serving-window contents and cab glazing retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+      "outputBytes": 169782,
+      "outputRgbaSha256": "77ffedb65ff2975e8d50091b8f82f8a1572415a144f87471e79cdb8e2a25a925",
+      "displayBounds": {
+        "box": [
+          23,
+          108,
+          503,
+          426
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/ice_cream_truck.webp",
+      "sourceSha256": "d2bd4ec7148ea8a6e20d286b6e10cd608923d7261ff7e386c265ca1b289138e5",
+      "candidate": "ice_cream_truck.png",
+      "candidateSha256": "ae6cbb54a5508fb82b000fc4d0655ae872aa9e3d9fc0a44a7bf1c34f98f3e632",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "b2313380966422d71b282d11ca7dfe16b8f076d582560b0e55947c85a5004fa6",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Roof cone, white paint, pink details and glazing retained without transparent holes.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+      "outputBytes": 175824,
+      "outputRgbaSha256": "b2313380966422d71b282d11ca7dfe16b8f076d582560b0e55947c85a5004fa6",
+      "displayBounds": {
+        "box": [
+          9,
+          21,
+          483,
+          426
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/moving_truck.webp",
+      "sourceSha256": "d05b0dc267e08e903cefe30477ac4508b704c795125f6e564635c36cf3101785",
+      "candidate": "moving_truck.png",
+      "candidateSha256": "8c58ddaf032b6703a101362bb0bb34c7c06a717e35cf3b380576eebdb04f320c",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "8bc19bafbc9d999e6621d1e7bee321a03388a72fa48dd71e4e88164b25ad344d",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Loading ramp, boxes, rear opening and white cab preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+      "outputBytes": 150184,
+      "outputRgbaSha256": "8bc19bafbc9d999e6621d1e7bee321a03388a72fa48dd71e4e88164b25ad344d",
+      "displayBounds": {
+        "box": [
+          22,
+          72,
+          507,
+          420
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/laundry_truck.webp",
+      "sourceSha256": "1e2b58911547838d3d70000c56593a671854bed85009a7e380c6035247f25c6c",
+      "candidate": "laundry_truck.png",
+      "candidateSha256": "bd3fa55a58d1f6e08f2b7490c54f48fe9f41cc7aae1686a3879d9c487e2338c8",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "11832ba1d4bbaec86d406e8163c566f9e5a1fbd515f60f5d09fdb925c408c327",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Enlarged original and result to verify left mirror and wipers; printed towels/washer and white body retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+      "outputBytes": 156956,
+      "outputRgbaSha256": "11832ba1d4bbaec86d406e8163c566f9e5a1fbd515f60f5d09fdb925c408c327",
+      "displayBounds": {
+        "box": [
+          1,
+          94,
+          495,
+          417
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/recycling_truck.webp",
+      "sourceSha256": "31b8b3ed6b28a31035e4ead8a4e390001e04d5dae5912944f5e9f3fc4b4750fe",
+      "candidate": "recycling_truck.png",
+      "candidateSha256": "326ee8d0bb5630ecf0b0dce316ccc521be647c6e9cb8960869798f87ce099896",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "53eb1fbcba5c55be4c93d78e0b935d9e730bfa9fdcf7b6b63d289e6ad89d4b29",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Rear loader, cylinders and white recycling mark retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+      "outputBytes": 172334,
+      "outputRgbaSha256": "53eb1fbcba5c55be4c93d78e0b935d9e730bfa9fdcf7b6b63d289e6ad89d4b29",
+      "displayBounds": {
+        "box": [
+          10,
+          66,
+          494,
+          397
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/library_bus.webp",
+      "sourceSha256": "ef8922c028504d8daa4d38625e66dcd9ac1f76a43deac3c46b8758c459765ef8",
+      "candidate": "library_bus.png",
+      "candidateSha256": "432b0ad5f18cb384218a51d7efa15c43b86cafed3c49155b758142bdf75188b0",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "117ffaefa9544238c959b59fdf23ca6f9fa5f0936573e68a581dce1fb9fadf25",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Book rows, tall glazing, mirrors and full body outline preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+      "outputBytes": 167456,
+      "outputRgbaSha256": "117ffaefa9544238c959b59fdf23ca6f9fa5f0936573e68a581dce1fb9fadf25",
+      "displayBounds": {
+        "box": [
+          5,
+          104,
+          500,
+          376
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/street_vendor_truck.webp",
+      "sourceSha256": "fc5bd8a278602664d1c45852a5d3c24a976d426f1352a3bd14fc4bbf0a4747ff",
+      "candidate": "street_vendor_truck.png",
+      "candidateSha256": "cec337d2c7c018b0cf4d3413d7514d3007789be869b80404ff78ed95779bf20b",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f7b69bb56d0db5ba03413490119660000ad0f4f96f0730c1fe58e533c27811d8",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Awning, produce, shelf supports, cab and all visible wheels retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+      "outputBytes": 186750,
+      "outputRgbaSha256": "f7b69bb56d0db5ba03413490119660000ad0f4f96f0730c1fe58e533c27811d8",
+      "displayBounds": {
+        "box": [
+          6,
+          93,
+          502,
+          396
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+      "sourceSha256": "14572a5c90294bfba518347d0838223ec1533d2a9ab1fd2d1798334aabfea61c",
+      "candidate": "aerial_ladder_truck.png",
+      "candidateSha256": "ec8947d2a8605eab8739ddea079c821227f6001fd431518155a77595850812ff",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "cb0821eba511e9b2a788a872491c5ae43e0ade38c4e0ae482c0a5d62c80c46d0",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Basket, front monitor, white ladder rungs and equipment panels retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "63b368633363859e1ba9ffaa7ba7ab8e304dbb9d17c3864440926909ba8b06de",
+      "outputBytes": 170764,
+      "outputRgbaSha256": "cb0821eba511e9b2a788a872491c5ae43e0ade38c4e0ae482c0a5d62c80c46d0",
+      "displayBounds": {
+        "box": [
+          10,
+          88,
+          512,
+          442
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/fire_tank.webp",
+      "sourceSha256": "b851c720e821a97f7879a028daf04104624768742a208d3d9c2e2d997f1a755f",
+      "candidate": "fire_tank.png",
+      "candidateSha256": "c78f312ed9f7c8c5309fafa42e74c4effdf8db1f61427115be19445fdc86f8a7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "51022b8300495c53b3e7fa808cf2568803f7f890145feb22fdb70336934041a1",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Continuous track outlines, road wheels and top monitor retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "ad2c7336d3c26fa0c8f8eacaccd179eb6b669f93f0eebbfa465c982b0efdb9b7",
+      "outputBytes": 152666,
+      "outputRgbaSha256": "51022b8300495c53b3e7fa808cf2568803f7f890145feb22fdb70336934041a1",
+      "displayBounds": {
+        "box": [
+          8,
+          153,
+          495,
+          415
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/airport_crash_tender.webp",
+      "sourceSha256": "df733f699802182e9e74e7e5eb50d7c603f49be86b2dbd347c5a2299eb50cdf5",
+      "candidate": "airport_crash_tender.png",
+      "candidateSha256": "76d6816ade5af90b20007570c6e3fb0d571167fe46d3db5d0d1de6ded9e4d0c7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "d8bee00f01ca1527962e541d9ef96eb54eea2fa320622d3495a67a6b08ce7b97",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Water monitor, roof rails, glazing and all six wheel outlines preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "b52fadcf1dd336d67ab9b40a7822b1a3f8a98bf4860d267d36b30e5ef05bc0d1",
+      "outputBytes": 137068,
+      "outputRgbaSha256": "d8bee00f01ca1527962e541d9ef96eb54eea2fa320622d3495a67a6b08ce7b97",
+      "displayBounds": {
+        "box": [
+          7,
+          119,
+          501,
+          421
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+      "sourceSha256": "a8a2b563744265fd71a37c6c2aa30cc3d878a43e2cf3e5bc2a9fd4b8ebb81351",
+      "candidate": "wildfire_6x6_truck.png",
+      "candidateSha256": "8ed9a78451d16ca1a75967f4bfc7a44b5a4b18a029fae29506d76b53dabfe624",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "13b8603b59b2b556c1a720c11cae6a25c56f4c2894161fe3c9e40a6b765671d4",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Large tire tread, brush bars and rooftop rail geometry retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "6f7daf0c9068e53b425a11d54debc3e866f43d60a75bbfe4878ac733d8d90717",
+      "outputBytes": 171838,
+      "outputRgbaSha256": "13b8603b59b2b556c1a720c11cae6a25c56f4c2894161fe3c9e40a6b765671d4",
+      "displayBounds": {
+        "box": [
+          1,
+          95,
+          506,
+          419
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+      "sourceSha256": "ba844213c8b47234454dd828e26ad428830c5091a2ee69399616815def7fba27",
+      "candidate": "robot_demolition_fire_vehicle.png",
+      "candidateSha256": "b34bc42370a331026cb838d51470a7c24a096d2a87bd37025b203e13d900b9c4",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "2807ac19df608cf446fce3e36674012ffd8560ebcdc1ba70ccefb00c9ea9f37e",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Drill tip, hose, arm joints, support legs and tracks retained. Existing near-frame drill clearance is not invented or enlarged.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "eef29b0972e74063f23a21c493120b450e379046e8ae1185813aef2f651eccd6",
+      "outputBytes": 166344,
+      "outputRgbaSha256": "2807ac19df608cf446fce3e36674012ffd8560ebcdc1ba70ccefb00c9ea9f37e",
+      "displayBounds": {
+        "box": [
+          3,
+          16,
+          501,
+          447
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+      "sourceSha256": "f054112b8bc732ea3bba64fb198794d5a5e5877833d5d0c0b2e1e81dc4514a96",
+      "candidate": "smoke_extraction_fan_truck.png",
+      "candidateSha256": "286a5b0bd38b31a548ed63232718ab7fa02560d8923fd2112cf81534b21b230d",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f72920b234daa4465f5d36617d2284a36b7cfe027d8e3757a679f01fed84108e",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Fan hub, blades, mesh, red ring and cab remain; inspected inner fan details.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "368917d59b5e10ab510947f7cca8adf6033aa69bad43fbf457b2fe6167ec3fec",
+      "outputBytes": 157000,
+      "outputRgbaSha256": "f72920b234daa4465f5d36617d2284a36b7cfe027d8e3757a679f01fed84108e",
+      "displayBounds": {
+        "box": [
+          0,
+          87,
+          503,
+          390
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/water_tanker.webp",
+      "sourceSha256": "52f7a3a87c0fe964f9bb8b6a984694cae020a0b368029246ca7bb81c5b811f09",
+      "candidate": "water_tanker.png",
+      "candidateSha256": "7cda51f3fd516a63a9ff47b5ee0ea2248177787f6ccbeb8051a177773d9d9d89",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "cf70505cf7a9a915c510895d1d5f1aef3a76959a374f800fd0dfb05a607b11b2",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Long tank, rails, hose and tire outlines retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "ef24041e91eca16e5b2074063a5a59f7985460401a8c660f2e335b1bf2357b87",
+      "outputBytes": 140454,
+      "outputRgbaSha256": "cf70505cf7a9a915c510895d1d5f1aef3a76959a374f800fd0dfb05a607b11b2",
+      "displayBounds": {
+        "box": [
+          10,
+          102,
+          511,
+          373
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+      "sourceSha256": "5aabf8dfffa6ed356a569c104f40f88acaf269645e0a6e8d47b7f8d03812d27c",
+      "candidate": "articulating_boom_truck.png",
+      "candidateSha256": "e2b1ad344268af4032eb13c44a79a4a9a65c849728d8a7fbb219014523f89e23",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "7eaf383b55c50b5471a9b05273b9cca813fba8149af88c93d8d2c83f317e249b",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White articulated boom, struts, basket rails and white equipment panels retained without holes.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "b49a1bc36c6dbf77921ae470013a504651791657d72d264fcf9e38578695f69c",
+      "outputBytes": 162034,
+      "outputRgbaSha256": "7eaf383b55c50b5471a9b05273b9cca813fba8149af88c93d8d2c83f317e249b",
+      "displayBounds": {
+        "box": [
+          5,
+          35,
+          491,
+          399
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/fire_command_suv.webp",
+      "sourceSha256": "408480fd1b1daf628c579041cb04f7c31cc0c3ec18fa9a936d3f43b2d1678037",
+      "candidate": "fire_command_suv.png",
+      "candidateSha256": "6d7579806c289a630bebfc4efbbc22aa8d2fb2afe4b864bc1e4eb6122ff98ed7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "1186324684dea7a58a5bd389ecc60f6564fd0e4a001c36626b7093586a8c83d7",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Two thin roof antennas, lightbar, bumper/winch and wheel tread retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "c18c07124bfa80051de5b85b9f764946089c76a461275c5a1f7f5f127c55e538",
+      "outputBytes": 132086,
+      "outputRgbaSha256": "1186324684dea7a58a5bd389ecc60f6564fd0e4a001c36626b7093586a8c83d7",
+      "displayBounds": {
+        "box": [
+          0,
+          73,
+          504,
+          404
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "sourceSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+      "candidate": "snow_rescue_vehicle.png",
+      "candidateSha256": "fe6d7303d665c5314ed1cfa661cae84ea1bebabca9ebb7ab0337df0ed225cf21",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618190811,
+      "artifactSha256": "7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1",
+      "alphaRepairs": [
+        {
+          "op": "restore_source",
+          "box": [
+            208,
+            211,
+            213,
+            218
+          ]
+        },
+        {
+          "op": "restore_source",
+          "box": [
+            217,
+            209,
+            223,
+            216
+          ]
+        }
+      ],
+      "reviewedRgbaSha256": "d0a402d359dd60c0f0b91373a5cfdcfde21ddc664492b1a038883b3e7025049a",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Original small white rectangle removed. Full track bottoms remain; initial mask incorrectly reduced two white roof lights. Restored their original alpha only in two inspected interior rectangles and rechecked all three backgrounds.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "precision",
+      "outputSha256": "19dc48e8614af0067fdfb26eb7846e8ab3a8c50f16c7cd8d9ccf42faba819134",
+      "outputBytes": 43224,
+      "outputRgbaSha256": "d0a402d359dd60c0f0b91373a5cfdcfde21ddc664492b1a038883b3e7025049a",
+      "displayBounds": {
+        "box": [
+          141,
+          204,
+          355,
+          348
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/transport/submarine.png",
+      "sourceSha256": "c4a00de78da854e2572867707e4fdeb4fa62ba2b26928024be380507b28516b2",
+      "candidate": "submarine.png",
+      "candidateSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "size": [
+        1024,
+        1024
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618190811,
+      "artifactSha256": "7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "685ea4019e3cc5a3d0326e92ece9bc4d697e314bc2839bde53f7d27ed2465dc3",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Removed right floating white fragment and baked light ground. Periscope, portholes, fins and propeller remain complete.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "precision",
+      "outputSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "outputBytes": 333832,
+      "outputRgbaSha256": "685ea4019e3cc5a3d0326e92ece9bc4d697e314bc2839bde53f7d27ed2465dc3",
+      "displayBounds": {
+        "box": [
+          173,
+          240,
+          857,
+          753
+        ],
+        "width": 1024,
+        "height": 1024,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/transport/garbage_truck.png",
+      "sourceSha256": "1b13ef68bd5c666906ceaa5cef578d452cd68810f27cd7d455efd7ee25335b87",
+      "candidate": "garbage_truck.png",
+      "candidateSha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+      "size": [
+        1024,
+        1024
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618190811,
+      "artifactSha256": "7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "2f9d032515312e6b2c40ea3953bf32f063dd4fcdda60a97aa8713f5e1c1326ad",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Removed left detached vertical line and baked ground; green body, rear lifting mechanism, glazing and all visible wheels retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "precision",
+      "outputSha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+      "outputBytes": 473305,
+      "outputRgbaSha256": "2f9d032515312e6b2c40ea3953bf32f063dd4fcdda60a97aa8713f5e1c1326ad",
+      "displayBounds": {
+        "box": [
+          105,
+          267,
+          903,
+          782
+        ],
+        "width": 1024,
+        "height": 1024,
+        "clean": true
+      }
+    }
+  ]
+}

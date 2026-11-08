@@ -1,0 +1,1438 @@
+{
+  "assets/vehicles/fire/pump_engine.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/water_tanker.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/ladder_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/aerial_ladder_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/articulating_ladder_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/rescue_fire_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/airport_fire_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/foam_fire_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/fire/fire_command_vehicle.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/police/korean_police_car.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/police/us_police_car.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/police/police_motorcycle.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/police/swat_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/police/forensic_bus.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/police/riot_police_bus.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/rescue/ambulance.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-01.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/rescue/doctor_car.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/rescue/rescue_helicopter.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/excavator.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/mini_excavator.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/bulldozer.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/wheel_loader.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/dump_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/concrete_mixer.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/concrete_pump_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/crane_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/forklift.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/construction/road_roller.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-road_roller.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/asphalt_paver.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-asphalt_paver.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/grader.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-grader.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/backhoe_loader.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-backhoe_loader.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/skid_steer_loader.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-02.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-skid_steer_loader.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/tower_crane.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-tower_crane.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/mobile_crane.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale. Retry removes the invented stabilizer feet from rejected first candidate; only source equipment remains.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-mobile_crane.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/pile_driver.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Top of pile-driving mast is cut at the original top frame boundary; uncropped source is required.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Top of pile-driving mast is cut at the original top frame boundary; uncropped source is required.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/construction/drilling_rig.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Upper drilling mast and head are clipped at the original top frame boundary; do not invent missing machinery.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Upper drilling mast and head are clipped at the original top frame boundary; do not invent missing machinery.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/construction/excavator_breaker.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-excavator_breaker.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/dump_loader.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-dump_loader.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/articulated_dump_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-articulated_dump_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/water_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-water_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/sweeper_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-sweeper_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/fuel_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-fuel_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/lowbed_trailer.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-lowbed_trailer.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/cargo_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-cargo_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/construction/scissor_lift.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-scissor_lift.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/transport/train.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/bus.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/car.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-03.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/taxi.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/school_bus.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/rocket.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/submarine.png": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Removed right floating white fragment and baked light ground. Periscope, portholes, fins and propeller remain complete.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/transport-submarine.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/transport/tow_truck.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/garbage_truck.png": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Removed left detached vertical line and baked ground; green body, rear lifting mechanism, glazing and all visible wheels retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/transport-garbage_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/transport/tractor.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/airplane.png": {
+    "classification": "2_DISPLAY_ONLY",
+    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
+    "background": "transparent-with-original-ground-shadow",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
+  },
+  "assets/vehicles/transport/helicopter.png": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original cabin/window seam contains transparency holes with lost RGB. Fragment removal alone is not a full repair; original preserved.",
+    "background": "transparent-with-original-artifact",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "HOLD_SOURCE_ALPHA_DAMAGE",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Original cabin/window seam contains transparency holes with lost RGB. Fragment removal alone is not a full repair; original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/airport/passenger_airplane.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Right wing/tail region extends through the original right frame edge; full aircraft silhouette cannot be certified.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Right wing/tail region extends through the original right frame edge; full aircraft silhouette cannot be certified.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/airport/airport_bus.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-airport_bus.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/airport_follow_me_car.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-airport_follow_me_car.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/baggage_cart.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-baggage_cart.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/catering_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-catering_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/de_icing_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-de_icing_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/fuel_truck_airport.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-04.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-fuel_truck_airport.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/pushback_tug.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-pushback_tug.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/airport/stair_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-stair_truck.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/farm/tractor.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Cab glazing, mirror, exhaust, roof light and tire lobes intact. Removed baked checker and ground field; original RGB and thin source-antialias edge retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/farm-tractor.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
+  },
+  "assets/vehicles/farm/plow_tractor.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Upper and lower plow blades, frame ties, wheel edges and cab retained; blade gaps open.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/farm-plow_tractor.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
+  },
+  "assets/vehicles/farm/combine_harvester.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-combine_harvester.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/farm/rice_transplanter.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Initial mask rejected because upper rice seedlings were deleted. Restored 1432 original green pixel alpha values within the inspected ROI, without synthesizing RGB. White bumper, wheel holes, canopy posts, seedling trays and planting mechanism retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/farm-rice_transplanter.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
+  },
+  "assets/vehicles/farm/sprayer_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White tank, antenna, boom truss and nozzles, and high wheels retained. Inner boom gaps remain open.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/farm-sprayer_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
+  },
+  "assets/vehicles/farm/baler.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-baler.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/farm/farm_trailer.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-farm_trailer.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/farm/fruit_harvest_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Windshield highlight remains opaque, fruit and crates preserved. A faint roof feature was enlarged and verified as the original antenna, not removed as a fragment.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/farm-fruit_harvest_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
+  },
+  "assets/vehicles/farm/milk_tanker.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-milk_tanker.jpg",
+    "displayNormalized": true
+  },
+  "assets/vehicles/port/cargo_ship.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original bow and anchor-side hull are clipped at the left frame; candidate cannot restore absent pixels.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "Original bow and anchor-side hull are clipped at the left frame; candidate cannot restore absent pixels.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/port/container_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White cab, long container proportions and all wheel edges retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/port-container_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/port/harbor_crane.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Enlarged mask fills upper rail gaps and removes fine rail segments. Failed candidate is excluded, original preserved.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-05.jpg",
+    "action": "HOLD_CANDIDATE_REJECTED",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "Enlarged mask fills upper rail gaps and removes fine rail segments. Failed candidate is excluded, original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/port/reach_stacker.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Spreader, long boom, hydraulic pistons, cab glazing and full wheel outlines preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/port-reach_stacker.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/port/tugboat.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Mast antennas, dark fenders, white bridge and intact hull retained; no invented structure.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/port-tugboat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/port/ferry.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "White mast/upper-rail gaps retain opaque patches and fine antenna fidelity is insufficient. Candidate excluded, original preserved.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-06.jpg",
+    "action": "HOLD_CANDIDATE_REJECTED",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "White mast/upper-rail gaps retain opaque patches and fine antenna fidelity is insufficient. Candidate excluded, original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/port/fishing_boat.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Masts, rigging, boom, winch, railing and entire hull remain. Original thin antialiased edges retained rather than claiming pixel-perfect background decontamination.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/port-fishing_boat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/port/coast_guard_boat.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White superstructure, navigation equipment, mast antennas and rail geometry retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/port-coast_guard_boat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/port/rescue_boat.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Orange cabin, black collar, mast and guardrail retained; checked fine exterior structures.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/port-rescue_boat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/road_repair_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Hopper, pipework, rear rollers, white cab and full wheel outlines retained; baked checker and ground removed.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-road_repair_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/line_painting_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White cab/tank, safety rails and front nozzle/caster retained. Painted stripe on the ground is background, not a removed vehicle component.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-line_painting_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/traffic_cone_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Cones and their white bands, arrow board and cargo rails intact; no new clipping or interior deletion observed.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-traffic_cone_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/road_sign_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Enlarged candidate retains white/checker patches in open frame below signs. Precise hole cleanup is unresolved; original preserved.",
+    "background": "baked-checkerboard",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-06.jpg",
+    "action": "HOLD_CANDIDATE_REJECTED",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "Enlarged candidate retains white/checker patches in open frame below signs. Precise hole cleanup is unresolved; original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
+  },
+  "assets/vehicles/road_service/road_sweeper.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White body, front/rear brushes and suction hose preserved; inspected open gaps and wheels.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-road_sweeper.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/salt_spreader.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White salt load is retained with hopper, rails and spreading disc; not mistaken for background.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-salt_spreader.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/snow_plow.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Blade, cutting edge, upright marker flags and roof lights preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-snow_plow.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/bridge_inspection_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Extended articulated boom, inspection basket rails, stabilizers and thin hydraulic members retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-bridge_inspection_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/road_service/tunnel_cleaning_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White tank, pipework and front cleaning head retained; checked dark composite for holes.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/road_service-tunnel_cleaning_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/military_special/military_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual enlarged original plus independent reviewer: front tire bottom meets the white rectangle edge; possible small original loss cannot be ruled out. Retain original until an uncropped source verifies full tread contour.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-06.jpg",
+    "action": "HOLD_AMBIGUOUS_SOURCE_EDGE",
+    "holdReason": "Front tire lowest arc at original rectangle edge; insufficient source to verify complete shape.",
+    "detailEvidence": "contact/military-detail-2.png"
+  },
+  "assets/vehicles/military_special/command_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bumper, tires and lower chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-06.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bumper, tires and lower chassis clipped",
+    "detailEvidence": "contact/military-detail-1.png"
+  },
+  "assets/vehicles/military_special/communication_relay_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bumper and most lower wheel areas clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-06.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bumper and most lower wheel areas clipped",
+    "detailEvidence": "contact/military-detail-1.png"
+  },
+  "assets/vehicles/military_special/radar_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower front tire and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower front tire and chassis clipped",
+    "detailEvidence": "contact/military-detail-3.png"
+  },
+  "assets/vehicles/military_special/searchlight_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bumper and lower wheels clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bumper and lower wheels clipped",
+    "detailEvidence": "contact/military-detail-3.png"
+  },
+  "assets/vehicles/military_special/mobile_hospital.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower tires and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower tires and chassis clipped",
+    "detailEvidence": "contact/military-detail-2.png"
+  },
+  "assets/vehicles/military_special/armored_rescue_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: front and near tires flattened by rectangle boundary; lower tread pixels absent at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "front and near tires flattened by rectangle boundary; lower tread pixels absent",
+    "detailEvidence": "contact/military-detail-1.png"
+  },
+  "assets/vehicles/military_special/mrap_patrol_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: all visible lower tire arcs clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "all visible lower tire arcs clipped",
+    "detailEvidence": "contact/military-detail-3.png"
+  },
+  "assets/vehicles/military_special/tracked_carrier.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bottom track loop and lower road wheels clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bottom track loop and lower road wheels clipped",
+    "detailEvidence": "contact/military-detail-3.png"
+  },
+  "assets/vehicles/military_special/amphibious_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: front and near wheels cut through their lower arcs at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "front and near wheels cut through their lower arcs",
+    "detailEvidence": "contact/military-detail-1.png"
+  },
+  "assets/vehicles/military_special/engineering_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower blade and tracked undercarriage clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower blade and tracked undercarriage clipped",
+    "detailEvidence": "contact/military-detail-2.png"
+  },
+  "assets/vehicles/military_special/bridge_layer_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower tires and undercarriage clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower tires and undercarriage clipped",
+    "detailEvidence": "contact/military-detail-1.png"
+  },
+  "assets/vehicles/military_special/decontamination_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower front tire and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower front tire and chassis clipped",
+    "detailEvidence": "contact/military-detail-1.png"
+  },
+  "assets/vehicles/military_special/water_purification_truck.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower front tire and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower front tire and chassis clipped",
+    "detailEvidence": "contact/military-detail-3.png"
+  },
+  "assets/vehicles/military_special/snow_rescue_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original small white rectangle removed. Full track bottoms remain; initial mask incorrectly reduced two white roof lights. Restored their original alpha only in two inspected interior rectangles and rechecked all three backgrounds.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/military_special-snow_rescue_vehicle.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "detailEvidence": "contact/military-detail-3.png",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/military_special/drone_control_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bottom bumper and tires clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bottom bumper and tires clipped",
+    "detailEvidence": "contact/military-detail-2.png"
+  },
+  "assets/vehicles/military_special/eod_robot_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower track loops and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower track loops and chassis clipped",
+    "detailEvidence": "contact/military-detail-2.png"
+  },
+  "assets/vehicles/military_special/missile_launcher_vehicle.webp": {
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower tires and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
+    "background": "baked-white-rectangle",
+    "visualReviewed": true,
+    "visualEvidence": "contact/vehicles-before-07.jpg",
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower tires and chassis clipped",
+    "detailEvidence": "contact/military-detail-2.png"
+  },
+  "assets/vehicles/town/school_van.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Cab glazing, mirrors, roof antenna, wheel tread and body paint retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-school_van.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/bakery_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Striped awning, cream-white body and bakery display trays remain opaque and complete.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-bakery_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/flower_delivery_van.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Printed flower petals, white details and glazing preserved as body content.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-flower_delivery_van.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/pet_grooming_van.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Printed pets/shears and white markings retained; wheels and mirrors intact.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-pet_grooming_van.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/utility_repair_van.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Roof ladder, its rungs and open gaps, white body and mirrors retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-utility_repair_van.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/maintenance_pickup.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Thin rake and shovel handles, cone and bed contents retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-maintenance_pickup.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/beverage_delivery_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Cargo print, cab windows, wheels and body outline preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-beverage_delivery_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/toy_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Bear, robot, stacking rings and small white toy behind bear retained as original cargo, not erased.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-toy_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/community_bus.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White body band, glazing, mirrors and full wheel outlines retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-community_bus.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/mail_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Enlarged both original and result to verify the narrow left mirror remains; white body and windshield highlights are opaque.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-mail_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/delivery_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Entire cargo box, cab, mirrors and wheel edges preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-delivery_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/food_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Striped awning, roof vent, serving-window contents and cab glazing retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-food_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/ice_cream_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Roof cone, white paint, pink details and glazing retained without transparent holes.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-ice_cream_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/moving_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Loading ramp, boxes, rear opening and white cab preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-moving_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/laundry_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Enlarged original and result to verify left mirror and wipers; printed towels/washer and white body retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-laundry_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/recycling_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Rear loader, cylinders and white recycling mark retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-recycling_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/library_bus.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Book rows, tall glazing, mirrors and full body outline preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-library_bus.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/town/street_vendor_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Awning, produce, shelf supports, cab and all visible wheels retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/town-street_vendor_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/aerial_ladder_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Basket, front monitor, white ladder rungs and equipment panels retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-aerial_ladder_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/fire_tank.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Continuous track outlines, road wheels and top monitor retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-fire_tank.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/airport_crash_tender.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Water monitor, roof rails, glazing and all six wheel outlines preserved.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-airport_crash_tender.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/wildfire_6x6_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Large tire tread, brush bars and rooftop rail geometry retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-wildfire_6x6_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Drill tip, hose, arm joints, support legs and tracks retained. Existing near-frame drill clearance is not invented or enlarged.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-robot_demolition_fire_vehicle.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Fan hub, blades, mesh, red ring and cab remain; inspected inner fan details.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-smoke_extraction_fan_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/water_tanker.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Long tank, rails, hose and tire outlines retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-water_tanker.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/articulating_boom_truck.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "White articulated boom, struts, basket rails and white equipment panels retained without holes.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-articulating_boom_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  },
+  "assets/vehicles/fire_special/fire_command_suv.webp": {
+    "classification": "1_ORIGINAL_REPAIR",
+    "finding": "Two thin roof antennas, lightbar, bumper/winch and wheel tread retained.",
+    "background": "transparent, original RGB retained",
+    "visualReviewed": true,
+    "visualEvidence": "comparisons/fire_special-fire_command_suv.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
+  }
+}

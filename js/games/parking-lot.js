@@ -345,6 +345,12 @@
         animation: pl-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
 
+      .pl-slot > .sv-vehicle-frame,
+      .pl-car-drag > .sv-vehicle-frame,
+      .pl-drag-ghost > .sv-vehicle-frame { max-width: 85%; max-height: 85%; }
+      .pl-slot > .sv-vehicle-frame { opacity: .15; filter: grayscale(1) brightness(.8); transition: opacity .4s; }
+      .pl-slot.correct > .sv-vehicle-frame { opacity: 1; filter: none; }
+
       .pl-slot.correct .pl-slot-check {
         display: block;
       }
@@ -633,7 +639,8 @@
     try {
       const res = await fetch(MANIFEST_URL, { cache: 'no-cache' });
       const json = await res.json();
-      const list = Array.isArray(json.vehicles) ? json.vehicles : [];
+      const raw = Array.isArray(json.vehicles) ? json.vehicles : [];
+      const list = window.SihyeonVehicleDisplay?.filterAvailable(raw) || raw;
       const map = {};
 
       list.forEach((v) => {
@@ -828,6 +835,7 @@
       `;
     }
 
+    state.container.querySelectorAll('.pl-slot-img, .pl-car-drag img').forEach(img => window.SihyeonVehicleDisplay?.apply(img));
     bindEvents();
   }
 
@@ -890,10 +898,22 @@
       if (!gesture.moved) {
         gesture.moved = true;
         gesture.ghost = gesture.card.cloneNode(true);
+        const ghost = gesture.ghost;
         gesture.ghost.className = 'pl-drag-ghost';
         gesture.ghost.removeAttribute('data-vehicle-id');
         gesture.ghost.setAttribute('aria-hidden', 'true');
         gesture.ghost.tabIndex = -1;
+        gesture.ghost.querySelectorAll('img').forEach(img => {
+          // Cloned SVG frames are already fitted; never fit their nested image
+          // again. A cloned DOM node does not inherit the capture error listener.
+          img.removeAttribute('onerror');
+          img.addEventListener('error', () => {
+            img.closest('.sv-vehicle-frame')?.remove();
+            img.hidden = true;
+            const fallback = ghost.querySelector('span[hidden]');
+            if (fallback) fallback.hidden = false;
+          }, { once: true });
+        });
         Object.assign(gesture.ghost.style, {
           left: gesture.rect.left + 'px', top: gesture.rect.top + 'px',
           width: gesture.rect.width + 'px', height: gesture.rect.height + 'px'

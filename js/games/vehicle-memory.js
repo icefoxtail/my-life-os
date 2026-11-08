@@ -1116,7 +1116,8 @@
     const manifest = await response.json();
     const vehicles = Array.isArray(manifest.vehicles) ? manifest.vehicles : [];
 
-    return vehicles.map(normalizeVehicle).filter((vehicle) => vehicle.file);
+    const normalized = vehicles.map(normalizeVehicle).filter((vehicle) => vehicle.file);
+    return window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
   }
 
   function pickRoundVehicles() {
@@ -1379,7 +1380,9 @@
     });
 
     root.querySelectorAll('.memory-card-front img').forEach((img) => {
+      window.SihyeonVehicleDisplay?.apply(img);
       img.addEventListener('error', () => {
+        window.SihyeonVehicleDisplay?.reset(img);
         img.hidden = true;
         if (img.nextElementSibling) img.nextElementSibling.hidden = false;
       });

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.2.0-pattern-train';
+const CACHE_NAME = 'sihyeon-play-os-v1.2.1-phase2-vehicles';
 
 const ASSETS = [
   './',

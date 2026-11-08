@@ -193,7 +193,7 @@
       .construction-landscape .cs-choice { min-height: clamp(126px, 25vh, 190px); padding: 10px; }
       .construction-landscape .cs-choice-img { max-height: clamp(92px, 20vh, 150px); }
       .construction-landscape .cs-message { left: 50%; bottom: 24px; width: min(54vw, 560px); }
-      .construction-landscape .cs-worker-vehicle { width: min(92%, 760px); height: min(86%, 560px); }
+      .construction-landscape .cs-worker-vehicle { width: min(90%, 760px); height: min(78%, 560px); }
       .construction-landscape .cs-target-zone { width: clamp(190px, 24vw, 340px); height: clamp(128px, 17vw, 210px); }
       .construction-landscape .cs-road { width: min(34vw, 430px); }
 
@@ -224,16 +224,16 @@
       .cs-root.is-success .cs-result-icon { animation: csResultPop 0.72s cubic-bezier(0.2, 1.4, 0.32, 1) forwards; }
 
       /* ★ 초거대 공사차 등장 애니메이션 */
-      .cs-worker-vehicle { position: absolute; left: -50%; bottom: 17%; z-index: 50; width: min(90%, 700px); height: min(85%, 500px); display: grid; place-items: center; opacity: 0; pointer-events: none; }
+      .cs-worker-vehicle { position: absolute; left: -50%; bottom: 17%; z-index: 50; width: min(90%, 700px); height: min(78%, 500px); display: grid; place-items: center; opacity: 0; pointer-events: none; }
       .cs-worker-vehicle img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 12px 0 rgba(0,0,0,0.16)) drop-shadow(0 16px 18px rgba(0,0,0,0.2)); }
       .cs-worker-fallback { font-size: clamp(80px, 22vw, 150px); }
 
       .cs-root.is-working .cs-worker-vehicle { animation: csMegaVehicleWork 4.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
       @keyframes csMegaVehicleWork {
         0%   { left: -50%; opacity: 0; transform: translateX(0) scale(0.5); }
-        15%  { left: 50%; opacity: 1; transform: translateX(-50%) scale(1.6); } 
-        25%  { left: 50%; opacity: 1; transform: translateX(-50%) scale(1.8) rotate(-3deg); } /* 엄청 거대하게! */
-        75%  { left: 50%; opacity: 1; transform: translateX(-50%) scale(1.8) rotate(2deg); } /* 오랫동안 구경 */
+        15%  { left: 50%; opacity: 1; transform: translateX(-50%) scale(.92); }
+        25%  { left: 50%; opacity: 1; transform: translateX(-50%) scale(1) rotate(-1.5deg); }
+        75%  { left: 50%; opacity: 1; transform: translateX(-50%) scale(1) rotate(1.5deg); }
         100% { left: 150%; opacity: 0; transform: translateX(-50%) scale(1); }
       }
 
@@ -267,6 +267,14 @@
       .cs-choice.is-wrong { animation: csWrongWobble 0.42s ease-in-out; opacity: 0.6; } /* 틀렸을 때 부드럽게 흔들리고 연해짐 */
 
       .cs-choice-img { max-width: 100%; max-height: clamp(80px, 18vw, 130px); object-fit: contain; filter: drop-shadow(0 8px 0 rgba(0,0,0,0.12)); }
+      .cs-choice-img-wrap { display: grid; place-items: center; width: 100%; height: clamp(80px, 18vw, 130px); min-width: 0; }
+      .construction-landscape .cs-choice-img-wrap { height: clamp(92px, 20vh, 150px); }
+      .cs-finale-vehicle { width: 30%; max-width: 140px; height: 115px; display: grid; place-items: center; animation: csFinaleBounce 1.5s infinite alternate; }
+      .cs-finale-vehicle:nth-child(2) { animation-delay: .2s; }
+      .cs-finale-vehicle:nth-child(3) { animation-delay: .4s; }
+      .cs-finale-vehicle img { width: 100%; max-height: 100%; }
+      @media (max-height: 520px) and (orientation: landscape) { .construction-landscape .cs-choice-img-wrap { height: 72px; } }
+      @media (max-width: 390px) { .cs-choice-img-wrap { height: 70px; } }
       .cs-choice-emoji { font-size: clamp(56px, 15vw, 100px); filter: drop-shadow(0 7px 0 rgba(0,0,0,0.14)); }
       .cs-choice-name { display: none; } /* ★ 글자 숨김: 그림에만 집중! */
 
@@ -367,7 +375,8 @@
       if (!response.ok) throw new Error(`Construction manifest load failed: ${response.status}`);
       const manifest = await response.json();
       const raw = Array.isArray(manifest) ? manifest : Array.isArray(manifest.vehicles) ? manifest.vehicles : [];
-      const list = raw.map(normalizeVehicle).filter((vehicle) => vehicle && vehicle.file);
+      const normalized = raw.map(normalizeVehicle).filter((vehicle) => vehicle && vehicle.file);
+      const list = window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
       if (list.length < 3) throw new Error('Construction manifest has too few vehicles.');
       return list;
     } catch (error) {
@@ -549,7 +558,9 @@
     });
 
     root.querySelectorAll('.cs-choice-img').forEach((img) => {
+      window.SihyeonVehicleDisplay?.apply(img);
       img.addEventListener('error', () => {
+        window.SihyeonVehicleDisplay?.reset(img);
         img.hidden = true;
         const fallback = img.parentElement?.querySelector('.cs-choice-emoji');
         if (fallback) fallback.hidden = false;
@@ -613,7 +624,9 @@
     `;
 
     const img = worker.querySelector('img');
+    window.SihyeonVehicleDisplay?.apply(img);
     img?.addEventListener('error', () => {
+      window.SihyeonVehicleDisplay?.reset(img);
       img.hidden = true;
       const fallback = worker.querySelector('.cs-worker-fallback');
       if (fallback) fallback.hidden = false;
@@ -687,7 +700,7 @@
 
     // ★ 피날레 뷰: 시현이가 고른 3대의 차를 나란히 배치
     const finaleImages = state.completedVehicles.map((v) => 
-      `<img src="./${escapeAttr(v.file)}" alt="${escapeAttr(v.name)}">`
+      `<span class="cs-finale-vehicle"><img src="./${escapeAttr(v.file)}" alt="${escapeAttr(v.name)}"><span hidden>🚜</span></span>`
     ).join('');
 
     state.container.innerHTML = `
@@ -724,6 +737,14 @@
       </div>
     `;
 
+    state.container.querySelectorAll('.cs-finale-vehicle img').forEach(img => {
+      window.SihyeonVehicleDisplay?.apply(img);
+      img.addEventListener('error', () => {
+        window.SihyeonVehicleDisplay?.reset(img);
+        img.hidden = true;
+        if (img.nextElementSibling) img.nextElementSibling.hidden = false;
+      });
+    });
     state.container.querySelector('[data-action="restart-complete"]')?.addEventListener('click', restartGame);
     state.container.querySelector('[data-action="home-complete"]')?.addEventListener('click', () => {
       state.options.closeToParkHome?.();

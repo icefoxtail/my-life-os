@@ -27,7 +27,14 @@ function fixture() {
       setPointerCapture(id){captured=id;},
       hasPointerCapture(id){return captured===id;},
       releasePointerCapture(id){captured=null;this.fire('lostpointercapture',{pointerId:id});},
-      cloneNode(){return element({...dataset});},
+      cloneNode(){
+        const clone=element({...dataset});
+        clone.image=element();clone.fallback={hidden:true};clone.frameRemoved=false;
+        clone.image.closest=selector=>selector==='.sv-vehicle-frame'?{remove(){clone.frameRemoved=true;}}:null;
+        return clone;
+      },
+      querySelectorAll(selector){return selector==='img'&&this.image?[this.image]:[];},
+      querySelector(selector){return selector==='span[hidden]'?this.fallback:null;},
       remove(){ghosts.delete(this);},
       closest(selector){return selector==='.pl-slot' && dataset.slotId ? this : null;},
       fire(name,event={}){handlers.get(name)?.({currentTarget:this,button:0,isPrimary:true,pointerId:7,clientX:20,clientY:30,detail:1,preventDefault(){},...event});}
@@ -90,7 +97,18 @@ assert.equal(f.ghosts.size,0,'secondary pointer cannot steal the first gesture')
 f.cards[0].fire('pointercancel');
 f.cards[2].fire('click',{detail:0});f.slots[2].fire('click',{detail:0});
 assert.equal(f.api.state.filledCount,1,'keyboard activation shares the tap path');
-console.log('PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy and secondary pointer.');
+f=fixture();f.start();
+const failedGhost=[...f.ghosts][0];failedGhost.image.fire('error');
+assert.equal(failedGhost.frameRemoved,true,'a failed cloned vehicle removes its fitted frame');
+assert.equal(failedGhost.fallback.hidden,false,'a failed ghost still shows its vehicle fallback');
+f.cards[0].fire('pointercancel');assert.equal(f.ghosts.size,0);
+f=fixture();f.start();const oldGhost=[...f.ghosts][0];
+f.cards[0].fire('pointercancel');f.start();const newGhost=[...f.ghosts][0];
+oldGhost.image.fire('error');
+assert.equal(newGhost.fallback.hidden,true,'a late error from a cancelled drag never changes the next drag');
+assert.equal(oldGhost.fallback.hidden,false);
+f.cards[0].fire('pointercancel');
+console.log('PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy, secondary pointer and cloned-image fallback.');
 
 // Handwashing: every wrong permutation keeps already-correct positions, and
 // the short assessment timer cannot erase an intervening edit.

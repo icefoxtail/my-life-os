@@ -1,0 +1,581 @@
+{
+  "testKind": "Controlled product-module layout fixture; not real-device or random-session play",
+  "results": [
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 1,
+      "viewport": [
+        390,
+        844
+      ],
+      "renderedCount": 1,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 1,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 5,
+      "viewport": [
+        390,
+        844
+      ],
+      "renderedCount": 5,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 5,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 9,
+      "viewport": [
+        390,
+        844
+      ],
+      "renderedCount": 9,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 9,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 11,
+      "viewport": [
+        390,
+        844
+      ],
+      "renderedCount": 11,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 11,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 20,
+      "viewport": [
+        390,
+        844
+      ],
+      "renderedCount": 20,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 20,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 30,
+      "viewport": [
+        390,
+        844
+      ],
+      "renderedCount": 30,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 30,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 1,
+      "viewport": [
+        844,
+        390
+      ],
+      "renderedCount": 1,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 1,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 5,
+      "viewport": [
+        844,
+        390
+      ],
+      "renderedCount": 5,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 5,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 9,
+      "viewport": [
+        844,
+        390
+      ],
+      "renderedCount": 9,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 9,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 11,
+      "viewport": [
+        844,
+        390
+      ],
+      "renderedCount": 11,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 11,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 20,
+      "viewport": [
+        844,
+        390
+      ],
+      "renderedCount": 20,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 20,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 30,
+      "viewport": [
+        844,
+        390
+      ],
+      "renderedCount": 30,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 30,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 1,
+      "viewport": [
+        360,
+        640
+      ],
+      "renderedCount": 1,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 1,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 5,
+      "viewport": [
+        360,
+        640
+      ],
+      "renderedCount": 5,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 5,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 9,
+      "viewport": [
+        360,
+        640
+      ],
+      "renderedCount": 9,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 9,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 11,
+      "viewport": [
+        360,
+        640
+      ],
+      "renderedCount": 11,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 11,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 20,
+      "viewport": [
+        360,
+        640
+      ],
+      "renderedCount": 20,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 20,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 30,
+      "viewport": [
+        360,
+        640
+      ],
+      "renderedCount": 30,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 30,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 1,
+      "viewport": [
+        768,
+        1024
+      ],
+      "renderedCount": 1,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 1,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 5,
+      "viewport": [
+        768,
+        1024
+      ],
+      "renderedCount": 5,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 5,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 9,
+      "viewport": [
+        768,
+        1024
+      ],
+      "renderedCount": 9,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 9,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 11,
+      "viewport": [
+        768,
+        1024
+      ],
+      "renderedCount": 11,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 11,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 20,
+      "viewport": [
+        768,
+        1024
+      ],
+      "renderedCount": 20,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 20,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 30,
+      "viewport": [
+        768,
+        1024
+      ],
+      "renderedCount": 30,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 30,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 1,
+      "viewport": [
+        1024,
+        768
+      ],
+      "renderedCount": 1,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 1,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 5,
+      "viewport": [
+        1024,
+        768
+      ],
+      "renderedCount": 5,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 5,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 9,
+      "viewport": [
+        1024,
+        768
+      ],
+      "renderedCount": 9,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 9,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 11,
+      "viewport": [
+        1024,
+        768
+      ],
+      "renderedCount": 11,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 11,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 20,
+      "viewport": [
+        1024,
+        768
+      ],
+      "renderedCount": 20,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 20,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 30,
+      "viewport": [
+        1024,
+        768
+      ],
+      "renderedCount": 30,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 30,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 1,
+      "viewport": [
+        1280,
+        800
+      ],
+      "renderedCount": 1,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 1,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 5,
+      "viewport": [
+        1280,
+        800
+      ],
+      "renderedCount": 5,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 5,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 9,
+      "viewport": [
+        1280,
+        800
+      ],
+      "renderedCount": 9,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": true,
+      "frames": 9,
+      "uniformAspectFit": true,
+      "pass": true
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 11,
+      "viewport": [
+        1280,
+        800
+      ],
+      "renderedCount": 11,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 11,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 20,
+      "viewport": [
+        1280,
+        800
+      ],
+      "renderedCount": 20,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 20,
+      "uniformAspectFit": true,
+      "pass": false
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "id": "road_roller",
+      "expectedCount": 30,
+      "viewport": [
+        1280,
+        800
+      ],
+      "renderedCount": 30,
+      "imageFailures": 0,
+      "settled": true,
+      "sizesEqual": false,
+      "frames": 30,
+      "uniformAspectFit": true,
+      "pass": false
+    }
+  ]
+}
