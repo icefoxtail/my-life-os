@@ -6,7 +6,8 @@
 - AWCR taskId: `6e320e78-0909-4eea-943c-d9daeadd3d36`
 - 기준 main SHA: `58eb1fad34bba957812b08cf55bdf28c5595ca60`
 - 조사 시 원격 브랜치 SHA: `58eb1fad34bba957812b08cf55bdf28c5595ca60`
-- 현재 단계: INITIAL_REMOTE_CHECKPOINT
+- 초기 기록 원격 검증 SHA: `449d33e5bb4e320be02076facff56c2a45b38a75`
+- 현재 단계: MODEL_REVIEWED_CHECKPOINT_PENDING
 - 기록 시간 기준: 2026-11-08 Asia/Seoul
 
 ## 실제 확인한 정본
@@ -51,6 +52,17 @@
 ## nextAction
 
 초기 기록을 commit + push하고 원격 commit 및 파일 내용 readback을 확인한다. 이후 기존 게임 생명주기 확인 후 DOM 독립 패턴 모델과 상태기계 구현.
+
+## 2026-11-08 모델 체크포인트
+
+- 구현 파일: `js/games/pattern-train-model.js`, `scripts/qa-pattern-train-model.cjs`.
+- 4·5·6·7세 각 5판, 총 20개 활동. 반복묶음 표시, 빈칸·이어 만들기·규칙 복제·그림 대응·최소 반복단위·같은 재료 다른 규칙·복수 해석 및 자유 공작을 분리한다.
+- BUILDING/RUNNING/ARRIVED 상태기계, 수정·교체·꺼내기·이동·되돌리기, 중복 출발 차단, 손상 저장 복원을 구현했다.
+- 독립 검수 첫 회의 오수락 165개, 자유 공작 손상 크기/테마 예외, undo 메타데이터 주입, 복제 주기 보고 오류를 수정했다. 표시된 묶음과 그림 대응도 명시적 정답 제약으로 사용한다.
+- 마지막 실제 검사: 작성자 모델 테스트 205 cases PASS. 독립 검사 29개 그룹, 1,645 assertions, 14,684 board verdicts PASS. 복수해 문제는 4개 완성 배열을 모두 수락한다. 이 결과는 모델 범위이며 브라우저·모바일·배포 PASS가 아니다.
+- 이 파일에 들어 있는 신규 모델 코드는 아직 원격 SHA를 주장하지 않는다. 통합 담당자의 API commit/push 및 readback이 다음 단계이다.
+- 미완료: 제품 UI, SVG 자산, 입력·모바일·음성·작업판 저장 연결, 브라우저 전수 검수, PR, 병합, 운영 검수.
+- nextAction: 이 세 파일을 첫 모델 원격 체크포인트로 저장한 후, 전용 JS/CSS/SVG로 실제 기차 조립과 운행을 구현한다.
 
 ## 파일 소유권
 
