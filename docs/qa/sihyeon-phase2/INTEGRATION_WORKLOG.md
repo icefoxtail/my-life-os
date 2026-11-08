@@ -29,3 +29,14 @@ AWCR 자동차 r2 raw SHA256: `a6647a01309ba523e021e98025ec85ee64edbce4e6d9741e6
 ## 미완료
 
 기차 실제구현·콘텐츠독립검사·입력/모바일검수, 자동차 복원후 게임회귀, PR/CI/main병합, 실제운영 확인.
+
+## 모델 보존과 독립 검수 게이트
+
+- 기차 모델의 원격 SHA: `c97153de1cf595d38b1a32543df59fe93a43c199`. 모델·작성자 검사·TRAIN_WORKLOG 3개 blob을 원격에서 대조하고 worktree fast-forward를 완료했다.
+- 모델 SHA-256: `aff31cb58d8ba2fae9d83e6596e71224aa355ee200d116136d7ebb021bd1c8a9`.
+- 작성자 검사 205건, 독립 모델 29그룹/1,645 assert/14,684 보드 판정 PASS를 통합 담당자도 직접 재실행했다.
+- 최초 오수락165개·손상 저장 예외·history 추가 필드 주입·주기 보고 결함은 최초 실패 JSON으로 보존하고 수정 뒤 결과와 구분한다.
+- `.github/workflows/playground-checks.yml`에 작성자 모델 검사와 독립 oracle을 필수 명령으로 추가했다. 실제 원격 CI 실행 결과는 PR 생성 후 별도로 확인한다.
+- AWCR r3 업로드/readback: `70de9df2808be0a8028cce53d4200bcca3ef894690fb062552a3e19f635c3008`.
+- 현재 범위는 모델·상태 복원 검수다. UI, 음성/실패 대체, 세로·가로 실플레이, 완제품 메뉴 공개, PR/main/운영 확인은 미완료다.
+- nextAction: 첫 UI checkpoint를 보존한 뒤 실제 메뉴·공용 수명주기·캐시에 통합하고 네 연령의 화면 세션과 실패 복구를 검수한다.
