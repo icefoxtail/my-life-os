@@ -1222,102 +1222,102 @@
   },
   "town/school_van.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      5,
+      142,
+      491,
+      460
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/bakery_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      3,
+      124,
+      498,
+      459
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/flower_delivery_van.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      3,
+      157,
+      497,
+      464
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/pet_grooming_van.webp": {
     "box": [
       0,
-      0,
-      512,
-      512
+      116,
+      488,
+      437
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/utility_repair_van.webp": {
     "box": [
       0,
-      0,
-      512,
-      512
+      88,
+      490,
+      442
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/maintenance_pickup.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      5,
+      124,
+      495,
+      446
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/beverage_delivery_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      10,
+      81,
+      493,
+      379
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/toy_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      12,
+      81,
+      490,
+      420
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/community_bus.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      13,
+      95,
+      501,
+      401
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/mail_truck.webp": {
     "box": [
