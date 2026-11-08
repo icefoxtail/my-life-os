@@ -1,0 +1,226 @@
+{
+  "taskId": "339a7bce-22ce-41bc-a477-fdd99f10a93d",
+  "reviewer": "/root/white_fire",
+  "files": [
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/aerial_ladder_truck-right-edge.png",
+      "bytes": 30466,
+      "sha256": "d789e8e1e4a8269d0dee472869462b0b8aada952bf2dfe489b1fbe33712e0da2"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/aerial_ladder_truck-thin-parts.png",
+      "bytes": 126505,
+      "sha256": "4ca72f70e45ff07a9655a13af1405a61aafbb918c6e98fa28bf71f3cf917449b"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/airplane-source-detail.png",
+      "bytes": 59421,
+      "sha256": "c2b0e6bf010c6eeccae0aba56b7265cdf2689d2a2748ec0d9ed1a0781d60edd0"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/airport_crash_tender-thin-parts.png",
+      "bytes": 52247,
+      "sha256": "0681603800740b2dd97546fb5aa3bc09a239aea3ba19a66fa86012e2ac73b029"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/articulating_boom_truck-thin-parts.png",
+      "bytes": 64086,
+      "sha256": "4a98f41db967a84bc328ae2f871d174df06861238d0ab321f56531ffb1aad768"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/bus-historical-comparison.jpg",
+      "bytes": 109344,
+      "sha256": "8a44537ce042812577321805a22f0617752cf35517eb79270665ba3f7ca866e7"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/bus-source-detail.png",
+      "bytes": 78885,
+      "sha256": "8f82d77bd3c44736f774c5a811b88ac5486b5810058e21440b8425f1635666b6"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_command_suv-left-edge.png",
+      "bytes": 50700,
+      "sha256": "a17f54ce5bfb6f7456f59cd310e38c8ce1ef1435b622a9bf676494c08ebc6f06"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_command_suv-thin-parts.png",
+      "bytes": 15115,
+      "sha256": "4d73af3fd87a391111d6dafe201d41bbe5a585043b4a4f4f52be42cc4dcdd678"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-aerial_ladder_truck-comparison.jpg",
+      "bytes": 387019,
+      "sha256": "71a0b5260428200c7d829973eb3a88f34d5970e94934875977452ebc5957609a"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-airport_crash_tender-comparison.jpg",
+      "bytes": 312778,
+      "sha256": "6f3700afc5cab6cb63d77ad3e93084b37ac521160b9bd0ddb9e182dd72f3d9ab"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-articulating_boom_truck-comparison.jpg",
+      "bytes": 354091,
+      "sha256": "e8dd6591c6a6eedc2e308dacbe76b45b9e50c8f121f7a90ed28243e4d9b5bc69"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-fire_command_suv-comparison.jpg",
+      "bytes": 307140,
+      "sha256": "8a27dda1aa5a751feea920cbb317bc906932ee9ca84a9ef2ba7c08780af242c5"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-fire_tank-comparison.jpg",
+      "bytes": 337912,
+      "sha256": "9bcd09e6171e089de3dcc6d34443e98f9948dfae24d3991600003d9661b558b4"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-robot_demolition_fire_vehicle-comparison.jpg",
+      "bytes": 367034,
+      "sha256": "82e34f7dd3478bd2f79e433440e7771ab298b639e11fb65c197b6658004dc9ae"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-smoke_extraction_fan_truck-comparison.jpg",
+      "bytes": 329076,
+      "sha256": "fc89fead59839509e9bbcd1227b7063b3775174ba196bffd024459bfc947f492"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-water_tanker-comparison.jpg",
+      "bytes": 319399,
+      "sha256": "beec6212a5959310a98085b47188ff8955b391bcd9921b6d632bca807b854c43"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/fire_special-wildfire_6x6_truck-comparison.jpg",
+      "bytes": 361262,
+      "sha256": "5d723db82af486a6370c2d537c5c775976c88d32175b4c6032604ceb88d6df66"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/forensic_bus-historical-comparison.jpg",
+      "bytes": 116659,
+      "sha256": "321c52231940d9b047ca964429f811edc5238dba72f01827a8c2e45e9617901b"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/forensic_bus-source-detail.png",
+      "bytes": 51280,
+      "sha256": "986fac23d87fc467c0b1802be85068ed1cd16c7dcfea3fdf4e21cb3d7626c65e"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/garbage-rear-detail.png",
+      "bytes": 165392,
+      "sha256": "621c16386649d8aeb89cc138df292514a843d12bec07dfb8d0330dfd9790f0a0"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/garbage_truck-historical-comparison.jpg",
+      "bytes": 130077,
+      "sha256": "7f1944356948709417fb5a06c691a35addd10d5c11cec59f6d9aeae60e7ee6ba"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/helicopter-source-hold.jpg",
+      "bytes": 314560,
+      "sha256": "87abd0cbb618b95f98a4fbb41969d267bfbb6e9eda4a8fff8badff15ecfb5df5"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/military-source-holds-01.png",
+      "bytes": 298092,
+      "sha256": "af257201231511ac83debf5e69546b8cf923df6aa073efe826301fce638b64f0"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/military-source-holds-02.png",
+      "bytes": 306945,
+      "sha256": "3df377bd5af9765b19bef359a712ae3cfff1fa53f9ca27ff093d5b13807b2822"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/military-source-holds-03.png",
+      "bytes": 296465,
+      "sha256": "9c9f664bb1a1b6810d20d2124228d5a95cea7ec4f38ab950b023348fd1339333"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/military-source-holds-04.png",
+      "bytes": 282801,
+      "sha256": "179a0e043326e06c5fda47789b858637c53e0d207d0b671f94f2bcf388b1f0dc"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/military-source-holds-05.png",
+      "bytes": 84249,
+      "sha256": "390e9a08f82398524d8931d5fb44a2555bfcf1b8674335a98a5e6c5c45caad42"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/military_special-snow_rescue_vehicle-comparison.jpg",
+      "bytes": 182925,
+      "sha256": "5e934057d3705d9aaf9294c36ea9fe97cd069cd7432197c364a1d7cddd0e04d2"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/preserved-01.jpg",
+      "bytes": 512791,
+      "sha256": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/preserved-02.jpg",
+      "bytes": 422825,
+      "sha256": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/preserved-03.jpg",
+      "bytes": 348712,
+      "sha256": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/preserved-04.jpg",
+      "bytes": 404369,
+      "sha256": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/preserved-05.jpg",
+      "bytes": 366422,
+      "sha256": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/preserved-06.jpg",
+      "bytes": 347927,
+      "sha256": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/rocket-historical-comparison.jpg",
+      "bytes": 83508,
+      "sha256": "534f5fa39c42dda4941592fa4b78d8c781c64e21b5d7b781c334d2a87e84d13c"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/rocket-source-detail.png",
+      "bytes": 192942,
+      "sha256": "c1621b8ad697a7fcf78561ec2fc957dd8ea29e9d158782a7f7cdea3035e37d4b"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/school_bus-source-detail.png",
+      "bytes": 183235,
+      "sha256": "074c5471131142385116f842c4e4d9048348ee16326dd9795c72d35e3edda177"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/smoke_extraction_fan_truck-left-edge.png",
+      "bytes": 22372,
+      "sha256": "41dafce325b6496618bf6ddf58fa24a93dd7d86623063f97b3d74594fcec690b"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/snow-tracks-detail.png",
+      "bytes": 46041,
+      "sha256": "8cf462ca13c3a131762aa42c5ac1b861b397ec62b6f4df5a97d5e7a0ce2d8e96"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/submarine-tail-detail.png",
+      "bytes": 119136,
+      "sha256": "6946b1462630b7618d02c8794d637ba163ea799f0855e20fb830d3eb66d70015"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/train-source-detail.png",
+      "bytes": 103294,
+      "sha256": "63781b943c9d1857693f0c047cf1796a0aea1baeea7a51706d7bb3d67ee61777"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/transport-garbage_truck-comparison.jpg",
+      "bytes": 255295,
+      "sha256": "1d51834e946ff4c89ef49f298e2dedf1378a39dd9993bd8374bf6a60318e2ed3"
+    },
+    {
+      "path": "docs/qa/sihyeon-phase2/release-20261108/white-fire/transport-submarine-comparison.jpg",
+      "bytes": 213148,
+      "sha256": "dabd12592e04ed3163d1e5c684976b9c4c9fc64917b6073b0796d5271be4109c"
+    }
+  ]
+}

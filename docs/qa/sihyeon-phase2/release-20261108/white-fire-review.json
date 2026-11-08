@@ -1,0 +1,2992 @@
+{
+  "schemaVersion": 1,
+  "taskId": "339a7bce-22ce-41bc-a477-fdd99f10a93d",
+  "owner": "GPT6_ASTRA_SIHYEON_P2_WHITE_FIRE",
+  "agent": "/root/white_fire",
+  "branch": "work/sihyeon-p2-white-fire-20261108",
+  "startingHead": "b85ffc2fd51d230be8a949cbc6b7517f57ace3d4",
+  "baselineSource": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+  "scopeCount": 66,
+  "status": "REVIEW_COMPLETE_WITH_INDIVIDUAL_HOLDS",
+  "independence": "Current agent did not create the inherited 12 repaired product images. Product files remain unchanged.",
+  "evidenceMethod": "Read-only Pillow compositing of actual Git baseline/current bytes; no product pixel edits",
+  "entries": [
+    {
+      "id": "pump_engine",
+      "file": "assets/vehicles/fire/pump_engine.png",
+      "inventoryIndex": 1,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0",
+      "finalSha256": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        211,
+        980,
+        813
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-01.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "호스릴·방수포·계기·차체와 타이어를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-01.jpg": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+      }
+    },
+    {
+      "id": "water_tanker",
+      "file": "assets/vehicles/fire/water_tanker.png",
+      "inventoryIndex": 2,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "b84601810c8afe00ace5bfa7b82af5c7a8d05c2590d8cea88e9cd8868ea40226",
+      "finalSha256": "b84601810c8afe00ace5bfa7b82af5c7a8d05c2590d8cea88e9cd8868ea40226",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        227,
+        980,
+        797
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-01.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "탱크·급수관·차체와 3축 바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-01.jpg": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+      }
+    },
+    {
+      "id": "ladder_truck",
+      "file": "assets/vehicles/fire/ladder_truck.png",
+      "inventoryIndex": 3,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "b896d3414d84ab8844265b42296436b4437172cfb8eddda94cf1d2c1b214292c",
+      "finalSha256": "b896d3414d84ab8844265b42296436b4437172cfb8eddda94cf1d2c1b214292c",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        199,
+        980,
+        825
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-01.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "접은 사다리·삼각 트러스·차체와 바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-01.jpg": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+      }
+    },
+    {
+      "id": "aerial_ladder_truck",
+      "file": "assets/vehicles/fire/aerial_ladder_truck.png",
+      "inventoryIndex": 4,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "351257bd0f81fe08597c8da286e3b75ba154421c9220e8f6fc3613bdf19d44d6",
+      "finalSha256": "351257bd0f81fe08597c8da286e3b75ba154421c9220e8f6fc3613bdf19d44d6",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        168,
+        980,
+        855
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-01.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "바스켓·제어반·사다리·차체를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-01.jpg": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+      }
+    },
+    {
+      "id": "articulating_ladder_truck",
+      "file": "assets/vehicles/fire/articulating_ladder_truck.png",
+      "inventoryIndex": 5,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "323bce390a1e47a93cef61d83efaf62dd94407fbd206d2dd7094bcd06d96bfbf",
+      "finalSha256": "323bce390a1e47a93cef61d83efaf62dd94407fbd206d2dd7094bcd06d96bfbf",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        120,
+        980,
+        904
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-01.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "굴절 붐·바스켓·난간·차체를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-01.jpg": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+      }
+    },
+    {
+      "id": "rescue_fire_truck",
+      "file": "assets/vehicles/fire/rescue_fire_truck.png",
+      "inventoryIndex": 6,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "a0cf916b8f5b04950dbb44bbd100711d31d47ed8d3aac2b21ddf49af2f0d0ebd",
+      "finalSha256": "a0cf916b8f5b04950dbb44bbd100711d31d47ed8d3aac2b21ddf49af2f0d0ebd",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        209,
+        980,
+        814
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-01.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "노출 장비함·사다리·장비·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-01.jpg": "04784393825a950b0feca2ce7a87a9047f85a46de77f6617b8b55548285100a3"
+      }
+    },
+    {
+      "id": "airport_fire_truck",
+      "file": "assets/vehicles/fire/airport_fire_truck.png",
+      "inventoryIndex": 7,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "52c46fac95185e3eaabf020fe74480db9595d139109bf5b2ee9e6c7b76bb3e09",
+      "finalSha256": "52c46fac95185e3eaabf020fe74480db9595d139109bf5b2ee9e6c7b76bb3e09",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        201,
+        980,
+        823
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-02.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "상하 방수포·6륜 바퀴·차체를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-02.jpg": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+      }
+    },
+    {
+      "id": "foam_fire_truck",
+      "file": "assets/vehicles/fire/foam_fire_truck.png",
+      "inventoryIndex": 8,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "4130d2a9f4e580a2b303727cb91115b95753ea62660c1219b664f37c80d84813",
+      "finalSha256": "4130d2a9f4e580a2b303727cb91115b95753ea62660c1219b664f37c80d84813",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        158,
+        980,
+        865
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-02.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "원래 거품/물방울 표현·노즐·탱크를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-02.jpg": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+      }
+    },
+    {
+      "id": "fire_command_vehicle",
+      "file": "assets/vehicles/fire/fire_command_vehicle.png",
+      "inventoryIndex": 9,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "c278e41a3d8145d24a74ae6293e8c18c685c7403eef288190292d36ee9d466e3",
+      "finalSha256": "c278e41a3d8145d24a74ae6293e8c18c685c7403eef288190292d36ee9d466e3",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        44,
+        149,
+        980,
+        874
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-02.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "안테나·스피커·경광등·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-02.jpg": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+      }
+    },
+    {
+      "id": "korean_police_car",
+      "file": "assets/vehicles/police/korean_police_car.png",
+      "inventoryIndex": 10,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "d2ee1e4969681185e414947690a8bb0ad1589baad8c3a16a63327ac013d9bb6d",
+      "finalSha256": "d2ee1e4969681185e414947690a8bb0ad1589baad8c3a16a63327ac013d9bb6d",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        149,
+        368,
+        904,
+        784
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-02.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "흰/파랑 도색·차창·경광등·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-02.jpg": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+      }
+    },
+    {
+      "id": "us_police_car",
+      "file": "assets/vehicles/police/us_police_car.png",
+      "inventoryIndex": 11,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "cd69d7811b66a745277ad04f94dba4b0d34cf235fadfdc61d56e74b4eeb97732",
+      "finalSha256": "cd69d7811b66a745277ad04f94dba4b0d34cf235fadfdc61d56e74b4eeb97732",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        159,
+        367,
+        892,
+        778
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-02.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "흰 문과 경찰표식·전면 보호대·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-02.jpg": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+      }
+    },
+    {
+      "id": "police_motorcycle",
+      "file": "assets/vehicles/police/police_motorcycle.png",
+      "inventoryIndex": 12,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "262eb37391b51c4ff4fd594234d71fa028777e9ba0cc6fc9201927640ad56650",
+      "finalSha256": "262eb37391b51c4ff4fd594234d71fa028777e9ba0cc6fc9201927640ad56650",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        216,
+        346,
+        807,
+        789
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-02.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "윈드스크린·핸들·사이드박스·두 바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-02.jpg": "019f4527d81bc879544468f66e1a7e98c626b7aee7e30de078d37e47887e3185"
+      }
+    },
+    {
+      "id": "swat_truck",
+      "file": "assets/vehicles/police/swat_truck.png",
+      "inventoryIndex": 13,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "b651ddcb93640af8f20d9db76795868baf29ba1a3bb667d046bc9b43bcb55922",
+      "finalSha256": "b651ddcb93640af8f20d9db76795868baf29ba1a3bb667d046bc9b43bcb55922",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        171,
+        305,
+        906,
+        770
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-03.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "상부 장비·차창·전면 보호대·타이어를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-03.jpg": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1"
+      }
+    },
+    {
+      "id": "forensic_bus",
+      "file": "assets/vehicles/police/forensic_bus.png",
+      "inventoryIndex": 14,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "23db581f0840aa15190d5a28f8fc29cecca027296adbb52c64631e759c9eafc3",
+      "finalSha256": "23db581f0840aa15190d5a28f8fc29cecca027296adbb52c64631e759c9eafc3",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        182,
+        309,
+        901,
+        763
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-03.jpg",
+        "release-20261108/white-fire/forensic_bus-source-detail.png",
+        "release-20261108/white-fire/forensic_bus-historical-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "observation": "흰 지붕의 긴 수평 영역과 지붕 장비 받침 연결이 투명하게 소실되어 장비가 떠 보인다. 최초 Git은 차체에도 더 넓은 알파 손상이 있어 정상 복구 소스로 사용할 수 없다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-03.jpg": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1",
+        "release-20261108/white-fire/forensic_bus-source-detail.png": "986fac23d87fc467c0b1802be85068ed1cd16c7dcfea3fdf4e21cb3d7626c65e",
+        "release-20261108/white-fire/forensic_bus-historical-comparison.jpg": "321c52231940d9b047ca964429f811edc5238dba72f01827a8c2e45e9617901b"
+      }
+    },
+    {
+      "id": "riot_police_bus",
+      "file": "assets/vehicles/police/riot_police_bus.png",
+      "inventoryIndex": 15,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "9ce3b94579d2f8cc7199e4a86dd6c26e430b691069a5a4034178fef70af3d43f",
+      "finalSha256": "9ce3b94579d2f8cc7199e4a86dd6c26e430b691069a5a4034178fef70af3d43f",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        170,
+        345,
+        889,
+        766
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-03.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "차창 보호망·상부등·전면 보호대·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-03.jpg": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1"
+      }
+    },
+    {
+      "id": "ambulance",
+      "file": "assets/vehicles/rescue/ambulance.png",
+      "inventoryIndex": 16,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "56b5211bb1564bca7f2b9e952dea9e3998a2f1a83cb7a29052aefb214ec8d910",
+      "finalSha256": "56b5211bb1564bca7f2b9e952dea9e3998a2f1a83cb7a29052aefb214ec8d910",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        193,
+        295,
+        895,
+        725
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-03.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "의료 표식·흰 차체·경광등·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-03.jpg": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1"
+      }
+    },
+    {
+      "id": "doctor_car",
+      "file": "assets/vehicles/rescue/doctor_car.png",
+      "inventoryIndex": 17,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "8c4e782e314c25712cc6302a0b7f321f3298a17b31e4ffe0a6586d393b9a7ef8",
+      "finalSha256": "8c4e782e314c25712cc6302a0b7f321f3298a17b31e4ffe0a6586d393b9a7ef8",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        224,
+        269,
+        872,
+        721
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-03.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "의료 가방 표시·흰 차체·차창·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-03.jpg": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1"
+      }
+    },
+    {
+      "id": "rescue_helicopter",
+      "file": "assets/vehicles/rescue/rescue_helicopter.png",
+      "inventoryIndex": 18,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "fdfcadb4eb9c85668f164a38b27a3d48e916712f726090a1981318fa80de6a6f",
+      "finalSha256": "fdfcadb4eb9c85668f164a38b27a3d48e916712f726090a1981318fa80de6a6f",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        226,
+        293,
+        895,
+        722
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-03.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "주/꼬리 로터·구조 바스켓·착륙 스키드를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-03.jpg": "94dd14c1524cad413e86e2138641a5a37ac02a416215861000134c4bfda89ae1"
+      }
+    },
+    {
+      "id": "excavator",
+      "file": "assets/vehicles/construction/excavator.png",
+      "inventoryIndex": 19,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "9c6a31d6a45040d7ffe47847b23ec95427dff2ab46364effe047f6ef98023475",
+      "finalSha256": "9c6a31d6a45040d7ffe47847b23ec95427dff2ab46364effe047f6ef98023475",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        118,
+        275,
+        906,
+        794
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-04.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "붐·유압실린더·버킷·무한궤도를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-04.jpg": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+      }
+    },
+    {
+      "id": "mini_excavator",
+      "file": "assets/vehicles/construction/mini_excavator.png",
+      "inventoryIndex": 20,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "240f3771b85f7416de23dd45c7a60d2e91d3caac644c80a58c77fb2865012b75",
+      "finalSha256": "240f3771b85f7416de23dd45c7a60d2e91d3caac644c80a58c77fb2865012b75",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        145,
+        265,
+        879,
+        810
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-04.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "붐·버킷·앞 블레이드·궤도를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-04.jpg": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+      }
+    },
+    {
+      "id": "bulldozer",
+      "file": "assets/vehicles/construction/bulldozer.png",
+      "inventoryIndex": 21,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "b58cca4395270ba6bf3e89b547522f002055f8391316ba43acb837684bf0e66d",
+      "finalSha256": "b58cca4395270ba6bf3e89b547522f002055f8391316ba43acb837684bf0e66d",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        117,
+        311,
+        907,
+        757
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-04.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "블레이드·배기구·캐노피·궤도를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-04.jpg": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+      }
+    },
+    {
+      "id": "wheel_loader",
+      "file": "assets/vehicles/construction/wheel_loader.png",
+      "inventoryIndex": 22,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "cde6cae724eac9d13678a251d95c9c15ef87595bb05567c2616af730eebb94bb",
+      "finalSha256": "cde6cae724eac9d13678a251d95c9c15ef87595bb05567c2616af730eebb94bb",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "finalSize": [
+        1312,
+        1199
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        93,
+        340,
+        1199,
+        935
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-04.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "버킷 이빨·리프트암·흰 유리·타이어를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-04.jpg": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+      }
+    },
+    {
+      "id": "dump_truck",
+      "file": "assets/vehicles/construction/dump_truck.png",
+      "inventoryIndex": 23,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "3afa9a9b919d8d61854fd36da3c4c13deb60f27a8bf20ccef934e3fdcee5e333",
+      "finalSha256": "3afa9a9b919d8d61854fd36da3c4c13deb60f27a8bf20ccef934e3fdcee5e333",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        119,
+        300,
+        905,
+        747
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-04.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "덤프 적재함·차체·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-04.jpg": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+      }
+    },
+    {
+      "id": "concrete_mixer",
+      "file": "assets/vehicles/construction/concrete_mixer.png",
+      "inventoryIndex": 24,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "776d7fb9cb28068534fe2bb821e0cbbb5f7fba5243e73c6fa5f8e5c67b825ef3",
+      "finalSha256": "776d7fb9cb28068534fe2bb821e0cbbb5f7fba5243e73c6fa5f8e5c67b825ef3",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "finalSize": [
+        1312,
+        1199
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        182,
+        336,
+        1170,
+        943
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-04.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "믹서 드럼·뒤 사다리/슈트·타이어를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-04.jpg": "ca0e91082775aa14059683b97b98232b5bceba088d5f75cc578d83f97b4d7d44"
+      }
+    },
+    {
+      "id": "concrete_pump_truck",
+      "file": "assets/vehicles/construction/concrete_pump_truck.png",
+      "inventoryIndex": 25,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "afa860e50022a30335a29fa95c5b3400575dba614e97d5aeccec3afb4f40fb71",
+      "finalSha256": "afa860e50022a30335a29fa95c5b3400575dba614e97d5aeccec3afb4f40fb71",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        117,
+        289,
+        907,
+        735
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-05.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "접은 펌프 붐·유압 연결·지지대·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-05.jpg": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e"
+      }
+    },
+    {
+      "id": "crane_truck",
+      "file": "assets/vehicles/construction/crane_truck.png",
+      "inventoryIndex": 26,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "e05110599b10c0c706a877e8e9d9b71d1005696e3666ade87e142dec9702352c",
+      "finalSha256": "e05110599b10c0c706a877e8e9d9b71d1005696e3666ade87e142dec9702352c",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        119,
+        278,
+        905,
+        746
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-05.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "붐·케이블·갈고리·차체와 바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-05.jpg": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e"
+      }
+    },
+    {
+      "id": "forklift",
+      "file": "assets/vehicles/construction/forklift.png",
+      "inventoryIndex": 27,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "41ca87c531302c7efb5b4b7ce89eeb823ac915602c2ddc9b0bb7f4c9615277be",
+      "finalSha256": "41ca87c531302c7efb5b4b7ce89eeb823ac915602c2ddc9b0bb7f4c9615277be",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        142,
+        252,
+        882,
+        772
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-05.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "포크·마스트·캐노피·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-05.jpg": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e"
+      }
+    },
+    {
+      "id": "train",
+      "file": "assets/vehicles/transport/train.png",
+      "inventoryIndex": 46,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "96170486e2b3f53da75f8bea809043e817be86432e8b27137fc793d37b81b2f3",
+      "finalSha256": "96170486e2b3f53da75f8bea809043e817be86432e8b27137fc793d37b81b2f3",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        98,
+        299,
+        926,
+        724
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-05.jpg",
+        "release-20261108/white-fire/train-source-detail.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "열차 차체·옆 창과 후방 바퀴가 내부 이미지 경계 x≈926에서 같은 수직선으로 잘린다. 의도한 전체 편성 길이나 닫힌 후방 외곽의 근거가 없으며 현재 범위에서 온전한 단독 차량으로 인증할 수 없다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-05.jpg": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e",
+        "release-20261108/white-fire/train-source-detail.png": "63781b943c9d1857693f0c047cf1796a0aea1baeea7a51706d7bb3d67ee61777"
+      }
+    },
+    {
+      "id": "bus",
+      "file": "assets/vehicles/transport/bus.png",
+      "inventoryIndex": 47,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "23f6012fd3070e529578d35dacd1e25dbcc3332979a221f32c0ed40eebc82a3b",
+      "finalSha256": "23f6012fd3070e529578d35dacd1e25dbcc3332979a221f32c0ed40eebc82a3b",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        143,
+        299,
+        897,
+        693
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-05.jpg",
+        "release-20261108/white-fire/bus-source-detail.png",
+        "release-20261108/white-fire/bus-historical-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "observation": "흰 지붕과 상단 장비를 가로지르는 긴 두 투명 소실 및 부유 수평 흰선/후면 흰 조각이 남는다. 최초 Git에도 지붕 손상이 있어 단순 과거버전 복귀로 복구되지 않는다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-05.jpg": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e",
+        "release-20261108/white-fire/bus-source-detail.png": "8f82d77bd3c44736f774c5a811b88ac5486b5810058e21440b8425f1635666b6",
+        "release-20261108/white-fire/bus-historical-comparison.jpg": "8a44537ce042812577321805a22f0617752cf35517eb79270665ba3f7ca866e7"
+      }
+    },
+    {
+      "id": "car",
+      "file": "assets/vehicles/transport/car.png",
+      "inventoryIndex": 48,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "57fc7764817e0b19c52b626ce04738c8edb7fa3fafb35ccc9bd59c9750cfac95",
+      "finalSha256": "57fc7764817e0b19c52b626ce04738c8edb7fa3fafb35ccc9bd59c9750cfac95",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        194,
+        356,
+        926,
+        698
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-05.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "차체·차창·헤드램프·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-05.jpg": "dd1a66e60a9081ef7de3ea3bb59433ac9d15a85d8462b1d14c7e9923e6ef108e"
+      }
+    },
+    {
+      "id": "taxi",
+      "file": "assets/vehicles/transport/taxi.png",
+      "inventoryIndex": 49,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "cfac3aaab4542b35c0001a6be90370b81df7efdf3ae432486c26225085d76fe9",
+      "finalSha256": "cfac3aaab4542b35c0001a6be90370b81df7efdf3ae432486c26225085d76fe9",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        98,
+        302,
+        926,
+        721
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-06.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "택시 지붕표지·차창·도색·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-06.jpg": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac"
+      }
+    },
+    {
+      "id": "school_bus",
+      "file": "assets/vehicles/transport/school_bus.png",
+      "inventoryIndex": 50,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "54b1518f7fc1068f77625d06ceece570b863e9e48ea1832ddeb1d03552bc5db0",
+      "finalSha256": "54b1518f7fc1068f77625d06ceece570b863e9e48ea1832ddeb1d03552bc5db0",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        56,
+        251,
+        970,
+        773
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-06.jpg",
+        "release-20261108/white-fire/school_bus-source-detail.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "버스 후방 차체가 내부 이미지 경계 x≈970에서 끊기고 후방 바퀴 부근에 수직 이어붙임 경계도 남는다. 온전한 원본 후면 없이 길이/부품을 생성해 복구했다고 하지 않는다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-06.jpg": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac",
+        "release-20261108/white-fire/school_bus-source-detail.png": "074c5471131142385116f842c4e4d9048348ee16326dd9795c72d35e3edda177"
+      }
+    },
+    {
+      "id": "rocket",
+      "file": "assets/vehicles/transport/rocket.png",
+      "inventoryIndex": 51,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "d8c05b7ea75e3cbf3667408e01873556cdb0dae13a3ec2de249db881075b1e6a",
+      "finalSha256": "d8c05b7ea75e3cbf3667408e01873556cdb0dae13a3ec2de249db881075b1e6a",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        310,
+        131,
+        672,
+        847
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-06.jpg",
+        "release-20261108/white-fire/rocket-source-detail.png",
+        "release-20261108/white-fire/rocket-historical-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "observation": "흰 측면 부스터 두 곳의 끝/몸체와 붉은 기수 아래 흰 본체에 투명 구멍이 있다. 밝은 바탕에서 숨고 어두운/격자 바탕에서 드러난다. earliest Git 53bb56e에도 같은 손상이 있다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-06.jpg": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac",
+        "release-20261108/white-fire/rocket-source-detail.png": "c1621b8ad697a7fcf78561ec2fc957dd8ea29e9d158782a7f7cdea3035e37d4b",
+        "release-20261108/white-fire/rocket-historical-comparison.jpg": "534f5fa39c42dda4941592fa4b78d8c781c64e21b5d7b781c334d2a87e84d13c"
+      }
+    },
+    {
+      "id": "submarine",
+      "file": "assets/vehicles/transport/submarine.png",
+      "inventoryIndex": 52,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "c4a00de78da854e2572867707e4fdeb4fa62ba2b26928024be380507b28516b2",
+      "finalSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        173,
+        240,
+        857,
+        753
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/transport-submarine-comparison.jpg",
+        "release-20261108/white-fire/submarine-tail-detail.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "잠망경·3개 측창·꼬리 지느러미·프로펠러 두 엽과 축을 유지했다. 원래의 오른쪽 흰 부유 조각과 바닥 흰 잔여가 제거됐으며 프로펠러를 2배 확대 비교했다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/transport-submarine-comparison.jpg": "dabd12592e04ed3163d1e5c684976b9c4c9fc64917b6073b0796d5271be4109c",
+        "release-20261108/white-fire/submarine-tail-detail.png": "6946b1462630b7618d02c8794d637ba163ea799f0855e20fb830d3eb66d70015"
+      }
+    },
+    {
+      "id": "tow_truck",
+      "file": "assets/vehicles/transport/tow_truck.png",
+      "inventoryIndex": 53,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "6a0f15eedf7282e2016b727def4c037f3ab704cfa27bb5f147a752d5ec418675",
+      "finalSha256": "6a0f15eedf7282e2016b727def4c037f3ab704cfa27bb5f147a752d5ec418675",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        98,
+        250,
+        926,
+        772
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-06.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "붐·와이어·갈고리·적재판·바퀴를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-06.jpg": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac"
+      }
+    },
+    {
+      "id": "garbage_truck",
+      "file": "assets/vehicles/transport/garbage_truck.png",
+      "inventoryIndex": 54,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "1b13ef68bd5c666906ceaa5cef578d452cd68810f27cd7d455efd7ee25335b87",
+      "finalSha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        105,
+        267,
+        903,
+        782
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/transport-garbage_truck-comparison.jpg",
+        "release-20261108/white-fire/garbage-rear-detail.png",
+        "release-20261108/white-fire/garbage_truck-historical-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_STITCH_DAMAGE",
+      "observation": "흰 바닥/좌측 부유선은 제거됐지만 원본 x≈816 수직 이음에서 후방 녹색 차체와 마지막 바퀴의 형태가 어긋난 결함은 그대로다. 최초 Git 53bb56e는 뒤쪽이 잘린 더 이른 원본이라 완전 복구 근거가 아니다. 배경 정비 성공과 전체 차량 원형 복원을 구분한다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/transport-garbage_truck-comparison.jpg": "1d51834e946ff4c89ef49f298e2dedf1378a39dd9993bd8374bf6a60318e2ed3",
+        "release-20261108/white-fire/garbage-rear-detail.png": "621c16386649d8aeb89cc138df292514a843d12bec07dfb8d0330dfd9790f0a0",
+        "release-20261108/white-fire/garbage_truck-historical-comparison.jpg": "7f1944356948709417fb5a06c691a35addd10d5c11cec59f6d9aeae60e7ee6ba"
+      }
+    },
+    {
+      "id": "tractor",
+      "file": "assets/vehicles/transport/tractor.png",
+      "inventoryIndex": 55,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "5fbcad0aaed84809fd4f3e2f42fc7682de3410526ee08673899ede52c2caade5",
+      "finalSha256": "5fbcad0aaed84809fd4f3e2f42fc7682de3410526ee08673899ede52c2caade5",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        305,
+        297,
+        926,
+        729
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-06.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "PRESERVED_VISUAL_REGRESSION_PASS",
+      "observation": "롤바·배기관·운전석·큰/작은 타이어를 세 배경에서 확인했다. 기준 원본과 파일 바이트가 동일하며 새 구조 소실/새 잘림은 없다. 기존 접지 그림자와 일부 밝은 외곽을 의도 없이 다시 지우지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-06.jpg": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac"
+      }
+    },
+    {
+      "id": "airplane",
+      "file": "assets/vehicles/transport/airplane.png",
+      "inventoryIndex": 56,
+      "priorDisposition": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "sourceSha256": "899719339c2fccee8e8f22b1be0356446d3dfbf1cd4506daba43c51d0042f0b2",
+      "finalSha256": "899719339c2fccee8e8f22b1be0356446d3dfbf1cd4506daba43c51d0042f0b2",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        98,
+        297,
+        926,
+        728
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/preserved-06.jpg",
+        "release-20261108/white-fire/airplane-source-detail.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "observation": "기수에서 꼬리까지 이어지는 동체 상단의 넓은 흰 영역이 투명하게 소실되고 몸체 밖 흰 선/조각이 남는다. earliest Git의 추가 시점부터 같은 바이트이므로 알려진 Git 이력에서 온전한 복구 소스는 찾지 못했다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/preserved-06.jpg": "34bb2bfc681a9567c5e16bb8d58c49e587452ec81858e5f1abbf1a53ad6a9dac",
+        "release-20261108/white-fire/airplane-source-detail.png": "c2b0e6bf010c6eeccae0aba56b7265cdf2689d2a2748ec0d9ed1a0781d60edd0"
+      }
+    },
+    {
+      "id": "helicopter",
+      "file": "assets/vehicles/transport/helicopter.png",
+      "inventoryIndex": 57,
+      "priorDisposition": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "sourceSha256": "e1dd3c63aad3a80e95bcea75b36b893a1d8c86a99029b05050645b77b5570028",
+      "finalSha256": "e1dd3c63aad3a80e95bcea75b36b893a1d8c86a99029b05050645b77b5570028",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "finalSize": [
+        1024,
+        1024
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        98,
+        267,
+        926,
+        757
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/helicopter-source-hold.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "observation": "원본과 최종 바이트가 같다. 좌측 부유 조각과 조종석 유리/흰 캐빈 이음의 투명 소실이 3배경에서 명확하다. 단순 부유 조각 제거로 흰 차체의 사라진 부분을 복구할 수 없다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/helicopter-source-hold.jpg": "87abd0cbb618b95f98a4fbb41969d267bfbb6e9eda4a8fff8badff15ecfb5df5"
+      }
+    },
+    {
+      "id": "military_truck",
+      "file": "assets/vehicles/military_special/military_truck.webp",
+      "inventoryIndex": 94,
+      "priorDisposition": "HOLD_AMBIGUOUS_SOURCE_EDGE",
+      "sourceSha256": "fd64c01082997bc0d627fd4a9819054c693a519d0eb4ccca7032a1cd2fbca39c",
+      "finalSha256": "fd64c01082997bc0d627fd4a9819054c693a519d0eb4ccca7032a1cd2fbca39c",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-01.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_AMBIGUOUS_SOURCE_EDGE",
+      "observation": "앞쪽 큰 타이어의 최하단 곡선이 흰 사각형 하단과 맞닿아 일부 소실 여부가 모호하다. 전체 원형 인증은 보류한다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-01.png": "af257201231511ac83debf5e69546b8cf923df6aa073efe826301fce638b64f0"
+      }
+    },
+    {
+      "id": "command_truck",
+      "file": "assets/vehicles/military_special/command_truck.webp",
+      "inventoryIndex": 95,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "b8f238e08f02d97770df8dd1008e0cbf7a6a5fc6b3721a2ee0f2cdbe1c0d1364",
+      "finalSha256": "b8f238e08f02d97770df8dd1008e0cbf7a6a5fc6b3721a2ee0f2cdbe1c0d1364",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-01.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "앞 범퍼와 타이어·하부 프레임이 흰 그림 사각형 하단에서 수평으로 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-01.png": "af257201231511ac83debf5e69546b8cf923df6aa073efe826301fce638b64f0"
+      }
+    },
+    {
+      "id": "communication_relay_truck",
+      "file": "assets/vehicles/military_special/communication_relay_truck.webp",
+      "inventoryIndex": 96,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "20169f5fbe5b1a003cbfa4630ebb8ec90367375c0c6dbb1b416f56f50cfec5c5",
+      "finalSha256": "20169f5fbe5b1a003cbfa4630ebb8ec90367375c0c6dbb1b416f56f50cfec5c5",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-01.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "범퍼와 타이어 대부분이 원래 사각형의 수평 하단에서 소실됐다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-01.png": "af257201231511ac83debf5e69546b8cf923df6aa073efe826301fce638b64f0"
+      }
+    },
+    {
+      "id": "radar_truck",
+      "file": "assets/vehicles/military_special/radar_truck.webp",
+      "inventoryIndex": 97,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "e0f126e849daa1be0772ea62fb406ec781cce94d22711a16a1e4320d11ba056e",
+      "finalSha256": "e0f126e849daa1be0772ea62fb406ec781cce94d22711a16a1e4320d11ba056e",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-01.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "하부 타이어 곡선과 차대가 원래 사각형 하단에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-01.png": "af257201231511ac83debf5e69546b8cf923df6aa073efe826301fce638b64f0"
+      }
+    },
+    {
+      "id": "searchlight_truck",
+      "file": "assets/vehicles/military_special/searchlight_truck.webp",
+      "inventoryIndex": 98,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "1097e5528f8fc4d363dd37a2e82f2199a98ccd06cb73c779db31ebd0edb5692a",
+      "finalSha256": "1097e5528f8fc4d363dd37a2e82f2199a98ccd06cb73c779db31ebd0edb5692a",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-02.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "앞 범퍼/아랫 타이어와 차대가 흰 사각형 하단에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-02.png": "3df377bd5af9765b19bef359a712ae3cfff1fa53f9ca27ff093d5b13807b2822"
+      }
+    },
+    {
+      "id": "mobile_hospital",
+      "file": "assets/vehicles/military_special/mobile_hospital.webp",
+      "inventoryIndex": 99,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "298deafd2dae4e98ed6181b0b9a208a77d591429844c9f291de59792f7d44c00",
+      "finalSha256": "298deafd2dae4e98ed6181b0b9a208a77d591429844c9f291de59792f7d44c00",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-02.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "하부 타이어와 차체 하단이 원본 사각형에서 끊긴다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-02.png": "3df377bd5af9765b19bef359a712ae3cfff1fa53f9ca27ff093d5b13807b2822"
+      }
+    },
+    {
+      "id": "armored_rescue_vehicle",
+      "file": "assets/vehicles/military_special/armored_rescue_vehicle.webp",
+      "inventoryIndex": 100,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "056ff3bf49c4b491927c07feb8fd5203d32a204bc3291436beabc67bd7a1605c",
+      "finalSha256": "056ff3bf49c4b491927c07feb8fd5203d32a204bc3291436beabc67bd7a1605c",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-02.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "가까운 앞 타이어 최하단 곡선이 흰 사각형 수평 경계에서 평평하게 끊긴다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-02.png": "3df377bd5af9765b19bef359a712ae3cfff1fa53f9ca27ff093d5b13807b2822"
+      }
+    },
+    {
+      "id": "mrap_patrol_vehicle",
+      "file": "assets/vehicles/military_special/mrap_patrol_vehicle.webp",
+      "inventoryIndex": 101,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "44350e0a30dd600041e8fdd48a15b1044d0f174d2b409474896bb99da24d07d5",
+      "finalSha256": "44350e0a30dd600041e8fdd48a15b1044d0f174d2b409474896bb99da24d07d5",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-02.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "앞뒤 타이어들의 하부 곡선이 원래 그림 하단에서 소실됐다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-02.png": "3df377bd5af9765b19bef359a712ae3cfff1fa53f9ca27ff093d5b13807b2822"
+      }
+    },
+    {
+      "id": "tracked_carrier",
+      "file": "assets/vehicles/military_special/tracked_carrier.webp",
+      "inventoryIndex": 102,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "5ad72a6d6792da1da196ddf77b13787e5085b3c0957c564ceed979b1f48ecaa6",
+      "finalSha256": "5ad72a6d6792da1da196ddf77b13787e5085b3c0957c564ceed979b1f48ecaa6",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-03.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "궤도의 하단 루프와 하부 로드휠이 사각형 하단에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-03.png": "9c9f664bb1a1b6810d20d2124228d5a95cea7ec4f38ab950b023348fd1339333"
+      }
+    },
+    {
+      "id": "amphibious_vehicle",
+      "file": "assets/vehicles/military_special/amphibious_vehicle.webp",
+      "inventoryIndex": 103,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "bea935e8874bf8e3a2d9b9c03c7428d6e65e574ef9937f910c5653687e98b38f",
+      "finalSha256": "bea935e8874bf8e3a2d9b9c03c7428d6e65e574ef9937f910c5653687e98b38f",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-03.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "가까운 큰 바퀴의 아래쪽 곡선이 그림 사각형 경계에서 끊긴다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-03.png": "9c9f664bb1a1b6810d20d2124228d5a95cea7ec4f38ab950b023348fd1339333"
+      }
+    },
+    {
+      "id": "engineering_vehicle",
+      "file": "assets/vehicles/military_special/engineering_vehicle.webp",
+      "inventoryIndex": 104,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "d48cd727c8d3bb52027f81c29e56efdf8681b2ee8832ccf6c4f76ab9446f4a12",
+      "finalSha256": "d48cd727c8d3bb52027f81c29e56efdf8681b2ee8832ccf6c4f76ab9446f4a12",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-03.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "블레이드의 아래쪽과 무한궤도 하부가 원래 그림 사각형에서 소실됐다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-03.png": "9c9f664bb1a1b6810d20d2124228d5a95cea7ec4f38ab950b023348fd1339333"
+      }
+    },
+    {
+      "id": "bridge_layer_truck",
+      "file": "assets/vehicles/military_special/bridge_layer_truck.webp",
+      "inventoryIndex": 105,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "bd9984b36fe15798d5937a20fa8135f2f1e6716380696ed51d259d5cf932b9e3",
+      "finalSha256": "bd9984b36fe15798d5937a20fa8135f2f1e6716380696ed51d259d5cf932b9e3",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-03.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "교량 구조는 남아 있지만 타이어·하부 차대가 그림 하단에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-03.png": "9c9f664bb1a1b6810d20d2124228d5a95cea7ec4f38ab950b023348fd1339333"
+      }
+    },
+    {
+      "id": "decontamination_truck",
+      "file": "assets/vehicles/military_special/decontamination_truck.webp",
+      "inventoryIndex": 106,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "1d743c7e7834156ebc93947f5ad43d01b9c5e618f898014847133750ce0cd876",
+      "finalSha256": "1d743c7e7834156ebc93947f5ad43d01b9c5e618f898014847133750ce0cd876",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-04.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "앞 범퍼 아랫부분과 앞뒤 타이어·하부 차대가 원본에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-04.png": "179a0e043326e06c5fda47789b858637c53e0d207d0b671f94f2bcf388b1f0dc"
+      }
+    },
+    {
+      "id": "water_purification_truck",
+      "file": "assets/vehicles/military_special/water_purification_truck.webp",
+      "inventoryIndex": 107,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "690c397999c49c3a10f96ef6f735bf627d92322e9b81ff205c154d6b51b056b6",
+      "finalSha256": "690c397999c49c3a10f96ef6f735bf627d92322e9b81ff205c154d6b51b056b6",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-04.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "앞 타이어와 하부 차대가 원래 사각형의 수평 하단에서 끊긴다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-04.png": "179a0e043326e06c5fda47789b858637c53e0d207d0b671f94f2bcf388b1f0dc"
+      }
+    },
+    {
+      "id": "snow_rescue_vehicle",
+      "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "inventoryIndex": 108,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+      "finalSha256": "19dc48e8614af0067fdfb26eb7846e8ab3a8c50f16c7cd8d9ccf42faba819134",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        141,
+        204,
+        355,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military_special-snow_rescue_vehicle-comparison.jpg",
+        "release-20261108/white-fire/snow-tracks-detail.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "작은 원본 흰 사각형이 제거됐고 궤도 하단 외곽·휠·유리·경광등/흰 루프등을 유지했다. 궤도 주변에 수 픽셀의 원본 밝은 접지 그림자 흔적이 남아 있으므로 무잔여 알파 또는 완전한 decontamination을 주장하지 않는다. 개별 3배경 및 궤도 4배 확대에서 주요 궤도 소실은 보지 못했다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military_special-snow_rescue_vehicle-comparison.jpg": "5e934057d3705d9aaf9294c36ea9fe97cd069cd7432197c364a1d7cddd0e04d2",
+        "release-20261108/white-fire/snow-tracks-detail.png": "8cf462ca13c3a131762aa42c5ac1b861b397ec62b6f4df5a97d5e7a0ce2d8e96"
+      }
+    },
+    {
+      "id": "drone_control_vehicle",
+      "file": "assets/vehicles/military_special/drone_control_vehicle.webp",
+      "inventoryIndex": 109,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "2c81f0af96977d24383426d42130105128892609795360718a02013d34b068a9",
+      "finalSha256": "2c81f0af96977d24383426d42130105128892609795360718a02013d34b068a9",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-04.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "드론·안테나는 남아 있지만 차체 하단과 타이어가 원본에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-04.png": "179a0e043326e06c5fda47789b858637c53e0d207d0b671f94f2bcf388b1f0dc"
+      }
+    },
+    {
+      "id": "eod_robot_vehicle",
+      "file": "assets/vehicles/military_special/eod_robot_vehicle.webp",
+      "inventoryIndex": 110,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "028df848e582299fffb286779e661aa5a71c88e6ae3d3e0fdf6525c965d567e7",
+      "finalSha256": "028df848e582299fffb286779e661aa5a71c88e6ae3d3e0fdf6525c965d567e7",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-04.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "양쪽 궤도의 하부 루프와 바닥 차대가 원래 그림 사각형에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-04.png": "179a0e043326e06c5fda47789b858637c53e0d207d0b671f94f2bcf388b1f0dc"
+      }
+    },
+    {
+      "id": "missile_launcher_vehicle",
+      "file": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
+      "inventoryIndex": 111,
+      "priorDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "sourceSha256": "21e5c6b593591bb1e78c697c381efef1228b286af94f0405c2f2e0838a216dc4",
+      "finalSha256": "21e5c6b593591bb1e78c697c381efef1228b286af94f0405c2f2e0838a216dc4",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": true,
+      "finalAlphaBounds16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/military-source-holds-05.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "발사관 장비는 남아 있지만 앞뒤 타이어·하부 차대가 그림 하단에서 잘린다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/military-source-holds-05.png": "390e9a08f82398524d8931d5fb44a2555bfcf1b8674335a98a5e6c5c45caad42"
+      }
+    },
+    {
+      "id": "aerial_ladder_truck",
+      "file": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+      "inventoryIndex": 130,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "14572a5c90294bfba518347d0838223ec1533d2a9ab1fd2d1798334aabfea61c",
+      "finalSha256": "63b368633363859e1ba9ffaa7ba7ab8e304dbb9d17c3864440926909ba8b06de",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        10,
+        88,
+        512,
+        442
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-aerial_ladder_truck-comparison.jpg",
+        "release-20261108/white-fire/aerial_ladder_truck-right-edge.png",
+        "release-20261108/white-fire/aerial_ladder_truck-thin-parts.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "원본과 최종 모두 후방 차체/범퍼가 x=511에서 끊긴다. 최종 오른쪽 프레임 alpha>=16이 y=343..372의 30px에 닿으며, 원본 확대에서 닫힌 후면 외곽을 확인할 수 없다. 배경제거와 사다리 구조 보존은 성공했으나 완전한 원본 복원 PASS는 아니다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-aerial_ladder_truck-comparison.jpg": "71a0b5260428200c7d829973eb3a88f34d5970e94934875977452ebc5957609a",
+        "release-20261108/white-fire/aerial_ladder_truck-right-edge.png": "d789e8e1e4a8269d0dee472869462b0b8aada952bf2dfe489b1fbe33712e0da2",
+        "release-20261108/white-fire/aerial_ladder_truck-thin-parts.png": "4ca72f70e45ff07a9655a13af1405a61aafbb918c6e98fa28bf71f3cf917449b"
+      }
+    },
+    {
+      "id": "fire_tank",
+      "file": "assets/vehicles/fire_special/fire_tank.webp",
+      "inventoryIndex": 131,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "b851c720e821a97f7879a028daf04104624768742a208d3d9c2e2d997f1a755f",
+      "finalSha256": "ad2c7336d3c26fa0c8f8eacaccd179eb6b669f93f0eebbfa465c982b0efdb9b7",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        8,
+        153,
+        495,
+        415
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-fire_tank-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "방수포·포신·상부 배관, 붉은 장비함, 양쪽 궤도 및 휠 구조를 세 배경에서 비교했다. 사각 흰 배경은 제거됐고 원본 RGB는 보존됐다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-fire_tank-comparison.jpg": "9bcd09e6171e089de3dcc6d34443e98f9948dfae24d3991600003d9661b558b4"
+      }
+    },
+    {
+      "id": "airport_crash_tender",
+      "file": "assets/vehicles/fire_special/airport_crash_tender.webp",
+      "inventoryIndex": 132,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "df733f699802182e9e74e7e5eb50d7c603f49be86b2dbd347c5a2299eb50cdf5",
+      "finalSha256": "b52fadcf1dd336d67ab9b40a7822b1a3f8a98bf4860d267d36b30e5ef05bc0d1",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        7,
+        119,
+        501,
+        421
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-airport_crash_tender-comparison.jpg",
+        "release-20261108/white-fire/airport_crash_tender-thin-parts.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "전면 유리·거울, 상단 방수포와 호스/난간, 전후 타이어가 유지된다. 상단 포와 흰 하이라이트를 확대 확인했다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-airport_crash_tender-comparison.jpg": "6f3700afc5cab6cb63d77ad3e93084b37ac521160b9bd0ddb9e182dd72f3d9ab",
+        "release-20261108/white-fire/airport_crash_tender-thin-parts.png": "0681603800740b2dd97546fb5aa3bc09a239aea3ba19a66fa86012e2ac73b029"
+      }
+    },
+    {
+      "id": "wildfire_6x6_truck",
+      "file": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+      "inventoryIndex": 133,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "a8a2b563744265fd71a37c6c2aa30cc3d878a43e2cf3e5bc2a9fd4b8ebb81351",
+      "finalSha256": "6f7daf0c9068e53b425a11d54debc3e866f43d60a75bbfe4878ac733d8d90717",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        1,
+        95,
+        506,
+        419
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-wildfire_6x6_truck-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "노란 전면 보호대와 지붕 난간, 장비함, 6x6 타이어 외곽·유리를 유지했다. 전면 보호대가 왼쪽 경계에 가까우나 현 source에 남은 바깥 곡선은 닫혀 있다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-wildfire_6x6_truck-comparison.jpg": "5d723db82af486a6370c2d537c5c775976c88d32175b4c6032604ceb88d6df66"
+      }
+    },
+    {
+      "id": "robot_demolition_fire_vehicle",
+      "file": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+      "inventoryIndex": 134,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "ba844213c8b47234454dd828e26ad428830c5091a2ee69399616815def7fba27",
+      "finalSha256": "eef29b0972e74063f23a21c493120b450e379046e8ae1185813aef2f651eccd6",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        3,
+        16,
+        501,
+        447
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-robot_demolition_fire_vehicle-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "큰 붐·상부 호스 고리·드릴 끝·실린더·궤도·지지발을 세 배경에서 비교했다. 원본에 있던 지지발을 보존했으며 새 부품은 없다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-robot_demolition_fire_vehicle-comparison.jpg": "82e34f7dd3478bd2f79e433440e7771ab298b639e11fb65c197b6658004dc9ae"
+      }
+    },
+    {
+      "id": "smoke_extraction_fan_truck",
+      "file": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+      "inventoryIndex": 135,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "f054112b8bc732ea3bba64fb198794d5a5e5877833d5d0c0b2e1e81dc4514a96",
+      "finalSha256": "368917d59b5e10ab510947f7cca8adf6033aa69bad43fbf457b2fe6167ec3fec",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        0,
+        87,
+        503,
+        390
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-smoke_extraction_fan_truck-comparison.jpg",
+        "release-20261108/white-fire/smoke_extraction_fan_truck-left-edge.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_AMBIGUOUS_SOURCE_EDGE",
+      "observation": "원본과 최종의 왼쪽 미러가 x=0 경계에 닿는다. alpha>=16이 y=221..237의 17px에서 프레임과 접한다. 거울의 최외곽 일부가 원본에 남았는지 확정할 수 없다. 팬·차체와 배경제거는 보존됐으나 완전 외곽 승인 보류.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-smoke_extraction_fan_truck-comparison.jpg": "fc89fead59839509e9bbcd1227b7063b3775174ba196bffd024459bfc947f492",
+        "release-20261108/white-fire/smoke_extraction_fan_truck-left-edge.png": "41dafce325b6496618bf6ddf58fa24a93dd7d86623063f97b3d74594fcec690b"
+      }
+    },
+    {
+      "id": "water_tanker",
+      "file": "assets/vehicles/fire_special/water_tanker.webp",
+      "inventoryIndex": 136,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "52f7a3a87c0fe964f9bb8b6a984694cae020a0b368029246ca7bb81c5b811f09",
+      "finalSha256": "ef24041e91eca16e5b2074063a5a59f7985460401a8c660f2e335b1bf2357b87",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        10,
+        102,
+        511,
+        373
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-water_tanker-comparison.jpg"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "탱크·후방/측면 난간·사다리·배관·방수포와 바퀴를 유지한다. 흰 사각형을 제거했으며 흰 유리 반사/은색 부품은 남아 있다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-water_tanker-comparison.jpg": "beec6212a5959310a98085b47188ff8955b391bcd9921b6d632bca807b854c43"
+      }
+    },
+    {
+      "id": "articulating_boom_truck",
+      "file": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+      "inventoryIndex": 137,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "5aabf8dfffa6ed356a569c104f40f88acaf269645e0a6e8d47b7f8d03812d27c",
+      "finalSha256": "b49a1bc36c6dbf77921ae470013a504651791657d72d264fcf9e38578695f69c",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        5,
+        35,
+        491,
+        399
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-articulating_boom_truck-comparison.jpg",
+        "release-20261108/white-fire/articulating_boom_truck-thin-parts.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "RESTORED_VISUAL_PASS",
+      "observation": "흰 붐·검은 유압 호스·바스켓 난간과 내부 열린 공간, 차체 유리 및 타이어를 확대 비교했다. 흰 장비는 지워지지 않았다.",
+      "qualityPass": true,
+      "sourceDefectWasPreexisting": false,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "주요 차량 특징을 온전하게 식별할 수 있다. 브라우저 크기/조작 검수는 별도 범위다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-articulating_boom_truck-comparison.jpg": "e8dd6591c6a6eedc2e308dacbe76b45b9e50c8f121f7a90ed28243e4d9b5bc69",
+        "release-20261108/white-fire/articulating_boom_truck-thin-parts.png": "4a98f41db967a84bc328ae2f871d174df06861238d0ab321f56531ffb1aad768"
+      }
+    },
+    {
+      "id": "fire_command_suv",
+      "file": "assets/vehicles/fire_special/fire_command_suv.webp",
+      "inventoryIndex": 138,
+      "priorDisposition": "RESTORED_AND_VISUALLY_REVIEWED",
+      "sourceSha256": "408480fd1b1daf628c579041cb04f7c31cc0c3ec18fa9a936d3f43b2d1678037",
+      "finalSha256": "c18c07124bfa80051de5b85b9f764946089c76a461275c5a1f7f5f127c55e538",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "finalSize": [
+        512,
+        512
+      ],
+      "bytesUnchanged": false,
+      "finalAlphaBounds16": [
+        0,
+        73,
+        504,
+        404
+      ],
+      "actualDecode": true,
+      "visualReview": "REVIEWED",
+      "evidence": [
+        "release-20261108/white-fire/fire_special-fire_command_suv-comparison.jpg",
+        "release-20261108/white-fire/fire_command_suv-left-edge.png",
+        "release-20261108/white-fire/fire_command_suv-thin-parts.png"
+      ],
+      "decodedRgbPixelsUnchanged": true,
+      "reviewedBackgrounds": [
+        "white",
+        "dark-navy",
+        "checker"
+      ],
+      "sourceStateClaim": "Git baseline/current bytes, not an assumed prior PASS",
+      "independentDisposition": "HOLD_SOURCE_PIXELS_MISSING",
+      "observation": "원본과 최종의 전면 보호범퍼 왼쪽 곡선이 x=0에서 수직으로 끊긴다. alpha>=16이 y=224..326의 103px에 닿는다. 두 안테나와 유리·바퀴는 유지되지만 원본에 없는 전면 부품을 새로 그려 정상 복구로 표시할 수 없다.",
+      "qualityPass": false,
+      "sourceDefectWasPreexisting": true,
+      "productionBytesModifiedByThisAgent": false,
+      "studentImpact": "현재 자산을 직접 표시하면 원본 절단/알파 손상/외곽 불확실성이 학생 화면에 그대로 나타날 수 있다. 기본 무작위/정상 차량 후보에서 제외하고 기존 검증된 동일 역할 그림 또는 기존 fallback을 사용하는 방안을 통합 담당자가 결정해야 한다.",
+      "evidenceSha256": {
+        "release-20261108/white-fire/fire_special-fire_command_suv-comparison.jpg": "8a27dda1aa5a751feea920cbb317bc906932ee9ca84a9ef2ba7c08780af242c5",
+        "release-20261108/white-fire/fire_command_suv-left-edge.png": "a17f54ce5bfb6f7456f59cd310e38c8ce1ef1435b622a9bf676494c08ebc6f06",
+        "release-20261108/white-fire/fire_command_suv-thin-parts.png": "4d73af3fd87a391111d6dafe201d41bbe5a585043b4a4f4f52be42cc4dcdd678"
+      }
+    }
+  ],
+  "completedAtUtc": "2026-11-08T14:03:18.467748+00:00",
+  "counts": {
+    "PRESERVED_VISUAL_REGRESSION_PASS": 30,
+    "HOLD_SOURCE_ALPHA_DAMAGE": 5,
+    "HOLD_SOURCE_PIXELS_MISSING": 20,
+    "RESTORED_VISUAL_PASS": 8,
+    "HOLD_SOURCE_STITCH_DAMAGE": 1,
+    "HOLD_AMBIGUOUS_SOURCE_EDGE": 2
+  },
+  "approvedRestoredCount": 8,
+  "approvedPreservedCount": 30,
+  "holdCount": 28,
+  "unreviewedCount": 0,
+  "productFilesChanged": 0,
+  "originalChangedBytesInInheritedScope": 12,
+  "initialRecordedCounts": {
+    "restored": 12,
+    "preserved": 36,
+    "hold": 18
+  },
+  "newlyIdentifiedHoldCount": 10,
+  "browserQA": "NOT_RUN_BY_THIS_AGENT",
+  "physicalDevices": "NOT_RUN",
+  "audibleTTS": "NOT_RUN",
+  "remotePreservation": "PENDING_ROOT_NATIVE_GITHUB_COMMIT",
+  "awcrDriveState": "PENDING_ROOT_COORDINATED_METADATA_CHECKPOINT",
+  "limitations": [
+    "This is image-byte and visual comparison QA; it does not certify browser interaction, audio or physical devices.",
+    "38 approved images = 8 inherited restored + 30 preserved; 28 holds are not visual quality PASS.",
+    "Existing opaque contact shadows/light antialias fringes on preserved originals remain. Byte preservation is not presented as a complete new background cleanup.",
+    "Snow rescue retains a very small original light contact shadow near tracks, explicitly shown in the evidence.",
+    "No product file, common manifest, display bounds or code was modified by this agent."
+  ]
+}
