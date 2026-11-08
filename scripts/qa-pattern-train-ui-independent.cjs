@@ -9,21 +9,24 @@ const crypto = require('node:crypto');
 const model = require('../js/games/pattern-train-model.js');
 const oracle = require('./qa-pattern-train-independent.cjs');
 const source = fs.readFileSync(path.resolve(__dirname, '../js/games/pattern-train.js'), 'utf8');
+const integrationSource = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
 const marker = '  window.SihyeonGames.patternTrain = {';
 assert(source.includes(marker), 'UI export marker changed; independent access needs review');
 const instrumented = source.replace(marker, '  window.__ptIndependent = { view, read, write, loadPrefs, loadTask, loadCourse, loadFree, dispatch, speak, start, beginTrip, cancelDrag, pointerDown, pointerMove, pointerUp, otherPointerDown, keyDown, onClick, changeLength, guideHtml };\n' + marker);
 const copy = value => value === undefined ? undefined : JSON.parse(JSON.stringify(value));
-const report = { scope: 'Independent controlled Node VM of actual UI closures; no browser layout, real storage quota, audio listening or device PASS', sourceSha256: crypto.createHash('sha256').update(source).digest('hex'), status: 'PENDING', checks: [], assertions: 0 };
+const report = { scope: 'Independent controlled Node VM of actual UI closures and integration functions; no browser layout, real storage quota, audio listening or device PASS', sourceSha256: crypto.createHash('sha256').update(source).digest('hex'), integrationSourceSha256: crypto.createHash('sha256').update(integrationSource).digest('hex'), status: 'PENDING', checks: [], assertions: 0 };
 function eq(actual, expected, message) { report.assertions++; assert.deepEqual(copy(actual), copy(expected), message); }
 function ok(value, message) { report.assertions++; assert.ok(value, message); }
 async function check(name, run) { try { const detail = await run(); report.checks.push({ name, status: 'PASS', detail }); } catch (error) { report.checks.push({ name, status: 'FAIL', error: error.message, stack: error.stack }); } }
-function fixture({ recommendedAge = 4, initial = {}, readThrows = false, writeThrows = false, voice = () => Promise.resolve(true) } = {}) {
+function fixture({ recommendedAge = 4, initial = {}, readThrows = false, writeThrows = false, modelAvailable = true, voice = () => Promise.resolve(true) } = {}) {
   const stored = new Map(Object.entries(initial)), timers = new Map(), ghosts = new Set(), windowListeners = new Map(), documentListeners = new Map();
   let id = 0, now = 1000, hit = null, q, activeAge = recommendedAge, saveReads = 0, saveWrites = 0, voiceCalls = 0, confetti = 0, homes = 0;
   const elements = [];
   function eventHost(target, registry) {
-    target.addEventListener = (name, fn, options) => { if (!registry.has(name)) registry.set(name, new Set()); registry.get(name).add(fn); };
+    const once = new WeakSet();
+    target.addEventListener = (name, fn, options) => { if (!registry.has(name)) registry.set(name, new Set()); registry.get(name).add(fn); if (options?.once) once.add(fn); };
     target.removeEventListener = (name, fn) => registry.get(name)?.delete(fn);
+    target.fireControlled = (name, event = {}) => [...(registry.get(name) || [])].forEach(fn => { if (once.has(fn)) registry.get(name).delete(fn); fn(event); });
     return target;
   }
   function element(dataset = {}, classes = []) {
@@ -43,7 +46,7 @@ function fixture({ recommendedAge = 4, initial = {}, readThrows = false, writeTh
       }
     }, registry); elements.push(el); return el;
   }
-  const frame = element(), row = element(), note = element(), dragNote = element(), dialogButton = element();
+  const frame = element(), row = element(), note = element(), dragNote = element(), dialogButton = element(), loadErrorHome = element();
   const coaches = Array.from({ length: 12 }, () => element());
   const container = element(); container.owner = container;
   elements.forEach(el => { el.owner = container; });
@@ -58,6 +61,7 @@ function fixture({ recommendedAge = 4, initial = {}, readThrows = false, writeTh
     if (selector === '.pt-voice-note') return note;
     if (selector === '.pt-drag-announcement') return dragNote;
     if (selector === '.pt-dialog button') return dialogButton;
+    if (selector === '[data-action="load-error-home"]') return loadErrorHome;
     if (selector.startsWith('[data-coach=')) return coaches[Number(selector.match(/"(\d+)"/)?.[1])];
     return null;
   };
@@ -69,7 +73,7 @@ function fixture({ recommendedAge = 4, initial = {}, readThrows = false, writeTh
     return action ? elements.filter(el => el.dataset.action === action) : [];
   };
   const document = eventHost({ activeElement: null, hidden: false, body: { appendChild: el => ghosts.add(el) }, head: { appendChild() {} }, getElementById: () => ({}), createElement: () => { const el = element(); el.owner = container; return el; }, elementFromPoint: () => hit }, documentListeners);
-  const window = eventHost({ SihyeonPatternTrainModel: model, SihyeonGames: {}, SihyeonVoice: { stop() {} }, matchMedia: () => ({ matches: false }),
+  const window = eventHost({ SihyeonPatternTrainModel: modelAvailable ? model : undefined, SihyeonGames: {}, SihyeonVoice: { stop() {} }, matchMedia: () => ({ matches: false }),
     setTimeout(fn, delay) { const timerId = ++id; timers.set(timerId, { fn: () => { timers.delete(timerId); fn(); }, delay }); return timerId; }, clearTimeout: timerId => timers.delete(timerId),
     SihyeonPlaySettings: { getAge: () => activeAge, setAge(value) { activeAge = value; windowListeners.get('sihyeon-settings-change')?.forEach(fn => fn()); } }
   }, windowListeners);
@@ -86,13 +90,46 @@ function fixture({ recommendedAge = 4, initial = {}, readThrows = false, writeTh
   const down = pointer => { q.otherPointerDown(pointer); q.pointerDown(pointer); };
   const advance = amount => { now += amount; };
   const runArrival = () => { const selected = [...timers].find(([, t]) => t.delay >= 4000 && t.delay < 9000); assert(selected, 'trip arrival timer missing'); timers.delete(selected[0]); selected[1].fn(); };
-  return { q, api, window, document, container, frame, row, note, ghosts, timers, stored, button, event, click, down, advance, runArrival, hit: value => { hit = value; }, options,
+  return { q, api, window, document, container, frame, row, note, loadErrorHome, ghosts, timers, stored, button, event, click, down, advance, runArrival, hit: value => { hit = value; }, options,
     listeners: () => [...windowListeners.values(), ...documentListeners.values()].reduce((n, set) => n + set.size, 0),
     counts: () => ({ reads: saveReads, writes: saveWrites, voiceCalls, confetti, homes }), render: () => api.render(container, options) };
 }
 async function flush() { await Promise.resolve(); await Promise.resolve(); }
 
 (async () => {
+  await check('actual index launcher cleans prior games and keeps an exit when the model or UI module is missing', () => {
+    const names = ['cleanupActiveGame', 'openGameShell', 'openPatternTrainGame', 'gameOptions', 'renderGameLoadError'];
+    const functions = names.map(name => { const match = integrationSource.match(new RegExp('^function ' + name + '\\([^\\n]*\\)\\{[\\s\\S]*?^\\}', 'm')); ok(match, name + ': actual integration function missing'); return match[0]; }).join('\n');
+    for (const missing of [null, 'model', 'ui']) {
+      const calls = [], back = { removed: false, remove() { this.removed = true; } }, target = { innerHTML: '', parentElement: { querySelector: () => back } }, root = { innerHTML: '' };
+      const games = {};
+      const expectedCleanup = ['vehicleMemory', 'numberPostOffice', 'numberCount', 'parkingLot', 'artZone', 'megaDispatch', 'constructionSite', 'carGarage'];
+      for (const game of expectedCleanup) games[game] = { destroy: () => calls.push('destroy:' + game) };
+      let rendering = null;
+      if (missing !== 'ui') { games.patternTrain = { destroy: () => calls.push('destroy:patternTrain'), render: (el, options) => { rendering = { el, options }; } }; expectedCleanup.push('patternTrain'); }
+      const context = { window: { SihyeonPatternTrainModel: missing === 'model' ? undefined : model, SihyeonGames: games, SihyeonPlaySettings: { getAge: () => 4 }, SihyeonZones: { voiceZone: { destroy: () => calls.push('voice:destroy') }, karaokeZone: { destroy: () => calls.push('karaoke:destroy') } } },
+        document: { getElementById: id => id === 'sihyeonPlayOS' ? root : target }, cleanupDetachedPlayLayers: () => calls.push('detached:cleanup'), closeGarageHandlers: () => calls.push('garage:cleanup'), startGameTimer: () => calls.push('timer:start'), escapeHtml: text => text,
+        speakGuide() {}, fireConfetti() {}, gainExp() {}, playDynamicGuide() {}, returnToZoneLand: zone => calls.push('return:' + zone) };
+      vm.runInNewContext('let activeGameZoneId;\n' + functions + '\nopenPatternTrainGame();', context, { timeout: 1000 });
+      for (const game of expectedCleanup) eq(calls.filter(call => call === 'destroy:' + game).length, 1, game + ': old game must be destroyed exactly once');
+      eq(calls.filter(call => call === 'detached:cleanup').length, 1); eq(calls.filter(call => call === 'garage:cleanup').length, 1);
+      ok(root.innerHTML.includes('game-back-floating'), 'shell contains a fallback exit');
+      if (missing) { eq(rendering, null); eq(back.removed, false); ok(target.innerHTML.includes('불러오지 못했어요')); }
+      else { ok(rendering?.el === target); eq(back.removed, true); eq(rendering.options.ageMode, 4); rendering.options.closeToParkHome(); ok(calls.includes('return:numbers')); }
+    }
+    return { cases: ['normal', 'model module missing', 'UI module missing'], actualIndexFunctions: names, browserRendering: false };
+  });
+  await check('standalone model-missing view provides a native exit without reading or overwriting saved work', () => {
+    const saved = model.reduce(model.createState('a4-first'), { type: 'place', index: 5, token: 'rabbit' });
+    const key = 'sihyeon-pattern-train-v1:board:a4-first', serialized = JSON.stringify(saved);
+    const f = fixture({ modelAvailable: false, initial: { [key]: serialized } });
+    eq(f.api.getSnapshot(), null); ok(f.container.innerHTML.includes('data-action="load-error-home"'));
+    eq(f.counts().reads, 0); eq(f.counts().writes, 0); eq(f.stored.get(key), serialized); eq(f.listeners(), 0); eq(f.timers.size, 0);
+    f.loadErrorHome.fireControlled('click'); f.loadErrorHome.fireControlled('click');
+    eq(f.counts().homes, 1); eq(f.q.view.container, null); eq(f.stored.get(key), serialized);
+    f.window.SihyeonPatternTrainModel = model; f.render(); eq(f.q.view.state.taskId, 'a4-first'); eq(f.q.view.state.board[5], 'rabbit');
+    return { nativeFallbackExit: true, duplicateClickCount: 1, savedWorkUntouchedByFailure: true, restoredAfterModuleAvailable: true };
+  });
   await check('all four five-stop sessions run through production UI click transitions', () => {
     const f = fixture(); let trips = 0;
     for (const level of [4, 5, 6, 7]) {

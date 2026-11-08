@@ -5,6 +5,23 @@
 - 자동차 taskId: `2e058ca8-0f08-4bf4-bff8-c05bfe8610b5`
 - 기차 taskId: `6e320e78-0909-4eea-943c-d9daeadd3d36`
 
+## 현재 확인된 체크포인트 — 2026-11-08
+
+| 작업 | 원격에서 파일까지 확인한 commit | PR | AWCR |
+|---|---|---|---|
+| 자동차 | `47f86ac50a078f95a59d7698e88d3cffcb848f0b` | #5 draft | revision 5 |
+| 기차 | `96c84f938d8058ef2cd24029de2d0efe9ca014c8` | #6 draft | revision 5 |
+
+main은 아직 기준 SHA이며 병합·운영 검수 전이다. 각 기록의 SHA는 그 기록을 작성하기 전에 원격에서 확인한 커밋이다. 이후 추가 커밋은 원격 브랜치와 append-only AWCR의 검증된 최신 revision을 조회한다.
+
+- 자동차: 138개 조사 완료, 20개 원본 복원 및 독립 시각/전달 byte 검수 보존. 숫자세기 6수량×6뷰포트 36조건에서 5개 묶음 테두리 높이 불일치를 발견·수정했고 재검은 36/36 PASS. 나머지 원본 개별 정비와 전수 회귀 진행 중.
+- 기차: 20개 활동, 모델 작성자205건/독립14,684보드 판정, UI 13그룹252 assert PASS. 실제 브라우저 첫 실행에서 ARRIVED 상태의 도전 버튼 잠금이 후속 조작을 막는 문제를 발견하여 수정. 최초 FAIL JSON과 수정 후 독립 재검을 분리 보존했다. 네 연령 전체 실브라우저 재실행 중이며 아직 브라우저 전체 PASS가 아니다.
+- 이 두 정확한 head의 GitHub Playground checks는 각각 run `42446882134`, `42446906519`에서 success를 확인했다.
+- 자동차 AWCR r5: raw SHA-256 `d106df1fb7be09b787352ff706dcb2d63e67f6af26b79f60d4a87032ac6d869a`, Drive `176AfkF7JP6fVDndlDyAY5AGOg-QDTf1s`.
+- 기차 AWCR r5: raw SHA-256 `83f905dc24d3c66ffc264d133e48f4a0bdfbd2984c01803c366c9798a8b6ab02`, Drive `1eKbg7MzlZjQQbz0LOiXGlWqUZ-nmYRVU`.
+- 두 AWCR 모두 업로드 뒤 원본 bytes·revision·schema·predecessor SHA readback 검증을 마쳤다.
+- nextAction: 진행 중 실제 브라우저 결과를 보존하고 발견사항 수정 → 직접 드래그/여섯 화면 및 기존 게임 격리 회귀 → 메뉴 공개 → PR 검증/main 병합 → 운영 사이트 실플레이.
+
 ## 복구와 원격 저장
 
 초기 원격 작업기록: 자동차 `dc42230223749628e294eb05cb902bce6ff6a188`, 기차 `449d33e5bb4e320be02076facff56c2a45b38a75`.
@@ -26,9 +43,9 @@ AWCR 자동차 r2 raw SHA256: `a6647a01309ba523e021e98025ec85ee64edbce4e6d9741e6
 
 초기 실제 메뉴→숫자놀이터→몇 대일까에서 지게차8대의 모두 나타난 상태를 확인했다. 등장 애니메이션 중5대만 보이는 순간은 최종상태로 판정하지 않았다. baseline screenshot은 자동차브랜치 `docs/qa/sihyeon-phase2/browser/count-baseline-desktop.png`에 보존한다.
 
-## 미완료
+## 당시 미완료 — 초기 통합 시점
 
-기차 실제구현·콘텐츠독립검사·입력/모바일검수, 자동차 복원후 게임회귀, PR/CI/main병합, 실제운영 확인.
+이 아래는 각 체크포인트 당시의 기록이다. 현재 상태와 남은 작업은 위 최신 체크포인트 및 각 범위 WORKLOG를 기준으로 한다.
 
 ## 모델 보존과 독립 검수 게이트
 

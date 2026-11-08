@@ -2321,7 +2321,7 @@ function openNumberCountGame(){
 
 function openPatternTrainGame(){
   const t=openGameShell('패턴 기차 공작소','patternTrainTarget','#f7f1df','numbers');
-  if(window.SihyeonGames?.patternTrain?.render){
+  if(window.SihyeonPatternTrainModel && window.SihyeonGames?.patternTrain?.render){
     t.parentElement.querySelector('.game-back-floating')?.remove();
     window.SihyeonGames.patternTrain.render(t,gameOptions('numbers'));
   } else renderGameLoadError(t,'기차를 불러오지 못했어요. 놀이터로 돌아가 다시 열어 주세요.','#304f51');

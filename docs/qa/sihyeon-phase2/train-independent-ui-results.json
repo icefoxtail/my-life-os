@@ -1,8 +1,38 @@
 {
-  "scope": "Independent controlled Node VM of actual UI closures; no browser layout, real storage quota, audio listening or device PASS",
-  "sourceSha256": "51d9b649b9eebf66b59a8e68441ff9d3f1e4c79d60e632c69aa32632b397d682",
+  "scope": "Independent controlled Node VM of actual UI closures and integration functions; no browser layout, real storage quota, audio listening or device PASS",
+  "sourceSha256": "2c63c7dd7ae80f301786c3cfd04e0d24f9b13d7489fd6d87f77e2f0eb8ac60f1",
+  "integrationSourceSha256": "8fc825a1005f41a0050450fa660d91d6c4ff21a7b11dec47444a789a12214abd",
   "status": "PASS",
   "checks": [
+    {
+      "name": "actual index launcher cleans prior games and keeps an exit when the model or UI module is missing",
+      "status": "PASS",
+      "detail": {
+        "cases": [
+          "normal",
+          "model module missing",
+          "UI module missing"
+        ],
+        "actualIndexFunctions": [
+          "cleanupActiveGame",
+          "openGameShell",
+          "openPatternTrainGame",
+          "gameOptions",
+          "renderGameLoadError"
+        ],
+        "browserRendering": false
+      }
+    },
+    {
+      "name": "standalone model-missing view provides a native exit without reading or overwriting saved work",
+      "status": "PASS",
+      "detail": {
+        "nativeFallbackExit": true,
+        "duplicateClickCount": 1,
+        "savedWorkUntouchedByFailure": true,
+        "restoredAfterModuleAvailable": true
+      }
+    },
     {
       "name": "all four five-stop sessions run through production UI click transitions",
       "status": "PASS",
@@ -129,5 +159,5 @@
       }
     }
   ],
-  "assertions": 252
+  "assertions": 314
 }

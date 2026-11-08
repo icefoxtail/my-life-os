@@ -167,6 +167,17 @@
       assert(snapshot().voiceFailed && !button('.pt-voice-note').hidden, 'Voice failure lacks visual fallback');
       assert(root.querySelectorAll('.pt-stage svg').length >= 7 && root.querySelectorAll('img').length === 0, 'Core art depends on image network requests');
     });
+    await check('모델 스크립트 누락 시 저장을 건드리지 않고 놀이터로 복구', async () => {
+      game().destroy(); const saved = localStorage.getItem(prefix + 'board:a4-first');
+      const originalModel = window.SihyeonPatternTrainModel;
+      try {
+        window.SihyeonPatternTrainModel = undefined; game().render(root, fixtureOptions);
+        click('[data-action="load-error-home"]');
+        assert(document.querySelector('#return-to-train'), 'Missing-model fallback has no exit');
+        assert(localStorage.getItem(prefix + 'board:a4-first') === saved, 'Missing model overwrote saved board');
+      } finally { window.SihyeonPatternTrainModel = originalModel; }
+      document.querySelector('#return-to-train').click(); assert(snapshot(), 'Could not re-enter after model restored');
+    });
     async function newFrame(width, height) {
       const frame = document.createElement('iframe'); frame.style.cssText = 'position:fixed;left:-3000px;top:0;border:0;width:' + width + 'px;height:' + height + 'px';
       const ready = new Promise((resolve, reject) => { frame.onload = resolve; frame.onerror = reject; });

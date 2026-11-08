@@ -415,7 +415,14 @@
   function render(container, options) {
     destroy(); if (!container) return;
     view.container = container; view.options = options || {};
-    if (!M()) { container.textContent = '기차 공작소를 다시 열어 주세요.'; return; }
+    if (!M()) {
+      // Keep an exit even when the rule script alone failed to load. Do not
+      // touch saved boards or depend on the missing model for this fallback.
+      container.innerHTML = '<section class="pt-load-error" style="padding:28px;text-align:center;font:18px/1.6 system-ui;color:#304f51;background:#fffaf0"><h2>기차 부품을 불러오지 못했어요</h2><p>놀이터에서 다시 열어 주세요.</p><button type="button" data-action="load-error-home" style="min-height:48px;padding:10px 24px;border:0;border-radius:14px;background:#408d7d;color:white;font:inherit">놀이터로</button></section>';
+      const leave = view.options.closeToParkHome;
+      container.querySelector('[data-action="load-error-home"]')?.addEventListener('click', () => { if (view.container !== container) return; destroy(); if (typeof leave === 'function') leave(); }, { once: true });
+      return;
+    }
     if (!document.getElementById('sihyeon-pattern-train-style')) { const link = document.createElement('link'); link.id = 'sihyeon-pattern-train-style'; link.rel = 'stylesheet'; link.href = './css/games/pattern-train.css'; document.head.appendChild(link); }
     const back = container.closest('.game-play-screen')?.querySelector('.game-back-floating'); if (back) { view.previousBack = { element: back, hidden: back.hidden }; back.hidden = true; }
     view.saveFailed = false; view.voiceFailed = false; view.suppressClickUntil = 0; loadPrefs(); view.age = age(); view.level = view.prefs.levels[view.age] || view.age; view.cursor = view.prefs.cursors[view.level] || 0;
