@@ -5,7 +5,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/water_tanker.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -13,7 +13,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/ladder_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -21,7 +21,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/aerial_ladder_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -29,7 +29,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/articulating_ladder_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -37,7 +37,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/rescue_fire_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -45,7 +45,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/airport_fire_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -53,7 +53,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/foam_fire_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -61,7 +61,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/fire/fire_command_vehicle.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -69,7 +69,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/police/korean_police_car.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -77,7 +77,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/police/us_police_car.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -85,7 +85,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/police/police_motorcycle.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -93,7 +93,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/police/swat_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -101,7 +101,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/police/forensic_bus.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -109,7 +109,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/police/riot_police_bus.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -117,7 +117,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/rescue/ambulance.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -125,7 +125,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-01.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/rescue/doctor_car.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -133,7 +133,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/rescue/rescue_helicopter.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -141,7 +141,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/excavator.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -149,7 +149,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/mini_excavator.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -157,7 +157,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/bulldozer.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -165,7 +165,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/wheel_loader.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -173,7 +173,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/dump_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -181,7 +181,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/concrete_mixer.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -189,7 +189,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/concrete_pump_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -197,7 +197,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/crane_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -205,7 +205,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/forklift.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -213,7 +213,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/construction/road_roller.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -329,19 +329,25 @@
   },
   "assets/vehicles/construction/pile_driver.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Baked checkerboard plus original equipment/wing reaches and is cut by source frame edge; background extraction alone cannot certify a whole intact machine.",
+    "finding": "Top of pile-driving mast is cut at the original top frame boundary; uncropped source is required.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Top of pile-driving mast is cut at the original top frame boundary; uncropped source is required.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/construction/drilling_rig.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Baked checkerboard plus original equipment/wing reaches and is cut by source frame edge; background extraction alone cannot certify a whole intact machine.",
+    "finding": "Upper drilling mast and head are clipped at the original top frame boundary; do not invent missing machinery.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Upper drilling mast and head are clipped at the original top frame boundary; do not invent missing machinery.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/construction/excavator_breaker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -493,7 +499,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/bus.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -501,7 +507,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/car.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -509,7 +515,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/taxi.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -517,7 +523,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/school_bus.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -525,7 +531,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/rocket.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -533,7 +539,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/submarine.png": {
     "classification": "4_PRECISE_REVIEW",
@@ -550,7 +556,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/garbage_truck.png": {
     "classification": "4_PRECISE_REVIEW",
@@ -567,7 +573,7 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/airplane.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -575,23 +581,29 @@
     "background": "transparent-with-original-ground-shadow",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED"
   },
   "assets/vehicles/transport/helicopter.png": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Original detached white/gray flecks to the left of the helicopter; source issue confirmed independently. Source currently preserved; precise repair pending.",
+    "finding": "Original cabin/window seam contains transparency holes with lost RGB. Fragment removal alone is not a full repair; original preserved.",
     "background": "transparent-with-original-artifact",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_ALPHA_DAMAGE",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Original cabin/window seam contains transparency holes with lost RGB. Fragment removal alone is not a full repair; original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/airport/passenger_airplane.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Baked checkerboard plus original equipment/wing reaches and is cut by source frame edge; background extraction alone cannot certify a whole intact machine.",
+    "finding": "Right wing/tail region extends through the original right frame edge; full aircraft silhouette cannot be certified.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "4_PRECISE_REVIEW",
+    "holdReason": "Right wing/tail region extends through the original right frame edge; full aircraft silhouette cannot be certified.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/airport/airport_bus.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -831,12 +843,15 @@
     "displayNormalized": true
   },
   "assets/vehicles/port/cargo_ship.webp": {
-    "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original bow and anchor-side hull are clipped at the left frame; candidate cannot restore absent pixels.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "Original bow and anchor-side hull are clipped at the left frame; candidate cannot restore absent pixels.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/port/container_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -848,12 +863,15 @@
     "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/harbor_crane.webp": {
-    "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Enlarged mask fills upper rail gaps and removes fine rail segments. Failed candidate is excluded, original preserved.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "HOLD_CANDIDATE_REJECTED",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "Enlarged mask fills upper rail gaps and removes fine rail segments. Failed candidate is excluded, original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/port/reach_stacker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -874,12 +892,15 @@
     "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/ferry.webp": {
-    "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "White mast/upper-rail gaps retain opaque patches and fine antenna fidelity is insufficient. Candidate excluded, original preserved.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "HOLD_CANDIDATE_REJECTED",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "White mast/upper-rail gaps retain opaque patches and fine antenna fidelity is insufficient. Candidate excluded, original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/port/fishing_boat.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -936,12 +957,15 @@
     "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/road_sign_truck.webp": {
-    "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Enlarged candidate retains white/checker patches in open frame below signs. Precise hole cleanup is unresolved; original preserved.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "HOLD_CANDIDATE_REJECTED",
+    "initialClassification": "1_ORIGINAL_REPAIR",
+    "holdReason": "Enlarged candidate retains white/checker patches in open frame below signs. Precise hole cleanup is unresolved; original preserved.",
+    "reviewMethod": "Coordinator enlarged original/candidate inspection; no new independent agent"
   },
   "assets/vehicles/road_service/road_sweeper.webp": {
     "classification": "1_ORIGINAL_REPAIR",

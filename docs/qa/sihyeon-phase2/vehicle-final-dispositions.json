@@ -1,0 +1,1260 @@
+{
+  "denominator": 138,
+  "sharedManifest": 129,
+  "separateFireSpecial": 9,
+  "counts": {
+    "restored": 77,
+    "preservedDisplayOnly": 36,
+    "hold": 25
+  },
+  "newlyRestoredThisResume": 49,
+  "previouslyRestored": 28,
+  "holdsAreNotQualityPass": true,
+  "independentSubagentsThisResume": false,
+  "browserRegression": "PENDING_SEPARATE_EVIDENCE",
+  "physicalDevices": "NOT_RUN",
+  "entries": [
+    {
+      "id": "pump_engine",
+      "file": "assets/vehicles/fire/pump_engine.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0",
+      "afterSha256": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0",
+      "reason": ""
+    },
+    {
+      "id": "water_tanker",
+      "file": "assets/vehicles/fire/water_tanker.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "b84601810c8afe00ace5bfa7b82af5c7a8d05c2590d8cea88e9cd8868ea40226",
+      "afterSha256": "b84601810c8afe00ace5bfa7b82af5c7a8d05c2590d8cea88e9cd8868ea40226",
+      "reason": ""
+    },
+    {
+      "id": "ladder_truck",
+      "file": "assets/vehicles/fire/ladder_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "b896d3414d84ab8844265b42296436b4437172cfb8eddda94cf1d2c1b214292c",
+      "afterSha256": "b896d3414d84ab8844265b42296436b4437172cfb8eddda94cf1d2c1b214292c",
+      "reason": ""
+    },
+    {
+      "id": "aerial_ladder_truck",
+      "file": "assets/vehicles/fire/aerial_ladder_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "351257bd0f81fe08597c8da286e3b75ba154421c9220e8f6fc3613bdf19d44d6",
+      "afterSha256": "351257bd0f81fe08597c8da286e3b75ba154421c9220e8f6fc3613bdf19d44d6",
+      "reason": ""
+    },
+    {
+      "id": "articulating_ladder_truck",
+      "file": "assets/vehicles/fire/articulating_ladder_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "323bce390a1e47a93cef61d83efaf62dd94407fbd206d2dd7094bcd06d96bfbf",
+      "afterSha256": "323bce390a1e47a93cef61d83efaf62dd94407fbd206d2dd7094bcd06d96bfbf",
+      "reason": ""
+    },
+    {
+      "id": "rescue_fire_truck",
+      "file": "assets/vehicles/fire/rescue_fire_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "a0cf916b8f5b04950dbb44bbd100711d31d47ed8d3aac2b21ddf49af2f0d0ebd",
+      "afterSha256": "a0cf916b8f5b04950dbb44bbd100711d31d47ed8d3aac2b21ddf49af2f0d0ebd",
+      "reason": ""
+    },
+    {
+      "id": "airport_fire_truck",
+      "file": "assets/vehicles/fire/airport_fire_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "52c46fac95185e3eaabf020fe74480db9595d139109bf5b2ee9e6c7b76bb3e09",
+      "afterSha256": "52c46fac95185e3eaabf020fe74480db9595d139109bf5b2ee9e6c7b76bb3e09",
+      "reason": ""
+    },
+    {
+      "id": "foam_fire_truck",
+      "file": "assets/vehicles/fire/foam_fire_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "4130d2a9f4e580a2b303727cb91115b95753ea62660c1219b664f37c80d84813",
+      "afterSha256": "4130d2a9f4e580a2b303727cb91115b95753ea62660c1219b664f37c80d84813",
+      "reason": ""
+    },
+    {
+      "id": "fire_command_vehicle",
+      "file": "assets/vehicles/fire/fire_command_vehicle.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "c278e41a3d8145d24a74ae6293e8c18c685c7403eef288190292d36ee9d466e3",
+      "afterSha256": "c278e41a3d8145d24a74ae6293e8c18c685c7403eef288190292d36ee9d466e3",
+      "reason": ""
+    },
+    {
+      "id": "korean_police_car",
+      "file": "assets/vehicles/police/korean_police_car.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "d2ee1e4969681185e414947690a8bb0ad1589baad8c3a16a63327ac013d9bb6d",
+      "afterSha256": "d2ee1e4969681185e414947690a8bb0ad1589baad8c3a16a63327ac013d9bb6d",
+      "reason": ""
+    },
+    {
+      "id": "us_police_car",
+      "file": "assets/vehicles/police/us_police_car.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "cd69d7811b66a745277ad04f94dba4b0d34cf235fadfdc61d56e74b4eeb97732",
+      "afterSha256": "cd69d7811b66a745277ad04f94dba4b0d34cf235fadfdc61d56e74b4eeb97732",
+      "reason": ""
+    },
+    {
+      "id": "police_motorcycle",
+      "file": "assets/vehicles/police/police_motorcycle.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "262eb37391b51c4ff4fd594234d71fa028777e9ba0cc6fc9201927640ad56650",
+      "afterSha256": "262eb37391b51c4ff4fd594234d71fa028777e9ba0cc6fc9201927640ad56650",
+      "reason": ""
+    },
+    {
+      "id": "swat_truck",
+      "file": "assets/vehicles/police/swat_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "b651ddcb93640af8f20d9db76795868baf29ba1a3bb667d046bc9b43bcb55922",
+      "afterSha256": "b651ddcb93640af8f20d9db76795868baf29ba1a3bb667d046bc9b43bcb55922",
+      "reason": ""
+    },
+    {
+      "id": "forensic_bus",
+      "file": "assets/vehicles/police/forensic_bus.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "23db581f0840aa15190d5a28f8fc29cecca027296adbb52c64631e759c9eafc3",
+      "afterSha256": "23db581f0840aa15190d5a28f8fc29cecca027296adbb52c64631e759c9eafc3",
+      "reason": ""
+    },
+    {
+      "id": "riot_police_bus",
+      "file": "assets/vehicles/police/riot_police_bus.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "9ce3b94579d2f8cc7199e4a86dd6c26e430b691069a5a4034178fef70af3d43f",
+      "afterSha256": "9ce3b94579d2f8cc7199e4a86dd6c26e430b691069a5a4034178fef70af3d43f",
+      "reason": ""
+    },
+    {
+      "id": "ambulance",
+      "file": "assets/vehicles/rescue/ambulance.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "56b5211bb1564bca7f2b9e952dea9e3998a2f1a83cb7a29052aefb214ec8d910",
+      "afterSha256": "56b5211bb1564bca7f2b9e952dea9e3998a2f1a83cb7a29052aefb214ec8d910",
+      "reason": ""
+    },
+    {
+      "id": "doctor_car",
+      "file": "assets/vehicles/rescue/doctor_car.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "8c4e782e314c25712cc6302a0b7f321f3298a17b31e4ffe0a6586d393b9a7ef8",
+      "afterSha256": "8c4e782e314c25712cc6302a0b7f321f3298a17b31e4ffe0a6586d393b9a7ef8",
+      "reason": ""
+    },
+    {
+      "id": "rescue_helicopter",
+      "file": "assets/vehicles/rescue/rescue_helicopter.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "fdfcadb4eb9c85668f164a38b27a3d48e916712f726090a1981318fa80de6a6f",
+      "afterSha256": "fdfcadb4eb9c85668f164a38b27a3d48e916712f726090a1981318fa80de6a6f",
+      "reason": ""
+    },
+    {
+      "id": "excavator",
+      "file": "assets/vehicles/construction/excavator.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "9c6a31d6a45040d7ffe47847b23ec95427dff2ab46364effe047f6ef98023475",
+      "afterSha256": "9c6a31d6a45040d7ffe47847b23ec95427dff2ab46364effe047f6ef98023475",
+      "reason": ""
+    },
+    {
+      "id": "mini_excavator",
+      "file": "assets/vehicles/construction/mini_excavator.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "240f3771b85f7416de23dd45c7a60d2e91d3caac644c80a58c77fb2865012b75",
+      "afterSha256": "240f3771b85f7416de23dd45c7a60d2e91d3caac644c80a58c77fb2865012b75",
+      "reason": ""
+    },
+    {
+      "id": "bulldozer",
+      "file": "assets/vehicles/construction/bulldozer.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "b58cca4395270ba6bf3e89b547522f002055f8391316ba43acb837684bf0e66d",
+      "afterSha256": "b58cca4395270ba6bf3e89b547522f002055f8391316ba43acb837684bf0e66d",
+      "reason": ""
+    },
+    {
+      "id": "wheel_loader",
+      "file": "assets/vehicles/construction/wheel_loader.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "cde6cae724eac9d13678a251d95c9c15ef87595bb05567c2616af730eebb94bb",
+      "afterSha256": "cde6cae724eac9d13678a251d95c9c15ef87595bb05567c2616af730eebb94bb",
+      "reason": ""
+    },
+    {
+      "id": "dump_truck",
+      "file": "assets/vehicles/construction/dump_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "3afa9a9b919d8d61854fd36da3c4c13deb60f27a8bf20ccef934e3fdcee5e333",
+      "afterSha256": "3afa9a9b919d8d61854fd36da3c4c13deb60f27a8bf20ccef934e3fdcee5e333",
+      "reason": ""
+    },
+    {
+      "id": "concrete_mixer",
+      "file": "assets/vehicles/construction/concrete_mixer.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "776d7fb9cb28068534fe2bb821e0cbbb5f7fba5243e73c6fa5f8e5c67b825ef3",
+      "afterSha256": "776d7fb9cb28068534fe2bb821e0cbbb5f7fba5243e73c6fa5f8e5c67b825ef3",
+      "reason": ""
+    },
+    {
+      "id": "concrete_pump_truck",
+      "file": "assets/vehicles/construction/concrete_pump_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "afa860e50022a30335a29fa95c5b3400575dba614e97d5aeccec3afb4f40fb71",
+      "afterSha256": "afa860e50022a30335a29fa95c5b3400575dba614e97d5aeccec3afb4f40fb71",
+      "reason": ""
+    },
+    {
+      "id": "crane_truck",
+      "file": "assets/vehicles/construction/crane_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "e05110599b10c0c706a877e8e9d9b71d1005696e3666ade87e142dec9702352c",
+      "afterSha256": "e05110599b10c0c706a877e8e9d9b71d1005696e3666ade87e142dec9702352c",
+      "reason": ""
+    },
+    {
+      "id": "forklift",
+      "file": "assets/vehicles/construction/forklift.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "41ca87c531302c7efb5b4b7ce89eeb823ac915602c2ddc9b0bb7f4c9615277be",
+      "afterSha256": "41ca87c531302c7efb5b4b7ce89eeb823ac915602c2ddc9b0bb7f4c9615277be",
+      "reason": ""
+    },
+    {
+      "id": "road_roller",
+      "file": "assets/vehicles/construction/road_roller.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "c0130937c2262c4c13de3cc7953ad8b9f49ca99298e6d2adeba7b81c725c07f7",
+      "afterSha256": "14d7efe351999c6e739467999588d9d49a73310ff2969f8d6e4df175dcf3841e",
+      "reason": ""
+    },
+    {
+      "id": "asphalt_paver",
+      "file": "assets/vehicles/construction/asphalt_paver.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "471732d8f757ea545aff4606ef5a0a379c68f9b0bc7f3a3b04d78bb3e2484c14",
+      "afterSha256": "5156649557e0d8064d8537a502b120511ed14b7e6c0dbb22af595bc0216e5789",
+      "reason": ""
+    },
+    {
+      "id": "grader",
+      "file": "assets/vehicles/construction/grader.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "5012c37e28d5bf089fd7e90d8ace4e4b22246d9880274e28468b369fedf26f73",
+      "afterSha256": "5674f20f7c1eb94ae5d6a9e56455bb7821c970b3c705cab1da4ebf664c663f83",
+      "reason": ""
+    },
+    {
+      "id": "backhoe_loader",
+      "file": "assets/vehicles/construction/backhoe_loader.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "b2196231b5b6728a2c037a327dabfdf8d893d8927dd1fa3ff2a3f51c5cd21f87",
+      "afterSha256": "42fc97ad3518d9688f2ef4c8f5e9a3289633c97b461a7dd8353c85b3581c9a4b",
+      "reason": ""
+    },
+    {
+      "id": "skid_steer_loader",
+      "file": "assets/vehicles/construction/skid_steer_loader.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "c0f2f2fa4aa31c97b2113c1ee3e386bc6c8b74f441d1c94ed836dbd9d946e62f",
+      "afterSha256": "b38ba13242f98aff6842345bac8fcb408364ab965684a3134297ca7a29c1d16d",
+      "reason": ""
+    },
+    {
+      "id": "tower_crane",
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "719f1da9bebf75e8ffac62352525ce383b0a72dc90b4b276092bcb6664072ffc",
+      "afterSha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "reason": ""
+    },
+    {
+      "id": "mobile_crane",
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "43dd9257a4c3011a2d083c4944706736d8bb285b27bc4a05ffb945bc9f5270d9",
+      "afterSha256": "2df3607b1290aebb0647631229b38e4e1cd1c27e11c4af0dc372b0ddd4f7b3eb",
+      "reason": ""
+    },
+    {
+      "id": "pile_driver",
+      "file": "assets/vehicles/construction/pile_driver.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "d5f57b656b3740c607d9cfb016d0b7678f3feea7dc568be9ef4aee05aa05723f",
+      "afterSha256": "d5f57b656b3740c607d9cfb016d0b7678f3feea7dc568be9ef4aee05aa05723f",
+      "reason": "Top of pile-driving mast is cut at the original top frame boundary; uncropped source is required."
+    },
+    {
+      "id": "drilling_rig",
+      "file": "assets/vehicles/construction/drilling_rig.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "f5deff5992a11c97818006a616fe2d0efd4ad2eaed64617355a3ad3004014570",
+      "afterSha256": "f5deff5992a11c97818006a616fe2d0efd4ad2eaed64617355a3ad3004014570",
+      "reason": "Upper drilling mast and head are clipped at the original top frame boundary; do not invent missing machinery."
+    },
+    {
+      "id": "excavator_breaker",
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "13e454ba034a9f95fb3ffdf84f7aa138c7dd2a1c4b86e0b8ff35aef649c26af5",
+      "afterSha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "reason": ""
+    },
+    {
+      "id": "dump_loader",
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "e5f7782c4b808b1deadac11bab62ff885f361af0fe004e63a9378a2e68e4dfd8",
+      "afterSha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "reason": ""
+    },
+    {
+      "id": "articulated_dump_truck",
+      "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "22f92ad036ba88120aa37c5c801ddff27ca0b3595f32f4acb3cee2176af53340",
+      "afterSha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+      "reason": ""
+    },
+    {
+      "id": "water_truck",
+      "file": "assets/vehicles/construction/water_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "117c3b4a5f65e224cb1e936fc1005aabef97129bafe18df2995f08b05e516fd5",
+      "afterSha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+      "reason": ""
+    },
+    {
+      "id": "sweeper_truck",
+      "file": "assets/vehicles/construction/sweeper_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "86467ffbc6f3d67361a7bf9aa4efc11729bfb602a6baa8909918ba3f3a46048b",
+      "afterSha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+      "reason": ""
+    },
+    {
+      "id": "fuel_truck",
+      "file": "assets/vehicles/construction/fuel_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "0b11cd01c3d0ac7cb62b04d3a8d6e399e63cfb695d4cafbfa8298b10ca8d5b19",
+      "afterSha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+      "reason": ""
+    },
+    {
+      "id": "lowbed_trailer",
+      "file": "assets/vehicles/construction/lowbed_trailer.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "f245fa7280fe6a658012095a86fdd198d42f7067c5b5c1a238066b6115144d12",
+      "afterSha256": "586d0b8f6423e2b2fbb9984cb985a1c22fdaff61bc16871b25f014d7593343b4",
+      "reason": ""
+    },
+    {
+      "id": "cargo_truck",
+      "file": "assets/vehicles/construction/cargo_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "ce6336794ca5558b7a477ce0bdb16ea74f32888354f8cc6ffb1c7eb5782fe15e",
+      "afterSha256": "ee43488e43ed604ed2432b9792b177db32deb0e4fe0ffcae70af294ff71ad17a",
+      "reason": ""
+    },
+    {
+      "id": "scissor_lift",
+      "file": "assets/vehicles/construction/scissor_lift.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "02cdf5f11323860a42f73bf780eaa38d5ce3f796252d41816d9cfe16d6120189",
+      "afterSha256": "72351f8ad22a202e1c9b7079b27e45ed290f8d6508e8f9c3d1661803c0d8553f",
+      "reason": ""
+    },
+    {
+      "id": "train",
+      "file": "assets/vehicles/transport/train.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "96170486e2b3f53da75f8bea809043e817be86432e8b27137fc793d37b81b2f3",
+      "afterSha256": "96170486e2b3f53da75f8bea809043e817be86432e8b27137fc793d37b81b2f3",
+      "reason": ""
+    },
+    {
+      "id": "bus",
+      "file": "assets/vehicles/transport/bus.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "23f6012fd3070e529578d35dacd1e25dbcc3332979a221f32c0ed40eebc82a3b",
+      "afterSha256": "23f6012fd3070e529578d35dacd1e25dbcc3332979a221f32c0ed40eebc82a3b",
+      "reason": ""
+    },
+    {
+      "id": "car",
+      "file": "assets/vehicles/transport/car.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "57fc7764817e0b19c52b626ce04738c8edb7fa3fafb35ccc9bd59c9750cfac95",
+      "afterSha256": "57fc7764817e0b19c52b626ce04738c8edb7fa3fafb35ccc9bd59c9750cfac95",
+      "reason": ""
+    },
+    {
+      "id": "taxi",
+      "file": "assets/vehicles/transport/taxi.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "cfac3aaab4542b35c0001a6be90370b81df7efdf3ae432486c26225085d76fe9",
+      "afterSha256": "cfac3aaab4542b35c0001a6be90370b81df7efdf3ae432486c26225085d76fe9",
+      "reason": ""
+    },
+    {
+      "id": "school_bus",
+      "file": "assets/vehicles/transport/school_bus.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "54b1518f7fc1068f77625d06ceece570b863e9e48ea1832ddeb1d03552bc5db0",
+      "afterSha256": "54b1518f7fc1068f77625d06ceece570b863e9e48ea1832ddeb1d03552bc5db0",
+      "reason": ""
+    },
+    {
+      "id": "rocket",
+      "file": "assets/vehicles/transport/rocket.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "d8c05b7ea75e3cbf3667408e01873556cdb0dae13a3ec2de249db881075b1e6a",
+      "afterSha256": "d8c05b7ea75e3cbf3667408e01873556cdb0dae13a3ec2de249db881075b1e6a",
+      "reason": ""
+    },
+    {
+      "id": "submarine",
+      "file": "assets/vehicles/transport/submarine.png",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "c4a00de78da854e2572867707e4fdeb4fa62ba2b26928024be380507b28516b2",
+      "afterSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "reason": ""
+    },
+    {
+      "id": "tow_truck",
+      "file": "assets/vehicles/transport/tow_truck.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "6a0f15eedf7282e2016b727def4c037f3ab704cfa27bb5f147a752d5ec418675",
+      "afterSha256": "6a0f15eedf7282e2016b727def4c037f3ab704cfa27bb5f147a752d5ec418675",
+      "reason": ""
+    },
+    {
+      "id": "garbage_truck",
+      "file": "assets/vehicles/transport/garbage_truck.png",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "1b13ef68bd5c666906ceaa5cef578d452cd68810f27cd7d455efd7ee25335b87",
+      "afterSha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+      "reason": ""
+    },
+    {
+      "id": "tractor",
+      "file": "assets/vehicles/transport/tractor.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "5fbcad0aaed84809fd4f3e2f42fc7682de3410526ee08673899ede52c2caade5",
+      "afterSha256": "5fbcad0aaed84809fd4f3e2f42fc7682de3410526ee08673899ede52c2caade5",
+      "reason": ""
+    },
+    {
+      "id": "airplane",
+      "file": "assets/vehicles/transport/airplane.png",
+      "disposition": "preservedDisplayOnly",
+      "action": "ORIGINAL_PRESERVED_DISPLAY_NORMALIZED",
+      "beforeSha256": "899719339c2fccee8e8f22b1be0356446d3dfbf1cd4506daba43c51d0042f0b2",
+      "afterSha256": "899719339c2fccee8e8f22b1be0356446d3dfbf1cd4506daba43c51d0042f0b2",
+      "reason": ""
+    },
+    {
+      "id": "helicopter",
+      "file": "assets/vehicles/transport/helicopter.png",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_ALPHA_DAMAGE",
+      "beforeSha256": "e1dd3c63aad3a80e95bcea75b36b893a1d8c86a99029b05050645b77b5570028",
+      "afterSha256": "e1dd3c63aad3a80e95bcea75b36b893a1d8c86a99029b05050645b77b5570028",
+      "reason": "Original cabin/window seam contains transparency holes with lost RGB. Fragment removal alone is not a full repair; original preserved."
+    },
+    {
+      "id": "passenger_airplane",
+      "file": "assets/vehicles/airport/passenger_airplane.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "8301e0dfa6d2237b17b58343a7de39b9e18c4620ea0a16915acf9d8232d1fc5f",
+      "afterSha256": "8301e0dfa6d2237b17b58343a7de39b9e18c4620ea0a16915acf9d8232d1fc5f",
+      "reason": "Right wing/tail region extends through the original right frame edge; full aircraft silhouette cannot be certified."
+    },
+    {
+      "id": "airport_bus",
+      "file": "assets/vehicles/airport/airport_bus.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "375e9cd4ad54344fd114ed91b3f5942a14b3cccbd8c5af4e1a342f6d4d833bf8",
+      "afterSha256": "0f8b75f0137effa7e229ad3d2edfd10614fa190df2612c6b5dbe803f7a3dbfd3",
+      "reason": ""
+    },
+    {
+      "id": "airport_follow_me_car",
+      "file": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "2a4aa92a8c57a1dc9171a80c24b5a9ad31bd92cd7c07cef81520345341557792",
+      "afterSha256": "49863d451c3e5f4e728c352ac051a2c9116609dd55b03972c2c062395c852eb0",
+      "reason": ""
+    },
+    {
+      "id": "baggage_cart",
+      "file": "assets/vehicles/airport/baggage_cart.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "2ee40184599fc2a4bec6e3bea13b4b8168424d50c2369d2d0e34ffa70c9d8ba8",
+      "afterSha256": "978f11bc4d655eed9c8b38de598b428fab115d66c11b7c8e9f99e879dde679e1",
+      "reason": ""
+    },
+    {
+      "id": "catering_truck",
+      "file": "assets/vehicles/airport/catering_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "f339119b27152be59d56f22e499bb0ebca339ff3bb72a180be3fbac7ec01e3b4",
+      "afterSha256": "a4295b76893e381259b519902d01b113c9c51df07b4191a7b5e075c4cdfec5ea",
+      "reason": ""
+    },
+    {
+      "id": "de_icing_truck",
+      "file": "assets/vehicles/airport/de_icing_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "d13084e5b0d1820f464b5d46c729bf2ad2c5f3aa25d3d0b8370ef5a8125fbffc",
+      "afterSha256": "4fe3897f3dde3157abe8a89aa3090ba798169ee515576b0687679b708186a5fd",
+      "reason": ""
+    },
+    {
+      "id": "fuel_truck_airport",
+      "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "1beaadbc4a321408d50e4521cd6397b7cfcceed677a2e3cdf7bb08f77ada6dbc",
+      "afterSha256": "22c0a0af077f5aa93370fd59f84596dc5e7424c1f169157bb68d9993f8e54a86",
+      "reason": ""
+    },
+    {
+      "id": "pushback_tug",
+      "file": "assets/vehicles/airport/pushback_tug.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "e90bf8ea4bb34bee5e2adf2f1e7d756f801f2d15e5a6306a8bdfcf7fd1ee819d",
+      "afterSha256": "01dda38387ec48347690cd23bde56e72fdf91ba3815dfae77fc248013c8b2582",
+      "reason": ""
+    },
+    {
+      "id": "stair_truck",
+      "file": "assets/vehicles/airport/stair_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "47fbca251be5b5b86b022fc84089b1969aa13de1887349741c5e4e2c5a812a75",
+      "afterSha256": "4d3367d058919d4e9c50f9e7f467966cd7c9745d1c95b38e42dc06086095edea",
+      "reason": ""
+    },
+    {
+      "id": "farm_tractor",
+      "file": "assets/vehicles/farm/tractor.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "e5b7cc3b7d73d4746743360ef73aa2294b75fdca8a45d1f1e1add953a013b70e",
+      "afterSha256": "e5e998034857ecec8aeebd8efca824fbd765043d491e48d1f46ab8b345063f8f",
+      "reason": ""
+    },
+    {
+      "id": "plow_tractor",
+      "file": "assets/vehicles/farm/plow_tractor.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "8fba0936b9ddfa6dae0ad6c6578f4aaaaa02645e14218d75a708a7852d2462f0",
+      "afterSha256": "9d621651fb89a744a44bcab6c8e7db330cd04e0eb8079c9a1c4845d86a4f3714",
+      "reason": ""
+    },
+    {
+      "id": "combine_harvester",
+      "file": "assets/vehicles/farm/combine_harvester.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "2559fb2393403cf9f27decc9e3deab4e4d9f292cd8f66d18a2482aa62ae2cc65",
+      "afterSha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+      "reason": ""
+    },
+    {
+      "id": "rice_transplanter",
+      "file": "assets/vehicles/farm/rice_transplanter.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
+      "afterSha256": "fc55c95cf3e16a07fcea384358929817b5361820674b275727a6937b08fe511c",
+      "reason": ""
+    },
+    {
+      "id": "sprayer_truck",
+      "file": "assets/vehicles/farm/sprayer_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "94f15a90cdcf5f135b1703d3950274679386a2d3e0a6c4fbd01642e89da7a9b4",
+      "afterSha256": "8f46df77a971d352175b82f46843fda9fa26aacac0899f31fe3cb863ae33743f",
+      "reason": ""
+    },
+    {
+      "id": "baler",
+      "file": "assets/vehicles/farm/baler.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "baeb9b6cb892f7c9687a1f95d362a00cc016dfe930ee9039a949de44919c3fe2",
+      "afterSha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+      "reason": ""
+    },
+    {
+      "id": "farm_trailer",
+      "file": "assets/vehicles/farm/farm_trailer.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "318433cd1cbf5286a3c8bd8324c4258685064986e95fddd3bc147220d9c7567a",
+      "afterSha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+      "reason": ""
+    },
+    {
+      "id": "fruit_harvest_truck",
+      "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "b576e23499a1198f2c1e4f13d3d944ed0cde18339331731935afea27993ec47b",
+      "afterSha256": "03e19f51b348175495f985fa8b9d9037e9fb4702586ad697dfbd5cb7b0ce6440",
+      "reason": ""
+    },
+    {
+      "id": "milk_tanker",
+      "file": "assets/vehicles/farm/milk_tanker.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "cffa451baa7e503f4e8c05751e937d4ee3903337f2d24c831022e3ae9da12fe0",
+      "afterSha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+      "reason": ""
+    },
+    {
+      "id": "cargo_ship",
+      "file": "assets/vehicles/port/cargo_ship.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "afterSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "reason": "Original bow and anchor-side hull are clipped at the left frame; candidate cannot restore absent pixels."
+    },
+    {
+      "id": "container_truck",
+      "file": "assets/vehicles/port/container_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "26db2e3e7528c4ea8c40a8603464b45501445af2ad4ec945955ff8c7a67a35e3",
+      "afterSha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+      "reason": ""
+    },
+    {
+      "id": "harbor_crane",
+      "file": "assets/vehicles/port/harbor_crane.webp",
+      "disposition": "hold",
+      "action": "HOLD_CANDIDATE_REJECTED",
+      "beforeSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
+      "afterSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
+      "reason": "Enlarged mask fills upper rail gaps and removes fine rail segments. Failed candidate is excluded, original preserved."
+    },
+    {
+      "id": "reach_stacker",
+      "file": "assets/vehicles/port/reach_stacker.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "c56aec7a3e0208ecb9e07b30c90428a0e3c36e68aeebbd515ea7a7fe03d63609",
+      "afterSha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+      "reason": ""
+    },
+    {
+      "id": "tugboat",
+      "file": "assets/vehicles/port/tugboat.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "5bbb5332eef850211d68b7265a350a576539dfe2a165d39a818d6f8474e4e5ba",
+      "afterSha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+      "reason": ""
+    },
+    {
+      "id": "ferry",
+      "file": "assets/vehicles/port/ferry.webp",
+      "disposition": "hold",
+      "action": "HOLD_CANDIDATE_REJECTED",
+      "beforeSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
+      "afterSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
+      "reason": "White mast/upper-rail gaps retain opaque patches and fine antenna fidelity is insufficient. Candidate excluded, original preserved."
+    },
+    {
+      "id": "fishing_boat",
+      "file": "assets/vehicles/port/fishing_boat.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "e8a29ff62fd6a44ba24a73291575455bd41504da822b8b49c7e237e42249a19f",
+      "afterSha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+      "reason": ""
+    },
+    {
+      "id": "coast_guard_boat",
+      "file": "assets/vehicles/port/coast_guard_boat.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "343575fa357ef4ce91733eee376d27cdd63d120521304a41385a0ed617ef7ba5",
+      "afterSha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+      "reason": ""
+    },
+    {
+      "id": "rescue_boat",
+      "file": "assets/vehicles/port/rescue_boat.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "8931833134ae4bdbc89245ec5bdce8f37cc8dcc8adb1dd56d67866a63d45c759",
+      "afterSha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+      "reason": ""
+    },
+    {
+      "id": "road_repair_truck",
+      "file": "assets/vehicles/road_service/road_repair_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "6e1c30573fc874db0ac595af19094a5feb40459b7357301a1b052542f80d964b",
+      "afterSha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+      "reason": ""
+    },
+    {
+      "id": "line_painting_truck",
+      "file": "assets/vehicles/road_service/line_painting_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "000a6f84903e5794f67c3e9571c68c0ef1942bf573a398117c528971b0c0f37a",
+      "afterSha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+      "reason": ""
+    },
+    {
+      "id": "traffic_cone_truck",
+      "file": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "2735a7d73b23c17c31eb86a41a4544780cd38caceeaab6980adb2c88dbb4a18a",
+      "afterSha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+      "reason": ""
+    },
+    {
+      "id": "road_sign_truck",
+      "file": "assets/vehicles/road_service/road_sign_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_CANDIDATE_REJECTED",
+      "beforeSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
+      "afterSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
+      "reason": "Enlarged candidate retains white/checker patches in open frame below signs. Precise hole cleanup is unresolved; original preserved."
+    },
+    {
+      "id": "road_sweeper",
+      "file": "assets/vehicles/road_service/road_sweeper.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "6bfc0635d1d32f64983b59bad6fdf036257d4aafbdbe9419be68beccbe3c99d2",
+      "afterSha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+      "reason": ""
+    },
+    {
+      "id": "salt_spreader",
+      "file": "assets/vehicles/road_service/salt_spreader.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "b8cb0270b5264a8cb7451e0fff7d540410d43d00a184ed55dfea9f55d42424ee",
+      "afterSha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+      "reason": ""
+    },
+    {
+      "id": "snow_plow",
+      "file": "assets/vehicles/road_service/snow_plow.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "25e12e2edd1a7d0da559ccf42697c46ade6fd0871230027669a268bf34fe6167",
+      "afterSha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+      "reason": ""
+    },
+    {
+      "id": "bridge_inspection_truck",
+      "file": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "878cca912fba2a3c4ea01ba254668fd8b2106b3ac0e6bac9f1b6c4cb2e18f66b",
+      "afterSha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+      "reason": ""
+    },
+    {
+      "id": "tunnel_cleaning_truck",
+      "file": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "72a5b06bb5d463eb250934903a00943cfdadba8d51337892189cd4027fa3f8a3",
+      "afterSha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+      "reason": ""
+    },
+    {
+      "id": "military_truck",
+      "file": "assets/vehicles/military_special/military_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_AMBIGUOUS_SOURCE_EDGE",
+      "beforeSha256": "fd64c01082997bc0d627fd4a9819054c693a519d0eb4ccca7032a1cd2fbca39c",
+      "afterSha256": "fd64c01082997bc0d627fd4a9819054c693a519d0eb4ccca7032a1cd2fbca39c",
+      "reason": "Front tire lowest arc at original rectangle edge; insufficient source to verify complete shape."
+    },
+    {
+      "id": "command_truck",
+      "file": "assets/vehicles/military_special/command_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "b8f238e08f02d97770df8dd1008e0cbf7a6a5fc6b3721a2ee0f2cdbe1c0d1364",
+      "afterSha256": "b8f238e08f02d97770df8dd1008e0cbf7a6a5fc6b3721a2ee0f2cdbe1c0d1364",
+      "reason": "bumper, tires and lower chassis clipped"
+    },
+    {
+      "id": "communication_relay_truck",
+      "file": "assets/vehicles/military_special/communication_relay_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "20169f5fbe5b1a003cbfa4630ebb8ec90367375c0c6dbb1b416f56f50cfec5c5",
+      "afterSha256": "20169f5fbe5b1a003cbfa4630ebb8ec90367375c0c6dbb1b416f56f50cfec5c5",
+      "reason": "bumper and most lower wheel areas clipped"
+    },
+    {
+      "id": "radar_truck",
+      "file": "assets/vehicles/military_special/radar_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "e0f126e849daa1be0772ea62fb406ec781cce94d22711a16a1e4320d11ba056e",
+      "afterSha256": "e0f126e849daa1be0772ea62fb406ec781cce94d22711a16a1e4320d11ba056e",
+      "reason": "lower front tire and chassis clipped"
+    },
+    {
+      "id": "searchlight_truck",
+      "file": "assets/vehicles/military_special/searchlight_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "1097e5528f8fc4d363dd37a2e82f2199a98ccd06cb73c779db31ebd0edb5692a",
+      "afterSha256": "1097e5528f8fc4d363dd37a2e82f2199a98ccd06cb73c779db31ebd0edb5692a",
+      "reason": "bumper and lower wheels clipped"
+    },
+    {
+      "id": "mobile_hospital",
+      "file": "assets/vehicles/military_special/mobile_hospital.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "298deafd2dae4e98ed6181b0b9a208a77d591429844c9f291de59792f7d44c00",
+      "afterSha256": "298deafd2dae4e98ed6181b0b9a208a77d591429844c9f291de59792f7d44c00",
+      "reason": "lower tires and chassis clipped"
+    },
+    {
+      "id": "armored_rescue_vehicle",
+      "file": "assets/vehicles/military_special/armored_rescue_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "056ff3bf49c4b491927c07feb8fd5203d32a204bc3291436beabc67bd7a1605c",
+      "afterSha256": "056ff3bf49c4b491927c07feb8fd5203d32a204bc3291436beabc67bd7a1605c",
+      "reason": "front and near tires flattened by rectangle boundary; lower tread pixels absent"
+    },
+    {
+      "id": "mrap_patrol_vehicle",
+      "file": "assets/vehicles/military_special/mrap_patrol_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "44350e0a30dd600041e8fdd48a15b1044d0f174d2b409474896bb99da24d07d5",
+      "afterSha256": "44350e0a30dd600041e8fdd48a15b1044d0f174d2b409474896bb99da24d07d5",
+      "reason": "all visible lower tire arcs clipped"
+    },
+    {
+      "id": "tracked_carrier",
+      "file": "assets/vehicles/military_special/tracked_carrier.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "5ad72a6d6792da1da196ddf77b13787e5085b3c0957c564ceed979b1f48ecaa6",
+      "afterSha256": "5ad72a6d6792da1da196ddf77b13787e5085b3c0957c564ceed979b1f48ecaa6",
+      "reason": "bottom track loop and lower road wheels clipped"
+    },
+    {
+      "id": "amphibious_vehicle",
+      "file": "assets/vehicles/military_special/amphibious_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "bea935e8874bf8e3a2d9b9c03c7428d6e65e574ef9937f910c5653687e98b38f",
+      "afterSha256": "bea935e8874bf8e3a2d9b9c03c7428d6e65e574ef9937f910c5653687e98b38f",
+      "reason": "front and near wheels cut through their lower arcs"
+    },
+    {
+      "id": "engineering_vehicle",
+      "file": "assets/vehicles/military_special/engineering_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "d48cd727c8d3bb52027f81c29e56efdf8681b2ee8832ccf6c4f76ab9446f4a12",
+      "afterSha256": "d48cd727c8d3bb52027f81c29e56efdf8681b2ee8832ccf6c4f76ab9446f4a12",
+      "reason": "lower blade and tracked undercarriage clipped"
+    },
+    {
+      "id": "bridge_layer_truck",
+      "file": "assets/vehicles/military_special/bridge_layer_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "bd9984b36fe15798d5937a20fa8135f2f1e6716380696ed51d259d5cf932b9e3",
+      "afterSha256": "bd9984b36fe15798d5937a20fa8135f2f1e6716380696ed51d259d5cf932b9e3",
+      "reason": "lower tires and undercarriage clipped"
+    },
+    {
+      "id": "decontamination_truck",
+      "file": "assets/vehicles/military_special/decontamination_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "1d743c7e7834156ebc93947f5ad43d01b9c5e618f898014847133750ce0cd876",
+      "afterSha256": "1d743c7e7834156ebc93947f5ad43d01b9c5e618f898014847133750ce0cd876",
+      "reason": "lower front tire and chassis clipped"
+    },
+    {
+      "id": "water_purification_truck",
+      "file": "assets/vehicles/military_special/water_purification_truck.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "690c397999c49c3a10f96ef6f735bf627d92322e9b81ff205c154d6b51b056b6",
+      "afterSha256": "690c397999c49c3a10f96ef6f735bf627d92322e9b81ff205c154d6b51b056b6",
+      "reason": "lower front tire and chassis clipped"
+    },
+    {
+      "id": "snow_rescue_vehicle",
+      "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+      "afterSha256": "19dc48e8614af0067fdfb26eb7846e8ab3a8c50f16c7cd8d9ccf42faba819134",
+      "reason": ""
+    },
+    {
+      "id": "drone_control_vehicle",
+      "file": "assets/vehicles/military_special/drone_control_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "2c81f0af96977d24383426d42130105128892609795360718a02013d34b068a9",
+      "afterSha256": "2c81f0af96977d24383426d42130105128892609795360718a02013d34b068a9",
+      "reason": "bottom bumper and tires clipped"
+    },
+    {
+      "id": "eod_robot_vehicle",
+      "file": "assets/vehicles/military_special/eod_robot_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "028df848e582299fffb286779e661aa5a71c88e6ae3d3e0fdf6525c965d567e7",
+      "afterSha256": "028df848e582299fffb286779e661aa5a71c88e6ae3d3e0fdf6525c965d567e7",
+      "reason": "lower track loops and chassis clipped"
+    },
+    {
+      "id": "missile_launcher_vehicle",
+      "file": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
+      "disposition": "hold",
+      "action": "HOLD_SOURCE_PIXELS_MISSING",
+      "beforeSha256": "21e5c6b593591bb1e78c697c381efef1228b286af94f0405c2f2e0838a216dc4",
+      "afterSha256": "21e5c6b593591bb1e78c697c381efef1228b286af94f0405c2f2e0838a216dc4",
+      "reason": "lower tires and chassis clipped"
+    },
+    {
+      "id": "school_van",
+      "file": "assets/vehicles/town/school_van.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "3a6a24a79c725a869667227c9520dc7aa05758476ae3e0248ebe76a11161cafb",
+      "afterSha256": "9b900324c9eb473d4905b17170d8a7f2ae94282f1d04b9929e73bef17717ce03",
+      "reason": ""
+    },
+    {
+      "id": "bakery_truck",
+      "file": "assets/vehicles/town/bakery_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "4652192e2c512b18d9625f6ed71f7be142228fd83ab1f7cacd2c84ae8ba09ac3",
+      "afterSha256": "dc97ed8f676e6bb6ddfc549173b4174f782e78d7e7cd6fbf300fa9952258074b",
+      "reason": ""
+    },
+    {
+      "id": "flower_delivery_van",
+      "file": "assets/vehicles/town/flower_delivery_van.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "2008c92d27b10bbf0887f22510dd564d32614e2b3f4c1f5789796852ebe51bb3",
+      "afterSha256": "05078b7967a41fcf3f077eaea54b60e10b2372753a1b8c4ad3354b72763bc561",
+      "reason": ""
+    },
+    {
+      "id": "pet_grooming_van",
+      "file": "assets/vehicles/town/pet_grooming_van.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "526b5ab00dc0435c5f97bb5f77fa738af4f3efee2947fed9660ea307857c2303",
+      "afterSha256": "626b843288ed39bf4cfa86610c41db97b613b9a6efbcc29554c9b9297a27c2e3",
+      "reason": ""
+    },
+    {
+      "id": "utility_repair_van",
+      "file": "assets/vehicles/town/utility_repair_van.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "1fca139c79fc43b074d542481029c314aa33b77d9becbfb2fca0ba703d7c21d7",
+      "afterSha256": "b29fa4e62a529cdec489103a23c5ff274e8e1ca0dbd92f2af8ff72526ee46bb9",
+      "reason": ""
+    },
+    {
+      "id": "maintenance_pickup",
+      "file": "assets/vehicles/town/maintenance_pickup.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "144aff41026bf20166251f1c7ebedbfd97ddd2aa6bfe873166d942cc19368c41",
+      "afterSha256": "c794d77b8e0d0744e8bd07ef72ded8c900a9afad75e2d6e838e08010968e7e6e",
+      "reason": ""
+    },
+    {
+      "id": "beverage_delivery_truck",
+      "file": "assets/vehicles/town/beverage_delivery_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "a2d0f8b9ee4fce986689b9083908096f48261718e39560dfc735c155b2e87897",
+      "afterSha256": "b9e59a2aed22989417381d59ebf8e620e325e118606e38016777cc1c63f49c4c",
+      "reason": ""
+    },
+    {
+      "id": "toy_truck",
+      "file": "assets/vehicles/town/toy_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "ff5e13d8a00f6ad2a5629165c79c82e35f94da3d0ada9d0c94768d9d1017ac2b",
+      "afterSha256": "ab14605d34ad123c49b80099f4ba7778917821d70bb13226c1df44b3fa4a1c91",
+      "reason": ""
+    },
+    {
+      "id": "community_bus",
+      "file": "assets/vehicles/town/community_bus.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "832e347b3de35540859c39a767123db4a6ec757c73ccc2352abb0c2426add3e5",
+      "afterSha256": "25d190e147fd5094791419376cbad7f98db134b882b0b2a23f3851a20203e250",
+      "reason": ""
+    },
+    {
+      "id": "mail_truck",
+      "file": "assets/vehicles/town/mail_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "8169af7b0e22fa51d1f81141ce48359e86aab10eaa1975882df24cd54f35441e",
+      "afterSha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+      "reason": ""
+    },
+    {
+      "id": "delivery_truck",
+      "file": "assets/vehicles/town/delivery_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "875b86b0bd8f4bf71c03dea68fc146538e0dadd81f6c377ff3a0198106ad8bab",
+      "afterSha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+      "reason": ""
+    },
+    {
+      "id": "food_truck",
+      "file": "assets/vehicles/town/food_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "c472b5f1bdfbe4fa33b8e80d404d6d377c9286516bad005b9fdbbd8e1f0317d4",
+      "afterSha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+      "reason": ""
+    },
+    {
+      "id": "ice_cream_truck",
+      "file": "assets/vehicles/town/ice_cream_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "d2bd4ec7148ea8a6e20d286b6e10cd608923d7261ff7e386c265ca1b289138e5",
+      "afterSha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+      "reason": ""
+    },
+    {
+      "id": "moving_truck",
+      "file": "assets/vehicles/town/moving_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "d05b0dc267e08e903cefe30477ac4508b704c795125f6e564635c36cf3101785",
+      "afterSha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+      "reason": ""
+    },
+    {
+      "id": "laundry_truck",
+      "file": "assets/vehicles/town/laundry_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "1e2b58911547838d3d70000c56593a671854bed85009a7e380c6035247f25c6c",
+      "afterSha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+      "reason": ""
+    },
+    {
+      "id": "recycling_truck",
+      "file": "assets/vehicles/town/recycling_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "31b8b3ed6b28a31035e4ead8a4e390001e04d5dae5912944f5e9f3fc4b4750fe",
+      "afterSha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+      "reason": ""
+    },
+    {
+      "id": "library_bus",
+      "file": "assets/vehicles/town/library_bus.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "ef8922c028504d8daa4d38625e66dcd9ac1f76a43deac3c46b8758c459765ef8",
+      "afterSha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+      "reason": ""
+    },
+    {
+      "id": "street_vendor_truck",
+      "file": "assets/vehicles/town/street_vendor_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "fc5bd8a278602664d1c45852a5d3c24a976d426f1352a3bd14fc4bbf0a4747ff",
+      "afterSha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+      "reason": ""
+    },
+    {
+      "id": "aerial_ladder_truck",
+      "file": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "14572a5c90294bfba518347d0838223ec1533d2a9ab1fd2d1798334aabfea61c",
+      "afterSha256": "63b368633363859e1ba9ffaa7ba7ab8e304dbb9d17c3864440926909ba8b06de",
+      "reason": ""
+    },
+    {
+      "id": "fire_tank",
+      "file": "assets/vehicles/fire_special/fire_tank.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "b851c720e821a97f7879a028daf04104624768742a208d3d9c2e2d997f1a755f",
+      "afterSha256": "ad2c7336d3c26fa0c8f8eacaccd179eb6b669f93f0eebbfa465c982b0efdb9b7",
+      "reason": ""
+    },
+    {
+      "id": "airport_crash_tender",
+      "file": "assets/vehicles/fire_special/airport_crash_tender.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "df733f699802182e9e74e7e5eb50d7c603f49be86b2dbd347c5a2299eb50cdf5",
+      "afterSha256": "b52fadcf1dd336d67ab9b40a7822b1a3f8a98bf4860d267d36b30e5ef05bc0d1",
+      "reason": ""
+    },
+    {
+      "id": "wildfire_6x6_truck",
+      "file": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "a8a2b563744265fd71a37c6c2aa30cc3d878a43e2cf3e5bc2a9fd4b8ebb81351",
+      "afterSha256": "6f7daf0c9068e53b425a11d54debc3e866f43d60a75bbfe4878ac733d8d90717",
+      "reason": ""
+    },
+    {
+      "id": "robot_demolition_fire_vehicle",
+      "file": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "ba844213c8b47234454dd828e26ad428830c5091a2ee69399616815def7fba27",
+      "afterSha256": "eef29b0972e74063f23a21c493120b450e379046e8ae1185813aef2f651eccd6",
+      "reason": ""
+    },
+    {
+      "id": "smoke_extraction_fan_truck",
+      "file": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "f054112b8bc732ea3bba64fb198794d5a5e5877833d5d0c0b2e1e81dc4514a96",
+      "afterSha256": "368917d59b5e10ab510947f7cca8adf6033aa69bad43fbf457b2fe6167ec3fec",
+      "reason": ""
+    },
+    {
+      "id": "water_tanker",
+      "file": "assets/vehicles/fire_special/water_tanker.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "52f7a3a87c0fe964f9bb8b6a984694cae020a0b368029246ca7bb81c5b811f09",
+      "afterSha256": "ef24041e91eca16e5b2074063a5a59f7985460401a8c660f2e335b1bf2357b87",
+      "reason": ""
+    },
+    {
+      "id": "articulating_boom_truck",
+      "file": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "5aabf8dfffa6ed356a569c104f40f88acaf269645e0a6e8d47b7f8d03812d27c",
+      "afterSha256": "b49a1bc36c6dbf77921ae470013a504651791657d72d264fcf9e38578695f69c",
+      "reason": ""
+    },
+    {
+      "id": "fire_command_suv",
+      "file": "assets/vehicles/fire_special/fire_command_suv.webp",
+      "disposition": "restored",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "beforeSha256": "408480fd1b1daf628c579041cb04f7c31cc0c3ec18fa9a936d3f43b2d1678037",
+      "afterSha256": "c18c07124bfa80051de5b85b9f764946089c76a461275c5a1f7f5f127c55e538",
+      "reason": ""
+    }
+  ]
+}
