@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "taskId": "ed2e65a1-ed64-4723-9f0d-e4f85316b4ea",
+  "owner": "GPT6_ASTRA_P2_INDEPENDENT_QA",
+  "agent": "/root/independent_qa",
+  "branch": "qa/sihyeon-p2-independent-20261108",
+  "createdAt": "2026-11-08T14:07:04.153109+00:00",
+  "revision": 1,
+  "scope": "four newly generated delivery candidates only",
+  "productFilesModified": false,
+  "browserTestsExecutedByThisAgent": false,
+  "entries": [
+    {
+      "file": "assets/vehicles/farm/rice_transplanter.webp",
+      "sourceRevision": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+      "sourceSha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
+      "candidateSha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
+      "candidateLocalPath": "/workspace/scratch/6880fba07b9d/grid-a/docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice-transplanter-repair-candidate.webp",
+      "dimensions": [
+        768,
+        768
+      ],
+      "bytes": 149712,
+      "alphaBoundsAt16": [
+        39,
+        123,
+        712,
+        629
+      ],
+      "edgePixelsAt16": 0,
+      "independentDecision": "APPROVED",
+      "decisionMeaning": "Independent image comparison approval of these exact bytes, not a claim of deployment or game/browser pass.",
+      "inspection": [
+        "original vs candidate vs delivery where applicable",
+        "light background",
+        "dark background",
+        "checker background",
+        "thin-parts enlarged comparison"
+      ],
+      "observations": "Middle seedling tray restored; upper gray screen, canopy supports, open gaps, planting tines/hoses and wheels correspond to the original. No invented outrigger observed.",
+      "comparison": "grid-a-evidence/rice-transplanter-repair-comparison.png",
+      "details": [
+        "independent/rice-details.jpg"
+      ]
+    },
+    {
+      "file": "assets/vehicles/port/harbor_crane.webp",
+      "sourceRevision": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+      "sourceSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
+      "candidateSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
+      "candidateLocalPath": "/workspace/scratch/6880fba07b9d/grid-b/assets/vehicles/port/harbor_crane.webp",
+      "dimensions": [
+        768,
+        768
+      ],
+      "bytes": 153210,
+      "alphaBoundsAt16": [
+        84,
+        33,
+        690,
+        742
+      ],
+      "edgePixelsAt16": 0,
+      "independentDecision": "APPROVED",
+      "decisionMeaning": "Independent image comparison approval of these exact bytes, not a claim of deployment or game/browser pass.",
+      "inspection": [
+        "original vs candidate vs delivery where applicable",
+        "light background",
+        "dark background",
+        "checker background",
+        "thin-parts enlarged comparison"
+      ],
+      "observations": "Two hoist blocks and hook, hoist/luff wires, blue lattice, yellow railing gaps, cabin glass, staircase and undercarriage retained. Dark wire contrast is naturally low; wires visible on light/checker.",
+      "comparison": "grid-b/harbor_crane-attempt1-three-backgrounds.jpg",
+      "details": [
+        "grid-b/harbor_crane-attempt1-detail.jpg"
+      ]
+    },
+    {
+      "file": "assets/vehicles/port/ferry.webp",
+      "sourceRevision": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+      "sourceSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
+      "candidateSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
+      "candidateLocalPath": "/workspace/scratch/6880fba07b9d/grid-b/assets/vehicles/port/ferry.webp",
+      "dimensions": [
+        768,
+        768
+      ],
+      "bytes": 98500,
+      "alphaBoundsAt16": [
+        16,
+        111,
+        742,
+        628
+      ],
+      "edgePixelsAt16": 0,
+      "independentDecision": "APPROVED",
+      "decisionMeaning": "Independent image comparison approval of these exact bytes, not a claim of deployment or game/browser pass.",
+      "inspection": [
+        "original vs candidate vs delivery where applicable",
+        "light background",
+        "dark background",
+        "checker background",
+        "thin-parts enlarged comparison"
+      ],
+      "observations": "Mast/antenna arms, bridge glass, narrow railing openings, funnel, loading opening, hull/red strip retained. Suspected white speck is bridge roof edge in a clipped comparison crop; direct original/candidate coordinate comparison resolves it.",
+      "comparison": "grid-b/ferry-attempt1-three-backgrounds.jpg",
+      "details": [
+        "grid-b/ferry-attempt1-detail.jpg",
+        "independent/ferry-roof-edge.png"
+      ]
+    },
+    {
+      "file": "assets/vehicles/road_service/road_sign_truck.webp",
+      "sourceRevision": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+      "sourceSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
+      "candidateSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
+      "candidateLocalPath": "/workspace/scratch/6880fba07b9d/grid-b/assets/vehicles/road_service/road_sign_truck.webp",
+      "dimensions": [
+        768,
+        768
+      ],
+      "bytes": 138320,
+      "alphaBoundsAt16": [
+        17,
+        90,
+        660,
+        639
+      ],
+      "edgePixelsAt16": 0,
+      "independentDecision": "APPROVED",
+      "decisionMeaning": "Independent image comparison approval of these exact bytes, not a claim of deployment or game/browser pass.",
+      "inspection": [
+        "original vs candidate vs delivery where applicable",
+        "light background",
+        "dark background",
+        "checker background",
+        "thin-parts enlarged comparison"
+      ],
+      "observations": "White sign faces and arrow remain opaque; blank spaces around signs and below platform clear. Frame braces, hydraulics/hoses, mirror/glass, crane, wheels and rear bumper retained.",
+      "comparison": "grid-b/road_sign_truck-attempt1-three-backgrounds.jpg",
+      "details": [
+        "grid-b/road_sign_truck-attempt1-detail.jpg"
+      ]
+    }
+  ]
+}
