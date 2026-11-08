@@ -1,0 +1,1654 @@
+{
+  "schemaVersion": 1,
+  "taskId": "e53d6b6c-c052-4239-a184-cb4a7356af1b",
+  "owner": "GPT6_ASTRA_P2_GRID_A",
+  "reviewer": "/root/grid_a",
+  "completedAtUtc": "2026-11-08T14:01:47.782430+00:00",
+  "branch": "work/sihyeon-p2-grid-a-20261108",
+  "reviewedProductHead": "b85ffc2fd51d230be8a949cbc6b7517f57ace3d4",
+  "baselineMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+  "sourceReadbackCommit": "4727518e70ecfd0e5e14661e1bac54fef82f7ced",
+  "sourceReadbackSha256": "2b48f822718f9ec208d57c9a0f249b7ba957d79286f0899f5d10262fab0d6511",
+  "scope": "격자 원본72개의 기존 inventory 순서 전반36개. 공사18·공항9·농장9. 제품파일/공용원장 수정 없음.",
+  "summary": {
+    "denominator": 36,
+    "reviewed": 36,
+    "unprocessed": 0,
+    "existingIndependentApprovalsRevalidated": 28,
+    "freshVisualApproved": 4,
+    "shippedImagesRejected": 1,
+    "sourceHoldsConfirmed": 3,
+    "repairCandidatesAuthored": 1,
+    "repairCandidatesIndependentPending": 1,
+    "productImageEdits": 0
+  },
+  "releaseDecision": "32 accepted current images + 3 independently confirmed original-source holds. The shipped rice_transplanter must be replaced only after independent acceptance of its candidate; current 36-image scope is not blanket PASS.",
+  "entries": [
+    {
+      "file": "assets/vehicles/construction/road_roller.webp",
+      "beforeSha256": "c0130937c2262c4c13de3cc7953ad8b9f49ca99298e6d2adeba7b81c725c07f7",
+      "afterSha256": "14d7efe351999c6e739467999588d9d49a73310ff2969f8d6e4df175dcf3841e",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 33280,
+      "finalBytes": 79764,
+      "visibleBounds16": [
+        19,
+        142,
+        729,
+        659
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "historicalGeneratedPngSha256": "3b9187e2cdf68a7368a0652d3f9e128cef2d1170cca8b67760690b48070c3394",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/asphalt_paver.webp",
+      "beforeSha256": "471732d8f757ea545aff4606ef5a0a379c68f9b0bc7f3a3b04d78bb3e2484c14",
+      "afterSha256": "5156649557e0d8064d8537a502b120511ed14b7e6c0dbb22af595bc0216e5789",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 31844,
+      "finalBytes": 87146,
+      "visibleBounds16": [
+        21,
+        204,
+        749,
+        622
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "historicalGeneratedPngSha256": "6893ad9b6c71048ae13c95a9185b1ea7f8922c2001124c028e0854b4960d0e73",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/grader.webp",
+      "beforeSha256": "5012c37e28d5bf089fd7e90d8ace4e4b22246d9880274e28468b369fedf26f73",
+      "afterSha256": "5674f20f7c1eb94ae5d6a9e56455bb7821c970b3c705cab1da4ebf664c663f83",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 36210,
+      "finalBytes": 95538,
+      "visibleBounds16": [
+        16,
+        223,
+        748,
+        623
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "historicalGeneratedPngSha256": "6c6d7d50e965afdf51db902d794c7752e13bb10c926aa35bef59853d218433c6",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/backhoe_loader.webp",
+      "beforeSha256": "b2196231b5b6728a2c037a327dabfdf8d893d8927dd1fa3ff2a3f51c5cd21f87",
+      "afterSha256": "42fc97ad3518d9688f2ef4c8f5e9a3289633c97b461a7dd8353c85b3581c9a4b",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 39112,
+      "finalBytes": 111508,
+      "visibleBounds16": [
+        3,
+        93,
+        762,
+        627
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "historicalGeneratedPngSha256": "87ef9f6200953bf1883f594345d971912794ab86cc1cd2845d5f1f2cf936edd1",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/skid_steer_loader.webp",
+      "beforeSha256": "c0f2f2fa4aa31c97b2113c1ee3e386bc6c8b74f441d1c94ed836dbd9d946e62f",
+      "afterSha256": "b38ba13242f98aff6842345bac8fcb408364ab965684a3134297ca7a29c1d16d",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 41022,
+      "finalBytes": 97730,
+      "visibleBounds16": [
+        5,
+        93,
+        707,
+        640
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "historicalGeneratedPngSha256": "f1463a073114c95f8396d0a4e1eff035bf9e51aa757d3c126c97e64811fa5f23",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "beforeSha256": "719f1da9bebf75e8ffac62352525ce383b0a72dc90b4b276092bcb6664072ffc",
+      "afterSha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 25328,
+      "finalBytes": 122212,
+      "visibleBounds16": [
+        49,
+        35,
+        741,
+        679
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "historicalGeneratedPngSha256": "c13d579d36b8f3223e17b152de710c9c54baf6d278a80422be1186a75116f484",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "beforeSha256": "43dd9257a4c3011a2d083c4944706736d8bb285b27bc4a05ffb945bc9f5270d9",
+      "afterSha256": "2df3607b1290aebb0647631229b38e4e1cd1c27e11c4af0dc372b0ddd4f7b3eb",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 42112,
+      "finalBytes": 126606,
+      "visibleBounds16": [
+        40,
+        16,
+        731,
+        682
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "866436f075cc20643b861a64c98be85e5ec3d91c5dca99c2f8e94068340e6c0d",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/pile_driver.webp",
+      "beforeSha256": "d5f57b656b3740c607d9cfb016d0b7678f3feea7dc568be9ef4aee05aa05723f",
+      "afterSha256": "d5f57b656b3740c607d9cfb016d0b7678f3feea7dc568be9ef4aee05aa05723f",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 36722,
+      "finalBytes": 36722,
+      "visibleBounds16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 1668,
+      "classification": "SOURCE_HOLD_VISUALLY_CONFIRMED",
+      "heldOriginalUnchanged": true,
+      "currentFreshVisualInspection": true,
+      "status": "HOLD_SOURCE_PIXELS_MISSING_CONFIRMED",
+      "detailMagnification": 4,
+      "observation": "항타 마스트의 수직 장비와 케이블이 원본 상단 y=0에서 잘려 마스트 끝이 없다. 배경 추출로 없는 상단 장비를 복구할 수 없다.",
+      "alternativeDisplay": "원본을 보존하고 검증된 온전한 construction 차량을 선택 풀에 사용한다. 이 ID의 온전한 원본이 제공되면 재개한다.",
+      "qualityPass": false,
+      "detailEvidence": {
+        "file": "assets/vehicles/construction/pile_driver.webp",
+        "box": [
+          85,
+          0,
+          180,
+          115
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/pile_driver-source-hold.png",
+        "sha256": "a24b7c8021bd02333a28535d87dc272f8979b28d43a2320ca089733eda05b80e"
+      },
+      "studentImpactAtReviewedHead": "clean=false라 숫자세기 기본 전체 풀에서는 제외되지만, 숫자세기 개별 카테고리·짝맞추기·주차장·코딩 자동차 및 공사장 오답 후보에서 원본이 노출될 수 있다. 승인 풀 제한은 통합 담당자에게 전달했으며 이 보고서는 후속 필터 적용이나 운영 반영을 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/drilling_rig.webp",
+      "beforeSha256": "f5deff5992a11c97818006a616fe2d0efd4ad2eaed64617355a3ad3004014570",
+      "afterSha256": "f5deff5992a11c97818006a616fe2d0efd4ad2eaed64617355a3ad3004014570",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 39598,
+      "finalBytes": 39598,
+      "visibleBounds16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 1668,
+      "classification": "SOURCE_HOLD_VISUALLY_CONFIRMED",
+      "heldOriginalUnchanged": true,
+      "currentFreshVisualInspection": true,
+      "status": "HOLD_SOURCE_PIXELS_MISSING_CONFIRMED",
+      "detailMagnification": 4,
+      "observation": "노란 천공 마스트와 검은 수직 장치가 원본 상단 y=0에서 끊겨 있다. 상단 외곽과 전체 길이를 원본만으로 검증할 수 없다.",
+      "alternativeDisplay": "원본을 보존하고 검증된 온전한 construction 차량을 선택 풀에 사용한다. 잘리지 않은 동일 원본을 확보한 뒤 재개한다.",
+      "qualityPass": false,
+      "detailEvidence": {
+        "file": "assets/vehicles/construction/drilling_rig.webp",
+        "box": [
+          110,
+          0,
+          205,
+          130
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/drilling_rig-source-hold.png",
+        "sha256": "21a84019a9da682b5e022c2d2fc3b68f8fd8a9c2245bdfc293699f88e2927ba3"
+      },
+      "studentImpactAtReviewedHead": "clean=false라 숫자세기 기본 전체 풀에서는 제외되지만, 숫자세기 개별 카테고리·짝맞추기·주차장·코딩 자동차 및 공사장 오답 후보에서 원본이 노출될 수 있다. 승인 풀 제한은 통합 담당자에게 전달했으며 이 보고서는 후속 필터 적용이나 운영 반영을 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "beforeSha256": "13e454ba034a9f95fb3ffdf84f7aa138c7dd2a1c4b86e0b8ff35aef649c26af5",
+      "afterSha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 41020,
+      "finalBytes": 126862,
+      "visibleBounds16": [
+        28,
+        120,
+        736,
+        722
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "historicalGeneratedPngSha256": "936fa179b25f55b6e7c1d634689e1cb79f47b136417f101eda93ede05a10cdd9",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "beforeSha256": "e5f7782c4b808b1deadac11bab62ff885f361af0fe004e63a9378a2e68e4dfd8",
+      "afterSha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 35896,
+      "finalBytes": 84856,
+      "visibleBounds16": [
+        3,
+        233,
+        746,
+        669
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "historicalGeneratedPngSha256": "48cd4698f954fe2b4e008c9edd8b1195e9f8ba9907ffcd82f4c37a3f03a3f0f7",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "beforeSha256": "22f92ad036ba88120aa37c5c801ddff27ca0b3595f32f4acb3cee2176af53340",
+      "afterSha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 39676,
+      "finalBytes": 93618,
+      "visibleBounds16": [
+        20,
+        271,
+        739,
+        650
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "historicalGeneratedPngSha256": "c2268d2696fc64c0fcb5480881bff15694c35716a3e7c92961190660511d822d",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/water_truck.webp",
+      "beforeSha256": "117c3b4a5f65e224cb1e936fc1005aabef97129bafe18df2995f08b05e516fd5",
+      "afterSha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 35538,
+      "finalBytes": 98396,
+      "visibleBounds16": [
+        21,
+        193,
+        743,
+        612
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "historicalGeneratedPngSha256": "15a49ff64894771d5c416c079725984e23598edab52dca3201ce17a14c633db0",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/sweeper_truck.webp",
+      "beforeSha256": "86467ffbc6f3d67361a7bf9aa4efc11729bfb602a6baa8909918ba3f3a46048b",
+      "afterSha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 39068,
+      "finalBytes": 104614,
+      "visibleBounds16": [
+        14,
+        193,
+        739,
+        631
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "historicalGeneratedPngSha256": "7d4f56739e3333ba837775efa4df1fecb753afb771c4e7eb2857908aa2582c9b",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/fuel_truck.webp",
+      "beforeSha256": "0b11cd01c3d0ac7cb62b04d3a8d6e399e63cfb695d4cafbfa8298b10ca8d5b19",
+      "afterSha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 34864,
+      "finalBytes": 84738,
+      "visibleBounds16": [
+        30,
+        231,
+        747,
+        622
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "historicalGeneratedPngSha256": "9300cda724d1bb6ca0f17c933ae5c25f3205400ea424e8c4c96a7f4d4a938c68",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/lowbed_trailer.webp",
+      "beforeSha256": "f245fa7280fe6a658012095a86fdd198d42f7067c5b5c1a238066b6115144d12",
+      "afterSha256": "586d0b8f6423e2b2fbb9984cb985a1c22fdaff61bc16871b25f014d7593343b4",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 26088,
+      "finalBytes": 66280,
+      "visibleBounds16": [
+        33,
+        199,
+        731,
+        566
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "b867979c40d08a107c81cbd1f8f4b5b059d58bfb1483acf8f1b49357c0f02adf",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/cargo_truck.webp",
+      "beforeSha256": "ce6336794ca5558b7a477ce0bdb16ea74f32888354f8cc6ffb1c7eb5782fe15e",
+      "afterSha256": "ee43488e43ed604ed2432b9792b177db32deb0e4fe0ffcae70af294ff71ad17a",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 41044,
+      "finalBytes": 99372,
+      "visibleBounds16": [
+        25,
+        115,
+        742,
+        608
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "43ce172836fec0991a9abf6e7abcebbdb65c9ed23bceefdf291ef41491999b58",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/construction/scissor_lift.webp",
+      "beforeSha256": "02cdf5f11323860a42f73bf780eaa38d5ce3f796252d41816d9cfe16d6120189",
+      "afterSha256": "72351f8ad22a202e1c9b7079b27e45ed290f8d6508e8f9c3d1661803c0d8553f",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 35784,
+      "finalBytes": 116548,
+      "visibleBounds16": [
+        145,
+        28,
+        562,
+        648
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "65c0e8844bd3625cbad7879b71d8394aa354c5637c08aeed16125b30f873f76f",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/passenger_airplane.webp",
+      "beforeSha256": "8301e0dfa6d2237b17b58343a7de39b9e18c4620ea0a16915acf9d8232d1fc5f",
+      "afterSha256": "8301e0dfa6d2237b17b58343a7de39b9e18c4620ea0a16915acf9d8232d1fc5f",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 22932,
+      "finalBytes": 22932,
+      "visibleBounds16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 1668,
+      "classification": "SOURCE_HOLD_VISUALLY_CONFIRMED",
+      "heldOriginalUnchanged": true,
+      "currentFreshVisualInspection": true,
+      "status": "HOLD_SOURCE_PIXELS_MISSING_CONFIRMED",
+      "detailMagnification": 4,
+      "observation": "주익/수평 날개 부분이 원본 오른쪽 x=417 경계에서 절단되어 날개 끝이 없다. 온전한 항공기 외곽을 배경 제거만으로 복구할 수 없다.",
+      "alternativeDisplay": "원본을 보존하고 검증된 온전한 airport 차량 또는 기존 transport/airplane.png를 의미에 맞게 선택한다. 같은 ID를 다른 그림으로 조용히 바꾼 것으로 보고하지 않는다.",
+      "qualityPass": false,
+      "detailEvidence": {
+        "file": "assets/vehicles/airport/passenger_airplane.webp",
+        "box": [
+          315,
+          105,
+          418,
+          255
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/passenger_airplane-source-hold.png",
+        "sha256": "e7af909e85929b70366025564b55f4635878d324493b21b867440bc16b41e947"
+      },
+      "studentImpactAtReviewedHead": "clean=false라 숫자세기 기본 전체 풀에서는 제외되지만, 숫자세기 개별 카테고리·짝맞추기·주차장·코딩 자동차 및 공사장 오답 후보에서 원본이 노출될 수 있다. 승인 풀 제한은 통합 담당자에게 전달했으며 이 보고서는 후속 필터 적용이나 운영 반영을 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/airport_bus.webp",
+      "beforeSha256": "375e9cd4ad54344fd114ed91b3f5942a14b3cccbd8c5af4e1a342f6d4d833bf8",
+      "afterSha256": "0f8b75f0137effa7e229ad3d2edfd10614fa190df2612c6b5dbe803f7a3dbfd3",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 31876,
+      "finalBytes": 65692,
+      "visibleBounds16": [
+        29,
+        246,
+        739,
+        615
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "07109076a98c70dc5c6173b1356ed57bc2fcb5f9b3212a3d606fb9729e0a9379",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "beforeSha256": "2a4aa92a8c57a1dc9171a80c24b5a9ad31bd92cd7c07cef81520345341557792",
+      "afterSha256": "49863d451c3e5f4e728c352ac051a2c9116609dd55b03972c2c062395c852eb0",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 37988,
+      "finalBytes": 78122,
+      "visibleBounds16": [
+        1,
+        172,
+        731,
+        583
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "6b71b1a284bff71c90190cdf22cd3e9a20a1265475b3ee6be25d4f594ca79032",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/baggage_cart.webp",
+      "beforeSha256": "2ee40184599fc2a4bec6e3bea13b4b8168424d50c2369d2d0e34ffa70c9d8ba8",
+      "afterSha256": "978f11bc4d655eed9c8b38de598b428fab115d66c11b7c8e9f99e879dde679e1",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 30540,
+      "finalBytes": 68006,
+      "visibleBounds16": [
+        6,
+        287,
+        754,
+        565
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "c5d2529d1ac6dd3adae5ec48db85f9b2678f5e0619264dd3f8d020b12b96aa66",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/catering_truck.webp",
+      "beforeSha256": "f339119b27152be59d56f22e499bb0ebca339ff3bb72a180be3fbac7ec01e3b4",
+      "afterSha256": "a4295b76893e381259b519902d01b113c9c51df07b4191a7b5e075c4cdfec5ea",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 39050,
+      "finalBytes": 100534,
+      "visibleBounds16": [
+        7,
+        88,
+        738,
+        655
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "94b780046074899831104959f8bad8fc633720b11056348371f62b2c1dc71589",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/de_icing_truck.webp",
+      "beforeSha256": "d13084e5b0d1820f464b5d46c729bf2ad2c5f3aa25d3d0b8370ef5a8125fbffc",
+      "afterSha256": "4fe3897f3dde3157abe8a89aa3090ba798169ee515576b0687679b708186a5fd",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 38090,
+      "finalBytes": 107704,
+      "visibleBounds16": [
+        27,
+        42,
+        719,
+        630
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "f913a18b7f2c1f708a57d21c03077d3a95da085b952839bd45adec6e3887ae68",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "beforeSha256": "1beaadbc4a321408d50e4521cd6397b7cfcceed677a2e3cdf7bb08f77ada6dbc",
+      "afterSha256": "22c0a0af077f5aa93370fd59f84596dc5e7424c1f169157bb68d9993f8e54a86",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 35214,
+      "finalBytes": 82590,
+      "visibleBounds16": [
+        28,
+        188,
+        748,
+        584
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "6cc4c99a0364e10d253209a5f5e79ed7495d475536073f0772f0be1d266a6552",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/pushback_tug.webp",
+      "beforeSha256": "e90bf8ea4bb34bee5e2adf2f1e7d756f801f2d15e5a6306a8bdfcf7fd1ee819d",
+      "afterSha256": "01dda38387ec48347690cd23bde56e72fdf91ba3815dfae77fc248013c8b2582",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 29820,
+      "finalBytes": 68742,
+      "visibleBounds16": [
+        10,
+        244,
+        754,
+        529
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "f8e23be950f840f1e3ce1d2c2e74e92ca39588988c187cb42de0ee2ea169b4eb",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/airport/stair_truck.webp",
+      "beforeSha256": "47fbca251be5b5b86b022fc84089b1969aa13de1887349741c5e4e2c5a812a75",
+      "afterSha256": "4d3367d058919d4e9c50f9e7f467966cd7c9745d1c95b38e42dc06086095edea",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 38728,
+      "finalBytes": 136122,
+      "visibleBounds16": [
+        59,
+        56,
+        736,
+        622
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "aa8508e0903adad49f13b901da437d2d1b019a16a6395bb471e31dfc47ca94d7",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/farm/tractor.webp",
+      "beforeSha256": "e5b7cc3b7d73d4746743360ef73aa2294b75fdca8a45d1f1e1add953a013b70e",
+      "afterSha256": "e5e998034857ecec8aeebd8efca824fbd765043d491e48d1f46ab8b345063f8f",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 42936,
+      "finalBytes": 127150,
+      "visibleBounds16": [
+        28,
+        72,
+        380,
+        352
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "FRESH_INDEPENDENT_VISUAL_APPROVED",
+      "matteOutputMatches": true,
+      "matteInputMatches": true,
+      "originalRgbRetainedExactly": true,
+      "alphaChanged": true,
+      "provenanceAlphaRepairs": [],
+      "currentFreshVisualInspection": true,
+      "freshComparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/tractor-3bg.png",
+      "freshComparisonSha256": "1aef30d501b05578f4d7f76b9496d819e29c8294a5ad7b6a9f843c9a373eb969",
+      "status": "PASS_FRESH_INDEPENDENT_VISUAL",
+      "backgrounds": [
+        "light",
+        "dark",
+        "checker"
+      ],
+      "detailMagnification": 2,
+      "observation": "운전석 유리·좌우 거울·배기관·지붕 경광등·네 바퀴 외곽을 확인했다. 격자와 바닥 필드는 제거됐고 유리가 투명 구멍으로 바뀌지 않았다. 2배 확대에서 원본의 얇은 경계 안티앨리어싱은 남으나 넓은 격자 조각이나 신규 부품 소실은 관찰하지 않았다.",
+      "detailEvidence": {
+        "file": "assets/vehicles/farm/tractor.webp",
+        "box": [
+          100,
+          60,
+          310,
+          200
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/tractor-detail-3bg.png",
+        "sha256": "ccb97883f8e4bdcbae9c095a5f97240cc11a072aba7681fff9f8422393678bce"
+      }
+    },
+    {
+      "file": "assets/vehicles/farm/plow_tractor.webp",
+      "beforeSha256": "8fba0936b9ddfa6dae0ad6c6578f4aaaaa02645e14218d75a708a7852d2462f0",
+      "afterSha256": "9d621651fb89a744a44bcab6c8e7db330cd04e0eb8079c9a1c4845d86a4f3714",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 39638,
+      "finalBytes": 118850,
+      "visibleBounds16": [
+        5,
+        71,
+        404,
+        306
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "FRESH_INDEPENDENT_VISUAL_APPROVED",
+      "matteOutputMatches": true,
+      "matteInputMatches": true,
+      "originalRgbRetainedExactly": true,
+      "alphaChanged": true,
+      "provenanceAlphaRepairs": [],
+      "currentFreshVisualInspection": true,
+      "freshComparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/plow_tractor-3bg.png",
+      "freshComparisonSha256": "b613df6bbd25f17aeef1e230883182de482213a88096c866483328f38ad4c49a",
+      "status": "PASS_FRESH_INDEPENDENT_VISUAL",
+      "backgrounds": [
+        "light",
+        "dark",
+        "checker"
+      ],
+      "detailMagnification": 2,
+      "observation": "트랙터의 운전석·바퀴와 후방 위/아래 쟁기날·노란 연결 프레임이 유지된다. 2배 확대에서 쟁기날 사이 빈 공간이 열려 있고 흰 날 표면은 그대로 남아 있다. 긴 외곽의 새 잘림을 관찰하지 않았다.",
+      "detailEvidence": {
+        "file": "assets/vehicles/farm/plow_tractor.webp",
+        "box": [
+          245,
+          155,
+          415,
+          280
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/plow_tractor-detail-3bg.png",
+        "sha256": "dc758827d2811f2e1fcd29a0a76b9b154a7354d738061758724917f50a105207"
+      }
+    },
+    {
+      "file": "assets/vehicles/farm/combine_harvester.webp",
+      "beforeSha256": "2559fb2393403cf9f27decc9e3deab4e4d9f292cd8f66d18a2482aa62ae2cc65",
+      "afterSha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 47606,
+      "finalBytes": 132254,
+      "visibleBounds16": [
+        12,
+        140,
+        754,
+        649
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "46832b84098c97c998a1c6129bcbeae99a8f7844faa63e3b465a9709eb271962",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/farm/rice_transplanter.webp",
+      "beforeSha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
+      "afterSha256": "fc55c95cf3e16a07fcea384358929817b5361820674b275727a6937b08fe511c",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 48360,
+      "finalBytes": 140782,
+      "visibleBounds16": [
+        20,
+        67,
+        386,
+        342
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "FRESH_INDEPENDENT_VISUAL_REJECTED",
+      "matteOutputMatches": true,
+      "matteInputMatches": true,
+      "originalRgbRetainedExactly": true,
+      "alphaChanged": true,
+      "provenanceAlphaRepairs": [
+        {
+          "op": "restore_green_source",
+          "box": [
+            235,
+            130,
+            360,
+            166
+          ],
+          "greenMinusRedMin": 1,
+          "greenMinusBlueMin": 6
+        }
+      ],
+      "currentFreshVisualInspection": true,
+      "freshComparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice_transplanter-3bg.png",
+      "freshComparisonSha256": "e71c5282e3e665135179933421a3e14e970e3477da85499c280ec9d50000931e",
+      "status": "FAIL_SHIPPED_ALPHA_FOREGROUND_LOSS",
+      "backgrounds": [
+        "light",
+        "dark",
+        "checker"
+      ],
+      "detailMagnification": 5,
+      "observation": "중간 수평 모판의 녹색 모가 잘못 투명 처리됐다. 흰 배경에서는 흰 구멍, 어두운 배경에서는 짙은 구멍으로 보인다. 원본 RGB는 남아 있으나 alpha가 삭제된 손상이다. 실제 배포된 기존 파일은 승인하지 않는다.",
+      "repairCandidate": "grid-a-evidence/rice-transplanter-repair-candidate.webp",
+      "detailEvidence": {
+        "file": "assets/vehicles/farm/rice_transplanter.webp",
+        "box": [
+          190,
+          115,
+          390,
+          285
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice_transplanter-detail-3bg.png",
+        "sha256": "df39a24151500db28371e6974c1261093128080acfb48f01cb62afa186f7b408"
+      }
+    },
+    {
+      "file": "assets/vehicles/farm/sprayer_truck.webp",
+      "beforeSha256": "94f15a90cdcf5f135b1703d3950274679386a2d3e0a6c4fbd01642e89da7a9b4",
+      "afterSha256": "8f46df77a971d352175b82f46843fda9fa26aacac0899f31fe3cb863ae33743f",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 45944,
+      "finalBytes": 137170,
+      "visibleBounds16": [
+        17,
+        71,
+        410,
+        329
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "FRESH_INDEPENDENT_VISUAL_APPROVED",
+      "matteOutputMatches": true,
+      "matteInputMatches": true,
+      "originalRgbRetainedExactly": true,
+      "alphaChanged": true,
+      "provenanceAlphaRepairs": [],
+      "currentFreshVisualInspection": true,
+      "freshComparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/sprayer_truck-3bg.png",
+      "freshComparisonSha256": "b36a928b9adc5cfe339b8488557c381065843e94431dae7247b61680d52aca28",
+      "status": "PASS_FRESH_INDEPENDENT_VISUAL",
+      "backgrounds": [
+        "light",
+        "dark",
+        "checker"
+      ],
+      "detailMagnification": 2,
+      "observation": "흰 탱크·운전석 유리·지붕 안테나·바퀴·긴 노란 살포 붐을 확인했다. 2배 확대에서 삼각 트러스와 가는 파이프를 배경 구멍과 구분해 확인했으며 큰 장비 소실이나 격자 패치를 관찰하지 않았다.",
+      "detailEvidence": {
+        "file": "assets/vehicles/farm/sprayer_truck.webp",
+        "box": [
+          190,
+          145,
+          418,
+          250
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/sprayer_truck-detail-3bg.png",
+        "sha256": "ad2003e1331e5302a76278b4a004076e5b7712c2594607007daba7c237c3ed33"
+      }
+    },
+    {
+      "file": "assets/vehicles/farm/baler.webp",
+      "beforeSha256": "baeb9b6cb892f7c9687a1f95d362a00cc016dfe930ee9039a949de44919c3fe2",
+      "afterSha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 35496,
+      "finalBytes": 96852,
+      "visibleBounds16": [
+        34,
+        117,
+        697,
+        665
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "392bdbf09a8dafe82871fbb572c51f55e24e64b5730f7cde34d30aee7f8f6541",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/farm/farm_trailer.webp",
+      "beforeSha256": "318433cd1cbf5286a3c8bd8324c4258685064986e95fddd3bc147220d9c7567a",
+      "afterSha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 36792,
+      "finalBytes": 89034,
+      "visibleBounds16": [
+        17,
+        164,
+        732,
+        593
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "967f974ae9edbe95785090fb773fbce0375263d32f87d5ad03b52c11c62220ef",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    },
+    {
+      "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "beforeSha256": "b576e23499a1198f2c1e4f13d3d944ed0cde18339331731935afea27993ec47b",
+      "afterSha256": "03e19f51b348175495f985fa8b9d9037e9fb4702586ad697dfbd5cb7b0ce6440",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        418,
+        418
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 42470,
+      "finalBytes": 129150,
+      "visibleBounds16": [
+        11,
+        78,
+        407,
+        320
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "FRESH_INDEPENDENT_VISUAL_APPROVED",
+      "matteOutputMatches": true,
+      "matteInputMatches": true,
+      "originalRgbRetainedExactly": true,
+      "alphaChanged": true,
+      "provenanceAlphaRepairs": [],
+      "currentFreshVisualInspection": true,
+      "freshComparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/fruit_harvest_truck-3bg.png",
+      "freshComparisonSha256": "e3e193d67622535bcef644bbbeb30d3f1d626bacc144b7bdc144e3f3be47a8f4",
+      "status": "PASS_FRESH_INDEPENDENT_VISUAL",
+      "backgrounds": [
+        "light",
+        "dark",
+        "checker"
+      ],
+      "detailMagnification": 2,
+      "observation": "앞유리의 밝은 면·와이퍼·거울·안테나·과일 상자·차체와 바퀴가 유지된다. 2배 확대에서 첫 생성 불승인 사례처럼 앞유리가 투명 구멍으로 바뀌지 않았음을 세 배경에서 확인했다.",
+      "detailEvidence": {
+        "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+        "box": [
+          10,
+          70,
+          200,
+          195
+        ],
+        "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/fruit_harvest_truck-detail-3bg.png",
+        "sha256": "020c82456585876d77b743dc20a66dd951a09816ae7194def0e8b7660d1fb3c3"
+      }
+    },
+    {
+      "file": "assets/vehicles/farm/milk_tanker.webp",
+      "beforeSha256": "cffa451baa7e503f4e8c05751e937d4ee3903337f2d24c831022e3ae9da12fe0",
+      "afterSha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+      "sourceBound": true,
+      "inventoryFinalBound": true,
+      "sourceSize": [
+        418,
+        418
+      ],
+      "finalSize": [
+        768,
+        768
+      ],
+      "preservedAspect": true,
+      "decoded": true,
+      "sourceBytes": 37430,
+      "finalBytes": 91674,
+      "visibleBounds16": [
+        19,
+        170,
+        754,
+        582
+      ],
+      "boundsMetadataMatches": true,
+      "alphaAtLeast17OnFrame": 0,
+      "classification": "EXISTING_INDEPENDENT_APPROVAL_REVALIDATED",
+      "independentLedgerDigestMatches": true,
+      "provenanceDigestMatches": true,
+      "provenanceInputDigestMatches": true,
+      "historicalVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "currentFreshVisualInspection": false,
+      "readbackEvidence": null,
+      "historicalGeneratedPngSha256": "42d03bc1d847c7b07f93e00b64b1e0eccb372cd76e125a24d3e41600adbc4f8e",
+      "status": "PASS_EXISTING_APPROVAL_REBOUND",
+      "decisionBasis": "기존 독립 시각검수와 SHA로 결속된 동일 배포 bytes를 재검증했다. 이 작업자가 새로 원본을 재제작하거나 새 시각검수했다고 주장하지 않는다."
+    }
+  ],
+  "repairCandidate": {
+    "targetFile": "assets/vehicles/farm/rice_transplanter.webp",
+    "state": "AUTHOR_REVIEWED_AWAITING_INDEPENDENT_ACCEPTANCE",
+    "appliedToProduct": false,
+    "sourceSha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
+    "rejectedShippedSha256": "fc55c95cf3e16a07fcea384358929817b5361820674b275727a6937b08fe511c",
+    "failureEvidence": {
+      "file": "grid-a-evidence/rice-transplanter-failed-seedlings-5x.png",
+      "sha256": "d958b56bfe3564dba1c5d301dcb8b5a6562abe23f0e01c5ee2d6c2a8df08cb8e",
+      "region": [
+        195,
+        180,
+        280,
+        200
+      ],
+      "greenDefinition": "G > R + 1 and G > B + 6",
+      "lostOrSeverelyAttenuatedPixels": 322,
+      "alphaThreshold": 128,
+      "observedLostPixelBounds": [
+        205,
+        186,
+        266,
+        195
+      ],
+      "examplePixel": {
+        "x": 253,
+        "y": 189,
+        "sourceRgba": [
+          150,
+          159,
+          65,
+          255
+        ],
+        "shippedRgba": [
+          150,
+          159,
+          65,
+          0
+        ]
+      }
+    },
+    "generator": "Built-in image_gen__imagegen",
+    "generatedPngSha256": "349986293aea389b8801f2f20c6d4b80f74eea368e0739b19503729e4eb96171",
+    "generatedSize": [
+      1254,
+      1254
+    ],
+    "prompt": "Use case: background-extraction / precise-object-edit. Edit the exact rice transplanter in image 1. Image 1 is the original source with its baked checkerboard background and complete machinery. Image 2 is the existing transparent cutout and is only a cautionary reference: its middle horizontal green seedling tray was wrongly made transparent. Produce a genuine transparent cutout from image 1, removing ONLY the external checkerboard/ground background. Preserve the original exact yellow rice planter, body outline, yellow canopy, white front bumper, black open wheels, mirrors, canopy poles, front and side metal pipes, thin railings, all pointed planting tools, all green seedlings and trays. In particular keep the complete short horizontal row of green seedlings around original pixels x205-267,y181-197 (source is 418 square), between the upper metallic rack and the next pale horizontal rail. Those green plants are foreground; they must stay visibly green and opaque, not transparent. Preserve the other upper and lower seedling rows. Preserve white metallic highlights and black equipment. No vehicle redesign, new parts, new plants or text, altered perspective, changed proportions, decorative background, cropping or extra shadows. Keep the full original vehicle in the same square composition with a small transparent safety margin. The only intended change from the original source is background removal; the final cutout must retain every source vehicle component.",
+    "candidateFile": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice-transplanter-repair-candidate.webp",
+    "candidateSha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
+    "candidateSize": [
+      768,
+      768
+    ],
+    "candidateBytes": 149712,
+    "candidateBounds16": [
+      39,
+      123,
+      712,
+      629
+    ],
+    "candidateAlphaAtLeast17OnFrame": 0,
+    "formatConversion": "Proportional LANCZOS downscale from 1254 square to 768 square, WebP quality 92/method 6. Decoded alpha equals proportionally downscaled generated alpha exactly.",
+    "candidateAuthorReview": "원본·현재 실패 파일·768px 전달 후보를 같은 418px 배율의 밝음/어둠/격자 3배경으로 비교했다. 누락된 중간 녹색 모판이 복원됐고 노란 차양, 지지대, 운전석, 흰 범퍼, 열린 바퀴와 옆 모판, 식부 장치의 주요 구조가 유지되는 것으로 보인다. Imagegen 출력이므로 원본 RGB 완전 동일성은 주장하지 않는다. 독립 D의 확대 확인 후 승인 또는 반려가 필요하다.",
+    "comparisonFile": "grid-a-evidence/rice-transplanter-repair-comparison.png",
+    "comparisonSha256": "7afb01677d8d05d0c711c8876a8503ccfaa1695e435a5555647b95b572a938e9"
+  },
+  "limitations": [
+    "기존 승인28은 변경 없는 bytes의 독립기록 결속을 재검증했고 새 시각검수로 중복 산정하지 않았다.",
+    "추가5의 시각검수는 실제 파일의 읽기전용 합성/확대를 보았으며 브라우저 게임 검수가 아니다.",
+    "물리 휴대폰·아동·TTS 실청취는 이 작업 범위에서 실행하지 않았다.",
+    "원본절단3은 품질 PASS가 아니며 후속 승인 풀 제한/대체표시는 통합 담당자 소유다."
+  ],
+  "nextAction": "D independently reviews rice candidate and metadata, then root integrates accepted bytes and updates common inventory/bounds. Root reruns final browser and release checks.",
+  "evidence": [
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/detail-manifest.json",
+      "sha256": "fa6259435b2dea3819d0528b31c0c697c2c84b5592e872f27f5f1f332255fd70",
+      "bytes": 2507
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/drilling_rig-source-hold.png",
+      "sha256": "21a84019a9da682b5e022c2d2fc3b68f8fd8a9c2245bdfc293699f88e2927ba3",
+      "bytes": 203301
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/fruit_harvest_truck-3bg.png",
+      "sha256": "e3e193d67622535bcef644bbbeb30d3f1d626bacc144b7bdc144e3f3be47a8f4",
+      "bytes": 394112
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/fruit_harvest_truck-detail-3bg.png",
+      "sha256": "020c82456585876d77b743dc20a66dd951a09816ae7194def0e8b7660d1fb3c3",
+      "bytes": 121898
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/passenger_airplane-source-hold.png",
+      "sha256": "e7af909e85929b70366025564b55f4635878d324493b21b867440bc16b41e947",
+      "bytes": 132425
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/pile_driver-source-hold.png",
+      "sha256": "a24b7c8021bd02333a28535d87dc272f8979b28d43a2320ca089733eda05b80e",
+      "bytes": 183683
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/plow_tractor-3bg.png",
+      "sha256": "b613df6bbd25f17aeef1e230883182de482213a88096c866483328f38ad4c49a",
+      "bytes": 384950
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/plow_tractor-detail-3bg.png",
+      "sha256": "dc758827d2811f2e1fcd29a0a76b9b154a7354d738061758724917f50a105207",
+      "bytes": 148504
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice-transplanter-failed-seedlings-5x.png",
+      "sha256": "d958b56bfe3564dba1c5d301dcb8b5a6562abe23f0e01c5ee2d6c2a8df08cb8e",
+      "bytes": 35281
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice-transplanter-repair-candidate.webp",
+      "sha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
+      "bytes": 149712
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice-transplanter-repair-comparison.png",
+      "sha256": "7afb01677d8d05d0c711c8876a8503ccfaa1695e435a5555647b95b572a938e9",
+      "bytes": 820663
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice_transplanter-3bg.png",
+      "sha256": "e71c5282e3e665135179933421a3e14e970e3477da85499c280ec9d50000931e",
+      "bytes": 475429
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice_transplanter-detail-3bg.png",
+      "sha256": "df39a24151500db28371e6974c1261093128080acfb48f01cb62afa186f7b408",
+      "bytes": 257215
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/sprayer_truck-3bg.png",
+      "sha256": "b36a928b9adc5cfe339b8488557c381065843e94431dae7247b61680d52aca28",
+      "bytes": 430272
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/sprayer_truck-detail-3bg.png",
+      "sha256": "ad2003e1331e5302a76278b4a004076e5b7712c2594607007daba7c237c3ed33",
+      "bytes": 171079
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/tractor-3bg.png",
+      "sha256": "1aef30d501b05578f4d7f76b9496d819e29c8294a5ad7b6a9f843c9a373eb969",
+      "bytes": 416351
+    },
+    {
+      "file": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/tractor-detail-3bg.png",
+      "sha256": "ccb97883f8e4bdcbae9c095a5f97240cc11a072aba7681fff9f8422393678bce",
+      "bytes": 178203
+    }
+  ]
+}

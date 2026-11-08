@@ -1,0 +1,90 @@
+[
+  {
+    "file": "assets/vehicles/farm/tractor.webp",
+    "box": [
+      100,
+      60,
+      310,
+      200
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/tractor-detail-3bg.png",
+    "sha256": "ccb97883f8e4bdcbae9c095a5f97240cc11a072aba7681fff9f8422393678bce"
+  },
+  {
+    "file": "assets/vehicles/farm/plow_tractor.webp",
+    "box": [
+      245,
+      155,
+      415,
+      280
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/plow_tractor-detail-3bg.png",
+    "sha256": "dc758827d2811f2e1fcd29a0a76b9b154a7354d738061758724917f50a105207"
+  },
+  {
+    "file": "assets/vehicles/farm/rice_transplanter.webp",
+    "box": [
+      190,
+      115,
+      390,
+      285
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/rice_transplanter-detail-3bg.png",
+    "sha256": "df39a24151500db28371e6974c1261093128080acfb48f01cb62afa186f7b408"
+  },
+  {
+    "file": "assets/vehicles/farm/sprayer_truck.webp",
+    "box": [
+      190,
+      145,
+      418,
+      250
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/sprayer_truck-detail-3bg.png",
+    "sha256": "ad2003e1331e5302a76278b4a004076e5b7712c2594607007daba7c237c3ed33"
+  },
+  {
+    "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+    "box": [
+      10,
+      70,
+      200,
+      195
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/fruit_harvest_truck-detail-3bg.png",
+    "sha256": "020c82456585876d77b743dc20a66dd951a09816ae7194def0e8b7660d1fb3c3"
+  },
+  {
+    "file": "assets/vehicles/construction/pile_driver.webp",
+    "box": [
+      85,
+      0,
+      180,
+      115
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/pile_driver-source-hold.png",
+    "sha256": "a24b7c8021bd02333a28535d87dc272f8979b28d43a2320ca089733eda05b80e"
+  },
+  {
+    "file": "assets/vehicles/construction/drilling_rig.webp",
+    "box": [
+      110,
+      0,
+      205,
+      130
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/drilling_rig-source-hold.png",
+    "sha256": "21a84019a9da682b5e022c2d2fc3b68f8fd8a9c2245bdfc293699f88e2927ba3"
+  },
+  {
+    "file": "assets/vehicles/airport/passenger_airplane.webp",
+    "box": [
+      315,
+      105,
+      418,
+      255
+    ],
+    "detail": "docs/qa/sihyeon-phase2/release-20261108/grid-a-evidence/passenger_airplane-source-hold.png",
+    "sha256": "e7af909e85929b70366025564b55f4635878d324493b21b867440bc16b41e947"
+  }
+]
