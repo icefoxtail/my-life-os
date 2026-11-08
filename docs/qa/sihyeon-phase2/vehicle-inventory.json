@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 28,
+  "actualOriginalEdits": 33,
   "entries": [
     {
       "index": 1,
@@ -4707,30 +4707,32 @@
         }
       },
       "after": {
-        "sha256": "e5b7cc3b7d73d4746743360ef73aa2294b75fdca8a45d1f1e1add953a013b70e",
-        "bytes": 42936,
+        "sha256": "e5e998034857ecec8aeebd8efca824fbd765043d491e48d1f46ab8b345063f8f",
+        "bytes": 127150,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          28,
+          72,
+          380,
+          352
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.622759,
+        "partialAlphaFraction": 0.37039,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Cab glazing, mirror, exhaust, roof light and tire lobes intact. Removed baked checker and ground field; original RGB and thin source-antialias edge retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/farm-tractor.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-farm_tractor.jpg"
     },
     {
       "index": 68,
@@ -4774,30 +4776,32 @@
         }
       },
       "after": {
-        "sha256": "8fba0936b9ddfa6dae0ad6c6578f4aaaaa02645e14218d75a708a7852d2462f0",
-        "bytes": 39638,
+        "sha256": "9d621651fb89a744a44bcab6c8e7db330cd04e0eb8079c9a1c4845d86a4f3714",
+        "bytes": 118850,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          5,
+          71,
+          404,
+          306
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.695983,
+        "partialAlphaFraction": 0.294178,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Upper and lower plow blades, frame ties, wheel edges and cab retained; blade gaps open.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/farm-plow_tractor.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-plow_tractor.jpg"
     },
     {
       "index": 69,
@@ -4916,30 +4920,32 @@
         }
       },
       "after": {
-        "sha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
-        "bytes": 48360,
+        "sha256": "fc55c95cf3e16a07fcea384358929817b5361820674b275727a6937b08fe511c",
+        "bytes": 140782,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          20,
+          67,
+          386,
+          342
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.65311,
+        "partialAlphaFraction": 0.326406,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Initial mask rejected because upper rice seedlings were deleted. Restored 1432 original green pixel alpha values within the inspected ROI, without synthesizing RGB. White bumper, wheel holes, canopy posts, seedling trays and planting mechanism retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/farm-rice_transplanter.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-rice_transplanter.jpg"
     },
     {
       "index": 71,
@@ -4983,30 +4989,32 @@
         }
       },
       "after": {
-        "sha256": "94f15a90cdcf5f135b1703d3950274679386a2d3e0a6c4fbd01642e89da7a9b4",
-        "bytes": 45944,
+        "sha256": "8f46df77a971d352175b82f46843fda9fa26aacac0899f31fe3cb863ae33743f",
+        "bytes": 137170,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          17,
+          71,
+          410,
+          329
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.668019,
+        "partialAlphaFraction": 0.32141,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White tank, antenna, boom truss and nozzles, and high wheels retained. Inner boom gaps remain open.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/farm-sprayer_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-sprayer_truck.jpg"
     },
     {
       "index": 72,
@@ -5200,30 +5208,32 @@
         }
       },
       "after": {
-        "sha256": "b576e23499a1198f2c1e4f13d3d944ed0cde18339331731935afea27993ec47b",
-        "bytes": 42470,
+        "sha256": "03e19f51b348175495f985fa8b9d9037e9fb4702586ad697dfbd5cb7b0ce6440",
+        "bytes": 129150,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          11,
+          78,
+          407,
+          320
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.591407,
+        "partialAlphaFraction": 0.402143,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Windshield highlight remains opaque, fruit and crates preserved. A faint roof feature was enlarged and verified as the original antenna, not removed as a fragment.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/farm-fruit_harvest_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-fruit_harvest_truck.jpg"
     },
     {
       "index": 75,
@@ -9439,5 +9449,27 @@
       "visualEvidence": "contact/vehicles-before-09.jpg",
       "action": "PENDING_ORIGINAL_REPAIR"
     }
+  ],
+  "beforeContactSheets": [
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-01.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-02.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-03.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-04.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-05.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-06.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-07.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-08.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-before-09.jpg"
+  ],
+  "afterContactSheets": [
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-01.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-02.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-03.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-04.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-05.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-06.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-07.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-08.jpg",
+    "docs/qa/sihyeon-phase2/contact/vehicles-after-09.jpg"
   ]
 }

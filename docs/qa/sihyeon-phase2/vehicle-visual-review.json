@@ -721,19 +721,21 @@
   },
   "assets/vehicles/farm/tractor.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Cab glazing, mirror, exhaust, roof light and tire lobes intact. Removed baked checker and ground field; original RGB and thin source-antialias edge retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/farm-tractor.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
   },
   "assets/vehicles/farm/plow_tractor.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Upper and lower plow blades, frame ties, wheel edges and cab retained; blade gaps open.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/farm-plow_tractor.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
   },
   "assets/vehicles/farm/combine_harvester.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -753,19 +755,21 @@
   },
   "assets/vehicles/farm/rice_transplanter.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Initial mask rejected because upper rice seedlings were deleted. Restored 1432 original green pixel alpha values within the inspected ROI, without synthesizing RGB. White bumper, wheel holes, canopy posts, seedling trays and planting mechanism retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/farm-rice_transplanter.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
   },
   "assets/vehicles/farm/sprayer_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White tank, antenna, boom truss and nozzles, and high wheels retained. Inner boom gaps remain open.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/farm-sprayer_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
   },
   "assets/vehicles/farm/baler.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -801,11 +805,12 @@
   },
   "assets/vehicles/farm/fruit_harvest_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Windshield highlight remains opaque, fruit and crates preserved. A faint roof feature was enlarged and verified as the original antenna, not removed as a fragment.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/farm-fruit_harvest_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator three-background comparison, explicit pixel repair and delivery-RGBA equality; not a new independent agent"
   },
   "assets/vehicles/farm/milk_tanker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
