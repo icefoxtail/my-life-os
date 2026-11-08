@@ -1,0 +1,83 @@
+{
+  "reviewer": "/root/independent_qa",
+  "scope": "Existing repository-authored Node regression scripts rerun by independent reviewer; no new independent browser or device claim",
+  "status": "PASS",
+  "sourceSha256": {
+    "js/vehicle-display.js": "57c914fbee8b7327bcb9f3edcde1b2047fe2c87f2fd4c8513331a6103b69ffe9",
+    "js/games/number-post-office-model.js": "e38eb927b6e5a4678bf151284f1961de92fc3c87aee289e5a0c2174514347c0d",
+    "js/games/number-post-office.js": "15ab59dc8ce55e599ffc59811a75dffa2e02d9e9836e2b729d4a3fd3e82ef234",
+    "js/games/art-zone.js": "a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5",
+    "js/games/number-count.js": "060e0e163d60da393a1036fadd7429e118d9c9b86230ed9222faaabe47856508",
+    "js/games/parking-lot.js": "8bee48994f2bcc9bce414b9090c2b3f9b31419c8511bd21f726ce374b88e5a9a",
+    "js/games/construction-site.js": "19099dd067324b718dd41ca7c2e545ea9d0ce359494509cd072a252e34d3a12f",
+    "js/games/megaDispatch.js": "8239492b4116c4a3830196a36965851f54d7573e3e81afaee54affdd729295ab",
+    "js/games/car-garage.js": "2312ff97efbbdbcff9c932477e321db56a2caa6f2720b96d6c3cb535f775cfd6",
+    "js/games/coding-car.js": "060239d4fc6d7d9e656c1474b04395cc34f0411ebe5611be784105057cb50472",
+    "js/games/vehicle-memory.js": "238712f5a88b6e525208df5d43e3942577d0f5d6a44210c7d84322fdafa1aa0f",
+    "js/play-settings.js": "bb5a4cbd9e0d74168e7c47bc9e518409e7fa8fb4e288880ca0f90e2c977e7fcd",
+    "js/engine/webgl-fallback.js": "16d11a7781e65c8b43a18d2f77a33f95724cc38226c7ce6199d697a688925112"
+  },
+  "sourcesStableDuringRun": true,
+  "checks": [
+    {
+      "script": "scripts/qa-static.cjs",
+      "exitCode": 0,
+      "stdout": "PASS: 13 JS files, 7 inline scripts, Boardland removal, load order and new asset cache paths.",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/qa-play-settings.cjs",
+      "exitCode": 0,
+      "stdout": "PASS: all four ages retain independent challenge choices, counting 1–5 persists, malformed/denied storage remains playable, invalid values rejected.",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/qa-number-post-office-independent.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"suite\": \"Independent quantity/state QA\",\n  \"modelSha256\": \"e38eb927b6e5a4678bf151284f1961de92fc3c87aee289e5a0c2174514347c0d\",\n  \"status\": \"PASS\",\n  \"missionsChecked\": 600,\n  \"actionsChecked\": 19141,\n  \"checks\": [\n    {\n      \"name\": \"every age can select every target 1..30, with enough unique physical stock\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"missions\": 600,\n        \"targetRange\": \"1..30\",\n        \"ages\": [\n          4,\n          5,\n          6,\n          7\n        ]\n      }\n    },\n    {\n      \"name\": \"wrong total and wrong type are retained for the child to repair\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    },\n    {\n      \"name\": \"bundling, unbundling, moving, undoing and resetting conserve actual objects\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    },\n    {\n      \"name\": \"all valid two-truck arrangements are accepted, including mirrored solutions\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"arrangements\": 260\n      }\n    },\n    {\n      \"name\": \"random input sequences preserve unique objects and never double complete\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    },\n    {\n      \"name\": \"interrupted delivery and corrupted saves recover without false reward or lockup\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    }\n  ],\n  \"limits\": [\n    \"Node model checks only. No browser DOM, layout, touch device, TTS listening, or child observation is claimed.\"\n  ]\n}",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/qa-art-restore-independent.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"suite\": \"Independent art asynchronous restore QA\",\n  \"sourceSha256\": \"a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5\",\n  \"status\": \"PASS\",\n  \"checks\": [\n    {\n      \"name\": \"newest restore wins when image callbacks finish in reverse order\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"new paper invalidates a pending restore\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"a pointer stroke waits for the pending picture and works after restore\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"destroy invalidates callbacks even if a new lifecycle reuses the canvas\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"an empty newer restore request cancels the older pending request\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"ordinary current restore still draws the requested picture\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"limits\": [\n    \"Node callback simulation only; no browser canvas pixels, touch device, or child observation is claimed.\"\n  ]\n}",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/qa-art-pending-save.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"suite\": \"Art pending-save production closure regression\",\n  \"sourceSha256\": \"a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5\",\n  \"status\": \"PASS\",\n  \"checks\": [\n    {\n      \"name\": \"save during initial decode preserves the loaded PNG\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"exit before decode preserves PNG and rejects the late callback\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"successful restore enables drawing and later saves the actual new stroke\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"early drawing does not replace the picture still being loaded\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"decode error keeps the original and offers explicit new-paper recovery\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"destroy and return with the same canvas cannot revive the old callback\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"new restore owns saving while older load and error callbacks are ignored\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"new paper during loading can undo back to the original canonical PNG\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"empty restore cancels pending work and makes an intentional blank writable\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"canvas draw failure protects the source just like decode failure\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"template and mode metadata can still save while free drawing restores\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"a first visit without a saved drawing stays immediately drawable\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"limits\": [\n    \"Node callback simulation with distinct PNG markers; no actual PNG decoding or browser pixel comparison.\",\n    \"Loading touch is intentionally deferred until restore completes; explicit new paper recovers from a decode failure.\"\n  ]\n}",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/qa-storage-write-failure.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"suite\": \"Readable stale storage with rejected writes — production closure regressions\",\n  \"sourceSha256\": {\n    \"postOffice\": \"15ab59dc8ce55e599ffc59811a75dffa2e02d9e9836e2b729d4a3fd3e82ef234\",\n    \"art\": \"a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5\"\n  },\n  \"status\": \"PASS\",\n  \"checks\": [\n    {\n      \"name\": \"post office restores the latest three items after an age/range round trip when only writes fail\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"persistedItems\": 1,\n        \"latestItems\": 3,\n        \"restoredItems\": 3,\n        \"readSucceeded\": true,\n        \"writesRejected\": 10,\n        \"readCopyDetached\": true\n      }\n    },\n    {\n      \"name\": \"art restores latest free PNG and per-template coloring when old storage reads succeed but writes fail\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"readSucceeded\": true,\n        \"writesRejected\": 1,\n        \"latestPngPreserved\": true,\n        \"latestTemplateFill\": \"#FF0000\"\n      }\n    }\n  ],\n  \"limits\": [\n    \"Node VM with controlled localStorage behavior; no actual browser quota, private-mode, or device validation.\",\n    \"Memory protects progress within the same loaded page; a real reload cannot recover writes the browser rejected.\"\n  ]\n}",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/test-legacy-models.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 22963 model scenarios: quantity conservation, undoable parts, saved-data validation, 140 Hangul compositions.",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/test-legacy-inputs.cjs",
+      "exitCode": 0,
+      "stdout": "PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy, secondary pointer and cloned-image fallback.\nPASS handwashing: all 24 four-step arrangements, required rinse step, delayed-check edit lock, and correct-slot preservation.",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/test-legacy-fallback.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 7 fault-boundary scenarios: unavailable GPU, two CDN errors, working 3D, context loss, explicit 2D, denied storage, invalid and restored progress.",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/test-vehicle-display.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 354 uniform-scale layouts for all 59 clean assets; transparent safety margin, floor alignment, tall rocket, replacement bounds, error fallback, idempotent apply and cleanup.",
+      "stderr": ""
+    }
+  ]
+}

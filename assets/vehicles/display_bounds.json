@@ -683,47 +683,47 @@
   },
   "airport/de_icing_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      27,
+      42,
+      719,
+      630
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/fuel_truck_airport.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      28,
+      188,
+      748,
+      584
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/pushback_tug.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      10,
+      244,
+      754,
+      529
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/stair_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      59,
+      56,
+      736,
+      622
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "farm/tractor.webp": {
     "box": [

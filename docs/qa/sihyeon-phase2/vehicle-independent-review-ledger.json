@@ -2,7 +2,7 @@
   "reviewer": "/root/independent_qa",
   "scope": "Independent visual comparison and decoded final-delivery readback; game/browser performance is separate",
   "baselineMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
-  "finalReadbackCount": 20,
+  "finalReadbackCount": 24,
   "finalReadbacks": [
     {
       "file": "assets/vehicles/construction/asphalt_paver.webp",
@@ -436,6 +436,122 @@
       ],
       "perimeterAlphaAtLeast16Count": 0,
       "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/de_icing_truck.webp",
+      "candidateComparisonSha256": "04adc528314df9e95b53164285d271590b4bb1e359f37233484912bef65d9c49",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "제빙차의 흰 차체, 높은 노란 조종석, 사다리·상부 난간, 노즐 및 두 가는 노즐 막대를 세 배경에서 확인. 새 잘림·차체 구멍·배경 조각은 보이지 않음.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 107704,
+      "deliverySha256": "4fe3897f3dde3157abe8a89aa3090ba798169ee515576b0687679b708186a5fd",
+      "generatedPngSha256": "f913a18b7f2c1f708a57d21c03077d3a95da085b952839bd45adec6e3887ae68",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        27,
+        42,
+        719,
+        630
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        27,
+        42,
+        719,
+        630
+      ]
+    },
+    {
+      "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "candidateComparisonSha256": "5899be411b173ce7d4e9f7ee896062a6dc1a9714e9ee7b71ca7f0bf9b82e9f32",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "흰 탱크와 차체, 운전석 뒤 세로 사다리, 탱크 위 난간, 아래 배관·측면 보호대·경고 도장 보존을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 82590,
+      "deliverySha256": "22c0a0af077f5aa93370fd59f84596dc5e7424c1f169157bb68d9993f8e54a86",
+      "generatedPngSha256": "6cc4c99a0364e10d253209a5f5e79ed7495d475536073f0772f0be1d266a6552",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        28,
+        188,
+        748,
+        584
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        28,
+        188,
+        748,
+        584
+      ]
+    },
+    {
+      "file": "assets/vehicles/airport/pushback_tug.webp",
+      "candidateComparisonSha256": "c75b12b5289865bcd1b515ded8383ae976e5d23ced07ef287e758e732ced9a4a",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "낮고 넓은 흰 차체, 큰 타이어, 창문·와이퍼·거울, 노랑검정 전면 도장, 전면 견인 연결부 보존을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 68742,
+      "deliverySha256": "01dda38387ec48347690cd23bde56e72fdf91ba3815dfae77fc248013c8b2582",
+      "generatedPngSha256": "f8e23be950f840f1e3ce1d2c2e74e92ca39588988c187cb42de0ee2ea169b4eb",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        10,
+        244,
+        754,
+        529
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        10,
+        244,
+        754,
+        529
+      ]
+    },
+    {
+      "file": "assets/vehicles/airport/stair_truck.webp",
+      "candidateComparisonSha256": "3876b2006fae15bad23b1832cbf2b30234b7ea9b398eb89f486d71bbcf4f11fa",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "계단의 흰 측판, 상부 승강판·가느다란 난간, 계단 아래 지지 구조·바퀴·기존 전방 지지발을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 136122,
+      "deliverySha256": "4d3367d058919d4e9c50f9e7f467966cd7c9745d1c95b38e42dc06086095edea",
+      "generatedPngSha256": "aa8508e0903adad49f13b901da437d2d1b019a16a6395bb471e31dfc47ca94d7",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        58,
+        56,
+        736,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        59,
+        56,
+        736,
+        622
+      ]
     }
   ],
   "candidateOnly": [],
@@ -446,5 +562,137 @@
       "reason": "Three outrigger feet were added although absent from original; do not use this candidate.",
       "retainedComparison": "comparisons/rejected-construction-mobile_crane-first.jpg"
     }
-  ]
+  ],
+  "originalMilitaryPrecisionRecheck": {
+    "reviewMethod": "Read-only nearest-neighbour enlargement of the original central image area; no source edits. All 18 images visually inspected.",
+    "inspectionImages": [
+      {
+        "fileName": "military-detail-1.png",
+        "sha256": "d8816753f9cd5c5c8e8dd37ad64fb206866591a11dc1d3db3e51ab065192d3d1"
+      },
+      {
+        "fileName": "military-detail-2.png",
+        "sha256": "d0c564f20cd76d6383d215cffd44f1855a92d247da3e49ac4f89afb509095f69"
+      },
+      {
+        "fileName": "military-detail-3.png",
+        "sha256": "04d641cac8b6d4662025239acde7f928d2b81b1f25a4f265f7dc2c91a41f71ec"
+      }
+    ],
+    "counts": {
+      "clearSourcePartLoss": 16,
+      "minorBottomAmbiguous": 1,
+      "backgroundExtractionCandidate": 1
+    },
+    "entries": [
+      {
+        "file": "assets/vehicles/military_special/amphibious_vehicle.webp",
+        "baselineSha256": "bea935e8874bf8e3a2d9b9c03c7428d6e65e574ef9937f910c5653687e98b38f",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "가까운 앞 타이어 하부가 흰 그림 영역의 수평 하단에서 끊긴다."
+      },
+      {
+        "file": "assets/vehicles/military_special/armored_rescue_vehicle.webp",
+        "baselineSha256": "056ff3bf49c4b491927c07feb8fd5203d32a204bc3291436beabc67bd7a1605c",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "전면 양쪽 타이어 하부가 그림 영역의 수평 하단에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/bridge_layer_truck.webp",
+        "baselineSha256": "bd9984b36fe15798d5937a20fa8135f2f1e6716380696ed51d259d5cf932b9e3",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 바퀴와 차체 하부가 수평 하단에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/command_truck.webp",
+        "baselineSha256": "b8f238e08f02d97770df8dd1008e0cbf7a6a5fc6b3721a2ee0f2cdbe1c0d1364",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞 바퀴·후방 차체 하부와 뒤 바퀴가 수평 하단에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/communication_relay_truck.webp",
+        "baselineSha256": "20169f5fbe5b1a003cbfa4630ebb8ec90367375c0c6dbb1b416f56f50cfec5c5",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞 범퍼와 바퀴 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/decontamination_truck.webp",
+        "baselineSha256": "1d743c7e7834156ebc93947f5ad43d01b9c5e618f898014847133750ce0cd876",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 타이어 하부가 수평 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/drone_control_vehicle.webp",
+        "baselineSha256": "2c81f0af96977d24383426d42130105128892609795360718a02013d34b068a9",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "범퍼와 타이어 하부가 크게 잘려 있다. 위 드론은 그림 일부로 보존 대상이다."
+      },
+      {
+        "file": "assets/vehicles/military_special/engineering_vehicle.webp",
+        "baselineSha256": "d48cd727c8d3bb52027f81c29e56efdf8681b2ee8832ccf6c4f76ab9446f4a12",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "블레이드와 궤도 하부가 수평 경계에서 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/eod_robot_vehicle.webp",
+        "baselineSha256": "028df848e582299fffb286779e661aa5a71c88e6ae3d3e0fdf6525c965d567e7",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "양쪽 트레드 하부가 그림 영역 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/military_truck.webp",
+        "baselineSha256": "fd64c01082997bc0d627fd4a9819054c693a519d0eb4ccca7032a1cd2fbca39c",
+        "status": "PRECISION_HOLD_AMBIGUOUS_BOTTOM",
+        "independentObservation": "앞 타이어의 최하단이 흰 사각 하단에 닿아 소량 소실 여부가 모호하다. 큰 하부 소실 16개와 구분하고 정상 전체 외곽으로 단정하지 않는다."
+      },
+      {
+        "file": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
+        "baselineSha256": "21e5c6b593591bb1e78c697c381efef1228b286af94f0405c2f2e0838a216dc4",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 바퀴 및 차체 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/mobile_hospital.webp",
+        "baselineSha256": "298deafd2dae4e98ed6181b0b9a208a77d591429844c9f291de59792f7d44c00",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 바퀴와 차체 하부가 수평 경계에서 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/mrap_patrol_vehicle.webp",
+        "baselineSha256": "44350e0a30dd600041e8fdd48a15b1044d0f174d2b409474896bb99da24d07d5",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "전면과 측면 타이어 하부가 수평 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/radar_truck.webp",
+        "baselineSha256": "e0f126e849daa1be0772ea62fb406ec781cce94d22711a16a1e4320d11ba056e",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 타이어와 차체 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/searchlight_truck.webp",
+        "baselineSha256": "1097e5528f8fc4d363dd37a2e82f2199a98ccd06cb73c779db31ebd0edb5692a",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞 범퍼 및 바퀴 하부가 크게 잘려 있다."
+      },
+      {
+        "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+        "baselineSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+        "status": "BACKGROUND_EXTRACTION_CANDIDATE",
+        "independentObservation": "차체·궤도·루프 장비 대부분의 외곽이 확인되어 추출을 시도할 수 있다. 최하단 여유가 얇아 결과에서 임의 새 장비·큰 외곽 변화 여부를 다시 확인해야 한다."
+      },
+      {
+        "file": "assets/vehicles/military_special/tracked_carrier.webp",
+        "baselineSha256": "5ad72a6d6792da1da196ddf77b13787e5085b3c0957c564ceed979b1f48ecaa6",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "궤도의 낮은 부분과 작은 휠 하부가 수평 경계에서 잘린다."
+      },
+      {
+        "file": "assets/vehicles/military_special/water_purification_truck.webp",
+        "baselineSha256": "690c397999c49c3a10f96ef6f735bf627d92322e9b81ff205c154d6b51b056b6",
+        "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+        "independentObservation": "앞·뒤 타이어와 차체 하부가 수평 경계에서 잘려 있다."
+      }
+    ]
+  }
 }

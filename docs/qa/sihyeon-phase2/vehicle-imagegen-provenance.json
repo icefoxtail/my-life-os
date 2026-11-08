@@ -281,6 +281,62 @@
       "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
       "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
       "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/airport/de_icing_truck.webp",
+      "inputSha256": "d13084e5b0d1820f464b5d46c729bf2ad2c5f3aa25d3d0b8370ef5a8125fbffc",
+      "generatedSourceName": "exec-1f70938f-73e8-42fa-93bd-a74bacee8ffe.png",
+      "generatedSha256": "f913a18b7f2c1f708a57d21c03077d3a95da085b952839bd45adec6e3887ae68",
+      "outputSha256": "4fe3897f3dde3157abe8a89aa3090ba798169ee515576b0687679b708186a5fd",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "inputSha256": "1beaadbc4a321408d50e4521cd6397b7cfcceed677a2e3cdf7bb08f77ada6dbc",
+      "generatedSourceName": "exec-02f1aa5d-a6e8-4be6-90ff-1dce63f8986b.png",
+      "generatedSha256": "6cc4c99a0364e10d253209a5f5e79ed7495d475536073f0772f0be1d266a6552",
+      "outputSha256": "22c0a0af077f5aa93370fd59f84596dc5e7424c1f169157bb68d9993f8e54a86",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/airport/pushback_tug.webp",
+      "inputSha256": "e90bf8ea4bb34bee5e2adf2f1e7d756f801f2d15e5a6306a8bdfcf7fd1ee819d",
+      "generatedSourceName": "exec-64c12050-9b54-4346-9f95-8425f973d28f.png",
+      "generatedSha256": "f8e23be950f840f1e3ce1d2c2e74e92ca39588988c187cb42de0ee2ea169b4eb",
+      "outputSha256": "01dda38387ec48347690cd23bde56e72fdf91ba3815dfae77fc248013c8b2582",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/airport/stair_truck.webp",
+      "inputSha256": "47fbca251be5b5b86b022fc84089b1969aa13de1887349741c5e4e2c5a812a75",
+      "generatedSourceName": "exec-db208c9c-4041-47c4-8c83-4c4b136390b4.png",
+      "generatedSha256": "aa8508e0903adad49f13b901da437d2d1b019a16a6395bb471e31dfc47ca94d7",
+      "outputSha256": "4d3367d058919d4e9c50f9e7f467966cd7c9745d1c95b38e42dc06086095edea",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
     }
   ]
 }

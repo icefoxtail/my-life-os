@@ -657,35 +657,67 @@
   },
   "assets/vehicles/airport/de_icing_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-de_icing_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/fuel_truck_airport.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-fuel_truck_airport.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/pushback_tug.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-pushback_tug.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/stair_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer each inspected three-background comparisons. White/silver body, de-icing boom/nozzle, tanker pipes, pushback connector, stair rails and existing supports retained. No new equipment or visible clipping/interior deletion.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-stair_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/farm/tractor.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -905,147 +937,182 @@
   },
   "assets/vehicles/military_special/military_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual enlarged original plus independent reviewer: front tire bottom meets the white rectangle edge; possible small original loss cannot be ruled out. Retain original until an uncropped source verifies full tread contour.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_AMBIGUOUS_SOURCE_EDGE",
+    "holdReason": "Front tire lowest arc at original rectangle edge; insufficient source to verify complete shape.",
+    "detailEvidence": "contact/military-detail-2.png"
   },
   "assets/vehicles/military_special/command_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bumper, tires and lower chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bumper, tires and lower chassis clipped",
+    "detailEvidence": "contact/military-detail-1.png"
   },
   "assets/vehicles/military_special/communication_relay_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bumper and most lower wheel areas clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bumper and most lower wheel areas clipped",
+    "detailEvidence": "contact/military-detail-1.png"
   },
   "assets/vehicles/military_special/radar_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower front tire and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower front tire and chassis clipped",
+    "detailEvidence": "contact/military-detail-3.png"
   },
   "assets/vehicles/military_special/searchlight_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bumper and lower wheels clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bumper and lower wheels clipped",
+    "detailEvidence": "contact/military-detail-3.png"
   },
   "assets/vehicles/military_special/mobile_hospital.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower tires and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower tires and chassis clipped",
+    "detailEvidence": "contact/military-detail-2.png"
   },
   "assets/vehicles/military_special/armored_rescue_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: front and near tires flattened by rectangle boundary; lower tread pixels absent at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "front and near tires flattened by rectangle boundary; lower tread pixels absent",
+    "detailEvidence": "contact/military-detail-1.png"
   },
   "assets/vehicles/military_special/mrap_patrol_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: all visible lower tire arcs clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "all visible lower tire arcs clipped",
+    "detailEvidence": "contact/military-detail-3.png"
   },
   "assets/vehicles/military_special/tracked_carrier.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bottom track loop and lower road wheels clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bottom track loop and lower road wheels clipped",
+    "detailEvidence": "contact/military-detail-3.png"
   },
   "assets/vehicles/military_special/amphibious_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: front and near wheels cut through their lower arcs at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "front and near wheels cut through their lower arcs",
+    "detailEvidence": "contact/military-detail-1.png"
   },
   "assets/vehicles/military_special/engineering_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower blade and tracked undercarriage clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower blade and tracked undercarriage clipped",
+    "detailEvidence": "contact/military-detail-2.png"
   },
   "assets/vehicles/military_special/bridge_layer_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower tires and undercarriage clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower tires and undercarriage clipped",
+    "detailEvidence": "contact/military-detail-1.png"
   },
   "assets/vehicles/military_special/decontamination_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower front tire and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower front tire and chassis clipped",
+    "detailEvidence": "contact/military-detail-1.png"
   },
   "assets/vehicles/military_special/water_purification_truck.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower front tire and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower front tire and chassis clipped",
+    "detailEvidence": "contact/military-detail-3.png"
   },
   "assets/vehicles/military_special/snow_rescue_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual enlarged original/independent review: roof equipment and track loops mostly complete, unlike clipped siblings. Conservative background-extraction candidate generated; do not mark repaired until comparison passes.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "CANDIDATE_REVIEW_PENDING",
+    "detailEvidence": "contact/military-detail-3.png"
   },
   "assets/vehicles/military_special/drone_control_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: bottom bumper and tires clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "bottom bumper and tires clipped",
+    "detailEvidence": "contact/military-detail-2.png"
   },
   "assets/vehicles/military_special/eod_robot_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower track loops and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower track loops and chassis clipped",
+    "detailEvidence": "contact/military-detail-2.png"
   },
   "assets/vehicles/military_special/missile_launcher_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Central white rectangle and very large transparent margin; bottom of vehicle may be cropped at rectangle boundary. Individual close inspection required before attempting restoration.",
+    "finding": "Individual nearest-neighbor enlarged original inspection and independent review: lower tires and chassis clipped at the opaque white rectangle boundary. Background extraction cannot recover missing source geometry without invention. Original bytes retained; need an uncropped original.",
     "background": "baked-white-rectangle",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "action": "HOLD_SOURCE_PIXELS_MISSING",
+    "holdReason": "lower tires and chassis clipped",
+    "detailEvidence": "contact/military-detail-2.png"
   },
   "assets/vehicles/town/school_van.webp": {
     "classification": "1_ORIGINAL_REPAIR",
