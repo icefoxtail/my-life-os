@@ -1518,6 +1518,124 @@
         "height": 512,
         "clean": true
       }
+    },
+    {
+      "source": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "sourceSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+      "candidate": "snow_rescue_vehicle.png",
+      "candidateSha256": "fe6d7303d665c5314ed1cfa661cae84ea1bebabca9ebb7ab0337df0ed225cf21",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618190811,
+      "artifactSha256": "7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1",
+      "alphaRepairs": [
+        {
+          "op": "restore_source",
+          "box": [
+            208,
+            211,
+            213,
+            218
+          ]
+        },
+        {
+          "op": "restore_source",
+          "box": [
+            217,
+            209,
+            223,
+            216
+          ]
+        }
+      ],
+      "reviewedRgbaSha256": "d0a402d359dd60c0f0b91373a5cfdcfde21ddc664492b1a038883b3e7025049a",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Original small white rectangle removed. Full track bottoms remain; initial mask incorrectly reduced two white roof lights. Restored their original alpha only in two inspected interior rectangles and rechecked all three backgrounds.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "precision",
+      "outputSha256": "19dc48e8614af0067fdfb26eb7846e8ab3a8c50f16c7cd8d9ccf42faba819134",
+      "outputBytes": 43224,
+      "outputRgbaSha256": "d0a402d359dd60c0f0b91373a5cfdcfde21ddc664492b1a038883b3e7025049a",
+      "displayBounds": {
+        "box": [
+          141,
+          204,
+          355,
+          348
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/transport/submarine.png",
+      "sourceSha256": "c4a00de78da854e2572867707e4fdeb4fa62ba2b26928024be380507b28516b2",
+      "candidate": "submarine.png",
+      "candidateSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "size": [
+        1024,
+        1024
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618190811,
+      "artifactSha256": "7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "685ea4019e3cc5a3d0326e92ece9bc4d697e314bc2839bde53f7d27ed2465dc3",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Removed right floating white fragment and baked light ground. Periscope, portholes, fins and propeller remain complete.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "precision",
+      "outputSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "outputBytes": 333832,
+      "outputRgbaSha256": "685ea4019e3cc5a3d0326e92ece9bc4d697e314bc2839bde53f7d27ed2465dc3",
+      "displayBounds": {
+        "box": [
+          173,
+          240,
+          857,
+          753
+        ],
+        "width": 1024,
+        "height": 1024,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/transport/garbage_truck.png",
+      "sourceSha256": "1b13ef68bd5c666906ceaa5cef578d452cd68810f27cd7d455efd7ee25335b87",
+      "candidate": "garbage_truck.png",
+      "candidateSha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+      "size": [
+        1024,
+        1024
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618190811,
+      "artifactSha256": "7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "2f9d032515312e6b2c40ea3953bf32f063dd4fcdda60a97aa8713f5e1c1326ad",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Removed left detached vertical line and baked ground; green body, rear lifting mechanism, glazing and all visible wheels retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "precision",
+      "outputSha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+      "outputBytes": 473305,
+      "outputRgbaSha256": "2f9d032515312e6b2c40ea3953bf32f063dd4fcdda60a97aa8713f5e1c1326ad",
+      "displayBounds": {
+        "box": [
+          105,
+          267,
+          903,
+          782
+        ],
+        "width": 1024,
+        "height": 1024,
+        "clean": true
+      }
     }
   ]
 }

@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 74,
+  "actualOriginalEdits": 77,
   "entries": [
     {
       "index": 1,
@@ -3638,30 +3638,32 @@
         }
       },
       "after": {
-        "sha256": "c4a00de78da854e2572867707e4fdeb4fa62ba2b26928024be380507b28516b2",
-        "bytes": 338290,
+        "sha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+        "bytes": 333832,
         "format": "PNG",
         "mode": "RGBA",
         "width": 1024,
         "height": 1024,
         "alphaBounds16": [
-          98,
-          237,
-          926,
-          786
+          173,
+          240,
+          857,
+          753
         ],
-        "transparentFraction": 0.786528,
-        "partialAlphaFraction": 0.009748,
+        "transparentFraction": 0.82478,
+        "partialAlphaFraction": 0.162798,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "4_PRECISE_REVIEW",
-      "finding": "Original detached white speck to the right of the submarine; source issue confirmed independently. Source currently preserved; precise repair pending.",
-      "background": "transparent-with-original-artifact",
+      "finding": "Removed right floating white fragment and baked light ground. Periscope, portholes, fins and propeller remain complete.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-04.jpg",
-      "action": "PENDING_PRECISE_REVIEW"
+      "visualEvidence": "comparisons/transport-submarine.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/transport-submarine.jpg"
     },
     {
       "index": 53,
@@ -3772,30 +3774,32 @@
         }
       },
       "after": {
-        "sha256": "1b13ef68bd5c666906ceaa5cef578d452cd68810f27cd7d455efd7ee25335b87",
-        "bytes": 532913,
+        "sha256": "a1995a439de4f55568f158ade4a763560e86bb7d703123905cdef07a3e902f6b",
+        "bytes": 473305,
         "format": "PNG",
         "mode": "RGBA",
         "width": 1024,
         "height": 1024,
         "alphaBounds16": [
-          0,
-          243,
+          105,
+          267,
           903,
-          802
+          782
         ],
-        "transparentFraction": 0.63469,
-        "partialAlphaFraction": 0.011342,
+        "transparentFraction": 0.678374,
+        "partialAlphaFraction": 0.3114,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "4_PRECISE_REVIEW",
-      "finding": "Original vertical rear-body seam and stray horizontal/left-edge lines; source issue confirmed independently. Source currently preserved; precise repair pending.",
-      "background": "transparent-with-original-artifact",
+      "finding": "Removed left detached vertical line and baked ground; green body, rear lifting mechanism, glazing and all visible wheels retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-04.jpg",
-      "action": "PENDING_PRECISE_REVIEW"
+      "visualEvidence": "comparisons/transport-garbage_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/transport-garbage_truck.jpg"
     },
     {
       "index": 55,
@@ -7552,31 +7556,33 @@
         }
       },
       "after": {
-        "sha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
-        "bytes": 14792,
+        "sha256": "19dc48e8614af0067fdfb26eb7846e8ab3a8c50f16c7cd8d9ccf42faba819134",
+        "bytes": 43224,
         "format": "WEBP",
         "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          139,
-          163,
-          372,
+          141,
+          204,
+          355,
           348
         ],
-        "transparentFraction": 0.835567,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.911938,
+        "partialAlphaFraction": 0.083473,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "4_PRECISE_REVIEW",
-      "finding": "Individual enlarged original/independent review: roof equipment and track loops mostly complete, unlike clipped siblings. Conservative background-extraction candidate generated; do not mark repaired until comparison passes.",
-      "background": "baked-white-rectangle",
+      "finding": "Original small white rectangle removed. Full track bottoms remain; initial mask incorrectly reduced two white roof lights. Restored their original alpha only in two inspected interior rectangles and rechecked all three backgrounds.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-07.jpg",
-      "action": "CANDIDATE_REVIEW_PENDING",
-      "detailEvidence": "contact/military-detail-3.png"
+      "visualEvidence": "comparisons/military_special-snow_rescue_vehicle.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "detailEvidence": "contact/military-detail-3.png",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/military_special-snow_rescue_vehicle.jpg"
     },
     {
       "index": 109,

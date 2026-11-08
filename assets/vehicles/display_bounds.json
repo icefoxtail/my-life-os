@@ -562,10 +562,10 @@
   },
   "transport/submarine.png": {
     "box": [
-      98,
-      237,
-      926,
-      786
+      173,
+      240,
+      857,
+      753
     ],
     "width": 1024,
     "height": 1024,
@@ -584,10 +584,10 @@
   },
   "transport/garbage_truck.png": {
     "box": [
-      0,
-      243,
+      105,
+      267,
       903,
-      802
+      782
     ],
     "width": 1024,
     "height": 1024,
@@ -1178,14 +1178,14 @@
   },
   "military_special/snow_rescue_vehicle.webp": {
     "box": [
-      139,
-      163,
-      372,
+      141,
+      204,
+      355,
       348
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "military_special/drone_control_vehicle.webp": {
     "box": [

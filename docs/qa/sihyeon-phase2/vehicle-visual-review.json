@@ -537,11 +537,12 @@
   },
   "assets/vehicles/transport/submarine.png": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Original detached white speck to the right of the submarine; source issue confirmed independently. Source currently preserved; precise repair pending.",
-    "background": "transparent-with-original-artifact",
+    "finding": "Removed right floating white fragment and baked light ground. Periscope, portholes, fins and propeller remain complete.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "visualEvidence": "comparisons/transport-submarine.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/transport/tow_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -553,11 +554,12 @@
   },
   "assets/vehicles/transport/garbage_truck.png": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Original vertical rear-body seam and stray horizontal/left-edge lines; source issue confirmed independently. Source currently preserved; precise repair pending.",
-    "background": "transparent-with-original-artifact",
+    "finding": "Removed left detached vertical line and baked ground; green body, rear lifting mechanism, glazing and all visible wheels retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_PRECISE_REVIEW"
+    "visualEvidence": "comparisons/transport-garbage_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/transport/tractor.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -1128,12 +1130,13 @@
   },
   "assets/vehicles/military_special/snow_rescue_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
-    "finding": "Individual enlarged original/independent review: roof equipment and track loops mostly complete, unlike clipped siblings. Conservative background-extraction candidate generated; do not mark repaired until comparison passes.",
-    "background": "baked-white-rectangle",
+    "finding": "Original small white rectangle removed. Full track bottoms remain; initial mask incorrectly reduced two white roof lights. Restored their original alpha only in two inspected interior rectangles and rechecked all three backgrounds.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-07.jpg",
-    "action": "CANDIDATE_REVIEW_PENDING",
-    "detailEvidence": "contact/military-detail-3.png"
+    "visualEvidence": "comparisons/military_special-snow_rescue_vehicle.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "detailEvidence": "contact/military-detail-3.png",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/military_special/drone_control_vehicle.webp": {
     "classification": "4_PRECISE_REVIEW",
