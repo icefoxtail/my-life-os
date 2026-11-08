@@ -4,6 +4,7 @@ on:
     paths:
       - 'docs/qa/sihyeon-phase2/vehicle-matte-approved*.json'
       - 'scripts/apply-reviewed-vehicle-mattes.py'
+      - 'scripts/finalize-vehicle-phase2-audit.py'
       - '.github/workflows/apply-reviewed-vehicle-mattes.yml'
 permissions:
   contents: write
@@ -21,7 +22,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - name: Verify writer lease and integrate released main without rewriting history
+      - name: Verify writer lease and integrate main without rewriting history
         env:
           EXPECTED: ${{ github.event.pull_request.head.sha }}
         run: |
@@ -38,21 +39,25 @@ jobs:
             test "$(git ls-remote origin "$branch" | cut -f1)" = "$(git rev-parse HEAD)"
           fi
           printf 'integration %s\n' "$(git rev-parse HEAD)" > reviewed-delivery-heads.txt
-      - name: Apply and remotely preserve each approved small group
+      - name: Apply each explicit batch and finalize inspected dispositions
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           python3 -m pip install pillow numpy requests
           branch=refs/heads/feat/sihyeon-vehicle-phase2-20261108
-          for batch in farm road_service port town-a town-b fire_special precision; do
+          for batch in farm road_service port town-a town-b fire_special precision final-dispositions; do
             expected="$(git rev-parse HEAD)"
             test "$(git ls-remote origin "$branch" | cut -f1)" = "$expected"
-            python3 scripts/apply-reviewed-vehicle-mattes.py --batch "$batch"
+            if test "$batch" = final-dispositions; then
+              python3 scripts/finalize-vehicle-phase2-audit.py
+            else
+              python3 scripts/apply-reviewed-vehicle-mattes.py --batch "$batch"
+            fi
             git add assets/vehicles js/vehicle-display.js docs/qa/sihyeon-phase2
             if ! git diff --cached --quiet; then
               test "$(git ls-remote origin "$branch" | cut -f1)" = "$expected"
-              git commit -m "fix: preserve reviewed $batch vehicle alpha repairs with SHA proof"
+              git commit -m "qa: preserve reviewed $batch with source-bound proof"
               git push origin HEAD:"$branch"
               test "$(git ls-remote origin "$branch" | cut -f1)" = "$(git rev-parse HEAD)"
             fi
@@ -72,6 +77,7 @@ jobs:
             js/vehicle-display.js
             docs/qa/sihyeon-phase2/vehicle-inventory.json
             docs/qa/sihyeon-phase2/vehicle-visual-review.json
+            docs/qa/sihyeon-phase2/vehicle-final-dispositions.*
             docs/qa/sihyeon-phase2/vehicle-matte-provenance.json
             docs/qa/sihyeon-phase2/comparisons/
             docs/qa/sihyeon-phase2/contact/
