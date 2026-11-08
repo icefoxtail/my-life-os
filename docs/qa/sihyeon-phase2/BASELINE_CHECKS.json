@@ -1,0 +1,82 @@
+{
+  "baseMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+  "results": [
+    {
+      "command": "qa-static",
+      "exitCode": 0,
+      "seconds": 2.28,
+      "stdout": "PASS: 13 JS files, 7 inline scripts, Boardland removal, load order and new asset cache paths.\n",
+      "stderr": ""
+    },
+    {
+      "command": "qa-play-settings",
+      "exitCode": 0,
+      "seconds": 0.13,
+      "stdout": "PASS: all four ages retain independent challenge choices, counting 1–5 persists, malformed/denied storage remains playable, invalid values rejected.\n",
+      "stderr": ""
+    },
+    {
+      "command": "qa-number-post-office-independent",
+      "exitCode": 0,
+      "seconds": 3.34,
+      "stdout": "{\n  \"suite\": \"Independent quantity/state QA\",\n  \"modelSha256\": \"e38eb927b6e5a4678bf151284f1961de92fc3c87aee289e5a0c2174514347c0d\",\n  \"status\": \"PASS\",\n  \"missionsChecked\": 600,\n  \"actionsChecked\": 19141,\n  \"checks\": [\n    {\n      \"name\": \"every age can select every target 1..30, with enough unique physical stock\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"missions\": 600,\n        \"targetRange\": \"1..30\",\n        \"ages\": [\n          4,\n          5,\n          6,\n          7\n        ]\n      }\n    },\n    {\n      \"name\": \"wrong total and wrong type are retained for the child to repair\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    },\n    {\n      \"name\": \"bundling, unbundling, moving, undoing and resetting conserve actual objects\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    },\n    {\n      \"name\": \"all valid two-truck arrangements are accepted, including mirrored solutions\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"arrangements\": 260\n      }\n    },\n    {\n      \"name\": \"random input sequences preserve unique objects and never double complete\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    },\n    {\n      \"name\": \"interrupted delivery and corrupted saves recover without false reward or lockup\",\n      \"status\": \"PASS\",\n      \"detail\": null\n    }\n  ],\n  \"limits\": [\n    \"Node model checks only. No browser DOM, layout, touch device, TTS listening, or child observation is claimed.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": "qa-art-restore-independent",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "stdout": "{\n  \"suite\": \"Independent art asynchronous restore QA\",\n  \"sourceSha256\": \"a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5\",\n  \"status\": \"PASS\",\n  \"checks\": [\n    {\n      \"name\": \"newest restore wins when image callbacks finish in reverse order\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"new paper invalidates a pending restore\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"a pointer stroke waits for the pending picture and works after restore\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"destroy invalidates callbacks even if a new lifecycle reuses the canvas\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"an empty newer restore request cancels the older pending request\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"ordinary current restore still draws the requested picture\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"limits\": [\n    \"Node callback simulation only; no browser canvas pixels, touch device, or child observation is claimed.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": "qa-art-pending-save",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "stdout": "{\n  \"suite\": \"Art pending-save production closure regression\",\n  \"sourceSha256\": \"a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5\",\n  \"status\": \"PASS\",\n  \"checks\": [\n    {\n      \"name\": \"save during initial decode preserves the loaded PNG\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"exit before decode preserves PNG and rejects the late callback\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"successful restore enables drawing and later saves the actual new stroke\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"early drawing does not replace the picture still being loaded\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"decode error keeps the original and offers explicit new-paper recovery\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"destroy and return with the same canvas cannot revive the old callback\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"new restore owns saving while older load and error callbacks are ignored\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"new paper during loading can undo back to the original canonical PNG\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"empty restore cancels pending work and makes an intentional blank writable\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"canvas draw failure protects the source just like decode failure\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"template and mode metadata can still save while free drawing restores\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"a first visit without a saved drawing stays immediately drawable\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"limits\": [\n    \"Node callback simulation with distinct PNG markers; no actual PNG decoding or browser pixel comparison.\",\n    \"Loading touch is intentionally deferred until restore completes; explicit new paper recovers from a decode failure.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": "qa-storage-write-failure",
+      "exitCode": 0,
+      "seconds": 0.18,
+      "stdout": "{\n  \"suite\": \"Readable stale storage with rejected writes — production closure regressions\",\n  \"sourceSha256\": {\n    \"postOffice\": \"15ab59dc8ce55e599ffc59811a75dffa2e02d9e9836e2b729d4a3fd3e82ef234\",\n    \"art\": \"a57a3c7222219e26770f47f6f5a4d05063474991f2ad1e06c4c916a6a4a9d2b5\"\n  },\n  \"status\": \"PASS\",\n  \"checks\": [\n    {\n      \"name\": \"post office restores the latest three items after an age/range round trip when only writes fail\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"persistedItems\": 1,\n        \"latestItems\": 3,\n        \"restoredItems\": 3,\n        \"readSucceeded\": true,\n        \"writesRejected\": 10,\n        \"readCopyDetached\": true\n      }\n    },\n    {\n      \"name\": \"art restores latest free PNG and per-template coloring when old storage reads succeed but writes fail\",\n      \"status\": \"PASS\",\n      \"detail\": {\n        \"readSucceeded\": true,\n        \"writesRejected\": 1,\n        \"latestPngPreserved\": true,\n        \"latestTemplateFill\": \"#FF0000\"\n      }\n    }\n  ],\n  \"limits\": [\n    \"Node VM with controlled localStorage behavior; no actual browser quota, private-mode, or device validation.\",\n    \"Memory protects progress within the same loaded page; a real reload cannot recover writes the browser rejected.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": "test-legacy-models",
+      "exitCode": 0,
+      "seconds": 0.24,
+      "stdout": "PASS 22963 model scenarios: quantity conservation, undoable parts, saved-data validation, 140 Hangul compositions.\n",
+      "stderr": ""
+    },
+    {
+      "command": "test-legacy-inputs",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "stdout": "PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy and secondary pointer.\nPASS handwashing: all 24 four-step arrangements, required rinse step, delayed-check edit lock, and correct-slot preservation.\n",
+      "stderr": ""
+    },
+    {
+      "command": "test-legacy-fallback",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "stdout": "PASS 7 fault-boundary scenarios: unavailable GPU, two CDN errors, working 3D, context loss, explicit 2D, denied storage, invalid and restored progress.\n",
+      "stderr": ""
+    },
+    {
+      "command": "test-vehicle-display",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "stdout": "PASS 234 uniform-scale layouts for all 39 clean assets; tall rocket, replacement bounds, idempotent apply and cleanup.\n",
+      "stderr": ""
+    },
+    {
+      "command": "qa-sw-independent",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "stdout": "PASS SW: 132 assets visited once, max 4 concurrent fetches, optional network/404/cache errors continue, 6 boundary lengths, only two old matching-prefix caches deleted.\n",
+      "stderr": ""
+    }
+  ]
+}
