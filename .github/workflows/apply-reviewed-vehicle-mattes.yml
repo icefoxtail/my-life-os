@@ -2,7 +2,7 @@ name: Apply reviewed vehicle mattes
 on:
   pull_request:
     paths:
-      - 'docs/qa/sihyeon-phase2/vehicle-matte-approved.json'
+      - 'docs/qa/sihyeon-phase2/vehicle-matte-approved*.json'
       - 'scripts/apply-reviewed-vehicle-mattes.py'
       - '.github/workflows/apply-reviewed-vehicle-mattes.yml'
 permissions:
@@ -15,40 +15,49 @@ jobs:
   apply-reviewed:
     if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feat/sihyeon-vehicle-phase2-20261108'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - name: Verify fixed-branch writer lease before applying
+      - name: Verify writer lease and integrate released main without rewriting history
         env:
           EXPECTED: ${{ github.event.pull_request.head.sha }}
         run: |
           set -euo pipefail
-          remote="$(git ls-remote origin refs/heads/feat/sihyeon-vehicle-phase2-20261108 | cut -f1)"
-          test "$remote" = "$EXPECTED"
-      - name: Apply reviewed source-bound pixels and validate
+          branch=refs/heads/feat/sihyeon-vehicle-phase2-20261108
+          test "$(git ls-remote origin "$branch" | cut -f1)" = "$EXPECTED"
+          git config user.name 'Sihyeon Reviewed Asset Delivery'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit refs/remotes/origin/main
+          if test "$(git rev-parse HEAD)" != "$EXPECTED"; then
+            test "$(git ls-remote origin "$branch" | cut -f1)" = "$EXPECTED"
+            git push origin HEAD:"$branch"
+            test "$(git ls-remote origin "$branch" | cut -f1)" = "$(git rev-parse HEAD)"
+          fi
+          printf 'integration %s\n' "$(git rev-parse HEAD)" > reviewed-delivery-heads.txt
+      - name: Apply and remotely preserve each approved small group
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python3 -m pip install pillow numpy requests
-          python3 scripts/apply-reviewed-vehicle-mattes.py
-      - name: Commit only approved product and QA scope, never force
-        env:
-          EXPECTED: ${{ github.event.pull_request.head.sha }}
-        run: |
           set -euo pipefail
-          git add assets/vehicles js/vehicle-display.js docs/qa/sihyeon-phase2
-          if git diff --cached --quiet; then
-            echo 'Approved pixels already present; no new commit.'
-          else
-            remote="$(git ls-remote origin refs/heads/feat/sihyeon-vehicle-phase2-20261108 | cut -f1)"
-            test "$remote" = "$EXPECTED"
-            git -c user.name='Sihyeon Reviewed Asset Delivery' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'fix: apply individually reviewed vehicle alpha repairs and preserve proof'
-            git push origin HEAD:refs/heads/feat/sihyeon-vehicle-phase2-20261108
-            test "$(git ls-remote origin refs/heads/feat/sihyeon-vehicle-phase2-20261108 | cut -f1)" = "$(git rev-parse HEAD)"
-          fi
+          python3 -m pip install pillow numpy requests
+          branch=refs/heads/feat/sihyeon-vehicle-phase2-20261108
+          for batch in farm road_service port town-a town-b fire_special precision; do
+            expected="$(git rev-parse HEAD)"
+            test "$(git ls-remote origin "$branch" | cut -f1)" = "$expected"
+            python3 scripts/apply-reviewed-vehicle-mattes.py --batch "$batch"
+            git add assets/vehicles js/vehicle-display.js docs/qa/sihyeon-phase2
+            if ! git diff --cached --quiet; then
+              test "$(git ls-remote origin "$branch" | cut -f1)" = "$expected"
+              git commit -m "fix: preserve reviewed $batch vehicle alpha repairs with SHA proof"
+              git push origin HEAD:"$branch"
+              test "$(git ls-remote origin "$branch" | cut -f1)" = "$(git rev-parse HEAD)"
+            fi
+            printf '%s %s\n' "$batch" "$(git rev-parse HEAD)" >> reviewed-delivery-heads.txt
+          done
           git rev-parse HEAD > reviewed-delivery-head.txt
           git diff-tree --no-commit-id --name-status -r HEAD > reviewed-delivery-files.txt
       - name: Attach exact delivery for readback
@@ -57,11 +66,12 @@ jobs:
         with:
           name: reviewed-vehicle-delivery-${{ github.run_id }}
           path: |
-            reviewed-delivery-head.txt
+            reviewed-delivery-head*.txt
             reviewed-delivery-files.txt
             assets/vehicles/
             js/vehicle-display.js
             docs/qa/sihyeon-phase2/vehicle-inventory.json
+            docs/qa/sihyeon-phase2/vehicle-visual-review.json
             docs/qa/sihyeon-phase2/vehicle-matte-provenance.json
             docs/qa/sihyeon-phase2/comparisons/
             docs/qa/sihyeon-phase2/contact/
