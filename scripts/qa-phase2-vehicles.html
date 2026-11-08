@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2차 차량 · 제어된 배치 검수</title>
+<style>body{margin:0;padding:12px;background:#e7ece9;color:#234638;font:15px system-ui}header{display:flex;gap:6px;flex-wrap:wrap;align-items:center}button,select{font:inherit;min-height:42px;padding:7px 10px;border:1px solid #799386;border-radius:8px;background:white}iframe{display:block;border:1px solid #799386;background:white}#frameWrap{overflow:visible;margin-top:8px}#report{white-space:pre-wrap;font:13px monospace}p{margin:8px 0}</style>
+<header><b>차량 배치 검수</b><select id="asset" aria-label="검수 차량"></select><button data-count="1">1대</button><button data-count="5">5대</button><button data-count="9">9대</button><button data-count="11">11대</button><button data-count="20">20대</button><button data-count="30">30대</button><button id="inspect">현재 화면 측정</button><button id="matrix">36개 배치 검사</button><button id="download" disabled>결과 내려받기</button></header>
+<p>실제 숫자세기 제품 모듈에 검수용 차량·수량을 지정합니다. 이 제어된 배치 검수는 실제 메뉴에서 무작위 판을 푼 결과와 구분합니다.</p>
+<header><button data-size="390,844">390 × 844</button><button data-size="844,390">844 × 390</button><button data-size="360,640">360 × 640</button><button data-size="768,1024">768 × 1024</button><button data-size="1024,768">1024 × 768</button><button data-size="1280,800">1280 × 800</button><output id="size"></output></header>
+<div id="frameWrap"><iframe id="scene" src="qa-phase2-vehicle-scene.html" title="실제 숫자세기 모듈"></iframe></div><pre id="report" role="status">준비 중</pre>
+<script>
+'use strict';
+const frame=document.querySelector('#scene'),select=document.querySelector('#asset');let items=[],count=5;
+function resize(value){const [w,h]=value.split(',').map(Number);frame.style.width=w+'px';frame.style.height=h+'px';document.querySelector('#size').textContent=w+'×'+h;}
+async function show(){if(items.length&&frame.contentWindow.vehicleQA){await frame.contentWindow.vehicleQA.render(items[+select.value],count);document.querySelector('#report').textContent='등장 애니메이션이 끝난 뒤 화면 측정 버튼을 누르세요.';}}
+document.querySelectorAll('[data-count]').forEach(b=>b.onclick=()=>{count=+b.dataset.count;show();});
+document.querySelectorAll('[data-size]').forEach(b=>b.onclick=()=>resize(b.dataset.size));select.onchange=show;
+document.querySelector('#inspect').onclick=()=>{document.querySelector('#report').textContent=JSON.stringify(frame.contentWindow.vehicleQA.inspect(),null,2);};
+let matrixResults=[];
+document.querySelector('#matrix').onclick=async()=>{
+  const button=document.querySelector('#matrix');button.disabled=true;matrixResults=[];
+  try{
+    for(const size of ['390,844','844,390','360,640','768,1024','1024,768','1280,800']){
+      resize(size);await new Promise(r=>setTimeout(r,120));
+      for(const n of [1,5,9,11,20,30]){
+        count=n;await show();
+        const deadline=Date.now()+8000;let result;
+        do{await new Promise(r=>setTimeout(r,120));result=frame.contentWindow.vehicleQA.inspect();}while((!result.settled||result.imageFailures)&&Date.now()<deadline);
+        matrixResults.push(result);
+        document.querySelector('#report').textContent=JSON.stringify({completed:matrixResults.length,total:36,failed:matrixResults.filter(r=>!r.pass).length,current:result},null,2);
+      }
+    }
+  }finally{button.disabled=false;document.querySelector('#download').disabled=!matrixResults.length;}
+};
+document.querySelector('#download').onclick=()=>{const data={testKind:'Controlled product-module layout fixture; not real-device or random-session play',results:matrixResults};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='vehicle-layout-matrix.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+fetch('../assets/vehicles/vehicles_manifest.json').then(r=>r.json()).then(data=>{items=data.vehicles;items.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.category+' / '+v.name_ko;select.append(o);});select.value=Math.max(0,items.findIndex(x=>x.id==='road_roller'));show();});
+frame.onload=show;resize('390,844');
+</script></html>

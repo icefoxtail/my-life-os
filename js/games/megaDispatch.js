@@ -262,6 +262,9 @@
         height: 85%;
         object-fit: contain;
       }
+      .md-mission-card > .sv-vehicle-frame { max-width: 85%; max-height: 85%; }
+      .md14-scene-target > .sv-vehicle-frame { max-width: 86%; max-height: 86%; }
+      .md14-truck-btn > .sv-vehicle-frame { max-width: 90%; max-height: 90%; }
 
       .md-mission-card.done {
         opacity: 0.2;
@@ -879,6 +882,7 @@
       </div>
     `;
 
+    state.container.querySelectorAll('.md-mission-card img, .md14-scene-target img, .md14-truck-btn img').forEach(img => window.SihyeonVehicleDisplay?.apply(img));
     state.container.querySelectorAll('.md14-truck-btn').forEach(btn => {
       btn.onclick = (e) => handleTouch(btn.dataset.gameId, btn, e);
     });

@@ -1379,7 +1379,9 @@
     });
 
     root.querySelectorAll('.memory-card-front img').forEach((img) => {
+      window.SihyeonVehicleDisplay?.apply(img);
       img.addEventListener('error', () => {
+        window.SihyeonVehicleDisplay?.reset(img);
         img.hidden = true;
         if (img.nextElementSibling) img.nextElementSibling.hidden = false;
       });

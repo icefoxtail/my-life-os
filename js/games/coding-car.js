@@ -374,6 +374,8 @@
         object-fit: contain;
         filter: drop-shadow(0 5px 5px rgba(0,0,0,0.28));
       }
+      .cc-car-wrapper > .sv-vehicle-frame { max-width: 92%; max-height: 92%; }
+      .cc-car-wrapper.is-guide-shake > .sv-vehicle-frame { animation: cc-car-guide-shake .5s ease-in-out; }
 
       .cc-ui-area {
         flex-shrink: 0;
@@ -1359,8 +1361,23 @@
       executeCommands();
     });
 
-    root.querySelector('.cc-car-img')?.addEventListener('error', (event) => {
-      event.currentTarget.src = './assets/vehicles/fire/pump_engine.webp';
+    const vehicleImage = root.querySelector('.cc-car-img');
+    window.SihyeonVehicleDisplay?.apply(vehicleImage);
+    vehicleImage?.addEventListener('error', () => {
+      window.SihyeonVehicleDisplay?.reset(vehicleImage);
+      if (vehicleImage.dataset.fallbackTried) {
+        vehicleImage.hidden = true;
+        const fallback = document.createElement('span');
+        fallback.textContent = '🚗';
+        fallback.setAttribute('role', 'img');
+        fallback.setAttribute('aria-label', '자동차');
+        fallback.style.fontSize = 'clamp(28px,8vw,64px)';
+        vehicleImage.after(fallback);
+        return;
+      }
+      vehicleImage.dataset.fallbackTried = 'true';
+      vehicleImage.src = './assets/vehicles/fire/pump_engine.png';
+      window.SihyeonVehicleDisplay?.apply(vehicleImage);
     });
   }
 

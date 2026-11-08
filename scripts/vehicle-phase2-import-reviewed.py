@@ -6,7 +6,7 @@ This performs no source-image background segmentation, cropping or recoloring.
 """
 from pathlib import Path
 from PIL import Image
-import argparse, hashlib, json, re, subprocess
+import argparse, hashlib, json, re, subprocess, shutil
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs/qa/sihyeon-phase2'
 BASE='58eb1fad34bba957812b08cf55bdf28c5595ca60'
@@ -30,7 +30,12 @@ def main():
   generated_size=im.size
   im.thumbnail((e.get('maxEdge',768),e.get('maxEdge',768)),Image.Resampling.LANCZOS)
   dest=ROOT/rel
-  if dest.suffix=='.webp':im.save(dest,format='WEBP',quality=e.get('quality',92),method=6,exact=True)
+  if e.get('deliveryPath'):
+   delivery=Path(e['deliveryPath']);candidate=Image.open(delivery).convert('RGBA')
+   assert candidate.size==im.size and candidate.getchannel('A').tobytes()==im.getchannel('A').tobytes(),'Reviewed delivery must preserve downscaled generated alpha'
+   assert Image.open(delivery).format==('WEBP' if dest.suffix=='.webp' else 'PNG'),'Keep the existing asset format'
+   shutil.copyfile(delivery,dest)
+  elif dest.suffix=='.webp':im.save(dest,format='WEBP',quality=e.get('quality',92),method=6,exact=True)
   elif dest.suffix=='.png':im.save(dest,format='PNG')
   else:raise ValueError(rel)
   reread=Image.open(dest).convert('RGBA');assert reread.size==im.size and reread.getchannel('A').tobytes()==im.getchannel('A').tobytes(),'Delivery encoding must preserve downscaled alpha exactly'

@@ -1,0 +1,59 @@
+{
+  "scope": "Independent final delivery readback for next three visually approved construction vehicles; excludes rejected mobile_crane candidate",
+  "rows": [
+    {
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 122212,
+      "deliverySha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "generatedPngSha256": "c13d579d36b8f3223e17b152de710c9c54baf6d278a80422be1186a75116f484",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        49,
+        35,
+        741,
+        679
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 126862,
+      "deliverySha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "generatedPngSha256": "936fa179b25f55b6e7c1d634689e1cb79f47b136417f101eda93ede05a10cdd9",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        28,
+        120,
+        736,
+        722
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 84856,
+      "deliverySha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "generatedPngSha256": "48cd4698f954fe2b4e008c9edd8b1195e9f8ba9907ffcd82f4c37a3f03a3f0f7",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        3,
+        233,
+        746,
+        669
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    }
+  ]
+}

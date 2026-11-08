@@ -297,11 +297,19 @@
   },
   "assets/vehicles/construction/tower_crane.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-tower_crane.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/mobile_crane.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -329,19 +337,35 @@
   },
   "assets/vehicles/construction/excavator_breaker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-excavator_breaker.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/dump_loader.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-dump_loader.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/articulated_dump_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",

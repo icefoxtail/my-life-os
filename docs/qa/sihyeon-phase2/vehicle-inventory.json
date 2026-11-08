@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 5,
+  "actualOriginalEdits": 8,
   "entries": [
     {
       "index": 1,
@@ -2264,30 +2264,38 @@
         }
       },
       "after": {
-        "sha256": "719f1da9bebf75e8ffac62352525ce383b0a72dc90b4b276092bcb6664072ffc",
-        "bytes": 25328,
+        "sha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+        "bytes": 122212,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          49,
+          35,
+          741,
+          679
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.906409,
+        "partialAlphaFraction": 0.092404,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-tower_crane.jpg",
+      "displayNormalized": true
     },
     {
       "index": 34,
@@ -2536,30 +2544,38 @@
         }
       },
       "after": {
-        "sha256": "13e454ba034a9f95fb3ffdf84f7aa138c7dd2a1c4b86e0b8ff35aef649c26af5",
-        "bytes": 41020,
+        "sha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+        "bytes": 126862,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          28,
+          120,
+          736,
+          722
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.673016,
+        "partialAlphaFraction": 0.322386,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-excavator_breaker.jpg",
+      "displayNormalized": true
     },
     {
       "index": 38,
@@ -2604,30 +2620,38 @@
         }
       },
       "after": {
-        "sha256": "e5f7782c4b808b1deadac11bab62ff885f361af0fe004e63a9378a2e68e4dfd8",
-        "bytes": 35896,
+        "sha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+        "bytes": 84856,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          3,
+          233,
+          746,
+          669
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.669271,
+        "partialAlphaFraction": 0.328454,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original and generated/delivery image individually inspected on white, dark and checkerboard backgrounds by implementation and independent reviewer. Truss/cables or hydraulic equipment/bucket retained; no new visible clipping or background residue at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-dump_loader.jpg",
+      "displayNormalized": true
     },
     {
       "index": 39,

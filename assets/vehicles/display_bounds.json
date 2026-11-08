@@ -353,14 +353,14 @@
   },
   "construction/tower_crane.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      49,
+      35,
+      741,
+      679
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/mobile_crane.webp": {
     "box": [
@@ -397,25 +397,25 @@
   },
   "construction/excavator_breaker.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      28,
+      120,
+      736,
+      722
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/dump_loader.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      3,
+      233,
+      746,
+      669
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/articulated_dump_truck.webp": {
     "box": [

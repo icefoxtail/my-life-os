@@ -1,0 +1,10 @@
+[
+  {
+    "file": "assets/vehicles/construction/mobile_crane.webp",
+    "candidateSha256": "6b3d24a6e7d6dd0acd92fbcb32ae1aaac4d7840fd38b40a5cfaee18bc862a1f4",
+    "candidateName": "exec-c616e6dd-f697-49f8-a56d-cee8882a2732.png",
+    "status": "REJECTED_RETRY",
+    "reason": "Generated three downward outrigger/stabilizer feet absent from the original. Independent reviewer confirmed altered equipment structure; original remains unchanged.",
+    "evidence": "comparisons/rejected-construction-mobile_crane-first.jpg"
+  }
+]

@@ -71,6 +71,48 @@
       "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
       "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
       "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "inputSha256": "719f1da9bebf75e8ffac62352525ce383b0a72dc90b4b276092bcb6664072ffc",
+      "generatedSourceName": "exec-32b78c6a-f4ec-4fe1-b513-c6498b430258.png",
+      "generatedSha256": "c13d579d36b8f3223e17b152de710c9c54baf6d278a80422be1186a75116f484",
+      "outputSha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "inputSha256": "13e454ba034a9f95fb3ffdf84f7aa138c7dd2a1c4b86e0b8ff35aef649c26af5",
+      "generatedSourceName": "exec-732934a2-e2d9-4bd0-ae44-916cf3c91297.png",
+      "generatedSha256": "936fa179b25f55b6e7c1d634689e1cb79f47b136417f101eda93ede05a10cdd9",
+      "outputSha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "inputSha256": "e5f7782c4b808b1deadac11bab62ff885f361af0fe004e63a9378a2e68e4dfd8",
+      "generatedSourceName": "exec-35fb3e30-17a2-4367-899c-f230a95f72db.png",
+      "generatedSha256": "48cd4698f954fe2b4e008c9edd8b1195e9f8ba9907ffcd82f4c37a3f03a3f0f7",
+      "outputSha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
     }
   ]
 }
