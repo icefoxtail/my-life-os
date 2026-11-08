@@ -1116,7 +1116,8 @@
     const manifest = await response.json();
     const vehicles = Array.isArray(manifest.vehicles) ? manifest.vehicles : [];
 
-    return vehicles.map(normalizeVehicle).filter((vehicle) => vehicle.file);
+    const normalized = vehicles.map(normalizeVehicle).filter((vehicle) => vehicle.file);
+    return window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
   }
 
   function pickRoundVehicles() {

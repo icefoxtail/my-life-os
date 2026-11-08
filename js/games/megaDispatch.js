@@ -767,7 +767,9 @@
       ]);
       const list1 = res1.map(t => ({ ...t, gameId: `n_${t.id}` }));
       const list2 = res2.map(t => ({ ...t, gameId: `s_${t.id}` }));
-      state.allTrucks = [...list1, ...list2];
+      const combined = [...list1, ...list2];
+      state.allTrucks = window.SihyeonVehicleDisplay?.filterAvailable(combined) || combined;
+      if (!state.allTrucks.length) throw new Error('No approved fire vehicles available');
     } catch (e) {
       state.allTrucks = [{ gameId: 'n_pump', id: 'pump_engine', file: 'assets/vehicles/fire/pump_engine.png', name_ko: '펌프차' }];
     }
@@ -785,7 +787,7 @@
           <div class="md14-mode-row">
             <button class="mode-btn" type="button" data-mode-size="4">쉬움 🚒 (4대)</button>
             <button class="mode-btn" type="button" data-mode-size="9">보통 🚒🚒 (9대)</button>
-            <button class="mode-btn" type="button" data-mode-size="16">도전 🚒🚒🚒 (16대)</button>
+            <button class="mode-btn" type="button" data-mode-size="16">도전 🚒🚒🚒 (최대 16대)</button>
           </div>
         </div>
       </div>

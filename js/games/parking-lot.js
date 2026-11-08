@@ -639,7 +639,8 @@
     try {
       const res = await fetch(MANIFEST_URL, { cache: 'no-cache' });
       const json = await res.json();
-      const list = Array.isArray(json.vehicles) ? json.vehicles : [];
+      const raw = Array.isArray(json.vehicles) ? json.vehicles : [];
+      const list = window.SihyeonVehicleDisplay?.filterAvailable(raw) || raw;
       const map = {};
 
       list.forEach((v) => {

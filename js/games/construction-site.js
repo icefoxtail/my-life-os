@@ -375,7 +375,8 @@
       if (!response.ok) throw new Error(`Construction manifest load failed: ${response.status}`);
       const manifest = await response.json();
       const raw = Array.isArray(manifest) ? manifest : Array.isArray(manifest.vehicles) ? manifest.vehicles : [];
-      const list = raw.map(normalizeVehicle).filter((vehicle) => vehicle && vehicle.file);
+      const normalized = raw.map(normalizeVehicle).filter((vehicle) => vehicle && vehicle.file);
+      const list = window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
       if (list.length < 3) throw new Error('Construction manifest has too few vehicles.');
       return list;
     } catch (error) {

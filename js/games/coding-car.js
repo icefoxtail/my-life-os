@@ -1083,21 +1083,22 @@
 
       const json = await res.json();
       const list = Array.isArray(json.vehicles) ? json.vehicles : [];
-      return list.filter((vehicle) => vehicle && (vehicle.file || vehicle.src));
+      const normalized = list.filter((vehicle) => vehicle && (vehicle.file || vehicle.src));
+      return window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
     } catch (e) {
       console.warn('Failed to load vehicle manifest, using fallback', e);
       return [
-        { id: 'pump_engine', name_ko: '소방차', file: 'assets/vehicles/fire/pump_engine.webp', category: 'fire' },
-        { id: 'police_car', name_ko: '경찰차', file: 'assets/vehicles/police/police_car.webp', category: 'police' },
-        { id: 'bus', name_ko: '버스', file: 'assets/vehicles/transport/bus.webp', category: 'transport' },
-        { id: 'excavator', name_ko: '굴착기', file: 'assets/vehicles/construction/excavator.webp', category: 'construction' }
+        { id: 'pump_engine', name_ko: '소방차', file: 'assets/vehicles/fire/pump_engine.png', category: 'fire' },
+        { id: 'korean_police_car', name_ko: '경찰차', file: 'assets/vehicles/police/korean_police_car.png', category: 'police' },
+        { id: 'car', name_ko: '자동차', file: 'assets/vehicles/transport/car.png', category: 'transport' },
+        { id: 'excavator', name_ko: '굴착기', file: 'assets/vehicles/construction/excavator.png', category: 'construction' }
       ];
     }
   }
 
   function normalizeVehicleFile(file) {
     const raw = String(file || '');
-    if (!raw) return './assets/vehicles/fire/pump_engine.webp';
+    if (!raw) return './assets/vehicles/fire/pump_engine.png';
     if (raw.startsWith('./')) return raw;
     if (raw.startsWith('/')) return `.${raw}`;
     return `./${raw}`;
@@ -1110,7 +1111,7 @@
     const pool = favs.length ? favs : list;
 
     if (!pool.length) {
-      return { id: 'pump_engine', name_ko: '소방차', file: './assets/vehicles/fire/pump_engine.webp' };
+      return { id: 'pump_engine', name_ko: '소방차', file: './assets/vehicles/fire/pump_engine.png' };
     }
 
     const picked = pool[Math.floor(Math.random() * pool.length)];

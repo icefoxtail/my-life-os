@@ -295,7 +295,8 @@
         if(!res.ok) throw new Error('manifest fail');
         const data = await res.json();
         const raw = Array.isArray(data.vehicles) ? data.vehicles : (Array.isArray(data) ? data : []);
-        const list = raw.map(normalizeVehicle).filter(v => v && v.id && v.image && v.name);
+        const normalized = raw.map(normalizeVehicle).filter(v => v && v.id && v.image && v.name);
+        const list = window.SihyeonVehicleDisplay?.filterAvailable(normalized) || normalized;
         if(list.length < TOTAL_ROUNDS) throw new Error('too few');
         this.state.vehicles = list;
       }catch(e){

@@ -52,5 +52,10 @@ function apply(image){
  image.style.cssText='display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;object-position:center;animation:none;filter:none;transform:none;opacity:1;pointer-events:none;';
  return entry.frame;
 }
-window.SihyeonVehicleDisplay={meta,geometry,apply,reset,isClean:path=>!!meta(path)?.clean};
+// A held source remains in the manifest/archive, but is not a playable choice.
+// Use one gate for every consumer, including explicitly selected categories.
+function filterAvailable(vehicles){
+ return (Array.isArray(vehicles)?vehicles:[]).filter(vehicle=>!!meta(vehicle.file||vehicle.image||vehicle.src)?.clean);
+}
+window.SihyeonVehicleDisplay={meta,geometry,apply,reset,filterAvailable,isClean:path=>!!meta(path)?.clean};
 })();
