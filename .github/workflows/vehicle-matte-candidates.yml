@@ -1,0 +1,52 @@
+name: Vehicle matte candidates
+on:
+  pull_request:
+    paths: ['.github/workflows/vehicle-matte-candidates.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Prepare local background segmentation (no image synthesis)
+        run: python3 -m pip install 'rembg[cpu]==2.0.86'
+      - name: Five candidates only; never modify product originals
+        run: |
+          mkdir -p matte-candidates
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          from PIL import Image
+          import numpy as np
+          from rembg import remove,new_session
+          session=new_session('birefnet-general-lite')
+          files=['assets/vehicles/farm/tractor.webp','assets/vehicles/farm/plow_tractor.webp','assets/vehicles/farm/rice_transplanter.webp','assets/vehicles/farm/sprayer_truck.webp','assets/vehicles/farm/fruit_harvest_truck.webp']
+          result={'status':'CANDIDATES_ONLY_NOT_APPROVED','method':'BiRefNet-general-lite alpha segmentation; original decoded RGB unchanged; no synthesized parts','sourceCommit':subprocess.check_output(['git','rev-parse','HEAD']).decode().strip(),'entries':[]}
+          for file in files:
+              src=pathlib.Path(file);im=Image.open(src).convert('RGBA')
+              mask=remove(im.convert('RGB'),session=session,only_mask=True).convert('L')
+              a=np.array(im);m=np.array(mask)
+              a[:,:,3]=np.minimum(a[:,:,3],m)
+              target=pathlib.Path('matte-candidates')/(src.stem+'.png')
+              Image.fromarray(a).save(target)
+              result['entries'].append({'source':file,'sourceSha256':hashlib.sha256(src.read_bytes()).hexdigest(),'candidate':target.name,'candidateSha256':hashlib.sha256(target.read_bytes()).hexdigest(),'size':list(im.size),'rgbPixelsUnchanged':bool(np.array_equal(np.array(im)[:,:,:3],a[:,:,:3]))})
+              print(result['entries'][-1],flush=True)
+          weights=list(pathlib.Path.home().glob('.u2net/*lite*.onnx'))+list(pathlib.Path.home().glob('.u2net/*tiny*.onnx'))+list(pathlib.Path.home().glob('.rembg/models/birefnet-general-lite/*.onnx'))
+          result['modelFiles']=[{'name':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p in set(weights)]
+          pathlib.Path('matte-candidates/manifest.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+          PY
+      - name: Save review candidates
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: vehicle-matte-candidates-${{ github.run_id }}
+          path: matte-candidates/
+          if-no-files-found: error
+          retention-days: 14
