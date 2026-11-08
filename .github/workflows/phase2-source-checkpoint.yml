@@ -1,0 +1,46 @@
+name: Phase 2 source checkpoint
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/phase2-source-checkpoint.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-snapshot:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Archive only tracked files from the three named refs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/phase2-source"
+          git fetch --no-tags origin main feat/sihyeon-vehicle-phase2-20261108 feat/sihyeon-pattern-train-20261108
+          for spec in 'main:main' 'vehicles:feat/sihyeon-vehicle-phase2-20261108' 'train:feat/sihyeon-pattern-train-20261108'; do
+            label="${spec%%:*}"
+            branch="${spec#*:}"
+            sha="$(git rev-parse "refs/remotes/origin/$branch")"
+            printf '%s %s %s\n' "$label" "$sha" "$branch" >> "$RUNNER_TEMP/phase2-source/refs.txt"
+            git archive --format=tar "$sha" | gzip -n > "$RUNNER_TEMP/phase2-source/$label.tar.gz"
+          done
+          cd "$RUNNER_TEMP/phase2-source"
+          sha256sum *.tar.gz refs.txt > SHA256SUMS
+          cat refs.txt SHA256SUMS
+          echo 'Source preservation only; this job does not certify gameplay quality.' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: phase2-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/phase2-source/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
