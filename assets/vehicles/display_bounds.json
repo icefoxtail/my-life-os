@@ -419,47 +419,47 @@
   },
   "construction/articulated_dump_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      20,
+      271,
+      739,
+      650
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/water_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      21,
+      193,
+      743,
+      612
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/sweeper_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      14,
+      193,
+      739,
+      631
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/fuel_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      30,
+      231,
+      747,
+      622
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/lowbed_trailer.webp": {
     "box": [

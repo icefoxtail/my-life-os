@@ -1,0 +1,77 @@
+{
+  "scope": "Independent readback of four construction trucks already visually reviewed on white/dark/checkerboard backgrounds",
+  "rows": [
+    {
+      "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 93618,
+      "deliverySha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+      "generatedPngSha256": "c2268d2696fc64c0fcb5480881bff15694c35716a3e7c92961190660511d822d",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        20,
+        271,
+        739,
+        650
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/water_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 98396,
+      "deliverySha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+      "generatedPngSha256": "15a49ff64894771d5c416c079725984e23598edab52dca3201ce17a14c633db0",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        21,
+        193,
+        743,
+        612
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/sweeper_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 104614,
+      "deliverySha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+      "generatedPngSha256": "7d4f56739e3333ba837775efa4df1fecb753afb771c4e7eb2857908aa2582c9b",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        14,
+        193,
+        739,
+        631
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/fuel_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 84738,
+      "deliverySha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+      "generatedPngSha256": "9300cda724d1bb6ca0f17c933ae5c25f3205400ea424e8c4c96a7f4d4a938c68",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        30,
+        231,
+        747,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    }
+  ]
+}

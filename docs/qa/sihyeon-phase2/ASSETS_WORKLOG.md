@@ -6,7 +6,7 @@
 - AWCR taskId: `2e058ca8-0f08-4bf4-bff8-c05bfe8610b5`
 - 기준 main SHA: `58eb1fad34bba957812b08cf55bdf28c5595ca60`
 - 조사 시 원격 브랜치 SHA: `58eb1fad34bba957812b08cf55bdf28c5595ca60`
-- 현재 단계: INITIAL_REMOTE_CHECKPOINT
+- 현재 단계: ASSET_REPAIR_AND_REGRESSION_IN_PROGRESS
 - 기록 시간 기준: 2026-11-08 Asia/Seoul
 
 ## 실제 확인한 정본
@@ -95,3 +95,11 @@
 - 생성후 전달본을 그대로 복사하는 importer 옵션을 추가했다. 치수와 리사이즈 생성알파 완전일치를 검사하여 실제 시각검수한 bytes를 배포한다.
 - 미완료: 나머지 원본복원·보류확정·전수비교·게임QA·PR/운영.
 - nextAction: 추가3개 원격저장 후 공사용 트럭4개와 이동크레인 재시도 후보를 개별검수한다.
+
+## 체크포인트 4 — 공사용 트럭 4개
+
+- 선행 원격 commit: `b9103fde8cee451236a0d3f5040a07961aa994d4` (누적8개 원본복원과 공용표시, 30파일 원격 readback/로컬 동기화 확인).
+- articulated_dump_truck / water_truck / sweeper_truck / fuel_truck 4개 개별복원·3배경 비교 통과. 흰탱크/흰차체를 보존하고 난간·사다리·배관·브러시를 유지했다. 구현 및 독립 시각검수 완료, 적용누적 12개.
+- 생성출력의 비례768px 전달본 그대로 적용, 알파 readback 정확일치. 원본39 SHA와 metadata 보존, Node 51 clean×6=306 표시조건 PASS.
+- 미완료: 남은 원본 개별복원 및 정밀보류판정, 전체회귀, PR/운영.
+- nextAction: 원격 체크포인트 이후 트레일러·화물차·고소작업차·이동크레인 재시도 비교, 공항차량 개별정비.

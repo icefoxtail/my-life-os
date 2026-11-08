@@ -1,0 +1,13 @@
+{
+  "scope": "Actual cloud Chromium observations; iframe layouts are not physical phone tests",
+  "observedChecks": [
+    "36 controlled count layouts; 1,5,9,11,20,30 across 6 frame sizes; all passed after border fix",
+    "Parking real menu: incorrect tap retains car; outside drag restores car; correct drag parks one; tap completes all four; completion visible"
+  ],
+  "snapshotFilesSha256": {
+    "js/vehicle-display.js": "30e1da485f68888bd7023562474f93b7144811e43ff4f44286b2a21b8d815b6c",
+    "js/games/number-count.js": "060e0e163d60da393a1036fadd7429e118d9c9b86230ed9222faaabe47856508",
+    "js/games/parking-lot.js": "2c18fd48584b71dcc63b300996ebdb152fcf2ed33242ef7cdfbc47adaa755f3e"
+  },
+  "note": "Parking snapshot precedes the late cancelled-ghost callback fix; that follow-up was independently reproduced and verified through actual handler tests. Final integrated live testing remains pending."
+}

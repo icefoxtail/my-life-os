@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 8,
+  "actualOriginalEdits": 12,
   "entries": [
     {
       "index": 1,
@@ -2696,30 +2696,38 @@
         }
       },
       "after": {
-        "sha256": "22f92ad036ba88120aa37c5c801ddff27ca0b3595f32f4acb3cee2176af53340",
-        "bytes": 39676,
+        "sha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+        "bytes": 93618,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          20,
+          271,
+          739,
+          650
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.665359,
+        "partialAlphaFraction": 0.332386,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-articulated_dump_truck.jpg",
+      "displayNormalized": true
     },
     {
       "index": 40,
@@ -2764,30 +2772,38 @@
         }
       },
       "after": {
-        "sha256": "117c3b4a5f65e224cb1e936fc1005aabef97129bafe18df2995f08b05e516fd5",
-        "bytes": 35538,
+        "sha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+        "bytes": 98396,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          21,
+          193,
+          743,
+          612
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.61812,
+        "partialAlphaFraction": 0.379411,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-water_truck.jpg",
+      "displayNormalized": true
     },
     {
       "index": 41,
@@ -2832,30 +2848,38 @@
         }
       },
       "after": {
-        "sha256": "86467ffbc6f3d67361a7bf9aa4efc11729bfb602a6baa8909918ba3f3a46048b",
-        "bytes": 39068,
+        "sha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+        "bytes": 104614,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          14,
+          193,
+          739,
+          631
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.558892,
+        "partialAlphaFraction": 0.438865,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-sweeper_truck.jpg",
+      "displayNormalized": true
     },
     {
       "index": 42,
@@ -2900,30 +2924,38 @@
         }
       },
       "after": {
-        "sha256": "0b11cd01c3d0ac7cb62b04d3a8d6e399e63cfb695d4cafbfa8298b10ca8d5b19",
-        "bytes": 34864,
+        "sha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+        "bytes": 84738,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          30,
+          231,
+          747,
+          622
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.614034,
+        "partialAlphaFraction": 0.383915,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-fuel_truck.jpg",
+      "displayNormalized": true
     },
     {
       "index": 43,

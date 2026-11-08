@@ -369,35 +369,67 @@
   },
   "assets/vehicles/construction/articulated_dump_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-articulated_dump_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/water_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-water_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/sweeper_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-sweeper_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/fuel_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Original, generated cutout and 768px WebP individually inspected on white/dark/checker backgrounds by implementation and independent reviewer. Truck body, tank/brush/bucket, original paint and fine rail/pipe attachments retained; no visible new clipping or halo.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-fuel_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/lowbed_trailer.webp": {
     "classification": "1_ORIGINAL_REPAIR",
