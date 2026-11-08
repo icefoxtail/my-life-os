@@ -165,6 +165,270 @@
         "height": 418,
         "clean": true
       }
+    },
+    {
+      "source": "assets/vehicles/road_service/road_repair_truck.webp",
+      "sourceSha256": "6e1c30573fc874db0ac595af19094a5feb40459b7357301a1b052542f80d964b",
+      "candidate": "road_repair_truck.png",
+      "candidateSha256": "f4bf817e1eb2f64b04225282913d39855bd0f85849581dfeb2bd1afdc47d93e6",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "5e93d30d4fe23cfb383081caa717b317e8fe5af7b77e9bb0ab38f92290b753ff",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Hopper, pipework, rear rollers, white cab and full wheel outlines retained; baked checker and ground removed.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+      "outputBytes": 126912,
+      "outputRgbaSha256": "5e93d30d4fe23cfb383081caa717b317e8fe5af7b77e9bb0ab38f92290b753ff",
+      "displayBounds": {
+        "box": [
+          9,
+          84,
+          409,
+          347
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/line_painting_truck.webp",
+      "sourceSha256": "000a6f84903e5794f67c3e9571c68c0ef1942bf573a398117c528971b0c0f37a",
+      "candidate": "line_painting_truck.png",
+      "candidateSha256": "d13929ecbce09571e0732c6297bdea03aba9a7d178db2b915cda4d420d271d61",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f968ec0c1896d785fb2837718c3ed4a0224141efe5ca9be9fe2b9f80a076541d",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White cab/tank, safety rails and front nozzle/caster retained. Painted stripe on the ground is background, not a removed vehicle component.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+      "outputBytes": 107566,
+      "outputRgbaSha256": "f968ec0c1896d785fb2837718c3ed4a0224141efe5ca9be9fe2b9f80a076541d",
+      "displayBounds": {
+        "box": [
+          19,
+          77,
+          401,
+          334
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "sourceSha256": "2735a7d73b23c17c31eb86a41a4544780cd38caceeaab6980adb2c88dbb4a18a",
+      "candidate": "traffic_cone_truck.png",
+      "candidateSha256": "11788c1a611b46f26ab363894cb9bc234b987d542a07573b1142241227145f81",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ec70811d555c897469865858a7db6ab1daf8bd407f5fd7035891411dadd67594",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Cones and their white bands, arrow board and cargo rails intact; no new clipping or interior deletion observed.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+      "outputBytes": 126986,
+      "outputRgbaSha256": "ec70811d555c897469865858a7db6ab1daf8bd407f5fd7035891411dadd67594",
+      "displayBounds": {
+        "box": [
+          13,
+          70,
+          407,
+          343
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/road_sweeper.webp",
+      "sourceSha256": "6bfc0635d1d32f64983b59bad6fdf036257d4aafbdbe9419be68beccbe3c99d2",
+      "candidate": "road_sweeper.png",
+      "candidateSha256": "9fd1df5e75ef05806120a597d71163fd044a7c82530fb167eef9c8ccf0cd3289",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f79040dc31db4d3748a09467bd297d1d679968f2e0fda63015b19bb402632564",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White body, front/rear brushes and suction hose preserved; inspected open gaps and wheels.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+      "outputBytes": 109254,
+      "outputRgbaSha256": "f79040dc31db4d3748a09467bd297d1d679968f2e0fda63015b19bb402632564",
+      "displayBounds": {
+        "box": [
+          16,
+          93,
+          406,
+          357
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/salt_spreader.webp",
+      "sourceSha256": "b8cb0270b5264a8cb7451e0fff7d540410d43d00a184ed55dfea9f55d42424ee",
+      "candidate": "salt_spreader.png",
+      "candidateSha256": "ffb54da3f43c1539baa96ad0ef85d725710c8f4b26f280cf7d54799c5f401621",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "20228d0d445910c7b8a22b0e55075becc345647ba5b7541eb9d6e23efd593d8a",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White salt load is retained with hopper, rails and spreading disc; not mistaken for background.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+      "outputBytes": 130084,
+      "outputRgbaSha256": "20228d0d445910c7b8a22b0e55075becc345647ba5b7541eb9d6e23efd593d8a",
+      "displayBounds": {
+        "box": [
+          18,
+          70,
+          392,
+          348
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/snow_plow.webp",
+      "sourceSha256": "25e12e2edd1a7d0da559ccf42697c46ade6fd0871230027669a268bf34fe6167",
+      "candidate": "snow_plow.png",
+      "candidateSha256": "8b551ed040721e5a746009db98c76bf0fc5e989fb63f8d4835361626a6cff905",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "6daac21e5804241f6654d995d5761d35233877bf7f9bd1a920fb296974eba7f8",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Blade, cutting edge, upright marker flags and roof lights preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+      "outputBytes": 126864,
+      "outputRgbaSha256": "6daac21e5804241f6654d995d5761d35233877bf7f9bd1a920fb296974eba7f8",
+      "displayBounds": {
+        "box": [
+          6,
+          71,
+          403,
+          369
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "sourceSha256": "878cca912fba2a3c4ea01ba254668fd8b2106b3ac0e6bac9f1b6c4cb2e18f66b",
+      "candidate": "bridge_inspection_truck.png",
+      "candidateSha256": "4e2377ffb9559529430f97c195c88caa6469bb8cafa237497d116e7b1f982ddc",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "71b02d1a0ef6715b8841883173d0e3f792d199be382b80d38243e7cdbd97aa71",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Extended articulated boom, inspection basket rails, stabilizers and thin hydraulic members retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+      "outputBytes": 120898,
+      "outputRgbaSha256": "71b02d1a0ef6715b8841883173d0e3f792d199be382b80d38243e7cdbd97aa71",
+      "displayBounds": {
+        "box": [
+          11,
+          12,
+          402,
+          343
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "sourceSha256": "72a5b06bb5d463eb250934903a00943cfdadba8d51337892189cd4027fa3f8a3",
+      "candidate": "tunnel_cleaning_truck.png",
+      "candidateSha256": "bc08c066b83a41b010180c8ecb7db0f96181b13085cf8dee4f50fd521186f557",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13618032097,
+      "artifactSha256": "0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "e58aa86e46f64507901b46f4761825d3e5777156cfcac98c784a69c347c47a37",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White tank, pipework and front cleaning head retained; checked dark composite for holes.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "road_service",
+      "outputSha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+      "outputBytes": 114660,
+      "outputRgbaSha256": "e58aa86e46f64507901b46f4761825d3e5777156cfcac98c784a69c347c47a37",
+      "displayBounds": {
+        "box": [
+          6,
+          60,
+          396,
+          345
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
     }
   ]
 }

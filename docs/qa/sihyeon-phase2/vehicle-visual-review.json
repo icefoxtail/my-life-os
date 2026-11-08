@@ -902,27 +902,30 @@
   },
   "assets/vehicles/road_service/road_repair_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Hopper, pipework, rear rollers, white cab and full wheel outlines retained; baked checker and ground removed.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-road_repair_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/line_painting_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White cab/tank, safety rails and front nozzle/caster retained. Painted stripe on the ground is background, not a removed vehicle component.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-line_painting_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/traffic_cone_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Cones and their white bands, arrow board and cargo rails intact; no new clipping or interior deletion observed.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-traffic_cone_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/road_sign_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -934,43 +937,48 @@
   },
   "assets/vehicles/road_service/road_sweeper.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White body, front/rear brushes and suction hose preserved; inspected open gaps and wheels.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-road_sweeper.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/salt_spreader.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White salt load is retained with hopper, rails and spreading disc; not mistaken for background.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-salt_spreader.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/snow_plow.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Blade, cutting edge, upright marker flags and roof lights preserved.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-snow_plow.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/bridge_inspection_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Extended articulated boom, inspection basket rails, stabilizers and thin hydraulic members retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-bridge_inspection_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/tunnel_cleaning_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White tank, pipework and front cleaning head retained; checked dark composite for holes.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/road_service-tunnel_cleaning_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/military_special/military_truck.webp": {
     "classification": "4_PRECISE_REVIEW",

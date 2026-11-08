@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 33,
+  "actualOriginalEdits": 41,
   "entries": [
     {
       "index": 1,
@@ -5955,30 +5955,32 @@
         }
       },
       "after": {
-        "sha256": "6e1c30573fc874db0ac595af19094a5feb40459b7357301a1b052542f80d964b",
-        "bytes": 47588,
+        "sha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+        "bytes": 126912,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          9,
+          84,
+          409,
+          347
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.562104,
+        "partialAlphaFraction": 0.427314,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Hopper, pipework, rear rollers, white cab and full wheel outlines retained; baked checker and ground removed.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-road_repair_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-road_repair_truck.jpg"
     },
     {
       "index": 86,
@@ -6022,30 +6024,32 @@
         }
       },
       "after": {
-        "sha256": "000a6f84903e5794f67c3e9571c68c0ef1942bf573a398117c528971b0c0f37a",
-        "bytes": 40768,
+        "sha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+        "bytes": 107566,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          19,
+          77,
+          401,
+          334
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.654976,
+        "partialAlphaFraction": 0.32335,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White cab/tank, safety rails and front nozzle/caster retained. Painted stripe on the ground is background, not a removed vehicle component.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-line_painting_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-line_painting_truck.jpg"
     },
     {
       "index": 87,
@@ -6089,30 +6093,32 @@
         }
       },
       "after": {
-        "sha256": "2735a7d73b23c17c31eb86a41a4544780cd38caceeaab6980adb2c88dbb4a18a",
-        "bytes": 44146,
+        "sha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+        "bytes": 126986,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          13,
+          70,
+          407,
+          343
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.597296,
+        "partialAlphaFraction": 0.388687,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Cones and their white bands, arrow board and cargo rails intact; no new clipping or interior deletion observed.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-traffic_cone_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-traffic_cone_truck.jpg"
     },
     {
       "index": 88,
@@ -6223,30 +6229,32 @@
         }
       },
       "after": {
-        "sha256": "6bfc0635d1d32f64983b59bad6fdf036257d4aafbdbe9419be68beccbe3c99d2",
-        "bytes": 41360,
+        "sha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+        "bytes": 109254,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          16,
+          93,
+          406,
+          357
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.522178,
+        "partialAlphaFraction": 0.463439,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White body, front/rear brushes and suction hose preserved; inspected open gaps and wheels.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-road_sweeper.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-road_sweeper.jpg"
     },
     {
       "index": 90,
@@ -6290,30 +6298,32 @@
         }
       },
       "after": {
-        "sha256": "b8cb0270b5264a8cb7451e0fff7d540410d43d00a184ed55dfea9f55d42424ee",
-        "bytes": 45356,
+        "sha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+        "bytes": 130084,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          18,
+          70,
+          392,
+          348
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.563741,
+        "partialAlphaFraction": 0.429632,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White salt load is retained with hopper, rails and spreading disc; not mistaken for background.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-salt_spreader.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-salt_spreader.jpg"
     },
     {
       "index": 91,
@@ -6357,30 +6367,32 @@
         }
       },
       "after": {
-        "sha256": "25e12e2edd1a7d0da559ccf42697c46ade6fd0871230027669a268bf34fe6167",
-        "bytes": 42066,
+        "sha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+        "bytes": 126864,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          6,
+          71,
+          403,
+          369
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.588242,
+        "partialAlphaFraction": 0.398474,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Blade, cutting edge, upright marker flags and roof lights preserved.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-snow_plow.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-snow_plow.jpg"
     },
     {
       "index": 92,
@@ -6424,30 +6436,32 @@
         }
       },
       "after": {
-        "sha256": "878cca912fba2a3c4ea01ba254668fd8b2106b3ac0e6bac9f1b6c4cb2e18f66b",
-        "bytes": 42126,
+        "sha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+        "bytes": 120898,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          11,
+          12,
+          402,
+          343
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.68555,
+        "partialAlphaFraction": 0.301304,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Extended articulated boom, inspection basket rails, stabilizers and thin hydraulic members retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-bridge_inspection_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-bridge_inspection_truck.jpg"
     },
     {
       "index": 93,
@@ -6491,30 +6505,32 @@
         }
       },
       "after": {
-        "sha256": "72a5b06bb5d463eb250934903a00943cfdadba8d51337892189cd4027fa3f8a3",
-        "bytes": 44224,
+        "sha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+        "bytes": 114660,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          6,
+          60,
+          396,
+          345
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.566814,
+        "partialAlphaFraction": 0.426724,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White tank, pipework and front cleaning head retained; checked dark composite for holes.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/road_service-tunnel_cleaning_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/road_service-tunnel_cleaning_truck.jpg"
     },
     {
       "index": 94,

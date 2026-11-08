@@ -925,36 +925,36 @@
   },
   "road_service/road_repair_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      9,
+      84,
+      409,
+      347
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/line_painting_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      19,
+      77,
+      401,
+      334
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/traffic_cone_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      13,
+      70,
+      407,
+      343
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/road_sign_truck.webp": {
     "box": [
@@ -969,58 +969,58 @@
   },
   "road_service/road_sweeper.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      16,
+      93,
+      406,
+      357
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/salt_spreader.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      18,
+      70,
+      392,
+      348
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/snow_plow.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      6,
+      71,
+      403,
+      369
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/bridge_inspection_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      11,
+      12,
+      402,
+      343
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/tunnel_cleaning_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      6,
+      60,
+      396,
+      345
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "military_special/military_truck.webp": {
     "box": [
