@@ -1,0 +1,40 @@
+{
+  "sourceCommit": "96c84f938d8058ef2cd24029de2d0efe9ca014c8",
+  "browser": "Shared cloud Chromium via CUA",
+  "execution": "Author-scripted DOM clicks and synthetic Pointer Events in actual product UI; actual iframe CSS layout",
+  "physicalDevice": false,
+  "audibleSpeechVerified": false,
+  "resultSha256": "ea5ae31221d9c2ba38a867d9bdd632cbfa6b32232265e7e60a715ccbb077006d",
+  "sources": [
+    {
+      "file": "js/games/pattern-train-model.js",
+      "sha256": "aff31cb58d8ba2fae9d83e6596e71224aa355ee200d116136d7ebb021bd1c8a9",
+      "previewBytesEqualGit": true
+    },
+    {
+      "file": "js/games/pattern-train.js",
+      "sha256": "51d9b649b9eebf66b59a8e68441ff9d3f1e4c79d60e632c69aa32632b397d682",
+      "previewBytesEqualGit": true
+    },
+    {
+      "file": "css/games/pattern-train.css",
+      "sha256": "d21c7eb5b290c35a6369a37b0de62183f99c9aefd145326f3e3c3f39293716d3",
+      "previewBytesEqualGit": true
+    },
+    {
+      "file": "scripts/qa-pattern-train.html",
+      "sha256": "1901e24eae77f292524482ad1601daf70b8f9d842e7ddcb96b197820ccc980be",
+      "previewBytesEqualGit": true
+    },
+    {
+      "file": "scripts/qa-pattern-train-browser.js",
+      "sha256": "46ff54bc8be022536f696b91fa18b12111bdb682abb63b2a16f566350d3eb13d",
+      "previewBytesEqualGit": true
+    },
+    {
+      "file": "js/play-settings.js",
+      "sha256": "bb5a4cbd9e0d74168e7c47bc9e518409e7fa8fb4e288880ca0f90e2c977e7fcd",
+      "previewBytesEqualGit": true
+    }
+  ]
+}

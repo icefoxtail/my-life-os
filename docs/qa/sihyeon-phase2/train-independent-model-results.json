@@ -1,0 +1,344 @@
+{
+  "scope": "Independent model/math/state verification only; not browser/device/deployment PASS",
+  "sourceSha256": "aff31cb58d8ba2fae9d83e6596e71224aa355ee200d116136d7ebb021bd1c8a9",
+  "status": "PASS",
+  "groups": [
+    {
+      "name": "catalogue is at least sixteen structural activities, with all four recommended ages",
+      "status": "PASS",
+      "assertions": 67
+    },
+    {
+      "name": "candidate generator agrees with an independent residue-class oracle",
+      "status": "PASS",
+      "assertions": 243
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a4-first",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a4-colors",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a4-middle",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a4-extend",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a4-pair",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a5-aab",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a5-abb",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a5-abc",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a5-abba",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a5-aabb",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a6-aabc",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a6-abcc",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a6-abac",
+      "status": "PASS",
+      "assertions": 6
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a6-abbc",
+      "status": "PASS",
+      "assertions": 6
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a7-ambiguous",
+      "status": "PASS",
+      "assertions": 6
+    },
+    {
+      "name": "exhaustive visible-rule verdict: a7-abacbc",
+      "status": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "least repeating unit: a7-unit",
+      "status": "PASS",
+      "assertions": 10
+    },
+    {
+      "name": "least repeating unit: a7-unit-four",
+      "status": "PASS",
+      "assertions": 9
+    },
+    {
+      "name": "created rule and copied carriages: a6-copy",
+      "status": "PASS",
+      "assertions": 272
+    },
+    {
+      "name": "created rule and copied carriages: a7-alternative",
+      "status": "PASS",
+      "assertions": 66
+    },
+    {
+      "name": "reported repeat length actually repeats the entire constructed train",
+      "status": "PASS",
+      "assertions": 6
+    },
+    {
+      "name": "all twenty workshop tasks complete through reducer actions; duplicate trip blocked",
+      "status": "PASS",
+      "assertions": 322
+    },
+    {
+      "name": "mistakes are retained and can be replaced, removed, swapped and undone",
+      "status": "PASS",
+      "assertions": 23
+    },
+    {
+      "name": "free workshop accepts every complete arbitrary arrangement without grading",
+      "status": "PASS",
+      "assertions": 514
+    },
+    {
+      "name": "restoration rejects malformed data and keeps only valid bounded history",
+      "status": "PASS",
+      "assertions": 23
+    },
+    {
+      "name": "saved free theme names cannot select inherited object properties",
+      "status": "PASS",
+      "assertions": 4
+    },
+    {
+      "name": "saved nested JSON cannot inject fields through undo history",
+      "status": "PASS",
+      "assertions": 3
+    }
+  ],
+  "totalAssertions": 1645,
+  "boardVerdicts": 14684,
+  "catalogue": [
+    {
+      "id": "a4-first",
+      "age": 4,
+      "kind": "fill",
+      "structuralSignature": "{\"kind\":\"fill\",\"unit\":[0,1],\"size\":6,\"mask\":[1,1,1,1,1,0],\"periods\":[2]}",
+      "examined": 2,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a4-colors",
+      "age": 4,
+      "kind": "fill",
+      "structuralSignature": "{\"kind\":\"fill\",\"unit\":[0,1],\"size\":6,\"mask\":[1,1,1,0,1,0],\"periods\":[2]}",
+      "examined": 4,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a4-middle",
+      "age": 4,
+      "kind": "repair",
+      "structuralSignature": "{\"kind\":\"repair\",\"unit\":[0,1],\"size\":6,\"mask\":[1,1,0,1,1,1],\"periods\":[2]}",
+      "examined": 2,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a4-extend",
+      "age": 4,
+      "kind": "extend",
+      "structuralSignature": "{\"kind\":\"extend\",\"unit\":[0,1],\"size\":8,\"mask\":[1,1,1,1,1,1,0,0],\"periods\":[2]}",
+      "examined": 4,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a4-pair",
+      "age": 4,
+      "kind": "fill",
+      "structuralSignature": "{\"kind\":\"fill\",\"unit\":[0,1],\"size\":8,\"mask\":[0,1,1,0,1,1,0,1],\"periods\":[2]}",
+      "examined": 8,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a5-aab",
+      "age": 5,
+      "kind": "fill",
+      "structuralSignature": "{\"kind\":\"fill\",\"unit\":[0,0,1],\"size\":6,\"mask\":[1,1,0,1,1,0],\"periods\":[3]}",
+      "examined": 4,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a5-abb",
+      "age": 5,
+      "kind": "fill",
+      "structuralSignature": "{\"kind\":\"fill\",\"unit\":[0,1,1],\"size\":6,\"mask\":[1,0,1,1,0,0],\"periods\":[3]}",
+      "examined": 8,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a5-abc",
+      "age": 5,
+      "kind": "extend",
+      "structuralSignature": "{\"kind\":\"extend\",\"unit\":[0,1,2],\"size\":8,\"mask\":[1,1,1,1,1,1,0,0],\"periods\":[3]}",
+      "examined": 9,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a5-abba",
+      "age": 5,
+      "kind": "repair",
+      "structuralSignature": "{\"kind\":\"repair\",\"unit\":[0,1,1,0],\"size\":8,\"mask\":[1,1,0,1,0,1,1,0],\"periods\":[4]}",
+      "examined": 8,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a5-aabb",
+      "age": 5,
+      "kind": "fill",
+      "structuralSignature": "{\"kind\":\"fill\",\"unit\":[0,0,1,1],\"size\":8,\"mask\":[1,0,1,0,1,0,1,0],\"periods\":[4]}",
+      "examined": 16,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a6-aabc",
+      "age": 6,
+      "kind": "extend",
+      "structuralSignature": "{\"kind\":\"extend\",\"unit\":[0,0,1,2],\"size\":12,\"mask\":[1,1,1,1,1,1,1,1,0,0,0,0],\"periods\":[4]}",
+      "examined": 81,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a6-abcc",
+      "age": 6,
+      "kind": "repair",
+      "structuralSignature": "{\"kind\":\"repair\",\"unit\":[0,1,2,2],\"size\":12,\"mask\":[1,1,1,0,1,1,0,1,0,1,1,0],\"periods\":[4]}",
+      "examined": 81,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a6-abac",
+      "age": 6,
+      "kind": "translate",
+      "structuralSignature": "{\"kind\":\"translate\",\"unit\":[0,1,0,2],\"reference\":[0,1,0,2],\"size\":8,\"mask\":[0,0,0,0,0,0,0,0],\"periods\":[4]}",
+      "examined": 6561,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a6-copy",
+      "age": 6,
+      "kind": "copy",
+      "structuralSignature": "{\"kind\":\"copy\",\"size\":9,\"mask\":[0,0,0,0,0,0,0,0,0],\"seed\":3}",
+      "validSeedCount": 27
+    },
+    {
+      "id": "a6-abbc",
+      "age": 6,
+      "kind": "translate",
+      "structuralSignature": "{\"kind\":\"translate\",\"unit\":[0,1,1,2],\"reference\":[0,1,1,2],\"size\":8,\"mask\":[0,0,0,0,0,0,0,0],\"periods\":[4]}",
+      "examined": 6561,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a7-unit",
+      "age": 7,
+      "kind": "unit",
+      "structuralSignature": "{\"kind\":\"unit\",\"unit\":[0,1,0],\"size\":9,\"mask\":[1,1,1,1,1,1,1,1,1],\"periods\":[3]}"
+    },
+    {
+      "id": "a7-unit-four",
+      "age": 7,
+      "kind": "unit",
+      "structuralSignature": "{\"kind\":\"unit\",\"unit\":[0,1,2,1],\"size\":12,\"mask\":[1,1,1,1,1,1,1,1,1,1,1,1],\"periods\":[4]}"
+    },
+    {
+      "id": "a7-alternative",
+      "age": 7,
+      "kind": "alternative",
+      "structuralSignature": "{\"kind\":\"alternative\",\"reference\":[0,0,1,1],\"size\":12,\"mask\":[0,0,0,0,0,0,0,0,0,0,0,0],\"seed\":4}",
+      "validSeedCount": 4
+    },
+    {
+      "id": "a7-ambiguous",
+      "age": 7,
+      "kind": "ambiguous",
+      "structuralSignature": "{\"kind\":\"ambiguous\",\"size\":8,\"mask\":[1,1,0,0,1,1,0,0],\"periods\":[2,3,4]}",
+      "examined": 16,
+      "validCompletions": 4,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    },
+    {
+      "id": "a7-abacbc",
+      "age": 7,
+      "kind": "extend",
+      "structuralSignature": "{\"kind\":\"extend\",\"unit\":[0,1,0,2,1,2],\"size\":12,\"mask\":[1,1,1,1,1,1,0,0,0,0,0,0],\"periods\":[6]}",
+      "examined": 729,
+      "validCompletions": 1,
+      "falseAccepts": 0,
+      "falseRejects": 0
+    }
+  ],
+  "findings": [],
+  "structuralActivityCount": 20
+}

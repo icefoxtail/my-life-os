@@ -1,0 +1,163 @@
+{
+  "scope": "Independent controlled Node VM of actual UI closures and integration functions; no browser layout, real storage quota, audio listening or device PASS",
+  "sourceSha256": "2c63c7dd7ae80f301786c3cfd04e0d24f9b13d7489fd6d87f77e2f0eb8ac60f1",
+  "integrationSourceSha256": "393a10840c46f770314003ba06fded203804555c774dcbf858b1277913c6b1c1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "actual index launcher cleans prior games and keeps an exit when the model or UI module is missing",
+      "status": "PASS",
+      "detail": {
+        "cases": [
+          "normal",
+          "model module missing",
+          "UI module missing"
+        ],
+        "actualIndexFunctions": [
+          "cleanupActiveGame",
+          "openGameShell",
+          "openPatternTrainGame",
+          "gameOptions",
+          "renderGameLoadError"
+        ],
+        "browserRendering": false
+      }
+    },
+    {
+      "name": "standalone model-missing view provides a native exit without reading or overwriting saved work",
+      "status": "PASS",
+      "detail": {
+        "nativeFallbackExit": true,
+        "duplicateClickCount": 1,
+        "savedWorkUntouchedByFailure": true,
+        "restoredAfterModuleAvailable": true
+      }
+    },
+    {
+      "name": "all four five-stop sessions run through production UI click transitions",
+      "status": "PASS",
+      "detail": {
+        "sessions": 4,
+        "trips": 20,
+        "input": "controlled onClick calls, no browser"
+      }
+    },
+    {
+      "name": "actual generated guide HTML exposes the rule used by model judgement",
+      "status": "PASS",
+      "detail": {
+        "checkedTasks": 20,
+        "scope": "generated HTML semantics, not visual placement"
+      }
+    },
+    {
+      "name": "arrival leaves challenge navigation enabled and preserves the completed train after a detour",
+      "status": "PASS",
+      "detail": {
+        "originatingFinding": "root real-browser review",
+        "phasesChecked": [
+          "BUILDING",
+          "RUNNING",
+          "ARRIVED"
+        ],
+        "completedBoardPreserved": true
+      }
+    },
+    {
+      "name": "mistake, replacement, undo, removal, explicit restart and return home",
+      "status": "PASS",
+      "detail": {
+        "retainedWrongAnswer": true,
+        "homePreservedBoard": true,
+        "resetRequiredExplicitConfirmation": true
+      }
+    },
+    {
+      "name": "palette and carriage drag success, outside drop, cancel, capture loss and secondary finger",
+      "status": "PASS",
+      "detail": {
+        "cases": [
+          "outside",
+          "pointercancel",
+          "secondary pointer",
+          "lost capture",
+          "successful placement",
+          "duplicate pointerup",
+          "return to palette"
+        ],
+        "physicalTouch": false
+      }
+    },
+    {
+      "name": "long second-finger hold cannot create a delayed click after gesture cancellation",
+      "status": "PASS",
+      "detail": {
+        "secondaryHoldMs": 1600,
+        "boardPreserved": true,
+        "physicalTouch": false
+      }
+    },
+    {
+      "name": "resize, orientation, Escape and teardown cancel drag without changing a board",
+      "status": "PASS",
+      "detail": {
+        "layoutResize": "handler only; visual orientation tested separately"
+      }
+    },
+    {
+      "name": "long held drag cancellation by resize, blur or Escape preserves the source carriage",
+      "status": "PASS",
+      "detail": {
+        "cancellationCauses": 3,
+        "heldMs": 1600,
+        "physicalTouch": false
+      }
+    },
+    {
+      "name": "readable old storage plus rejected writes keeps newest board across switching and reopening",
+      "status": "PASS",
+      "detail": {
+        "reads": 3,
+        "writes": 12,
+        "voiceCalls": 0,
+        "confetti": 0,
+        "homes": 0,
+        "durableStillOld": true,
+        "sameLoadedPageMemoryPreserved": true
+      }
+    },
+    {
+      "name": "fresh page context restores committed progress and safely rejects corrupt storage",
+      "status": "PASS",
+      "detail": {
+        "freshContextRestore": true,
+        "malformedAndDeniedReads": "recover editable board"
+      }
+    },
+    {
+      "name": "interrupted trip, late arrival and repeated render cannot complete another task",
+      "status": "PASS",
+      "detail": {
+        "oldTripCallbacksIgnored": true,
+        "duplicateListeners": false
+      }
+    },
+    {
+      "name": "voice rejection, throw and stalled speech use visual fallback; mute and late rejection are safe",
+      "status": "PASS",
+      "detail": {
+        "audioHeard": false,
+        "controlledFailureModes": 5
+      }
+    },
+    {
+      "name": "free board, theme switching and challenge independence preserve children choices",
+      "status": "PASS",
+      "detail": {
+        "ageFourMayPlaySeven": true,
+        "freeWorkPreservedAcrossThemes": true
+      }
+    }
+  ],
+  "assertions": 314
+}
