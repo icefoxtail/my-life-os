@@ -1417,5 +1417,104 @@
     "width": 512,
     "height": 512,
     "clean": true
+  },
+  "fire_special/aerial_ladder_truck.webp": {
+    "box": [
+      10,
+      88,
+      512,
+      442
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/fire_tank.webp": {
+    "box": [
+      8,
+      153,
+      495,
+      415
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/airport_crash_tender.webp": {
+    "box": [
+      7,
+      119,
+      501,
+      421
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/wildfire_6x6_truck.webp": {
+    "box": [
+      1,
+      95,
+      506,
+      419
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/robot_demolition_fire_vehicle.webp": {
+    "box": [
+      3,
+      16,
+      501,
+      447
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/smoke_extraction_fan_truck.webp": {
+    "box": [
+      0,
+      87,
+      503,
+      390
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/water_tanker.webp": {
+    "box": [
+      10,
+      102,
+      511,
+      373
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/articulating_boom_truck.webp": {
+    "box": [
+      5,
+      35,
+      491,
+      399
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
+  },
+  "fire_special/fire_command_suv.webp": {
+    "box": [
+      0,
+      73,
+      504,
+      404
+    ],
+    "width": 512,
+    "height": 512,
+    "clean": true
   }
 }

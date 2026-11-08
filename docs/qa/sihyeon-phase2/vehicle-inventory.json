@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 65,
+  "actualOriginalEdits": 74,
   "entries": [
     {
       "index": 1,
@@ -9056,30 +9056,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "14572a5c90294bfba518347d0838223ec1533d2a9ab1fd2d1798334aabfea61c",
-        "bytes": 46582,
+        "sha256": "63b368633363859e1ba9ffaa7ba7ab8e304dbb9d17c3864440926909ba8b06de",
+        "bytes": 170764,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
+          10,
+          88,
           512,
-          512
+          442
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.537045,
+        "partialAlphaFraction": 0.457455,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Basket, front monitor, white ladder rungs and equipment panels retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-aerial_ladder_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-aerial_ladder_truck.jpg"
     },
     {
       "index": 131,
@@ -9110,30 +9112,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "b851c720e821a97f7879a028daf04104624768742a208d3d9c2e2d997f1a755f",
-        "bytes": 41486,
+        "sha256": "ad2c7336d3c26fa0c8f8eacaccd179eb6b669f93f0eebbfa465c982b0efdb9b7",
+        "bytes": 152666,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          8,
+          153,
+          495,
+          415
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.616344,
+        "partialAlphaFraction": 0.378616,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Continuous track outlines, road wheels and top monitor retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-fire_tank.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-fire_tank.jpg"
     },
     {
       "index": 132,
@@ -9164,30 +9168,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "df733f699802182e9e74e7e5eb50d7c603f49be86b2dbd347c5a2299eb50cdf5",
-        "bytes": 34614,
+        "sha256": "b52fadcf1dd336d67ab9b40a7822b1a3f8a98bf4860d267d36b30e5ef05bc0d1",
+        "bytes": 137068,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          7,
+          119,
+          501,
+          421
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.633938,
+        "partialAlphaFraction": 0.348694,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Water monitor, roof rails, glazing and all six wheel outlines preserved.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-airport_crash_tender.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-airport_crash_tender.jpg"
     },
     {
       "index": 133,
@@ -9218,30 +9224,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "a8a2b563744265fd71a37c6c2aa30cc3d878a43e2cf3e5bc2a9fd4b8ebb81351",
-        "bytes": 44020,
+        "sha256": "6f7daf0c9068e53b425a11d54debc3e866f43d60a75bbfe4878ac733d8d90717",
+        "bytes": 171838,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          1,
+          95,
+          506,
+          419
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.541309,
+        "partialAlphaFraction": 0.441082,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Large tire tread, brush bars and rooftop rail geometry retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-wildfire_6x6_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-wildfire_6x6_truck.jpg"
     },
     {
       "index": 134,
@@ -9272,30 +9280,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "ba844213c8b47234454dd828e26ad428830c5091a2ee69399616815def7fba27",
-        "bytes": 43126,
+        "sha256": "eef29b0972e74063f23a21c493120b450e379046e8ae1185813aef2f651eccd6",
+        "bytes": 166344,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          3,
+          16,
+          501,
+          447
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.622395,
+        "partialAlphaFraction": 0.370247,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Drill tip, hose, arm joints, support legs and tracks retained. Existing near-frame drill clearance is not invented or enlarged.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-robot_demolition_fire_vehicle.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-robot_demolition_fire_vehicle.jpg"
     },
     {
       "index": 135,
@@ -9326,30 +9336,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "f054112b8bc732ea3bba64fb198794d5a5e5877833d5d0c0b2e1e81dc4514a96",
-        "bytes": 37460,
+        "sha256": "368917d59b5e10ab510947f7cca8adf6033aa69bad43fbf457b2fe6167ec3fec",
+        "bytes": 157000,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
           0,
-          0,
-          512,
-          512
+          87,
+          503,
+          390
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.579559,
+        "partialAlphaFraction": 0.415142,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Fan hub, blades, mesh, red ring and cab remain; inspected inner fan details.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-smoke_extraction_fan_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-smoke_extraction_fan_truck.jpg"
     },
     {
       "index": 136,
@@ -9380,30 +9392,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "52f7a3a87c0fe964f9bb8b6a984694cae020a0b368029246ca7bb81c5b811f09",
-        "bytes": 35608,
+        "sha256": "ef24041e91eca16e5b2074063a5a59f7985460401a8c660f2e335b1bf2357b87",
+        "bytes": 140454,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          10,
+          102,
+          511,
+          373
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.597881,
+        "partialAlphaFraction": 0.381428,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Long tank, rails, hose and tire outlines retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-water_tanker.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-water_tanker.jpg"
     },
     {
       "index": 137,
@@ -9434,30 +9448,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "5aabf8dfffa6ed356a569c104f40f88acaf269645e0a6e8d47b7f8d03812d27c",
-        "bytes": 39032,
+        "sha256": "b49a1bc36c6dbf77921ae470013a504651791657d72d264fcf9e38578695f69c",
+        "bytes": 162034,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          5,
+          35,
+          491,
+          399
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.574718,
+        "partialAlphaFraction": 0.413891,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "White articulated boom, struts, basket rails and white equipment panels retained without holes.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-articulating_boom_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-articulating_boom_truck.jpg"
     },
     {
       "index": 138,
@@ -9488,30 +9504,32 @@
         "displayBounds": null
       },
       "after": {
-        "sha256": "408480fd1b1daf628c579041cb04f7c31cc0c3ec18fa9a936d3f43b2d1678037",
-        "bytes": 33738,
+        "sha256": "c18c07124bfa80051de5b85b9f764946089c76a461275c5a1f7f5f127c55e538",
+        "bytes": 132086,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
           0,
-          0,
-          512,
-          512
+          73,
+          504,
+          404
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.608765,
+        "partialAlphaFraction": 0.387691,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Opaque white backdrop visible around vehicle",
-      "background": "baked-white",
+      "finding": "Two thin roof antennas, lightbar, bumper/winch and wheel tread retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/fire_special-fire_command_suv.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/fire_special-fire_command_suv.jpg"
     }
   ],
   "beforeContactSheets": [

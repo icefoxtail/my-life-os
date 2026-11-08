@@ -1221,6 +1221,303 @@
         "height": 512,
         "clean": true
       }
+    },
+    {
+      "source": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+      "sourceSha256": "14572a5c90294bfba518347d0838223ec1533d2a9ab1fd2d1798334aabfea61c",
+      "candidate": "aerial_ladder_truck.png",
+      "candidateSha256": "ec8947d2a8605eab8739ddea079c821227f6001fd431518155a77595850812ff",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "cb0821eba511e9b2a788a872491c5ae43e0ade38c4e0ae482c0a5d62c80c46d0",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Basket, front monitor, white ladder rungs and equipment panels retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "63b368633363859e1ba9ffaa7ba7ab8e304dbb9d17c3864440926909ba8b06de",
+      "outputBytes": 170764,
+      "outputRgbaSha256": "cb0821eba511e9b2a788a872491c5ae43e0ade38c4e0ae482c0a5d62c80c46d0",
+      "displayBounds": {
+        "box": [
+          10,
+          88,
+          512,
+          442
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/fire_tank.webp",
+      "sourceSha256": "b851c720e821a97f7879a028daf04104624768742a208d3d9c2e2d997f1a755f",
+      "candidate": "fire_tank.png",
+      "candidateSha256": "c78f312ed9f7c8c5309fafa42e74c4effdf8db1f61427115be19445fdc86f8a7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "51022b8300495c53b3e7fa808cf2568803f7f890145feb22fdb70336934041a1",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Continuous track outlines, road wheels and top monitor retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "ad2c7336d3c26fa0c8f8eacaccd179eb6b669f93f0eebbfa465c982b0efdb9b7",
+      "outputBytes": 152666,
+      "outputRgbaSha256": "51022b8300495c53b3e7fa808cf2568803f7f890145feb22fdb70336934041a1",
+      "displayBounds": {
+        "box": [
+          8,
+          153,
+          495,
+          415
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/airport_crash_tender.webp",
+      "sourceSha256": "df733f699802182e9e74e7e5eb50d7c603f49be86b2dbd347c5a2299eb50cdf5",
+      "candidate": "airport_crash_tender.png",
+      "candidateSha256": "76d6816ade5af90b20007570c6e3fb0d571167fe46d3db5d0d1de6ded9e4d0c7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "d8bee00f01ca1527962e541d9ef96eb54eea2fa320622d3495a67a6b08ce7b97",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Water monitor, roof rails, glazing and all six wheel outlines preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "b52fadcf1dd336d67ab9b40a7822b1a3f8a98bf4860d267d36b30e5ef05bc0d1",
+      "outputBytes": 137068,
+      "outputRgbaSha256": "d8bee00f01ca1527962e541d9ef96eb54eea2fa320622d3495a67a6b08ce7b97",
+      "displayBounds": {
+        "box": [
+          7,
+          119,
+          501,
+          421
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+      "sourceSha256": "a8a2b563744265fd71a37c6c2aa30cc3d878a43e2cf3e5bc2a9fd4b8ebb81351",
+      "candidate": "wildfire_6x6_truck.png",
+      "candidateSha256": "8ed9a78451d16ca1a75967f4bfc7a44b5a4b18a029fae29506d76b53dabfe624",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "13b8603b59b2b556c1a720c11cae6a25c56f4c2894161fe3c9e40a6b765671d4",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Large tire tread, brush bars and rooftop rail geometry retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "6f7daf0c9068e53b425a11d54debc3e866f43d60a75bbfe4878ac733d8d90717",
+      "outputBytes": 171838,
+      "outputRgbaSha256": "13b8603b59b2b556c1a720c11cae6a25c56f4c2894161fe3c9e40a6b765671d4",
+      "displayBounds": {
+        "box": [
+          1,
+          95,
+          506,
+          419
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+      "sourceSha256": "ba844213c8b47234454dd828e26ad428830c5091a2ee69399616815def7fba27",
+      "candidate": "robot_demolition_fire_vehicle.png",
+      "candidateSha256": "b34bc42370a331026cb838d51470a7c24a096d2a87bd37025b203e13d900b9c4",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "2807ac19df608cf446fce3e36674012ffd8560ebcdc1ba70ccefb00c9ea9f37e",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Drill tip, hose, arm joints, support legs and tracks retained. Existing near-frame drill clearance is not invented or enlarged.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "eef29b0972e74063f23a21c493120b450e379046e8ae1185813aef2f651eccd6",
+      "outputBytes": 166344,
+      "outputRgbaSha256": "2807ac19df608cf446fce3e36674012ffd8560ebcdc1ba70ccefb00c9ea9f37e",
+      "displayBounds": {
+        "box": [
+          3,
+          16,
+          501,
+          447
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+      "sourceSha256": "f054112b8bc732ea3bba64fb198794d5a5e5877833d5d0c0b2e1e81dc4514a96",
+      "candidate": "smoke_extraction_fan_truck.png",
+      "candidateSha256": "286a5b0bd38b31a548ed63232718ab7fa02560d8923fd2112cf81534b21b230d",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f72920b234daa4465f5d36617d2284a36b7cfe027d8e3757a679f01fed84108e",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Fan hub, blades, mesh, red ring and cab remain; inspected inner fan details.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "368917d59b5e10ab510947f7cca8adf6033aa69bad43fbf457b2fe6167ec3fec",
+      "outputBytes": 157000,
+      "outputRgbaSha256": "f72920b234daa4465f5d36617d2284a36b7cfe027d8e3757a679f01fed84108e",
+      "displayBounds": {
+        "box": [
+          0,
+          87,
+          503,
+          390
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/water_tanker.webp",
+      "sourceSha256": "52f7a3a87c0fe964f9bb8b6a984694cae020a0b368029246ca7bb81c5b811f09",
+      "candidate": "water_tanker.png",
+      "candidateSha256": "7cda51f3fd516a63a9ff47b5ee0ea2248177787f6ccbeb8051a177773d9d9d89",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "cf70505cf7a9a915c510895d1d5f1aef3a76959a374f800fd0dfb05a607b11b2",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Long tank, rails, hose and tire outlines retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "ef24041e91eca16e5b2074063a5a59f7985460401a8c660f2e335b1bf2357b87",
+      "outputBytes": 140454,
+      "outputRgbaSha256": "cf70505cf7a9a915c510895d1d5f1aef3a76959a374f800fd0dfb05a607b11b2",
+      "displayBounds": {
+        "box": [
+          10,
+          102,
+          511,
+          373
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+      "sourceSha256": "5aabf8dfffa6ed356a569c104f40f88acaf269645e0a6e8d47b7f8d03812d27c",
+      "candidate": "articulating_boom_truck.png",
+      "candidateSha256": "e2b1ad344268af4032eb13c44a79a4a9a65c849728d8a7fbb219014523f89e23",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "7eaf383b55c50b5471a9b05273b9cca813fba8149af88c93d8d2c83f317e249b",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White articulated boom, struts, basket rails and white equipment panels retained without holes.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "b49a1bc36c6dbf77921ae470013a504651791657d72d264fcf9e38578695f69c",
+      "outputBytes": 162034,
+      "outputRgbaSha256": "7eaf383b55c50b5471a9b05273b9cca813fba8149af88c93d8d2c83f317e249b",
+      "displayBounds": {
+        "box": [
+          5,
+          35,
+          491,
+          399
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/fire_special/fire_command_suv.webp",
+      "sourceSha256": "408480fd1b1daf628c579041cb04f7c31cc0c3ec18fa9a936d3f43b2d1678037",
+      "candidate": "fire_command_suv.png",
+      "candidateSha256": "6d7579806c289a630bebfc4efbbc22aa8d2fb2afe4b864bc1e4eb6122ff98ed7",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617423904,
+      "artifactSha256": "d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "1186324684dea7a58a5bd389ecc60f6564fd0e4a001c36626b7093586a8c83d7",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Two thin roof antennas, lightbar, bumper/winch and wheel tread retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "fire_special",
+      "outputSha256": "c18c07124bfa80051de5b85b9f764946089c76a461275c5a1f7f5f127c55e538",
+      "outputBytes": 132086,
+      "outputRgbaSha256": "1186324684dea7a58a5bd389ecc60f6564fd0e4a001c36626b7093586a8c83d7",
+      "displayBounds": {
+        "box": [
+          0,
+          73,
+          504,
+          404
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
     }
   ]
 }

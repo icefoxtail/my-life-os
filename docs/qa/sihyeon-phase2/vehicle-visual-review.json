@@ -1329,74 +1329,83 @@
   },
   "assets/vehicles/fire_special/aerial_ladder_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Basket, front monitor, white ladder rungs and equipment panels retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-aerial_ladder_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/fire_tank.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Continuous track outlines, road wheels and top monitor retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-fire_tank.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/airport_crash_tender.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Water monitor, roof rails, glazing and all six wheel outlines preserved.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-airport_crash_tender.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/wildfire_6x6_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Large tire tread, brush bars and rooftop rail geometry retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-wildfire_6x6_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Drill tip, hose, arm joints, support legs and tracks retained. Existing near-frame drill clearance is not invented or enlarged.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-robot_demolition_fire_vehicle.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Fan hub, blades, mesh, red ring and cab remain; inspected inner fan details.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-smoke_extraction_fan_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/water_tanker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Long tank, rails, hose and tire outlines retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-water_tanker.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/articulating_boom_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "White articulated boom, struts, basket rails and white equipment panels retained without holes.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-articulating_boom_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/fire_command_suv.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Opaque white backdrop visible around vehicle",
-    "background": "baked-white",
+    "finding": "Two thin roof antennas, lightbar, bumper/winch and wheel tread retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/fire_special-fire_command_suv.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   }
 }
