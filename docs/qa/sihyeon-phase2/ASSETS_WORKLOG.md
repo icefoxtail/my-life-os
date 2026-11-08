@@ -55,3 +55,14 @@
 ## 파일 소유권
 
 자동차 구현은 차량 자산·공용 차량 표시·해당 QA만, 기차 구현은 기차 소스·패턴 데이터·기차 전용 자산만 수정한다. index.html/sw.js/공용 메뉴/공용 설정/CI는 통합 담당자만 수정한다. 검수자는 제품 파일을 덮어쓰지 않는다. force push, reset --hard, 브랜치 삭제 금지.
+
+## 체크포인트 1 — 전체 원본 조사 완료
+
+- 최초 원격 보존 SHA: `dc42230223749628e294eb05cb902bce6ff6a188`, GitHub에서 WORKLOG 전체 readback 확인.
+- 완료: 129+9=138 고유파일 디코딩·SHA·치수·알파·사용처 조사, 원본9장 contact sheet 직접 시각 검토. 초기 4분류는 정비78/표시39/전체정상0/정밀21.
+- 조사 코드: `scripts/vehicle-phase2-audit.py` (원본 read-only).
+- 증거: `vehicle-inventory.json`, `vehicle-visual-review.json`, `VEHICLE_PHASE2_AUDIT.md`, `contact/vehicles-before-01.jpg`~`09.jpg`.
+- 실제 원본 변경: 이 단계 0개. 1개 road_roller 생성 후보는 아직 미적용·검수 대기.
+- 발견: 정비소는 공유래스터 대신 인라인SVG. 항타기·천공기·여객기는 원본 프레임 잘림, 특수차18개는 작고 일부 하단이 잘린 원본이므로 정밀검수.
+- 미완료: 원본복원, 공용표시 보완, 기존39 회귀, 게임브라우저, PR/운영.
+- nextAction: 조사 파일을 원격 저장한 뒤 첫 원본복원 후보를 흰/어둠/격자 배경에서 비교·검수, 작은 묶음 단위로 적용.
