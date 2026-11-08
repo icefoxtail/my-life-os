@@ -264,7 +264,7 @@
       "path": "assets/vehicles/farm/rice_transplanter.webp",
       "gitBlobSha": "1f29566ad81f6eb7d6d15a502314dd6c058099ff",
       "baselineGitBlobSha": "5c99f9055143421bf308a62d91ddae8216799b85",
-      "sourceSha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
+      "sourceSha256": "3486452108836753faabce543ecbc0f9bc5a731268c97b984d6e3c63cde05170",
       "resultSha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
       "evidence": "independent/new-candidates-r1.md; grid-a review"
     },
@@ -624,7 +624,7 @@
       "path": "assets/vehicles/port/harbor_crane.webp",
       "gitBlobSha": "04cedadf970492257b260857e67e019ec71ca545",
       "baselineGitBlobSha": "0dc3e13c91352b25263b17fd953faf9e3291fe95",
-      "sourceSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
+      "sourceSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
       "resultSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
       "evidence": "independent/new-candidates-r1.md"
     },
@@ -632,7 +632,7 @@
       "path": "assets/vehicles/port/ferry.webp",
       "gitBlobSha": "58ae98947056227d5d1a68eecbc15fc1e57beffb",
       "baselineGitBlobSha": "bed1c8b171946479b25547a2bd120a9ce491c3d7",
-      "sourceSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
+      "sourceSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
       "resultSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
       "evidence": "independent/new-candidates-r1.md"
     },
@@ -640,7 +640,7 @@
       "path": "assets/vehicles/road_service/road_sign_truck.webp",
       "gitBlobSha": "123cfb82d6abd5dfa3d45e48ff45ad39b750f4c2",
       "baselineGitBlobSha": "5c805fc61fa50119905222552f0be82a4452f7ee",
-      "sourceSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
+      "sourceSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
       "resultSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
       "evidence": "independent/new-candidates-r1.md"
     }
