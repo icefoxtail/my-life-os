@@ -5,7 +5,7 @@
   const game = () => window.SihyeonGames.patternTrain;
   const model = window.SihyeonPatternTrainModel;
   const root = document.querySelector('#train-fixture');
-  const result = { scope: 'Author scripted browser/DOM/Pointer Event/iframe viewport verification; not physical touch, audible speech or production deployment verification', status: 'RUNNING', checks: [], startedAt: new Date().toISOString() };
+  const result = { scope: 'Author scripted browser/DOM/Pointer Event/iframe viewport verification; not physical touch, audible speech or production deployment verification', status: 'RUNNING', checks: [], visibilityEvents: [{ state: document.visibilityState, at: new Date().toISOString() }], startedAt: new Date().toISOString() };
   window.patternTrainBrowserQa = result;
   const prefix = 'sihyeon-pattern-train-v1:';
   const original = {};
@@ -14,10 +14,16 @@
   const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
   function assert(value, message) { if (!value) throw new Error(message); }
   function snapshot() { return game().getSnapshot(); }
+  const observeVisibility = () => result.visibilityEvents.push({ state: document.visibilityState, at: new Date().toISOString(), taskId: snapshot()?.taskId || null, phase: snapshot()?.state?.phase || null });
+  document.addEventListener('visibilitychange', observeVisibility);
   function button(selector) { const el = root.querySelector(selector); assert(el, 'Missing control ' + selector); return el; }
   function click(selector) { const el = button(selector); assert(!el.disabled, 'Disabled control ' + selector); el.click(); }
   function equalBoard(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
-  async function waitFor(predicate, message, ms) { const end = Date.now() + (ms || 12000); while (!predicate() && Date.now() < end) await pause(35); assert(predicate(), message); }
+  async function waitFor(predicate, message, ms) {
+    const end = Date.now() + (ms || 12000); let hiddenDuringWait = document.hidden;
+    while (!predicate() && Date.now() < end) { hiddenDuringWait = hiddenDuringWait || document.hidden; await pause(35); }
+    assert(predicate(), message + ' [phase=' + (snapshot()?.state?.phase || 'unmounted') + ', visibility=' + document.visibilityState + ', hiddenDuringWait=' + hiddenDuringWait + ']');
+  }
   async function check(name, fn) {
     progress.textContent = '자동 검수: ' + name;
     try { await fn(); result.checks.push({ name, status: 'PASS' }); }
@@ -212,6 +218,7 @@
       } finally { frame.contentWindow.SihyeonGames.patternTrain.destroy(); frame.remove(); }
     });
   } finally {
+    document.removeEventListener('visibilitychange', observeVisibility);
     game().destroy();
     const remove = []; for (let i = 0; i < localStorage.length; i++) { const key = localStorage.key(i); if (key.startsWith(prefix) || key === 'sihyeon-play-settings-v1') remove.push(key); }
     remove.forEach(key => localStorage.removeItem(key)); Object.entries(original).forEach(([key,value]) => localStorage.setItem(key,value));

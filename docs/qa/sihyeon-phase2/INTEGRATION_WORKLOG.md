@@ -68,3 +68,10 @@ AWCR 자동차 r2 raw SHA256: `a6647a01309ba523e021e98025ec85ee64edbce4e6d9741e6
 - 초안 PR https://github.com/icefoxtail/my-life-os/pull/6 생성. 원격 CI는 별도 확인하며 아직 병합 준비 완료가 아니다.
 - AWCR r4 raw SHA256 `ab7e6a1374327efa97516e6bc6e9660c91249ff7445e6a240ddf4b652a8ae57c` upload/readback 완료.
 - nextAction: 수정 스냅샷에서 작성자 브라우저 자동 검사와 네 연령 실제 세션/6개 프레임/복원 검수, 최종 메뉴 공개 및 PR/main/운영 확인.
+
+## 전체 브라우저 PASS 후 메뉴 통합 준비
+
+- 원격 `233cd17789d2db6c225315a9cbefae229ecd5f11`까지 모델 누락 시 귀가 경로와 공용 정리를 보존했다. 독립 UI 15그룹314 assert PASS이며 정상/모델누락/UI누락 및 기존9개 모듈 정리를 실제 index 함수로 검사했다.
+- 이전 정확한 preview commit `96c84f938d8058ef2cd24029de2d0efe9ca014c8`에서 네 연령 각5판 전체와 편집/복구/여섯뷰포트 **23/23 PASS**. 상세 범위는 `TRAIN_BROWSER_REVIEW.md`, 원시 JSON과 Git/preview 파일대조는 browser/의 해당 SHA 자료를 따른다.
+- 이 검증 뒤 고정 기차 브랜치의 숫자놀이터에 카드와 5세 추천·4~7세 지원 설명을 추가했다. 아직 draft PR이며 운영 main에는 노출하지 않았다. 메뉴 포함 index에서도 static 및 독립 UI 15/314 PASS.
+- 남은 순서: 최신 모델누락 fallback의 실제 브라우저 검사와 메뉴 직접 조작/복귀 → 최종 독립검수/CI/PR → main 병합 → Pages와 운영 실플레이. 실제 휴대폰 미검증 상태는 유지한다.

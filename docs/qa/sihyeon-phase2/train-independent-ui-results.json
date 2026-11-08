@@ -1,7 +1,7 @@
 {
   "scope": "Independent controlled Node VM of actual UI closures and integration functions; no browser layout, real storage quota, audio listening or device PASS",
   "sourceSha256": "2c63c7dd7ae80f301786c3cfd04e0d24f9b13d7489fd6d87f77e2f0eb8ac60f1",
-  "integrationSourceSha256": "8fc825a1005f41a0050450fa660d91d6c4ff21a7b11dec47444a789a12214abd",
+  "integrationSourceSha256": "393a10840c46f770314003ba06fded203804555c774dcbf858b1277913c6b1c1",
   "status": "PASS",
   "checks": [
     {
