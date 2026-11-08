@@ -313,11 +313,19 @@
   },
   "assets/vehicles/construction/mobile_crane.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale. Retry removes the invented stabilizer feet from rejected first candidate; only source equipment remains.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-mobile_crane.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/pile_driver.webp": {
     "classification": "4_PRECISE_REVIEW",
@@ -433,27 +441,51 @@
   },
   "assets/vehicles/construction/lowbed_trailer.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-lowbed_trailer.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/cargo_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-cargo_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/scissor_lift.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-03.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-scissor_lift.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/transport/train.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -561,35 +593,67 @@
   },
   "assets/vehicles/airport/airport_bus.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-airport_bus.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/airport_follow_me_car.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-airport_follow_me_car.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/baggage_cart.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-baggage_cart.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/catering_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/airport-catering_truck.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/airport/de_icing_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",

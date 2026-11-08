@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 12,
+  "actualOriginalEdits": 20,
   "entries": [
     {
       "index": 1,
@@ -2340,30 +2340,38 @@
         }
       },
       "after": {
-        "sha256": "43dd9257a4c3011a2d083c4944706736d8bb285b27bc4a05ffb945bc9f5270d9",
-        "bytes": 42112,
+        "sha256": "2df3607b1290aebb0647631229b38e4e1cd1c27e11c4af0dc372b0ddd4f7b3eb",
+        "bytes": 126606,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          40,
+          16,
+          731,
+          682
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.61557,
+        "partialAlphaFraction": 0.38102,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale. Retry removes the invented stabilizer feet from rejected first candidate; only source equipment remains.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-mobile_crane.jpg",
+      "displayNormalized": true
     },
     {
       "index": 35,
@@ -3000,30 +3008,38 @@
         }
       },
       "after": {
-        "sha256": "f245fa7280fe6a658012095a86fdd198d42f7067c5b5c1a238066b6115144d12",
-        "bytes": 26088,
+        "sha256": "586d0b8f6423e2b2fbb9984cb985a1c22fdaff61bc16871b25f014d7593343b4",
+        "bytes": 66280,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          33,
+          199,
+          731,
+          566
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.843903,
+        "partialAlphaFraction": 0.153202,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-lowbed_trailer.jpg",
+      "displayNormalized": true
     },
     {
       "index": 44,
@@ -3068,30 +3084,38 @@
         }
       },
       "after": {
-        "sha256": "ce6336794ca5558b7a477ce0bdb16ea74f32888354f8cc6ffb1c7eb5782fe15e",
-        "bytes": 41044,
+        "sha256": "ee43488e43ed604ed2432b9792b177db32deb0e4fe0ffcae70af294ff71ad17a",
+        "bytes": 99372,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          25,
+          115,
+          742,
+          608
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.618698,
+        "partialAlphaFraction": 0.379128,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-cargo_truck.jpg",
+      "displayNormalized": true
     },
     {
       "index": 45,
@@ -3136,30 +3160,38 @@
         }
       },
       "after": {
-        "sha256": "02cdf5f11323860a42f73bf780eaa38d5ce3f796252d41816d9cfe16d6120189",
-        "bytes": 35784,
+        "sha256": "72351f8ad22a202e1c9b7079b27e45ed290f8d6508e8f9c3d1661803c0d8553f",
+        "bytes": 116548,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          145,
+          28,
+          562,
+          648
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.76749,
+        "partialAlphaFraction": 0.228816,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-03.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/construction-scissor_lift.jpg",
+      "displayNormalized": true
     },
     {
       "index": 46,
@@ -4075,30 +4107,38 @@
         }
       },
       "after": {
-        "sha256": "375e9cd4ad54344fd114ed91b3f5942a14b3cccbd8c5af4e1a342f6d4d833bf8",
-        "bytes": 31876,
+        "sha256": "0f8b75f0137effa7e229ad3d2edfd10614fa190df2612c6b5dbe803f7a3dbfd3",
+        "bytes": 65692,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          29,
+          246,
+          739,
+          615
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.643717,
+        "partialAlphaFraction": 0.354328,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-04.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/airport-airport_bus.jpg",
+      "displayNormalized": true
     },
     {
       "index": 60,
@@ -4142,30 +4182,38 @@
         }
       },
       "after": {
-        "sha256": "2a4aa92a8c57a1dc9171a80c24b5a9ad31bd92cd7c07cef81520345341557792",
-        "bytes": 37988,
+        "sha256": "49863d451c3e5f4e728c352ac051a2c9116609dd55b03972c2c062395c852eb0",
+        "bytes": 78122,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          1,
+          172,
+          731,
+          583
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.648031,
+        "partialAlphaFraction": 0.350223,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-04.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/airport-airport_follow_me_car.jpg",
+      "displayNormalized": true
     },
     {
       "index": 61,
@@ -4209,30 +4257,38 @@
         }
       },
       "after": {
-        "sha256": "2ee40184599fc2a4bec6e3bea13b4b8168424d50c2369d2d0e34ffa70c9d8ba8",
-        "bytes": 30540,
+        "sha256": "978f11bc4d655eed9c8b38de598b428fab115d66c11b7c8e9f99e879dde679e1",
+        "bytes": 68006,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          6,
+          287,
+          754,
+          565
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.779105,
+        "partialAlphaFraction": 0.218719,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-04.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/airport-baggage_cart.jpg",
+      "displayNormalized": true
     },
     {
       "index": 62,
@@ -4276,30 +4332,38 @@
         }
       },
       "after": {
-        "sha256": "f339119b27152be59d56f22e499bb0ebca339ff3bb72a180be3fbac7ec01e3b4",
-        "bytes": 39050,
+        "sha256": "a4295b76893e381259b519902d01b113c9c51df07b4191a7b5e075c4cdfec5ea",
+        "bytes": 100534,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          7,
+          88,
+          738,
+          655
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.512204,
+        "partialAlphaFraction": 0.484048,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Implementation and independent reviewer individually compared source, generated and web delivery on white/dark/checker backgrounds. Original paint, major equipment and thin structural attachments retained; no visible new clipping/halo at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-04.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/airport-catering_truck.jpg",
+      "displayNormalized": true
     },
     {
       "index": 63,

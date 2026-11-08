@@ -1,0 +1,450 @@
+{
+  "reviewer": "/root/independent_qa",
+  "scope": "Independent visual comparison and decoded final-delivery readback; game/browser performance is separate",
+  "baselineMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+  "finalReadbackCount": 20,
+  "finalReadbacks": [
+    {
+      "file": "assets/vehicles/construction/asphalt_paver.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 87146,
+      "originalBytes": 31844,
+      "deliverySha256": "5156649557e0d8064d8537a502b120511ed14b7e6c0dbb22af595bc0216e5789",
+      "generatedPngSha256": "6893ad9b6c71048ae13c95a9185b1ea7f8922c2001124c028e0854b4960d0e73",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        21,
+        204,
+        749,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/grader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 95538,
+      "originalBytes": 36210,
+      "deliverySha256": "5674f20f7c1eb94ae5d6a9e56455bb7821c970b3c705cab1da4ebf664c663f83",
+      "generatedPngSha256": "6c6d7d50e965afdf51db902d794c7752e13bb10c926aa35bef59853d218433c6",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        16,
+        223,
+        748,
+        623
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/backhoe_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 111508,
+      "originalBytes": 39112,
+      "deliverySha256": "42fc97ad3518d9688f2ef4c8f5e9a3289633c97b461a7dd8353c85b3581c9a4b",
+      "generatedPngSha256": "87ef9f6200953bf1883f594345d971912794ab86cc1cd2845d5f1f2cf936edd1",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        3,
+        93,
+        762,
+        627
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/skid_steer_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 97730,
+      "originalBytes": 41022,
+      "deliverySha256": "b38ba13242f98aff6842345bac8fcb408364ab965684a3134297ca7a29c1d16d",
+      "generatedPngSha256": "f1463a073114c95f8396d0a4e1eff035bf9e51aa757d3c126c97e64811fa5f23",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        5,
+        93,
+        707,
+        640
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/road_roller.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 79764,
+      "originalBytes": 33280,
+      "deliverySha256": "14d7efe351999c6e739467999588d9d49a73310ff2969f8d6e4df175dcf3841e",
+      "generatedPngSha256": "3b9187e2cdf68a7368a0652d3f9e128cef2d1170cca8b67760690b48070c3394",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        19,
+        142,
+        729,
+        659
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-five.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/tower_crane.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 122212,
+      "deliverySha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "generatedPngSha256": "c13d579d36b8f3223e17b152de710c9c54baf6d278a80422be1186a75116f484",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        49,
+        35,
+        741,
+        679
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/excavator_breaker.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 126862,
+      "deliverySha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "generatedPngSha256": "936fa179b25f55b6e7c1d634689e1cb79f47b136417f101eda93ede05a10cdd9",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        28,
+        120,
+        736,
+        722
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/dump_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 84856,
+      "deliverySha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "generatedPngSha256": "48cd4698f954fe2b4e008c9edd8b1195e9f8ba9907ffcd82f4c37a3f03a3f0f7",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        3,
+        233,
+        746,
+        669
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-next-three.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 93618,
+      "deliverySha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+      "generatedPngSha256": "c2268d2696fc64c0fcb5480881bff15694c35716a3e7c92961190660511d822d",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        20,
+        271,
+        739,
+        650
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/water_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 98396,
+      "deliverySha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+      "generatedPngSha256": "15a49ff64894771d5c416c079725984e23598edab52dca3201ce17a14c633db0",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        21,
+        193,
+        743,
+        612
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/sweeper_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 104614,
+      "deliverySha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+      "generatedPngSha256": "7d4f56739e3333ba837775efa4df1fecb753afb771c4e7eb2857908aa2582c9b",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        14,
+        193,
+        739,
+        631
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/fuel_truck.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 84738,
+      "deliverySha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+      "generatedPngSha256": "9300cda724d1bb6ca0f17c933ae5c25f3205400ea424e8c4c96a7f4d4a938c68",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        30,
+        231,
+        747,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "readbackEvidence": "vehicle-independent-delivery-trucks-four.json",
+      "source": "Original Git baseline 58eb1fad34bba957812b08cf55bdf28c5595ca60, generated candidate and delivered WebP compared at matching scale"
+    },
+    {
+      "file": "assets/vehicles/construction/lowbed_trailer.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Long deck, front supports and two rear ramps preserved.",
+      "candidateComparisonSha256": "51d211cd7c1a2d19411cefd05a1479c9f35ec874bae5ace91519ae55eb0bdb99",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 66280,
+      "deliverySha256": "586d0b8f6423e2b2fbb9984cb985a1c22fdaff61bc16871b25f014d7593343b4",
+      "generatedPngSha256": "b867979c40d08a107c81cbd1f8f4b5b059d58bfb1483acf8f1b49357c0f02adf",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        33,
+        199,
+        731,
+        566
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/construction/cargo_truck.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Loaded pipes, timber, folding crane and truck frame preserved.",
+      "candidateComparisonSha256": "6cc7fb5099f7b29d5cb1615048e9d5f2a1017f004de89d97b182cab8bfb13805",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 99372,
+      "deliverySha256": "ee43488e43ed604ed2432b9792b177db32deb0e4fe0ffcae70af294ff71ad17a",
+      "generatedPngSha256": "43ce172836fec0991a9abf6e7abcebbdb65c9ed23bceefdf291ef41491999b58",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        25,
+        115,
+        742,
+        608
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/construction/scissor_lift.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Guardrails, crossed lifting links and four-wheel base preserved.",
+      "candidateComparisonSha256": "9f35c412fe1dc6c0820dfa08eaf46b77de13e5980fff3ece18cde20e679ddd7b",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 116548,
+      "deliverySha256": "72351f8ad22a202e1c9b7079b27e45ed290f8d6508e8f9c3d1661803c0d8553f",
+      "generatedPngSha256": "65c0e8844bd3625cbad7879b71d8394aa354c5637c08aeed16125b30f873f76f",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        145,
+        28,
+        562,
+        648
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Retry candidate has no three invented outrigger feet; boom, cables, hook and wheels preserved.",
+      "candidateComparisonSha256": "425accd8c707327fd065ee6755e214a60371ca96d7bf9c3edb889d0e4fdaf089",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 126606,
+      "deliverySha256": "2df3607b1290aebb0647631229b38e4e1cd1c27e11c4af0dc372b0ddd4f7b3eb",
+      "generatedPngSha256": "866436f075cc20643b861a64c98be85e5ec3d91c5dca99c2f8e94068340e6c0d",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        40,
+        16,
+        731,
+        682
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/airport_bus.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "White body, windows, doors and mirrors preserved.",
+      "candidateComparisonSha256": "442b610f7738b1f0add248f0b33e996ba8a329845c57adefb91e975560c448d0",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 65692,
+      "deliverySha256": "0f8b75f0137effa7e229ad3d2edfd10614fa190df2612c6b5dbe803f7a3dbfd3",
+      "generatedPngSha256": "07109076a98c70dc5c6173b1356ed57bc2fcb5f9b3212a3d606fb9729e0a9379",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        29,
+        246,
+        739,
+        615
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "Yellow/black vehicle paint kept, unlike removed pale backdrop checkerboard; left source margin is small.",
+      "candidateComparisonSha256": "9f08149c8bbfce19c4b67afde465493eeea2b610757c9527a43ade8a4697d045",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 78122,
+      "deliverySha256": "49863d451c3e5f4e728c352ac051a2c9116609dd55b03972c2c062395c852eb0",
+      "generatedPngSha256": "6b71b1a284bff71c90190cdf22cd3e9a20a1265475b3ee6be25d4f594ca79032",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        1,
+        172,
+        731,
+        583
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/baggage_cart.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "White tractor and three linked luggage carts, thin railings and wheels preserved.",
+      "candidateComparisonSha256": "88a4f5d355658cff56561774640110ff206d0f2aab30e2bb24b0fe724c11957d",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 68006,
+      "deliverySha256": "978f11bc4d655eed9c8b38de598b428fab115d66c11b7c8e9f99e879dde679e1",
+      "generatedPngSha256": "c5d2529d1ac6dd3adae5ec48db85f9b2678f5e0619264dd3f8d020b12b96aa66",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        6,
+        286,
+        754,
+        565
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    },
+    {
+      "file": "assets/vehicles/airport/catering_truck.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "White elevated box, door railing, scissor lift, side ladder and truck body preserved.",
+      "candidateComparisonSha256": "9b2279bd5d459608e7978ab6edae588790189e7ed53d43b35022b6387ee5dba3",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 100534,
+      "deliverySha256": "a4295b76893e381259b519902d01b113c9c51df07b4191a7b5e075c4cdfec5ea",
+      "generatedPngSha256": "94b780046074899831104959f8bad8fc633720b11056348371f62b2c1dc71589",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        7,
+        88,
+        738,
+        655
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true
+    }
+  ],
+  "candidateOnly": [],
+  "rejected": [
+    {
+      "file": "assets/vehicles/construction/mobile_crane.webp",
+      "candidate": "first",
+      "reason": "Three outrigger feet were added although absent from original; do not use this candidate.",
+      "retainedComparison": "comparisons/rejected-construction-mobile_crane-first.jpg"
+    }
+  ]
+}

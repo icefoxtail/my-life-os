@@ -364,14 +364,14 @@
   },
   "construction/mobile_crane.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      40,
+      16,
+      731,
+      682
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/pile_driver.webp": {
     "box": [
@@ -463,36 +463,36 @@
   },
   "construction/lowbed_trailer.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      33,
+      199,
+      731,
+      566
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/cargo_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      25,
+      115,
+      742,
+      608
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "construction/scissor_lift.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      145,
+      28,
+      562,
+      648
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "transport/train.png": {
     "box": [
@@ -639,47 +639,47 @@
   },
   "airport/airport_bus.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      29,
+      246,
+      739,
+      615
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/airport_follow_me_car.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      1,
+      172,
+      731,
+      583
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/baggage_cart.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      6,
+      287,
+      754,
+      565
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/catering_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      7,
+      88,
+      738,
+      655
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "airport/de_icing_truck.webp": {
     "box": [
