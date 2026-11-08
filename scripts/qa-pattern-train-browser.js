@@ -28,6 +28,7 @@
     await pause(530);
     const task = model.taskFor(id);
     if (snapshot().modal) click('[data-action="close-modal"]');
+    if (snapshot().state.phase === 'ARRIVED') click('[data-action="edit"]');
     click('[data-action="challenge"]'); click('[data-action="level"][data-level="' + task.age + '"]');
     click('[data-action="stop"][data-stop="' + model.getTasks(task.age).indexOf(task) + '"]');
     if (fresh !== false) { click('[data-action="restart"]'); click('[data-action="confirm-reset"]'); }
@@ -89,6 +90,7 @@
       await pick('a5-abb');
       await drag(button('[data-action="select"][data-token="square"]'), button('[data-action="seat"][data-index="4"]'));
       assert(snapshot().state.board[4] === 'square', 'Palette drop failed');
+      assert(snapshot().state.selected === 'square' && button('[data-action="select"][data-token="square"]').getAttribute('aria-pressed') === 'true', 'Dragged part not reflected in selection');
       pointer(window, 'pointerup', 0, 0); assert(snapshot().state.history.length === 1, 'Duplicate pointerup committed twice');
       await pause(540);
       const frame = button('.pt-train-scroll'); frame.scrollLeft = 320;

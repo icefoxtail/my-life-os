@@ -131,6 +131,24 @@ async function flush() { await Promise.resolve(); await Promise.resolve(); }
     ok(!source.includes('<img'), 'this workshop should have no required external bitmap asset');
     return { checkedTasks: 20, scope: 'generated HTML semantics, not visual placement' };
   });
+  await check('arrival leaves challenge navigation enabled and preserves the completed train after a detour', () => {
+    const f = fixture();
+    const challengeTag = () => f.q.guideHtml().match(/<button\b[^>]*data-action="challenge"[^>]*>/)?.[0];
+    ok(challengeTag()); ok(!/\sdisabled(?:\s|>)/.test(challengeTag()), 'building challenge button must be enabled');
+    f.click('select', { token: 'rabbit' }); f.click('seat', { index: '5', token: '' }); f.click('start');
+    eq(f.q.view.state.phase, 'RUNNING'); ok(/\sdisabled(?:\s|>)/.test(challengeTag()), 'running trip must lock challenge navigation');
+    f.click('challenge'); eq(f.q.view.modal, null, 'programmatic challenge click must also be blocked while running');
+    f.runArrival(); eq(f.q.view.state.phase, 'ARRIVED');
+    ok(!/\sdisabled(?:\s|>)/.test(challengeTag()), 'arrived challenge button must be enabled in the generated HTML');
+    const completed = copy(f.q.view.state.board), departures = f.q.view.state.departures;
+    f.click('challenge'); eq(f.q.view.modal, 'challenge'); f.click('level', { level: '5' }, true);
+    eq(f.q.view.state.taskId, 'a5-aab'); eq(f.q.view.state.phase, 'BUILDING');
+    f.click('challenge'); f.click('level', { level: '4' }, true);
+    eq(f.q.view.state.taskId, 'a4-first'); eq(f.q.view.state.board, completed); eq(f.q.view.state.phase, 'ARRIVED');
+    eq(f.q.view.state.departures, departures); ok(!/\sdisabled(?:\s|>)/.test(challengeTag()));
+    f.click('edit'); eq(f.q.view.state.phase, 'BUILDING'); eq(f.q.view.state.board, completed);
+    return { originatingFinding: 'root real-browser review', phasesChecked: ['BUILDING', 'RUNNING', 'ARRIVED'], completedBoardPreserved: true };
+  });
   await check('mistake, replacement, undo, removal, explicit restart and return home', () => {
     const f = fixture(); f.click('select', { token: 'cat' }); f.click('seat', { index: '5', token: '' }); f.click('start');
     eq(f.q.view.state.phase, 'BUILDING'); eq(f.q.view.state.board[5], 'cat');
@@ -150,8 +168,11 @@ async function flush() { await Promise.resolve(); await Promise.resolve(); }
     f.advance(800); dragStart(); f.q.view.handlers.cancel({ pointerId: 1 }); eq(f.q.view.state.board, original); eq(f.ghosts.size, 0);
     f.advance(800); dragStart(); f.q.otherPointerDown(f.event(palette, { pointerId: 2, isPrimary: false })); eq(f.ghosts.size, 0); f.hit(seat); f.q.pointerUp(f.event(palette)); eq(f.q.view.state.board, original);
     f.advance(800); dragStart(); f.container.releasePointerCapture(1); eq(f.ghosts.size, 0); eq(f.q.view.state.board, original);
-    f.advance(800); dragStart(); f.hit(seat); f.q.pointerUp(f.event(palette)); eq(f.q.view.state.board[5], 'rabbit'); const history = f.q.view.state.history.length;
+    f.advance(800); dragStart(); f.hit(seat); f.q.pointerUp(f.event(palette)); eq(f.q.view.state.board[5], 'rabbit'); eq(f.q.view.state.selected, 'rabbit'); const history = f.q.view.state.history.length;
     f.q.pointerUp(f.event(palette)); eq(f.q.view.state.history.length, history, 'duplicate pointerup cannot place twice');
+    f.advance(800); f.click('select', { token: 'cat' }); dragStart(); f.hit(seat); f.q.pointerUp(f.event(palette));
+    eq(f.q.view.state.selected, 'rabbit'); eq(f.q.view.state.history.length, history, 'dropping the same token only changes selection');
+    ok(/<button\b[^>]*data-action="select"[^>]*data-token="rabbit"[^>]*aria-pressed="true"/.test(f.container.innerHTML), 'same-token drop must redraw the selected palette mark');
     f.advance(800); const occupied = f.button('seat', { index: '5', token: 'rabbit' }); f.down(f.event(occupied)); f.q.pointerMove(f.event(occupied, { clientX: 120 }));
     const tray = f.button('noop'); tray.classList.add('pt-palette'); f.hit(tray); f.q.pointerUp(f.event(occupied)); eq(f.q.view.state.board[5], null);
     return { cases: ['outside', 'pointercancel', 'secondary pointer', 'lost capture', 'successful placement', 'duplicate pointerup', 'return to palette'], physicalTouch: false };

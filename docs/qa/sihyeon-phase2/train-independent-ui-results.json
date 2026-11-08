@@ -1,6 +1,6 @@
 {
   "scope": "Independent controlled Node VM of actual UI closures; no browser layout, real storage quota, audio listening or device PASS",
-  "sourceSha256": "25804a309bc79f71a3837c06b2aff8a709064d069a4b6aa0d3eb12fbe42252a9",
+  "sourceSha256": "51d9b649b9eebf66b59a8e68441ff9d3f1e4c79d60e632c69aa32632b397d682",
   "status": "PASS",
   "checks": [
     {
@@ -18,6 +18,19 @@
       "detail": {
         "checkedTasks": 20,
         "scope": "generated HTML semantics, not visual placement"
+      }
+    },
+    {
+      "name": "arrival leaves challenge navigation enabled and preserves the completed train after a detour",
+      "status": "PASS",
+      "detail": {
+        "originatingFinding": "root real-browser review",
+        "phasesChecked": [
+          "BUILDING",
+          "RUNNING",
+          "ARRIVED"
+        ],
+        "completedBoardPreserved": true
       }
     },
     {
@@ -116,5 +129,5 @@
       }
     }
   ],
-  "assertions": 230
+  "assertions": 252
 }

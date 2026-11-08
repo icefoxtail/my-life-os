@@ -152,7 +152,7 @@
     } else {
       content = '<div class="pt-motif" aria-label="되풀이할 묶음 ' + t.unit.map(v => M().TOKENS[v].name).join(', ') + '">' + rowPictures(t.unit) + '<span class="pt-repeat-sign" aria-label="이 묶음 반복">↻</span></div>' + (t.unit.length <= 4 ? '<div class="pt-picture-guide" aria-hidden="true">' + icon('hand') + token(view.state.selected) + icon('arrow') + '<span class="pt-mini-coach">+</span></div>' : '');
     }
-    return '<section class="pt-guide"><div class="pt-guide-heading"><span class="pt-guide-label">' + (t.kind === 'free' ? '정답 없이, 마음대로' : t.title) + '</span><button class="pt-challenge" type="button" data-action="challenge"' + locked + '>' + icon('book') + '<span>도전 바꾸기</span></button></div><div class="pt-guide-content">' + content + '</div></section>';
+    return '<section class="pt-guide"><div class="pt-guide-heading"><span class="pt-guide-label">' + (t.kind === 'free' ? '정답 없이, 마음대로' : t.title) + '</span><button class="pt-challenge" type="button" data-action="challenge"' + (view.state.phase === 'RUNNING' ? ' disabled' : '') + '>' + icon('book') + '<span>도전 바꾸기</span></button></div><div class="pt-guide-content">' + content + '</div></section>';
   }
   function coachHtml(value, i) {
     const fixed = view.task.clues[i] !== null;
@@ -359,9 +359,11 @@
     const target = dropTarget(event.clientX, event.clientY); cancelDrag(); view.suppressClickUntil = Date.now() + 500;
     if (!target || view.state.phase !== 'BUILDING') return;
     if (target.classList.contains('pt-palette')) { if (drag.source === 'coach') dispatch({ type: 'remove', index: drag.from }); return; }
-    if (target.dataset.action === 'seed') { if (drag.source === 'palette') dispatch({ type: 'seed', index: Number(target.dataset.seed), token: drag.token }); return; }
+    if (target.dataset.action === 'seed') { if (drag.source === 'palette') { const selected = dispatch({ type: 'select', token: drag.token }, false); if (!dispatch({ type: 'seed', index: Number(target.dataset.seed), token: drag.token }) && selected) draw(); } return; }
     const to = Number(target.dataset.index);
+    const selected = drag.source === 'palette' && dispatch({ type: 'select', token: drag.token }, false);
     const placed = dispatch(drag.source === 'coach' ? { type: 'move', from: drag.from, to } : { type: 'place', index: to, token: drag.token });
+    if (!placed && selected) draw();
     if (placed) { speak(M().TOKENS[drag.token].name + ', 탔어!'); scrollToIndex(to); }
   }
   function keyDown(event) {
