@@ -1248,75 +1248,84 @@
   },
   "assets/vehicles/town/mail_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Enlarged both original and result to verify the narrow left mirror remains; white body and windshield highlights are opaque.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-mail_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/delivery_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Entire cargo box, cab, mirrors and wheel edges preserved.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-delivery_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/food_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Striped awning, roof vent, serving-window contents and cab glazing retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-food_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/ice_cream_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Roof cone, white paint, pink details and glazing retained without transparent holes.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-ice_cream_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/moving_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Loading ramp, boxes, rear opening and white cab preserved.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-moving_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/laundry_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Enlarged original and result to verify left mirror and wipers; printed towels/washer and white body retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-laundry_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/recycling_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Rear loader, cylinders and white recycling mark retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-recycling_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/library_bus.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Book rows, tall glazing, mirrors and full body outline preserved.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-08.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-library_bus.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/town/street_vendor_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Awning, produce, shelf supports, cab and all visible wheels retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-09.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/town-street_vendor_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/fire_special/aerial_ladder_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",

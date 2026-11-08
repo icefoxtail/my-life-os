@@ -1321,101 +1321,101 @@
   },
   "town/mail_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      16,
+      112,
+      479,
+      432
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/delivery_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      18,
+      100,
+      489,
+      419
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/food_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      23,
+      108,
+      503,
+      426
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/ice_cream_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      9,
+      21,
+      483,
+      426
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/moving_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      22,
+      72,
+      507,
+      420
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/laundry_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      1,
+      94,
+      495,
+      417
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/recycling_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      10,
+      66,
+      494,
+      397
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/library_bus.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      5,
+      104,
+      500,
+      376
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   },
   "town/street_vendor_truck.webp": {
     "box": [
-      0,
-      0,
-      512,
-      512
+      6,
+      93,
+      502,
+      396
     ],
     "width": 512,
     "height": 512,
-    "clean": false
+    "clean": true
   }
 }

@@ -924,6 +924,303 @@
         "height": 512,
         "clean": true
       }
+    },
+    {
+      "source": "assets/vehicles/town/mail_truck.webp",
+      "sourceSha256": "8169af7b0e22fa51d1f81141ce48359e86aab10eaa1975882df24cd54f35441e",
+      "candidate": "mail_truck.png",
+      "candidateSha256": "08486189478b501a6b0a8402ea0fd81b98ff0606a0574ee6a9a72f0f2a47a562",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "be1ae76d642662b4eb114661913581d25c5dab8c47e4b1ca1f9e5ab3bd2a2340",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Enlarged both original and result to verify the narrow left mirror remains; white body and windshield highlights are opaque.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+      "outputBytes": 137842,
+      "outputRgbaSha256": "be1ae76d642662b4eb114661913581d25c5dab8c47e4b1ca1f9e5ab3bd2a2340",
+      "displayBounds": {
+        "box": [
+          16,
+          112,
+          479,
+          432
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/delivery_truck.webp",
+      "sourceSha256": "875b86b0bd8f4bf71c03dea68fc146538e0dadd81f6c377ff3a0198106ad8bab",
+      "candidate": "delivery_truck.png",
+      "candidateSha256": "99e67b58097f55b77d977077b3caeb355603e07eeae321a108a8e9c6b3812ebb",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "5bf8c61b0359214247dd658df604badecc4d5cfe52773c9c76b43096e99c8331",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Entire cargo box, cab, mirrors and wheel edges preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+      "outputBytes": 142202,
+      "outputRgbaSha256": "5bf8c61b0359214247dd658df604badecc4d5cfe52773c9c76b43096e99c8331",
+      "displayBounds": {
+        "box": [
+          18,
+          100,
+          489,
+          419
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/food_truck.webp",
+      "sourceSha256": "c472b5f1bdfbe4fa33b8e80d404d6d377c9286516bad005b9fdbbd8e1f0317d4",
+      "candidate": "food_truck.png",
+      "candidateSha256": "dba4362bd8c750821874880833821592ab5ffd1999f02adff71bacb5d90eeabc",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "77ffedb65ff2975e8d50091b8f82f8a1572415a144f87471e79cdb8e2a25a925",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Striped awning, roof vent, serving-window contents and cab glazing retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+      "outputBytes": 169782,
+      "outputRgbaSha256": "77ffedb65ff2975e8d50091b8f82f8a1572415a144f87471e79cdb8e2a25a925",
+      "displayBounds": {
+        "box": [
+          23,
+          108,
+          503,
+          426
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/ice_cream_truck.webp",
+      "sourceSha256": "d2bd4ec7148ea8a6e20d286b6e10cd608923d7261ff7e386c265ca1b289138e5",
+      "candidate": "ice_cream_truck.png",
+      "candidateSha256": "ae6cbb54a5508fb82b000fc4d0655ae872aa9e3d9fc0a44a7bf1c34f98f3e632",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "b2313380966422d71b282d11ca7dfe16b8f076d582560b0e55947c85a5004fa6",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Roof cone, white paint, pink details and glazing retained without transparent holes.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+      "outputBytes": 175824,
+      "outputRgbaSha256": "b2313380966422d71b282d11ca7dfe16b8f076d582560b0e55947c85a5004fa6",
+      "displayBounds": {
+        "box": [
+          9,
+          21,
+          483,
+          426
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/moving_truck.webp",
+      "sourceSha256": "d05b0dc267e08e903cefe30477ac4508b704c795125f6e564635c36cf3101785",
+      "candidate": "moving_truck.png",
+      "candidateSha256": "8c58ddaf032b6703a101362bb0bb34c7c06a717e35cf3b380576eebdb04f320c",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "8bc19bafbc9d999e6621d1e7bee321a03388a72fa48dd71e4e88164b25ad344d",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Loading ramp, boxes, rear opening and white cab preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+      "outputBytes": 150184,
+      "outputRgbaSha256": "8bc19bafbc9d999e6621d1e7bee321a03388a72fa48dd71e4e88164b25ad344d",
+      "displayBounds": {
+        "box": [
+          22,
+          72,
+          507,
+          420
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/laundry_truck.webp",
+      "sourceSha256": "1e2b58911547838d3d70000c56593a671854bed85009a7e380c6035247f25c6c",
+      "candidate": "laundry_truck.png",
+      "candidateSha256": "bd3fa55a58d1f6e08f2b7490c54f48fe9f41cc7aae1686a3879d9c487e2338c8",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "11832ba1d4bbaec86d406e8163c566f9e5a1fbd515f60f5d09fdb925c408c327",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Enlarged original and result to verify left mirror and wipers; printed towels/washer and white body retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+      "outputBytes": 156956,
+      "outputRgbaSha256": "11832ba1d4bbaec86d406e8163c566f9e5a1fbd515f60f5d09fdb925c408c327",
+      "displayBounds": {
+        "box": [
+          1,
+          94,
+          495,
+          417
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/recycling_truck.webp",
+      "sourceSha256": "31b8b3ed6b28a31035e4ead8a4e390001e04d5dae5912944f5e9f3fc4b4750fe",
+      "candidate": "recycling_truck.png",
+      "candidateSha256": "326ee8d0bb5630ecf0b0dce316ccc521be647c6e9cb8960869798f87ce099896",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "53eb1fbcba5c55be4c93d78e0b935d9e730bfa9fdcf7b6b63d289e6ad89d4b29",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Rear loader, cylinders and white recycling mark retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+      "outputBytes": 172334,
+      "outputRgbaSha256": "53eb1fbcba5c55be4c93d78e0b935d9e730bfa9fdcf7b6b63d289e6ad89d4b29",
+      "displayBounds": {
+        "box": [
+          10,
+          66,
+          494,
+          397
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/library_bus.webp",
+      "sourceSha256": "ef8922c028504d8daa4d38625e66dcd9ac1f76a43deac3c46b8758c459765ef8",
+      "candidate": "library_bus.png",
+      "candidateSha256": "432b0ad5f18cb384218a51d7efa15c43b86cafed3c49155b758142bdf75188b0",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "117ffaefa9544238c959b59fdf23ca6f9fa5f0936573e68a581dce1fb9fadf25",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Book rows, tall glazing, mirrors and full body outline preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+      "outputBytes": 167456,
+      "outputRgbaSha256": "117ffaefa9544238c959b59fdf23ca6f9fa5f0936573e68a581dce1fb9fadf25",
+      "displayBounds": {
+        "box": [
+          5,
+          104,
+          500,
+          376
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/town/street_vendor_truck.webp",
+      "sourceSha256": "fc5bd8a278602664d1c45852a5d3c24a976d426f1352a3bd14fc4bbf0a4747ff",
+      "candidate": "street_vendor_truck.png",
+      "candidateSha256": "cec337d2c7c018b0cf4d3413d7514d3007789be869b80404ff78ed95779bf20b",
+      "size": [
+        512,
+        512
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617678214,
+      "artifactSha256": "4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "f7b69bb56d0db5ba03413490119660000ad0f4f96f0730c1fe58e533c27811d8",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Awning, produce, shelf supports, cab and all visible wheels retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "town-b",
+      "outputSha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+      "outputBytes": 186750,
+      "outputRgbaSha256": "f7b69bb56d0db5ba03413490119660000ad0f4f96f0730c1fe58e533c27811d8",
+      "displayBounds": {
+        "box": [
+          6,
+          93,
+          502,
+          396
+        ],
+        "width": 512,
+        "height": 512,
+        "clean": true
+      }
     }
   ]
 }

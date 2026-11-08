@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 56,
+  "actualOriginalEdits": 65,
   "entries": [
     {
       "index": 1,
@@ -8448,30 +8448,32 @@
         }
       },
       "after": {
-        "sha256": "8169af7b0e22fa51d1f81141ce48359e86aab10eaa1975882df24cd54f35441e",
-        "bytes": 43670,
+        "sha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+        "bytes": 137842,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          16,
+          112,
+          479,
+          432
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.558472,
+        "partialAlphaFraction": 0.437237,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Enlarged both original and result to verify the narrow left mirror remains; white body and windshield highlights are opaque.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-mail_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-mail_truck.jpg"
     },
     {
       "index": 122,
@@ -8515,30 +8517,32 @@
         }
       },
       "after": {
-        "sha256": "875b86b0bd8f4bf71c03dea68fc146538e0dadd81f6c377ff3a0198106ad8bab",
-        "bytes": 41468,
+        "sha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+        "bytes": 142202,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          18,
+          100,
+          489,
+          419
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.557865,
+        "partialAlphaFraction": 0.433331,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Entire cargo box, cab, mirrors and wheel edges preserved.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-delivery_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-delivery_truck.jpg"
     },
     {
       "index": 123,
@@ -8582,30 +8586,32 @@
         }
       },
       "after": {
-        "sha256": "c472b5f1bdfbe4fa33b8e80d404d6d377c9286516bad005b9fdbbd8e1f0317d4",
-        "bytes": 53610,
+        "sha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+        "bytes": 169782,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          23,
+          108,
+          503,
+          426
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.584938,
+        "partialAlphaFraction": 0.411297,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Striped awning, roof vent, serving-window contents and cab glazing retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-food_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-food_truck.jpg"
     },
     {
       "index": 124,
@@ -8649,30 +8655,32 @@
         }
       },
       "after": {
-        "sha256": "d2bd4ec7148ea8a6e20d286b6e10cd608923d7261ff7e386c265ca1b289138e5",
-        "bytes": 50908,
+        "sha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+        "bytes": 175824,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          9,
+          21,
+          483,
+          426
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.535904,
+        "partialAlphaFraction": 0.458683,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Roof cone, white paint, pink details and glazing retained without transparent holes.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-ice_cream_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-ice_cream_truck.jpg"
     },
     {
       "index": 125,
@@ -8716,30 +8724,32 @@
         }
       },
       "after": {
-        "sha256": "d05b0dc267e08e903cefe30477ac4508b704c795125f6e564635c36cf3101785",
-        "bytes": 43588,
+        "sha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+        "bytes": 150184,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          22,
+          72,
+          507,
+          420
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.515949,
+        "partialAlphaFraction": 0.476063,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Loading ramp, boxes, rear opening and white cab preserved.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-moving_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-moving_truck.jpg"
     },
     {
       "index": 126,
@@ -8783,30 +8793,32 @@
         }
       },
       "after": {
-        "sha256": "1e2b58911547838d3d70000c56593a671854bed85009a7e380c6035247f25c6c",
-        "bytes": 49052,
+        "sha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+        "bytes": 156956,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          1,
+          94,
+          495,
+          417
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.531712,
+        "partialAlphaFraction": 0.464958,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Enlarged original and result to verify left mirror and wipers; printed towels/washer and white body retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-laundry_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-laundry_truck.jpg"
     },
     {
       "index": 127,
@@ -8850,30 +8862,32 @@
         }
       },
       "after": {
-        "sha256": "31b8b3ed6b28a31035e4ead8a4e390001e04d5dae5912944f5e9f3fc4b4750fe",
-        "bytes": 53446,
+        "sha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+        "bytes": 172334,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          10,
+          66,
+          494,
+          397
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.546284,
+        "partialAlphaFraction": 0.444004,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Rear loader, cylinders and white recycling mark retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-recycling_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-recycling_truck.jpg"
     },
     {
       "index": 128,
@@ -8917,30 +8931,32 @@
         }
       },
       "after": {
-        "sha256": "ef8922c028504d8daa4d38625e66dcd9ac1f76a43deac3c46b8758c459765ef8",
-        "bytes": 48934,
+        "sha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+        "bytes": 167456,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          5,
+          104,
+          500,
+          376
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.565987,
+        "partialAlphaFraction": 0.429562,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Book rows, tall glazing, mirrors and full body outline preserved.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-08.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-library_bus.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-library_bus.jpg"
     },
     {
       "index": 129,
@@ -8984,30 +9000,32 @@
         }
       },
       "after": {
-        "sha256": "fc5bd8a278602664d1c45852a5d3c24a976d426f1352a3bd14fc4bbf0a4747ff",
-        "bytes": 55768,
+        "sha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+        "bytes": 186750,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 512,
         "height": 512,
         "alphaBounds16": [
-          0,
-          0,
-          512,
-          512
+          6,
+          93,
+          502,
+          396
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.566082,
+        "partialAlphaFraction": 0.428921,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Awning, produce, shelf supports, cab and all visible wheels retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-09.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/town-street_vendor_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/town-street_vendor_truck.jpg"
     },
     {
       "index": 130,
