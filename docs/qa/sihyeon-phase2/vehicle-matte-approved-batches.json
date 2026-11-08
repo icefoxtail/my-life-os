@@ -1,0 +1,71 @@
+{
+  "schemaVersion":1,
+  "reviewer":"GPT6_ASTRA_CHAT",
+  "independentSubagent":false,
+  "approvalContract":"Only explicitly named PNG bytes inside each SHA-256-bound ZIP are approved. Manifest source and candidate hashes are verified before application. Every named candidate was compared individually on white, dark and checker backgrounds. Explicit corrected candidates also bind final decoded RGBA.",
+  "batches":[
+    {"group":"road_service","artifactId":13618032097,"artifactSha256":"0fb41390e6ed80d78fc4cc59bc2202c3b06492176b16bf07ea40010134733309","approved":{
+      "road_repair_truck.png":{"notes":"Hopper, pipework, rear rollers, white cab and full wheel outlines retained; baked checker and ground removed."},
+      "line_painting_truck.png":{"notes":"White cab/tank, safety rails and front nozzle/caster retained. Painted stripe on the ground is background, not a removed vehicle component."},
+      "traffic_cone_truck.png":{"notes":"Cones and their white bands, arrow board and cargo rails intact; no new clipping or interior deletion observed."},
+      "road_sweeper.png":{"notes":"White body, front/rear brushes and suction hose preserved; inspected open gaps and wheels."},
+      "salt_spreader.png":{"notes":"White salt load is retained with hopper, rails and spreading disc; not mistaken for background."},
+      "snow_plow.png":{"notes":"Blade, cutting edge, upright marker flags and roof lights preserved."},
+      "bridge_inspection_truck.png":{"notes":"Extended articulated boom, inspection basket rails, stabilizers and thin hydraulic members retained."},
+      "tunnel_cleaning_truck.png":{"notes":"White tank, pipework and front cleaning head retained; checked dark composite for holes."}
+    }},
+    {"group":"port","artifactId":13617153410,"artifactSha256":"0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56","approved":{
+      "container_truck.png":{"notes":"White cab, long container proportions and all wheel edges retained."},
+      "reach_stacker.png":{"notes":"Spreader, long boom, hydraulic pistons, cab glazing and full wheel outlines preserved."},
+      "tugboat.png":{"notes":"Mast antennas, dark fenders, white bridge and intact hull retained; no invented structure."},
+      "fishing_boat.png":{"notes":"Masts, rigging, boom, winch, railing and entire hull remain. Original thin antialiased edges retained rather than claiming pixel-perfect background decontamination."},
+      "coast_guard_boat.png":{"notes":"White superstructure, navigation equipment, mast antennas and rail geometry retained."},
+      "rescue_boat.png":{"notes":"Orange cabin, black collar, mast and guardrail retained; checked fine exterior structures."}
+    }},
+    {"group":"town-a","artifactId":13617962127,"artifactSha256":"6e97343cc224c2d2e0991847243cbb56ee0f995e5d68a6e71d03fd7628cd6f9d","approved":{
+      "school_van.png":{"notes":"Cab glazing, mirrors, roof antenna, wheel tread and body paint retained."},
+      "bakery_truck.png":{"notes":"Striped awning, cream-white body and bakery display trays remain opaque and complete."},
+      "flower_delivery_van.png":{"notes":"Printed flower petals, white details and glazing preserved as body content."},
+      "pet_grooming_van.png":{"notes":"Printed pets/shears and white markings retained; wheels and mirrors intact."},
+      "utility_repair_van.png":{"notes":"Roof ladder, its rungs and open gaps, white body and mirrors retained."},
+      "maintenance_pickup.png":{"notes":"Thin rake and shovel handles, cone and bed contents retained."},
+      "beverage_delivery_truck.png":{"notes":"Cargo print, cab windows, wheels and body outline preserved."},
+      "toy_truck.png":{"notes":"Bear, robot, stacking rings and small white toy behind bear retained as original cargo, not erased."},
+      "community_bus.png":{"notes":"White body band, glazing, mirrors and full wheel outlines retained."}
+    }},
+    {"group":"town-b","artifactId":13617678214,"artifactSha256":"4d3314e12e4a139a006d3147fa2b873c40339864bef99a76e612279f4d4195f3","approved":{
+      "mail_truck.png":{"notes":"Enlarged both original and result to verify the narrow left mirror remains; white body and windshield highlights are opaque."},
+      "delivery_truck.png":{"notes":"Entire cargo box, cab, mirrors and wheel edges preserved."},
+      "food_truck.png":{"notes":"Striped awning, roof vent, serving-window contents and cab glazing retained."},
+      "ice_cream_truck.png":{"notes":"Roof cone, white paint, pink details and glazing retained without transparent holes."},
+      "moving_truck.png":{"notes":"Loading ramp, boxes, rear opening and white cab preserved."},
+      "laundry_truck.png":{"notes":"Enlarged original and result to verify left mirror and wipers; printed towels/washer and white body retained."},
+      "recycling_truck.png":{"notes":"Rear loader, cylinders and white recycling mark retained."},
+      "library_bus.png":{"notes":"Book rows, tall glazing, mirrors and full body outline preserved."},
+      "street_vendor_truck.png":{"notes":"Awning, produce, shelf supports, cab and all visible wheels retained."}
+    }},
+    {"group":"fire_special","artifactId":13617423904,"artifactSha256":"d3240fadc1722d9eb8a11e0e82f85e3190817b877b3b559184c64d68b27c9e0d","approved":{
+      "aerial_ladder_truck.png":{"notes":"Basket, front monitor, white ladder rungs and equipment panels retained."},
+      "fire_tank.png":{"notes":"Continuous track outlines, road wheels and top monitor retained."},
+      "airport_crash_tender.png":{"notes":"Water monitor, roof rails, glazing and all six wheel outlines preserved."},
+      "wildfire_6x6_truck.png":{"notes":"Large tire tread, brush bars and rooftop rail geometry retained."},
+      "robot_demolition_fire_vehicle.png":{"notes":"Drill tip, hose, arm joints, support legs and tracks retained. Existing near-frame drill clearance is not invented or enlarged."},
+      "smoke_extraction_fan_truck.png":{"notes":"Fan hub, blades, mesh, red ring and cab remain; inspected inner fan details."},
+      "water_tanker.png":{"notes":"Long tank, rails, hose and tire outlines retained."},
+      "articulating_boom_truck.png":{"notes":"White articulated boom, struts, basket rails and white equipment panels retained without holes."},
+      "fire_command_suv.png":{"notes":"Two thin roof antennas, lightbar, bumper/winch and wheel tread retained."}
+    }},
+    {"group":"precision","artifactId":13618190811,"artifactSha256":"7b70ccac89b29eb4e30ede20eb342425ac05bb1be73d59d9df9ca8b4cf601dc1","approved":{
+      "snow_rescue_vehicle.png":{"notes":"Original small white rectangle removed. Full track bottoms remain; initial mask incorrectly reduced two white roof lights. Restored their original alpha only in two inspected interior rectangles and rechecked all three backgrounds.","alphaRepairs":[{"op":"restore_source","box":[208,211,213,218]},{"op":"restore_source","box":[217,209,223,216]}],"reviewedRgbaSha256":"d0a402d359dd60c0f0b91373a5cfdcfde21ddc664492b1a038883b3e7025049a"},
+      "submarine.png":{"notes":"Removed right floating white fragment and baked light ground. Periscope, portholes, fins and propeller remain complete."},
+      "garbage_truck.png":{"notes":"Removed left detached vertical line and baked ground; green body, rear lifting mechanism, glazing and all visible wheels retained."}
+    }}
+  ],
+  "notApproved":[
+    {"candidate":"road_sign_truck.png","reason":"Enlarged result retains opaque white/checker patches below signs inside the open support frame; additional precise alpha work needed. Original remains unchanged."},
+    {"candidate":"cargo_ship.png","reason":"Original left bow is already clipped by the image frame. Background extraction cannot reconstruct missing geometry; preserve original and record HOLD."},
+    {"candidate":"harbor_crane.png","reason":"Enlarged result leaves filled background between upper railings and removes parts of fine rail structures. Reject candidate; preserve source."},
+    {"candidate":"ferry.png","reason":"White mast and upper-rail gaps merge into opaque background patches and fine antenna fidelity is not sufficient. Reject candidate rather than force deployment."},
+    {"candidate":"helicopter.png","reason":"Detached fragment can be removed but enlarged original already has transparent holes at the white cabin/window seam, with lost RGB in those pixels. Alpha-only candidate does not restore that damage; preserve original and do not claim full repair."}
+  ]
+}
