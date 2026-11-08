@@ -20,27 +20,54 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - name: Archive only tracked files from the three named refs
+      - name: Archive baseline once and exact branch deltas
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/phase2-source"
-          git fetch --no-tags origin main feat/sihyeon-vehicle-phase2-20261108 feat/sihyeon-pattern-train-20261108
-          for spec in 'main:main' 'vehicles:feat/sihyeon-vehicle-phase2-20261108' 'train:feat/sihyeon-pattern-train-20261108'; do
-            label="${spec%%:*}"
-            branch="${spec#*:}"
-            sha="$(git rev-parse "refs/remotes/origin/$branch")"
-            printf '%s %s %s\n' "$label" "$sha" "$branch" >> "$RUNNER_TEMP/phase2-source/refs.txt"
-            git archive --format=tar "$sha" | gzip -n > "$RUNNER_TEMP/phase2-source/$label.tar.gz"
-          done
-          cd "$RUNNER_TEMP/phase2-source"
-          sha256sum *.tar.gz refs.txt > SHA256SUMS
-          cat refs.txt SHA256SUMS
+          git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main' '+refs/heads/feat/sihyeon-vehicle-phase2-20261108:refs/remotes/origin/feat/sihyeon-vehicle-phase2-20261108' '+refs/heads/feat/sihyeon-pattern-train-20261108:refs/remotes/origin/feat/sihyeon-pattern-train-20261108'
+          python3 - <<'PY'
+          import gzip, hashlib, json, os, pathlib, subprocess
+          out = pathlib.Path(os.environ['RUNNER_TEMP']) / 'phase2-source'
+          (out / 'baseline').mkdir(parents=True)
+          (out / 'changes').mkdir()
+          def git(*args):
+              return subprocess.check_output(['git', *args])
+          base = '58eb1fad34bba957812b08cf55bdf28c5595ca60'
+          refs = {'main': base}
+          for label, branch in [('vehicles','feat/sihyeon-vehicle-phase2-20261108'),('train','feat/sihyeon-pattern-train-20261108')]:
+              refs[label] = git('rev-parse', 'refs/remotes/origin/' + branch).decode().strip()
+          for label, sha in refs.items():
+              folder = out / ('baseline' if label == 'main' else 'changes')
+              entries = []
+              for entry in git('ls-tree','-r','-z',sha).split(b'\0'):
+                  if not entry: continue
+                  meta, path = entry.split(b'\t',1)
+                  mode, kind, blob = meta.decode().split()
+                  entries.append({'path':path.decode(),'mode':mode,'kind':kind,'sha':blob})
+              (folder / (label + '.tree.json')).write_text(json.dumps({'commit':sha,'files':entries},ensure_ascii=True,separators=(',',':')))
+              paths = [] if label == 'main' else [p.decode() for p in git('diff','--name-only','--diff-filter=ACMR','-z',base,sha).split(b'\0') if p]
+              deleted = [] if label == 'main' else [p.decode() for p in git('diff','--name-only','--diff-filter=D','-z',base,sha).split(b'\0') if p]
+              (folder / (label + '.deleted.json')).write_text(json.dumps(deleted))
+              raw = git('archive','--format=tar',sha,*paths)
+              (folder / (label + '.tar.gz')).write_bytes(gzip.compress(raw,compresslevel=6,mtime=0))
+          for folder in [out/'baseline',out/'changes']:
+              (folder/'refs.json').write_text(json.dumps(refs,sort_keys=True,separators=(',',':')))
+              sums = [hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name for p in sorted(folder.iterdir())]
+              (folder/'SHA256SUMS').write_text('\n'.join(sums)+'\n')
+          print(json.dumps(refs))
+          PY
           echo 'Source preservation only; this job does not certify gameplay quality.' >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: phase2-source-${{ github.run_id }}
-          path: ${{ runner.temp }}/phase2-source/
+          name: phase2-baseline-${{ github.run_id }}
+          path: ${{ runner.temp }}/phase2-source/baseline/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: phase2-changes-${{ github.run_id }}
+          path: ${{ runner.temp }}/phase2-source/changes/
           if-no-files-found: error
           compression-level: 0
           retention-days: 7
