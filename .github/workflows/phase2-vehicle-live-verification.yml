@@ -1,0 +1,96 @@
+name: Phase 2 vehicle and live verification
+on:
+  pull_request:
+    paths:
+      - 'assets/vehicles/**'
+      - 'js/vehicle-display.js'
+      - 'js/games/**'
+      - 'scripts/qa-phase2-vehicles-release.py'
+      - '.github/workflows/phase2-vehicle-live-verification.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/vehicles/**'
+      - 'js/vehicle-display.js'
+      - 'js/games/**'
+      - 'scripts/qa-phase2-vehicles-release.py'
+      - '.github/workflows/phase2-vehicle-live-verification.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate-vehicles:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Install fixed browser harness
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Run actual browser vehicle regression
+        run: python3 scripts/qa-phase2-vehicles-release.py --output qa-vehicle-browser
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: vehicles-browser-${{ github.run_id }}
+          path: qa-vehicle-browser/
+          if-no-files-found: error
+          retention-days: 14
+  live-main:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Verify deployed bytes against the actual main checkout
+        run: |
+          mkdir -p qa-live
+          python3 - <<'PY'
+          import concurrent.futures,hashlib,json,pathlib,subprocess,time,urllib.request
+          root=pathlib.Path('.');sha=subprocess.check_output(['git','rev-parse','HEAD']).decode().strip()
+          files=['index.html','sw.js','js/games/pattern-train-model.js','js/games/pattern-train.js','css/games/pattern-train.css','scripts/qa-pattern-train-browser.js']
+          inventory=root/'docs/qa/sihyeon-phase2/vehicle-final-dispositions.json'
+          if inventory.exists():
+              files += ['js/vehicle-display.js','assets/vehicles/display_bounds.json']+[e['file'] for e in json.loads(inventory.read_text())['entries']]
+          def verify(path):
+              expected=hashlib.sha256((root/path).read_bytes()).hexdigest();last=None
+              for attempt in range(20):
+                  try:
+                      req=urllib.request.Request('https://icefoxtail.github.io/my-life-os/'+path+'?verify='+sha,headers={'Cache-Control':'no-cache'})
+                      with urllib.request.urlopen(req,timeout=40) as response:data=response.read()
+                      actual=hashlib.sha256(data).hexdigest()
+                      if actual==expected:return {'path':path,'sha256':actual,'status':'PASS'}
+                      last='different deployed bytes: '+actual
+                  except Exception as exc:last=str(exc)
+                  time.sleep(12)
+              return {'path':path,'expected':expected,'status':'FAIL','error':last}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:results=list(pool.map(verify,files))
+          report={'mainSha':sha,'scope':'Actual public Pages response bytes, not CI checkout only','results':results,'status':'PASS' if all(r['status']=='PASS' for r in results) else 'FAIL'}
+          pathlib.Path('qa-live/source-readback.json').write_text(json.dumps(report,indent=2));print(report);assert report['status']=='PASS'
+          PY
+      - name: Install actual browser
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Play deployed train through the public menu
+        run: python3 scripts/qa-phase2-release-browser.py --base-url https://icefoxtail.github.io/my-life-os/ --output qa-live/train
+      - name: Exercise deployed vehicles when vehicle release is on main
+        run: |
+          if test -f docs/qa/sihyeon-phase2/vehicle-final-dispositions.json; then
+            python3 scripts/qa-phase2-vehicles-release.py --base-url https://icefoxtail.github.io/my-life-os/ --output qa-live/vehicles
+          else
+            echo 'Vehicle branch is not yet deployed; this run verifies live train only.' > qa-live/vehicle-scope.txt
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: live-main-${{ github.run_id }}
+          path: qa-live/
+          if-no-files-found: error
+          retention-days: 14
