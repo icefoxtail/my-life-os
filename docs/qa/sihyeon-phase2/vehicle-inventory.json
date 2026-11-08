@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 24,
+  "actualOriginalEdits": 28,
   "entries": [
     {
       "index": 1,
@@ -4841,30 +4841,38 @@
         }
       },
       "after": {
-        "sha256": "2559fb2393403cf9f27decc9e3deab4e4d9f292cd8f66d18a2482aa62ae2cc65",
-        "bytes": 47606,
+        "sha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+        "bytes": 132254,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          12,
+          140,
+          754,
+          649
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.598901,
+        "partialAlphaFraction": 0.398951,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-combine_harvester.jpg",
+      "displayNormalized": true
     },
     {
       "index": 70,
@@ -5042,30 +5050,38 @@
         }
       },
       "after": {
-        "sha256": "baeb9b6cb892f7c9687a1f95d362a00cc016dfe930ee9039a949de44919c3fe2",
-        "bytes": 35496,
+        "sha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+        "bytes": 96852,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          34,
+          117,
+          697,
+          665
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.560013,
+        "partialAlphaFraction": 0.437369,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-baler.jpg",
+      "displayNormalized": true
     },
     {
       "index": 73,
@@ -5109,30 +5125,38 @@
         }
       },
       "after": {
-        "sha256": "318433cd1cbf5286a3c8bd8324c4258685064986e95fddd3bc147220d9c7567a",
-        "bytes": 36792,
+        "sha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+        "bytes": 89034,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          17,
+          164,
+          732,
+          593
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.618145,
+        "partialAlphaFraction": 0.379389,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-farm_trailer.jpg",
+      "displayNormalized": true
     },
     {
       "index": 74,
@@ -5243,30 +5267,38 @@
         }
       },
       "after": {
-        "sha256": "cffa451baa7e503f4e8c05751e937d4ee3903337f2d24c831022e3ae9da12fe0",
-        "bytes": 37430,
+        "sha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+        "bytes": 91674,
         "format": "WEBP",
-        "mode": "RGB",
-        "width": 418,
-        "height": 418,
+        "mode": "RGBA",
+        "width": 768,
+        "height": 768,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          19,
+          170,
+          754,
+          582
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.599455,
+        "partialAlphaFraction": 0.398353,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
+      "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
       "background": "baked-checkerboard",
       "visualReviewed": true,
       "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+      "reviewedOn": [
+        "white",
+        "dark",
+        "checkerboard"
+      ],
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/farm-milk_tanker.jpg",
+      "displayNormalized": true
     },
     {
       "index": 76,

@@ -749,14 +749,14 @@
   },
   "farm/combine_harvester.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      12,
+      140,
+      754,
+      649
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "farm/rice_transplanter.webp": {
     "box": [
@@ -782,25 +782,25 @@
   },
   "farm/baler.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      34,
+      117,
+      697,
+      665
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "farm/farm_trailer.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      17,
+      164,
+      732,
+      593
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "farm/fruit_harvest_truck.webp": {
     "box": [
@@ -815,14 +815,14 @@
   },
   "farm/milk_tanker.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      19,
+      170,
+      754,
+      582
     ],
-    "width": 418,
-    "height": 418,
-    "clean": false
+    "width": 768,
+    "height": 768,
+    "clean": true
   },
   "port/cargo_ship.webp": {
     "box": [

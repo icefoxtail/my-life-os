@@ -737,11 +737,19 @@
   },
   "assets/vehicles/farm/combine_harvester.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-combine_harvester.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/farm/rice_transplanter.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -761,19 +769,35 @@
   },
   "assets/vehicles/farm/baler.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-baler.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/farm/farm_trailer.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-farm_trailer.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/farm/fruit_harvest_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -785,11 +809,19 @@
   },
   "assets/vehicles/farm/milk_tanker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Source, generated candidate and final 768px delivery independently viewed on white, dark and checker backgrounds. Agricultural equipment, thin parts, original paint, wheels and glazing retained; no visible new clipping or detached remnants at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/farm-milk_tanker.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/port/cargo_ship.webp": {
     "classification": "1_ORIGINAL_REPAIR",

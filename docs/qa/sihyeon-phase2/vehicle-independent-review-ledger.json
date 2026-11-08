@@ -2,7 +2,7 @@
   "reviewer": "/root/independent_qa",
   "scope": "Independent visual comparison and decoded final-delivery readback; game/browser performance is separate",
   "baselineMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
-  "finalReadbackCount": 24,
+  "finalReadbackCount": 28,
   "finalReadbacks": [
     {
       "file": "assets/vehicles/construction/asphalt_paver.webp",
@@ -552,15 +552,181 @@
         736,
         622
       ]
+    },
+    {
+      "file": "assets/vehicles/farm/baler.webp",
+      "candidateComparisonSha256": "67cb9e249a3eeb452f55ffe292e6547469885573672302fc2ebe2939f3f83405",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 몸통, 가는 픽업 이빨, 검은 롤러, 견인 연결부와 작은 보조바퀴를 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 96852,
+      "deliverySha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+      "generatedPngSha256": "392bdbf09a8dafe82871fbb572c51f55e24e64b5730f7cde34d30aee7f8f6541",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        34,
+        117,
+        697,
+        665
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        34,
+        117,
+        697,
+        665
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/combine_harvester.webp",
+      "candidateComparisonSha256": "d86096615273c70b1788a8a613d0472467bd6093c2aaa268829d2746cf59c584",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 차체, 앞 리일·이빨·회전 구조, 계단·난간·캐빈, 상부 호퍼와 긴 배출관을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 132254,
+      "deliverySha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+      "generatedPngSha256": "46832b84098c97c998a1c6129bcbeae99a8f7844faa63e3b465a9709eb271962",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        12,
+        140,
+        754,
+        649
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        12,
+        140,
+        754,
+        649
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/farm_trailer.webp",
+      "candidateComparisonSha256": "f0cc9d37f8b9591cbb631d7cbe3b440e603f53db32bed7d9e7078905d8c9e990",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 적재함의 판/기둥, 견인바와 앞 지지발, 차축·타이어가 유지됨을 세 배경에서 확인.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 89034,
+      "deliverySha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+      "generatedPngSha256": "967f974ae9edbe95785090fb773fbce0375263d32f87d5ad03b52c11c62220ef",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        17,
+        164,
+        732,
+        593
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        17,
+        164,
+        732,
+        593
+      ]
+    },
+    {
+      "file": "assets/vehicles/farm/milk_tanker.webp",
+      "candidateComparisonSha256": "96d20cf6f45f254a2794c3a04e332fdbb32f0bc8451849bb1d1cf92be0fe1bd7",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "은색 탱크, 덮개3개, 후방 사다리·배관, 노란 캐빈·바퀴를 세 배경에서 확인. 앞유리는 부분 투명 알파가 있지만 완전 투명 삭제 구멍은 아니며 창틀·와이퍼·내부 형상이 유지된다.",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 91674,
+      "deliverySha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+      "generatedPngSha256": "42d03bc1d847c7b07f93e00b64b1e0eccb372cd76e125a24d3e41600adbc4f8e",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        19,
+        170,
+        754,
+        582
+      ],
+      "perimeterAlphaAtLeast16Count": 0,
+      "provenanceOutputShaMatches": true,
+      "displayMetadataAndInventoryMatch": true,
+      "displayAlphaAbove16Bounds": [
+        19,
+        170,
+        754,
+        582
+      ]
     }
   ],
-  "candidateOnly": [],
+  "candidateOnly": [
+    {
+      "file": "assets/vehicles/farm/plow_tractor.webp",
+      "candidateComparisonSha256": "99d668d83708cd3c1433422098a191e470d2042d2c2892ed221df519aa411637",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "노란 트랙터의 캐빈·거울·계단·바퀴와 뒤쪽 위/아래 쟁기날·연결 프레임을 세 배경에서 확인."
+    },
+    {
+      "file": "assets/vehicles/farm/rice_transplanter.webp",
+      "candidateComparisonSha256": "58562da30be68e2625bb0502999d31b09cc1290a0d2aba04f88df5bbbd152d91",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "차양의 가는 지지대, 좌석·핸들, 녹색 모판과 흰 거치대, 하부 이식 장치·금속바퀴를 세 배경에서 확인."
+    },
+    {
+      "file": "assets/vehicles/farm/sprayer_truck.webp",
+      "candidateComparisonSha256": "02654bc8ca0d5e2541942880b3c972c6c072dd5cb355330a075d9305c16d0f79",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "높은 차체, 흰 탱크, 접힌 노란 격자 붐·호스, 큰 바퀴·거울·안테나를 세 배경에서 확인."
+    },
+    {
+      "file": "assets/vehicles/farm/tractor.webp",
+      "candidateComparisonSha256": "8a8b9c971f006aace22e8c6d532e57fe9c9eccff66bc99f2e95eae55880dddca",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "note": "캐빈의 유리·핸들, 배기관·거울·경광등, 계단·앞 무게추·타이어 형상 유지."
+    },
+    {
+      "file": "assets/vehicles/transport/helicopter.png",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "candidateComparisonSha256": "5217d6cfc53a4b999afeda8a9d1250066d5335aeb482146c4577b8c5987cd911",
+      "note": "원본 왼쪽 부유 조각과 흰 바닥을 제거하고 주황/흰 차체·창문·로터 끝·꼬리/스키드 유지 확인."
+    },
+    {
+      "file": "assets/vehicles/transport/garbage_truck.png",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "candidateComparisonSha256": "515dcbac5752b37b6d03b23664da097f8a8961f3f878ff8be373ab06dd8bd99d",
+      "note": "원본의 세로 이어붙임 경계와 잔여선을 제거하고 녹색 차체·압축함·후부 장치·바퀴 유지 확인."
+    },
+    {
+      "file": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "independentVisualStatus": "REVIEWED_THREE_BACKGROUNDS",
+      "candidateComparisonSha256": "c5135e604f2aa7f657af60b50b4319f68351cb4aa8cf593aa08209ae83e61683",
+      "note": "작은 원본의 흰 사각을 제거하고 붉은 차체·파란 유리·루프 조명/난간·궤도 형상 유지 확인. 생성 PNG도 크게 읽음."
+    }
+  ],
   "rejected": [
     {
       "file": "assets/vehicles/construction/mobile_crane.webp",
       "candidate": "first",
       "reason": "Three outrigger feet were added although absent from original; do not use this candidate.",
       "retainedComparison": "comparisons/rejected-construction-mobile_crane-first.jpg"
+    },
+    {
+      "file": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "candidate": "first",
+      "reason": "원본의 흰 앞유리 부분이 후보에서 배경색·격자가 그대로 비치는 투명 구멍으로 바뀐다. 차체 내부를 배경으로 오인한 것으로 보이며 적용하지 않는다.",
+      "comparisonSha256": "e4c84f636bfc51a256bbc6349d0c8bb3a9fb3196256aba0da78ba1bdc3578c58",
+      "retainedComparison": "comparisons/rejected-farm-fruit_harvest_truck-first.jpg"
     }
   ],
   "originalMilitaryPrecisionRecheck": {
@@ -568,15 +734,18 @@
     "inspectionImages": [
       {
         "fileName": "military-detail-1.png",
-        "sha256": "d8816753f9cd5c5c8e8dd37ad64fb206866591a11dc1d3db3e51ab065192d3d1"
+        "sha256": "d8816753f9cd5c5c8e8dd37ad64fb206866591a11dc1d3db3e51ab065192d3d1",
+        "repositoryEvidence": "contact/military-detail-1.png"
       },
       {
         "fileName": "military-detail-2.png",
-        "sha256": "d0c564f20cd76d6383d215cffd44f1855a92d247da3e49ac4f89afb509095f69"
+        "sha256": "d0c564f20cd76d6383d215cffd44f1855a92d247da3e49ac4f89afb509095f69",
+        "repositoryEvidence": "contact/military-detail-2.png"
       },
       {
         "fileName": "military-detail-3.png",
-        "sha256": "04d641cac8b6d4662025239acde7f928d2b81b1f25a4f265f7dc2c91a41f71ec"
+        "sha256": "04d641cac8b6d4662025239acde7f928d2b81b1f25a4f265f7dc2c91a41f71ec",
+        "repositoryEvidence": "contact/military-detail-3.png"
       }
     ],
     "counts": {
@@ -694,5 +863,13 @@
         "independentObservation": "앞·뒤 타이어와 차체 하부가 수평 경계에서 잘려 있다."
       }
     ]
-  }
+  },
+  "originalPortPrecisionRecheck": [
+    {
+      "file": "assets/vehicles/port/cargo_ship.webp",
+      "baselineSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "status": "PRECISION_HOLD_SOURCE_PARTS_CUT",
+      "independentObservation": "좌측 x=0에서 선수의 곡선 외곽이 수직 단면으로 끊겨 원래 외곽을 확인할 수 없다. 전체 원본과 (0,150,100,270) 읽기전용6배 확대 확인. 사라진 외곽을 임의 생성하여 원형 보존이라고 보고하지 않는다."
+    }
+  ]
 }

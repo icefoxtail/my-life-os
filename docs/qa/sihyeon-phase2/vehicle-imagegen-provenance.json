@@ -337,6 +337,62 @@
       "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
       "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
       "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/farm/baler.webp",
+      "inputSha256": "baeb9b6cb892f7c9687a1f95d362a00cc016dfe930ee9039a949de44919c3fe2",
+      "generatedSourceName": "exec-34ae6781-1972-4104-986a-cad07d75bd47.png",
+      "generatedSha256": "392bdbf09a8dafe82871fbb572c51f55e24e64b5730f7cde34d30aee7f8f6541",
+      "outputSha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/farm/combine_harvester.webp",
+      "inputSha256": "2559fb2393403cf9f27decc9e3deab4e4d9f292cd8f66d18a2482aa62ae2cc65",
+      "generatedSourceName": "exec-1ee3216f-7a53-4610-9b53-7be1d3494c84.png",
+      "generatedSha256": "46832b84098c97c998a1c6129bcbeae99a8f7844faa63e3b465a9709eb271962",
+      "outputSha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/farm/farm_trailer.webp",
+      "inputSha256": "318433cd1cbf5286a3c8bd8324c4258685064986e95fddd3bc147220d9c7567a",
+      "generatedSourceName": "exec-d3844998-5f72-4f60-ac6a-3d4aab658c96.png",
+      "generatedSha256": "967f974ae9edbe95785090fb773fbce0375263d32f87d5ad03b52c11c62220ef",
+      "outputSha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
+    },
+    {
+      "file": "assets/vehicles/farm/milk_tanker.webp",
+      "inputSha256": "cffa451baa7e503f4e8c05751e937d4ee3903337f2d24c831022e3ae9da12fe0",
+      "generatedSourceName": "exec-cbcb9780-8ba4-4eeb-b57e-dd4c2c819a66.png",
+      "generatedSha256": "42d03bc1d847c7b07f93e00b64b1e0eccb372cd76e125a24d3e41600adbc4f8e",
+      "outputSha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+      "generatedWidth": 1254,
+      "generatedHeight": 1254,
+      "deliveryWidth": 768,
+      "deliveryHeight": 768,
+      "formatConversion": "Generated PNG proportionally downscaled to max edge 768; WebP quality 92 method 6, alpha channel lossless",
+      "visualReview": "Original identity/color/equipment and alpha edges checked on three backgrounds; not a claim of pixel-identical original vehicle interior.",
+      "prompt": "Remove only the baked checkerboard/white backdrop and residual fringe. Use genuine transparent alpha. Keep this exact vehicle, original shape, paint, equipment structure, wheels, glass, white highlights, thin parts and camera angle. No cropping, stretching, redesign, added text, scenery or shadow. Preserve source aspect ratio with a small transparent safety margin."
     }
   ]
 }
