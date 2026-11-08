@@ -25,6 +25,7 @@ jobs:
         run: |
           node scripts/qa-pattern-train-model.cjs
           node scripts/qa-pattern-train-independent.cjs
+          node scripts/qa-pattern-train-ui-independent.cjs
       - name: Independent asynchronous art restore checks
         run: |
           node scripts/qa-art-restore-independent.cjs

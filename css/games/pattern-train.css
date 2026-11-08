@@ -216,3 +216,12 @@
 @media (prefers-reduced-motion: reduce) {
   .pt-running .pt-train-row { animation: none; }.pt-running .pt-wheel, .pt-running .pt-steam { animation: none; }.pt-train-scroll { scroll-behavior: auto; }
 }
+/* Large hit areas stay separate from the artwork; remove controls never sit
+   above the scroll frame where a short landscape viewport could clip them. */
+.pt-scroll-tools { height: 44px; min-height: 44px; padding-bottom: 0; }
+.pt-scroll-tools button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; font-size: 28px; }
+.pt-scroll-tools button::before { content: ''; position: absolute; width: 34px; height: 29px; border-radius: 10px; background: #f1f3dcbf; z-index: -1; }
+.pt-remove { width: 44px; height: 44px; top: -10px; right: -6px; border: 0 !important; background: transparent; }
+.pt-remove::before { content: ''; position: absolute; inset: 8px; border: 1px solid #d9d5bb; background: #fff9ed; border-radius: 8px; z-index: -1; }
+.pt-remove .pt-icon { width: 18px; height: 18px; }
+@media (orientation: landscape) and (max-height: 540px) { .pt-scroll-tools { top: 0; }.pt-scroll-tools button { background: transparent; }.pt-scroll-tools button::before { width: 28px; height: 26px; } }

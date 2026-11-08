@@ -1,0 +1,120 @@
+{
+  "scope": "Independent controlled Node VM of actual UI closures; no browser layout, real storage quota, audio listening or device PASS",
+  "sourceSha256": "25804a309bc79f71a3837c06b2aff8a709064d069a4b6aa0d3eb12fbe42252a9",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "all four five-stop sessions run through production UI click transitions",
+      "status": "PASS",
+      "detail": {
+        "sessions": 4,
+        "trips": 20,
+        "input": "controlled onClick calls, no browser"
+      }
+    },
+    {
+      "name": "actual generated guide HTML exposes the rule used by model judgement",
+      "status": "PASS",
+      "detail": {
+        "checkedTasks": 20,
+        "scope": "generated HTML semantics, not visual placement"
+      }
+    },
+    {
+      "name": "mistake, replacement, undo, removal, explicit restart and return home",
+      "status": "PASS",
+      "detail": {
+        "retainedWrongAnswer": true,
+        "homePreservedBoard": true,
+        "resetRequiredExplicitConfirmation": true
+      }
+    },
+    {
+      "name": "palette and carriage drag success, outside drop, cancel, capture loss and secondary finger",
+      "status": "PASS",
+      "detail": {
+        "cases": [
+          "outside",
+          "pointercancel",
+          "secondary pointer",
+          "lost capture",
+          "successful placement",
+          "duplicate pointerup",
+          "return to palette"
+        ],
+        "physicalTouch": false
+      }
+    },
+    {
+      "name": "long second-finger hold cannot create a delayed click after gesture cancellation",
+      "status": "PASS",
+      "detail": {
+        "secondaryHoldMs": 1600,
+        "boardPreserved": true,
+        "physicalTouch": false
+      }
+    },
+    {
+      "name": "resize, orientation, Escape and teardown cancel drag without changing a board",
+      "status": "PASS",
+      "detail": {
+        "layoutResize": "handler only; visual orientation tested separately"
+      }
+    },
+    {
+      "name": "long held drag cancellation by resize, blur or Escape preserves the source carriage",
+      "status": "PASS",
+      "detail": {
+        "cancellationCauses": 3,
+        "heldMs": 1600,
+        "physicalTouch": false
+      }
+    },
+    {
+      "name": "readable old storage plus rejected writes keeps newest board across switching and reopening",
+      "status": "PASS",
+      "detail": {
+        "reads": 3,
+        "writes": 12,
+        "voiceCalls": 0,
+        "confetti": 0,
+        "homes": 0,
+        "durableStillOld": true,
+        "sameLoadedPageMemoryPreserved": true
+      }
+    },
+    {
+      "name": "fresh page context restores committed progress and safely rejects corrupt storage",
+      "status": "PASS",
+      "detail": {
+        "freshContextRestore": true,
+        "malformedAndDeniedReads": "recover editable board"
+      }
+    },
+    {
+      "name": "interrupted trip, late arrival and repeated render cannot complete another task",
+      "status": "PASS",
+      "detail": {
+        "oldTripCallbacksIgnored": true,
+        "duplicateListeners": false
+      }
+    },
+    {
+      "name": "voice rejection, throw and stalled speech use visual fallback; mute and late rejection are safe",
+      "status": "PASS",
+      "detail": {
+        "audioHeard": false,
+        "controlledFailureModes": 5
+      }
+    },
+    {
+      "name": "free board, theme switching and challenge independence preserve children choices",
+      "status": "PASS",
+      "detail": {
+        "ageFourMayPlaySeven": true,
+        "freeWorkPreservedAcrossThemes": true
+      }
+    }
+  ],
+  "assertions": 230
+}

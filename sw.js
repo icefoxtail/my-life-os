@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.1.0-post-office';
+const CACHE_NAME = 'sihyeon-play-os-v1.2.0-pattern-train';
 
 const ASSETS = [
   './',
@@ -13,6 +13,10 @@ const ASSETS = [
   './js/games/number-post-office-model.js',
   './js/games/number-post-office.js',
   './css/games/number-post-office.css',
+  './js/games/pattern-train-model.js',
+  './js/games/pattern-train.js',
+  './css/games/pattern-train.css',
+  './assets/games/pattern-train/card.svg',
   './assets/games/number-post-office/apple.svg',
   './assets/games/number-post-office/ball.svg',
   './assets/games/number-post-office/bear.svg',

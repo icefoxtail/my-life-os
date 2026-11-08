@@ -4,7 +4,7 @@
   const PREFIX = 'sihyeon-pattern-train-v1:';
   const memory = Object.create(null);
   const LEVELS = { 4: '첫 규칙', 5: '여러 묶음', 6: '규칙 공작', 7: '규칙 탐험' };
-  const view = { container: null, options: {}, state: null, task: null, age: 5, level: 5, cursor: 0, mode: 'course', prefs: {}, muted: false, saveFailed: false, voiceFailed: false, modal: null, erase: false, drag: null, ghost: null, handlers: null, timers: new Set(), voiceToken: 0, tripToken: 0, suppressClickUntil: 0, previousBack: null };
+  const view = { container: null, options: {}, state: null, task: null, age: 5, level: 5, cursor: 0, mode: 'course', prefs: {}, muted: false, saveFailed: false, voiceFailed: false, modal: null, erase: false, drag: null, ghost: null, activePointers: new Set(), blockedGesture: false, handlers: null, timers: new Set(), voiceToken: 0, tripToken: 0, suppressClickUntil: 0, previousBack: null };
   const M = () => window.SihyeonPatternTrainModel;
   const clone = value => JSON.parse(JSON.stringify(value));
   const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -117,6 +117,9 @@
     // A free board remembers its own length.
     if (view.state.free) view.task = M().resolveTask(view.state);
     view.erase = false; view.modal = null; save(); draw();
+    const frame = view.container.querySelector('.pt-train-scroll'); if (frame) frame.scrollLeft = 0;
+    const taskId = view.task.id, firstEmpty = view.state.board.indexOf(null);
+    if (firstEmpty >= 0) timer(() => { if (view.task?.id === taskId && !view.drag && view.state.phase === 'BUILDING') scrollToIndex(firstEmpty); }, 280);
     timer(() => speak(instruction()), 160);
   }
   function loadCourse(level, index, fresh) {
@@ -147,7 +150,7 @@
     } else if (t.kind === 'free') {
       content = '<div class="pt-free-themes">' + [['animal', 'cat', '동물'], ['color', 'red', '색깔'], ['shape', 'star', '모양']].map(([theme, picture, text]) => '<button type="button" data-action="theme" data-theme="' + theme + '" aria-label="' + text + ' 공작" aria-pressed="' + (t.theme === theme) + '"' + locked + '>' + token(picture) + '<span>' + text + '</span></button>').join('') + '</div><div class="pt-length-controls"><button type="button" data-action="shorter" aria-label="객차 한 칸 줄이기"' + (locked || (t.size <= 2 ? ' disabled' : '')) + '>' + icon('minus') + '</button><span>' + t.size + '칸</span><button type="button" data-action="longer" aria-label="객차 한 칸 늘리기"' + (locked || (t.size >= 12 ? ' disabled' : '')) + '>' + icon('plus') + '</button></div>';
     } else {
-      content = '<div class="pt-motif" aria-label="되풀이할 묶음 ' + t.unit.map(v => M().TOKENS[v].name).join(', ') + '">' + rowPictures(t.unit) + '<span class="pt-repeat-sign" aria-label="이 묶음 반복">↻</span></div><div class="pt-picture-guide" aria-hidden="true">' + icon('hand') + token(view.state.selected) + icon('arrow') + '<span class="pt-mini-coach">+</span></div>';
+      content = '<div class="pt-motif" aria-label="되풀이할 묶음 ' + t.unit.map(v => M().TOKENS[v].name).join(', ') + '">' + rowPictures(t.unit) + '<span class="pt-repeat-sign" aria-label="이 묶음 반복">↻</span></div>' + (t.unit.length <= 4 ? '<div class="pt-picture-guide" aria-hidden="true">' + icon('hand') + token(view.state.selected) + icon('arrow') + '<span class="pt-mini-coach">+</span></div>' : '');
     }
     return '<section class="pt-guide"><div class="pt-guide-heading"><span class="pt-guide-label">' + (t.kind === 'free' ? '정답 없이, 마음대로' : t.title) + '</span><button class="pt-challenge" type="button" data-action="challenge"' + locked + '>' + icon('book') + '<span>도전 바꾸기</span></button></div><div class="pt-guide-content">' + content + '</div></section>';
   }
@@ -292,7 +295,7 @@
   }
   function cancelDrag(announce) {
     const old = view.drag; view.drag = null;
-    if (old?.moved) view.suppressClickUntil = Date.now() + 500;
+    if (old?.moved) { view.suppressClickUntil = Date.now() + 500; if (view.activePointers.has(old.pointerId)) view.blockedGesture = true; }
     if (old) { try { if (view.container?.hasPointerCapture(old.pointerId)) view.container.releasePointerCapture(old.pointerId); } catch (_) {} }
     view.ghost?.remove(); view.ghost = null;
     view.container?.querySelectorAll('.pt-drop-target').forEach(el => el.classList.remove('pt-drop-target'));
@@ -300,7 +303,9 @@
   }
   function pointerDown(event) {
     if (!view.state || view.modal || view.state.phase !== 'BUILDING' || event.button > 0) return;
-    if (event.isPrimary === false || (view.drag && view.drag.pointerId !== event.pointerId)) { cancelDrag(true); view.suppressClickUntil = Date.now() + 700; return; }
+    if (event.isPrimary !== false && !view.drag) { view.activePointers.clear(); view.blockedGesture = false; }
+    view.activePointers.add(event.pointerId);
+    if (view.blockedGesture || event.isPrimary === false || view.activePointers.size > 1 || (view.drag && view.drag.pointerId !== event.pointerId)) { view.blockedGesture = true; cancelDrag(true); view.suppressClickUntil = Date.now() + 700; return; }
     const button = event.target.closest?.('[data-action]');
     if (!button || button.disabled || !view.container.contains(button) || view.erase) return;
     const source = button.dataset.action === 'select' ? 'palette' : button.dataset.action === 'seat' ? 'coach' : '';
@@ -310,7 +315,12 @@
     view.drag = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, token: button.dataset.token, source, from, moved: false };
   }
   function otherPointerDown(event) {
-    if (view.drag && event.pointerId !== view.drag.pointerId) { cancelDrag(true); view.suppressClickUntil = Date.now() + 700; }
+    if (!view.drag && !view.container?.contains(event.target)) return;
+    // A new primary down starts a new gesture even if a previous pointer ended
+    // outside this browsing context. A secondary down never clears the lock.
+    if (event.isPrimary !== false && !view.drag) { view.activePointers.clear(); view.blockedGesture = false; }
+    view.activePointers.add(event.pointerId);
+    if (view.activePointers.size > 1 || (view.drag && event.pointerId !== view.drag.pointerId)) { view.blockedGesture = true; cancelDrag(true); view.suppressClickUntil = Date.now() + 700; }
   }
   function dropTarget(x, y) {
     const el = document.elementFromPoint(x, y);
@@ -337,6 +347,12 @@
     if (event.clientY > box.top && event.clientY < box.bottom) { if (event.clientX < box.left + 30) frame.scrollLeft -= 18; else if (event.clientX > box.right - 30) frame.scrollLeft += 18; }
   }
   function pointerUp(event) {
+    view.activePointers.delete(event.pointerId);
+    if (view.blockedGesture) {
+      cancelDrag(true); view.suppressClickUntil = Date.now() + 600;
+      if (!view.activePointers.size) view.blockedGesture = false;
+      return;
+    }
     const drag = view.drag;
     if (!drag || drag.pointerId !== event.pointerId) return;
     if (!drag.moved) { view.drag = null; return; }
@@ -368,7 +384,7 @@
   function bind() {
     const h = view.handlers = {
       click: onClick, down: pointerDown, otherDown: otherPointerDown, move: pointerMove, up: pointerUp,
-      cancel: event => { if (view.drag?.pointerId === event.pointerId) cancelDrag(true); },
+      cancel: event => { if (view.drag?.pointerId === event.pointerId) cancelDrag(true); if (event.type !== 'lostpointercapture') { view.activePointers.delete(event.pointerId); if (!view.activePointers.size) view.blockedGesture = false; } },
       resize: () => { cancelDrag(true); save(); },
       blur: () => { cancelDrag(true); stopVoice(); save(); },
       visibility: () => { if (document.hidden) { cancelDrag(true); stopVoice(); parkInterruptedTrip(); save(); } else if (view.container) draw(); },
@@ -392,7 +408,7 @@
       document.removeEventListener('visibilitychange', h.visibility); document.removeEventListener('keydown', h.key);
     }
     if (view.previousBack?.element) view.previousBack.element.hidden = view.previousBack.hidden;
-    view.previousBack = null; view.container = null; view.state = null; view.task = null; view.handlers = null; view.modal = null;
+    view.previousBack = null; view.container = null; view.state = null; view.task = null; view.handlers = null; view.modal = null; view.activePointers.clear(); view.blockedGesture = false;
   }
   function render(container, options) {
     destroy(); if (!container) return;

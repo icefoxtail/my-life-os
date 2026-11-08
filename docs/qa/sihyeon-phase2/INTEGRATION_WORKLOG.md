@@ -40,3 +40,14 @@ AWCR 자동차 r2 raw SHA256: `a6647a01309ba523e021e98025ec85ee64edbce4e6d9741e6
 - AWCR r3 업로드/readback: `70de9df2808be0a8028cce53d4200bcca3ef894690fb062552a3e19f635c3008`.
 - 현재 범위는 모델·상태 복원 검수다. UI, 음성/실패 대체, 세로·가로 실플레이, 완제품 메뉴 공개, PR/main/운영 확인은 미완료다.
 - nextAction: 첫 UI checkpoint를 보존한 뒤 실제 메뉴·공용 수명주기·캐시에 통합하고 네 연령의 화면 세션과 실패 복구를 검수한다.
+
+## 첫 실플레이와 통합 진행
+
+- 첫 UI 원격 SHA `9131e6d7c6708d22d7b03fb2bd1457af38c7f6b0`에서 JS/CSS/card SVG/fixture/작업로그 5개를 원격 blob 대조하고 로컬 fast-forward했다.
+- 실제 Chromium 390×844 프레임에서 4세 첫 판: 고양이를 잘못 놓고 출발 → 오답은 보드에 유지 → 객차의 개별 꺼내기 → 토끼 선택/배치 → 출발 중 편집 잠금 → 기차 운행 후 도착 및 고쳐 만들기/다음 역 UI를 확인했다. 음성은 이 fixture에서 의도적으로 false를 반환하며 시각 대체 문구가 나타났다.
+- 초기에는 빈6번 객차가 화면 밖에 있어 첫 행동이 불명확했다. 첫 빈칸 자동 이동, 44px 스크롤 조작 영역, 6칸 가이드와 꺼내기 버튼 배치를 후속 보완했다. 초기/도착 화면은 `browser/train-4-first-layout-390.png`, `browser/train-4-arrived-390.png`에 보존한다.
+- 수정 UI SHA256 `25804a309bc79f71a3837c06b2aff8a709064d069a4b6aa0d3eb12fbe42252a9`: 독립 실제 closure의 12그룹/230 assert PASS. 합성 포인터와 저장/음성 실패 주입 결과이며 실제 물리 터치나 음성 청취 결과가 아니다. 최초 다중 포인터 긴 hold 실패도 별도 JSON으로 보존한다.
+- 공용 index에 model→UI 로드, 스타일, 실행 함수, 종료 목록을 연결했다. **메뉴 카드는 아직 추가하지 않았다.** 서비스워커 캐시136개와 경계검사를 통과했고 새4개 기차 경로를 포함했다. 기존 게임의 load order/자산을 보존했다.
+- 초안 PR https://github.com/icefoxtail/my-life-os/pull/6 생성. 원격 CI는 별도 확인하며 아직 병합 준비 완료가 아니다.
+- AWCR r4 raw SHA256 `ab7e6a1374327efa97516e6bc6e9660c91249ff7445e6a240ddf4b652a8ae57c` upload/readback 완료.
+- nextAction: 수정 스냅샷에서 작성자 브라우저 자동 검사와 네 연령 실제 세션/6개 프레임/복원 검수, 최종 메뉴 공개 및 PR/main/운영 확인.

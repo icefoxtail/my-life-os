@@ -3,4 +3,10 @@
 *{box-sizing:border-box}body{margin:0;padding:12px;background:#e8eeeb;font:15px system-ui;color:#25483d}header{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px}button{border:1px solid #698578;border-radius:9px;padding:9px 12px;background:white;font:inherit;min-height:42px}button[aria-pressed=true]{background:#235f50;color:white}p{margin:8px 0}iframe{display:block;background:white;border:1px solid #6a877b;max-width:none}#wrap{overflow:visible;width:100%}output{font-weight:700}
 </style></head><body><header><strong>실제 앱 · 화면 크기 검수</strong><button data-w="390" data-h="844">390 × 844</button><button data-w="844" data-h="390">844 × 390</button><button data-w="360" data-h="640">360 × 640</button><button data-w="768" data-h="1024">768 × 1024</button><button data-w="1024" data-h="768">1024 × 768</button><button data-w="1280" data-h="800">1280 × 800</button><button id="refresh">앱 새로고침</button><output id="size"></output></header><p>iframe 뷰포트 검수입니다. 실제 휴대폰·물리 터치·스피커 청취 검수와 구분합니다. 회전 버튼은 같은 게임과 작업판을 유지합니다.</p><div id="wrap"><iframe id="playground" src="../index.html" title="시현이놀이터 실제 앱"></iframe></div><script>
 const frame=document.querySelector('#playground');function resize(w,h){frame.style.width=w+'px';frame.style.height=h+'px';document.querySelector('#size').textContent=w+'×'+h;document.querySelectorAll('[data-w]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.w===w&&+b.dataset.h===h)));}document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>resize(+b.dataset.w,+b.dataset.h));document.querySelector('#refresh').onclick=()=>frame.contentWindow.location.reload();resize(390,844);
+const qaParams=new URLSearchParams(location.search);
+if(qaParams.get('fixture')==='train'){
+  const selectedAge=[4,5,6,7].includes(Number(qaParams.get('age')))?Number(qaParams.get('age')):4;
+  frame.src='qa-pattern-train.html?age='+selectedAge;
+  document.querySelector('header strong').textContent='패턴 기차 제품 모듈 · 화면 크기 검수';
+}
 </script></body></html>
