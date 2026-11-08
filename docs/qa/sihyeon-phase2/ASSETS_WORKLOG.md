@@ -66,3 +66,22 @@
 - 발견: 정비소는 공유래스터 대신 인라인SVG. 항타기·천공기·여객기는 원본 프레임 잘림, 특수차18개는 작고 일부 하단이 잘린 원본이므로 정밀검수.
 - 미완료: 원본복원, 공용표시 보완, 기존39 회귀, 게임브라우저, PR/운영.
 - nextAction: 조사 파일을 원격 저장한 뒤 첫 원본복원 후보를 흰/어둠/격자 배경에서 비교·검수, 작은 묶음 단위로 적용.
+
+## 체크포인트 2 — 첫 원본 복원 5개
+
+- 선행 원격 commit: `c3705d9752d6439d9b423ee162829cdafa6cf15e` (138개 조사/원본9시트 보존·원격 blob 검증).
+- 실제 변경 원본: construction의 road_roller / asphalt_paver / grader / backhoe_loader / skid_steer_loader WebP **5개**.
+- 각 원본을 직접 연 뒤 개별 Imagegen background-extraction 1회씩 수행. 원본 대비 흰/어둠/격자3배경 비교를 개별 확인하고 차량색·실루엣·장비·바퀴·유리·미러 유지, 표시규모에서 배경잔여/내부삭제 없음 확인.
+- 검수후 출력은 PNG→WebP exact lossless 인코딩. 디코딩한 RGBA 전체 bytes가 생성본과 동일함을 검증. 원래 차량 내부픽셀까지 원본과 동일하다고 주장하지 않는다.
+- `vehicle-imagegen-provenance.json`: 생성출력SHA, 기준원본SHA, 최종원본SHA, 실제편집프롬프트 규격 보존.
+- `assets/vehicles/display_bounds.json`, `js/vehicle-display.js`에 새5개 가시경계 반영. 기존39 경계/픽셀 유지 확인. clean pool44개.
+- Node 공용표시검사: 44×6=**264** 비율보존 조건 통과. 원래39 SHA 및 기존경계정확보존, 새5개 SHA/alpha경계 정합성, fallback·idempotence·cleanup 검증.
+- 초기분류 보정: 독립검수에서 기존39 중 helicopter/submarine/garbage_truck의 기존잔여파편·선을 확인. 원본정상으로 묶지 않고 **정밀검토3개**로 전환. 현재분류는 정비78/표시36/정밀24이며, 정밀분류는 자동HOLD확정이 아니다.
+- 미완료: 나머지 원본 개별복원, 생성후 독립시각QA, 공용게임표시, 브라우저회귀, PR/운영.
+- nextAction: 첫5개를 원격저장하고 다음공사차4개 원본후보 개별복원·비교.
+
+### 배포 크기 보강 — 첫5개 최종 형식
+
+생성본1254²를 lossless그대로사용하면 개당629~826KB로 원본대비약20배가 되는비용회귀를 독립검수에서 발견했다. 최종게임전달본은 생성결과만 비율유지768²로리사이즈하고WebP quality92/method6로저장했다. 원본RGB의배경제거를외부알고리즘으로대체하지않는다.
+
+5개최종파일은 road_roller79,764 / asphalt_paver87,146 / grader95,538 / backhoe_loader111,508 / skid_steer_loader97,730 bytes. 생성원본과전달본을3배경으로비교해 표시범위에서장비/타이어/유리/얇은부품의품질유지를확인했다. 전달인코딩의알파는리사이즈된생성본알파와정확일치한다. 기존lossless단계RGBA동일검증은중간후보검증이며최종전달본과구분한다. 최종SHA/치수/알파경계는inventory와provenance를기준으로한다.

@@ -3,6 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
+const crypto=require('node:crypto');
 const source=fs.readFileSync(path.resolve(__dirname,'../js/vehicle-display.js'),'utf8');
 const bounds=JSON.parse(source.match(/const bounds = (.*);\n/)[1]);
 class Element {
@@ -17,7 +18,28 @@ const window={};
 vm.runInNewContext(source,{window,document:{createElementNS:(namespace,tag)=>new Element(tag)}});
 const api=window.SihyeonVehicleDisplay;
 const clean=Object.entries(bounds).filter(([,value])=>value.clean);
-assert.equal(clean.length,39,'the reviewed clean asset pool must remain unchanged');
+const inventory=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../docs/qa/sihyeon-phase2/vehicle-inventory.json'),'utf8'));
+const original39=inventory.entries.filter(e=>e.file.endsWith('.png'));
+assert.equal(original39.length,39,'all 39 original transparent assets remain represented');
+for(const entry of original39){
+  const name=entry.file.split('assets/vehicles/')[1];
+  const sha=crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'..',entry.file))).digest('hex');
+  assert.equal(sha,entry.before.sha256,'original transparent pixels preserved: '+name);
+  assert.equal(bounds[name].clean,true,'original clean pool preserved: '+name);
+  assert.deepEqual(bounds[name].box,entry.before.displayBounds.box,'original visible bounds preserved: '+name);
+  assert.equal(bounds[name].width,entry.before.width);
+  assert.equal(bounds[name].height,entry.before.height);
+}
+const restored=inventory.entries.filter(e=>e.action==='RESTORED_AND_VISUALLY_REVIEWED');
+assert.equal(clean.length,39+restored.length,'only explicitly reviewed restorations may join the clean pool');
+for(const entry of restored){
+  const name=entry.file.split('assets/vehicles/')[1];
+  assert.equal(bounds[name].clean,true,'restored vehicle joins common display pool: '+name);
+  assert.deepEqual(bounds[name].box,entry.after.alphaBounds16,'restored visible bounds match decoded alpha: '+name);
+  const sha=crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'..',entry.file))).digest('hex');
+  assert.equal(sha,entry.after.sha256,'reviewed bytes still match: '+name);
+}
+assert.ok(clean.length>=39,'no clean original is silently removed');
 let scenarios=0;
 for(const [name,b] of clean){
   const parent=new Element('button'),image=new Element('img');

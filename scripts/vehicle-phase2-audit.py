@@ -80,8 +80,10 @@ def main():
     reviews_path=OUT/'vehicle-visual-review.json'
     reviews=json.loads(reviews_path.read_text()) if reviews_path.exists() else {}
     entries=[]
+    original_bounds=json.loads(raw('assets/vehicles/display_bounds.json',True))
     for index,e in enumerate(source,1):
       original=metrics(raw(e['file'],True));current=metrics(raw(e['file']))
+      original['displayBounds']=original_bounds.get(e['file'].split('assets/vehicles/')[1])
       review=reviews.get(e['file'],{'classification':'PENDING_VISUAL','finding':'Not yet reviewed in this phase'})
       item=dict(index=index,id=e['id'],name_ko=e['name_ko'],category=e['category'],file=e['file'],games=games(e),before=original,after=current,originalChanged=original['sha256']!=current['sha256'],**review)
       if item['originalChanged']:item['comparison']=compare(item)

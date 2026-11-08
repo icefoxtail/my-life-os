@@ -1,0 +1,100 @@
+{
+  "scope": "Independent final delivery readback: proportional 768px WebP quality92, separate from initial 1254px lossless stage",
+  "rows": [
+    {
+      "file": "assets/vehicles/construction/asphalt_paver.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 87146,
+      "originalBytes": 31844,
+      "deliverySha256": "5156649557e0d8064d8537a502b120511ed14b7e6c0dbb22af595bc0216e5789",
+      "generatedPngSha256": "6893ad9b6c71048ae13c95a9185b1ea7f8922c2001124c028e0854b4960d0e73",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        21,
+        204,
+        749,
+        622
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/grader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 95538,
+      "originalBytes": 36210,
+      "deliverySha256": "5674f20f7c1eb94ae5d6a9e56455bb7821c970b3c705cab1da4ebf664c663f83",
+      "generatedPngSha256": "6c6d7d50e965afdf51db902d794c7752e13bb10c926aa35bef59853d218433c6",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        16,
+        223,
+        748,
+        623
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/backhoe_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 111508,
+      "originalBytes": 39112,
+      "deliverySha256": "42fc97ad3518d9688f2ef4c8f5e9a3289633c97b461a7dd8353c85b3581c9a4b",
+      "generatedPngSha256": "87ef9f6200953bf1883f594345d971912794ab86cc1cd2845d5f1f2cf936edd1",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        3,
+        93,
+        762,
+        627
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/skid_steer_loader.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 97730,
+      "originalBytes": 41022,
+      "deliverySha256": "b38ba13242f98aff6842345bac8fcb408364ab965684a3134297ca7a29c1d16d",
+      "generatedPngSha256": "f1463a073114c95f8396d0a4e1eff035bf9e51aa757d3c126c97e64811fa5f23",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        5,
+        93,
+        707,
+        640
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    },
+    {
+      "file": "assets/vehicles/construction/road_roller.webp",
+      "deliverySize": [
+        768,
+        768
+      ],
+      "deliveryBytes": 79764,
+      "originalBytes": 33280,
+      "deliverySha256": "14d7efe351999c6e739467999588d9d49a73310ff2969f8d6e4df175dcf3841e",
+      "generatedPngSha256": "3b9187e2cdf68a7368a0652d3f9e128cef2d1170cca8b67760690b48070c3394",
+      "alphaExactAfterProportionalLanczos": true,
+      "alphaAtLeast16BBox": [
+        19,
+        142,
+        729,
+        659
+      ],
+      "perimeterAlphaAtLeast16Count": 0
+    }
+  ]
+}

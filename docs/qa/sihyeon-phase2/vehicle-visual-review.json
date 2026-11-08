@@ -217,43 +217,83 @@
   },
   "assets/vehicles/construction/road_roller.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-road_roller.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/asphalt_paver.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-asphalt_paver.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/grader.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-grader.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/backhoe_loader.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-backhoe_loader.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/skid_steer_loader.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
+    "finding": "Baked background removed; original color, silhouette and equipment preserved in three-background comparison. No visible new clipping, white halo or interior deletion at game scale.",
     "background": "baked-checkerboard",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-02.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "restorationMethod": "Imagegen background-extraction; proportional generated-output web delivery; exact alpha",
+    "reviewedOn": [
+      "white",
+      "dark",
+      "checkerboard"
+    ],
+    "comparison": "comparisons/construction-skid_steer_loader.jpg",
+    "displayNormalized": true
   },
   "assets/vehicles/construction/tower_crane.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -408,12 +448,12 @@
     "action": "PRESERVE_ORIGINAL"
   },
   "assets/vehicles/transport/submarine.png": {
-    "classification": "2_DISPLAY_ONLY",
-    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
-    "background": "transparent-with-original-ground-shadow",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original detached white speck to the right of the submarine; source issue confirmed independently. Source currently preserved; precise repair pending.",
+    "background": "transparent-with-original-artifact",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "PENDING_PRECISE_REVIEW"
   },
   "assets/vehicles/transport/tow_truck.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -424,12 +464,12 @@
     "action": "PRESERVE_ORIGINAL"
   },
   "assets/vehicles/transport/garbage_truck.png": {
-    "classification": "2_DISPLAY_ONLY",
-    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
-    "background": "transparent-with-original-ground-shadow",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original vertical rear-body seam and stray horizontal/left-edge lines; source issue confirmed independently. Source currently preserved; precise repair pending.",
+    "background": "transparent-with-original-artifact",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "PENDING_PRECISE_REVIEW"
   },
   "assets/vehicles/transport/tractor.png": {
     "classification": "2_DISPLAY_ONLY",
@@ -448,12 +488,12 @@
     "action": "PRESERVE_ORIGINAL"
   },
   "assets/vehicles/transport/helicopter.png": {
-    "classification": "2_DISPLAY_ONLY",
-    "finding": "Original transparent source retained. Existing counting normalization is present; other shared games require common bounds-based display inspection.",
-    "background": "transparent-with-original-ground-shadow",
+    "classification": "4_PRECISE_REVIEW",
+    "finding": "Original detached white/gray flecks to the left of the helicopter; source issue confirmed independently. Source currently preserved; precise repair pending.",
+    "background": "transparent-with-original-artifact",
     "visualReviewed": true,
     "visualEvidence": "contact/vehicles-before-04.jpg",
-    "action": "PRESERVE_ORIGINAL"
+    "action": "PENDING_PRECISE_REVIEW"
   },
   "assets/vehicles/airport/passenger_airplane.webp": {
     "classification": "4_PRECISE_REVIEW",
