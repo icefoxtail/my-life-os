@@ -837,14 +837,14 @@
   },
   "port/container_truck.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      22,
+      125,
+      400,
+      359
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "port/harbor_crane.webp": {
     "box": [
@@ -859,25 +859,25 @@
   },
   "port/reach_stacker.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      9,
+      58,
+      387,
+      372
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "port/tugboat.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      21,
+      32,
+      394,
+      349
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "port/ferry.webp": {
     "box": [
@@ -892,36 +892,36 @@
   },
   "port/fishing_boat.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      11,
+      39,
+      404,
+      351
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "port/coast_guard_boat.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      12,
+      52,
+      405,
+      339
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "port/rescue_boat.webp": {
     "box": [
-      0,
-      0,
-      418,
-      418
+      11,
+      53,
+      403,
+      353
     ],
     "width": 418,
     "height": 418,
-    "clean": false
+    "clean": true
   },
   "road_service/road_repair_truck.webp": {
     "box": [

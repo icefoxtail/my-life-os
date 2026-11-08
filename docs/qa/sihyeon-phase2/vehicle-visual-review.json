@@ -838,11 +838,12 @@
   },
   "assets/vehicles/port/container_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White cab, long container proportions and all wheel edges retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/port-container_truck.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/harbor_crane.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -854,19 +855,21 @@
   },
   "assets/vehicles/port/reach_stacker.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Spreader, long boom, hydraulic pistons, cab glazing and full wheel outlines preserved.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/port-reach_stacker.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/tugboat.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Mast antennas, dark fenders, white bridge and intact hull retained; no invented structure.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-05.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/port-tugboat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/ferry.webp": {
     "classification": "1_ORIGINAL_REPAIR",
@@ -878,27 +881,30 @@
   },
   "assets/vehicles/port/fishing_boat.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Masts, rigging, boom, winch, railing and entire hull remain. Original thin antialiased edges retained rather than claiming pixel-perfect background decontamination.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/port-fishing_boat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/coast_guard_boat.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "White superstructure, navigation equipment, mast antennas and rail geometry retained.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/port-coast_guard_boat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/port/rescue_boat.webp": {
     "classification": "1_ORIGINAL_REPAIR",
-    "finding": "Baked opaque checkerboard visible around vehicle",
-    "background": "baked-checkerboard",
+    "finding": "Orange cabin, black collar, mast and guardrail retained; checked fine exterior structures.",
+    "background": "transparent, original RGB retained",
     "visualReviewed": true,
-    "visualEvidence": "contact/vehicles-before-06.jpg",
-    "action": "PENDING_ORIGINAL_REPAIR"
+    "visualEvidence": "comparisons/port-rescue_boat.jpg",
+    "action": "RESTORED_AND_VISUALLY_REVIEWED",
+    "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent"
   },
   "assets/vehicles/road_service/road_repair_truck.webp": {
     "classification": "1_ORIGINAL_REPAIR",

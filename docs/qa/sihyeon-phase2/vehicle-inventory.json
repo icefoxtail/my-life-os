@@ -12,7 +12,7 @@
     "2_DISPLAY_ONLY": 36,
     "4_PRECISE_REVIEW": 24
   },
-  "actualOriginalEdits": 41,
+  "actualOriginalEdits": 47,
   "entries": [
     {
       "index": 1,
@@ -5419,30 +5419,32 @@
         }
       },
       "after": {
-        "sha256": "26db2e3e7528c4ea8c40a8603464b45501445af2ad4ec945955ff8c7a67a35e3",
-        "bytes": 32898,
+        "sha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+        "bytes": 95960,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          22,
+          125,
+          400,
+          359
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.591705,
+        "partialAlphaFraction": 0.394222,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White cab, long container proportions and all wheel edges retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/port-container_truck.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/port-container_truck.jpg"
     },
     {
       "index": 78,
@@ -5553,30 +5555,32 @@
         }
       },
       "after": {
-        "sha256": "c56aec7a3e0208ecb9e07b30c90428a0e3c36e68aeebbd515ea7a7fe03d63609",
-        "bytes": 36100,
+        "sha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+        "bytes": 108264,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          9,
+          58,
+          387,
+          372
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.699269,
+        "partialAlphaFraction": 0.289399,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Spreader, long boom, hydraulic pistons, cab glazing and full wheel outlines preserved.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/port-reach_stacker.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/port-reach_stacker.jpg"
     },
     {
       "index": 80,
@@ -5620,30 +5624,32 @@
         }
       },
       "after": {
-        "sha256": "5bbb5332eef850211d68b7265a350a576539dfe2a165d39a818d6f8474e4e5ba",
-        "bytes": 32086,
+        "sha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+        "bytes": 93036,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          21,
+          32,
+          394,
+          349
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.721544,
+        "partialAlphaFraction": 0.270987,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Mast antennas, dark fenders, white bridge and intact hull retained; no invented structure.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-05.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/port-tugboat.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/port-tugboat.jpg"
     },
     {
       "index": 81,
@@ -5754,30 +5760,32 @@
         }
       },
       "after": {
-        "sha256": "e8a29ff62fd6a44ba24a73291575455bd41504da822b8b49c7e237e42249a19f",
-        "bytes": 43230,
+        "sha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+        "bytes": 133654,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          11,
+          39,
+          404,
+          351
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.691851,
+        "partialAlphaFraction": 0.293623,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Masts, rigging, boom, winch, railing and entire hull remain. Original thin antialiased edges retained rather than claiming pixel-perfect background decontamination.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/port-fishing_boat.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/port-fishing_boat.jpg"
     },
     {
       "index": 83,
@@ -5821,30 +5829,32 @@
         }
       },
       "after": {
-        "sha256": "343575fa357ef4ce91733eee376d27cdd63d120521304a41385a0ed617ef7ba5",
-        "bytes": 30192,
+        "sha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+        "bytes": 88236,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          12,
+          52,
+          405,
+          339
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.735657,
+        "partialAlphaFraction": 0.256862,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "White superstructure, navigation equipment, mast antennas and rail geometry retained.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/port-coast_guard_boat.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/port-coast_guard_boat.jpg"
     },
     {
       "index": 84,
@@ -5888,30 +5898,32 @@
         }
       },
       "after": {
-        "sha256": "8931833134ae4bdbc89245ec5bdce8f37cc8dcc8adb1dd56d67866a63d45c759",
-        "bytes": 33664,
+        "sha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+        "bytes": 103166,
         "format": "WEBP",
-        "mode": "RGB",
+        "mode": "RGBA",
         "width": 418,
         "height": 418,
         "alphaBounds16": [
-          0,
-          0,
-          418,
-          418
+          11,
+          53,
+          403,
+          353
         ],
-        "transparentFraction": 0.0,
-        "partialAlphaFraction": 0.0,
+        "transparentFraction": 0.719386,
+        "partialAlphaFraction": 0.265997,
         "sourceAspectRatio": 1.0,
         "decoded": true
       },
-      "originalChanged": false,
+      "originalChanged": true,
       "classification": "1_ORIGINAL_REPAIR",
-      "finding": "Baked opaque checkerboard visible around vehicle",
-      "background": "baked-checkerboard",
+      "finding": "Orange cabin, black collar, mast and guardrail retained; checked fine exterior structures.",
+      "background": "transparent, original RGB retained",
       "visualReviewed": true,
-      "visualEvidence": "contact/vehicles-before-06.jpg",
-      "action": "PENDING_ORIGINAL_REPAIR"
+      "visualEvidence": "comparisons/port-rescue_boat.jpg",
+      "action": "RESTORED_AND_VISUALLY_REVIEWED",
+      "reviewMethod": "Coordinator individual three-background review and decoded-RGBA readback; not an independent agent",
+      "comparison": "docs/qa/sihyeon-phase2/comparisons/port-rescue_boat.jpg"
     },
     {
       "index": 85,

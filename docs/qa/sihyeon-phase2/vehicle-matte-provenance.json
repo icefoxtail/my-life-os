@@ -429,6 +429,204 @@
         "height": 418,
         "clean": true
       }
+    },
+    {
+      "source": "assets/vehicles/port/container_truck.webp",
+      "sourceSha256": "26db2e3e7528c4ea8c40a8603464b45501445af2ad4ec945955ff8c7a67a35e3",
+      "candidate": "container_truck.png",
+      "candidateSha256": "c48f4aea8e9de416f5681aa4ecd918b33d15d40b40377f2498d3cfe46f6aaf33",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "394c5b6c13cff2429d34c7e37624b6a5a39e1d6e1b4ef786469c0987e2050d0b",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White cab, long container proportions and all wheel edges retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+      "outputBytes": 95960,
+      "outputRgbaSha256": "394c5b6c13cff2429d34c7e37624b6a5a39e1d6e1b4ef786469c0987e2050d0b",
+      "displayBounds": {
+        "box": [
+          22,
+          125,
+          400,
+          359
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/reach_stacker.webp",
+      "sourceSha256": "c56aec7a3e0208ecb9e07b30c90428a0e3c36e68aeebbd515ea7a7fe03d63609",
+      "candidate": "reach_stacker.png",
+      "candidateSha256": "ead9d056501ed267009e48dfb33c406f83171f5dc9312339c6d6f58f34d95b0a",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ef3338a2888b525e0140bbc0fa28ac210347e9d3895546368aa9ee2cb8b04ff9",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Spreader, long boom, hydraulic pistons, cab glazing and full wheel outlines preserved.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+      "outputBytes": 108264,
+      "outputRgbaSha256": "ef3338a2888b525e0140bbc0fa28ac210347e9d3895546368aa9ee2cb8b04ff9",
+      "displayBounds": {
+        "box": [
+          9,
+          58,
+          387,
+          372
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/tugboat.webp",
+      "sourceSha256": "5bbb5332eef850211d68b7265a350a576539dfe2a165d39a818d6f8474e4e5ba",
+      "candidate": "tugboat.png",
+      "candidateSha256": "3a31c38c2e19da44d3749e014ad24e231d77beccef9559d8f46d18ac3e06529b",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "6839e4d11a1123ecbd9ac0b756023b95a1523252f504c02811f221c076bbc334",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Mast antennas, dark fenders, white bridge and intact hull retained; no invented structure.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+      "outputBytes": 93036,
+      "outputRgbaSha256": "6839e4d11a1123ecbd9ac0b756023b95a1523252f504c02811f221c076bbc334",
+      "displayBounds": {
+        "box": [
+          21,
+          32,
+          394,
+          349
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/fishing_boat.webp",
+      "sourceSha256": "e8a29ff62fd6a44ba24a73291575455bd41504da822b8b49c7e237e42249a19f",
+      "candidate": "fishing_boat.png",
+      "candidateSha256": "d1158fd80aea093c67ba01a6a0ae8a999fefb4273d8ce5be19700c49189f0434",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "0dae74734152ccecd5a29ef7b274d91800fd5ea92b2d025c0dc2b2c579b6df40",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Masts, rigging, boom, winch, railing and entire hull remain. Original thin antialiased edges retained rather than claiming pixel-perfect background decontamination.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+      "outputBytes": 133654,
+      "outputRgbaSha256": "0dae74734152ccecd5a29ef7b274d91800fd5ea92b2d025c0dc2b2c579b6df40",
+      "displayBounds": {
+        "box": [
+          11,
+          39,
+          404,
+          351
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/coast_guard_boat.webp",
+      "sourceSha256": "343575fa357ef4ce91733eee376d27cdd63d120521304a41385a0ed617ef7ba5",
+      "candidate": "coast_guard_boat.png",
+      "candidateSha256": "b46b96f0597f36d7380539bb2cbc0f41b23a9bff202488638b5709138aafee64",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "ae5b930df7ffa8a353869fb70a7eb38a914c4ce344ec4ee262020802caf6f5ee",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "White superstructure, navigation equipment, mast antennas and rail geometry retained.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+      "outputBytes": 88236,
+      "outputRgbaSha256": "ae5b930df7ffa8a353869fb70a7eb38a914c4ce344ec4ee262020802caf6f5ee",
+      "displayBounds": {
+        "box": [
+          12,
+          52,
+          405,
+          339
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
+    },
+    {
+      "source": "assets/vehicles/port/rescue_boat.webp",
+      "sourceSha256": "8931833134ae4bdbc89245ec5bdce8f37cc8dcc8adb1dd56d67866a63d45c759",
+      "candidate": "rescue_boat.png",
+      "candidateSha256": "180a341eb572454a7e713d626aab8343f75dbb4eed06b0cd34ec83a4c87752e9",
+      "size": [
+        418,
+        418
+      ],
+      "rgbPixelsUnchanged": true,
+      "artifactId": 13617153410,
+      "artifactSha256": "0e027c45c4ae4bac800d4f5f2ac9752e7d115917002063972339a298a5409b56",
+      "alphaRepairs": [],
+      "reviewedRgbaSha256": "23b645d7220d80b38ec6a1ddb58551a25cd36c15dc03fda125539de3a3903989",
+      "review": "APPROVED_AFTER_INDIVIDUAL_THREE_BACKGROUND_COMPARISON",
+      "notes": "Orange cabin, black collar, mast and guardrail retained; checked fine exterior structures.",
+      "approvalBinding": "Explicit candidate name within immutable SHA-256-bound artifact; no inferred approval",
+      "batch": "port",
+      "outputSha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+      "outputBytes": 103166,
+      "outputRgbaSha256": "23b645d7220d80b38ec6a1ddb58551a25cd36c15dc03fda125539de3a3903989",
+      "displayBounds": {
+        "box": [
+          11,
+          53,
+          403,
+          353
+        ],
+        "width": 418,
+        "height": 418,
+        "clean": true
+      }
     }
   ]
 }
