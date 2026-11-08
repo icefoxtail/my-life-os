@@ -1,0 +1,648 @@
+{
+  "schemaVersion": 1,
+  "baseMain": "adaac2de7c147618e9f16acff952dd87ce5d443a",
+  "candidatePR": 5,
+  "candidateHead": "f35dec64c8b69aea8a6091f2b95d55d896776885",
+  "sourceDenominator": 138,
+  "originalRestoredCount": 77,
+  "approvedOriginalRestored": 73,
+  "excludedRestored": [
+    {
+      "file": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+      "disposition": "HOLD_SOURCE_OR_CURRENT_ART_DEFECT",
+      "mainFileUnchanged": true
+    },
+    {
+      "file": "assets/vehicles/fire_special/fire_command_suv.webp",
+      "disposition": "HOLD_SOURCE_OR_CURRENT_ART_DEFECT",
+      "mainFileUnchanged": true
+    },
+    {
+      "file": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+      "disposition": "HOLD_SOURCE_OR_CURRENT_ART_DEFECT",
+      "mainFileUnchanged": true
+    },
+    {
+      "file": "assets/vehicles/transport/garbage_truck.png",
+      "disposition": "HOLD_SOURCE_OR_CURRENT_ART_DEFECT",
+      "mainFileUnchanged": true
+    }
+  ],
+  "newApprovedFromHolds": [
+    "assets/vehicles/port/harbor_crane.webp",
+    "assets/vehicles/port/ferry.webp",
+    "assets/vehicles/road_service/road_sign_truck.webp"
+  ],
+  "releaseImageCount": 76,
+  "scope": "IMAGES_ONLY_NO_JS_CSS_SW_MANIFEST",
+  "items": [
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "gitBlobSha": "9531603a13200a6fe3362e60d6b0061372958e1c",
+      "baselineGitBlobSha": "2c58cb262487b658b06c825d739c8407f5473197",
+      "sourceSha256": "c0130937c2262c4c13de3cc7953ad8b9f49ca99298e6d2adeba7b81c725c07f7",
+      "resultSha256": "14d7efe351999c6e739467999588d9d49a73310ff2969f8d6e4df175dcf3841e",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/asphalt_paver.webp",
+      "gitBlobSha": "bff14fda43e9ff733541de061a30ed066c2311f5",
+      "baselineGitBlobSha": "0f472f26f7b8d95f1f6959d425ab9d1f976edb98",
+      "sourceSha256": "471732d8f757ea545aff4606ef5a0a379c68f9b0bc7f3a3b04d78bb3e2484c14",
+      "resultSha256": "5156649557e0d8064d8537a502b120511ed14b7e6c0dbb22af595bc0216e5789",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/grader.webp",
+      "gitBlobSha": "af5daab1a912e278f74772524895add84415c857",
+      "baselineGitBlobSha": "9ff2971420f329e0d97bf1e5ff58b571abe638a1",
+      "sourceSha256": "5012c37e28d5bf089fd7e90d8ace4e4b22246d9880274e28468b369fedf26f73",
+      "resultSha256": "5674f20f7c1eb94ae5d6a9e56455bb7821c970b3c705cab1da4ebf664c663f83",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/backhoe_loader.webp",
+      "gitBlobSha": "ef40db72ffb27b37cf586fc260750ca8b550f601",
+      "baselineGitBlobSha": "c7ffdd28aaed45e75a7b9c34d32575eec545fafd",
+      "sourceSha256": "b2196231b5b6728a2c037a327dabfdf8d893d8927dd1fa3ff2a3f51c5cd21f87",
+      "resultSha256": "42fc97ad3518d9688f2ef4c8f5e9a3289633c97b461a7dd8353c85b3581c9a4b",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/skid_steer_loader.webp",
+      "gitBlobSha": "79114b466d82c2a4a7dfdef7cdbdc3501fee04c5",
+      "baselineGitBlobSha": "641bc5d8e2e300e710cd8e677e8e725c0c9bcb77",
+      "sourceSha256": "c0f2f2fa4aa31c97b2113c1ee3e386bc6c8b74f441d1c94ed836dbd9d946e62f",
+      "resultSha256": "b38ba13242f98aff6842345bac8fcb408364ab965684a3134297ca7a29c1d16d",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/tower_crane.webp",
+      "gitBlobSha": "15f7e6db7ef5275e816bf2578159b39081faec73",
+      "baselineGitBlobSha": "df568d2f018b7ca435a2b6c9e76e53c5013f5b6e",
+      "sourceSha256": "719f1da9bebf75e8ffac62352525ce383b0a72dc90b4b276092bcb6664072ffc",
+      "resultSha256": "c7b794bb7cd4b575a54de978631f68e5091f344315ac43ccecde99a043071004",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/mobile_crane.webp",
+      "gitBlobSha": "936517496d56ec61a883c77d1fb4ead2b0a24bee",
+      "baselineGitBlobSha": "ac7a27c92a28da1475d28c1e07ee084d5a4952e1",
+      "sourceSha256": "43dd9257a4c3011a2d083c4944706736d8bb285b27bc4a05ffb945bc9f5270d9",
+      "resultSha256": "2df3607b1290aebb0647631229b38e4e1cd1c27e11c4af0dc372b0ddd4f7b3eb",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/excavator_breaker.webp",
+      "gitBlobSha": "ebdd4d2f2e27a4b17e78cc0406e43797364d9a14",
+      "baselineGitBlobSha": "e2d37ea584d4ae4c9ac017e266fa83d6adf4f7eb",
+      "sourceSha256": "13e454ba034a9f95fb3ffdf84f7aa138c7dd2a1c4b86e0b8ff35aef649c26af5",
+      "resultSha256": "0c677e02bb8de97b324762135923e098ab8217ae16a12684f5482cec74f68f1f",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/dump_loader.webp",
+      "gitBlobSha": "41faa4524c66840698bda5e8848edfa6e8f67097",
+      "baselineGitBlobSha": "30b02a1c0692a1a41d23326c3c79c8d276335be5",
+      "sourceSha256": "e5f7782c4b808b1deadac11bab62ff885f361af0fe004e63a9378a2e68e4dfd8",
+      "resultSha256": "65bacaf65bfcc7ad8659f6ee0a347a8da6764c8f459ad942dce4750c327bf4ab",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "gitBlobSha": "9cd399fb51b5fdc8513d03ae25889e39b27b38b1",
+      "baselineGitBlobSha": "6c1b3b46aca91cae7254e97040f76719798780b0",
+      "sourceSha256": "22f92ad036ba88120aa37c5c801ddff27ca0b3595f32f4acb3cee2176af53340",
+      "resultSha256": "845a70910c5cfeece8ac62c0584644c036be85009d22043453c723ba9631e83a",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/water_truck.webp",
+      "gitBlobSha": "4194730023c8ad4614ee625f422ddf012be4d3a8",
+      "baselineGitBlobSha": "69633d67e2569680aac163a821b5bd7da790d9e9",
+      "sourceSha256": "117c3b4a5f65e224cb1e936fc1005aabef97129bafe18df2995f08b05e516fd5",
+      "resultSha256": "0522eb20c6e8a670430738f1560772d69aa233d76001a50481dc47898c83782e",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/sweeper_truck.webp",
+      "gitBlobSha": "517f0bb4635b1a50d98753a08ff5f1d5b95f7362",
+      "baselineGitBlobSha": "f9562f57cdc29e9a275ef6a195f01ef528f424de",
+      "sourceSha256": "86467ffbc6f3d67361a7bf9aa4efc11729bfb602a6baa8909918ba3f3a46048b",
+      "resultSha256": "fc96ec4d8465848cc162ea1706aec9089e65cdbfc5a0492d9dd7380c5a42c516",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/fuel_truck.webp",
+      "gitBlobSha": "bb882ad48faa360a29aa6594adcab70f27c4c994",
+      "baselineGitBlobSha": "934e558334833327e027645456ce936f0df22836",
+      "sourceSha256": "0b11cd01c3d0ac7cb62b04d3a8d6e399e63cfb695d4cafbfa8298b10ca8d5b19",
+      "resultSha256": "940670739c8af9b6650edf8344b0915d3de2ad6251b34a6290113e92a42a6320",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/lowbed_trailer.webp",
+      "gitBlobSha": "60d65395a5a39dbb4b56a22522d6f8bd3af3bc69",
+      "baselineGitBlobSha": "e2f0fc31613a12a28dd0e8590ed6b4c18ca57d54",
+      "sourceSha256": "f245fa7280fe6a658012095a86fdd198d42f7067c5b5c1a238066b6115144d12",
+      "resultSha256": "586d0b8f6423e2b2fbb9984cb985a1c22fdaff61bc16871b25f014d7593343b4",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/cargo_truck.webp",
+      "gitBlobSha": "2e9115370511672aaf41e5fd0faf5696a2b43e63",
+      "baselineGitBlobSha": "d20abc195a8519135154aaed7c6a82a40ea7ff17",
+      "sourceSha256": "ce6336794ca5558b7a477ce0bdb16ea74f32888354f8cc6ffb1c7eb5782fe15e",
+      "resultSha256": "ee43488e43ed604ed2432b9792b177db32deb0e4fe0ffcae70af294ff71ad17a",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/construction/scissor_lift.webp",
+      "gitBlobSha": "8d6b58c97d60f55abfbe27760bd8a95d063d6cfd",
+      "baselineGitBlobSha": "a64ffd1711573e9ae946853d15110827852acbf9",
+      "sourceSha256": "02cdf5f11323860a42f73bf780eaa38d5ce3f796252d41816d9cfe16d6120189",
+      "resultSha256": "72351f8ad22a202e1c9b7079b27e45ed290f8d6508e8f9c3d1661803c0d8553f",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/transport/submarine.png",
+      "gitBlobSha": "e2cbbd2cb11d7ad59063ff9ccc21e30b2c8e23b4",
+      "baselineGitBlobSha": "69e13220a19aa8b66d86c9e83fc07b4958b66b46",
+      "sourceSha256": "c4a00de78da854e2572867707e4fdeb4fa62ba2b26928024be380507b28516b2",
+      "resultSha256": "5c0f7395d7a7c46d9a38ecd68bc497a5393cc11bab6a6a9e10655d9fe8b5bde3",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/airport_bus.webp",
+      "gitBlobSha": "3682df2d76532eb6d0857780100986c8b62e71d3",
+      "baselineGitBlobSha": "37adcc7ae331859ca99b40876ed87ad384c25c9c",
+      "sourceSha256": "375e9cd4ad54344fd114ed91b3f5942a14b3cccbd8c5af4e1a342f6d4d833bf8",
+      "resultSha256": "0f8b75f0137effa7e229ad3d2edfd10614fa190df2612c6b5dbe803f7a3dbfd3",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "gitBlobSha": "578ad127e89369689bcbfd4989265812e82948e5",
+      "baselineGitBlobSha": "9d89042abc2533316f8f2bdedb977da5e904638d",
+      "sourceSha256": "2a4aa92a8c57a1dc9171a80c24b5a9ad31bd92cd7c07cef81520345341557792",
+      "resultSha256": "49863d451c3e5f4e728c352ac051a2c9116609dd55b03972c2c062395c852eb0",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/baggage_cart.webp",
+      "gitBlobSha": "cb15f5ede005b84fc07eb8941da286d60c68dd57",
+      "baselineGitBlobSha": "d7fa312f521c9cbe561392ad2dfeb3b58845df66",
+      "sourceSha256": "2ee40184599fc2a4bec6e3bea13b4b8168424d50c2369d2d0e34ffa70c9d8ba8",
+      "resultSha256": "978f11bc4d655eed9c8b38de598b428fab115d66c11b7c8e9f99e879dde679e1",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/catering_truck.webp",
+      "gitBlobSha": "af2924bfba5a61460a32d3c679897568f4fea25c",
+      "baselineGitBlobSha": "57d8bfe4b78bf0c707d7925e40a720ab27633321",
+      "sourceSha256": "f339119b27152be59d56f22e499bb0ebca339ff3bb72a180be3fbac7ec01e3b4",
+      "resultSha256": "a4295b76893e381259b519902d01b113c9c51df07b4191a7b5e075c4cdfec5ea",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/de_icing_truck.webp",
+      "gitBlobSha": "063b7165c8a4ee8610daf83d9e3d69ab3a1af8ff",
+      "baselineGitBlobSha": "3bd13dd2cb36fad32ce8fa2c3981316de4bbb5dc",
+      "sourceSha256": "d13084e5b0d1820f464b5d46c729bf2ad2c5f3aa25d3d0b8370ef5a8125fbffc",
+      "resultSha256": "4fe3897f3dde3157abe8a89aa3090ba798169ee515576b0687679b708186a5fd",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "gitBlobSha": "250df7a9978b3be33d22deb1f4e01f508971a1d4",
+      "baselineGitBlobSha": "85c36346a803602bd434b1874c581048af775913",
+      "sourceSha256": "1beaadbc4a321408d50e4521cd6397b7cfcceed677a2e3cdf7bb08f77ada6dbc",
+      "resultSha256": "22c0a0af077f5aa93370fd59f84596dc5e7424c1f169157bb68d9993f8e54a86",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/pushback_tug.webp",
+      "gitBlobSha": "8f4043edfcb05ffd7b874b720060dd13f6d92b0a",
+      "baselineGitBlobSha": "a864e3f76a61be0ae237003a511b1dcaea5acc6d",
+      "sourceSha256": "e90bf8ea4bb34bee5e2adf2f1e7d756f801f2d15e5a6306a8bdfcf7fd1ee819d",
+      "resultSha256": "01dda38387ec48347690cd23bde56e72fdf91ba3815dfae77fc248013c8b2582",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/airport/stair_truck.webp",
+      "gitBlobSha": "d7e683d25f87381787e21547e312070d2e947ecf",
+      "baselineGitBlobSha": "ed4b904a75ca04a39115e496bcc2a41b1ee66b79",
+      "sourceSha256": "47fbca251be5b5b86b022fc84089b1969aa13de1887349741c5e4e2c5a812a75",
+      "resultSha256": "4d3367d058919d4e9c50f9e7f467966cd7c9745d1c95b38e42dc06086095edea",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/tractor.webp",
+      "gitBlobSha": "d7a30b817dd214b515e8faeabb23967e3faf8170",
+      "baselineGitBlobSha": "92df145886364298e7c092c1f4ec7bde86f33681",
+      "sourceSha256": "e5b7cc3b7d73d4746743360ef73aa2294b75fdca8a45d1f1e1add953a013b70e",
+      "resultSha256": "e5e998034857ecec8aeebd8efca824fbd765043d491e48d1f46ab8b345063f8f",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/plow_tractor.webp",
+      "gitBlobSha": "8b339492c07d8ac6d366070288d57a1f721d05f3",
+      "baselineGitBlobSha": "23ee3d2b7e50df4766313dd09b0b0af0b9ad3c4d",
+      "sourceSha256": "8fba0936b9ddfa6dae0ad6c6578f4aaaaa02645e14218d75a708a7852d2462f0",
+      "resultSha256": "9d621651fb89a744a44bcab6c8e7db330cd04e0eb8079c9a1c4845d86a4f3714",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/combine_harvester.webp",
+      "gitBlobSha": "6398acc8a54aa4bad438a2f0037cf9e1c8b5ff52",
+      "baselineGitBlobSha": "fa8c64762c7718ce6d994e1cec1defd9c82069d6",
+      "sourceSha256": "2559fb2393403cf9f27decc9e3deab4e4d9f292cd8f66d18a2482aa62ae2cc65",
+      "resultSha256": "5f379737fcf42886bb9618589546fd268245d4300994b29bf4575a8748a4bcf6",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/rice_transplanter.webp",
+      "gitBlobSha": "1f29566ad81f6eb7d6d15a502314dd6c058099ff",
+      "baselineGitBlobSha": "5c99f9055143421bf308a62d91ddae8216799b85",
+      "sourceSha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
+      "resultSha256": "eb19db66a2f10f16824149d251ab52708836e68a7d57d54f4f69af8ef5853511",
+      "evidence": "independent/new-candidates-r1.md; grid-a review"
+    },
+    {
+      "path": "assets/vehicles/farm/sprayer_truck.webp",
+      "gitBlobSha": "ddedb901bf45b86c44d42bbf52b734d840a4c11e",
+      "baselineGitBlobSha": "6b5fc3301102fa7bb8f45ee22dca91d56e54d0f1",
+      "sourceSha256": "94f15a90cdcf5f135b1703d3950274679386a2d3e0a6c4fbd01642e89da7a9b4",
+      "resultSha256": "8f46df77a971d352175b82f46843fda9fa26aacac0899f31fe3cb863ae33743f",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/baler.webp",
+      "gitBlobSha": "595ea880fbdd8a0bba9d72483bfb018985231180",
+      "baselineGitBlobSha": "e9d0e4df264d7c0b9129ea50658103a5960b0149",
+      "sourceSha256": "baeb9b6cb892f7c9687a1f95d362a00cc016dfe930ee9039a949de44919c3fe2",
+      "resultSha256": "fdfe848e6d9f4470bdae8362aa190732289fa5f0555031f86c52b67ee40dfd22",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/farm_trailer.webp",
+      "gitBlobSha": "526bec928212cfbaaa098ff84910a7f6ebeaee99",
+      "baselineGitBlobSha": "04fa5db56dc732b6f7bd36ce3f8ee9ceab848ffb",
+      "sourceSha256": "318433cd1cbf5286a3c8bd8324c4258685064986e95fddd3bc147220d9c7567a",
+      "resultSha256": "e5f743de2b5c022a49afbedd7d0700f9f266c72f298d6b2413b34799530b7b32",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "gitBlobSha": "3854da135f6896eddb400d748db347262f134d25",
+      "baselineGitBlobSha": "96ea998ac67db725cd237fc7ccc3eee2d62f81ac",
+      "sourceSha256": "b576e23499a1198f2c1e4f13d3d944ed0cde18339331731935afea27993ec47b",
+      "resultSha256": "03e19f51b348175495f985fa8b9d9037e9fb4702586ad697dfbd5cb7b0ce6440",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/farm/milk_tanker.webp",
+      "gitBlobSha": "87c5c46d2e84b1b1d41170a72ddf12a335534f63",
+      "baselineGitBlobSha": "78cb4c74e708821febe5eb4a077295ac46b3e5fc",
+      "sourceSha256": "cffa451baa7e503f4e8c05751e937d4ee3903337f2d24c831022e3ae9da12fe0",
+      "resultSha256": "b567c76affb25583b3dd942e65529a75b4167f392dbb06157d8e321cad6b39f3",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/container_truck.webp",
+      "gitBlobSha": "218b3eee6d9e7e8d4e6c65404e1f91e2589048c4",
+      "baselineGitBlobSha": "de3475295ce711e94cef0e6e00fb86db2973fafb",
+      "sourceSha256": "26db2e3e7528c4ea8c40a8603464b45501445af2ad4ec945955ff8c7a67a35e3",
+      "resultSha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/reach_stacker.webp",
+      "gitBlobSha": "a06adb70d2058433d5fbe52e6f87ad93fed1c620",
+      "baselineGitBlobSha": "b0d25cffcfb4ac12489ab3151daec09e17191406",
+      "sourceSha256": "c56aec7a3e0208ecb9e07b30c90428a0e3c36e68aeebbd515ea7a7fe03d63609",
+      "resultSha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/tugboat.webp",
+      "gitBlobSha": "324fd68314776b76e7c30ee5588c15c4f4454ed7",
+      "baselineGitBlobSha": "4215d51e8ede347869f3e1d2e500a70d790d65ac",
+      "sourceSha256": "5bbb5332eef850211d68b7265a350a576539dfe2a165d39a818d6f8474e4e5ba",
+      "resultSha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/fishing_boat.webp",
+      "gitBlobSha": "b81c9fe47843ea065d50e74cea3b27915f35d990",
+      "baselineGitBlobSha": "1a36605dad1a49f88ef41b8d41077a9d434a43b2",
+      "sourceSha256": "e8a29ff62fd6a44ba24a73291575455bd41504da822b8b49c7e237e42249a19f",
+      "resultSha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/coast_guard_boat.webp",
+      "gitBlobSha": "c8fdc7766a2de3483162d259bf0bb09005b1b6e1",
+      "baselineGitBlobSha": "72ff890a24b9d4cb2bdbfcd8f285cf0d625e2c29",
+      "sourceSha256": "343575fa357ef4ce91733eee376d27cdd63d120521304a41385a0ed617ef7ba5",
+      "resultSha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/rescue_boat.webp",
+      "gitBlobSha": "240d213320790c96df5e2900be879f3451ee9b69",
+      "baselineGitBlobSha": "b00fa81342489b89ce70995e558c3149d6a28e78",
+      "sourceSha256": "8931833134ae4bdbc89245ec5bdce8f37cc8dcc8adb1dd56d67866a63d45c759",
+      "resultSha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/road_repair_truck.webp",
+      "gitBlobSha": "b992e5b540c18d0b30ebde2e255aaeec8cf8879b",
+      "baselineGitBlobSha": "d7c0378446849a5a80ee684f22265f4c5f68a181",
+      "sourceSha256": "6e1c30573fc874db0ac595af19094a5feb40459b7357301a1b052542f80d964b",
+      "resultSha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/line_painting_truck.webp",
+      "gitBlobSha": "4704359ba8bb47b7cb1407754fd85f95d070d271",
+      "baselineGitBlobSha": "9d345b6987de54a78fc0042f9203031a233288b1",
+      "sourceSha256": "000a6f84903e5794f67c3e9571c68c0ef1942bf573a398117c528971b0c0f37a",
+      "resultSha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "gitBlobSha": "5a24e53d501ca4329a5163606c27680d759e7bf8",
+      "baselineGitBlobSha": "adc328c522cfd438fef3ccf15bfbd97a5d62ba60",
+      "sourceSha256": "2735a7d73b23c17c31eb86a41a4544780cd38caceeaab6980adb2c88dbb4a18a",
+      "resultSha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/road_sweeper.webp",
+      "gitBlobSha": "42b13b71ee2820547a8c06203d51bad2b2b48967",
+      "baselineGitBlobSha": "1d220e50b6eecc7c7ab8ba21c773444ecfb56d26",
+      "sourceSha256": "6bfc0635d1d32f64983b59bad6fdf036257d4aafbdbe9419be68beccbe3c99d2",
+      "resultSha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/salt_spreader.webp",
+      "gitBlobSha": "2a154d92921fb5811c67b8fb5e462d77fb7ae661",
+      "baselineGitBlobSha": "cc1b18a0592fc10cbaaeacb57f349e7dee018f14",
+      "sourceSha256": "b8cb0270b5264a8cb7451e0fff7d540410d43d00a184ed55dfea9f55d42424ee",
+      "resultSha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/snow_plow.webp",
+      "gitBlobSha": "3350d18317ffd9b03ce17ab967da25ddf1711474",
+      "baselineGitBlobSha": "f7bfaa31c3bcd3d167a4c4c456f0613e7a2cecf8",
+      "sourceSha256": "25e12e2edd1a7d0da559ccf42697c46ade6fd0871230027669a268bf34fe6167",
+      "resultSha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "gitBlobSha": "c2eb537be07e200c2a5460a92e0e1ddd4820bd7b",
+      "baselineGitBlobSha": "97eb7d727fffa02bc5397ae7cc4f54c3e0247fd5",
+      "sourceSha256": "878cca912fba2a3c4ea01ba254668fd8b2106b3ac0e6bac9f1b6c4cb2e18f66b",
+      "resultSha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "gitBlobSha": "0c6bcb7a1814c1cb4fb078cb124266cbec27b4a0",
+      "baselineGitBlobSha": "2d8039ae0daf556db622b60e36919b00dda1d00c",
+      "sourceSha256": "72a5b06bb5d463eb250934903a00943cfdadba8d51337892189cd4027fa3f8a3",
+      "resultSha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "gitBlobSha": "1b167db639ab10e31208068d23e489b5ad65aa86",
+      "baselineGitBlobSha": "4ccd05ae472997d816ec013a7b413ef9b54de5f8",
+      "sourceSha256": "218ff0fc28a1811fd503d170b220f4e19bc83abe2f8e04fb5c7236e7ebe54dca",
+      "resultSha256": "19dc48e8614af0067fdfb26eb7846e8ab3a8c50f16c7cd8d9ccf42faba819134",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/school_van.webp",
+      "gitBlobSha": "be71d3e058cc72b062e3a88b721d4a80ad146964",
+      "baselineGitBlobSha": "4dd6fb9b21a9d87b647dd4122e480fb258e73c06",
+      "sourceSha256": "3a6a24a79c725a869667227c9520dc7aa05758476ae3e0248ebe76a11161cafb",
+      "resultSha256": "9b900324c9eb473d4905b17170d8a7f2ae94282f1d04b9929e73bef17717ce03",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/bakery_truck.webp",
+      "gitBlobSha": "f7ff2b19abef4c4d8fd79ace7fa1f988e6090537",
+      "baselineGitBlobSha": "4cce2a24ddae63a7550f20cc6260d131b232f0a9",
+      "sourceSha256": "4652192e2c512b18d9625f6ed71f7be142228fd83ab1f7cacd2c84ae8ba09ac3",
+      "resultSha256": "dc97ed8f676e6bb6ddfc549173b4174f782e78d7e7cd6fbf300fa9952258074b",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/flower_delivery_van.webp",
+      "gitBlobSha": "d3966aced0b4b1834b5e761f18b6332a6197135a",
+      "baselineGitBlobSha": "857a7951348e2fad7b9aedad30c35ab3bb6e14f9",
+      "sourceSha256": "2008c92d27b10bbf0887f22510dd564d32614e2b3f4c1f5789796852ebe51bb3",
+      "resultSha256": "05078b7967a41fcf3f077eaea54b60e10b2372753a1b8c4ad3354b72763bc561",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/pet_grooming_van.webp",
+      "gitBlobSha": "d86c43c4ee807081c223ad51e580890f950d5190",
+      "baselineGitBlobSha": "5f610ae66b3464e1a1b6cc8221c6e767e586f9c8",
+      "sourceSha256": "526b5ab00dc0435c5f97bb5f77fa738af4f3efee2947fed9660ea307857c2303",
+      "resultSha256": "626b843288ed39bf4cfa86610c41db97b613b9a6efbcc29554c9b9297a27c2e3",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/utility_repair_van.webp",
+      "gitBlobSha": "a85e89cf1f21738a274ed5ee67931a74d20744ed",
+      "baselineGitBlobSha": "1e6bf4873f7e98bb145716f90b54533640d7f4c0",
+      "sourceSha256": "1fca139c79fc43b074d542481029c314aa33b77d9becbfb2fca0ba703d7c21d7",
+      "resultSha256": "b29fa4e62a529cdec489103a23c5ff274e8e1ca0dbd92f2af8ff72526ee46bb9",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/maintenance_pickup.webp",
+      "gitBlobSha": "ed561b9f294bc0464379cacec285f894c4e58e8f",
+      "baselineGitBlobSha": "af658342b3cac91ec26ebaa273b1e23e080a7890",
+      "sourceSha256": "144aff41026bf20166251f1c7ebedbfd97ddd2aa6bfe873166d942cc19368c41",
+      "resultSha256": "c794d77b8e0d0744e8bd07ef72ded8c900a9afad75e2d6e838e08010968e7e6e",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/beverage_delivery_truck.webp",
+      "gitBlobSha": "43a8222da77eeaa98b7f2c3f1634e625792a59f7",
+      "baselineGitBlobSha": "678af1620cdc9cfb6cfadb8e4fffa2bc8d23d681",
+      "sourceSha256": "a2d0f8b9ee4fce986689b9083908096f48261718e39560dfc735c155b2e87897",
+      "resultSha256": "b9e59a2aed22989417381d59ebf8e620e325e118606e38016777cc1c63f49c4c",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/toy_truck.webp",
+      "gitBlobSha": "c3551c605337a8243c30a63069c6d34d94947b5b",
+      "baselineGitBlobSha": "dd1a7c7f9ff019008c8de1eed5300d63b23db1cb",
+      "sourceSha256": "ff5e13d8a00f6ad2a5629165c79c82e35f94da3d0ada9d0c94768d9d1017ac2b",
+      "resultSha256": "ab14605d34ad123c49b80099f4ba7778917821d70bb13226c1df44b3fa4a1c91",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/community_bus.webp",
+      "gitBlobSha": "55eee69ff728e8b15237fc56746603a712ccf2e0",
+      "baselineGitBlobSha": "f05553cc41df2b642fef720a44df92467c822bc4",
+      "sourceSha256": "832e347b3de35540859c39a767123db4a6ec757c73ccc2352abb0c2426add3e5",
+      "resultSha256": "25d190e147fd5094791419376cbad7f98db134b882b0b2a23f3851a20203e250",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/mail_truck.webp",
+      "gitBlobSha": "d8ae01a78ebb6e39faee98c8893a01ca2f851b3a",
+      "baselineGitBlobSha": "d8c3ab69bd6240d174aeeeb81ecd11b93668873b",
+      "sourceSha256": "8169af7b0e22fa51d1f81141ce48359e86aab10eaa1975882df24cd54f35441e",
+      "resultSha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/delivery_truck.webp",
+      "gitBlobSha": "10441f1d1a40688242cbbe50952e5f15974be7ad",
+      "baselineGitBlobSha": "8a3eac2476e8cfc211a3005ddd2fd6d94ff7eb36",
+      "sourceSha256": "875b86b0bd8f4bf71c03dea68fc146538e0dadd81f6c377ff3a0198106ad8bab",
+      "resultSha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/food_truck.webp",
+      "gitBlobSha": "9314e51e4e8f94857ce87d16d3a945f783a8d3e0",
+      "baselineGitBlobSha": "32167b6dd484b5d6b4446ecfd909bd0195ea38c7",
+      "sourceSha256": "c472b5f1bdfbe4fa33b8e80d404d6d377c9286516bad005b9fdbbd8e1f0317d4",
+      "resultSha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/ice_cream_truck.webp",
+      "gitBlobSha": "d96503872337c0348803af41ad52215728ec2f1a",
+      "baselineGitBlobSha": "13d959bef5fed6d9f7df596bf2da3a776e2253e2",
+      "sourceSha256": "d2bd4ec7148ea8a6e20d286b6e10cd608923d7261ff7e386c265ca1b289138e5",
+      "resultSha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/moving_truck.webp",
+      "gitBlobSha": "21b021f23cd4af11450050f28f44f832aa9c1689",
+      "baselineGitBlobSha": "09b8f140247d539a0eb9698f36f73958f43069d9",
+      "sourceSha256": "d05b0dc267e08e903cefe30477ac4508b704c795125f6e564635c36cf3101785",
+      "resultSha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/laundry_truck.webp",
+      "gitBlobSha": "b5c057d950c6fd4625769f91c81a8723410a5e75",
+      "baselineGitBlobSha": "bac67904d829eb69f60b6334e726f91d1c6dcf88",
+      "sourceSha256": "1e2b58911547838d3d70000c56593a671854bed85009a7e380c6035247f25c6c",
+      "resultSha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/recycling_truck.webp",
+      "gitBlobSha": "44fc3ffb995ae308212d4e9000546490c89722e6",
+      "baselineGitBlobSha": "00920c9af7a3916cb7f64d75a3d07089cc486498",
+      "sourceSha256": "31b8b3ed6b28a31035e4ead8a4e390001e04d5dae5912944f5e9f3fc4b4750fe",
+      "resultSha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/library_bus.webp",
+      "gitBlobSha": "b761e555c0d7fc3e9718c0434f8e339b9aea1c6f",
+      "baselineGitBlobSha": "8b21e61b3b83ddb8bca279731512e21c3a6db84d",
+      "sourceSha256": "ef8922c028504d8daa4d38625e66dcd9ac1f76a43deac3c46b8758c459765ef8",
+      "resultSha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/town/street_vendor_truck.webp",
+      "gitBlobSha": "dfe7f5e6507244ce14e5505a9eaf3acc4323398d",
+      "baselineGitBlobSha": "068fe1f092f116c9045148c20438558bbe274fef",
+      "sourceSha256": "fc5bd8a278602664d1c45852a5d3c24a976d426f1352a3bd14fc4bbf0a4747ff",
+      "resultSha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/fire_special/fire_tank.webp",
+      "gitBlobSha": "fab96cc8fe35bfe768dca44bfa3dd7feae5b7fbd",
+      "baselineGitBlobSha": "4d9cac50c4d533c62458b9fe0a458370c0cdab7d",
+      "sourceSha256": "b851c720e821a97f7879a028daf04104624768742a208d3d9c2e2d997f1a755f",
+      "resultSha256": "ad2c7336d3c26fa0c8f8eacaccd179eb6b669f93f0eebbfa465c982b0efdb9b7",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/fire_special/airport_crash_tender.webp",
+      "gitBlobSha": "5bd95f2ac8861a239fce72295f4ccd58556c4504",
+      "baselineGitBlobSha": "a82815f7f50ee84d524af6ba2e5c4e0923920132",
+      "sourceSha256": "df733f699802182e9e74e7e5eb50d7c603f49be86b2dbd347c5a2299eb50cdf5",
+      "resultSha256": "b52fadcf1dd336d67ab9b40a7822b1a3f8a98bf4860d267d36b30e5ef05bc0d1",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+      "gitBlobSha": "62beed60d0f48dccd8353a7d6f7848748ee96fdb",
+      "baselineGitBlobSha": "34cb2a79e44b7950e56482cbff91d10d316eefbf",
+      "sourceSha256": "a8a2b563744265fd71a37c6c2aa30cc3d878a43e2cf3e5bc2a9fd4b8ebb81351",
+      "resultSha256": "6f7daf0c9068e53b425a11d54debc3e866f43d60a75bbfe4878ac733d8d90717",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+      "gitBlobSha": "c578ef824e7baf112afd4e1a66f1991ba76edff6",
+      "baselineGitBlobSha": "e1dbdff8832af62a164b87147a5a114e9d03d20e",
+      "sourceSha256": "ba844213c8b47234454dd828e26ad428830c5091a2ee69399616815def7fba27",
+      "resultSha256": "eef29b0972e74063f23a21c493120b450e379046e8ae1185813aef2f651eccd6",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/fire_special/water_tanker.webp",
+      "gitBlobSha": "c96c6a80374c336cff5dc70909fd400aca086b32",
+      "baselineGitBlobSha": "bfea5469b1f0db489c2f8f7f4377ac4e2dfe913d",
+      "sourceSha256": "52f7a3a87c0fe964f9bb8b6a984694cae020a0b368029246ca7bb81c5b811f09",
+      "resultSha256": "ef24041e91eca16e5b2074063a5a59f7985460401a8c660f2e335b1bf2357b87",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+      "gitBlobSha": "53f825792fcd1fdd1d1302e593a3b04513e25f79",
+      "baselineGitBlobSha": "2f794b532467919004d645d6a3576224d2bdc2c6",
+      "sourceSha256": "5aabf8dfffa6ed356a569c104f40f88acaf269645e0a6e8d47b7f8d03812d27c",
+      "resultSha256": "b49a1bc36c6dbf77921ae470013a504651791657d72d264fcf9e38578695f69c",
+      "evidence": "PR5 disposition and three-background comparison"
+    },
+    {
+      "path": "assets/vehicles/port/harbor_crane.webp",
+      "gitBlobSha": "04cedadf970492257b260857e67e019ec71ca545",
+      "baselineGitBlobSha": "0dc3e13c91352b25263b17fd953faf9e3291fe95",
+      "sourceSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
+      "resultSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
+      "evidence": "independent/new-candidates-r1.md"
+    },
+    {
+      "path": "assets/vehicles/port/ferry.webp",
+      "gitBlobSha": "58ae98947056227d5d1a68eecbc15fc1e57beffb",
+      "baselineGitBlobSha": "bed1c8b171946479b25547a2bd120a9ce491c3d7",
+      "sourceSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
+      "resultSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
+      "evidence": "independent/new-candidates-r1.md"
+    },
+    {
+      "path": "assets/vehicles/road_service/road_sign_truck.webp",
+      "gitBlobSha": "123cfb82d6abd5dfa3d45e48ff45ad39b750f4c2",
+      "baselineGitBlobSha": "5c805fc61fa50119905222552f0be82a4452f7ee",
+      "sourceSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
+      "resultSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
+      "evidence": "independent/new-candidates-r1.md"
+    }
+  ]
+}
