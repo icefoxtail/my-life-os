@@ -1,0 +1,46 @@
+name: Phase 2 browser release
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'sw.js'
+      - 'js/**'
+      - 'css/**'
+      - 'assets/**'
+      - 'scripts/qa-phase2-release-browser.py'
+      - 'scripts/qa-pattern-train*'
+      - '.github/workflows/phase2-browser-release.yml'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'js/games/pattern-train*'
+      - 'css/games/pattern-train.css'
+      - 'scripts/qa-phase2-release-browser.py'
+      - '.github/workflows/phase2-browser-release.yml'
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Install pinned browser harness
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Latest train fixture, real menu and legacy entry checks
+        run: python3 scripts/qa-phase2-release-browser.py --output qa-release-evidence
+      - name: Attach source-bound evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: phase2-browser-${{ github.run_id }}
+          path: qa-release-evidence/
+          if-no-files-found: error
+          retention-days: 14
