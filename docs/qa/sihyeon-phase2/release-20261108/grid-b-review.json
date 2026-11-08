@@ -1,0 +1,557 @@
+{
+  "schemaVersion": 1,
+  "agent": "/root/grid_b",
+  "owner": "GPT6_ASTRA_SIHYEON_P2_GRID_B",
+  "taskId": "0269f67d-43df-4097-8a62-ac850d8c1803",
+  "branch": "work/sihyeon-p2-grid-b-20261108",
+  "baselineMain": "58eb1fad34bba957812b08cf55bdf28c5595ca60",
+  "initialBranchSha": "b85ffc2fd51d230be8a949cbc6b7517f57ace3d4",
+  "denominator": 36,
+  "scope": "port9 / road_service9 / town18",
+  "state": "IN_PROGRESS",
+  "reviewedExisting": 0,
+  "newlyRepairedAuthorReviewed": 3,
+  "sourceHoldConfirmed": 1,
+  "pendingExisting": 32,
+  "independentNewRepairReview": "PENDING_OTHER_AGENT",
+  "entries": [
+    {
+      "file": "assets/vehicles/port/cargo_ship.webp",
+      "id": "cargo_ship",
+      "sourceSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "finalSha256": "7fd0655101b57a24978fac399992b045090c1711a2d81f2524b9e8bac66af5c1",
+      "status": "HOLD_SOURCE_PIXELS_MISSING_CONFIRMED",
+      "observation": "Directly viewed original 418px source. The upper left bow/hull outline exits the left frame at x=0; this is original loss. No vehicle pixels changed or invented."
+    },
+    {
+      "file": "assets/vehicles/port/container_truck.webp",
+      "id": "container_truck",
+      "sourceSha256": "26db2e3e7528c4ea8c40a8603464b45501445af2ad4ec945955ff8c7a67a35e3",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+      "finalSha256": "34389eb827dfb234f43a8863c1c1c80a4a831540cd9ec4603662ef5c0a8ff46e",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/port/harbor_crane.webp",
+      "id": "harbor_crane",
+      "sourceSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
+      "finalSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
+      "status": "REPAIRED_AUTHOR_REVIEWED_INDEPENDENT_PENDING",
+      "observation": "Compared the two hoist blocks/hook, thin hoist and suspension wires, blue lattice, top yellow rail openings, housing rails, stairs and undercarriage on all three backgrounds and enlarged details. No added outrigger, missing major equipment, solid checker/white residue or new clipping observed. Dark wires naturally have low contrast on dark background.",
+      "newRepair": {
+        "file": "assets/vehicles/port/harbor_crane.webp",
+        "sourceSha256": "a0374a515b1438374bd8f45157189408a04bb3423424c218d4f9acfc2d83045b",
+        "generatedFile": "exec-3de58527-99a4-4514-9734-eb1aa7cc5555.png",
+        "generatedSha256": "8b834b49fb7239fc169211c9ff6a961a892628baaf3240c2c84a3bab1ea2df61",
+        "generatedSize": [
+          1254,
+          1254
+        ],
+        "deliveryCandidateSha256": "56143611e71c0a70bb39ab64bc89e9fc2a8bb5e135f34adce4e0fd92a3e9d91b",
+        "deliverySize": [
+          768,
+          768
+        ],
+        "deliveryBytes": 153210,
+        "alphaExactlyPreservedAfterProportionalResize": true,
+        "alphaBounds16": [
+          84,
+          33,
+          690,
+          742
+        ],
+        "comparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-b/harbor_crane-attempt1-three-backgrounds.jpg",
+        "comparisonSha256": "95c0340edbef056b15317bf693c075f18d3e9ef86e2346056260cf2045984cd3",
+        "visualStatus": "AUTHOR_REVIEWED_INDEPENDENT_PENDING",
+        "notes": "Compared the two hoist blocks/hook, thin hoist and suspension wires, blue lattice, top yellow rail openings, housing rails, stairs and undercarriage on all three backgrounds and enlarged details. No added outrigger, missing major equipment, solid checker/white residue or new clipping observed. Dark wires naturally have low contrast on dark background.",
+        "deliveredRgbaSha256": "b91523c29aebab098904c2ce4fd197f073a935b28964f844e4780e8d8959fea8",
+        "sourceAspectRatioPreserved": true,
+        "perimeterAlphaAtLeast16Pixels": 0,
+        "comparisonDetailFile": "docs/qa/sihyeon-phase2/release-20261108/grid-b/harbor_crane-attempt1-detail.jpg",
+        "comparisonDetailSha256": "ce5861edf423e74fe42068f900ef09c566d776bc879e5e9e2085bd9524a52b9c",
+        "deliveryPath": "assets/vehicles/port/harbor_crane.webp",
+        "promptPath": "docs/qa/sihyeon-phase2/release-20261108/grid-b/harbor_crane-imagegen-prompt.txt"
+      }
+    },
+    {
+      "file": "assets/vehicles/port/reach_stacker.webp",
+      "id": "reach_stacker",
+      "sourceSha256": "c56aec7a3e0208ecb9e07b30c90428a0e3c36e68aeebbd515ea7a7fe03d63609",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+      "finalSha256": "09e23577aff25d63326194bcbf1dd9ef51434ee8c17ae5111530b8dc97fc1bef",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/port/tugboat.webp",
+      "id": "tugboat",
+      "sourceSha256": "5bbb5332eef850211d68b7265a350a576539dfe2a165d39a818d6f8474e4e5ba",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+      "finalSha256": "aa3a3e2f86a2b6b9b4cd78eb780c09d74222373c3ad067ef3692cc2e6722e188",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/port/ferry.webp",
+      "id": "ferry",
+      "sourceSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
+      "finalSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
+      "status": "REPAIRED_AUTHOR_REVIEWED_INDEPENDENT_PENDING",
+      "observation": "White mast and antenna tiers, bridge/deck rail openings, bow loading opening and guardrails, dark glazing and all visible window rows, funnel, blue hull and red lower strip retained on three backgrounds and enlarged details. No large opaque patch in open-air rail gaps or erased white deck fitting observed.",
+      "newRepair": {
+        "file": "assets/vehicles/port/ferry.webp",
+        "sourceSha256": "bcf8041abb78f8f2384727ebc431c0f963d80e144841d0ba83bad43995b9c900",
+        "generatedFile": "exec-0ec37eb2-18b3-4bed-8972-107cc901a301.png",
+        "generatedSha256": "f6e8aab027e697c8b9922fcdd82c403f012f268c1d8ebb46431ebf039d8dd065",
+        "generatedSize": [
+          1254,
+          1254
+        ],
+        "deliveryCandidateSha256": "9421f0f4843ecfefd808391ec012b77a3b6a79cd23e8c12d9071d73cfb0b3d18",
+        "deliverySize": [
+          768,
+          768
+        ],
+        "deliveryBytes": 98500,
+        "alphaExactlyPreservedAfterProportionalResize": true,
+        "alphaBounds16": [
+          16,
+          111,
+          742,
+          628
+        ],
+        "comparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-b/ferry-attempt1-three-backgrounds.jpg",
+        "comparisonSha256": "a21780511661169871739a9965283a21304e58589882f34e6a2dc05e00f12b1a",
+        "visualStatus": "AUTHOR_REVIEWED_INDEPENDENT_PENDING",
+        "notes": "White mast and antenna tiers, bridge/deck rail openings, bow loading opening and guardrails, dark glazing and all visible window rows, funnel, blue hull and red lower strip retained on three backgrounds and enlarged details. No large opaque patch in open-air rail gaps or erased white deck fitting observed.",
+        "deliveredRgbaSha256": "7f7be4562ec985ceccb990622d7d22add95763776940bce10fb4faa06641ca9d",
+        "sourceAspectRatioPreserved": true,
+        "perimeterAlphaAtLeast16Pixels": 0,
+        "comparisonDetailFile": "docs/qa/sihyeon-phase2/release-20261108/grid-b/ferry-attempt1-detail.jpg",
+        "comparisonDetailSha256": "82d2101df055c1b4ec1a6d436764812fbe2492e9d04876e64cd41dd18b03f3d3",
+        "deliveryPath": "assets/vehicles/port/ferry.webp",
+        "promptPath": "docs/qa/sihyeon-phase2/release-20261108/grid-b/ferry-imagegen-prompt.txt"
+      }
+    },
+    {
+      "file": "assets/vehicles/port/fishing_boat.webp",
+      "id": "fishing_boat",
+      "sourceSha256": "e8a29ff62fd6a44ba24a73291575455bd41504da822b8b49c7e237e42249a19f",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+      "finalSha256": "ffe39aa51f56ff51311ce8830177cfca497c20882a8947b5e76309cea3cf04b3",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/port/coast_guard_boat.webp",
+      "id": "coast_guard_boat",
+      "sourceSha256": "343575fa357ef4ce91733eee376d27cdd63d120521304a41385a0ed617ef7ba5",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+      "finalSha256": "01c63609cffbf42e1c95d1c258c75f31de0e7710b8bca0e42b8c5c9e8cb100db",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/port/rescue_boat.webp",
+      "id": "rescue_boat",
+      "sourceSha256": "8931833134ae4bdbc89245ec5bdce8f37cc8dcc8adb1dd56d67866a63d45c759",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+      "finalSha256": "38cbb040415475001b82347cf3fb9cd7f90fed51e934f7bc42cc7397814234a1",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/road_repair_truck.webp",
+      "id": "road_repair_truck",
+      "sourceSha256": "6e1c30573fc874db0ac595af19094a5feb40459b7357301a1b052542f80d964b",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+      "finalSha256": "2351a2f9d3d67e21b1d64a61d40df1bc44490d947f93add0b60ef785ed864c71",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/line_painting_truck.webp",
+      "id": "line_painting_truck",
+      "sourceSha256": "000a6f84903e5794f67c3e9571c68c0ef1942bf573a398117c528971b0c0f37a",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+      "finalSha256": "31630993f83d845b44daabb4d7f8ad8d0a16a29651d8b1d7a0428b4adbf24f54",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "id": "traffic_cone_truck",
+      "sourceSha256": "2735a7d73b23c17c31eb86a41a4544780cd38caceeaab6980adb2c88dbb4a18a",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+      "finalSha256": "ded492f2bb83ce5048b9ffb1b1b3d565de0ddda6fa3660f4bd38ab689b1be790",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/road_sign_truck.webp",
+      "id": "road_sign_truck",
+      "sourceSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
+      "finalSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
+      "status": "REPAIRED_AUTHOR_REVIEWED_INDEPENDENT_PENDING",
+      "observation": "Blue arrow/triangular worker sign faces remain opaque; gray frames, narrow braces, hydraulic ram and hoses remain. The background openings below signs are clear. White cabin/glass/mirror, yellow crane, wheels, rear lights/bumper retained. No new supports or body extension observed.",
+      "newRepair": {
+        "file": "assets/vehicles/road_service/road_sign_truck.webp",
+        "sourceSha256": "d89ba52a9161053057f8c8b4a5a35d557f37fd8aaa5f7ba74c9f13d90e19bddd",
+        "generatedFile": "exec-90b2cdc0-3ca9-4199-8a4c-2993ccb4bbbe.png",
+        "generatedSha256": "53395b3d83e22e35a953733019e0a9ebef1bb09aac5edf331c5a937aa8e69a2d",
+        "generatedSize": [
+          1254,
+          1254
+        ],
+        "deliveryCandidateSha256": "701a801c997d67cf3f2a173e9015caae68950f4a28817b5d0cfbfa6f16e4a4fe",
+        "deliverySize": [
+          768,
+          768
+        ],
+        "deliveryBytes": 138320,
+        "alphaExactlyPreservedAfterProportionalResize": true,
+        "alphaBounds16": [
+          17,
+          90,
+          660,
+          639
+        ],
+        "comparisonFile": "docs/qa/sihyeon-phase2/release-20261108/grid-b/road_sign_truck-attempt1-three-backgrounds.jpg",
+        "comparisonSha256": "d3454306d3c1d628124dfcc9bd25cdbd263f575bf19ce16b23ccc21d0a8a1551",
+        "visualStatus": "AUTHOR_REVIEWED_INDEPENDENT_PENDING",
+        "notes": "Blue arrow/triangular worker sign faces remain opaque; gray frames, narrow braces, hydraulic ram and hoses remain. The background openings below signs are clear. White cabin/glass/mirror, yellow crane, wheels, rear lights/bumper retained. No new supports or body extension observed.",
+        "deliveredRgbaSha256": "ce191e91ef73efc97290ac762d0a358aea3951c8c095d46cda02aa1a4676251d",
+        "sourceAspectRatioPreserved": true,
+        "perimeterAlphaAtLeast16Pixels": 0,
+        "comparisonDetailFile": "docs/qa/sihyeon-phase2/release-20261108/grid-b/road_sign_truck-attempt1-detail.jpg",
+        "comparisonDetailSha256": "1e462676a99170fe04db6aae262cd4b04406d6e2e4c85798f418dc04b681bb0f",
+        "deliveryPath": "assets/vehicles/road_service/road_sign_truck.webp",
+        "promptPath": "docs/qa/sihyeon-phase2/release-20261108/grid-b/road_sign_truck-imagegen-prompt.txt"
+      }
+    },
+    {
+      "file": "assets/vehicles/road_service/road_sweeper.webp",
+      "id": "road_sweeper",
+      "sourceSha256": "6bfc0635d1d32f64983b59bad6fdf036257d4aafbdbe9419be68beccbe3c99d2",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+      "finalSha256": "6e6cd83ac2bb6db6ff39b7f3aa7c37f8489140550695ff901d1741f4c3a8621b",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/salt_spreader.webp",
+      "id": "salt_spreader",
+      "sourceSha256": "b8cb0270b5264a8cb7451e0fff7d540410d43d00a184ed55dfea9f55d42424ee",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+      "finalSha256": "3e9c3cee0fd9603dc1583e631d1fa0b89102fc0dcc8a2c79ad34edde135f9a66",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/snow_plow.webp",
+      "id": "snow_plow",
+      "sourceSha256": "25e12e2edd1a7d0da559ccf42697c46ade6fd0871230027669a268bf34fe6167",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+      "finalSha256": "63bef88753415abcfec1f2fcf5d6f45bc4de1a593cb67d884da4087a841e4125",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "id": "bridge_inspection_truck",
+      "sourceSha256": "878cca912fba2a3c4ea01ba254668fd8b2106b3ac0e6bac9f1b6c4cb2e18f66b",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+      "finalSha256": "1e3c64a3543ec4c9afbf3325c35e46889dd6646a1dd8d2794f53acb16ab7eecd",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "id": "tunnel_cleaning_truck",
+      "sourceSha256": "72a5b06bb5d463eb250934903a00943cfdadba8d51337892189cd4027fa3f8a3",
+      "sourceSize": [
+        418,
+        418
+      ],
+      "initialSha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+      "finalSha256": "cca4028d0ea9ac484e424ca64ca92ef1871b83db0c03993a73b86cc787d5b1b1",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/school_van.webp",
+      "id": "school_van",
+      "sourceSha256": "3a6a24a79c725a869667227c9520dc7aa05758476ae3e0248ebe76a11161cafb",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "9b900324c9eb473d4905b17170d8a7f2ae94282f1d04b9929e73bef17717ce03",
+      "finalSha256": "9b900324c9eb473d4905b17170d8a7f2ae94282f1d04b9929e73bef17717ce03",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/bakery_truck.webp",
+      "id": "bakery_truck",
+      "sourceSha256": "4652192e2c512b18d9625f6ed71f7be142228fd83ab1f7cacd2c84ae8ba09ac3",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "dc97ed8f676e6bb6ddfc549173b4174f782e78d7e7cd6fbf300fa9952258074b",
+      "finalSha256": "dc97ed8f676e6bb6ddfc549173b4174f782e78d7e7cd6fbf300fa9952258074b",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/flower_delivery_van.webp",
+      "id": "flower_delivery_van",
+      "sourceSha256": "2008c92d27b10bbf0887f22510dd564d32614e2b3f4c1f5789796852ebe51bb3",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "05078b7967a41fcf3f077eaea54b60e10b2372753a1b8c4ad3354b72763bc561",
+      "finalSha256": "05078b7967a41fcf3f077eaea54b60e10b2372753a1b8c4ad3354b72763bc561",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/pet_grooming_van.webp",
+      "id": "pet_grooming_van",
+      "sourceSha256": "526b5ab00dc0435c5f97bb5f77fa738af4f3efee2947fed9660ea307857c2303",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "626b843288ed39bf4cfa86610c41db97b613b9a6efbcc29554c9b9297a27c2e3",
+      "finalSha256": "626b843288ed39bf4cfa86610c41db97b613b9a6efbcc29554c9b9297a27c2e3",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/utility_repair_van.webp",
+      "id": "utility_repair_van",
+      "sourceSha256": "1fca139c79fc43b074d542481029c314aa33b77d9becbfb2fca0ba703d7c21d7",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "b29fa4e62a529cdec489103a23c5ff274e8e1ca0dbd92f2af8ff72526ee46bb9",
+      "finalSha256": "b29fa4e62a529cdec489103a23c5ff274e8e1ca0dbd92f2af8ff72526ee46bb9",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/maintenance_pickup.webp",
+      "id": "maintenance_pickup",
+      "sourceSha256": "144aff41026bf20166251f1c7ebedbfd97ddd2aa6bfe873166d942cc19368c41",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "c794d77b8e0d0744e8bd07ef72ded8c900a9afad75e2d6e838e08010968e7e6e",
+      "finalSha256": "c794d77b8e0d0744e8bd07ef72ded8c900a9afad75e2d6e838e08010968e7e6e",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/beverage_delivery_truck.webp",
+      "id": "beverage_delivery_truck",
+      "sourceSha256": "a2d0f8b9ee4fce986689b9083908096f48261718e39560dfc735c155b2e87897",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "b9e59a2aed22989417381d59ebf8e620e325e118606e38016777cc1c63f49c4c",
+      "finalSha256": "b9e59a2aed22989417381d59ebf8e620e325e118606e38016777cc1c63f49c4c",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/toy_truck.webp",
+      "id": "toy_truck",
+      "sourceSha256": "ff5e13d8a00f6ad2a5629165c79c82e35f94da3d0ada9d0c94768d9d1017ac2b",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "ab14605d34ad123c49b80099f4ba7778917821d70bb13226c1df44b3fa4a1c91",
+      "finalSha256": "ab14605d34ad123c49b80099f4ba7778917821d70bb13226c1df44b3fa4a1c91",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/community_bus.webp",
+      "id": "community_bus",
+      "sourceSha256": "832e347b3de35540859c39a767123db4a6ec757c73ccc2352abb0c2426add3e5",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "25d190e147fd5094791419376cbad7f98db134b882b0b2a23f3851a20203e250",
+      "finalSha256": "25d190e147fd5094791419376cbad7f98db134b882b0b2a23f3851a20203e250",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/mail_truck.webp",
+      "id": "mail_truck",
+      "sourceSha256": "8169af7b0e22fa51d1f81141ce48359e86aab10eaa1975882df24cd54f35441e",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+      "finalSha256": "3627ca4a372d079189e804693a094c0d59bf7a53260903fea9f55d9093f50475",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/delivery_truck.webp",
+      "id": "delivery_truck",
+      "sourceSha256": "875b86b0bd8f4bf71c03dea68fc146538e0dadd81f6c377ff3a0198106ad8bab",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+      "finalSha256": "da9d01601d61a0f8d8a854e6e9f2009b056d92ff1b86d81c702dfcb2eb6495e1",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/food_truck.webp",
+      "id": "food_truck",
+      "sourceSha256": "c472b5f1bdfbe4fa33b8e80d404d6d377c9286516bad005b9fdbbd8e1f0317d4",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+      "finalSha256": "dae9d7b4580e2bc5a53c4f57829a407e91b6dd9f2f0911a34ad5140f173d87b6",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/ice_cream_truck.webp",
+      "id": "ice_cream_truck",
+      "sourceSha256": "d2bd4ec7148ea8a6e20d286b6e10cd608923d7261ff7e386c265ca1b289138e5",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+      "finalSha256": "f55c0051e065fdca15f28ab5430ed8adc65a826f67aaaa933e67b7a211d20bcc",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/moving_truck.webp",
+      "id": "moving_truck",
+      "sourceSha256": "d05b0dc267e08e903cefe30477ac4508b704c795125f6e564635c36cf3101785",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+      "finalSha256": "7ac4c388f086136b0d090d593248337bed85c1195a126eddcc80df3823528d77",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/laundry_truck.webp",
+      "id": "laundry_truck",
+      "sourceSha256": "1e2b58911547838d3d70000c56593a671854bed85009a7e380c6035247f25c6c",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+      "finalSha256": "59958026b786a1674135381b0ce9f3c0341bcbe97ffa6ff32fd893efbfdaf381",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/recycling_truck.webp",
+      "id": "recycling_truck",
+      "sourceSha256": "31b8b3ed6b28a31035e4ead8a4e390001e04d5dae5912944f5e9f3fc4b4750fe",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+      "finalSha256": "70a8e9d8ffe479143aefc50371efdb2537c45a3f764878a98e2153dca2886640",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/library_bus.webp",
+      "id": "library_bus",
+      "sourceSha256": "ef8922c028504d8daa4d38625e66dcd9ac1f76a43deac3c46b8758c459765ef8",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+      "finalSha256": "c9054371c4fce72e6054b3f564e5f1fe7e8a13265ea5b6d24f0f93d41148974f",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "file": "assets/vehicles/town/street_vendor_truck.webp",
+      "id": "street_vendor_truck",
+      "sourceSha256": "fc5bd8a278602664d1c45852a5d3c24a976d426f1352a3bd14fc4bbf0a4747ff",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "initialSha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+      "finalSha256": "c3b823adfb02f70611abd49aad003e81e4bc4a19a1994d521525978cff76e4db",
+      "status": "PENDING_REVIEW"
+    }
+  ]
+}
