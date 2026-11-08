@@ -1,0 +1,69 @@
+name: Apply reviewed vehicle mattes
+on:
+  pull_request:
+    paths:
+      - 'docs/qa/sihyeon-phase2/vehicle-matte-approved.json'
+      - 'scripts/apply-reviewed-vehicle-mattes.py'
+      - '.github/workflows/apply-reviewed-vehicle-mattes.yml'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: reviewed-vehicle-matte-writer
+  cancel-in-progress: false
+jobs:
+  apply-reviewed:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feat/sihyeon-vehicle-phase2-20261108'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - name: Verify fixed-branch writer lease before applying
+        env:
+          EXPECTED: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          remote="$(git ls-remote origin refs/heads/feat/sihyeon-vehicle-phase2-20261108 | cut -f1)"
+          test "$remote" = "$EXPECTED"
+      - name: Apply reviewed source-bound pixels and validate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 -m pip install pillow numpy requests
+          python3 scripts/apply-reviewed-vehicle-mattes.py
+      - name: Commit only approved product and QA scope, never force
+        env:
+          EXPECTED: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          git add assets/vehicles js/vehicle-display.js docs/qa/sihyeon-phase2
+          if git diff --cached --quiet; then
+            echo 'Approved pixels already present; no new commit.'
+          else
+            remote="$(git ls-remote origin refs/heads/feat/sihyeon-vehicle-phase2-20261108 | cut -f1)"
+            test "$remote" = "$EXPECTED"
+            git -c user.name='Sihyeon Reviewed Asset Delivery' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'fix: apply individually reviewed vehicle alpha repairs and preserve proof'
+            git push origin HEAD:refs/heads/feat/sihyeon-vehicle-phase2-20261108
+            test "$(git ls-remote origin refs/heads/feat/sihyeon-vehicle-phase2-20261108 | cut -f1)" = "$(git rev-parse HEAD)"
+          fi
+          git rev-parse HEAD > reviewed-delivery-head.txt
+          git diff-tree --no-commit-id --name-status -r HEAD > reviewed-delivery-files.txt
+      - name: Attach exact delivery for readback
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reviewed-vehicle-delivery-${{ github.run_id }}
+          path: |
+            reviewed-delivery-head.txt
+            reviewed-delivery-files.txt
+            assets/vehicles/
+            js/vehicle-display.js
+            docs/qa/sihyeon-phase2/vehicle-inventory.json
+            docs/qa/sihyeon-phase2/vehicle-matte-provenance.json
+            docs/qa/sihyeon-phase2/comparisons/
+            docs/qa/sihyeon-phase2/contact/
+          if-no-files-found: error
+          retention-days: 14
