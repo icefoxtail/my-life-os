@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.3.0-english-listening';
+const CACHE_NAME = 'sihyeon-play-os-v1.4.0-voice-sync';
 
 const ASSETS = [
   './',
@@ -9,6 +9,7 @@ const ASSETS = [
   './js/voice-engine.js',
   './js/play-settings.js',
   './js/english-listening.js',
+  './js/voice-labels.js',
   './css/play-settings.css',
   './js/vehicle-display.js',
   './js/games/number-post-office-model.js',

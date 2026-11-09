@@ -23,6 +23,8 @@ jobs:
         run: |
           python3 -m py_compile scripts/qa-english-listening-browser.py
           node scripts/qa-english-listening.cjs
+          python3 -m py_compile scripts/qa-voice-label-sync-browser.py
+          node scripts/qa-voice-label-sync.cjs
       - name: Independent post office quantity and state checks
         run: node scripts/qa-number-post-office-independent.cjs
       - name: Pattern train model and independent rule oracle

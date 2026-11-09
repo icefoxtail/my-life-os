@@ -1702,6 +1702,18 @@
       .replace(/-\d+$/g, '');
 
     const baseId = rawBaseId.replace(/[^a-zA-Z0-9_-]/g, '_');
+    // Card IDs are the authority: display label, English label and spoken
+    // name share the same manifest identity. Do not trust mislinked audio names.
+    const labels=window.SihyeonVoiceLabels;
+    const spoken=labels?.entry?.('vehicle',baseId);
+    const voice=window.SihyeonVoice;
+    if(spoken && typeof voice?.speak==='function'){
+      const english=window.SihyeonPlaySettings?.getLanguage?.()==='en';
+      const text=type==='name'
+        ? spoken[english?'en':'ko']+'!'
+        : (english?'Great match! '+spoken.en+'!':getRoleText(cardData));
+      return voice.speak(text,{lang:english?'en-US':'ko-KR',rate:.93,pitch:1.02}).catch(()=>false);
+    }
 
     const explicitIds = type === 'name'
       ? [
@@ -1749,7 +1761,7 @@
       if (!id) return Promise.resolve(false);
 
       return window.SihyeonVoice.play(id)
-        .then(() => true)
+        .then(ok => ok ? true : next())
         .catch(() => next());
     }
 

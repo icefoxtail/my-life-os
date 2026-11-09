@@ -39,6 +39,8 @@ jobs:
         run: python3 scripts/qa-phase2-release-browser.py --output qa-release-evidence
       - name: Native Chromium English Listening and mode-switch verification
         run: python3 scripts/qa-english-listening-browser.py --output qa-release-evidence/english
+      - name: Korean and English tap-to-speech synchronization
+        run: python3 scripts/qa-voice-label-sync-browser.py --output qa-release-evidence/voice-sync
       - name: Attach source-bound evidence even on failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

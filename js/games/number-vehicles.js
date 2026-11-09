@@ -21,7 +21,7 @@
 
   const VEHICLES = [
     {
-      name:'소방차',
+      id:'pump_engine', name:'소방차',
       slots:[
         { shape:'roof', x:40, y:14, w:18, h:16, number:1 },
         { shape:'square', x:26, y:26, w:18, h:18, number:2 },
@@ -31,7 +31,7 @@
       ]
     },
     {
-      name:'경찰차',
+      id:'korean_police_car', name:'경찰차',
       slots:[
         { shape:'roof', x:40, y:16, w:18, h:16, number:1 },
         { shape:'triangle', x:28, y:30, w:18, h:18, number:2 },
@@ -41,7 +41,7 @@
       ]
     },
     {
-      name:'구급차',
+      id:'ambulance', name:'구급차',
       slots:[
         { shape:'square', x:36, y:18, w:18, h:18, number:1 },
         { shape:'triangle', x:54, y:18, w:18, h:18, number:2 },
@@ -622,22 +622,31 @@
     },
 
     speak(text) {
-      if (!text) return;
-
-      if (this.options.speakGuide) {
-        this.options.speakGuide(text, true);
-        return;
+      const raw=String(text||'').trim();
+      if(!raw)return;
+      const english=window.SihyeonPlaySettings?.getLanguage?.()==='en';
+      const labels=window.SihyeonVoiceLabels;
+      let phrase=raw;
+      if(english){
+        const vehicle=this.state.currentVehicle;
+        const noun=labels?.spoken?.('vehicle',vehicle?.id,'en') || '';
+        const article=/^[aeiou]/i.test(noun)?'an':'a';
+        const number=n=>{
+          const word=labels?.numberEn?.(Number(n));
+          return word||String(n);
+        };
+        if(/를 만들어보자/.test(raw)) phrase=noun ? "Let's build "+article+' '+noun+'!' : '';
+        else {
+          const find=raw.match(/^(\d+)번을 찾아볼까/);
+          const chosen=raw.match(/^(\d+)! 좋아/);
+          if(find)phrase='Find number '+number(find[1])+'!';
+          else if(chosen)phrase=number(chosen[1])+'! Great job!';
+          else if(/탈것 완성/.test(raw))phrase="Hooray! We built "+article+' '+noun+'!';
+          else phrase='';
+        }
       }
-
-      if (!window.speechSynthesis) return;
-
-      try {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = 'ko-KR';
-        utter.rate = 0.9;
-        window.speechSynthesis.speak(utter);
-      } catch (error) {}
+      if(!phrase)return;
+      window.SihyeonVoice?.speak?.(phrase,{lang:english?'en-US':'ko-KR',rate:.9,pitch:1.02})?.catch?.(()=>{});
     },
 
     shuffle(array) {
