@@ -35,6 +35,8 @@ jobs:
           mkdir -p qa-release-evidence
           python3 -m pip install playwright==1.57.0
           python3 -m playwright install --with-deps chromium
+      - name: Vehicle grammar and game interaction regression
+        run: python3 scripts/qa-vehicle-grammar-browser.py --output qa-release-evidence/vehicle-grammar
       - name: Latest train fixture, real menu and legacy entry checks
         run: python3 scripts/qa-phase2-release-browser.py --output qa-release-evidence
       - name: Native Chromium English Listening and mode-switch verification

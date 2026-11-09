@@ -842,8 +842,10 @@
       const raw = String(text).trim();
       if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
         const engine=window.SihyeonEnglishListening;
-        const noun=window.SihyeonVoiceLabels?.spoken?.('vehicle',this.state.currentVehicle?.id,'en') || engine?.vehicleName(this.state.currentVehicle?.id) || 'vehicle';
-        const plural=noun==='vehicle' ? 'vehicles' : (/bus$/.test(noun) ? noun+'es' : noun+'s');
+        const id=this.state.currentVehicle?.id;
+        const label=window.SihyeonVoiceLabels?.entry?.('vehicle',id);
+        const noun=label?.en || engine?.vehicleName(id) || 'vehicle';
+        const plural=label?.enPlural || noun + (/\bbus$/i.test(noun) ? 'es' : 's');
         const n=engine?.numberWord(this.state.currentAnswer)||String(this.state.currentAnswer);
         let spoken='';
         if(/몇 대인지 세어볼까/.test(raw)) spoken='How many '+plural+' do you see?';
@@ -854,8 +856,10 @@
         return;
       }
       if(/몇 대인지 세어볼까/.test(raw)){
-        const name=this.state.currentVehicle?.name||'자동차';
-        window.SihyeonVoice?.speak?.(name+'는 몇 대일까?',{lang:'ko-KR',rate:.93})?.catch?.(()=>{});
+        const name=this.state.currentVehicle?.name?.trim() || '자동차';
+        const last=name.charCodeAt(name.length-1);
+        const particle=last>=0xac00 && last<=0xd7a3 && (last-0xac00)%28!==0 ? '은' : '는';
+        window.SihyeonVoice?.speak?.(name+particle+' 몇 대일까?',{lang:'ko-KR',rate:.93})?.catch?.(()=>{});
         return;
       }
       this.state.options.say?.(raw);
