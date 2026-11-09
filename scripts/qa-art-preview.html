@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Art Template Preview</title>
+<style>
+  :root { --bg:#f5f7fb; --card:#fff; --ink:#1f2937; --muted:#6b7280; --bad:#dc2626; --ok:#16a34a; }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, sans-serif; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  .hint { color:var(--muted); margin:0 0 16px; }
+  .tpl { background:var(--card); border-radius:14px; padding:12px; margin:0 0 16px; box-shadow:0 1px 3px #0001; }
+  .tpl h2 { font-size:15px; margin:0 0 8px; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; }
+  figure { margin:0; width:300px; max-width:100%; }
+  figcaption { font-size:12px; color:var(--muted); text-align:center; }
+  .stage { width:100%; aspect-ratio:4/3; border:1px solid #e5e7eb; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#fff; }
+  .stage svg { width:100%; height:100%; max-width:94%; max-height:94%; }
+  .issues { font-size:12px; margin-top:6px; }
+  .issues .bad { color:var(--bad); } .issues .ok { color:var(--ok); }
+  table { font-size:12px; border-collapse:collapse; margin-top:6px; }
+  td { padding:1px 6px; border-bottom:1px solid #eee; }
+  .sw { display:inline-block; width:12px; height:12px; border:1px solid #333; border-radius:3px; vertical-align:middle; }
+</style>
+</head>
+<body>
+<h1>색칠 도안 미리보기</h1>
+<p class="hint">?ids=police,fire_pump 로 일부만 보기 · ?drafts=police_bus,ambulance 로 <code>.art-drafts/&lt;id&gt;.js</code> 초안 보기 · ?parts=1 로 부위 표 표시</p>
+<div id="out"></div>
+<script>
+(async () => {
+  const qs = new URLSearchParams(location.search);
+  const src = await (await fetch('../js/games/art-zone.js', { cache: 'no-store' })).text();
+  const marker = 'window.SihyeonGames[GAME_KEY] = { render, destroy };';
+  const exposed = src.replace(marker, 'window.__art = { COLORING_TEMPLATES, COLORS, partOrder, templateVersion };\n' + marker);
+  window.SihyeonGames = {};
+  new Function(exposed)();
+  const { COLORING_TEMPLATES, COLORS, partOrder, templateVersion } = window.__art;
+  const palette = new Set(COLORS.map((c) => String(c.c).toLowerCase()));
+
+  window.ART_DRAFTS = [];
+  const draftIds = (qs.get('drafts') || '').split(',').filter(Boolean);
+  for (const id of draftIds) {
+    await new Promise((res) => { const s = document.createElement('script'); s.src = `../.art-drafts/${id}.js?t=${Date.now()}`; s.onload = res; s.onerror = res; document.head.appendChild(s); });
+  }
+  const only = (qs.get('ids') || '').split(',').filter(Boolean);
+  const list = [];
+  for (const t of COLORING_TEMPLATES) if (!only.length || only.includes(t.id)) list.push({ t, draft: false });
+  for (const d of window.ART_DRAFTS) {
+    const base = COLORING_TEMPLATES.find((t) => t.id === d.id);
+    list.push({ t: { ...d, legacy: base ? { [templateVersion(base)]: base.svg } : undefined }, draft: true });
+  }
+
+  const out = document.getElementById('out');
+  for (const { t, draft } of list) {
+    const card = document.createElement('section');
+    card.className = 'tpl';
+    card.innerHTML = `<h2>${draft ? '📝 초안 ' : ''}${t.emoji || ''} ${t.name || ''} <small>(${t.id}, v${t.version || 1})</small></h2><div class="row"></div><div class="issues"></div>`;
+    const row = card.querySelector('.row');
+    const add = (label, svg, paint) => {
+      const fig = document.createElement('figure');
+      fig.innerHTML = `<div class="stage">${svg}</div><figcaption>${label}</figcaption>`;
+      row.appendChild(fig);
+      const el = fig.querySelector('svg');
+      if (paint && t.parts) el.querySelectorAll('.fillable').forEach((f) => { const m = t.parts[f.dataset.part]; if (m) f.setAttribute('fill', m.color); });
+      return el;
+    };
+    out.appendChild(card);
+    const blank = add('빈 도안', t.svg, false);
+    if (t.parts) add('추천 색', t.svg, true);
+    const prev = t.legacy && Object.entries(t.legacy).sort((a, b) => b[0] - a[0])[0];
+    if (prev) add(`이전 v${prev[0]}`, prev[1], false);
+    // Normalize like the game does, then audit fillables.
+    [...row.querySelectorAll('svg')].forEach((svg) => {
+      try {
+        const b = svg.getBBox(); const pad = Math.max(b.width, b.height) * 0.095 + 5;
+        svg.setAttribute('viewBox', `${b.x + b.width / 2 - (b.width + 2 * pad) / 2} ${b.y + b.height / 2 - (b.height + 2 * pad) / 2} ${b.width + 2 * pad} ${b.height + 2 * pad}`);
+      } catch (_) {}
+    });
+    const issues = [];
+    const whole = blank.getBBox();
+    const minArea = Math.max(60, whole.width * whole.height * 0.012);
+    const fills = [...blank.querySelectorAll('.fillable')];
+    const order = partOrder(t.svg);
+    if (!order.unique) issues.push('data-part 누락/중복');
+    if (fills.length < 5 || fills.length > 16) issues.push(`fillable ${fills.length}개 (권장 6~14)`);
+    const rows = [];
+    for (const f of fills) {
+      const b = f.getBBox(); const p = f.dataset.part; const m = t.parts?.[p];
+      const small = b.width * b.height < minArea || Math.min(b.width, b.height) < 12;
+      if (small) issues.push(`작은 영역: ${p || '?'} (${b.width.toFixed(0)}×${b.height.toFixed(0)})`);
+      if (t.parts && !m) issues.push(`parts 메타 없음: ${p}`);
+      if (m && !palette.has(String(m.color).toLowerCase())) issues.push(`팔레트 밖 색: ${p} ${m.color}`);
+      rows.push(`<tr><td>${p || '?'}</td><td>${m ? m.ko + ' / ' + m.en : ''}</td><td>${m ? `<span class="sw" style="background:${m.color}"></span> ${m.color}` : ''}</td><td>${b.width.toFixed(0)}×${b.height.toFixed(0)}${small ? ' ⚠' : ''}</td></tr>`);
+    }
+    if (t.parts) Object.keys(t.parts).filter((k) => !order.ids.includes(k)).forEach((k) => issues.push(`SVG에 없는 parts 키: ${k}`));
+    const vb = (t.svg.match(/viewBox="([^"]+)"/) || [])[1];
+    if (t.parts && vb !== '0 0 240 180') issues.push(`viewBox ${vb} (기준 0 0 240 180)`);
+    card.dataset.issues = issues.length;
+    card.querySelector('.issues').innerHTML = (issues.length ? issues.map((i) => `<div class="bad">⚠ ${i}</div>`).join('') : '<div class="ok">✓ 자동 점검 통과</div>')
+      + (qs.get('parts') ? `<table>${rows.join('')}</table>` : '');
+  }
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body>
+</html>

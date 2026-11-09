@@ -45,7 +45,46 @@
       id: 'police',
       name: '경찰차',
       emoji: '🚓',
+      version: 2,
+      parts: {
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        light_blue: { ko: '파란 경광등', en: 'blue siren light', color: '#4488FF' },
+        cabin: { ko: '지붕', en: 'roof', color: '#FFF8E7' },
+        window_rear: { ko: '뒷창문', en: 'back window', color: '#8EF6D1' },
+        window_front: { ko: '앞창문', en: 'front window', color: '#8EF6D1' },
+        body: { ko: '차체', en: 'car body', color: '#FFF8E7' },
+        stripe: { ko: '경찰 줄무늬', en: 'police stripe', color: '#1E40AF' },
+        badge: { ko: '경찰 배지', en: 'police badge', color: '#FFD700' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="light_red" x="95" y="24" width="24" height="16" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light_blue" x="121" y="24" width="24" height="16" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cabin" d="M 56 86 L 77 47 Q 81 40 90 40 H 150 Q 159 40 163 47 L 184 86 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="window_rear" d="M 73 82 L 88 54 Q 90 49 96 49 H 114 V 82 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="window_front" d="M 126 82 V 49 H 144 Q 150 49 152 54 L 167 82 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 36 136 H 206 Q 219 136 219 123 V 104 Q 219 91 205 89 L 180 84 H 42 Q 21 84 21 104 V 123 Q 21 136 36 136 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="stripe" x="21" y="104" width="198" height="15" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="badge" d="M 136 95 Q 148 90 160 95 V 107 Q 160 119 148 124 Q 136 119 136 107 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="headlight" d="M 195 104 V 93 Q 195 87 202 87.6 L 210 88.8 Q 219 90.5 219 100 V 104 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="66" cy="136" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="174" cy="136" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="66" cy="136" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="174" cy="136" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 92 40 H 148"/>
+          <path d="M 120 86 V 132"/>
+          <path d="M 100 94 H 110"/>
+          <path d="M 148 99 L 150 104 L 155 104 L 151 107 L 153 112 L 148 109 L 143 112 L 145 107 L 141 104 L 146 104 Z" fill="#333" stroke="none"/>
+          <path d="M 21 96 H 30"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="88" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
         <rect class="fillable" x="110" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path class="fillable" d="M 52 110 L 52 72 C 52 60,72 48,92 48 L 172 48 C 192 48,210 58,210 72 L 210 110 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
@@ -77,12 +116,52 @@
 <path d="M112 101 H143"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'police_bus',
       name: '경찰 버스',
       emoji: '🚌',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        light_blue: { ko: '파란 경광등', en: 'blue siren light', color: '#4488FF' },
+        body: { ko: '버스 차체', en: 'bus body', color: '#FFF8E7' },
+        window_1: { ko: '첫째 창문', en: 'window 1', color: '#8EF6D1' },
+        window_2: { ko: '둘째 창문', en: 'window 2', color: '#8EF6D1' },
+        window_3: { ko: '셋째 창문', en: 'window 3', color: '#8EF6D1' },
+        window_front: { ko: '앞창문', en: 'front window', color: '#8EF6D1' },
+        stripe: { ko: '경찰 줄무늬', en: 'police stripe', color: '#1E40AF' },
+        badge: { ko: '경찰 배지', en: 'police badge', color: '#FFD700' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="light_red" x="88" y="30" width="30" height="22" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light_blue" x="122" y="30" width="30" height="22" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 34 136 H 206 Q 224 136 224 120 V 68 Q 224 52 208 52 H 32 Q 16 52 16 68 V 120 Q 16 136 34 136 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="window_1" x="26" y="62" width="46" height="28" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_2" x="78" y="62" width="46" height="28" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_3" x="130" y="62" width="46" height="28" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="window_front" d="M 184 62 H 206 Q 214 62 214 70 V 82 Q 214 90 206 90 H 184 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="stripe" x="16" y="98" width="208" height="14" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="badge" d="M 106 94 Q 120 88 134 94 V 108 Q 134 122 120 128 Q 106 122 106 108 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="headlight" x="200" y="116" width="24" height="16" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="60" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="180" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="60" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="180" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 84 52 H 156"/>
+          <path d="M 120 101 L 122 106 L 127 106 L 123 109 L 125 114 L 120 111 L 115 114 L 117 109 L 113 106 L 118 106 Z" fill="#333" stroke="none"/>
+          <path d="M 16 124 H 26"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="30" y="15" width="16" height="10" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
         <rect class="fillable" x="154" y="15" width="16" height="10" rx="3" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 20 25 L 180 25 C 185 25, 190 30, 190 40 L 190 70 L 10 70 L 10 40 C 10 30, 15 25, 20 25 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -99,12 +178,51 @@
 <path d="M104 72 V91 M100 91 H112"/><path d="M113 80 L120 73 L127 80 L125 88 L120 91 L115 88 Z" fill="none"/><path d="M18 81 H94"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'fire_pump',
       name: '소방 펌프차',
       emoji: '🚒',
+      version: 2,
+      parts: {
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        light_yellow: { ko: '노란 경광등', en: 'yellow siren light', color: '#FFD700' },
+        roof_rack: { ko: '지붕 선반', en: 'roof rack', color: '#C0C0C0' },
+        body: { ko: '장비 차체', en: 'equipment body', color: '#FF4444' },
+        hose_reel: { ko: '호스 릴', en: 'hose reel', color: '#FFD700' },
+        compartment: { ko: '장비함', en: 'equipment door', color: '#C0C0C0' },
+        cab: { ko: '운전석', en: 'cab', color: '#FF4444' },
+        window_cab: { ko: '운전석 창문', en: 'cab window', color: '#8EF6D1' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="light_red" x="148" y="20" width="24" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light_yellow" x="174" y="20" width="24" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="roof_rack" x="22" y="40" width="112" height="16" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="body" x="16" y="54" width="130" height="80" rx="12" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hose_reel" cx="52" cy="90" r="24" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="compartment" x="88" y="70" width="48" height="44" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cab" d="M 140 134 V 52 Q 140 38 154 38 H 186 Q 196 38 201 46 L 216 72 Q 224 78 224 90 V 122 Q 224 134 212 134 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="window_cab" d="M 150 50 H 184 Q 190 50 193 55 L 205 76 H 150 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="headlight" cx="211" cy="102" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="60" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="182" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="60" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="182" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 50 40 V 56 M 70 40 V 56 M 90 40 V 56 M 110 40 V 56"/>
+          <circle cx="52" cy="90" r="8"/>
+          <path d="M 52 82 V 98 M 44 90 H 60"/>
+          <path d="M 96 92 H 112"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="158" y="14" width="22" height="11" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path class="fillable" d="M 138 108 L 138 46 C 138 34,150 28,164 28 L 196 28 C 213 28,218 52,218 68 L 218 108 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
         <path class="fillable" d="M 148 60 L 148 40 L 180 40 C 195 40,202 50,204 60 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
@@ -136,12 +254,48 @@
 <path d="M25 77 H38 M118 77 H131"/><path d="M155 71 V87 H179"/><circle cx="169" cy="90" r="7" fill="none"/><path d="M169 83 V97 M162 90 H176"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'fire_ladder',
       name: '소방 사다리차',
       emoji: '🪜',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        body: { ko: '차체', en: 'truck body', color: '#FF4444' },
+        turntable: { ko: '사다리 받침', en: 'ladder base', color: '#C0C0C0' },
+        ladder: { ko: '사다리', en: 'ladder', color: '#FFD700' },
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        compartment_1: { ko: '뒤 장비함', en: 'back equipment door', color: '#C0C0C0' },
+        compartment_2: { ko: '앞 장비함', en: 'front equipment door', color: '#C0C0C0' },
+        cab: { ko: '운전석', en: 'cab', color: '#FF4444' },
+        window_cab: { ko: '운전석 창문', en: 'cab window', color: '#8EF6D1' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="body" x="16" y="80" width="138" height="54" rx="12" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="turntable" x="28" y="64" width="56" height="22" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="compartment_1" x="26" y="92" width="52" height="22" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="compartment_2" x="90" y="92" width="52" height="22" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cab" d="M 148 134 V 72 Q 148 62 158 62 H 190 Q 198 62 202 69 L 216 90 Q 224 96 224 104 V 122 Q 224 134 212 134 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="window_cab" d="M 158 72 H 188 Q 192 72 195 76 L 205 92 H 158 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="headlight" cx="212" cy="114" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="ladder" d="M 30 56 L 196 26 Q 203 25 204 32 L 205 42 Q 205 47 199 48 L 32 78 Q 25 79 24 72 L 23 63 Q 23 57 30 56 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="light_red" x="112" y="66" width="28" height="18" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="60" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="184" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="60" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="184" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 50 55 V 72 M 72 51 V 68 M 94 47 V 64 M 116 43 V 60 M 138 39 V 56 M 160 35 V 52 M 182 31 V 49"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="150" y="35" width="15" height="8" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 20 40 L 130 15 L 135 25 L 25 50 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <line x1="40" y1="36" x2="45" y2="45" stroke="#333" stroke-width="3"/>
@@ -165,12 +319,50 @@
 <path d="M28 56 H56 M68 50 L118 39"/><circle cx="45" cy="67" r="5" fill="none"/><path d="M170 77 H183 M145 84 H155"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'ambulance',
       name: '구급차',
       emoji: '🚑',
+      version: 2,
+      parts: {
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        light_blue: { ko: '파란 경광등', en: 'blue siren light', color: '#4488FF' },
+        body: { ko: '구급차 뒷칸', en: 'ambulance box', color: '#FFF8E7' },
+        window_box: { ko: '뒷칸 창문', en: 'box window', color: '#8EF6D1' },
+        cross: { ko: '빨간 십자', en: 'red cross', color: '#FF4444' },
+        cab: { ko: '운전석', en: 'cab', color: '#FFF8E7' },
+        window_cab: { ko: '운전석 창문', en: 'cab window', color: '#8EF6D1' },
+        stripe: { ko: '줄무늬', en: 'stripe', color: '#FF4444' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="light_red" x="96" y="22" width="26" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light_blue" x="124" y="22" width="26" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="body" x="16" y="38" width="140" height="96" rx="12" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="window_box" x="26" y="50" width="36" height="28" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cross" d="M 93 52 H 107 V 67 H 122 V 81 H 107 V 96 H 93 V 81 H 78 V 67 H 93 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cab" d="M 148 134 V 62 Q 148 52 158 52 H 184 Q 192 52 197 59 L 214 84 Q 224 90 224 100 V 122 Q 224 134 212 134 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="window_cab" d="M 158 62 H 182 Q 186 62 189 66 L 200 82 H 158 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="stripe" x="16" y="104" width="208" height="16" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="headlight" x="200" y="87" width="24" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="62" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="184" cy="138" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="62" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="184" cy="138" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 96 38 H 150"/>
+          <path d="M 138 60 V 104"/>
+          <path d="M 150 94 H 158"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="95" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
         <rect class="fillable" x="118" y="10" width="18" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path class="fillable" d="M 125 108 L 125 50 L 180 50 L 214 74 L 214 108 Z" stroke="#333" stroke-width="3.5" fill="#FFF"/>
@@ -200,6 +392,7 @@
 <path d="M37 48 H43 V57 H49 V64 H43 V73 H37 V64 H31 V57 H37 Z" fill="none"/><path d="M65 87 H77 M140 88 H160"/><path d="M145 78 H170"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'excavator',

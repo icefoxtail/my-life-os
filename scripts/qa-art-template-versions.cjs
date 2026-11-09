@@ -46,7 +46,7 @@ function fakeWrap() {
   return wrap;
 }
 
-function boot(store, { failKeys = [] } = {}) {
+function boot(store, { failKeys = [], real = false } = {}) {
   const wrap = fakeWrap();
   const writes = [];
   const context = {
@@ -65,6 +65,13 @@ function boot(store, { failKeys = [] } = {}) {
   };
   vm.runInNewContext(testSource, context, { timeout: 1000 });
   const q = context.window.qa;
+  if (!real) {
+    // Pin police to its original v1 artwork so these checks do not depend on
+    // which templates have shipped a redesign; redesign() simulates one.
+    const t = q.COLORING_TEMPLATES.find((x) => x.id === 'police');
+    if (t.legacy?.[1]) t.svg = t.legacy[1];
+    delete t.legacy; delete t.parts; delete t.version;
+  }
   q.state.tab = 'coloring';
   q.state.destroyed = false;
   q.state.options = {};
@@ -301,8 +308,24 @@ test('corrupt or hostile saved data never throws and never injects colors', () =
   return { cases: bad.length };
 });
 
+test('shipped redesigns: a painted v1 save opens on the real legacy artwork', () => {
+  const { q: probe } = boot(new Map(), { real: true });
+  const shipped = probe.COLORING_TEMPLATES.filter((t) => probe.templateVersion(t) > 1);
+  for (const t of shipped) {
+    const count = [...t.legacy[1].matchAll(TAG_RE)].length;
+    const fills = Array.from({ length: count }, (_, i) => (i % 3 ? '#FFF' : '#44CC44'));
+    const store = new Map([[KEY, JSON.stringify({ templates: { [t.id]: { fills } } })]]);
+    const { q, wrap } = boot(store, { real: true });
+    q.loadWork();
+    q.renderColoringTemplate(q.COLORING_TEMPLATES.find((x) => x.id === t.id));
+    assert.equal(wrap.innerHTML, t.legacy[1], `${t.id}: legacy artwork`);
+    assert.deepEqual(wrap.els.map((e) => e.getAttribute('fill')), fills, `${t.id}: same colors on same indices`);
+  }
+  return { shipped: shipped.map((t) => t.id) };
+});
+
 test('static: every template revision is complete and every part is unique and described', () => {
-  const { q } = boot(new Map());
+  const { q } = boot(new Map(), { real: true });
   const palette = new Set(q.COLORS.map((c) => String(c.c).toLowerCase()));
   const labels = fs.readFileSync(path.join(__dirname, '../js/voice-labels.js'), 'utf8');
   const report = [];
