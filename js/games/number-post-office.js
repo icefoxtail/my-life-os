@@ -109,6 +109,8 @@
     const state = current();
     if (!state) return '';
     const mission = state.mission;
+    if (window.SihyeonPlaySettings?.getLanguage?.()==='en')
+      return window.SihyeonEnglishListening?.postOfficeOrder?.(mission) || '';
     const request = mission.requirements.map(function (need) { return typeOf(need.type).name + ' ' + numberWord(need.count, true) + ' 개'; }).join(', ');
     let instruction = '물건을 톡 눌러 차에 실어 줘.';
     if (mission.kind === 'fill-missing') instruction = '담긴 물건은 두고, 부족한 물건을 더 실어 줘.';
@@ -122,6 +124,10 @@
   }
   function speak(text) {
     if (!view.container || view.muted) return;
+    if (window.SihyeonPlaySettings?.getLanguage?.()==='en' && /[가-힣]/.test(String(text))) {
+      text = window.SihyeonEnglishListening?.postOfficePhrase?.(text) || '';
+    }
+    if (!text) return;
     stopVoice();
     const token = view.voiceToken;
     let finished = false;
@@ -138,7 +144,7 @@
       if (typeof view.options.say === 'function') {
         Promise.resolve(view.options.say(text)).then(fallback, function () { fallback(false); });
       } else if (window.SihyeonVoice && typeof window.SihyeonVoice.speak === 'function') {
-        Promise.resolve(window.SihyeonVoice.speak(text, { lang: 'ko-KR', rate: 0.88, pitch: 1.08 })).then(fallback, function () { fallback(false); });
+        Promise.resolve(window.SihyeonVoice.speak(text, { lang: window.SihyeonPlaySettings?.getLanguage?.()==='en' ? 'en-US' : 'ko-KR', rate: 0.88, pitch: 1.08 })).then(fallback, function () { fallback(false); });
       } else fallback(false);
     } catch (error) { fallback(false); }
     timer(function () { fallback(false); }, 11000);
