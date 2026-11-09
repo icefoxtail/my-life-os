@@ -1,0 +1,107 @@
+name: QA only - live English Listening
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/qa-sihyeon-english-public-20261109.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-english:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Verify actual published English Listening bytes
+        run: |
+          mkdir -p qa-live-english
+          python3 - <<'PY'
+          import concurrent.futures,hashlib,json,pathlib,subprocess,time,urllib.request
+          root=pathlib.Path('.')
+          sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          expectedSha='cf988eb30d602df4a7fac950228cb1cd831769e4'
+          assert sha==expectedSha, 'new main branch moved; re-evaluate release'
+          paths=['index.html','sw.js','css/play-settings.css','js/play-settings.js','js/english-listening.js',
+                 'js/voice-engine.js','js/games/number-count.js','js/games/color-balloon.js',
+                 'js/games/number-post-office.js','js/games/pattern-train.js']
+          def get(path):
+              expect=hashlib.sha256((root/path).read_bytes()).hexdigest();last=''
+              for k in range(12):
+                  try:
+                      url='https://icefoxtail.github.io/my-life-os/'+path+'?release='+sha+'-'+str(k)
+                      req=urllib.request.Request(url,headers={'Cache-Control':'no-cache'})
+                      with urllib.request.urlopen(req,timeout=30) as f:
+                          body=f.read();status=f.status
+                      got=hashlib.sha256(body).hexdigest()
+                      if status==200 and got==expect:return {'path':path,'status':'PASS','sha256':got,'bytes':len(body),'attempt':k+1}
+                      last=f'HTTP={status}; actual sha={got}; expected={expect}'
+                  except Exception as err:last=str(err)
+                  time.sleep(7)
+              return {'path':path,'status':'FAIL','reason':last}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
+              result=list(ex.map(get,paths))
+          report={'mainSha':sha,'scope':'Public Pages network response bytes, not just checkout','results':result}
+          pathlib.Path('qa-live-english/source-sha.json').write_text(json.dumps(report,indent=2))
+          passed=sum(x['status']=='PASS' for x in result)
+          print('PUBLIC_ENGLISH_SOURCE_SHA',passed,'/',len(result),flush=True)
+          for x in result:
+              if x['status']!='PASS':print('FAIL',x,flush=True)
+          assert passed==len(result),'Published assets missing or do not match main'
+          PY
+      - name: Install pinned Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Exercise actual public site English TTS invocations
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,re
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path('qa-live-english')
+          result={'scope':'Native Chromium public-site DOM and captured speechSynthesis invocations, NOT audible human or physical phone testing','checks':[]}
+          def check(name,fn):
+              try:result['checks'].append({'name':name,'status':'PASS','detail':fn()})
+              except Exception as exc:result['checks'].append({'name':name,'status':'FAIL','error':str(exc)})
+              print(result['checks'][-1],flush=True)
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for w,h in [(390,844),(844,390)]:
+                  context=browser.new_context(viewport={'width':w,'height':h},service_workers='block')
+                  page=context.new_page()
+                  def sample():
+                      page.goto('https://icefoxtail.github.io/my-life-os/index.html',wait_until='load',timeout=55000)
+                      page.evaluate('''() => {
+                        window.__voiceAudit = [];
+                        speechSynthesis.cancel = () => {};
+                        speechSynthesis.speak = u => {
+                          window.__voiceAudit.push({text:u.text,lang:u.lang});
+                          setTimeout(() => { if(u.onend)u.onend(); }, 30);
+                        };
+                      }''')
+                      page.locator('[data-language-toggle]').click()
+                      assert page.evaluate('SihyeonPlaySettings.getLanguage()')=='en'
+                      page.evaluate('openColorBalloonGame()')
+                      page.wait_for_function('Boolean(SihyeonGames.colorBalloon.state.targetColor)',timeout=12000)
+                      expected=page.evaluate('SihyeonGames.colorBalloon.state.targetColor.id')
+                      page.wait_for_function("(c) => window.__voiceAudit.some(x=>x.text==='Find the '+c+' balloon!')",arg=expected,timeout=10000)
+                      voices=page.evaluate('window.__voiceAudit')
+                      assert not any(re.search(r'[\uac00-\ud7a3]',v['text']) for v in voices)
+                      assert any(v['lang']=='en-US' for v in voices)
+                      return {'viewport':[w,h],'target':expected,'matchedEnglish':True}
+                  check('public English color balloon '+str(w)+'x'+str(h),sample)
+                  context.close()
+              browser.close()
+          root.joinpath('live-english-play.json').write_text(json.dumps(result,indent=2))
+          assert all(c['status']=='PASS' for c in result['checks']), 'Public English Listening UI failed'
+          print('PUBLIC_ENGLISH_LISTENING_PLAY',len(result['checks']),'/',len(result['checks']),flush=True)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: english-public-${{ github.run_id }}
+          path: qa-live-english/
+          if-no-files-found: error
+          retention-days: 14
