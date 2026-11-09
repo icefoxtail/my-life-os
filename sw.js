@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.4.0-voice-sync';
+const CACHE_NAME = 'sihyeon-play-os-v1.4.1-art-versions';
 
 const ASSETS = [
   './',

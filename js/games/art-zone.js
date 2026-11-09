@@ -451,13 +451,89 @@
   };
 
   const WORK_KEY = 'sihyeon-art-work-v1';
+  // One-time, never-overwritten copy of the coloring fills as they were before
+  // template versioning shipped. Free-drawing PNGs are excluded so the copy
+  // cannot push the main save over the storage quota.
+  const WORK_BACKUP_KEY = 'sihyeon-art-work-v1-backup';
+  const FILL_RE = /^(#[0-9a-f]{3,8}|hsl\([0-9.,% ]+\)|white|none)$/i;
+  const PART_RE = /^[a-z][a-z0-9_]{0,40}$/;
+  const safeFill = (f) => (typeof f === 'string' && FILL_RE.test(f) ? f : '#FFF');
+  const isPainted = (f) => !!f && !/^(#fff|#ffffff|white|none)$/i.test(f);
+  const templateVersion = (tpl) => (Number.isInteger(tpl?.version) && tpl.version > 0 ? tpl.version : 1);
+
+  // Saved fills are index-ordered for the exact SVG they were painted on.
+  // data-part ids (in .fillable document order) make the same paint portable
+  // across future SVG revisions without relying on that order.
+  const partOrderCache = new Map();
+  function partOrder(svg) {
+    const key = String(svg || '');
+    if (partOrderCache.has(key)) return partOrderCache.get(key);
+    const ids = [];
+    for (const m of key.matchAll(/<[a-z]+\b[^>]*\bclass="(?:[^"]*\s)?fillable(?:\s[^"]*)?"[^>]*>/gi)) {
+      const p = m[0].match(/\bdata-part="([^"]+)"/);
+      ids.push(p && PART_RE.test(p[1]) ? p[1] : null);
+    }
+    const unique = ids.every(Boolean) && new Set(ids).size === ids.length;
+    const result = { ids, unique };
+    partOrderCache.set(key, result);
+    return result;
+  }
+  // The SVG a saved work must be drawn on: an older revision's artwork stays
+  // on that revision so each index keeps meaning the same part.
+  function workSvg(tpl, work) {
+    const v = work?.svgVersion || 1;
+    if (v !== templateVersion(tpl) && typeof tpl.legacy?.[v] === 'string') return tpl.legacy[v];
+    return tpl.svg;
+  }
+  function normalizeWork(tpl, work) {
+    const current = templateVersion(tpl);
+    if (!Number.isInteger(work.svgVersion) || work.svgVersion < 1) work.svgVersion = 1;
+    if (work.svgVersion === current) return work;
+    const painted = work.fills.some(isPainted);
+    if (painted && work.svgVersion < current && typeof tpl.legacy?.[work.svgVersion] === 'string') return work;
+    // No drawable older artwork: carry paint over only by matching part ids.
+    const target = partOrder(tpl.svg);
+    const parts = work.parts || {};
+    work.fills = target.unique ? target.ids.map((p) => (Object.prototype.hasOwnProperty.call(parts, p) ? safeFill(parts[p]) : '#FFF')) : [];
+    work.svgVersion = current;
+    work.completed = false;
+    work.history = [];
+    return work;
+  }
+  function serializeTemplates() {
+    const out = {};
+    Object.keys(state.templateWork).forEach((id) => {
+      const w = state.templateWork[id];
+      if (!w) return;
+      const entry = { svgVersion: w.svgVersion || 1, fills: w.fills, completed: !!w.completed };
+      const tpl = COLORING_TEMPLATES.find((t) => t.id === id);
+      const order = tpl ? partOrder(workSvg(tpl, w)) : null;
+      if (order && order.unique && order.ids.length) {
+        entry.parts = {};
+        order.ids.forEach((p, i) => { entry.parts[p] = w.fills[i] || '#FFF'; });
+      } else if (w.parts) entry.parts = w.parts;
+      out[id] = entry;
+    });
+    return out;
+  }
+  function backupWorkOnce() {
+    try {
+      if (localStorage.getItem(WORK_BACKUP_KEY) !== null) return;
+      const raw = localStorage.getItem(WORK_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (!data || typeof data !== 'object' || !data.templates || typeof data.templates !== 'object') return;
+      localStorage.setItem(WORK_BACKUP_KEY, JSON.stringify({ savedFrom: WORK_KEY, templates: data.templates }));
+    } catch (_) { /* The main save is untouched when a backup cannot be written. */ }
+  }
+
   let memoryWork = null;
   function saveWork() {
     try {
       // A newly sized canvas is blank until the saved PNG has decoded. Keep the
       // canonical PNG when leaving, changing tabs, or saving during that interval.
       if (state.freeCanvasReady && state.canvas && state.canvas.width > 1) state.freeImage = state.canvas.toDataURL('image/png');
-      const serialized = JSON.stringify({templates:state.templateWork, freeImage:state.freeImage, activeTemplateId:state.activeTemplateId, activeTheme:state.activeTheme, tab:state.tab});
+      const serialized = JSON.stringify({templates:serializeTemplates(), freeImage:state.freeImage, activeTemplateId:state.activeTemplateId, activeTheme:state.activeTheme, tab:state.tab});
       // A write can fail while reads keep returning an older picture. Preserve
       // a detached canonical snapshot before attempting persistent storage.
       memoryWork = JSON.parse(serialized);
@@ -465,6 +541,7 @@
     } catch (_) { /* In-memory work stays available when storage is full. */ }
   }
   function loadWork() {
+    if (!memoryWork) backupWorkOnce();
     try {
       const data=memoryWork || JSON.parse(localStorage.getItem(WORK_KEY)||'null');
       if (!data || typeof data!=='object') return;
@@ -475,7 +552,22 @@
       if (data.templates && typeof data.templates==='object') {
         COLORING_TEMPLATES.forEach(t=>{
           const item=data.templates[t.id];
-          if(item && Array.isArray(item.fills)) state.templateWork[t.id]={fills:item.fills.slice(0,1000).map(f=>typeof f==='string'&&/^(#[0-9a-f]{3,8}|hsl\([0-9.,% ]+\)|white|none)$/i.test(f)?f:'#FFF'),completed:!!item.completed,history:[]};
+          if(!item || typeof item!=='object') return;
+          const hasFills=Array.isArray(item.fills);
+          const hasParts=!!item.parts && typeof item.parts==='object' && !Array.isArray(item.parts);
+          if(!hasFills && !hasParts) return;
+          // Saves written before versioning carry no svgVersion: they are v1.
+          const svgVersion=Number.isInteger(item.svgVersion) && item.svgVersion>0 && item.svgVersion<1000 ? item.svgVersion : 1;
+          const work={svgVersion,fills:hasFills?item.fills.slice(0,1000).map(safeFill):[],completed:!!item.completed,history:[]};
+          if(hasParts){
+            work.parts=Object.create(null);
+            Object.keys(item.parts).slice(0,1000).forEach(k=>{ if(PART_RE.test(k)) work.parts[k]=safeFill(item.parts[k]); });
+            if(!hasFills){
+              const order=partOrder(workSvg(t,work));
+              if(order.unique) work.fills=order.ids.map(p=>work.parts[p]||'#FFF');
+            }
+          }
+          state.templateWork[t.id]=normalizeWork(t,work);
         });
       }
     } catch (_) {}
@@ -533,7 +625,7 @@
     if(state.tab==='coloring') {
       const work=state.templateWork[state.activeTemplateId]; const item=work?.history?.pop();
       if(!item)return;
-      if(item.fills)work.fills=item.fills;else work.fills[item.index]=item.prev;work.completed=false;
+      if(item.fills){work.fills=item.fills;if(item.svgVersion)work.svgVersion=item.svgVersion;}else work.fills[item.index]=item.prev;work.completed=false;
       renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
     } else {
       const prior=state.freeHistory.pop();if(prior===undefined)return;
@@ -544,9 +636,17 @@
   function clearWork() {
     if(state.tab==='coloring') {
       const work=state.templateWork[state.activeTemplateId];
-      if(work){work.history.push({fills:work.fills.slice()});work.fills=work.fills.map(()=>'#FFF');}
+      const tpl=COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId);
+      if(work){
+        // New paper is where an older saved picture moves to the newest artwork;
+        // undo restores both the fills and the revision they belong to.
+        work.history.push({fills:work.fills.slice(),svgVersion:work.svgVersion||1});
+        const current=templateVersion(tpl);
+        if((work.svgVersion||1)!==current){work.svgVersion=current;work.fills=[];}
+        else work.fills=work.fills.map(()=>'#FFF');
+      }
       if(work)work.completed=false;
-      renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
+      renderColoringTemplate(tpl);
     } else {
       const prior = state.freeCanvasReady ? state.canvas.toDataURL('image/png') : state.freeImage;
       state.freeHistory.push(prior);state.freeHistory=state.freeHistory.slice(-12);
@@ -1618,13 +1718,15 @@
     const wrap = document.getElementById('azColoringWrap');
     if (!wrap) return;
 
-    const work=state.templateWork[tpl.id]||(state.templateWork[tpl.id]={fills:[],completed:false,history:[]});
+    const work=state.templateWork[tpl.id]||(state.templateWork[tpl.id]={svgVersion:templateVersion(tpl),fills:[],completed:false,history:[]});
     work.history=work.history||[];
+    normalizeWork(tpl, work);
     state.paintHistory=work.history;
     state.coloringCompleted=work.completed;
 
     wrap.classList.remove('az-done');
-    wrap.innerHTML = tpl.svg;
+    wrap.innerHTML = workSvg(tpl, work);
+    if (wrap.dataset) wrap.dataset.svgVersion = String(work.svgVersion);
 
     const svg = wrap.querySelector('svg');
     if (svg) {
