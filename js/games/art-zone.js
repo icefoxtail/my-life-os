@@ -1467,7 +1467,7 @@
 
         const tpl = COLORING_TEMPLATES.find((t) => t.id === state.activeTemplateId);
         renderColoringTemplate(tpl);
-        speak(`${tpl?.name || '그림'}! 같이 색칠해 볼까?`);
+        speakSelection('template',tpl?.id,`${tpl?.name || '그림'}! 같이 색칠해 볼까?`);
       };
     });
 
@@ -1485,7 +1485,7 @@
         root.querySelectorAll('.az-color-circle').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
 
-        speak(btn.dataset.name + '!');
+        speakSelection('color',color,btn.dataset.name + '!');
         if (navigator.vibrate) navigator.vibrate(25);
       };
     });
@@ -1708,7 +1708,10 @@
     state.templateWork[tpl.id].completed=true;
     saveWork();    wrap.classList.add('az-done');
 
-    speak(`우와. ${tpl.name} 완성. 시현이 참 잘했어.`, true);
+    if(window.SihyeonPlaySettings?.getLanguage?.()==='en') {
+      const english=window.SihyeonVoiceLabels?.spoken?.('template',tpl.id,'en');
+      if(english) window.SihyeonVoice?.speak?.('Great job! You colored the '+english+'!',{lang:'en-US',rate:.9})?.catch?.(()=>{});
+    } else speak(`우와. ${tpl.name} 완성. 시현이 참 잘했어.`, true);
     state.options.fireConfetti?.();
     state.options.gainExp?.(20);
 
@@ -1757,6 +1760,17 @@
 
     wrap.appendChild(el);
     timer(() => el.remove(), 820);
+  }
+
+  function speakSelection(kind,id,fallback) {
+    const labels=window.SihyeonVoiceLabels;
+    const voice=window.SihyeonVoice;
+    if(labels?.entry?.(kind,id) && typeof voice?.speak==='function'){
+      state.speechToken += 1;
+      labels.say(kind,id)?.catch?.(()=>{});
+      return;
+    }
+    if(fallback) speak(fallback);
   }
 
   function speak(msg, force = false) {
