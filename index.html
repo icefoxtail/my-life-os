@@ -2121,9 +2121,10 @@ function travelToZone(zoneId){
     }
   }
 
-  playVoiceGuide(LAND_VOICE_IDS[zoneId],'',true);
-
   let entered=false;
+  queueMicrotask(()=>{
+    if(!entered && ticket===activeTravelTicket) playVoiceGuide(LAND_VOICE_IDS[zoneId],'',true);
+  });
   const safeEnter=()=>{
     if(entered || ticket!==activeTravelTicket) return;
     entered=true;
