@@ -588,7 +588,8 @@
   {
     "id": "ferry",
     "ko": "페리",
-    "en": "ferry"
+    "en": "ferry",
+    "enPlural": "ferries"
   },
   {
     "id": "fishing_boat",

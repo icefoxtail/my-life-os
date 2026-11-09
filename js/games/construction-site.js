@@ -619,7 +619,8 @@
       if (fallback) fallback.hidden = false;
     });
 
-    const successMessage = `우와! 시현이가 고른 ${vehicle.name}야! ${mission.successText}`;
+    const ending = getSubjectParticle(vehicle.name) === '은' ? '이야' : '야';
+    const successMessage = `우와! 시현이가 고른 ${vehicle.name}${ending}! ${mission.successText}`;
     if (window.SihyeonVoice && typeof window.SihyeonVoice.playSequence === 'function') {
       window.SihyeonVoice.playSequence([
         [getConstructionVehicleVoiceId(vehicle, 'name'), ''],
