@@ -74,21 +74,53 @@
       return result;
     });
   }
+  // The same language preference applies to 2D fallback when WebGL is unavailable.
+  // English text is deliberately mapped from actual numeric action data.
   function say(text) {
-    if (!active?.sound || !text) return;
-    try {
-      if (window.parent !== window && window.parent.SihyeonVoice?.speak) {
-        Promise.resolve(window.parent.SihyeonVoice.speak(text, { rate: .85, pitch: 1.04 })).catch(() => {});
+    if(!active?.sound||!text)return;
+    const root=window.parent && window.parent!==window ? window.parent : window;
+    const english=root.SihyeonPlaySettings?.getLanguage?.()==='en';
+    const names=root.SihyeonVoiceLabels;
+    let phrase=String(text);
+    if(english){
+      if(active.kind!=='numbers')return;
+      const word=n=>names?.numberEn?.(Number(n)) || '';
+      const added=phrase.match(/^(\d+) 블록을 놓았어요\.$/);
+      const merged=phrase.match(/^(\d+) 더하기 (\d+)은 (\d+)\. 모두 (\d+)개예요\.$/);
+      if(added)phrase=word(added[1])+'! One more block!';
+      else if(merged)phrase=word(merged[1])+' plus '+word(merged[2])+' makes '+word(merged[3])+'!';
+      else if(/나누어도 모두/.test(phrase))phrase='Look! We can split the blocks!';
+      else if(/블록을 합치거나/.test(phrase))phrase="Let's join some blocks first!";
+      else if(/두 블록을 먼저/.test(phrase))phrase='Pick two blocks first!';
+      else if(/새 놀이/.test(phrase))phrase="Let's start again!";
+      else return;
+    }
+    try{
+      if(root.SihyeonVoice?.speak){
+        Promise.resolve(root.SihyeonVoice.speak(phrase,{
+          lang:english?'en-US':'ko-KR',rate:english?.9:.85,pitch:1.02
+        })).catch(()=>{});
         return;
       }
-      if (!window.speechSynthesis || typeof window.SpeechSynthesisUtterance !== 'function') return;
+      if(english || !window.speechSynthesis || typeof SpeechSynthesisUtterance!=='function')return;
       window.speechSynthesis.cancel();
-      const speech = new SpeechSynthesisUtterance(text);
-      speech.lang = 'ko-KR'; speech.rate = .85;
-      speech.onerror = () => {}; // All instructions also remain visible.
-      window.speechSynthesis.speak(speech);
-    } catch (error) {}
+      const utterance=new SpeechSynthesisUtterance(phrase);
+      utterance.lang='ko-KR';utterance.rate=.85;
+      window.speechSynthesis.speak(utterance);
+    }catch(_){}
   }
+  function sayNumber(n) {
+    if(!active?.sound)return;
+    const root=window.parent && window.parent!==window ? window.parent : window;
+    const english=root.SihyeonPlaySettings?.getLanguage?.()==='en';
+    const labels=root.SihyeonVoiceLabels;
+    const word=english ? labels?.numberEn?.(n) : labels?.numberKo?.(n);
+    if(!word)return;
+    try { root.SihyeonVoice?.speak?.(word,{
+      lang:english?'en-US':'ko-KR',rate:.9,pitch:1.0
+    })?.catch?.(()=>{}); }catch(_){}
+  }
+
   function installStyle() {
     if (document.getElementById('sihyeon-2d-style')) return;
     const style = document.createElement('style');
@@ -191,7 +223,10 @@
     if (action === 'select') {
       active.selected = active.selected.includes(value) ? active.selected.filter(id => id !== value)
         : active.selected.length < 2 ? [...active.selected, value] : [active.selected[1], value];
-      render(); return;
+      render();
+      const tapped=active.blocks.find(block=>block.id===value);
+      if(tapped)sayNumber(tapped.value);
+      return;
     }
     if (action === 'add') {
       if (!Number.isInteger(value) || value < 1 || value > 100) return;
