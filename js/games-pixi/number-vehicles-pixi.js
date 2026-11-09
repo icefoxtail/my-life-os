@@ -22,7 +22,7 @@
 
   const VEHICLES = [
     {
-      id: 'firetruck', name: '소방차', emoji: '🚒', mainColor: 0xff4d4d, accentColor: 0xffd93d,
+      id: 'firetruck', name: '소방차', english: 'fire truck', emoji: '🚒', mainColor: 0xff4d4d, accentColor: 0xffd93d,
       completeVoice: '소방차 출동!', finaleParticles: [0xff4d4d, 0xffd93d, 0x45c2ff, 0xffffff],
       parts: [
         { id: 'body', number: 1, label: '차체', shape: 'rectangle', color: 'red', rx: 0, ry: 42, w: 430, h: 140 },
@@ -36,7 +36,7 @@
       decor: [{ id: 'water', label: '물방울', icon: '💧' }, { id: 'star', label: '별', icon: '⭐' }, { id: 'heart', label: '하트', icon: '💛' }]
     },
     {
-      id: 'policecar', name: '경찰차', emoji: '🚓', mainColor: 0xffffff, accentColor: 0x3a7bff,
+      id: 'policecar', name: '경찰차', english: 'police car', emoji: '🚓', mainColor: 0xffffff, accentColor: 0x3a7bff,
       completeVoice: '경찰차 출동!', finaleParticles: [0x45c2ff, 0xffffff, 0xffd93d, 0x3a7bff],
       parts: [
         { id: 'body', number: 1, label: '차체', shape: 'rectangle', color: 'white', rx: 0, ry: 46, w: 430, h: 138 },
@@ -50,7 +50,7 @@
       decor: [{ id: 'star', label: '별', icon: '⭐' }, { id: 'bolt', label: '번개', icon: '⚡' }, { id: 'flag', label: '깃발', icon: '🚩' }]
     },
     {
-      id: 'ambulance', name: '구급차', emoji: '🚑', mainColor: 0xffffff, accentColor: 0xff5b5b,
+      id: 'ambulance', name: '구급차', english: 'ambulance', emoji: '🚑', mainColor: 0xffffff, accentColor: 0xff5b5b,
       completeVoice: '구급차 출동!', finaleParticles: [0xff5b5b, 0xffffff, 0xff7ac8, 0x4ee6b8],
       parts: [
         { id: 'body', number: 1, label: '차체', shape: 'rectangle', color: 'white', rx: 0, ry: 46, w: 430, h: 138 },
@@ -356,7 +356,7 @@
       state.partMap.set(part.id, item);
       state.trayOrigins.set(part.id, { x: pos.x, y: pos.y, rotation: 0 });
       state.runtime.makeDraggable(item, {
-        disabled: () => state.locked || state.phase !== 'build' || state.completing,
+        disabled: () => state.locked || state.isDragging || state.phase !== 'build' || state.completing,
         onStart: () => { state.isDragging = true; item.alpha = 0.95; item.scale.set(0.86); },
         onEnd: () => { state.isDragging = false; handlePartDrop(item, part); },
         onCancel: () => { state.isDragging = false; returnPartToTray(item, part); }
@@ -421,7 +421,7 @@
       state.decorMap.set(decor.id, c);
       state.trayOrigins.set(decor.id, { x: pos.x, y: pos.y, rotation: 0 });
       state.runtime.makeDraggable(c, {
-        disabled: () => state.locked || state.phase !== 'decorate' || state.completing,
+        disabled: () => state.locked || state.isDragging || state.phase !== 'decorate' || state.completing,
         onStart: () => { state.isDragging = true; c.scale.set(1.15); },
         onEnd: () => { state.isDragging = false; handleDecorDrop(c, decor); },
         onCancel: () => { state.isDragging = false; returnDecorToTray(c, decor); }
@@ -501,7 +501,12 @@
     state.runtime.spawnParticles(cfg.carCenter.x, cfg.carCenter.y, { count: 70, colors: state.currentVehicle.finaleParticles, duration: 1100 });
     fireConfetti();
     if (!state.completeRewardGiven) { state.completeRewardGiven = true; gainExpOnce(25); }
-    speakGuide(`우와! ${state.currentVehicle.completeVoice}`);
+    const vehicle = state.currentVehicle;
+    const english = window.SihyeonPlaySettings?.getLanguage?.() === 'en';
+    const article = vehicle.id === 'ambulance' ? 'an' : 'a';
+    const announcement = english ? `Hooray! We built ${article} ${vehicle.english}!` : `우와! ${vehicle.completeVoice}`;
+    if (state.options.say) state.options.say(announcement);
+    else speakGuide(announcement);
     makeText('우와! 완성!', { x: cfg.width / 2, y: cfg.mode === 'landscape' ? 98 : 318, fontSize: cfg.mode === 'landscape' ? 58 : 66, fill: '#ff5b5b', stroke: '#ffffff', strokeThickness: 9, wordWrapWidth: 720 }, state.rootContainers.labels);
     await state.runtime.successPop(group, { amount: 1.12, upDuration: 220, downDuration: 260 });
     state.runtime.setTimeout(() => { state.runtime.tween(group, { x: cfg.width + 520, y: cfg.carCenter.y - 30, rotation: 0.08 }, 1400, 'easeInOutCubic'); }, 500);

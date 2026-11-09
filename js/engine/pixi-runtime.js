@@ -250,11 +250,13 @@
       if (!displayObject) return displayObject;
       displayObject.eventMode = 'static';
       displayObject.cursor = options.cursor || 'grab';
-      const startData = { dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const startData = { dragging: false, pointerId: null, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const moveEvent = typeof this.app.init === 'function' ? 'globalpointermove' : 'pointermove';
       const down = (event) => {
-        if (this.destroyed || (options.disabled && options.disabled())) return;
+        if (this.destroyed || startData.dragging || (options.disabled && options.disabled())) return;
         const p = event.global;
         startData.dragging = true;
+        startData.pointerId = event.pointerId;
         startData.startX = p.x;
         startData.startY = p.y;
         startData.originX = displayObject.x;
@@ -264,7 +266,7 @@
         options.onStart?.({ event, object: displayObject, state: startData });
       };
       const move = (event) => {
-        if (!startData.dragging || this.destroyed) return;
+        if (!startData.dragging || event.pointerId !== startData.pointerId || this.destroyed) return;
         const p = event.global;
         const dx = (p.x - startData.startX) / this.scale;
         const dy = (p.y - startData.startY) / this.scale;
@@ -273,25 +275,26 @@
         options.onMove?.({ event, object: displayObject, state: startData, dx, dy });
       };
       const up = (event) => {
-        if (!startData.dragging || this.destroyed) return;
+        if (!startData.dragging || event.pointerId !== startData.pointerId || this.destroyed) return;
+        move(event);
         startData.dragging = false;
         displayObject.cursor = options.cursor || 'grab';
         options.onEnd?.({ event, object: displayObject, state: startData });
       };
       const cancel = (event) => {
-        if (!startData.dragging || this.destroyed) return;
+        if (!startData.dragging || event.pointerId !== startData.pointerId || this.destroyed) return;
         startData.dragging = false;
         displayObject.cursor = options.cursor || 'grab';
         options.onCancel?.({ event, object: displayObject, state: startData });
       };
       displayObject.on('pointerdown', down);
-      displayObject.on('pointermove', move);
+      displayObject.on(moveEvent, move);
       displayObject.on('pointerup', up);
       displayObject.on('pointerupoutside', up);
       displayObject.on('pointercancel', cancel);
       displayObject.__sihyeonDragCleanup = () => {
         displayObject.off('pointerdown', down);
-        displayObject.off('pointermove', move);
+        displayObject.off(moveEvent, move);
         displayObject.off('pointerup', up);
         displayObject.off('pointerupoutside', up);
         displayObject.off('pointercancel', cancel);
@@ -469,7 +472,11 @@
         parent.addChild(p);
         const start = performance.now();
         const tick = () => {
-          if (this.destroyed) { destroyDisplayObject(p); this.removeTicker(tick); return; }
+          // A scene rebuild can destroy particles before their animation ends.
+          if (this.destroyed || p.destroyed || !p.parent) {
+            this.removeTicker(tick);
+            return;
+          }
           const t = clamp((performance.now() - start) / duration, 0, 1);
           const dt = (this.app?.ticker?.deltaMS || 16) / 1000;
           p.x += vx * dt;
