@@ -2116,9 +2116,11 @@ function openStoryLand(){
 
 function openVoiceLand(){ renderZoneLand(ZONE_CONFIGS.voice); }
 
+let activeTravelTicket=0;
 function travelToZone(zoneId){
   const zone=WORLD_ZONES[zoneId];
   if(!zone) return;
+  const ticket=++activeTravelTicket;
   const worldMap=document.getElementById('worldMapScreen');
   if(worldMap) worldMap.dataset.navigating='true';
 
@@ -2142,17 +2144,18 @@ function travelToZone(zoneId){
 
   let entered=false;
   const safeEnter=()=>{
-    if(entered) return;
+    if(entered || ticket!==activeTravelTicket) return;
     entered=true;
     enterZone(zoneId);
   };
 
   const totalMs=estimateWalkDuration(zoneId);
-  walkAvatarToZone(zoneId,safeEnter);
+  walkAvatarToZone(zoneId,safeEnter,()=>ticket===activeTravelTicket);
   setTimeout(safeEnter,totalMs);
 }
 
-function walkAvatarToZone(zoneId,onComplete){
+function walkAvatarToZone(zoneId,onComplete,isCurrent=()=>true){
+  if(!isCurrent()) return;
   const avatar=document.getElementById('sihyeonAvatar');
   if(!avatar){ onComplete?.(); return; }
 
@@ -2171,6 +2174,7 @@ function walkAvatarToZone(zoneId,onComplete){
     let idx=1;
 
     function step(){
+      if(!isCurrent()) return;
       if(idx>=path.length){
         avatar.classList.remove('is-walking');
         avatar.style.transform='translate(-50%, -50%) scale(1.06)';
