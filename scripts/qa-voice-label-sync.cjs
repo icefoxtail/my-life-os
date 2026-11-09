@@ -85,7 +85,7 @@ for(const [id,src] of voiceEntries){
   assert(fs.existsSync(path.join(root,src.replace(/^\.\//,''))),'Broken voice path '+id);
 }
 for(const p of ['js/games/art-zone.js','js/games/number-blocks.js','js/games/vehicle-memory.js',
-                'js/games/number-vehicles.js','games/number-kingdom-3d.html','js/games/number-count.js']){
+                'js/games/number-vehicles.js','games/number-kingdom-3d.html','js/engine/webgl-fallback.js','js/games/number-count.js']){
   assert(file(p).includes('SihyeonVoiceLabels'),'Voice registry not integrated into '+p);
 }
 async function run(){
