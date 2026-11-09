@@ -2006,7 +2006,7 @@ function renderWorldMapHome(options={}){
       <div class="world-blur-bg"></div>
       <div class="world-map-frame">
         <img src="${bg}" class="world-map-bg" alt="시현이 큰 놀이동산" onerror="handleMapImageError(this)">
-        <div class="ps-home-ages" aria-label="놀이 나이 선택">${[4,5,6,7].map(age=>`<button type="button" data-home-age="${age}" data-play-age="${age}" aria-label="${age}세 놀이" aria-pressed="${window.SihyeonPlaySettings.getAge()===age}"><span>${({4:'🐣',5:'🐰',6:'🦊',7:'🐻'})[age]}</span><b>${age}세</b></button>`).join('')}</div>
+        <div class="ps-home-ages" aria-label="놀이 나이와 음성 언어 선택">${[4,5,6,7].map(age=>`<button type="button" data-home-age="${age}" data-play-age="${age}" aria-label="${age}세 놀이" aria-pressed="${window.SihyeonPlaySettings.getAge()===age}"><span>${({4:'🐣',5:'🐰',6:'🦊',7:'🐻'})[age]}</span><b>${age}세</b></button>`).join('')}${window.SihyeonPlaySettings.languageButton()}</div>
         <button class="btn-parent-lock" onclick="showPinOverlay()" aria-label="부모 대시보드">🔒</button>
         <div class="world-map-content">
           ${['game','numbers','letters','cars','story','voice'].map(id=>{
@@ -2116,9 +2116,13 @@ function openStoryLand(){
 
 function openVoiceLand(){ renderZoneLand(ZONE_CONFIGS.voice); }
 
+let activeTravelTicket=0;
 function travelToZone(zoneId){
   const zone=WORLD_ZONES[zoneId];
   if(!zone) return;
+  const ticket=++activeTravelTicket;
+  const worldMap=document.getElementById('worldMapScreen');
+  if(worldMap) worldMap.dataset.navigating='true';
 
   if(window.stopStoryReading) window.stopStoryReading(true);
   stopSpeaking();
@@ -2140,17 +2144,18 @@ function travelToZone(zoneId){
 
   let entered=false;
   const safeEnter=()=>{
-    if(entered) return;
+    if(entered || ticket!==activeTravelTicket) return;
     entered=true;
     enterZone(zoneId);
   };
 
   const totalMs=estimateWalkDuration(zoneId);
-  walkAvatarToZone(zoneId,safeEnter);
+  walkAvatarToZone(zoneId,safeEnter,()=>ticket===activeTravelTicket);
   setTimeout(safeEnter,totalMs);
 }
 
-function walkAvatarToZone(zoneId,onComplete){
+function walkAvatarToZone(zoneId,onComplete,isCurrent=()=>true){
+  if(!isCurrent()) return;
   const avatar=document.getElementById('sihyeonAvatar');
   if(!avatar){ onComplete?.(); return; }
 
@@ -2169,6 +2174,7 @@ function walkAvatarToZone(zoneId,onComplete){
     let idx=1;
 
     function step(){
+      if(!isCurrent()) return;
       if(idx>=path.length){
         avatar.classList.remove('is-walking');
         avatar.style.transform='translate(-50%, -50%) scale(1.06)';
@@ -2755,7 +2761,7 @@ window.addEventListener('load',()=>{
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true),600);
+  setTimeout(()=>{ const map=document.getElementById('worldMapScreen'); if(map && map.dataset.navigating!=='true') playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true); },600);
 }
 
 
@@ -2780,6 +2786,7 @@ if('serviceWorker' in navigator){
 }
 </script>
 
+<script src="./js/english-listening.js"></script>
 <script src="./js/voice-engine.js"></script>
 <script src="./js/zones/voice-zone.js"></script>
 <script src="./js/zones/karaoke-zone.js"></script>

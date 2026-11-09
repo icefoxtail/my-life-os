@@ -37,6 +37,8 @@ jobs:
           python3 -m playwright install --with-deps chromium
       - name: Latest train fixture, real menu and legacy entry checks
         run: python3 scripts/qa-phase2-release-browser.py --output qa-release-evidence
+      - name: Native Chromium English Listening and mode-switch verification
+        run: python3 scripts/qa-english-listening-browser.py --output qa-release-evidence/english
       - name: Attach source-bound evidence even on failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

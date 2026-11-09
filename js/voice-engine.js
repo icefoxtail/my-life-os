@@ -60,6 +60,13 @@
   var currentAudioResolve = null;
   var unlocked = false;
   var unlockBound = false;
+  var generation = 0;
+  var currentSpeechResolve = null;
+
+  function listeningLanguage() {
+    try { return window.SihyeonPlaySettings?.getLanguage?.() === 'en' ? 'en' : 'ko'; }
+    catch (_) { return 'ko'; }
+  }
 
   function warn(message, detail) {
     try {
@@ -170,11 +177,12 @@
   }
 
   function stopSpeech() {
+    var resolve = currentSpeechResolve;
+    currentSpeechResolve = null;
     try {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     } catch (error) {}
+    if (typeof resolve === 'function') resolve(false);
   }
 
   function finishCurrentAudio(value) {
@@ -202,45 +210,61 @@
   }
 
   function stop() {
+    generation += 1;
     stopAudio();
     stopSpeech();
   }
 
+  function isCurrent(ticket, options) {
+    return ticket === generation &&
+      !(options && typeof options.shouldPlay === 'function' && !options.shouldPlay());
+  }
+
   function speak(text, options) {
     options = options || {};
+    var ticket = options._voiceTicket;
+    if (ticket == null) { stop(); ticket = generation; }
+    if (!isCurrent(ticket, options)) return Promise.resolve(false);
+    var english = listeningLanguage() === 'en';
+    var phrase = String(text || '').trim();
+    // English Listening never reads a Korean sentence with an English voice.
+    if (english && /[가-힣]/.test(phrase)) {
+      phrase = window.SihyeonEnglishListening?.phraseForText?.(phrase) || '';
+    }
+    if (!phrase) return Promise.resolve(false);
 
     return new Promise(function (resolve) {
-      if (!text) {
-        resolve(false);
-        return;
-      }
-
-      stop();
-
       if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
         resolve(false);
         return;
       }
-
       try {
-        var utterance = new SpeechSynthesisUtterance(String(text));
-
-        utterance.lang = options.lang || DEFAULT_TTS.lang;
-        utterance.rate = Number(options.rate || DEFAULT_TTS.rate);
-        utterance.pitch = Number(options.pitch || DEFAULT_TTS.pitch);
-        utterance.volume = Number(options.volume || DEFAULT_TTS.volume);
-
-        utterance.onend = function () {
-          resolve(true);
+        var utterance = new SpeechSynthesisUtterance(phrase);
+        utterance.lang = english ? 'en-US' : (options.lang || DEFAULT_TTS.lang);
+        utterance.rate = Number(options.rate || (english ? 0.88 : DEFAULT_TTS.rate));
+        utterance.pitch = Number(options.pitch || (english ? 1 : DEFAULT_TTS.pitch));
+        utterance.volume = Number(options.volume == null ? DEFAULT_TTS.volume : options.volume);
+        if (english && typeof window.speechSynthesis.getVoices === 'function') {
+          var voices = window.speechSynthesis.getVoices();
+          var voice = voices.find(function (candidate) { return /^en-US\b/i.test(candidate.lang); }) ||
+            voices.find(function (candidate) { return /^en\b/i.test(candidate.lang); });
+          if (voice) utterance.voice = voice;
+        }
+        var settled = false;
+        var finish = function (success) {
+          if (settled) return;
+          settled = true;
+          if (currentSpeechResolve === finish) currentSpeechResolve = null;
+          resolve(success);
         };
-
-        utterance.onerror = function () {
-          resolve(false);
-        };
-
+        currentSpeechResolve = finish;
+        utterance.onend = function () { finish(isCurrent(ticket, options)); };
+        utterance.onerror = function () { finish(false); };
+        if (!isCurrent(ticket, options)) { finish(false); return; }
         window.speechSynthesis.speak(utterance);
       } catch (error) {
-        resolve(false);
+        if (currentSpeechResolve) { var finish = currentSpeechResolve; finish(false); }
+        else resolve(false);
       }
     });
   }
@@ -274,12 +298,10 @@
     options = options || {};
 
     return new Promise(function (resolve) {
-      if (!src) {
+      if (!src || !isCurrent(options._voiceTicket, options)) {
         resolve(false);
         return;
       }
-
-      stop();
 
       try {
         var audio = new Audio(src);
@@ -324,57 +346,55 @@
   function play(id, fallbackText, options) {
     options = options || {};
     fallbackText = fallbackText || '';
-
+    var ticket = options._voiceTicket;
+    if (ticket == null) { stop(); ticket = generation; }
+    var request = Object.assign({}, options, { _voiceTicket: ticket });
     var voiceId = normalizeId(id);
     var allowTtsFallback = options.allowTtsFallback === true;
-    var shouldPlay = typeof options.shouldPlay === 'function' ? options.shouldPlay : function () { return true; };
 
+    if (!isCurrent(ticket, request)) return Promise.resolve(false);
+    if (listeningLanguage() === 'en') {
+      // Never play a Korean MP3 or read an untranslated Korean fallback.
+      var englishText = window.SihyeonEnglishListening?.phraseForId?.(voiceId) || '';
+      return englishText ? speak(englishText, Object.assign({}, request, { lang: 'en-US' })) : Promise.resolve(false);
+    }
     if (!voiceId) {
-      return allowTtsFallback ? speak(fallbackText, options) : Promise.resolve(false);
+      return allowTtsFallback ? speak(fallbackText, request) : Promise.resolve(false);
     }
 
     return loadManifest()
       .then(function (data) {
-        if (!shouldPlay()) return false;
+        if (!isCurrent(ticket, request)) return false;
         var src = resolveVoiceSrc(data, voiceId);
-
-        if (!src) {
-          return allowTtsFallback ? speak(fallbackText, options) : false;
-        }
-
-        return playAudio(src, options).then(function (ok) {
+        if (!src) return allowTtsFallback ? speak(fallbackText, request) : false;
+        return playAudio(src, request).then(function (ok) {
           if (ok) return true;
-          return allowTtsFallback && shouldPlay() ? speak(fallbackText, options) : false;
+          return allowTtsFallback && isCurrent(ticket, request) ? speak(fallbackText, request) : false;
         });
       })
       .catch(function () {
-        return allowTtsFallback && shouldPlay() ? speak(fallbackText, options) : false;
+        return allowTtsFallback && isCurrent(ticket, request) ? speak(fallbackText, request) : false;
       });
   }
 
   function playSequence(items, options) {
     options = options || {};
     var list = Array.isArray(items) ? items : [];
-
+    stop();
+    var ticket = generation;
+    var request = Object.assign({}, options, { _voiceTicket: ticket });
     var chain = Promise.resolve(true);
-
     list.forEach(function (item) {
       chain = chain.then(function () {
-        if (Array.isArray(item)) {
-          return play(item[0], item[1] || '', options);
-        }
-
+        if (!isCurrent(ticket, request)) return false;
+        if (Array.isArray(item)) return play(item[0], item[1] || '', request);
         if (item && typeof item === 'object') {
-          return play(item.id, item.text || item.fallbackText || '', Object.assign({}, options, item.options || {}));
+          return play(item.id, item.text || item.fallbackText || '', Object.assign({}, request, item.options || {}, { _voiceTicket: ticket }));
         }
-
         return true;
       });
     });
-
-    return chain.then(function () {
-      return true;
-    });
+    return chain.then(function () { return isCurrent(ticket, request); });
   }
 
   function unlock() {
@@ -404,7 +424,9 @@
       ready: isReady(),
       unlocked: unlocked,
       manifestVoices: manifest && manifest.voices ? Object.keys(manifest.voices).length : 0,
-      hasCurrentAudio: Boolean(currentAudio)
+      hasCurrentAudio: Boolean(currentAudio),
+      listeningLanguage: listeningLanguage(),
+      requestGeneration: generation
     };
   }
 

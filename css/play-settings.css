@@ -7,3 +7,14 @@
 .ps-dialog p{font-size:17px;line-height:1.55;margin:14px 0}.ps-age-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.ps-age-row button{min-height:72px;font-size:21px}.ps-dialog label{display:block;margin:14px 0 7px;font-size:19px}.ps-dialog select{width:100%;min-height:52px;border:2px solid #9abbb6;border-radius:12px;padding:10px;background:#fff;font:inherit;font-size:18px;color:#23464c}.ps-dialog .ps-note{font-size:15px;color:#496364}.ps-done{width:100%;min-height:56px;border-radius:16px;background:#227a6b;color:#fff;font-size:21px}.ps-parent-open{min-height:54px;background:#e4f4ed;padding:12px 18px;border-radius:14px;font-size:20px;color:#204b51}.ps-game-mode{position:fixed;right:max(8px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));z-index:8999;min-height:44px;padding:8px 12px;background:#fffffff0;border-radius:16px;font-size:17px;border:2px solid #afd2c6}
 button:focus-visible,.ps-dialog select:focus-visible{outline:4px solid #125fa6;outline-offset:3px}
 @media(orientation:landscape) and (max-height:520px){.ps-home-ages{top:8px;left:10px}.ps-home-ages button{min-height:48px;min-width:51px;display:flex;gap:3px;padding:4px}.ps-home-ages button span{font-size:20px}.ps-dialog{padding:14px 20px}.ps-dialog p{margin:8px 0}.ps-game-mode{font-size:15px;min-height:42px;padding:6px 9px}}
+
+/* Listening language is independent of age and game difficulty. */
+.ps-home-ages{flex-wrap:wrap;row-gap:4px}
+.ps-home-ages .ps-language-toggle{min-width:50px;min-height:58px;display:flex;flex-direction:column;font-size:12px;gap:0;padding:2px 4px;background:#f3f9ff;border-color:#a6c3e1}
+.ps-home-ages .ps-language-toggle[aria-pressed="true"]{background:#d9edff;border-color:#247bc7;box-shadow:0 3px 0 #247bc7}
+.ps-language-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ps-language-row button{padding:9px;min-height:54px;border:2px solid #a5c3c4;border-radius:14px;background:#fff;font:inherit;font-size:17px;color:#204b51}
+.ps-language-row button[aria-pressed="true"]{border-color:#247bc7;background:#e5f3ff;font-weight:bold}
+@media(orientation:landscape) and (max-height:520px){
+  .ps-home-ages .ps-language-toggle{min-height:48px;flex-direction:row;gap:4px}
+}

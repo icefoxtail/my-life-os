@@ -411,7 +411,10 @@
             const n=this.state.countedIds.size+1;this.state.countedIds.set(i,n);
             const badge=document.createElement('span');badge.className='nc-tap-count';badge.textContent=n;wrap.appendChild(badge);
           }
-          const n=this.state.countedIds.get(i);this.state.options.say?.(KOREAN_COUNT[n]||String(n));
+          const n=this.state.countedIds.get(i);
+          this.state.options.say?.(window.SihyeonPlaySettings?.getLanguage?.()==='en'
+            ? window.SihyeonEnglishListening.numberWord(n)
+            : (KOREAN_COUNT[n]||String(n)));
           wrap.style.transition = 'transform 0.15s';
           wrap.style.transform = 'scale(1.2) rotate(-5deg)';
           this.setManagedTimeout(()=>{ wrap.style.transform = ''; }, 160);
@@ -839,6 +842,19 @@
     say:function(text, force = false){
       if(!text) return;
       const raw = String(text).trim();
+      if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
+        const engine=window.SihyeonEnglishListening;
+        const noun=engine?.vehicleName(this.state.currentVehicle?.id) || 'vehicle';
+        const plural=noun==='vehicle' ? 'vehicles' : (/bus$/.test(noun) ? noun+'es' : noun+'s');
+        const n=engine?.numberWord(this.state.currentAnswer)||String(this.state.currentAnswer);
+        let spoken='';
+        if(/몇 대인지 세어볼까/.test(raw)) spoken='How many '+plural+' do you see?';
+        else if(/우와 맞았어/.test(raw)) spoken="Yes! "+n+' '+(this.state.currentAnswer===1?noun:plural)+'! Great counting!';
+        else if(/다 맞혔어/.test(raw)) spoken='Hooray! You counted them all!';
+        else if(/다시 한 번/.test(raw)) spoken="Oops! Let's count again.";
+        if(spoken) window.SihyeonVoice?.speak?.(spoken,{lang:'en-US',rate:.88})?.catch?.(()=>{});
+        return;
+      }
       const guideMap = [
         { test:/몇 대인지 세어볼까/, ids:['games.number.guide.countQuestion', 'games.number.countQuestion'] }
       ];
@@ -849,6 +865,11 @@
     speakDirect:function(text){
       if(!text) return;
       const raw = String(text).trim();
+      if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
+        const number=KOREAN_COUNT.indexOf(raw);
+        if(number>0) this.state.options.say?.(window.SihyeonEnglishListening.numberWord(number));
+        return;
+      }
 
       if(KOREAN_COUNT.indexOf(raw)>=10){this.state.options.say?.(raw);return;}
       const countMap = {

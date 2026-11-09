@@ -19,6 +19,10 @@ jobs:
         run: |
           node scripts/qa-static.cjs
           node scripts/qa-play-settings.cjs
+      - name: English Listening TTS, language preference and voice queue safety
+        run: |
+          python3 -m py_compile scripts/qa-english-listening-browser.py
+          node scripts/qa-english-listening.cjs
       - name: Independent post office quantity and state checks
         run: node scripts/qa-number-post-office-independent.cjs
       - name: Pattern train model and independent rule oracle

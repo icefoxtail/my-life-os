@@ -88,6 +88,10 @@
   function stopVoice() { view.voiceToken++; try { window.SihyeonVoice?.stop?.(); } catch (_) {} }
   function speak(text) {
     if (!view.container || view.muted) return;
+    if (window.SihyeonPlaySettings?.getLanguage?.()==='en') {
+      text = window.SihyeonEnglishListening?.trainPhrase?.(text,view.task,view.state) || '';
+    }
+    if (!text) return;
     stopVoice(); const ticket = view.voiceToken; let settled = false;
     function fallback(ok) {
       if (settled || !view.container || ticket !== view.voiceToken) return;
@@ -95,7 +99,7 @@
       if (!ok) { view.voiceFailed = true; const note = view.container.querySelector('.pt-voice-note'); if (note) { note.hidden = false; note.textContent = '그림을 보며 함께 만들어요'; } }
     }
     try {
-      const result = typeof view.options.say === 'function' ? view.options.say(text) : window.SihyeonVoice?.speak?.(text, { lang: 'ko-KR', rate: .86, pitch: 1.08 });
+      const result = typeof view.options.say === 'function' ? view.options.say(text) : window.SihyeonVoice?.speak?.(text, { lang: window.SihyeonPlaySettings?.getLanguage?.()==='en' ? 'en-US' : 'ko-KR', rate: .86, pitch: 1.08 });
       Promise.resolve(result).then(value => fallback(value !== false && value !== undefined), () => fallback(false));
     } catch (_) { fallback(false); }
     timer(() => fallback(false), 10000);
