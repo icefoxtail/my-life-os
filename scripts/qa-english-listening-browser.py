@@ -40,10 +40,14 @@ with sync_playwright() as p:
         def clear(): pg.evaluate('window.__spoken.length=0')
         def wait_phrase(needle):
             pg.wait_for_function("(text) => window.__spoken.some(s=>s.text.includes(text))",arg=needle,timeout=9000)
+            pg.wait_for_timeout(670)  # catch any delayed home welcome interrupting gameplay
             items=latest()
             assert all(x['lang']=='en-US' for x in items),items
             assert all(not re.search(r'[\uac00-\ud7a3]',x['text']) for x in items),items
-            return items[-1]
+            assert not any(x['text']=="Hi there! Ready to play?" for x in items),items
+            matching=[x for x in items if needle in x['text']]
+            assert matching,items
+            return matching[-1]
         def home():
             load()
             button=pg.locator('[data-language-toggle]')
