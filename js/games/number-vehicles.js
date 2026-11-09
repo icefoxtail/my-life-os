@@ -630,17 +630,18 @@
       if(english){
         const vehicle=this.state.currentVehicle;
         const noun=labels?.spoken?.('vehicle',vehicle?.id,'en') || '';
+        const article=/^[aeiou]/i.test(noun)?'an':'a';
         const number=n=>{
           const word=labels?.numberEn?.(Number(n));
           return word||String(n);
         };
-        if(/를 만들어보자/.test(raw)) phrase=noun ? "Let's build a "+noun+'!' : '';
+        if(/를 만들어보자/.test(raw)) phrase=noun ? "Let's build "+article+' '+noun+'!' : '';
         else {
           const find=raw.match(/^(\d+)번을 찾아볼까/);
           const chosen=raw.match(/^(\d+)! 좋아/);
           if(find)phrase='Find number '+number(find[1])+'!';
           else if(chosen)phrase=number(chosen[1])+'! Great job!';
-          else if(/탈것 완성/.test(raw))phrase="Hooray! We built a "+noun+'!';
+          else if(/탈것 완성/.test(raw))phrase="Hooray! We built "+article+' '+noun+'!';
           else phrase='';
         }
       }
