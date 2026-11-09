@@ -107,6 +107,18 @@ with sync_playwright() as p:
             assert pg.evaluate("SihyeonPlaySettings.getLanguage()")=='ko'
             return {'enPersists':True,'koRestores':True}
         check('persist and switch back to Korean',persisted)
+        def latest_zone_wins():
+            load()
+            pg.evaluate("SihyeonPlaySettings.setLanguage('en')")
+            clear()
+            pg.evaluate("travelToZone('numbers');travelToZone('letters');")
+            pg.locator('.zone-card-land .zone-title').wait_for(timeout=15000)
+            pg.wait_for_timeout(1100)
+            title=pg.locator('.zone-card-land .zone-title').inner_text()
+            assert '글자놀이터' in title,title
+            assert not any('Let's play with numbers!' in x['text'] for x in latest()),latest()
+            return {'lastRequestedZone':'letters','actualTitle':title}
+        check('rapid menu change drops obsolete route and voice',latest_zone_wins)
         context.close()
     browser.close()
 server.shutdown()
