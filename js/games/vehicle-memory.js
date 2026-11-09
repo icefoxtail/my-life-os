@@ -122,6 +122,8 @@
     resizeTimer: null,
     handleResizeBound: null,
     pendingVoiceToken: 0,
+    roundToken: 0,
+    roundTimers: new Set(),
     seenCards: new Set(),
     seenPairs: {},
     hintPairs: {},
@@ -146,6 +148,26 @@
       return window.SihyeonVoice.play(id).then(() => true).catch(() => false);
     }
     return Promise.resolve(false);
+  }
+
+  function speakMemoryPrompt(korean, english) {
+    const voice = window.SihyeonVoice;
+    if (typeof voice?.speak !== 'function') return Promise.resolve(false);
+    const isEnglish = window.SihyeonPlaySettings?.getLanguage?.() === 'en';
+    return voice.speak(isEnglish ? english : korean, {
+      lang: isEnglish ? 'en-US' : 'ko-KR', rate: isEnglish ? 0.88 : 0.92, pitch: 1.04
+    }).catch(() => false);
+  }
+
+  function scheduleRoundTimeout(callback, ms) {
+    const token = state.roundToken;
+    const timer = window.setTimeout(() => {
+      state.roundTimers.delete(timer);
+      if (state.destroyed || token !== state.roundToken) return;
+      callback();
+    }, ms);
+    state.roundTimers.add(timer);
+    return timer;
   }
 
   function injectStyle() {
@@ -1180,15 +1202,16 @@
     window.addEventListener('resize', state.handleResizeBound);
     window.addEventListener('orientationchange', state.handleResizeBound);
 
+    const renderToken = state.roundToken;
     fetchMemoryVehicles()
       .then((vehicles) => {
-        if (state.destroyed) return;
+        if (state.destroyed || renderToken !== state.roundToken) return;
         state.vehicles = vehicles;
         startRound();
       })
       .catch((error) => {
+        if (!state.container || state.destroyed || renderToken !== state.roundToken) return;
         console.warn(error);
-        if (!state.container || state.destroyed) return;
         state.container.innerHTML = `
           <div class="memory-game-container memory-${getLayoutMode()}">
             <div class="memory-error">자동차 카드를 불러오지 못했어요.</div>
@@ -1220,7 +1243,7 @@
     state.successRewardGiven = false;
 
     renderMemoryBoard();
-    playGameVoice('games.memory.intro');
+    speakMemoryPrompt('카드 두 장을 잘 보고 같은 그림을 찾아요!', 'Look at the cards and find the matching pictures!');
     startPreview();
   }
 
@@ -1606,10 +1629,11 @@
 
   function checkMemoryMatch() {
     const [first, second] = state.flipped;
+    const roundToken = state.roundToken;
     state.locked = true;
 
     if (first.data.pairKey === second.data.pairKey || first.data.id === second.data.id) {
-      window.setTimeout(() => {
+      scheduleRoundTimeout(() => {
         const pairKey = first.data.pairKey || first.data.id;
         const firstEl = getCardElement(first.index, first.el);
         const secondEl = getCardElement(second.index, second.el);
@@ -1631,7 +1655,7 @@
 
         const isFinal = state.matched >= selectedCardCount;
         announceCardRole(first.data, isFinal).then(() => {
-          if (state.destroyed) return;
+          if (state.destroyed || roundToken !== state.roundToken) return;
 
           if (isFinal) {
             triggerFinaleAfterRole();
@@ -1652,9 +1676,9 @@
     firstEl?.classList.add('is-wrong');
     secondEl?.classList.add('is-wrong');
     showSpeechBanner('다시 찾아보자!');
-    playGameVoice('games.memory.wrong');
+    speakMemoryPrompt('다시 찾아볼까?', 'Try another pair!');
 
-    window.setTimeout(() => {
+    scheduleRoundTimeout(() => {
       const latestFirstEl = getCardElement(first.index, firstEl);
       const latestSecondEl = getCardElement(second.index, secondEl);
 
@@ -1668,7 +1692,7 @@
 
       refreshHintsAfterWrong();
 
-      state.noticeTimer = window.setTimeout(() => {
+      state.noticeTimer = scheduleRoundTimeout(() => {
         hideSpeechBanner();
       }, 700);
     }, 900);
@@ -1683,14 +1707,16 @@
   function announceCardRole(cardData, isFinal) {
     const text = getRoleText(cardData);
     const token = ++state.pendingVoiceToken;
+    const roundToken = state.roundToken;
 
     showSpeechBanner(text);
 
     return playVehicleVoice(cardData, 'role').then(() => {
+      if (token !== state.pendingVoiceToken || roundToken !== state.roundToken || state.destroyed) return;
       const waitMs = estimateSpeechMs(text, isFinal);
       return wait(waitMs);
     }).then(() => {
-      if (token !== state.pendingVoiceToken) return;
+      if (token !== state.pendingVoiceToken || roundToken !== state.roundToken || state.destroyed) return;
       if (!isFinal) hideSpeechBanner();
     });
   }
@@ -1828,7 +1854,7 @@
     playGameVoice('games.memory.complete');
 
     state.container?.querySelectorAll('.memory-card').forEach((card, idx) => {
-      window.setTimeout(() => card.classList.add('is-finale'), idx * 70);
+      scheduleRoundTimeout(() => card.classList.add('is-finale'), idx * 70);
     });
 
     clearTimeout(state.finaleTimer);
@@ -1896,6 +1922,10 @@
   }
 
   function clearTimers() {
+    state.roundToken += 1;
+    state.pendingVoiceToken += 1;
+    state.roundTimers.forEach((timer) => clearTimeout(timer));
+    state.roundTimers.clear();
     clearTimeout(state.noticeTimer);
     clearTimeout(state.finaleTimer);
     clearTimeout(state.previewTimer);
@@ -1904,7 +1934,9 @@
     state.finaleTimer = null;
     state.previewTimer = null;
     state.resizeTimer = null;
-    state.pendingVoiceToken += 1;
+    if (state.container && !state.destroyed) {
+      try { window.SihyeonVoice?.stop?.(); } catch (_) {}
+    }
   }
 
   function wait(ms) {

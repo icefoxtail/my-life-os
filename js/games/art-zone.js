@@ -1801,7 +1801,11 @@
     const token = ++state.speechToken;
     const voice = window.SihyeonVoice;
     if (voice && typeof voice.stop === 'function') voice.stop();
-    if (voice && typeof voice.play === 'function' && voiceIds[msg]) {
+    // These legacy clips contain unrelated praise, so mode prompts use the
+    // shared language-aware TTS path below in Korean; English keeps its mapping.
+    const isKoreanModePrompt = window.SihyeonPlaySettings?.getLanguage?.() !== 'en' &&
+      (msg === '어떤 그림을 색칠해볼까?' || msg === '자유롭게 그려볼까?');
+    if (!isKoreanModePrompt && voice && typeof voice.play === 'function' && voiceIds[msg]) {
       voice.play(voiceIds[msg], msg, {
         allowTtsFallback: true,
         shouldPlay: () => !state.destroyed && state.speechToken === token,

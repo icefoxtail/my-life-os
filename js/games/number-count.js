@@ -34,6 +34,13 @@
   const KOREAN_COUNT = ['', '하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '열', '열하나', '열둘', '열셋', '열넷', '열다섯', '열여섯', '열일곱', '열여덟', '열아홉', '스물', '스물하나', '스물둘', '스물셋', '스물넷', '스물다섯', '스물여섯', '스물일곱', '스물여덟', '스물아홉', '서른'];
   const SINO_KR      = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
 
+  function koreanVehicleCount(n){
+    if(n === 20) return '스무';
+    const unit = ['', '한', '두', '세', '네'][n % 10];
+    if(!unit) return KOREAN_COUNT[n] || String(n);
+    return (n >= 20 ? '스물' : n >= 10 ? '열' : '') + unit;
+  }
+
   const BG_THEMES = [
     { sky:'linear-gradient(180deg,#87CEEB 0%,#E0F7FA 65%,#C8E6C9 100%)', road:'#9E9E9E', roadShadow:'#757575', cloud:true  },
     { sky:'linear-gradient(180deg,#FF7043 0%,#FFA726 45%,#FFE082 100%)', road:'#795548', roadShadow:'#4E342E', cloud:false },
@@ -553,12 +560,10 @@
             this.showNumberStamp(this.state.currentAnswer);
             this.createParticles(15);
             this.showCorrectEmoji();
-            const spokenNum = KOREAN_COUNT[this.state.currentAnswer] || this.state.currentAnswer;
             if(!this.state.successRewardGiven){
               this.state.successRewardGiven = true;
               if(this.state.options.fireConfetti) this.state.options.fireConfetti();
-              playGameVoice('games.number.correct');
-              this.say(`우와 맞았어! ${spokenNum} 대야!`, true);
+              this.say(`우와 맞았어! ${koreanVehicleCount(this.state.currentAnswer)} 대야!`, true);
             }
 
             this.setManagedTimeout(()=>{
@@ -580,7 +585,6 @@
         this.query('.nc-toy-block-btn[data-correct="true"]')?.classList.add('hint-glow');
       }
 
-      playGameVoice('games.number.wrong');
       this.say('어라? 다시 한 번 천천히 세어보자!', true);
       this.showWrongFlash();
       wrapper.classList.add('shake');
@@ -609,10 +613,6 @@
           dot.className = 'nc-count-dot';
           dot.textContent = i + 1;
           cell.appendChild(dot);
-
-          if(i === cells.length - 1){
-            this.speakDirect(KOREAN_COUNT[i + 1] || String(i + 1));
-          }
         }, i * delay);
       });
 
@@ -638,8 +638,6 @@
       stamp.className = 'nc-number-stamp';
       stamp.textContent = num;
       area.appendChild(stamp);
-
-      this.speakDirect(KOREAN_COUNT[num] || String(num));
 
       this.setManagedTimeout(()=>{ if(stamp.parentNode) stamp.parentNode.removeChild(stamp); }, 1500);
     },
@@ -855,88 +853,12 @@
         if(spoken) window.SihyeonVoice?.speak?.(spoken,{lang:'en-US',rate:.88})?.catch?.(()=>{});
         return;
       }
-      // The vehicle shown on screen, not a generic prerecorded question,
-      // determines the Korean question a child hears.
       if(/몇 대인지 세어볼까/.test(raw)){
         const name=this.state.currentVehicle?.name||'자동차';
         window.SihyeonVoice?.speak?.(name+'는 몇 대일까?',{lang:'ko-KR',rate:.93})?.catch?.(()=>{});
         return;
       }
-      const guideMap = [
-        { test:/몇 대인지 세어볼까/, ids:['games.number.guide.countQuestion', 'games.number.countQuestion'] }
-      ];
-      const found = guideMap.find(item => item.test.test(raw));
-      if(found) this.playFirstVoice(found.ids);
-    },
-
-    speakDirect:function(text){
-      if(!text) return;
-      const raw = String(text).trim();
-      if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
-        const number=KOREAN_COUNT.indexOf(raw);
-        if(number>0) this.state.options.say?.(window.SihyeonEnglishListening.numberWord(number));
-        return;
-      }
-
-      if(KOREAN_COUNT.indexOf(raw)>=10){this.state.options.say?.(raw);return;}
-      const countMap = {
-        '하나': 1,
-        '둘': 2,
-        '셋': 3,
-        '넷': 4,
-        '다섯': 5,
-        '여섯': 6,
-        '일곱': 7,
-        '여덟': 8,
-        '아홉': 9
-      };
-
-      const unitMap = {
-        '하나': 1,
-        '한': 1,
-        '둘': 2,
-        '두': 2,
-        '셋': 3,
-        '세': 3,
-        '넷': 4,
-        '네': 4,
-        '다섯': 5,
-        '여섯': 6,
-        '일곱': 7,
-        '여덟': 8,
-        '아홉': 9
-      };
-
-      const unitMatch = raw.match(/^(하나|한|둘|두|셋|세|넷|네|다섯|여섯|일곱|여덟|아홉)\s*대$/);
-      if(unitMatch){
-        const n = unitMap[unitMatch[1]];
-        this.playFirstVoice([
-          `games.number.countVehicle.${n}`,
-          `games.number.countUnit.${n}`,
-          `games.number.count.${n}`
-        ]);
-        return;
-      }
-
-      if(Object.prototype.hasOwnProperty.call(countMap, raw)){
-        const n = countMap[raw];
-        this.playFirstVoice([
-          `games.number.count.${n}`,
-          `games.number.koreanCount.${n}`
-        ]);
-      }
-    },
-
-    playFirstVoice:function(ids){
-      if(!window.SihyeonVoice || typeof window.SihyeonVoice.play !== 'function') return;
-      const list = Array.isArray(ids) ? ids.filter(Boolean) : [ids].filter(Boolean);
-      let index = 0;
-      const next = ()=>{
-        const id = list[index++];
-        if(!id) return;
-        window.SihyeonVoice.play(id).catch(next);
-      };
-      next();
+      this.state.options.say?.(raw);
     },
 
     query:function(sel){
