@@ -182,6 +182,66 @@
     "id": "helicopter",
     "ko": "헬리콥터",
     "en": "helicopter"
+  },
+  {
+    "id": "police_motorcycle",
+    "ko": "경찰 오토바이",
+    "en": "police motorcycle"
+  },
+  {
+    "id": "police_helicopter",
+    "ko": "경찰 헬기",
+    "en": "police helicopter"
+  },
+  {
+    "id": "police_officer",
+    "ko": "경찰관",
+    "en": "police officer"
+  },
+  {
+    "id": "police_dog",
+    "ko": "경찰견",
+    "en": "police dog"
+  },
+  {
+    "id": "boat",
+    "ko": "배",
+    "en": "boat"
+  },
+  {
+    "id": "bus",
+    "ko": "버스",
+    "en": "bus"
+  },
+  {
+    "id": "strawberry",
+    "ko": "딸기",
+    "en": "strawberry"
+  },
+  {
+    "id": "apple",
+    "ko": "사과",
+    "en": "apple"
+  },
+  {
+    "id": "cat",
+    "ko": "고양이",
+    "en": "cat"
+  },
+  {
+    "id": "puppy",
+    "ko": "강아지",
+    "en": "puppy"
+  },
+  {
+    "id": "butterfly",
+    "ko": "나비",
+    "en": "butterfly"
+  },
+  {
+    "id": "house",
+    "ko": "집",
+    "en": "house"
   }
 ];
   const vehicles = [

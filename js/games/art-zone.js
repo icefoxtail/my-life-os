@@ -922,6 +922,487 @@
 </svg>`,
       },
     },
+    {
+      id: 'police_motorcycle',
+      name: '경찰 오토바이',
+      emoji: '🏍️',
+      version: 1,
+      parts: {
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        light_blue: { ko: '파란 경광등', en: 'blue siren light', color: '#4488FF' },
+        body: { ko: '몸체', en: 'body', color: '#FFF8E7' },
+        stripe: { ko: '경찰 줄무늬', en: 'police stripe', color: '#1E40AF' },
+        seat: { ko: '안장', en: 'seat', color: '#1A1A1A' },
+        fairing: { ko: '앞 덮개', en: 'front cover', color: '#FFF8E7' },
+        windshield: { ko: '바람막이', en: 'windshield', color: '#8EF6D1' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="4" fill="none">
+          <path d="M 58 86 V 66"/>
+        </g>
+        <rect class="fillable" data-part="light_red" x="32" y="46" width="26" height="20" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light_blue" x="58" y="46" width="26" height="20" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 60 116 Q 46 116 48 102 L 52 92 Q 55 86 64 86 H 100 Q 110 68 132 68 H 148 Q 162 68 166 82 L 170 102 Q 172 116 158 116 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="stripe" d="M 50 96 H 168 L 170 110 H 48 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="seat" d="M 56 86 Q 56 72 72 72 H 98 Q 108 72 106 80 L 102 86 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="fairing" d="M 158 74 Q 176 62 192 72 Q 202 80 200 94 Q 198 104 186 106 L 170 106 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="windshield" d="M 166 70 L 174 40 Q 177 33 184 36 Q 190 39 190 46 L 188 70 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="headlight" cx="202" cy="86" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="64" cy="130" r="26" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="184" cy="130" r="26" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="64" cy="130" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="184" cy="130" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 180 104 L 184 130" stroke-width="6"/>
+          <path d="M 76 116 L 64 130" stroke-width="5"/>
+          <path d="M 166 62 L 154 56 M 150 54 L 156 58"/>
+          <path d="M 96 120 H 122 Q 128 120 128 126 H 100"/>
+          <path d="M 184 82 L 186 86 L 190 86 L 187 89 L 188 93 L 184 91 L 180 93 L 181 89 L 178 86 L 182 86 Z" fill="#333" stroke="none"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'police_helicopter',
+      name: '경찰 헬기',
+      emoji: '🚁',
+      version: 1,
+      parts: {
+        rotor: { ko: '프로펠러', en: 'main rotor', color: '#C0C0C0' },
+        engine: { ko: '엔진 덮개', en: 'engine cover', color: '#1E40AF' },
+        light: { ko: '경광등', en: 'siren light', color: '#FF4444' },
+        fin: { ko: '꼬리 날개', en: 'tail fin', color: '#1E40AF' },
+        tail: { ko: '꼬리', en: 'tail boom', color: '#FFF8E7' },
+        tail_rotor: { ko: '꼬리 프로펠러', en: 'tail rotor', color: '#C0C0C0' },
+        cabin: { ko: '몸체', en: 'cabin', color: '#FFF8E7' },
+        window_front: { ko: '앞창문', en: 'front window', color: '#8EF6D1' },
+        window_side: { ko: '옆창문', en: 'side window', color: '#8EF6D1' },
+        stripe: { ko: '경찰 줄무늬', en: 'police stripe', color: '#1E40AF' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="rotor" x="26" y="30" width="180" height="14" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="fin" d="M 34 90 L 28 58 Q 27 51 34 53 L 62 86 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="tail" d="M 86 88 L 40 80 Q 30 78 30 88 V 96 Q 30 104 40 102 L 86 114 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="tail_rotor" cx="24" cy="90" rx="12" ry="22" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="engine" x="94" y="48" width="40" height="22" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light" x="132" y="52" width="26" height="18" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="cabin" cx="120" cy="102" rx="52" ry="36" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="window_front" d="M 132 76 Q 158 76 168 100 H 132 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_side" x="80" y="78" width="40" height="22" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="stripe" d="M 69.4 108 H 170.6 A 52 36 0 0 1 162 122 H 78 A 52 36 0 0 1 69.4 108 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 114 44 V 50 M 126 44 V 50"/>
+          <path d="M 80 135 L 76 150 M 160 135 L 164 150" stroke-width="4"/>
+          <path d="M 62 152 H 168 Q 180 152 184 142" stroke-width="4"/>
+          <path d="M 120 109 L 122 114 L 127 114 L 123 117 L 125 121 L 120 118.5 L 115 121 L 117 117 L 113 114 L 118 114 Z" fill="#333" stroke="none"/>
+          <path d="M 139 59 H 151"/>
+          <path d="M 140 90 H 150"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'police_officer',
+      name: '경찰관',
+      emoji: '👮',
+      version: 1,
+      parts: {
+        pants: { ko: '바지', en: 'pants', color: '#1E40AF' },
+        shoe_left: { ko: '왼쪽 신발', en: 'left shoe', color: '#1A1A1A' },
+        shoe_right: { ko: '오른쪽 신발', en: 'right shoe', color: '#1A1A1A' },
+        shirt: { ko: '제복', en: 'uniform', color: '#4488FF' },
+        belt: { ko: '허리띠', en: 'belt', color: '#1A1A1A' },
+        arm_left: { ko: '왼팔', en: 'left arm', color: '#4488FF' },
+        arm_right: { ko: '오른팔', en: 'right arm', color: '#4488FF' },
+        hand_left: { ko: '왼손', en: 'left hand', color: '#F6E7C8' },
+        hand_right: { ko: '오른손', en: 'right hand', color: '#F6E7C8' },
+        face: { ko: '얼굴', en: 'face', color: '#F6E7C8' },
+        cap: { ko: '경찰 모자', en: 'police cap', color: '#1E40AF' },
+        brim: { ko: '모자 챙', en: 'cap brim', color: '#1A1A1A' },
+        badge: { ko: '모자 배지', en: 'cap badge', color: '#FFD700' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="pants" d="M 94 134 H 146 V 150 Q 146 154 140 154 H 126 Q 121 154 121 148 V 142 Q 120 140 119 142 V 148 Q 119 154 114 154 H 100 Q 94 154 94 150 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="shoe_left" cx="104" cy="156" rx="16" ry="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="shoe_right" cx="136" cy="156" rx="16" ry="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="shirt" d="M 92 104 Q 92 94 102 94 H 138 Q 148 94 148 104 V 128 H 92 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="belt" x="92" y="124" width="56" height="12" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="arm_left" d="M 92 100 Q 80 98 77 110 L 73 126 Q 71 135 80 136 Q 88 137 90 129 L 95 112 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="arm_right" d="M 148 100 Q 162 98 167 86 L 171 70 Q 173 62 165 61 Q 158 61 156 69 L 153 82 Q 151 88 146 90 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hand_left" cx="77" cy="141" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hand_right" cx="168" cy="54" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="face" cx="120" cy="68" r="34" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="cap" d="M 86 52 Q 86 22 120 22 Q 154 22 154 52 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="brim" x="80" y="48" width="80" height="12" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="badge" d="M 111 28 H 129 V 38 Q 129 44 120 47 Q 111 44 111 38 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="107" cy="76" r="4.5" fill="#333" stroke="none"/>
+          <circle cx="133" cy="76" r="4.5" fill="#333" stroke="none"/>
+          <circle cx="108.6" cy="74.4" r="1.5" fill="#FFF" stroke="none"/>
+          <circle cx="134.6" cy="74.4" r="1.5" fill="#FFF" stroke="none"/>
+          <circle cx="96" cy="86" r="5" fill="#FF88CC" stroke="none"/>
+          <circle cx="144" cy="86" r="5" fill="#FF88CC" stroke="none"/>
+          <path d="M 110 88 Q 120 98 130 88"/>
+          <path d="M 108 94 L 120 108 L 132 94"/>
+          <path d="M 120 110 V 124"/>
+          <circle cx="120" cy="114" r="1.8" fill="#333" stroke="none"/>
+          <circle cx="120" cy="120" r="1.8" fill="#333" stroke="none"/>
+          <rect x="114" y="126" width="12" height="8" rx="2"/>
+          <path d="M 100 106 L 101.5 110 L 105 110 L 102.3 112.4 L 103.3 116 L 100 114 L 96.7 116 L 97.7 112.4 L 95 110 L 98.5 110 Z" fill="#333" stroke="none"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'police_dog',
+      name: '경찰견',
+      emoji: '🐕',
+      version: 1,
+      parts: {
+        tail: { ko: '꼬리', en: 'tail', color: '#8B5A2B' },
+        ear_left: { ko: '왼쪽 귀', en: 'left ear', color: '#1A1A1A' },
+        ear_right: { ko: '오른쪽 귀', en: 'right ear', color: '#1A1A1A' },
+        body: { ko: '몸', en: 'body', color: '#8B5A2B' },
+        haunch_left: { ko: '왼쪽 뒷다리', en: 'left hind leg', color: '#8B5A2B' },
+        haunch_right: { ko: '오른쪽 뒷다리', en: 'right hind leg', color: '#8B5A2B' },
+        vest: { ko: '경찰 조끼', en: 'police vest', color: '#1E40AF' },
+        badge: { ko: '경찰 배지', en: 'police badge', color: '#FFD700' },
+        paw_left: { ko: '왼쪽 앞발', en: 'left paw', color: '#F6E7C8' },
+        paw_right: { ko: '오른쪽 앞발', en: 'right paw', color: '#F6E7C8' },
+        head: { ko: '얼굴', en: 'head', color: '#8B5A2B' },
+        muzzle: { ko: '주둥이', en: 'muzzle', color: '#F6E7C8' },
+        nose: { ko: '코', en: 'nose', color: '#1A1A1A' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="tail" d="M 148 148 Q 188 152 192 122 Q 194 110 185 111 Q 179 112 179 121 Q 177 138 148 136 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="ear_left" d="M 92 46 L 82 12 Q 81 7 86 9 L 110 26 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="ear_right" d="M 148 46 L 158 12 Q 159 7 154 9 L 130 26 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 120 84 Q 90 84 86 118 Q 84 146 96 154 H 144 Q 156 146 154 118 Q 150 84 120 84 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="haunch_left" cx="84" cy="134" rx="17" ry="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="haunch_right" cx="156" cy="134" rx="17" ry="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="vest" d="M 98 98 Q 120 92 142 98 L 146 130 Q 146 138 138 138 H 102 Q 94 138 94 130 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="badge" d="M 124 104 H 140 V 114 Q 140 121 132 125 Q 124 121 124 114 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="paw_left" x="96" y="138" width="19" height="20" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="paw_right" x="125" y="138" width="19" height="20" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="head" cx="120" cy="58" rx="36" ry="32" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="muzzle" cx="120" cy="71" rx="21" ry="16" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="nose" cx="120" cy="63" rx="11" ry="7.5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="102" cy="50" r="5" fill="#333" stroke="none"/>
+          <circle cx="138" cy="50" r="5" fill="#333" stroke="none"/>
+          <circle cx="103.8" cy="48.2" r="1.7" fill="#FFF" stroke="none"/>
+          <circle cx="139.8" cy="48.2" r="1.7" fill="#FFF" stroke="none"/>
+          <path d="M 94 40 Q 102 35 110 39 M 130 39 Q 138 35 146 40"/>
+          <path d="M 120 70 V 75 M 110 76 Q 115 82 120 75 Q 125 82 130 76"/>
+          <path d="M 115 80 Q 120 92 125 80 Z" fill="#FF88CC"/>
+          <path d="M 132 108 L 133.5 112 L 137 112 L 134.3 114.4 L 135.3 118 L 132 116 L 128.7 118 L 129.7 114.4 L 127 112 L 130.5 112 Z" fill="#333" stroke="none"/>
+          <path d="M 105 104 V 128"/>
+          <path d="M 105 138 V 148 M 134 138 V 148"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'boat',
+      name: '배',
+      emoji: '⛵',
+      version: 1,
+      parts: {
+        sun: { ko: '해님', en: 'sun', color: '#FF9900' },
+        flag: { ko: '깃발', en: 'flag', color: '#FF4444' },
+        sail_big: { ko: '큰 돛', en: 'big sail', color: '#FFF8E7' },
+        sail_small: { ko: '작은 돛', en: 'small sail', color: '#FFD700' },
+        hull: { ko: '배 몸통', en: 'hull', color: '#1E40AF' },
+        stripe: { ko: '배 줄무늬', en: 'hull stripe', color: '#FFF8E7' },
+        water: { ko: '파도', en: 'waves', color: '#4488FF' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <circle class="fillable" data-part="sun" cx="48" cy="44" r="15" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="sail_big" d="M 124 36 Q 172 66 186 112 H 124 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="sail_small" d="M 112 54 Q 88 86 62 112 H 112 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="hull" d="M 32 112 H 208 Q 210 112 208 116 Q 198 152 176 152 H 64 Q 42 152 32 116 Q 30 112 32 112 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="stripe" d="M 33.5 116 Q 32 112 36 112 H 204 Q 208 112 206.5 116 L 204 126 H 36 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="flag" d="M 118 22 L 148 30 Q 152 32 148 34 L 118 44 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="water" d="M 16 144 Q 28 134 40 144 T 64 144 T 88 144 T 112 144 T 136 144 T 160 144 T 184 144 T 208 144 H 224 V 158 Q 224 164 218 164 H 22 Q 16 164 16 158 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 118 22 V 112" stroke-width="4"/>
+          <path d="M 48 20 V 14 M 48 68 V 74 M 24 44 H 18 M 72 44 H 78 M 31 27 L 27 23 M 65 61 L 69 65 M 65 27 L 69 23 M 31 61 L 27 65"/>
+          <path d="M 134 60 Q 160 82 170 104"/>
+          <path d="M 98 74 Q 84 92 76 106"/>
+          <circle cx="94" cy="136" r="5"/>
+          <circle cx="146" cy="136" r="5"/>
+          <path d="M 40 154 Q 46 150 52 154 M 110 154 Q 116 150 122 154 M 176 154 Q 182 150 188 154"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'bus',
+      name: '버스',
+      emoji: '🚌',
+      version: 1,
+      parts: {
+        sign: { ko: '지붕 표지판', en: 'roof sign', color: '#FFF8E7' },
+        body: { ko: '버스 차체', en: 'bus body', color: '#FFD700' },
+        stripe: { ko: '검정 줄무늬', en: 'black stripe', color: '#1A1A1A' },
+        window_1: { ko: '첫째 창문', en: 'window 1', color: '#8EF6D1' },
+        window_2: { ko: '둘째 창문', en: 'window 2', color: '#8EF6D1' },
+        window_3: { ko: '셋째 창문', en: 'window 3', color: '#8EF6D1' },
+        door: { ko: '문', en: 'door', color: '#FF9900' },
+        windshield: { ko: '앞유리', en: 'windshield', color: '#8EF6D1' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFF8E7' },
+        bumper: { ko: '범퍼', en: 'bumper', color: '#C0C0C0' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="sign" x="64" y="16" width="56" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 28 30 H 180 Q 188 30 188 38 V 78 H 214 Q 224 78 224 90 V 128 Q 224 136 216 136 H 28 Q 20 136 20 128 V 38 Q 20 30 28 30 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="stripe" x="20" y="108" width="204" height="14" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_1" x="28" y="42" width="30" height="46" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_2" x="65" y="42" width="30" height="46" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_3" x="102" y="42" width="30" height="46" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="door" x="139" y="42" width="26" height="64" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="windshield" d="M 172 42 H 180 Q 184 42 184 46 V 88 H 172 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="headlight" x="198" y="88" width="26" height="18" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="bumper" x="200" y="132" width="32" height="16" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="66" cy="140" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="168" cy="140" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="66" cy="140" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="168" cy="140" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 74 25 H 110"/>
+          <path d="M 152 42 V 106 M 139 74 H 165"/>
+          <path d="M 188 78 V 106"/>
+          <circle cx="43" cy="78" r="6"/>
+          <circle cx="117" cy="78" r="6"/>
+          <path d="M 40 79 Q 43 82 46 79 M 114 79 Q 117 82 120 79"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'strawberry',
+      name: '딸기',
+      emoji: '🍓',
+      version: 1,
+      parts: {
+        body: { ko: '딸기 열매', en: 'strawberry', color: '#FF4444' },
+        shine: { ko: '반짝이', en: 'shine', color: '#FF88CC' },
+        stem: { ko: '줄기', en: 'stem', color: '#7ED957' },
+        leaf_left: { ko: '왼쪽 잎', en: 'left leaf', color: '#44CC44' },
+        leaf_right: { ko: '오른쪽 잎', en: 'right leaf', color: '#44CC44' },
+        leaf_front: { ko: '앞쪽 잎', en: 'front leaf', color: '#7ED957' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="body" d="M 120 160 Q 116 160 110 156 Q 62 130 58 88 Q 56 56 88 54 Q 106 54 120 62 Q 134 54 152 54 Q 184 56 182 88 Q 178 130 130 156 Q 124 160 120 160 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="stem" x="112" y="26" width="16" height="42" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="leaf_left" d="M 120 66 Q 100 40 62 52 Q 70 84 120 74 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="leaf_right" d="M 120 66 Q 140 40 178 52 Q 170 84 120 74 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="leaf_front" d="M 102 70 Q 120 64 138 70 Q 134 92 120 98 Q 106 92 102 70 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="shine" cx="78" cy="102" rx="8" ry="14" transform="rotate(12 78 102)" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="102" cy="116" r="4.5" fill="#333" stroke="none"/>
+          <circle cx="138" cy="116" r="4.5" fill="#333" stroke="none"/>
+          <circle cx="103.5" cy="114.5" r="1.5" fill="#FFF" stroke="none"/>
+          <circle cx="139.5" cy="114.5" r="1.5" fill="#FFF" stroke="none"/>
+          <path d="M 112 124 Q 120 132 128 124"/>
+          <ellipse cx="148" cy="86" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+          <ellipse cx="164" cy="104" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+          <ellipse cx="94" cy="86" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+          <ellipse cx="156" cy="128" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+          <ellipse cx="86" cy="124" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+          <ellipse cx="120" cy="142" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+          <ellipse cx="170" cy="76" rx="2.5" ry="3.5" fill="#333" stroke="none"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'apple',
+      name: '사과',
+      emoji: '🍎',
+      version: 1,
+      parts: {
+        body: { ko: '사과 열매', en: 'apple', color: '#FF4444' },
+        shine: { ko: '반짝이', en: 'shine', color: '#FF88CC' },
+        stem: { ko: '꼭지', en: 'stem', color: '#8B5A2B' },
+        leaf: { ko: '잎', en: 'leaf', color: '#44CC44' },
+        cheek_left: { ko: '왼쪽 볼', en: 'left cheek', color: '#FF88CC' },
+        cheek_right: { ko: '오른쪽 볼', en: 'right cheek', color: '#FF88CC' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="body" d="M 120 62 Q 138 46 164 56 Q 192 70 188 108 Q 182 152 150 160 Q 134 162 120 156 Q 106 162 90 160 Q 58 152 52 108 Q 48 70 76 56 Q 102 46 120 62 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="stem" d="M 113 64 Q 113 44 121 30 Q 123 26 128 28 Q 133 30 131 35 Q 126 46 127 64 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="leaf" d="M 130 44 Q 152 18 188 26 Q 180 58 136 52 Q 130 50 130 44 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="shine" cx="76" cy="90" rx="8" ry="15" transform="rotate(14 76 90)" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="cheek_left" cx="82" cy="124" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="cheek_right" cx="158" cy="124" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="102" cy="108" r="5" fill="#333" stroke="none"/>
+          <circle cx="138" cy="108" r="5" fill="#333" stroke="none"/>
+          <circle cx="103.8" cy="106.2" r="1.7" fill="#FFF" stroke="none"/>
+          <circle cx="139.8" cy="106.2" r="1.7" fill="#FFF" stroke="none"/>
+          <path d="M 111 120 Q 120 130 129 120"/>
+          <path d="M 140 44 Q 158 36 174 34"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'cat',
+      name: '고양이',
+      emoji: '🐱',
+      version: 1,
+      parts: {
+        tail: { ko: '꼬리', en: 'tail', color: '#FF9900' },
+        body: { ko: '몸', en: 'body', color: '#FF9900' },
+        belly: { ko: '배', en: 'belly', color: '#FFF8E7' },
+        paw_left: { ko: '왼발', en: 'left paw', color: '#FFF8E7' },
+        paw_right: { ko: '오른발', en: 'right paw', color: '#FFF8E7' },
+        ear_left: { ko: '왼쪽 귀', en: 'left ear', color: '#FF9900' },
+        ear_right: { ko: '오른쪽 귀', en: 'right ear', color: '#FF9900' },
+        head: { ko: '얼굴', en: 'face', color: '#FF9900' },
+        muzzle: { ko: '주둥이', en: 'muzzle', color: '#FFF8E7' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="tail" d="M 150 148 Q 202 156 206 112 Q 208 86 192 84 Q 180 92 186 112 Q 186 134 150 130 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 80 108 Q 68 158 98 158 H 142 Q 172 158 160 108 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="belly" cx="120" cy="132" rx="19" ry="20" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="paw_left" cx="96" cy="154" rx="17" ry="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="paw_right" cx="144" cy="154" rx="17" ry="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="ear_left" d="M 74 60 Q 66 26 76 20 Q 98 24 108 38 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="ear_right" d="M 166 60 Q 174 26 164 20 Q 142 24 132 38 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="head" cx="120" cy="66" rx="50" ry="40" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="muzzle" cx="120" cy="82" rx="22" ry="15" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="98" cy="62" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="142" cy="62" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="100" cy="60" r="1.8" fill="#FFF" stroke="none"/>
+          <circle cx="144" cy="60" r="1.8" fill="#FFF" stroke="none"/>
+          <path d="M 114 74 H 126 L 120 80 Z" fill="#333"/>
+          <path d="M 120 80 V 85 M 111 87 Q 116 92 120 85 Q 124 92 129 87"/>
+          <path d="M 98 80 L 72 76 M 98 85 L 72 88 M 142 80 L 168 76 M 142 85 L 168 88"/>
+          <path d="M 112 34 V 42 M 120 32 V 41 M 128 34 V 42"/>
+          <path d="M 80 52 Q 80 38 88 32 M 160 52 Q 160 38 152 32"/>
+          <path d="M 96 148 V 154 M 144 148 V 154"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'puppy',
+      name: '강아지',
+      emoji: '🐶',
+      version: 1,
+      parts: {
+        tail: { ko: '꼬리', en: 'tail', color: '#F6E7C8' },
+        body: { ko: '몸', en: 'body', color: '#F6E7C8' },
+        paw_left: { ko: '왼발', en: 'left paw', color: '#FFF8E7' },
+        paw_right: { ko: '오른발', en: 'right paw', color: '#FFF8E7' },
+        head: { ko: '얼굴', en: 'face', color: '#F6E7C8' },
+        ear_left: { ko: '왼쪽 귀', en: 'left ear', color: '#8B5A2B' },
+        ear_right: { ko: '오른쪽 귀', en: 'right ear', color: '#8B5A2B' },
+        patch: { ko: '눈 얼룩', en: 'eye patch', color: '#8B5A2B' },
+        muzzle: { ko: '주둥이', en: 'muzzle', color: '#FFF8E7' },
+        nose: { ko: '코', en: 'nose', color: '#1A1A1A' },
+        tongue: { ko: '혓바닥', en: 'tongue', color: '#FF88CC' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="tail" d="M 154 138 Q 192 142 198 104 Q 200 92 190 94 Q 180 98 182 112 Q 180 128 154 124 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 82 104 Q 70 158 98 158 H 142 Q 170 158 158 104 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <ellipse class="fillable" data-part="paw_left" cx="96" cy="154" rx="17" ry="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="paw_right" cx="144" cy="154" rx="17" ry="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="head" cx="120" cy="62" rx="46" ry="38" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="ear_left" d="M 82 34 Q 50 30 48 68 Q 48 94 68 96 Q 84 90 84 62 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="ear_right" d="M 158 34 Q 190 30 192 68 Q 192 94 172 96 Q 156 90 156 62 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="patch" cx="142" cy="56" r="14" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="muzzle" cx="120" cy="80" rx="25" ry="17" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="tongue" d="M 109 90 Q 108 110 120 110 Q 132 110 131 90 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="nose" cx="120" cy="72" rx="10" ry="7.5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="100" cy="56" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="140" cy="56" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="102" cy="54" r="1.8" fill="#FFF" stroke="none"/>
+          <circle cx="142" cy="54" r="1.8" fill="#FFF" stroke="none"/>
+          <path d="M 120 79 V 88 M 107 86 Q 113 94 120 88 Q 127 94 133 86"/>
+          <path d="M 120 94 V 104"/>
+          <path d="M 96 148 V 154 M 144 148 V 154"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'butterfly',
+      name: '나비',
+      emoji: '🦋',
+      version: 1,
+      parts: {
+        wing_top_left: { ko: '왼쪽 위 날개', en: 'upper left wing', color: '#FF88CC' },
+        wing_top_right: { ko: '오른쪽 위 날개', en: 'upper right wing', color: '#FF88CC' },
+        wing_bottom_left: { ko: '왼쪽 아래 날개', en: 'lower left wing', color: '#9944FF' },
+        wing_bottom_right: { ko: '오른쪽 아래 날개', en: 'lower right wing', color: '#9944FF' },
+        spot_top_left: { ko: '왼쪽 위 무늬', en: 'upper left spot', color: '#FFF8E7' },
+        spot_top_right: { ko: '오른쪽 위 무늬', en: 'upper right spot', color: '#FFF8E7' },
+        spot_bottom_left: { ko: '왼쪽 아래 무늬', en: 'lower left spot', color: '#FFD700' },
+        spot_bottom_right: { ko: '오른쪽 아래 무늬', en: 'lower right spot', color: '#FFD700' },
+        body: { ko: '몸통', en: 'body', color: '#8B5A2B' },
+        head: { ko: '머리', en: 'head', color: '#F6E7C8' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="wing_top_left" d="M 114 88 C 106 40 72 20 46 28 C 20 36 20 74 44 88 C 64 100 96 98 114 96 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="wing_top_right" d="M 126 88 C 134 40 168 20 194 28 C 220 36 220 74 196 88 C 176 100 144 98 126 96 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="wing_bottom_left" d="M 114 100 C 82 100 48 108 48 130 C 48 156 86 160 102 140 C 112 128 114 114 114 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="wing_bottom_right" d="M 126 100 C 158 100 192 108 192 130 C 192 156 154 160 138 140 C 128 128 126 114 126 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="spot_top_left" cx="58" cy="56" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="spot_top_right" cx="182" cy="56" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="spot_bottom_left" cx="78" cy="130" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="spot_bottom_right" cx="162" cy="130" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="body" cx="120" cy="100" rx="9" ry="44" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="head" cx="120" cy="52" r="13" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 115 41 Q 108 24 94 20 M 125 41 Q 132 24 146 20"/>
+          <circle cx="94" cy="20" r="3.5" fill="#333" stroke="none"/>
+          <circle cx="146" cy="20" r="3.5" fill="#333" stroke="none"/>
+          <circle cx="115" cy="50" r="2.2" fill="#333" stroke="none"/>
+          <circle cx="125" cy="50" r="2.2" fill="#333" stroke="none"/>
+          <path d="M 115 57 Q 120 62 125 57"/>
+          <path d="M 113 96 H 127 M 112 108 H 128 M 113 120 H 127"/>
+        </g>
+      </svg>`,
+    },
+    {
+      id: 'house',
+      name: '집',
+      emoji: '🏠',
+      version: 1,
+      parts: {
+        sun: { ko: '해님', en: 'sun', color: '#FFD700' },
+        chimney: { ko: '굴뚝', en: 'chimney', color: '#8B5A2B' },
+        wall: { ko: '벽', en: 'wall', color: '#F6E7C8' },
+        roof: { ko: '지붕', en: 'roof', color: '#FF4444' },
+        attic_window: { ko: '동그란 창문', en: 'round window', color: '#8EF6D1' },
+        window_left: { ko: '왼쪽 창문', en: 'left window', color: '#8EF6D1' },
+        window_right: { ko: '오른쪽 창문', en: 'right window', color: '#8EF6D1' },
+        grass: { ko: '잔디', en: 'grass', color: '#7ED957' },
+        door: { ko: '문', en: 'door', color: '#4488FF' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <circle class="fillable" data-part="sun" cx="42" cy="38" r="14" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="chimney" x="152" y="30" width="22" height="46" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="wall" x="52" y="84" width="136" height="66" rx="5" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="roof" d="M 34 94 L 110 36 Q 120 29 130 36 L 206 94 Q 210 100 202 100 H 38 Q 30 100 34 94 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="attic_window" cx="120" cy="72" r="13" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_left" x="64" y="108" width="28" height="28" rx="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="window_right" x="148" y="108" width="28" height="28" rx="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="grass" d="M 16 150 Q 28 142 40 148 T 64 148 T 88 148 T 112 148 T 136 148 T 160 148 T 184 148 T 208 148 Q 216 146 224 150 V 158 Q 224 164 218 164 H 22 Q 16 164 16 158 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="door" d="M 102 152 V 122 Q 102 108 120 108 Q 138 108 138 122 V 152 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 42 14 V 9 M 42 62 V 67 M 18 38 H 13 M 66 38 H 71 M 25 21 L 22 18 M 59 55 L 62 58 M 59 21 L 62 18 M 25 55 L 22 58"/>
+          <circle cx="160" cy="21" r="5"/><circle cx="170" cy="11" r="6"/>
+          <path d="M 78 108 V 136 M 64 122 H 92 M 162 108 V 136 M 148 122 H 176"/>
+          <path d="M 120 59 V 85 M 107 72 H 133" stroke-width="2"/>
+          <circle cx="130" cy="132" r="3" fill="#333" stroke="none"/>
+        </g>
+      </svg>`,
+    },
   ];
 
   const state = {

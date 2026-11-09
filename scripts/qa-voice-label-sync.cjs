@@ -1,4 +1,4 @@
-/* Canonical label QA: 15 art templates, 16 swatches, 129 vehicles, 6 menu zones.
+/* Canonical label QA: 27 art templates, 16 swatches, 129 vehicles, 6 menu zones.
  * Also validates mapped file existence; it CANNOT certify the spoken contents of MP3.
  */
 const assert=require('node:assert/strict');
@@ -49,7 +49,7 @@ for(const match of uiColors){
 const templates=artSource.split('const COLORING_TEMPLATES = [')[1].split('];\n\n  const state =')[0];
 assert(templates,'Failed to locate current art templates');
 const ids=[...templates.matchAll(/^\s+id:\s*'([^']+)'/gm)].map(x=>x[1]);
-assert.equal(ids.length,15,'Expected exactly the active 15 artwork choices');
+assert.equal(ids.length,27,'Expected exactly the active 27 artwork choices');
 for(const id of ids){
   const template=lex.entry('template',id);
   assert(template, 'Missing art template '+id);
