@@ -892,15 +892,15 @@
         cherry: { ko: '체리', en: 'cherry', color: '#FF4444' },
       },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" data-part="cone" d="M 86 104 L 114 156 Q 120 166 126 156 L 154 104 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" data-part="rim" x="82" y="96" width="76" height="14" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cone" d="M 88 124 L 114 162 Q 120 171 126 162 L 152 124 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="rim" x="80" y="106" width="80" height="22" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path class="fillable" data-part="wafer" d="M 146 70 L 158 32 Q 160 25 167 27 Q 174 29 172 36 L 161 74 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
         <path class="fillable" data-part="scoop_1" d="M 80 98 Q 74 62 120 60 Q 166 62 160 98 Q 164 108 154 106 Q 148 116 140 106 Q 132 112 126 106 Q 118 114 110 106 Q 102 112 96 106 Q 86 110 80 98 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" data-part="scoop_2" cx="120" cy="52" r="25" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" data-part="cherry" cx="120" cy="22" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
         <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
           <path d="M 122 12 Q 124 6 133 5"/>
-          <path d="M 96 116 L 112 144 M 110 112 L 122 134 M 144 116 L 128 144 M 130 112 L 118 134"/>
+          <path d="M 100 134 L 112 152 M 112 132 L 121 146 M 140 134 L 128 152 M 128 132 L 119 146"/>
           <circle cx="105" cy="88" r="4.5" fill="#333" stroke="none"/>
           <circle cx="135" cy="88" r="4.5" fill="#333" stroke="none"/>
           <path d="M 113 94 Q 120 100 127 94"/>
