@@ -1700,8 +1700,46 @@ function updatePhysics(dt, now){
  * ============================================================================ */
 const speechAvailable = typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance === 'function';
 
+function getVoiceRoot(){
+  try{
+    if(window.parent && window.parent !== window){
+      void window.parent.document;
+      return window.parent;
+    }
+  }catch{}
+  return window;
+}
+
+function stopSpeech(){
+  const root = getVoiceRoot();
+  let sharedStop = null;
+  try{ sharedStop = root.SihyeonVoice?.stop; }catch{}
+  if(typeof sharedStop === 'function'){
+    try{ sharedStop.call(root.SihyeonVoice); }catch{}
+  }else{
+    try{ window.speechSynthesis?.cancel?.(); }catch{}
+  }
+}
+
 function say(text){
-  if(!state.sound || !speechAvailable || !text) return;
+  if(!state.sound || !text) return;
+  const root = getVoiceRoot();
+  // Hangul phonics are Korean learning content, not English translations.
+  // English Listening must not send these phrases to an English or Korean TTS.
+  let english = false;
+  let sharedVoice = null;
+  try{
+    english = root.SihyeonPlaySettings?.getLanguage?.() === 'en';
+    sharedVoice = root.SihyeonVoice;
+  }catch{}
+  if(english) return;
+  if(root !== window && sharedVoice?.speak){
+    try{
+      sharedVoice.speak(text,{lang:'ko-KR',rate:0.96,pitch:1.1})?.catch?.(()=>{});
+    }catch{}
+    return;
+  }
+  if(!speechAvailable) return;
   try{
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
@@ -1790,6 +1828,7 @@ function mountUI(){
 
   $('soundBtn').onclick = () => {
     state.sound = !state.sound;
+    if(!state.sound) stopSpeech();
     $('soundIcon').textContent = state.sound ? '🔊' : '🔇';
     toast(state.sound ? '🔊 소리를 켰어요' : '🔇 소리를 껐어요');
   };
@@ -1825,6 +1864,7 @@ function returnToPlayOS(){
       return;
     }
   }catch(e){}
+  stopSpeech();
   window.location.href = '../index.html';
 }
 window.returnToPlayOS = returnToPlayOS;
