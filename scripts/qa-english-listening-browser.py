@@ -39,7 +39,7 @@ with sync_playwright() as p:
         def latest(): return pg.evaluate('window.__spoken.slice()')
         def clear(): pg.evaluate('window.__spoken.length=0')
         def wait_phrase(needle):
-            pg.wait_for_function("(text) => window.__spoken.some(s=>s.text.includes(text))",needle,timeout=9000)
+            pg.wait_for_function("(text) => window.__spoken.some(s=>s.text.includes(text))",arg=needle,timeout=9000)
             items=latest()
             assert all(x['lang']=='en-US' for x in items),items
             assert all(not re.search(r'[\uac00-\ud7a3]',x['text']) for x in items),items
