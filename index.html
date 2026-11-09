@@ -2755,7 +2755,7 @@ window.addEventListener('load',()=>{
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true),600);
+  setTimeout(()=>{ if(document.getElementById('worldMapScreen')) playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true); },600);
 }
 
 
