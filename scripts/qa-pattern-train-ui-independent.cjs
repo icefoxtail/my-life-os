@@ -98,7 +98,7 @@ async function flush() { await Promise.resolve(); await Promise.resolve(); }
 
 (async () => {
   await check('actual index launcher cleans prior games and keeps an exit when the model or UI module is missing', () => {
-    const names = ['cleanupActiveGame', 'openGameShell', 'openPatternTrainGame', 'gameOptions', 'renderGameLoadError'];
+    const names = ['cleanupActiveGame', 'stopSpeaking', 'openGameShell', 'openPatternTrainGame', 'gameOptions', 'renderGameLoadError'];
     const functions = names.map(name => { const match = integrationSource.match(new RegExp('^function ' + name + '\\([^\\n]*\\)\\{[\\s\\S]*?^\\}', 'm')); ok(match, name + ': actual integration function missing'); return match[0]; }).join('\n');
     for (const missing of [null, 'model', 'ui']) {
       const calls = [], back = { removed: false, remove() { this.removed = true; } }, target = { innerHTML: '', parentElement: { querySelector: () => back } }, root = { innerHTML: '' };
@@ -107,10 +107,12 @@ async function flush() { await Promise.resolve(); await Promise.resolve(); }
       for (const game of expectedCleanup) games[game] = { destroy: () => calls.push('destroy:' + game) };
       let rendering = null;
       if (missing !== 'ui') { games.patternTrain = { destroy: () => calls.push('destroy:patternTrain'), render: (el, options) => { rendering = { el, options }; } }; expectedCleanup.push('patternTrain'); }
-      const context = { window: { SihyeonPatternTrainModel: missing === 'model' ? undefined : model, SihyeonGames: games, SihyeonPlaySettings: { getAge: () => 4 }, SihyeonZones: { voiceZone: { destroy: () => calls.push('voice:destroy') }, karaokeZone: { destroy: () => calls.push('karaoke:destroy') } } },
+      const context = { window: { SihyeonPatternTrainModel: missing === 'model' ? undefined : model, SihyeonGames: games, SihyeonPlaySettings: { getAge: () => 4 }, SihyeonVoice: { stop: () => calls.push('voice:stop') }, SihyeonZones: { voiceZone: { destroy: () => calls.push('voice:destroy') }, karaokeZone: { destroy: () => calls.push('karaoke:destroy') } } },
         document: { getElementById: id => id === 'sihyeonPlayOS' ? root : target }, cleanupDetachedPlayLayers: () => calls.push('detached:cleanup'), closeGarageHandlers: () => calls.push('garage:cleanup'), startGameTimer: () => calls.push('timer:start'), escapeHtml: text => text,
         speakGuide() {}, fireConfetti() {}, gainExp() {}, playDynamicGuide() {}, returnToZoneLand: zone => calls.push('return:' + zone) };
-      vm.runInNewContext('let activeGameZoneId;\n' + functions + '\nopenPatternTrainGame();', context, { timeout: 1000 });
+      const travelTicket = vm.runInNewContext('let activeGameZoneId, activeTravelTicket=0;\n' + functions + '\nopenPatternTrainGame(); activeTravelTicket;', context, { timeout: 1000 });
+      eq(travelTicket, 1, 'opening a game invalidates a pending trip');
+      eq(calls.filter(call => call === 'voice:stop').length, 1, 'opening a game stops the prior voice');
       for (const game of expectedCleanup) eq(calls.filter(call => call === 'destroy:' + game).length, 1, game + ': old game must be destroyed exactly once');
       eq(calls.filter(call => call === 'detached:cleanup').length, 1); eq(calls.filter(call => call === 'garage:cleanup').length, 1);
       ok(root.innerHTML.includes('game-back-floating'), 'shell contains a fallback exit');

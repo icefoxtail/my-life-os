@@ -106,13 +106,15 @@ with sync_playwright() as p:
             results=[]
             for lang in ['ko','en']:
                 page.evaluate("(value) => SihyeonPlaySettings.setLanguage(value)",lang)
+                page.evaluate("renderWorldMapHome({countLaunch:false})")
                 clear()
-                page.evaluate("openStoryLand()")
-                expect='만화극장' if lang=='ko' else 'Story time! Let\'s listen!'
-                page.wait_for_function("(text) => window.__heard.some(x=>x.text===text)",arg=expect,timeout=9000)
+                page.get_by_role('button',name='만화극장',exact=True).click()
+                destination='만화극장' if lang=='ko' else "Story time! Let's listen!"
+                arrival='도착했어! 어떤 놀이를 해 볼까?' if lang=='ko' else 'Here we are! What shall we play?'
+                page.wait_for_function("(text) => window.__heard.some(x=>x.text===text)",arg=arrival,timeout=12000)
                 heard=page.evaluate('window.__heard')
-                assert not any(x['text']=='글자놀이터' for x in heard),heard
-                results.append({'lang':lang,'expected':expect,'heard':heard})
+                assert [x['text'] for x in heard]==[destination,arrival],heard
+                results.append({'lang':lang,'expected':[destination,arrival],'heard':heard})
             return results
         check('story-zone menu never says letters '+str(width)+'x'+str(height),menu_ko_en)
         def number_kingdom_2d():
