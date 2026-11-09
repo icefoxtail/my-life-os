@@ -115,6 +115,27 @@ with sync_playwright() as p:
                 results.append({'lang':lang,'expected':expect,'heard':heard})
             return results
         check('story-zone menu never says letters '+str(width)+'x'+str(height),menu_ko_en)
+        def number_kingdom_2d():
+            samples=[]
+            for lang in ['ko','en']:
+                page.evaluate("(value) => SihyeonPlaySettings.setLanguage(value)",lang)
+                clear()
+                page.evaluate("""() => {
+                    openNumberKingdom3DGame();
+                    document.getElementById('numberKingdomFrame').src='./games/number-kingdom-3d.html?view=2d';
+                }""")
+                frame=page.frame_locator('#numberKingdomFrame')
+                add_two=frame.locator('#sihyeon-2d-root [data-add="2"]')
+                add_two.wait_for(timeout=14000)
+                add_two.click(timeout=6500)
+                page.wait_for_function('window.__heard.length>0',timeout=7000)
+                spoken=last()
+                assert spoken['lang']==('en-US' if lang=='en' else 'ko-KR'),spoken
+                if lang=='en': assert spoken['text']=="two! One more block!",spoken
+                else: assert '2 블록을 놓았어요' in spoken['text'],spoken
+                samples.append({'lang':lang,'spoken':spoken})
+            return samples
+        check('number kingdom 2D fallback taps '+str(width)+'x'+str(height),number_kingdom_2d)
         context.close()
     browser.close()
 server.shutdown()
