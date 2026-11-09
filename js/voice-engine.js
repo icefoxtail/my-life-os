@@ -358,6 +358,10 @@
       var englishText = window.SihyeonEnglishListening?.phraseForId?.(voiceId) || '';
       return englishText ? speak(englishText, Object.assign({}, request, { lang: 'en-US' })) : Promise.resolve(false);
     }
+    // Zone titles are semantic labels, not unverified legacy MP3 content.
+    // Read the exact current Korean zone label from the same registry used by the UI.
+    var stableKoreanLabel = window.SihyeonVoiceLabels?.fixedKoreanVoice?.(voiceId) || '';
+    if (stableKoreanLabel) return speak(stableKoreanLabel, request);
     if (!voiceId) {
       return allowTtsFallback ? speak(fallbackText, request) : Promise.resolve(false);
     }
