@@ -1,0 +1,128 @@
+name: QA only - live Korean English voice sync
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/qa-sihyeon-ko-en-live-20261109.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-voice-sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Public GitHub Pages source byte SHA-256 verification
+        run: |
+          mkdir -p qa-voice-live
+          python3 - <<'PY'
+          import concurrent.futures,hashlib,json,pathlib,subprocess,time,urllib.request
+          root=pathlib.Path('.')
+          sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert sha=='238fd94b150200a29a593ea193bb42de2905dc66','main changed: rebase audit'
+          paths=['index.html','sw.js','js/voice-labels.js','js/voice-engine.js',
+                 'js/english-listening.js','js/play-settings.js',
+                 'js/games/art-zone.js','js/games/number-blocks.js',
+                 'games/number-kingdom-3d.html','js/engine/webgl-fallback.js',
+                 'js/games/vehicle-memory.js','js/games/number-vehicles.js',
+                 'js/games/number-count.js']
+          def check(path):
+              expected=hashlib.sha256((root/path).read_bytes()).hexdigest()
+              last=None
+              for attempt in range(10):
+                  try:
+                      req=urllib.request.Request('https://icefoxtail.github.io/my-life-os/'+path+'?check='+sha+'-'+str(attempt),headers={'Cache-Control':'no-cache'})
+                      with urllib.request.urlopen(req,timeout=35) as response:
+                          actual=hashlib.sha256(response.read()).hexdigest()
+                      if actual==expected:
+                          return dict(path=path,status='PASS',sha256=actual,attempt=attempt+1)
+                      last='different public SHA='+actual
+                  except Exception as exc:last=str(exc)
+                  time.sleep(6)
+              return dict(path=path,status='FAIL',expected=expected,reason=last)
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool: results=list(pool.map(check,paths))
+          passed=sum(r['status']=='PASS' for r in results)
+          report={'mainSha':sha,'scope':'actual public Pages HTTP bytes','results':results,'passed':passed,'total':len(results)}
+          pathlib.Path('qa-voice-live/sha.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
+          print('PUBLIC_KO_EN_VOICE_SHA',passed,'/',len(results),flush=True)
+          for r in results:
+              if r['status']!='PASS':print(r,flush=True)
+          assert passed==len(results),'Public Pages still serves older assets'
+          PY
+      - name: Install Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Actual public site click and TTS text verification
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,re
+          from playwright.sync_api import sync_playwright
+          result={'scope':'public-site click+speechSynthesis invocation, not actual speaker listening','checks':[]}
+          def check(name,action):
+              try:result['checks'].append(dict(name=name,status='PASS',detail=action()))
+              except Exception as exc:result['checks'].append(dict(name=name,status='FAIL',reason=str(exc)))
+              print(result['checks'][-1],flush=True)
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for w,h in [(390,844),(844,390)]:
+                  ctx=browser.new_context(viewport={'width':w,'height':h},service_workers='block')
+                  page=ctx.new_page()
+                  def art():
+                      page.goto('https://icefoxtail.github.io/my-life-os/index.html',wait_until='load',timeout=55000)
+                      page.evaluate('''() => {
+                         window.__speechEvents=[];
+                         speechSynthesis.cancel=()=>{};
+                         speechSynthesis.speak=u=>{
+                           window.__speechEvents.push({text:u.text,lang:u.lang});
+                           setTimeout(()=>u.onend?.(),25);
+                         };
+                      }''')
+                      page.evaluate('openArtZoneGame()')
+                      page.locator('.az-root').wait_for(timeout=12000)
+                      results=[]
+                      for lang in ['ko','en']:
+                          page.evaluate("(lang)=>SihyeonPlaySettings.setLanguage(lang)",lang)
+                          for kind,selector,id in [
+                              ('template','[data-tpl="police"]','police'),
+                              ('template','[data-tpl="fire_ladder"]','fire_ladder'),
+                              ('template','[data-tpl="dino"]','dino'),
+                              ('template','[data-tpl="icecream"]','icecream'),
+                              ('color','[data-color="#FF4444"]','#FF4444'),
+                              ('color','[data-color="#4488FF"]','#4488FF')]:
+                              page.evaluate('window.__speechEvents.length=0')
+                              page.locator(selector).click(timeout=6000)
+                              expected=page.evaluate("(x)=>SihyeonVoiceLabels.spoken(x.kind,x.id,x.lang)",dict(kind=kind,id=id,lang=lang))
+                              actual=page.evaluate('window.__speechEvents.at(-1)')
+                              assert actual and actual['text']==expected,(lang,kind,id,actual,expected)
+                              assert actual['lang']==('en-US' if lang=='en' else 'ko-KR')
+                              results.append(dict(lang=lang,kind=kind,id=id,spoken=actual['text']))
+                      return {'viewport':[w,h],'passes':len(results),'selected':results}
+                  check('KO/EN selected art and colors '+str(w)+'x'+str(h),art)
+                  def story():
+                      results=[]
+                      for lang,expected in [('ko','만화극장'),('en',"Story time! Let's listen!")]:
+                          page.evaluate("(lang)=>SihyeonPlaySettings.setLanguage(lang)",lang)
+                          page.evaluate("window.__speechEvents.length=0;openStoryLand()")
+                          page.wait_for_function("(text)=>window.__speechEvents.some(x=>x.text===text)",arg=expected,timeout=9500)
+                          heard=page.evaluate('window.__speechEvents')
+                          assert not any(x['text']=='글자놀이터' for x in heard),heard
+                          results.append(dict(lang=lang,matched=expected))
+                      return results
+                  check('KO/EN story menu actual title '+str(w)+'x'+str(h),story)
+                  ctx.close()
+              browser.close()
+          pathlib.Path('qa-voice-live/site-voice.json').write_text(json.dumps(result,indent=2,ensure_ascii=False))
+          assert all(x['status']=='PASS' for x in result['checks'])
+          print('PUBLIC_KO_EN_VOICE_TAP',len(result['checks']),'/',len(result['checks']),flush=True)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ko-en-live-voice-${{ github.run_id }}
+          path: qa-voice-live/
+          if-no-files-found: error
+          retention-days: 14
