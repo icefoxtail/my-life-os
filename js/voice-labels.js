@@ -946,6 +946,8 @@
     };
     if(named[id])return zoneById[named[id]].ko;
     const generic={
+      'common.welcome':'시현아 안녕. 놀이공원에 온 걸 환영해.',
+      'common.whereToGo':'어디로 갈까? 가고 싶은 곳을 살짝 눌러볼까?',
       'common.landArrive':'도착했어! 어떤 놀이를 해 볼까?',
       'common.walkToZone':'출발! 하나, 둘, 하나, 둘!',
       'common.zoneArrive':'도착했어! 같이 놀아보자!'

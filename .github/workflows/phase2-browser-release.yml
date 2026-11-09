@@ -9,6 +9,7 @@ on:
       - 'assets/**'
       - 'scripts/qa-phase2-release-browser.py'
       - 'scripts/qa-pattern-train*'
+      - 'scripts/qa-home-voice-browser.py'
       - '.github/workflows/phase2-browser-release.yml'
   workflow_dispatch:
   push:
@@ -43,6 +44,8 @@ jobs:
         run: python3 scripts/qa-menu-voice-browser.py --output qa-release-evidence/menu-voice
       - name: Korean and English tap-to-speech synchronization
         run: python3 scripts/qa-voice-label-sync-browser.py --output qa-release-evidence/voice-sync
+      - name: Home welcome and guide voice regression
+        run: python3 scripts/qa-home-voice-browser.py --output qa-release-evidence/home-voice
       - name: Attach source-bound evidence even on failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
