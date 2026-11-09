@@ -2761,7 +2761,18 @@ window.addEventListener('load',()=>{
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>{ const map=document.getElementById('worldMapScreen'); if(map && map.dataset.navigating!=='true') playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true); },600);
+  const welcomeMap = document.getElementById('worldMapScreen');
+  if(welcomeMap){
+    // An explicit home action takes priority over the delayed greeting.
+    const cancelWelcome = () => clearTimeout(welcomeTimer);
+    const welcomeTimer = setTimeout(()=>{
+      welcomeMap.removeEventListener('click',cancelWelcome,true);
+      if(welcomeMap.isConnected && welcomeMap.dataset.navigating !== 'true'){
+        playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true);
+      }
+    },600);
+    welcomeMap.addEventListener('click',cancelWelcome,{capture:true,once:true});
+  }
 }
 
 
