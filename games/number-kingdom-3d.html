@@ -3712,9 +3712,38 @@ const NUMBER_VOICE_PROFILES = {
 
 const tapTracker = { targetId: null, num: 0, count: 0, lastTime: 0, tickleIdx: 0 };
 
+// Speak only the number the child actually touched. Reuse the parent's
+// language preference and one voice queue when this game runs in an iframe.
 function say(){ return false; }
-function sayNumber(){ return false; }
-function stopSpeech(){}
+function sayNumber(n){
+  if(!state.sound || state.destroyed || !Number.isInteger(Number(n)))return false;
+  const root=window.parent && window.parent!==window ? window.parent : window;
+  const english=root.SihyeonPlaySettings?.getLanguage?.()==='en';
+  const names=root.SihyeonVoiceLabels;
+  const word=english
+    ? names?.numberEn?.(Number(n))
+    : (getPureKoreanName(Number(n)) || getSinoName(Number(n)));
+  if(!word)return false;
+  const voice=root.SihyeonVoice;
+  if(voice?.speak){
+    voice.speak(word,{lang:english?'en-US':'ko-KR',rate:.91,pitch:1.0})?.catch?.(()=>{});
+    return true;
+  }
+  // Standalone iframe without the playground's voice engine.
+  if(!english && window.speechSynthesis && typeof SpeechSynthesisUtterance==='function'){
+    try{
+      const utterance=new SpeechSynthesisUtterance(word);
+      utterance.lang='ko-KR';utterance.rate=.91;
+      window.speechSynthesis.cancel();window.speechSynthesis.speak(utterance);
+      return true;
+    }catch(_){}
+  }
+  return false;
+}
+function stopSpeech(){
+  if(window.parent && window.parent!==window) window.parent.SihyeonVoice?.stop?.();
+  else window.speechSynthesis?.cancel?.();
+}
 
 function handleFriendTap(o, isSpawn = false){
   if(!o || o.kind !== 'friend') return;
@@ -3728,6 +3757,7 @@ function handleFriendTap(o, isSpawn = false){
 
     if(o.n === 1){
       const step = ((tapTracker.count - 1) % 10) + 1;
+      sayNumber(step);
       triggerSquash(o, 0.85);
       o.vy = 0.16;
       sfx('count', step);
@@ -3766,6 +3796,7 @@ function handleFriendTap(o, isSpawn = false){
     return;
   }
 
+  sayNumber(o.n);
   tapTracker.targetId = o.id;
   tapTracker.num = o.n;
   tapTracker.count = 1;
@@ -4626,7 +4657,7 @@ function mountUI(){
       b.style.background = getCellColor(n, 0, 0);
     }
     b.innerHTML = `<span class="numTxt">${n}</span>${getNumberblockFaceSVG(n)}`;
-    b.onclick = () => spawnFriend(n);
+    b.onclick = () => { spawnFriend(n); sayNumber(n); };
     tray.appendChild(b);
   }
 
@@ -4809,7 +4840,7 @@ function toggleDrawer(mode){
     dr.appendChild(b);
   };
   if(mode === 'numbers'){
-    for(const n of [20, 50, 100]) addOption('숫자 ' + n, '🔢', () => spawnFriend(n));
+    for(const n of [20, 50, 100]) addOption('숫자 ' + n, '🔢', () => { spawnFriend(n); sayNumber(n); });
     addOption('1칸 브릭', '🧱', () => spawnProp('brick'));
     addOption('건축 소품', '🏠', () => toggleDrawer('props'));
   } else {
