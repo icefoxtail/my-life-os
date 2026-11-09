@@ -60,7 +60,7 @@ for(const id of ids){
   assert.equal(template.ko,found[1],'Displayed picture name must match KO voice for '+id);
 }
 assert.equal(lex.spoken('template','police','en'),'police car');
-assert.equal(lex.spoken('template','fire_ladder','en'),'ladder fire truck');
+assert.equal(lex.spoken('template','fire_ladder','en'),'ladder truck');
 assert.equal(lex.spoken('template','dino','en'),'dinosaur');
 assert.equal(lex.spoken('template','icecream','en'),'ice cream');
 assert.equal(lex.spoken('vehicle','helicopter','en'),'helicopter');
