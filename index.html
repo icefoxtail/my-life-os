@@ -1787,15 +1787,6 @@ const LAND_VOICE_IDS={
   karaoke:'common.zone.karaoke'
 };
 
-function playVoiceSequenceGuide(items,force=false){
-  if(!force&&isStoryPlaying()) return;
-  if(!db.settings.voiceGuide.enabled) return;
-  if(window.SihyeonVoice&&typeof window.SihyeonVoice.playSequence==='function'){
-    const cleanItems=Array.isArray(items)?items.map(item=>Array.isArray(item)?[item[0],'']:item):[];
-    window.SihyeonVoice.playSequence(cleanItems,{rate:0.82,pitch:1.04}).catch(()=>{});
-  }
-}
-
 function speakStory(text){ speakText(text,{rate:0.82,pitch:1.03}); }
 
 function stopSpeaking(){
@@ -2055,10 +2046,7 @@ function openImageLand(zoneId,title,imageSrc,hotspots){
         </div>
       </div>
     </section>`;
-  playVoiceSequenceGuide([
-    [LAND_VOICE_IDS[zoneId],title],
-    ['common.landArrive',`${title}에 도착했어. 하고 싶은 걸 살짝 눌러볼까?`]
-  ],true);
+  playVoiceGuide('common.landArrive','',true);
 }
 
 function renderZoneLand(config){
@@ -2096,11 +2084,7 @@ function renderZoneLand(config){
       </div>
     </div>`;
 
-  const landTitle=String(config.title||'').replace(/^[^\s]+\s*/,'');
-  playVoiceSequenceGuide([
-    [LAND_VOICE_IDS[config.id],landTitle||config.title],
-    ['common.landArrive',`${landTitle||config.title}에 도착했어. 하고 싶은 걸 살짝 눌러볼까?`]
-  ],true);
+  playVoiceGuide('common.landArrive','',true);
 }
 
 function openGameLand(){ renderZoneLand(ZONE_CONFIGS.game); }
@@ -2137,10 +2121,7 @@ function travelToZone(zoneId){
     }
   }
 
-  playVoiceSequenceGuide([
-    [LAND_VOICE_IDS[zoneId],zone.label],
-    ['common.walkToZone',`시현이가 ${zone.label}으로 걸어가요. 하나, 둘. 하나, 둘.`]
-  ],true);
+  playVoiceGuide(LAND_VOICE_IDS[zoneId],'',true);
 
   let entered=false;
   const safeEnter=()=>{
@@ -2212,6 +2193,7 @@ function enterZone(zoneId){
 }
 
 function closeToParkHome(){
+  activeTravelTicket++;
   clearGameTimer();
   activeGameZoneId='';
   cleanupActiveGame();
@@ -2223,6 +2205,7 @@ function closeToParkHome(){
 }
 
 function returnToZoneLand(zoneId){
+  activeTravelTicket++;
   clearGameTimer();
   activeGameZoneId='';
   cleanupActiveGame();
@@ -2274,13 +2257,12 @@ function renderPlaceholderZone(zoneId){
         <div class="placeholder-text">재미있는 놀이를 준비하고 있어!</div>
       </div>
     </div>`;
-  playVoiceSequenceGuide([
-    [LAND_VOICE_IDS[zoneId],zone.label],
-    ['common.zoneArrive',`${zone.label}에 도착했어. 재미있는 걸 준비하고 있어.`]
-  ]);
+  playVoiceGuide('common.zoneArrive','');
 }
 
 function openGameShell(title,bodyId,bg='linear-gradient(180deg,#FF7A1A 0%,#FFD93D 100%)',zoneId='game'){
+  activeTravelTicket++;
+  stopSpeaking();
   cleanupActiveGame();
   closeGarageHandlers();
   activeGameZoneId=zoneId;
@@ -2587,10 +2569,7 @@ function openStoryTheater(){
   if(window.renderStoryWorld) window.renderStoryWorld();
   else setTimeout(()=>window.renderStoryWorld?.(),0);
 
-  playVoiceSequenceGuide([
-    ['common.land.story','만화극장'],
-    ['common.landArrive','만화극장에 도착했어. 보고 싶은 만화를 살짝 눌러볼까?']
-  ],true);
+  playVoiceGuide('common.landArrive','',true);
 }
 
 
