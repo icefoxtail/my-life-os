@@ -398,7 +398,37 @@
       id: 'excavator',
       name: '포크레인',
       emoji: '🚧',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        boom: { ko: '긴 팔', en: 'boom', color: '#FFD700' },
+        stick: { ko: '짧은 팔', en: 'stick', color: '#FF9900' },
+        bucket: { ko: '삽', en: 'bucket', color: '#C0C0C0' },
+        track: { ko: '무한궤도', en: 'track', color: '#1A1A1A' },
+        body: { ko: '몸체', en: 'body', color: '#FFD700' },
+        cab: { ko: '운전실', en: 'cab', color: '#FFD700' },
+        window: { ko: '창문', en: 'window', color: '#8EF6D1' },
+        wheel_rear: { ko: '뒷바퀴', en: 'rear wheel', color: '#C0C0C0' },
+        wheel_front: { ko: '앞바퀴', en: 'front wheel', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+  <path class="fillable" data-part="boom" d="M 112 104 L 146 48 Q 150 40 158 44 L 168 50 Q 175 55 171 62 L 138 116 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="stick" d="M 156 44 L 176 52 L 202 108 L 184 116 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="bucket" d="M 182 104 L 214 98 Q 224 116 206 134 L 188 134 Q 178 120 182 104 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="track" x="22" y="130" width="130" height="30" rx="15" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="body" x="26" y="92" width="100" height="40" rx="9" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="cab" d="M 62 94 V 56 Q 62 50 68 50 H 106 Q 112 50 112 56 V 94 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="window" x="71" y="59" width="32" height="26" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_rear" cx="44" cy="145" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_front" cx="130" cy="145" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+    <path d="M 62 145 H 112"/>
+    <path d="M 34 106 H 52"/>
+    <path d="M 192 134 V 140 M 200 134 V 140 M 208 134 V 138"/>
+    <path d="M 125 88 L 150 76"/>
+  </g>
+</svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="20" y="95" width="90" height="26" rx="13" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="35" cy="108" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
         <circle class="fillable" cx="65" cy="108" r="6" stroke="#333" stroke-width="3" fill="#FFF"/>
@@ -414,12 +444,43 @@
 <path d="M27 117 H104 M47 88 H79"/><circle cx="88" cy="82" r="4" fill="none"/><path d="M162 97 H176 M154 107 H183"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'dump_truck',
       name: '덤프트럭',
       emoji: '🚛',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        chassis: { ko: '아래 틀', en: 'chassis', color: '#8B5A2B' },
+        bed: { ko: '짐칸', en: 'dump bed', color: '#FF9900' },
+        cab: { ko: '운전석', en: 'cab', color: '#FFD700' },
+        window: { ko: '창문', en: 'window', color: '#8EF6D1' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFF8E7' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+  <rect class="fillable" data-part="chassis" x="22" y="112" width="198" height="22" rx="8" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="bed" d="M 24 110 L 126 86 L 118 42 L 16 66 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="cab" d="M 132 112 V 68 Q 132 58 142 58 H 170 Q 178 58 183 66 L 200 92 Q 204 98 211 98 H 214 Q 220 100 220 106 V 112 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="window" d="M 142 68 H 168 L 182 90 H 142 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="headlight" x="199" y="96" width="20" height="16" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="tire_rear" cx="62" cy="140" r="20" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="tire_front" cx="176" cy="140" r="20" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="hub_rear" cx="62" cy="140" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="hub_front" cx="176" cy="140" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+    <path d="M 34 94 L 124 72"/>
+    <path d="M 100 108 L 116 92"/>
+    <path d="M 160 94 H 170"/>
+    <path d="M 146 112 V 100"/>
+  </g>
+</svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <path class="fillable" d="M 15 30 L 115 30 L 115 85 L 15 85 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <rect class="fillable" x="25" y="40" width="20" height="35" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
         <rect class="fillable" x="55" y="40" width="20" height="35" rx="2" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -436,12 +497,43 @@
 <path d="M18 28 L12 23 H118 L126 32"/><path d="M22 81 H108"/><path d="M132 73 H161 M137 78 H153"/><path d="M184 83 H190"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'bulldozer',
       name: '불도저',
       emoji: '🚜',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        push_arm: { ko: '미는 팔', en: 'push arm', color: '#C0C0C0' },
+        blade: { ko: '큰 삽날', en: 'blade', color: '#FF9900' },
+        body: { ko: '몸체', en: 'body', color: '#FFD700' },
+        engine: { ko: '엔진 덮개', en: 'engine hood', color: '#FFD700' },
+        cab: { ko: '운전실', en: 'cab', color: '#FFD700' },
+        window: { ko: '창문', en: 'window', color: '#8EF6D1' },
+        track: { ko: '무한궤도', en: 'track', color: '#1A1A1A' },
+        wheel_rear: { ko: '뒷바퀴', en: 'rear wheel', color: '#C0C0C0' },
+        wheel_front: { ko: '앞바퀴', en: 'front wheel', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+  <rect class="fillable" data-part="push_arm" x="150" y="100" width="40" height="22" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <path class="fillable" data-part="blade" d="M 188 62 Q 188 54 196 54 H 208 Q 216 54 217 62 L 221 140 Q 221 150 211 150 H 196 Q 187 150 187 141 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="body" x="42" y="88" width="122" height="36" rx="10" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="engine" x="112" y="62" width="50" height="32" rx="9" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="cab" d="M 54 90 V 36 Q 54 30 60 30 H 100 Q 106 30 106 36 V 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="window" x="63" y="40" width="34" height="30" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="track" x="30" y="116" width="140" height="44" rx="22" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_rear" cx="58" cy="138" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_front" cx="142" cy="138" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+    <path d="M 84 138 H 116"/>
+    <path d="M 196 70 H 210 M 196 134 H 212"/>
+    <path d="M 124 76 H 148 M 124 84 H 148"/>
+    <path d="M 72 78 H 92"/>
+  </g>
+</svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="25" y="90" width="95" height="28" rx="14" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="42" cy="104" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
         <circle class="fillable" cx="72" cy="104" r="7" stroke="#333" stroke-width="3" fill="#FFF"/>
@@ -457,12 +549,39 @@
 <path d="M47 77 H69 M96 59 H122"/><path d="M146 110 H174"/><path d="M155 54 Q164 56 167 65"/><path d="M35 118 H118"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'rocket',
       name: '우주 로켓',
       emoji: '🚀',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        fin_left: { ko: '왼쪽 날개', en: 'left fin', color: '#FF4444' },
+        fin_right: { ko: '오른쪽 날개', en: 'right fin', color: '#FF4444' },
+        body: { ko: '로켓 몸통', en: 'rocket body', color: '#FFF8E7' },
+        nose: { ko: '뾰족한 머리', en: 'nose cone', color: '#FF4444' },
+        window: { ko: '동그란 창문', en: 'round window', color: '#8EF6D1' },
+        stripe: { ko: '줄무늬', en: 'stripe', color: '#4488FF' },
+        nozzle: { ko: '분사구', en: 'nozzle', color: '#C0C0C0' },
+        flame: { ko: '불꽃', en: 'flame', color: '#FF9900' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+  <path class="fillable" data-part="fin_left" d="M 92 90 L 58 126 Q 50 134 56 142 L 92 138 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="fin_right" d="M 148 90 L 182 126 Q 190 134 184 142 L 148 138 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="flame" d="M 106 138 Q 98 152 120 162 Q 142 152 134 138 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="nozzle" x="104" y="126" width="32" height="14" rx="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <path class="fillable" data-part="body" d="M 90 66 H 150 V 126 Q 150 134 142 134 H 98 Q 90 134 90 126 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="nose" d="M 120 18 Q 146 34 150 68 H 90 Q 94 34 120 18 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="stripe" x="90" y="108" width="60" height="16" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="window" cx="120" cy="88" r="15" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+    <path d="M 113 84 Q 115 80 119 79"/>
+    <path d="M 108 44 Q 112 36 118 33"/>
+  </g>
+</svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <path class="fillable" d="M 95 90 L 95 115 L 105 115 L 105 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 80 75 L 45 105 L 80 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 120 75 L 155 105 L 120 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -476,12 +595,50 @@
 <path d="M86 85 H93 M107 85 H114"/><path d="M93 98 H107"/><path d="M95 30 L100 23 L105 30"/><path d="M49 117 l7 -5 m93 5 l-7 -5"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'dino',
       name: '공룡',
       emoji: '🦕',
+      version: 2,
+      parts: {
+        plate_1: { ko: '등판 1', en: 'back plate 1', color: '#FF9900' },
+        plate_2: { ko: '등판 2', en: 'back plate 2', color: '#FFD700' },
+        plate_3: { ko: '등판 3', en: 'back plate 3', color: '#FF9900' },
+        plate_4: { ko: '등판 4', en: 'back plate 4', color: '#FFD700' },
+        tail: { ko: '꼬리', en: 'tail', color: '#7ED957' },
+        leg_rear: { ko: '뒷다리', en: 'back leg', color: '#7ED957' },
+        leg_front: { ko: '앞다리', en: 'front leg', color: '#7ED957' },
+        body: { ko: '몸통', en: 'body', color: '#7ED957' },
+        belly: { ko: '배', en: 'belly', color: '#F6E7C8' },
+        head: { ko: '얼굴', en: 'head', color: '#7ED957' },
+      },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="plate_1" d="M 68 84 Q 68 62 80 56 Q 92 62 92 84 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="plate_2" d="M 93 78 Q 93 54 105 46 Q 117 54 117 78 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="plate_3" d="M 118 78 Q 118 54 130 46 Q 142 54 142 78 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="plate_4" d="M 143 82 Q 143 62 155 56 Q 167 62 167 84 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="tail" d="M 72 88 Q 42 96 16 68 Q 18 114 48 122 Q 62 126 76 124 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="leg_rear" x="78" y="118" width="30" height="42" rx="13" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="leg_front" x="140" y="118" width="30" height="42" rx="13" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 62 108 Q 62 70 118 68 Q 178 68 182 105 Q 182 138 120 140 Q 62 142 62 108 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="belly" d="M 92 118 Q 122 110 156 118 Q 150 133 123 134 Q 98 134 92 118 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="head" d="M 164 86 Q 164 60 192 60 Q 220 60 220 86 Q 220 112 192 112 Q 164 112 164 86 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="198" cy="80" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="200" cy="78" r="1.8" fill="#FFF" stroke="none"/>
+          <circle cx="212" cy="92" r="1.8" fill="#333" stroke="none"/>
+          <path d="M 194 98 Q 203 105 212 99"/>
+          <circle cx="180" cy="97" r="5" stroke-width="2"/>
+          <circle cx="88" cy="92" r="4" stroke-width="2"/>
+          <circle cx="108" cy="86" r="3" stroke-width="2"/>
+          <circle cx="132" cy="90" r="4" stroke-width="2"/>
+          <path d="M 88 154 V 160 M 99 154 V 160 M 150 154 V 160 M 161 154 V 160"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <rect class="fillable" x="74" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
         <rect class="fillable" x="100" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
         <rect class="fillable" x="146" y="118" width="20" height="38" rx="8" stroke="#333" stroke-width="3.5" fill="#FFF"/>
@@ -504,12 +661,49 @@
 <path d="M196 111 Q188 119 178 115"/><circle cx="204" cy="92" r="2" fill="#333" stroke="none"/><path d="M79 151 L84 156 M109 151 L114 156 M156 151 L161 156"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'train',
       name: '칙칙폭폭 기차',
       emoji: '🚂',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        smoke: { ko: '연기', en: 'smoke', color: '#C0C0C0' },
+        chimney: { ko: '굴뚝', en: 'chimney', color: '#1A1A1A' },
+        dome: { ko: '동그란 뚜껑', en: 'steam dome', color: '#FFD700' },
+        boiler: { ko: '기관차 몸통', en: 'boiler', color: '#FF4444' },
+        frame: { ko: '아래 틀', en: 'frame', color: '#1A1A1A' },
+        cab: { ko: '운전실', en: 'cab', color: '#FF4444' },
+        roof: { ko: '지붕', en: 'roof', color: '#1E40AF' },
+        window: { ko: '창문', en: 'window', color: '#8EF6D1' },
+        lamp: { ko: '앞 등', en: 'headlamp', color: '#FFD700' },
+        wheel_big: { ko: '큰 바퀴', en: 'big wheel', color: '#1A1A1A' },
+        wheel_mid: { ko: '가운데 바퀴', en: 'middle wheel', color: '#1A1A1A' },
+        wheel_small: { ko: '작은 바퀴', en: 'small wheel', color: '#1A1A1A' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+  <circle class="fillable" data-part="smoke" cx="166" cy="26" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <path class="fillable" data-part="chimney" d="M 154 74 V 56 L 146 42 H 182 L 174 56 V 74 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="dome" d="M 106 74 Q 106 52 122 52 Q 138 52 138 74 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="boiler" x="70" y="70" width="130" height="52" rx="16" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="frame" x="18" y="118" width="186" height="14" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="cab" x="24" y="48" width="64" height="80" rx="6" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="roof" x="16" y="34" width="80" height="18" rx="9" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="window" x="36" y="62" width="40" height="30" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="lamp" cx="180" cy="92" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_big" cx="54" cy="138" r="22" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_mid" cx="108" cy="141" r="19" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="wheel_small" cx="160" cy="145" r="15" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+    <circle cx="54" cy="138" r="7"/><circle cx="108" cy="141" r="6"/><circle cx="160" cy="145" r="5"/>
+    <path d="M 54 138 L 108 141"/>
+    <path d="M 146 80 V 112 M 96 100 H 128"/>
+    <path d="M 194 124 L 212 132 V 140 H 196"/>
+  </g>
+</svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <circle class="fillable" cx="135" cy="15" r="10" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="110" cy="20" r="7" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="95" cy="10" r="5" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -532,12 +726,44 @@
 <path d="M16 99 H161"/><path d="M35 83 H60"/><path d="M75 53 H142"/><path d="M150 84 H164"/><circle cx="174" cy="96" r="4" fill="none"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'airplane',
       name: '비행기',
       emoji: '✈️',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        tail: { ko: '꼬리 날개', en: 'tail fin', color: '#FF4444' },
+        wing_far: { ko: '뒤쪽 날개', en: 'far wing', color: '#4488FF' },
+        fuselage: { ko: '비행기 몸통', en: 'fuselage', color: '#FFF8E7' },
+        nose: { ko: '뾰족한 코', en: 'nose', color: '#FF4444' },
+        cockpit: { ko: '조종석 창문', en: 'cockpit window', color: '#8EF6D1' },
+        window_1: { ko: '창문 1', en: 'window 1', color: '#8EF6D1' },
+        window_2: { ko: '창문 2', en: 'window 2', color: '#8EF6D1' },
+        window_3: { ko: '창문 3', en: 'window 3', color: '#8EF6D1' },
+        wing: { ko: '큰 날개', en: 'wing', color: '#4488FF' },
+        engine: { ko: '엔진', en: 'engine', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+  <path class="fillable" data-part="tail" d="M 36 80 L 24 40 Q 22 32 30 32 H 44 Q 50 32 54 38 L 82 80 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="wing_far" d="M 116 74 L 142 36 Q 146 30 152 30 H 160 Q 164 32 162 38 L 146 74 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="fuselage" d="M 22 94 Q 22 74 44 72 H 182 Q 220 74 220 94 Q 220 114 182 116 H 44 Q 22 114 22 94 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="nose" d="M 188 73 Q 220 76 220 94 Q 220 112 188 115 Q 198 94 188 73 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <path class="fillable" data-part="cockpit" d="M 158 80 H 176 Q 182 80 184 86 L 186 92 H 158 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="window_1" cx="64" cy="92" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="window_2" cx="92" cy="92" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="window_3" cx="120" cy="92" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <path class="fillable" data-part="wing" d="M 100 102 H 146 L 114 148 Q 110 156 102 156 H 94 Q 88 154 92 146 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="engine" x="112" y="124" width="36" height="18" rx="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+    <path d="M 140 94 H 150"/>
+    <path d="M 32 104 H 54"/>
+    <path d="M 126 148 H 140"/>
+  </g>
+</svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <path class="fillable" d="M 40 70 L 25 35 L 50 35 L 60 65 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 85 65 L 130 30 L 145 35 L 110 70 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 30 75 C 20 60, 140 50, 170 75 C 190 100, 30 90, 30 75 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -552,12 +778,45 @@
 <path d="M33 75 Q40 70 52 70"/><path d="M90 63 L125 38"/><path d="M101 87 L124 111"/><path d="M160 73 Q168 78 165 83"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'lion',
       name: '어흥 사자',
       emoji: '🦁',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        mane: { ko: '갈기', en: 'mane', color: '#FF9900' },
+        ear_left: { ko: '왼쪽 귀', en: 'left ear', color: '#FFD700' },
+        ear_right: { ko: '오른쪽 귀', en: 'right ear', color: '#FFD700' },
+        face: { ko: '얼굴', en: 'face', color: '#FFD700' },
+        tuft: { ko: '앞머리', en: 'forelock', color: '#FF9900' },
+        muzzle: { ko: '주둥이', en: 'muzzle', color: '#FFF8E7' },
+        nose: { ko: '코', en: 'nose', color: '#8B5A2B' },
+        cheek_left: { ko: '왼쪽 볼', en: 'left cheek', color: '#FF88CC' },
+        cheek_right: { ko: '오른쪽 볼', en: 'right cheek', color: '#FF88CC' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="mane" d="M 120.0 30.0 Q 138.7 10.1 146.9 36.1 Q 172.4 26.3 168.5 53.3 Q 195.7 55.6 180.4 78.2 Q 204.0 92.0 180.4 105.8 Q 195.7 128.4 168.5 130.7 Q 172.4 157.7 146.9 147.9 Q 138.7 173.9 120.0 154.0 Q 101.3 173.9 93.1 147.9 Q 67.6 157.7 71.5 130.7 Q 44.3 128.4 59.6 105.8 Q 36.0 92.0 59.6 78.2 Q 44.3 55.6 71.5 53.3 Q 67.6 26.3 93.1 36.1 Q 101.3 10.1 120.0 30.0 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="ear_left" cx="87" cy="56" r="15" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="ear_right" cx="153" cy="56" r="15" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="face" cx="120" cy="96" r="46" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="tuft" d="M 100 56 Q 110 40 120 54 Q 130 40 140 56 Q 120 66 100 56 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <ellipse class="fillable" data-part="muzzle" cx="120" cy="114" rx="27" ry="20" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="nose" d="M 109 97 Q 120 92 131 97 Q 129 108 120 111 Q 111 108 109 97 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="cheek_left" cx="82" cy="108" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="cheek_right" cx="158" cy="108" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="100" cy="84" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="140" cy="84" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="102" cy="82" r="1.8" fill="#FFF" stroke="none"/>
+          <circle cx="142" cy="82" r="1.8" fill="#FFF" stroke="none"/>
+          <path d="M 120 111 V 118 M 108 122 Q 114 128 120 118 Q 126 128 132 122"/>
+          <path d="M 83 54 Q 87 50 91 54 M 149 54 Q 153 50 157 54"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <polygon class="fillable" points="100,10 120,25 145,15 145,40 170,45 155,65 175,85 150,100 160,125 130,120 100,140 70,120 40,125 50,100 25,85 45,65 30,45 55,40 55,15 80,25" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="72" cy="50" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
         <circle class="fillable" cx="128" cy="50" r="14" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -571,12 +830,39 @@
 <path d="M72 92 L46 88 M70 99 L42 102 M128 92 L154 88 M130 99 L158 102"/><path d="M93 99 Q100 110 107 99"/><circle cx="91" cy="82" r="2" fill="#333" stroke="none"/><circle cx="109" cy="82" r="2" fill="#333" stroke="none"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'whale',
       name: '고래',
       emoji: '🐳',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        spout: { ko: '물줄기', en: 'water spout', color: '#8EF6D1' },
+        tail: { ko: '꼬리', en: 'tail fin', color: '#4488FF' },
+        body: { ko: '몸통', en: 'body', color: '#4488FF' },
+        belly: { ko: '하얀 배', en: 'belly', color: '#FFF8E7' },
+        fin: { ko: '지느러미', en: 'flipper', color: '#1E40AF' },
+        cheek: { ko: '볼', en: 'cheek', color: '#FF88CC' },
+        wave: { ko: '바다 물결', en: 'sea waves', color: '#8EF6D1' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="spout" d="M 143 56 Q 146 44 138 36 Q 128 38 124 28 Q 138 22 146 30 Q 142 16 152 12 Q 162 16 158 30 Q 166 22 180 28 Q 176 38 166 36 Q 158 44 161 56 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="tail" d="M 54 112 Q 44 92 34 78 Q 20 80 12 62 Q 28 52 34 64 Q 36 48 52 44 Q 54 62 62 78 Q 68 96 66 116 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 40 104 Q 40 58 108 56 Q 174 56 198 96 Q 206 122 182 134 Q 150 148 100 146 Q 40 144 40 104 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="belly" d="M 122 128 Q 160 118 194 108 Q 198 124 180 132 Q 152 144 128 141 Q 118 136 122 128 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="fin" d="M 78 98 Q 98 94 106 108 Q 104 124 86 122 Q 74 112 78 98 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="cheek" cx="168" cy="100" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="wave" d="M 16 150 Q 30 140 44 150 Q 58 160 72 150 Q 86 140 100 150 Q 114 160 128 150 Q 142 140 156 150 Q 170 160 184 150 Q 198 140 212 150 Q 220 156 224 152 V 162 Q 220 166 212 162 H 28 Q 16 160 16 150 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <circle cx="170" cy="82" r="5.5" fill="#333" stroke="none"/>
+          <circle cx="172" cy="80" r="1.8" fill="#FFF" stroke="none"/>
+          <path d="M 176 114 Q 186 119 196 112"/>
+          <path d="M 108 56 Q 120 50 134 54"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <path class="fillable" d="M 50 90 L 15 60 L 30 90 L 10 120 L 50 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 45 80 Q 45 35, 120 40 Q 185 50, 185 85 Q 185 125, 120 125 Q 45 125, 45 80 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 55 105 Q 120 130, 180 95 Q 120 115, 55 105 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -590,12 +876,38 @@
 <path d="M151 95 Q161 102 173 94"/><path d="M119 31 Q123 28 125 24"/><path d="M130 57 Q137 54 144 58"/><path d="M41 86 Q35 92 41 98"/>
 </g>
 </svg>`,
+      },
     },
     {
       id: 'icecream',
       name: '아이스크림',
       emoji: '🍦',
-      svg: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+      version: 2,
+      parts: {
+        cone: { ko: '콘', en: 'cone', color: '#F6E7C8' },
+        rim: { ko: '콘 테두리', en: 'cone rim', color: '#8B5A2B' },
+        scoop_1: { ko: '아래 아이스크림', en: 'bottom scoop', color: '#FF88CC' },
+        scoop_2: { ko: '위 아이스크림', en: 'top scoop', color: '#8EF6D1' },
+        sauce: { ko: '초콜릿 소스', en: 'chocolate sauce', color: '#8B5A2B' },
+        cherry: { ko: '체리', en: 'cherry', color: '#FF4444' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <path class="fillable" data-part="cone" d="M 78 110 L 114 156 Q 120 164 126 156 L 162 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="rim" x="72" y="102" width="96" height="16" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="scoop_1" d="M 68 98 Q 62 70 92 68 H 148 Q 178 70 172 98 Q 172 106 164 106 Q 158 118 150 106 Q 144 108 138 104 Q 130 110 122 104 Q 114 112 106 104 Q 98 108 94 104 Q 86 116 78 106 Q 68 108 68 98 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="scoop_2" d="M 80 74 Q 74 44 100 40 H 140 Q 166 44 160 74 Q 140 82 120 80 Q 98 82 80 74 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <path class="fillable" data-part="sauce" d="M 79 62 Q 76 44 100 41 H 140 Q 164 44 161 62 Q 156 68 150 62 Q 146 72 140 64 Q 132 68 128 62 Q 120 74 112 62 Q 104 68 98 62 Q 94 70 88 63 Q 82 68 79 62 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="cherry" cx="120" cy="30" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 122 19 Q 124 12 134 10"/>
+          <path d="M 88 120 L 120 154 M 120 120 L 96 146 M 152 120 L 120 154 M 120 120 L 144 146"/>
+          <circle cx="104" cy="88" r="4.5" fill="#333" stroke="none"/>
+          <circle cx="136" cy="88" r="4.5" fill="#333" stroke="none"/>
+          <path d="M 112 94 Q 120 101 128 94"/>
+        </g>
+      </svg>`,
+      legacy: {
+        1: `<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
         <path class="fillable" d="M 75 100 L 100 145 L 125 100 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
         <ellipse class="fillable" cx="100" cy="98" rx="28" ry="8" stroke="#333" stroke-width="4" fill="#FFF"/>
         <path class="fillable" d="M 65 95 C 65 60, 135 60, 135 95 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -607,6 +919,7 @@
 <path d="M84 112 L115 134 M115 112 L87 133"/><path d="M91 59 L95 63 M108 62 L113 59 M99 83 L104 80"/><path d="M90 42 L94 45"/>
 </g>
 </svg>`,
+      },
     },
   ];
 
