@@ -1,0 +1,64 @@
+name: QA only - Sihyeon 76 live vehicle bytes
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/qa-sihyeon-vehicle-pages-readback.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-vehicle-images:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Compare all shipped images against public Pages bytes
+        run: |
+          mkdir -p qa-live-vehicle
+          python3 - <<'PY'
+          import concurrent.futures, hashlib, json, pathlib, subprocess, time, urllib.request
+          root=pathlib.Path('.')
+          rev=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          release=json.loads((root/'docs/qa/release/VEHICLE_IMAGE_ONLY_RELEASE_20261109.json').read_text())
+          assert release['releaseImageCount']==76 and len(release['items'])==76
+          files=release['items']
+          def verify(item):
+              path=item['path']; local=(root/path).read_bytes()
+              file_sha=hashlib.sha256(local).hexdigest()
+              gitsha=subprocess.check_output(['git','hash-object',path],text=True).strip()
+              if file_sha!=item['resultSha256'] or gitsha!=item['gitBlobSha']:
+                  return dict(path=path,status='FAIL',reason='local hash mismatch',localSha=file_sha,sourceSha=item['resultSha256'])
+              last=None
+              for attempt in range(6):
+                  try:
+                      url='https://icefoxtail.github.io/my-life-os/'+path+'?r='+rev+'-'+str(attempt)
+                      with urllib.request.urlopen(urllib.request.Request(url,headers={'Cache-Control':'no-cache','User-Agent':'Sihyeon-Release-QA/1.0'}),timeout=25) as r:
+                          body=r.read();http=r.status;ct=r.headers.get('Content-Type','')
+                      got=hashlib.sha256(body).hexdigest()
+                      if http==200 and got==file_sha:
+                          return dict(path=path,status='PASS',sha256=got,bytes=len(body),contentType=ct,attempt=attempt+1)
+                      last='HTTP '+str(http)+' sha256 '+got+' expected '+file_sha+' content-type '+ct
+                  except Exception as exc:
+                      last=str(exc)
+                  time.sleep(4)
+              return dict(path=path,status='FAIL',reason=last)
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+              results=list(pool.map(verify,files))
+          ok=sum(x['status']=='PASS' for x in results)
+          outcome=dict(mainSha=rev,count=len(results),passed=ok,failed=len(results)-ok,results=results)
+          (root/'qa-live-vehicle/76-images-public-sha.json').write_text(json.dumps(outcome,indent=2,ensure_ascii=False))
+          print('SIHYEON_VEHICLES_PUBLIC_SHA',ok,'/',len(results),'main',rev)
+          for e in results:
+              if e['status']!='PASS':print('FAIL',e)
+          assert ok==76,'public Pages asset hashes do not match all main images'
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sihyeon-vehicle-live-${{ github.run_id }}
+          path: qa-live-vehicle/
+          if-no-files-found: error
+          retention-days: 14
