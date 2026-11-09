@@ -359,7 +359,11 @@
         balloonEl.classList.remove('cb-hint-jump', 'cb-target-glow');
         balloonEl.className = 'cb-balloon cb-pop';
 
-        playGameVoice('games.color.correct');
+        if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
+          window.SihyeonVoice?.speak?.(
+            window.SihyeonEnglishListening.colorFeedback(color.id,this.state.targetColor.id),
+            {lang:'en-US',rate:.88})?.catch?.(()=>{});
+        }else playGameVoice('games.color.correct');
 
         if (this.state.options.fireConfetti) this.state.options.fireConfetti();
 
@@ -381,7 +385,11 @@
         if (navigator.vibrate) navigator.vibrate(50);
 
         balloonEl.classList.add('cb-wobble', 'cb-wrong-face');
-        playGameVoice('games.color.wrong');
+        if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
+          window.SihyeonVoice?.speak?.(
+            window.SihyeonEnglishListening.colorFeedback(color.id,this.state.targetColor.id),
+            {lang:'en-US',rate:.88})?.catch?.(()=>{});
+        }else playGameVoice('games.color.wrong');
 
         this.setManagedTimeout(() => {
           if (balloonEl) balloonEl.classList.remove('cb-wobble', 'cb-wrong-face');
