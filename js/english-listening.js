@@ -132,7 +132,7 @@
     const paint = key.match(/^games\.paint\.([A-Za-z]+)$/);
     if (paint && COLORS[paint[1]]) return COLORS[paint[1]].charAt(0).toUpperCase() + COLORS[paint[1]].slice(1) + '!';
     const count = key.match(/^games\.number\.(?:koreanCount\.|count\.|countUnit\.|countVehicle\.)(\d+)$/);
-    if (count) return numberWord(Number(count[1])) + (key.includes('Vehicle.') ? ' cars!' : '!');
+    if (count) return numberWord(Number(count[1])) + (key.includes('Vehicle.') ? (Number(count[1]) === 1 ? ' car!' : ' cars!') : '!');
     const sound = key.match(/^games\.number\.vehicleSound\.(\w+)$/);
     if (sound) {
       const soundMap = {siren:'fire truck',ladder:'ladder truck',ambulance:'ambulance',
