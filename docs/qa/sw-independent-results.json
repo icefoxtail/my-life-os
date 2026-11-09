@@ -1,7 +1,7 @@
 {
-  "reviewedAt": "2026-11-09T11:50:08.823Z",
+  "reviewedAt": "2026-11-09T12:02:49.221Z",
   "source": "sw.js",
-  "sourceSha256": "4fb08115c10bf1afa2d91a12e9f232f1c7fb98343931fa6ca00d6e149a55487a",
+  "sourceSha256": "73abd8ac8a59ab52a1d80f488598c748aba864cbc0796b3697b1d3949b212449",
   "result": "PASS",
   "verification": "Node VM contract checks with asynchronous fetch/cache doubles; not browser installation evidence",
   "fullInstall": {
