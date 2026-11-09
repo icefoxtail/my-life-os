@@ -121,7 +121,7 @@
   {
     "id": "fire_ladder",
     "ko": "소방 사다리차",
-    "en": "ladder fire truck"
+    "en": "ladder truck"
   },
   {
     "id": "ambulance",
@@ -198,7 +198,7 @@
   {
     "id": "ladder_truck",
     "ko": "사다리차",
-    "en": "ladder fire truck"
+    "en": "ladder truck"
   },
   {
     "id": "aerial_ladder_truck",
