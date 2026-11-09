@@ -452,7 +452,7 @@
       emoji: '🚛',
       version: 2,
       parts: {
-        chassis: { ko: '아래 틀', en: 'chassis', color: '#8B5A2B' },
+        chassis: { ko: '아래 틀', en: 'chassis', color: '#C0C0C0' },
         bed: { ko: '짐칸', en: 'dump bed', color: '#FF9900' },
         cab: { ko: '운전석', en: 'cab', color: '#FFD700' },
         window: { ko: '창문', en: 'window', color: '#8EF6D1' },
@@ -463,20 +463,20 @@
         hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
       },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-  <rect class="fillable" data-part="chassis" x="22" y="112" width="198" height="22" rx="8" stroke="#333" stroke-width="4" fill="#FFF"/>
-  <path class="fillable" data-part="bed" d="M 24 110 L 126 86 L 118 42 L 16 66 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-  <path class="fillable" data-part="cab" d="M 132 112 V 68 Q 132 58 142 58 H 170 Q 178 58 183 66 L 200 92 Q 204 98 211 98 H 214 Q 220 100 220 106 V 112 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-  <path class="fillable" data-part="window" d="M 142 68 H 168 L 182 90 H 142 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
-  <rect class="fillable" data-part="headlight" x="199" y="96" width="20" height="16" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
-  <circle class="fillable" data-part="tire_rear" cx="62" cy="140" r="20" stroke="#333" stroke-width="4" fill="#FFF"/>
-  <circle class="fillable" data-part="tire_front" cx="176" cy="140" r="20" stroke="#333" stroke-width="4" fill="#FFF"/>
-  <circle class="fillable" data-part="hub_rear" cx="62" cy="140" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
-  <circle class="fillable" data-part="hub_front" cx="176" cy="140" r="9" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="chassis" x="18" y="118" width="204" height="18" rx="8" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="bed" d="M 36 118 L 16 62 Q 14 54 22 54 H 148 Q 156 54 152 61 L 134 70 V 118 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="cab" d="M 136 118 V 74 Q 136 66 144 66 H 172 Q 180 66 185 73 L 202 96 Q 206 102 213 102 H 216 Q 222 104 222 110 V 118 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="window" d="M 146 76 H 170 L 184 96 H 146 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <rect class="fillable" data-part="headlight" x="201" y="102" width="20" height="16" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="tire_rear" cx="64" cy="139" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="tire_front" cx="176" cy="139" r="21" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <circle class="fillable" data-part="hub_rear" cx="64" cy="139" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <circle class="fillable" data-part="hub_front" cx="176" cy="139" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
   <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
-    <path d="M 34 94 L 124 72"/>
-    <path d="M 100 108 L 116 92"/>
-    <path d="M 160 94 H 170"/>
-    <path d="M 146 112 V 100"/>
+    <path d="M 50 66 L 58 108 M 80 66 V 108 M 108 66 V 108"/>
+    <path d="M 22 64 H 132"/>
+    <circle cx="38" cy="112" r="3" fill="#333" stroke="none"/>
+    <path d="M 160 98 H 170"/>
   </g>
 </svg>`,
       legacy: {
@@ -516,8 +516,8 @@
         wheel_front: { ko: '앞바퀴', en: 'front wheel', color: '#C0C0C0' },
       },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-  <rect class="fillable" data-part="push_arm" x="150" y="100" width="40" height="22" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
-  <path class="fillable" data-part="blade" d="M 188 62 Q 188 54 196 54 H 208 Q 216 54 217 62 L 221 140 Q 221 150 211 150 H 196 Q 187 150 187 141 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <rect class="fillable" data-part="push_arm" x="150" y="100" width="48" height="22" rx="6" stroke="#333" stroke-width="3" fill="#FFF"/>
+  <path class="fillable" data-part="blade" d="M 212 54 Q 222 52 222 60 Q 202 104 222 144 Q 222 152 212 152 Q 178 104 212 54 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
   <rect class="fillable" data-part="body" x="42" y="88" width="122" height="36" rx="10" stroke="#333" stroke-width="4" fill="#FFF"/>
   <rect class="fillable" data-part="engine" x="112" y="62" width="50" height="32" rx="9" stroke="#333" stroke-width="4" fill="#FFF"/>
   <path class="fillable" data-part="cab" d="M 54 90 V 36 Q 54 30 60 30 H 100 Q 106 30 106 36 V 90 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
@@ -527,7 +527,7 @@
   <circle class="fillable" data-part="wheel_front" cx="142" cy="138" r="12" stroke="#333" stroke-width="3" fill="#FFF"/>
   <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
     <path d="M 84 138 H 116"/>
-    <path d="M 196 70 H 210 M 196 134 H 212"/>
+    <path d="M 206 66 L 212 62"/>
     <path d="M 124 76 H 148 M 124 84 H 148"/>
     <path d="M 72 78 H 92"/>
   </g>
@@ -747,7 +747,7 @@
       },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
   <path class="fillable" data-part="tail" d="M 36 80 L 24 40 Q 22 32 30 32 H 44 Q 50 32 54 38 L 82 80 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-  <path class="fillable" data-part="wing_far" d="M 116 74 L 142 36 Q 146 30 152 30 H 160 Q 164 32 162 38 L 146 74 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+  <path class="fillable" data-part="wing_far" d="M 116 74 L 92 36 Q 90 30 97 30 H 106 Q 112 31 115 36 L 146 74 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
   <path class="fillable" data-part="fuselage" d="M 22 94 Q 22 74 44 72 H 182 Q 220 74 220 94 Q 220 114 182 116 H 44 Q 22 114 22 94 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
   <path class="fillable" data-part="nose" d="M 188 73 Q 220 76 220 94 Q 220 112 188 115 Q 198 94 188 73 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
   <path class="fillable" data-part="cockpit" d="M 158 80 H 176 Q 182 80 184 86 L 186 92 H 158 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
@@ -884,26 +884,27 @@
       emoji: '🍦',
       version: 2,
       parts: {
-        cone: { ko: '콘', en: 'cone', color: '#F6E7C8' },
+        cone: { ko: '와플 콘', en: 'waffle cone', color: '#F6E7C8' },
         rim: { ko: '콘 테두리', en: 'cone rim', color: '#8B5A2B' },
+        wafer: { ko: '과자 막대', en: 'wafer stick', color: '#F6E7C8' },
         scoop_1: { ko: '아래 아이스크림', en: 'bottom scoop', color: '#FF88CC' },
-        scoop_2: { ko: '위 아이스크림', en: 'top scoop', color: '#8EF6D1' },
-        sauce: { ko: '초콜릿 소스', en: 'chocolate sauce', color: '#8B5A2B' },
+        scoop_2: { ko: '위 아이스크림', en: 'top scoop', color: '#FFF8E7' },
         cherry: { ko: '체리', en: 'cherry', color: '#FF4444' },
       },
       svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
-        <path class="fillable" data-part="cone" d="M 78 110 L 114 156 Q 120 164 126 156 L 162 110 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <rect class="fillable" data-part="rim" x="72" y="102" width="96" height="16" rx="8" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <path class="fillable" data-part="scoop_1" d="M 68 98 Q 62 70 92 68 H 148 Q 178 70 172 98 Q 172 106 164 106 Q 158 118 150 106 Q 144 108 138 104 Q 130 110 122 104 Q 114 112 106 104 Q 98 108 94 104 Q 86 116 78 106 Q 68 108 68 98 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" data-part="scoop_2" d="M 80 74 Q 74 44 100 40 H 140 Q 166 44 160 74 Q 140 82 120 80 Q 98 82 80 74 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
-        <path class="fillable" data-part="sauce" d="M 79 62 Q 76 44 100 41 H 140 Q 164 44 161 62 Q 156 68 150 62 Q 146 72 140 64 Q 132 68 128 62 Q 120 74 112 62 Q 104 68 98 62 Q 94 70 88 63 Q 82 68 79 62 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
-        <circle class="fillable" data-part="cherry" cx="120" cy="30" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="cone" d="M 86 104 L 114 156 Q 120 166 126 156 L 154 104 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="rim" x="82" y="96" width="76" height="14" rx="7" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="wafer" d="M 146 70 L 158 32 Q 160 25 167 27 Q 174 29 172 36 L 161 74 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="scoop_1" d="M 80 98 Q 74 62 120 60 Q 166 62 160 98 Q 164 108 154 106 Q 148 116 140 106 Q 132 112 126 106 Q 118 114 110 106 Q 102 112 96 106 Q 86 110 80 98 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="scoop_2" cx="120" cy="52" r="25" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="cherry" cx="120" cy="22" r="10" stroke="#333" stroke-width="3" fill="#FFF"/>
         <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
-          <path d="M 122 19 Q 124 12 134 10"/>
-          <path d="M 88 120 L 120 154 M 120 120 L 96 146 M 152 120 L 120 154 M 120 120 L 144 146"/>
-          <circle cx="104" cy="88" r="4.5" fill="#333" stroke="none"/>
-          <circle cx="136" cy="88" r="4.5" fill="#333" stroke="none"/>
-          <path d="M 112 94 Q 120 101 128 94"/>
+          <path d="M 122 12 Q 124 6 133 5"/>
+          <path d="M 96 116 L 112 144 M 110 112 L 122 134 M 144 116 L 128 144 M 130 112 L 118 134"/>
+          <circle cx="105" cy="88" r="4.5" fill="#333" stroke="none"/>
+          <circle cx="135" cy="88" r="4.5" fill="#333" stroke="none"/>
+          <path d="M 113 94 Q 120 100 127 94"/>
+          <path d="M 108 44 Q 112 38 119 38"/>
         </g>
       </svg>`,
       legacy: {
