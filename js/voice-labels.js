@@ -935,7 +935,7 @@
     const named={'하나':1,'둘':2,'셋':3,'넷':4,'다섯':5};
     const n=named[t.replace(/\.$/,'')];
     if(n)return numberEn(n)+'!';
-    const merged=t.match(/^(하나|둘|셋|넷|다섯)이랑 (하나|둘|셋|넷|다섯) 합체! 그래서 (하나|둘|셋|넷|다섯)!$/);
+    const merged=t.match(/^(하나|둘|셋|넷|다섯)(?:이랑|랑) (하나|둘|셋|넷|다섯) 합체! 그래서 (하나|둘|셋|넷|다섯)!$/);
     if(merged)return numberEn(named[merged[1]])+' and '+numberEn(named[merged[2]])+' make '+numberEn(named[merged[3]])+'!';
     return blockEnglish[t]||'';
   }
