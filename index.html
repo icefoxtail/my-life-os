@@ -2119,6 +2119,8 @@ function openVoiceLand(){ renderZoneLand(ZONE_CONFIGS.voice); }
 function travelToZone(zoneId){
   const zone=WORLD_ZONES[zoneId];
   if(!zone) return;
+  const worldMap=document.getElementById('worldMapScreen');
+  if(worldMap) worldMap.dataset.navigating='true';
 
   if(window.stopStoryReading) window.stopStoryReading(true);
   stopSpeaking();
@@ -2755,7 +2757,7 @@ window.addEventListener('load',()=>{
 
 if(!sessionStorage.getItem('greeted')){
   sessionStorage.setItem('greeted','1');
-  setTimeout(()=>{ if(document.getElementById('worldMapScreen')) playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true); },600);
+  setTimeout(()=>{ const map=document.getElementById('worldMapScreen'); if(map && map.dataset.navigating!=='true') playVoiceGuide('common.welcome','시현아 안녕. 놀이공원에 온 걸 환영해.',true); },600);
 }
 
 
