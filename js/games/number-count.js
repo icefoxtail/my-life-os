@@ -844,7 +844,7 @@
       const raw = String(text).trim();
       if(window.SihyeonPlaySettings?.getLanguage?.()==='en'){
         const engine=window.SihyeonEnglishListening;
-        const noun=engine?.vehicleName(this.state.currentVehicle?.id) || 'vehicle';
+        const noun=window.SihyeonVoiceLabels?.spoken?.('vehicle',this.state.currentVehicle?.id,'en') || engine?.vehicleName(this.state.currentVehicle?.id) || 'vehicle';
         const plural=noun==='vehicle' ? 'vehicles' : (/bus$/.test(noun) ? noun+'es' : noun+'s');
         const n=engine?.numberWord(this.state.currentAnswer)||String(this.state.currentAnswer);
         let spoken='';
@@ -853,6 +853,13 @@
         else if(/다 맞혔어/.test(raw)) spoken='Hooray! You counted them all!';
         else if(/다시 한 번/.test(raw)) spoken="Oops! Let's count again.";
         if(spoken) window.SihyeonVoice?.speak?.(spoken,{lang:'en-US',rate:.88})?.catch?.(()=>{});
+        return;
+      }
+      // The vehicle shown on screen, not a generic prerecorded question,
+      // determines the Korean question a child hears.
+      if(/몇 대인지 세어볼까/.test(raw)){
+        const name=this.state.currentVehicle?.name||'자동차';
+        window.SihyeonVoice?.speak?.(name+'는 몇 대일까?',{lang:'ko-KR',rate:.93})?.catch?.(()=>{});
         return;
       }
       const guideMap = [
