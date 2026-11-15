@@ -3,33 +3,39 @@
   "owner": "GPT_ROOT_7E22907460A6",
   "instructionRevision": 3,
   "baseMain": "196f8c5c88f283fa346e5d2d64b632997e0379fa",
-  "state": "IMPLEMENTING",
-  "activeStage": 1,
+  "state": "BRANCH_VALIDATION",
+  "activeStage": 3,
   "stages": [
     {
       "id": 1,
       "name": "automatic-number-picture",
       "branch": "work/number-picture-auto-20261115",
-      "status": "IMPLEMENTED_PENDING_UI_CHECK"
+      "status": "CI_RUNNING",
+      "sourceCheckpoint": "167551b90fd87883f0719e6566b5ea3ad8be5ee2",
+      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/25"
     },
     {
       "id": 2,
       "name": "svg-artwork-bridge",
       "branch": "work/svg-play-assets-20261115",
-      "status": "IN_PROGRESS"
+      "status": "CI_RUNNING",
+      "sourceCheckpoint": "a0b65ff6c039d138187d61a7f1f6e144af2a3ed8",
+      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/26"
     },
     {
       "id": 3,
       "name": "ten-frame-garden",
       "branch": "work/ten-frame-garden-20261115",
-      "status": "IN_PROGRESS"
+      "status": "IMPLEMENTED_PENDING_UI_CHECK",
+      "sourceCheckpoint": "06a6cb1a30a1e8d1c38e69f5426b4a770e6af15d"
     },
     {
       "id": 4,
       "name": "picture-addition-and-equal-sharing",
       "branch": "work/picture-arithmetic-20261115",
-      "status": "IN_PROGRESS"
+      "status": "IMPLEMENTED_PENDING_INTEGRATION",
+      "sourceCheckpoint": "22b24ffcff540d11d123de094aac4b18a6e4a738"
     }
   ],
-  "nextAction": "Validate stage 1 in Chromium CI, merge and verify Pages, then complete stages 2-4 in order."
+  "nextAction": "Complete independent UI checks and merge each stage into main in order, verifying Pages after every merge."
 }

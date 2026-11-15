@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./css/play-settings.css">
   <link id="sihyeon-number-post-office-style" rel="stylesheet" href="./css/games/number-post-office.css">
   <link id="sihyeon-number-picture-style" rel="stylesheet" href="./css/games/number-picture.css">
+  <link id="sihyeon-ten-frame-garden-style" rel="stylesheet" href="./css/games/ten-frame-garden.css">
   <link id="sihyeon-pattern-train-style" rel="stylesheet" href="./css/games/pattern-train.css">
   <script src="./js/play-settings.js"></script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235BC8F5'/%3E%3Ccircle cx='22' cy='42' r='7' fill='%231A2E3B'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%231A2E3B'/%3E%3Cpath d='M10 37h44l-5-15H24L15 31z' fill='%23FFD93D'/%3E%3Cpath d='M24 22h17l4 11H18z' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
@@ -1623,6 +1624,7 @@ const ZONE_CONFIGS = {
     greeting:'엄마랑 숫자 놀이 해볼까? 어떤 걸 해볼래?',
     games:[
       { id:'numberpicture', title:'내가 만드는 숫자놀이', emoji:'🚓', image:'./assets/games/number-picture/card.svg', desc:'그림과 수를 고르면 함께 세어요', action:'openNumberPictureGame()', isNew:true },
+      { id:'tenframegarden', title:'열 칸 꽃 정원', emoji:'🌼', image:'./assets/games/ten-frame-garden/card.svg', desc:'꽃을 피우고 열 칸을 채워요', action:'openTenFrameGardenGame()', isNew:true },
       { id:'postoffice', title:'숫자 배달 우체국', emoji:'📮', image:'./assets/games/number-post-office/card.svg', desc:'세고 담아 친구에게 배달해요', action:'openNumberPostOfficeGame()', isNew:true },
       { id:'patterntrain', title:'패턴 기차 공작소', emoji:'🚂', image:'./assets/games/pattern-train/card.svg', desc:'규칙 기차를 만들어요 · 5세 추천(4~7세)', action:'openPatternTrainGame()', isNew:true },
       { id:'kingdom3d', title:'숫자 왕국 3D', emoji:'🌈', image:'./assets/games/cards/number-kingdom-3d.png', desc:'3D 블록으로 숫자를 합쳐요', action:'openNumberKingdom3DGame()', isNew:true },
@@ -1870,7 +1872,7 @@ function cleanupDetachedPlayLayers(){
 }
 
 function cleanupActiveGame(){
-  ['vehicleMemory','numberPostOffice','patternTrain','numberCount','numberBlocks','numberVehiclesPixi','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare','robotCoding','megaDispatch','numberPicture'].forEach(key=>{
+  ['vehicleMemory','numberPostOffice','patternTrain','numberCount','numberBlocks','numberVehiclesPixi','letterPlay','colorBalloon','parkingLot','constructionSite','carGarage','codingCar','lifeSequence','artZone','abcPhonics','catCare','robotCoding','megaDispatch','numberPicture','tenFrameGarden'].forEach(key=>{
     try{ window.SihyeonGames?.[key]?.destroy?.(); }catch(error){}
   });
 
@@ -2305,6 +2307,14 @@ function openNumberPictureGame(initialObject){
   } else renderGameLoadError(t,'숫자놀이를 불러오지 못했어요. 놀이터로 돌아가 다시 열어 주세요.','#354d50');
 }
 
+function openTenFrameGardenGame(){
+  const t=openGameShell('열 칸 꽃 정원','tenFrameGardenTarget','#f5efdf','numbers');
+  if(window.SihyeonQuantityPlayModel && window.SihyeonQuantitySequencer && window.SihyeonGames?.tenFrameGarden?.render){
+    t.parentElement.querySelector('.game-back-floating')?.remove();
+    window.SihyeonGames.tenFrameGarden.render(t,gameOptions('numbers'));
+  } else renderGameLoadError(t,'꽃 정원을 불러오지 못했어요. 놀이터로 돌아가 다시 열어 주세요.','#354d50');
+}
+
 function openNumberPostOfficeGame(){
   const t=openGameShell('📮 숫자 배달 우체국','numberPostOfficeTarget','#f8f1db','numbers');
   if(window.SihyeonGames?.numberPostOffice?.render){
@@ -2730,7 +2740,7 @@ Object.assign(window,{
   openImageLand, renderZoneLand,
   openGameLand, openNumberLand, openLetterLand, openCarLand, openStoryLand, openVoiceLand, openVoiceZone, openKaraokeZone,
   cleanupActiveGame, openGameShell,
-  openMemoryGame, openNumberPictureGame, openNumberPostOfficeGame, openPatternTrainGame, openNumberKingdom3DGame, openHangulPlaymat3DGame, openHangulWorld3DGame, openNumberCountGame, openColorBalloonGame,
+  openMemoryGame, openNumberPictureGame, openTenFrameGardenGame, openNumberPostOfficeGame, openPatternTrainGame, openNumberKingdom3DGame, openHangulPlaymat3DGame, openHangulWorld3DGame, openNumberCountGame, openColorBalloonGame,
   openParkingGame, openConstructionSiteGame, openCarGarageGame, openCodingCarGame, openLifeSequenceGame,
   openArtZoneGame, openAbcPhonicsGame, openCatCareGame,
   renderPlaceholderZone, openFullscreenGarage, openStoryTheater,
@@ -2806,6 +2816,7 @@ if('serviceWorker' in navigator){
 <script src="./js/games/quantity-play-model.js"></script>
 <script src="./js/quantity-sequencer.js"></script>
 <script src="./js/games/number-picture.js"></script>
+<script src="./js/games/ten-frame-garden.js"></script>
 <script src="./js/games/number-count.js"></script>
 <script src="./js/games/number-post-office-model.js"></script>
 <script src="./js/games/number-post-office.js"></script>

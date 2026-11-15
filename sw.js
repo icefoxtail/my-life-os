@@ -1,6 +1,9 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.6.1-art-numbers';
+const CACHE_NAME = 'sihyeon-play-os-v1.6.2-flower-garden';
 
 const ASSETS = [
+  './js/games/ten-frame-garden.js',
+  './css/games/ten-frame-garden.css',
+  './assets/games/ten-frame-garden/card.svg',
   './js/play-objects.js',
   './js/games/quantity-play-model.js',
   './js/quantity-sequencer.js',
