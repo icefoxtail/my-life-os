@@ -10,6 +10,9 @@ on:
       - 'scripts/qa-phase2-release-browser.py'
       - 'scripts/qa-pattern-train*'
       - 'scripts/qa-home-voice-browser.py'
+      - 'scripts/qa-number-picture-browser.py'
+      - 'scripts/qa-ten-frame-garden-browser.py'
+      - 'scripts/qa-picture-arithmetic-browser.py'
       - '.github/workflows/phase2-browser-release.yml'
   workflow_dispatch:
   push:
@@ -55,4 +58,39 @@ jobs:
           name: phase2-browser-${{ github.run_id }}
           path: qa-release-evidence/
           if-no-files-found: error
+          retention-days: 14
+  quantity-games:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify quantities, cancellation and staged game models
+        run: |
+          node scripts/qa-quantity-play-model.cjs
+          node scripts/qa-quantity-sequencer.cjs
+          for suite in art-play-bridge ten-frame-garden picture-arithmetic; do
+            if test -f "scripts/qa-$suite.cjs"; then node "scripts/qa-$suite.cjs"; fi
+          done
+      - name: Install pinned browser harness
+        run: |
+          mkdir -p qa-quantity-evidence
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Automatic picture counting and staged quantity games
+        run: |
+          for game in number-picture ten-frame-garden picture-arithmetic; do
+            if test -f "scripts/qa-$game-browser.py"; then
+              python3 "scripts/qa-$game-browser.py" --output "qa-quantity-evidence/$game"
+            fi
+          done
+      - name: Attach quantity-game evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quantity-browser-${{ github.run_id }}
+          path: qa-quantity-evidence/
+          if-no-files-found: warn
           retention-days: 14
