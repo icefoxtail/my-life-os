@@ -1,0 +1,35 @@
+{
+  "taskId": "09d33a6e-613e-4eb4-bfc8-f3cf9e814a72",
+  "owner": "GPT_ROOT_7E22907460A6",
+  "instructionRevision": 3,
+  "baseMain": "196f8c5c88f283fa346e5d2d64b632997e0379fa",
+  "state": "IMPLEMENTING",
+  "activeStage": 1,
+  "stages": [
+    {
+      "id": 1,
+      "name": "automatic-number-picture",
+      "branch": "work/number-picture-auto-20261115",
+      "status": "IMPLEMENTED_PENDING_UI_CHECK"
+    },
+    {
+      "id": 2,
+      "name": "svg-artwork-bridge",
+      "branch": "work/svg-play-assets-20261115",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": 3,
+      "name": "ten-frame-garden",
+      "branch": "work/ten-frame-garden-20261115",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": 4,
+      "name": "picture-addition-and-equal-sharing",
+      "branch": "work/picture-arithmetic-20261115",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "nextAction": "Validate stage 1 in Chromium CI, merge and verify Pages, then complete stages 2-4 in order."
+}

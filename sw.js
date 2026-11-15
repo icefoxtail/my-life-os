@@ -1,6 +1,19 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.5.0-art-27';
+const CACHE_NAME = 'sihyeon-play-os-v1.6.0-auto-number';
 
 const ASSETS = [
+  './js/play-objects.js',
+  './js/games/quantity-play-model.js',
+  './js/quantity-sequencer.js',
+  './js/games/number-picture.js',
+  './css/games/number-picture.css',
+  './assets/games/number-picture/card.svg',
+  './assets/vehicles/police/korean_police_car.png',
+  './assets/vehicles/police/riot_police_bus.png',
+  './assets/vehicles/police/swat_truck.png',
+  './assets/vehicles/fire/pump_engine.png',
+  './assets/vehicles/fire/ladder_truck.png',
+  './assets/vehicles/construction/excavator.png',
+
   './',
   './index.html',
   './manifest.json',
