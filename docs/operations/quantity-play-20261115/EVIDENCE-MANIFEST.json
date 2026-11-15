@@ -1,0 +1,146 @@
+{
+  "generatedAt": "2026-11-15T14:16:02.799039+00:00",
+  "scope": "SHA-256 of the release documents, reports and unchanged original screenshots; this manifest excludes itself.",
+  "files": [
+    {
+      "path": "CURRENT.json",
+      "bytes": 3752,
+      "sha256": "e16b8507b1c43ac9e82676a181442fdad04d6d81a1721b5fc110e1c19d368f68"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 3429,
+      "sha256": "c3251227f498ee429f26635e22a3ea010af62d1af0a18635da8955b398d40529"
+    },
+    {
+      "path": "RELEASE.md",
+      "bytes": 7503,
+      "sha256": "ed2ac44bafb1082ed9478a1856cc09fcb8ec91719b6845f9abccfe70c2c077e8"
+    },
+    {
+      "path": "SCOPE-REVIEW.md",
+      "bytes": 5593,
+      "sha256": "45331922e383aa95ae8d7875e76c13ebf42183825e9eda9f2884dcdc1143e79c"
+    },
+    {
+      "path": "USER-GUIDE.md",
+      "bytes": 5741,
+      "sha256": "6241af219e0c58bb44ae4a0147e7eeb8bbb69c06ef93b813a664684d4088dc60"
+    },
+    {
+      "path": "ci/number-picture-browser.json",
+      "bytes": 85575,
+      "sha256": "003cf9be2a70bbc9550b0201b886ad4c60b9438241dbb72f7efed841fe432f21"
+    },
+    {
+      "path": "ci/picture-arithmetic-browser.json",
+      "bytes": 92999,
+      "sha256": "a93d64e5b36ca18525e21d9c99d38a24917b4ba15d75dd65bdb9472260b2c4b1"
+    },
+    {
+      "path": "ci/stage1-ci.json",
+      "bytes": 11020,
+      "sha256": "3c61f2cda2b2da7c4f18892242a3f0f6b3e3ddfaa56779d32e35d17b2b271fa1"
+    },
+    {
+      "path": "ci/stage2-ci.json",
+      "bytes": 14416,
+      "sha256": "e1d3b3d32a843823d08886c67d8c255372ab1bf86172c2fc87b2257740e771b8"
+    },
+    {
+      "path": "ci/stage3-ci.json",
+      "bytes": 5247,
+      "sha256": "070747f925a989fc6000243915326566dfc977a3d079ebc6be6e304262fd8212"
+    },
+    {
+      "path": "ci/stage4-ci.json",
+      "bytes": 16938,
+      "sha256": "b26f51e550a5b2526524c4d685d1bd4f7d45c001d2e18be8c0e7a748796983d0"
+    },
+    {
+      "path": "ci/ten-frame-garden-browser.json",
+      "bytes": 481770,
+      "sha256": "ba08437f43111d3422438be4d79086f58f7e8e31af3777bd1ab94961b711e804"
+    },
+    {
+      "path": "merge-preflight.json",
+      "bytes": 1025,
+      "sha256": "f686dbd5de4c6d380e1404ca6407c4a2916f133525aafceaf7fdfd70da4fcc5a"
+    },
+    {
+      "path": "production/stage1/fire-fifteen.jpg",
+      "bytes": 147053,
+      "sha256": "d0d78db69a4a920c2a0cdcd9a01514b23f39abd299e23837d01cab0785094fc1"
+    },
+    {
+      "path": "production/stage1/live.json",
+      "bytes": 648,
+      "sha256": "68614f4f79bbd587c99869acaef0800bb4b49cb40c3811e844b120b8a39ff102"
+    },
+    {
+      "path": "production/stage1/pages.json",
+      "bytes": 2782,
+      "sha256": "7b70bf355aea3d0116a6f1219c0f28c88cb546143e004c63539ed2f5b1d0368f"
+    },
+    {
+      "path": "production/stage1/police-nine.jpg",
+      "bytes": 142676,
+      "sha256": "5df78d65deee9a2a8cd68c3d11335f932847c3f4eca8fa2511d4c1e7516b9567"
+    },
+    {
+      "path": "production/stage2/live.json",
+      "bytes": 884,
+      "sha256": "1825e7193b4608981f0dfa4e3a67e63ae59f1dadc2bcc4db9f0575b127cb9379"
+    },
+    {
+      "path": "production/stage2/own-suv-fifteen.jpg",
+      "bytes": 136093,
+      "sha256": "c54c36a7712d663731fce224c35f2169471017f0fccef3119f7c34275bb80d0c"
+    },
+    {
+      "path": "production/stage2/pages.json",
+      "bytes": 1841,
+      "sha256": "d8cb42526cd11a2d55ccfa3f6f4f859f14551f1d67ef38820f6294d70443b3b5"
+    },
+    {
+      "path": "production/stage2/suv-reference.jpg",
+      "bytes": 103460,
+      "sha256": "cf70d5616d8319b2568de24f22e42cd2d4bf1eb7203209cd98d86c0aa6acd9f7"
+    },
+    {
+      "path": "production/stage3/garden-fill-twenty.jpg",
+      "bytes": 103743,
+      "sha256": "8e121b8f9a92371d13cc3740696d9df081bd932f3d2744a59419a1ab262ab034"
+    },
+    {
+      "path": "production/stage3/live.json",
+      "bytes": 1007,
+      "sha256": "13e9c7eb4dab131c85ad07eb37ae33f4463d0186bb4ef66f0f4a939344ed87ee"
+    },
+    {
+      "path": "production/stage3/pages.json",
+      "bytes": 1871,
+      "sha256": "f79270faf308be238601208c3c427b761550e99318d730b388c94e326f68406c"
+    },
+    {
+      "path": "production/stage4/add-nine-six.jpg",
+      "bytes": 138783,
+      "sha256": "8abe110a9dda47aee469edba901740a0cb354304e1c71443a14d2258ebf2393c"
+    },
+    {
+      "path": "production/stage4/live.json",
+      "bytes": 874,
+      "sha256": "d4570d5f1bcf600b96cfd62fdef30436b0ddd6f4c052801cd58c14b2fe4f44a2"
+    },
+    {
+      "path": "production/stage4/pages.json",
+      "bytes": 1877,
+      "sha256": "919a7f709e368fd31905c160646946fa9e151874cee29458592b77880db6c94b"
+    },
+    {
+      "path": "production/stage4/share-fifteen-four.jpg",
+      "bytes": 97346,
+      "sha256": "572571d497754974757dbcd66758728bfed8af4056612d929eddd31a0142fc98"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "stage": 2,
+  "mainMergeSha": "463263652e35ab903a724b504bb7db683909027c",
+  "verifiedAt": "2026-11-15T14:02:20.258994+00:00",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "scope": "Public Pages asset bytes compared with the exact merged Git tree; live browser interaction recorded separately.",
+  "status": "PASS",
+  "checks": [
+    {
+      "path": "index.html",
+      "expectedSha256": "b1d06562479e2520dfaaffa20cbc73d16afb8a57a58e77bea08dd7d5156af58e",
+      "httpStatus": 200,
+      "bytes": 93822,
+      "actualSha256": "b1d06562479e2520dfaaffa20cbc73d16afb8a57a58e77bea08dd7d5156af58e",
+      "matches": true
+    },
+    {
+      "path": "sw.js",
+      "expectedSha256": "38b57bf577a8cedd40491e7c8fe5b7b7185a213b84d5d56d4b2cca27991d3766",
+      "httpStatus": 200,
+      "bytes": 8320,
+      "actualSha256": "38b57bf577a8cedd40491e7c8fe5b7b7185a213b84d5d56d4b2cca27991d3766",
+      "matches": true
+    },
+    {
+      "path": "js/games/art-zone.js",
+      "expectedSha256": "3f6c8cf76315d6a170e037285374fcecfd68813dc0b2fc018037f59965711031",
+      "httpStatus": 200,
+      "bytes": 177489,
+      "actualSha256": "3f6c8cf76315d6a170e037285374fcecfd68813dc0b2fc018037f59965711031",
+      "matches": true
+    },
+    {
+      "path": "js/voice-labels.js",
+      "expectedSha256": "845797d1b82019ad806c9ea793f67896d4e8791267f53d27cc5ada3401cbb7f8",
+      "httpStatus": 200,
+      "bytes": 21626,
+      "actualSha256": "845797d1b82019ad806c9ea793f67896d4e8791267f53d27cc5ada3401cbb7f8",
+      "matches": true
+    },
+    {
+      "path": "js/games/number-picture.js",
+      "expectedSha256": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+      "httpStatus": 200,
+      "bytes": 19213,
+      "actualSha256": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+      "matches": true
+    }
+  ]
+}

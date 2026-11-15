@@ -1,0 +1,3685 @@
+{
+  "scope": "Actual Chromium menu/native click/DOM checks with lower speechSynthesis transport completion fixture",
+  "nativeAudio": {
+    "status": "NOT_RUN",
+    "reason": "No speaker hearing, physical device or child-observation claim"
+  },
+  "fixture": {
+    "sharedVoiceEngineReplaced": false,
+    "gameTimersReplaced": false
+  },
+  "checks": [
+    {
+      "name": "9 police + 6 fire / 320x568",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "empty",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉 더하기 여섯. 모두 열다섯 대예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            320,
+            568
+          ],
+          "documentWidth": 320,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 320,
+            "bottom": 568,
+            "clientWidth": 320,
+            "scrollWidth": 320,
+            "clientHeight": 568,
+            "scrollHeight": 568
+          },
+          "board": {
+            "width": 292,
+            "height": 142
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-add-320x568.png"
+      }
+    },
+    {
+      "name": "15 shared among 4 / 320x568",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 15,
+          "counted": 0,
+          "moved": 0,
+          "phase": "preview",
+          "currentStep": {
+            "id": "share-intro",
+            "kind": "intro",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "poolCount": 3,
+          "counted": 12,
+          "moved": 12,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "모두 열다섯 개 있어요. 네 곳에 똑같이 나눠요.",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "한 곳에 세 개씩. 세 개 남아요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "observedMoves": 13,
+        "currentAndHeadingVisible": true,
+        "remainderVisible": {
+          "found": true,
+          "visible": true,
+          "rect": {
+            "top": 169,
+            "bottom": 259,
+            "left": 17,
+            "right": 303
+          },
+          "board": {
+            "top": 166,
+            "bottom": 308,
+            "left": 14,
+            "right": 306
+          }
+        },
+        "layout": {
+          "viewport": [
+            320,
+            568
+          ],
+          "documentWidth": 320,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 320,
+            "bottom": 568,
+            "clientWidth": 320,
+            "scrollWidth": 320,
+            "clientHeight": 568,
+            "scrollHeight": 568
+          },
+          "board": {
+            "width": 292,
+            "height": 142
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-share-320x568.png"
+      }
+    },
+    {
+      "name": "9 police + 6 fire / 360x640",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "empty",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉 더하기 여섯. 모두 열다섯 대예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            360,
+            640
+          ],
+          "documentWidth": 360,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 360,
+            "bottom": 640,
+            "clientWidth": 360,
+            "scrollWidth": 360,
+            "clientHeight": 640,
+            "scrollHeight": 640
+          },
+          "board": {
+            "width": 332,
+            "height": 214
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-add-360x640.png"
+      }
+    },
+    {
+      "name": "15 shared among 4 / 360x640",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 15,
+          "counted": 0,
+          "moved": 0,
+          "phase": "preview",
+          "currentStep": {
+            "id": "share-intro",
+            "kind": "intro",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "poolCount": 3,
+          "counted": 12,
+          "moved": 12,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "모두 열다섯 개 있어요. 네 곳에 똑같이 나눠요.",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "한 곳에 세 개씩. 세 개 남아요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "observedMoves": 13,
+        "currentAndHeadingVisible": true,
+        "remainderVisible": {
+          "found": true,
+          "visible": true,
+          "rect": {
+            "top": 169,
+            "bottom": 264.21875,
+            "left": 17,
+            "right": 343
+          },
+          "board": {
+            "top": 166,
+            "bottom": 380,
+            "left": 14,
+            "right": 346
+          }
+        },
+        "layout": {
+          "viewport": [
+            360,
+            640
+          ],
+          "documentWidth": 360,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 360,
+            "bottom": 640,
+            "clientWidth": 360,
+            "scrollWidth": 360,
+            "clientHeight": 640,
+            "scrollHeight": 640
+          },
+          "board": {
+            "width": 332,
+            "height": 214
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-share-360x640.png"
+      }
+    },
+    {
+      "name": "9 police + 6 fire / 390x844",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "empty",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉 더하기 여섯. 모두 열다섯 대예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            390,
+            844
+          ],
+          "documentWidth": 390,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 844,
+            "clientWidth": 390,
+            "scrollWidth": 390,
+            "clientHeight": 844,
+            "scrollHeight": 844
+          },
+          "board": {
+            "width": 348,
+            "height": 200.1875
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-add-390x844.png"
+      }
+    },
+    {
+      "name": "15 shared among 4 / 390x844",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 15,
+          "counted": 0,
+          "moved": 0,
+          "phase": "preview",
+          "currentStep": {
+            "id": "share-intro",
+            "kind": "intro",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "poolCount": 3,
+          "counted": 12,
+          "moved": 12,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "모두 열다섯 개 있어요. 네 곳에 똑같이 나눠요.",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "한 곳에 세 개씩. 세 개 남아요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "observedMoves": 13,
+        "currentAndHeadingVisible": true,
+        "remainderVisible": {
+          "found": true,
+          "visible": true,
+          "rect": {
+            "top": 207.09375,
+            "bottom": 308.421875,
+            "left": 24,
+            "right": 366
+          },
+          "board": {
+            "top": 204.09375,
+            "bottom": 418.1875,
+            "left": 21,
+            "right": 369
+          }
+        },
+        "layout": {
+          "viewport": [
+            390,
+            844
+          ],
+          "documentWidth": 390,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 844,
+            "clientWidth": 390,
+            "scrollWidth": 390,
+            "clientHeight": 844,
+            "scrollHeight": 844
+          },
+          "board": {
+            "width": 348,
+            "height": 214.09375
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-share-390x844.png"
+      }
+    },
+    {
+      "name": "zero, thirty and incomplete rounds",
+      "status": "PASS",
+      "detail": [
+        {
+          "operation": "0+0",
+          "snapshot": {
+            "active": true,
+            "error": null,
+            "mode": "add",
+            "a": 0,
+            "b": 0,
+            "leftObjectId": "korean_police_car",
+            "rightObjectId": "pump_engine",
+            "shareObjectId": "apple",
+            "total": 0,
+            "groups": null,
+            "each": null,
+            "remainder": null,
+            "actualCount": 0,
+            "actualLeft": 0,
+            "actualRight": 0,
+            "actualGroups": [],
+            "poolCount": 0,
+            "counted": 0,
+            "moved": 0,
+            "phase": "complete",
+            "currentStep": {
+              "id": "sum",
+              "kind": "summary",
+              "number": null,
+              "groupIndex": null
+            },
+            "complete": true,
+            "dialog": null,
+            "readingStyle": "native",
+            "muted": false,
+            "age": 4,
+            "language": "ko",
+            "audioFailed": false,
+            "storage": {
+              "memoryAvailable": true,
+              "read": "empty",
+              "write": "saved"
+            },
+            "sequence": {
+              "runId": 8,
+              "status": "completed",
+              "running": false,
+              "stepIndex": 0,
+              "completedSteps": 1,
+              "totalSteps": 1,
+              "language": "ko",
+              "audioAttempted": 1,
+              "audioSucceeded": 1,
+              "audioFailed": 0,
+              "audioTimedOut": 0,
+              "muted": false,
+              "reason": null,
+              "errors": []
+            }
+          },
+          "speech": [
+            {
+              "text": "영 더하기 영. 하나도 없어요. 영이에요.",
+              "lang": "ko-KR"
+            }
+          ]
+        },
+        {
+          "operation": "30+0",
+          "snapshot": {
+            "active": true,
+            "error": null,
+            "mode": "add",
+            "a": 30,
+            "b": 0,
+            "leftObjectId": "korean_police_car",
+            "rightObjectId": "pump_engine",
+            "shareObjectId": "apple",
+            "total": 30,
+            "groups": null,
+            "each": null,
+            "remainder": null,
+            "actualCount": 30,
+            "actualLeft": 30,
+            "actualRight": 0,
+            "actualGroups": [],
+            "poolCount": 0,
+            "counted": 30,
+            "moved": 0,
+            "phase": "complete",
+            "currentStep": {
+              "id": "sum",
+              "kind": "summary",
+              "number": null,
+              "groupIndex": null
+            },
+            "complete": true,
+            "dialog": null,
+            "readingStyle": "native",
+            "muted": false,
+            "age": 4,
+            "language": "ko",
+            "audioFailed": false,
+            "storage": {
+              "memoryAvailable": true,
+              "read": "empty",
+              "write": "saved"
+            },
+            "sequence": {
+              "runId": 12,
+              "status": "completed",
+              "running": false,
+              "stepIndex": 30,
+              "completedSteps": 31,
+              "totalSteps": 31,
+              "language": "ko",
+              "audioAttempted": 31,
+              "audioSucceeded": 31,
+              "audioFailed": 0,
+              "audioTimedOut": 0,
+              "muted": false,
+              "reason": null,
+              "errors": []
+            }
+          },
+          "speech": [
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "여섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "일곱",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "여덟",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "아홉",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열여섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열일곱",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열여덟",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "열아홉",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물여섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물일곱",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물여덟",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "스물아홉",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "서른",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "서른 더하기 영. 모두 서른 대예요.",
+              "lang": "ko-KR"
+            }
+          ]
+        },
+        {
+          "operation": "3/5",
+          "snapshot": {
+            "active": true,
+            "error": null,
+            "mode": "share",
+            "a": 30,
+            "b": 0,
+            "leftObjectId": "korean_police_car",
+            "rightObjectId": "pump_engine",
+            "shareObjectId": "apple",
+            "total": 3,
+            "groups": 5,
+            "each": 0,
+            "remainder": 3,
+            "actualCount": 3,
+            "actualLeft": 0,
+            "actualRight": 0,
+            "actualGroups": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "poolCount": 3,
+            "counted": 0,
+            "moved": 0,
+            "phase": "complete",
+            "currentStep": {
+              "id": "share-result",
+              "kind": "summary",
+              "number": null,
+              "groupIndex": null
+            },
+            "complete": true,
+            "dialog": null,
+            "readingStyle": "native",
+            "muted": false,
+            "age": 4,
+            "language": "ko",
+            "audioFailed": false,
+            "storage": {
+              "memoryAvailable": true,
+              "read": "empty",
+              "write": "saved"
+            },
+            "sequence": {
+              "runId": 15,
+              "status": "completed",
+              "running": false,
+              "stepIndex": 1,
+              "completedSteps": 2,
+              "totalSteps": 2,
+              "language": "ko",
+              "audioAttempted": 2,
+              "audioSucceeded": 2,
+              "audioFailed": 0,
+              "audioTimedOut": 0,
+              "muted": false,
+              "reason": null,
+              "errors": []
+            }
+          },
+          "speech": [
+            {
+              "text": "모두 세 개 있어요. 다섯 곳에 똑같이 나눠요.",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "한 개씩 나누기에는 모자라요. 세 개 모두 남아요.",
+              "lang": "ko-KR"
+            }
+          ],
+          "remainderVisible": {
+            "found": true,
+            "visible": true,
+            "rect": {
+              "top": 207.09375,
+              "bottom": 342.421875,
+              "left": 24,
+              "right": 366
+            },
+            "board": {
+              "top": 204.09375,
+              "bottom": 418.1875,
+              "left": 21,
+              "right": 369
+            }
+          }
+        },
+        {
+          "operation": "0/3",
+          "snapshot": {
+            "active": true,
+            "error": null,
+            "mode": "share",
+            "a": 30,
+            "b": 0,
+            "leftObjectId": "korean_police_car",
+            "rightObjectId": "pump_engine",
+            "shareObjectId": "apple",
+            "total": 0,
+            "groups": 3,
+            "each": 0,
+            "remainder": 0,
+            "actualCount": 0,
+            "actualLeft": 0,
+            "actualRight": 0,
+            "actualGroups": [
+              0,
+              0,
+              0
+            ],
+            "poolCount": 0,
+            "counted": 0,
+            "moved": 0,
+            "phase": "complete",
+            "currentStep": {
+              "id": "share-result",
+              "kind": "summary",
+              "number": null,
+              "groupIndex": null
+            },
+            "complete": true,
+            "dialog": null,
+            "readingStyle": "native",
+            "muted": false,
+            "age": 4,
+            "language": "ko",
+            "audioFailed": false,
+            "storage": {
+              "memoryAvailable": true,
+              "read": "empty",
+              "write": "saved"
+            },
+            "sequence": {
+              "runId": 18,
+              "status": "completed",
+              "running": false,
+              "stepIndex": 1,
+              "completedSteps": 2,
+              "totalSteps": 2,
+              "language": "ko",
+              "audioAttempted": 2,
+              "audioSucceeded": 2,
+              "audioFailed": 0,
+              "audioTimedOut": 0,
+              "muted": false,
+              "reason": null,
+              "errors": []
+            }
+          },
+          "speech": [
+            {
+              "text": "하나도 없어요. 세 곳에 똑같이 나눠요.",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "어느 곳에도 없어요. 남은 것도 없어요. 영이에요.",
+              "lang": "ko-KR"
+            }
+          ],
+          "remainderVisible": {
+            "found": true,
+            "visible": true,
+            "rect": {
+              "top": 207.09375,
+              "bottom": 322.09375,
+              "left": 24,
+              "right": 366
+            },
+            "board": {
+              "top": 204.09375,
+              "bottom": 418.1875,
+              "left": 21,
+              "right": 369
+            }
+          }
+        },
+        {
+          "operation": "30/6",
+          "snapshot": {
+            "active": true,
+            "error": null,
+            "mode": "share",
+            "a": 30,
+            "b": 0,
+            "leftObjectId": "korean_police_car",
+            "rightObjectId": "pump_engine",
+            "shareObjectId": "apple",
+            "total": 30,
+            "groups": 6,
+            "each": 5,
+            "remainder": 0,
+            "actualCount": 30,
+            "actualLeft": 0,
+            "actualRight": 0,
+            "actualGroups": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "poolCount": 0,
+            "counted": 30,
+            "moved": 30,
+            "phase": "complete",
+            "currentStep": {
+              "id": "share-result",
+              "kind": "summary",
+              "number": null,
+              "groupIndex": null
+            },
+            "complete": true,
+            "dialog": null,
+            "readingStyle": "native",
+            "muted": false,
+            "age": 4,
+            "language": "ko",
+            "audioFailed": false,
+            "storage": {
+              "memoryAvailable": true,
+              "read": "empty",
+              "write": "saved"
+            },
+            "sequence": {
+              "runId": 21,
+              "status": "completed",
+              "running": false,
+              "stepIndex": 31,
+              "completedSteps": 32,
+              "totalSteps": 32,
+              "language": "ko",
+              "audioAttempted": 32,
+              "audioSucceeded": 32,
+              "audioFailed": 0,
+              "audioTimedOut": 0,
+              "muted": false,
+              "reason": null,
+              "errors": []
+            }
+          },
+          "speech": [
+            {
+              "text": "모두 서른 개 있어요. 여섯 곳에 똑같이 나눠요.",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "하나",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "둘",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "셋",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "넷",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "다섯",
+              "lang": "ko-KR"
+            },
+            {
+              "text": "한 곳에 다섯 개씩. 남은 것은 없어요.",
+              "lang": "ko-KR"
+            }
+          ],
+          "remainderVisible": {
+            "found": true,
+            "visible": true,
+            "rect": {
+              "top": 207.09375,
+              "bottom": 292.09375,
+              "left": 24,
+              "right": 366
+            },
+            "board": {
+              "top": 204.09375,
+              "bottom": 418.1875,
+              "left": 21,
+              "right": 369
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "independent types for the two addends",
+      "status": "PASS",
+      "detail": {
+        "active": true,
+        "error": null,
+        "mode": "add",
+        "a": 9,
+        "b": 6,
+        "leftObjectId": "korean_police_car",
+        "rightObjectId": "cookie",
+        "shareObjectId": "apple",
+        "total": 15,
+        "groups": null,
+        "each": null,
+        "remainder": null,
+        "actualCount": 15,
+        "actualLeft": 9,
+        "actualRight": 6,
+        "actualGroups": [],
+        "poolCount": 0,
+        "counted": 15,
+        "moved": 0,
+        "phase": "complete",
+        "currentStep": {
+          "id": "sum",
+          "kind": "summary",
+          "number": null,
+          "groupIndex": null
+        },
+        "complete": true,
+        "dialog": null,
+        "readingStyle": "native",
+        "muted": false,
+        "age": 4,
+        "language": "ko",
+        "audioFailed": false,
+        "storage": {
+          "memoryAvailable": true,
+          "read": "empty",
+          "write": "saved"
+        },
+        "sequence": {
+          "runId": 26,
+          "status": "completed",
+          "running": false,
+          "stepIndex": 15,
+          "completedSteps": 16,
+          "totalSteps": 16,
+          "language": "ko",
+          "audioAttempted": 16,
+          "audioSucceeded": 16,
+          "audioFailed": 0,
+          "audioTimedOut": 0,
+          "muted": false,
+          "reason": null,
+          "errors": []
+        }
+      }
+    },
+    {
+      "name": "large picture chooser traps focus and Escape resumes",
+      "status": "PASS",
+      "detail": {
+        "escapeResumed": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 27,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "focusStayedInsideDialog": true
+      }
+    },
+    {
+      "name": "rapid quantity and mode replacement cancel prior speech",
+      "status": "PASS",
+      "detail": {
+        "replacement": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 8,
+          "b": 2,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 10,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 10,
+          "actualLeft": 8,
+          "actualRight": 2,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 1,
+          "moved": 0,
+          "phase": "counting",
+          "currentStep": {
+            "id": "count-left-1",
+            "kind": "count",
+            "number": 1,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 33,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 11,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "addition": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 8,
+          "b": 2,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 10,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 10,
+          "actualLeft": 8,
+          "actualRight": 2,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 10,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 33,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 10,
+            "completedSteps": 11,
+            "totalSteps": 11,
+            "language": "ko",
+            "audioAttempted": 11,
+            "audioSucceeded": 11,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "sharing": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 8,
+          "b": 2,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 3,
+          "groups": 5,
+          "each": 0,
+          "remainder": 3,
+          "actualCount": 3,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 3,
+          "counted": 0,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 38,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 1,
+            "completedSteps": 2,
+            "totalSteps": 2,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 2,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        }
+      }
+    },
+    {
+      "name": "reading modes and settings close automatically resume",
+      "status": "PASS",
+      "detail": {
+        "sino": [
+          {
+            "text": "일",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "이",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "삼",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "사",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "오",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "이 더하기 삼. 모두 다섯 개예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "cancelledFromRunning": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 2,
+          "b": 3,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 5,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 5,
+          "actualLeft": 2,
+          "actualRight": 3,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 1,
+          "moved": 0,
+          "phase": "counting",
+          "currentStep": {
+            "id": "count-left-1",
+            "kind": "count",
+            "number": 1,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "sino",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 45,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 6,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "english": [
+          {
+            "text": "one",
+            "lang": "en-US"
+          },
+          {
+            "text": "two",
+            "lang": "en-US"
+          },
+          {
+            "text": "three",
+            "lang": "en-US"
+          },
+          {
+            "text": "four",
+            "lang": "en-US"
+          },
+          {
+            "text": "five",
+            "lang": "en-US"
+          },
+          {
+            "text": "two plus three is five.",
+            "lang": "en-US"
+          }
+        ],
+        "unchangedCloseResumed": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 2,
+          "b": 3,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 5,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 5,
+          "actualLeft": 2,
+          "actualRight": 3,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 5,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "sino",
+          "muted": false,
+          "age": 7,
+          "language": "en",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 47,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 5,
+            "completedSteps": 6,
+            "totalSteps": 6,
+            "language": "en",
+            "audioAttempted": 6,
+            "audioSucceeded": 6,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        }
+      }
+    },
+    {
+      "name": "reload restoration and memory after failed storage writes",
+      "status": "PASS",
+      "detail": {
+        "saved": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 7,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 13,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 13,
+          "actualLeft": 7,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 13,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 7,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 53,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "reloaded": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 7,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 13,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 13,
+          "actualLeft": 7,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 13,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 7,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "storage",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "memoryRecovered": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 8,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 14,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 14,
+          "actualLeft": 8,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 14,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 7,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "memory",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 14,
+            "completedSteps": 15,
+            "totalSteps": 15,
+            "language": "ko",
+            "audioAttempted": 15,
+            "audioSucceeded": 15,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        }
+      }
+    },
+    {
+      "name": "mute keeps visual sharing and exit cancels future steps",
+      "status": "PASS",
+      "detail": {
+        "mutedCompletion": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 8,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "cookie",
+          "shareObjectId": "apple",
+          "total": 3,
+          "groups": 5,
+          "each": 0,
+          "remainder": 3,
+          "actualCount": 3,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 3,
+          "counted": 0,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": true,
+          "age": 7,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "memory",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 5,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 1,
+            "completedSteps": 2,
+            "totalSteps": 2,
+            "language": "ko",
+            "audioAttempted": 0,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": true,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "exitActive": false
+      }
+    },
+    {
+      "name": "9 police + 6 fire / 844x390",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "empty",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉 더하기 여섯. 모두 열다섯 대예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            844,
+            390
+          ],
+          "documentWidth": 844,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 844,
+            "bottom": 390,
+            "clientWidth": 844,
+            "scrollWidth": 844,
+            "clientHeight": 390,
+            "scrollHeight": 390
+          },
+          "board": {
+            "width": 595,
+            "height": 121
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-add-844x390.png"
+      }
+    },
+    {
+      "name": "15 shared among 4 / 844x390",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 15,
+          "counted": 0,
+          "moved": 0,
+          "phase": "preview",
+          "currentStep": {
+            "id": "share-intro",
+            "kind": "intro",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "poolCount": 3,
+          "counted": 12,
+          "moved": 12,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "모두 열다섯 개 있어요. 네 곳에 똑같이 나눠요.",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "한 곳에 세 개씩. 세 개 남아요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "observedMoves": 13,
+        "currentAndHeadingVisible": true,
+        "remainderVisible": {
+          "found": true,
+          "visible": true,
+          "rect": {
+            "top": 172.796875,
+            "bottom": 288.921875,
+            "left": 16,
+            "right": 605
+          },
+          "board": {
+            "top": 169.796875,
+            "bottom": 292,
+            "left": 13,
+            "right": 608
+          }
+        },
+        "layout": {
+          "viewport": [
+            844,
+            390
+          ],
+          "documentWidth": 844,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 844,
+            "bottom": 390,
+            "clientWidth": 844,
+            "scrollWidth": 844,
+            "clientHeight": 390,
+            "scrollHeight": 390
+          },
+          "board": {
+            "width": 595,
+            "height": 122.203125
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-share-844x390.png"
+      }
+    },
+    {
+      "name": "9 police + 6 fire / 1024x768",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "empty",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉 더하기 여섯. 모두 열다섯 대예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            1024,
+            768
+          ],
+          "documentWidth": 1024,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 1024,
+            "bottom": 768,
+            "clientWidth": 1024,
+            "scrollWidth": 1024,
+            "clientHeight": 768,
+            "scrollHeight": 768
+          },
+          "board": {
+            "width": 636,
+            "height": 380
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-add-1024x768.png"
+      }
+    },
+    {
+      "name": "15 shared among 4 / 1024x768",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 15,
+          "counted": 0,
+          "moved": 0,
+          "phase": "preview",
+          "currentStep": {
+            "id": "share-intro",
+            "kind": "intro",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "poolCount": 3,
+          "counted": 12,
+          "moved": 12,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "모두 열다섯 개 있어요. 네 곳에 똑같이 나눠요.",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "한 곳에 세 개씩. 세 개 남아요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "observedMoves": 13,
+        "currentAndHeadingVisible": true,
+        "remainderVisible": {
+          "found": true,
+          "visible": true,
+          "rect": {
+            "top": 234,
+            "bottom": 378.328125,
+            "left": 35,
+            "right": 659
+          },
+          "board": {
+            "top": 228,
+            "bottom": 630,
+            "left": 29,
+            "right": 665
+          }
+        },
+        "layout": {
+          "viewport": [
+            1024,
+            768
+          ],
+          "documentWidth": 1024,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 1024,
+            "bottom": 768,
+            "clientWidth": 1024,
+            "scrollWidth": 1024,
+            "clientHeight": 768,
+            "scrollHeight": 768
+          },
+          "board": {
+            "width": 636,
+            "height": 402
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-share-1024x768.png"
+      }
+    },
+    {
+      "name": "9 police + 6 fire / 1365x936",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "add",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": null,
+          "each": null,
+          "remainder": null,
+          "actualCount": 15,
+          "actualLeft": 9,
+          "actualRight": 6,
+          "actualGroups": [],
+          "poolCount": 0,
+          "counted": 15,
+          "moved": 0,
+          "phase": "complete",
+          "currentStep": {
+            "id": "sum",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": false,
+            "read": "empty",
+            "write": "unwritten"
+          },
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉 더하기 여섯. 모두 열다섯 대예요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            1365,
+            936
+          ],
+          "documentWidth": 1365,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 1365,
+            "bottom": 936,
+            "clientWidth": 1365,
+            "scrollWidth": 1365,
+            "clientHeight": 936,
+            "scrollHeight": 936
+          },
+          "board": {
+            "width": 977,
+            "height": 548
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-add-1365x936.png"
+      }
+    },
+    {
+      "name": "15 shared among 4 / 1365x936",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "poolCount": 15,
+          "counted": 0,
+          "moved": 0,
+          "phase": "preview",
+          "currentStep": {
+            "id": "share-intro",
+            "kind": "intro",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": false,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "snapshot": {
+          "active": true,
+          "error": null,
+          "mode": "share",
+          "a": 9,
+          "b": 6,
+          "leftObjectId": "korean_police_car",
+          "rightObjectId": "pump_engine",
+          "shareObjectId": "apple",
+          "total": 15,
+          "groups": 4,
+          "each": 3,
+          "remainder": 3,
+          "actualCount": 15,
+          "actualLeft": 0,
+          "actualRight": 0,
+          "actualGroups": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "poolCount": 3,
+          "counted": 12,
+          "moved": 12,
+          "phase": "complete",
+          "currentStep": {
+            "id": "share-result",
+            "kind": "summary",
+            "number": null,
+            "groupIndex": null
+          },
+          "complete": true,
+          "dialog": null,
+          "readingStyle": "native",
+          "muted": false,
+          "age": 4,
+          "language": "ko",
+          "audioFailed": false,
+          "storage": {
+            "memoryAvailable": true,
+            "read": "empty",
+            "write": "saved"
+          },
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 13,
+            "completedSteps": 14,
+            "totalSteps": 14,
+            "language": "ko",
+            "audioAttempted": 14,
+            "audioSucceeded": 14,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "speech": [
+          {
+            "text": "모두 열다섯 개 있어요. 네 곳에 똑같이 나눠요.",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "한 곳에 세 개씩. 세 개 남아요.",
+            "lang": "ko-KR"
+          }
+        ],
+        "observedMoves": 13,
+        "currentAndHeadingVisible": true,
+        "remainderVisible": {
+          "found": true,
+          "visible": true,
+          "rect": {
+            "top": 234,
+            "bottom": 402,
+            "left": 35,
+            "right": 1000
+          },
+          "board": {
+            "top": 228,
+            "bottom": 798,
+            "left": 29,
+            "right": 1006
+          }
+        },
+        "layout": {
+          "viewport": [
+            1365,
+            936
+          ],
+          "documentWidth": 1365,
+          "blockedButtons": [],
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 1365,
+            "bottom": 936,
+            "clientWidth": 1365,
+            "scrollWidth": 1365,
+            "clientHeight": 936,
+            "scrollHeight": 936
+          },
+          "board": {
+            "width": 977,
+            "height": 570
+          },
+          "brokenImages": []
+        },
+        "screenshot": "picture-arithmetic-share-1365x936.png"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    "picture-arithmetic-add-320x568.png",
+    "picture-arithmetic-share-320x568.png",
+    "picture-arithmetic-add-360x640.png",
+    "picture-arithmetic-share-360x640.png",
+    "picture-arithmetic-add-390x844.png",
+    "picture-arithmetic-share-390x844.png",
+    "picture-arithmetic-add-844x390.png",
+    "picture-arithmetic-share-844x390.png",
+    "picture-arithmetic-add-1024x768.png",
+    "picture-arithmetic-share-1024x768.png",
+    "picture-arithmetic-add-1365x936.png",
+    "picture-arithmetic-share-1365x936.png"
+  ],
+  "sources": {
+    "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+    "js/games/picture-arithmetic.js": "b4f791fb6c816e4e00c647a5d1b0915f05797b4e29bb18c77c3952d969c7940f",
+    "css/games/picture-arithmetic.css": "2400897d4942dbdf8ada6a2028abb910dbe437da39ff5f11b87909d33689703b",
+    "js/games/quantity-play-model.js": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+    "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+    "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+    "scripts/qa-picture-arithmetic-browser.py": "c16f5389d4eaf94189b43a42a28e2f62c3f6df941e7d324f06c34abdb6b6669b"
+  },
+  "baseUrl": "http://127.0.0.1:38519/",
+  "browser": "143.0.7499.4",
+  "status": "PASS"
+}

@@ -1,0 +1,34 @@
+{
+  "stage": 4,
+  "mainMergeSha": "25bc1494caeacc821f1aa3f97cd80e7d77aa3154",
+  "url": "https://icefoxtail.github.io/my-life-os/index.html",
+  "addition": {
+    "bySource": {
+      "./assets/vehicles/fire/pump_engine.png": 6,
+      "./assets/vehicles/police/korean_police_car.png": 9
+    },
+    "completedText": true,
+    "images": 15,
+    "sumLabel": "모두15"
+  },
+  "sharingInitial": {
+    "pictures": 15,
+    "groups": 4,
+    "visibleGroupsInitiallyEmpty": true
+  },
+  "sharingCompleted": {
+    "completedText": true,
+    "groups": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "pictures": 15,
+    "remainder": 3,
+    "remainderTitle": "남은 그림"
+  },
+  "method": "Actual production menu, operation switch and group choice; independent DOM image counts and screenshots; no game/API injection",
+  "nativeSpeakerAudio": "NOT_RUN",
+  "observedAudioFallback": true
+}

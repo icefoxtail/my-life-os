@@ -1,0 +1,529 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-11-15T14:07:22.088998+00:00",
+  "status": "PASS",
+  "scope": "Exact-head CI and downloaded artifact verification; no merge or production deployment was performed by this verification agent.",
+  "repository": "icefoxtail/my-life-os",
+  "head": "a62669e4776df97aa01bd24a309d5c8f309d7387",
+  "pull_request": {
+    "number": 28,
+    "url": "https://github.com/icefoxtail/my-life-os/pull/28",
+    "head": "a62669e4776df97aa01bd24a309d5c8f309d7387",
+    "mergeable_observed": false,
+    "state": "open"
+  },
+  "workflow_runs": [
+    {
+      "id": 43721624780,
+      "name": "Playground checks",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 116,
+      "jobs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43721624780/jobs",
+      "logs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43721624780/logs",
+      "workflow_id": 410444489
+    },
+    {
+      "id": 43721624773,
+      "name": "Phase 2 browser release",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 77,
+      "jobs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43721624773/jobs",
+      "logs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43721624773/logs",
+      "workflow_id": 411125511
+    }
+  ],
+  "jobs": [
+    {
+      "id": 132834654078,
+      "name": "quantity-and-regression",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 43721624780,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Syntax and integration",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "English Listening TTS, language preference and voice queue safety",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Independent post office quantity and state checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Pattern train model and independent rule oracle",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Independent asynchronous art restore checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Existing game and fallback regression",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Independent service worker checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "id": 132834654069,
+      "name": "chromium",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 43721624773,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Install pinned browser harness",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Vehicle grammar and game interaction regression",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Latest train fixture, real menu and legacy entry checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Native Chromium English Listening and mode-switch verification",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Menu arrival voice and cancellation regression",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Korean and English tap-to-speech synchronization",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Home welcome and guide voice regression",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Attach source-bound evidence even on failure",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ]
+    },
+    {
+      "id": 132834654324,
+      "name": "quantity-games",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 43721624773,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Verify quantities, cancellation and staged game models",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install pinned browser harness",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Automatic picture counting and staged quantity games",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Attach quantity-game evidence even on failure",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 14165021830,
+      "name": "phase2-browser-43721624773",
+      "head": "a62669e4776df97aa01bd24a309d5c8f309d7387",
+      "digest": "sha256:113c7f18ccd56ee2cbcd4287bf8e7edcbc60b2afa5b021ae98c8d9f2a21223ce",
+      "verified_sha256": "113c7f18ccd56ee2cbcd4287bf8e7edcbc60b2afa5b021ae98c8d9f2a21223ce",
+      "archive_path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/legacy-a62669e.zip",
+      "extracted_path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/legacy",
+      "metadata_path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/legacy/artifact-metadata.json",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43721624773/artifacts/14165021830"
+    },
+    {
+      "id": 14164504495,
+      "name": "quantity-browser-43721624773",
+      "head": "a62669e4776df97aa01bd24a309d5c8f309d7387",
+      "digest": "sha256:8df4b74c57f50131a0bb3f0a349f22d34c10cb073011056068dcf0a93335be66",
+      "verified_sha256": "8df4b74c57f50131a0bb3f0a349f22d34c10cb073011056068dcf0a93335be66",
+      "archive_path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/quantity-a62669e.zip",
+      "extracted_path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity",
+      "metadata_path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/artifact-metadata.json",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43721624773/artifacts/14164504495"
+    }
+  ],
+  "reports": [
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/number-picture/number-picture-browser.json",
+      "status": "PASS",
+      "checks": 20,
+      "passed": 20,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "003cf9be2a70bbc9550b0201b886ad4c60b9438241dbb72f7efed841fe432f21"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/ten-frame-garden/ten-frame-garden-browser.json",
+      "status": "PASS",
+      "checks": 14,
+      "passed": 14,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "ba08437f43111d3422438be4d79086f58f7e8e31af3777bd1ab94961b711e804"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-browser.json",
+      "status": "PASS",
+      "checks": 19,
+      "passed": 19,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "a93d64e5b36ca18525e21d9c99d38a24917b4ba15d75dd65bdb9472260b2c4b1"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/legacy/release-browser.json",
+      "status": "PASS",
+      "checks": 16,
+      "passed": 16,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "2135f1ed6d8aec85e5c7285199e7c133d654a00fec8a4f485b929e72e609ac74"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/legacy/train-final24.json",
+      "status": "PASS",
+      "checks": 24,
+      "passed": 24,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "fce15a1fa2439ff180e1c82c534bdb9a49fd86fa2283a2a22c537fbd4ccba9a5"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/legacy/english/english-listening-browser.json",
+      "status": "PASS",
+      "checks": 14,
+      "passed": 14,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "8866e950b68d5266be9f572343bf5a7cc67602157c3839e5ac80a28d13ef5f11"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/legacy/voice-sync/voice-label-sync-browser.json",
+      "status": "PASS",
+      "checks": 8,
+      "passed": 8,
+      "failures": 0,
+      "page_errors": 0,
+      "sha256": "e9315122b8d549deda47791a5bac946c61f99b9eecf3312dc8f34a9f27664f61"
+    }
+  ],
+  "source_hash_checks": [
+    {
+      "file": "js/games/picture-arithmetic.js",
+      "sha256": "b4f791fb6c816e4e00c647a5d1b0915f05797b4e29bb18c77c3952d969c7940f",
+      "matches_ci_source": true
+    },
+    {
+      "file": "css/games/picture-arithmetic.css",
+      "sha256": "2400897d4942dbdf8ada6a2028abb910dbe437da39ff5f11b87909d33689703b",
+      "matches_ci_source": true
+    },
+    {
+      "file": "scripts/qa-picture-arithmetic-browser.py",
+      "sha256": "c16f5389d4eaf94189b43a42a28e2f62c3f6df941e7d324f06c34abdb6b6669b",
+      "matches_ci_source": true
+    }
+  ],
+  "arithmetic_viewports": [
+    {
+      "case": "9 police + 6 fire / 320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "board": {
+        "width": 292,
+        "height": 142
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-320x568.png"
+    },
+    {
+      "case": "15 shared among 4 / 320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "board": {
+        "width": 292,
+        "height": 142
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-320x568.png"
+    },
+    {
+      "case": "9 police + 6 fire / 360x640",
+      "viewport": [
+        360,
+        640
+      ],
+      "board": {
+        "width": 332,
+        "height": 214
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-360x640.png"
+    },
+    {
+      "case": "15 shared among 4 / 360x640",
+      "viewport": [
+        360,
+        640
+      ],
+      "board": {
+        "width": 332,
+        "height": 214
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-360x640.png"
+    },
+    {
+      "case": "9 police + 6 fire / 390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "board": {
+        "width": 348,
+        "height": 200.1875
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-390x844.png"
+    },
+    {
+      "case": "15 shared among 4 / 390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "board": {
+        "width": 348,
+        "height": 214.09375
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-390x844.png"
+    },
+    {
+      "case": "9 police + 6 fire / 844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "board": {
+        "width": 595,
+        "height": 121
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-844x390.png"
+    },
+    {
+      "case": "15 shared among 4 / 844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "board": {
+        "width": 595,
+        "height": 122.203125
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-844x390.png"
+    },
+    {
+      "case": "9 police + 6 fire / 1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "board": {
+        "width": 636,
+        "height": 380
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-1024x768.png"
+    },
+    {
+      "case": "15 shared among 4 / 1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "board": {
+        "width": 636,
+        "height": 402
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-1024x768.png"
+    },
+    {
+      "case": "9 police + 6 fire / 1365x936",
+      "viewport": [
+        1365,
+        936
+      ],
+      "board": {
+        "width": 977,
+        "height": 548
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-1365x936.png"
+    },
+    {
+      "case": "15 shared among 4 / 1365x936",
+      "viewport": [
+        1365,
+        936
+      ],
+      "board": {
+        "width": 977,
+        "height": 570
+      },
+      "blocked_buttons": 0,
+      "screenshot": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-1365x936.png"
+    }
+  ],
+  "physical_audio": {
+    "status": "NOT_RUN",
+    "reason": "Browser harness uses a speechSynthesis transport completion fixture; no physical speaker hearing or mobile-device observation."
+  },
+  "key_screenshots": {
+    "portrait_add_320x568": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-320x568.png",
+    "portrait_share_320x568": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-320x568.png",
+    "landscape_add_844x390": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-add-844x390.png",
+    "landscape_share_844x390": "/workspace/scratch/43e7e077fa86/ci-stage4-release/a62669e/quantity/picture-arithmetic/picture-arithmetic-share-844x390.png"
+  }
+}

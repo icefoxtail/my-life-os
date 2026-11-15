@@ -1,0 +1,74 @@
+{
+  "stage": 1,
+  "mainMergeSha": "8029e1c9c66f93d3b2339013cbaba502c3f22e36",
+  "verifiedAt": "2026-11-15T13:59:02.706697+00:00",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "scope": "Public Pages asset bytes compared with the exact merged Git tree; live browser interaction recorded separately.",
+  "status": "PASS",
+  "checks": [
+    {
+      "path": "index.html",
+      "expectedSha256": "b1fd11eb50772f7f5707de5f829564cd3e505375ad474a4f911608f43ba8fb58",
+      "httpStatus": 200,
+      "bytes": 93785,
+      "actualSha256": "b1fd11eb50772f7f5707de5f829564cd3e505375ad474a4f911608f43ba8fb58",
+      "matches": true
+    },
+    {
+      "path": "sw.js",
+      "expectedSha256": "1adf41bd18eabe5cad254084c93db9f558fbb8d2c5f040630c0cb70966f9444c",
+      "httpStatus": 200,
+      "bytes": 8320,
+      "actualSha256": "1adf41bd18eabe5cad254084c93db9f558fbb8d2c5f040630c0cb70966f9444c",
+      "matches": true
+    },
+    {
+      "path": "js/play-objects.js",
+      "expectedSha256": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+      "httpStatus": 200,
+      "bytes": 3360,
+      "actualSha256": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+      "matches": true
+    },
+    {
+      "path": "js/games/quantity-play-model.js",
+      "expectedSha256": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+      "httpStatus": 200,
+      "bytes": 6135,
+      "actualSha256": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+      "matches": true
+    },
+    {
+      "path": "js/quantity-sequencer.js",
+      "expectedSha256": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+      "httpStatus": 200,
+      "bytes": 10869,
+      "actualSha256": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+      "matches": true
+    },
+    {
+      "path": "js/games/number-picture.js",
+      "expectedSha256": "b122c2dade929de40f97e0602b9a42a289dfd319beb0a3ad0dace0f2b24597ac",
+      "httpStatus": 200,
+      "bytes": 18772,
+      "actualSha256": "b122c2dade929de40f97e0602b9a42a289dfd319beb0a3ad0dace0f2b24597ac",
+      "matches": true
+    },
+    {
+      "path": "css/games/number-picture.css",
+      "expectedSha256": "c4f38e1f9aef80da784e83a0c6937e0380f606aba3dbb928798e4cb4a2e4ffbe",
+      "httpStatus": 200,
+      "bytes": 14180,
+      "actualSha256": "c4f38e1f9aef80da784e83a0c6937e0380f606aba3dbb928798e4cb4a2e4ffbe",
+      "matches": true
+    },
+    {
+      "path": "assets/games/number-picture/card.svg",
+      "expectedSha256": "1e0a7b313f4b6f43cd3ba87035e048a2d39cfc514562c5b98ec5e026f0e5daf3",
+      "httpStatus": 200,
+      "bytes": 1686,
+      "actualSha256": "1e0a7b313f4b6f43cd3ba87035e048a2d39cfc514562c5b98ec5e026f0e5daf3",
+      "matches": true
+    }
+  ]
+}
