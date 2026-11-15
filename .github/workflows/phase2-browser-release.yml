@@ -10,6 +10,9 @@ on:
       - 'scripts/qa-phase2-release-browser.py'
       - 'scripts/qa-pattern-train*'
       - 'scripts/qa-home-voice-browser.py'
+      - 'scripts/qa-number-picture-browser.py'
+      - 'scripts/qa-ten-frame-garden-browser.py'
+      - 'scripts/qa-picture-arithmetic-browser.py'
       - '.github/workflows/phase2-browser-release.yml'
   workflow_dispatch:
   push:
@@ -40,6 +43,13 @@ jobs:
         run: python3 scripts/qa-vehicle-grammar-browser.py --output qa-release-evidence/vehicle-grammar
       - name: Latest train fixture, real menu and legacy entry checks
         run: python3 scripts/qa-phase2-release-browser.py --output qa-release-evidence
+      - name: Automatic picture counting and staged quantity games
+        run: |
+          for game in number-picture ten-frame-garden picture-arithmetic; do
+            if test -f "scripts/qa-$game-browser.py"; then
+              python3 "scripts/qa-$game-browser.py" --output "qa-release-evidence/$game"
+            fi
+          done
       - name: Native Chromium English Listening and mode-switch verification
         run: python3 scripts/qa-english-listening-browser.py --output qa-release-evidence/english
       - name: Menu arrival voice and cancellation regression
