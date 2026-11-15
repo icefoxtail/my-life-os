@@ -63,7 +63,9 @@ with sync_playwright() as p:
             checkResults=[]
             for lang in ['ko','en']:
                 page.evaluate("(lang) => SihyeonPlaySettings.setLanguage(lang)",lang)
-                templates=page.evaluate("SihyeonVoiceLabels.templates.map(x=>x.id)")
+                # The voice registry intentionally retains the old 'helicopter'
+                # label for saved/legacy content. It is not an active gallery button.
+                templates=page.evaluate("SihyeonVoiceLabels.templates.filter(x=>x.id!=='helicopter').map(x=>x.id)")
                 rendered_templates=page.locator('[data-tpl]').evaluate_all('(buttons)=>buttons.map(button=>button.dataset.tpl)')
                 assert templates and sorted(templates)==sorted(rendered_templates),(templates,rendered_templates)
                 for t in templates:
