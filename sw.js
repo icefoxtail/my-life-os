@@ -1,6 +1,9 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.6.2-flower-garden';
+const CACHE_NAME = 'sihyeon-play-os-v1.6.3-picture-arithmetic';
 
 const ASSETS = [
+  './js/games/picture-arithmetic.js',
+  './css/games/picture-arithmetic.css',
+  './assets/games/picture-arithmetic/card.svg',
   './js/games/ten-frame-garden.js',
   './css/games/ten-frame-garden.css',
   './assets/games/ten-frame-garden/card.svg',
