@@ -173,7 +173,14 @@ def layout(page):
     page.wait_for_function("[...document.querySelectorAll('.pa-root img')].every(img=>img.complete)", timeout=15000)
     result = page.evaluate("""()=>{
       const root=document.querySelector('.pa-root'),r=root.getBoundingClientRect(),b=root.querySelector('.pa-board').getBoundingClientRect();
-      return {viewport:[innerWidth,innerHeight],documentWidth:document.documentElement.scrollWidth,
+      const picker=root.querySelector('.pa-picker'),p=picker.getBoundingClientRect();
+      const blockedButtons=[...picker.querySelectorAll('button')].filter(button=>{
+        if(!button.getClientRects().length)return false;
+        const q=button.getBoundingClientRect(),x=q.left+q.width/2,y=q.top+q.height/2;
+        if(x<p.left||x>p.right||y<p.top||y>p.bottom)return false;
+        return document.elementFromPoint(x,y)?.closest('button')!==button;
+      }).map(button=>({action:button.dataset.paAction,value:button.dataset.value,label:button.textContent}));
+      return {viewport:[innerWidth,innerHeight],documentWidth:document.documentElement.scrollWidth,blockedButtons,
         root:{left:r.left,top:r.top,right:r.right,bottom:r.bottom,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,clientHeight:root.clientHeight,scrollHeight:root.scrollHeight},
         board:{width:b.width,height:b.height},brokenImages:[...root.querySelectorAll('img')].filter(img=>!img.naturalWidth).map(img=>img.getAttribute('src'))};
     }""")
@@ -184,6 +191,7 @@ def layout(page):
     assert bounds['scrollWidth'] <= bounds['clientWidth'] + 1 and bounds['scrollHeight'] <= bounds['clientHeight'] + 1, result
     assert result['board']['width'] > 0 and result['board']['height'] >= 120, result
     assert not result['brokenImages'], result
+    assert not result['blockedButtons'], result
     return result
 
 
@@ -244,6 +252,20 @@ def main():
                 entry['snapshot'] = page.evaluate('window.SihyeonGames?.pictureArithmetic?.getSnapshot?.()||null')
             except Exception:
                 pass
+            # Preserve the failure, then close an observed overlay so later,
+            # independent cases do not fail merely because this case left it open.
+            try:
+                close = page.locator('#playSettingsDialog [data-ps-close]')
+                if close.count():
+                    close.last.click(timeout=5000)
+                    page.locator('#playSettingsDialog').wait_for(state='detached', timeout=5000)
+                    entry['cleanup'] = 'Closed settings after capturing the original failure'
+                if page.locator('.pa-picture-dialog').count():
+                    page.keyboard.press('Escape')
+                    page.locator('.pa-picture-dialog').wait_for(state='detached', timeout=5000)
+                    entry['cleanup'] = 'Closed picture/group chooser after capturing the original failure'
+            except Exception as cleanup_error:
+                entry['cleanupError'] = str(cleanup_error)
         report['checks'].append(entry)
         print(json.dumps(entry, ensure_ascii=False), flush=True)
 
@@ -372,8 +394,15 @@ def main():
                         action(page, 'style', 'sino'); start = mark(page); action(page, 'replay')
                         value = finish(page, 'add', 5)
                         sino = speech(page, start, value, ['일', '이', '삼', '사', '오'])
+                        # Start a deliberately pending transport request before
+                        # testing cancellation. A completed run correctly stays completed.
+                        page.evaluate('__arithmeticSpeech.delayMs=1000')
+                        action(page, 'replay')
+                        running = snap(page)
+                        assert running['sequence']['running'] and running['sequence']['status'] == 'running', running
                         action(page, 'settings'); page.locator('#playSettingsDialog').wait_for(state='visible')
                         assert snap(page)['sequence']['status'] == 'cancelled'
+                        page.evaluate('__arithmeticSpeech.delayMs=25')
                         page.locator('[data-play-age="7"]').click()
                         assert snap(page)['age'] == 7 and snap(page)['total'] == 5
                         page.locator('[data-ps-language="en"]').click()
@@ -381,13 +410,16 @@ def main():
                         page.locator('#playSettingsDialog').wait_for(state='detached')
                         value = finish(page, 'add', 5)
                         english = speech(page, start, value, ['one', 'two', 'three', 'four', 'five'], 'en-US')
-                        action(page, 'settings'); start = mark(page); page.locator('[data-ps-close]').last.click()
+                        action(page, 'settings')
+                        completed = snap(page)
+                        assert completed['sequence']['status'] == 'completed' and not completed['sequence']['running'], completed
+                        start = mark(page); page.locator('[data-ps-close]').last.click()
                         unchanged = finish(page, 'add', 5)
                         speech(page, start, unchanged, ['one', 'two', 'three', 'four', 'five'], 'en-US')
                         action(page, 'settings'); page.locator('[data-ps-language="ko"]').click(); page.locator('[data-ps-close]').last.click()
                         finish(page, 'add', 5)
                         action(page, 'style', 'native')
-                        return {'sino': sino, 'english': english, 'unchangedCloseResumed': unchanged}
+                        return {'sino': sino, 'cancelledFromRunning': running, 'english': english, 'unchangedCloseResumed': unchanged}
                     check('reading modes and settings close automatically resume', settings_and_languages, page)
 
                     def persistence():
