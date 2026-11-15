@@ -442,7 +442,8 @@ def main():
                             disk = page.evaluate("JSON.parse(localStorage.getItem('sihyeon-picture-arithmetic-v1'))")
                             assert disk['a'] == 7, disk
                         finally:
-                            page.evaluate('Storage.prototype.setItem=__paOriginalSet')
+                            restored_storage = page.evaluate('() => { Storage.prototype.setItem=window.__paOriginalSet; return Storage.prototype.setItem===window.__paOriginalSet; }')
+                            assert restored_storage, 'The storage failure fixture was not removed'
                         return {'saved': value, 'reloaded': restored, 'memoryRecovered': recovered}
                     check('reload restoration and memory after failed storage writes', persistence, page)
 
