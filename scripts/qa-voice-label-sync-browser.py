@@ -63,7 +63,9 @@ with sync_playwright() as p:
             checkResults=[]
             for lang in ['ko','en']:
                 page.evaluate("(lang) => SihyeonPlaySettings.setLanguage(lang)",lang)
-                templates=page.evaluate("SihyeonVoiceLabels.templates.filter(x=>x.id!=='helicopter').map(x=>x.id)")
+                templates=page.evaluate("SihyeonVoiceLabels.templates.map(x=>x.id)")
+                rendered_templates=page.locator('[data-tpl]').evaluate_all('(buttons)=>buttons.map(button=>button.dataset.tpl)')
+                assert templates and sorted(templates)==sorted(rendered_templates),(templates,rendered_templates)
                 for t in templates:
                     clear()
                     if t in ['police','fire_ladder','dino','icecream']:
@@ -72,6 +74,7 @@ with sync_playwright() as p:
                         page.evaluate("(id) => document.querySelector('[data-tpl=\"'+id+'\"]').click()",t)
                     checkResults.append(compare(lang,'template',t))
                 colors=page.evaluate("SihyeonVoiceLabels.palettes.map(x=>x.hex)")
+                assert len(colors)==16,len(colors)
                 for color in colors:
                     clear()
                     if color in ['rainbow','#1A1A1A','#FF4444','#4488FF']:
@@ -80,8 +83,8 @@ with sync_playwright() as p:
                         page.evaluate("(hex) => document.querySelector('.az-color-circle[data-color=\"'+hex+'\"]').click()",color)
                     checkResults.append(compare(lang,'color',color))
             page.screenshot(path=str(out/('art-'+str(width)+'x'+str(height)+'.png')),full_page=True)
-            assert len(checkResults)==62,len(checkResults)
-            return {'viewport':[width,height],'languageModes':2,'templates':15,'colors':16,'verified':len(checkResults),'examples':[x for x in checkResults if x['id'] in ['police','dino','icecream','#FF4444']]}
+            assert len(checkResults)==2*(len(templates)+len(colors)),len(checkResults)
+            return {'viewport':[width,height],'languageModes':2,'templates':len(templates),'colors':len(colors),'verified':len(checkResults),'examples':[x for x in checkResults if x['id'] in ['police','dino','icecream','#FF4444']]}
         check('art picture+color real buttons '+str(width)+'x'+str(height),art_all)
         def blocks_both():
             samples=[]

@@ -104,6 +104,11 @@
 ];
   const templates = [
   {
+    "id": "police_swat_suv",
+    "ko": "경찰 특공대 SUV",
+    "en": "police SWAT SUV"
+  },
+  {
     "id": "police",
     "ko": "경찰차",
     "en": "police car"

@@ -212,7 +212,7 @@
   }
   function framesHtml() {
     const all = slots(view.state); const count = all.length / 10;
-    return '<div class="tfg-frames" data-frames="' + count + '" style="--tfg-frames:' + count + '">' + Array.from({ length: count }, (_, f) => {
+    return '<div class="tfg-frames" data-frames="' + count + '" style="--tfg-frames:' + count + '" role="region" aria-label="열 칸 화단. 스크롤해서 다른 화단도 볼 수 있어요" tabindex="0">' + Array.from({ length: count }, (_, f) => {
       const group = all.filter(s => s.frame === f);
       return '<section class="tfg-frame" aria-label="' + (f + 1) + '번째 열 칸 화단"><div class="tfg-frame-heading"><span>' + (f * 10 + 1) + '–' + ((f + 1) * 10) + '</span><strong data-frame-count="' + f + '">' + group.filter(s => s.filled).length + '</strong></div><div class="tfg-ten-grid">' + group.map(s => '<div class="tfg-slot" data-slot="' + s.ordinal + '" data-filled="' + s.filled + '" data-active="false" role="img" aria-label="' + (s.filled ? s.ordinal + '번째 꽃' : '빈 칸') + '">' + (s.filled ? flowerSvg(s.flower) : '<span class="tfg-soil-dot" aria-hidden="true"></span>') + '<span class="tfg-count-badge" aria-hidden="true">' + s.ordinal + '</span></div>').join('') + '</div></section>';
     }).join('') + '</div>';
@@ -252,6 +252,25 @@
     const count = view.container.querySelector('[data-count-value]'); if (count) count.textContent = view.lastOrdinal || (s.quantity === 0 ? '0' : '♪');
     const word = view.container.querySelector('[data-count-word]'); if (word) word.textContent = view.lastWord || (s.quantity === 0 ? '없어요' : '함께 세어요');
     const equation = view.container.querySelector('.tfg-equation'); if (equation) equation.innerHTML = equationHtml();
+    revealActiveFlower();
+  }
+  function revealActiveFlower() {
+    if (!view.container || !view.state?.active) return;
+    const board = view.container.querySelector('.tfg-frames');
+    const slot = board?.querySelector('[data-slot="' + view.state.active + '"]');
+    if (!board || !slot) return;
+    const frame = slot.closest('.tfg-frame');
+    const frameRect = frame?.getBoundingClientRect();
+    const target = frameRect && frameRect.width <= board.clientWidth - 4 && frameRect.height <= board.clientHeight - 4 ? frame : slot;
+    const rect = target.getBoundingClientRect(); const viewport = board.getBoundingClientRect();
+    const left = viewport.left + board.clientLeft + 2; const top = viewport.top + board.clientTop + 2;
+    const right = viewport.left + board.clientLeft + board.clientWidth - 2;
+    const bottom = viewport.top + board.clientTop + board.clientHeight - 2;
+    const dx = rect.left < left ? rect.left - left : rect.right > right ? rect.right - right : 0;
+    const dy = rect.top < top ? rect.top - top : rect.bottom > bottom ? rect.bottom - bottom : 0;
+    // Move only this board. The selected total and controls stay in place, and the
+    // active ten-frame is visible before its next spoken count begins.
+    if (dx || dy) board.scrollBy({ left: dx, top: dy, behavior: 'auto' });
   }
   function showModal(name) {
     stopRun('pause'); view.modal = name; draw();

@@ -38,12 +38,12 @@
 .tfg-goal small{font-size:13px;color:#5d7668}.tfg-goal strong{font-size:36px;font-weight:400;line-height:1.15;white-space:nowrap}.tfg-goal strong>span{font-size:18px}
 .tfg-counting{min-width:94px;min-height:60px;display:flex;gap:8px;align-items:center;justify-content:flex-end}
 .tfg-counting b{font-size:42px;font-weight:400;color:#c8793b;line-height:1}.tfg-counting>span{font-size:16px;max-width:132px;line-height:1.25;overflow-wrap:anywhere}
-.tfg-frames{display:grid;grid-template-rows:repeat(var(--tfg-frames),minmax(0,1fr));gap:12px;min-height:0;min-width:0}
-.tfg-frame{display:grid;grid-template-rows:20px minmax(0,1fr);gap:5px;min-height:0;min-width:0;border-radius:16px;background:#c9d9ac;padding:7px 10px 10px;box-shadow:0 3px 0 #9cba7b}
+.tfg-frames{display:grid;grid-template-rows:repeat(var(--tfg-frames),minmax(148px,1fr));gap:12px;min-height:0;min-width:0;padding:4px 4px 6px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scroll-padding:2px}
+.tfg-frame{display:grid;grid-template-rows:20px minmax(0,1fr);gap:5px;min-height:148px;min-width:0;border-radius:16px;background:#c9d9ac;padding:7px 10px 10px;box-shadow:0 3px 0 #9cba7b}
 .tfg-frame-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:#52734e;line-height:1}
 .tfg-frame-heading strong{font-size:19px;font-weight:400;color:#365743}
 .tfg-ten-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:6px;min-height:0;min-width:0}
-.tfg-slot{position:relative;display:flex;align-items:center;justify-content:center;background:#f6f0da;border:1.5px solid #b5bf90;border-radius:11px;min-width:0;min-height:0;padding:2px 6px;overflow:visible}
+.tfg-slot{position:relative;display:flex;align-items:center;justify-content:center;background:#f6f0da;border:1.5px solid #b5bf90;border-radius:11px;min-width:0;min-height:44px;padding:2px 2px;overflow:visible}
 .tfg-flower{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;overflow:visible}
 .tfg-slot>.tfg-flower{max-height:110px;max-width:88px;transform-origin:bottom center}
 .tfg-slot[data-active=true]{background:#fff6be;box-shadow:0 0 0 3px #e69c45;z-index:1}
@@ -66,6 +66,7 @@
 .tfg-quick-numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .tfg-quick-numbers>button{min-height:44px;font-size:24px;background:#f0ebdb;border-radius:12px}
 .tfg-quick-numbers>button[aria-pressed=true]{background:#427b6b;color:#fffaf0}
+.tfg-app[data-mode="colors"] .tfg-quick-numbers{display:none}
 .tfg-reading{display:flex;gap:6px;min-width:0}
 .tfg-reading>button{flex:1;min-width:0;min-height:44px;background:#e9e8d8;border-radius:12px;font-size:12px;padding:4px 3px;white-space:nowrap}
 .tfg-reading>button[aria-pressed=true]{background:#d5e4d2;box-shadow:inset 0 0 0 2px #5a876f}
@@ -93,8 +94,8 @@
 .tfg-load-error{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:#fffaf0;color:#304f51;font:20px/1.5 system-ui;padding:25px;text-align:center}
 .tfg-load-error button{min-height:48px;padding:10px 20px;border:0;border-radius:15px;background:#427b6b;color:white;font:inherit}
 @keyframes tfg-flower-nod{0%{transform:rotate(-7deg) scale(.93)}70%{transform:rotate(3deg) scale(1.05)}100%{transform:none}}
-@media (min-width:1100px) and (min-height:650px){
-  .tfg-frames[data-frames="2"],.tfg-frames[data-frames="3"]{grid-template-columns:repeat(var(--tfg-frames),minmax(0,1fr));grid-template-rows:minmax(0,1fr);align-items:center}
+@media (orientation:landscape) and (min-height:571px){
+  .tfg-frames[data-frames="2"],.tfg-frames[data-frames="3"]{grid-template-columns:repeat(var(--tfg-frames),minmax(240px,1fr));grid-template-rows:minmax(148px,1fr);align-items:center}
   .tfg-frames[data-frames="2"]>.tfg-frame,.tfg-frames[data-frames="3"]>.tfg-frame{height:min(100%,280px)}
 }
 @media (orientation:portrait),(max-width:620px){
@@ -105,7 +106,7 @@
   .tfg-workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:9px}
   .tfg-stage{grid-template-rows:48px minmax(0,1fr) 35px;gap:6px;padding:8px 10px 6px;border-radius:21px}
   .tfg-goal small{font-size:11px}.tfg-goal strong{font-size:30px}.tfg-goal strong>span{font-size:16px}.tfg-counting{min-height:44px;gap:6px;min-width:75px}.tfg-counting b{font-size:34px}.tfg-counting>span{font-size:13px;max-width:116px}
-  .tfg-frames{gap:8px}.tfg-frame{grid-template-rows:15px minmax(0,1fr);gap:3px;padding:4px 6px 6px;border-radius:13px}.tfg-frame-heading{font-size:10px}.tfg-frame-heading strong{font-size:16px}.tfg-ten-grid{gap:4px}.tfg-slot{padding:1px 4px;border-radius:8px}.tfg-slot>.tfg-flower{max-height:83px}.tfg-count-badge{min-width:20px;height:20px;font-size:12px;top:-4px}
+  .tfg-frames{gap:8px;grid-template-rows:repeat(var(--tfg-frames),minmax(136px,1fr))}.tfg-frame{grid-template-rows:15px minmax(0,1fr);gap:3px;min-height:136px;padding:4px 6px 6px;border-radius:13px}.tfg-frame-heading{font-size:10px}.tfg-frame-heading strong{font-size:16px}.tfg-ten-grid{gap:4px}.tfg-slot{min-height:48px;padding:1px 4px;border-radius:8px}.tfg-slot>.tfg-flower{max-height:83px}.tfg-count-badge{min-width:20px;height:20px;font-size:12px;top:-4px}
   .tfg-equation{gap:7px;font-size:21px}.tfg-equation>strong{font-size:27px}.tfg-equation-flower>.tfg-flower{width:21px;height:30px}
   .tfg-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto;gap:8px 10px;padding:9px 10px;border-radius:19px;overflow:visible}
   .tfg-flower-choices{grid-column:1;grid-row:1;gap:4px}.tfg-flower-choices>button{min-height:58px;padding:3px 1px;gap:0;border-radius:11px}.tfg-flower-choices .tfg-flower{width:28px;height:38px}.tfg-flower-choices span{font-size:9px}
@@ -113,7 +114,7 @@
   .tfg-quick-numbers{grid-column:1/3;grid-row:2;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.tfg-quick-numbers>button{min-height:42px;font-size:23px;border-radius:11px}
   .tfg-reading{grid-column:1;grid-row:3;gap:4px}.tfg-reading>button{min-height:40px;font-size:10px;border-radius:10px}
   .tfg-control-bottom{grid-column:2;grid-row:3;justify-content:center;margin-top:0}.tfg-control-bottom>button{min-height:40px;font-size:11px}.tfg-control-bottom .tfg-icon{width:21px;height:21px}.tfg-voice-note{font-size:9px}
-  .tfg-split-controls{grid-column:1/3;grid-row:4;grid-template-columns:minmax(0,1fr) 48px 48px}.tfg-split-controls>button{min-height:40px}.tfg-split-controls .tfg-flower{width:22px;height:29px}
+  .tfg-split-controls{grid-column:1/3;grid-row:2;grid-template-columns:minmax(0,1fr) 48px 48px}.tfg-split-controls>button{min-height:40px}.tfg-split-controls .tfg-flower{width:22px;height:29px}
   .tfg-number-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.tfg-number-grid>button{min-height:44px;font-size:24px}.tfg-dialog{padding:12px;border-radius:21px}.tfg-dialog>header{margin-bottom:10px}.tfg-dialog h2{font-size:22px}
 }
 @media (max-width:360px){
@@ -121,14 +122,14 @@
   .tfg-controls{gap:6px;padding:8px}.tfg-quantity-control{grid-template-columns:30px minmax(0,1fr) 30px}.tfg-step-button{width:30px}.tfg-quick-numbers{gap:4px}.tfg-quick-numbers>button{min-height:40px}.tfg-flower-choices span{font-size:8px}.tfg-reading>button{font-size:9px}.tfg-age-choices{gap:5px}
 }
 @media (orientation:landscape) and (max-height:570px){
-  .tfg-app{grid-template-rows:43px 43px minmax(0,1fr);gap:5px;padding:max(5px,env(safe-area-inset-top)) max(9px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(9px,env(safe-area-inset-left))}
+  .tfg-app{grid-template-rows:40px 40px minmax(0,1fr);gap:4px;padding:max(5px,env(safe-area-inset-top)) max(9px,env(safe-area-inset-right)) max(5px,env(safe-area-inset-bottom)) max(9px,env(safe-area-inset-left))}
   .tfg-top{gap:8px}.tfg-brand h1{font-size:23px}.tfg-brand small{display:none}.tfg-icon-button{width:43px;height:39px;flex-basis:43px;border-radius:12px}.tfg-icon{width:24px;height:24px}.tfg-modes{gap:7px}.tfg-modes>button{min-height:40px;padding:3px 10px;gap:8px;font-size:13px;flex-direction:row}.tfg-mode-numeral{font-size:21px}.tfg-age-button{height:40px;min-width:48px;flex-direction:row;gap:4px}.tfg-age-button b{font-size:24px}.tfg-age-button span{font-size:10px}
   .tfg-workspace{grid-template-columns:minmax(0,1fr) 207px;grid-template-rows:minmax(0,1fr);gap:9px}
-  .tfg-stage{grid-template-rows:39px minmax(0,1fr) 30px;gap:5px;border-radius:18px;padding:6px 10px}
-  .tfg-goal small{font-size:10px}.tfg-goal strong{font-size:27px}.tfg-goal strong>span{font-size:14px}.tfg-counting{min-height:35px;gap:6px}.tfg-counting b{font-size:31px}.tfg-counting>span{font-size:12px;max-width:120px}
-  .tfg-frames{gap:6px;grid-template-columns:repeat(var(--tfg-frames),minmax(0,1fr));grid-template-rows:minmax(0,1fr);align-items:stretch}
-  .tfg-frame{grid-template-rows:15px minmax(0,1fr);gap:4px;padding:5px 5px 7px;border-radius:12px}.tfg-frame-heading{font-size:9px}.tfg-frame-heading strong{font-size:15px}.tfg-ten-grid{gap:3px}.tfg-slot{border-radius:6px;padding:1px 2px}.tfg-count-badge{min-width:17px;height:17px;font-size:10px;right:-3px;top:-3px}.tfg-slot>.tfg-flower{max-height:85px;max-width:65px}
-  .tfg-equation{font-size:19px;gap:7px}.tfg-equation>strong{font-size:24px}.tfg-equation-flower>.tfg-flower{width:19px;height:28px}
+  .tfg-stage{grid-template-rows:35px minmax(0,1fr) 24px;gap:5px;border-radius:18px;padding:5px 10px}
+  .tfg-goal small{font-size:9px;line-height:1.1}.tfg-goal strong{font-size:24px;line-height:1}.tfg-goal strong>span{font-size:14px}.tfg-counting{min-height:35px;gap:6px}.tfg-counting b{font-size:31px}.tfg-counting>span{font-size:12px;max-width:120px}
+  .tfg-frames{gap:6px;padding:2px;grid-template-columns:repeat(var(--tfg-frames),minmax(240px,1fr));grid-template-rows:minmax(128px,1fr);align-items:stretch}
+  .tfg-frame{grid-template-rows:15px minmax(0,1fr);gap:4px;min-height:128px;padding:5px 5px 7px;border-radius:12px}.tfg-frame-heading{font-size:9px}.tfg-frame-heading strong{font-size:15px}.tfg-ten-grid{gap:3px}.tfg-slot{min-height:44px;border-radius:6px;padding:1px 2px}.tfg-count-badge{min-width:17px;height:17px;font-size:10px;right:-3px;top:-3px}.tfg-slot>.tfg-flower{max-height:85px;max-width:65px}
+  .tfg-equation{font-size:19px;gap:7px}.tfg-equation>strong{font-size:24px}.tfg-equation-flower>.tfg-flower{width:17px;height:24px}
   .tfg-controls{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto;align-content:start;gap:6px;padding:7px 8px;border-radius:17px;overflow-y:auto}
   .tfg-flower-choices{grid-column:1;grid-row:auto;gap:5px}.tfg-flower-choices>button{min-height:51px;padding:3px 2px;gap:1px;border-radius:10px;flex-direction:row}.tfg-flower-choices .tfg-flower{width:30px;height:41px}.tfg-flower-choices span{display:none}
   .tfg-quantity-control{grid-column:1;grid-row:auto;grid-template-columns:43px minmax(0,1fr) 43px;gap:5px}.tfg-step-button{width:43px;height:42px;border-radius:11px}.tfg-quantity-button{min-height:44px;flex-direction:row;gap:4px;border-radius:12px}.tfg-quantity-button strong{font-size:31px}.tfg-quantity-button span{font-size:11px}
