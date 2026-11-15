@@ -38,6 +38,30 @@ SPEECH_FIXTURE = r"""(() => {
   const state = {kind:'speechSynthesis transport completion fixture', delayMs:25,
     entries:[], cancels:[], available:!!window.speechSynthesis};
   window.__numberPictureSpeech = state;
+  window.__numberPictureFocus = function() {
+    const game=window.SihyeonGames?.numberPicture?.getSnapshot?.();
+    const root=document.querySelector('.qp-root'),board=root?.querySelector('.qp-board');
+    if(!game?.active||!board)return null;
+    const area=board.getBoundingClientRect();
+    const bounds={top:area.top+board.clientTop,left:area.left+board.clientLeft,
+      bottom:area.top+board.clientTop+board.clientHeight,right:area.left+board.clientLeft+board.clientWidth};
+    const ordinal=Math.min(game.quantity,game.complete?game.quantity:game.counted);
+    const item=ordinal?board.querySelector('[data-object-index="'+(ordinal-1)+'"]'):null;
+    const rect=item?.getBoundingClientRect();
+    const inside=(a,b)=>a.top>=b.top-1&&a.left>=b.left-1&&a.bottom<=b.bottom+1&&a.right<=b.right+1;
+    const summary=root.querySelector('.qp-summary').getBoundingClientRect();
+    const textBounds=[...root.querySelectorAll('.qp-target,.qp-count-now,.qp-count-word')].map(el=>{
+      const r=el.getBoundingClientRect();
+      return {className:el.className,text:el.textContent,inside:inside(r,summary),
+        width:r.width,height:r.height,clientWidth:el.clientWidth,scrollWidth:el.scrollWidth};
+    });
+    const grid=board.querySelector('.qp-items,.qp-ten');
+    return {ordinal,fullyVisible:!rect||inside(rect,bounds),board:bounds,
+      item:rect?{top:rect.top,left:rect.left,bottom:rect.bottom,right:rect.right,width:rect.width,height:rect.height}:null,
+      boardScrollTop:board.scrollTop,stageScrollTop:root.querySelector('.qp-stage').scrollTop,
+      rootScrollTop:root.scrollTop,rootScrollLeft:root.scrollLeft,
+      columns:grid?getComputedStyle(grid).gridTemplateColumns.split(/\s+/).filter(Boolean).length:0,textBounds};
+  };
   const synth = window.speechSynthesis;
   if (!synth) return;
   const pending = new Map();
@@ -47,7 +71,8 @@ SPEECH_FIXTURE = r"""(() => {
       startedAt:performance.now(), endedAt:null, cancelledAt:null,
       userGestureSeen:!!navigator.userActivation?.hasBeenActive,
       gameActive:!!game?.active, runId:game?.sequence?.runId ?? null,
-      quantity:game?.quantity ?? null, counted:game?.counted ?? null};
+      quantity:game?.quantity ?? null, counted:game?.counted ?? null,
+      visibility:game?.active?window.__numberPictureFocus():null};
     state.entries.push(entry);
     const timer = setTimeout(() => {
       if (!pending.has(entry.index)) return;
@@ -133,7 +158,26 @@ def finish(page, quantity):
     assert page.locator('.qp-item.is-counted').count() == quantity
     assert page.locator('.qp-item.is-current').count() == 0
     assert page.evaluate('window.__qpEngineReference.api===SihyeonVoice && window.__qpEngineReference.speak===SihyeonVoice.speak && window.__qpEngineReference.stop===SihyeonVoice.stop'), 'shared voice engine was replaced'
+    # The onStep callback must make the current picture visible before speech.
+    # Also verify completion after layout/ResizeObserver callbacks have settled.
+    spoken = page.evaluate('([id,n])=>__numberPictureSpeech.entries.filter(x=>x.gameActive&&x.runId===id&&x.quantity===n).slice(-(n+1))', [value['sequence']['runId'], quantity])
+    clipped = [entry for entry in spoken if entry['visibility'] and not entry['visibility']['fullyVisible']]
+    assert not clipped, {'clippedWhileCounting':clipped[:3]}
+    page.evaluate('()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
+    value['browserVisibility'] = assert_focus_visible(page)
     return value
+
+
+def assert_focus_visible(page):
+    data = page.evaluate('window.__numberPictureFocus()')
+    assert data is not None and data['fullyVisible'], {'clippedCurrentOrLastPicture':data}
+    assert data['rootScrollTop'] == 0 and data['rootScrollLeft'] == 0 and data['stageScrollTop'] == 0, {'anAncestorScrolled':data}
+    assert all(text['inside'] and text['scrollWidth'] <= text['clientWidth'] + 1 for text in data['textBounds']), {'clippedSummary':data}
+    value = snap(page)
+    if value['quantity']:
+        expected_columns = 5 if value['layout'] == 'tens' or value['quantity'] > 10 else 3
+        assert data['columns'] == expected_columns, data
+    return data
 
 
 def assert_speech(page, start, value, expected, lang='ko-KR'):
@@ -184,6 +228,7 @@ def image_and_layout(page, allow_missing=False):
     assert data['board']['height'] >= 40 and data['board']['width'] > 0, data
     if not allow_missing:
         assert not data['brokenImages'], data
+    data['focusVisibility'] = assert_focus_visible(page)
     return data
 
 
@@ -264,6 +309,7 @@ def main():
                 assert initial['objectId'] == 'korean_police_car' and initial['quantity'] == 9 and initial['actualCount'] == 9, initial
                 assert initial['readingStyle'] == 'native' and initial['counted'] < 9, initial
                 completed = finish(page, 9)
+                assert page.locator('.qp-count-word').inner_text() == '아홉 대'
                 heard = assert_speech(page, start, completed, NATIVE[:9] + ['모두 경찰차 아홉 대!'])
                 layout = image_and_layout(page)
                 screenshot(page, 'police9-native-390x844')
@@ -320,8 +366,9 @@ def main():
                     assert modal.is_visible()
                     modal.locator('[data-qp-action="closePictures"]').click()
                     page.wait_for_function('SihyeonGames.numberPicture.getSnapshot().sequence.running')
-                    finish(page, 30)
-                    return {'viewport':[width,height], 'layout':layout, 'screenshot':image, 'chooserClosedAndResumed':True}
+                    completed = finish(page, 30)
+                    return {'viewport':[width,height], 'layout':layout, 'screenshot':image, 'chooserClosedAndResumed':True,
+                            'currentPicturesAndLastPictureVisible':completed['browserVisibility']}
                 check('responsive root and chooser %sx%s' % (width, height), viewport_check, page)
             ctx.close()
 
