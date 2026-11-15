@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   const KEY='numberPicture', SAVE_KEY='sihyeon-number-picture-v1';
-  const view={container:null,options:{},objects:[],objectId:'korean_police_car',custom:null,n:9,style:'native',layout:'rows',range:0,category:'vehicle',muted:false,counted:0,complete:false,sequence:null,handlers:null,audioFailed:false,picturePicker:false,settingsObserver:null};
+  const view={container:null,options:{},objects:[],objectId:'korean_police_car',custom:null,n:9,style:'native',layout:'rows',range:0,category:'vehicle',muted:false,counted:0,complete:false,sequence:null,handlers:null,audioFailed:false,picturePicker:false,settingsObserver:null,boardObserver:null,scrollFrame:0};
   let memory=null;
   const M=()=>window.SihyeonQuantityPlayModel;
   const C=()=>window.SihyeonPlayObjects;
@@ -36,6 +36,35 @@
     if(view.n===0)return subject(item.nameKo)+' 없어요';
     return item.nameKo+' '+M().quantityText(view.n,item.unitKo,'ko');
   }
+  function completionText(){return view.n===0?'없어요':M().quantityText(view.n,object().unitKo,'ko');}
+  function keepCountedVisible(){
+    if(!view.container||view.picturePicker)return;
+    const board=view.container.querySelector('.qp-board');
+    if(!board)return;
+    const ordinal=Math.min(view.n,view.complete?view.n:view.counted);
+    if(!ordinal){board.scrollTop=0;return;}
+    const item=board.querySelector('[data-object-index="'+(ordinal-1)+'"]');
+    if(!item)return;
+    const area=board.getBoundingClientRect(),box=item.getBoundingClientRect();
+    const top=area.top+board.clientTop+4,bottom=area.top+board.clientTop+board.clientHeight-4;
+    // Only move the board. scrollIntoView also moves overflow:hidden ancestors,
+    // which can clip the stage/header or leave the last row outside the board.
+    if(box.top<top)board.scrollTop+=box.top-top;
+    else if(box.bottom>bottom)board.scrollTop+=box.bottom-bottom;
+  }
+  function scheduleBoardFocus(){
+    if(view.scrollFrame)cancelAnimationFrame(view.scrollFrame);
+    view.scrollFrame=requestAnimationFrame(()=>{view.scrollFrame=0;keepCountedVisible();});
+  }
+  function observeBoard(){
+    view.boardObserver?.disconnect();view.boardObserver=null;
+    const board=view.container?.querySelector('.qp-board');
+    if(board&&typeof window.ResizeObserver==='function'){
+      view.boardObserver=new window.ResizeObserver(scheduleBoardFocus);
+      view.boardObserver.observe(board);
+    }
+    keepCountedVisible();scheduleBoardFocus();
+  }
   function summaryStep(){
     const item=object();
     return {id:'total',kind:'total',text:view.n===0?subject(item.nameKo)+' 없어요. 영이에요.':'모두 '+totalText()+'!',enText:view.n===0?'There are none. Zero.':(view.n===1?'There is ':'There are ')+M().countWord(view.n,'sino','en')+' '+(view.n===1?item.nameEn:(item.pluralEn||'in all'))+'.'};
@@ -48,12 +77,11 @@
       view.counted=step.ordinal;
       const el=root.querySelector('[data-object-index="'+(step.ordinal-1)+'"]');
       el?.classList.add('is-current','is-counted');
-      const board=root.querySelector('.qp-board');
-      if(el && board){const a=el.getBoundingClientRect(),b=board.getBoundingClientRect();if(a.bottom>b.bottom||a.top<b.top)el.scrollIntoView({block:'nearest',inline:'nearest',behavior:'auto'});}
     }
     root.querySelector('.qp-count-now').textContent=step.kind==='total'?String(view.n):String(view.counted);
-    root.querySelector('.qp-count-word').textContent=step.kind==='total'?(view.n===0?'없어요':totalText()):M().countWord(view.counted,view.style,language());
+    root.querySelector('.qp-count-word').textContent=step.kind==='total'?completionText():M().countWord(view.counted,view.style,language());
     root.querySelector('.qp-progress').textContent=step.kind==='total'?'모두 '+view.n+object().unitKo:'지금 '+view.counted+object().unitKo+' 셌어요';
+    keepCountedVisible();scheduleBoardFocus();
   }
   function run(){
     if(!view.container||!view.sequence)return;
@@ -74,6 +102,7 @@
       if(!view.container)return;view.counted=view.n;view.complete=true;
       const currentRoot=view.container.querySelector('.qp-root');currentRoot?.classList.add('qp-finished');
       currentRoot?.querySelectorAll('.qp-item.is-current').forEach(el=>el.classList.remove('is-current'));
+      keepCountedVisible();scheduleBoardFocus();
     }});
   }
   function itemMarkup(index){return '<div class="qp-item" data-object-index="'+index+'">'+C().picture(object())+'<span class="qp-ordinal" aria-hidden="true">'+(index+1)+'</span></div>';}
@@ -88,7 +117,8 @@
       }
       return html;
     }
-    return '<div class="qp-items '+(view.layout==='scatter'?'qp-scatter':'')+'">'+M().items(view.n).map(i=>itemMarkup(i.index)).join('')+'</div>';
+    const small=view.n<=10;
+    return '<div class="qp-items '+(small?'qp-small ':'')+(view.layout==='scatter'?'qp-scatter':'')+'"'+(small?' style="--qp-small-rows:'+Math.ceil(view.n/3)+'"':'')+'>'+M().items(view.n).map(i=>itemMarkup(i.index)).join('')+'</div>';
   }
   function categories(){
     return [['vehicle','🚓','탈것'],['food','🍎','음식'],['toy','🧸','장난감'],['art','🎨','그림판']].filter(c=>view.objects.some(o=>o.category===c[0]));
@@ -106,7 +136,7 @@
     const numbers=Array.from({length:rangeEnd-rangeStart+1},(_,i)=>i+rangeStart);
     view.container.innerHTML='<section class="qp-root" data-age="'+age()+'">'+
       '<header class="qp-top"><button type="button" data-qp-action="home" class="qp-icon qp-home" aria-label="숫자놀이터로">🏠</button><h2>내가 만드는<br><strong>숫자놀이</strong></h2><div class="qp-top-tools"><button type="button" data-qp-action="mute" class="qp-icon" aria-label="'+(view.muted?'소리 켜기':'소리 끄기')+'" aria-pressed="'+view.muted+'">'+(view.muted?'🔇':'🔊')+'</button><button type="button" data-qp-action="settings" class="qp-icon qp-age" aria-label="놀이 모드 설정"><strong>'+age()+'</strong><small>세 ⚙</small></button></div></header>'+
-      '<main class="qp-stage"><div class="qp-summary"><button type="button" class="qp-object-launch" data-qp-action="choosePicture" aria-label="다른 그림 고르기">'+C().picture(item,'qp-summary-picture')+'<span>그림 고르기 ▾</span></button><div><span class="qp-object-name">'+esc(item.nameKo)+'</span><strong class="qp-target">'+view.n+'<small>'+esc(item.unitKo)+'</small></strong></div><div class="qp-live"><strong class="qp-count-now">0</strong><span class="qp-count-word">같이 세어요</span></div></div>'+
+      '<main class="qp-stage"><div class="qp-summary"><button type="button" class="qp-object-launch" data-qp-action="choosePicture" aria-label="다른 그림 고르기">'+C().picture(item,'qp-summary-picture')+'<span>그림 고르기 ▾</span></button><div class="qp-target-summary"><span class="qp-object-name">'+esc(item.nameKo)+'</span><strong class="qp-target">'+view.n+'<small>'+esc(item.unitKo)+'</small></strong></div><div class="qp-live"><strong class="qp-count-now">0</strong><span class="qp-count-word">같이 세어요</span></div></div>'+
       '<div class="qp-board" role="img" aria-label="'+esc(totalText())+'" data-layout="'+view.layout+'">'+boardMarkup()+'</div>'+
       '<div class="qp-stage-bottom"><span class="qp-progress" role="status" aria-live="polite">그림이 나타나요</span><button type="button" data-qp-action="minus" aria-label="한 개 덜" '+(view.n===0?'disabled':'')+'>−1</button><button type="button" data-qp-action="plus" aria-label="한 개 더" '+(view.n===30?'disabled':'')+'>+1</button></div></main>'+
       '<aside class="qp-picker" aria-label="그림과 숫자 고르기"><div class="qp-categories">'+categories().map(c=>'<button type="button" data-qp-action="category" data-value="'+c[0]+'" aria-pressed="'+(view.category===c[0])+'"><span>'+c[1]+'</span>'+c[2]+'</button>').join('')+'</div>'+
@@ -118,10 +148,11 @@
     const currentRoot=view.container.querySelector('.qp-root');
     currentRoot.classList.toggle('qp-finished',view.complete);
     currentRoot.querySelector('.qp-count-now').textContent=String(view.counted);
-    currentRoot.querySelector('.qp-count-word').textContent=view.complete?(view.n===0?'없어요':totalText()):(view.counted?M().countWord(view.counted,view.style,language()):'같이 세어요');
+    currentRoot.querySelector('.qp-count-word').textContent=view.complete?completionText():(view.counted?M().countWord(view.counted,view.style,language()):'같이 세어요');
     currentRoot.querySelector('.qp-progress').textContent=view.complete?'모두 '+view.n+item.unitKo:'지금 '+view.counted+item.unitKo+' 셌어요';
     currentRoot.querySelectorAll('.qp-item').forEach((el,i)=>{el.classList.toggle('is-counted',i<view.counted);el.classList.toggle('is-current',!view.complete&&i===view.counted-1);});
     if(view.audioFailed){currentRoot.querySelector('.qp-sound-note').hidden=false;currentRoot.querySelector('.qp-sound-note').textContent='그림과 숫자로 함께 세어요';}
+    observeBoard();
   }
   function openSettings(){
     view.sequence.stop();
@@ -181,14 +212,17 @@
     view.range=view.n<=10?0:view.n<=20?1:2;
     view.sequence=window.SihyeonQuantitySequencer.create();
     view.picturePicker=false;
-    view.handlers={click:onClick,key:onKey,settings:()=>{if(view.container&&!document.getElementById('playSettingsDialog')){repaint();run();}},visibility:()=>{if(document.hidden)view.sequence?.stop();else if(view.container&&!document.getElementById('playSettingsDialog')&&!view.picturePicker)run();}};
+    view.handlers={click:onClick,key:onKey,resize:scheduleBoardFocus,settings:()=>{if(view.container&&!document.getElementById('playSettingsDialog')){repaint();run();}},visibility:()=>{if(document.hidden)view.sequence?.stop();else if(view.container&&!document.getElementById('playSettingsDialog')&&!view.picturePicker)run();}};
     container.addEventListener('click',view.handlers.click);container.addEventListener('keydown',view.handlers.key);window.addEventListener('sihyeon-settings-change',view.handlers.settings);document.addEventListener('visibilitychange',view.handlers.visibility);
+    window.addEventListener('resize',view.handlers.resize);window.addEventListener('orientationchange',view.handlers.resize);
     repaint();run();
   }
   function destroy(){
     view.sequence?.stop();
     view.settingsObserver?.disconnect();view.settingsObserver=null;
-    if(view.handlers){view.container?.removeEventListener('click',view.handlers.click);view.container?.removeEventListener('keydown',view.handlers.key);window.removeEventListener('sihyeon-settings-change',view.handlers.settings);document.removeEventListener('visibilitychange',view.handlers.visibility);}
+    view.boardObserver?.disconnect();view.boardObserver=null;
+    if(view.scrollFrame)cancelAnimationFrame(view.scrollFrame);view.scrollFrame=0;
+    if(view.handlers){view.container?.removeEventListener('click',view.handlers.click);view.container?.removeEventListener('keydown',view.handlers.key);window.removeEventListener('sihyeon-settings-change',view.handlers.settings);document.removeEventListener('visibilitychange',view.handlers.visibility);window.removeEventListener('resize',view.handlers.resize);window.removeEventListener('orientationchange',view.handlers.resize);}
     view.container=null;view.sequence=null;view.handlers=null;
   }
   function getSnapshot(){return {active:!!view.container,objectId:view.objectId,quantity:view.n,actualCount:view.container?.querySelectorAll('.qp-item').length||0,counted:view.counted,readingStyle:view.style,layout:view.layout,age:age(),language:language(),muted:view.muted,complete:view.complete,audioFailed:view.audioFailed,sequence:view.sequence?.getSnapshot()||null};}

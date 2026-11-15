@@ -81,11 +81,13 @@ jobs:
           python3 -m playwright install --with-deps chromium
       - name: Automatic picture counting and staged quantity games
         run: |
+          status=0
           for game in number-picture ten-frame-garden picture-arithmetic; do
             if test -f "scripts/qa-$game-browser.py"; then
-              python3 "scripts/qa-$game-browser.py" --output "qa-quantity-evidence/$game"
+              python3 "scripts/qa-$game-browser.py" --output "qa-quantity-evidence/$game" || status=1
             fi
           done
+          exit "$status"
       - name: Attach quantity-game evidence even on failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
