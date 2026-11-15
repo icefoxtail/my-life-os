@@ -1,0 +1,31 @@
+{
+  "scope": "Read-only git merge-tree preflight of exact stage heads; each resulting tree equals the later stage's tested tree.",
+  "status": "PASS",
+  "pairs": [
+    {
+      "fromStage": 1,
+      "toStage": 2,
+      "fromHead": "b5713ea9a457a1ed3c8eacfa612e3d3004db0a9e",
+      "toHead": "b3cbb03d2bfdbbd7db6c666134ae6b5f52af288e",
+      "mergeTree": "0387ccd195750732d6bace4ae91ede7a572f3725",
+      "exactLaterStageTree": true
+    },
+    {
+      "fromStage": 2,
+      "toStage": 3,
+      "fromHead": "b3cbb03d2bfdbbd7db6c666134ae6b5f52af288e",
+      "toHead": "ab4fe0502a4139572093ba85e122d50c9e83f497",
+      "mergeTree": "8ee32450f56fd58e2291b469d4ab23bfe8db27d3",
+      "exactLaterStageTree": true
+    },
+    {
+      "fromStage": 3,
+      "toStage": 4,
+      "fromHead": "1ee1761e4f5660c6a98b7c7c0e59158146437b6d",
+      "toHead": "a62669e4776df97aa01bd24a309d5c8f309d7387",
+      "mergeTree": "61f4d2d6dc39936468fc377f2b39948249619983",
+      "exactLaterStageTree": true,
+      "actualPreviousMain": true
+    }
+  ]
+}

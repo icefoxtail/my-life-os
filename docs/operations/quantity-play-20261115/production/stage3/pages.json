@@ -1,0 +1,50 @@
+{
+  "stage": 3,
+  "mainMergeSha": "1ee1761e4f5660c6a98b7c7c0e59158146437b6d",
+  "verifiedAt": "2026-11-15T14:07:13.163400+00:00",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "scope": "Public Pages asset bytes compared with the exact merged Git tree; live browser interaction recorded separately.",
+  "status": "PASS",
+  "checks": [
+    {
+      "path": "index.html",
+      "expectedSha256": "5e18a33f22c2a3b53d9f03f7fc4192d41a328ba8d77b44d1038b18f57dbba13b",
+      "httpStatus": 200,
+      "bytes": 94760,
+      "actualSha256": "5e18a33f22c2a3b53d9f03f7fc4192d41a328ba8d77b44d1038b18f57dbba13b",
+      "matches": true
+    },
+    {
+      "path": "sw.js",
+      "expectedSha256": "272a67eba662428de00a3faffd86d052565b5e3ba85f7cfe50237bad8e3cdc72",
+      "httpStatus": 200,
+      "bytes": 8442,
+      "actualSha256": "272a67eba662428de00a3faffd86d052565b5e3ba85f7cfe50237bad8e3cdc72",
+      "matches": true
+    },
+    {
+      "path": "js/games/ten-frame-garden.js",
+      "expectedSha256": "f80bdd521b9149516a59ab7e20e715dbc09ff92e181bbe28c988869b95bdbefc",
+      "httpStatus": 200,
+      "bytes": 31731,
+      "actualSha256": "f80bdd521b9149516a59ab7e20e715dbc09ff92e181bbe28c988869b95bdbefc",
+      "matches": true
+    },
+    {
+      "path": "css/games/ten-frame-garden.css",
+      "expectedSha256": "34efb6dac73976e27ba524967f5e8f9440db30d55ff8190f1a4167c389a08e6f",
+      "httpStatus": 200,
+      "bytes": 19931,
+      "actualSha256": "34efb6dac73976e27ba524967f5e8f9440db30d55ff8190f1a4167c389a08e6f",
+      "matches": true
+    },
+    {
+      "path": "assets/games/ten-frame-garden/card.svg",
+      "expectedSha256": "a17052d9b2fd56ca2a60c2d7efd7252347c78750c82705a3504a3af454f16c62",
+      "httpStatus": 200,
+      "bytes": 2046,
+      "actualSha256": "a17052d9b2fd56ca2a60c2d7efd7252347c78750c82705a3504a3af454f16c62",
+      "matches": true
+    }
+  ]
+}

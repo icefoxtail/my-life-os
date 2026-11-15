@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "repository": "icefoxtail/my-life-os",
+  "pullRequest": 25,
+  "exactHead": "b5713ea9a457a1ed3c8eacfa612e3d3004db0a9e",
+  "status": "PASS",
+  "scope": "Observed GitHub Actions workflows and downloaded source-bound artifacts for this exact commit. Not a merge or deployment result.",
+  "workflowRuns": [
+    {
+      "id": 43720732068,
+      "name": "Playground checks",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 112,
+      "jobs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43720732068/jobs",
+      "logs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43720732068/logs",
+      "workflow_id": 410444489,
+      "jobs": [
+        {
+          "id": 132831932176,
+          "name": "quantity-and-regression",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 43720732068,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Syntax and integration",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "English Listening TTS, language preference and voice queue safety",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Independent post office quantity and state checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Pattern train model and independent rule oracle",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Independent asynchronous art restore checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Existing game and fallback regression",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Independent service worker checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 43720732080,
+      "name": "Phase 2 browser release",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 73,
+      "jobs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43720732080/jobs",
+      "logs_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/runs/43720732080/logs",
+      "workflow_id": 411125511,
+      "jobs": [
+        {
+          "id": 132831932159,
+          "name": "chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 43720732080,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Install pinned browser harness",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Vehicle grammar and game interaction regression",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Latest train fixture, real menu and legacy entry checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Automatic picture counting and staged quantity games",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Native Chromium English Listening and mode-switch verification",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Menu arrival voice and cancellation regression",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Korean and English tap-to-speech synchronization",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Home welcome and guide voice regression",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Attach source-bound evidence even on failure",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 22
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 14164428520,
+      "name": "phase2-browser-43720732080",
+      "size_in_bytes": 4492710,
+      "url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/artifacts/14164428520",
+      "archive_download_url": "https://api.github.com/repos/icefoxtail/my-life-os/actions/artifacts/14164428520/zip",
+      "expired": false,
+      "created_at": "2026-11-15T13:56:28Z",
+      "expires_at": "2026-11-29T13:56:26Z",
+      "updated_at": "2026-11-15T13:56:28Z",
+      "digest": "sha256:39a29df8955033b3ac36c14939cd874104c276f055726bbc905c0d786697861c",
+      "workflow_run": {
+        "id": 43720732080,
+        "repository_id": 1203324357,
+        "head_repository_id": 1203324357,
+        "head_branch": "work/number-picture-auto-20261115",
+        "head_sha": "b5713ea9a457a1ed3c8eacfa612e3d3004db0a9e"
+      },
+      "localZip": "/workspace/scratch/43e7e077fa86/ci-stage1-release/phase2-browser-43720732080.zip",
+      "digestVerified": true,
+      "extractedTo": "/workspace/scratch/43e7e077fa86/ci-stage1-release"
+    }
+  ],
+  "observedReports": [
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/number-picture/number-picture-browser.json",
+      "sha256": "2e210f6fe4e1aa41e4ae4ef60b54416a818c6c4cd3469895fb610b84adc6f3c3",
+      "status": "PASS",
+      "passed": 18,
+      "failed": 0,
+      "notApplicable": 1,
+      "pageErrors": [],
+      "failedChecks": []
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/voice-sync/voice-label-sync-browser.json",
+      "sha256": "5f5648d19fb08dd724725d816457bb61b55bfe279ca63f0ef0a646eb5516dbd3",
+      "status": "PASS",
+      "failedChecks": []
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/release-browser.json",
+      "sha256": "a6474fdb06b4f7958c73356269d8ec14ac98360ac96b79bc138f8547079a3d1b",
+      "status": "PASS",
+      "pageErrors": [],
+      "failedChecks": []
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/train-final24.json",
+      "sha256": "d51cc511a8ec65825d39258f9dca9dad8ee83880ac8c6e7fa4c9e11eab6a1712",
+      "status": "PASS",
+      "passed": 24,
+      "failed": 0,
+      "failedChecks": []
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/english/english-listening-browser.json",
+      "sha256": "6464c9a941ffc357d4c080847dca00eda94e609f5b4a0234a5190d9225709da1",
+      "status": "PASS",
+      "pageErrors": [],
+      "failedChecks": []
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/home-voice/home-voice-browser.json",
+      "sha256": "504803a395f0810fd6d582bf4561f1f263dd6f5dd810fbc5260e502eb2c198a2",
+      "status": "PASS",
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/menu-voice/menu-voice-browser.json",
+      "sha256": "6152e105bafe387be10a645a2654007cd6a4760e1152f12c16ab429b8e135717",
+      "status": "PASS",
+      "passed": 5,
+      "failed": 0
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/vehicle-grammar/vehicle-grammar-browser.json",
+      "sha256": "b09577dbc0b480e351a0064b211f10093097bf2b0c19d687db3a18e70d0ef2e9",
+      "status": "PASS",
+      "passed": 5,
+      "failed": 0
+    }
+  ],
+  "observedImages": [
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/number-picture/number-picture-police9-native-390x844.png",
+      "method": "Direct visual inspection",
+      "finding": "Nine police cars in three columns; full compact completion label visible.",
+      "sha256": "287a7fb267f8b3654e986131b18bc2ee81435b4d9769a12b45e2fa7d579d900b"
+    },
+    {
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage1-release/number-picture/number-picture-320x568-thirty.png",
+      "method": "SHA256 equality to directly inspected prior image",
+      "comparedTo": "/workspace/scratch/43e7e077fa86/ci-stage1-final/number-picture/number-picture-320x568-thirty.png",
+      "finding": "Final row 26–30 fully visible within board; 30th picture not clipped.",
+      "sha256": "50446c03c3ecd5f0c9b2c26b0a7cf2f0e9b750311576fed79f8db9d16908d6f9"
+    }
+  ],
+  "limitations": [
+    "Number-picture browser speech tests use the shared voice engine with speechSynthesis transport fixture. Native pronunciation/audible listening was not verified.",
+    "Local Chromium was not run; browser evidence comes from these GitHub Actions jobs.",
+    "Stage 2 art bridge is not included in this stage-1 head; the corresponding browser check is NOT_APPLICABLE."
+  ]
+}

@@ -1,43 +1,103 @@
 {
+  "schemaVersion": 1,
   "taskId": "09d33a6e-613e-4eb4-bfc8-f3cf9e814a72",
   "owner": "GPT_ROOT_7E22907460A6",
   "instructionRevision": 3,
   "baseMain": "196f8c5c88f283fa346e5d2d64b632997e0379fa",
-  "state": "BRANCH_VALIDATION",
-  "activeStage": 4,
+  "state": "DEPLOYED_VERIFIED",
+  "featureReleaseMain": "25bc1494caeacc821f1aa3f97cd80e7d77aa3154",
+  "verifiedAt": "2026-11-15T14:14:04.461577+00:00",
+  "activeStage": null,
   "stages": [
     {
       "id": 1,
       "name": "automatic-number-picture",
+      "status": "DEPLOYED_VERIFIED",
       "branch": "work/number-picture-auto-20261115",
-      "status": "CI_RUNNING",
-      "sourceCheckpoint": "1f473b2b73f1c20700bc4bd08b56874fe20fa7b9",
-      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/25"
+      "pullRequest": 25,
+      "pullRequestUrl": "https://github.com/icefoxtail/my-life-os/pull/25",
+      "testedHead": "b5713ea9a457a1ed3c8eacfa612e3d3004db0a9e",
+      "mainMergeSha": "8029e1c9c66f93d3b2339013cbaba502c3f22e36",
+      "testedTree": "de363d77da0f9f850157af41bf0ea627b87ead5a",
+      "mainTreeMatchesTestedTree": true,
+      "ciRuns": [
+        43720732068,
+        43720732080
+      ],
+      "pagesRun": 43721700662,
+      "ciEvidence": "ci/stage1-ci.json",
+      "pagesEvidence": "production/stage1/pages.json",
+      "liveEvidence": "production/stage1/live.json"
     },
     {
       "id": 2,
       "name": "svg-artwork-bridge",
+      "status": "DEPLOYED_VERIFIED",
       "branch": "work/svg-play-assets-20261115",
-      "status": "CI_RUNNING",
-      "sourceCheckpoint": "a0b65ff6c039d138187d61a7f1f6e144af2a3ed8",
-      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/26"
+      "pullRequest": 26,
+      "pullRequestUrl": "https://github.com/icefoxtail/my-life-os/pull/26",
+      "testedHead": "b3cbb03d2bfdbbd7db6c666134ae6b5f52af288e",
+      "mainMergeSha": "463263652e35ab903a724b504bb7db683909027c",
+      "testedTree": "0387ccd195750732d6bace4ae91ede7a572f3725",
+      "mainTreeMatchesTestedTree": true,
+      "ciRuns": [
+        43720749754,
+        43720749796
+      ],
+      "pagesRun": 43722010417,
+      "ciEvidence": "ci/stage2-ci.json",
+      "pagesEvidence": "production/stage2/pages.json",
+      "liveEvidence": "production/stage2/live.json"
     },
     {
       "id": 3,
       "name": "ten-frame-garden",
+      "status": "DEPLOYED_VERIFIED",
       "branch": "work/ten-frame-garden-20261115",
-      "status": "CI_RUNNING",
-      "sourceCheckpoint": "dc485ae272e4183007c451e3619149621a3fce42",
-      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/27"
+      "pullRequest": 27,
+      "pullRequestUrl": "https://github.com/icefoxtail/my-life-os/pull/27",
+      "testedHead": "ab4fe0502a4139572093ba85e122d50c9e83f497",
+      "mainMergeSha": "1ee1761e4f5660c6a98b7c7c0e59158146437b6d",
+      "testedTree": "8ee32450f56fd58e2291b469d4ab23bfe8db27d3",
+      "mainTreeMatchesTestedTree": true,
+      "ciRuns": [
+        43720766039,
+        43720766019
+      ],
+      "pagesRun": 43722463987,
+      "ciEvidence": "ci/stage3-ci.json",
+      "pagesEvidence": "production/stage3/pages.json",
+      "liveEvidence": "production/stage3/live.json"
     },
     {
       "id": 4,
       "name": "picture-addition-and-equal-sharing",
+      "status": "DEPLOYED_VERIFIED",
       "branch": "work/picture-arithmetic-20261115",
-      "status": "IMPLEMENTED_PENDING_UI_CHECK",
-      "sourceCheckpoint": "22b24ffcff540d11d123de094aac4b18a6e4a738"
+      "pullRequest": 28,
+      "pullRequestUrl": "https://github.com/icefoxtail/my-life-os/pull/28",
+      "testedHead": "a62669e4776df97aa01bd24a309d5c8f309d7387",
+      "mainMergeSha": "25bc1494caeacc821f1aa3f97cd80e7d77aa3154",
+      "testedTree": "61f4d2d6dc39936468fc377f2b39948249619983",
+      "mainTreeMatchesTestedTree": true,
+      "ciRuns": [
+        43721624780,
+        43721624773
+      ],
+      "pagesRun": 43722821748,
+      "ciEvidence": "ci/stage4-ci.json",
+      "pagesEvidence": "production/stage4/pages.json",
+      "liveEvidence": "production/stage4/live.json"
     }
   ],
-  "nextAction": "Complete independent UI checks and merge each stage into main in order, verifying Pages after every merge.",
-  "nativeSpeakerVerification": "NOT_RUN; CI inspects the real shared voice engine through a completion fixture."
+  "verification": {
+    "numberPictureBrowser": "20/20 PASS",
+    "gardenBrowser": "14/14 PASS",
+    "arithmeticBrowser": "19/19 PASS",
+    "nativeSpeakerAudio": "NOT_RUN",
+    "physicalDevice": "NOT_RUN",
+    "cloudVisualAudioFallback": "PASS"
+  },
+  "remainingImplementation": [],
+  "nextAction": "Use the deployed games; preserve this release and its evidence when handling subsequent feedback."
 }

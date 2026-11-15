@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "repository": "icefoxtail/my-life-os",
+  "pullRequest": 27,
+  "headSha": "ab4fe0502a4139572093ba85e122d50c9e83f497",
+  "verifiedAt": "2026-11-15T13:57:05.519Z",
+  "scope": "Exact PR head GitHub Actions and downloaded Chromium artifact verification",
+  "runs": [
+    {
+      "id": 43720766039,
+      "name": "Playground checks",
+      "status": "completed",
+      "conclusion": "success",
+      "runNumber": 114
+    },
+    {
+      "id": 43720766019,
+      "name": "Phase 2 browser release",
+      "status": "completed",
+      "conclusion": "success",
+      "runNumber": 75
+    }
+  ],
+  "jobs": [
+    {
+      "id": 132832037557,
+      "runId": 43720766019,
+      "name": "chromium",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 132832037898,
+      "runId": 43720766019,
+      "name": "quantity-games",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 132832037657,
+      "runId": 43720766039,
+      "name": "quantity-and-regression",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifactId": 14164632137,
+      "runId": 43720766019,
+      "headSha": "ab4fe0502a4139572093ba85e122d50c9e83f497",
+      "archive": "/workspace/scratch/43e7e077fa86/ci-stage3-release/quantity-browser-43720766019.zip",
+      "expectedSha256": "49c7743a77072c225326a81e67e6d64241696764bece4414cd1f46baad02bff8",
+      "actualSha256": "49c7743a77072c225326a81e67e6d64241696764bece4414cd1f46baad02bff8",
+      "digestMatch": true,
+      "bytes": 3826915,
+      "name": "quantity-browser-43720766019",
+      "originalDigest": "sha256:49c7743a77072c225326a81e67e6d64241696764bece4414cd1f46baad02bff8",
+      "originalApiUrl": "https://api.github.com/repos/icefoxtail/my-life-os/actions/artifacts/14164632137"
+    },
+    {
+      "artifactId": 14164816968,
+      "runId": 43720766019,
+      "headSha": "ab4fe0502a4139572093ba85e122d50c9e83f497",
+      "archive": "/workspace/scratch/43e7e077fa86/ci-stage3-release/phase2-browser-43720766019.zip",
+      "expectedSha256": "db6accae057397b674ba7518b535cdab94b2f53f4b276fb899f1a5c58007ac62",
+      "actualSha256": "db6accae057397b674ba7518b535cdab94b2f53f4b276fb899f1a5c58007ac62",
+      "digestMatch": true,
+      "bytes": 3239273,
+      "name": "phase2-browser-43720766019",
+      "originalDigest": "sha256:db6accae057397b674ba7518b535cdab94b2f53f4b276fb899f1a5c58007ac62",
+      "originalApiUrl": "https://api.github.com/repos/icefoxtail/my-life-os/actions/artifacts/14164816968"
+    }
+  ],
+  "reports": [
+    {
+      "status": "PASS",
+      "passed": 14,
+      "total": 14,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/ten-frame-garden/ten-frame-garden-browser.json",
+      "sha256": "4f567d30b9f536ed5253c5f6d7c2391672336e2f820b3b18cce32e35d739520a"
+    },
+    {
+      "status": "PASS",
+      "passed": 20,
+      "total": 20,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/number-picture/number-picture-browser.json",
+      "sha256": "00eac39cc9df2f3bc68bece791bb1e87ff834a9fe6312240b7253cf84abeb26a"
+    },
+    {
+      "status": "PASS",
+      "passed": 16,
+      "total": 16,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/release-browser.json",
+      "sha256": "813afbcf2d38f02b84e73b93797ac0ab8487d09f46ab102007800b5db28f6e93"
+    },
+    {
+      "status": "PASS",
+      "passed": 24,
+      "total": 24,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/train-final24.json",
+      "sha256": "20f11c864d7b05405b59a55b817c3a9479da4df6b02e4948153a74d1c22cf8ad"
+    },
+    {
+      "status": "PASS",
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/english/english-listening-browser.json",
+      "sha256": "ff97525efbfcb509258c9201154a697dfb3af24f58a5550d59127f79964b3dd2"
+    },
+    {
+      "status": "PASS",
+      "passed": 5,
+      "total": 5,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/vehicle-grammar/vehicle-grammar-browser.json",
+      "sha256": "b09577dbc0b480e351a0064b211f10093097bf2b0c19d687db3a18e70d0ef2e9"
+    },
+    {
+      "status": "PASS",
+      "passed": 5,
+      "total": 5,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/menu-voice/menu-voice-browser.json",
+      "sha256": "6152e105bafe387be10a645a2654007cd6a4760e1152f12c16ab429b8e135717"
+    },
+    {
+      "status": "PASS",
+      "passed": 8,
+      "total": 8,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/voice-sync/voice-label-sync-browser.json",
+      "sha256": "1b4d6027fb64f9eca333ced7ffa776301c93e0c5dac20b182118978890d875f9"
+    },
+    {
+      "status": "PASS",
+      "passed": 4,
+      "total": 4,
+      "path": "/workspace/scratch/43e7e077fa86/ci-stage3-release/legacy/home-voice/home-voice-browser.json",
+      "sha256": "333282dc2bddca54947ee4792bbb041d43678fc12fe434491699bb5d7ae742f8"
+    }
+  ],
+  "evidenceSnapshot": "/workspace/scratch/43e7e077fa86/ci-stage3-release/github-actions-snapshot.json",
+  "limits": [
+    "Chromium DOM, native input and speech-request fixture verification.",
+    "Audible TTS and physical-device behavior are not verified by these artifacts."
+  ]
+}

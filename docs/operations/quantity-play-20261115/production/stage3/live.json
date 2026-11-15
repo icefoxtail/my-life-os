@@ -1,0 +1,51 @@
+{
+  "stage": 3,
+  "mainMergeSha": "1ee1761e4f5660c6a98b7c7c0e59158146437b6d",
+  "url": "https://icefoxtail.github.io/my-life-os/index.html",
+  "verifiedAt": "2026-11-15T14:09:27.237634+00:00",
+  "method": "Actual production menu and native button clicks; rendered accessibility/DOM observations; no game/API injection",
+  "initial": {
+    "selected": 15,
+    "flowerImages": 15,
+    "currentCountObservedAtEntry": 1
+  },
+  "fillStart": {
+    "selected": 15,
+    "target": 20,
+    "currentText": "15 열다섯 송이"
+  },
+  "fillCompleted": {
+    "selected": 15,
+    "target": 20,
+    "flowerImageLabels": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "currentText": "20 모두 스무 송이",
+    "frameCounts": [
+      10,
+      10
+    ],
+    "equation": "10 ＋ 10 ＝ 20"
+  },
+  "nativeSpeakerAudio": "NOT_RUN",
+  "observedAudioFallback": true
+}

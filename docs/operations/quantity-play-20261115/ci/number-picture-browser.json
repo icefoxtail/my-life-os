@@ -1,0 +1,3120 @@
+{
+  "scope": "Actual Chromium menu and native locator clicks, DOM quantities, requested speech text and cancellation; transport-completion fixture only",
+  "nativeAudio": {
+    "status": "NOT_RUN",
+    "reason": "speechSynthesis speak/cancel are a fixture; no speaker hearing or physical-device claim"
+  },
+  "fixture": {
+    "transport": "speechSynthesis.speak/cancel",
+    "defaultCompletionMs": 25,
+    "sharedVoiceEngineReplaced": false,
+    "gameTimersReplaced": false
+  },
+  "checks": [
+    {
+      "name": "real menu to immediate police9 and automatic native count",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 1,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "completed": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 9,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 9,
+            "completedSteps": 10,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 10,
+            "audioSucceeded": 10,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "모두 경찰차 아홉 대!",
+            "lang": "ko-KR"
+          }
+        ],
+        "layout": {
+          "viewport": [
+            390,
+            844
+          ],
+          "documentWidth": 390,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 844,
+            "width": 390,
+            "height": 844,
+            "clientWidth": 390,
+            "scrollWidth": 390,
+            "clientHeight": 844,
+            "scrollHeight": 844
+          },
+          "board": {
+            "width": 334,
+            "height": 234
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "picture chooser and fifteen fire engines appear before counting finishes",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "active": true,
+          "objectId": "pump_engine",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 3,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "completed": {
+          "active": true,
+          "objectId": "pump_engine",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 15,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 3,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 15,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 286.4375,
+              "left": 298.59375,
+              "bottom": 333.15625,
+              "right": 357,
+              "width": 58.40625,
+              "height": 46.71875
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "15대",
+                "inside": true,
+                "width": 58,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "15",
+                "inside": true,
+                "width": 55,
+                "height": 56,
+                "clientWidth": 55,
+                "scrollWidth": 55
+              },
+              {
+                "className": "qp-count-word",
+                "text": "열다섯 대",
+                "inside": true,
+                "width": 68,
+                "height": 22.796875,
+                "clientWidth": 68,
+                "scrollWidth": 68
+              }
+            ]
+          }
+        },
+        "speech": [
+          {
+            "text": "하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "일곱",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "여덟",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "아홉",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열하나",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열둘",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열셋",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열넷",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "열다섯",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "모두 소방차 열다섯 대!",
+            "lang": "ko-KR"
+          }
+        ]
+      }
+    },
+    {
+      "name": "sino nine zero thirty and plus-minus boundaries",
+      "status": "PASS",
+      "detail": {
+        "sinoNine": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 9,
+          "readingStyle": "sino",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 6,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 9,
+            "completedSteps": 10,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 10,
+            "audioSucceeded": 10,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        },
+        "sinoSpeech": [
+          {
+            "text": "일",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "이",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "삼",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "사",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "오",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "육",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "칠",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "팔",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "구",
+            "lang": "ko-KR"
+          },
+          {
+            "text": "모두 경찰차 아홉 대!",
+            "lang": "ko-KR"
+          }
+        ],
+        "zeroInitial": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 0,
+          "actualCount": 0,
+          "counted": 0,
+          "readingStyle": "sino",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 7,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 1,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "zero": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 0,
+          "actualCount": 0,
+          "counted": 0,
+          "readingStyle": "sino",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 7,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 0,
+            "completedSteps": 1,
+            "totalSteps": 1,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 0,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": null,
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 0,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "0대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "0",
+                "inside": true,
+                "width": 34,
+                "height": 56,
+                "clientWidth": 34,
+                "scrollWidth": 34
+              },
+              {
+                "className": "qp-count-word",
+                "text": "없어요",
+                "inside": true,
+                "width": 46,
+                "height": 22.796875,
+                "clientWidth": 46,
+                "scrollWidth": 46
+              }
+            ]
+          }
+        },
+        "thirtyInitial": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 30,
+          "actualCount": 30,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 9,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 31,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "thirty": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 30,
+          "actualCount": 30,
+          "counted": 30,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 9,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 30,
+            "completedSteps": 31,
+            "totalSteps": 31,
+            "language": "ko",
+            "audioAttempted": 31,
+            "audioSucceeded": 31,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 355.59375,
+              "left": 298.59375,
+              "bottom": 402.3125,
+              "right": 357,
+              "width": 58.40625,
+              "height": 46.71875
+            },
+            "boardScrollTop": 95,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 65,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 65,
+                "height": 56,
+                "clientWidth": 65,
+                "scrollWidth": 65
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 51,
+                "height": 22.796875,
+                "clientWidth": 51,
+                "scrollWidth": 51
+              }
+            ]
+          }
+        },
+        "plusMinus": true
+      }
+    },
+    {
+      "name": "responsive root and chooser 320x568",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          320,
+          568
+        ],
+        "layout": {
+          "viewport": [
+            320,
+            568
+          ],
+          "documentWidth": 320,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 320,
+            "bottom": 568,
+            "width": 320,
+            "height": 568,
+            "clientWidth": 320,
+            "scrollWidth": 320,
+            "clientHeight": 568,
+            "scrollHeight": 568
+          },
+          "board": {
+            "width": 286,
+            "height": 162
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 135,
+              "left": 17,
+              "bottom": 297,
+              "right": 303
+            },
+            "item": {
+              "top": 251.765625,
+              "left": 246.796875,
+              "bottom": 292.71875,
+              "right": 298,
+              "width": 51.203125,
+              "height": 40.953125
+            },
+            "boardScrollTop": 118,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 57,
+                "height": 32,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 50,
+                "height": 43,
+                "clientWidth": 50,
+                "scrollWidth": 50
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 44,
+                "height": 19.1875,
+                "clientWidth": 44,
+                "scrollWidth": 44
+              }
+            ]
+          }
+        },
+        "screenshot": "number-picture-320x568-thirty.png",
+        "chooserClosedAndResumed": true,
+        "currentPicturesAndLastPictureVisible": {
+          "ordinal": 30,
+          "fullyVisible": true,
+          "board": {
+            "top": 135,
+            "left": 17,
+            "bottom": 297,
+            "right": 303
+          },
+          "item": {
+            "top": 251.765625,
+            "left": 246.796875,
+            "bottom": 292.71875,
+            "right": 298,
+            "width": 51.203125,
+            "height": 40.953125
+          },
+          "boardScrollTop": 118,
+          "stageScrollTop": 0,
+          "rootScrollTop": 0,
+          "rootScrollLeft": 0,
+          "columns": 5,
+          "textBounds": [
+            {
+              "className": "qp-target",
+              "text": "30대",
+              "inside": true,
+              "width": 57,
+              "height": 32,
+              "clientWidth": 0,
+              "scrollWidth": 0
+            },
+            {
+              "className": "qp-count-now",
+              "text": "30",
+              "inside": true,
+              "width": 50,
+              "height": 43,
+              "clientWidth": 50,
+              "scrollWidth": 50
+            },
+            {
+              "className": "qp-count-word",
+              "text": "서른 대",
+              "inside": true,
+              "width": 44,
+              "height": 19.1875,
+              "clientWidth": 44,
+              "scrollWidth": 44
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "responsive root and chooser 360x640",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          360,
+          640
+        ],
+        "layout": {
+          "viewport": [
+            360,
+            640
+          ],
+          "documentWidth": 360,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 360,
+            "bottom": 640,
+            "width": 360,
+            "height": 640,
+            "clientWidth": 360,
+            "scrollWidth": 360,
+            "clientHeight": 640,
+            "scrollHeight": 640
+          },
+          "board": {
+            "width": 326,
+            "height": 234
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 135,
+              "left": 17,
+              "bottom": 369,
+              "right": 343
+            },
+            "item": {
+              "top": 316.796875,
+              "left": 278.796875,
+              "bottom": 364.15625,
+              "right": 338,
+              "width": 59.203125,
+              "height": 47.359375
+            },
+            "boardScrollTop": 85,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 57,
+                "height": 32,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 50,
+                "height": 43,
+                "clientWidth": 50,
+                "scrollWidth": 50
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 44,
+                "height": 19.1875,
+                "clientWidth": 44,
+                "scrollWidth": 44
+              }
+            ]
+          }
+        },
+        "screenshot": "number-picture-360x640-thirty.png",
+        "chooserClosedAndResumed": true,
+        "currentPicturesAndLastPictureVisible": {
+          "ordinal": 30,
+          "fullyVisible": true,
+          "board": {
+            "top": 135,
+            "left": 17,
+            "bottom": 369,
+            "right": 343
+          },
+          "item": {
+            "top": 317.796875,
+            "left": 278.796875,
+            "bottom": 365.15625,
+            "right": 338,
+            "width": 59.203125,
+            "height": 47.359375
+          },
+          "boardScrollTop": 84,
+          "stageScrollTop": 0,
+          "rootScrollTop": 0,
+          "rootScrollLeft": 0,
+          "columns": 5,
+          "textBounds": [
+            {
+              "className": "qp-target",
+              "text": "30대",
+              "inside": true,
+              "width": 57,
+              "height": 32,
+              "clientWidth": 0,
+              "scrollWidth": 0
+            },
+            {
+              "className": "qp-count-now",
+              "text": "30",
+              "inside": true,
+              "width": 50,
+              "height": 43,
+              "clientWidth": 50,
+              "scrollWidth": 50
+            },
+            {
+              "className": "qp-count-word",
+              "text": "서른 대",
+              "inside": true,
+              "width": 44,
+              "height": 19.1875,
+              "clientWidth": 44,
+              "scrollWidth": 44
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "responsive root and chooser 390x844",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "layout": {
+          "viewport": [
+            390,
+            844
+          ],
+          "documentWidth": 390,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 844,
+            "width": 390,
+            "height": 844,
+            "clientWidth": 390,
+            "scrollWidth": 390,
+            "clientHeight": 844,
+            "scrollHeight": 844
+          },
+          "board": {
+            "width": 334,
+            "height": 234
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 355.59375,
+              "left": 298.59375,
+              "bottom": 402.3125,
+              "right": 357,
+              "width": 58.40625,
+              "height": 46.71875
+            },
+            "boardScrollTop": 95,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 65,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 65,
+                "height": 56,
+                "clientWidth": 65,
+                "scrollWidth": 65
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 51,
+                "height": 22.796875,
+                "clientWidth": 51,
+                "scrollWidth": 51
+              }
+            ]
+          }
+        },
+        "screenshot": "number-picture-390x844-thirty.png",
+        "chooserClosedAndResumed": true,
+        "currentPicturesAndLastPictureVisible": {
+          "ordinal": 30,
+          "fullyVisible": true,
+          "board": {
+            "top": 172,
+            "left": 28,
+            "bottom": 406,
+            "right": 362
+          },
+          "item": {
+            "top": 355.59375,
+            "left": 298.59375,
+            "bottom": 402.3125,
+            "right": 357,
+            "width": 58.40625,
+            "height": 46.71875
+          },
+          "boardScrollTop": 95,
+          "stageScrollTop": 0,
+          "rootScrollTop": 0,
+          "rootScrollLeft": 0,
+          "columns": 5,
+          "textBounds": [
+            {
+              "className": "qp-target",
+              "text": "30대",
+              "inside": true,
+              "width": 65,
+              "height": 40,
+              "clientWidth": 0,
+              "scrollWidth": 0
+            },
+            {
+              "className": "qp-count-now",
+              "text": "30",
+              "inside": true,
+              "width": 65,
+              "height": 56,
+              "clientWidth": 65,
+              "scrollWidth": 65
+            },
+            {
+              "className": "qp-count-word",
+              "text": "서른 대",
+              "inside": true,
+              "width": 51,
+              "height": 22.796875,
+              "clientWidth": 51,
+              "scrollWidth": 51
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "responsive root and chooser 844x390",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "layout": {
+          "viewport": [
+            844,
+            390
+          ],
+          "documentWidth": 844,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 844,
+            "bottom": 390,
+            "width": 844,
+            "height": 390,
+            "clientWidth": 844,
+            "scrollWidth": 844,
+            "clientHeight": 390,
+            "scrollHeight": 390
+          },
+          "board": {
+            "width": 541,
+            "height": 195
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 128,
+              "left": 20,
+              "bottom": 323,
+              "right": 561
+            },
+            "item": {
+              "top": 243.515625,
+              "left": 453.796875,
+              "bottom": 319.203125,
+              "right": 555.984375,
+              "width": 102.1875,
+              "height": 75.6875
+            },
+            "boardScrollTop": 293,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 48,
+                "height": 28,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 49,
+                "height": 42,
+                "clientWidth": 49,
+                "scrollWidth": 49
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 44,
+                "height": 19.1875,
+                "clientWidth": 44,
+                "scrollWidth": 44
+              }
+            ]
+          }
+        },
+        "screenshot": "number-picture-844x390-thirty.png",
+        "chooserClosedAndResumed": true,
+        "currentPicturesAndLastPictureVisible": {
+          "ordinal": 30,
+          "fullyVisible": true,
+          "board": {
+            "top": 128,
+            "left": 20,
+            "bottom": 323,
+            "right": 561
+          },
+          "item": {
+            "top": 243.515625,
+            "left": 453.796875,
+            "bottom": 319.203125,
+            "right": 555.984375,
+            "width": 102.1875,
+            "height": 75.6875
+          },
+          "boardScrollTop": 293,
+          "stageScrollTop": 0,
+          "rootScrollTop": 0,
+          "rootScrollLeft": 0,
+          "columns": 5,
+          "textBounds": [
+            {
+              "className": "qp-target",
+              "text": "30대",
+              "inside": true,
+              "width": 48,
+              "height": 28,
+              "clientWidth": 0,
+              "scrollWidth": 0
+            },
+            {
+              "className": "qp-count-now",
+              "text": "30",
+              "inside": true,
+              "width": 49,
+              "height": 42,
+              "clientWidth": 49,
+              "scrollWidth": 49
+            },
+            {
+              "className": "qp-count-word",
+              "text": "서른 대",
+              "inside": true,
+              "width": 44,
+              "height": 19.1875,
+              "clientWidth": 44,
+              "scrollWidth": 44
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "responsive root and chooser 1024x768",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "layout": {
+          "viewport": [
+            1024,
+            768
+          ],
+          "documentWidth": 1024,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 1024,
+            "bottom": 768,
+            "width": 1024,
+            "height": 768,
+            "clientWidth": 1024,
+            "scrollWidth": 1024,
+            "clientHeight": 768,
+            "scrollHeight": 768
+          },
+          "board": {
+            "width": 636,
+            "height": 410
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 200,
+              "left": 32,
+              "bottom": 610,
+              "right": 668
+            },
+            "item": {
+              "top": 513.953125,
+              "left": 544.1875,
+              "bottom": 605.34375,
+              "right": 663,
+              "width": 118.8125,
+              "height": 91.390625
+            },
+            "boardScrollTop": 188,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 74,
+                "height": 48,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 79,
+                "height": 68,
+                "clientWidth": 79,
+                "scrollWidth": 79
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 64,
+                "height": 28.796875,
+                "clientWidth": 64,
+                "scrollWidth": 64
+              }
+            ]
+          }
+        },
+        "screenshot": "number-picture-1024x768-thirty.png",
+        "chooserClosedAndResumed": true,
+        "currentPicturesAndLastPictureVisible": {
+          "ordinal": 30,
+          "fullyVisible": true,
+          "board": {
+            "top": 200,
+            "left": 32,
+            "bottom": 610,
+            "right": 668
+          },
+          "item": {
+            "top": 514.953125,
+            "left": 544.1875,
+            "bottom": 606.34375,
+            "right": 663,
+            "width": 118.8125,
+            "height": 91.390625
+          },
+          "boardScrollTop": 187,
+          "stageScrollTop": 0,
+          "rootScrollTop": 0,
+          "rootScrollLeft": 0,
+          "columns": 5,
+          "textBounds": [
+            {
+              "className": "qp-target",
+              "text": "30대",
+              "inside": true,
+              "width": 74,
+              "height": 48,
+              "clientWidth": 0,
+              "scrollWidth": 0
+            },
+            {
+              "className": "qp-count-now",
+              "text": "30",
+              "inside": true,
+              "width": 79,
+              "height": 68,
+              "clientWidth": 79,
+              "scrollWidth": 79
+            },
+            {
+              "className": "qp-count-word",
+              "text": "서른 대",
+              "inside": true,
+              "width": 64,
+              "height": 28.796875,
+              "clientWidth": 64,
+              "scrollWidth": 64
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "responsive root and chooser 1365x936",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          1365,
+          936
+        ],
+        "layout": {
+          "viewport": [
+            1365,
+            936
+          ],
+          "documentWidth": 1365,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 1365,
+            "bottom": 936,
+            "width": 1365,
+            "height": 936,
+            "clientWidth": 1365,
+            "scrollWidth": 1365,
+            "clientHeight": 936,
+            "scrollHeight": 936
+          },
+          "board": {
+            "width": 977,
+            "height": 578
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 30,
+            "fullyVisible": true,
+            "board": {
+              "top": 200,
+              "left": 32,
+              "bottom": 778,
+              "right": 1009
+            },
+            "item": {
+              "top": 646.953125,
+              "left": 784.890625,
+              "bottom": 774.34375,
+              "right": 950.5,
+              "width": 165.609375,
+              "height": 127.390625
+            },
+            "boardScrollTop": 235,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "30대",
+                "inside": true,
+                "width": 74,
+                "height": 48,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "30",
+                "inside": true,
+                "width": 79,
+                "height": 68,
+                "clientWidth": 79,
+                "scrollWidth": 79
+              },
+              {
+                "className": "qp-count-word",
+                "text": "서른 대",
+                "inside": true,
+                "width": 64,
+                "height": 28.796875,
+                "clientWidth": 64,
+                "scrollWidth": 64
+              }
+            ]
+          }
+        },
+        "screenshot": "number-picture-1365x936-thirty.png",
+        "chooserClosedAndResumed": true,
+        "currentPicturesAndLastPictureVisible": {
+          "ordinal": 30,
+          "fullyVisible": true,
+          "board": {
+            "top": 200,
+            "left": 32,
+            "bottom": 778,
+            "right": 1009
+          },
+          "item": {
+            "top": 646.953125,
+            "left": 784.890625,
+            "bottom": 774.34375,
+            "right": 950.5,
+            "width": 165.609375,
+            "height": 127.390625
+          },
+          "boardScrollTop": 235,
+          "stageScrollTop": 0,
+          "rootScrollTop": 0,
+          "rootScrollLeft": 0,
+          "columns": 5,
+          "textBounds": [
+            {
+              "className": "qp-target",
+              "text": "30대",
+              "inside": true,
+              "width": 74,
+              "height": 48,
+              "clientWidth": 0,
+              "scrollWidth": 0
+            },
+            {
+              "className": "qp-count-now",
+              "text": "30",
+              "inside": true,
+              "width": 79,
+              "height": 68,
+              "clientWidth": 79,
+              "scrollWidth": 79
+            },
+            {
+              "className": "qp-count-word",
+              "text": "서른 대",
+              "inside": true,
+              "width": 64,
+              "height": 28.796875,
+              "clientWidth": 64,
+              "scrollWidth": 64
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "view-only category/range preserve progress and new number cancels old run",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 30,
+          "actualCount": 30,
+          "counted": 2,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 2,
+            "status": "running",
+            "running": true,
+            "stepIndex": 1,
+            "completedSteps": 1,
+            "totalSteps": 31,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "category": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 30,
+          "actualCount": 30,
+          "counted": 2,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 2,
+            "status": "running",
+            "running": true,
+            "stepIndex": 1,
+            "completedSteps": 1,
+            "totalSteps": 31,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "range": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 30,
+          "actualCount": 30,
+          "counted": 2,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 2,
+            "status": "running",
+            "running": true,
+            "stepIndex": 1,
+            "completedSteps": 1,
+            "totalSteps": 31,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "replacement": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 3,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "completed": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 9,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 3,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 9,
+            "completedSteps": 10,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 10,
+            "audioSucceeded": 10,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        },
+        "cancelledPendingSpeech": 1
+      }
+    },
+    {
+      "name": "closing unchanged settings automatically restarts the preserved selection",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 2,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 5,
+            "status": "running",
+            "running": true,
+            "stepIndex": 1,
+            "completedSteps": 1,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "paused": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 2,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 5,
+            "status": "cancelled",
+            "running": false,
+            "stepIndex": 1,
+            "completedSteps": 1,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": "stopped",
+            "errors": []
+          }
+        },
+        "resumed": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 6,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "completed": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 15,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 6,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 15,
+            "completedSteps": 16,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 16,
+            "audioSucceeded": 16,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 15,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 286.4375,
+              "left": 298.59375,
+              "bottom": 333.15625,
+              "right": 357,
+              "width": 58.40625,
+              "height": 46.71875
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 5,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "15대",
+                "inside": true,
+                "width": 58,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "15",
+                "inside": true,
+                "width": 55,
+                "height": 56,
+                "clientWidth": 55,
+                "scrollWidth": 55
+              },
+              {
+                "className": "qp-count-word",
+                "text": "열다섯 대",
+                "inside": true,
+                "width": 68,
+                "height": 22.796875,
+                "clientWidth": 68,
+                "scrollWidth": 68
+              }
+            ]
+          }
+        },
+        "settingsChanged": false
+      }
+    },
+    {
+      "name": "home cancels counting and selection survives return plus full reload",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "active": true,
+          "objectId": "pump_engine",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 2,
+          "readingStyle": "sino",
+          "layout": "tens",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 11,
+            "status": "running",
+            "running": true,
+            "stepIndex": 1,
+            "completedSteps": 1,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 2,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "left": {
+          "active": false,
+          "objectId": "pump_engine",
+          "quantity": 15,
+          "actualCount": 0,
+          "counted": 2,
+          "readingStyle": "sino",
+          "layout": "tens",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": null
+        },
+        "returned": {
+          "active": true,
+          "objectId": "pump_engine",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 1,
+          "readingStyle": "sino",
+          "layout": "tens",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "reloaded": {
+          "active": true,
+          "objectId": "pump_engine",
+          "quantity": 15,
+          "actualCount": 15,
+          "counted": 1,
+          "readingStyle": "sino",
+          "layout": "tens",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 0,
+            "totalSteps": 16,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 0,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "saved": {
+          "version": 1,
+          "objectId": "pump_engine",
+          "n": 15,
+          "style": "sino",
+          "layout": "tens",
+          "muted": false,
+          "category": "vehicle",
+          "fromArtwork": false,
+          "artTemplateId": null
+        }
+      }
+    },
+    {
+      "name": "English settings use English count text and singular/plural totals",
+      "status": "PASS",
+      "detail": {
+        "nine": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 9,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "en",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 2,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 9,
+            "completedSteps": 10,
+            "totalSteps": 10,
+            "language": "en",
+            "audioAttempted": 10,
+            "audioSucceeded": 10,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        },
+        "speech": [
+          {
+            "text": "one",
+            "lang": "en-US"
+          },
+          {
+            "text": "two",
+            "lang": "en-US"
+          },
+          {
+            "text": "three",
+            "lang": "en-US"
+          },
+          {
+            "text": "four",
+            "lang": "en-US"
+          },
+          {
+            "text": "five",
+            "lang": "en-US"
+          },
+          {
+            "text": "six",
+            "lang": "en-US"
+          },
+          {
+            "text": "seven",
+            "lang": "en-US"
+          },
+          {
+            "text": "eight",
+            "lang": "en-US"
+          },
+          {
+            "text": "nine",
+            "lang": "en-US"
+          },
+          {
+            "text": "There are nine police cars.",
+            "lang": "en-US"
+          }
+        ],
+        "one": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 1,
+          "actualCount": 1,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "en",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 3,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 1,
+            "completedSteps": 2,
+            "totalSteps": 2,
+            "language": "en",
+            "audioAttempted": 2,
+            "audioSucceeded": 2,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 1,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 177,
+              "left": 33,
+              "bottom": 401,
+              "right": 135.65625,
+              "width": 102.65625,
+              "height": 224
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "1대",
+                "inside": true,
+                "width": 35,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "1",
+                "inside": true,
+                "width": 23,
+                "height": 56,
+                "clientWidth": 23,
+                "scrollWidth": 23
+              },
+              {
+                "className": "qp-count-word",
+                "text": "한 대",
+                "inside": true,
+                "width": 37,
+                "height": 22.796875,
+                "clientWidth": 37,
+                "scrollWidth": 37
+              }
+            ]
+          }
+        },
+        "zero": {
+          "active": true,
+          "objectId": "korean_police_car",
+          "quantity": 0,
+          "actualCount": 0,
+          "counted": 0,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "en",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 4,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 0,
+            "completedSteps": 1,
+            "totalSteps": 1,
+            "language": "en",
+            "audioAttempted": 1,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          },
+          "browserVisibility": {
+            "ordinal": 0,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": null,
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 0,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "0대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "0",
+                "inside": true,
+                "width": 34,
+                "height": 56,
+                "clientWidth": 34,
+                "scrollWidth": 34
+              },
+              {
+                "className": "qp-count-word",
+                "text": "없어요",
+                "inside": true,
+                "width": 46,
+                "height": 22.796875,
+                "clientWidth": 46,
+                "scrollWidth": 46
+              }
+            ]
+          }
+        },
+        "nativeAudio": "NOT_RUN"
+      }
+    },
+    {
+      "name": "missing model allows menu recovery",
+      "status": "PASS",
+      "detail": {
+        "blockedResource": "model",
+        "loadMessageVisible": true,
+        "returnedViaNativeClick": true
+      }
+    },
+    {
+      "name": "missing sequencer allows menu recovery",
+      "status": "PASS",
+      "detail": {
+        "blockedResource": "sequencer",
+        "loadMessageVisible": true,
+        "returnedViaNativeClick": true
+      }
+    },
+    {
+      "name": "missing catalog allows menu recovery",
+      "status": "PASS",
+      "detail": {
+        "blockedResource": "catalog",
+        "loadMessageVisible": true,
+        "returnedViaNativeClick": true
+      }
+    },
+    {
+      "name": "missing game allows menu recovery",
+      "status": "PASS",
+      "detail": {
+        "blockedResource": "game",
+        "loadMessageVisible": true,
+        "returnedViaNativeClick": true
+      }
+    },
+    {
+      "name": "missing picture has visible fallback and an exit",
+      "status": "PASS",
+      "detail": {
+        "layout": {
+          "viewport": [
+            320,
+            568
+          ],
+          "documentWidth": 320,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 320,
+            "bottom": 568,
+            "width": 320,
+            "height": 568,
+            "clientWidth": 320,
+            "scrollWidth": 320,
+            "clientHeight": 568,
+            "scrollHeight": 568
+          },
+          "board": {
+            "width": 286,
+            "height": 162
+          },
+          "brokenImages": [
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            },
+            {
+              "src": "./assets/vehicles/police/korean_police_car.png",
+              "fallback": true
+            }
+          ],
+          "focusVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 135,
+              "left": 17,
+              "bottom": 297,
+              "right": 303
+            },
+            "item": {
+              "top": 244.65625,
+              "left": 209.328125,
+              "bottom": 291.984375,
+              "right": 297.984375,
+              "width": 88.65625,
+              "height": 47.328125
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 38,
+                "height": 32,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 25,
+                "height": 43,
+                "clientWidth": 25,
+                "scrollWidth": 25
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 43,
+                "height": 19.1875,
+                "clientWidth": 43,
+                "scrollWidth": 43
+              }
+            ]
+          }
+        },
+        "nineVisibleFallbacks": true,
+        "returnedViaNativeClick": true
+      }
+    },
+    {
+      "name": "phase2 painting reference handoff and painted image survives return/reload",
+      "status": "PASS",
+      "detail": {
+        "savedPaintingPreserved": true,
+        "referenceDidNotApplyPaint": true,
+        "handoff": {
+          "active": true,
+          "objectId": "art:police",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 1,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": false,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "running",
+            "running": true,
+            "stepIndex": 0,
+            "completedSteps": 1,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 1,
+            "audioSucceeded": 1,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "layout": {
+          "viewport": [
+            390,
+            844
+          ],
+          "documentWidth": 390,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 844,
+            "width": 390,
+            "height": 844,
+            "clientWidth": 390,
+            "scrollWidth": 390,
+            "clientHeight": 844,
+            "scrollHeight": 844
+          },
+          "board": {
+            "width": 334,
+            "height": 234
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        },
+        "savedSelection": {
+          "version": 1,
+          "objectId": "art:police",
+          "n": 9,
+          "style": "native",
+          "layout": "rows",
+          "muted": false,
+          "category": "art",
+          "fromArtwork": true,
+          "artTemplateId": "police"
+        },
+        "returned": {
+          "active": true,
+          "objectId": "art:police",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 9,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 9,
+            "completedSteps": 10,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 10,
+            "audioSucceeded": 10,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "reloaded": {
+          "active": true,
+          "objectId": "art:police",
+          "quantity": 9,
+          "actualCount": 9,
+          "counted": 9,
+          "readingStyle": "native",
+          "layout": "rows",
+          "age": 4,
+          "language": "ko",
+          "muted": false,
+          "complete": true,
+          "audioFailed": false,
+          "sequence": {
+            "runId": 1,
+            "status": "completed",
+            "running": false,
+            "stepIndex": 9,
+            "completedSteps": 10,
+            "totalSteps": 10,
+            "language": "ko",
+            "audioAttempted": 10,
+            "audioSucceeded": 10,
+            "audioFailed": 0,
+            "audioTimedOut": 0,
+            "muted": false,
+            "reason": null,
+            "errors": []
+          }
+        },
+        "restoredLayout": {
+          "viewport": [
+            390,
+            844
+          ],
+          "documentWidth": 390,
+          "root": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 844,
+            "width": 390,
+            "height": 844,
+            "clientWidth": 390,
+            "scrollWidth": 390,
+            "clientHeight": 844,
+            "scrollHeight": 844
+          },
+          "board": {
+            "width": 334,
+            "height": 234
+          },
+          "brokenImages": [],
+          "focusVisibility": {
+            "ordinal": 9,
+            "fullyVisible": true,
+            "board": {
+              "top": 172,
+              "left": 28,
+              "bottom": 406,
+              "right": 362
+            },
+            "item": {
+              "top": 331.65625,
+              "left": 254.328125,
+              "bottom": 401,
+              "right": 356.984375,
+              "width": 102.65625,
+              "height": 69.34375
+            },
+            "boardScrollTop": 0,
+            "stageScrollTop": 0,
+            "rootScrollTop": 0,
+            "rootScrollLeft": 0,
+            "columns": 3,
+            "textBounds": [
+              {
+                "className": "qp-target",
+                "text": "9대",
+                "inside": true,
+                "width": 43,
+                "height": 40,
+                "clientWidth": 0,
+                "scrollWidth": 0
+              },
+              {
+                "className": "qp-count-now",
+                "text": "9",
+                "inside": true,
+                "width": 33,
+                "height": 56,
+                "clientWidth": 33,
+                "scrollWidth": 33
+              },
+              {
+                "className": "qp-count-word",
+                "text": "아홉 대",
+                "inside": true,
+                "width": 52,
+                "height": 22.796875,
+                "clientWidth": 52,
+                "scrollWidth": 52
+              }
+            ]
+          }
+        },
+        "purpleRegionRetainedAcrossReturnAndReload": true
+      }
+    },
+    {
+      "name": "phase2 all 28 shared catalog SVG images decode in Chromium",
+      "status": "PASS",
+      "detail": {
+        "scope": "Native Chromium Image.decode of the actual shared catalog data SVGs; no repeated game sessions",
+        "expected": 28,
+        "decoded": 28,
+        "images": [
+          {
+            "id": "art:police",
+            "artTemplateId": "police",
+            "name": "경찰차",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:police_swat_suv",
+            "artTemplateId": "police_swat_suv",
+            "name": "경찰 특공대 SUV",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:police_bus",
+            "artTemplateId": "police_bus",
+            "name": "경찰 버스",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:fire_pump",
+            "artTemplateId": "fire_pump",
+            "name": "소방 펌프차",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:fire_ladder",
+            "artTemplateId": "fire_ladder",
+            "name": "소방 사다리차",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:ambulance",
+            "artTemplateId": "ambulance",
+            "name": "구급차",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:excavator",
+            "artTemplateId": "excavator",
+            "name": "포크레인",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:dump_truck",
+            "artTemplateId": "dump_truck",
+            "name": "덤프트럭",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:bulldozer",
+            "artTemplateId": "bulldozer",
+            "name": "불도저",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:rocket",
+            "artTemplateId": "rocket",
+            "name": "우주 로켓",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:dino",
+            "artTemplateId": "dino",
+            "name": "공룡",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:train",
+            "artTemplateId": "train",
+            "name": "칙칙폭폭 기차",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:airplane",
+            "artTemplateId": "airplane",
+            "name": "비행기",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:lion",
+            "artTemplateId": "lion",
+            "name": "어흥 사자",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:whale",
+            "artTemplateId": "whale",
+            "name": "고래",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:icecream",
+            "artTemplateId": "icecream",
+            "name": "아이스크림",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:police_motorcycle",
+            "artTemplateId": "police_motorcycle",
+            "name": "경찰 오토바이",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:police_helicopter",
+            "artTemplateId": "police_helicopter",
+            "name": "경찰 헬기",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:police_officer",
+            "artTemplateId": "police_officer",
+            "name": "경찰관",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:police_dog",
+            "artTemplateId": "police_dog",
+            "name": "경찰견",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:boat",
+            "artTemplateId": "boat",
+            "name": "배",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:bus",
+            "artTemplateId": "bus",
+            "name": "버스",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:strawberry",
+            "artTemplateId": "strawberry",
+            "name": "딸기",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:apple",
+            "artTemplateId": "apple",
+            "name": "사과",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:cat",
+            "artTemplateId": "cat",
+            "name": "고양이",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:puppy",
+            "artTemplateId": "puppy",
+            "name": "강아지",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:butterfly",
+            "artTemplateId": "butterfly",
+            "name": "나비",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          },
+          {
+            "id": "art:house",
+            "artTemplateId": "house",
+            "name": "집",
+            "decoded": true,
+            "width": 200,
+            "height": 150
+          }
+        ]
+      }
+    }
+  ],
+  "pageErrors": [],
+  "sources": {
+    "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+    "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+    "js/games/quantity-play-model.js": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+    "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+    "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+    "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+    "css/games/number-picture.css": "c4f38e1f9aef80da784e83a0c6937e0380f606aba3dbb928798e4cb4a2e4ffbe",
+    "js/games/art-zone.js": "3f6c8cf76315d6a170e037285374fcecfd68813dc0b2fc018037f59965711031",
+    "scripts/qa-number-picture-browser.py": "8bd4249902e19ce732ab1620f1cc5797377fce3d98a444f23497a21adfba681a"
+  },
+  "screenshots": [
+    "number-picture-police9-native-390x844.png",
+    "number-picture-fire15-native-390x844.png",
+    "number-picture-zero-390x844.png",
+    "number-picture-320x568-thirty.png",
+    "number-picture-360x640-thirty.png",
+    "number-picture-390x844-thirty.png",
+    "number-picture-844x390-thirty.png",
+    "number-picture-1024x768-thirty.png",
+    "number-picture-1365x936-thirty.png",
+    "number-picture-saved-fire15-sino-tens-reloaded.png",
+    "number-picture-english-zero.png",
+    "number-picture-missing-picture-fallback-320x568.png",
+    "number-picture-art-reference.png",
+    "number-picture-painted-police9.png",
+    "number-picture-painted-police9-returned.png",
+    "number-picture-painted-police9-reloaded.png"
+  ],
+  "baseUrl": "http://127.0.0.1:46611/",
+  "browser": "143.0.7499.4",
+  "status": "PASS",
+  "passed": 20,
+  "failed": 0,
+  "notApplicable": 0
+}

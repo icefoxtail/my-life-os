@@ -1,0 +1,50 @@
+{
+  "stage": 4,
+  "mainMergeSha": "25bc1494caeacc821f1aa3f97cd80e7d77aa3154",
+  "verifiedAt": "2026-11-15T14:11:47.752306+00:00",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "scope": "Public Pages asset bytes compared with the exact merged Git tree; live browser interaction recorded separately.",
+  "status": "PASS",
+  "checks": [
+    {
+      "path": "index.html",
+      "expectedSha256": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+      "httpStatus": 200,
+      "bytes": 95792,
+      "actualSha256": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+      "matches": true
+    },
+    {
+      "path": "sw.js",
+      "expectedSha256": "5faf86dc561b2295cdd9a2e8c88a5447c4f208b700ddbfc8d7833e5bfb99ba49",
+      "httpStatus": 200,
+      "bytes": 8573,
+      "actualSha256": "5faf86dc561b2295cdd9a2e8c88a5447c4f208b700ddbfc8d7833e5bfb99ba49",
+      "matches": true
+    },
+    {
+      "path": "js/games/picture-arithmetic.js",
+      "expectedSha256": "b4f791fb6c816e4e00c647a5d1b0915f05797b4e29bb18c77c3952d969c7940f",
+      "httpStatus": 200,
+      "bytes": 32774,
+      "actualSha256": "b4f791fb6c816e4e00c647a5d1b0915f05797b4e29bb18c77c3952d969c7940f",
+      "matches": true
+    },
+    {
+      "path": "css/games/picture-arithmetic.css",
+      "expectedSha256": "2400897d4942dbdf8ada6a2028abb910dbe437da39ff5f11b87909d33689703b",
+      "httpStatus": 200,
+      "bytes": 22028,
+      "actualSha256": "2400897d4942dbdf8ada6a2028abb910dbe437da39ff5f11b87909d33689703b",
+      "matches": true
+    },
+    {
+      "path": "assets/games/picture-arithmetic/card.svg",
+      "expectedSha256": "bb96f147efe40658c06f3f5cc1369a2c5395bbcae14b534bd5964470701fe544",
+      "httpStatus": 200,
+      "bytes": 2325,
+      "actualSha256": "bb96f147efe40658c06f3f5cc1369a2c5395bbcae14b534bd5964470701fe544",
+      "matches": true
+    }
+  ]
+}

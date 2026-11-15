@@ -1,0 +1,25 @@
+{
+  "stage": 1,
+  "mainMergeSha": "8029e1c9c66f93d3b2339013cbaba502c3f22e36",
+  "url": "https://icefoxtail.github.io/my-life-os/index.html",
+  "police": {
+    "current": "9",
+    "pictures": 9,
+    "progress": "모두 9대",
+    "word": "아홉 대"
+  },
+  "fireInitial": {
+    "pictures": 15,
+    "current": "1",
+    "progress": "지금 1대 셌어요"
+  },
+  "fireCompleted": {
+    "current": "15",
+    "pictures": 15,
+    "progress": "모두 15대",
+    "word": "열다섯 대"
+  },
+  "method": "Actual production browser controls; DOM and screenshots; no game/API injection",
+  "nativeSpeakerAudio": "NOT_RUN",
+  "observedAudioFallback": true
+}
