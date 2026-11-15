@@ -58,6 +58,7 @@ SPEECH_FIXTURE = r"""
   const cancelled = [];
   let active = null;
   let serial = 0;
+  let clickSerial = 0;
   function box(element) {
     const r = element.getBoundingClientRect();
     return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height};
@@ -89,7 +90,9 @@ SPEECH_FIXTURE = r"""
     };
   }
   function record(kind, extra) {
+    const index = rows.length;
     rows.push({kind, time: performance.now(), ...extra, dom: dom()});
+    return index;
   }
   function finish(entry) {
     if (!entry || active !== entry) return false;
@@ -100,7 +103,7 @@ SPEECH_FIXTURE = r"""
   }
   const probe = window.__gardenProbe = {
     fixture: 'native speechSynthesis boundary; completion after 25 ms',
-    rows, hold: false,
+    rows, hold: false, lastClick: null,
     finishActive: () => finish(active),
     fireCancelled: () => {
       const pending = cancelled.splice(0);
@@ -112,6 +115,17 @@ SPEECH_FIXTURE = r"""
     },
     activeId: () => active?.id ?? null
   };
+  // Playwright waits for a moving button to settle before delivering its click.
+  // During that wait the entry's automatic count legitimately continues. Mark
+  // the actual DOM event, before the game's delegated handler starts a new run.
+  document.addEventListener('click', event => {
+    const button = event.target.closest?.('.tfg-app button[data-action]');
+    if (!button) return;
+    const click = {serial: ++clickSerial, action: button.dataset.action,
+      value: button.dataset.value ?? null};
+    click.index = record('ui-click', click);
+    probe.lastClick = click;
+  }, true);
   synth.speak = utterance => {
     const entry = {id: ++serial, utterance};
     active = entry;
@@ -239,14 +253,25 @@ def button(page, action, value=None):
     return page.locator(selector)
 
 
+def click_and_mark(page, locator):
+    action = locator.get_attribute("data-action")
+    value = locator.get_attribute("data-value")
+    before = page.evaluate("window.__gardenProbe.lastClick?.serial ?? 0")
+    locator.click()
+    click = page.evaluate("window.__gardenProbe.lastClick")
+    assert click and click["serial"] > before, "No native click reached the capture probe"
+    assert (click["action"], click["value"]) == (action, value), click
+    return click["index"]
+
+
 def choose_number(page, n):
     # Deliberately use the same visible controls as a child. No model dispatches.
     quick = page.locator(f'.tfg-quick-numbers button[data-value="{n}"]')
     if quick.count() and quick.is_visible():
-        quick.click()
+        return click_and_mark(page, quick)
     else:
         button(page, "number-picker").click()
-        page.locator(f'.tfg-number-grid button[data-value="{n}"]').click()
+        return click_and_mark(page, page.locator(f'.tfg-number-grid button[data-value="{n}"]'))
 
 
 def assert_board(page, chosen, actual=None, target=None):
@@ -423,8 +448,7 @@ def inspect_layout(page, width, height):
 
 def normal_fifteen(page, url, output):
     card_src = enter(page, url)
-    start = mark(page)
-    choose_number(page, 15)
+    start = choose_number(page, 15)
     immediate = assert_board(page, 15)
     complete(page, 15)
     spoken = assert_automatic_speech(page, start, range(1, 16), 15)
@@ -437,8 +461,7 @@ def boundaries(page, url, output):
     enter(page, url)
     results = []
     for n in (0, 30):
-        start = mark(page)
-        choose_number(page, n)
+        start = choose_number(page, n)
         assert_board(page, n)
         complete(page, n)
         spoken = assert_automatic_speech(page, start, range(1, n + 1), n)
@@ -456,8 +479,7 @@ def fill_to_ten(page, url, output):
         # Hold only the browser speech boundary so a busy CI worker can inspect
         # the starting amount before the first added flower. No app clock changes.
         page.evaluate("window.__gardenProbe.hold = true")
-        start = mark(page)
-        button(page, "mode", "fill").click()
+        start = click_and_mark(page, button(page, "mode", "fill"))
         # The initial existing flowers must remain N; the target is displayed separately.
         initial = assert_board(page, n, actual=n, target=target)
         page.evaluate("window.__gardenProbe.hold = false; window.__gardenProbe.finishActive()")
@@ -493,8 +515,7 @@ def selection_cancellation(page, url, output):
     choose_number(page, 30)
     page.wait_for_function("window.__gardenProbe.activeId() !== null")
     old = snapshot(page)["sequence"]["runId"]
-    start = mark(page)
-    choose_number(page, 9)
+    start = choose_number(page, 9)
     assert_board(page, 9)
     page.wait_for_function("window.__gardenProbe.activeId() !== null")
     before_late = mark(page)
@@ -528,8 +549,7 @@ def settings_close_and_ages(page, url, output):
     page.wait_for_timeout(180)
     assert not [r for r in speech_rows(page, paused_mark) if r["kind"] == "speak"], \
         speech_rows(page, paused_mark)
-    start = mark(page)
-    page.locator('.tfg-dialog-done[data-action="close-modal"]').click()
+    start = click_and_mark(page, page.locator('.tfg-dialog-done[data-action="close-modal"]'))
     expect(page.locator(".tfg-modal")).to_have_count(0)
     page.wait_for_function("window.__gardenProbe.activeId() !== null")
     assert_board(page, 15)
@@ -553,13 +573,11 @@ def settings_close_and_ages(page, url, output):
 def reading_and_english(page, url, output):
     enter(page, url)
     choose_number(page, 9)
-    start = mark(page)
-    button(page, "reading", "sino").click()
+    start = click_and_mark(page, button(page, "reading", "sino"))
     complete(page, 9)
     sino = assert_automatic_speech(page, start, range(1, 10), 9, style="sino")
     button(page, "settings").click()
-    start = mark(page)
-    button(page, "language", "en").click()
+    start = click_and_mark(page, button(page, "language", "en"))
     complete(page, 9)
     english = assert_automatic_speech(page, start, range(1, 10), 9, style="en")
     garden_speech = [r for r in speech_rows(page, start)
@@ -664,6 +682,7 @@ def main():
                         "Application author wrote this test; integer/DOM/speech observations are independent of app-model expectations"],
         "fixture": {"boundary": "speechSynthesis.speak/cancel only", "normalCompletionMs": 25,
                     "sharedVoiceAndSequencerUnmodified": True,
+                    "traceBoundary": "capture phase of the actual native button click, before the app handler",
                     "adversarialCases": "held utterance, cancellation, delayed cancelled onend"},
         "sources": {}, "checks": [], "pageErrors": [], "networkFailures": []
     }
