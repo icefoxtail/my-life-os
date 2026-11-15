@@ -2425,7 +2425,7 @@ function openLifeSequenceGame(){
 
 function openArtZoneGame(){
   const t=openGameShell('🎨 매직 그림판','artZoneTarget','linear-gradient(160deg,#f0f4f8 0%,#fce4ec 100%)','game');
-  if(window.SihyeonGames?.artZone?.render) window.SihyeonGames.artZone.render(t,gameOptions('game'));
+  if(window.SihyeonGames?.artZone?.render) window.SihyeonGames.artZone.render(t,gameOptions('game',{onPlayObject:openNumberPictureGame}));
   else renderGameLoadError(t,'매직 그림판을 불러오지 못했어요.','#333');
 }
 

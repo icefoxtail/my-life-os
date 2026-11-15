@@ -557,15 +557,79 @@ def main():
                 initial = snap(page)
                 assert initial['objectId'] == 'art:police' and initial['quantity'] == 9 and initial['actualCount'] == 9, initial
                 finish(page, 9)
-                src = page.locator('.qp-item img').first.get_attribute('src')
-                assert src.startswith('data:image/svg+xml'), src[:80]
-                svg = unquote(src.split(',', 1)[1])
-                assert re.search(r'data-part="light_red"[^>]*fill="#9944FF"', svg), 'number play did not use the painted snapshot'
-                assert page.evaluate("JSON.parse(localStorage.getItem('sihyeon-art-work-v1')).templates.police") == saved_before
+
+                def painted_snapshot(expected_src=None):
+                    value = snap(page)
+                    assert value['objectId'] == 'art:police' and value['quantity'] == 9 and value['actualCount'] == 9, value
+                    sources = page.locator('.qp-item img').evaluate_all('(images)=>images.map(img=>img.getAttribute("src"))')
+                    assert len(sources) == 9 and len(set(sources)) == 1, 'the nine pictures must share the same painted snapshot'
+                    src = sources[0]
+                    assert src.startswith('data:image/svg+xml'), src[:80]
+                    svg = unquote(src.split(',', 1)[1])
+                    assert re.search(r'data-part="light_red"[^>]*fill="#9944FF"', svg), 'number play did not restore the purple painted region'
+                    if expected_src is not None:
+                        assert src == expected_src, 'restoring number play changed the artwork snapshot'
+                    assert page.evaluate("JSON.parse(localStorage.getItem('sihyeon-art-work-v1')).templates.police") == saved_before
+                    return src, value
+
+                painted_src, _ = painted_snapshot()
+                saved_selection = page.evaluate("JSON.parse(localStorage.getItem('sihyeon-number-picture-v1'))")
+                assert saved_selection['objectId'] == 'art:police' and saved_selection['fromArtwork'] is True and saved_selection['artTemplateId'] == 'police', saved_selection
                 layout = image_and_layout(page)
                 screenshot(page, 'painted-police9')
-                return {'savedPaintingPreserved':True, 'referenceDidNotApplyPaint':True, 'handoff':initial, 'layout':layout}
-            check('phase2 actual painting reference and my-art number-play handoff', art_bridge, page)
+                action(page, 'home')
+                page.locator(CARD).wait_for(state='visible')
+                page.locator(CARD).click()
+                page.locator('.qp-root').wait_for(state='visible')
+                finish(page, 9)
+                _, returned = painted_snapshot(painted_src)
+                screenshot(page, 'painted-police9-returned')
+                enter(page, base, reload=True)
+                finish(page, 9)
+                _, reloaded = painted_snapshot(painted_src)
+                restored_layout = image_and_layout(page)
+                screenshot(page, 'painted-police9-reloaded')
+                return {'savedPaintingPreserved':True, 'referenceDidNotApplyPaint':True, 'handoff':initial,
+                        'layout':layout, 'savedSelection':saved_selection, 'returned':returned, 'reloaded':reloaded,
+                        'restoredLayout':restored_layout, 'purpleRegionRetainedAcrossReturnAndReload':True}
+            check('phase2 painting reference handoff and painted image survives return/reload', art_bridge, page)
+            ctx.close()
+
+            ctx, page = context_page(browser)
+
+            def decode_art_catalog():
+                page.goto(base + 'index.html', wait_until='load', timeout=45000)
+                if not page.evaluate('!!window.SihyeonArtPlayBridge?.getPlayObjects'):
+                    return {'notApplicable':True, 'reason':'Phase-2 artwork bridge is not present in this release.'}
+                result = page.evaluate("""async () => {
+                  const bridge = SihyeonArtPlayBridge.getPlayObjects();
+                  const catalog = SihyeonPlayObjects.list().filter(item =>
+                    item.category === 'art' && item.src.startsWith('data:image/svg+xml'));
+                  const images = await Promise.all(catalog.map(async item => {
+                    const image = new Image();
+                    let timeout;
+                    try {
+                      image.src = item.src;
+                      await Promise.race([image.decode(), new Promise((_, reject) => {
+                        timeout = setTimeout(() => reject(new Error('SVG decode timeout')), 8000);
+                      })]);
+                      return {id:item.id, artTemplateId:item.artTemplateId, name:item.nameKo,
+                        decoded:image.naturalWidth>0 && image.naturalHeight>0,
+                        width:image.naturalWidth, height:image.naturalHeight};
+                    } catch (error) {
+                      return {id:item.id, artTemplateId:item.artTemplateId, name:item.nameKo,
+                        decoded:false, error:String(error)};
+                    } finally { clearTimeout(timeout); }
+                  }));
+                  return {bridgeIds:bridge.map(item=>item.id), catalogIds:catalog.map(item=>item.id), images};
+                }""")
+                assert len(result['bridgeIds']) == 28 and len(set(result['bridgeIds'])) == 28, result
+                assert len(result['catalogIds']) == 28 and sorted(result['catalogIds']) == sorted(result['bridgeIds']), result
+                assert all(image['decoded'] for image in result['images']), result
+                assert any(image['artTemplateId'] == 'police_swat_suv' for image in result['images']), result
+                return {'scope':'Native Chromium Image.decode of the actual shared catalog data SVGs; no repeated game sessions',
+                        'expected':28, 'decoded':len(result['images']), 'images':result['images']}
+            check('phase2 all 28 shared catalog SVG images decode in Chromium', decode_art_catalog, page)
             ctx.close()
             browser.close()
     except Exception as exc:

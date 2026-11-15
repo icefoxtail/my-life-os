@@ -12,7 +12,8 @@
   function subject(name){const c=name.charCodeAt(name.length-1);return name+(c>=0xac00&&c<=0xd7a3&&(c-0xac00)%28?'이':'가');}
   function object(){return view.custom && view.custom.id===view.objectId?view.custom:view.objects.find(o=>o.id===view.objectId)||view.objects[0];}
   function save(){
-    memory={version:1,objectId:view.objectId,n:view.n,style:view.style,layout:view.layout,muted:view.muted,category:view.category};
+    const selected=object();
+    memory={version:1,objectId:view.objectId,n:view.n,style:view.style,layout:view.layout,muted:view.muted,category:view.category,fromArtwork:selected.fromArtwork===true,artTemplateId:selected.artTemplateId||null};
     try{localStorage.setItem(SAVE_KEY,JSON.stringify(memory));}catch(_){}
   }
   function load(){
@@ -21,6 +22,10 @@
     if(!saved||saved.version!==1)return;
     if(M().isQuantity(saved.n))view.n=saved.n;
     if(view.objects.some(o=>o.id===saved.objectId))view.objectId=saved.objectId;
+    if(saved.fromArtwork===true&&typeof saved.artTemplateId==='string'){
+      const painted=window.SihyeonArtPlayBridge?.getSavedPlayObject?.(saved.artTemplateId);
+      if(C().isValid(painted)&&painted.id===saved.objectId){view.custom=painted;view.objects=view.objects.map(o=>o.id===painted.id?painted:o);}
+    }
     if(['native','sino'].includes(saved.style))view.style=saved.style;
     if(['rows','tens','scatter'].includes(saved.layout))view.layout=saved.layout;
     view.muted=saved.muted===true;
@@ -202,6 +207,7 @@
       view.custom=Object.assign({emoji:'🎨',category:'art'},view.options.initialObject);view.objectId=view.custom.id;view.category='art';
       if(!view.objects.some(o=>o.id===view.custom.id))view.objects.push(view.custom);
       else view.objects=view.objects.map(o=>o.id===view.custom.id?view.custom:o);
+      save();
     }
     view.range=view.n<=10?0:view.n<=20?1:2;
     view.sequence=window.SihyeonQuantitySequencer.create();

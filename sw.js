@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.6.0-auto-number';
+const CACHE_NAME = 'sihyeon-play-os-v1.6.1-art-numbers';
 
 const ASSETS = [
   './js/play-objects.js',

@@ -1,5 +1,5 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v4.4.0
+ * 시현이 놀이터 OS — 매직 그림판 v4.5.0
  * v4.1 원본 기준 유지 + 시현이 전용 단순 그림놀이 레이아웃
  * - 큰 매직 그림판 헤더 제거
  * - 도구/되돌리기/휴지통/완료/저장 UI 제거
@@ -117,6 +117,50 @@
 </g>
 </svg>`,
       },
+    },
+    {
+      id: 'police_swat_suv',
+      name: '경찰 특공대 SUV',
+      emoji: '🚙',
+      version: 1,
+      parts: {
+        light_red: { ko: '빨간 경광등', en: 'red siren light', color: '#FF4444' },
+        light_blue: { ko: '파란 경광등', en: 'blue siren light', color: '#4488FF' },
+        body: { ko: '튼튼한 차체', en: 'SUV body', color: '#1E40AF' },
+        window_rear: { ko: '뒷창문', en: 'back window', color: '#8EF6D1' },
+        window_front: { ko: '앞창문', en: 'front window', color: '#8EF6D1' },
+        side_panel: { ko: '옆 보호판', en: 'side panel', color: '#C0C0C0' },
+        badge: { ko: '경찰 배지', en: 'police badge', color: '#FFD700' },
+        headlight: { ko: '헤드라이트', en: 'headlight', color: '#FFD700' },
+        spare_wheel: { ko: '예비 바퀴', en: 'spare wheel', color: '#1A1A1A' },
+        guard_front: { ko: '앞 보호대', en: 'front bumper guard', color: '#C0C0C0' },
+        tire_rear: { ko: '뒷바퀴', en: 'back wheel', color: '#1A1A1A' },
+        tire_front: { ko: '앞바퀴', en: 'front wheel', color: '#1A1A1A' },
+        hub_rear: { ko: '뒷바퀴 휠', en: 'back hubcap', color: '#C0C0C0' },
+        hub_front: { ko: '앞바퀴 휠', en: 'front hubcap', color: '#C0C0C0' },
+      },
+      svg: `<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">
+        <rect class="fillable" data-part="light_red" x="94" y="22" width="24" height="16" rx="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="light_blue" x="120" y="22" width="24" height="16" rx="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="body" d="M 40 136 Q 30 136 30 126 V 54 Q 30 42 42 42 H 146 Q 156 42 161 52 L 177 82 L 208 88 Q 220 90 220 102 V 124 Q 220 136 209 136 Z" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="window_rear" x="44" y="55" width="47" height="31" rx="5" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="window_front" d="M 104 86 V 55 H 143 Q 148 55 151 61 L 164 86 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="side_panel" d="M 31 97 H 190 V 122 H 31 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="badge" d="M 120 95 Q 134 89 148 95 V 109 Q 148 121 134 127 Q 120 121 120 109 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <path class="fillable" data-part="headlight" d="M 199 90 H 210 Q 219 90 219 100 V 108 H 199 Z" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <rect class="fillable" data-part="spare_wheel" x="16" y="90" width="25" height="40" rx="9" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <rect class="fillable" data-part="guard_front" x="208" y="111" width="16" height="24" rx="4" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_rear" cx="67" cy="137" r="23" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="tire_front" cx="178" cy="137" r="23" stroke="#333" stroke-width="4" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_rear" cx="67" cy="137" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <circle class="fillable" data-part="hub_front" cx="178" cy="137" r="11" stroke="#333" stroke-width="3" fill="#FFF"/>
+        <g class="az-illustration-details" pointer-events="none" stroke="#333" stroke-width="2.5" fill="none">
+          <path d="M 42 37 H 154 M 48 37 V 42 M 84 37 V 42 M 150 37 V 42"/>
+          <path d="M 98 48 V 94 M 99 124 V 132 M 109 93 H 118 M 158 93 H 166 M 94 132 H 150"/>
+          <path d="M 202 116 H 207 M 202 122 H 207 M 202 128 H 207 M 25 99 V 121 M 33 99 V 121"/>
+          <path d="M 134 99 L 137 105 L 143 106 L 138 111 L 139 117 L 134 114 L 129 117 L 130 111 L 125 106 L 131 105 Z" fill="#333" stroke="none"/>
+        </g>
+      </svg>`,
     },
     {
       id: 'police_bus',
@@ -1436,6 +1480,7 @@
     pointerId: null,
     lastPoint: null,
     pageHideHandler: null,
+    showReference: false,
   };
 
   const WORK_KEY = 'sihyeon-art-work-v1';
@@ -1488,6 +1533,153 @@
     work.history = [];
     return work;
   }
+
+  function readTemplateWork(tpl, item) {
+    if (!item || typeof item !== 'object') return null;
+    const hasFills = Array.isArray(item.fills);
+    const hasParts = !!item.parts && typeof item.parts === 'object' && !Array.isArray(item.parts);
+    if (!hasFills && !hasParts) return null;
+    const svgVersion = Number.isInteger(item.svgVersion) && item.svgVersion > 0 && item.svgVersion < 1000 ? item.svgVersion : 1;
+    const work = { svgVersion, fills: hasFills ? item.fills.slice(0, 1000).map(safeFill) : [], completed: !!item.completed, history: [] };
+    if (hasParts) {
+      work.parts = Object.create(null);
+      Object.keys(item.parts).slice(0, 1000).forEach((key) => {
+        if (PART_RE.test(key)) work.parts[key] = safeFill(item.parts[key]);
+      });
+      if (!hasFills) {
+        const order = partOrder(workSvg(tpl, work));
+        if (order.unique) work.fills = order.ids.map((part) => work.parts[part] || '#FFF');
+      }
+    }
+    return normalizeWork(tpl, work);
+  }
+
+  // Names and counters are shared with number play; the drawings themselves
+  // remain here so there is only one source of template geometry and colors.
+  const PLAY_OBJECT_LABELS = {
+    police: ['police car', 'police cars', '대'],
+    police_swat_suv: ['police SWAT SUV', 'police SWAT SUVs', '대'],
+    police_bus: ['police bus', 'police buses', '대'],
+    fire_pump: ['fire engine', 'fire engines', '대'],
+    fire_ladder: ['ladder truck', 'ladder trucks', '대'],
+    ambulance: ['ambulance', 'ambulances', '대'],
+    excavator: ['excavator', 'excavators', '대'],
+    dump_truck: ['dump truck', 'dump trucks', '대'],
+    bulldozer: ['bulldozer', 'bulldozers', '대'],
+    rocket: ['rocket', 'rockets', '대'],
+    dino: ['dinosaur', 'dinosaurs', '마리'],
+    train: ['train', 'trains', '대'],
+    airplane: ['airplane', 'airplanes', '대'],
+    lion: ['lion', 'lions', '마리'],
+    whale: ['whale', 'whales', '마리'],
+    icecream: ['ice cream', 'ice creams', '개'],
+    police_motorcycle: ['police motorcycle', 'police motorcycles', '대'],
+    police_helicopter: ['police helicopter', 'police helicopters', '대'],
+    police_officer: ['police officer', 'police officers', '명'],
+    police_dog: ['police dog', 'police dogs', '마리'],
+    boat: ['boat', 'boats', '척'],
+    bus: ['bus', 'buses', '대'],
+    strawberry: ['strawberry', 'strawberries', '개'],
+    apple: ['apple', 'apples', '개'],
+    cat: ['cat', 'cats', '마리'],
+    puppy: ['puppy', 'puppies', '마리'],
+    butterfly: ['butterfly', 'butterflies', '마리'],
+    house: ['house', 'houses', '채'],
+  };
+  const FILLABLE_TAG_RE = /<[a-z]+\b[^>]*\bclass="(?:[^"]*\s)?fillable(?:\s[^"]*)?"[^>]*>/gi;
+  const recommendedPlayObjects = new Map();
+
+  function readOnlySvg(tpl, svg, fills, recommended = false) {
+    let index = 0;
+    // svg is always a shipped template, never a string from stored work or callers.
+    // Only validated paint values can enter this read-only image.
+    return svg.replace(FILLABLE_TAG_RE, (tag) => {
+      const part = tag.match(/\bdata-part="([^"]+)"/)?.[1];
+      const fill = safeFill(recommended ? tpl.parts?.[part]?.color : fills[index]);
+      index += 1;
+      return tag.replace(/\bfill="[^"]*"/, `fill="${fill}"`);
+    });
+  }
+
+  function playObject(tpl, svg, version, fromArtwork) {
+    const [nameEn, pluralEn, unitKo] = PLAY_OBJECT_LABELS[tpl.id];
+    return {
+      id: `art:${tpl.id}`, nameKo: tpl.name, nameEn, pluralEn, unitKo,
+      category: 'art', emoji: tpl.emoji,
+      src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`,
+      artTemplateId: tpl.id, artVersion: version, fromArtwork,
+    };
+  }
+
+  function getPlayObjects() {
+    return COLORING_TEMPLATES.map((tpl) => {
+      if (!recommendedPlayObjects.has(tpl.id)) {
+        recommendedPlayObjects.set(tpl.id, Object.freeze(playObject(tpl,
+          readOnlySvg(tpl, tpl.svg, [], true), templateVersion(tpl), false)));
+      }
+      return { ...recommendedPlayObjects.get(tpl.id) };
+    });
+  }
+
+  function getSavedPlayObject(templateId) {
+    let stored = memoryWork;
+    if (!stored) {
+      try { stored = JSON.parse(localStorage.getItem(WORK_KEY) || 'null'); }
+      catch (_) { stored = null; }
+    }
+    const activeId = state.container && !state.destroyed ? state.activeTemplateId : stored?.activeTemplateId || state.activeTemplateId;
+    const tpl = COLORING_TEMPLATES.find((item) => item.id === (templateId || activeId));
+    if (!tpl) return null;
+    // Deserialize into a detached work: reading from another game must not
+    // migrate, recolor, save, or empty the child's original artwork.
+    const work = readTemplateWork(tpl, state.templateWork[tpl.id] || stored?.templates?.[tpl.id]);
+    if (!work) return null;
+    const svg = workSvg(tpl, work);
+    const fills = work.fills.slice(0, partOrder(svg).ids.length);
+    if (!fills.some(isPainted)) return null;
+    return playObject(tpl, readOnlySvg(tpl, svg, fills), work.svgVersion, true);
+  }
+
+  function updateArtTools() {
+    const root = state.container;
+    const tools = root?.querySelector?.('#azArtTools');
+    if (!tools) return;
+    const tpl = COLORING_TEMPLATES.find((item) => item.id === state.activeTemplateId);
+    if (!tpl) return;
+    const isColoring = state.tab === 'coloring';
+    const showing = isColoring && state.showReference;
+    tools.hidden = !isColoring;
+    const toggle = root.querySelector('#azReferenceToggle');
+    toggle.textContent = showing ? '🎨 내 그림 보기' : '🖼️ 참고 그림';
+    toggle.setAttribute('aria-pressed', String(showing));
+    const sample = root.querySelector('#azReference');
+    sample.hidden = !showing;
+    if (showing) {
+      const object = getPlayObjects().find((item) => item.artTemplateId === tpl.id);
+      const img = sample.querySelector('img');
+      if (img.getAttribute('src') !== object.src) img.setAttribute('src', object.src);
+      img.alt = `${tpl.name} 참고 색상`;
+      const legacy = state.templateWork[tpl.id]?.svgVersion !== templateVersion(tpl);
+      sample.querySelector('figcaption').textContent = legacy
+        ? '새 종이에서는 이런 그림을 칠할 수 있어요.'
+        : '이렇게 칠해도 좋아요. 내 마음대로 칠해도 좋아요!';
+    }
+    const wrap = root.querySelector('#azColoringWrap');
+    if (wrap) wrap.style.display = isColoring && !showing ? 'flex' : 'none';
+    const play = root.querySelector('#azPlayArtwork');
+    play.hidden = typeof state.options.onPlayObject !== 'function';
+    play.disabled = !getSavedPlayObject(tpl.id);
+    play.title = play.disabled ? '먼저 그림을 색칠해 주세요.' : '내가 칠한 그림으로 숫자 놀이';
+  }
+
+  function playCurrentArtwork() {
+    const object = getSavedPlayObject(state.activeTemplateId);
+    const onPlayObject = state.options.onPlayObject;
+    if (!object || typeof onPlayObject !== 'function') return;
+    saveWork();
+    onPlayObject(object);
+  }
+
   function serializeTemplates() {
     const out = {};
     Object.keys(state.templateWork).forEach((id) => {
@@ -1539,23 +1731,9 @@
       if (typeof data.freeImage==='string' && data.freeImage.startsWith('data:image/png;base64,') && data.freeImage.length<4000000) state.freeImage=data.freeImage;
       if (data.templates && typeof data.templates==='object') {
         COLORING_TEMPLATES.forEach(t=>{
-          const item=data.templates[t.id];
-          if(!item || typeof item!=='object') return;
-          const hasFills=Array.isArray(item.fills);
-          const hasParts=!!item.parts && typeof item.parts==='object' && !Array.isArray(item.parts);
-          if(!hasFills && !hasParts) return;
-          // Saves written before versioning carry no svgVersion: they are v1.
-          const svgVersion=Number.isInteger(item.svgVersion) && item.svgVersion>0 && item.svgVersion<1000 ? item.svgVersion : 1;
-          const work={svgVersion,fills:hasFills?item.fills.slice(0,1000).map(safeFill):[],completed:!!item.completed,history:[]};
-          if(hasParts){
-            work.parts=Object.create(null);
-            Object.keys(item.parts).slice(0,1000).forEach(k=>{ if(PART_RE.test(k)) work.parts[k]=safeFill(item.parts[k]); });
-            if(!hasFills){
-              const order=partOrder(workSvg(t,work));
-              if(order.unique) work.fills=order.ids.map(p=>work.parts[p]||'#FFF');
-            }
-          }
-          state.templateWork[t.id]=normalizeWork(t,work);
+          // Saves written before versioning still mean v1 artwork.
+          const work = readTemplateWork(t, data.templates[t.id]);
+          if (work) state.templateWork[t.id] = work;
         });
       }
     } catch (_) {}
@@ -1614,6 +1792,7 @@
       const work=state.templateWork[state.activeTemplateId]; const item=work?.history?.pop();
       if(!item)return;
       if(item.fills){work.fills=item.fills;if(item.svgVersion)work.svgVersion=item.svgVersion;}else work.fills[item.index]=item.prev;work.completed=false;
+      state.showReference = false;
       renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
     } else {
       const prior=state.freeHistory.pop();if(prior===undefined)return;
@@ -1634,6 +1813,7 @@
         else work.fills=work.fills.map(()=>'#FFF');
       }
       if(work)work.completed=false;
+      state.showReference = false;
       renderColoringTemplate(tpl);
     } else {
       const prior = state.freeCanvasReady ? state.canvas.toDataURL('image/png') : state.freeImage;
@@ -2329,6 +2509,20 @@
       .az-mode-tabs{min-width:0;max-width:600px;flex:1 1 auto}
       @media(max-width:767px),(orientation:portrait){.az-topbar{flex-basis:60px;height:60px;min-height:60px}.az-work-actions button{height:44px}}
       @media(orientation:landscape) and (max-height:500px){.az-topbar{flex-basis:56px;height:56px;min-height:56px}.az-work-actions button{height:44px}}
+      .az-main{flex-direction:column;gap:7px}
+      .az-art-tools{width:100%;flex:0 0 auto;display:flex;justify-content:center;gap:6px}
+      .az-art-tools[hidden],.az-art-tools button[hidden],.az-reference[hidden]{display:none}
+      .az-art-tools button{min-height:44px;min-width:0;padding:6px 10px;border:2px solid #e1e5eb;border-radius:15px;background:#fff;color:#233044;font:inherit;font-size:15px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+      .az-art-tools button[aria-pressed="true"]{border-color:#4488FF;background:#eef6ff}
+      .az-art-tools button:disabled{color:#77828e;background:#edf0f4;cursor:default}
+      .az-art-tools button:focus-visible{outline:3px solid #1E40AF;outline-offset:2px}
+      .az-main .az-canvas-shell{flex:1 1 auto;min-height:0}
+      .az-root[data-tab="coloring"] .az-canvas-shell{height:0;aspect-ratio:auto}
+      .az-reference{position:absolute;inset:0;margin:0;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#eef6ff;box-sizing:border-box}
+      .az-reference img{display:block;flex:1 1 auto;min-height:0;width:94%;object-fit:contain;pointer-events:none}
+      .az-reference figcaption{flex:0 0 auto;max-width:100%;margin:0;text-align:center;color:#46607b;font-size:14px;line-height:1.35;word-break:keep-all}
+      @media(max-width:380px){.az-art-tools button{font-size:13px;padding:6px 8px}.az-reference figcaption{font-size:12px}}
+      @media(orientation:landscape) and (max-height:500px){.az-main{gap:4px}.az-art-tools button{font-size:13px;padding:5px 8px}.az-reference{padding:6px}.az-reference figcaption{font-size:12px}}
     `;
     document.head.appendChild(s);
   }
@@ -2348,6 +2542,7 @@
     state.currentSize = 18;
     state.isRainbow = false;
     state.hue = 0;
+    state.showReference = false;
     state.speechToken += 1;
 
     if (options.initialTemplateId && COLORING_TEMPLATES.some((t) => t.id === options.initialTemplateId)) {
@@ -2387,10 +2582,18 @@
           </aside>
 
           <section class="az-main">
+            <div class="az-art-tools" id="azArtTools"${!isInitialColoring ? ' hidden' : ''}>
+              <button type="button" id="azReferenceToggle" aria-pressed="false" aria-controls="azReference">🖼️ 참고 그림</button>
+              <button type="button" id="azPlayArtwork" disabled${typeof options.onPlayObject !== 'function' ? ' hidden' : ''}>🔢 내 그림 숫자 놀이</button>
+            </div>
             <div class="az-canvas-shell">
               <div class="az-canvas-wrap" id="azCanvasWrap">
                 <canvas id="azCanvas"${isInitialColoring ? ' style="display:none;"' : ''}></canvas>
                 <div class="az-coloring-wrap" id="azColoringWrap"${isInitialColoring ? ' style="display:flex;"' : ''}></div>
+                <figure class="az-reference" id="azReference" hidden>
+                  <img alt="참고 색상" draggable="false">
+                  <figcaption>이렇게 칠해도 좋아요. 내 마음대로 칠해도 좋아요!</figcaption>
+                </figure>
                 <div id="azRestoreNotice" role="status" hidden style="position:absolute;z-index:3;left:50%;top:12px;transform:translateX(-50%);max-width:90%;padding:9px 13px;border-radius:14px;background:#fff8e7;color:#5e5143;font-size:14px;text-align:center;pointer-events:none;"></div>
               </div>
             </div>
@@ -2525,6 +2728,11 @@
     const root = state.container.querySelector('.az-root');
     root.querySelector('#azUndo').onclick=undoWork;
     root.querySelector('#azNewPaper').onclick=clearWork;
+    root.querySelector('#azReferenceToggle').onclick = () => {
+      state.showReference = !state.showReference;
+      updateArtTools();
+    };
+    root.querySelector('#azPlayArtwork').onclick = playCurrentArtwork;
 
     root.querySelectorAll('.az-mode-tab').forEach((btn) => {
       btn.onclick = () => {
@@ -2695,6 +2903,7 @@
       renderColoringTemplate(tpl);
       speak('어떤 그림을 색칠해볼까?');
     } else {
+      updateArtTools();
       requestAnimationFrame(() => resizeCanvasPreserve(true));
       speak('자유롭게 그려볼까?');
     }
@@ -2752,6 +2961,7 @@
         el.setAttribute('fill', fillColor);
         work.fills[index]=fillColor;
         saveWork();
+        updateArtTools();
 
         burstSparkles(clientX, clientY);
 
@@ -2766,6 +2976,7 @@
         applyFill(e.clientX, e.clientY);
       });
     });
+    updateArtTools();
   }
 
   function checkColoringComplete(tpl) {
@@ -2799,7 +3010,7 @@
     saveWork();    wrap.classList.add('az-done');
 
     if(window.SihyeonPlaySettings?.getLanguage?.()==='en') {
-      const english=window.SihyeonVoiceLabels?.spoken?.('template',tpl.id,'en');
+      const english=window.SihyeonVoiceLabels?.spoken?.('template',tpl.id,'en') || PLAY_OBJECT_LABELS[tpl.id]?.[0];
       if(english) window.SihyeonVoice?.speak?.('Great job! You colored the '+english+'!',{lang:'en-US',rate:.9})?.catch?.(()=>{});
     } else speak(`우와. ${tpl.name} 완성. 시현이 참 잘했어.`, true);
     state.options.fireConfetti?.();
@@ -2858,6 +3069,15 @@
     if(labels?.entry?.(kind,id) && typeof voice?.speak==='function'){
       state.speechToken += 1;
       labels.say(kind,id)?.catch?.(()=>{});
+      return;
+    }
+    if (kind === 'template' && PLAY_OBJECT_LABELS[id] && typeof voice?.speak === 'function') {
+      const tpl = COLORING_TEMPLATES.find((item) => item.id === id);
+      const english = window.SihyeonPlaySettings?.getLanguage?.() === 'en';
+      state.speechToken += 1;
+      voice.stop?.();
+      voice.speak(english ? PLAY_OBJECT_LABELS[id][0] : tpl.name,
+        { lang: english ? 'en-US' : 'ko-KR', rate: .9 })?.catch?.(() => {});
       return;
     }
     if(fallback) speak(fallback);
@@ -2951,5 +3171,6 @@
   }
 
   window.SihyeonGames = window.SihyeonGames || {};
+  window.SihyeonArtPlayBridge = Object.freeze({ getPlayObjects, getSavedPlayObject });
   window.SihyeonGames[GAME_KEY] = { render, destroy };
 })();
