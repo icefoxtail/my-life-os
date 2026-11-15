@@ -37,6 +37,9 @@ class Element {
     };
   }
   get dataset() { const result = {}; Object.entries(this.attrs).forEach(([key, value]) => { if (key.startsWith('data-')) result[key.slice(5).replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = value; }); return result; }
+  get className() { return this.attrs.class || ''; }
+  set className(value) { this.attrs.class = String(value); }
+  focus() { if (Element.document) Element.document.activeElement = this; }
   get disabled() { return Object.hasOwn(this.attrs, 'disabled'); }
   get hidden() { return Object.hasOwn(this.attrs, 'hidden'); }
   set hidden(value) { if (value) this.attrs.hidden = ''; else delete this.attrs.hidden; }
@@ -90,7 +93,8 @@ function fixture({ saved = {}, writeFails = false, readFails = false, missing = 
   const stored = new Map([[SAVE_KEY, JSON.stringify({ ...defaults, ...saved })]]), runs = [], observers = new Set();
   let active = null, latest = null, lang = 'ko', currentAge = 4, homes = 0, writes = 0;
   const body = new Element('body'), container = body.appendChild(new Element('div'));
-  const document = eventHost({ body, hidden: false, getElementById: id => body.querySelector('[id="' + id + '"]') });
+  const document = eventHost({ body, hidden: false, activeElement: null, createElement: tag => new Element(tag), getElementById: id => body.querySelector('[id="' + id + '"]') });
+  Element.document = document;
   const window = eventHost({ SihyeonQuantityPlayModel: missing ? null : model,
     SihyeonPlaySettings: { getLanguage: () => lang, getAge: () => currentAge, openSettings() { const dialog = new Element('div', { id: 'playSettingsDialog' }); body.appendChild(dialog); } },
     SihyeonQuantitySequencer: { create() {
@@ -117,7 +121,8 @@ function fixture({ saved = {}, writeFails = false, readFails = false, missing = 
   render();
   function click(action, value) {
     const selector = '[data-pa-action="' + action + '"]' + (value === undefined ? '' : '[data-value="' + value + '"]');
-    const button = container.querySelector(selector); assert(button, 'Actual rendered control missing: ' + selector);
+    const scope = container.querySelector('.pa-picture-dialog') || container;
+    const button = scope.querySelector(selector); assert(button, 'Actual rendered control missing: ' + selector);
     container.fire('click', { target: button }); return button;
   }
   function step() {
@@ -209,6 +214,33 @@ check('validated restoration and in-memory recovery after readable stale storage
   s = bad.api.getSnapshot(); eq([s.a, s.b, s.readingStyle, s.leftObjectId], [9, 6, 'native', 'korean_police_car']);
   bad.click('mode', 'share'); s = bad.api.getSnapshot(); eq([s.total, s.groups], [15, 3]); bad.api.destroy();
   const denied = fixture({ readFails: true, writeFails: true }); denied.click('number', '5'); denied.api.destroy(); denied.render(); eq(denied.api.getSnapshot().a, 5); denied.api.destroy();
+});
+check('large picture/group dialogs pause, trap focus and resume without losing the exact set', () => {
+  const f = fixture(), first = f.runs.at(-1);
+  f.click('choosePicture', 'b'); eq(first.status, 'cancelled'); eq(f.api.getSnapshot().dialog, 'pictures');
+  eq(f.api.getSnapshot().actualCount, 15);
+  let buttons = f.container.querySelectorAll('.pa-picture-dialog button');
+  eq(f.document.activeElement.dataset.paAction, 'closeDialog');
+  let prevented = 0;
+  f.container.fire('keydown', { key: 'Tab', shiftKey: true, preventDefault() { prevented++; } });
+  ok(f.document.activeElement === buttons.at(-1));
+  f.container.fire('keydown', { key: 'Tab', shiftKey: false, preventDefault() { prevented++; } });
+  ok(f.document.activeElement === buttons[0]); eq(prevented, 2);
+  f.click('category', 'food'); f.click('object', 'cookie');
+  eq([f.api.getSnapshot().dialog, f.api.getSnapshot().rightObjectId, f.api.getSnapshot().actualCount], [null, 'cookie', 15]);
+  f.click('choosePicture', 'a'); const paused = f.runs.length;
+  f.setLanguage('en'); eq(f.runs.length, paused);
+  f.container.fire('keydown', { key: 'Escape', preventDefault() {} });
+  eq(f.api.getSnapshot().dialog, null); eq(f.runs.length, paused + 1);
+  f.click('mode', 'share'); f.click('chooseGroups');
+  eq(f.api.getSnapshot().dialog, 'groups');
+  eq(f.container.querySelectorAll('.pa-picture-dialog [data-pa-action="groups"]').map(button => button.dataset.value), ['1', '2', '3', '4', '5', '6']);
+  f.click('groups', '5'); f.click('range', '0'); f.click('number', '3'); f.finish();
+  eq(f.api.getSnapshot().actualGroups, [0, 0, 0, 0, 0]);
+  eq(f.container.querySelector('.pa-empty-groups-summary').hidden, false);
+  eq(f.container.querySelectorAll('.pa-empty-group').length, 5); eq(f.api.getSnapshot().poolCount, 3);
+  f.click('chooseGroups'); const overlay = f.container.querySelector('.pa-picture-overlay'); f.container.fire('click', { target: overlay });
+  eq(f.api.getSnapshot().dialog, null); f.api.destroy(); eq(f.counts().listeners, 0);
 });
 check('missing dependencies provide an exit without reading or writing game state', () => {
   const f = fixture({ missing: true }); eq(f.api.getSnapshot().error, 'dependencies-unavailable'); eq(f.counts().writes, 0);

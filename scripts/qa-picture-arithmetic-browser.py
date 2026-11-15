@@ -66,7 +66,9 @@ def action(page, name, value=None):
     selector = '[data-pa-action="%s"]' % name
     if value is not None:
         selector += '[data-value="%s"]' % value
-    page.locator(selector + ':visible').first.click(timeout=12000)
+    dialog = page.locator('.pa-picture-dialog')
+    scope = dialog if dialog.count() else page
+    scope.locator(selector + ':visible').first.click(timeout=12000)
 
 
 def mark(page):
@@ -113,9 +115,14 @@ def addition(page, a, b):
 def sharing(page, total, groups):
     action(page, 'mode', 'share')
     choose_number(page, total)
+    action(page, 'chooseGroups')
+    page.locator('.pa-picture-dialog').wait_for(state='visible')
+    assert page.locator('.pa-picture-dialog [data-pa-action="groups"]').count() == 6
+    assert page.locator('.pa-picture-dialog [data-pa-action="groups"][data-value="0"]').count() == 0
     page.evaluate('__arithmeticSpeech.delayMs=250')
     start = mark(page)
     action(page, 'groups', groups)
+    page.locator('.pa-picture-dialog').wait_for(state='detached')
     value = snap(page)
     initial = requests(page, start, value['sequence']['runId'])[0]
     assert value['actualCount'] == total, value
@@ -175,8 +182,23 @@ def layout(page):
     assert result['documentWidth'] <= width + 1, result
     assert bounds['left'] >= -1 and bounds['top'] >= -1 and bounds['right'] <= width + 1 and bounds['bottom'] <= height + 1, result
     assert bounds['scrollWidth'] <= bounds['clientWidth'] + 1 and bounds['scrollHeight'] <= bounds['clientHeight'] + 1, result
-    assert result['board']['width'] > 0 and result['board']['height'] >= 32, result
+    assert result['board']['width'] > 0 and result['board']['height'] >= 120, result
     assert not result['brokenImages'], result
+    return result
+
+
+def visible_in_board(page, selector):
+    result = page.evaluate("""selector=>{
+      const board=document.querySelector('.pa-board'), element=board.querySelector(selector);
+      if(!element)return {found:false};
+      const b=board.getBoundingClientRect(),r=element.getBoundingClientRect();
+      return {found:true,visible:!!element.getClientRects().length,
+        rect:{top:r.top,bottom:r.bottom,left:r.left,right:r.right},board:{top:b.top,bottom:b.bottom,left:b.left,right:b.right}};
+    }""", selector)
+    assert result.get('found') and result['visible'], result
+    rect, bounds = result['rect'], result['board']
+    assert rect['top'] >= bounds['top'] - 2 and rect['bottom'] <= bounds['bottom'] + 2, result
+    assert rect['left'] >= bounds['left'] - 2 and rect['right'] <= bounds['right'] + 2, result
     return result
 
 
@@ -254,7 +276,10 @@ def main():
                       window.__paObserver?.disconnect();
                       window.__paObserver=new MutationObserver(()=>{
                         const s=SihyeonGames.pictureArithmetic.getSnapshot(),nodes=[...document.querySelectorAll('.pa-item')];
-                        __paConservation.push({actual:nodes.length,same:nodes.every(n=>__paOriginals.includes(n)),groups:s.actualGroups,pool:s.poolCount});
+                        const board=document.querySelector('.pa-board'),b=board.getBoundingClientRect(),current=board.querySelector('.pa-item.is-current'),group=current?.closest('.pa-group');
+                        const inside=element=>{const r=element.getBoundingClientRect();return r.top>=b.top-2&&r.bottom<=b.bottom+2;};
+                        __paConservation.push({actual:nodes.length,same:nodes.every(n=>__paOriginals.includes(n)),groups:s.actualGroups,pool:s.poolCount,
+                          currentVisible:current?inside(current):null,headerVisible:group?inside(group.querySelector('header')):null});
                       });
                       __paObserver.observe(document.querySelector('.pa-board'),{childList:true,subtree:true});
                     }""")
@@ -263,9 +288,12 @@ def main():
                     assert observations, 'No DOM moves were observed'
                     assert all(x['actual'] == 15 and x['same'] and sum(x['groups']) + x['pool'] == 15 for x in observations), observations
                     assert all(max(x['groups']) - min(x['groups']) <= 1 for x in observations), observations
+                    active = [x for x in observations if x['currentVisible'] is not None]
+                    assert active and all(x['currentVisible'] and x['headerVisible'] for x in active), observations
                     text = speech(page, start, value, ['하나'] * 4 + ['둘'] * 4 + ['셋'] * 4)
                     dimensions = layout(page)
-                    return {'initial': before, 'snapshot': value, 'speech': text, 'observedMoves': len(observations), 'layout': dimensions, 'screenshot': capture(page, 'share-%sx%s' % (width, height))}
+                    remainder = visible_in_board(page, '.pa-pool')
+                    return {'initial': before, 'snapshot': value, 'speech': text, 'observedMoves': len(observations), 'currentAndHeadingVisible': True, 'remainderVisible': remainder, 'layout': dimensions, 'screenshot': capture(page, 'share-%sx%s' % (width, height))}
                 check('15 shared among 4 / %sx%s' % (width, height), fifteen_four, page)
 
                 if (width, height) == (390, 844):
@@ -280,20 +308,42 @@ def main():
                             start, _ = sharing(page, total, groups)
                             value = finish(page, 'share', total, groups)
                             counts = [word for word in NATIVE[:total // groups] for _ in range(groups)]
-                            cases.append({'operation': '%s/%s' % (total, groups), 'snapshot': value, 'speech': speech(page, start, value, counts)})
+                            visible = visible_in_board(page, '.pa-pool')
+                            if total // groups == 0:
+                                visible_in_board(page, '.pa-empty-groups-summary')
+                                assert page.locator('.pa-empty-group').count() == groups
+                                assert page.locator('.pa-empty-group b').all_text_contents() == ['0'] * groups
+                            cases.append({'operation': '%s/%s' % (total, groups), 'snapshot': value, 'speech': speech(page, start, value, counts), 'remainderVisible': visible})
                         return cases
                     check('zero, thirty and incomplete rounds', boundaries, page)
 
                     def independent_pictures():
                         addition(page, 9, 6)
-                        action(page, 'term', 'b'); action(page, 'category', 'food')
+                        action(page, 'choosePicture', 'b')
+                        assert snap(page)['dialog'] == 'pictures' and snap(page)['sequence']['status'] == 'cancelled'
+                        page.locator('.pa-picture-dialog').wait_for(state='visible')
+                        action(page, 'category', 'food')
                         action(page, 'object', 'cookie')
+                        page.locator('.pa-picture-dialog').wait_for(state='detached')
                         value = finish(page, 'add', 15)
                         assert value['leftObjectId'] == 'korean_police_car' and value['rightObjectId'] == 'cookie', value
                         assert page.locator('.pa-item[data-object-id="korean_police_car"]').count() == 9
                         assert page.locator('.pa-item[data-object-id="cookie"]').count() == 6
                         return value
                     check('independent types for the two addends', independent_pictures, page)
+
+                    def picker_keyboard():
+                        action(page, 'choosePicture', 'a')
+                        page.keyboard.press('Shift+Tab')
+                        assert page.evaluate("document.activeElement===document.querySelector('.pa-picture-dialog').querySelectorAll('button')[document.querySelector('.pa-picture-dialog').querySelectorAll('button').length-1]")
+                        page.keyboard.press('Tab')
+                        assert page.evaluate("document.activeElement===document.querySelector('.pa-picture-dialog [data-pa-action=\"closeDialog\"]')")
+                        page.keyboard.press('Escape')
+                        page.locator('.pa-picture-dialog').wait_for(state='detached')
+                        value = finish(page, 'add', 15)
+                        assert value['dialog'] is None
+                        return {'escapeResumed': value, 'focusStayedInsideDialog': True}
+                    check('large picture chooser traps focus and Escape resumes', picker_keyboard, page)
 
                     def rapid_changes():
                         addition(page, 5, 2)

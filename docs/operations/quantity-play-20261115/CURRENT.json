@@ -1,0 +1,43 @@
+{
+  "taskId": "09d33a6e-613e-4eb4-bfc8-f3cf9e814a72",
+  "owner": "GPT_ROOT_7E22907460A6",
+  "instructionRevision": 3,
+  "baseMain": "196f8c5c88f283fa346e5d2d64b632997e0379fa",
+  "state": "BRANCH_VALIDATION",
+  "activeStage": 4,
+  "stages": [
+    {
+      "id": 1,
+      "name": "automatic-number-picture",
+      "branch": "work/number-picture-auto-20261115",
+      "status": "CI_RUNNING",
+      "sourceCheckpoint": "1f473b2b73f1c20700bc4bd08b56874fe20fa7b9",
+      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/25"
+    },
+    {
+      "id": 2,
+      "name": "svg-artwork-bridge",
+      "branch": "work/svg-play-assets-20261115",
+      "status": "CI_RUNNING",
+      "sourceCheckpoint": "a0b65ff6c039d138187d61a7f1f6e144af2a3ed8",
+      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/26"
+    },
+    {
+      "id": 3,
+      "name": "ten-frame-garden",
+      "branch": "work/ten-frame-garden-20261115",
+      "status": "CI_RUNNING",
+      "sourceCheckpoint": "dc485ae272e4183007c451e3619149621a3fce42",
+      "pullRequest": "https://github.com/icefoxtail/my-life-os/pull/27"
+    },
+    {
+      "id": 4,
+      "name": "picture-addition-and-equal-sharing",
+      "branch": "work/picture-arithmetic-20261115",
+      "status": "IMPLEMENTED_PENDING_UI_CHECK",
+      "sourceCheckpoint": "22b24ffcff540d11d123de094aac4b18a6e4a738"
+    }
+  ],
+  "nextAction": "Complete independent UI checks and merge each stage into main in order, verifying Pages after every merge.",
+  "nativeSpeakerVerification": "NOT_RUN; CI inspects the real shared voice engine through a completion fixture."
+}

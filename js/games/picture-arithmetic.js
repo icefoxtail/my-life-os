@@ -11,7 +11,7 @@
   const view = {
     container: null, options: {}, objects: [], state: null, sequence: null, handlers: null,
     range: 0, category: 'vehicle', model: null, counted: 0, moved: 0, current: null,
-    phase: 'idle', complete: false, audioFailed: false, runId: 0, error: null, settingsObserver: null,
+    phase: 'idle', complete: false, audioFailed: false, runId: 0, error: null, settingsObserver: null, dialog: null,
     storage: { read: 'unread', write: 'unwritten' }
   };
   let memory = null;
@@ -133,40 +133,51 @@
     const all = M().items(s.total, 'share');
     return '<section class="pa-pool"><header><strong class="pa-pool-title">나눌 그림</strong><span class="pa-pool-count">' + s.total + '</span></header>' +
       '<div class="pa-pool-items">' + all.map(object => objectMarkup(object, item(s.shareId), 'share')).join('') + '</div>' +
-      '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p></section>' +
+      '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p>' +
+      '<div class="pa-empty-groups-summary" hidden aria-label="' + s.groups + '곳 모두 0개"><strong>빈 자리</strong><div class="pa-empty-group-list" style="--pa-group-count:' + s.groups + '">' +
+      model.groups.map((_, index) => '<span class="pa-empty-group"><small>' + (index + 1) + '번</small><b>0</b></span>').join('') + '</div></div></section>' +
       '<div class="pa-groups" data-groups="' + s.groups + '">' + model.groups.map((_, index) =>
         '<section class="pa-group" data-group="' + index + '" aria-label="' + (index + 1) + '번 자리"><header><span class="pa-group-badge">' + (index + 1) + '</span><strong>' + (index + 1) + '번 자리</strong><span class="pa-group-count" data-group-count="' + index + '">0</span></header>' +
         '<div class="pa-group-items" data-group-index="' + index + '"></div></section>').join('') + '</div>';
   }
   function termMarkup(term) {
     const s = view.state, selected = item(s[term + 'Id']);
-    return '<button type="button" class="pa-term pa-term-' + term + '" data-pa-action="term" data-value="' + term + '" aria-label="' + (term === 'a' ? '첫 번째' : '두 번째') + ' 그림과 숫자 고르기" aria-pressed="' + (s.activeTerm === term) + '">' +
-      C().picture(selected, 'pa-term-picture') + '<span class="pa-term-info"><small>' + esc(selected.nameKo) + '</small><strong>' + s[term] + '</strong></span><span class="pa-term-edit" aria-hidden="true">▾</span></button>';
+    const label = term === 'a' ? '첫 번째' : '두 번째';
+    return '<div class="pa-term pa-term-' + term + (s.activeTerm === term ? ' is-selected' : '') + '" data-term-slot="' + term + '">' +
+      '<button type="button" class="pa-term-picture-button" data-pa-action="choosePicture" data-value="' + term + '" aria-label="' + label + ' 그림 바꾸기: ' + esc(selected.nameKo) + '" aria-haspopup="dialog">' + C().picture(selected) + '<span class="pa-picture-edit" aria-hidden="true">▾</span></button>' +
+      '<button type="button" class="pa-term-number" data-pa-action="term" data-value="' + term + '" aria-label="' + label + ' 숫자 고르기" aria-pressed="' + (s.activeTerm === term) + '"><span class="pa-term-info"><small>' + esc(selected.nameKo) + '</small><strong>' + s[term] + '</strong></span><span class="pa-term-edit" aria-hidden="true">▾</span></button></div>';
   }
   function expressionMarkup() {
     const s = view.state;
     if (s.mode === 'add') return '<div class="pa-expression pa-add-expression">' + termMarkup('a') + '<span class="pa-operator" aria-hidden="true">+</span>' + termMarkup('b') +
       '<span class="pa-operator" aria-hidden="true">=</span><div class="pa-answer" aria-label="합 ' + view.model.total + '"><small>모두</small><strong>' + view.model.total + '</strong></div></div>';
-    return '<div class="pa-expression pa-share-expression"><div class="pa-share-source">' + C().picture(item(s.shareId), 'pa-term-picture') +
+    return '<div class="pa-expression pa-share-expression"><div class="pa-share-source"><button type="button" class="pa-share-picture-button" data-pa-action="choosePicture" data-value="share" aria-label="나눌 그림 바꾸기: ' + esc(item(s.shareId).nameKo) + '" aria-haspopup="dialog">' + C().picture(item(s.shareId)) + '<span class="pa-picture-edit" aria-hidden="true">▾</span></button>' +
       '<span><small>' + esc(item(s.shareId).nameKo) + '</small><strong>' + s.total + '</strong></span></div><span class="pa-operator" aria-hidden="true">÷</span>' +
-      '<div class="pa-share-divisor"><strong>' + s.groups + '</strong><small>곳에</small></div><span class="pa-operator" aria-hidden="true">=</span>' +
+      '<button type="button" class="pa-share-divisor" data-pa-action="chooseGroups" aria-label="나눌 곳 고르기: ' + s.groups + '곳" aria-haspopup="dialog"><strong>' + s.groups + '</strong><small>곳 ▾</small></button><span class="pa-operator" aria-hidden="true">=</span>' +
       '<div class="pa-answer"><small>한 곳에</small><strong>' + view.model.each + '</strong></div><div class="pa-remainder"><small>남은 것</small><strong>' + view.model.remainder + '</strong></div></div>';
   }
   function categoryOptions() {
     return [['vehicle', '🚓', '탈것'], ['food', '🍎', '음식'], ['toy', '🧸', '장난감'], ['art', '🎨', '그림판']]
       .filter(category => view.objects.some(object => object.category === category[0]));
   }
+  function pictureChoicesMarkup() {
+    const selected = selectedId(), objects = view.objects.filter(object => object.category === view.category);
+    return '<div class="pa-categories" role="group" aria-label="그림 종류">' + categoryOptions().map(category => '<button type="button" data-pa-action="category" data-value="' + category[0] + '" aria-pressed="' + (view.category === category[0]) + '"><span aria-hidden="true">' + category[1] + '</span>' + category[2] + '</button>').join('') + '</div>' +
+      '<div class="pa-objects" role="group" aria-label="그림 고르기">' + objects.map(object => '<button type="button" class="pa-object-choice" data-pa-action="object" data-value="' + esc(object.id) + '" aria-label="' + esc(object.nameKo) + ' 고르기" aria-pressed="' + (selected === object.id) + '">' + C().picture(object) + '<span>' + esc(object.nameKo) + '</span></button>').join('') + '</div>';
+  }
+  function groupButtonsMarkup() {
+    return '<div class="pa-group-buttons" role="group" aria-label="나눌 곳 수">' + [1, 2, 3, 4, 5, 6].map(value => '<button type="button" data-pa-action="groups" data-value="' + value + '" aria-label="' + value + '곳에 나누기" aria-pressed="' + (view.state.groups === value) + '">' + value + '</button>').join('') + '</div>';
+  }
   function pickerMarkup() {
     const s = view.state, selected = selectedId(), n = selectedNumber();
     const low = [0, 11, 21][view.range], high = [10, 20, 30][view.range];
     const max = s.mode === 'share' ? 30 : 30 - (s.activeTerm === 'b' ? s.a : s.b);
-    const objects = view.objects.filter(object => object.category === view.category);
     return '<div class="pa-picker-heading"><strong>' + (s.mode === 'share' ? '나눌 그림과 숫자' : s.activeTerm === 'b' ? '두 번째 그림과 숫자' : '첫 번째 그림과 숫자') + '</strong><span>고르면 바로 시작해요</span></div>' +
-      '<div class="pa-categories" role="group" aria-label="그림 종류">' + categoryOptions().map(category => '<button type="button" data-pa-action="category" data-value="' + category[0] + '" aria-pressed="' + (view.category === category[0]) + '"><span aria-hidden="true">' + category[1] + '</span>' + category[2] + '</button>').join('') + '</div>' +
-      '<div class="pa-objects" role="group" aria-label="그림 고르기">' + objects.map(object => '<button type="button" class="pa-object-choice" data-pa-action="object" data-value="' + esc(object.id) + '" aria-label="' + esc(object.nameKo) + ' 고르기" aria-pressed="' + (selected === object.id) + '">' + C().picture(object) + '<span>' + esc(object.nameKo) + '</span></button>').join('') + '</div>' +
+      '<button type="button" class="pa-choose-picture" data-pa-action="choosePicture" data-value="' + (s.mode === 'share' ? 'share' : s.activeTerm) + '" aria-haspopup="dialog">' + C().picture(item(selected)) + '<span>' + esc(item(selected).nameKo) + '<small>그림 바꾸기 ▾</small></span></button>' +
+      '<div class="pa-inline-pictures">' + pictureChoicesMarkup() + '</div>' +
       '<div class="pa-ranges" role="group" aria-label="숫자 범위">' + ['0–10', '11–20', '21–30'].map((label, index) => '<button type="button" data-pa-action="range" data-value="' + index + '" aria-pressed="' + (view.range === index) + '">' + label + '</button>').join('') + '</div>' +
       '<div class="pa-numbers" role="group" aria-label="원하는 숫자">' + Array.from({ length: high - low + 1 }, (_, index) => index + low).map(value => '<button type="button" data-pa-action="number" data-value="' + value + '" aria-label="' + value + ' 선택" aria-pressed="' + (value === n) + '"' + (value > max ? ' disabled' : '') + '>' + value + '</button>').join('') + '</div>' +
-      (s.mode === 'add' ? '<p class="pa-limit-note">두 수를 합해 30까지 만들어요</p>' : '<div class="pa-group-picker"><strong>몇 곳에 나눌까요?</strong><div class="pa-group-buttons" role="group" aria-label="나눌 곳 수">' + [1, 2, 3, 4, 5, 6].map(value => '<button type="button" data-pa-action="groups" data-value="' + value + '" aria-label="' + value + '곳에 나누기" aria-pressed="' + (s.groups === value) + '">' + value + '</button>').join('') + '</div></div>');
+      (s.mode === 'add' ? '<p class="pa-limit-note">두 수를 합해 30까지 만들어요</p>' : '<div class="pa-group-picker"><strong>몇 곳에 나눌까요?</strong>' + groupButtonsMarkup() + '</div>');
   }
   function footerMarkup() {
     const s = view.state;
@@ -190,14 +201,53 @@
     if (!picker) return;
     picker.innerHTML = pickerMarkup();
     view.container.querySelectorAll('[data-pa-action="term"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.value === view.state.activeTerm)));
+    view.container.querySelectorAll('[data-term-slot]').forEach(element => element.classList.toggle('is-selected', element.dataset.termSlot === view.state.activeTerm));
     C().preparePictures(picker);
   }
-  function keepInBoard(element) {
+  function paintDialog() {
+    view.container?.querySelector('.pa-picture-overlay')?.remove();
+    if (!view.container || !view.dialog) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'pa-picture-overlay';
+    const groups = view.dialog === 'groups';
+    const title = groups ? '몇 곳에 나눌까요?' : (view.state.mode === 'share' ? '나눌 그림을 골라요' : view.state.activeTerm === 'b' ? '두 번째 그림을 골라요' : '첫 번째 그림을 골라요');
+    overlay.innerHTML = '<section class="pa-picture-dialog" role="dialog" aria-modal="true" aria-labelledby="pa-dialog-title"><header><h3 id="pa-dialog-title">' + title + '</h3><button type="button" data-pa-action="closeDialog" aria-label="선택창 닫기">✕</button></header>' +
+      (groups ? '<div class="pa-dialog-groups">' + groupButtonsMarkup() + '</div>' : pictureChoicesMarkup()) + '</section>';
+    view.container.querySelector('.pa-root').appendChild(overlay);
+    C().preparePictures(overlay);
+    overlay.querySelector('[data-pa-action="closeDialog"]').focus();
+  }
+  function openDialog(kind, term) {
+    stop();
+    if (kind === 'pictures' && view.state.mode === 'add' && ['a', 'b'].includes(term)) view.state.activeTerm = term;
+    syncPicker(); save(); paintPicker();
+    view.dialog = kind; paintDialog();
+  }
+  function closeDialog() {
+    const kind = view.dialog;
+    view.dialog = null; run();
+    const selector = kind === 'groups' ? '[data-pa-action="chooseGroups"]' : '[data-pa-action="choosePicture"][data-value="' + (view.state.mode === 'share' ? 'share' : view.state.activeTerm) + '"]';
+    view.container?.querySelector(selector)?.focus?.({ preventScroll: true });
+  }
+  function onKey(event) {
+    if (!view.dialog) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeDialog(); return; }
+    if (event.key !== 'Tab') return;
+    const buttons = Array.from(view.container.querySelectorAll('.pa-picture-dialog button')).filter(button => !button.disabled);
+    const first = buttons[0], last = buttons[buttons.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  }
+  function keepInBoard(element, group) {
     const board = view.container?.querySelector('.pa-board');
     if (!board || !element) return;
-    const target = element.getBoundingClientRect(), bounds = board.getBoundingClientRect();
-    if (target.bottom > bounds.bottom) board.scrollTop += target.bottom - bounds.bottom + 8;
-    else if (target.top < bounds.top) board.scrollTop -= bounds.top - target.top + 8;
+    const bounds = board.getBoundingClientRect(), groupBounds = group?.getBoundingClientRect();
+    const wholeGroupFits = groupBounds && groupBounds.height <= bounds.height - 16;
+    const target = (wholeGroupFits ? group : element).getBoundingClientRect();
+    // Tall groups keep a sticky heading; the picture must stay below that heading.
+    const inset = group && !wholeGroupFits ? group.querySelector('header').getBoundingClientRect().height + 8 : 8;
+    if (target.bottom > bounds.bottom - 8) board.scrollTop += target.bottom - bounds.bottom + 8;
+    else if (target.top < bounds.top + inset) board.scrollTop -= bounds.top + inset - target.top;
   }
   function showStep(step) {
     const root = view.container?.querySelector('.pa-root');
@@ -225,9 +275,10 @@
       element.querySelector('.pa-item-number').textContent = String(step.number);
       root.querySelector('[data-group="' + step.groupIndex + '"]').classList.add('is-current');
       root.querySelector('[data-group-count="' + step.groupIndex + '"]').textContent = String(step.number);
+      root.querySelector('.pa-pool-title').textContent = '아직 나눌 그림';
       root.querySelector('.pa-pool-count').textContent = String(model.total - view.moved);
       root.querySelector('.pa-pool-empty').hidden = model.total !== view.moved;
-      keepInBoard(element);
+      keepInBoard(element, root.querySelector('[data-group="' + step.groupIndex + '"]'));
       number = step.number; word = M().countWord(number, s.style, language()); status = (step.groupIndex + 1) + '번 자리 · ' + number + unit;
     } else if (step.kind === 'intro') {
       view.phase = 'preview';
@@ -243,6 +294,8 @@
         root.querySelector('.pa-pool').classList.add('is-remainder');
         root.querySelector('.pa-pool-empty').hidden = model.remainder !== 0;
         root.querySelector('.pa-pool-empty').textContent = '남은 것 없어요 · 0';
+        root.querySelector('.pa-empty-groups-summary').hidden = model.each !== 0;
+        keepInBoard(root.querySelector('.pa-pool'));
       }
     }
     root.querySelector('.pa-count-now').textContent = String(number);
@@ -254,7 +307,7 @@
     view.sequence?.stop();
   }
   function run() {
-    if (!view.container || !view.sequence || !view.state || view.error) return;
+    if (!view.container || !view.sequence || !view.state || view.error || view.dialog) return;
     stop();
     const ticket = view.runId;
     view.counted = 0; view.moved = 0; view.current = null; view.phase = 'preview';
@@ -307,25 +360,30 @@
     view.settingsObserver.observe(document.body, { childList: true });
   }
   function onClick(event) {
+    if (view.dialog && event.target === view.container?.querySelector('.pa-picture-overlay')) { closeDialog(); return; }
     const button = event.target.closest?.('[data-pa-action]');
     if (!button || !view.container?.contains(button) || button.disabled) return;
     const action = button.dataset.paAction, value = button.dataset.value, s = view.state;
     if (action === 'home') { const close = view.options.closeToParkHome; destroy(); close?.(); return; }
     if (action === 'settings') { openSettings(); return; }
     if (!s || view.error) return;
+    if (action === 'choosePicture') { openDialog('pictures', value); return; }
+    if (action === 'chooseGroups') { openDialog('groups'); return; }
+    if (action === 'closeDialog') { closeDialog(); return; }
     if (action === 'mode' && ['add', 'share'].includes(value)) { s.mode = value; syncPicker(); save(); run(); return; }
     if (action === 'term' && ['a', 'b'].includes(value)) { s.activeTerm = value; syncPicker(); save(); paintPicker(); return; }
-    if (action === 'category' && categoryOptions().some(category => category[0] === value)) { view.category = value; paintPicker(); return; }
+    if (action === 'category' && categoryOptions().some(category => category[0] === value)) { view.category = value; if (view.dialog) paintDialog(); else paintPicker(); return; }
     if (action === 'range' && ['0', '1', '2'].includes(value)) { view.range = Number(value); paintPicker(); return; }
     if (action === 'number') { changeNumber(Number(value)); return; }
     if (action === 'object' && view.objects.some(object => object.id === value)) {
       if (s.mode === 'share') s.shareId = value;
       else s[s.activeTerm === 'b' ? 'bId' : 'aId'] = value;
+      view.dialog = null;
       save(); run(); return;
     }
     if (action === 'groups') {
       const groups = Number(value);
-      if (Number.isInteger(groups) && groups >= 1 && groups <= 6) { s.groups = groups; save(); run(); }
+      if (Number.isInteger(groups) && groups >= 1 && groups <= 6) { s.groups = groups; view.dialog = null; save(); run(); }
       return;
     }
     if (action === 'style' && ['native', 'sino'].includes(value)) { s.style = value; save(); run(); return; }
@@ -345,10 +403,12 @@
     view.sequence = window.SihyeonQuantitySequencer.create();
     view.handlers = {
       click: onClick,
-      settings: () => { if (view.container && !view.error && !document.getElementById('playSettingsDialog')) run(); },
-      visibility: () => { if (document.hidden) stop(); else if (view.container && !view.error && !document.getElementById('playSettingsDialog')) run(); }
+      key: onKey,
+      settings: () => { if (view.container && !view.error && !view.dialog && !document.getElementById('playSettingsDialog')) run(); },
+      visibility: () => { if (document.hidden) stop(); else if (view.container && !view.error && !view.dialog && !document.getElementById('playSettingsDialog')) run(); }
     };
     container.addEventListener('click', view.handlers.click);
+    container.addEventListener('keydown', view.handlers.key);
     window.addEventListener('sihyeon-settings-change', view.handlers.settings);
     document.addEventListener('visibilitychange', view.handlers.visibility);
     run();
@@ -358,10 +418,11 @@
     view.settingsObserver?.disconnect(); view.settingsObserver = null;
     if (view.handlers) {
       view.container?.removeEventListener('click', view.handlers.click);
+      if (view.handlers.key) view.container?.removeEventListener('keydown', view.handlers.key);
       if (view.handlers.settings) window.removeEventListener('sihyeon-settings-change', view.handlers.settings);
       if (view.handlers.visibility) document.removeEventListener('visibilitychange', view.handlers.visibility);
     }
-    view.container = null; view.sequence = null; view.handlers = null; view.options = {};
+    view.container = null; view.sequence = null; view.handlers = null; view.options = {}; view.dialog = null;
   }
   function getSnapshot() {
     const s = view.state, model = view.model, root = view.container;
@@ -377,7 +438,7 @@
       actualGroups: root ? Array.from(root.querySelectorAll('.pa-group-items'), group => group.querySelectorAll('.pa-item').length) : [],
       poolCount: root?.querySelector('.pa-pool-items')?.querySelectorAll('.pa-item').length || 0,
       counted: view.counted, moved: view.moved, phase: view.phase, currentStep: view.current ? Object.assign({}, view.current) : null,
-      complete: view.complete, readingStyle: s?.style || 'native', muted: s?.muted || false,
+      complete: view.complete, dialog: view.dialog, readingStyle: s?.style || 'native', muted: s?.muted || false,
       age: age(), language: language(), audioFailed: view.audioFailed,
       storage: Object.assign({ memoryAvailable: !!memory }, view.storage), sequence: view.sequence?.getSnapshot() || null
     };
