@@ -68,7 +68,7 @@
   function isLandscapeMode() {
     const width = window.innerWidth || document.documentElement.clientWidth || 0;
     const height = window.innerHeight || document.documentElement.clientHeight || 0;
-    return width >= 760 && width > height;
+    return width >= 640 && width > height;
   }
 
   function getLayoutMode() {
@@ -374,6 +374,8 @@
         object-fit: contain;
         filter: drop-shadow(0 5px 5px rgba(0,0,0,0.28));
       }
+      .cc-car-wrapper > .sv-vehicle-frame { max-width: 92%; max-height: 92%; }
+      .cc-car-wrapper.is-guide-shake > .sv-vehicle-frame { animation: cc-car-guide-shake .5s ease-in-out; }
 
       .cc-ui-area {
         flex-shrink: 0;
@@ -480,12 +482,12 @@
       @keyframes cc-arrow-guide-glow {
         from {
           filter: brightness(1);
-          transform: translateY(0);
+          transform: none;
           box-shadow: 0 6px 0 rgba(0,0,0,0.16);
         }
         to {
           filter: brightness(1.12);
-          transform: translateY(-2px);
+          transform: none;
           box-shadow: 0 8px 0 rgba(0,0,0,0.14), 0 0 0 5px rgba(33,150,243,0.16);
         }
       }
@@ -582,8 +584,8 @@
       }
 
       @keyframes cc-go-ready {
-        from { filter: brightness(1); transform: scale(1); }
-        to { filter: brightness(1.08); transform: scale(1.03); }
+        from { filter: brightness(1); }
+        to { filter: brightness(1.08); }
       }
 
       .cc-btn-edit:active,
@@ -1049,6 +1051,25 @@
           min-height: clamp(50px, 8vh, 70px);
         }
       }
+      @media (orientation: landscape) and (max-height: 700px) {
+        .coding-car-landscape { grid-template-columns: clamp(112px, 17vw, 144px) minmax(0, 1fr) clamp(220px, 31vw, 280px); gap: 8px; padding: 8px; }
+        .coding-car-landscape .cc-top { min-width: 0; padding: 8px; gap: 8px; border-radius: 20px; border-width: 3px; }
+        .coding-car-landscape .cc-title { min-height: 60px; padding: 8px 4px; font-size: 17px; border-radius: 18px; }
+        .coding-car-landscape .cc-difficulty-row { gap: 8px; }
+        .coding-car-landscape .cc-diff-btn { min-height: 44px; padding: 4px; font-size: 15px; border-radius: 16px; }
+        .coding-car-landscape .cc-map-container { min-width: 0; }
+        .coding-car-landscape .cc-map { width: min(100%, calc(100vh - 32px)); height: auto; aspect-ratio: 1; min-width: 0; min-height: 0; max-height: 100%; border-width: 6px; border-radius: 24px; }
+        .coding-car-landscape .cc-ui-area { min-width: 0; padding: 8px; gap: 6px; grid-template-rows: auto auto minmax(94px, 1fr) auto auto; align-content: stretch; border-radius: 20px; border-width: 3px; overflow: hidden; }
+        .coding-car-landscape .cc-guide-text, .coding-car-landscape .cc-bottom-guide { min-height: 18px; padding: 0; border: 0; background: none; font-size: 14px; }
+        .coding-car-landscape .cc-slots { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; min-height: 0; }
+        .coding-car-landscape .cc-slot { width: 100%; height: 34px; border-width: 2px; border-radius: 10px; }
+        .coding-car-landscape .cc-slot .cc-arrow-fallback { font-size: 26px; }
+        .coding-car-landscape .cc-controls { grid-template-rows: repeat(2, minmax(44px, 1fr)); gap: 6px; }
+        .coding-car-landscape .cc-btn-arrow { height: 100%; min-height: 44px; border-width: 3px; border-radius: 14px; }
+        .coding-car-landscape .cc-bottom-actions { grid-template-columns: .8fr 1fr 1.2fr; gap: 5px; }
+        .coding-car-landscape .cc-btn-edit, .coding-car-landscape .cc-btn-go { min-height: 44px; padding: 3px; border-width: 3px; border-radius: 14px; font-size: 14px; }
+        .coding-car-landscape .cc-speech { bottom: 10px; width: min(42vw, 360px); min-height: 36px; font-size: 16px; padding: 6px; border-width: 3px; }
+      }
     `;
 
     document.head.appendChild(style);
@@ -1085,17 +1106,17 @@
     } catch (e) {
       console.warn('Failed to load vehicle manifest, using fallback', e);
       return [
-        { id: 'pump_engine', name_ko: '소방차', file: 'assets/vehicles/fire/pump_engine.webp', category: 'fire' },
-        { id: 'police_car', name_ko: '경찰차', file: 'assets/vehicles/police/police_car.webp', category: 'police' },
-        { id: 'bus', name_ko: '버스', file: 'assets/vehicles/transport/bus.webp', category: 'transport' },
-        { id: 'excavator', name_ko: '굴착기', file: 'assets/vehicles/construction/excavator.webp', category: 'construction' }
+        { id: 'pump_engine', name_ko: '소방차', file: 'assets/vehicles/fire/pump_engine.png', category: 'fire' },
+        { id: 'korean_police_car', name_ko: '경찰차', file: 'assets/vehicles/police/korean_police_car.png', category: 'police' },
+        { id: 'bus', name_ko: '버스', file: 'assets/vehicles/transport/bus.png', category: 'transport' },
+        { id: 'excavator', name_ko: '굴착기', file: 'assets/vehicles/construction/excavator.png', category: 'construction' }
       ];
     }
   }
 
   function normalizeVehicleFile(file) {
     const raw = String(file || '');
-    if (!raw) return './assets/vehicles/fire/pump_engine.webp';
+    if (!raw) return './assets/vehicles/fire/pump_engine.png';
     if (raw.startsWith('./')) return raw;
     if (raw.startsWith('/')) return `.${raw}`;
     return `./${raw}`;
@@ -1108,7 +1129,7 @@
     const pool = favs.length ? favs : list;
 
     if (!pool.length) {
-      return { id: 'pump_engine', name_ko: '소방차', file: './assets/vehicles/fire/pump_engine.webp' };
+      return { id: 'pump_engine', name_ko: '소방차', file: './assets/vehicles/fire/pump_engine.png' };
     }
 
     const picked = pool[Math.floor(Math.random() * pool.length)];
@@ -1359,8 +1380,23 @@
       executeCommands();
     });
 
-    root.querySelector('.cc-car-img')?.addEventListener('error', (event) => {
-      event.currentTarget.src = './assets/vehicles/fire/pump_engine.webp';
+    const vehicleImage = root.querySelector('.cc-car-img');
+    window.SihyeonVehicleDisplay?.apply(vehicleImage);
+    vehicleImage?.addEventListener('error', () => {
+      window.SihyeonVehicleDisplay?.reset(vehicleImage);
+      if (vehicleImage.dataset.fallbackTried) {
+        vehicleImage.hidden = true;
+        const fallback = document.createElement('span');
+        fallback.textContent = '🚗';
+        fallback.setAttribute('role', 'img');
+        fallback.setAttribute('aria-label', '자동차');
+        fallback.style.fontSize = 'clamp(28px,8vw,64px)';
+        vehicleImage.after(fallback);
+        return;
+      }
+      vehicleImage.dataset.fallbackTried = 'true';
+      vehicleImage.src = './assets/vehicles/fire/pump_engine.png';
+      window.SihyeonVehicleDisplay?.apply(vehicleImage);
     });
   }
 
