@@ -5,6 +5,12 @@ on:
     paths:
       - 'js/games/vehicle-memory.js'
       - 'js/games/construction-site.js'
+      - 'js/games/number-count.js'
+      - 'js/games/color-balloon.js'
+      - 'js/games/megaDispatch.js'
+      - 'js/games/life-sequence.js'
+      - 'js/games/pattern-train.js'
+      - 'js/games/pattern-train-model.js'
       - 'js/engine/webgl-fallback.js'
       - 'games/hangul-playmat-3d.html'
       - 'games/number-kingdom-3d.html'
@@ -17,6 +23,12 @@ on:
     paths:
       - 'js/games/vehicle-memory.js'
       - 'js/games/construction-site.js'
+      - 'js/games/number-count.js'
+      - 'js/games/color-balloon.js'
+      - 'js/games/megaDispatch.js'
+      - 'js/games/life-sequence.js'
+      - 'js/games/pattern-train.js'
+      - 'js/games/pattern-train-model.js'
       - 'js/engine/webgl-fallback.js'
       - 'games/hangul-playmat-3d.html'
       - 'games/number-kingdom-3d.html'
@@ -43,6 +55,15 @@ jobs:
           node scripts/test-creator-vehicle-rules.cjs
           node scripts/test-creator-hangul-rules.cjs
           node scripts/test-creator-number-language.cjs
+          node scripts/test-creator-count-pace.cjs
+          node scripts/test-creator-help-modes.cjs
+          node scripts/test-creator-memory-pace.cjs
+          node scripts/test-creator-number-mute.cjs
+          node scripts/test-creator-life-pace.cjs
+          node scripts/test-creator-train-edit.cjs
+          node scripts/qa-pattern-train-model.cjs
+          node scripts/qa-pattern-train-independent.cjs
+          node scripts/qa-pattern-train-ui-independent.cjs
           node scripts/test-legacy-models.cjs
           node scripts/test-legacy-inputs.cjs
           node scripts/test-legacy-fallback.cjs
@@ -66,7 +87,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import hashlib,json,pathlib,time,urllib.request
-          paths=['sw.js','js/games/vehicle-memory.js','js/games/construction-site.js','js/engine/webgl-fallback.js','games/hangul-playmat-3d.html','games/number-kingdom-3d.html']
+          paths=['sw.js','js/games/vehicle-memory.js','js/games/construction-site.js','js/games/number-count.js','js/games/color-balloon.js','js/games/megaDispatch.js','js/games/life-sequence.js','js/games/pattern-train.js','js/games/pattern-train-model.js','js/engine/webgl-fallback.js','games/hangul-playmat-3d.html','games/number-kingdom-3d.html']
           expected={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
           out=pathlib.Path('qa-creator-evidence');out.mkdir(exist_ok=True)
           deadline=time.monotonic()+50*60
@@ -94,7 +115,7 @@ jobs:
           if [ "$EVENT_NAME" = push ]; then
             args=(--base-url https://icefoxtail.github.io/my-life-os/)
           fi
-          for suite in vehicle hangul number; do
+          for suite in vehicle hangul number count-pace help memory-pace number-mute life-pace train-edit; do
             python3 "scripts/qa-creator-$suite-browser.py" "${args[@]}" --output "qa-creator-evidence/$suite" || status=1
           done
           exit "$status"

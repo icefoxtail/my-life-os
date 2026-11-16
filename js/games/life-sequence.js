@@ -121,7 +121,10 @@
     resizeTimer: null,
     handleResizeBound: null,
     successRewardGiven: false,
-    completeRewardGiven: false
+    completeRewardGiven: false,
+    roundId: 0,
+    roundAnswered: false,
+    timerToken: 0
   };
 
   function injectStyle() {
@@ -157,6 +160,20 @@
       .ls-root[data-step-count="4"] .ls-slots { top: 12px; bottom: 12px; grid-template-rows: repeat(2,minmax(0,1fr)); }
       .ls-root[data-step-count="4"] .ls-slot,
       .ls-root[data-step-count="4"] .ls-slot-card { min-height: 0; }
+      .ls-root .ls-pool.ls-result-pool{display:flex;flex-direction:column;justify-content:center;gap:12px;padding:10px;border-radius:20px;background:rgba(255,255,255,.88)}
+      .ls-round-status{text-align:center;font-size:clamp(18px,4vw,25px);font-weight:900;color:#165c4e}
+      .ls-round-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+      .ls-round-buttons button{min-width:44px;min-height:48px;padding:10px 6px;border:3px solid #fff;border-radius:16px;font:inherit;font-size:clamp(15px,3.8vw,20px);font-weight:900;line-height:1.3;cursor:pointer;box-shadow:0 4px 0 rgba(50,70,120,.16)}
+      .ls-round-next{background:#17695a;color:#fff}.ls-round-replay{background:#fff0a6;color:#233047}
+      .ls-round-buttons button:focus-visible{outline:3px solid #233047;outline-offset:3px}
+      .ls-root .ls-scene .ls-message{left:50%;bottom:12px;width:calc(100% - 24px);max-width:520px}
+      @media(orientation:landscape) and (max-height:540px){
+        .life-sequence-landscape .ls-success-box{padding:14px 18px;gap:10px}
+        .life-sequence-landscape .ls-success-icon{font-size:64px;line-height:1.1}
+        .life-sequence-landscape .ls-success-title{font-size:30px;line-height:1.2}
+        .life-sequence-landscape .ls-success-sub{font-size:18px;line-height:1.3}
+        .life-sequence-landscape .ls-success-actions .ls-btn{min-height:48px}
+      }
     `;
     document.head.appendChild(style);
   }
@@ -190,21 +207,28 @@
     try { state.options.say?.(text); } catch (error) {}
   }
 
+  function stopSpeech() {
+    try { window.SihyeonVoice?.stop?.(); } catch (error) {}
+    try { window.speechSynthesis?.cancel?.(); } catch (error) {}
+  }
+
   function vibrate(pattern) {
     if (!navigator.vibrate) return;
     try { navigator.vibrate(pattern); } catch (error) {}
   }
 
   function timer(fn, ms) {
+    const token = state.timerToken;
     const id = setTimeout(() => {
       state.timers = state.timers.filter((timerId) => timerId !== id);
-      if (!state.destroyed) fn();
+      if (!state.destroyed && token === state.timerToken) fn();
     }, ms);
     state.timers.push(id);
     return id;
   }
 
   function clearTimers() {
+    state.timerToken += 1;
     state.timers.forEach(clearTimeout);
     state.timers = [];
   }
@@ -292,6 +316,8 @@
   function startRound() {
     if (!state.container) return;
     clearTimers();
+    state.roundId += 1;
+    state.roundAnswered = false;
     state.locked = false;
     if (state.round > state.missions.length) {
       showComplete();
@@ -331,8 +357,8 @@
             <div class="ls-sparkle"></div>
             <div class="ls-complete-fallback">${escapeHtml(mission.completeEmoji)}</div>
             <div class="ls-slots">${state.placed.map(renderSlot).join('')}</div>
+            <div class="ls-message" id="lsMessage"></div>
           </section>
-          <div class="ls-message" id="lsMessage"></div>
         </div>
       </div>
     `;
@@ -481,13 +507,62 @@
   }
 
   function handleCorrect() {
-    if (!state.container || !state.mission) return;
+    if (!state.container || !state.mission || state.destroyed || state.roundAnswered) return;
 
+    state.roundAnswered = true;
     state.locked = true;
     state.combo += 1;
     vibrate(180);
+    renderRoundActions();
+    if (!state.successRewardGiven) {
+      state.successRewardGiven = true;
+      try { state.options.fireConfetti?.(); } catch (error) {}
+      try { state.options.gainExp?.(10 + Math.min(state.combo, 3) * 2); } catch (error) {}
+    }
+    playSuccessAnimation();
+  }
+
+  function renderRoundActions() {
+    const pool = state.container?.querySelector('.ls-pool');
+    if (!pool) return;
+    const roundId = state.roundId;
+    pool.classList.add('ls-result-pool');
+    pool.innerHTML = `
+      <div class="ls-round-status" role="status">🌟 순서가 맞았어요!</div>
+      <div class="ls-round-buttons">
+        <button class="ls-round-next" type="button" data-life-next>${state.round === state.missions.length ? '🏁 마침' : '▶ 다음 놀이'}</button>
+        <button class="ls-round-replay" type="button" data-life-replay>🔎 다시 보기</button>
+      </div>`;
+    pool.querySelector('[data-life-next]').onclick = () => advanceRound(roundId);
+    pool.querySelector('[data-life-replay]').onclick = () => {
+      if (state.destroyed || !state.roundAnswered || state.roundId !== roundId) return;
+      playSuccessAnimation();
+    };
+  }
+
+  function advanceRound(roundId) {
+    if (state.destroyed || !state.container || !state.roundAnswered || state.roundId !== roundId) return;
+    state.roundAnswered = false;
+    clearTimers();
+    stopSpeech();
+    state.round += 1;
+    startRound();
+  }
+
+  function playSuccessAnimation() {
+    if (!state.container || !state.mission || !state.roundAnswered || state.destroyed) return;
+    clearTimers();
+    stopSpeech();
+    const mission = state.mission;
+    const root = state.container.querySelector('.ls-root');
+    const scene = state.container.querySelector('#lsScene');
+    root?.classList.remove('complete');
+    scene?.classList.remove('has-complete');
+    state.container.querySelector('#lsMessage')?.classList.remove('show');
 
     const slots = Array.from(state.container.querySelectorAll('.ls-slot'));
+    slots.forEach(slot => slot.classList.remove('correct'));
+    if (root) void root.offsetWidth; // A replay restarts the existing CSS animations.
     slots.forEach((slot, index) => {
       timer(() => {
         const card = state.placed[index];
@@ -498,36 +573,17 @@
 
     const delay = slots.length * 360 + 300;
     timer(() => {
-      const root = state.container?.querySelector('.ls-root');
-      const scene = state.container?.querySelector('#lsScene');
-
       root?.classList.add('complete');
       if (scene && scene.dataset.complete === '1') scene.classList.add('has-complete');
 
       const comboText = state.combo >= 2 ? ` ${state.combo}번 연속 성공!` : '';
-      const sequenceText = state.mission.sequenceText ? ` ${state.mission.sequenceText}` : '';
-      const message = `${state.mission.completeText} ${sequenceText}${comboText}`.replace(/\s+/g, ' ').trim();
+      const sequenceText = mission.sequenceText ? ` ${mission.sequenceText}` : '';
+      const message = `${mission.completeText} ${sequenceText}${comboText}`.replace(/\s+/g, ' ').trim();
 
       showMessage(message);
       speak(message, true);
-      if (!state.successRewardGiven) {
-        state.successRewardGiven = true;
-        playGameVoice('games.common.correct');
-        state.options.fireConfetti?.();
-        state.options.gainExp?.(10 + Math.min(state.combo, 3) * 2);
-      }
-
-      timer(() => {
-        state.round += 1;
-        startRound();
-      }, getSuccessMessageHoldMs(message));
+      playGameVoice('games.common.correct');
     }, delay);
-  }
-
-  function getSuccessMessageHoldMs(message) {
-    const baseTime = 6000;
-    const extraTime = String(message || '').length * 80;
-    return Math.min(12000, baseTime + extraTime);
   }
 
   function showMessage(text) {
@@ -547,8 +603,8 @@
     state.locked = true;
     if (!state.completeRewardGiven) {
       state.completeRewardGiven = true;
-      state.options.fireConfetti?.();
-      state.options.gainExp?.(30);
+      try { state.options.fireConfetti?.(); } catch (error) {}
+      try { state.options.gainExp?.(30); } catch (error) {}
       playGameVoice('games.common.complete');
       speak('차례차례 모두 해냈어요. 정말 멋져요!', true);
     }
@@ -581,6 +637,7 @@
 
   function restart() {
     clearTimers();
+    stopSpeech();
     state.round = 1;
     state.combo = 0;
     state.successRewardGiven = false;
@@ -591,6 +648,7 @@
 
   function destroy() {
     clearTimers();
+    if (state.container) stopSpeech();
     if (state.resizeTimer) {
       clearTimeout(state.resizeTimer);
       state.resizeTimer = null;
@@ -608,6 +666,8 @@
     state.pool = [];
     state.placed = [];
     state.locked = false;
+    state.roundAnswered = false;
+    state.roundId += 1;
     state.combo = 0;
     state.layoutMode = 'portrait';
     state.successRewardGiven = false;

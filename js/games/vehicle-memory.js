@@ -103,6 +103,7 @@
 
   const HINT_COLORS = ['red', 'yellow', 'blue', 'green', 'purple', 'pink'];
   const PREVIEW_MS = 1800;
+  const ROLE_VOICE_TIMEOUT_MS = 15000;
 
   const state = {
     container: null,
@@ -122,6 +123,7 @@
     resizeTimer: null,
     handleResizeBound: null,
     pendingVoiceToken: 0,
+    cancelRoleWait: null,
     roundToken: 0,
     roundTimers: new Set(),
     seenCards: new Set(),
@@ -1673,11 +1675,11 @@
         state.flipped = [];
 
         const isFinal = state.matched >= selectedCardCount;
-        announceCardRole(first.data, isFinal).then(() => {
-          if (state.destroyed || roundToken !== state.roundToken) return;
+        announceCardRole(first.data, isFinal).then((result) => {
+          if (!result || state.destroyed || roundToken !== state.roundToken) return;
 
           if (isFinal) {
-            triggerFinaleAfterRole();
+            triggerFinaleAfterRole(result.voiceEnded);
           } else {
             state.locked = false;
             applyHintClasses();
@@ -1727,16 +1729,62 @@
     const text = getRoleText(cardData);
     const token = ++state.pendingVoiceToken;
     const roundToken = state.roundToken;
+    const startedAt = Date.now();
+
+    state.cancelRoleWait?.();
 
     showSpeechBanner(text);
 
-    return playVehicleVoice(cardData, 'role').then(() => {
-      if (token !== state.pendingVoiceToken || roundToken !== state.roundToken || state.destroyed) return;
-      const waitMs = estimateSpeechMs(text, isFinal);
-      return wait(waitMs);
-    }).then(() => {
-      if (token !== state.pendingVoiceToken || roundToken !== state.roundToken || state.destroyed) return;
+    return new Promise((resolve) => {
+      let settled = false;
+      const timers = new Set();
+
+      const finish = (result) => {
+        if (settled) return;
+        settled = true;
+        timers.forEach((timer) => {
+          clearTimeout(timer);
+          state.roundTimers.delete(timer);
+        });
+        timers.clear();
+        if (state.cancelRoleWait === cancel) state.cancelRoleWait = null;
+        resolve(result);
+      };
+      const cancel = () => finish(null);
+      state.cancelRoleWait = cancel;
+
+      const schedule = (callback, ms) => {
+        const timer = scheduleRoundTimeout(() => {
+          timers.delete(timer);
+          callback();
+        }, ms);
+        timers.add(timer);
+      };
+
+      const finishWithoutAudio = () => {
+        if (settled) return;
+        // Without audible guidance, retain time to read the banner. Time
+        // already spent waiting for an unavailable voice counts toward it.
+        const remaining = estimateSpeechMs(text, isFinal) - (Date.now() - startedAt);
+        if (remaining > 0) schedule(() => finish({ voiceEnded: true }), remaining);
+        else finish({ voiceEnded: true });
+      };
+
+      // Some browsers never deliver an audio/TTS completion callback. Recover
+      // input without stopping that voice or automatically replacing it.
+      schedule(() => finish({ voiceEnded: false }), ROLE_VOICE_TIMEOUT_MS);
+      Promise.resolve().then(() => {
+        if (settled || token !== state.pendingVoiceToken || roundToken !== state.roundToken || state.destroyed) return false;
+        return playVehicleVoice(cardData, 'role');
+      }).then((played) => {
+        if (settled) return;
+        if (played) finish({ voiceEnded: true });
+        else finishWithoutAudio();
+      }, finishWithoutAudio);
+    }).then((result) => {
+      if (!result || token !== state.pendingVoiceToken || roundToken !== state.roundToken || state.destroyed) return null;
       if (!isFinal) hideSpeechBanner();
+      return result;
     });
   }
 
@@ -1867,17 +1915,17 @@
     return isFinal ? base + 500 : base;
   }
 
-  function triggerFinaleAfterRole() {
+  function triggerFinaleAfterRole(voiceEnded = true) {
     state.locked = true;
     state.options.fireConfetti?.();
-    playGameVoice('games.memory.complete');
+    if (voiceEnded) playGameVoice('games.memory.complete');
 
     state.container?.querySelectorAll('.memory-card').forEach((card, idx) => {
       scheduleRoundTimeout(() => card.classList.add('is-finale'), idx * 70);
     });
 
     clearTimeout(state.finaleTimer);
-    state.finaleTimer = window.setTimeout(() => {
+    state.finaleTimer = scheduleRoundTimeout(() => {
       hideSpeechBanner();
       showMemorySuccess();
     }, 850);
@@ -1943,6 +1991,7 @@
   function clearTimers() {
     state.roundToken += 1;
     state.pendingVoiceToken += 1;
+    state.cancelRoleWait?.();
     state.roundTimers.forEach((timer) => clearTimeout(timer));
     state.roundTimers.clear();
     clearTimeout(state.noticeTimer);
@@ -1956,12 +2005,6 @@
     if (state.container && !state.destroyed) {
       try { window.SihyeonVoice?.stop?.(); } catch (_) {}
     }
-  }
-
-  function wait(ms) {
-    return new Promise((resolve) => {
-      window.setTimeout(resolve, ms);
-    });
   }
 
   function destroy() {

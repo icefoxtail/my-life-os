@@ -7,6 +7,8 @@
 (function () {
   const GAME_KEY = 'megaDispatch';
   const STYLE_ID = 'sihyeon-mega-style';
+  const HELP_KEY = 'sihyeon-mega-dispatch-help-v1';
+  let helpPreferenceDirty = false;
   const MANIFESTS = {
     normal: './assets/vehicles/fire_manifest.json',
     special: './assets/vehicles/fire_special_manifest.json'
@@ -31,9 +33,38 @@
     successRewardGiven: false,
     completeRewardGiven: false,
     isEnding: false,
+    helpEnabled: true,
     timers: [],
     roundToken: 0
   };
+
+  function readHelpPreference(fallback = true) {
+    if (helpPreferenceDirty) return fallback;
+    try {
+      const saved = window.localStorage.getItem(HELP_KEY);
+      return saved === 'off' ? false : saved === 'on' ? true : fallback;
+    } catch (_) { return fallback; }
+  }
+
+  function updateHelpButton() {
+    const button = state.container?.querySelector('[data-action="help"]');
+    if (!button) return;
+    const label = state.helpEnabled ? '도움 켜짐. 스스로 찾기로 바꾸기' : '스스로 찾는 중. 도움 켜기';
+    button.setAttribute('aria-pressed', String(state.helpEnabled));
+    button.setAttribute('aria-label', label);
+    button.setAttribute('title', label);
+    button.innerHTML = `<span aria-hidden="true">${state.helpEnabled ? '💡' : '🔎'}</span><span class="md14-help-label">${state.helpEnabled ? '도움' : '찾기'}</span>`;
+    button.onclick = () => {
+      if (state.destroyed) return;
+      state.helpEnabled = !state.helpEnabled;
+      try {
+        window.localStorage.setItem(HELP_KEY, state.helpEnabled ? 'on' : 'off');
+        helpPreferenceDirty = false;
+      } catch (_) { helpPreferenceDirty = true; }
+      updateHelpButton();
+      updateTargetGlow();
+    };
+  }
 
   const ROLE_ICONS = {
     pump_engine: '💧', water_tanker: '💧', ladder_truck: '🪜',
@@ -202,6 +233,35 @@
         gap: 10px;
         align-content: start;
       }
+
+      .md14-top-controls {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 6px;
+      }
+      .md14-top-controls .md14-level-badge { white-space: normal; text-align: center; }
+      .md14-help-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        min-width: 48px;
+        min-height: 48px;
+        padding: 6px 8px;
+        border: 2px solid #b7c9d5;
+        border-radius: 14px;
+        background: #fff;
+        color: #17324a;
+        font: inherit;
+        font-size: 23px;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+      .md14-help-toggle[aria-pressed="true"] { background: #fff4b7; border-color: #d6a825; }
+      .md14-help-toggle:focus-visible { outline: 3px solid #80d8ff; outline-offset: 3px; }
+      .md14-help-label { font-size: 14px; font-weight: 900; }
+      .md14-start-screen > .md14-help-toggle { margin-bottom: 16px; }
 
       .md14-title {
         margin: 0;
@@ -764,6 +824,8 @@
         .dispatch-landscape { grid-template-columns: minmax(112px, .72fr) minmax(0, 1fr) minmax(210px, 1.28fr); gap: 8px; padding: 8px; }
         .dispatch-landscape .md14-status-panel { grid-template-rows: auto auto minmax(0, 1fr); padding: 6px; gap: 6px; border-radius: 20px; }
         .dispatch-landscape .md14-level-badge { min-height: 30px; padding: 4px; font-size: 14px; }
+        .dispatch-landscape .md14-top-controls .md14-help-label { display: none; }
+        .dispatch-landscape .md14-top-controls .md14-help-toggle { padding: 4px; }
         .dispatch-landscape .md14-title { font-size: 18px; }
         .dispatch-landscape .md14-subtitle { display: none; }
         .dispatch-landscape .md14-header { padding: 8px 4px; gap: 8px; border-radius: 18px; }
@@ -803,6 +865,7 @@
         <div class="md14-start-screen">
           <h1 class="md14-title">본부장 시현! 출동 준비!</h1>
           <p class="md14-subtitle">소방차를 골라서 마을을 지켜요</p>
+          <button class="md14-help-toggle" type="button" data-action="help"></button>
           <div class="md14-mode-row">
             <button class="mode-btn" type="button" data-mode-size="4">쉬움 🚒 (4대)</button>
             <button class="mode-btn" type="button" data-mode-size="9">보통 🚒🚒 (9대)</button>
@@ -811,6 +874,8 @@
         </div>
       </div>
     `;
+
+    updateHelpButton();
 
     state.container.querySelectorAll('[data-mode-size]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -868,7 +933,10 @@
         <div class="md14-fire-overlay"></div>
 
         <section class="md14-status-panel" aria-label="미션 안내">
-          <div class="md14-level-badge">🚒 ${state.currentLevel}단계 · ${missionProgressText}</div>
+          <div class="md14-top-controls">
+            <div class="md14-level-badge">🚒 ${state.currentLevel}단계 · ${missionProgressText}</div>
+            <button class="md14-help-toggle" type="button" data-action="help"></button>
+          </div>
           <h1 class="md14-title">초강력 소방대 출동!</h1>
           <p class="md14-subtitle">왼쪽 미션 순서대로 소방차를 눌러요</p>
           <div class="md14-header">
@@ -907,6 +975,7 @@
     state.container.querySelectorAll('.md14-truck-btn').forEach(btn => {
       btn.onclick = (e) => handleTouch(btn.dataset.gameId, btn, e);
     });
+    updateHelpButton();
   }
 
   function updateTargetGlow() {
@@ -914,20 +983,23 @@
     const targetId = state.mission[state.userIndex]?.gameId;
     state.container.querySelectorAll('.md14-truck-btn').forEach(btn => {
       btn.classList.remove('target-glow');
-      if (btn.dataset.gameId === targetId) btn.classList.add('target-glow');
+      if (state.helpEnabled && btn.dataset.gameId === targetId) btn.classList.add('target-glow');
     });
   }
 
   function shootWater(x, y, isSuper) {
+    const root = state.container?.querySelector('.md14-root');
+    if (!root) return;
+    const rect = root.getBoundingClientRect();
     const count = isSuper ? 30 : 15;
     for (let i = 0; i < count; i++) {
       const drop = document.createElement('div');
       drop.className = 'water-drop';
-      drop.style.left = x + 'px';
-      drop.style.top = y + 'px';
+      drop.style.left = (x - rect.left) + 'px';
+      drop.style.top = (y - rect.top) + 'px';
       drop.style.setProperty('--tx', (Math.random() * (isSuper ? 400 : 200) - (isSuper ? 200 : 100)) + 'px');
       drop.style.setProperty('--ty', (Math.random() * -300 - 50) + 'px');
-      state.container.appendChild(drop);
+      root.appendChild(drop);
       setManagedTimeout(() => drop.remove(), 700);
     }
   }
@@ -939,17 +1011,13 @@
     const root = state.container.querySelector('.md14-root');
 
     if (gameId === target.gameId) {
+      const rect = el.getBoundingClientRect();
+      const hasPointer = e?.detail !== 0 && Number.isFinite(e?.clientX) && Number.isFinite(e?.clientY);
+      const waterX = hasPointer ? e.clientX : rect.left + rect.width / 2;
+      const waterY = hasPointer ? e.clientY : rect.top + rect.height / 2;
       state.userIndex++;
       state.combo++;
       const isSuper = state.combo >= 2;
-
-      // [복구] 물대포 VFX 발사
-      shootWater(e.clientX, e.clientY, isSuper);
-
-      el.style.transform = 'scale(1.3) !important';
-      setManagedTimeout(() => {
-        if (el && el.isConnected) el.style.transform = '';
-      }, 300);
 
       if (state.options.speakGuide) {
         if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
@@ -964,6 +1032,13 @@
         render();
         updateTargetGlow();
       }
+      // Re-render first, then attach the effect to the current scene so it survives this click.
+      shootWater(waterX, waterY, isSuper);
+      const feedbackEl = state.container.querySelector(`[data-game-id="${gameId}"]`);
+      if (feedbackEl) feedbackEl.style.setProperty('transform', 'scale(1.3)', 'important');
+      setManagedTimeout(() => {
+        if (feedbackEl?.isConnected) feedbackEl.style.removeProperty('transform');
+      }, 300);
     } else {
       state.combo = 0;
       if (root) {
@@ -1052,6 +1127,7 @@
       state.isEnding = false;
       state.successRewardGiven = false;
       state.completeRewardGiven = false;
+      state.helpEnabled = readHelpPreference(state.helpEnabled);
       state.layoutMode = getLayoutMode();
       injectStyle();
       bindLayoutEvents();

@@ -8,6 +8,16 @@
   window.SihyeonGames = window.SihyeonGames || {};
 
   const STYLE_ID = 'sihyeon-color-balloon-style';
+  const HELP_KEY = 'sihyeon-color-balloon-help-v1';
+  let helpPreferenceDirty = false;
+
+  function readHelpPreference(fallback = true) {
+    if (helpPreferenceDirty) return fallback;
+    try {
+      const saved = window.localStorage.getItem(HELP_KEY);
+      return saved === 'off' ? false : saved === 'on' ? true : fallback;
+    } catch (_) { return fallback; }
+  }
 
   function playGameVoice(id) {
     if (window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
@@ -44,6 +54,7 @@
       resizeTimer: null,
       handleResizeBound: null,
       completeRewardGiven: false,
+      helpEnabled: true,
       destroyed: false,
       timers: []
     },
@@ -132,6 +143,7 @@
       this.state.targetColor = null;
       this.state.layoutMode = getLayoutMode();
       this.state.completeRewardGiven = false;
+      this.state.helpEnabled = readHelpPreference(this.state.helpEnabled);
       this.state.destroyed = false;
 
       this.injectStyles();
@@ -166,6 +178,7 @@
 
               <div class="cb-header">
                 <div class="cb-progress" id="cbProgress"></div>
+                <button class="cb-help-toggle" id="cbHelpToggle" type="button"></button>
                 <div class="cb-target-wrap">
                   <div class="cb-target-label">찾을 색깔</div>
                   <div class="cb-target-dot" id="cbTargetDot"></div>
@@ -188,6 +201,7 @@
 
             <div class="cb-header">
               <div class="cb-progress" id="cbProgress"></div>
+              <button class="cb-help-toggle" id="cbHelpToggle" type="button"></button>
               <div class="cb-target-wrap">
                 <div class="cb-target-dot" id="cbTargetDot"></div>
               </div>
@@ -197,6 +211,39 @@
           </div>
         `;
       }
+      const helpButton = container.querySelector('#cbHelpToggle');
+      if (helpButton) helpButton.onclick = () => this.setHelpEnabled(!this.state.helpEnabled);
+      this.updateHelpVisuals();
+    },
+
+    setHelpEnabled: function(enabled) {
+      if (this.state.destroyed) return;
+      this.state.helpEnabled = Boolean(enabled);
+      try {
+        window.localStorage.setItem(HELP_KEY, this.state.helpEnabled ? 'on' : 'off');
+        helpPreferenceDirty = false;
+      } catch (_) { helpPreferenceDirty = true; }
+      this.updateHelpVisuals();
+    },
+
+    updateHelpVisuals: function() {
+      const container = this.state.container;
+      if (!container) return;
+      const enabled = this.state.helpEnabled;
+      const button = container.querySelector('#cbHelpToggle');
+      if (button) {
+        button.setAttribute('aria-pressed', String(enabled));
+        const label = enabled ? '도움 켜짐. 스스로 찾기로 바꾸기' : '스스로 찾는 중. 도움 켜기';
+        button.setAttribute('aria-label', label);
+        button.setAttribute('title', label);
+        button.innerHTML = `<span aria-hidden="true">${enabled ? '💡' : '🔎'}</span><span class="cb-help-label">${enabled ? '도움' : '찾기'}</span>`;
+      }
+      container.querySelectorAll('.cb-balloon:not(.cb-pop)').forEach(balloon => {
+        const hinted = enabled && balloon.dataset.colorId === this.state.targetColor?.id;
+        balloon.classList.toggle('cb-balloon-target', hinted);
+        balloon.classList.toggle('cb-target-glow', hinted);
+        if (!hinted) balloon.classList.remove('cb-hint-jump');
+      });
     },
 
     startLevel: function() {
@@ -291,7 +338,7 @@
         const isTarget = color.id === target.id;
         const balloon = document.createElement('div');
 
-        balloon.className = isTarget ? 'cb-balloon cb-balloon-target cb-target-glow' : 'cb-balloon';
+        balloon.className = isTarget && this.state.helpEnabled ? 'cb-balloon cb-balloon-target cb-target-glow' : 'cb-balloon';
         balloon.style.background = `radial-gradient(circle at 30% 28%, rgba(255,255,255,0.9) 0%, ${color.hex} 25%, ${color.dark} 100%)`;
 
         const leftPct = (idx * slotWidth) + Math.random() * Math.max(1, (slotWidth - 5)) + 5;
@@ -330,7 +377,7 @@
 
         if (isTarget) {
           this.setManagedTimeout(() => {
-            if (balloon.parentNode && !balloon.classList.contains('cb-pop')) {
+            if (this.state.helpEnabled && balloon.parentNode && !balloon.classList.contains('cb-pop')) {
               balloon.classList.add('cb-hint-jump');
             }
           }, 3000);
@@ -670,7 +717,7 @@
           min-height: 0;
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-rows: auto 1fr;
+          grid-template-rows: auto auto 1fr;
           align-items: center;
           justify-items: center;
           gap: 18px;
@@ -738,9 +785,34 @@
         }
 
         .cb-landscape .cb-progress {
-          flex-direction: column;
-          gap: 14px;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 8px;
         }
+
+        .cb-help-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          flex: 0 0 auto;
+          min-width: 48px;
+          min-height: 48px;
+          padding: 6px 9px;
+          border: 2px solid #a4bcd0;
+          border-radius: 14px;
+          background: #fff;
+          color: #17324a;
+          font: inherit;
+          font-size: 23px;
+          cursor: pointer;
+          touch-action: manipulation;
+        }
+
+        .cb-help-toggle[aria-pressed="true"] { background: #fff4b7; border-color: #d6a825; }
+        .cb-help-toggle:focus-visible { outline: 3px solid #1769aa; outline-offset: 3px; }
+        .cb-help-label { font-size: 14px; font-weight: 900; }
 
         .cb-dot {
           width: 22px;

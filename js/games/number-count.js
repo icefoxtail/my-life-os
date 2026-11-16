@@ -179,7 +179,12 @@
       resizeTimer: null,
       handleResizeBound: null,
       successRewardGiven: false,
-      completeRewardGiven: false
+      completeRewardGiven: false,
+      roundId: 0,
+      roundAnswered: false,
+      recountActive: false,
+      recountToken: 0,
+      recountTimerIds: []
     },
 
     initAudio:function(){
@@ -338,7 +343,7 @@
       const choices = this.query('#ncChoicesArea');
       if(panel) panel.style.display = 'none';
       if(choices){
-        choices.style.display = 'flex';
+        choices.style.display = '';
         choices.style.visibility = 'visible';
       }
 
@@ -349,6 +354,9 @@
     loadNextQuestion:function(){
       this.clearTimers();
       if(!this.state.container) return;
+      this.state.roundId += 1;
+      this.state.roundAnswered = false;
+      this.state.container.querySelectorAll('.nc-star,.nc-sad-emoji,.nc-wrong-flash,.nc-correct-overlay,.nc-number-stamp,.nc-mega-flash').forEach(el => el.remove());
       if(this.state.currentLevel > TOTAL_ROUNDS){
         this.showCompleteScreen();
         return;
@@ -413,7 +421,8 @@
         wrap.addEventListener('click', ()=>{
           this.initAudio();
           this.playTone('pop');
-          if(this.state.isAnimating)return;
+          if(this.state.isAnimating || this.state.recountActive)return;
+          this.stopRecount();
           if(!this.state.countedIds.has(i)){
             const n=this.state.countedIds.size+1;this.state.countedIds.set(i,n);
             const badge=document.createElement('span');badge.className='nc-tap-count';badge.textContent=n;wrap.appendChild(badge);
@@ -429,7 +438,10 @@
       }
 
       const choicesArea = this.query('#ncChoicesArea');
-      if(choicesArea) choicesArea.style.visibility = 'hidden';
+      if(choicesArea){
+        choicesArea.classList.remove('nc-round-actions');
+        choicesArea.style.visibility = 'hidden';
+      }
 
       this.driveIn(wrapper, ()=>{
         if(choicesArea) choicesArea.style.visibility = 'visible';
@@ -441,14 +453,15 @@
 
     driveIn:function(wrapper, done){
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
+      const stagger = Math.min(100, 500 / Math.max(1, cells.length - 1));
       cells.forEach((cell, i)=>{
         this.setManagedTimeout(()=>{
           cell.style.transition = 'transform 0.4s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s';
           cell.style.transform = 'translateX(0)';
           cell.style.opacity = '1';
-        }, i * 100);
+        }, i * stagger);
       });
-      this.setManagedTimeout(done, cells.length * 100 + 400);
+      this.setManagedTimeout(done, Math.max(0, cells.length - 1) * stagger + 400);
     },
 
     applyTheme:function(idx){
@@ -541,38 +554,22 @@
     },
 
     checkAnswer:function(selected){
-      if(this.state.isAnimating || !this.state.container) return;
+      if(this.state.isAnimating || this.state.roundAnswered || !this.state.container) return;
       const wrapper = this.query('#ncVehiclesWrapper');
       const choices = this.query('#ncChoicesArea');
       if(!wrapper || !choices) return;
 
       if(selected === this.state.currentAnswer){
-        this.state.isAnimating = true;
+        this.state.roundAnswered = true;
         this.state.correctCount += 1;
-        choices.querySelectorAll('button').forEach(b => { b.disabled = true; });
-
-        this.flashScreen();
         this.playTone('pop');
-        if(navigator.vibrate) try{ navigator.vibrate([100, 50, 100]); }catch(e){}
-
-        this.runCountingHighlight(wrapper, ()=>{
-          this.driveOut(wrapper, ()=>{
-            this.showNumberStamp(this.state.currentAnswer);
-            this.createParticles(15);
-            this.showCorrectEmoji();
-            if(!this.state.successRewardGiven){
-              this.state.successRewardGiven = true;
-              if(this.state.options.fireConfetti) this.state.options.fireConfetti();
-              this.say(`우와 맞았어! ${koreanVehicleCount(this.state.currentAnswer)} 대야!`, true);
-            }
-
-            this.setManagedTimeout(()=>{
-              this.state.currentLevel += 1;
-              this.state.isAnimating = false;
-              this.loadNextQuestion();
-            }, 3200);
-          });
-        });
+        this.createParticles(8);
+        if(!this.state.successRewardGiven){
+          this.state.successRewardGiven = true;
+          if(this.state.options.fireConfetti) this.state.options.fireConfetti();
+          this.say(`우와 맞았어! ${koreanVehicleCount(this.state.currentAnswer)} 대야!`, true);
+        }
+        this.renderRoundActions();
         return;
       }
 
@@ -603,20 +600,87 @@
       this.setManagedTimeout(()=>{ if(flash.parentNode) flash.parentNode.removeChild(flash); }, 600);
     },
 
-    runCountingHighlight:function(wrapper, done){
+    renderRoundActions:function(){
+      const area = this.query('#ncChoicesArea');
+      if(!area) return;
+      const roundId = this.state.roundId;
+      area.classList.add('nc-round-actions');
+      area.innerHTML = `
+        <div class="nc-round-result" role="status">🌟 ${this.state.currentAnswer}대, 맞았어!</div>
+        <button type="button" class="nc-round-next" id="ncContinueBtn">${this.state.currentLevel === TOTAL_ROUNDS ? '🏁 다 셌어요' : '▶ 다음 놀이'}</button>
+        <button type="button" class="nc-round-recount" id="ncRecountBtn" aria-pressed="false">🔎 다시 세어 보기</button>`;
+      area.querySelector('#ncContinueBtn').onclick = ()=>this.advanceRound(roundId);
+      area.querySelector('#ncRecountBtn').onclick = ()=>{
+        if(this.state.roundId !== roundId || !this.state.roundAnswered) return;
+        if(this.state.recountActive) this.stopRecount();
+        else this.runCountingHighlight(this.query('#ncVehiclesWrapper'));
+      };
+    },
+
+    advanceRound:function(roundId){
+      if(!this.state.container || !this.state.roundAnswered || this.state.roundId !== roundId) return;
+      // The child explicitly moves on: stop the previous quantity's feedback
+      // before showing a different group of vehicles.
+      try { window.SihyeonVoice?.stop?.(); } catch(_) {}
+      try { window.speechSynthesis?.cancel?.(); } catch(_) {}
+      this.state.roundAnswered = false;
+      this.state.currentLevel += 1;
+      this.loadNextQuestion();
+    },
+
+    stopRecount:function(){
+      this.state.recountToken += 1;
+      this.state.recountActive = false;
+      this.state.recountTimerIds.forEach(id => clearTimeout(id));
+      const cancelled = new Set(this.state.recountTimerIds);
+      this.state.timeoutIds = this.state.timeoutIds.filter(id => !cancelled.has(id));
+      this.state.recountTimerIds = [];
+      const wrapper = this.query('#ncVehiclesWrapper');
+      if(wrapper){
+        wrapper.classList.remove('nc-recounting');
+        wrapper.querySelectorAll('.nc-count-dot').forEach(dot => dot.remove());
+      }
+      const button = this.query('#ncRecountBtn');
+      if(button){
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = '🔎 다시 세어 보기';
+      }
+    },
+
+    runCountingHighlight:function(wrapper){
+      this.stopRecount();
+      if(!wrapper || !this.state.roundAnswered || !this.state.container) return;
+      this.state.recountActive = true;
+      wrapper.classList.add('nc-recounting');
+      const token = this.state.recountToken;
+      const roundId = this.state.roundId;
+      const current = ()=>this.state.container && this.state.recountToken === token && this.state.roundId === roundId;
+      const button = this.query('#ncRecountBtn');
+      if(button){
+        button.setAttribute('aria-pressed', 'true');
+        button.textContent = '⏹ 세기 멈추기';
+      }
       const cells = Array.from(wrapper.querySelectorAll('.nc-vehicle-cell'));
       const delay = 650;
 
       cells.forEach((cell, i)=>{
-        this.setManagedTimeout(()=>{
+        this.state.recountTimerIds.push(this.setManagedTimeout(()=>{
+          if(!current()) return;
           const dot = document.createElement('div');
           dot.className = 'nc-count-dot';
           dot.textContent = i + 1;
           cell.appendChild(dot);
-        }, i * delay);
+        }, i * delay));
       });
 
-      this.setManagedTimeout(done, cells.length * delay + 300);
+      this.state.recountTimerIds.push(this.setManagedTimeout(()=>{
+        if(!current()) return;
+        this.state.recountActive = false;
+        if(button){
+          button.setAttribute('aria-pressed', 'false');
+          button.textContent = '🔎 다시 세어 보기';
+        }
+      }, cells.length * delay + 300));
     },
 
     driveOut:function(wrapper, done){
@@ -879,6 +943,7 @@
     },
 
     clearTimers:function(){
+      this.stopRecount();
       this.state.timeoutIds.forEach(id => clearTimeout(id));
       this.state.timeoutIds = [];
     },
@@ -1155,6 +1220,16 @@
         .nc-choice-dots--many .nc-choice-dot{width:6px;height:6px}
         .nc-choice-many .nc-choice-num{font-size:clamp(30px,5vw,64px)}
         .nc-idle-anim{animation:none}
+        .number-count-root .nc-choices-area.nc-round-actions{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:8px;max-width:520px;margin:auto}
+        .nc-round-result{text-align:center;font-size:clamp(16px,3.5vw,23px);font-weight:bold;color:#164b50;word-break:keep-all;line-height:1.35}
+        .nc-round-actions button{min-height:48px;border:3px solid white;border-radius:16px;padding:10px 12px;font:inherit;font-size:clamp(14px,3vw,20px);font-weight:bold;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.14);line-height:1.35;word-break:keep-all}
+        .nc-round-next{background:#17695a;color:#fff}
+        .nc-round-recount{background:#fff7cf;color:#294d52}
+        .nc-round-actions button:focus-visible{outline:3px solid #192e51;outline-offset:3px}
+        .nc-recounting .nc-tap-count{visibility:hidden}
+        .nc-recounting .nc-count-dot{top:0;left:auto;right:0;transform:none;width:28px;height:28px;font-size:16px;border-width:2px;box-shadow:0 2px 4px #0003}
+        @media(orientation:portrait){.number-count-root .nc-choices-area.nc-round-actions{display:grid;grid-template-columns:1fr 1fr}.nc-round-result{grid-column:1/-1}}
+        @media(orientation:landscape) and (max-height:520px){.nc-round-actions button{font-size:16px;padding:10px 4px}.nc-round-result{font-size:18px}}
         @media(orientation:landscape) and (max-height:520px){.number-count-landscape{grid-template-columns:120px minmax(0,1fr) 120px;gap:6px}.number-count-landscape .nc-difficulty-tabs{display:flex;flex-direction:column;gap:3px}.nc-range-label{font-size:14px}.nc-difficulty-tabs select{min-height:46px;font-size:16px;padding:5px}.number-count-landscape .nc-vehicle-cat-tab{font-size:14px;min-height:44px;padding:4px}.number-count-landscape .nc-toy-block-btn{min-height:48px;height:54px;width:104px}.number-count-landscape .nc-choice-num{font-size:30px}.number-count-landscape .nc-choice-dots{display:none}.nc-objects-area{overflow-y:auto}.nc-many{min-height:calc(var(--nc-rows)*54px)}}
       `;
       document.head.appendChild(style);
@@ -1185,6 +1260,8 @@
       this.state.correctCount = 0;
       this.state.wrongCount = 0;
       this.state.isAnimating = false;
+      this.state.roundAnswered = false;
+      this.state.roundId += 1;
       this.state.difficulty = 1;
       this.state.selectedVehicleCategory = 'all';
       this.state.gameVehicles = [];

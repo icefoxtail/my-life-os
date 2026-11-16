@@ -125,7 +125,11 @@
     for (const c of candidates) if (!nearest || c.board.filter((v, i) => v !== board[i]).length < nearest.board.filter((v, i) => v !== board[i]).length) nearest = c;
     return { ok: false, code: 'pattern', wrong: nearest ? nearest.board.map((v, i) => v !== board[i] ? i : -1).filter(i => i >= 0) : [] };
   }
-  const editSnapshot = s => ({ board: s.board.slice(), seed: s.seed.slice(), chosenPeriod: s.chosenPeriod });
+  const editSnapshot = (s, rememberSelection = false) => {
+    const snapshot = { board: s.board.slice(), seed: s.seed.slice(), chosenPeriod: s.chosenPeriod };
+    if (rememberSelection) snapshot.selected = s.selected;
+    return snapshot;
+  };
   function reduce(state, action) {
     if (!state || !action) return state;
     const task = resolveTask(state); if (!task) return state;
@@ -138,11 +142,24 @@
       const result = validateBoard(task, state.board, state); const n = clone(state); n.lastResult = result;
       if (result.ok) { n.phase = 'RUNNING'; n.departures++; } return n;
     }
-    if (action.type === 'undo') { if (!state.history.length) return state; const n = clone(state), h = n.history.pop(); n.board = h.board; n.seed = h.seed; n.chosenPeriod = h.chosenPeriod; n.lastResult = null; return n; }
+    if (action.type === 'undo') {
+      if (!state.history.length) return state;
+      const n = clone(state), h = n.history.pop();
+      n.board = h.board; n.seed = h.seed; n.chosenPeriod = h.chosenPeriod;
+      if (task.kind === 'free') {
+        n.size = h.board.length;
+        if (task.palette.includes(h.selected)) n.selected = h.selected;
+      }
+      n.lastResult = null; return n;
+    }
     const n = clone(state); let changed = false;
     function editable(i) { return Number.isInteger(i) && i >= 0 && i < task.size && task.clues[i] === null; }
     function validToken(v) { return task.palette.includes(v); }
-    if (action.type === 'place' && editable(action.index) && validToken(action.token || state.selected)) {
+    if (action.type === 'resize' && task.kind === 'free' && Number.isInteger(action.size) && action.size >= 2 && action.size <= 12 && action.size !== state.size) {
+      n.size = action.size;
+      n.board = Array.from({ length: action.size }, (_, i) => state.board[i] ?? null);
+      changed = true;
+    } else if (action.type === 'place' && editable(action.index) && validToken(action.token || state.selected)) {
       const token = action.token || state.selected;
       if (n.board[action.index] !== token) { n.board[action.index] = token; changed = true; }
     } else if (action.type === 'remove' && editable(action.index) && n.board[action.index] !== null) { n.board[action.index] = null; changed = true;
@@ -154,17 +171,25 @@
     } else if (action.type === 'copy' && task.seedSize && n.seed.every(validToken)) { const b = repeat(n.seed, task.size); if (b.some((v, i) => v !== n.board[i])) { n.board = b; changed = true; }
     } else if (action.type === 'period' && task.kind === 'unit' && task.periodChoices.includes(action.period) && n.chosenPeriod !== action.period) { n.chosenPeriod = action.period; changed = true; }
     if (!changed) return state;
-    n.history = state.history.concat([editSnapshot(state)]).slice(-24); n.lastResult = null; return n;
+    n.history = state.history.concat([editSnapshot(state, action.type === 'resize')]).slice(-24); n.lastResult = null; return n;
   }
   function restoreState(raw) {
     if (!raw || raw.version !== 1 || typeof raw.taskId !== 'string' || !['BUILDING', 'RUNNING', 'ARRIVED'].includes(raw.phase)) return null;
     const task = resolveTask(raw); if (!task || raw.taskId !== task.id || raw.size !== task.size || raw.theme !== task.theme) return null;
-    const valid = (b, seed) => Array.isArray(b) && b.length === task.size && b.every((v, i) => (v === null || task.palette.includes(v)) && (task.clues[i] === null || task.clues[i] === v)) && Array.isArray(seed) && seed.length === (task.seedSize || 0) && seed.every(v => v === null || task.palette.includes(v));
+    const valid = (b, seed, boardTask = task) => Array.isArray(b) && b.length === boardTask.size && b.every((v, i) => (v === null || boardTask.palette.includes(v)) && (boardTask.clues[i] === null || boardTask.clues[i] === v)) && Array.isArray(seed) && seed.length === (boardTask.seedSize || 0) && seed.every(v => v === null || boardTask.palette.includes(v));
     if (!valid(raw.board, raw.seed) || !task.palette.includes(raw.selected)) return null;
     if (raw.chosenPeriod !== null && !(task.periodChoices || []).includes(raw.chosenPeriod)) return null;
     const n = createState(task); n.board = raw.board.slice(); n.seed = raw.seed.slice(); n.selected = raw.selected; n.chosenPeriod = raw.chosenPeriod;
     n.departures = Number.isSafeInteger(raw.departures) && raw.departures >= 0 ? raw.departures : 0;
-    n.history = Array.isArray(raw.history) ? raw.history.filter(h => h && valid(h.board, h.seed) && (h.chosenPeriod === null || (task.periodChoices || []).includes(h.chosenPeriod))).slice(-24).map(editSnapshot) : [];
+    n.history = Array.isArray(raw.history) ? raw.history.filter(h => {
+      // Version-1 snapshots already contain their board length. Free editing
+      // may now restore a different length; course clues remain fixed.
+      const historyTask = task.kind === 'free' && Array.isArray(h?.board) && h.board.length >= 2 && h.board.length <= 12
+        ? createFreeTask(task.theme, h.board.length) : task;
+      return h && valid(h.board, h.seed, historyTask)
+        && (h.chosenPeriod === null || (task.periodChoices || []).includes(h.chosenPeriod))
+        && (!owns(h, 'selected') || (task.kind === 'free' && task.palette.includes(h.selected)));
+    }).slice(-24).map(h => editSnapshot(h, owns(h, 'selected'))) : [];
     // A reload must never resume a timer. An interrupted trip is parked and editable.
     n.phase = raw.phase === 'RUNNING' ? 'BUILDING' : raw.phase;
     if (n.phase === 'ARRIVED' && !validateBoard(task, n.board, n).ok) n.phase = 'BUILDING';
