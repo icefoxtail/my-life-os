@@ -7,7 +7,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
-const sourceRoot = process.argv[2] ? path.resolve(process.argv[2]) : root;
+const alternateRoot = process.argv.slice(2).find(arg => !arg.startsWith('--'));
+const sourceRoot = alternateRoot ? path.resolve(alternateRoot) : root;
+const constructionOnly = process.argv.includes('--construction-only');
 const catalog = JSON.parse(fs.readFileSync(path.join(root, 'assets/vehicles/vehicles_manifest.json'), 'utf8')).vehicles;
 const construction = JSON.parse(fs.readFileSync(path.join(root, 'assets/vehicles/construction_manifest.json'), 'utf8'));
 
@@ -252,6 +254,6 @@ function testConstruction() {
 }
 
 (async () => {
-  const boards = await testMemory(); testConstruction();
-  console.log(`PASS ${boards} memory catalog/count boards; rescue 8 and police 16 cross-copy matching, reconstructed markup, remaining hints, completion, stale timers, emoji and empty data; construction 27 vehicles across 7 missions, multiple valid roles, safe distractors and sparse catalogs.`);
+  const boards = constructionOnly ? 0 : await testMemory(); testConstruction();
+  console.log(`PASS ${constructionOnly ? '' : `${boards} memory catalog/count boards; rescue 8 and police 16 cross-copy matching, reconstructed markup, remaining hints, completion, stale timers, emoji and empty data; `}construction 27 vehicles across 7 missions, multiple valid roles, safe distractors and sparse catalogs.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });
