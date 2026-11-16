@@ -1,6 +1,9 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.7.0-art-reference';
+const CACHE_NAME = 'sihyeon-play-os-v1.8.0-quantity-change';
 
 const ASSETS = [
+  './js/games/quantity-change.js',
+  './css/games/quantity-change.css',
+  './assets/games/quantity-change/card.svg',
   './js/games/picture-arithmetic.js',
   './css/games/picture-arithmetic.css',
   './assets/games/picture-arithmetic/card.svg',

@@ -69,8 +69,12 @@
   }
   function inspect(state) {
     const all = slots(state);
+    const filling = state.mode === 'fill';
     return {
       chosen: state.quantity, visible: all.filter(s => s.filled).length, goal: state.goal,
+      initialNeed: filling ? state.goal - state.quantity : 0,
+      added: filling ? state.count - state.quantity : 0,
+      stillNeeded: filling ? state.goal - state.count : 0,
       frames: all.length / 10, capacity: all.length, empty: all.filter(s => !s.filled).length,
       firstColor: state.mode === 'colors' ? state.split : state.count,
       secondColor: state.mode === 'colors' ? state.quantity - state.split : 0,
@@ -140,9 +144,10 @@
       steps.push({ id: 'garden-guide', text: guide[0], enText: guide[1], kind: 'guide' });
     }
     if (state.mode === 'fill' && state.quantity < state.goal) {
+      const need = state.goal - state.quantity;
       steps.push({ id: 'garden-starting-flowers', kind: 'baseline', ordinal: state.quantity,
-        text: (state.quantity === 0 ? '아직 꽃이 없어요.' : '꽃이 ' + Q().quantityText(state.quantity, '송이', 'ko') + ' 있어요.') + ' ' + Q().quantityText(state.goal, '송이', 'ko') + '까지 채워요.',
-        enText: (state.quantity === 0 ? 'There are no flowers yet.' : state.quantity === 1 ? 'There is one flower.' : 'There are ' + Q().quantityText(state.quantity, '송이', 'en') + '.') + ' Let us fill the garden to ' + Q().quantityText(state.goal, '송이', 'en') + '.' });
+        text: (state.quantity === 0 ? '아직 꽃이 없어요.' : '꽃이 ' + Q().quantityText(state.quantity, '송이', 'ko') + ' 있어요.') + ' ' + Q().quantityText(need, '송이', 'ko') + '를 더 심으면 ' + Q().quantityText(state.goal, '송이', 'ko') + '가 돼요.',
+        enText: (state.quantity === 0 ? 'There are no flowers yet.' : state.quantity === 1 ? 'There is one flower.' : 'There are ' + Q().quantityText(state.quantity, '송이', 'en') + '.') + ' Add ' + Q().quantityText(need, '송이', 'en') + ' to make ' + Q().quantityText(state.goal, '송이', 'en') + '.' });
     }
     const firstOrdinal = state.mode === 'fill' ? state.quantity + 1 : 1;
     for (let n = firstOrdinal; n <= state.goal; n++) {
@@ -153,7 +158,15 @@
     const totals = inspect(Object.assign({}, state, { count: state.goal }));
     let ko = state.goal === 0 ? '꽃이 하나도 없어요.' : '꽃이 모두 ' + Q().quantityText(state.goal, '송이', 'ko') + '예요.';
     let en = state.goal === 0 ? 'There are no flowers.' : state.goal === 1 ? 'There is one flower.' : 'There are ' + Q().quantityText(state.goal, '송이', 'en') + '.';
-    if (state.mode === 'colors' && state.quantity > 0) {
+    if (state.mode === 'fill') {
+      const need = state.goal - state.quantity;
+      ko = need === 0
+        ? '이미 ' + Q().quantityText(state.goal, '송이', 'ko') + '로 가득 찼어요. 더 심을 꽃은 없어요.'
+        : (state.quantity === 0 ? '빈 화단에 ' : Q().quantityText(state.quantity, '송이', 'ko') + '에 ') + Q().quantityText(need, '송이', 'ko') + '를 더해서, 모두 ' + Q().quantityText(state.goal, '송이', 'ko') + '예요.';
+      en = need === 0
+        ? 'The garden already has ' + Q().quantityText(state.goal, '송이', 'en') + '. No more flowers are needed.'
+        : (state.quantity === 0 ? 'Zero flowers' : Q().quantityText(state.quantity, '송이', 'en')) + ' and ' + Q().countWord(need, 'native', 'en') + ' more make ' + Q().quantityText(state.goal, '송이', 'en') + '.';
+    } else if (state.mode === 'colors' && state.quantity > 0) {
       const second = state.quantity - state.split;
       const colorKo = (id, n) => flower(id).name + '은 ' + (n === 0 ? '없어요.' : Q().quantityText(n, '송이', 'ko') + '예요.');
       const colorEn = (id, n) => Q().countWord(n, 'native', 'en') + ' ' + id + (n === 1 ? ' flower' : ' flowers');
@@ -219,8 +232,17 @@
   }
   function equationHtml() {
     const s = view.state; const d = inspect(s);
+    // Keep the original amount and the complete addend visible even while
+    // planting. Progress is a separate remaining count in the stage heading.
+    if (s.mode === 'fill') return '<span data-fill-start>' + s.quantity + '</span><span>＋</span><span class="tfg-complement" data-fill-addend>' + d.initialNeed + '</span><span>＝</span><strong data-fill-goal>' + s.goal + '</strong>';
     if (s.mode === 'colors') return '<span class="tfg-equation-flower">' + flowerSvg(s.flower) + '<b>' + s.split + '</b></span><span>＋</span><span class="tfg-equation-flower">' + flowerSvg(partner(s.flower)) + '<b>' + (s.quantity - s.split) + '</b></span><span>＝</span><strong>' + s.quantity + '</strong>';
     return '<span class="tfg-group-equation">' + d.groups.filter((n, i) => n > 0 || i === 0).join(' ＋ ') + '</span><span>＝</span><strong>' + s.count + '</strong>';
+  }
+  function fillNeedText() {
+    const remaining = inspect(view.state).stillNeeded;
+    return language() === 'en'
+      ? remaining > 0 ? remaining + ' more' : 'All filled!'
+      : remaining > 0 ? remaining + '송이 더' : '가득 찼어요!';
   }
   function modalHtml() {
     if (!view.modal) return '';
@@ -231,12 +253,13 @@
     if (!view.container || !view.state) return;
     const s = view.state;
     const titles = { number: '내 숫자', free: '자유 정원', fill: '열 칸 채우기', colors: '두 색 꽃' };
-    view.container.innerHTML = '<section class="tfg-app" data-mode="' + s.mode + '" data-phase="' + s.phase + '" data-age="' + view.age + '"><header class="tfg-top"><button type="button" class="tfg-icon-button tfg-home" data-action="home" aria-label="숫자놀이터로">' + icon('home') + '</button><div class="tfg-brand"><small>꽃이 하나, 둘, 셋</small><h1>열 칸 꽃정원</h1></div><button type="button" class="tfg-icon-button" data-action="replay" aria-label="처음부터 다시 세기">' + icon('replay') + '</button><button type="button" class="tfg-icon-button" data-action="mute" aria-label="' + (view.muted ? '소리 켜기' : '소리 끄기') + '" aria-pressed="' + view.muted + '">' + icon(view.muted ? 'mute' : 'hear') + '</button></header><nav class="tfg-mode-bar" aria-label="꽃정원 놀이 선택"><div class="tfg-modes">' + MODES.map(mode => '<button type="button" data-action="mode" data-value="' + mode + '" aria-pressed="' + (s.mode === mode) + '" aria-label="' + titles[mode] + '">' + modeMark(mode) + '<span>' + titles[mode] + '</span></button>').join('') + '</div><button type="button" class="tfg-age-button" data-action="settings" aria-label="' + view.age + '세 놀이 설정"><b>' + view.age + '</b><span>세 ⚙</span></button></nav><main class="tfg-workspace"><section class="tfg-stage" aria-label="꽃이 피는 정원"><div class="tfg-stage-heading"><div class="tfg-goal">' + (s.mode === 'fill' ? '<small>고른 수 → 채울 수</small><strong>' + s.quantity + '<span> → </span>' + s.goal + '</strong>' : '<small>' + (s.mode === 'colors' ? '두 색, 같은 수' : '내가 고른 꽃') + '</small><strong>' + s.quantity + '<span> 송이</span></strong>') + '</div><div class="tfg-counting" aria-live="polite" aria-atomic="true"><b data-count-value>' + (view.lastOrdinal || (s.quantity === 0 ? '0' : '♪')) + '</b><span data-count-word>' + esc(view.lastWord || (s.quantity === 0 ? '없어요' : '함께 세어요')) + '</span></div></div>' + framesHtml() + '<div class="tfg-equation" aria-label="화단별 꽃 수">' + equationHtml() + '</div></section><aside class="tfg-controls" aria-label="꽃과 숫자 선택"><div class="tfg-flower-choices" aria-label="꽃 선택">' + FLOWERS.map(f => '<button type="button" data-action="flower" data-value="' + f.id + '" aria-label="' + f.name + ' 선택" aria-pressed="' + (s.flower === f.id) + '">' + flowerSvg(f.id) + '<span>' + f.name + '</span></button>').join('') + '</div><div class="tfg-quantity-control"><button type="button" class="tfg-step-button" data-action="less" aria-label="꽃 한 송이 덜"' + (s.quantity === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" class="tfg-quantity-button" data-action="number-picker" aria-label="숫자 고르기, 현재 ' + s.quantity + '송이"><strong>' + s.quantity + '</strong><span>송이 ▦</span></button><button type="button" class="tfg-step-button" data-action="more" aria-label="꽃 한 송이 더"' + (s.quantity === 30 ? ' disabled' : '') + '>' + icon('plus') + '</button></div><div class="tfg-quick-numbers" aria-label="자주 고르는 숫자">' + [5, 9, 10, 15, 20, 30].map(n => '<button type="button" data-action="quantity" data-value="' + n + '" aria-pressed="' + (s.quantity === n) + '">' + n + '</button>').join('') + '</div>' + (s.mode === 'colors' ? '<div class="tfg-split-controls"><div>' + flowerSvg(s.flower) + '<strong>' + s.split + '</strong><span>＋</span>' + flowerSvg(partner(s.flower)) + '<strong>' + (s.quantity - s.split) + '</strong></div><button type="button" data-action="split-less" aria-label="첫 번째 색 꽃 한 송이를 두 번째 색으로 바꾸기"' + (s.split === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" data-action="split-more" aria-label="두 번째 색 꽃 한 송이를 첫 번째 색으로 바꾸기"' + (s.split === s.quantity ? ' disabled' : '') + '>' + icon('plus') + '</button></div>' : '') + '<div class="tfg-reading" role="group" aria-label="숫자 읽는 방식"><button type="button" data-action="reading" data-value="native" aria-pressed="' + (s.reading === 'native') + '">🔊 하나·둘</button><button type="button" data-action="reading" data-value="sino" aria-pressed="' + (s.reading === 'sino') + '">🔊 일·이</button></div><div class="tfg-control-bottom"><button type="button" data-action="undo" aria-label="이전 선택으로 돌아가기"' + (!view.undo.length ? ' disabled' : '') + '>' + icon('undo') + '<span>되돌리기</span></button><p class="tfg-voice-note"' + (view.voiceFailed ? '' : ' hidden') + '>소리가 없어도 꽃을 함께 볼 수 있어요.</p></div></aside></main>' + modalHtml() + '</section>';
+    view.container.innerHTML = '<section class="tfg-app" data-mode="' + s.mode + '" data-phase="' + s.phase + '" data-age="' + view.age + '"><header class="tfg-top"><button type="button" class="tfg-icon-button tfg-home" data-action="home" aria-label="숫자놀이터로">' + icon('home') + '</button><div class="tfg-brand"><small>꽃이 하나, 둘, 셋</small><h1>열 칸 꽃정원</h1></div><button type="button" class="tfg-icon-button" data-action="replay" aria-label="처음부터 다시 세기">' + icon('replay') + '</button><button type="button" class="tfg-icon-button" data-action="mute" aria-label="' + (view.muted ? '소리 켜기' : '소리 끄기') + '" aria-pressed="' + view.muted + '">' + icon(view.muted ? 'mute' : 'hear') + '</button></header><nav class="tfg-mode-bar" aria-label="꽃정원 놀이 선택"><div class="tfg-modes">' + MODES.map(mode => '<button type="button" data-action="mode" data-value="' + mode + '" aria-pressed="' + (s.mode === mode) + '" aria-label="' + titles[mode] + '">' + modeMark(mode) + '<span>' + titles[mode] + '</span></button>').join('') + '</div><button type="button" class="tfg-age-button" data-action="settings" aria-label="' + view.age + '세 놀이 설정"><b>' + view.age + '</b><span>세 ⚙</span></button></nav><main class="tfg-workspace"><section class="tfg-stage" aria-label="꽃이 피는 정원"><div class="tfg-stage-heading"><div class="tfg-goal">' + (s.mode === 'fill' ? '<small data-fill-need>' + fillNeedText() + '</small><strong>' + s.quantity + '<span> → </span>' + s.goal + '</strong>' : '<small>' + (s.mode === 'colors' ? '두 색, 같은 수' : '내가 고른 꽃') + '</small><strong>' + s.quantity + '<span> 송이</span></strong>') + '</div><div class="tfg-counting" aria-live="polite" aria-atomic="true"><b data-count-value>' + (view.lastOrdinal || (s.quantity === 0 ? '0' : '♪')) + '</b><span data-count-word>' + esc(view.lastWord || (s.quantity === 0 ? '없어요' : '함께 세어요')) + '</span></div></div>' + framesHtml() + '<div class="tfg-equation" aria-label="화단별 꽃 수">' + equationHtml() + '</div></section><aside class="tfg-controls" aria-label="꽃과 숫자 선택"><div class="tfg-flower-choices" aria-label="꽃 선택">' + FLOWERS.map(f => '<button type="button" data-action="flower" data-value="' + f.id + '" aria-label="' + f.name + ' 선택" aria-pressed="' + (s.flower === f.id) + '">' + flowerSvg(f.id) + '<span>' + f.name + '</span></button>').join('') + '</div><div class="tfg-quantity-control"><button type="button" class="tfg-step-button" data-action="less" aria-label="꽃 한 송이 덜"' + (s.quantity === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" class="tfg-quantity-button" data-action="number-picker" aria-label="숫자 고르기, 현재 ' + s.quantity + '송이"><strong>' + s.quantity + '</strong><span>송이 ▦</span></button><button type="button" class="tfg-step-button" data-action="more" aria-label="꽃 한 송이 더"' + (s.quantity === 30 ? ' disabled' : '') + '>' + icon('plus') + '</button></div><div class="tfg-quick-numbers" aria-label="자주 고르는 숫자">' + [5, 9, 10, 15, 20, 30].map(n => '<button type="button" data-action="quantity" data-value="' + n + '" aria-pressed="' + (s.quantity === n) + '">' + n + '</button>').join('') + '</div>' + (s.mode === 'colors' ? '<div class="tfg-split-controls"><div>' + flowerSvg(s.flower) + '<strong>' + s.split + '</strong><span>＋</span>' + flowerSvg(partner(s.flower)) + '<strong>' + (s.quantity - s.split) + '</strong></div><button type="button" data-action="split-less" aria-label="첫 번째 색 꽃 한 송이를 두 번째 색으로 바꾸기"' + (s.split === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" data-action="split-more" aria-label="두 번째 색 꽃 한 송이를 첫 번째 색으로 바꾸기"' + (s.split === s.quantity ? ' disabled' : '') + '>' + icon('plus') + '</button></div>' : '') + '<div class="tfg-reading" role="group" aria-label="숫자 읽는 방식"><button type="button" data-action="reading" data-value="native" aria-pressed="' + (s.reading === 'native') + '">🔊 하나·둘</button><button type="button" data-action="reading" data-value="sino" aria-pressed="' + (s.reading === 'sino') + '">🔊 일·이</button></div><div class="tfg-control-bottom"><button type="button" data-action="undo" aria-label="이전 선택으로 돌아가기"' + (!view.undo.length ? ' disabled' : '') + '>' + icon('undo') + '<span>되돌리기</span></button><p class="tfg-voice-note"' + (view.voiceFailed ? '' : ' hidden') + '>소리가 없어도 꽃을 함께 볼 수 있어요.</p></div></aside></main>' + modalHtml() + '</section>';
     paintProgress();
   }
   function paintProgress() {
     if (!view.container || !view.state) return;
     const s = view.state;
+    const details = inspect(s);
     view.container.querySelector('.tfg-app')?.setAttribute('data-phase', s.phase);
     slots(s).forEach(slot => {
       const node = view.container.querySelector('[data-slot="' + slot.ordinal + '"]');
@@ -248,10 +271,23 @@
       node.dataset.active = String(slot.active);
       node.setAttribute('aria-label', slot.filled ? slot.ordinal + '번째 꽃' : '빈 칸');
     });
-    inspect(s).groups.forEach((n, index) => { const node = view.container.querySelector('[data-frame-count="' + index + '"]'); if (node) node.textContent = n; });
+    details.groups.forEach((n, index) => { const node = view.container.querySelector('[data-frame-count="' + index + '"]'); if (node) node.textContent = n; });
+    const need = view.container.querySelector('[data-fill-need]');
+    if (need) {
+      need.textContent = fillNeedText();
+      need.dataset.initialNeed = String(details.initialNeed);
+      need.dataset.added = String(details.added);
+      need.dataset.stillNeeded = String(details.stillNeeded);
+    }
     const count = view.container.querySelector('[data-count-value]'); if (count) count.textContent = view.lastOrdinal || (s.quantity === 0 ? '0' : '♪');
     const word = view.container.querySelector('[data-count-word]'); if (word) word.textContent = view.lastWord || (s.quantity === 0 ? '없어요' : '함께 세어요');
-    const equation = view.container.querySelector('.tfg-equation'); if (equation) equation.innerHTML = equationHtml();
+    const equation = view.container.querySelector('.tfg-equation');
+    if (equation) {
+      equation.innerHTML = equationHtml();
+      equation.setAttribute('aria-label', s.mode === 'fill'
+        ? language() === 'en' ? 'Starting flowers plus more flowers equals the goal' : '처음 꽃 수 더하기 더 심을 꽃 수는 목표 수'
+        : '화단별 꽃 수');
+    }
     revealActiveFlower();
   }
   function revealActiveFlower() {

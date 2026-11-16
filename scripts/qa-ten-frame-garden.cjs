@@ -10,6 +10,20 @@ vm.runInNewContext(fs.readFileSync(path.join(root, 'js/games/ten-frame-garden.js
 const M = sandbox.window.SihyeonTenFrameGardenModel;
 assert(M && sandbox.window.SihyeonGames.tenFrameGarden);
 let cases = 0;
+let fillPositions = 0;
+function checkNeeds(state) {
+  const q = M.inspect(state);
+  if (state.mode === 'fill') {
+    assert.equal(q.initialNeed, state.goal - state.quantity);
+    assert.equal(q.added, state.count - state.quantity);
+    assert.equal(q.stillNeeded, state.goal - state.count);
+    assert.equal(q.added + q.stillNeeded, q.initialNeed);
+    assert.equal(q.stillNeeded, M.slots(state).filter(s => !s.filled).length, 'Current need equals the actual empty slots');
+    fillPositions++;
+  } else {
+    assert.equal(q.initialNeed, 0); assert.equal(q.added, 0); assert.equal(q.stillNeeded, 0);
+  }
+}
 for (const mode of ['number', 'free', 'fill', 'colors']) {
   for (let n = 0; n <= 30; n++) {
     let state = M.createState({ quantity: n, mode });
@@ -17,6 +31,7 @@ for (const mode of ['number', 'free', 'fill', 'colors']) {
     const expectedGoal = mode === 'fill' ? Math.min(30, (Math.floor(n / 10) + 1) * 10) : n;
     assert.equal(state.quantity, n);
     assert.equal(state.goal, expectedGoal);
+    checkNeeds(state);
     assert.equal(M.slots(state).filter(s => s.filled).length, n, 'N flowers appear before automatic counting');
     assert.equal(M.slots(state).length, Math.max(10, Math.ceil(expectedGoal / 10) * 10));
     assert.equal(new Set(M.slots(state).map(s => s.id)).size, M.slots(state).length);
@@ -26,16 +41,19 @@ for (const mode of ['number', 'free', 'fill', 'colors']) {
       assert.equal(state.active, i);
       assert.equal(state.quantity, n, 'chosen number stays separate from fill result');
       assert.equal(M.slots(state).filter(s => s.filled).length, mode === 'fill' ? Math.max(n, i) : n);
+      checkNeeds(state);
     }
     assert.equal(JSON.stringify(old), before, 'reducer must not mutate prior state');
     state = M.reduce(state, { type: 'COMPLETE' });
     assert.equal(state.count, expectedGoal);
     assert.equal(state.active, 0);
+    checkNeeds(state);
     assert.equal(M.inspect(state).visible, expectedGoal);
     assert.equal(M.inspect(state).groups.reduce((a, b) => a + b, 0), expectedGoal);
     state = M.reduce(state, { type: 'REPLAY' });
     assert.equal(state.count, n, 'replay restores the chosen starting amount');
     assert.equal(state.active, 0);
+    checkNeeds(state);
     cases++;
   }
 }
@@ -73,4 +91,4 @@ const stopped = M.reduce(M.reduce(start, { type: 'STEP', ordinal: 5 }), { type: 
 assert.equal(stopped.active, 0); assert.equal(stopped.count, 15);
 assert.equal(M.nextTen(0), 10); assert.equal(M.nextTen(10), 20); assert.equal(M.nextTen(20), 30); assert.equal(M.nextTen(30), 30);
 assert.deepEqual(Array.from(M.inspect(M.createState({ quantity: 15 })).groups), [10, 5]);
-console.log(`PASS: ${cases} garden quantity/fill/color states; 0-30 counts, fixed totals, unique objects, restore and cancellation state. Browser rendering and real speech are NOT_RUN.`);
+console.log(`PASS: ${cases} garden quantity/fill/color states and ${fillPositions} fill-position complement checks; 0-30 counts, fixed totals, unique objects, restore and cancellation state. Browser rendering and real speech are NOT_RUN.`);

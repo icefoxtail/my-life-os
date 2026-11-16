@@ -14,6 +14,7 @@ on:
       - 'scripts/qa-ten-frame-garden-browser.py'
       - 'scripts/qa-picture-arithmetic-browser.py'
       - 'scripts/qa-art-reference-browser.py'
+      - 'scripts/qa-quantity-change*'
       - '.github/workflows/phase2-browser-release.yml'
   workflow_dispatch:
   push:
@@ -22,6 +23,11 @@ on:
       - 'index.html'
       - 'js/games/pattern-train*'
       - 'css/games/pattern-train.css'
+      - 'js/games/quantity*'
+      - 'css/games/quantity-change.css'
+      - 'js/games/ten-frame-garden.js'
+      - 'css/games/ten-frame-garden.css'
+      - 'scripts/qa-quantity-change*'
       - 'scripts/qa-phase2-release-browser.py'
       - '.github/workflows/phase2-browser-release.yml'
 permissions:
@@ -65,7 +71,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      PLAYGROUND_LIVE_GAME: art-reference
+      PLAYGROUND_LIVE_GAMES: quantity-change ten-frame-garden
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -78,7 +84,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import hashlib, json, pathlib, time, urllib.request
-          paths = ['sw.js', 'index.html', 'js/games/art-zone.js', 'css/play-settings.css']
+          paths = ['sw.js', 'index.html', 'js/games/quantity-play-model.js', 'js/games/quantity-change.js', 'css/games/quantity-change.css', 'assets/games/quantity-change/card.svg', 'js/games/ten-frame-garden.js', 'css/games/ten-frame-garden.css']
           expected = {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
           base = 'https://icefoxtail.github.io/my-life-os/'
           for attempt in range(48):
@@ -98,7 +104,12 @@ jobs:
               raise SystemExit('Pages has not served the exact main runtime; production UI verification did not run.')
           PY
       - name: Play the deployed stage through its real menu
-        run: python3 "scripts/qa-${PLAYGROUND_LIVE_GAME}-browser.py" --base https://icefoxtail.github.io/my-life-os/ --output qa-production-evidence
+        run: |
+          status=0
+          for game in $PLAYGROUND_LIVE_GAMES; do
+            python3 "scripts/qa-$game-browser.py" --base https://icefoxtail.github.io/my-life-os/ --output "qa-production-evidence/$game" || status=1
+          done
+          exit "$status"
       - name: Attach production menu and screenshot evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -119,7 +130,7 @@ jobs:
         run: |
           node scripts/qa-quantity-play-model.cjs
           node scripts/qa-quantity-sequencer.cjs
-          for suite in art-play-bridge ten-frame-garden picture-arithmetic; do
+          for suite in art-play-bridge ten-frame-garden picture-arithmetic quantity-change; do
             if test -f "scripts/qa-$suite.cjs"; then node "scripts/qa-$suite.cjs"; fi
           done
       - name: Install pinned browser harness
@@ -130,7 +141,7 @@ jobs:
       - name: Automatic picture counting and staged quantity games
         run: |
           status=0
-          for game in art-reference number-picture ten-frame-garden picture-arithmetic; do
+          for game in art-reference number-picture ten-frame-garden picture-arithmetic quantity-change; do
             if test -f "scripts/qa-$game-browser.py"; then
               python3 "scripts/qa-$game-browser.py" --output "qa-quantity-evidence/$game" || status=1
             fi

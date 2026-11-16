@@ -53,6 +53,8 @@
 .tfg-soil-dot{display:block;width:6px;height:6px;background:#d7c79d;border-radius:50%}
 .tfg-equation{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;font-size:24px;line-height:1}
 .tfg-equation>strong{font-weight:400;font-size:31px}.tfg-group-equation{white-space:nowrap}
+.tfg-complement{color:#285f4d;background:#d5e4c2;border-radius:9px;min-width:1.45em;padding:3px 7px;text-align:center}
+.tfg-goal [data-fill-need]{color:#285f4d;font-weight:700;white-space:nowrap}
 .tfg-equation-flower{display:flex;gap:4px;align-items:center}.tfg-equation-flower>.tfg-flower{width:25px;height:37px}.tfg-equation-flower b{font-weight:400}
 .tfg-controls{display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0;padding:14px 13px;border:2px solid #dfd7bc;border-radius:23px;background:var(--tfg-paper);box-shadow:0 4px 0 #e0d5ba;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .tfg-flower-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;min-width:0}
