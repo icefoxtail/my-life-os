@@ -13,6 +13,7 @@ on:
       - 'scripts/qa-number-picture-browser.py'
       - 'scripts/qa-ten-frame-garden-browser.py'
       - 'scripts/qa-picture-arithmetic-browser.py'
+      - 'scripts/qa-art-reference-browser.py'
       - '.github/workflows/phase2-browser-release.yml'
   workflow_dispatch:
   push:
@@ -82,7 +83,7 @@ jobs:
       - name: Automatic picture counting and staged quantity games
         run: |
           status=0
-          for game in number-picture ten-frame-garden picture-arithmetic; do
+          for game in art-reference number-picture ten-frame-garden picture-arithmetic; do
             if test -f "scripts/qa-$game-browser.py"; then
               python3 "scripts/qa-$game-browser.py" --output "qa-quantity-evidence/$game" || status=1
             fi
