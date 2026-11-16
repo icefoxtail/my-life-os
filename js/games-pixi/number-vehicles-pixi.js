@@ -76,6 +76,7 @@
 
   function getRuntime() { return window.SihyeonPixiRuntime || null; }
   function getMode() { return state.runtime?.getMetrics?.().mode || 'portrait'; }
+  function stillActive(runtime, object) { return !!runtime && !!object && state.runtime === runtime && !runtime.destroyed && !object.destroyed; }
 
   function getSceneConfig() {
     const mode = getMode();
@@ -366,17 +367,20 @@
   }
 
   async function returnPartToTray(item, part) {
+    const runtime = state.runtime;
     const origin = state.trayOrigins.get(part.id);
     if (!origin) return;
-    await state.runtime.returnTo(item, origin, { duration: 250 });
+    await runtime.returnTo(item, origin, { duration: 250 });
+    if (!stillActive(runtime, item)) return;
     item.scale.set(0.72);
     item.zIndex = 0;
   }
 
   async function handlePartDrop(item, part) {
     if (state.locked || state.phase !== 'build') return;
+    const runtime = state.runtime;
     const target = state.currentVehicle.parts[state.currentPartIndex];
-    const activeSlot = state.slotMap.get(target.id);
+    const activeSlot = target && state.slotMap.get(target.id);
     if (!target || !activeSlot) { returnPartToTray(item, part); return; }
     const distance = state.runtime.getDistance(item, activeSlot.point);
     const isNear = distance <= activeSlot.snapRadius;
@@ -384,8 +388,10 @@
     if (!isNear || !isCorrect) {
       state.locked = true;
       await state.runtime.wrongShake(item);
+      if (!stillActive(runtime, item)) return;
       speakGuide(`괜찮아, ${target.number}번을 찾아볼까?`);
       await returnPartToTray(item, part);
+      if (!stillActive(runtime, item)) return;
       state.locked = false;
       return;
     }
@@ -394,15 +400,18 @@
 
   async function placeCorrectPart(item, part, slot) {
     if (state.locked) return;
+    const runtime = state.runtime;
     state.locked = true;
     clearHint();
     item.eventMode = 'none'; item.cursor = 'default';
     await state.runtime.snapTo(item, { x: slot.x, y: slot.y, rotation: 0 }, { duration: 220, easing: 'backOut' });
+    if (!stillActive(runtime, item)) return;
     item.scale.set(1); item.zIndex = 30;
     slot.filled = true; slot.display.alpha = 0;
     state.placedPartIds.add(part.id);
     state.runtime.spawnParticles(slot.x, slot.y, { count: 18, colors: [COLOR_HEX[part.color] || 0xffffff, 0xffffff, 0xffd93d], duration: 620 });
     await state.runtime.successPop(item, { amount: 1.12 });
+    if (!stillActive(runtime, item)) return;
     speakGuide(`${part.number}번 ${part.label}! 딸깍 붙었어!`);
     state.currentPartIndex += 1;
     if (state.currentPartIndex >= state.currentVehicle.parts.length) { state.locked = false; enterDecoratePhase(); return; }
@@ -432,24 +441,36 @@
   }
 
   async function returnDecorToTray(item, decor) {
+    const runtime = state.runtime;
     const origin = state.trayOrigins.get(decor.id);
     if (!origin) return;
-    await state.runtime.returnTo(item, origin, { duration: 250 });
+    await runtime.returnTo(item, origin, { duration: 250 });
+    if (!stillActive(runtime, item)) return;
     item.scale.set(1); item.zIndex = 0;
   }
 
   async function handleDecorDrop(item, decor) {
     if (state.locked || state.phase !== 'decorate') return;
+    const runtime = state.runtime;
     const cfg = getSceneConfig();
     const center = cfg.carCenter;
     const maxX = cfg.mode === 'landscape' ? 360 : 300;
     const maxY = cfg.mode === 'landscape' ? 210 : 190;
     const insideCar = Math.abs(item.x - center.x) <= maxX && Math.abs(item.y - center.y) <= maxY;
-    if (!insideCar) { state.locked = true; await state.runtime.wrongShake(item); await returnDecorToTray(item, decor); state.locked = false; return; }
+    if (!insideCar) {
+      state.locked = true;
+      await runtime.wrongShake(item);
+      if (!stillActive(runtime, item)) return;
+      await returnDecorToTray(item, decor);
+      if (!stillActive(runtime, item)) return;
+      state.locked = false;
+      return;
+    }
     item.eventMode = 'none'; item.cursor = 'default'; item.zIndex = 80; item.scale.set(0.82);
     state.placedDecorCount = Math.min(3, state.placedDecorCount + 1);
     state.runtime.spawnParticles(item.x, item.y, { count: 14, colors: [0xffd93d, 0xff7ac8, 0xffffff], duration: 520 });
     await state.runtime.successPop(item, { amount: 1.18 });
+    if (!stillActive(runtime, item)) return;
     speakGuide(`${decor.label} 붙였어!`);
     renderInfoOnly();
   }
@@ -492,6 +513,7 @@
 
   async function completeVehicle() {
     if (state.completing) return;
+    const runtime = state.runtime;
     state.completing = true; state.locked = true; state.phase = 'complete'; clearHint();
     const cfg = getSceneConfig();
     const carObjects = [...state.rootContainers.placed.children, ...state.rootContainers.decor.children];
@@ -510,6 +532,7 @@
     else speakGuide(announcement);
     makeText('우와! 완성!', { x: cfg.width / 2, y: cfg.mode === 'landscape' ? 98 : 318, fontSize: cfg.mode === 'landscape' ? 58 : 66, fill: '#ff5b5b', stroke: '#ffffff', strokeThickness: 9, wordWrapWidth: 720 }, state.rootContainers.labels);
     await state.runtime.successPop(group, { amount: 1.12, upDuration: 220, downDuration: 260 });
+    if (!stillActive(runtime, group)) return;
     state.runtime.setTimeout(() => { state.runtime.tween(group, { x: cfg.width + 520, y: cfg.carCenter.y - 30, rotation: 0.08 }, 1400, 'easeInOutCubic'); }, 500);
     state.runtime.setTimeout(() => nextVehicle(), 2500);
   }

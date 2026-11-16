@@ -322,8 +322,8 @@
       return Math.sqrt(dx * dx + dy * dy);
     }
 
-    tween(displayObject, to, duration = 300, easing = 'easeOutCubic') {
-      if (!displayObject) return Promise.resolve();
+    tween(displayObject, to, duration = 300, easing = 'easeOutCubic', owner = displayObject) {
+      if (!displayObject || this.destroyed || owner?.destroyed) return Promise.resolve();
       const from = {};
       const keys = Object.keys(to || {});
       keys.forEach((key) => { from[key] = displayObject[key]; });
@@ -331,7 +331,7 @@
       const start = performance.now();
       return new Promise((resolve) => {
         const tick = () => {
-          if (this.destroyed || !displayObject) { resolve(); return; }
+          if (this.destroyed || owner?.destroyed) { this.removeTicker(tick); resolve(); return; }
           const t = clamp((performance.now() - start) / duration, 0, 1);
           const k = ease(t);
           keys.forEach((key) => { displayObject[key] = from[key] + (to[key] - from[key]) * k; });
@@ -388,6 +388,7 @@
     async snapTo(displayObject, target, options = {}) {
       if (!displayObject || !target) return;
       await this.tween(displayObject, { x: target.x, y: target.y, rotation: target.rotation ?? displayObject.rotation, alpha: target.alpha ?? displayObject.alpha }, options.duration ?? 220, options.easing || 'backOut');
+      if (this.destroyed || displayObject.destroyed) return;
       if (options.scale !== undefined) displayObject.scale.set(options.scale);
     }
 
@@ -408,12 +409,13 @@
     }
 
     async successPop(displayObject, options = {}) {
-      if (!displayObject) return;
+      if (!displayObject || !displayObject.scale || displayObject.destroyed || this.destroyed) return;
       const sx = displayObject.scale.x;
       const sy = displayObject.scale.y;
       const amount = options.amount ?? 1.18;
-      await this.tween(displayObject.scale, { x: sx * amount, y: sy * amount }, options.upDuration ?? 130, 'easeOutCubic');
-      await this.tween(displayObject.scale, { x: sx, y: sy }, options.downDuration ?? 170, 'backOut');
+      await this.tween(displayObject.scale, { x: sx * amount, y: sy * amount }, options.upDuration ?? 130, 'easeOutCubic', displayObject);
+      if (this.destroyed || displayObject.destroyed) return;
+      await this.tween(displayObject.scale, { x: sx, y: sy }, options.downDuration ?? 170, 'backOut', displayObject);
     }
 
     hintGlow(displayObject, options = {}) {

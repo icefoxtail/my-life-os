@@ -12,3 +12,12 @@
 - 실제 브라우저 검사는 세 차량 × 한국어 마우스/영어 터치 6개 시나리오와 로딩·드롭 중 종료/재입장 시나리오 1개, 총 7개다. 각 조립 시나리오는 오배치 복귀·7부품·완성 안내 정확히 1회·완성 애니메이션 도중 종료 후 새 라운드 복원을 포함한다. 실행 전 PASS로 표시하지 않는다.
 - 남은 검증: 원격 Actions에서 7개 실제 브라우저 시나리오와 독립 검토, 이후 main 병합 및 운영 파일/시나리오 확인.
 - 적용 지침: 최신 AGENTS.md 및 AP 공통 목표·방법 검토 계약 본문을 실제 읽었다. 이 프로젝트에 수학/Archive 영역 규칙을 가져오지 않는다.
+
+## 첫 원격 브라우저 실패와 후속 수정
+
+- 기준 후보 `a89fc6232cdb34689070a44eb243bfd0490ab659`, 실행 `43864994212`, artifact `14224919315`, ZIP SHA256 `53a7723274ad641bec8afa2eb6b63d02b3fe7415a95b166ff6b95892e72a4570`.
+- 첫 결과는 7/7 FAIL로 보존한다. 네 시나리오는 7부품 조립·정확한 완료 음성·runtime 정리·새 라운드 복원까지 확인됐지만 `Cannot set properties of null (setting 'x')` pageerror 때문에 실패했다. 나머지는 runtime 객체를 반환하는 QA evaluate 호출 중 context가 사라져 완료 판정을 내리지 않았다.
+- 제품의 tween은 파괴된 대상의 `destroyed`를 확인하지 않았다. 실제 runtime을 실행하는 controlled 검사에서 장면 객체와 scale 소유객체 파괴 후 좌표 쓰기 실패를 각각 재현했다. 독립 검수자는 Pixi 8.22의 x setter/파괴 계약으로 동일한 null-x 오류와 ticker 잔류도 재현했다. CI의 기존 stack이 없으므로 해당 브라우저 오류와 일대일로 확정했다고 표현하지 않는다.
+- 후속 수정은 tween의 소유객체 검증·즉시 ticker 제거, scale tween의 소유자 연결, 비동기 애니메이션 후 폐기된 게임/객체에 계속 쓰지 않는 가드다. lifecycle의 기존 두 검사와 retired position/scale 두 검사, 독립 포인터/파티클/host 네 그룹 모두 로컬 PASS다.
+- QA runtime 참조 저장은 반환값 없는 블록으로 바꿔 거대한 Pixi 객체 직렬화를 없앴고, pageerror stack을 보존한다. 7개 시나리오·완료 기준·pageerror 0 기준은 유지한다.
+- 이 수정 후보의 실제 브라우저 재검사는 PENDING이다.

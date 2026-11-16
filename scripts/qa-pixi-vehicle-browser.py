@@ -124,7 +124,7 @@ def run(page, url, lang, touch, vehicle_index, output):
     page.screenshot(path=str(output/f"completion-{vehicle_index}-{lang}.png"))
     result={"placed":7,"completion":calls,"pixiVersion":page.evaluate("PIXI.VERSION")}
     # Leave during the completion animation; the former round must not advance later.
-    page.evaluate("window.__completedRuntime=__pixi")
+    page.evaluate("() => { window.__completedRuntime=__pixi; }")
     page.locator(".game-back-floating").click()
     page.evaluate("openNumberVehiclesPixiGame()")
     wait_for_builder(page)
@@ -139,7 +139,7 @@ def lifecycle(page,url):
     # Delay the async factory return to reproduce closing before game render resumes.
     page.evaluate("window.__holdPixiReturn=true; openNumberVehiclesPixiGame()")
     page.wait_for_function("typeof window.__releasePixi==='function'",timeout=35000)
-    page.evaluate("window.__loadingRuntime=__pixi")
+    page.evaluate("() => { window.__loadingRuntime=__pixi; }")
     page.locator(".game-back-floating").click()
     page.evaluate("window.__holdPixiReturn=false; __releasePixi()")
     page.wait_for_function("__loadingRuntime.destroyed")
@@ -149,7 +149,7 @@ def lifecycle(page,url):
 
     # Leave immediately after a native drop, before its snap/pop animations finish.
     state=page.evaluate(POINTS)
-    page.evaluate("window.__droppingRuntime=__pixi")
+    page.evaluate("() => { window.__droppingRuntime=__pixi; }")
     drag(page,None,dict(state["parts"])[1],state["slots"][0])
     page.locator(".game-back-floating").click()
     page.evaluate("openNumberVehiclesPixiGame()")
@@ -189,7 +189,7 @@ def main():
                 context.add_init_script(QA["PROBE"])
                 page=context.new_page()
                 errors=[]
-                page.on("pageerror",lambda error:errors.append(str(error)))
+                page.on("pageerror",lambda error:errors.append(getattr(error,"stack",None) or str(error)))
                 case_name=f"{VEHICLES[vehicle_index][1]}-{lang}" if vehicle_index is not None else "lifecycle"
                 row={"case":case_name,"language":lang,"input":"touch" if touch else "mouse","errors":errors}
                 try:

@@ -7,6 +7,31 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const source = fs.readFileSync(path.join(__dirname, '../js/games-pixi/number-vehicles-pixi.js'), 'utf8');
+const runtimeSource = fs.readFileSync(path.join(__dirname, '../js/engine/pixi-runtime.js'), 'utf8');
+
+async function retiredAnimation(scale) {
+  const window = {};
+  vm.runInNewContext(runtimeSource, { window, performance: { now: () => 0 } });
+  const runtime = new window.SihyeonPixiRuntime.SihyeonPixiGame({});
+  const scheduled = new Set();
+  runtime.app = { ticker: { add: fn => scheduled.add(fn), remove: fn => scheduled.delete(fn) } };
+  const owner = { destroyed: false };
+  const point = {};
+  for (const axis of ['x', 'y']) Object.defineProperty(point, axis, {
+    get: () => 1,
+    set() { if (owner.destroyed) throw new Error('retired Pixi coordinate written'); }
+  });
+  owner.scale = point;
+  Object.defineProperty(owner, 'x', Object.getOwnPropertyDescriptor(point, 'x'));
+  const pending = scale ? runtime.successPop(owner) : runtime.tween(owner, { x: 10 });
+  assert.equal(scheduled.size, 1);
+  owner.destroyed = true;
+  owner.scale = null;
+  for (const tick of Array.from(scheduled)) tick();
+  await pending;
+  assert.equal(scheduled.size, 0, 'retired animation must remove its ticker');
+  assert.equal(runtime.tickers.size, 0);
+}
 
 async function abandonedLoad(reenter) {
   const requests = [];
@@ -44,5 +69,7 @@ async function abandonedLoad(reenter) {
 (async () => {
   await abandonedLoad(false);
   await abandonedLoad(true);
-  process.stdout.write('PASS: close during Pixi load and close/reenter during Pixi load\n');
+  await retiredAnimation(false);
+  await retiredAnimation(true);
+  process.stdout.write('PASS: close/reenter while loading and retired position/scale animations\n');
 })().catch(error => { console.error(error); process.exitCode = 1; });
