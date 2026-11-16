@@ -60,7 +60,7 @@ jobs:
   vehicle-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -76,7 +76,8 @@ jobs:
           paths = ['sw.js', 'index.html', 'assets/vehicles/display_bounds.json', 'js/vehicle-display.js', 'js/games/number-count.js', 'js/games/vehicle-memory.js', 'js/games/parking-lot.js', 'js/games/construction-site.js', 'js/games/megaDispatch.js', 'js/games/coding-car.js']
           expected = {p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
           base = 'https://icefoxtail.github.io/my-life-os/'
-          deadline = time.monotonic() + 20*60
+          # Match the existing production gate's allowance for Pages queue delays.
+          deadline = time.monotonic() + 50*60
           while time.monotonic() < deadline:
               actual = {}
               try:

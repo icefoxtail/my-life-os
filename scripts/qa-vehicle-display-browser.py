@@ -204,7 +204,7 @@ def main():
                             assert not result['failed'],f'Failed/pending visible images: {result["failed"]}'
                             assert not result['unfitted'],f'Unfitted current image: {result["unfitted"]}'
                             return result
-                        shot=f'{game[0]}-{width}x{height}.png' if (width,height) in [(390,844),(640,360)] or (game[0],width,height) in [('fire',768,1024),('coding',844,390),('count',1280,800)] else None
+                        shot=f'{game[0]}-{width}x{height}.png' if (width,height) in [(390,844),(640,360)] or (game[0],width,height) in [('fire',768,1024),('coding',844,390),('count',1280,800),('construction',1024,768)] else None
                         record(f'{game[0]} {width}x{height}'+(' internal entry' if game[0]=='coding' else ' menu entry'),inspect,page,shot)
                 except Exception as exc:
                     record(game[0]+' entry',lambda:(_ for _ in ()).throw(exc),page)

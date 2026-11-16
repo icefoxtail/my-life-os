@@ -1,0 +1,99 @@
+name: Pixi vehicle release
+on:
+  pull_request:
+    paths:
+      - 'js/engine/pixi-runtime.js'
+      - 'js/games-pixi/number-vehicles-pixi.js'
+      - 'scripts/qa-pixi-vehicle-browser.py'
+      - 'scripts/test-pixi-lifecycle.cjs'
+      - 'scripts/test-pixi-pointer-review.cjs'
+      - '.github/workflows/pixi-vehicle-release.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/engine/pixi-runtime.js'
+      - 'js/games-pixi/number-vehicles-pixi.js'
+      - 'scripts/qa-pixi-vehicle-browser.py'
+      - 'scripts/test-pixi-lifecycle.cjs'
+      - 'scripts/test-pixi-pointer-review.cjs'
+      - '.github/workflows/pixi-vehicle-release.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pixi-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Check syntax and stale-load lifecycle
+        run: |
+          node --check js/engine/pixi-runtime.js
+          node --check js/games-pixi/number-vehicles-pixi.js
+          node scripts/test-pixi-lifecycle.cjs
+          node scripts/test-pixi-pointer-review.cjs
+          python3 -m py_compile scripts/qa-pixi-vehicle-browser.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Assemble three vehicles with mouse and touch input
+        run: python3 scripts/qa-pixi-vehicle-browser.py --output qa-pixi-evidence
+      - name: Preserve source-bound browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pixi-vehicle-${{ github.run_id }}
+          path: qa-pixi-evidence/
+          if-no-files-found: warn
+          retention-days: 14
+  pixi-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install production browser
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Wait for exact released Pixi runtime
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, time, urllib.request
+          paths = ['sw.js','index.html','js/engine/pixi-runtime.js','js/games-pixi/number-vehicles-pixi.js']
+          expected = {p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base = 'https://icefoxtail.github.io/my-life-os/'
+          # Match the existing production gate's allowance for Pages queue delays.
+          deadline = time.monotonic() + 50*60
+          while time.monotonic() < deadline:
+              actual = {}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base+path+'?release='+expected['sw.js'][:12],timeout=15) as response:
+                          actual[path] = hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__, flush=True)
+              if actual == expected:
+                  out=pathlib.Path('qa-pixi-production'); out.mkdir(exist_ok=True)
+                  (out/'deployed-runtime.json').write_text(json.dumps({'base':base,'expected':expected,'actual':actual,'matches':True},indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Exact Pixi runtime has not appeared on Pages.')
+          PY
+      - name: Verify deployed assembly and cancellation
+        run: python3 scripts/qa-pixi-vehicle-browser.py --base-url https://icefoxtail.github.io/my-life-os/index.html --output qa-pixi-production
+      - name: Preserve production evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pixi-production-${{ github.run_id }}
+          path: qa-pixi-production/
+          if-no-files-found: warn
+          retention-days: 14

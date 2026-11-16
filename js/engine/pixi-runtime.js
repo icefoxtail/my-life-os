@@ -126,7 +126,7 @@
 
     async init() {
       this.PIXI = await loadPixi();
-      if (this.destroyed) return this;
+      if (this.destroyed || this.options.isCurrent?.() === false) { this.destroy(); return this; }
       this.container.innerHTML = '';
       this.app = new this.PIXI.Application();
 
@@ -151,6 +151,7 @@
         });
       }
 
+      if (this.destroyed || this.options.isCurrent?.() === false) { this.destroy(); return this; }
       const view = this.app.canvas || this.app.view;
       view.style.width = '100%';
       view.style.height = '100%';
@@ -250,11 +251,13 @@
       if (!displayObject) return displayObject;
       displayObject.eventMode = 'static';
       displayObject.cursor = options.cursor || 'grab';
-      const startData = { dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const startData = { dragging: false, pointerId: null, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const moveEvent = typeof this.app.init === 'function' ? 'globalpointermove' : 'pointermove';
       const down = (event) => {
-        if (this.destroyed || (options.disabled && options.disabled())) return;
+        if (this.destroyed || startData.dragging || (options.disabled && options.disabled())) return;
         const p = event.global;
         startData.dragging = true;
+        startData.pointerId = event.pointerId;
         startData.startX = p.x;
         startData.startY = p.y;
         startData.originX = displayObject.x;
@@ -264,7 +267,7 @@
         options.onStart?.({ event, object: displayObject, state: startData });
       };
       const move = (event) => {
-        if (!startData.dragging || this.destroyed) return;
+        if (!startData.dragging || event.pointerId !== startData.pointerId || this.destroyed) return;
         const p = event.global;
         const dx = (p.x - startData.startX) / this.scale;
         const dy = (p.y - startData.startY) / this.scale;
@@ -273,25 +276,26 @@
         options.onMove?.({ event, object: displayObject, state: startData, dx, dy });
       };
       const up = (event) => {
-        if (!startData.dragging || this.destroyed) return;
+        if (!startData.dragging || event.pointerId !== startData.pointerId || this.destroyed) return;
+        move(event);
         startData.dragging = false;
         displayObject.cursor = options.cursor || 'grab';
         options.onEnd?.({ event, object: displayObject, state: startData });
       };
       const cancel = (event) => {
-        if (!startData.dragging || this.destroyed) return;
+        if (!startData.dragging || event.pointerId !== startData.pointerId || this.destroyed) return;
         startData.dragging = false;
         displayObject.cursor = options.cursor || 'grab';
         options.onCancel?.({ event, object: displayObject, state: startData });
       };
       displayObject.on('pointerdown', down);
-      displayObject.on('pointermove', move);
+      displayObject.on(moveEvent, move);
       displayObject.on('pointerup', up);
       displayObject.on('pointerupoutside', up);
       displayObject.on('pointercancel', cancel);
       displayObject.__sihyeonDragCleanup = () => {
         displayObject.off('pointerdown', down);
-        displayObject.off('pointermove', move);
+        displayObject.off(moveEvent, move);
         displayObject.off('pointerup', up);
         displayObject.off('pointerupoutside', up);
         displayObject.off('pointercancel', cancel);
@@ -318,8 +322,8 @@
       return Math.sqrt(dx * dx + dy * dy);
     }
 
-    tween(displayObject, to, duration = 300, easing = 'easeOutCubic') {
-      if (!displayObject) return Promise.resolve();
+    tween(displayObject, to, duration = 300, easing = 'easeOutCubic', owner = displayObject) {
+      if (!displayObject || this.destroyed || owner?.destroyed) return Promise.resolve();
       const from = {};
       const keys = Object.keys(to || {});
       keys.forEach((key) => { from[key] = displayObject[key]; });
@@ -327,7 +331,7 @@
       const start = performance.now();
       return new Promise((resolve) => {
         const tick = () => {
-          if (this.destroyed || !displayObject) { resolve(); return; }
+          if (this.destroyed || owner?.destroyed) { this.removeTicker(tick); resolve(); return; }
           const t = clamp((performance.now() - start) / duration, 0, 1);
           const k = ease(t);
           keys.forEach((key) => { displayObject[key] = from[key] + (to[key] - from[key]) * k; });
@@ -384,6 +388,7 @@
     async snapTo(displayObject, target, options = {}) {
       if (!displayObject || !target) return;
       await this.tween(displayObject, { x: target.x, y: target.y, rotation: target.rotation ?? displayObject.rotation, alpha: target.alpha ?? displayObject.alpha }, options.duration ?? 220, options.easing || 'backOut');
+      if (this.destroyed || displayObject.destroyed) return;
       if (options.scale !== undefined) displayObject.scale.set(options.scale);
     }
 
@@ -404,12 +409,13 @@
     }
 
     async successPop(displayObject, options = {}) {
-      if (!displayObject) return;
+      if (!displayObject || !displayObject.scale || displayObject.destroyed || this.destroyed) return;
       const sx = displayObject.scale.x;
       const sy = displayObject.scale.y;
       const amount = options.amount ?? 1.18;
-      await this.tween(displayObject.scale, { x: sx * amount, y: sy * amount }, options.upDuration ?? 130, 'easeOutCubic');
-      await this.tween(displayObject.scale, { x: sx, y: sy }, options.downDuration ?? 170, 'backOut');
+      await this.tween(displayObject.scale, { x: sx * amount, y: sy * amount }, options.upDuration ?? 130, 'easeOutCubic', displayObject);
+      if (this.destroyed || displayObject.destroyed) return;
+      await this.tween(displayObject.scale, { x: sx, y: sy }, options.downDuration ?? 170, 'backOut', displayObject);
     }
 
     hintGlow(displayObject, options = {}) {
@@ -469,7 +475,11 @@
         parent.addChild(p);
         const start = performance.now();
         const tick = () => {
-          if (this.destroyed) { destroyDisplayObject(p); this.removeTicker(tick); return; }
+          // A scene rebuild can destroy particles before their animation ends.
+          if (this.destroyed || p.destroyed || !p.parent) {
+            this.removeTicker(tick);
+            return;
+          }
           const t = clamp((performance.now() - start) / duration, 0, 1);
           const dt = (this.app?.ticker?.deltaMS || 16) / 1000;
           p.x += vx * dt;
@@ -513,7 +523,7 @@
       });
       this.tickers.clear();
       try { this.app?.destroy(true, { children: true, texture: false, baseTexture: false }); } catch (error) {}
-      if (this.container) this.container.innerHTML = '';
+      // app.destroy(true) removes this runtime's view; a newer game may own the host now.
       this.app = null;
       this.stage = null;
       this.container = null;
