@@ -1022,6 +1022,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#d2f0ff');
 
 const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.5, 100);
+const pictureArea = {top:132, bottom:innerHeight - 150};
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
 renderer.setSize(innerWidth, innerHeight);
@@ -1186,6 +1187,13 @@ function adjustCameraForViewport(){
     camera.position.set(0, 9.0 + pull * 0.5, 18.0 + pull);
     camera.lookAt(0, 0.5, -0.2);
   }
+  camera.updateMatrixWorld();
+  updatePictureArea();
+}
+
+function updatePictureArea(){
+  pictureArea.top = Math.max($('top').getBoundingClientRect().bottom + 10, $('toast').getBoundingClientRect().bottom + 8, Math.min(132, innerHeight * 0.33));
+  pictureArea.bottom = $('trayWrap').getBoundingClientRect().top - 10;
 }
 
 /* ============================================================================
@@ -1391,7 +1399,15 @@ function mergeChoAndJung(choBlock, jungBlock){
   return syl;
 }
 
-function spawnMiniToyPopup(block, meta){
+function spawnMiniToyPopup(block, meta, isBonus = false){
+  // One readable picture at a time; a completed word replaces its earlier syllable feedback.
+  state.toys = state.toys.filter(t => {
+    if(isBonus || (meta.toy === 'picture' && t.mesh.userData.wordPicture)){
+      removeMiniToy(t.mesh);
+      return false;
+    }
+    return true;
+  });
   // 기존 장난감이 너무 많으면 정리
   while(state.toys.length >= 4){
     const old = state.toys.shift();
@@ -1408,6 +1424,7 @@ function spawnMiniToyPopup(block, meta){
     mesh,
     word: meta.word,
     emoji: meta.emoji,
+    isBonus,
     age: 0,
     maxAge: 5.5
   });
@@ -1438,7 +1455,7 @@ function checkShelfBonusWords(){
           triggerSquash(b, 1.2);
           burstParticles(b.x, 1.5, b.z, '#FFD43B', '#FF6B8B', 16);
         });
-        spawnMiniToyPopup(slice[Math.floor(slice.length / 2)], {word:wordStr, emoji:bonus.emoji, toy:bonus.toy});
+        spawnMiniToyPopup(slice[Math.floor(slice.length / 2)], {word:wordStr, emoji:bonus.emoji, toy:bonus.toy}, true);
         sfx('fanfare');
         say(`우와! ${wordStr} 완성!`);
         toast(`🎊 진열대 단어 완성! [${wordStr}] ${bonus.emoji}`);
@@ -1792,6 +1809,24 @@ function updatePhysics(dt, now){
     t.mesh.position.y = 2.55 + Math.sin(t.age * 5.0) * 0.22;
     t.mesh.rotation.y = -orbitAng + Math.PI / 2;
 
+    if(t.mesh.userData.wordPicture){
+      // A small, depth-tested card floats in front of the mat, below the toast
+      // and above the tray. It must not follow an off-screen shelf slot or hide
+      // behind the jumping letter that has just summoned it.
+      const height = Math.min(168, Math.max(24, pictureArea.bottom - pictureArea.top));
+      const width = height * 512 / 448;
+      const anchor = new THREE.Vector3(ax, 2.55, az).project(camera);
+      const centerX = t.isBonus ? innerWidth / 2 : clamp((anchor.x + 1) * innerWidth / 2, width / 2 + 10, innerWidth - width / 2 - 10);
+      const centerY = pictureArea.top + height / 2;
+      const point = new THREE.Vector3(centerX / innerWidth * 2 - 1, 1 - centerY / innerHeight * 2, 0.5).unproject(camera);
+      const direction = point.sub(camera.position);
+      t.mesh.position.copy(camera.position).addScaledVector(direction, (5.0 - camera.position.z) / direction.z);
+      const depth = -t.mesh.position.clone().applyMatrix4(camera.matrixWorldInverse).z;
+      const popupScale = enterScale * exitScale;
+      t.mesh.scale.setScalar(height / innerHeight * 2 * depth * Math.tan(camera.fov * Math.PI / 360) / 1.88 * popupScale);
+      t.mesh.userData.pictureBounds = {x:centerX - width * popupScale / 2, y:centerY - height * popupScale / 2, width:width * popupScale, height:height * popupScale};
+    }
+
     if(t.mesh.userData.wings){
       const flap = Math.sin(now * 0.022) * 0.6;
       t.mesh.userData.wings[0].rotation.z = flap;
@@ -1908,6 +1943,7 @@ function toast(msg){
   const el = $('toast');
   el.textContent = msg;
   el.style.opacity = '1';
+  updatePictureArea();
   clearTimeout(state.toastTimer);
   state.toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 2400);
 }

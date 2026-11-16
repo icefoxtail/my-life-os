@@ -157,4 +157,24 @@ for (const meta of pictureEntries) {
   assert.equal(material.disposed,1);assert.equal(texture.disposed,1,'Dispose each popup-owned texture once');
   checks++;
 }
-console.log(`PASS ${checks} Hangul rule scenarios: 140 syllables, 16 reachable bonuses, semantic picture routing, shelf behavior and popup cleanup. Browser/audio NOT_RUN.`);
+// New feedback must not be buried under an earlier picture. A shelf bonus
+// replaces preceding syllable popups while retaining the normal lifetime.
+const removed=[];
+const popupContext={
+  state:{toys:[]},uid:0,toysGroup:{add(){}},
+  buildMiniToy3D(toy,meta){return {word:meta.word,userData:toy==='picture'?{wordPicture:{}}:{},position:{set(){}},scale:{setScalar(){}}};},
+  removeMiniToy(mesh){removed.push(mesh.word);}
+};
+vm.runInNewContext(between('function spawnMiniToyPopup(', '// 진열대에 나란히')+'\nthis.spawn=spawnMiniToyPopup;', popupContext);
+const anchor={x:0,y:0,z:0};
+popupContext.spawn(anchor,{word:'로봇',toy:'picture'});
+popupContext.spawn(anchor,{word:'도토리',toy:'picture'});
+assert.deepEqual(removed,['로봇']);assert.equal(popupContext.state.toys.length,1);checks++;
+popupContext.spawn(anchor,{word:'사과',toy:'apple'});
+popupContext.spawn(anchor,{word:'호랑이',toy:'picture'});
+assert.deepEqual(removed,['로봇','도토리']);assert.equal(popupContext.state.toys.length,2);checks++;
+popupContext.spawn(anchor,{word:'두부',toy:'picture'},true);
+assert.deepEqual(removed,['로봇','도토리','사과','호랑이']);
+assert.equal(popupContext.state.toys.length,1);assert.equal(popupContext.state.toys[0].word,'두부');checks++;
+assert.equal(popupContext.state.toys[0].isBonus,true);assert.equal(popupContext.state.toys[0].maxAge,5.5);checks++;
+console.log(`PASS ${checks} Hangul rule scenarios: 140 syllables, 16 reachable bonuses, semantic picture routing, shelf behavior, readable popup replacement and owned cleanup. Browser/audio NOT_RUN.`);

@@ -195,6 +195,12 @@
         flex-direction: column;
       }
 
+      /* The public game shell keeps its back button fixed above the game.
+         Leave its full touch area clear before the portrait control rows. */
+      .game-play-body .memory-game-container.memory-portrait {
+        padding-top: max(72px, calc(env(safe-area-inset-top, 0px) + 64px));
+      }
+
       .memory-game-container.memory-landscape {
         display: grid;
         grid-template-columns: minmax(250px, 0.74fr) minmax(420px, 1.26fr);

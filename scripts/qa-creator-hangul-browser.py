@@ -79,6 +79,60 @@ READ_TOY = """() => {
     picturePng:image?.toDataURL('image/png')||null};
 }"""
 
+READ_VISIBLE_PICTURE = """async (png) => {
+  const t=OpenWorldDebug.state.toys.at(-1), sprite=t.mesh.userData.wordPicture;
+  const bounds=t.mesh.userData.pictureBounds;
+  if(!sprite || !bounds) throw new Error('No projected picture card');
+  const image=new Image();image.src='data:image/png;base64,'+png;await image.decode();
+  const actual=document.createElement('canvas');actual.width=image.width;actual.height=image.height;
+  const a=actual.getContext('2d');a.drawImage(image,0,0);
+  const screen=a.getImageData(0,0,actual.width,actual.height).data;
+  const expected=document.createElement('canvas');
+  expected.width=Math.round(bounds.width);expected.height=Math.round(bounds.height);
+  const e=expected.getContext('2d');e.drawImage(sprite.material.map.image,0,0,expected.width,expected.height);
+  const reference=e.getImageData(0,0,expected.width,expected.height).data;
+  const counts={picture:{ink:0,matched:0},label:{ink:0,matched:0}};
+  for(let y=0;y<expected.height;y++) for(let x=0;x<expected.width;x++){
+    const nx=x/expected.width,ny=y/expected.height;
+    const zone=nx>.10&&nx<.90&&ny>.08&&ny<.74?'picture':nx>.07&&nx<.93&&ny>.80&&ny<.96?'label':null;
+    if(!zone) continue;
+    const p=(y*expected.width+x)*4;
+    if(reference[p+3]<245 || Math.min(reference[p],reference[p+1],reference[p+2])>195) continue;
+    counts[zone].ink++;
+    let matched=false;
+    for(let dy=-2;dy<=2&&!matched;dy++) for(let dx=-2;dx<=2;dx++){
+      const sx=Math.round(bounds.x)+x+dx,sy=Math.round(bounds.y)+y+dy;
+      if(sx<0||sy<0||sx>=actual.width||sy>=actual.height) continue;
+      const q=(sy*actual.width+sx)*4;
+      if(Math.max(Math.abs(reference[p]-screen[q]),Math.abs(reference[p+1]-screen[q+1]),Math.abs(reference[p+2]-screen[q+2]))<=40){matched=true;break;}
+    }
+    if(matched) counts[zone].matched++;
+  }
+  const toast=document.getElementById('toast').getBoundingClientRect();
+  const tray=document.getElementById('trayWrap').getBoundingClientRect();
+  return {bounds,screen:{width:actual.width,height:actual.height},toastBottom:toast.bottom,trayTop:tray.top,
+    depthTest:sprite.material.depthTest,worldZ:t.mesh.position.z,
+    pictureInk:counts.picture.ink,labelInk:counts.label.ink,
+    pictureMatch:counts.picture.matched/Math.max(1,counts.picture.ink),labelMatch:counts.label.matched/Math.max(1,counts.label.ink)};
+}"""
+
+
+def verify_visible_picture(frame):
+    # Real compositor pixels catch a correct source picture hidden behind letters,
+    # an earlier popup or fixed UI. The drawing's source canvas alone cannot.
+    png = frame.locator("#scene3d").screenshot()
+    visible = frame.evaluate(READ_VISIBLE_PICTURE, base64.b64encode(png).decode())
+    bounds = visible["bounds"]
+    assert bounds["width"] >= 80 and bounds["height"] >= 70, visible
+    assert bounds["x"] >= 4 and bounds["x"] + bounds["width"] <= visible["screen"]["width"] - 4, visible
+    assert bounds["y"] >= visible["toastBottom"] + 3, visible
+    assert bounds["y"] + bounds["height"] <= visible["trayTop"] - 3, visible
+    assert visible["depthTest"] is True and abs(visible["worldZ"] - 5) < .01, visible
+    assert visible["pictureInk"] > 100 and visible["labelInk"] > 20, visible
+    assert visible["pictureMatch"] >= .90 and visible["labelMatch"] >= .88, visible
+    return visible
+
+
 BUILD_BONUS = """(pairs) => {
   const api=window.OpenWorldDebug;api.state.sound=false;api.resetInitialBlocks();
   for(const [cho,jung] of pairs){
@@ -124,7 +178,8 @@ def main():
                               "3D content composition uses the existing OpenWorldDebug API; drag gestures are not certified.",
                               "Speech is muted during 3D checks; audio listening is NOT_RUN."],
               "test_api_scope": ["OpenWorldDebug.state.sound=false", "resetInitialBlocks()", "spawnFromTray()", "mergeChoAndJung()",
-                                 "Read state.toys, lastBonusWord and the actual popup CanvasTexture image."]}
+                                 "Read state.toys, lastBonusWord, projected pictureBounds and CanvasTexture image.",
+                                 "Compare real WebGL canvas screenshot pixels to picture/label ink; no rendering state is hidden or replaced."]}
     try:
         try:
             result["checkout_commit"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
@@ -162,6 +217,7 @@ def main():
                         if is_picture:
                             assert toy["pictureWord"] == word and toy["inkPixels"] > 1500, toy
                             write_png(toy.pop("picturePng"), output / f"picture-{name}-{tag}.png")
+                            toy["visiblePicture"] = verify_visible_picture(frame)
                         else:
                             assert toy["firstGeometry"] == "SphereGeometry", toy
                             toy.pop("picturePng")
@@ -175,6 +231,8 @@ def main():
                         assert toy["inkPixels"] > 1500
                         toy.pop("picturePng")
                         page.wait_for_timeout(200)
+                        assert frame.evaluate("OpenWorldDebug.state.toys.length") == 1, "Bonus must replace previous syllable popups"
+                        toy["visiblePicture"] = verify_visible_picture(frame)
                         name = "tofu" if word == "두부" else "sweet-potato"
                         page.screenshot(path=str(output / f"shelf-{name}-{tag}.png"))
                         result["checks"].append({"case": "shelf-" + name, "viewport": tag, "status": "PASS", "toy": toy})

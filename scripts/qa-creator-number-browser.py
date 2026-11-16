@@ -309,7 +309,7 @@ def main():
                     page = context.new_page()
                     page.set_default_timeout(15000)
                     responses = []
-                    page.on("response", responses.append)
+                    page.on("response", lambda response, target=responses: target.append(response))
                     page.on("pageerror", lambda error, s=size: report["pageErrors"].append(
                         {"viewport": s, "error": str(error)}))
                     page.on("requestfailed", lambda request, s=size: report["failedRequests"].append(
