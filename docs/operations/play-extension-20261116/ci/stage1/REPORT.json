@@ -1,0 +1,337 @@
+{
+  "runtimeHead": "9eab6f542d3ee244be3ccae7d82d0c5aec90c2ee",
+  "candidateHead": "548c0a5a58ce2d9e5679bf4ba121a05b8590c3ae",
+  "merge": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
+  "runtimeDifference": "Only the Playground workflow runner changed between runtimeHead and candidateHead; complete merged tree equals candidateHead.",
+  "browserRun": "https://github.com/icefoxtail/my-life-os/actions/runs/43812219551",
+  "mainChecksRun": "https://github.com/icefoxtail/my-life-os/actions/runs/43814183264",
+  "suites": [
+    {
+      "game": "art-reference",
+      "reportSha256": "553994f951ab9f36069d4cf3d296b28fc85674198a84b379114b16ae01c1a992",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "companion layout and reachable controls 320x568",
+          "status": "PASS"
+        },
+        {
+          "name": "companion layout and reachable controls 390x844",
+          "status": "PASS"
+        },
+        {
+          "name": "companion layout and reachable controls 844x390",
+          "status": "PASS"
+        },
+        {
+          "name": "companion layout and reachable controls 1024x768",
+          "status": "PASS"
+        },
+        {
+          "name": "independent example paint undo reload and number-play handoff",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy saved picture stays on its own geometry through reference new-paper undo and reload",
+          "status": "PASS"
+        },
+        {
+          "name": "separate free drawing survives companion controls and reload",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "sources": {
+        "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "scripts/qa-art-reference-browser.py": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+        "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+      }
+    },
+    {
+      "game": "number-picture",
+      "reportSha256": "0e342338d56670737d64512d9f3edb77bacbdfdafac64ef474485e832de73be8",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "real menu to immediate police9 and automatic native count",
+          "status": "PASS"
+        },
+        {
+          "name": "picture chooser and fifteen fire engines appear before counting finishes",
+          "status": "PASS"
+        },
+        {
+          "name": "sino nine zero thirty and plus-minus boundaries",
+          "status": "PASS"
+        },
+        {
+          "name": "responsive root and chooser 320x568",
+          "status": "PASS"
+        },
+        {
+          "name": "responsive root and chooser 360x640",
+          "status": "PASS"
+        },
+        {
+          "name": "responsive root and chooser 390x844",
+          "status": "PASS"
+        },
+        {
+          "name": "responsive root and chooser 844x390",
+          "status": "PASS"
+        },
+        {
+          "name": "responsive root and chooser 1024x768",
+          "status": "PASS"
+        },
+        {
+          "name": "responsive root and chooser 1365x936",
+          "status": "PASS"
+        },
+        {
+          "name": "view-only category/range preserve progress and new number cancels old run",
+          "status": "PASS"
+        },
+        {
+          "name": "closing unchanged settings automatically restarts the preserved selection",
+          "status": "PASS"
+        },
+        {
+          "name": "home cancels counting and selection survives return plus full reload",
+          "status": "PASS"
+        },
+        {
+          "name": "English settings use English count text and singular/plural totals",
+          "status": "PASS"
+        },
+        {
+          "name": "missing model allows menu recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "missing sequencer allows menu recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "missing catalog allows menu recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "missing game allows menu recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "missing picture has visible fallback and an exit",
+          "status": "PASS"
+        },
+        {
+          "name": "phase2 painting reference handoff and painted image survives return/reload",
+          "status": "PASS"
+        },
+        {
+          "name": "phase2 all 28 shared catalog SVG images decode in Chromium",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "sources": {
+        "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+        "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+        "js/games/quantity-play-model.js": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "css/games/number-picture.css": "c4f38e1f9aef80da784e83a0c6937e0380f606aba3dbb928798e4cb4a2e4ffbe",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+      }
+    },
+    {
+      "game": "ten-frame-garden",
+      "reportSha256": "712eb73d91f5ed556e0d6026f732fd23dd68b93aef1bad284c2667eded902b36",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "native-menu-fifteen",
+          "status": "PASS"
+        },
+        {
+          "name": "zero-and-thirty",
+          "status": "PASS"
+        },
+        {
+          "name": "fill-selected-to-target",
+          "status": "PASS"
+        },
+        {
+          "name": "two-colors-preserve-total",
+          "status": "PASS"
+        },
+        {
+          "name": "replacement-cancels-late-callback",
+          "status": "PASS"
+        },
+        {
+          "name": "settings-resume-and-ages",
+          "status": "PASS"
+        },
+        {
+          "name": "sino-and-english",
+          "status": "PASS"
+        },
+        {
+          "name": "home-and-reload",
+          "status": "PASS"
+        },
+        {
+          "name": "viewport-320x568",
+          "status": "PASS"
+        },
+        {
+          "name": "viewport-568x320",
+          "status": "PASS"
+        },
+        {
+          "name": "viewport-390x844",
+          "status": "PASS"
+        },
+        {
+          "name": "viewport-844x390",
+          "status": "PASS"
+        },
+        {
+          "name": "viewport-768x1024",
+          "status": "PASS"
+        },
+        {
+          "name": "viewport-1024x768",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "sources": {
+        "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+        "sw.js": "d8306c3d5a23e77d2a017d309c700629f1a4826462c0ccc5179312ac8d316622",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/games/quantity-play-model.js": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+        "js/games/ten-frame-garden.js": "f80bdd521b9149516a59ab7e20e715dbc09ff92e181bbe28c988869b95bdbefc",
+        "css/games/ten-frame-garden.css": "34efb6dac73976e27ba524967f5e8f9440db30d55ff8190f1a4167c389a08e6f",
+        "assets/games/ten-frame-garden/card.svg": "a17052d9b2fd56ca2a60c2d7efd7252347c78750c82705a3504a3af454f16c62",
+        "scripts/qa-ten-frame-garden-browser.py": "debbf406e2e8e8dd215bcaa3d78717dcb621b0cb5b6d9461300c102f2347012e"
+      }
+    },
+    {
+      "game": "picture-arithmetic",
+      "reportSha256": "b79530435d3043a74c8a77eb4aa6266de3a965faebede13a7bee50cbf1dfb8f8",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "9 police + 6 fire / 320x568",
+          "status": "PASS"
+        },
+        {
+          "name": "15 shared among 4 / 320x568",
+          "status": "PASS"
+        },
+        {
+          "name": "9 police + 6 fire / 360x640",
+          "status": "PASS"
+        },
+        {
+          "name": "15 shared among 4 / 360x640",
+          "status": "PASS"
+        },
+        {
+          "name": "9 police + 6 fire / 390x844",
+          "status": "PASS"
+        },
+        {
+          "name": "15 shared among 4 / 390x844",
+          "status": "PASS"
+        },
+        {
+          "name": "zero, thirty and incomplete rounds",
+          "status": "PASS"
+        },
+        {
+          "name": "independent types for the two addends",
+          "status": "PASS"
+        },
+        {
+          "name": "large picture chooser traps focus and Escape resumes",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid quantity and mode replacement cancel prior speech",
+          "status": "PASS"
+        },
+        {
+          "name": "reading modes and settings close automatically resume",
+          "status": "PASS"
+        },
+        {
+          "name": "reload restoration and memory after failed storage writes",
+          "status": "PASS"
+        },
+        {
+          "name": "mute keeps visual sharing and exit cancels future steps",
+          "status": "PASS"
+        },
+        {
+          "name": "9 police + 6 fire / 844x390",
+          "status": "PASS"
+        },
+        {
+          "name": "15 shared among 4 / 844x390",
+          "status": "PASS"
+        },
+        {
+          "name": "9 police + 6 fire / 1024x768",
+          "status": "PASS"
+        },
+        {
+          "name": "15 shared among 4 / 1024x768",
+          "status": "PASS"
+        },
+        {
+          "name": "9 police + 6 fire / 1365x936",
+          "status": "PASS"
+        },
+        {
+          "name": "15 shared among 4 / 1365x936",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "sources": {
+        "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+        "js/games/picture-arithmetic.js": "b4f791fb6c816e4e00c647a5d1b0915f05797b4e29bb18c77c3952d969c7940f",
+        "css/games/picture-arithmetic.css": "2400897d4942dbdf8ada6a2028abb910dbe437da39ff5f11b87909d33689703b",
+        "js/games/quantity-play-model.js": "f1fa9dbbae8f4174e426b223e22e92aced320bd3f39915a8c622c4d9e63bc379",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "scripts/qa-picture-arithmetic-browser.py": "c16f5389d4eaf94189b43a42a28e2f62c3f6df941e7d324f06c34abdb6b6669b"
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "art-reference-police-320x568.png",
+      "sha256": "9ca763e4a2570181d4cadcb5297d07433430c86191b0042e01de59e0ef3be653"
+    },
+    {
+      "file": "art-reference-police-844x390.png",
+      "sha256": "346d3ba00f7e717667aa09b260527ed768c6dbc5926e42472c8b4accb3361596"
+    }
+  ],
+  "productionStatus": "WAITING_FOR_PAGES",
+  "nativeAudio": "NOT_RUN",
+  "physicalDevice": "NOT_RUN"
+}

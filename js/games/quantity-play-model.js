@@ -19,7 +19,8 @@
     '개': ['item', 'items'], '대': ['vehicle', 'vehicles'],
     '마리': ['animal', 'animals'], '송이': ['flower', 'flowers'],
     '명': ['person', 'people'], '칸': ['space', 'spaces'],
-    '곳': ['place', 'places'], '그루': ['tree', 'trees'], '장': ['sheet', 'sheets']
+    '곳': ['place', 'places'], '그루': ['tree', 'trees'], '장': ['sheet', 'sheets'],
+    '채': ['house', 'houses'], '척': ['boat', 'boats']
   });
 
   function invalid(code, message) {
@@ -97,6 +98,39 @@
     return { a: a, b: b, total: total, left: left, right: right, items: left.concat(right) };
   }
 
+  function comparison(leftValue, rightValue) {
+    const a = checkedQuantity(leftValue, 'left quantity');
+    const b = checkedQuantity(rightValue, 'right quantity');
+    const pairCount = Math.min(a, b);
+    // Each side is independently limited to 30; their combined display may hold 60.
+    const left = items(a, 'compare-left');
+    const right = items(b, 'compare-right');
+    return {
+      a: a, b: b, pairCount: pairCount, difference: Math.abs(a - b),
+      relation: a === b ? 'equal' : a > b ? 'left' : 'right',
+      left: left, right: right,
+      pairs: left.slice(0, pairCount).map(function (item, index) { return { left: item, right: right[index] }; }),
+      leftExtra: left.slice(pairCount), rightExtra: right.slice(pairCount)
+    };
+  }
+
+  function subtraction(originalValue, departingValue) {
+    const a = checkedQuantity(originalValue, 'original quantity');
+    const b = checkedQuantity(departingValue, 'departing quantity');
+    if (b > a) throw invalid('SUBTRACTION_OUT_OF_RANGE', 'the departing quantity must not exceed the original quantity.');
+    const original = items(a, 'subtract');
+    const remainingCount = a - b;
+    // Leave from the right-hand end. Every ledger entry keeps the original object.
+    const departed = original.slice(remainingCount).reverse();
+    return {
+      a: a, b: b, remainingCount: remainingCount, original: original,
+      remaining: original.slice(0, remainingCount), departed: departed,
+      moves: departed.map(function (item, index) {
+        return { item: item, remainingAfter: a - index - 1, departedAfter: index + 1 };
+      })
+    };
+  }
+
   function equalShare(value, count) {
     const total = checkedQuantity(value);
     if (!Number.isInteger(count) || count < 1 || count > MAX_GROUPS) {
@@ -124,7 +158,8 @@
   const API = Object.freeze({
     MAX_QUANTITY: MAX_QUANTITY, MAX_GROUPS: MAX_GROUPS,
     isQuantity: isQuantity, countWord: countWord, determiner: determiner,
-    quantityText: quantityText, items: items, addition: addition, equalShare: equalShare
+    quantityText: quantityText, items: items, addition: addition, equalShare: equalShare,
+    comparison: comparison, subtraction: subtraction
   });
   root.SihyeonQuantityPlayModel = API;
   if (typeof module === 'object' && module.exports) module.exports = API;
