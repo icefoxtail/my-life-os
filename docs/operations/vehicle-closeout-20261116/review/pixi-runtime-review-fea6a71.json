@@ -1,0 +1,92 @@
+{
+  "atUtc": "2026-11-16T12:10:51.760724+00:00",
+  "candidateCommit": "fea6a71814298e363a66ae715337a91414d7194c",
+  "baselineCommit": "833cc1ec5cd38728850957c47b33a6bb24c0ada3",
+  "reviewer": "/root/live_status",
+  "baselineResult": {
+    "reviewer": "/root/live_status",
+    "sourceSha256": "9822fd05d7e27b54744f302f68200c96fb670bef4515cf1408f94b49d2ef7c5f",
+    "scope": "actual runtime behavior in Node VM, not browser input",
+    "checks": [
+      {
+        "name": "Pixi 8 pointers",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(object.handlers.has(move))\n"
+      },
+      {
+        "name": "Pixi 7 pointers",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n    cancel: 0,\n+   end: 1,\n+   move: 1,\n+   start: 2\n-   end: 0,\n-   move: 0,\n-   start: 1\n  }\n"
+      },
+      {
+        "name": "retired particles",
+        "status": "FAIL",
+        "error": "Error: retired particle x accessed"
+      },
+      {
+        "name": "shared host ownership",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: retired runtime must not wipe another owner\n+ actual - expected\n\n+ ''\n- 'newer-owner-content'\n"
+      }
+    ]
+  },
+  "baselineExit": 1,
+  "candidateResult": {
+    "reviewer": "/root/live_status",
+    "sourceSha256": "106a9c53fb896e14a32a3b813c3578e402b85d191131669be50fe1f4132f3f36",
+    "scope": "actual runtime behavior in Node VM, not browser input",
+    "checks": [
+      {
+        "name": "Pixi 8 pointers",
+        "status": "PASS",
+        "detail": {
+          "version": 8,
+          "secondaryPointerIgnored": true,
+          "outsideRelease": true,
+          "cancel": true,
+          "cleanup": true
+        }
+      },
+      {
+        "name": "Pixi 7 pointers",
+        "status": "PASS",
+        "detail": {
+          "version": 7,
+          "secondaryPointerIgnored": true,
+          "outsideRelease": true,
+          "cancel": true,
+          "cleanup": true
+        }
+      },
+      {
+        "name": "retired particles",
+        "status": "PASS",
+        "detail": {
+          "removedDuringAnimation": true,
+          "retiredObjectAccess": false,
+          "remainingTickers": 0
+        }
+      },
+      {
+        "name": "shared host ownership",
+        "status": "PASS",
+        "detail": {
+          "idempotentDestroy": true,
+          "otherOwnerPreserved": true
+        }
+      }
+    ]
+  },
+  "candidateExit": 0,
+  "existingLifecycleTest": {
+    "exit": 0,
+    "stdout": "PASS: close during Pixi load and close/reenter during Pixi load\n"
+  },
+  "sourceHashes": {
+    "js/engine/pixi-runtime.js": "106a9c53fb896e14a32a3b813c3578e402b85d191131669be50fe1f4132f3f36",
+    "js/games-pixi/number-vehicles-pixi.js": "f784dfc697806b411aa964330649b2e113520916029c9159619a887bb762c392",
+    "scripts/qa-pixi-vehicle-browser.py": "bc8f0fa4aed7a8bb379c089fe1307c6d80967e478da45f8c06eb593ddb6d60ee",
+    "scripts/test-pixi-lifecycle.cjs": "9c338ef0e8faa3e9f9fd7e60560cd4aa46e0f617b025e9bc757a71e7acb078ac"
+  },
+  "actualBrowser": "PENDING_REMOTE_CI"
+}
