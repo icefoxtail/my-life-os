@@ -1,0 +1,24 @@
+{
+  "atUtc": "2026-11-16T12:09:55.612652+00:00",
+  "candidateCommit": "a4e2066dc8798b3c63cb20cb56c23493f2f6a380",
+  "reviewer": "/root/live_status",
+  "sourceObservation": "baseline-source-observation.json",
+  "checkedImages": 138,
+  "sourceBytesUnchanged": true,
+  "approvedLedgerMatches": 76,
+  "metadataMatchesDecodedAlpha": true,
+  "cleanPoolPreserved": true,
+  "inlineJsonEqual": true,
+  "errors": [],
+  "sourceHashes": {
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a",
+    "js/games/parking-lot.js": "c3728be0956c8b1e761896f6e3ef1ab15f8c2317575a71c02871e87742b23b70",
+    "js/games/coding-car.js": "3c61599f67809531dd660ed321243067ac3d29d5a1267d47d8445c66f7a11d17",
+    "js/games/megaDispatch.js": "6d09721bf28440f8b4d579c204ba04ebe5f26c76b03c897a0b40f47c9017d725",
+    "js/games/construction-site.js": "1325486aa8b9834232d433441fe6f170572d86cdf019c7134c4fb863882c71db",
+    "js/games/vehicle-memory.js": "d6363cc79ca1440d0e2f8d9dc27b4c3718bfb1f3f57c8e8e950bc346160b7507",
+    "js/games/number-count.js": "347c12c5e268e2b850e6a00583b709dffa395802c3ba28b463c1b85bb06584e5"
+  },
+  "browser": "PENDING_REMOTE_CI"
+}

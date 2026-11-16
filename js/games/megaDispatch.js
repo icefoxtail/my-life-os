@@ -49,7 +49,7 @@
   function isLandscapeMode() {
     const width = window.innerWidth || document.documentElement.clientWidth || 0;
     const height = window.innerHeight || document.documentElement.clientHeight || 0;
-    return width >= 760 && width > height;
+    return width >= 640 && width > height;
   }
 
   function getLayoutMode() {
@@ -262,6 +262,9 @@
         height: 85%;
         object-fit: contain;
       }
+      .md-mission-card > .sv-vehicle-frame { max-width: 85%; max-height: 85%; }
+      .md14-scene-target > .sv-vehicle-frame { max-width: 86%; max-height: 86%; }
+      .md14-truck-btn > .sv-vehicle-frame { max-width: 90%; max-height: 90%; }
 
       .md-mission-card.done {
         opacity: 0.2;
@@ -399,7 +402,7 @@
 
       /* [버튼] 48dp+ 확보 & 타겟 글로우 */
       .md14-truck-btn {
-        aspect-ratio: 1/1;
+        aspect-ratio: auto;
         background: #fff;
         border-radius: 20px;
         border: none;
@@ -408,7 +411,8 @@
         align-items: center;
         justify-content: center;
         padding: 10px;
-        min-height: 80px;
+        min-height: 44px;
+        min-width: 0;
         position: relative;
         transition: transform 0.1s;
         cursor: pointer;
@@ -751,6 +755,26 @@
           font-size: 20px;
         }
       }
+      /* Row heights follow the available panel, not the width of a square card. */
+      .md14-garage { align-content: stretch; }
+      .md14-garage.grid-4 { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+      .md14-garage.grid-9 { grid-template-rows: repeat(3, minmax(0, 1fr)); }
+      .md14-garage.grid-16 { grid-template-rows: repeat(4, minmax(0, 1fr)); }
+      @media (orientation: landscape) and (max-height: 640px) {
+        .dispatch-landscape { grid-template-columns: minmax(112px, .72fr) minmax(0, 1fr) minmax(210px, 1.28fr); gap: 8px; padding: 8px; }
+        .dispatch-landscape .md14-status-panel { grid-template-rows: auto auto minmax(0, 1fr); padding: 6px; gap: 6px; border-radius: 20px; }
+        .dispatch-landscape .md14-level-badge { min-height: 30px; padding: 4px; font-size: 14px; }
+        .dispatch-landscape .md14-title { font-size: 18px; }
+        .dispatch-landscape .md14-subtitle { display: none; }
+        .dispatch-landscape .md14-header { padding: 8px 4px; gap: 8px; border-radius: 18px; }
+        .dispatch-landscape .md-mission-card { width: 54px; height: 54px; }
+        .dispatch-landscape .md-mission-card.preview-large { width: 82px; height: 82px; }
+        .dispatch-landscape .md14-scene-inner { padding: 8px; }
+        .dispatch-landscape .md14-scene-target { width: min(78%, 42vh); border-radius: 22px; }
+        .dispatch-landscape .md14-scene-caption { bottom: 8px; padding: 7px 5px; font-size: 14px; }
+        .dispatch-landscape .md14-garage { padding: 8px; gap: 8px; border-radius: 20px; }
+        .dispatch-landscape .md14-truck-btn { min-height: 44px; padding: 5px; border-radius: 14px; }
+      }
     `;
     document.head.appendChild(s);
   }
@@ -879,6 +903,7 @@
       </div>
     `;
 
+    state.container.querySelectorAll('.md-mission-card img, .md14-scene-target img, .md14-truck-btn img').forEach(img => window.SihyeonVehicleDisplay?.apply(img));
     state.container.querySelectorAll('.md14-truck-btn').forEach(btn => {
       btn.onclick = (e) => handleTouch(btn.dataset.gameId, btn, e);
     });

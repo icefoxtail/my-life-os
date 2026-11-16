@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.9.0-art-story';
+const CACHE_NAME = 'sihyeon-play-os-v1.9.1-vehicle-display';
 
 const ASSETS = [
   './js/games/neighborhood-story-model.js',
