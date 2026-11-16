@@ -1,0 +1,14 @@
+{
+  "taskId": "42335eec-a883-4486-9504-182b1b5d2f47",
+  "owner": "GPT_ROOT_4414C9BDF4A5",
+  "instructionRevision": 2,
+  "baseMain": "e47e89b1617a3a68628bf277be15efb6bed38ff9",
+  "state": "IMPLEMENTING",
+  "activeStage": 1,
+  "stages": [
+    {"id": 1, "name": "coloring-reference-companion", "branch": "work/art-reference-companion-20261116", "status": "IMPLEMENTING"},
+    {"id": 2, "name": "quantity-comparison-and-subtraction", "branch": "work/quantity-compare-subtract-20261116", "status": "NOT_STARTED"},
+    {"id": 3, "name": "personal-artwork-story-play", "branch": "work/art-story-play-20261116", "status": "NOT_STARTED"}
+  ],
+  "nextAction": "Complete, independently verify and deploy stage 1 before implementing stage 2."
+}
