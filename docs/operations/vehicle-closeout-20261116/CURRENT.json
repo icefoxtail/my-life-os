@@ -1,0 +1,31 @@
+{
+  "taskId": "9782230a-8f17-4f0e-a562-ae9727db2865",
+  "owner": "GPT_STATUS_607059CD986C",
+  "instructionRevision": 2,
+  "baseMain": "833cc1ec5cd38728850957c47b33a6bb24c0ada3",
+  "state": "IN_PROGRESS",
+  "stages": [
+    {
+      "id": 1,
+      "name": "vehicle-display",
+      "branch": "work/vehicle-display-closeout-20261116",
+      "sourcePr": 5,
+      "implementationCheckpoint": "00bddfd164d9b2396867d980ee7d4064d5f831ad",
+      "status": "BROWSER_VERIFICATION_PENDING"
+    },
+    {
+      "id": 2,
+      "name": "pixi-vehicle",
+      "branch": "work/pixi-vehicle-closeout-20261116",
+      "sourcePr": 19,
+      "implementationCheckpoint": "fea6a71814298e363a66ae715337a91414d7194c",
+      "status": "BROWSER_VERIFICATION_PENDING"
+    }
+  ],
+  "nextAction": "Run focused and existing mandatory CI; review screenshots; sequential main and production closeout.",
+  "limitations": [
+    "Physical device touch NOT_RUN",
+    "Audible speaker listening NOT_RUN",
+    "Local/headless and shared desktop browser unavailable in this executor; remote Chromium jobs provide browser evidence."
+  ]
+}

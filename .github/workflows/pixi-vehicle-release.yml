@@ -53,7 +53,7 @@ jobs:
   pixi-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -69,7 +69,8 @@ jobs:
           paths = ['sw.js','index.html','js/engine/pixi-runtime.js','js/games-pixi/number-vehicles-pixi.js']
           expected = {p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
           base = 'https://icefoxtail.github.io/my-life-os/'
-          deadline = time.monotonic() + 20*60
+          # Match the existing production gate's allowance for Pages queue delays.
+          deadline = time.monotonic() + 50*60
           while time.monotonic() < deadline:
               actual = {}
               try:

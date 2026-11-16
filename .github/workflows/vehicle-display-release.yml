@@ -1,0 +1,106 @@
+name: Vehicle display release
+on:
+  pull_request:
+    paths:
+      - 'js/vehicle-display.js'
+      - 'js/games/number-count.js'
+      - 'js/games/vehicle-memory.js'
+      - 'js/games/parking-lot.js'
+      - 'js/games/construction-site.js'
+      - 'js/games/megaDispatch.js'
+      - 'js/games/coding-car.js'
+      - 'assets/vehicles/**'
+      - 'scripts/qa-vehicle-display-browser.py'
+      - 'scripts/refresh-vehicle-display.py'
+      - '.github/workflows/vehicle-display-release.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/vehicle-display.js'
+      - 'js/games/number-count.js'
+      - 'js/games/vehicle-memory.js'
+      - 'js/games/parking-lot.js'
+      - 'js/games/construction-site.js'
+      - 'js/games/megaDispatch.js'
+      - 'js/games/coding-car.js'
+      - 'assets/vehicles/**'
+      - 'scripts/qa-vehicle-display-browser.py'
+      - '.github/workflows/vehicle-display-release.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  vehicle-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify unchanged images and regenerated display metadata
+        run: |
+          python3 -m pip install Pillow==11.3.0 playwright==1.57.0
+          python3 scripts/refresh-vehicle-display.py --check
+          node scripts/test-vehicle-display.cjs
+          node scripts/test-legacy-inputs.cjs
+          python3 -m py_compile scripts/qa-vehicle-display-browser.py
+      - name: Install Chromium
+        run: python3 -m playwright install --with-deps chromium
+      - name: Independent current-image fitting and six-game responsive review
+        run: python3 scripts/qa-vehicle-display-browser.py --output qa-vehicle-evidence
+      - name: Preserve source-bound browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: vehicle-display-${{ github.run_id }}
+          path: qa-vehicle-evidence/
+          if-no-files-found: warn
+          retention-days: 14
+  vehicle-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install production browser
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Wait for exact released vehicle runtime
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, time, urllib.request
+          paths = ['sw.js', 'index.html', 'assets/vehicles/display_bounds.json', 'js/vehicle-display.js', 'js/games/number-count.js', 'js/games/vehicle-memory.js', 'js/games/parking-lot.js', 'js/games/construction-site.js', 'js/games/megaDispatch.js', 'js/games/coding-car.js']
+          expected = {p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base = 'https://icefoxtail.github.io/my-life-os/'
+          # Match the existing production gate's allowance for Pages queue delays.
+          deadline = time.monotonic() + 50*60
+          while time.monotonic() < deadline:
+              actual = {}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base+path+'?release='+expected['sw.js'][:12],timeout=15) as response:
+                          actual[path] = hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__, flush=True)
+              if actual == expected:
+                  out=pathlib.Path('qa-vehicle-production'); out.mkdir(exist_ok=True)
+                  (out/'deployed-runtime.json').write_text(json.dumps({'base':base,'expected':expected,'actual':actual,'matches':True},indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Exact vehicle runtime has not appeared on Pages.')
+          PY
+      - name: Verify the deployed games and current images
+        run: python3 scripts/qa-vehicle-display-browser.py --base-url https://icefoxtail.github.io/my-life-os/ --output qa-vehicle-production
+      - name: Preserve production evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: vehicle-production-${{ github.run_id }}
+          path: qa-vehicle-production/
+          if-no-files-found: warn
+          retention-days: 14
