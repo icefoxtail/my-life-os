@@ -1861,7 +1861,6 @@
       const work=state.templateWork[state.activeTemplateId]; const item=work?.history?.pop();
       if(!item)return;
       if(item.fills){work.fills=item.fills;if(item.svgVersion)work.svgVersion=item.svgVersion;}else work.fills[item.index]=item.prev;work.completed=false;
-      state.showReference = false;
       renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
     } else {
       const prior=state.freeHistory.pop();if(prior===undefined)return;
@@ -1882,7 +1881,6 @@
         else work.fills=work.fills.map(()=>'#FFF');
       }
       if(work)work.completed=false;
-      state.showReference = false;
       renderColoringTemplate(tpl);
     } else {
       const prior = state.freeCanvasReady ? state.canvas.toDataURL('image/png') : state.freeImage;

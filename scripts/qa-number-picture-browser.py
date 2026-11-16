@@ -546,10 +546,18 @@ def main():
                 assert region.get_attribute('fill') == '#9944FF'
                 saved_before = page.evaluate("JSON.parse(localStorage.getItem('sihyeon-art-work-v1')).templates.police")
                 page.locator('#azReferenceToggle').click()
-                assert page.locator('#azReference').is_visible() and not page.locator('#azColoringWrap').is_visible()
+                assert page.locator('#azReference').is_visible() and page.locator('#azColoringWrap').is_visible()
                 page.wait_for_function("document.querySelector('#azReference img').complete && document.querySelector('#azReference img').naturalWidth>0")
+                assert page.locator('#azReferenceToggle').get_attribute('aria-pressed') == 'true'
+                assert page.locator('#azColoringWrap [data-part="light_red"]').get_attribute('fill') == '#9944FF'
+                assert page.evaluate("JSON.parse(localStorage.getItem('sihyeon-art-work-v1')).templates.police") == saved_before
+                reference_src = page.locator('#azReference img').get_attribute('src')
+                reference_svg = unquote(reference_src.split(',', 1)[1])
+                assert re.search(r'data-part="light_red"[^>]*fill="#FF4444"', reference_svg), 'the recommended red light must stay separate from the purple child artwork'
                 screenshot(page, 'art-reference')
                 page.locator('#azReferenceToggle').click()
+                assert not page.locator('#azReference').is_visible() and page.locator('#azColoringWrap').is_visible()
+                assert page.locator('#azReferenceToggle').get_attribute('aria-pressed') == 'false'
                 assert page.locator('#azColoringWrap [data-part="light_red"]').get_attribute('fill') == '#9944FF'
                 assert page.evaluate("JSON.parse(localStorage.getItem('sihyeon-art-work-v1')).templates.police") == saved_before
                 page.locator('#azPlayArtwork').click()
