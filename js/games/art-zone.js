@@ -1,5 +1,5 @@
 /**
- * 시현이 놀이터 OS — 매직 그림판 v4.5.0
+ * 시현이 놀이터 OS — 매직 그림판 v4.6.0
  * v4.1 원본 기준 유지 + 시현이 전용 단순 그림놀이 레이아웃
  * - 큰 매직 그림판 헤더 제거
  * - 도구/되돌리기/휴지통/완료/저장 UI 제거
@@ -1482,9 +1482,14 @@
     pageHideHandler: null,
     showReference: false,
     referencePartId: null,
+    colorSceneToken: 0,
+    collectionUndo: null,
+    collectionUndoTarget: null,
   };
 
   const WORK_KEY = 'sihyeon-art-work-v1';
+  const COLLECTION_KEY = 'sihyeon-art-collection-v1';
+  const COLLECTION_LIMIT = 12;
   // One-time, never-overwritten copy of the coloring fills as they were before
   // template versioning shipped. Free-drawing PNGs are excluded so the copy
   // cannot push the main save over the storage quota.
@@ -1641,6 +1646,19 @@
     return playObject(tpl, readOnlySvg(tpl, svg, fills), work.svgVersion, true);
   }
 
+  // Chooser pictures use the same shipped geometry and detached paint as the
+  // editor, including the original revision of a returning child's artwork.
+  function templatePreview(tpl) {
+    const work = readTemplateWork(tpl, state.templateWork[tpl.id]);
+    const svg = work ? readOnlySvg(tpl, workSvg(tpl, work), work.fills) : tpl.svg;
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  }
+
+  function updateTemplatePreview(tpl) {
+    const image = state.container?.querySelector?.(`[data-tpl="${tpl.id}"] img`);
+    if (image) image.src = templatePreview(tpl);
+  }
+
   function referenceParts(tpl) {
     // Begin with the largest useful parts. Names and colors come from the
     // template metadata, and the hint never decides what the child must paint.
@@ -1691,6 +1709,7 @@
     if (!tools) return;
     const tpl = COLORING_TEMPLATES.find((item) => item.id === state.activeTemplateId);
     if (!tpl) return;
+    updateTemplatePreview(tpl);
     const isColoring = state.tab === 'coloring';
     const showing = isColoring && state.showReference;
     tools.hidden = !isColoring;
@@ -1807,6 +1826,261 @@
       }
     } catch (_) {}
   }
+
+  // The working page and the collection have separate keys. Saving a new
+  // version never overwrites an older picture of the same template.
+  let memoryCollection = null;
+  let collectionReadBlocked = false;
+  let collectionMessage = '';
+  let collectionSequence = 0;
+  let persistedCollectionIds = new Set();
+
+  function snapshotTemplate(tpl, source) {
+    const work = readTemplateWork(tpl, source);
+    if (!work) return null;
+    const snapshot = { svgVersion: work.svgVersion, fills: work.fills.slice(), completed: !!work.completed };
+    const order = partOrder(workSvg(tpl, work));
+    if (order.unique && order.ids.length) {
+      snapshot.parts = {};
+      order.ids.forEach((part, index) => { snapshot.parts[part] = safeFill(work.fills[index]); });
+    }
+    return snapshot;
+  }
+
+  function readCollectionItem(item) {
+    if (!item || typeof item !== 'object' || !/^aw-[a-z0-9-]{1,72}$/.test(item.id || '')) return null;
+    const base = { id: item.id, createdAt: Number.isSafeInteger(item.createdAt) && item.createdAt > 0 ? item.createdAt : 0 };
+    if (item.kind === 'coloring') {
+      const tpl = COLORING_TEMPLATES.find((entry) => entry.id === item.templateId);
+      const work = tpl && snapshotTemplate(tpl, item.work);
+      return work ? { ...base, kind: 'coloring', templateId: tpl.id, work } : null;
+    }
+    if (item.kind === 'free' && typeof item.image === 'string' &&
+        /^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(item.image) && item.image.length < 4000000) {
+      return { ...base, kind: 'free', image: item.image,
+        theme: Object.prototype.hasOwnProperty.call(THEMES, item.theme) ? item.theme : 'white' };
+    }
+    return null;
+  }
+
+  function loadCollection() {
+    if (memoryCollection) return memoryCollection;
+    memoryCollection = [];
+    try {
+      const raw = localStorage.getItem(COLLECTION_KEY);
+      if (!raw) return memoryCollection;
+      const data = JSON.parse(raw);
+      if (!data || data.version !== 1 || !Array.isArray(data.items) || data.items.length > COLLECTION_LIMIT) throw Error('unreadable collection');
+      const items = data.items.map(readCollectionItem);
+      if (items.some((item) => !item) || new Set(items.map((item) => item.id)).size !== items.length) throw Error('unreadable picture');
+      memoryCollection = items;
+      persistedCollectionIds = new Set(items.map((item) => item.id));
+    } catch (_) {
+      // A denied read or a future/corrupt format must not be replaced by a new
+      // empty collection just because writing happens to be permitted.
+      collectionReadBlocked = true;
+      collectionMessage = '저장된 그림을 읽지 못했어요. 새 그림은 이번 놀이에서만 보관돼요.';
+    }
+    return memoryCollection;
+  }
+
+  function persistCollection(items) {
+    memoryCollection = JSON.parse(JSON.stringify(items));
+    if (collectionReadBlocked) return false;
+    try {
+      localStorage.setItem(COLLECTION_KEY, JSON.stringify({ version: 1, items: memoryCollection }));
+      persistedCollectionIds = new Set(memoryCollection.map((item) => item.id));
+      return true;
+    } catch (_) {
+      // The browser keeps the old value when setItem fails. Session pictures
+      // remain available without pretending that they survived a reload.
+      return false;
+    }
+  }
+
+  function captureCurrentArtwork() {
+    saveWork();
+    if (state.tab === 'coloring') {
+      const tpl = COLORING_TEMPLATES.find((item) => item.id === state.activeTemplateId);
+      const work = tpl && snapshotTemplate(tpl, state.templateWork[tpl.id]);
+      if (!work || !work.fills.some(isPainted)) return null;
+      return { kind: 'coloring', templateId: tpl.id, work };
+    }
+    if (!state.freeImage) return null;
+    return { kind: 'free', image: state.freeImage, theme: state.activeTheme };
+  }
+
+  function artworkIdentity(item) {
+    return item.kind === 'free'
+      ? JSON.stringify([item.kind, item.image, item.theme])
+      : JSON.stringify([item.kind, item.templateId, item.work.svgVersion, item.work.fills]);
+  }
+
+  function saveCurrentToCollection() {
+    const items = loadCollection();
+    const picture = captureCurrentArtwork();
+    if (!picture) {
+      collectionMessage = '먼저 그림을 그리거나 색칠해 주세요.';
+    } else if (items.some((item) => artworkIdentity(item) === artworkIdentity(picture))) {
+      collectionMessage = '이 그림은 이미 보관했어요. 새 색으로 그리면 한 장 더 보관할 수 있어요.';
+    } else if (items.length >= COLLECTION_LIMIT) {
+      collectionMessage = '그림 12장이 모두 찼어요. 지워도 괜찮은 그림을 고르면 자리가 생겨요.';
+    } else {
+      const item = { ...picture, id: `aw-${Date.now().toString(36)}-${(++collectionSequence).toString(36)}-${Math.random().toString(36).slice(2, 9)}`, createdAt: Date.now() };
+      const saved = persistCollection([...items, item]);
+      collectionMessage = saved ? '내 그림에 보관했어요. 다음에도 다시 볼 수 있어요.'
+        : collectionReadBlocked ? '저장된 그림을 읽지 못했어요. 새 그림은 이번 놀이에서만 보관돼요.'
+          : '기기에 저장하지 못했어요. 새 그림은 이번 놀이에서만 볼 수 있어요.';
+    }
+    renderCollection();
+  }
+
+  function currentWorkspaceSnapshot() {
+    saveWork();
+    return {
+      tab: state.tab, activeTemplateId: state.activeTemplateId, activeTheme: state.activeTheme,
+      freeImage: state.freeImage, freeHistory: state.freeHistory.slice(),
+      templateWork: JSON.parse(JSON.stringify(state.templateWork)),
+    };
+  }
+
+  function refreshWorkspaceChoices() {
+    const root = state.container?.querySelector?.('.az-root');
+    if (!root) return;
+    root.querySelectorAll('.az-mode-tab').forEach((button) => button.classList.toggle('active', button.dataset.tab === state.tab));
+    root.querySelectorAll('[data-tpl]').forEach((button) => button.classList.toggle('active', button.dataset.tpl === state.activeTemplateId));
+    root.querySelectorAll('[data-theme]').forEach((button) => button.classList.toggle('active', button.dataset.theme === state.activeTheme));
+    COLORING_TEMPLATES.forEach(updateTemplatePreview);
+    applyThemeBg();
+  }
+
+  function loadCollectedArtwork(id) {
+    const item = loadCollection().find((entry) => entry.id === id);
+    if (!item) return;
+    state.collectionUndo = currentWorkspaceSnapshot();
+    state.collectionUndoTarget = { kind: item.kind, templateId: item.templateId || null };
+    state.isDrawing = false;
+    state.pointerId = null;
+    state.referencePartId = null;
+    if (item.kind === 'coloring') {
+      const tpl = COLORING_TEMPLATES.find((entry) => entry.id === item.templateId);
+      state.templateWork[tpl.id] = readTemplateWork(tpl, item.work);
+      state.activeTemplateId = tpl.id;
+    } else {
+      state.freeHistory = [];
+      state.activeTheme = item.theme;
+      // Invalidate the previous PNG decode before any save can read pixels.
+      restoreFreeImage(item.image);
+    }
+    closeCollection();
+    switchTab(item.kind === 'coloring' ? 'coloring' : 'free');
+    refreshWorkspaceChoices();
+    speak('보관한 그림이야. 되돌리면 이전 그림이 돌아와!');
+  }
+
+  function undoCollectionRestore() {
+    const prior = state.collectionUndo;
+    const target = state.collectionUndoTarget;
+    if (!prior || !target || target.kind !== (state.tab === 'coloring' ? 'coloring' : 'free') ||
+        (target.kind === 'coloring' && target.templateId !== state.activeTemplateId)) return false;
+    state.collectionUndo = null;
+    state.collectionUndoTarget = null;
+    state.tab = prior.tab;
+    state.activeTemplateId = prior.activeTemplateId;
+    state.activeTheme = prior.activeTheme;
+    state.templateWork = JSON.parse(JSON.stringify(prior.templateWork));
+    state.freeHistory = prior.freeHistory.slice();
+    restoreFreeImage(prior.freeImage);
+    switchTab(prior.tab);
+    refreshWorkspaceChoices();
+    speak('이전 그림이 돌아왔어!');
+    return true;
+  }
+
+  function collectionPicture(item) {
+    if (item.kind === 'free') return item.image;
+    const tpl = COLORING_TEMPLATES.find((entry) => entry.id === item.templateId);
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(readOnlySvg(tpl, workSvg(tpl, item.work), item.work.fills))}`;
+  }
+
+  function closeCollection() {
+    state.container?.querySelector?.('#azCollection')?.remove();
+    state.container?.querySelector?.('#azCollectionButton')?.focus?.();
+  }
+
+  function renderCollection(confirmDeleteId = null) {
+    const root = state.container?.querySelector?.('.az-root');
+    if (!root || state.destroyed) return;
+    const items = loadCollection();
+    let overlay = root.querySelector('#azCollection');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'azCollection';
+      overlay.className = 'az-collection';
+      root.appendChild(overlay);
+    }
+    const full = items.length >= COLLECTION_LIMIT;
+    const hasSessionPicture = items.some((item) => !persistedCollectionIds.has(item.id));
+    const message = collectionMessage || (hasSessionPicture ? '새 그림은 이번 놀이에서만 보관돼요.'
+      : full ? '12장이 모두 찼어요. 지워도 괜찮은 그림을 골라 주세요.'
+        : '같은 그림도 여러 장 보관할 수 있어요.');
+    overlay.innerHTML = `
+      <section class="az-collection-dialog" role="dialog" aria-modal="true" aria-labelledby="azCollectionTitle">
+        <header class="az-collection-header">
+          <h2 id="azCollectionTitle">🖼️ 내 그림 <small>${items.length}/${COLLECTION_LIMIT}</small></h2>
+          <button type="button" id="azCollectionClose" aria-label="그림판으로 돌아가기">닫기 ✕</button>
+        </header>
+        <div class="az-collection-bar">
+          <button type="button" id="azCollectionSave">＋ 지금 그림 보관</button>
+          <p id="azCollectionStatus" role="status" aria-live="polite">${message}</p>
+        </div>
+        <div class="az-collection-grid" tabindex="0" aria-label="보관한 그림 목록">
+          ${items.length ? items.map((item, index) => {
+            const name = item.kind === 'free' ? '내가 그린 그림' : COLORING_TEMPLATES.find((entry) => entry.id === item.templateId).name;
+            const background = item.kind === 'free' ? THEMES[item.theme].color : '#fffbf5';
+            const pending = !persistedCollectionIds.has(item.id);
+            return `<article class="az-collected-work" data-work-id="${item.id}">
+              <img src="${collectionPicture(item)}" alt="${name} ${index + 1}" draggable="false" style="background:${background}">
+              <h3>${name} <span>${index + 1}</span></h3>
+              ${pending ? '<small class="az-session-picture">이번 놀이에서만</small>' : ''}
+              ${confirmDeleteId === item.id ? `<p class="az-delete-question">이 그림을 지울까요?</p><div class="az-collected-actions"><button type="button" data-keep="${item.id}">그대로 두기</button><button type="button" class="az-delete-confirm" data-confirm-delete="${item.id}">지우기</button></div>`
+                : `<div class="az-collected-actions"><button type="button" data-open-work="${item.id}" aria-label="${name} ${index + 1} 불러오기">그림 열기</button><button type="button" data-delete-work="${item.id}" aria-label="${name} ${index + 1} 지우기">🗑️</button></div>`}
+            </article>`;
+          }).join('') : '<div class="az-collection-empty"><span>🎨</span><p>소중한 그림을 모아 봐요!</p><p>지금 그림 보관을 누르면<br>여기에 한 장씩 담겨요.</p></div>'}
+        </div>
+      </section>`;
+    overlay.querySelector('#azCollectionClose').onclick = closeCollection;
+    overlay.querySelector('#azCollectionSave').onclick = saveCurrentToCollection;
+    overlay.querySelectorAll('[data-open-work]').forEach((button) => { button.onclick = () => loadCollectedArtwork(button.dataset.openWork); });
+    overlay.querySelectorAll('[data-delete-work]').forEach((button) => { button.onclick = () => { renderCollection(button.dataset.deleteWork); overlay.querySelector(`[data-keep="${button.dataset.deleteWork}"]`)?.focus(); }; });
+    overlay.querySelectorAll('[data-keep]').forEach((button) => { button.onclick = () => renderCollection(); });
+    overlay.querySelectorAll('[data-confirm-delete]').forEach((button) => {
+      button.onclick = () => {
+        const saved = persistCollection(loadCollection().filter((item) => item.id !== button.dataset.confirmDelete));
+        collectionMessage = saved ? '그림 한 장을 지웠어요. 지금 그리는 그림은 그대로예요.'
+          : '이번 놀이에서 지웠어요. 기기에 저장하지 못해 다음에 다시 보일 수 있어요.';
+        renderCollection();
+      };
+    });
+    overlay.onkeydown = (event) => {
+      if (event.key === 'Escape') { event.preventDefault(); closeCollection(); return; }
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(overlay.querySelectorAll('button,[tabindex="0"]')).filter((element) => !element.disabled);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    overlay.querySelector('#azCollectionClose').focus();
+  }
+
+  function openCollection() {
+    state.isDrawing = false;
+    state.pointerId = null;
+    saveWork();
+    collectionMessage = '';
+    renderCollection();
+  }
+
   function updateFreeRestoreNotice() {
     const notice = state.container?.querySelector?.('#azRestoreNotice');
     if (!notice) return;
@@ -1859,11 +2133,11 @@
   function undoWork() {
     if(state.tab==='coloring') {
       const work=state.templateWork[state.activeTemplateId]; const item=work?.history?.pop();
-      if(!item)return;
+      if(!item){undoCollectionRestore();return;}
       if(item.fills){work.fills=item.fills;if(item.svgVersion)work.svgVersion=item.svgVersion;}else work.fills[item.index]=item.prev;work.completed=false;
       renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
     } else {
-      const prior=state.freeHistory.pop();if(prior===undefined)return;
+      const prior=state.freeHistory.pop();if(prior===undefined){undoCollectionRestore();return;}
       state.freeImage=prior;restoreFreeImage(prior);
     }
     timer(saveWork,100);
@@ -2639,6 +2913,76 @@
         .az-reference-guide button{font-size:12px;padding:4px 7px}
       }
     `;
+    s.textContent += `
+      #azTplRow .az-cat-btn{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;overflow:hidden}
+      #azTplRow .az-cat-btn img{display:block;width:100%;height:58px;min-height:0;object-fit:contain;pointer-events:none}
+      #azTplRow .az-tpl-name{display:block;max-width:100%;font-size:11px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+      #azTplRow{touch-action:pan-y}
+      .az-work-actions button{flex:0 0 44px;min-width:44px;width:44px;cursor:pointer}
+      .az-work-actions #azCollectionButton{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:20px;line-height:1;padding:2px}
+      .az-action-name{font:11px/1 'Jua',sans-serif;color:#233044;white-space:nowrap}
+      .az-collection,.az-collection *{box-sizing:border-box}
+      .az-collection{position:fixed;inset:0;z-index:10020;display:grid;place-items:center;padding:12px;background:rgba(24,47,70,.56);touch-action:pan-y}
+      .az-collection-dialog{width:min(820px,100%);max-height:calc(100dvh - 24px);min-height:0;display:flex;flex-direction:column;background:#fff9ef;border:3px solid #fff;border-radius:24px;box-shadow:0 16px 48px #172d4655;overflow:hidden}
+      .az-collection-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;background:#fff;flex:0 0 auto}
+      .az-collection-header h2{margin:0;font-size:23px;line-height:1.2;color:#233044}
+      .az-collection-header small{font-size:14px;color:#65758a;white-space:nowrap}
+      .az-collection button{min-height:44px;min-width:44px;padding:6px 10px;border:2px solid #d6dce5;border-radius:14px;background:#fff;font:inherit;font-size:14px;color:#233044;cursor:pointer;touch-action:manipulation}
+      .az-collection button:focus-visible,.az-collection-grid:focus-visible{outline:3px solid #235fa8;outline-offset:2px}
+      .az-collection-bar{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:center;gap:10px;padding:8px 14px;flex:0 0 auto}
+      #azCollectionSave{background:#fff0d8;border-color:#efaa55;font-size:16px}
+      #azCollectionStatus{margin:0;font-size:13px;line-height:1.4;word-break:keep-all;color:#5d5043}
+      .az-collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;padding:6px 14px 14px;overflow-y:auto;min-height:0;overscroll-behavior:contain;touch-action:pan-y;align-content:start}
+      .az-collected-work{padding:8px;border:2px solid #efe0c9;border-radius:18px;background:white;min-width:0;display:flex;flex-direction:column;gap:6px}
+      .az-collected-work>img{width:100%;height:120px;object-fit:contain;display:block;border-radius:12px;border:1px solid #e9e5df}
+      .az-collected-work h3{font-size:14px;line-height:1.2;margin:0;min-height:18px;word-break:keep-all;text-align:center}
+      .az-collected-work h3 span{color:#8a7560;font-size:12px}
+      .az-collected-actions{display:flex;gap:5px;margin-top:auto;min-width:0}
+      .az-collected-actions [data-open-work],.az-collected-actions [data-keep]{flex:1 1 auto;min-width:0}
+      .az-collected-actions [data-delete-work]{flex:0 0 44px;padding:6px}
+      .az-collected-actions [data-confirm-delete]{background:#fff0e9;border-color:#dfab92}
+      .az-collected-actions [data-keep]{background:#eef6ff;border-color:#aac9e8}
+      .az-delete-question{margin:0;text-align:center;font-size:13px;color:#805342}
+      .az-session-picture{font-size:11px;line-height:1.2;color:#805a35;text-align:center}
+      .az-collection-empty{grid-column:1/-1;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#65758a}
+      .az-collection-empty>span{font-size:54px}
+      .az-collection-empty p{margin:5px 0;font-size:16px;line-height:1.4}
+      @media(max-width:767px),(orientation:portrait){
+        #azTplRow{touch-action:pan-x}
+        #azTplRow .az-cat-btn img{height:39px}
+        #azTplRow .az-tpl-name{font-size:10px;line-height:1.1}
+      }
+      @media(max-width:520px){
+        .az-work-actions{gap:4px}
+        .az-work-actions button{width:44px;min-width:44px}
+        .az-collection-header{padding:8px 10px}
+        .az-collection-header h2{font-size:21px}
+        .az-collection-bar{grid-template-columns:1fr;padding:8px 10px;gap:6px}
+        .az-collection-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:4px 10px 12px}
+        .az-collected-work{padding:6px;gap:5px}
+        .az-collected-work>img{height:96px}
+        .az-collected-work h3{font-size:12px;line-height:1.25}
+        .az-collected-actions button{padding:5px;font-size:12px}
+      }
+      @media(max-width:380px){.az-mode-icon{display:none}.az-mode-tabs{gap:4px}.az-mode-tab{min-width:44px}}
+      @media(orientation:landscape) and (max-height:500px){
+        .az-left-panel,.az-right-panel{height:100%;min-height:0;display:flex}
+        .az-left-panel .coloring-section{height:100%;min-height:0;display:flex;flex-direction:column}
+        .az-left-panel .free-section{height:100%;min-height:0;overflow-y:auto}
+        .az-left-panel .free-section .az-panel-row{height:auto;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;touch-action:pan-y}
+        .az-left-panel .free-section .az-cat-btn{min-height:44px;width:100%;flex:0 0 auto;font-size:12px}
+        #azTplRow{height:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow-y:auto;overflow-x:hidden;touch-action:pan-y;align-items:start}
+        #azTplRow .az-cat-btn{width:100%;min-width:0;height:66px;min-height:66px;flex:none}
+        #azTplRow .az-cat-btn img{height:43px}
+        #azTplRow .az-tpl-name{font-size:9px}
+        .az-right-panel .az-color-section{height:100%;min-height:0}
+        .az-palette-row{height:auto;grid-template-rows:none;align-items:start;overflow-y:auto;touch-action:pan-y}
+        .az-color-circle{min-height:44px;max-height:none;aspect-ratio:1}
+        .az-collection-header{padding:6px 12px}
+        .az-collection-bar{padding:6px 12px}
+        .az-collected-work>img{height:82px}
+      }
+    `;
     document.head.appendChild(s);
   }
 
@@ -2659,6 +3003,8 @@
     state.hue = 0;
     state.showReference = false;
     state.referencePartId = null;
+    state.collectionUndo = null;
+    state.collectionUndoTarget = null;
     state.speechToken += 1;
 
     if (options.initialTemplateId && COLORING_TEMPLATES.some((t) => t.id === options.initialTemplateId)) {
@@ -2673,11 +3019,11 @@
       <div class="az-root" data-tab="${state.tab}">
         <header class="az-topbar">
           <div class="az-mode-tabs">
-            <button type="button" class="az-mode-tab${!isInitialColoring ? ' active' : ''}" data-tab="free">🎨 그림 팡팡</button>
-            <button type="button" class="az-mode-tab${isInitialColoring ? ' active' : ''}" data-tab="coloring">🌈 색칠 팡팡</button>
+            <button type="button" class="az-mode-tab${!isInitialColoring ? ' active' : ''}" data-tab="free"><span class="az-mode-icon">🎨 </span>그림 팡팡</button>
+            <button type="button" class="az-mode-tab${isInitialColoring ? ' active' : ''}" data-tab="coloring"><span class="az-mode-icon">🌈 </span>색칠 팡팡</button>
           </div>
           <div class="az-brand">🎨 매직 그림판</div>
-          <div class="az-work-actions"><button type="button" id="azUndo" aria-label="되돌리기">↶</button><button type="button" id="azNewPaper" aria-label="새 종이">📄</button></div>
+          <div class="az-work-actions"><button type="button" id="azUndo" aria-label="되돌리기">↶</button><button type="button" id="azNewPaper" aria-label="새 종이">📄</button><button type="button" id="azCollectionButton" aria-label="내 그림" aria-haspopup="dialog"><span aria-hidden="true">🖼️</span><span class="az-action-name">내 그림</span></button></div>
         </header>
 
         <main class="az-workspace">
@@ -2692,7 +3038,7 @@
             <section class="az-panel-section coloring-section"${!isInitialColoring ? ' style="display:none;"' : ''}>
               <div class="az-panel-title">색칠 그림</div>
               <div class="az-panel-row" id="azTplRow">
-                ${COLORING_TEMPLATES.map((t) => `<button type="button" class="az-cat-btn${t.id === state.activeTemplateId ? ' active' : ''}" data-tpl="${t.id}" aria-label="${t.name}">${t.emoji}</button>`).join('')}
+                ${COLORING_TEMPLATES.map((t) => `<button type="button" class="az-cat-btn${t.id === state.activeTemplateId ? ' active' : ''}" data-tpl="${t.id}" aria-label="${t.name}" title="${t.name}"><img src="${templatePreview(t)}" alt="" draggable="false"><span class="az-tpl-name">${t.name}</span></button>`).join('')}
               </div>
             </section>
           </aside>
@@ -2856,6 +3202,7 @@
     const root = state.container.querySelector('.az-root');
     root.querySelector('#azUndo').onclick=undoWork;
     root.querySelector('#azNewPaper').onclick=clearWork;
+    root.querySelector('#azCollectionButton').onclick = openCollection;
     root.querySelector('#azReferenceToggle').onclick = () => {
       state.showReference = !state.showReference;
       updateArtTools();
@@ -3058,6 +3405,7 @@
 
     const wrap = document.getElementById('azColoringWrap');
     if (!wrap) return;
+    const sceneToken = ++state.colorSceneToken;
 
     const work=state.templateWork[tpl.id]||(state.templateWork[tpl.id]={svgVersion:templateVersion(tpl),fills:[],completed:false,history:[]});
     work.history=work.history||[];
@@ -3111,7 +3459,7 @@
 
         if (navigator.vibrate) navigator.vibrate(25);
 
-        timer(() => {if(state.activeTemplateId===tpl.id)checkColoringComplete(tpl);}, 450);
+        timer(() => {if(state.activeTemplateId===tpl.id && state.colorSceneToken===sceneToken)checkColoringComplete(tpl);}, 450);
       };
 
       el.addEventListener('pointerup', (e) => {
