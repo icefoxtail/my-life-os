@@ -1,0 +1,171 @@
+{
+  "recordedAt": "2026-11-16T07:00:39.790288+00:00",
+  "stage1": {
+    "main": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
+    "pagesRun": 43814182675,
+    "productionRun": 43814183284,
+    "productionJob": 133139168937,
+    "artifact": 14203799068,
+    "zipSha256": "9b6a9de36b7b7eb3cbda8b3634629c3224c1a6964dede35357ae73a429f13e53",
+    "rootLiveInteraction": "PASS: reference, purple coloring, undo, persisted original colors after reload, nine saved-art pictures counted automatically",
+    "rootScreenshot": "ci/stage1/production/reference-live.jpg"
+  },
+  "stage2": {
+    "testedHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+    "main": "9d28ef0bab06859df0d3432ad4a8191c18394870",
+    "pr": 31,
+    "checksRun": 43817801977,
+    "browserRun": 43817801990,
+    "artifact": 14203494793,
+    "zipSha256": "561a23b7c5311ca163e95ba394af3bfbd72315baf228aa1172f967069832bb2c",
+    "browserTotal": 76,
+    "sourceHashRecordsMatched": 46,
+    "visualReview": "PASS: 320/390/844 landscape/1024; comparison60, subtraction originals, audio failure, garden complements",
+    "productionStatus": "PENDING"
+  },
+  "reports": [
+    {
+      "file": "ci/stage1/production/art-reference-browser.json.gz",
+      "reportSha256": "d0b2a133b942d54d613370528a517bd54ee382b77baf304155c8aeb5e1250235",
+      "gzipSha256": "86df7ad1b0ecf83b9b322e0b2126aa37dfbeec7fff7ee83613edb4dec4037645",
+      "sourceHead": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
+      "status": "PASS",
+      "passed": 7,
+      "failed": 0,
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "pageErrors": [],
+      "sources": {
+        "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "scripts/qa-art-reference-browser.py": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+        "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+      },
+      "tests": []
+    },
+    {
+      "file": "ci/stage2/browser/art-reference-browser.json.gz",
+      "reportSha256": "1f3744d22c16ba00ed05130d30e742369cf276cba2490d69cdbeaddeccb3b689",
+      "gzipSha256": "fa5d4c5957dd6d06025ab8c0e83e2a7746db3faeeba352c394323984325a85c9",
+      "sourceHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+      "status": "PASS",
+      "passed": 7,
+      "failed": 0,
+      "baseUrl": "http://127.0.0.1:40947/",
+      "pageErrors": [],
+      "sources": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "scripts/qa-art-reference-browser.py": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+        "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+      },
+      "tests": []
+    },
+    {
+      "file": "ci/stage2/browser/number-picture-browser.json.gz",
+      "reportSha256": "0300e59a3e6a0d31e9f600b91304b09c69e27a836aa71bcb20e1678905cd710f",
+      "gzipSha256": "690c37b3e948d412affd030e64eb60391cfcd0d14883e19c3bfe2a4e585152e8",
+      "sourceHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+      "status": "PASS",
+      "passed": 20,
+      "failed": 0,
+      "baseUrl": "http://127.0.0.1:46121/",
+      "pageErrors": [],
+      "sources": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+        "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "css/games/number-picture.css": "c4f38e1f9aef80da784e83a0c6937e0380f606aba3dbb928798e4cb4a2e4ffbe",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+      },
+      "tests": []
+    },
+    {
+      "file": "ci/stage2/browser/picture-arithmetic-browser.json.gz",
+      "reportSha256": "7e166d94a05b68906ee8b9baf6e537840fc8aded9ffe75ce0763e9944b4c28a2",
+      "gzipSha256": "682d2e31b0c618a458ada7b0ba5fa16cba1901fbb22d5d7c0f438c4aa251f40c",
+      "sourceHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+      "status": "PASS",
+      "passed": null,
+      "failed": null,
+      "baseUrl": "http://127.0.0.1:34001/",
+      "pageErrors": [],
+      "sources": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "js/games/picture-arithmetic.js": "b4f791fb6c816e4e00c647a5d1b0915f05797b4e29bb18c77c3952d969c7940f",
+        "css/games/picture-arithmetic.css": "2400897d4942dbdf8ada6a2028abb910dbe437da39ff5f11b87909d33689703b",
+        "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "scripts/qa-picture-arithmetic-browser.py": "c16f5389d4eaf94189b43a42a28e2f62c3f6df941e7d324f06c34abdb6b6669b"
+      },
+      "tests": []
+    },
+    {
+      "file": "ci/stage2/browser/quantity-change-browser.json.gz",
+      "reportSha256": "f28db004bea50358f11de68046e05c1512f9548144ffdbad382edfe0f8b1dd1b",
+      "gzipSha256": "fa23eff634e33c6112714d5f131792f1e710a40730631da39c3ad92757acf45c",
+      "sourceHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+      "status": "PASS",
+      "passed": 16,
+      "failed": 0,
+      "baseUrl": "http://127.0.0.1:36191/",
+      "pageErrors": [],
+      "sources": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+        "js/games/quantity-change.js": "620ae7d076e52397facc359b630ca35aa9278e633b0eebcabdaf029d45fabd25",
+        "css/games/quantity-change.css": "398dccdd6ea0f8b2f755f66ad24423be8bfe0aa28a25afaea2b79dc8dd5e89c0",
+        "assets/games/quantity-change/card.svg": "b5ba10376518a5f637a1652afb6e1722b4b9ebf174d974f9f34e3c8d4f5b49a2",
+        "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "scripts/qa-quantity-change-browser.py": "a47bdde4434e14f2d8baaf2ebbadd414413df5c91d0d041e84eee5fb84435109"
+      },
+      "tests": []
+    },
+    {
+      "file": "ci/stage2/browser/ten-frame-garden-browser.json.gz",
+      "reportSha256": "51f519a018920dfb1d091f4acac2b9b8140dcb9d478020a738dc1d7cddc2f2e0",
+      "gzipSha256": "ce2d94e388894988dfbe0afddd88ed449b3b2d89e5cb108dabb30a8163029fc3",
+      "sourceHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+      "status": "PASS",
+      "passed": null,
+      "failed": null,
+      "baseUrl": "http://127.0.0.1:43163/index.html",
+      "pageErrors": [],
+      "sources": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+        "js/games/ten-frame-garden.js": "e47a078f90606d2d6881c267006c4cd14168d35e5ae5b760657320e1d87160c0",
+        "css/games/ten-frame-garden.css": "d5da0653fec49e4c7091796255e2258abc2ef0019ebd1b1f3b2ce998fe669fc3",
+        "assets/games/ten-frame-garden/card.svg": "a17052d9b2fd56ca2a60c2d7efd7252347c78750c82705a3504a3af454f16c62",
+        "scripts/qa-ten-frame-garden-browser.py": "15bf1cdbc0e7954049ee142c9ddcbe1baa91aba28840e2f4e729cbadcb3cc237"
+      },
+      "tests": []
+    }
+  ],
+  "nativeAudio": "NOT_RUN",
+  "physicalDevice": "NOT_RUN",
+  "pagesContingency": {
+    "pr": 32,
+    "state": "CLOSED_UNMERGED",
+    "applied": false
+  }
+}

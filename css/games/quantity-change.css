@@ -118,6 +118,13 @@
 .qc-categories { display:flex; gap:5px; }
 .qc-categories>button { display:flex; align-items:center; justify-content:center; gap:3px; flex:1; padding:4px; font-size:13px; }
 .qc-categories>button>span { font-size:18px; }
+.qc-choice-controls { display:grid; gap:6px; min-width:0; }
+.qc-source-kinds { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+.qc-source-kinds>button { min-height:44px; padding:4px 6px; font-size:14px; }
+.qc-choice-empty { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:12px 7px; min-width:0; text-align:center; }
+.qc-choice-empty p { font-size:13px; line-height:1.4; overflow-wrap:anywhere; }
+.qc-choice-empty button { padding:6px 12px; font-size:14px; }
+.qc-source-badge { position:absolute; top:1px; left:1px; min-width:16px; padding:1px 3px; border-radius:4px; background:#427d70; color:#fffaf0; font-size:10px; line-height:12px; pointer-events:none; }
 .qc-picture-choices { min-height:0; overflow:auto; overscroll-behavior:contain; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; padding:2px; scrollbar-width:thin; }
 .qc-object-choice { height:111px; padding:6px!important; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
 .qc-root .qc-object-choice .qp-picture { height:68px; flex:1; }

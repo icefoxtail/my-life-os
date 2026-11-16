@@ -6,12 +6,14 @@
   const SAVE_KEY = 'sihyeon-picture-arithmetic-v1';
   const DEFAULTS = {
     mode: 'add', a: 9, b: 6, aId: 'korean_police_car', bId: 'pump_engine',
-    total: 15, groups: 3, shareId: 'apple', activeTerm: 'a', style: 'native', muted: false
+    total: 15, groups: 3, shareId: 'apple', activeTerm: 'a', style: 'native', muted: false,
+    aSourceKind: 'recommended', bSourceKind: 'recommended', shareSourceKind: 'recommended'
   };
   const view = {
     container: null, options: {}, objects: [], state: null, sequence: null, handlers: null,
     range: 0, category: 'vehicle', model: null, counted: 0, moved: 0, current: null,
     phase: 'idle', complete: false, audioFailed: false, runId: 0, error: null, settingsObserver: null, dialog: null,
+    choiceSourceKind: 'recommended', choiceObjects: [], choices: {},
     storage: { read: 'unread', write: 'unwritten' }
   };
   let memory = null;
@@ -24,11 +26,32 @@
     const n = window.SihyeonPlaySettings?.getAge?.() || view.options.ageMode;
     return [4, 5, 6, 7].includes(n) ? n : 4;
   }
-  function item(id) { return view.objects.find(object => object.id === id) || view.objects[0]; }
-  function selectedId() {
-    const s = view.state;
-    return s.mode === 'share' ? s.shareId : s.activeTerm === 'b' ? s.bId : s.aId;
+  function selectedSlot() { return view.state.mode === 'share' ? 'share' : view.state.activeTerm === 'b' ? 'b' : 'a'; }
+  function reference(slot) { return { id: view.state[slot + 'Id'], sourceKind: view.state[slot + 'SourceKind'] }; }
+  function selectedRef() { return reference(selectedSlot()); }
+  function item(slot) { return view.choices[slot].object; }
+  function captureChoices() {
+    // Resolve once per run. Counting and reparenting keep this exact picture,
+    // even if the saved artwork changes while the sequence is in progress.
+    view.choices = {};
+    (view.state.mode === 'share' ? ['share'] : ['a', 'b']).forEach(slot => {
+      view.choices[slot] = C().resolveChoice(reference(slot));
+    });
   }
+  function refreshChoiceList(kind) {
+    view.choiceSourceKind = kind === 'artwork' ? 'artwork' : 'recommended';
+    view.choiceObjects = C().listChoices({ sourceKind: view.choiceSourceKind });
+  }
+  function missingArtwork() { return Object.values(view.choices).some(choice => choice.missingArtwork); }
+  function choiceSnapshot() {
+    return Object.fromEntries(Object.entries(view.choices).map(([slot, choice]) => [slot, {
+      requested: Object.assign({}, choice.requested), actual: Object.assign({}, choice.actual),
+      missingArtwork: choice.missingArtwork, artVersion: choice.object.artVersion || null,
+      fromArtwork: choice.object.fromArtwork === true
+    }]));
+  }
+  function pictureLabel(slot) { return (view.choices[slot].actual.sourceKind === 'artwork' ? '내 그림 ' : '추천 그림 ') + item(slot).nameKo; }
+  function sourceBadge(slot) { return view.choices[slot].actual.sourceKind === 'artwork' ? '<span class="pa-source-badge" aria-hidden="true">내</span>' : ''; }
   function selectedNumber() {
     const s = view.state;
     return s.mode === 'share' ? s.total : s.activeTerm === 'b' ? s.b : s.a;
@@ -36,7 +59,9 @@
   function syncPicker() {
     const n = selectedNumber();
     view.range = n <= 10 ? 0 : n <= 20 ? 1 : 2;
-    view.category = item(selectedId()).category || 'toy';
+    const selected = selectedRef();
+    view.category = (view.objects.find(object => object.id === selected.id) || view.objects[0]).category || 'toy';
+    refreshChoiceList(selected.sourceKind);
   }
   function save() {
     // The in-session copy is authoritative after a quota or privacy-mode write failure.
@@ -67,6 +92,9 @@
       ['aId', 'bId', 'shareId'].forEach(key => {
         if (view.objects.some(object => object.id === saved[key])) s[key] = saved[key];
       });
+      ['a', 'b', 'share'].forEach(slot => {
+        if (saved[slot + 'SourceKind'] === 'artwork' && saved[slot + 'Id'] === s[slot + 'Id']) s[slot + 'SourceKind'] = 'artwork';
+      });
       if (['a', 'b'].includes(saved.activeTerm)) s.activeTerm = saved.activeTerm;
       if (['native', 'sino'].includes(saved.style)) s.style = saved.style;
       s.muted = saved.muted === true;
@@ -83,8 +111,7 @@
     return view.model;
   }
   function commonUnit() {
-    const s = view.state;
-    return s.mode === 'share' ? item(s.shareId).unitKo : item(s.aId).unitKo === item(s.bId).unitKo ? item(s.aId).unitKo : '개';
+    return view.state.mode === 'share' ? item('share').unitKo : item('a').unitKo === item('b').unitKo ? item('a').unitKo : '개';
   }
   function plainQuantity(n, unit) { return M().determiner(n) + ' ' + unit; }
   function readingStep(id, kind, n, extra) {
@@ -119,20 +146,22 @@
     return [intro].concat(model.moves.map((move, index) => readingStep('move-' + move.item.id, 'move', move.groupCountAfter,
       { itemId: move.item.id, groupIndex: move.groupIndex, ordinal: index + 1 })), summaryStep());
   }
-  function objectMarkup(object, selected, source) {
-    return '<div class="pa-item pa-source-' + source + '" data-item-id="' + esc(object.id) + '" data-source="' + source + '" data-object-id="' + esc(selected.id) + '">' +
+  function objectMarkup(object, slot, source) {
+    const choice = view.choices[slot], selected = choice.object;
+    return '<div class="pa-item pa-source-' + source + '" data-item-id="' + esc(object.id) + '" data-source="' + source + '" data-object-id="' + esc(selected.id) +
+      '" data-source-kind="' + choice.actual.sourceKind + '" data-requested-source-kind="' + choice.requested.sourceKind + '" data-missing-artwork="' + choice.missingArtwork + '">' +
       C().picture(selected) + '<span class="pa-item-number" aria-hidden="true"></span></div>';
   }
   function boardMarkup() {
     const s = view.state, model = view.model;
     if (s.mode === 'add') {
       if (!model.total) return '<div class="pa-zero"><strong>0</strong><span>하나도 없어요</span><span aria-hidden="true">🌿</span></div>';
-      return '<div class="pa-add-items">' + model.left.map(object => objectMarkup(object, item(s.aId), 'a')).join('') +
-        model.right.map(object => objectMarkup(object, item(s.bId), 'b')).join('') + '</div>';
+      return '<div class="pa-add-items">' + model.left.map(object => objectMarkup(object, 'a', 'a')).join('') +
+        model.right.map(object => objectMarkup(object, 'b', 'b')).join('') + '</div>';
     }
     const all = M().items(s.total, 'share');
     return '<section class="pa-pool"><header><strong class="pa-pool-title">나눌 그림</strong><span class="pa-pool-count">' + s.total + '</span></header>' +
-      '<div class="pa-pool-items">' + all.map(object => objectMarkup(object, item(s.shareId), 'share')).join('') + '</div>' +
+      '<div class="pa-pool-items">' + all.map(object => objectMarkup(object, 'share', 'share')).join('') + '</div>' +
       '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p>' +
       '<div class="pa-empty-groups-summary" hidden aria-label="' + s.groups + '곳 모두 0개"><strong>빈 자리</strong><div class="pa-empty-group-list" style="--pa-group-count:' + s.groups + '">' +
       model.groups.map((_, index) => '<span class="pa-empty-group"><small>' + (index + 1) + '번</small><b>0</b></span>').join('') + '</div></div></section>' +
@@ -141,18 +170,18 @@
         '<div class="pa-group-items" data-group-index="' + index + '"></div></section>').join('') + '</div>';
   }
   function termMarkup(term) {
-    const s = view.state, selected = item(s[term + 'Id']);
+    const s = view.state, selected = item(term);
     const label = term === 'a' ? '첫 번째' : '두 번째';
     return '<div class="pa-term pa-term-' + term + (s.activeTerm === term ? ' is-selected' : '') + '" data-term-slot="' + term + '">' +
-      '<button type="button" class="pa-term-picture-button" data-pa-action="choosePicture" data-value="' + term + '" aria-label="' + label + ' 그림 바꾸기: ' + esc(selected.nameKo) + '" aria-haspopup="dialog">' + C().picture(selected) + '<span class="pa-picture-edit" aria-hidden="true">▾</span></button>' +
+      '<button type="button" class="pa-term-picture-button" data-pa-action="choosePicture" data-value="' + term + '" data-source-kind="' + view.choices[term].actual.sourceKind + '" aria-label="' + label + ' 그림 바꾸기: ' + esc(pictureLabel(term)) + '" aria-haspopup="dialog">' + C().picture(selected) + sourceBadge(term) + '<span class="pa-picture-edit" aria-hidden="true">▾</span></button>' +
       '<button type="button" class="pa-term-number" data-pa-action="term" data-value="' + term + '" aria-label="' + label + ' 숫자 고르기" aria-pressed="' + (s.activeTerm === term) + '"><span class="pa-term-info"><small>' + esc(selected.nameKo) + '</small><strong>' + s[term] + '</strong></span><span class="pa-term-edit" aria-hidden="true">▾</span></button></div>';
   }
   function expressionMarkup() {
     const s = view.state;
     if (s.mode === 'add') return '<div class="pa-expression pa-add-expression">' + termMarkup('a') + '<span class="pa-operator" aria-hidden="true">+</span>' + termMarkup('b') +
       '<span class="pa-operator" aria-hidden="true">=</span><div class="pa-answer" aria-label="합 ' + view.model.total + '"><small>모두</small><strong>' + view.model.total + '</strong></div></div>';
-    return '<div class="pa-expression pa-share-expression"><div class="pa-share-source"><button type="button" class="pa-share-picture-button" data-pa-action="choosePicture" data-value="share" aria-label="나눌 그림 바꾸기: ' + esc(item(s.shareId).nameKo) + '" aria-haspopup="dialog">' + C().picture(item(s.shareId)) + '<span class="pa-picture-edit" aria-hidden="true">▾</span></button>' +
-      '<span><small>' + esc(item(s.shareId).nameKo) + '</small><strong>' + s.total + '</strong></span></div><span class="pa-operator" aria-hidden="true">÷</span>' +
+    return '<div class="pa-expression pa-share-expression"><div class="pa-share-source"><button type="button" class="pa-share-picture-button" data-pa-action="choosePicture" data-value="share" data-source-kind="' + view.choices.share.actual.sourceKind + '" aria-label="나눌 그림 바꾸기: ' + esc(pictureLabel('share')) + '" aria-haspopup="dialog">' + C().picture(item('share')) + sourceBadge('share') + '<span class="pa-picture-edit" aria-hidden="true">▾</span></button>' +
+      '<span><small>' + esc(item('share').nameKo) + '</small><strong>' + s.total + '</strong></span></div><span class="pa-operator" aria-hidden="true">÷</span>' +
       '<button type="button" class="pa-share-divisor" data-pa-action="chooseGroups" aria-label="나눌 곳 고르기: ' + s.groups + '곳" aria-haspopup="dialog"><strong>' + s.groups + '</strong><small>곳 ▾</small></button><span class="pa-operator" aria-hidden="true">=</span>' +
       '<div class="pa-answer"><small>한 곳에</small><strong>' + view.model.each + '</strong></div><div class="pa-remainder"><small>남은 것</small><strong>' + view.model.remainder + '</strong></div></div>';
   }
@@ -161,19 +190,23 @@
       .filter(category => view.objects.some(object => object.category === category[0]));
   }
   function pictureChoicesMarkup() {
-    const selected = selectedId(), objects = view.objects.filter(object => object.category === view.category);
-    return '<div class="pa-categories" role="group" aria-label="그림 종류">' + categoryOptions().map(category => '<button type="button" data-pa-action="category" data-value="' + category[0] + '" aria-pressed="' + (view.category === category[0]) + '"><span aria-hidden="true">' + category[1] + '</span>' + category[2] + '</button>').join('') + '</div>' +
-      '<div class="pa-objects" role="group" aria-label="그림 고르기">' + objects.map(object => '<button type="button" class="pa-object-choice" data-pa-action="object" data-value="' + esc(object.id) + '" aria-label="' + esc(object.nameKo) + ' 고르기" aria-pressed="' + (selected === object.id) + '">' + C().picture(object) + '<span>' + esc(object.nameKo) + '</span></button>').join('') + '</div>';
+    const selected = selectedRef(), personal = view.choiceSourceKind === 'artwork';
+    const objects = view.choiceObjects.filter(object => personal || object.category === view.category);
+    return '<div class="pa-choice-controls"><div class="pa-source-kinds" role="group" aria-label="그림 출처">' +
+      [['recommended', '추천 그림'], ['artwork', '내 그림']].map(([kind, label]) => '<button type="button" data-pa-action="sourceKind" data-value="' + kind + '" aria-pressed="' + (view.choiceSourceKind === kind) + '">' + label + '</button>').join('') + '</div>' +
+      (personal ? '' : '<div class="pa-categories" role="group" aria-label="그림 종류">' + categoryOptions().map(category => '<button type="button" data-pa-action="category" data-value="' + category[0] + '" aria-pressed="' + (view.category === category[0]) + '"><span aria-hidden="true">' + category[1] + '</span>' + category[2] + '</button>').join('') + '</div>') + '</div>' +
+      '<div class="pa-objects" role="group" aria-label="그림 고르기">' + (objects.length ? objects.map(object => '<button type="button" class="pa-object-choice" data-pa-action="object" data-value="' + esc(object.id) + '" data-source-kind="' + object.sourceKind + '" aria-label="' + (personal ? '내 그림 ' : '추천 그림 ') + esc(object.nameKo) + ' 고르기" aria-pressed="' + (selected.id === object.id && selected.sourceKind === object.sourceKind) + '">' + C().picture(object) + '<span>' + esc(object.nameKo) + '</span></button>').join('') :
+        '<div class="pa-choice-empty"><p>불러올 내 그림이 없어요.</p><p>그림판에서 먼저 색칠해 보세요.</p><button type="button" data-pa-action="sourceKind" data-value="recommended">추천 그림 보기</button></div>') + '</div>';
   }
   function groupButtonsMarkup() {
     return '<div class="pa-group-buttons" role="group" aria-label="나눌 곳 수">' + [1, 2, 3, 4, 5, 6].map(value => '<button type="button" data-pa-action="groups" data-value="' + value + '" aria-label="' + value + '곳에 나누기" aria-pressed="' + (view.state.groups === value) + '">' + value + '</button>').join('') + '</div>';
   }
   function pickerMarkup() {
-    const s = view.state, selected = selectedId(), n = selectedNumber();
+    const s = view.state, slot = selectedSlot(), n = selectedNumber();
     const low = [0, 11, 21][view.range], high = [10, 20, 30][view.range];
     const max = s.mode === 'share' ? 30 : 30 - (s.activeTerm === 'b' ? s.a : s.b);
     return '<div class="pa-picker-heading"><strong>' + (s.mode === 'share' ? '나눌 그림과 숫자' : s.activeTerm === 'b' ? '두 번째 그림과 숫자' : '첫 번째 그림과 숫자') + '</strong><span>고르면 바로 시작해요</span></div>' +
-      '<button type="button" class="pa-choose-picture" data-pa-action="choosePicture" data-value="' + (s.mode === 'share' ? 'share' : s.activeTerm) + '" aria-haspopup="dialog">' + C().picture(item(selected)) + '<span>' + esc(item(selected).nameKo) + '<small>그림 바꾸기 ▾</small></span></button>' +
+      '<button type="button" class="pa-choose-picture" data-pa-action="choosePicture" data-value="' + (s.mode === 'share' ? 'share' : s.activeTerm) + '" aria-haspopup="dialog">' + C().picture(item(slot)) + '<span>' + esc(item(slot).nameKo) + '<small>' + (view.choices[slot].actual.sourceKind === 'artwork' ? '내 그림 · ' : '') + '그림 바꾸기 ▾</small></span></button>' +
       '<div class="pa-inline-pictures">' + pictureChoicesMarkup() + '</div>' +
       '<div class="pa-ranges" role="group" aria-label="숫자 범위">' + ['0–10', '11–20', '21–30'].map((label, index) => '<button type="button" data-pa-action="range" data-value="' + index + '" aria-pressed="' + (view.range === index) + '">' + label + '</button>').join('') + '</div>' +
       '<div class="pa-numbers" role="group" aria-label="원하는 숫자">' + Array.from({ length: high - low + 1 }, (_, index) => index + low).map(value => '<button type="button" data-pa-action="number" data-value="' + value + '" aria-label="' + value + ' 선택" aria-pressed="' + (value === n) + '"' + (value > max ? ' disabled' : '') + '>' + value + '</button>').join('') + '</div>' +
@@ -183,7 +216,7 @@
     const s = view.state;
     return '<div class="pa-readings" role="group" aria-label="수 읽는 방법">' + (language() === 'en' ? '<span class="pa-english">🌐 English · one, two</span>' :
       '<button type="button" data-pa-action="style" data-value="native" aria-pressed="' + (s.style === 'native') + '">하나·둘</button><button type="button" data-pa-action="style" data-value="sino" aria-pressed="' + (s.style === 'sino') + '">일·이</button>') + '</div>' +
-      '<button type="button" class="pa-replay" data-pa-action="replay">↻ ' + (s.mode === 'share' ? '다시 나누기' : '다시 세기') + '</button><p class="pa-sound-note" hidden>그림과 숫자로 계속 놀아요</p>';
+      '<button type="button" class="pa-replay" data-pa-action="replay">↻ ' + (s.mode === 'share' ? '다시 나누기' : '다시 세기') + '</button><p class="pa-sound-note pa-artwork-note" data-missing-artwork="' + missingArtwork() + '"' + (missingArtwork() ? '' : ' hidden') + '>' + (missingArtwork() ? '내 그림이 없어 견본으로 놀아요' : '그림과 숫자로 계속 놀아요') + '</p>';
   }
   function paint() {
     if (!view.container || !view.state) return;
@@ -312,7 +345,7 @@
     const ticket = view.runId;
     view.counted = 0; view.moved = 0; view.current = null; view.phase = 'preview';
     view.complete = false; view.audioFailed = false;
-    calculate(); paint();
+    captureChoices(); calculate(); paint();
     view.sequence.start(steps(), { muted: view.state.muted, delayMs: 160,
       onStep: step => { if (view.container && ticket === view.runId) showStep(step); },
       onError: error => {
@@ -321,7 +354,7 @@
         if (error.code.startsWith('AUDIO_')) view.audioFailed = true;
         else {
           view.phase = 'error';
-          if (note) note.textContent = '다시 세기 버튼으로 한 번 더 해 봐요';
+          if (note && !missingArtwork()) note.textContent = '다시 세기 버튼으로 한 번 더 해 봐요';
         }
         if (note) note.hidden = false;
       },
@@ -372,14 +405,15 @@
     if (action === 'closeDialog') { closeDialog(); return; }
     if (action === 'mode' && ['add', 'share'].includes(value)) { s.mode = value; syncPicker(); save(); run(); return; }
     if (action === 'term' && ['a', 'b'].includes(value)) { s.activeTerm = value; syncPicker(); save(); paintPicker(); return; }
+    if (action === 'sourceKind' && ['recommended', 'artwork'].includes(value)) { refreshChoiceList(value); if (view.dialog) paintDialog(); else paintPicker(); return; }
     if (action === 'category' && categoryOptions().some(category => category[0] === value)) { view.category = value; if (view.dialog) paintDialog(); else paintPicker(); return; }
     if (action === 'range' && ['0', '1', '2'].includes(value)) { view.range = Number(value); paintPicker(); return; }
     if (action === 'number') { changeNumber(Number(value)); return; }
-    if (action === 'object' && view.objects.some(object => object.id === value)) {
-      if (s.mode === 'share') s.shareId = value;
-      else s[s.activeTerm === 'b' ? 'bId' : 'aId'] = value;
+    if (action === 'object' && view.choiceObjects.some(object => object.id === value && object.sourceKind === button.dataset.sourceKind)) {
+      const slot = selectedSlot();
+      s[slot + 'Id'] = value; s[slot + 'SourceKind'] = button.dataset.sourceKind;
       view.dialog = null;
-      save(); run(); return;
+      syncPicker(); save(); run(); return;
     }
     if (action === 'groups') {
       const groups = Number(value);
@@ -392,7 +426,8 @@
   }
   function render(container, options) {
     destroy(); view.container = container; view.options = options || {}; view.error = null;
-    const ready = M() && typeof C()?.list === 'function' && typeof window.SihyeonQuantitySequencer?.create === 'function';
+    const ready = M() && typeof C()?.list === 'function' && typeof C()?.listChoices === 'function'
+      && typeof C()?.resolveChoice === 'function' && typeof window.SihyeonQuantitySequencer?.create === 'function';
     view.objects = ready ? C().list().filter(object => C().isValid(object)) : [];
     if (!ready || !view.objects.length) {
       view.error = 'dependencies-unavailable'; view.state = null; view.model = null;
@@ -423,11 +458,13 @@
       if (view.handlers.visibility) document.removeEventListener('visibilitychange', view.handlers.visibility);
     }
     view.container = null; view.sequence = null; view.handlers = null; view.options = {}; view.dialog = null;
+    view.choices = {}; view.choiceObjects = [];
   }
   function getSnapshot() {
     const s = view.state, model = view.model, root = view.container;
     return {
       active: !!root, error: view.error, mode: s?.mode || null,
+      state: s ? Object.assign({}, s) : null, artworkChoices: choiceSnapshot(), missingArtwork: missingArtwork(), choiceSourceKind: view.choiceSourceKind,
       a: s?.a ?? null, b: s?.b ?? null, leftObjectId: s?.aId || null, rightObjectId: s?.bId || null,
       shareObjectId: s?.shareId || null, total: model?.total ?? null,
       groups: s?.mode === 'share' ? model?.groupCount : null,

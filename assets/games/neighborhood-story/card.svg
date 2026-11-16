@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">내 그림 우리 동네</title><desc id="desc">집과 소방차, 그림 접시가 있는 우리 동네에서 수가 이어지는 이야기</desc>
+  <rect width="640" height="400" rx="36" fill="#f3efdf"/>
+  <path d="M0 285Q130 244 270 278T640 262V400H0Z" fill="#dbe5ca"/>
+  <path d="M0 337Q180 298 355 327T640 319" fill="none" stroke="#fdf9ef" stroke-width="45"/>
+  <g stroke="#627c6c" stroke-width="5" stroke-linejoin="round">
+    <path d="M64 135 165 65l99 70v135H64Z" fill="#efd9b1"/>
+    <path d="m50 141 115-81 113 81" fill="none" stroke="#b98169" stroke-width="17" stroke-linecap="round"/>
+    <rect x="91" y="167" width="52" height="55" rx="8" fill="#fdf8df"/>
+    <path d="M117 169v51m-23-25h46" stroke="#c1bb8c" stroke-width="4"/>
+    <path d="M179 198a24 24 0 0 1 48 0v72h-48Z" fill="#98b29a"/>
+    <path d="M418 149 487 96l80 53v122H418Z" fill="#b6d0cf"/>
+    <path d="m406 151 81-62 93 62" fill="none" stroke="#718f98" stroke-width="14" stroke-linecap="round"/>
+    <rect x="442" y="177" width="44" height="41" rx="6" fill="#fff5ce"/>
+    <path d="M517 270v-75h27v75" fill="#f3e5b7"/>
+  </g>
+  <g transform="translate(99 256)" stroke="#705951" stroke-width="5" stroke-linejoin="round">
+    <path d="M0 22h114V0h47l34 43v36H0Z" fill="#cc7d67"/>
+    <path d="M126 10h27l23 30h-50Z" fill="#d9e9e1"/>
+    <rect x="20" y="34" width="73" height="27" rx="5" fill="#ebc5a6"/>
+    <path d="M32 34v27m16-27v27m16-27v27m16-27v27" stroke="#ad7e68" stroke-width="3"/>
+    <rect x="129" y="-12" width="24" height="13" rx="5" fill="#a5c6ce"/>
+    <circle cx="41" cy="79" r="19" fill="#5c6960"/><circle cx="158" cy="79" r="19" fill="#5c6960"/>
+    <circle cx="41" cy="79" r="8" fill="#efe9d5" stroke="none"/><circle cx="158" cy="79" r="8" fill="#efe9d5" stroke="none"/>
+  </g>
+  <g transform="translate(356 292)">
+    <ellipse cx="86" cy="43" rx="79" ry="39" fill="#fcf7e5" stroke="#a5b7a1" stroke-width="5"/>
+    <g fill="#d9aa65" stroke="#ae854e" stroke-width="3">
+      <circle cx="57" cy="36" r="18"/><circle cx="94" cy="29" r="18"/><circle cx="113" cy="56" r="18"/>
+    </g>
+    <g fill="#916e45"><circle cx="54" cy="30" r="3"/><circle cx="63" cy="40" r="3"/><circle cx="89" cy="25" r="3"/><circle cx="101" cy="32" r="3"/><circle cx="108" cy="52" r="3"/><circle cx="118" cy="61" r="3"/></g>
+  </g>
+  <g font-family="system-ui,sans-serif" font-weight="700" text-anchor="middle" fill="#557453">
+    <rect x="274" y="58" width="95" height="73" rx="20" fill="#fff9df" stroke="#bfcea8" stroke-width="4"/><text x="321" y="109" font-size="47">15</text>
+    <path d="M312 151v43m-12-13 12 14 12-14" fill="none" stroke="#97ae81" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="277" y="212" width="90" height="63" rx="19" fill="#e3edcf" stroke="#adc394" stroke-width="4"/><text x="322" y="257" font-size="42">11</text>
+  </g>
+  <g fill="#abc39a"><circle cx="34" cy="246" r="19"/><circle cx="594" cy="224" r="29"/></g>
+  <path d="M34 245v40m560-62v60" stroke="#8c9c77" stroke-width="7" stroke-linecap="round"/>
+</svg>

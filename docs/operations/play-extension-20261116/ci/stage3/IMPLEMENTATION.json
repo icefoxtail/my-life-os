@@ -1,0 +1,70 @@
+{
+  "createdAt": "2026-11-16T07:08:56.377035+00:00",
+  "status": "LAYOUT_CORRECTED_BROWSER_RERUN_PENDING",
+  "checks": [
+    {
+      "suite": "artwork-choices",
+      "status": "PASS",
+      "passed": 8,
+      "episodes": null,
+      "assertions": null
+    },
+    {
+      "suite": "neighborhood-story",
+      "status": "PASS",
+      "passed": null,
+      "episodes": 8556,
+      "assertions": 2658758
+    }
+  ],
+  "sources": {
+    "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+    "js/games/picture-arithmetic.js": "0384e47d9c35e74be220b765e543eaeace472d71830c40e92ab6fc0615eee7fc",
+    "css/games/picture-arithmetic.css": "1c8dbb01a2844f3da2ca04e27ca2ea7791cc07c028db54e6c81c1f7fc4fd3bf3",
+    "js/games/quantity-change.js": "7cc52a1a6c04b8e7e3ce9ae053ff1bc831ed95901a43b328a8953546c34ee06d",
+    "css/games/quantity-change.css": "a4ed8fc40e3bfe843cdd451b0cf36e70478f420666ae1c4c839340c91a27abbd",
+    "js/games/neighborhood-story-model.js": "464b94f2a7ce2117bf7c991e232cf950da733dd934cb809e5c363e20cd879bcc",
+    "scripts/qa-artwork-choices.cjs": "abbc052b60bc8794b26d6e8954cc78626b77c5b4e5eae83bf0de2bb56e83b4bc",
+    "scripts/qa-neighborhood-story.cjs": "457453f55f02af698f860f61ef66740baddcab0063c91e8c3bb608bc6ad95ba7",
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "26fdf32e46a7984fd1a0ccd7ac73aa6b342565fd9ec8019cd3a0fa6576036a51",
+    ".github/workflows/phase2-browser-release.yml": "881f3a208f56eb02577ca5a9385308f923dc4db4a588151e6b91c8f00433153f",
+    "js/games/neighborhood-story.js": "5d74d271038258fb6eb3018fa0fd51119078eaa9153fc28b9edfa13b9487e47f",
+    "css/games/neighborhood-story.css": "e33c0bd170858805afc7d21e274982c350f0b1d153f779eb51542e60999a4c4d",
+    "assets/games/neighborhood-story/card.svg": "2b73c8bed1983b4e9f91bbee973eba1526c73a6ee1bd8d80b6c19df68f0398b3",
+    "scripts/qa-art-story-browser.py": "18b51f2a557976525ad35bca876baf3366158e841fc875d4d3d33dbcde0a098f"
+  },
+  "browser": {
+    "candidate": "742cddb4f5a83b62d613990378a6a5c47aff1686",
+    "run": 43822792377,
+    "quantityGroups": "75/76",
+    "artStoryGroups": "20/21",
+    "pageErrors": [],
+    "sourceHashRecords": "46/46 legacy,17/17 art-story",
+    "defects": [
+      "PA1024x768 inline source tabs leave insufficient height for group controls",
+      "PA320x568 personal-art expression text needs full glyph height and contained result emphasis"
+    ],
+    "testSourcesChanged": false
+  },
+  "remaining": [
+    "Recheck corrected PA layout with unchanged hosted suites",
+    "Merge after all required candidate checks",
+    "Exact deployed hashes and actual-menu production checks",
+    "Root live interaction and final evidence checkpoint"
+  ],
+  "updatedAt": "2026-11-16T07:40:03.810283+00:00",
+  "requiredLocalChecks": "7/7 PASS",
+  "sourceReview": "Independent final source review: age behavior, original DOM identities, resume/cancel, 0/30 and vocabulary checked. Pixel layout NOT_RUN.",
+  "productionWait": "Exact runtime equality and real-menu gates unchanged; production job deadline increased to accommodate observed Pages runner queues.",
+  "layoutCorrections": {
+    "scope": [
+      "css/games/picture-arithmetic.css"
+    ],
+    "inlineSourceTabs": "Source tabs remain in dialog; inline preview reserves group controls space.",
+    "compactTerm": "11px name/14px line,26px number/28px line,1px gap in44px target.",
+    "compactResult": "Keep green emphasis without scaling beyond52px expression.",
+    "qaChanged": false,
+    "renderedStatus": "PENDING"
+  }
+}

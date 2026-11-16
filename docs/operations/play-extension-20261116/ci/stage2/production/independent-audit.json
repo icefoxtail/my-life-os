@@ -1,0 +1,198 @@
+{
+  "gitHead": "9d28ef0bab06859df0d3432ad4a8191c18394870",
+  "checks": {
+    "quantity-change": {
+      "status": "PASS",
+      "passed": 16,
+      "failed": 0,
+      "pageErrors": [],
+      "networkFailures": null,
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "browser": "143.0.7499.4",
+      "reportedGitHead": null,
+      "names": [
+        "comparison and sixty originals 320x568",
+        "fifteen minus four original-node movement 320x568",
+        "comparison and sixty originals 390x844",
+        "fifteen minus four original-node movement 390x844",
+        "comparison and sixty originals 844x390",
+        "fifteen minus four original-node movement 844x390",
+        "comparison and sixty originals 1024x768",
+        "fifteen minus four original-node movement 1024x768",
+        "left right equal and zero comparisons",
+        "subtract all none zero and thirty",
+        "independent mode values invalid controls home and reload",
+        "independent picture chooser focus and Escape resume",
+        "rapid selection mode and home cancel pending speech",
+        "reading settings unchanged close age and English",
+        "speech failure visual fallback recovery and mute",
+        "denied storage preserves in-session choices and playable reload"
+      ]
+    },
+    "ten-frame-garden": {
+      "status": "PASS",
+      "passed": 14,
+      "failed": 0,
+      "pageErrors": [],
+      "networkFailures": [],
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/index.html",
+      "browser": "143.0.7499.4",
+      "reportedGitHead": "9d28ef0bab06859df0d3432ad4a8191c18394870",
+      "names": [
+        "native-menu-fifteen",
+        "zero-and-thirty",
+        "fill-selected-to-target",
+        "two-colors-preserve-total",
+        "replacement-cancels-late-callback",
+        "settings-resume-and-ages",
+        "sino-and-english",
+        "home-and-reload",
+        "viewport-320x568",
+        "viewport-568x320",
+        "viewport-390x844",
+        "viewport-844x390",
+        "viewport-768x1024",
+        "viewport-1024x768"
+      ]
+    }
+  },
+  "sources": {
+    "quantity-change": {
+      "count": 12,
+      "allMatchExactGitHead": true,
+      "hashes": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+        "js/games/quantity-change.js": "620ae7d076e52397facc359b630ca35aa9278e633b0eebcabdaf029d45fabd25",
+        "css/games/quantity-change.css": "398dccdd6ea0f8b2f755f66ad24423be8bfe0aa28a25afaea2b79dc8dd5e89c0",
+        "assets/games/quantity-change/card.svg": "b5ba10376518a5f637a1652afb6e1722b4b9ebf174d974f9f34e3c8d4f5b49a2",
+        "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/play-objects.js": "7d8b11b60eb777a09961c2c4c8dea5778c54d1a243270f3599f58e4276edd961",
+        "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "scripts/qa-quantity-change-browser.py": "a47bdde4434e14f2d8baaf2ebbadd414413df5c91d0d041e84eee5fb84435109"
+      }
+    },
+    "ten-frame-garden": {
+      "count": 10,
+      "allMatchExactGitHead": true,
+      "hashes": {
+        "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+        "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+        "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+        "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+        "js/games/ten-frame-garden.js": "e47a078f90606d2d6881c267006c4cd14168d35e5ae5b760657320e1d87160c0",
+        "css/games/ten-frame-garden.css": "d5da0653fec49e4c7091796255e2258abc2ef0019ebd1b1f3b2ce998fe669fc3",
+        "assets/games/ten-frame-garden/card.svg": "a17052d9b2fd56ca2a60c2d7efd7252347c78750c82705a3504a3af454f16c62",
+        "scripts/qa-ten-frame-garden-browser.py": "15bf1cdbc0e7954049ee142c9ddcbe1baa91aba28840e2f4e729cbadcb3cc237"
+      }
+    }
+  },
+  "deployed": {
+    "count": 8,
+    "expectedEqualsActual": true,
+    "allMatchExactGitHead": true,
+    "base": "https://icefoxtail.github.io/my-life-os/",
+    "hashes": {
+      "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+      "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+      "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+      "js/games/quantity-change.js": "620ae7d076e52397facc359b630ca35aa9278e633b0eebcabdaf029d45fabd25",
+      "css/games/quantity-change.css": "398dccdd6ea0f8b2f755f66ad24423be8bfe0aa28a25afaea2b79dc8dd5e89c0",
+      "assets/games/quantity-change/card.svg": "b5ba10376518a5f637a1652afb6e1722b4b9ebf174d974f9f34e3c8d4f5b49a2",
+      "js/games/ten-frame-garden.js": "e47a078f90606d2d6881c267006c4cd14168d35e5ae5b760657320e1d87160c0",
+      "css/games/ten-frame-garden.css": "d5da0653fec49e4c7091796255e2258abc2ef0019ebd1b1f3b2ce998fe669fc3"
+    }
+  },
+  "limitations": {
+    "quantity-change": {
+      "nativeAudio": {
+        "status": "NOT_RUN",
+        "reason": "Transport completion/failure fixture; no speaker hearing claim"
+      },
+      "physicalDevice": {
+        "status": "NOT_RUN",
+        "reason": "Chromium viewports/touch emulation only"
+      },
+      "limitations": null,
+      "fixture": {
+        "sharedVoiceEngineReplaced": false,
+        "gameHandlersReplaced": false,
+        "gameTimersReplaced": false
+      }
+    },
+    "ten-frame-garden": {
+      "nativeAudio": null,
+      "physicalDevice": null,
+      "limitations": [
+        "No audible TTS verification",
+        "No physical phone or tablet verification",
+        "Screenshots require visual review; actual SVG drawing bounds must be at least 24 CSS px",
+        "Other ten-frames may be offscreen inside the board scroll container; active flowers must be visible",
+        "Application author wrote this test; integer/DOM/speech observations are independent of app-model expectations"
+      ],
+      "fixture": {
+        "boundary": "speechSynthesis.speak/cancel only",
+        "normalCompletionMs": 25,
+        "sharedVoiceAndSequencerUnmodified": true,
+        "traceBoundary": "capture phase of the actual native button click, before the app handler",
+        "adversarialCases": "held utterance, cancellation, delayed cancelled onend"
+      }
+    }
+  },
+  "artifact": {
+    "repo": "icefoxtail/my-life-os",
+    "runId": 43820498604,
+    "jobId": 133149640770,
+    "jobConclusion": "success",
+    "artifactId": 14205114417,
+    "name": "production-ui-43820498604",
+    "bytes": 4101241,
+    "sha256": "dd88748c452300901d7d7f1c265fdef932401b6e7c8f6d175f8f7e8e0c26b0aa",
+    "githubDigestMatches": true,
+    "headSha": "9d28ef0bab06859df0d3432ad4a8191c18394870"
+  },
+  "visualReview": [
+    {
+      "file": "quantity-change/quantity-change-compare-30-30-320x568.png",
+      "viewport": [
+        320,
+        568
+      ],
+      "observation": "30 and 30, zero difference and equal quantity are legible; final paired rows 29 and 30 are visible; mode, number choices and footer controls stay inside viewport. Other pairs remain within the intentionally scrolling board.",
+      "sha256": "24b399fc3b58707332117deec766ba22dc2c1e6346b191a3ccedb5030bcc6e66"
+    },
+    {
+      "file": "quantity-change/quantity-change-subtract-15-4-844x390.png",
+      "viewport": [
+        844,
+        390
+      ],
+      "observation": "15 minus 4 equals 11 is legible; remaining and departed panels remain side by side; four departed originals are visible; the side number picker and footer controls remain visible. Remaining items use the intended board scrolling.",
+      "sha256": "1147ef06b5136abf9fcaaf053097d51f9156898a3fbd84411cd4a4ef1eb1c8cd"
+    },
+    {
+      "file": "ten-frame-garden/viewport-320x568-fill-7.png",
+      "viewport": [
+        320,
+        568
+      ],
+      "observation": "Completed 7 to 10 filling shows all ten flowers and retains 7 + 3 = 10; upper modes, number picker and footer controls stay visible without overlapping the equation.",
+      "sha256": "ec72fe90ca4a29d8b76f4badc365f5cc10bbedc621caa3419d87393f91c22a8f"
+    }
+  ],
+  "scopeLimits": {
+    "nativeAudio": "NOT_RUN",
+    "physicalAndroid": "NOT_RUN",
+    "physicalIPhone": "NOT_RUN",
+    "browser": "Chromium 143.0.7499.4 CI production URL with touch/viewport emulation",
+    "screenshotsDirectlyViewed": 3,
+    "sourceRecordsVerified": 22,
+    "uniqueDeployedRuntimeFilesVerified": 8,
+    "sourceFilesChangedByAudit": false
+  }
+}

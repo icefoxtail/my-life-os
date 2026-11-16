@@ -1,0 +1,82 @@
+{
+  "suite": "Recommended and personal artwork choice contract",
+  "status": "PASS",
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "the existing twelve pictures work before the art bridge is loaded",
+      "status": "PASS",
+      "detail": {
+        "originalPictures": 12,
+        "personalPictures": 0
+      }
+    },
+    {
+      "name": "late-loaded art bridge adds all 28 examples without changing existing list/get callers",
+      "status": "PASS",
+      "detail": {
+        "recommended": 40,
+        "artwork": 1,
+        "loadingOrder": "catalog before art bridge"
+      }
+    },
+    {
+      "name": "the same art ID distinguishes the child purple light from the recommended red light",
+      "status": "PASS",
+      "detail": {
+        "sameID": "art:police",
+        "recommendedColor": "#FF4444",
+        "artworkColor": "#9944FF",
+        "artVersion": 2
+      }
+    },
+    {
+      "name": "an absent artwork resolves to its same example while preserving the requested source",
+      "status": "PASS",
+      "detail": {
+        "missingOrBlankFixtures": 5,
+        "countAndRequestedSourceUntouched": true
+      }
+    },
+    {
+      "name": "new resolution observes edits/deletion while already returned pictures remain snapshots",
+      "status": "PASS",
+      "detail": {
+        "liveReads": 3,
+        "priorSnapshotsPreserved": true
+      }
+    },
+    {
+      "name": "pre-versioning saved artwork retains all fifteen original regions and fills",
+      "status": "PASS",
+      "detail": {
+        "savedVersion": 1,
+        "originalRegions": 15,
+        "exampleVersion": 2
+      }
+    },
+    {
+      "name": "unknown IDs and forged saved SVG/paint cannot replace shipped artwork",
+      "status": "PASS",
+      "detail": {
+        "unknownIDs": 10,
+        "rejectedRemoteSources": 4,
+        "realSavedPaintSanitized": true,
+        "markupEscaped": true
+      }
+    },
+    {
+      "name": "caller mutations do not contaminate future choices or the canonical examples",
+      "status": "PASS",
+      "detail": true
+    }
+  ],
+  "sources": {
+    "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+    "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36"
+  },
+  "limitations": [
+    "Pure production catalog/bridge calls in a VM; browser rendering and audio are separate checks"
+  ]
+}
