@@ -1,0 +1,198 @@
+{
+  "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
+  "owner": "GPT_UPGRADE_5EF8F1489B24",
+  "repository": "icefoxtail/my-life-os",
+  "publicUrl": "https://icefoxtail.github.io/my-life-os/index.html",
+  "stages": [
+    {
+      "stage": 1,
+      "status": "PRODUCTION_VERIFIED",
+      "pr": 38,
+      "sourceHead": {
+        "sha": "5d9979ea9b9dfc0213e86cea612ea962d9807ec3",
+        "tree": "46393c5dcef72c637436e48f8681ec8db2ccaaed"
+      },
+      "merge": {
+        "sha": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+        "tree": "46393c5dcef72c637436e48f8681ec8db2ccaaed"
+      },
+      "preMergeRuns": [
+        {
+          "id": 43891824573,
+          "name": "Creator upgrade release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43891824782,
+          "name": "Vehicle display release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43891824619,
+          "name": "Playground checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43891824699,
+          "name": "Phase 2 browser release",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "productionRuns": [
+        {
+          "id": 43895599249,
+          "name": "Playground checks",
+          "head": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43895599338,
+          "name": "Creator upgrade release",
+          "head": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43895597374,
+          "name": "pages build and deployment",
+          "head": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43895599496,
+          "name": "Vehicle display release",
+          "head": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43895599311,
+          "name": "Phase 2 browser release",
+          "head": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "productionProof": {
+        "commit": "b7db1835c1d74b053c2439f3391a723114ba05b9",
+        "run": 43895599338,
+        "artifact": 14238988199,
+        "artifactSha256": "3ad32967a12b492771681dd4fa0f21e6cb5c267a09d2f7c812ed5144a29e9e74",
+        "runtimeFiles": 6,
+        "checks": {
+          "vehicle": 10,
+          "hangul": 28,
+          "number": 14
+        },
+        "status": "PASS",
+        "pageErrors": 0,
+        "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+        "visualReview": [
+          "actual production acorn picture/label visible",
+          "actual production equal8 blocks quantity language correct"
+        ]
+      }
+    },
+    {
+      "stage": 2,
+      "status": "MERGED_PRODUCTION_PENDING",
+      "pr": 39,
+      "sourceHead": {
+        "sha": "01007877dfa4761715d6059d42832a020f4061bd",
+        "tree": "346fc7aca82e259d84ad58798ce993e08a9bf6dc",
+        "stage1Parent": "b7db1835c1d74b053c2439f3391a723114ba05b9"
+      },
+      "merge": {
+        "sha": "23fd7f9af6e28034d1a6a3062e293742b3d66cb7",
+        "tree": "346fc7aca82e259d84ad58798ce993e08a9bf6dc"
+      },
+      "preMergeRuns": [
+        {
+          "id": 43896241790,
+          "name": "Playground checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43896241669,
+          "name": "Vehicle display release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43896241760,
+          "name": "Creator upgrade release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 43896241923,
+          "name": "Phase 2 browser release",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "preMergeArtifact": {
+        "id": 14241350042,
+        "run": 43896241760,
+        "sha256": "d2841bcb531f7ff3653f2410b51f0836fe0f025462ae58e8965af6cad4317892"
+      },
+      "preMergeChecks": {
+        "vehicle": 10,
+        "hangul": 28,
+        "number": 14,
+        "countPace": 2,
+        "help": 16,
+        "memoryPace": 2,
+        "numberMute": 6,
+        "lifePace": 2,
+        "trainEdit": 1
+      },
+      "includesStage1Scenarios": true,
+      "lifeLayoutVisualReview": "PASS: scene-contained message and fully visible finish controls, root and independent review",
+      "priorArtStoryLoadFailure": {
+        "run": 43892435862,
+        "job": 133386936140,
+        "classification": "First-page load and font readiness timeout before lifecycle assertions; exact network request not captured",
+        "resolvedVerification": {
+          "head": "01007877dfa4761715d6059d42832a020f4061bd",
+          "run": 43896241923,
+          "job": 133400450429,
+          "status": "PASS",
+          "lifecycleExecuted": true,
+          "priorLoadFailureNotWaived": true
+        }
+      },
+      "productionRuns": [],
+      "productionProof": null
+    }
+  ],
+  "remainingStages": [
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "followupObservations": [
+    {
+      "stage": 6,
+      "observation": "Hangul picture-card labels remain small at 844x390; the larger word toast remains visible."
+    },
+    {
+      "stage": 5,
+      "observation": "The shape picker overlaps the lower 3D scene in landscape comparison fixtures; improve camera/palette spacing in the number-depth stage."
+    }
+  ]
+}
