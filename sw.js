@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.6.3-picture-arithmetic';
+const CACHE_NAME = 'sihyeon-play-os-v1.7.0-art-reference';
 
 const ASSETS = [
   './js/games/picture-arithmetic.js',

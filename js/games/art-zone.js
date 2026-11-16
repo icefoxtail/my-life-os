@@ -1481,6 +1481,7 @@
     lastPoint: null,
     pageHideHandler: null,
     showReference: false,
+    referencePartId: null,
   };
 
   const WORK_KEY = 'sihyeon-art-work-v1';
@@ -1640,6 +1641,50 @@
     return playObject(tpl, readOnlySvg(tpl, svg, fills), work.svgVersion, true);
   }
 
+  function referenceParts(tpl) {
+    // Begin with the largest useful parts. Names and colors come from the
+    // template metadata, and the hint never decides what the child must paint.
+    const wrap = state.container?.querySelector?.('#azColoringWrap');
+    const areas = new Map();
+    wrap?.querySelectorAll?.('.fillable[data-part]').forEach((el) => {
+      try {
+        const box = el.getBBox();
+        areas.set(el.getAttribute('data-part'), box.width * box.height);
+      } catch (_) { /* Metadata ordering also works before the first layout. */ }
+    });
+    const priority = (id) => {
+      if (/^(body|fuselage|hull|wall|face|boiler|cone)$/.test(id)) return 0;
+      if (/^(window|windshield|cockpit|belly|roof|head|mane|scoop|sail|wing)/.test(id)) return 1;
+      if (/^(tire|wheel|ear|tail|leaf|door|cab|pants|shirt|bed|blade|bucket|track)/.test(id)) return 2;
+      return 3;
+    };
+    const candidates = Object.entries(tpl.parts || {}).map(([id, part]) => ({ id, ...part, area: areas.get(id) || 0 }));
+    const major = candidates.filter((part) => priority(part.id) < 3);
+    return (major.length >= 3 ? major : candidates)
+      .sort((a, b) => priority(a.id) - priority(b.id) || b.area - a.area)
+      .slice(0, 4);
+  }
+
+  function referencePart(tpl) {
+    const parts = referenceParts(tpl);
+    return parts.find((part) => part.id === state.referencePartId) || parts[0] || null;
+  }
+
+  function speakReferencePart() {
+    const tpl = COLORING_TEMPLATES.find((item) => item.id === state.activeTemplateId);
+    const part = tpl && referencePart(tpl);
+    const voice = window.SihyeonVoice;
+    if (!part || !state.showReference || typeof voice?.speak !== 'function') return;
+    const english = window.SihyeonPlaySettings?.getLanguage?.() === 'en';
+    const color = english
+      ? window.SihyeonVoiceLabels?.spoken?.('color', part.color, 'en')
+      : COLORS.find((item) => item.c === part.color)?.n;
+    state.speechToken += 1;
+    voice.stop?.();
+    voice.speak(`${english ? part.en : part.ko}${color ? ', ' + color : ''}`,
+      { lang: english ? 'en-US' : 'ko-KR', rate: .9 })?.catch?.(() => {});
+  }
+
   function updateArtTools() {
     const root = state.container;
     const tools = root?.querySelector?.('#azArtTools');
@@ -1650,8 +1695,10 @@
     const showing = isColoring && state.showReference;
     tools.hidden = !isColoring;
     const toggle = root.querySelector('#azReferenceToggle');
-    toggle.textContent = showing ? '🎨 내 그림 보기' : '🖼️ 참고 그림';
+    toggle.textContent = '🖼️ 보고 색칠';
     toggle.setAttribute('aria-pressed', String(showing));
+    root.querySelector('#azFreeColoring')?.setAttribute('aria-pressed', String(!showing));
+    root.querySelector('#azCompanion')?.classList.toggle('has-reference', showing);
     const sample = root.querySelector('#azReference');
     sample.hidden = !showing;
     if (showing) {
@@ -1659,13 +1706,35 @@
       const img = sample.querySelector('img');
       if (img.getAttribute('src') !== object.src) img.setAttribute('src', object.src);
       img.alt = `${tpl.name} 참고 색상`;
-      const legacy = state.templateWork[tpl.id]?.svgVersion !== templateVersion(tpl);
+      const work = state.templateWork[tpl.id];
+      const legacy = !!work && work.svgVersion !== templateVersion(tpl);
       sample.querySelector('figcaption').textContent = legacy
-        ? '새 종이에서는 이런 그림을 칠할 수 있어요.'
-        : '이렇게 칠해도 좋아요. 내 마음대로 칠해도 좋아요!';
+        ? '새 도안 견본 · 내 그림은 그대로'
+        : '견본 · 내 색도 좋아요!';
+      const part = referencePart(tpl);
+      const hint = sample.querySelector('#azPartHint');
+      if (hint && part) {
+        state.referencePartId = part.id;
+        hint.dataset.part = part.id;
+        hint.querySelector('.az-part-name').textContent = part.ko;
+        hint.querySelector('.az-part-color').textContent = COLORS.find((item) => item.c === part.color)?.n || '';
+        const swatch = sample.querySelector('#azPartSwatch');
+        swatch.style.backgroundColor = part.color;
+        swatch.dataset.color = part.color;
+      }
+      const next = sample.querySelector('#azNextPart');
+      if (next) next.disabled = referenceParts(tpl).length < 2;
     }
     const wrap = root.querySelector('#azColoringWrap');
-    if (wrap) wrap.style.display = isColoring && !showing ? 'flex' : 'none';
+    if (wrap) {
+      // The sample is beside the drawing; showing it must never cover the
+      // child's picture or turn painting into a read-only preview.
+      wrap.style.display = isColoring ? 'flex' : 'none';
+      const sameVersion = state.templateWork[tpl.id]?.svgVersion === templateVersion(tpl);
+      wrap.querySelectorAll?.('.fillable').forEach((el) => {
+        el.classList.toggle('az-guided-part', showing && sameVersion && el.getAttribute('data-part') === state.referencePartId);
+      });
+    }
     const play = root.querySelector('#azPlayArtwork');
     play.hidden = typeof state.options.onPlayObject !== 'function';
     play.disabled = !getSavedPlayObject(tpl.id);
@@ -1792,7 +1861,6 @@
       const work=state.templateWork[state.activeTemplateId]; const item=work?.history?.pop();
       if(!item)return;
       if(item.fills){work.fills=item.fills;if(item.svgVersion)work.svgVersion=item.svgVersion;}else work.fills[item.index]=item.prev;work.completed=false;
-      state.showReference = false;
       renderColoringTemplate(COLORING_TEMPLATES.find(t=>t.id===state.activeTemplateId));
     } else {
       const prior=state.freeHistory.pop();if(prior===undefined)return;
@@ -1813,7 +1881,6 @@
         else work.fills=work.fills.map(()=>'#FFF');
       }
       if(work)work.completed=false;
-      state.showReference = false;
       renderColoringTemplate(tpl);
     } else {
       const prior = state.freeCanvasReady ? state.canvas.toDataURL('image/png') : state.freeImage;
@@ -2507,6 +2574,7 @@
     `;
     s.textContent += `
       .az-mode-tabs{min-width:0;max-width:600px;flex:1 1 auto}
+      .az-mode-tab{min-height:44px}
       @media(max-width:767px),(orientation:portrait){.az-topbar{flex-basis:60px;height:60px;min-height:60px}.az-work-actions button{height:44px}}
       @media(orientation:landscape) and (max-height:500px){.az-topbar{flex-basis:56px;height:56px;min-height:56px}.az-work-actions button{height:44px}}
       .az-main{flex-direction:column;gap:7px}
@@ -2516,13 +2584,60 @@
       .az-art-tools button[aria-pressed="true"]{border-color:#4488FF;background:#eef6ff}
       .az-art-tools button:disabled{color:#77828e;background:#edf0f4;cursor:default}
       .az-art-tools button:focus-visible{outline:3px solid #1E40AF;outline-offset:2px}
-      .az-main .az-canvas-shell{flex:1 1 auto;min-height:0}
-      .az-root[data-tab="coloring"] .az-canvas-shell{height:0;aspect-ratio:auto}
-      .az-reference{position:absolute;inset:0;margin:0;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#eef6ff;box-sizing:border-box}
-      .az-reference img{display:block;flex:1 1 auto;min-height:0;width:94%;object-fit:contain;pointer-events:none}
-      .az-reference figcaption{flex:0 0 auto;max-width:100%;margin:0;text-align:center;color:#46607b;font-size:14px;line-height:1.35;word-break:keep-all}
-      @media(max-width:380px){.az-art-tools button{font-size:13px;padding:6px 8px}.az-reference figcaption{font-size:12px}}
-      @media(orientation:landscape) and (max-height:500px){.az-main{gap:4px}.az-art-tools button{font-size:13px;padding:5px 8px}.az-reference{padding:6px}.az-reference figcaption{font-size:12px}}
+      .az-art-mode-group{display:flex;flex:1 1 auto;min-width:0;max-width:340px;gap:4px;padding:3px;background:#e9edf3;border-radius:18px}
+      .az-art-mode-group button{flex:1 1 0;padding:4px 8px}
+      #azPlayArtwork{align-self:center;flex:0 1 auto}
+      .az-companion{display:flex;flex:1 1 auto;width:100%;height:0;min-width:0;min-height:0;align-items:stretch}
+      .az-companion.has-reference{gap:8px}
+      .az-main .az-companion .az-canvas-shell{order:0;flex:1 1 auto;width:0;height:100%;min-width:0;min-height:0;aspect-ratio:auto}
+      .az-reference{order:1;flex:0 0 clamp(112px,24%,164px);min-width:0;min-height:0;position:relative;margin:0;padding:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:#eef6ff;border:2px solid #dae6f3;border-radius:20px;box-sizing:border-box}
+      .az-reference img{display:block;flex:1 1 auto;min-height:0;width:100%;max-height:180px;object-fit:contain;pointer-events:none}
+      .az-reference figcaption{flex:0 0 auto;max-width:100%;margin:0;text-align:center;color:#46607b;font-size:12px;line-height:1.35;word-break:keep-all}
+      .az-reference-guide{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;width:100%}
+      .az-part-hint{display:flex;align-items:center;justify-content:center;gap:6px;max-width:100%;min-width:0;color:#233044;font-size:14px;line-height:1.35;word-break:keep-all}
+      .az-part-hint strong,.az-part-hint small{display:block}
+      .az-part-hint small{font-size:12px;color:#46607b}
+      .az-part-swatch{flex:0 0 25px;width:25px;height:25px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #b7c7d7}
+      .az-reference-guide button{min-height:44px;max-width:100%;padding:5px 10px;border:2px solid #cadbee;border-radius:14px;background:#fff;color:#355270;font:inherit;font-size:14px;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
+      .az-reference-guide button:focus-visible{outline:3px solid #1E40AF;outline-offset:2px}
+      .az-coloring-wrap .az-guided-part{stroke:#2475c7;stroke-dasharray:5 4;stroke-width:3.5}
+      @media(orientation:portrait){
+        .az-companion{flex-direction:column}
+        .az-main .az-companion .az-canvas-shell{order:1;width:100%;height:0}
+        .az-reference{order:0;flex:0 0 90px;width:100%;max-height:90px;display:grid;grid-template-columns:94px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:10px;row-gap:2px;padding:6px 9px;border-radius:16px}
+        .az-reference img{grid-column:1;grid-row:1 / 3;height:100%;max-height:74px;min-height:0}
+        .az-reference figcaption{grid-column:2;grid-row:2;font-size:11px;line-height:1.2;text-align:left}
+        .az-reference-guide{grid-column:2;grid-row:1;flex-direction:row;justify-content:space-between;gap:6px}
+        .az-part-hint{justify-content:flex-start;font-size:13px}
+        .az-part-swatch{flex-basis:20px;width:20px;height:20px}
+        .az-reference-guide button{flex:0 0 54px;padding:4px 5px;font-size:12px;line-height:1.2}
+      }
+      @media(max-width:380px){
+        .az-mode-tabs{gap:4px}
+        .az-mode-tab{height:44px;white-space:normal;font-size:12px!important;line-height:1.15;padding:3px!important;word-break:keep-all}
+        .az-art-tools{gap:4px}
+        .az-art-tools button{font-size:12px;padding:5px 6px}
+        .az-art-mode-group{gap:3px;padding:2px}
+        .az-reference{grid-template-columns:76px minmax(0,1fr);column-gap:7px;flex-basis:82px;max-height:82px;padding:5px 7px}
+        .az-reference img{max-height:68px}
+        .az-reference figcaption{font-size:10px}
+        .az-part-hint{gap:4px;font-size:12px}
+        .az-part-hint small{font-size:11px}
+      }
+      @media(orientation:landscape) and (max-height:500px){
+        .az-main{gap:4px}
+        .az-art-tools button{font-size:12px;padding:5px 7px}
+        .az-art-mode-group{padding:2px}
+        .az-companion.has-reference{gap:5px}
+        .az-reference{flex-basis:112px;padding:6px;gap:4px;border-radius:12px}
+        .az-reference img{max-height:110px}
+        .az-reference figcaption{font-size:10px}
+        .az-part-hint{font-size:12px;gap:4px}
+        .az-part-hint small{font-size:11px}
+        .az-part-swatch{flex-basis:20px;width:20px;height:20px}
+        .az-reference-guide{gap:5px}
+        .az-reference-guide button{font-size:12px;padding:4px 7px}
+      }
     `;
     document.head.appendChild(s);
   }
@@ -2543,6 +2658,7 @@
     state.isRainbow = false;
     state.hue = 0;
     state.showReference = false;
+    state.referencePartId = null;
     state.speechToken += 1;
 
     if (options.initialTemplateId && COLORING_TEMPLATES.some((t) => t.id === options.initialTemplateId)) {
@@ -2583,19 +2699,31 @@
 
           <section class="az-main">
             <div class="az-art-tools" id="azArtTools"${!isInitialColoring ? ' hidden' : ''}>
-              <button type="button" id="azReferenceToggle" aria-pressed="false" aria-controls="azReference">🖼️ 참고 그림</button>
-              <button type="button" id="azPlayArtwork" disabled${typeof options.onPlayObject !== 'function' ? ' hidden' : ''}>🔢 내 그림 숫자 놀이</button>
+              <div class="az-art-mode-group" role="group" aria-label="색칠 방법">
+                <button type="button" id="azFreeColoring" aria-pressed="true">🎨 자유 색칠</button>
+                <button type="button" id="azReferenceToggle" aria-pressed="false" aria-controls="azReference">🖼️ 보고 색칠</button>
+              </div>
+              <button type="button" id="azPlayArtwork" aria-label="내 그림 숫자 놀이" disabled${typeof options.onPlayObject !== 'function' ? ' hidden' : ''}>🔢 숫자 놀이</button>
             </div>
+            <div class="az-companion" id="azCompanion">
+              <figure class="az-reference" id="azReference" hidden>
+                <img alt="참고 색상" draggable="false">
+                <figcaption>견본 · 내 색도 좋아요!</figcaption>
+                <div class="az-reference-guide">
+                  <div class="az-part-hint" id="azPartHint" role="status" aria-live="polite">
+                    <span class="az-part-swatch" id="azPartSwatch" aria-hidden="true"></span>
+                    <span><strong class="az-part-name"></strong><small class="az-part-color"></small></span>
+                  </div>
+                  <button type="button" id="azNextPart" aria-label="다음 부분 보기">다음 부분 ›</button>
+                </div>
+              </figure>
             <div class="az-canvas-shell">
               <div class="az-canvas-wrap" id="azCanvasWrap">
                 <canvas id="azCanvas"${isInitialColoring ? ' style="display:none;"' : ''}></canvas>
                 <div class="az-coloring-wrap" id="azColoringWrap"${isInitialColoring ? ' style="display:flex;"' : ''}></div>
-                <figure class="az-reference" id="azReference" hidden>
-                  <img alt="참고 색상" draggable="false">
-                  <figcaption>이렇게 칠해도 좋아요. 내 마음대로 칠해도 좋아요!</figcaption>
-                </figure>
                 <div id="azRestoreNotice" role="status" hidden style="position:absolute;z-index:3;left:50%;top:12px;transform:translateX(-50%);max-width:90%;padding:9px 13px;border-radius:14px;background:#fff8e7;color:#5e5143;font-size:14px;text-align:center;pointer-events:none;"></div>
               </div>
+            </div>
             </div>
           </section>
 
@@ -2731,6 +2859,21 @@
     root.querySelector('#azReferenceToggle').onclick = () => {
       state.showReference = !state.showReference;
       updateArtTools();
+      if (state.showReference) speakReferencePart();
+    };
+    root.querySelector('#azFreeColoring').onclick = () => {
+      state.showReference = false;
+      updateArtTools();
+    };
+    root.querySelector('#azNextPart').onclick = () => {
+      if (!state.showReference) return;
+      const tpl = COLORING_TEMPLATES.find((item) => item.id === state.activeTemplateId);
+      const parts = tpl && referenceParts(tpl);
+      if (!parts?.length) return;
+      const index = parts.findIndex((part) => part.id === state.referencePartId);
+      state.referencePartId = parts[(index + 1) % parts.length].id;
+      updateArtTools();
+      speakReferencePart();
     };
     root.querySelector('#azPlayArtwork').onclick = playCurrentArtwork;
 
@@ -2757,6 +2900,7 @@
     root.querySelectorAll('[data-tpl]').forEach((btn) => {
       btn.onclick = () => {
         state.activeTemplateId = btn.dataset.tpl;
+        state.referencePartId = null;
         state.coloringCompleted = false;
         root.querySelectorAll('[data-tpl]').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');

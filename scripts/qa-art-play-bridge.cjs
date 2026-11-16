@@ -196,14 +196,19 @@ test('my-art action saves once and passes only the detached painted picture to t
   assert.deepEqual(writes, [KEY]);
 });
 
-test('reference toggle changes only the preview and preserves the freely colored original', () => {
+test('reference stays beside a paintable original and never changes the freely colored work', () => {
   const { q, writes } = boot();
   const attrs = {};
   const img = { getAttribute: (name) => attrs[name], setAttribute: (name, value) => { attrs[name] = value; } };
   const caption = {};
+  const partName = {}, partColor = {}, swatch = { style: {}, dataset: {} };
+  const hint = { dataset: {}, querySelector: (selector) => selector === '.az-part-name' ? partName : partColor };
+  const next = {};
   const elements = {
     '#azArtTools': {}, '#azReferenceToggle': { setAttribute(name, value) { this[name] = value; } },
-    '#azReference': { querySelector: (selector) => selector === 'img' ? img : caption },
+    '#azFreeColoring': { setAttribute(name, value) { this[name] = value; } },
+    '#azCompanion': { classList: { toggle(name, value) { this[name] = value; } } },
+    '#azReference': { querySelector: (selector) => ({ img, figcaption: caption, '#azPartHint': hint, '#azPartSwatch': swatch, '#azNextPart': next })[selector] },
     '#azColoringWrap': { style: {} }, '#azPlayArtwork': {},
   };
   q.state.container = { querySelector: (selector) => elements[selector] };
@@ -214,13 +219,22 @@ test('reference toggle changes only the preview and preserves the freely colored
   q.state.showReference = true;
   q.updateArtTools();
   assert.equal(elements['#azReference'].hidden, false);
-  assert.equal(elements['#azColoringWrap'].style.display, 'none');
+  assert.equal(elements['#azColoringWrap'].style.display, 'flex');
+  assert.equal(elements['#azReferenceToggle']['aria-pressed'], 'true');
+  assert.equal(elements['#azFreeColoring']['aria-pressed'], 'false');
+  assert.equal(elements['#azCompanion'].classList['has-reference'], true);
+  assert.equal(hint.dataset.part, 'body');
+  assert.equal(partName.textContent, '차체');
+  assert.equal(swatch.dataset.color, '#FFF8E7');
+  assert.equal(next.disabled, false);
   assert.equal(elements['#azPlayArtwork'].disabled, false);
   assert.equal(byPart(decode({ src: attrs.src })).light_red, '#FF4444');
   q.state.showReference = false;
   q.updateArtTools();
   assert.equal(elements['#azReference'].hidden, true);
   assert.equal(elements['#azColoringWrap'].style.display, 'flex');
+  assert.equal(elements['#azFreeColoring']['aria-pressed'], 'true');
+  assert.equal(elements['#azCompanion'].classList['has-reference'], false);
   assert.deepEqual(json(q.state.templateWork), before);
   assert.equal(writes.length, 0);
   q.state.tab = 'free';
