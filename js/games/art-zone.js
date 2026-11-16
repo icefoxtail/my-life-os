@@ -2574,6 +2574,7 @@
     `;
     s.textContent += `
       .az-mode-tabs{min-width:0;max-width:600px;flex:1 1 auto}
+      .az-mode-tab{min-height:44px}
       @media(max-width:767px),(orientation:portrait){.az-topbar{flex-basis:60px;height:60px;min-height:60px}.az-work-actions button{height:44px}}
       @media(orientation:landscape) and (max-height:500px){.az-topbar{flex-basis:56px;height:56px;min-height:56px}.az-work-actions button{height:44px}}
       .az-main{flex-direction:column;gap:7px}
@@ -2612,6 +2613,8 @@
         .az-reference-guide button{flex:0 0 54px;padding:4px 5px;font-size:12px;line-height:1.2}
       }
       @media(max-width:380px){
+        .az-mode-tabs{gap:4px}
+        .az-mode-tab{height:44px;white-space:normal;font-size:12px!important;line-height:1.15;padding:3px!important;word-break:keep-all}
         .az-art-tools{gap:4px}
         .az-art-tools button{font-size:12px;padding:5px 6px}
         .az-art-mode-group{gap:3px;padding:2px}

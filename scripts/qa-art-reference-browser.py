@@ -109,17 +109,32 @@ def check_layout(page):
       };
       const selectors = ['#azReference', '#azReference img', '#azColoringWrap',
         '#azColoringWrap svg', '#azReferenceToggle', '#azFreeColoring', '#azNextPart',
-        '#azUndo', '#azNewPaper', '#azPlayArtwork'];
+        '#azUndo', '#azNewPaper', '#azPlayArtwork',
+        '.az-mode-tab[data-tab="free"]', '.az-mode-tab[data-tab="coloring"]'];
       const boxes = Object.fromEntries(selectors.map(selector => [selector, rect(root.querySelector(selector))]));
-      const controls = ['#azReferenceToggle', '#azFreeColoring', '#azNextPart', '#azUndo', '#azNewPaper'];
+      const modeSelectors = ['.az-mode-tab[data-tab="free"]', '.az-mode-tab[data-tab="coloring"]'];
+      const controls = ['#azReferenceToggle', '#azFreeColoring', '#azNextPart', '#azUndo', '#azNewPaper',
+        ...modeSelectors];
       const hits = controls.map(selector => {
         const el = root.querySelector(selector), r = el.getBoundingClientRect();
         const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
         return {selector, reachable:!!hit && (hit === el || el.contains(hit))};
       });
+      // Scroll dimensions alone miss visible label text spilling into a sibling
+      // button. Inspect each rendered line against its own button's bounds.
+      const modeTabText = modeSelectors.map(selector => {
+        const el = root.querySelector(selector), r = el.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const lines = [...range.getClientRects()].filter(line => line.width > 0 && line.height > 0)
+          .map(line => ({left:line.left, top:line.top, right:line.right, bottom:line.bottom}));
+        return {selector, text:el.textContent.trim(), lines,
+          contained:lines.length > 0 && lines.every(line => line.left >= r.left - 1 &&
+            line.right <= r.right + 1 && line.top >= r.top - 1 && line.bottom <= r.bottom + 1)};
+      });
       return {viewport:[innerWidth, innerHeight], documentWidth:document.documentElement.scrollWidth,
-        root:rect(root), boxes, hits,
-        clippedText:[...root.querySelectorAll('#azPartHint strong,#azPartHint small,#azReference figcaption')]
+        root:rect(root), boxes, hits, modeTabText,
+        clippedText:[...root.querySelectorAll('#azPartHint strong,#azPartHint small,#azReference figcaption,.az-mode-tab')]
           .filter(el => el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1)
           .map(el => el.textContent)};
     }""")
@@ -145,7 +160,11 @@ def check_layout(page):
     assert own_svg['width'] >= 140 and own_svg['height'] >= 90, data
     for selector in ['#azReferenceToggle', '#azFreeColoring', '#azNextPart']:
         assert data['boxes'][selector]['height'] >= 43.5, {'smallTouchControl':selector, 'layout':data}
+    for selector in ['.az-mode-tab[data-tab="free"]', '.az-mode-tab[data-tab="coloring"]']:
+        box = data['boxes'][selector]
+        assert box['width'] >= 43.5 and box['height'] >= 43.5, {'smallModeTab':selector, 'layout':data}
     assert all(hit['reachable'] for hit in data['hits']), data
+    assert all(text['contained'] for text in data['modeTabText']), {'overflowingModeTabText':data['modeTabText'], 'layout':data}
     assert not data['clippedText'], data
     return data
 
