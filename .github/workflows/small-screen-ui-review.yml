@@ -18,7 +18,6 @@ jobs:
     timeout-minutes: 15
     env:
       BASE_SHA: 23fd7f9af6e28034d1a6a3062e293742b3d66cb7
-      TABLET_BASE_SHA: a857c31a130e9bd8ba41ab658a34a140813a91b9
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -34,16 +33,11 @@ jobs:
         run: |
           python3 -m pip install playwright==1.57.0
           python3 -m playwright install --with-deps chromium
-      # Run 43903458052 preserves the original main reproductions and the
-      # unchanged construction checks. This follow-up changes only coding CSS.
-      - name: Reproduce the tablet command-slot overlap
-        id: before
-        run: |
-          git worktree add --detach "$RUNNER_TEMP/small-screen-baseline" "$TABLET_BASE_SHA"
-          python3 scripts/qa-small-screen-ui-browser.py --root "$RUNNER_TEMP/small-screen-baseline" --output qa-small-screen/tablet-before --tablet-baseline
-      - name: Inspect coding screens and touch scrolling
-        if: always() && steps.before.outcome != 'skipped'
-        run: python3 scripts/qa-small-screen-ui-browser.py --root . --output qa-small-screen/coding-after --game coding
+      # Run 43903458052 preserves construction and the original reproductions.
+      # Run 43905541853 preserves the slot reproduction and five coding sizes.
+      # Runtime CSS is unchanged; this closes the remaining tablet touch check.
+      - name: Inspect tablet layout and native touch scrolling
+        run: python3 scripts/qa-small-screen-ui-browser.py --root . --output qa-small-screen/tablet-after --game coding --viewport 1024x768
       - name: Preserve comparison evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

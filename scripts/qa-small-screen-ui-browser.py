@@ -10,6 +10,7 @@ import hashlib
 import http.server
 import json
 import pathlib
+import re
 import runpy
 import subprocess
 import threading
@@ -103,6 +104,32 @@ MEASURE = r"""game => {
   return result;
 }"""
 
+TOUCH_PROBE = r"""(() => {
+  window.__smallScreenTouchEvents = [];
+  const label = e => e?.id || (typeof e?.className === 'string' && e.className) || e?.tagName || 'document';
+  for (const type of ['touchstart','touchmove','touchend','touchcancel','pointerdown','pointermove','pointerup','pointercancel','scroll']) {
+    document.addEventListener(type, event => {
+      const row={type,time:performance.now(),trusted:event.isTrusted,target:label(event.target),defaultPrevented:event.defaultPrevented};
+      if(event.changedTouches)row.points=[...event.changedTouches].map(t=>({id:t.identifier,x:t.clientX,y:t.clientY}));
+      if(event.pointerType)Object.assign(row,{pointerType:event.pointerType,pointerId:event.pointerId,x:event.clientX,y:event.clientY});
+      if(type==='scroll')row.scrollTop=event.target.scrollTop;
+      window.__smallScreenTouchEvents.push(row);
+      setTimeout(()=>{row.defaultPrevented=event.defaultPrevented;},0);
+    },{capture:true,passive:true});
+  }
+})();"""
+
+SCROLL_SNAPSHOT = r"""([x,y]) => {
+  const panel=document.querySelector('.cc-ui-area'),hit=document.elementFromPoint(x,y),ancestors=[];
+  const label=e=>e?.id||(typeof e?.className==='string'&&e.className)||e?.tagName;
+  for(let e=hit;e;e=e.parentElement){const s=getComputedStyle(e);ancestors.push({element:label(e),touchAction:s.touchAction,overflowX:s.overflowX,overflowY:s.overflowY,scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight});}
+  const r=panel.getBoundingClientRect();
+  return {scrollTop:panel.scrollTop,maxScroll:panel.scrollHeight-panel.clientHeight,hit:label(hit),ancestors,
+    panel:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},eventIndex:window.__smallScreenTouchEvents.length,
+    difficulty:document.querySelector('.cc-diff-btn.active')?.dataset.difficulty,
+    input:{maxTouchPoints:navigator.maxTouchPoints,coarsePointer:matchMedia('(pointer:coarse)').matches}};
+}"""
+
 
 def hashes(root):
     return {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in SOURCES}
@@ -147,9 +174,54 @@ def touch_scroll(page, cdp, direction):
     x = p['x'] + p['width'] / 2
     y = min(p['y'] + p['height'] * .78, page.viewport_size['height'] - 25) if direction > 0 else max(p['y'] + p['height'] * .22, 25)
     distance = min(p['height'] * .52, 260)
-    cdp.send('Input.synthesizeScrollGesture', {'x': x, 'y': y, 'yDistance': -distance if direction > 0 else distance,
-                                             'gestureSourceType': 'touch', 'speed': 550})
-    page.wait_for_timeout(220)
+    end_y = y - distance if direction > 0 else y + distance
+    before = page.evaluate(SCROLL_SNAPSHOT, [x, y])
+    row = {'driver': 'Input.dispatchTouchEvent', 'direction': 'down' if direction > 0 else 'up',
+           'from': [x, y], 'to': [x, end_y], 'moves': 12, 'stepDelayMs': 30, 'before': before}
+    # Store the mutable row before input, so an interrupted gesture retains its
+    # attempted coordinates and available diagnostics in the final report.
+    page._ui_scroll_diagnostics.append(row)
+
+    def capture_edge(snapshot):
+        edge = 'top' if snapshot['scrollTop'] <= 1 else 'bottom' if snapshot['scrollTop'] >= snapshot['maxScroll'] - 1 else None
+        if not edge:
+            return
+        key = snapshot['difficulty'] + '-' + edge
+        if key in page._ui_scroll_shots:
+            return
+        page._ui_scroll_shots.add(key)
+        label = page._ui_case_name + '-' + snapshot['difficulty'] + '-scroll-' + edge
+        page.screenshot(path=str(page._ui_output / (label + '.png')))
+        (page._ui_output / (label + '.json')).write_text(json.dumps(snapshot, ensure_ascii=False, indent=2))
+        row.setdefault('screenshots', []).append(label + '.png')
+
+    capture_edge(before)
+    ended = False
+    try:
+        # Same native CDP touch path as the existing Pixi touch driver. Explicit
+        # moves make event delivery observable; no DOM scroll or wheel fallback.
+        cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': x, 'y': y}]})
+        page.wait_for_timeout(30)
+        for step in range(1, 13):
+            move_y = y + (end_y - y) * step / 12
+            cdp.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': x, 'y': move_y}]})
+            page.wait_for_timeout(30)
+        cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+        ended = True
+    except Exception as exc:
+        row['driverError'] = str(exc)
+        raise
+    finally:
+        if not ended:
+            cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+        page.wait_for_timeout(220)
+        row['after'] = page.evaluate(SCROLL_SNAPSHOT, [x, end_y])
+        row['events'] = page.evaluate('i=>window.__smallScreenTouchEvents.slice(i)', before['eventIndex'])
+        row['trustedTouchObserved'] = all(any(e['type'] == kind and e['trusted'] for e in row['events'])
+                                          for kind in ['touchstart', 'touchmove', 'touchend'])
+        row['scrollDelta'] = row['after']['scrollTop'] - before['scrollTop']
+        capture_edge(row['after'])
+    assert row['trustedTouchObserved'], f'Native touch event delivery not observed: {row}'
 
 
 def reach(page, cdp, selector):
@@ -302,14 +374,22 @@ def main():
     modes.add_argument('--baseline', action='store_true')
     modes.add_argument('--tablet-baseline', action='store_true', help='Reproduce code-slot overlap at 1024x768 on a frozen app revision.')
     parser.add_argument('--game', choices=['construction', 'coding'], help='Run only the selected candidate game; preserves the six viewport checks.')
+    parser.add_argument('--viewport', help='Candidate-only size filter, e.g. 1024x768; requires --game and a previously defined viewport.')
     args = parser.parse_args()
-    if args.game and (args.baseline or args.tablet_baseline):
-        parser.error('--game is candidate-only; baseline modes select their exact reproduction cases.')
+    if (args.game or args.viewport) and (args.baseline or args.tablet_baseline):
+        parser.error('--game/--viewport are candidate-only; baseline modes select their exact reproduction cases.')
+    selected_size = None
+    if args.viewport:
+        match = re.fullmatch(r'(\d+)x(\d+)', args.viewport)
+        selected_size = tuple(map(int, match.groups())) if match else None
+        if not args.game or selected_size not in SIZES:
+            parser.error('--viewport requires --game and one of: ' + ', '.join(f'{w}x{h}' for w, h in SIZES))
     root, out = args.root.resolve(), args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
     mode = 'baseline' if args.baseline else 'tablet-baseline' if args.tablet_baseline else 'candidate'
-    report = {'mode': mode, 'gameFilter': args.game, 'gitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
+    report = {'mode': mode, 'gameFilter': args.game, 'viewportFilter': selected_size, 'gitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
               'sourceHashesBefore': hashes(root), 'checks': [], 'pageErrors': [],
+              'scrollDiagnostics': [],
               'runnerGitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=SCRIPT_ROOT).decode().strip(),
               'runnerSourceHashesBefore': runner_hashes(),
               'scope': 'Two games only. Chromium touch emulation; simulated audio completion; coding existing internal entry. Physical device/speaker NOT_RUN.'}
@@ -322,15 +402,25 @@ def main():
             report['browserVersion'] = browser.version
             games = ['coding'] if args.tablet_baseline else [args.game] if args.game else ['construction', 'coding']
             for game in games:
-                sizes = [(1024, 768)] if args.tablet_baseline else ([(640, 360)] if game == 'construction' else [(390, 844)]) if args.baseline else SIZES
+                if args.tablet_baseline:
+                    sizes = [(1024, 768)]
+                elif args.baseline:
+                    sizes = [(640, 360)] if game == 'construction' else [(390, 844)]
+                else:
+                    sizes = [selected_size] if selected_size else SIZES
                 for width, height in sizes:
                     name = f'{game}-{width}x{height}'
                     context = browser.new_context(viewport={'width': width, 'height': height}, has_touch=True, service_workers='block')
                     context.add_init_script(QA['PROBE'])
+                    context.add_init_script(TOUCH_PROBE)
                     # Stable random input selects carry/pump/dig, without changing
                     # any game state or granting answers. Same seed both versions.
                     context.add_init_script('Math.random = () => 0.3;')
                     page = context.new_page()
+                    page._ui_scroll_diagnostics = []
+                    page._ui_scroll_shots = set()
+                    page._ui_case_name = name
+                    page._ui_output = out
                     page.on('pageerror', lambda error, n=name: report['pageErrors'].append({'screen': n, 'error': str(error)}))
                     def capture(label, detail):
                         page.screenshot(path=str(out / (label + '.png')))
@@ -383,6 +473,7 @@ def main():
                     except Exception as exc:
                         record(name + '-entry', lambda: (_ for _ in ()).throw(exc))
                     finally:
+                        report['scrollDiagnostics'].extend({'screen': name, **row} for row in page._ui_scroll_diagnostics)
                         context.close()
             browser.close()
     finally:
