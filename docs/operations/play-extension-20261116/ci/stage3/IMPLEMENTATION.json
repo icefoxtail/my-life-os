@@ -1,6 +1,6 @@
 {
   "createdAt": "2026-11-16T07:08:56.377035+00:00",
-  "status": "LAYOUT_CORRECTED_BROWSER_RERUN_PENDING",
+  "status": "DEPLOYED_VERIFIED",
   "checks": [
     {
       "suite": "artwork-choices",
@@ -34,7 +34,22 @@
     "assets/games/neighborhood-story/card.svg": "2b73c8bed1983b4e9f91bbee973eba1526c73a6ee1bd8d80b6c19df68f0398b3",
     "scripts/qa-art-story-browser.py": "18b51f2a557976525ad35bca876baf3366158e841fc875d4d3d33dbcde0a098f"
   },
-  "browser": {
+  "remaining": [],
+  "updatedAt": "2026-11-16T08:05:59.518047+00:00",
+  "requiredLocalChecks": "7/7 PASS",
+  "sourceReview": "Independent final source review: age behavior, original DOM identities, resume/cancel, 0/30 and vocabulary checked. Pixel layout NOT_RUN.",
+  "productionWait": "Exact runtime equality and real-menu gates unchanged; production job deadline increased to accommodate observed Pages runner queues.",
+  "layoutCorrections": {
+    "scope": [
+      "css/games/picture-arithmetic.css"
+    ],
+    "inlineSourceTabs": "Source tabs remain in dialog; inline preview reserves group controls space.",
+    "compactTerm": "11px name/14px line,26px number/28px line,1px gap in44px target.",
+    "compactResult": "Keep green emphasis without scaling beyond52px expression.",
+    "qaChanged": false,
+    "renderedStatus": "PASS"
+  },
+  "firstCandidateBrowser": {
     "candidate": "742cddb4f5a83b62d613990378a6a5c47aff1686",
     "run": 43822792377,
     "quantityGroups": "75/76",
@@ -47,24 +62,29 @@
     ],
     "testSourcesChanged": false
   },
-  "remaining": [
-    "Recheck corrected PA layout with unchanged hosted suites",
-    "Merge after all required candidate checks",
-    "Exact deployed hashes and actual-menu production checks",
-    "Root live interaction and final evidence checkpoint"
-  ],
-  "updatedAt": "2026-11-16T07:40:03.810283+00:00",
-  "requiredLocalChecks": "7/7 PASS",
-  "sourceReview": "Independent final source review: age behavior, original DOM identities, resume/cancel, 0/30 and vocabulary checked. Pixel layout NOT_RUN.",
-  "productionWait": "Exact runtime equality and real-menu gates unchanged; production job deadline increased to accommodate observed Pages runner queues.",
-  "layoutCorrections": {
-    "scope": [
-      "css/games/picture-arithmetic.css"
-    ],
-    "inlineSourceTabs": "Source tabs remain in dialog; inline preview reserves group controls space.",
-    "compactTerm": "11px name/14px line,26px number/28px line,1px gap in44px target.",
-    "compactResult": "Keep green emphasis without scaling beyond52px expression.",
-    "qaChanged": false,
-    "renderedStatus": "PENDING"
+  "browser": {
+    "candidate": "cc267b9cc2513cfbea0c01c47e66210cfaed7b69",
+    "run": 43825567992,
+    "quantityGroups": "76/76",
+    "artStoryGroups": "21/21",
+    "sourceHashRecords": "63/63",
+    "pageErrors": [],
+    "status": "PASS",
+    "visualReview": "Both PA corrections directly reviewed by root and independent reviewer."
+  },
+  "production": {
+    "merge": "0b90bd0ceab618c76bba4651d1e85a7afc557f3a",
+    "pagesRun": 43828299039,
+    "pagesStatus": "SUCCESS",
+    "mainChecksRun": 43828299834,
+    "mainChecksStatus": "SUCCESS",
+    "productionRun": 43828299940,
+    "productionJob": 133167237131,
+    "menuChecks": "21/21 PASS",
+    "sourceHashRecords": "17/17",
+    "runtimeHashes": "12/12",
+    "rootLiveInteraction": "5/5 PASS",
+    "actualSpeakerListening": "NOT_RUN",
+    "physicalDevice": "NOT_RUN"
   }
 }

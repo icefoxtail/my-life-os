@@ -1,0 +1,142 @@
+{
+  "observedAtUTC": "2026-11-16T08:16:50.873506+00:00",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/index.html",
+  "releaseMerge": "0b90bd0ceab618c76bba4651d1e85a7afc557f3a",
+  "method": "Cloud browser native controls with read-only DOM observations and screenshots",
+  "warmExistingTab": "One reload exposed new numbers-land story card and retained saved artwork.",
+  "originalSettings": {
+    "age": 4,
+    "language": "KO",
+    "reading": "native Korean",
+    "soundEnabled": true,
+    "postRange": "1-10",
+    "vehicleRange": "1-10"
+  },
+  "artwork": {
+    "id": "art:police_swat_suv",
+    "label": "경찰 특공대 SUV",
+    "retainedFill": "#9944FF",
+    "paintingModified": false
+  },
+  "checks": [
+    {
+      "name": "Personal artwork sharing",
+      "status": "PASS",
+      "values": {
+        "total": 15,
+        "groups": 4
+      },
+      "actualItemCount": 15,
+      "actualGroups": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "actualRemainder": 3,
+      "sourceKind": "artwork",
+      "retainedFill": "#9944FF"
+    },
+    {
+      "name": "Personal artwork subtraction",
+      "status": "PASS",
+      "values": {
+        "a": 15,
+        "b": 4
+      },
+      "observedRemaining": 11,
+      "observedDeparted": 4,
+      "actualItemCount": 15,
+      "personalColoredItems": 15
+    },
+    {
+      "name": "Age7 connected police story",
+      "status": "PASS",
+      "selectedBase": {
+        "a": 9,
+        "b": 6
+      },
+      "observedStageStart": "1 / 2,9+6",
+      "observedStageEnd": "2 / 2,15-3=12",
+      "observedRemaining": 12,
+      "observedDeparted": 3,
+      "actualItemCount": 15,
+      "personalItems": 15,
+      "personalColoredItems": 15,
+      "observedIdSet": [
+        "story-police-main-1",
+        "story-police-main-2",
+        "story-police-main-3",
+        "story-police-main-4",
+        "story-police-main-5",
+        "story-police-main-6",
+        "story-police-main-7",
+        "story-police-main-8",
+        "story-police-main-9",
+        "story-police-arrival-1",
+        "story-police-arrival-2",
+        "story-police-arrival-3",
+        "story-police-arrival-4",
+        "story-police-arrival-5",
+        "story-police-arrival-6"
+      ],
+      "identityScope": "Point-in-time ID set and source colors observed here; object identity across events is independently verified in hosted QA."
+    },
+    {
+      "name": "Age6 ten-frame presentation",
+      "status": "PASS",
+      "observedEquation": "9+6=15",
+      "observedTenGroup": 10,
+      "observedOnes": 5,
+      "picture": "existing personal purple SUV"
+    },
+    {
+      "name": "Original age restored and age4 completed",
+      "status": "PASS",
+      "restoredAge": 4,
+      "language": "KO",
+      "postRange": "1-10",
+      "vehicleRange": "1-10",
+      "observedStage": "1 / 1",
+      "observedEquation": "9+6=15",
+      "actualItemCount": 15,
+      "personalItems": 15,
+      "personalColoredItems": 15
+    }
+  ],
+  "uiLimitations": {
+    "physicalDevice": "NOT_RUN",
+    "actualSpeakerListening": "NOT_RUN",
+    "cloudAudioFallback": "Visible silent-support message; gameplay completed.",
+    "hiddenText": "DOM textContent includes hidden fallback text; no visible fallback claim inferred from it."
+  },
+  "screenshots": [
+    {
+      "path": "stage3-personal-sharing-live.jpg",
+      "bytes": 110908,
+      "sha256": "69ef64a1cd08970189df3bded00344efd067be1d180f5d07f9d9456536fca707"
+    },
+    {
+      "path": "stage3-personal-subtraction-live.jpg",
+      "bytes": 87738,
+      "sha256": "8d829e965544f73dd684224bdcd80382fae3cc8c19893475d2216de7c0bb49ca"
+    },
+    {
+      "path": "stage3-story-age7-live.jpg",
+      "bytes": 63049,
+      "sha256": "636c6e42ebe9f3dbbea75060e4b8fa6eed6a784efb55c5322498db65073c1f07"
+    },
+    {
+      "path": "stage3-story-age6-live.jpg",
+      "bytes": 70368,
+      "sha256": "70fdbb2d63c0cc52f88e9225815de04e5327ede7f0cca1978bf1daedb5d990dd"
+    },
+    {
+      "path": "stage3-story-age4-live.jpg",
+      "bytes": 64957,
+      "sha256": "dd1d7478c44a111f574bdfbe0d0f2ea6afc21b464bcb9eb6216ef4832b94e7b8"
+    }
+  ],
+  "liveTabMarkedDeliverable": true,
+  "status": "PASS"
+}
