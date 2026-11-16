@@ -60,6 +60,53 @@ jobs:
           path: qa-release-evidence/
           if-no-files-found: error
           retention-days: 14
+  production-ui:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PLAYGROUND_LIVE_GAME: art-reference
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install pinned browser harness
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Wait for the exact main runtime on Pages
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, time, urllib.request
+          paths = ['sw.js', 'index.html', 'js/games/art-zone.js']
+          expected = {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base = 'https://icefoxtail.github.io/my-life-os/'
+          for attempt in range(48):
+              actual = {}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base + path + '?release=' + expected['sw.js'][:12], timeout=15) as response:
+                          actual[path] = hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__, flush=True)
+              if actual == expected:
+                  pathlib.Path('qa-production-evidence').mkdir(exist_ok=True)
+                  pathlib.Path('qa-production-evidence/deployed-runtime.json').write_text(json.dumps({'base':base,'expected':expected,'actual':actual,'matches':True}, indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Pages has not served the exact main runtime; production UI verification did not run.')
+          PY
+      - name: Play the deployed stage through its real menu
+        run: python3 "scripts/qa-${PLAYGROUND_LIVE_GAME}-browser.py" --base https://icefoxtail.github.io/my-life-os/ --output qa-production-evidence
+      - name: Attach production menu and screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: production-ui-${{ github.run_id }}
+          path: qa-production-evidence/
+          if-no-files-found: warn
+          retention-days: 14
   quantity-games:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
