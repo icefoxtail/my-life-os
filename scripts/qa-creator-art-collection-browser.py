@@ -190,7 +190,7 @@ def main():
                 page = context.new_page()
                 page.set_default_timeout(12000)
                 responses = []
-                page.on('response', responses.append)
+                page.on('response', lambda response: responses.append(response))
                 page.on('pageerror', lambda error: report['pageErrors'].append({'check': current['name'], 'message': str(error)}))
                 try:
                     ART['enter_art'](page, base)

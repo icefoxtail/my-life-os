@@ -264,7 +264,7 @@ def main():
                                               service_workers="block", reduced_motion="reduce")
                 page = context.new_page()
                 responses = []
-                page.on("response", responses.append)
+                page.on("response", lambda response: responses.append(response))
                 page.on("pageerror", lambda error: report["pageErrors"].append(str(error)))
                 page.on("requestfailed", lambda request: report["failedRequests"].append(
                     {"url": request.url, "failure": request.failure}))
