@@ -3,29 +3,74 @@
   "owner": "GPT_STATUS_607059CD986C",
   "instructionRevision": 2,
   "baseMain": "833cc1ec5cd38728850957c47b33a6bb24c0ada3",
-  "state": "IN_PROGRESS",
+  "state": "COMPLETE",
+  "lastVerifiedProductCommit": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+  "testedIntegratedCandidate": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+  "productTree": "5f21cd1b9a419332f14941a2815caa9d040970a2",
+  "serviceUrl": "https://icefoxtail.github.io/my-life-os/index.html",
   "stages": [
     {
       "id": 1,
       "name": "vehicle-display",
-      "branch": "work/vehicle-display-closeout-20261116",
       "sourcePr": 5,
-      "implementationCheckpoint": "00bddfd164d9b2396867d980ee7d4064d5f831ad",
-      "status": "BROWSER_VERIFICATION_PENDING"
+      "sourcePrState": "CLOSED_SUPERSEDED",
+      "mergedPr": 35,
+      "testedHead": "83000bc9af5482dc64693b16387220ca821cf147",
+      "mergeCommit": "f1f3647ea90be5fb2ad43a7e12d3956151c87a0b",
+      "status": "DEPLOYED_VERIFIED",
+      "initialProductionRun": 43867520128,
+      "finalProductionRun": 43869275111,
+      "browserChecks": 38,
+      "approvedImagesPreserved": 76,
+      "measuredImageSources": 138,
+      "imageFilesChanged": 0,
+      "cleanPoolPreserved": 39
     },
     {
       "id": 2,
       "name": "pixi-vehicle",
-      "branch": "work/pixi-vehicle-closeout-20261116",
       "sourcePr": 19,
-      "implementationCheckpoint": "fea6a71814298e363a66ae715337a91414d7194c",
-      "status": "BROWSER_VERIFICATION_PENDING"
+      "sourcePrState": "CLOSED_SUPERSEDED",
+      "mergedPr": 36,
+      "testedHead": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+      "mergeCommit": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+      "status": "DEPLOYED_VERIFIED",
+      "finalProductionRun": 43869274835,
+      "browserCases": 7,
+      "pageErrors": 0,
+      "entryPoint": "existing internal entry"
     }
   ],
-  "nextAction": "Run focused and existing mandatory CI; review screenshots; sequential main and production closeout.",
+  "requiredCandidateChecks": "PASS",
+  "finalMainWorkflows": "ALL_PASS",
+  "publicRuntimeSha256": {
+    "sw.js": "3131903ec96ff7702a265c6c550cf8a74d9741872b0b8280650fb33b7fc01893",
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "js/games/number-count.js": "347c12c5e268e2b850e6a00583b709dffa395802c3ba28b463c1b85bb06584e5",
+    "js/games/vehicle-memory.js": "d6363cc79ca1440d0e2f8d9dc27b4c3718bfb1f3f57c8e8e950bc346160b7507",
+    "js/games/parking-lot.js": "c3728be0956c8b1e761896f6e3ef1ab15f8c2317575a71c02871e87742b23b70",
+    "js/games/construction-site.js": "a8fe63447c3410624451f1dbdffb2cc25831883f85d1bae502973d4a453e94c3",
+    "js/games/megaDispatch.js": "6d09721bf28440f8b4d579c204ba04ebe5f26c76b03c897a0b40f47c9017d725",
+    "js/games/coding-car.js": "3c61599f67809531dd660ed321243067ac3d29d5a1267d47d8445c66f7a11d17",
+    "js/engine/pixi-runtime.js": "16ddfbd826ce9d8f4ece06b872338f0280b9e972f01f21d218aeb7f18ade8d02",
+    "js/games-pixi/number-vehicles-pixi.js": "394a3445e8bb5f4e18f380174bc28306bddb1f0dc45fd1b4090c214039eb4a90"
+  },
+  "independentReview": "review/FINAL_INDEPENDENT_REVIEW.md",
+  "report": "REPORT.md",
+  "ciRecords": "CI_RUNS.json",
+  "remainingAuthorizedWork": [],
+  "nextAction": "NONE",
   "limitations": [
     "Physical device touch NOT_RUN",
     "Audible speaker listening NOT_RUN",
-    "Local/headless and shared desktop browser unavailable in this executor; remote Chromium jobs provide browser evidence."
+    "Chromium touch uses browser input; speech uses call-content/count probes.",
+    "Pixi completion exit/reentry tested; full automatic next-vehicle cycle and three-decoration completion not counted.",
+    "Public menu expansion is a separate scope."
+  ],
+  "separateExistingUiFollowups": [
+    "Construction 640x360 central scene clipping",
+    "Coding 390x844 arrow artwork clipping"
   ]
 }

@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "repository": "icefoxtail/my-life-os",
+  "observedAtUtc": "2026-11-16 12:57:05 UTC",
+  "productCommit": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+  "testedCandidate": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+  "productTree": "5f21cd1b9a419332f14941a2815caa9d040970a2",
+  "historicalFailuresPreserved": [
+    43864992439,
+    43864994212
+  ],
+  "finalProductWorkflows": "ALL_PASS",
+  "runs": [
+    {
+      "id": 43869275111,
+      "name": "Vehicle display release",
+      "event": "push",
+      "headSha": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43869275111",
+      "startedAt": "2026-11-16T12:44:16Z",
+      "updatedAt": "2026-11-16T12:48:03Z"
+    },
+    {
+      "id": 43869274877,
+      "name": "Playground checks",
+      "event": "push",
+      "headSha": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43869274877",
+      "startedAt": "2026-11-16T12:44:16Z",
+      "updatedAt": "2026-11-16T12:44:46Z"
+    },
+    {
+      "id": 43869274864,
+      "name": "Phase 2 browser release",
+      "event": "push",
+      "headSha": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43869274864",
+      "startedAt": "2026-11-16T12:44:16Z",
+      "updatedAt": "2026-11-16T12:55:34Z"
+    },
+    {
+      "id": 43869274835,
+      "name": "Pixi vehicle release",
+      "event": "push",
+      "headSha": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43869274835",
+      "startedAt": "2026-11-16T12:44:16Z",
+      "updatedAt": "2026-11-16T12:49:36Z"
+    },
+    {
+      "id": 43869273761,
+      "name": "pages build and deployment",
+      "event": "dynamic",
+      "headSha": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43869273761",
+      "startedAt": "2026-11-16T12:44:16Z",
+      "updatedAt": "2026-11-16T12:46:54Z"
+    },
+    {
+      "id": 43867520128,
+      "name": "Vehicle display release",
+      "event": "push",
+      "headSha": "f1f3647ea90be5fb2ad43a7e12d3956151c87a0b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867520128",
+      "startedAt": "2026-11-16T12:32:38Z",
+      "updatedAt": "2026-11-16T12:39:00Z"
+    },
+    {
+      "id": 43867520114,
+      "name": "Phase 2 browser release",
+      "event": "push",
+      "headSha": "f1f3647ea90be5fb2ad43a7e12d3956151c87a0b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867520114",
+      "startedAt": "2026-11-16T12:32:38Z",
+      "updatedAt": "2026-11-16T12:44:58Z"
+    },
+    {
+      "id": 43867518331,
+      "name": "pages build and deployment",
+      "event": "dynamic",
+      "headSha": "f1f3647ea90be5fb2ad43a7e12d3956151c87a0b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867518331",
+      "startedAt": "2026-11-16T12:32:38Z",
+      "updatedAt": "2026-11-16T12:37:49Z"
+    },
+    {
+      "id": 43867162557,
+      "name": "Pixi vehicle release",
+      "event": "pull_request",
+      "headSha": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867162557",
+      "startedAt": "2026-11-16T12:30:17Z",
+      "updatedAt": "2026-11-16T12:39:21Z"
+    },
+    {
+      "id": 43867162304,
+      "name": "Vehicle display release",
+      "event": "pull_request",
+      "headSha": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867162304",
+      "startedAt": "2026-11-16T12:30:17Z",
+      "updatedAt": "2026-11-16T12:35:16Z"
+    },
+    {
+      "id": 43867162292,
+      "name": "Phase 2 browser release",
+      "event": "pull_request",
+      "headSha": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867162292",
+      "startedAt": "2026-11-16T12:30:17Z",
+      "updatedAt": "2026-11-16T12:41:18Z"
+    },
+    {
+      "id": 43867162286,
+      "name": "Playground checks",
+      "event": "pull_request",
+      "headSha": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43867162286",
+      "startedAt": "2026-11-16T12:30:17Z",
+      "updatedAt": "2026-11-16T12:30:42Z"
+    },
+    {
+      "id": 43866360106,
+      "name": "Pixi vehicle release",
+      "event": "pull_request",
+      "headSha": "ff0133dd06d5d4b01b1542917176a54dac52383d",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43866360106",
+      "startedAt": "2026-11-16T12:24:58Z",
+      "updatedAt": "2026-11-16T12:28:14Z"
+    },
+    {
+      "id": 43865566620,
+      "name": "Playground checks",
+      "event": "pull_request",
+      "headSha": "83000bc9af5482dc64693b16387220ca821cf147",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43865566620",
+      "startedAt": "2026-11-16T12:19:45Z",
+      "updatedAt": "2026-11-16T12:24:06Z"
+    },
+    {
+      "id": 43865566483,
+      "name": "Vehicle display release",
+      "event": "pull_request",
+      "headSha": "83000bc9af5482dc64693b16387220ca821cf147",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43865566483",
+      "startedAt": "2026-11-16T12:19:45Z",
+      "updatedAt": "2026-11-16T12:23:07Z"
+    },
+    {
+      "id": 43865566476,
+      "name": "Phase 2 browser release",
+      "event": "pull_request",
+      "headSha": "83000bc9af5482dc64693b16387220ca821cf147",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43865566476",
+      "startedAt": "2026-11-16T12:19:45Z",
+      "updatedAt": "2026-11-16T12:32:14Z"
+    },
+    {
+      "id": 43864994212,
+      "name": "Pixi vehicle release",
+      "event": "pull_request",
+      "headSha": "a89fc6232cdb34689070a44eb243bfd0490ab659",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43864994212",
+      "startedAt": "2026-11-16T12:15:58Z",
+      "updatedAt": "2026-11-16T12:21:25Z"
+    },
+    {
+      "id": 43864992439,
+      "name": "Vehicle display release",
+      "event": "pull_request",
+      "headSha": "46311eed30047eae6291b9164165ea7b245dc1ff",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43864992439",
+      "startedAt": "2026-11-16T12:15:57Z",
+      "updatedAt": "2026-11-16T12:17:27Z"
+    }
+  ],
+  "retainedEvidence": [
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/FINAL_INDEPENDENT_REVIEW.md",
+      "bytes": 8394,
+      "gitBlobSha": "8ef51d1b54f1d3ed88aebc61bcd77a236bce86dc"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-final-production-43869274835/completion-0-en.png",
+      "bytes": 64443,
+      "gitBlobSha": "c4228e9c69f88a8a2a5a241c3cef770135a6256a"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-final-production-43869274835/deployed-runtime.json",
+      "bytes": 875,
+      "gitBlobSha": "2cd2d35b5d62858d318fad1d66dda9c2a704a9d2"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-final-production-43869274835/pixi-vehicle-browser.json",
+      "bytes": 3155,
+      "gitBlobSha": "adf1673a77ada69b2f9d28faa63a26f1623ffb4e"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-final-production-43869274835/pixi-vehicle-sources.json",
+      "bytes": 780,
+      "gitBlobSha": "d4e52308677e010165bf2adf424f2b5c1470218c"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-final-production-43869274835/reentered-None-ko.png",
+      "bytes": 108269,
+      "gitBlobSha": "2c9447d2faf2589cdcdfc4edc7b3cac83ceb0fd1"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-first-43864994212/pixi-vehicle-browser.json",
+      "bytes": 8673,
+      "gitBlobSha": "672eea73a790732b920502cb4036f052187ceb78"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-first-43864994212/pixi-vehicle-sources.json",
+      "bytes": 732,
+      "gitBlobSha": "dee0941e2ec6ebfd9b3ca7194ed0a76b545e99d5"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-fixed-43866360106/pixi-vehicle-browser.json",
+      "bytes": 3155,
+      "gitBlobSha": "adf1673a77ada69b2f9d28faa63a26f1623ffb4e"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-fixed-43866360106/pixi-vehicle-sources.json",
+      "bytes": 732,
+      "gitBlobSha": "ad76da19fefc6231b67b5e980e65bfe776f6e52a"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-integrated-43867162557/pixi-vehicle-browser.json",
+      "bytes": 3155,
+      "gitBlobSha": "adf1673a77ada69b2f9d28faa63a26f1623ffb4e"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/pixi-integrated-43867162557/pixi-vehicle-sources.json",
+      "bytes": 732,
+      "gitBlobSha": "ad76da19fefc6231b67b5e980e65bfe776f6e52a"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-final-production-43869275111/construction-1024x768.png",
+      "bytes": 261667,
+      "gitBlobSha": "5a186cea5ee33da84da2067a06d70ea61d70569c"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-final-production-43869275111/deployed-runtime.json",
+      "bytes": 2071,
+      "gitBlobSha": "536de86abe88e44b1f1ff1ae59be4d392511f9da"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-final-production-43869275111/fire-768x1024.png",
+      "bytes": 438030,
+      "gitBlobSha": "dcdcdfadb7144f01946bd729978fefc4011136cf"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-final-production-43869275111/independent-vehicle-browser.json",
+      "bytes": 88313,
+      "gitBlobSha": "fb03a0dc44d1fa40f1840f25280b0e4b9fe35645"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-final-production-43869275111/measured-image-geometry.json",
+      "bytes": 32957,
+      "gitBlobSha": "2c1a01af438cdf9b7d6b3bbdc62827612859c7fb"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-final-production-43869275111/parking-640x360.png",
+      "bytes": 105910,
+      "gitBlobSha": "6a4fff05930b107e3f8c5519a8e2101065c10538"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-first-43864992439/failure-24.png",
+      "bytes": 281586,
+      "gitBlobSha": "6ef214606eb5dab1d0a308f2cbb417667d888901"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-first-43864992439/independent-vehicle-browser.json",
+      "bytes": 88133,
+      "gitBlobSha": "f71243a652683dffcea696f8193c61b9e85e4f1b"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-fixed-43865566483/independent-vehicle-browser.json",
+      "bytes": 88452,
+      "gitBlobSha": "15209d6b0c61713f12c6a3c092815a438dbac8e4"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-integrated-43867162304/construction-1024x768.png",
+      "bytes": 307747,
+      "gitBlobSha": "63f968cdd28c646c048d8dbb54c21ce6fc7fe911"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-integrated-43867162304/independent-vehicle-browser.json",
+      "bytes": 88547,
+      "gitBlobSha": "f6876591c9dbb0fdf0332d49662ea8a70c26d2ad"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-production-43867520128/deployed-runtime.json",
+      "bytes": 2071,
+      "gitBlobSha": "13d0be7cd52fd13fc05524ab491d56509cb8ab50"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-production-43867520128/independent-vehicle-browser.json",
+      "bytes": 88322,
+      "gitBlobSha": "378f23869b50b0923b8c399d3b6003a5edb12d18"
+    },
+    {
+      "path": "docs/operations/vehicle-closeout-20261116/review/ci/vehicle-production-43867520128/measured-image-geometry.json",
+      "bytes": 32957,
+      "gitBlobSha": "2c1a01af438cdf9b7d6b3bbdc62827612859c7fb"
+    }
+  ]
+}

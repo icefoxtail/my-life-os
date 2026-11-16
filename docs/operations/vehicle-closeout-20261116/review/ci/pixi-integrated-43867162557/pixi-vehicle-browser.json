@@ -1,0 +1,171 @@
+[
+  {
+    "case": "a fire truck-ko",
+    "language": "ko",
+    "input": "mouse",
+    "errors": [],
+    "placed": 7,
+    "completion": [
+      [
+        "우와! 소방차 출동!",
+        "ko-KR"
+      ]
+    ],
+    "pixiVersion": "8.22.0",
+    "completionExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "a fire truck-en",
+    "language": "en",
+    "input": "touch",
+    "errors": [],
+    "placed": 7,
+    "completion": [
+      [
+        "Hooray! We built a fire truck!",
+        "en-US"
+      ]
+    ],
+    "pixiVersion": "8.22.0",
+    "completionExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "a police car-ko",
+    "language": "ko",
+    "input": "mouse",
+    "errors": [],
+    "placed": 7,
+    "completion": [
+      [
+        "우와! 경찰차 출동!",
+        "ko-KR"
+      ]
+    ],
+    "pixiVersion": "8.22.0",
+    "completionExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "a police car-en",
+    "language": "en",
+    "input": "touch",
+    "errors": [],
+    "placed": 7,
+    "completion": [
+      [
+        "Hooray! We built a police car!",
+        "en-US"
+      ]
+    ],
+    "pixiVersion": "8.22.0",
+    "completionExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "an ambulance-ko",
+    "language": "ko",
+    "input": "mouse",
+    "errors": [],
+    "placed": 7,
+    "completion": [
+      [
+        "우와! 구급차 출동!",
+        "ko-KR"
+      ]
+    ],
+    "pixiVersion": "8.22.0",
+    "completionExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "an ambulance-en",
+    "language": "en",
+    "input": "touch",
+    "errors": [],
+    "placed": 7,
+    "completion": [
+      [
+        "Hooray! We built an ambulance!",
+        "en-US"
+      ]
+    ],
+    "pixiVersion": "8.22.0",
+    "completionExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "lifecycle",
+    "language": "ko",
+    "input": "mouse",
+    "errors": [],
+    "loadingExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "dropExitReentry": {
+      "destroyed": true,
+      "tickers": 0,
+      "timers": 0,
+      "fresh": true,
+      "placed": 0,
+      "parts": 7,
+      "canvases": 1
+    },
+    "status": "PASS"
+  }
+]

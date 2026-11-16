@@ -1,0 +1,28 @@
+{
+  "base": "https://icefoxtail.github.io/my-life-os/",
+  "expected": {
+    "sw.js": "24f70338a9fe4ed94eff3f693977257d2511229cc310437d300fe68f5104aaca",
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "js/games/number-count.js": "347c12c5e268e2b850e6a00583b709dffa395802c3ba28b463c1b85bb06584e5",
+    "js/games/vehicle-memory.js": "d6363cc79ca1440d0e2f8d9dc27b4c3718bfb1f3f57c8e8e950bc346160b7507",
+    "js/games/parking-lot.js": "c3728be0956c8b1e761896f6e3ef1ab15f8c2317575a71c02871e87742b23b70",
+    "js/games/construction-site.js": "a8fe63447c3410624451f1dbdffb2cc25831883f85d1bae502973d4a453e94c3",
+    "js/games/megaDispatch.js": "6d09721bf28440f8b4d579c204ba04ebe5f26c76b03c897a0b40f47c9017d725",
+    "js/games/coding-car.js": "3c61599f67809531dd660ed321243067ac3d29d5a1267d47d8445c66f7a11d17"
+  },
+  "actual": {
+    "sw.js": "24f70338a9fe4ed94eff3f693977257d2511229cc310437d300fe68f5104aaca",
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "js/games/number-count.js": "347c12c5e268e2b850e6a00583b709dffa395802c3ba28b463c1b85bb06584e5",
+    "js/games/vehicle-memory.js": "d6363cc79ca1440d0e2f8d9dc27b4c3718bfb1f3f57c8e8e950bc346160b7507",
+    "js/games/parking-lot.js": "c3728be0956c8b1e761896f6e3ef1ab15f8c2317575a71c02871e87742b23b70",
+    "js/games/construction-site.js": "a8fe63447c3410624451f1dbdffb2cc25831883f85d1bae502973d4a453e94c3",
+    "js/games/megaDispatch.js": "6d09721bf28440f8b4d579c204ba04ebe5f26c76b03c897a0b40f47c9017d725",
+    "js/games/coding-car.js": "3c61599f67809531dd660ed321243067ac3d29d5a1267d47d8445c66f7a11d17"
+  },
+  "matches": true
+}
