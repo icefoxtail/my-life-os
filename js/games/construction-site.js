@@ -305,7 +305,7 @@
       }
 
       @media (orientation: landscape) and (min-width: 1024px) and (min-height: 640px) {
-        .construction-landscape { grid-template-columns: minmax(250px, 25%) minmax(460px, 1fr) minmax(270px, 27%); gap: 16px; padding: 16px; }
+        .construction-landscape { grid-template-columns: minmax(250px, 25%) minmax(0, 1fr) minmax(270px, 27%); gap: 16px; padding: 16px; }
         .construction-landscape .cs-stage { border-radius: 36px; border-width: 8px; }
         .construction-landscape .cs-title { font-size: clamp(30px, 3vw, 44px); }
         .construction-landscape .cs-question { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
