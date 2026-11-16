@@ -95,6 +95,8 @@ def gallery_layout(page):
 
 
 def compare_preview(page, template_id):
+    page.wait_for_function('''id => {const image=document.querySelector('[data-tpl="'+id+'"] img');
+        return image?.complete && image.naturalWidth>0;}''', arg=template_id)
     result = page.evaluate('''id => {
       const image=document.querySelector('[data-tpl="'+id+'"] img');
       const source=decodeURIComponent(image.getAttribute('src').split(',').slice(1).join(','));
