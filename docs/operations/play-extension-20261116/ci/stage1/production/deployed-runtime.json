@@ -1,0 +1,16 @@
+{
+  "base": "https://icefoxtail.github.io/my-life-os/",
+  "expected": {
+    "sw.js": "d8306c3d5a23e77d2a017d309c700629f1a4826462c0ccc5179312ac8d316622",
+    "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+    "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+    "css/play-settings.css": "a4e7f95deb819ba5b1e256f62ba36cf99c7703966364308c65d3aecd8d946ffd"
+  },
+  "actual": {
+    "sw.js": "d8306c3d5a23e77d2a017d309c700629f1a4826462c0ccc5179312ac8d316622",
+    "index.html": "23efc219a663573748add6aa2ca2c72021b9a13e578c8818ea36574a05ad5187",
+    "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+    "css/play-settings.css": "a4e7f95deb819ba5b1e256f62ba36cf99c7703966364308c65d3aecd8d946ffd"
+  },
+  "matches": true
+}

@@ -3,14 +3,14 @@
   "owner": "GPT_ROOT_4414C9BDF4A5",
   "instructionRevision": 2,
   "baseMain": "e47e89b1617a3a68628bf277be15efb6bed38ff9",
-  "state": "VERIFYING",
-  "activeStage": 2,
+  "state": "IMPLEMENTING",
+  "activeStage": 3,
   "stages": [
     {
       "id": 1,
       "name": "coloring-reference-companion",
       "branch": "work/art-reference-companion-20261116",
-      "status": "MERGED_WAITING_FOR_PAGES",
+      "status": "DEPLOYED_VERIFIED",
       "testedRuntimeHead": "9eab6f542d3ee244be3ccae7d82d0c5aec90c2ee",
       "candidateHead": "548c0a5a58ce2d9e5679bf4ba121a05b8590c3ae",
       "merge": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
@@ -21,16 +21,21 @@
       "pagesRun": 43814182675,
       "productionUI": {
         "run": 43814183284,
-        "job": 133122339424,
-        "status": "DEPLOYMENT_WAIT_TIMEOUT",
-        "menuChecks": "NOT_RUN"
-      }
+        "job": 133139168937,
+        "status": "PASS",
+        "menuChecks": "7/7",
+        "artifact": 14203799068,
+        "runtimeHashes": "4/4",
+        "sourceHashes": "6/6",
+        "rootLiveInteraction": "PASS"
+      },
+      "pagesStatus": "SUCCESS"
     },
     {
       "id": 2,
       "name": "quantity-comparison-and-subtraction",
       "branch": "work/quantity-compare-subtract-20261116",
-      "status": "IMPLEMENTED_BROWSER_CI_PENDING",
+      "status": "MERGED_WAITING_FOR_PAGES",
       "baseMain": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
       "modelChecks": {
         "comparisons": 961,
@@ -39,15 +44,24 @@
         "gardenStates": 620,
         "gardenComplementProgress": 723,
         "status": "PASS"
-      }
+      },
+      "testedHead": "43d1449b4ee2f447b3255025b54c6fd5f300ff75",
+      "merge": "9d28ef0bab06859df0d3432ad4a8191c18394870",
+      "pr": 31,
+      "checksRun": 43817801977,
+      "browserRun": 43817801990,
+      "browserChecks": "76/76 PASS",
+      "visualReview": "PASS"
     },
     {
       "id": 3,
       "name": "personal-artwork-story-play",
       "branch": "work/art-story-play-20261116",
-      "status": "NOT_STARTED"
+      "status": "IMPLEMENTING",
+      "baseMain": "9d28ef0bab06859df0d3432ad4a8191c18394870",
+      "design": "STAGE3-DESIGN.md"
     }
   ],
-  "nextAction": "Run Stage 2 browser CI. Continue Stage 3 after Stage 2 verification. Stage 1 Pages must be verified before Stage 2 main merge.",
+  "nextAction": "Implement Stage3 on separate branch; verify Stage2 production before Stage3 merge.",
   "progressionAdjustment": "Pages runner allocation delayed the first deployment; continue implementation in order on separate branches while preserving stage-by-stage production gates."
 }
