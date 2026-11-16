@@ -1062,6 +1062,10 @@
           min-height: clamp(50px, 8vh, 70px);
         }
       }
+      @media (orientation: landscape) and (min-height: 701px) {
+        /* Keep command rows at their natural height so overflow can scroll. */
+        .coding-car-landscape .cc-ui-area { grid-auto-rows: max-content; }
+      }
       @media (orientation: landscape) and (max-height: 700px) {
         .coding-car-landscape { grid-template-columns: clamp(112px, 17vw, 144px) minmax(0, 1fr) clamp(220px, 31vw, 280px); gap: 8px; padding: 8px; }
         .coding-car-landscape .cc-top { min-width: 0; padding: 8px; gap: 8px; border-radius: 20px; border-width: 3px; }

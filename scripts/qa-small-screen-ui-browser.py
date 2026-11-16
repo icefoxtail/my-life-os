@@ -1,7 +1,7 @@
 """Scoped construction/coding UI review, using real Chromium layout and touch.
 
-The baseline keeps observed layout failures as FAIL; exit zero only means both
-requested defects were reproduced. Audio completion alone is simulated by the
+The baseline modes keep observed layout failures as FAIL; exit zero only means
+the named defects were reproduced. Audio completion alone is simulated by the
 existing voice probe. No game state, answers, asset bytes, or CSS is rewritten.
 """
 import argparse
@@ -66,6 +66,21 @@ MEASURE = r"""game => {
     result.round=root.querySelector('.cs-pill')?.textContent;
   }else{
     result.panel={rect:rect(panel),scrollTop:panel.scrollTop,scrollHeight:panel.scrollHeight,clientHeight:panel.clientHeight,overflow:getComputedStyle(panel).overflowY,touchAction:getComputedStyle(panel).touchAction,rootTouchAction:getComputedStyle(root).touchAction,alignContent:getComputedStyle(panel).alignContent};
+    const slots=root.querySelector('#ccSlots'),slotBoundary=content(slots),controlBoundary=rect(root.querySelector('.cc-controls'));
+    const difficulty=root.querySelector('.cc-diff-btn.active')?.dataset.difficulty;
+    const expectedSlots=difficulty==='easy'?4:difficulty==='challenge'?7:null;
+    const overlaps=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
+    result.codeSlots={difficulty,expected:expectedSlots,group:rect(slots),groupContent:slotBoundary,controls:controlBoundary,rows:[]};
+    const slotElements=[...slots.querySelectorAll('.cc-slot')];
+    if(slotElements.length!==expectedSlots)issues.push({kind:'slot-count',expected:expectedSlots,actual:slotElements.length});
+    for(const [index,e] of slotElements.entries()){
+      const r=rect(e),row={index:index+1,rect:r,insideGroup:inside(r,slotBoundary),overlapsControls:overlaps(r,controlBoundary),insideViewport:inside(r,viewport),insidePanel:inside(r,content(panel))};
+      result.codeSlots.rows.push(row);
+      if(!row.insideGroup)issues.push({kind:'slot-outside-group',index:row.index,rect:r,boundary:slotBoundary});
+      if(row.overlapsControls)issues.push({kind:'slot-control-overlap',index:row.index,rect:r,controls:controlBoundary});
+      if(!scrollable&&(!row.insideViewport||!row.insidePanel))issues.push({kind:'slot-clipped-no-scroll',index:row.index,rect:r});
+      for(const previous of result.codeSlots.rows.slice(0,-1))if(overlaps(r,previous.rect))issues.push({kind:'slot-slot-overlap',indices:[previous.index,row.index]});
+    }
     result.arrows=[];
     for(const img of root.querySelectorAll('.cc-btn-arrow img')){
       const button=img.closest('button'),b=content(button),r=rect(img),style=getComputedStyle(button);
@@ -91,6 +106,11 @@ MEASURE = r"""game => {
 
 def hashes(root):
     return {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in SOURCES}
+
+
+def runner_hashes():
+    return {p: hashlib.sha256((SCRIPT_ROOT / p).read_bytes()).hexdigest()
+            for p in ['scripts/qa-small-screen-ui-browser.py', 'scripts/qa-p1-voice-browser.py']}
 
 
 def enter(page, base, game):
@@ -215,6 +235,15 @@ def coding_flow(page, cdp, capture, name):
         states.append(detail)
         assert not detail['issues'], detail['issues']
         reach(page, cdp, '.cc-guide-text')
+        # Code slots are not buttons, but every whole slot must remain readable.
+        # A panel may legitimately scroll; use finger input to expose each slot
+        # and never accept merely counting seven overlapped DOM elements.
+        slot_reach = []
+        assert page.locator('#ccSlots .cc-slot').count() == (4 if difficulty == 'easy' else 7)
+        for index in range(1, (4 if difficulty == 'easy' else 7) + 1):
+            selector = f'#ccSlots .cc-slot:nth-child({index})'
+            reach(page, cdp, selector)
+            slot_reach.append(page.locator(selector).evaluate("e=>{const r=e.getBoundingClientRect(),p=e.closest('.cc-ui-area');return {rect:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},panelScrollTop:p.scrollTop};}"))
         # Check all controls can be reached by finger movement, including ones
         # legitimately below a scrollable panel's initial viewport.
         for selector in ['.cc-btn-arrow[data-dir="up"]', '.cc-btn-arrow[data-dir="down"]',
@@ -224,7 +253,7 @@ def coding_flow(page, cdp, capture, name):
             box = page.locator(selector).bounding_box()
             assert box['width'] >= 43.8 and box['height'] >= 43.8, (selector, box)
         panel = page.evaluate("()=>{const p=document.querySelector('.cc-ui-area');return {scrollTop:p.scrollTop,max:p.scrollHeight-p.clientHeight};}")
-        scroll_checks.append({'difficulty': difficulty, **panel})
+        scroll_checks.append({'difficulty': difficulty, 'codeSlotsReached': slot_reach, **panel})
         start, goal = detail['map']['start'], detail['map']['goal']
         dx, dy = int(goal[0]) - int(start[0]), int(goal[1]) - int(start[1])
         route = (['right' if dx > 0 else 'left'] * abs(dx) + ['down' if dy > 0 else 'up'] * abs(dy))
@@ -269,12 +298,20 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=pathlib.Path, default=SCRIPT_ROOT)
     parser.add_argument('--output', type=pathlib.Path, required=True)
-    parser.add_argument('--baseline', action='store_true')
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('--baseline', action='store_true')
+    modes.add_argument('--tablet-baseline', action='store_true', help='Reproduce code-slot overlap at 1024x768 on a frozen app revision.')
+    parser.add_argument('--game', choices=['construction', 'coding'], help='Run only the selected candidate game; preserves the six viewport checks.')
     args = parser.parse_args()
+    if args.game and (args.baseline or args.tablet_baseline):
+        parser.error('--game is candidate-only; baseline modes select their exact reproduction cases.')
     root, out = args.root.resolve(), args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
-    report = {'mode': 'baseline' if args.baseline else 'candidate', 'gitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
+    mode = 'baseline' if args.baseline else 'tablet-baseline' if args.tablet_baseline else 'candidate'
+    report = {'mode': mode, 'gameFilter': args.game, 'gitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
               'sourceHashesBefore': hashes(root), 'checks': [], 'pageErrors': [],
+              'runnerGitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=SCRIPT_ROOT).decode().strip(),
+              'runnerSourceHashesBefore': runner_hashes(),
               'scope': 'Two games only. Chromium touch emulation; simulated audio completion; coding existing internal entry. Physical device/speaker NOT_RUN.'}
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(QA['QuietServer'], directory=str(root)))
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -283,8 +320,9 @@ def main():
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True)
             report['browserVersion'] = browser.version
-            for game in ['construction', 'coding']:
-                sizes = ([(640, 360)] if game == 'construction' else [(390, 844)]) if args.baseline else SIZES
+            games = ['coding'] if args.tablet_baseline else [args.game] if args.game else ['construction', 'coding']
+            for game in games:
+                sizes = [(1024, 768)] if args.tablet_baseline else ([(640, 360)] if game == 'construction' else [(390, 844)]) if args.baseline else SIZES
                 for width, height in sizes:
                     name = f'{game}-{width}x{height}'
                     context = browser.new_context(viewport={'width': width, 'height': height}, has_touch=True, service_workers='block')
@@ -317,6 +355,15 @@ def main():
                         return row
                     try:
                         enter(page, base, game)
+                        if args.tablet_baseline:
+                            for difficulty in ['easy', 'challenge']:
+                                if difficulty == 'challenge':
+                                    tap_exact(page, '.cc-diff-btn[data-difficulty="challenge"]')
+                                    page.wait_for_timeout(250)
+                                detail = page.evaluate(MEASURE, game)
+                                capture(name + '-' + difficulty, detail)
+                                record(name + '-' + difficulty + '-layout', lambda: detail)
+                            continue
                         detail = page.evaluate(MEASURE, game)
                         capture(name + '-initial', detail)
                         record(name + '-layout', lambda: detail)
@@ -341,7 +388,8 @@ def main():
     finally:
         server.shutdown()
         report['sourceHashesAfter'] = hashes(root)
-        report['sourcesUnchanged'] = report['sourceHashesBefore'] == report['sourceHashesAfter']
+        report['runnerSourceHashesAfter'] = runner_hashes()
+        report['sourcesUnchanged'] = report['sourceHashesBefore'] == report['sourceHashesAfter'] and report['runnerSourceHashesBefore'] == report['runnerSourceHashesAfter']
         report['status'] = 'PASS' if report['checks'] and all(row['status'] == 'PASS' for row in report['checks']) and not report['pageErrors'] and report['sourcesUnchanged'] else 'FAIL'
         if args.baseline:
             construction = next((r for r in report['checks'] if r['name'] == 'construction-640x360-layout'), {})
@@ -350,9 +398,15 @@ def main():
                 'constructionScene': any(i['kind'] == 'scene-clipped' for i in construction.get('detail', {}).get('issues', [])),
                 'codingArrow': any(i['kind'] == 'arrow-clipped' for i in coding.get('detail', {}).get('issues', [])),
             }
+        elif args.tablet_baseline:
+            slot_defects = {'slot-outside-group', 'slot-control-overlap', 'slot-slot-overlap'}
+            report['expectedDefectsReproduced'] = {}
+            for difficulty in ['easy', 'challenge']:
+                row = next((r for r in report['checks'] if r['name'] == f'coding-1024x768-{difficulty}-layout'), {})
+                report['expectedDefectsReproduced'][difficulty + 'CodeSlots'] = any(i['kind'] in slot_defects for i in row.get('detail', {}).get('issues', []))
         (out / 'small-screen-ui-results.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print('SMALL_SCREEN_UI', report['mode'], report['status'], flush=True)
-    if args.baseline:
+    if args.baseline or args.tablet_baseline:
         return 0 if all(report['expectedDefectsReproduced'].values()) and report['sourcesUnchanged'] and not report['pageErrors'] else 1
     return int(report['status'] != 'PASS')
 
