@@ -1,0 +1,1803 @@
+{
+  "images": 138,
+  "passed": 138,
+  "layouts": 828,
+  "failures": [],
+  "fallbackRestored": true,
+  "rows": [
+    {
+      "path": "assets/vehicles/airport/airport_bus.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        29,
+        246,
+        739,
+        615
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/airport_follow_me_car.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        1,
+        172,
+        731,
+        583
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/baggage_cart.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        6,
+        286,
+        754,
+        565
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/catering_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        7,
+        88,
+        738,
+        655
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/de_icing_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        27,
+        42,
+        719,
+        630
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/fuel_truck_airport.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        28,
+        188,
+        748,
+        584
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/passenger_airplane.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/pushback_tug.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        10,
+        244,
+        754,
+        529
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/airport/stair_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        58,
+        56,
+        736,
+        622
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/articulated_dump_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        20,
+        271,
+        739,
+        650
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/asphalt_paver.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        21,
+        204,
+        749,
+        622
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/backhoe_loader.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        3,
+        93,
+        762,
+        627
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/bulldozer.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        117,
+        311,
+        907,
+        757
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/cargo_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        25,
+        115,
+        742,
+        608
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/concrete_mixer.png",
+      "width": 1312,
+      "height": 1199,
+      "alpha16": [
+        182,
+        336,
+        1170,
+        943
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/concrete_pump_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        117,
+        289,
+        907,
+        735
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/crane_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        119,
+        278,
+        905,
+        746
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/drilling_rig.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/dump_loader.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        3,
+        233,
+        746,
+        669
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/dump_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        119,
+        300,
+        905,
+        747
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/excavator.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        118,
+        275,
+        906,
+        794
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/excavator_breaker.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        28,
+        120,
+        736,
+        722
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/forklift.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        142,
+        252,
+        882,
+        772
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/fuel_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        30,
+        231,
+        747,
+        622
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/grader.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        16,
+        223,
+        748,
+        623
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/lowbed_trailer.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        33,
+        199,
+        731,
+        566
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/mini_excavator.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        145,
+        265,
+        879,
+        810
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/mobile_crane.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        40,
+        16,
+        731,
+        682
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/pile_driver.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/road_roller.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        19,
+        142,
+        729,
+        659
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/scissor_lift.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        145,
+        28,
+        562,
+        648
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/skid_steer_loader.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        5,
+        93,
+        707,
+        640
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/sweeper_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        14,
+        193,
+        739,
+        631
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/tower_crane.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        49,
+        35,
+        741,
+        679
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/water_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        21,
+        193,
+        743,
+        612
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/construction/wheel_loader.png",
+      "width": 1312,
+      "height": 1199,
+      "alpha16": [
+        93,
+        340,
+        1199,
+        935
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/baler.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        34,
+        117,
+        697,
+        665
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/combine_harvester.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        12,
+        140,
+        754,
+        649
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/farm_trailer.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        17,
+        164,
+        732,
+        593
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/fruit_harvest_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        11,
+        78,
+        407,
+        320
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/milk_tanker.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        19,
+        170,
+        754,
+        582
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/plow_tractor.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        5,
+        71,
+        404,
+        306
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/rice_transplanter.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        39,
+        123,
+        712,
+        629
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/sprayer_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        17,
+        71,
+        410,
+        329
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/farm/tractor.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        28,
+        72,
+        380,
+        352
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/aerial_ladder_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        168,
+        980,
+        855
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/airport_fire_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        201,
+        980,
+        823
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/articulating_ladder_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        120,
+        980,
+        904
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/fire_command_vehicle.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        149,
+        980,
+        874
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/foam_fire_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        158,
+        980,
+        865
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/ladder_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        199,
+        980,
+        825
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/pump_engine.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        211,
+        980,
+        813
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/rescue_fire_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        209,
+        980,
+        814
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire/water_tanker.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        44,
+        227,
+        980,
+        797
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/aerial_ladder_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/airport_crash_tender.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        7,
+        119,
+        501,
+        421
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/articulating_boom_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        5,
+        35,
+        491,
+        399
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/fire_command_suv.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/fire_tank.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        8,
+        153,
+        495,
+        415
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/robot_demolition_fire_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        3,
+        16,
+        501,
+        447
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/smoke_extraction_fan_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/water_tanker.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        10,
+        102,
+        511,
+        373
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/fire_special/wildfire_6x6_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        1,
+        95,
+        506,
+        419
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/amphibious_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/armored_rescue_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/bridge_layer_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/command_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/communication_relay_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/decontamination_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/drone_control_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/engineering_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/eod_robot_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/military_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/missile_launcher_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        372,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/mobile_hospital.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/mrap_patrol_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/radar_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/searchlight_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/snow_rescue_vehicle.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        141,
+        204,
+        355,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/tracked_carrier.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/military_special/water_purification_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        139,
+        163,
+        373,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/police/forensic_bus.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        182,
+        309,
+        901,
+        763
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/police/korean_police_car.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        149,
+        368,
+        904,
+        784
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/police/police_motorcycle.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        216,
+        346,
+        807,
+        789
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/police/riot_police_bus.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        170,
+        345,
+        889,
+        766
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/police/swat_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        171,
+        305,
+        906,
+        770
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/police/us_police_car.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        159,
+        367,
+        892,
+        778
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/cargo_ship.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/coast_guard_boat.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        12,
+        52,
+        405,
+        339
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/container_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        22,
+        125,
+        400,
+        359
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/ferry.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        16,
+        111,
+        742,
+        628
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/fishing_boat.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        11,
+        39,
+        404,
+        351
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/harbor_crane.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        84,
+        33,
+        690,
+        742
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/reach_stacker.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        9,
+        58,
+        387,
+        372
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/rescue_boat.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        11,
+        53,
+        403,
+        353
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/port/tugboat.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        21,
+        32,
+        394,
+        349
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/rescue/ambulance.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        193,
+        295,
+        895,
+        725
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/rescue/doctor_car.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        224,
+        269,
+        872,
+        721
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/rescue/rescue_helicopter.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        226,
+        293,
+        895,
+        722
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/bridge_inspection_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        11,
+        12,
+        402,
+        343
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/line_painting_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        19,
+        77,
+        401,
+        334
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/road_repair_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        9,
+        84,
+        409,
+        347
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/road_sign_truck.webp",
+      "width": 768,
+      "height": 768,
+      "alpha16": [
+        17,
+        90,
+        660,
+        639
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/road_sweeper.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        16,
+        93,
+        406,
+        357
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/salt_spreader.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        18,
+        70,
+        392,
+        348
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/snow_plow.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        6,
+        71,
+        403,
+        369
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/traffic_cone_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        13,
+        70,
+        407,
+        343
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/road_service/tunnel_cleaning_truck.webp",
+      "width": 418,
+      "height": 418,
+      "alpha16": [
+        6,
+        60,
+        396,
+        345
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/bakery_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        3,
+        124,
+        498,
+        459
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/beverage_delivery_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        10,
+        81,
+        493,
+        379
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/community_bus.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        13,
+        95,
+        501,
+        401
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/delivery_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        18,
+        100,
+        489,
+        419
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/flower_delivery_van.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        3,
+        157,
+        497,
+        464
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/food_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        23,
+        108,
+        503,
+        426
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/ice_cream_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        9,
+        21,
+        483,
+        426
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/laundry_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        1,
+        94,
+        495,
+        417
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/library_bus.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        5,
+        104,
+        500,
+        376
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/mail_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        16,
+        112,
+        479,
+        432
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/maintenance_pickup.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        5,
+        124,
+        495,
+        446
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/moving_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        22,
+        72,
+        507,
+        420
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/pet_grooming_van.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        0,
+        116,
+        488,
+        437
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/recycling_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        10,
+        66,
+        494,
+        397
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/school_van.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        5,
+        142,
+        491,
+        460
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/street_vendor_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        6,
+        93,
+        502,
+        396
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/toy_truck.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        12,
+        81,
+        490,
+        420
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/town/utility_repair_van.webp",
+      "width": 512,
+      "height": 512,
+      "alpha16": [
+        0,
+        88,
+        490,
+        442
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/airplane.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        98,
+        297,
+        926,
+        728
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/bus.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        143,
+        299,
+        897,
+        693
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/car.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        194,
+        356,
+        926,
+        698
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/garbage_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        0,
+        243,
+        903,
+        802
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/helicopter.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        98,
+        267,
+        926,
+        757
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/rocket.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        310,
+        131,
+        672,
+        847
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/school_bus.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        56,
+        251,
+        970,
+        773
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/submarine.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        173,
+        240,
+        857,
+        753
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/taxi.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        98,
+        302,
+        926,
+        721
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/tow_truck.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        98,
+        250,
+        926,
+        772
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/tractor.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        305,
+        297,
+        926,
+        729
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    },
+    {
+      "path": "assets/vehicles/transport/train.png",
+      "width": 1024,
+      "height": 1024,
+      "alpha16": [
+        98,
+        299,
+        926,
+        724
+      ],
+      "layouts": 6,
+      "status": "PASS"
+    }
+  ]
+}

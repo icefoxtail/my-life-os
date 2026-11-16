@@ -1,0 +1,21 @@
+{
+  "sourceSha256": "16ddfbd826ce9d8f4ece06b872338f0280b9e972f01f21d218aeb7f18ade8d02",
+  "source": "5444e33dfc9609d3cac8e151e10e8a8ab9c0ce1b",
+  "scope": "independent Node runtime checks using Pixi 8.22 Container coordinate disposal contract; no browser claim",
+  "checks": [
+    {
+      "kind": "position",
+      "status": "PASS",
+      "retiredCoordinateWrites": 0,
+      "remainingTickers": 0,
+      "promiseSettled": true
+    },
+    {
+      "kind": "scale",
+      "status": "PASS",
+      "retiredCoordinateWrites": 0,
+      "remainingTickers": 0,
+      "promiseSettled": true
+    }
+  ]
+}

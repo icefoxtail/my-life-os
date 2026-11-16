@@ -1,0 +1,3596 @@
+{
+  "reviewer": "independent /root/live_status",
+  "scope": "current images, measured fitting and six consuming games; coding internal entry; simulated audio only",
+  "gitSha": "a0fd765f230894f600cfcb572cc1f6c315349dc3",
+  "sourceHashesBefore": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "3131903ec96ff7702a265c6c550cf8a74d9741872b0b8280650fb33b7fc01893",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a",
+    "assets/vehicles/vehicles_manifest.json": "6c9437e7dc3b109929d9cb0781258e44b45c22c1f2672440c3fc32c4cdf85031",
+    "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa",
+    "docs/qa/release/VEHICLE_IMAGE_ONLY_RELEASE_20261109.json": "0dc454ac916a264f5a1dc65f8f53c7b2b7bbae76be4e4e7018b18cc72ff7f82e",
+    "js/games/number-count.js": "347c12c5e268e2b850e6a00583b709dffa395802c3ba28b463c1b85bb06584e5",
+    "js/games/vehicle-memory.js": "d6363cc79ca1440d0e2f8d9dc27b4c3718bfb1f3f57c8e8e950bc346160b7507",
+    "js/games/parking-lot.js": "c3728be0956c8b1e761896f6e3ef1ab15f8c2317575a71c02871e87742b23b70",
+    "js/games/construction-site.js": "a8fe63447c3410624451f1dbdffb2cc25831883f85d1bae502973d4a453e94c3",
+    "js/games/megaDispatch.js": "6d09721bf28440f8b4d579c204ba04ebe5f26c76b03c897a0b40f47c9017d725",
+    "js/games/coding-car.js": "3c61599f67809531dd660ed321243067ac3d29d5a1267d47d8445c66f7a11d17",
+    "scripts/qa-vehicle-display-browser.py": "8b23cb2f313ab663e4414f616ddbc41b25920ca1b1318f3244257d29ed416376"
+  },
+  "checks": [
+    {
+      "name": "approved current 76 image bytes",
+      "detail": {
+        "approvedCurrentImages": 76,
+        "allApprovedHashesMatch": true,
+        "manifestPaths": 138
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "138 decoded alpha bounds x 6 actual SVG viewport shapes",
+      "detail": {
+        "images": 138,
+        "passed": 138,
+        "layouts": 828,
+        "failures": [],
+        "fallbackRestored": true
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "count 390x844 menu entry",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "controls": [
+          {
+            "label": "자동차 수량 고르기",
+            "rect": {
+              "x": 199.5,
+              "y": 67,
+              "right": 306.5,
+              "bottom": 117,
+              "width": 107,
+              "height": 50
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "9",
+            "rect": {
+              "x": 8.578125,
+              "y": 736.90625,
+              "right": 78.78125,
+              "bottom": 834,
+              "width": 70.203125,
+              "height": 97.09375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "7",
+            "rect": {
+              "x": 84.234375,
+              "y": 736.90625,
+              "right": 154.4375,
+              "bottom": 834,
+              "width": 70.203125,
+              "height": 97.09375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "6",
+            "rect": {
+              "x": 159.890625,
+              "y": 736.90625,
+              "right": 230.09375,
+              "bottom": 834,
+              "width": 70.203125,
+              "height": 97.09375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "8",
+            "rect": {
+              "x": 235.546875,
+              "y": 736.90625,
+              "right": 305.75,
+              "bottom": 834,
+              "width": 70.203125,
+              "height": 97.09375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "10",
+            "rect": {
+              "x": 311.203125,
+              "y": 736.90625,
+              "right": 381.40625,
+              "bottom": 834,
+              "width": 70.203125,
+              "height": 97.09375
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "count-390x844.png"
+    },
+    {
+      "name": "count 844x390 menu entry",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 844,
+          "bottom": 390,
+          "width": 844,
+          "height": 390
+        },
+        "controls": [
+          {
+            "label": "자동차 수량 고르기",
+            "rect": {
+              "x": 4,
+              "y": 340,
+              "right": 124,
+              "bottom": 386,
+              "width": 120,
+              "height": 46
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "9",
+            "rect": {
+              "x": 728,
+              "y": 48,
+              "right": 832,
+              "bottom": 102,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "7",
+            "rect": {
+              "x": 728,
+              "y": 108,
+              "right": 832,
+              "bottom": 162,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "6",
+            "rect": {
+              "x": 728,
+              "y": 168,
+              "right": 832,
+              "bottom": 222,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "8",
+            "rect": {
+              "x": 728,
+              "y": 228,
+              "right": 832,
+              "bottom": 282,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "10",
+            "rect": {
+              "x": 728,
+              "y": 288,
+              "right": 832,
+              "bottom": 342,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "count 640x360 menu entry",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "controls": [
+          {
+            "label": "자동차 수량 고르기",
+            "rect": {
+              "x": 4,
+              "y": 310,
+              "right": 124,
+              "bottom": 356,
+              "width": 120,
+              "height": 46
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "9",
+            "rect": {
+              "x": 524,
+              "y": 33,
+              "right": 628,
+              "bottom": 87,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "7",
+            "rect": {
+              "x": 524,
+              "y": 93,
+              "right": 628,
+              "bottom": 147,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "6",
+            "rect": {
+              "x": 524,
+              "y": 153,
+              "right": 628,
+              "bottom": 207,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "8",
+            "rect": {
+              "x": 524,
+              "y": 213,
+              "right": 628,
+              "bottom": 267,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "10",
+            "rect": {
+              "x": 524,
+              "y": 273,
+              "right": 628,
+              "bottom": 327,
+              "width": 104,
+              "height": 54
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "count-640x360.png"
+    },
+    {
+      "name": "count 768x1024 menu entry",
+      "detail": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 768,
+          "bottom": 1024,
+          "width": 768,
+          "height": 1024
+        },
+        "controls": [
+          {
+            "label": "자동차 수량 고르기",
+            "rect": {
+              "x": 388.5,
+              "y": 67,
+              "right": 495.5,
+              "bottom": 117,
+              "width": 107,
+              "height": 50
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "9",
+            "rect": {
+              "x": 12,
+              "y": 898,
+              "right": 154.40625,
+              "bottom": 1014,
+              "width": 142.40625,
+              "height": 116
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "7",
+            "rect": {
+              "x": 162.40625,
+              "y": 898,
+              "right": 304.8125,
+              "bottom": 1014,
+              "width": 142.40625,
+              "height": 116
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "6",
+            "rect": {
+              "x": 312.8125,
+              "y": 898,
+              "right": 455.21875,
+              "bottom": 1014,
+              "width": 142.40625,
+              "height": 116
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "8",
+            "rect": {
+              "x": 463.21875,
+              "y": 898,
+              "right": 605.625,
+              "bottom": 1014,
+              "width": 142.40625,
+              "height": 116
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "10",
+            "rect": {
+              "x": 613.625,
+              "y": 898,
+              "right": 756.03125,
+              "bottom": 1014,
+              "width": 142.40625,
+              "height": 116
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "count 1024x768 menu entry",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "자동차 수량 고르기",
+            "rect": {
+              "x": 12,
+              "y": 706,
+              "right": 212,
+              "bottom": 756,
+              "width": 200,
+              "height": 50
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "9",
+            "rect": {
+              "x": 785,
+              "y": 22.6875,
+              "right": 999,
+              "bottom": 159.125,
+              "width": 214,
+              "height": 136.4375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "7",
+            "rect": {
+              "x": 785,
+              "y": 169.125,
+              "right": 999,
+              "bottom": 305.5625,
+              "width": 214,
+              "height": 136.4375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "6",
+            "rect": {
+              "x": 785,
+              "y": 315.5625,
+              "right": 999,
+              "bottom": 438.4375,
+              "width": 214,
+              "height": 122.875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "8",
+            "rect": {
+              "x": 785,
+              "y": 448.4375,
+              "right": 999,
+              "bottom": 584.875,
+              "width": 214,
+              "height": 136.4375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "10",
+            "rect": {
+              "x": 785,
+              "y": 594.875,
+              "right": 999,
+              "bottom": 745.3125,
+              "width": 214,
+              "height": 150.4375
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "count 1280x800 menu entry",
+      "detail": {
+        "viewport": [
+          1280,
+          800
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "controls": [
+          {
+            "label": "자동차 수량 고르기",
+            "rect": {
+              "x": 12,
+              "y": 738,
+              "right": 212,
+              "bottom": 788,
+              "width": 200,
+              "height": 50
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "9",
+            "rect": {
+              "x": 1041,
+              "y": 0.515625,
+              "right": 1255,
+              "bottom": 152.3125,
+              "width": 214,
+              "height": 151.796875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "7",
+            "rect": {
+              "x": 1041,
+              "y": 162.3125,
+              "right": 1255,
+              "bottom": 314.109375,
+              "width": 214,
+              "height": 151.796875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "6",
+            "rect": {
+              "x": 1041,
+              "y": 324.109375,
+              "right": 1255,
+              "bottom": 461.90625,
+              "width": 214,
+              "height": 137.796875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "8",
+            "rect": {
+              "x": 1041,
+              "y": 471.90625,
+              "right": 1255,
+              "bottom": 623.703125,
+              "width": 214,
+              "height": 151.796875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "10",
+            "rect": {
+              "x": 1041,
+              "y": 633.703125,
+              "right": 1255,
+              "bottom": 799.5,
+              "width": 214,
+              "height": 165.796875
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "count-1280x800.png"
+    },
+    {
+      "name": "memory 390x844 menu entry",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "controls": [
+          {
+            "label": "카드",
+            "rect": {
+              "x": 8,
+              "y": 97,
+              "right": 96.25,
+              "bottom": 462,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 103.25,
+              "y": 97,
+              "right": 191.5,
+              "bottom": 462,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 198.5,
+              "y": 97,
+              "right": 286.75,
+              "bottom": 462,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 293.75,
+              "y": 97,
+              "right": 382,
+              "bottom": 462,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 8,
+              "y": 469,
+              "right": 96.25,
+              "bottom": 834,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 103.25,
+              "y": 469,
+              "right": 191.5,
+              "bottom": 834,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 198.5,
+              "y": 469,
+              "right": 286.75,
+              "bottom": 834,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 293.75,
+              "y": 469,
+              "right": 382,
+              "bottom": 834,
+              "width": 88.25,
+              "height": 365
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "memory-390x844.png"
+    },
+    {
+      "name": "memory 844x390 menu entry",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 844,
+          "bottom": 390,
+          "width": 844,
+          "height": 390
+        },
+        "controls": [
+          {
+            "label": "카드",
+            "rect": {
+              "x": 318.890625,
+              "y": 24,
+              "right": 439.65625,
+              "bottom": 192,
+              "width": 120.765625,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 445.65625,
+              "y": 24,
+              "right": 566.4375,
+              "bottom": 192,
+              "width": 120.78125,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 572.4375,
+              "y": 24,
+              "right": 693.21875,
+              "bottom": 192,
+              "width": 120.78125,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 699.21875,
+              "y": 24,
+              "right": 820,
+              "bottom": 192,
+              "width": 120.78125,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 318.890625,
+              "y": 198,
+              "right": 439.65625,
+              "bottom": 366,
+              "width": 120.765625,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 445.65625,
+              "y": 198,
+              "right": 566.4375,
+              "bottom": 366,
+              "width": 120.78125,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 572.4375,
+              "y": 198,
+              "right": 693.21875,
+              "bottom": 366,
+              "width": 120.78125,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 699.21875,
+              "y": 198,
+              "right": 820,
+              "bottom": 366,
+              "width": 120.78125,
+              "height": 168
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "memory 640x360 menu entry",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "controls": [
+          {
+            "label": "카드",
+            "rect": {
+              "x": 10,
+              "y": 78,
+              "right": 161.25,
+              "bottom": 210.5,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 166.25,
+              "y": 78,
+              "right": 317.5,
+              "bottom": 210.5,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 322.5,
+              "y": 78,
+              "right": 473.75,
+              "bottom": 210.5,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 478.75,
+              "y": 78,
+              "right": 630,
+              "bottom": 210.5,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 10,
+              "y": 215.5,
+              "right": 161.25,
+              "bottom": 348,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 166.25,
+              "y": 215.5,
+              "right": 317.5,
+              "bottom": 348,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 322.5,
+              "y": 215.5,
+              "right": 473.75,
+              "bottom": 348,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 478.75,
+              "y": 215.5,
+              "right": 630,
+              "bottom": 348,
+              "width": 151.25,
+              "height": 132.5
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "memory-640x360.png"
+    },
+    {
+      "name": "memory 768x1024 menu entry",
+      "detail": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 768,
+          "bottom": 1024,
+          "width": 768,
+          "height": 1024
+        },
+        "controls": [
+          {
+            "label": "카드",
+            "rect": {
+              "x": 10,
+              "y": 108,
+              "right": 188,
+              "bottom": 554,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 200,
+              "y": 108,
+              "right": 378,
+              "bottom": 554,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 390,
+              "y": 108,
+              "right": 568,
+              "bottom": 554,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 580,
+              "y": 108,
+              "right": 758,
+              "bottom": 554,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 10,
+              "y": 566,
+              "right": 188,
+              "bottom": 1012,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 200,
+              "y": 566,
+              "right": 378,
+              "bottom": 1012,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 390,
+              "y": 566,
+              "right": 568,
+              "bottom": 1012,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 580,
+              "y": 566,
+              "right": 758,
+              "bottom": 1012,
+              "width": 178,
+              "height": 446
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "memory 1024x768 menu entry",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "카드",
+            "rect": {
+              "x": 416,
+              "y": 35.359375,
+              "right": 549.65625,
+              "bottom": 378,
+              "width": 133.65625,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 561.65625,
+              "y": 35.359375,
+              "right": 695.3125,
+              "bottom": 378,
+              "width": 133.65625,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 707.3125,
+              "y": 35.359375,
+              "right": 840.96875,
+              "bottom": 378,
+              "width": 133.65625,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 852.96875,
+              "y": 35.359375,
+              "right": 986.640625,
+              "bottom": 378,
+              "width": 133.671875,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 416,
+              "y": 390,
+              "right": 549.65625,
+              "bottom": 732.640625,
+              "width": 133.65625,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 561.65625,
+              "y": 390,
+              "right": 695.3125,
+              "bottom": 732.640625,
+              "width": 133.65625,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 707.3125,
+              "y": 390,
+              "right": 840.96875,
+              "bottom": 732.640625,
+              "width": 133.65625,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 852.96875,
+              "y": 390,
+              "right": 986.640625,
+              "bottom": 732.640625,
+              "width": 133.671875,
+              "height": 342.640625
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "memory 1280x800 menu entry",
+      "detail": {
+        "viewport": [
+          1280,
+          800
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "controls": [
+          {
+            "label": "카드",
+            "rect": {
+              "x": 515.609375,
+              "y": 38,
+              "right": 687.703125,
+              "bottom": 394,
+              "width": 172.09375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 699.703125,
+              "y": 38,
+              "right": 871.796875,
+              "bottom": 394,
+              "width": 172.09375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 883.796875,
+              "y": 38,
+              "right": 1055.890625,
+              "bottom": 394,
+              "width": 172.09375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 1067.890625,
+              "y": 38,
+              "right": 1240,
+              "bottom": 394,
+              "width": 172.109375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 515.609375,
+              "y": 406,
+              "right": 687.703125,
+              "bottom": 762,
+              "width": 172.09375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 699.703125,
+              "y": 406,
+              "right": 871.796875,
+              "bottom": 762,
+              "width": 172.09375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 883.796875,
+              "y": 406,
+              "right": 1055.890625,
+              "bottom": 762,
+              "width": 172.09375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "카드",
+            "rect": {
+              "x": 1067.890625,
+              "y": 406,
+              "right": 1240,
+              "bottom": 762,
+              "width": 172.109375,
+              "height": 356
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "parking 390x844 menu entry",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "controls": [
+          {
+            "label": "택시 주차칸",
+            "rect": {
+              "x": 12,
+              "y": 105,
+              "right": 190,
+              "bottom": 386.078125,
+              "width": 178,
+              "height": 281.078125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 주차칸",
+            "rect": {
+              "x": 200,
+              "y": 105,
+              "right": 378,
+              "bottom": 386.078125,
+              "width": 178,
+              "height": 281.078125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 주차칸",
+            "rect": {
+              "x": 12,
+              "y": 396.078125,
+              "right": 190,
+              "bottom": 514.171875,
+              "width": 178,
+              "height": 118.09375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 주차칸",
+            "rect": {
+              "x": 200,
+              "y": 396.078125,
+              "right": 378,
+              "bottom": 514.171875,
+              "width": 178,
+              "height": 118.09375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 선택",
+            "rect": {
+              "x": 42.609375,
+              "y": 561.828125,
+              "right": 136.203125,
+              "bottom": 655.421875,
+              "width": 93.59375,
+              "height": 93.59375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "택시 선택",
+            "rect": {
+              "x": 148.203125,
+              "y": 561.828125,
+              "right": 241.796875,
+              "bottom": 655.421875,
+              "width": 93.59375,
+              "height": 93.59375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 선택",
+            "rect": {
+              "x": 253.796875,
+              "y": 561.828125,
+              "right": 347.390625,
+              "bottom": 655.421875,
+              "width": 93.59375,
+              "height": 93.59375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 선택",
+            "rect": {
+              "x": 148.203125,
+              "y": 714.734375,
+              "right": 241.796875,
+              "bottom": 808.328125,
+              "width": 93.59375,
+              "height": 93.59375
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "parking-390x844.png"
+    },
+    {
+      "name": "parking 844x390 menu entry",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 844,
+          "bottom": 390,
+          "width": 844,
+          "height": 390
+        },
+        "controls": [
+          {
+            "label": "택시 주차칸",
+            "rect": {
+              "x": 170,
+              "y": 10,
+              "right": 413,
+              "bottom": 191,
+              "width": 243,
+              "height": 181
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 주차칸",
+            "rect": {
+              "x": 421,
+              "y": 10,
+              "right": 664,
+              "bottom": 191,
+              "width": 243,
+              "height": 181
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 주차칸",
+            "rect": {
+              "x": 170,
+              "y": 199,
+              "right": 413,
+              "bottom": 380,
+              "width": 243,
+              "height": 181
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 주차칸",
+            "rect": {
+              "x": 421,
+              "y": 199,
+              "right": 664,
+              "bottom": 380,
+              "width": 243,
+              "height": 181
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 선택",
+            "rect": {
+              "x": 686,
+              "y": 22,
+              "right": 822,
+              "bottom": 102.5,
+              "width": 136,
+              "height": 80.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "택시 선택",
+            "rect": {
+              "x": 686,
+              "y": 110.5,
+              "right": 822,
+              "bottom": 191,
+              "width": 136,
+              "height": 80.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 선택",
+            "rect": {
+              "x": 686,
+              "y": 199,
+              "right": 822,
+              "bottom": 279.5,
+              "width": 136,
+              "height": 80.5
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 선택",
+            "rect": {
+              "x": 686,
+              "y": 287.5,
+              "right": 822,
+              "bottom": 368,
+              "width": 136,
+              "height": 80.5
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "parking 640x360 menu entry",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "controls": [
+          {
+            "label": "택시 주차칸",
+            "rect": {
+              "x": 135.1875,
+              "y": 10,
+              "right": 312.796875,
+              "bottom": 176,
+              "width": 177.609375,
+              "height": 166
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 주차칸",
+            "rect": {
+              "x": 320.796875,
+              "y": 10,
+              "right": 498.40625,
+              "bottom": 176,
+              "width": 177.609375,
+              "height": 166
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 주차칸",
+            "rect": {
+              "x": 135.1875,
+              "y": 184,
+              "right": 312.796875,
+              "bottom": 350,
+              "width": 177.609375,
+              "height": 166
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 주차칸",
+            "rect": {
+              "x": 320.796875,
+              "y": 184,
+              "right": 498.40625,
+              "bottom": 350,
+              "width": 177.609375,
+              "height": 166
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 선택",
+            "rect": {
+              "x": 520.40625,
+              "y": 22,
+              "right": 618,
+              "bottom": 95,
+              "width": 97.59375,
+              "height": 73
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "택시 선택",
+            "rect": {
+              "x": 520.40625,
+              "y": 103,
+              "right": 618,
+              "bottom": 176,
+              "width": 97.59375,
+              "height": 73
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 선택",
+            "rect": {
+              "x": 520.40625,
+              "y": 184,
+              "right": 618,
+              "bottom": 257,
+              "width": 97.59375,
+              "height": 73
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 선택",
+            "rect": {
+              "x": 520.40625,
+              "y": 265,
+              "right": 618,
+              "bottom": 338,
+              "width": 97.59375,
+              "height": 73
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "parking-640x360.png"
+    },
+    {
+      "name": "parking 768x1024 menu entry",
+      "detail": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 768,
+          "bottom": 1024,
+          "width": 768,
+          "height": 1024
+        },
+        "controls": [
+          {
+            "label": "택시 주차칸",
+            "rect": {
+              "x": 16,
+              "y": 125,
+              "right": 191,
+              "bottom": 400.046875,
+              "width": 175,
+              "height": 275.046875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 주차칸",
+            "rect": {
+              "x": 203,
+              "y": 125,
+              "right": 378,
+              "bottom": 400.046875,
+              "width": 175,
+              "height": 275.046875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 주차칸",
+            "rect": {
+              "x": 390,
+              "y": 125,
+              "right": 565,
+              "bottom": 400.046875,
+              "width": 175,
+              "height": 275.046875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 주차칸",
+            "rect": {
+              "x": 577,
+              "y": 125,
+              "right": 752,
+              "bottom": 400.046875,
+              "width": 175,
+              "height": 275.046875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 선택",
+            "rect": {
+              "x": 100,
+              "y": 655.015625,
+              "right": 230,
+              "bottom": 785.015625,
+              "width": 130,
+              "height": 130
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "택시 선택",
+            "rect": {
+              "x": 246,
+              "y": 655.015625,
+              "right": 376,
+              "bottom": 785.015625,
+              "width": 130,
+              "height": 130
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 선택",
+            "rect": {
+              "x": 392,
+              "y": 655.015625,
+              "right": 522,
+              "bottom": 785.015625,
+              "width": 130,
+              "height": 130
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 선택",
+            "rect": {
+              "x": 538,
+              "y": 655.015625,
+              "right": 668,
+              "bottom": 785.015625,
+              "width": 130,
+              "height": 130
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "parking 1024x768 menu entry",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "택시 주차칸",
+            "rect": {
+              "x": 280.390625,
+              "y": 14,
+              "right": 477.140625,
+              "bottom": 376,
+              "width": 196.75,
+              "height": 362
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 주차칸",
+            "rect": {
+              "x": 493.140625,
+              "y": 14,
+              "right": 689.890625,
+              "bottom": 376,
+              "width": 196.75,
+              "height": 362
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 주차칸",
+            "rect": {
+              "x": 280.390625,
+              "y": 392,
+              "right": 477.140625,
+              "bottom": 754,
+              "width": 196.75,
+              "height": 362
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 주차칸",
+            "rect": {
+              "x": 493.140625,
+              "y": 392,
+              "right": 689.890625,
+              "bottom": 754,
+              "width": 196.75,
+              "height": 362
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 선택",
+            "rect": {
+              "x": 726.890625,
+              "y": 35,
+              "right": 986.984375,
+              "bottom": 199,
+              "width": 260.09375,
+              "height": 164
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "택시 선택",
+            "rect": {
+              "x": 726.890625,
+              "y": 213,
+              "right": 986.984375,
+              "bottom": 377,
+              "width": 260.09375,
+              "height": 164
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 선택",
+            "rect": {
+              "x": 726.890625,
+              "y": 391,
+              "right": 986.984375,
+              "bottom": 555,
+              "width": 260.09375,
+              "height": 164
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 선택",
+            "rect": {
+              "x": 726.890625,
+              "y": 569,
+              "right": 986.984375,
+              "bottom": 733,
+              "width": 260.09375,
+              "height": 164
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "parking 1280x800 menu entry",
+      "detail": {
+        "viewport": [
+          1280,
+          800
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "controls": [
+          {
+            "label": "택시 주차칸",
+            "rect": {
+              "x": 346.625,
+              "y": 14,
+              "right": 597.96875,
+              "bottom": 392,
+              "width": 251.34375,
+              "height": 378
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 주차칸",
+            "rect": {
+              "x": 613.96875,
+              "y": 14,
+              "right": 865.328125,
+              "bottom": 392,
+              "width": 251.359375,
+              "height": 378
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 주차칸",
+            "rect": {
+              "x": 346.625,
+              "y": 408,
+              "right": 597.96875,
+              "bottom": 786,
+              "width": 251.34375,
+              "height": 378
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 주차칸",
+            "rect": {
+              "x": 613.96875,
+              "y": 408,
+              "right": 865.328125,
+              "bottom": 786,
+              "width": 251.359375,
+              "height": 378
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "잠수함 선택",
+            "rect": {
+              "x": 902.328125,
+              "y": 35,
+              "right": 1242.984375,
+              "bottom": 207,
+              "width": 340.65625,
+              "height": 172
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "택시 선택",
+            "rect": {
+              "x": 902.328125,
+              "y": 221,
+              "right": 1242.984375,
+              "bottom": 393,
+              "width": 340.65625,
+              "height": 172
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로켓 선택",
+            "rect": {
+              "x": 902.328125,
+              "y": 407,
+              "right": 1242.984375,
+              "bottom": 579,
+              "width": 340.65625,
+              "height": 172
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "견인차 선택",
+            "rect": {
+              "x": 902.328125,
+              "y": 593,
+              "right": 1242.984375,
+              "bottom": 765,
+              "width": 340.65625,
+              "height": 172
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "construction 390x844 menu entry",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "controls": [
+          {
+            "label": "노면 청소차",
+            "rect": {
+              "x": 12,
+              "y": 718,
+              "right": 128.28125,
+              "bottom": 830,
+              "width": 116.28125,
+              "height": 112
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "브레이커 굴착기",
+            "rect": {
+              "x": 136.859375,
+              "y": 718,
+              "right": 253.140625,
+              "bottom": 830,
+              "width": 116.28125,
+              "height": 112
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "콘크리트 펌프카",
+            "rect": {
+              "x": 261.71875,
+              "y": 718,
+              "right": 378,
+              "bottom": 830,
+              "width": 116.28125,
+              "height": 112
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "construction-390x844.png"
+    },
+    {
+      "name": "construction 844x390 menu entry",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 844,
+          "bottom": 390,
+          "width": 844,
+          "height": 390
+        },
+        "controls": [
+          {
+            "label": "노면 청소차",
+            "rect": {
+              "x": 12,
+              "y": 238,
+              "right": 281.328125,
+              "bottom": 384,
+              "width": 269.328125,
+              "height": 146
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "브레이커 굴착기",
+            "rect": {
+              "x": 287.328125,
+              "y": 238,
+              "right": 556.65625,
+              "bottom": 384,
+              "width": 269.328125,
+              "height": 146
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "콘크리트 펌프카",
+            "rect": {
+              "x": 562.65625,
+              "y": 238,
+              "right": 832,
+              "bottom": 384,
+              "width": 269.34375,
+              "height": 146
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "construction 640x360 menu entry",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "controls": [
+          {
+            "label": "노면 청소차",
+            "rect": {
+              "x": 12,
+              "y": 222.8125,
+              "right": 213.328125,
+              "bottom": 354,
+              "width": 201.328125,
+              "height": 131.1875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "브레이커 굴착기",
+            "rect": {
+              "x": 219.328125,
+              "y": 222.8125,
+              "right": 420.65625,
+              "bottom": 354,
+              "width": 201.328125,
+              "height": 131.1875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "콘크리트 펌프카",
+            "rect": {
+              "x": 426.65625,
+              "y": 222.8125,
+              "right": 627.984375,
+              "bottom": 354,
+              "width": 201.328125,
+              "height": 131.1875
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "construction-640x360.png"
+    },
+    {
+      "name": "construction 768x1024 menu entry",
+      "detail": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 768,
+          "bottom": 1024,
+          "width": 768,
+          "height": 1024
+        },
+        "controls": [
+          {
+            "label": "노면 청소차",
+            "rect": {
+              "x": 12,
+              "y": 790,
+              "right": 251.328125,
+              "bottom": 1010,
+              "width": 239.328125,
+              "height": 220
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "브레이커 굴착기",
+            "rect": {
+              "x": 264.328125,
+              "y": 790,
+              "right": 503.65625,
+              "bottom": 1010,
+              "width": 239.328125,
+              "height": 220
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "콘크리트 펌프카",
+            "rect": {
+              "x": 516.65625,
+              "y": 790,
+              "right": 755.984375,
+              "bottom": 1010,
+              "width": 239.328125,
+              "height": 220
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "construction 1024x768 menu entry",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "노면 청소차",
+            "rect": {
+              "x": 738,
+              "y": 87,
+              "right": 1008,
+              "bottom": 277,
+              "width": 270,
+              "height": 190
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "브레이커 굴착기",
+            "rect": {
+              "x": 738,
+              "y": 289,
+              "right": 1008,
+              "bottom": 479,
+              "width": 270,
+              "height": 190
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "콘크리트 펌프카",
+            "rect": {
+              "x": 738,
+              "y": 491,
+              "right": 1008,
+              "bottom": 681,
+              "width": 270,
+              "height": 190
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "construction-1024x768.png"
+    },
+    {
+      "name": "construction 1280x800 menu entry",
+      "detail": {
+        "viewport": [
+          1280,
+          800
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "controls": [
+          {
+            "label": "노면 청소차",
+            "rect": {
+              "x": 927.046875,
+              "y": 103,
+              "right": 1264,
+              "bottom": 293,
+              "width": 336.953125,
+              "height": 190
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "브레이커 굴착기",
+            "rect": {
+              "x": 927.046875,
+              "y": 305,
+              "right": 1264,
+              "bottom": 495,
+              "width": 336.953125,
+              "height": 190
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "콘크리트 펌프카",
+            "rect": {
+              "x": 927.046875,
+              "y": 507,
+              "right": 1264,
+              "bottom": 697,
+              "width": 336.953125,
+              "height": 190
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "fire 390x844 menu entry",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "controls": [
+          {
+            "label": "굴절 붐 소방차 출동",
+            "rect": {
+              "x": 23,
+              "y": 408.375,
+              "right": 189,
+              "bottom": 608.6875,
+              "width": 166,
+              "height": 200.3125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로봇 파쇄 소방차 출동",
+            "rect": {
+              "x": 199.357177734375,
+              "y": 406.392578125,
+              "right": 368.642822265625,
+              "bottom": 610.669921875,
+              "width": 169.28564453125,
+              "height": 204.27734375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "연기 배출차 출동",
+            "rect": {
+              "x": 23,
+              "y": 620.6875,
+              "right": 189,
+              "bottom": 821,
+              "width": 166,
+              "height": 200.3125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "소방 물탱크차 출동",
+            "rect": {
+              "x": 201,
+              "y": 620.6875,
+              "right": 367,
+              "bottom": 821,
+              "width": 166,
+              "height": 200.3125
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "fire-390x844.png"
+    },
+    {
+      "name": "fire 844x390 menu entry",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 844,
+          "bottom": 390,
+          "width": 844,
+          "height": 390
+        },
+        "controls": [
+          {
+            "label": "굴절 붐 소방차 출동",
+            "rect": {
+              "x": 501.53125,
+              "y": 20,
+              "right": 658.75,
+              "bottom": 191,
+              "width": 157.21875,
+              "height": 171
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로봇 파쇄 소방차 출동",
+            "rect": {
+              "x": 665.4392700195312,
+              "y": 18.57453155517578,
+              "right": 825.2951049804688,
+              "bottom": 192.42548370361328,
+              "width": 159.8558349609375,
+              "height": 173.8509521484375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "연기 배출차 출동",
+            "rect": {
+              "x": 501.53125,
+              "y": 199,
+              "right": 658.75,
+              "bottom": 370,
+              "width": 157.21875,
+              "height": 171
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "소방 물탱크차 출동",
+            "rect": {
+              "x": 666.75,
+              "y": 199,
+              "right": 823.984375,
+              "bottom": 370,
+              "width": 157.234375,
+              "height": 171
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "fire 640x360 menu entry",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "controls": [
+          {
+            "label": "굴절 붐 소방차 출동",
+            "rect": {
+              "x": 384.578125,
+              "y": 20,
+              "right": 498.28125,
+              "bottom": 176,
+              "width": 113.703125,
+              "height": 156
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로봇 파쇄 소방차 출동",
+            "rect": {
+              "x": 505.64947509765625,
+              "y": 19.133331298828125,
+              "right": 620.6317749023438,
+              "bottom": 176.86666870117188,
+              "width": 114.9822998046875,
+              "height": 157.73333740234375
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "연기 배출차 출동",
+            "rect": {
+              "x": 384.578125,
+              "y": 184,
+              "right": 498.28125,
+              "bottom": 340,
+              "width": 113.703125,
+              "height": 156
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "소방 물탱크차 출동",
+            "rect": {
+              "x": 506.28125,
+              "y": 184,
+              "right": 620,
+              "bottom": 340,
+              "width": 113.71875,
+              "height": 156
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "fire-640x360.png"
+    },
+    {
+      "name": "fire 768x1024 menu entry",
+      "detail": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 768,
+          "bottom": 1024,
+          "width": 768,
+          "height": 1024
+        },
+        "controls": [
+          {
+            "label": "굴절 붐 소방차 출동",
+            "rect": {
+              "x": 31,
+              "y": 465.078125,
+              "right": 376,
+              "bottom": 721.03125,
+              "width": 345,
+              "height": 255.953125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로봇 파쇄 소방차 출동",
+            "rect": {
+              "x": 389.1943359375,
+              "y": 462.9966125488281,
+              "right": 739.8056640625,
+              "bottom": 723.11279296875,
+              "width": 350.611328125,
+              "height": 260.1161804199219
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "연기 배출차 출동",
+            "rect": {
+              "x": 31,
+              "y": 737.03125,
+              "right": 376,
+              "bottom": 993,
+              "width": 345,
+              "height": 255.96875
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "소방 물탱크차 출동",
+            "rect": {
+              "x": 392,
+              "y": 737.03125,
+              "right": 737,
+              "bottom": 993,
+              "width": 345,
+              "height": 255.96875
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "fire-768x1024.png"
+    },
+    {
+      "name": "fire 1024x768 menu entry",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "굴절 붐 소방차 출동",
+            "rect": {
+              "x": 720.5625,
+              "y": 36,
+              "right": 844.28125,
+              "bottom": 375,
+              "width": 123.71875,
+              "height": 339
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로봇 파쇄 소방차 출동",
+            "rect": {
+              "x": 861.3023681640625,
+              "y": 33.31788635253906,
+              "right": 986.9788208007812,
+              "bottom": 377.68214416503906,
+              "width": 125.67645263671875,
+              "height": 344.3642578125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "연기 배출차 출동",
+            "rect": {
+              "x": 720.5625,
+              "y": 393,
+              "right": 844.28125,
+              "bottom": 732,
+              "width": 123.71875,
+              "height": 339
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "소방 물탱크차 출동",
+            "rect": {
+              "x": 862.28125,
+              "y": 393,
+              "right": 986,
+              "bottom": 732,
+              "width": 123.71875,
+              "height": 339
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "fire 1280x800 menu entry",
+      "detail": {
+        "viewport": [
+          1280,
+          800
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "controls": [
+          {
+            "label": "굴절 붐 소방차 출동",
+            "rect": {
+              "x": 897.203125,
+              "y": 36,
+              "right": 1060.59375,
+              "bottom": 391,
+              "width": 163.390625,
+              "height": 355
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "로봇 파쇄 소방차 출동",
+            "rect": {
+              "x": 1077.6072998046875,
+              "y": 33.85693359375,
+              "right": 1242.9864501953125,
+              "bottom": 393.14306640625,
+              "width": 165.379150390625,
+              "height": 359.2861328125
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "연기 배출차 출동",
+            "rect": {
+              "x": 897.203125,
+              "y": 409,
+              "right": 1060.59375,
+              "bottom": 764,
+              "width": 163.390625,
+              "height": 355
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "소방 물탱크차 출동",
+            "rect": {
+              "x": 1078.59375,
+              "y": 409,
+              "right": 1242,
+              "bottom": 764,
+              "width": 163.40625,
+              "height": 355
+            },
+            "disabled": false,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "coding 390x844 internal entry",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "controls": [
+          {
+            "label": "위",
+            "rect": {
+              "x": 8,
+              "y": 694,
+              "right": 97,
+              "bottom": 750,
+              "width": 89,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "아래",
+            "rect": {
+              "x": 103,
+              "y": 694,
+              "right": 192,
+              "bottom": 750,
+              "width": 89,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "왼쪽",
+            "rect": {
+              "x": 198,
+              "y": 694,
+              "right": 287,
+              "bottom": 750,
+              "width": 89,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "오른쪽",
+            "rect": {
+              "x": 293,
+              "y": 694,
+              "right": 382,
+              "bottom": 750,
+              "width": 89,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "GO!",
+            "rect": {
+              "x": 226.84375,
+              "y": 784,
+              "right": 382,
+              "bottom": 834,
+              "width": 155.15625,
+              "height": 50
+            },
+            "disabled": true,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "coding-390x844.png"
+    },
+    {
+      "name": "coding 844x390 internal entry",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 844,
+          "bottom": 390,
+          "width": 844,
+          "height": 390
+        },
+        "controls": [
+          {
+            "label": "위",
+            "rect": {
+              "x": 585.375,
+              "y": 83,
+              "right": 702.1875,
+              "bottom": 187,
+              "width": 116.8125,
+              "height": 104
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "아래",
+            "rect": {
+              "x": 708.1875,
+              "y": 83,
+              "right": 825,
+              "bottom": 187,
+              "width": 116.8125,
+              "height": 104
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "왼쪽",
+            "rect": {
+              "x": 585.375,
+              "y": 193,
+              "right": 702.1875,
+              "bottom": 297,
+              "width": 116.8125,
+              "height": 104
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "오른쪽",
+            "rect": {
+              "x": 708.1875,
+              "y": 193,
+              "right": 825,
+              "bottom": 297,
+              "width": 116.8125,
+              "height": 104
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "GO!",
+            "rect": {
+              "x": 733.140625,
+              "y": 327,
+              "right": 824.984375,
+              "bottom": 371,
+              "width": 91.84375,
+              "height": 44
+            },
+            "disabled": true,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "coding-844x390.png"
+    },
+    {
+      "name": "coding 640x360 internal entry",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "controls": [
+          {
+            "label": "위",
+            "rect": {
+              "x": 423,
+              "y": 83,
+              "right": 519,
+              "bottom": 170,
+              "width": 96,
+              "height": 87
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "아래",
+            "rect": {
+              "x": 525,
+              "y": 83,
+              "right": 621,
+              "bottom": 170,
+              "width": 96,
+              "height": 87
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "왼쪽",
+            "rect": {
+              "x": 423,
+              "y": 176,
+              "right": 519,
+              "bottom": 263,
+              "width": 96,
+              "height": 87
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "오른쪽",
+            "rect": {
+              "x": 525,
+              "y": 176,
+              "right": 621,
+              "bottom": 263,
+              "width": 96,
+              "height": 87
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "GO!",
+            "rect": {
+              "x": 545.796875,
+              "y": 293,
+              "right": 621,
+              "bottom": 341,
+              "width": 75.203125,
+              "height": 48
+            },
+            "disabled": true,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS",
+      "screenshot": "coding-640x360.png"
+    },
+    {
+      "name": "coding 768x1024 internal entry",
+      "detail": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 768,
+          "bottom": 1024,
+          "width": 768,
+          "height": 1024
+        },
+        "controls": [
+          {
+            "label": "위",
+            "rect": {
+              "x": 10,
+              "y": 828,
+              "right": 191,
+              "bottom": 904,
+              "width": 181,
+              "height": 76
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "아래",
+            "rect": {
+              "x": 199,
+              "y": 828,
+              "right": 380,
+              "bottom": 904,
+              "width": 181,
+              "height": 76
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "왼쪽",
+            "rect": {
+              "x": 388,
+              "y": 828,
+              "right": 569,
+              "bottom": 904,
+              "width": 181,
+              "height": 76
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "오른쪽",
+            "rect": {
+              "x": 577,
+              "y": 828,
+              "right": 758,
+              "bottom": 904,
+              "width": 181,
+              "height": 76
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "GO!",
+            "rect": {
+              "x": 444.28125,
+              "y": 946,
+              "right": 758,
+              "bottom": 1012,
+              "width": 313.71875,
+              "height": 66
+            },
+            "disabled": true,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "coding 1024x768 internal entry",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "위",
+            "rect": {
+              "x": 744.28125,
+              "y": 233.359375,
+              "right": 863.640625,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "아래",
+            "rect": {
+              "x": 873.640625,
+              "y": 233.359375,
+              "right": 993,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "왼쪽",
+            "rect": {
+              "x": 744.28125,
+              "y": 335.515625,
+              "right": 863.640625,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "오른쪽",
+            "rect": {
+              "x": 873.640625,
+              "y": 335.515625,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "GO!",
+            "rect": {
+              "x": 744.28125,
+              "y": 667.890625,
+              "right": 993,
+              "bottom": 737,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": true,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "coding 1280x800 internal entry",
+      "detail": {
+        "viewport": [
+          1280,
+          800
+        ],
+        "root": {
+          "x": 0,
+          "y": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "controls": [
+          {
+            "label": "위",
+            "rect": {
+              "x": 928.609375,
+              "y": 249,
+              "right": 1083.796875,
+              "bottom": 345,
+              "width": 155.1875,
+              "height": 96
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "아래",
+            "rect": {
+              "x": 1093.796875,
+              "y": 249,
+              "right": 1249,
+              "bottom": 345,
+              "width": 155.203125,
+              "height": 96
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "왼쪽",
+            "rect": {
+              "x": 928.609375,
+              "y": 355,
+              "right": 1083.796875,
+              "bottom": 451,
+              "width": 155.1875,
+              "height": 96
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "오른쪽",
+            "rect": {
+              "x": 1093.796875,
+              "y": 355,
+              "right": 1249,
+              "bottom": 451,
+              "width": 155.203125,
+              "height": 96
+            },
+            "disabled": false,
+            "hit": true
+          },
+          {
+            "label": "GO!",
+            "rect": {
+              "x": 928.609375,
+              "y": 697,
+              "right": 1249,
+              "bottom": 769,
+              "width": 320.390625,
+              "height": 72
+            },
+            "disabled": true,
+            "hit": true
+          }
+        ],
+        "outside": [],
+        "failed": [],
+        "unfitted": [],
+        "pageOverflow": false
+      },
+      "status": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "baseUrl": "http://127.0.0.1:44559/",
+  "browser": "143.0.7499.4",
+  "sourceHashesAfter": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "3131903ec96ff7702a265c6c550cf8a74d9741872b0b8280650fb33b7fc01893",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a",
+    "assets/vehicles/vehicles_manifest.json": "6c9437e7dc3b109929d9cb0781258e44b45c22c1f2672440c3fc32c4cdf85031",
+    "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa",
+    "docs/qa/release/VEHICLE_IMAGE_ONLY_RELEASE_20261109.json": "0dc454ac916a264f5a1dc65f8f53c7b2b7bbae76be4e4e7018b18cc72ff7f82e",
+    "js/games/number-count.js": "347c12c5e268e2b850e6a00583b709dffa395802c3ba28b463c1b85bb06584e5",
+    "js/games/vehicle-memory.js": "d6363cc79ca1440d0e2f8d9dc27b4c3718bfb1f3f57c8e8e950bc346160b7507",
+    "js/games/parking-lot.js": "c3728be0956c8b1e761896f6e3ef1ab15f8c2317575a71c02871e87742b23b70",
+    "js/games/construction-site.js": "a8fe63447c3410624451f1dbdffb2cc25831883f85d1bae502973d4a453e94c3",
+    "js/games/megaDispatch.js": "6d09721bf28440f8b4d579c204ba04ebe5f26c76b03c897a0b40f47c9017d725",
+    "js/games/coding-car.js": "3c61599f67809531dd660ed321243067ac3d29d5a1267d47d8445c66f7a11d17",
+    "scripts/qa-vehicle-display-browser.py": "8b23cb2f313ab663e4414f616ddbc41b25920ca1b1318f3244257d29ed416376"
+  },
+  "sourcesUnchanged": true,
+  "status": "PASS"
+}

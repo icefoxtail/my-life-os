@@ -1,0 +1,16 @@
+{
+  "base": "https://icefoxtail.github.io/my-life-os/",
+  "expected": {
+    "sw.js": "3131903ec96ff7702a265c6c550cf8a74d9741872b0b8280650fb33b7fc01893",
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "js/engine/pixi-runtime.js": "16ddfbd826ce9d8f4ece06b872338f0280b9e972f01f21d218aeb7f18ade8d02",
+    "js/games-pixi/number-vehicles-pixi.js": "394a3445e8bb5f4e18f380174bc28306bddb1f0dc45fd1b4090c214039eb4a90"
+  },
+  "actual": {
+    "sw.js": "3131903ec96ff7702a265c6c550cf8a74d9741872b0b8280650fb33b7fc01893",
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "js/engine/pixi-runtime.js": "16ddfbd826ce9d8f4ece06b872338f0280b9e972f01f21d218aeb7f18ade8d02",
+    "js/games-pixi/number-vehicles-pixi.js": "394a3445e8bb5f4e18f380174bc28306bddb1f0dc45fd1b4090c214039eb4a90"
+  },
+  "matches": true
+}

@@ -1,0 +1,13 @@
+{
+  "baseUrl": null,
+  "sourceSha256": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "js/engine/pixi-runtime.js": "16ddfbd826ce9d8f4ece06b872338f0280b9e972f01f21d218aeb7f18ade8d02",
+    "js/games-pixi/number-vehicles-pixi.js": "394a3445e8bb5f4e18f380174bc28306bddb1f0dc45fd1b4090c214039eb4a90",
+    "scripts/qa-pixi-vehicle-browser.py": "01ffdea398659a64c98d7824694476f2226d6ae48632641e0b8d20c8a41abada",
+    "scripts/qa-p1-voice-browser.py": "c0b7edd4b88c0809817eef744e8b5c9e1ab766db5a449d3b31ebcefc2a53b2b1",
+    "scripts/test-pixi-lifecycle.cjs": "970672932bcfd3a95b30d37f7155c314e9911d3a31ac587eede6835d8468465d"
+  },
+  "physicalDevice": "NOT_RUN",
+  "speakerListening": "NOT_RUN"
+}
