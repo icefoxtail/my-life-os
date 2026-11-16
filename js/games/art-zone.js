@@ -1906,7 +1906,7 @@
       if (!work || !work.fills.some(isPainted)) return null;
       return { kind: 'coloring', templateId: tpl.id, work };
     }
-    if (!state.freeImage) return null;
+    if (!/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(state.freeImage) || state.freeImage.length >= 4000000) return null;
     return { kind: 'free', image: state.freeImage, theme: state.activeTheme };
   }
 
@@ -1935,13 +1935,18 @@
     renderCollection();
   }
 
-  function currentWorkspaceSnapshot() {
+  function currentWorkspaceSnapshot(target) {
     saveWork();
-    return {
-      tab: state.tab, activeTemplateId: state.activeTemplateId, activeTheme: state.activeTheme,
-      freeImage: state.freeImage, freeHistory: state.freeHistory.slice(),
-      templateWork: JSON.parse(JSON.stringify(state.templateWork)),
-    };
+    const snapshot = { tab: state.tab, activeTemplateId: state.activeTemplateId };
+    if (target.kind === 'coloring') {
+      const prior = state.templateWork[target.templateId];
+      snapshot.work = prior ? JSON.parse(JSON.stringify(prior)) : null;
+    } else {
+      snapshot.activeTheme = state.activeTheme;
+      snapshot.freeImage = state.freeImage;
+      snapshot.freeHistory = state.freeHistory.slice();
+    }
+    return snapshot;
   }
 
   function refreshWorkspaceChoices() {
@@ -1957,7 +1962,7 @@
   function loadCollectedArtwork(id) {
     const item = loadCollection().find((entry) => entry.id === id);
     if (!item) return;
-    state.collectionUndo = currentWorkspaceSnapshot();
+    state.collectionUndo = currentWorkspaceSnapshot(item);
     state.collectionUndoTarget = { kind: item.kind, templateId: item.templateId || null };
     state.isDrawing = false;
     state.pointerId = null;
@@ -1987,10 +1992,16 @@
     state.collectionUndoTarget = null;
     state.tab = prior.tab;
     state.activeTemplateId = prior.activeTemplateId;
-    state.activeTheme = prior.activeTheme;
-    state.templateWork = JSON.parse(JSON.stringify(prior.templateWork));
-    state.freeHistory = prior.freeHistory.slice();
-    restoreFreeImage(prior.freeImage);
+    // Undo owns only the page that was replaced. The child may have visited
+    // and edited another template or the free canvas since opening this one.
+    if (target.kind === 'coloring') {
+      if (prior.work) state.templateWork[target.templateId] = JSON.parse(JSON.stringify(prior.work));
+      else delete state.templateWork[target.templateId];
+    } else {
+      state.activeTheme = prior.activeTheme;
+      state.freeHistory = prior.freeHistory.slice();
+      restoreFreeImage(prior.freeImage);
+    }
     switchTab(prior.tab);
     refreshWorkspaceChoices();
     speak('이전 그림이 돌아왔어!');
@@ -2021,7 +2032,8 @@
     }
     const full = items.length >= COLLECTION_LIMIT;
     const hasSessionPicture = items.some((item) => !persistedCollectionIds.has(item.id));
-    const message = collectionMessage || (hasSessionPicture ? '새 그림은 이번 놀이에서만 보관돼요.'
+    const message = collectionMessage || (collectionReadBlocked ? '저장된 그림을 읽지 못했어요. 새 그림은 이번 놀이에서만 보관돼요.'
+      : hasSessionPicture ? '새 그림은 이번 놀이에서만 보관돼요.'
       : full ? '12장이 모두 찼어요. 지워도 괜찮은 그림을 골라 주세요.'
         : '같은 그림도 여러 장 보관할 수 있어요.');
     overlay.innerHTML = `
@@ -2914,6 +2926,7 @@
       }
     `;
     s.textContent += `
+      .az-left-panel .coloring-section{display:flex;flex-direction:column;min-height:0;flex:1 1 auto}
       #azTplRow .az-cat-btn{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;overflow:hidden}
       #azTplRow .az-cat-btn img{display:block;width:100%;height:58px;min-height:0;object-fit:contain;pointer-events:none}
       #azTplRow .az-tpl-name{display:block;max-width:100%;font-size:11px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}

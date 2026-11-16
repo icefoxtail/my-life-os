@@ -38,7 +38,7 @@
     audioCtx: null, destroyed: true, locked: false, layoutMode: 'portrait',
     resizeTimer: null, handleResizeBound: null, timers: [], epoch: 0, renderToken: 0,
     successRewardGiven: false, completeRewardGiven: false, skipNextSpeak: false,
-    viewBefore: false, message: '', memoryOnly: false, storageNotice: '',
+    viewBefore: false, message: '', memoryOnly: false, storageBlocked: false, storageNotice: '',
     workshop: null, confirmDeleteId: null, deletedCar: null,
     driveVisited: [], driveX: 6, driveMoving: false
   };
@@ -101,7 +101,7 @@
     });
   }
   function cleanCar(raw) {
-    if (!raw || !VEHICLE_META[raw.vehicleId] || typeof raw.id !== 'string' ||
+    if (!raw || !Object.keys(VEHICLE_META).includes(raw.vehicleId) || typeof raw.id !== 'string' ||
         !/^[a-zA-Z0-9_-]{1,80}$/.test(raw.id)) return null;
     return {
       id: raw.id, vehicleId: raw.vehicleId,
@@ -115,22 +115,29 @@
   }
   function loadGarage() {
     state.memoryOnly = false;
+    state.storageBlocked = false;
     state.storageNotice = '';
     if (memoryGarage) {
       state.collection = copy(memoryGarage.cars);
       state.memoryOnly = memoryGarage.memoryOnly;
+      state.storageBlocked = !!memoryGarage.writeBlocked;
       return;
     }
     try {
       const raw = JSON.parse(localStorage.getItem(GARAGE_KEY) || 'null');
+      if (raw !== null && (raw.version !== 1 || !Array.isArray(raw.cars))) throw new Error('Unrecognized garage save');
       const seen = new Set();
-      state.collection = (raw && raw.version === 1 && Array.isArray(raw.cars) ? raw.cars : [])
+      const input = raw ? raw.cars : [];
+      state.collection = input
         .map(cleanCar).filter(function (car) {
           if (!car || seen.has(car.id)) return false;
           seen.add(car.id); return true;
         });
-    } catch (_) { state.collection = []; state.memoryOnly = true; }
-    memoryGarage = { cars: copy(state.collection), memoryOnly: state.memoryOnly };
+      if (state.collection.length !== input.length) {
+        state.storageBlocked = true; state.memoryOnly = true;
+      }
+    } catch (_) { state.collection = []; state.memoryOnly = true; state.storageBlocked = true; }
+    memoryGarage = { cars: copy(state.collection), memoryOnly: state.memoryOnly, writeBlocked: state.storageBlocked };
   }
   function persistGarage() {
     // setItem is atomic: a quota/permission failure keeps the previous durable
@@ -138,11 +145,13 @@
     const cars = copy(state.collection);
     let durable = false;
     try {
-      localStorage.setItem(GARAGE_KEY, JSON.stringify({ version: 1, cars: cars }));
-      durable = true;
+      if (!state.storageBlocked) {
+        localStorage.setItem(GARAGE_KEY, JSON.stringify({ version: 1, cars: cars }));
+        durable = true;
+      }
     } catch (_) { /* The visible memory-only notice is rendered below. */ }
     state.memoryOnly = !durable;
-    memoryGarage = { cars: cars, memoryOnly: !durable };
+    memoryGarage = { cars: cars, memoryOnly: !durable, writeBlocked: state.storageBlocked };
     return durable;
   }
   function completedCar() {
@@ -325,7 +334,7 @@
     if (state.destroyed) return;
     clearTimers();
     const keys = Object.keys(VEHICLE_META);
-    const key = VEHICLE_META[vehicleId] ? vehicleId : keys[Math.floor(Math.random() * keys.length)];
+    const key = keys.includes(vehicleId) ? vehicleId : keys[Math.floor(Math.random() * keys.length)];
     state.currentVehicle = Object.assign({ id: key }, VEHICLE_META[key]);
     state.completedTasks = []; state.decorations = []; state.savedCurrentId = null;
     state.phase = 'repair'; state.locked = false; state.workshop = null;
