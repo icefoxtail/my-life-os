@@ -837,7 +837,7 @@ body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(saf
     <article class="glass">
       <h2>🧸 시현이의 숫자 왕국 V3.1 (보호자 안내)</h2>
       <p>🏟️ <b>입체 4열 합창단 배치</b>: 작은 숫자(1~3)는 맨 앞줄, 중간 숫자(4~7)는 가운데 줄, 큰 숫자(8~19)는 뒷줄, 거대 숫자(20~100+)는 맨 뒷줄에 서서 서로 가리지 않아요!</p>
-      <p>🧲 <b>옆으로 착착 & 자동 줄 점프</b>: 아래 트레이에서 같은 숫자를 여러 번 누르면 옆으로 나란히 줄을 서고, 합체하거나 가르면 자기 키에 맞는 줄로 폴짝! 점프해 이동해요.</p>
+      <p>🧲 <b>옆으로 착착 & 자동 줄 점프</b>: 아래 트레이에서 같은 숫자를 여러 번 누르면 옆으로 나란히 줄을 서고, 합체하거나 가르면 블록 수에 맞는 줄로 폴짝! 점프해 이동해요.</p>
       <p>➕ <b>1:1 단짝 합체 & 묶음 합체</b>: 두 블록을 부딪히거나 <b>[더하기]</b>를 누르면 가장 가까운 둘만 합체해요. 같은 숫자(예: 5가 4개, 10이 3개)를 모아두면 <b>5×4=20, 10×3=30</b> 묶음 합체도 할 수 있어요!</p>
       <p>✂️ <b>짝수 절반(1순위) & 골라 가르기</b>: <b>[가르기]</b>를 누르면 짝수는 시현이가 좋아하는 <b>절반(3+3, 4+4, 5+5)</b>이 맨 앞에 뜨고, <b>1+5, 2+4</b>나 <b>5가 4개</b> 카드도 직접 고를 수 있어요!</p>
       <button id="helpClose">3D 놀이터로 가자! ✨</button>
@@ -1069,7 +1069,9 @@ function poses(n){
   if(n <= 10) p.push('tall');
   if(n >= 2 && n <= 20) p.push('bridge');
   if([3, 6, 10, 15, 21].includes(n)) p.push('stairs');
-  const rect = {4:2, 6:2, 8:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5};
+  // For 6 and 8, the default standing form already has two columns.
+  // Do not offer the identical geometry again as a second shape choice.
+  const rect = {4:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5};
   if(rect[n]) p.push('rect' + rect[n]);
   if([4, 6, 7, 8, 9, 10, 12, 16, 20].includes(n)) p.push('cube3d');
   if(n >= 6 && n <= 20) p.push('super');
@@ -3712,18 +3714,35 @@ const NUMBER_VOICE_PROFILES = {
 
 const tapTracker = { targetId: null, num: 0, count: 0, lastTime: 0, tickleIdx: 0 };
 
-// Speak only the number the child actually touched. Reuse the parent's
-// language preference and one voice queue when this game runs in an iframe.
+function getTapCountLabel(n){
+  const boundName = ['', '한', '두', '세', '네'][n] || getPureKoreanName(n) || getSinoName(n);
+  return `${boundName} 번`;
+}
+
+function quantityComparisonText(a, b){
+  if(a.n === b.n) return `🟰 두 숫자 친구의 블록 수가 같아요! (${a.n} = ${b.n})`;
+  const bigger = a.n > b.n ? a : b;
+  const smaller = a.n > b.n ? b : a;
+  return `👑 숫자 ${bigger.n} 쪽에 블록이 ${bigger.n - smaller.n}개 더 많아요! (${smaller.n} < ${bigger.n})`;
+}
+
+// Number taps name the touched quantity; repeated taps on 1 count actions.
+// Reuse the parent's language preference and voice queue inside an iframe.
 function say(){ return false; }
-function sayNumber(n){
+function sayNumber(n, unit = ''){
   if(!state.sound || state.destroyed || !Number.isInteger(Number(n)))return false;
   const root=window.parent && window.parent!==window ? window.parent : window;
   const english=root.SihyeonPlaySettings?.getLanguage?.()==='en';
   const names=root.SihyeonVoiceLabels;
-  const word=english
+  let word=english
     ? names?.numberEn?.(Number(n))
     : (getPureKoreanName(Number(n)) || getSinoName(Number(n)));
   if(!word)return false;
+  if(unit === 'tap'){
+    word = english
+      ? (Number(n) === 1 ? 'once' : Number(n) === 2 ? 'twice' : `${word} times`)
+      : getTapCountLabel(Number(n));
+  }
   const voice=root.SihyeonVoice;
   if(voice?.speak){
     voice.speak(word,{lang:english?'en-US':'ko-KR',rate:.91,pitch:1.0})?.catch?.(()=>{});
@@ -3757,19 +3776,17 @@ function handleFriendTap(o, isSpawn = false){
 
     if(o.n === 1){
       const step = ((tapTracker.count - 1) % 10) + 1;
-      sayNumber(step);
+      sayNumber(step, 'tap');
       triggerSquash(o, 0.85);
       o.vy = 0.16;
       sfx('count', step);
-      const stepSino = getSinoName(step);
-      const stepPure = getPureKoreanName(step);
       if(step === 10){
         burst3D(o.gx, o.gy + 1.8, o.gz, '#FFD700', 22, true);
         sfx('complete10');
-        toast('🌟 십! 열! 10개 카운트 완성!');
+        toast('🌟 열 번 두드렸어요! (10/10)');
       } else {
         burst3D(o.gx, o.gy + 1.0, o.gz, getCellColor(step, 0, 0), 5);
-        toast(`🎵 ${stepSino}! ${stepPure}! (${step}/10)`);
+        toast(`🎵 ${getTapCountLabel(step)} 두드렸어요! (${step}/10)`);
       }
       return;
     }
@@ -3778,19 +3795,11 @@ function handleFriendTap(o, isSpawn = false){
     o.vy = 0.14;
     sfx('grab', o.n);
 
-    // 옆에 다른 숫자가 있으면 "100 < 110 (110이 10칸 더 커요!)" 크기 비교 안내!
+    // Compare the number of unit blocks, independently of pose or height.
     const pair = findPair3D(state);
     if(pair){
-      const a = pair.a, b = pair.b;
-      if(a.n !== b.n){
-        const bigger = a.n > b.n ? a : b;
-        const smaller = a.n > b.n ? b : a;
-        toast(`👑 ${bigger.n}이(가) ${smaller.n}보다 ${bigger.n - smaller.n}칸 더 커요! (${smaller.n} < ${bigger.n})`);
-        return;
-      } else {
-        toast(`🟰 ${a.n}과(와) ${b.n}은(는) 키가 똑같아요! (${a.n} + ${b.n} = ${a.n + b.n})`);
-        return;
-      }
+      toast(quantityComparisonText(pair.a, pair.b));
+      return;
     }
     toast(`✨ ${getSinoName(o.n)} (${o.n})`);
     return;
@@ -3808,9 +3817,7 @@ function handleFriendTap(o, isSpawn = false){
 
   const pair = findPair3D(state);
   if(pair && pair.a.n !== pair.b.n && (pair.a.n >= 20 || pair.b.n >= 20)){
-    const bigger = pair.a.n > pair.b.n ? pair.a : pair.b;
-    const smaller = pair.a.n > pair.b.n ? pair.b : pair.a;
-    toast(`👑 ${bigger.n}이(가) ${smaller.n}보다 ${bigger.n - smaller.n}칸 더 커요! (${smaller.n} < ${bigger.n})`);
+    toast(quantityComparisonText(pair.a, pair.b));
   } else {
     toast(`✨ ${getSinoName(o.n)} (${o.n})`);
   }
