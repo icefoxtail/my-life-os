@@ -74,6 +74,17 @@ def click(page, selector):
     locator.click()
 
 
+def menu_click(page, selector):
+    # The public land is intentionally scrollable; a tall game card can be
+    # larger than a landscape viewport. Native Playwright click finds an
+    # actionable, visible point after scrolling, without force. The strict
+    # 44px/full-bounds check above remains mandatory for in-game controls.
+    locator = page.locator(selector).first
+    expect(locator).to_be_visible()
+    expect(locator).to_be_enabled()
+    locator.click()
+
+
 def source_evidence(responses, base):
     evidence = {}
     paths = {urlsplit(urljoin(base, name)).path: name for name in SOURCES}
@@ -90,13 +101,24 @@ def source_evidence(responses, base):
     return evidence
 
 
+def wait_for_entry(page):
+    # Wait for the real shell entry animation to finish; do not hide or replace
+    # it. Capturing mid-fade would turn an otherwise opaque scene translucent.
+    page.wait_for_function("""() => {
+      const shell = document.querySelector('.game-play-screen');
+      return shell && shell.getAnimations().every(a => a.playState === 'finished')
+        && Number(getComputedStyle(shell).opacity) >= 0.99;
+    }""", timeout=5000)
+
+
 def enter(page, base, first=True):
     if first:
         response = page.goto(urljoin(base, "index.html"), wait_until="load", timeout=60000)
         assert response and response.ok
-    click(page, '.world-zone[onclick="travelToZone(\'cars\')"]')
-    click(page, '.zone-game-card[onclick="openCarGarageGame()"]')
+    menu_click(page, '.world-zone[onclick="travelToZone(\'cars\')"]')
+    menu_click(page, '.zone-game-card[onclick="openCarGarageGame()"]')
     expect(page.locator(".cg-phase-repair")).to_be_visible()
+    wait_for_entry(page)
 
 
 def readiness(page):
@@ -156,7 +178,8 @@ def one_case(page, base, output, vehicle, width, height, responses):
     # gameOptions captured gainExp on entry. Re-enter using the actual menu so the
     # observation wrapper records real reward calls without replacing behavior.
     page.locator(".game-back-floating").click()
-    click(page, '.zone-game-card[onclick="openCarGarageGame()"]')
+    menu_click(page, '.zone-game-card[onclick="openCarGarageGame()"]')
+    wait_for_entry(page)
     expect(page.locator(".cg-stage .cg-vehicle-svg")).to_have_attribute("data-vehicle", vehicle)
     sources = source_evidence(responses, base)
     initial_box = stage_within_viewport(page)
@@ -164,8 +187,25 @@ def one_case(page, base, output, vehicle, width, height, responses):
     parts = solve(page, vehicle, output, prefix)
     click(page, '[data-before="1"]')
     assert all(readiness(page)[task] == "false" for task in TASKS[vehicle])
+    # Both images use the exact same viewport rectangle in the same tuning
+    # layout. A wash group's dirt/sparkle bounds can change, so individual part
+    # crops above are detail evidence, not an aligned full-vehicle comparison.
+    fixed_clip = page.locator(".cg-stage .cg-vehicle-svg").bounding_box()
+    assert fixed_clip and fixed_clip["width"] > 0 and fixed_clip["height"] > 0
+    fixed_before = page.screenshot(clip=fixed_clip,
+                                  path=str(output / f"{prefix}-vehicle-fixed-before.png"))
     click(page, '[data-before="0"]')
     assert all(readiness(page)[task] == "true" for task in TASKS[vehicle])
+    after_box = page.locator(".cg-stage .cg-vehicle-svg").bounding_box()
+    assert after_box and all(abs(after_box[k] - fixed_clip[k]) <= 0.1
+                             for k in ("x", "y", "width", "height")), (fixed_clip, after_box)
+    fixed_after = page.screenshot(clip=fixed_clip,
+                                 path=str(output / f"{prefix}-vehicle-fixed-after.png"))
+    assert sha(fixed_before) != sha(fixed_after), "Aligned full-vehicle repair view did not change"
+    fixed_vehicle = {"clip": fixed_clip, "sameBounds": True,
+                     "beforeSha256": sha(fixed_before), "afterSha256": sha(fixed_after),
+                     "beforeFile": f"{prefix}-vehicle-fixed-before.png",
+                     "afterFile": f"{prefix}-vehicle-fixed-after.png"}
     click(page, '[data-deco="2"]')
     click(page, '[data-deco="1"]')
     click(page, '[data-deco="5"]')
@@ -226,7 +266,8 @@ def one_case(page, base, output, vehicle, width, height, responses):
     expect(page.locator(".cg-phase-repair")).to_be_visible()
     assert all(readiness(page)[task] == "false" for task in TASKS[vehicle])
     return {"status": "PASS", "vehicle": vehicle, "viewport": {"width": width, "height": height},
-            "sourceSha256": sources, "repairPartPixels": parts, "savedCars": 2,
+            "sourceSha256": sources, "repairPartPixels": parts,
+            "repairFixedVehicleFrame": fixed_vehicle, "savedCars": 2,
             "firstCarId": first["id"], "decorations": decorations, "driveOrder": [2, 0, 1],
             "rewardCallsBeforeReload": [40, 40], "initialStage": initial_box, "driveStage": drive_box,
             "checks": ["repair order and visible part change", "before/after view", "sticker removal",

@@ -134,6 +134,20 @@ def paint_pixels(page):
     }''')
 
 
+def free_theme(page, theme, color):
+    assert page.locator('[data-theme].active').get_attribute('data-theme') == theme
+    # Restoring a picture also restores its background. Wait for the existing
+    # CSS transition so evidence records the restored color, not its midpoint.
+    page.wait_for_function('''color => getComputedStyle(document.querySelector('#azCanvasWrap')).backgroundColor === color''', arg=color)
+    result = page.evaluate('''key => ({
+        theme: document.querySelector('[data-theme].active').dataset.theme,
+        background: getComputedStyle(document.querySelector('#azCanvasWrap')).backgroundColor,
+        storedTheme: JSON.parse(localStorage.getItem(key)).activeTheme
+    })''', WORK)
+    assert result == {'theme': theme, 'background': color, 'storedTheme': theme}, result
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', '--base-url', dest='base_url')
@@ -156,7 +170,7 @@ def main():
     def verify_sources(responses, base):
         expected = {urlsplit(urljoin(base, name)).path: name for name in SOURCES}
         evidence = {}
-        for response in responses:
+        for response in reversed(responses):
             name = expected.get(urlsplit(response.url).path)
             if name and name not in evidence:
                 served = hashlib.sha256(response.body()).hexdigest()
@@ -167,6 +181,21 @@ def main():
         assert set(evidence) == set(SOURCES), evidence
         assert all(row['status'] == 200 and row['matchesCheckout'] for row in evidence.values()), evidence
         return evidence
+
+    def enter_verified(page, reload=False, coloring=True):
+        responses = []
+        capture = lambda response: responses.append(response)
+        page.on('response', capture)
+        try:
+            ART['enter_art'](page, base, reload=reload, coloring=coloring)
+            # Chromium can release an earlier document's response bodies on
+            # reload. Verify every navigation while those exact bytes are live,
+            # including the initial document before any scenario can reload it.
+            proof = verify_sources(responses, base)
+            report['servedSources'].append({'check': current['name'],
+                'navigation': 'reload' if reload else 'initial', 'files': proof})
+        finally:
+            page.remove_listener('response', capture)
 
     try:
         if args.base_url:
@@ -189,14 +218,10 @@ def main():
                     context.add_init_script(script=init)
                 page = context.new_page()
                 page.set_default_timeout(12000)
-                responses = []
-                page.on('response', lambda response: responses.append(response))
                 page.on('pageerror', lambda error: report['pageErrors'].append({'check': current['name'], 'message': str(error)}))
                 try:
-                    ART['enter_art'](page, base)
+                    enter_verified(page)
                     detail = fn(page)
-                    proof = verify_sources(responses, base)
-                    report['servedSources'].append({'check': name, 'files': proof})
                     row = {'name': name, 'status': 'PASS', 'detail': detail}
                 except Exception as error:
                     row = {'name': name, 'status': 'FAIL', 'error': str(error), 'trace': traceback.format_exc()}
@@ -255,7 +280,7 @@ def main():
                 open_gallery(page); choose_work(page, 0)
                 paint(page, '#4488FF')
                 assert data(page) == saved, 'editing a reopened picture changed a stored snapshot'
-                ART['enter_art'](page, base, reload=True)
+                enter_verified(page, reload=True)
                 open_gallery(page)
                 assert page.locator('[data-work-id]').count() == 2
                 choose_work(page, 0)
@@ -263,6 +288,7 @@ def main():
                 QP['retain_engine_reference'](page)
                 page.locator('#azPlayArtwork').click()
                 page.locator('.qp-root').wait_for(state='visible')
+                QP['select_number'](page, 3)
                 completed = QP['finish'](page, 3)
                 images = page.locator('.qp-item img').evaluate_all('(nodes)=>nodes.map(node=>node.getAttribute("src"))')
                 assert completed['objectId'] == 'art:police' and len(images) == 3
@@ -310,15 +336,18 @@ def main():
                 assert [item['theme'] for item in saved['items']] == ['ocean', 'forest']
                 choose_work(page, 0); page.wait_for_function("document.querySelector('#azRestoreNotice').hidden")
                 first = paint_pixels(page); assert first['red'] > 50 and first['blue'] == 0, first
-                assert page.locator('[data-theme="ocean"]').get_attribute('class').endswith('active')
+                first_theme = free_theme(page, 'ocean', 'rgb(224, 247, 250)')
                 open_gallery(page); choose_work(page, 1); page.wait_for_function("document.querySelector('#azRestoreNotice').hidden")
                 second = paint_pixels(page); assert second['blue'] > 50 and second['red'] == 0, second
-                ART['enter_art'](page, base, reload=True, coloring=False)
+                second_theme = free_theme(page, 'forest', 'rgb(241, 248, 233)')
+                enter_verified(page, reload=True, coloring=False)
                 open_gallery(page); choose_work(page, 0); page.wait_for_function("document.querySelector('#azRestoreNotice').hidden")
                 after_reload = paint_pixels(page); assert after_reload['red'] > 50 and after_reload['blue'] == 0, after_reload
+                reload_theme = free_theme(page, 'ocean', 'rgb(224, 247, 250)')
                 assert data(page) == saved
                 screen(page, 'red-free-picture-restored')
-                return {'first': first, 'second': second, 'reload': after_reload, 'originalPngSnapshotsUnchanged': True}
+                return {'first': first, 'second': second, 'reload': after_reload,
+                        'backgrounds': [first_theme, second_theme, reload_theme], 'originalPngSnapshotsUnchanged': True}
             run_case('two free pictures keep their colors backgrounds and saved PNGs after reload', free_versions)
 
             legacy = {'tab': 'coloring', 'activeTemplateId': 'police', 'templates': {
@@ -355,7 +384,7 @@ def main():
                 open_gallery(page)
                 assert page.locator('[data-work-id]').count() == 2
                 screen(page, 'quota-session-picture')
-                ART['enter_art'](page, base, reload=True)
+                enter_verified(page, reload=True)
                 open_gallery(page)
                 assert page.locator('[data-work-id]').count() == 1
                 assert data(page) == original
