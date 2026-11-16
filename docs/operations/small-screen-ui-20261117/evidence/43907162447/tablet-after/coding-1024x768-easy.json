@@ -1,0 +1,458 @@
+{
+  "viewport": [
+    1024,
+    768
+  ],
+  "root": {
+    "left": 0,
+    "top": 0,
+    "right": 1024,
+    "bottom": 768,
+    "width": 1024,
+    "height": 768
+  },
+  "controls": [
+    {
+      "label": "easy",
+      "rect": {
+        "left": 31,
+        "top": 186.828125,
+        "right": 238.75,
+        "bottom": 254.828125,
+        "width": 207.75,
+        "height": 68
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "challenge",
+      "rect": {
+        "left": 31,
+        "top": 266.828125,
+        "right": 238.75,
+        "bottom": 334.828125,
+        "width": 207.75,
+        "height": 68
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "ccCar",
+      "rect": {
+        "left": 562.40625,
+        "top": 116.515625,
+        "right": 704.234375,
+        "bottom": 294.828125,
+        "width": 141.828125,
+        "height": 178.3125
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "up",
+      "rect": {
+        "left": 744.28125,
+        "top": 262.65625,
+        "right": 863.640625,
+        "bottom": 354.8125,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "down",
+      "rect": {
+        "left": 873.640625,
+        "top": 262.65625,
+        "right": 993,
+        "bottom": 354.8125,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "left",
+      "rect": {
+        "left": 744.28125,
+        "top": 364.8125,
+        "right": 863.640625,
+        "bottom": 456.96875,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "right",
+      "rect": {
+        "left": 873.640625,
+        "top": 364.8125,
+        "right": 993,
+        "bottom": 456.96875,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "undo",
+      "rect": {
+        "left": 744.28125,
+        "top": 538.96875,
+        "right": 993,
+        "bottom": 608.078125,
+        "width": 248.71875,
+        "height": 69.109375
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "clear",
+      "rect": {
+        "left": 744.28125,
+        "top": 618.078125,
+        "right": 993,
+        "bottom": 687.1875,
+        "width": 248.71875,
+        "height": 69.109375
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "ccGoBtn",
+      "rect": {
+        "left": 744.28125,
+        "top": 697.1875,
+        "right": 993,
+        "bottom": 766.296875,
+        "width": 248.71875,
+        "height": 69.109375
+      },
+      "disabled": true,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": true
+    },
+    {
+      "label": "놀이터로",
+      "rect": {
+        "left": 8,
+        "top": 8,
+        "right": 64,
+        "bottom": 64,
+        "width": 56,
+        "height": 56
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    }
+  ],
+  "issues": [],
+  "page": {
+    "width": 1024,
+    "height": 768,
+    "x": 0,
+    "y": 0
+  },
+  "panel": {
+    "rect": {
+      "left": 725.28125,
+      "top": 10,
+      "right": 1012,
+      "bottom": 758,
+      "width": 286.71875,
+      "height": 748
+    },
+    "scrollTop": 0,
+    "scrollHeight": 767,
+    "clientHeight": 738,
+    "overflow": "auto",
+    "touchAction": "auto",
+    "rootTouchAction": "pan-y",
+    "alignContent": "safe center"
+  },
+  "codeSlots": {
+    "difficulty": "easy",
+    "expected": 4,
+    "group": {
+      "left": 744.28125,
+      "top": 118.78125,
+      "right": 993,
+      "bottom": 250.65625,
+      "width": 248.71875,
+      "height": 131.875
+    },
+    "groupContent": {
+      "left": 744.28125,
+      "top": 118.78125,
+      "right": 993.28125,
+      "bottom": 250.78125
+    },
+    "controls": {
+      "left": 744.28125,
+      "top": 262.65625,
+      "right": 993,
+      "bottom": 456.96875,
+      "width": 248.71875,
+      "height": 194.3125
+    },
+    "rows": [
+      {
+        "index": 1,
+        "rect": {
+          "left": 744.28125,
+          "top": 118.78125,
+          "right": 864.140625,
+          "bottom": 180.21875,
+          "width": 119.859375,
+          "height": 61.4375
+        },
+        "insideGroup": true,
+        "overlapsControls": false,
+        "insideViewport": true,
+        "insidePanel": true
+      },
+      {
+        "index": 2,
+        "rect": {
+          "left": 873.140625,
+          "top": 118.78125,
+          "right": 993,
+          "bottom": 180.21875,
+          "width": 119.859375,
+          "height": 61.4375
+        },
+        "insideGroup": true,
+        "overlapsControls": false,
+        "insideViewport": true,
+        "insidePanel": true
+      },
+      {
+        "index": 3,
+        "rect": {
+          "left": 744.28125,
+          "top": 189.21875,
+          "right": 864.140625,
+          "bottom": 250.65625,
+          "width": 119.859375,
+          "height": 61.4375
+        },
+        "insideGroup": true,
+        "overlapsControls": false,
+        "insideViewport": true,
+        "insidePanel": true
+      },
+      {
+        "index": 4,
+        "rect": {
+          "left": 873.140625,
+          "top": 189.21875,
+          "right": 993,
+          "bottom": 250.65625,
+          "width": 119.859375,
+          "height": 61.4375
+        },
+        "insideGroup": true,
+        "overlapsControls": false,
+        "insideViewport": true,
+        "insidePanel": true
+      }
+    ]
+  },
+  "arrows": [
+    {
+      "dir": "up",
+      "button": {
+        "left": 744.28125,
+        "top": 262.65625,
+        "right": 863.640625,
+        "bottom": 354.8125,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "buttonContent": {
+        "left": 748.28125,
+        "top": 266.65625,
+        "right": 859.28125,
+        "bottom": 350.65625
+      },
+      "imageRect": {
+        "left": 757.328125,
+        "top": 274.625,
+        "right": 850.578125,
+        "bottom": 342.84375,
+        "width": 93.25,
+        "height": 68.21875
+      },
+      "gridRows": "74.1562px",
+      "gridColumns": "101.359px",
+      "naturalWidth": 512,
+      "naturalHeight": 512,
+      "alphaBounds": {
+        "left": 774.640380859375,
+        "top": 278.22247314453125,
+        "right": 835.7974243164062,
+        "bottom": 342.84375
+      },
+      "contained": true
+    },
+    {
+      "dir": "down",
+      "button": {
+        "left": 873.640625,
+        "top": 262.65625,
+        "right": 993,
+        "bottom": 354.8125,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "buttonContent": {
+        "left": 877.640625,
+        "top": 266.65625,
+        "right": 988.640625,
+        "bottom": 350.65625
+      },
+      "imageRect": {
+        "left": 886.6875,
+        "top": 274.625,
+        "right": 979.9375,
+        "bottom": 342.84375,
+        "width": 93.25,
+        "height": 68.21875
+      },
+      "gridRows": "74.1562px",
+      "gridColumns": "101.359px",
+      "naturalWidth": 512,
+      "naturalHeight": 512,
+      "alphaBounds": {
+        "left": 901.7346801757812,
+        "top": 278.22247314453125,
+        "right": 963.0249633789062,
+        "bottom": 342.84375
+      },
+      "contained": true
+    },
+    {
+      "dir": "left",
+      "button": {
+        "left": 744.28125,
+        "top": 364.8125,
+        "right": 863.640625,
+        "bottom": 456.96875,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "buttonContent": {
+        "left": 748.28125,
+        "top": 368.8125,
+        "right": 859.28125,
+        "bottom": 452.8125
+      },
+      "imageRect": {
+        "left": 757.328125,
+        "top": 376.78125,
+        "right": 850.578125,
+        "bottom": 445,
+        "width": 93.25,
+        "height": 68.21875
+      },
+      "gridRows": "74.1562px",
+      "gridColumns": "101.359px",
+      "naturalWidth": 512,
+      "naturalHeight": 512,
+      "alphaBounds": {
+        "left": 775.17333984375,
+        "top": 378.24688720703125,
+        "right": 834.9979858398438,
+        "bottom": 441.5357666015625
+      },
+      "contained": true
+    },
+    {
+      "dir": "right",
+      "button": {
+        "left": 873.640625,
+        "top": 364.8125,
+        "right": 993,
+        "bottom": 456.96875,
+        "width": 119.359375,
+        "height": 92.15625
+      },
+      "buttonContent": {
+        "left": 877.640625,
+        "top": 368.8125,
+        "right": 988.640625,
+        "bottom": 452.8125
+      },
+      "imageRect": {
+        "left": 886.6875,
+        "top": 376.78125,
+        "right": 979.9375,
+        "bottom": 445,
+        "width": 93.25,
+        "height": 68.21875
+      },
+      "gridRows": "74.1562px",
+      "gridColumns": "101.359px",
+      "naturalWidth": 512,
+      "naturalHeight": 512,
+      "alphaBounds": {
+        "left": 902.40087890625,
+        "top": 378.24688720703125,
+        "right": 962.2255249023438,
+        "bottom": 441.5357666015625
+      },
+      "contained": true
+    }
+  ],
+  "map": {
+    "rect": {
+      "left": 269.75,
+      "top": 107.515625,
+      "right": 713.28125,
+      "bottom": 660.46875,
+      "width": 443.53125,
+      "height": 552.953125
+    },
+    "grid": "3",
+    "start": [
+      "2",
+      "0"
+    ],
+    "goal": [
+      "1",
+      "1"
+    ]
+  }
+}

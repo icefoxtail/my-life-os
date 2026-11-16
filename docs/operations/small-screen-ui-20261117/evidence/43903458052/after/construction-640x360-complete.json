@@ -1,0 +1,100 @@
+{
+  "viewport": [
+    640,
+    360
+  ],
+  "root": {
+    "left": 0,
+    "top": 0,
+    "right": 640,
+    "bottom": 360,
+    "width": 640,
+    "height": 360
+  },
+  "controls": [
+    {
+      "label": "restart-complete",
+      "rect": {
+        "left": 73,
+        "top": 220.390625,
+        "right": 315,
+        "bottom": 264.390625,
+        "width": 242,
+        "height": 44
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "home-complete",
+      "rect": {
+        "left": 325,
+        "top": 220.390625,
+        "right": 567,
+        "bottom": 264.390625,
+        "width": 242,
+        "height": 44
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "놀이터로",
+      "rect": {
+        "left": 6,
+        "top": 6,
+        "right": 50,
+        "bottom": 50,
+        "width": 44,
+        "height": 44
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    }
+  ],
+  "issues": [],
+  "page": {
+    "width": 640,
+    "height": 360,
+    "x": 0,
+    "y": 0
+  },
+  "stage": {
+    "rect": {
+      "left": 12,
+      "top": 12,
+      "right": 628,
+      "bottom": 348,
+      "width": 616,
+      "height": 336
+    },
+    "content": {
+      "left": 18,
+      "top": 18,
+      "right": 622,
+      "bottom": 342
+    }
+  },
+  "scene": [
+    {
+      "selector": ".cs-success-box",
+      "rect": {
+        "left": 50,
+        "top": 76.59375,
+        "right": 590,
+        "bottom": 283.390625,
+        "width": 540,
+        "height": 206.796875
+      },
+      "inside": true
+    }
+  ],
+  "mission": "complete",
+  "round": null
+}

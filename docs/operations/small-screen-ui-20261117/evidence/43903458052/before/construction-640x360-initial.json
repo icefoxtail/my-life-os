@@ -1,0 +1,230 @@
+{
+  "viewport": [
+    640,
+    360
+  ],
+  "root": {
+    "left": 0,
+    "top": 0,
+    "right": 640,
+    "bottom": 360,
+    "width": 640,
+    "height": 360
+  },
+  "controls": [
+    {
+      "label": "restart",
+      "rect": {
+        "left": 522,
+        "top": 4,
+        "right": 577,
+        "bottom": 40,
+        "width": 55,
+        "height": 36
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "home",
+      "rect": {
+        "left": 585,
+        "top": 4,
+        "right": 628,
+        "bottom": 40,
+        "width": 43,
+        "height": 36
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "항타기",
+      "rect": {
+        "left": 12,
+        "top": 222.8125,
+        "right": 213.328125,
+        "bottom": 354,
+        "width": 201.328125,
+        "height": 131.1875
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "로드롤러",
+      "rect": {
+        "left": 219.328125,
+        "top": 222.8125,
+        "right": 420.65625,
+        "bottom": 354,
+        "width": 201.328125,
+        "height": 131.1875
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "자재 운반 트럭",
+      "rect": {
+        "left": 426.65625,
+        "top": 222.8125,
+        "right": 627.984375,
+        "bottom": 354,
+        "width": 201.328125,
+        "height": 131.1875
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    },
+    {
+      "label": "놀이터로",
+      "rect": {
+        "left": 6,
+        "top": 6,
+        "right": 48,
+        "bottom": 48,
+        "width": 42,
+        "height": 42
+      },
+      "disabled": false,
+      "hit": true,
+      "viewport": true,
+      "scrollPanel": false
+    }
+  ],
+  "issues": [
+    {
+      "kind": "touch-target",
+      "label": "restart",
+      "rect": {
+        "left": 522,
+        "top": 4,
+        "right": 577,
+        "bottom": 40,
+        "width": 55,
+        "height": 36
+      }
+    },
+    {
+      "kind": "touch-target",
+      "label": "home",
+      "rect": {
+        "left": 585,
+        "top": 4,
+        "right": 628,
+        "bottom": 40,
+        "width": 43,
+        "height": 36
+      }
+    },
+    {
+      "kind": "touch-target",
+      "label": "놀이터로",
+      "rect": {
+        "left": 6,
+        "top": 6,
+        "right": 48,
+        "bottom": 48,
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "kind": "scene-clipped",
+      "selector": ".cs-target-zone",
+      "rect": {
+        "left": 175,
+        "top": 17.71875,
+        "right": 465,
+        "bottom": 190.515625,
+        "width": 290,
+        "height": 172.796875
+      },
+      "boundary": {
+        "left": 18,
+        "top": 127,
+        "right": 622,
+        "bottom": 213
+      }
+    },
+    {
+      "kind": "scene-clipped",
+      "selector": ".cs-target-icon",
+      "rect": {
+        "left": 247.46353149414062,
+        "top": 31.572898864746094,
+        "right": 392.5364990234375,
+        "bottom": 176.64586639404297,
+        "width": 145.07296752929688,
+        "height": 145.07296752929688
+      },
+      "boundary": {
+        "left": 18,
+        "top": 127,
+        "right": 622,
+        "bottom": 213
+      }
+    }
+  ],
+  "page": {
+    "width": 640,
+    "height": 360,
+    "x": 0,
+    "y": 0
+  },
+  "stage": {
+    "rect": {
+      "left": 12,
+      "top": 121,
+      "right": 628,
+      "bottom": 218.8125,
+      "width": 616,
+      "height": 97.8125
+    },
+    "content": {
+      "left": 18,
+      "top": 127,
+      "right": 622,
+      "bottom": 213
+    }
+  },
+  "scene": [
+    {
+      "selector": ".cs-target-zone",
+      "rect": {
+        "left": 175,
+        "top": 17.71875,
+        "right": 465,
+        "bottom": 190.515625,
+        "width": 290,
+        "height": 172.796875
+      },
+      "inside": false
+    },
+    {
+      "selector": ".cs-target-icon",
+      "rect": {
+        "left": 247.46353149414062,
+        "top": 31.572898864746094,
+        "right": 392.5364990234375,
+        "bottom": 176.64586639404297,
+        "width": 145.07296752929688,
+        "height": 145.07296752929688
+      },
+      "inside": false
+    }
+  ],
+  "mission": "cs-stage-carry",
+  "round": "🏗️ 1번 공사"
+}

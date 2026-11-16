@@ -1,0 +1,16 @@
+{
+  "runId": 43907162447,
+  "runUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/43907162447",
+  "commit": "b29bd80dbbe61bc9e9038969831cbde5658a4699",
+  "artifactId": 14244813262,
+  "artifactZipSha256": "7947140db17b8dfaa7a19155a378057060f8777ada9412c81b6ed67857758142",
+  "downloadHashVerified": true,
+  "automatedStatus": "PASS",
+  "automatedChecks": {
+    "passed": 2,
+    "total": 2
+  },
+  "pageErrors": 0,
+  "independentVisualStatus": "PASS_SCOPED",
+  "note": "Native Chromium touchStart/move/end moved easy panel 0→29 px and challenge panel 0→170 px. Same product source hashes as run43905541853. Raw failures from prior runs retained."
+}
