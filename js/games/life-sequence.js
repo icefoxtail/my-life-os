@@ -166,6 +166,14 @@
       .ls-round-buttons button{min-width:44px;min-height:48px;padding:10px 6px;border:3px solid #fff;border-radius:16px;font:inherit;font-size:clamp(15px,3.8vw,20px);font-weight:900;line-height:1.3;cursor:pointer;box-shadow:0 4px 0 rgba(50,70,120,.16)}
       .ls-round-next{background:#17695a;color:#fff}.ls-round-replay{background:#fff0a6;color:#233047}
       .ls-round-buttons button:focus-visible{outline:3px solid #233047;outline-offset:3px}
+      .ls-root .ls-scene .ls-message{left:50%;bottom:12px;width:calc(100% - 24px);max-width:520px}
+      @media(orientation:landscape) and (max-height:540px){
+        .life-sequence-landscape .ls-success-box{padding:14px 18px;gap:10px}
+        .life-sequence-landscape .ls-success-icon{font-size:64px;line-height:1.1}
+        .life-sequence-landscape .ls-success-title{font-size:30px;line-height:1.2}
+        .life-sequence-landscape .ls-success-sub{font-size:18px;line-height:1.3}
+        .life-sequence-landscape .ls-success-actions .ls-btn{min-height:48px}
+      }
     `;
     document.head.appendChild(style);
   }
@@ -349,8 +357,8 @@
             <div class="ls-sparkle"></div>
             <div class="ls-complete-fallback">${escapeHtml(mission.completeEmoji)}</div>
             <div class="ls-slots">${state.placed.map(renderSlot).join('')}</div>
+            <div class="ls-message" id="lsMessage"></div>
           </section>
-          <div class="ls-message" id="lsMessage"></div>
         </div>
       </div>
     `;

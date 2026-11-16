@@ -68,19 +68,52 @@ def source_evidence(responses, base):
     return evidence
 
 
-def check_buttons(page):
+def check_buttons(page, final=False):
     viewport = page.viewport_size
     boxes = {}
-    for name in ("next", "replay"):
-        locator = page.locator(f"[data-life-{name}]")
+    for name in (("restart", "home") if final else ("next", "replay")):
+        locator = page.locator(f"[data-{name}]" if final else f"[data-life-{name}]")
         expect(locator).to_be_enabled()
         box = locator.bounding_box()
         assert box and box["width"] >= 44 and box["height"] >= 44, (name, box)
         assert box["x"] >= 0 and box["y"] >= 0, box
         assert box["x"] + box["width"] <= viewport["width"] + 1, box
         assert box["y"] + box["height"] <= viewport["height"] + 1, box
+        assert locator.evaluate("""element => {
+          const box = element.getBoundingClientRect();
+          const hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+          return hit === element || element.contains(hit);
+        }"""), f"{name} button is covered"
         boxes[name] = box
     return boxes
+
+
+def check_completion_layout(page):
+    # Inspect the real animated message while it is opaque, rather than relying
+    # on hidden DOM rectangles or shortening the success text in the fixture.
+    page.wait_for_function("""() => {
+      const message = document.querySelector('.ls-root.complete #lsMessage.show');
+      return message && Number(getComputedStyle(message).opacity) >= 0.98;
+    }""", timeout=4000)
+    selectors = {"scene": "#lsScene", "message": "#lsMessage",
+                 "actions": ".ls-result-pool", "status": ".ls-round-status"}
+    boxes = {name: page.locator(selector).bounding_box() for name, selector in selectors.items()}
+    assert all(boxes.values()), boxes
+    message, scene = boxes["message"], boxes["scene"]
+    assert message["x"] >= scene["x"] and message["y"] >= scene["y"], boxes
+    assert message["x"] + message["width"] <= scene["x"] + scene["width"] + 1, boxes
+    assert message["y"] + message["height"] <= scene["y"] + scene["height"] + 1, boxes
+    for name in ("actions", "status"):
+        other = boxes[name]
+        overlap_width = min(message["x"] + message["width"], other["x"] + other["width"]) - max(message["x"], other["x"])
+        overlap_height = min(message["y"] + message["height"], other["y"] + other["height"]) - max(message["y"], other["y"])
+        assert overlap_width <= 0 or overlap_height <= 0, (name, boxes)
+    assert page.locator("#lsMessage").evaluate("""element =>
+      element.scrollHeight <= element.clientHeight + 1 && element.scrollWidth <= element.clientWidth + 1
+    """), "Success text is clipped inside the message"
+    return {"viewport": page.viewport_size, "boxes": boxes, "buttons": check_buttons(page),
+            "message": page.locator("#lsMessage").inner_text(),
+            "status": page.locator(".ls-round-status").inner_text()}
 
 
 def install_voice_probe(page):
@@ -128,6 +161,8 @@ def native_case(page, base, output, width, height, responses):
     expect(page.locator(".ls-root.complete")).to_have_count(1, timeout=4000)
     expect(page.locator(".ls-scene.has-complete")).to_have_count(1)
     expect(page.locator(".ls-slot.correct")).to_have_count(4)
+    completion_layouts = {"washHands": check_completion_layout(page)}
+    page.screenshot(path=str(output / f"life-completion-{size}.png"))
     # The old implementation automatically moved on after about 12 seconds.
     page.wait_for_timeout(14000)
     expect(page.locator('.ls-mission-icon[aria-label="손 씻기"]')).to_be_visible()
@@ -157,17 +192,27 @@ def native_case(page, base, output, width, height, responses):
         check_buttons(page)
         if title == MISSIONS[-1][0]:
             expect(page.locator("[data-life-next]")).to_have_text("🏁 마침")
-            page.wait_for_timeout(2000)
+            completion_layouts["cleanUp"] = check_completion_layout(page)
             expect(page.locator(".ls-success")).to_have_count(0)
             page.screenshot(path=str(output / f"life-before-finish-{size}.png"))
+            page.wait_for_timeout(2000)
+            expect(page.locator(".ls-success")).to_have_count(0)
         page.locator("[data-life-next]").click()
     expect(page.locator(".ls-success")).to_be_visible()
     expect(page.locator(".ls-success-title")).to_have_text("하루놀이 완료!")
+    finished_buttons = check_buttons(page, final=True)
+    finished_box = page.locator(".ls-success-box").bounding_box()
+    viewport = page.viewport_size
+    assert finished_box and finished_box["x"] >= 0 and finished_box["y"] >= 0, finished_box
+    assert finished_box["x"] + finished_box["width"] <= viewport["width"] + 1, finished_box
+    assert finished_box["y"] + finished_box["height"] <= viewport["height"] + 1, finished_box
     page.screenshot(path=str(output / f"life-finished-{size}.png"))
     page.locator("[data-home]").click()
     expect(page.locator('.zone-game-card[onclick="openLifeSequenceGame()"]')).to_be_visible()
     return {"driver": "Native public menu, wrong/correct card clicks, Replay, rotation, Next, Finish and Home",
             "sourceSha256": sources, "buttons": buttons, "rotatedButtons": rotated_buttons,
+            "completionLayouts": completion_layouts, "finishedButtons": finished_buttons,
+            "finishedPanel": {"viewport": viewport, "box": finished_box},
             "nextVisibleAfterFinalCardClickMs": verdict_to_control,
             "noAutomaticProgressionWaitMs": 14000,
             "voiceBeforeNext": before_next, "voiceAfterNext": after_next,
