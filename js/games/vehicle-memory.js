@@ -111,7 +111,7 @@
     cards: [],
     flipped: [],
     matched: 0,
-    matchedPairKeys: new Set(),
+    matchedCardUids: new Set(),
     locked: false,
     round: 1,
     destroyed: false,
@@ -1138,7 +1138,9 @@
     const manifest = await response.json();
     const vehicles = Array.isArray(manifest.vehicles) ? manifest.vehicles : [];
 
-    return vehicles.map(normalizeVehicle).filter((vehicle) => vehicle.file);
+    const available = vehicles.map(normalizeVehicle).filter((vehicle) => vehicle.file);
+    if (!available.length) throw new Error('Vehicle manifest has no usable cards.');
+    return available;
   }
 
   function pickRoundVehicles() {
@@ -1147,6 +1149,7 @@
       : state.vehicles.filter((vehicle) => vehicle.category === selectedVehicleCategory);
     const sourcePool = pool.length ? pool : state.vehicles;
     const pairCount = Math.floor(selectedCardCount / 2);
+    if (!sourcePool.length) return [];
 
     let expanded = [...sourcePool];
     while (expanded.length < pairCount) expanded = expanded.concat(sourcePool);
@@ -1154,10 +1157,13 @@
     const source = shuffle(expanded).slice(0, pairCount);
 
     return shuffle(source.flatMap((vehicle, index) => {
-      const pairKey = `${vehicle.baseId || vehicle.id}-${index}`;
+      // Children match the picture, not the invisible copy number. Several
+      // pairs may share a picture when a category has fewer vehicle types.
+      const pairKey = `vehicle:${vehicle.file}`;
+      const copyId = `${vehicle.baseId || vehicle.id}-${index}`;
       return [
-        { ...vehicle, id: pairKey, pairKey, uid: `${pairKey}-a` },
-        { ...vehicle, id: pairKey, pairKey, uid: `${pairKey}-b` }
+        { ...vehicle, id: copyId, pairKey, uid: `${copyId}-a` },
+        { ...vehicle, id: copyId, pairKey, uid: `${copyId}-b` }
       ];
     }));
   }
@@ -1165,6 +1171,7 @@
   function pickRoundEmoji() {
     const pool = EMOJI_CATEGORIES[selectedCategory] || [];
     const pairCount = Math.floor(selectedCardCount / 2);
+    if (!pool.length) return [];
 
     let expanded = [...pool];
     while (expanded.length < pairCount) expanded = expanded.concat(pool);
@@ -1172,10 +1179,11 @@
     const picked = shuffle(expanded).slice(0, pairCount);
 
     return shuffle(picked.flatMap((item, index) => {
-      const pairKey = `${item.id}-${index}`;
+      const pairKey = `emoji:${item.emoji}`;
+      const copyId = `${item.id}-${index}`;
       return [
-        { ...item, id: pairKey, pairKey, uid: `${pairKey}-a`, isEmoji: true },
-        { ...item, id: pairKey, pairKey, uid: `${pairKey}-b`, isEmoji: true }
+        { ...item, id: copyId, pairKey, uid: `${copyId}-a`, isEmoji: true },
+        { ...item, id: copyId, pairKey, uid: `${copyId}-b`, isEmoji: true }
       ];
     }));
   }
@@ -1231,7 +1239,7 @@
 
     state.flipped = [];
     state.matched = 0;
-    state.matchedPairKeys = new Set();
+    state.matchedCardUids = new Set();
     state.locked = false;
     state.isPreviewing = false;
     state.seenCards = new Set();
@@ -1295,7 +1303,7 @@
     const classes = ['memory-card'];
 
     if (state.isPreviewing) classes.push('is-preview');
-    if (state.matchedPairKeys.has(card.pairKey)) classes.push('is-matched');
+    if (state.matchedCardUids.has(card.uid)) classes.push('is-matched');
     if (state.flipped.some((item) => item.index === index)) classes.push('is-open');
 
     return classes.join(' ');
@@ -1309,7 +1317,7 @@
           const scaleStyle = scale > 0 ? ` style="--vehicle-scale:${escapeAttr(scale)}"` : '';
 
           return `
-            <button class="${getCardClass(card, index)}" type="button" data-index="${index}" data-pair-key="${escapeAttr(card.pairKey)}" aria-label="카드">
+            <button class="${getCardClass(card, index)}" type="button" data-index="${index}" data-card-uid="${escapeAttr(card.uid)}" data-pair-key="${escapeAttr(card.pairKey)}" aria-label="카드">
               <span class="memory-card-inner">
                 <span class="memory-card-face memory-card-back"></span>
                 <span class="memory-card-face memory-card-front">
@@ -1532,7 +1540,8 @@
     const cardData = state.cards[index];
     const cardEl = state.container?.querySelector(`.memory-card[data-index="${index}"]`);
 
-    if (!cardData || !cardEl || cardEl.classList.contains('is-open') || cardEl.classList.contains('is-matched')) return;
+    if (!cardData || !cardEl || state.matchedCardUids.has(cardData.uid)
+      || cardEl.classList.contains('is-open') || cardEl.classList.contains('is-matched')) return;
 
     cardEl.classList.add('is-open');
     rememberSeenCard(index, cardData);
@@ -1572,15 +1581,11 @@
     if (!isHintAllowed()) return;
 
     const seenIndexes = state.seenPairs[pairKey] || [];
-    const uniqueIndexes = Array.from(new Set(seenIndexes));
-    if (uniqueIndexes.length < 2) return;
-
-    const hasMatchedCard = uniqueIndexes.some((index) => {
-      const cardEl = state.container?.querySelector(`.memory-card[data-index="${index}"]`);
-      return cardEl?.classList.contains('is-matched') || state.matchedPairKeys.has(pairKey);
+    const uniqueIndexes = Array.from(new Set(seenIndexes)).filter((index) => {
+      const card = state.cards[index];
+      return card && !state.matchedCardUids.has(card.uid);
     });
-
-    if (hasMatchedCard) return;
+    if (uniqueIndexes.length < 2) return;
 
     const color = HINT_COLORS[state.hintColorIndex % HINT_COLORS.length];
     state.hintColorIndex += 1;
@@ -1634,7 +1639,7 @@
     const roundToken = state.roundToken;
     state.locked = true;
 
-    if (first.data.pairKey === second.data.pairKey || first.data.id === second.data.id) {
+    if (first.data.pairKey === second.data.pairKey) {
       scheduleRoundTimeout(() => {
         const pairKey = first.data.pairKey || first.data.id;
         const firstEl = getCardElement(first.index, first.el);
@@ -1649,8 +1654,12 @@
           secondEl.classList.remove(`hint-${color}`);
         });
 
-        state.matchedPairKeys.add(pairKey);
+        // Remember the two physical cards only. Marking the picture itself
+        // would finish its still-unmatched copies when the board is resized.
+        state.matchedCardUids.add(first.data.uid);
+        state.matchedCardUids.add(second.data.uid);
         clearHintForPair(pairKey);
+        maybeRegisterHint(pairKey);
 
         state.matched += 2;
         state.flipped = [];
@@ -1965,7 +1974,7 @@
     state.cards = [];
     state.flipped = [];
     state.matched = 0;
-    state.matchedPairKeys = new Set();
+    state.matchedCardUids = new Set();
     state.locked = false;
     state.isPreviewing = false;
     state.seenCards = new Set();

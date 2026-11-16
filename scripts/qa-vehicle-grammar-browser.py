@@ -93,10 +93,25 @@ def construction(page, url):
     QA["start"](page, url, "ko")
     QA["enter"](page, "자동차놀이터", "공사장")
     results = []
-    for vehicle, phrase in [("wheel_loader", "휠로더야!"), ("dump_truck", "덤프트럭이야!")]:
+    # Wheel loaders can also push soil. Follow the displayed mission rather
+    # than assuming the old, overly narrow answer list fixes the round order.
+    choices_by_question = {
+        "흙더미를 밀어야 해요!": ("wheel_loader", "휠로더야!"),
+        "흙을 담아야 해요!": ("wheel_loader", "휠로더야!"),
+        "짐을 멀리 옮겨야 해요!": ("dump_truck", "덤프트럭이야!"),
+        "콘크리트를 높은 곳으로!": ("concrete_pump_truck", "콘크리트 펌프카야!"),
+    }
+    for round_number in range(1, 4):
+        expect(page.locator(".cs-pill")).to_contain_text(f"{round_number}번 공사", timeout=10000)
+        question = page.locator(".cs-title").inner_text()
+        assert question in choices_by_question, question
+        vehicle, phrase = choices_by_question[question]
         page.locator(f'.cs-choice[data-id="{vehicle}"]').click(timeout=10000)
         expect(page.locator("#csMessage")).to_contain_text(phrase)
         results.append(phrase)
+        if {"휠로더야!", "덤프트럭이야!"}.issubset(results):
+            break
+    assert {"휠로더야!", "덤프트럭이야!"}.issubset(results), results
     return results
 
 

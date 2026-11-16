@@ -25,14 +25,28 @@
   ];
 
   const MISSIONS = [
-    { id: 'dig', title: '땅을 파야 해요!', question: '땅을 파야 해. 어떤 차가 좋을까?', answerIds: ['excavator', 'mini_excavator'], targetIcon: '🟫', resultIcon: '🕳️', workLabel: '흙 파기', successText: '쿠궁쿠궁! 땅을 팠어!', wrongText: '괜찮아. 이 차는 다른 일을 잘해. 땅 파는 차를 같이 찾아볼까?', stageClass: 'cs-stage-dig' },
-    { id: 'push', title: '흙더미를 밀어야 해요!', question: '흙더미를 밀어야 해. 어떤 차가 좋을까?', answerIds: ['bulldozer'], targetIcon: '🧱', resultIcon: '🟩', workLabel: '밀기', successText: '쓱쓱! 흙더미를 밀었어!', wrongText: '괜찮아. 이 차는 다른 일을 잘해. 다른 차를 같이 볼까?', stageClass: 'cs-stage-push' },
-    { id: 'load', title: '흙을 담아야 해요!', question: '흙을 담아야 해. 어떤 차가 좋을까?', answerIds: ['wheel_loader'], targetIcon: '🟤', resultIcon: '🪣', workLabel: '담기', successText: '커다란 삽으로 흙을 담았어!', wrongText: '괜찮아. 큰 삽이 있는 차를 같이 찾아볼까?', stageClass: 'cs-stage-load' },
-    { id: 'carry', title: '짐을 멀리 옮겨야 해요!', question: '흙과 돌을 옮겨야 해. 어떤 차가 좋을까?', answerIds: ['dump_truck'], targetIcon: '📦', resultIcon: '🏁', workLabel: '', successText: '우르르! 짐을 싣고 옮겼어!', wrongText: '괜찮아. 짐 옮기는 차를 같이 찾아볼까?', stageClass: 'cs-stage-carry' },
+    { id: 'dig', title: '땅을 파야 해요!', question: '땅을 파야 해. 어떤 차가 좋을까?', answerIds: ['excavator', 'mini_excavator', 'backhoe_loader'], targetIcon: '🟫', resultIcon: '🕳️', workLabel: '흙 파기', successText: '쿠궁쿠궁! 땅을 팠어!', wrongText: '괜찮아. 이 차는 다른 일을 잘해. 땅 파는 차를 같이 찾아볼까?', stageClass: 'cs-stage-dig' },
+    { id: 'push', title: '흙더미를 밀어야 해요!', question: '흙더미를 밀어야 해. 어떤 차가 좋을까?', answerIds: ['bulldozer', 'grader', 'wheel_loader', 'backhoe_loader', 'skid_steer_loader'], targetIcon: '🧱', resultIcon: '🟩', workLabel: '밀기', successText: '쓱쓱! 흙더미를 밀었어!', wrongText: '괜찮아. 이 차는 다른 일을 잘해. 다른 차를 같이 볼까?', stageClass: 'cs-stage-push' },
+    { id: 'load', title: '흙을 담아야 해요!', question: '흙을 담아야 해. 어떤 차가 좋을까?', answerIds: ['wheel_loader', 'backhoe_loader', 'skid_steer_loader', 'excavator', 'mini_excavator'], targetIcon: '🟤', resultIcon: '🪣', workLabel: '담기', successText: '삽으로 흙을 담았어!', wrongText: '괜찮아. 삽이 있는 차를 같이 찾아볼까?', stageClass: 'cs-stage-load' },
+    { id: 'carry', title: '짐을 멀리 옮겨야 해요!', question: '흙과 돌을 옮겨야 해. 어떤 차가 좋을까?', answerIds: ['dump_truck', 'articulated_dump_truck', 'dump_loader', 'cargo_truck'], targetIcon: '📦', resultIcon: '🏁', workLabel: '', successText: '우르르! 짐을 싣고 옮겼어!', wrongText: '괜찮아. 짐 옮기는 차를 같이 찾아볼까?', stageClass: 'cs-stage-carry' },
     { id: 'mix', title: '콘크리트를 만들어야 해요!', question: '콘크리트를 만들어야 해. 어떤 차가 좋을까?', answerIds: ['concrete_mixer'], targetIcon: '🌀', resultIcon: '⬛', workLabel: '섞기', successText: '빙글빙글! 콘크리트가 완성됐어!', wrongText: '괜찮아. 빙글빙글 도는 차를 같이 찾아볼까?', stageClass: 'cs-stage-mix' },
-    { id: 'lift', title: '무거운 짐을 들어야 해요!', question: '무거운 짐을 들어야 해. 어떤 차가 좋을까?', answerIds: ['crane_truck', 'forklift'], targetIcon: '📦', resultIcon: '✨', workLabel: '들기', successText: '번쩍! 무거운 짐을 들어 올렸어!', wrongText: '괜찮아. 들기 대장을 같이 찾아볼까?', stageClass: 'cs-stage-lift' },
+    { id: 'lift', title: '무거운 짐을 들어야 해요!', question: '무거운 짐을 들어야 해. 어떤 차가 좋을까?', answerIds: ['crane_truck', 'forklift', 'tower_crane', 'mobile_crane'], targetIcon: '📦', resultIcon: '✨', workLabel: '들기', successText: '번쩍! 무거운 짐을 들어 올렸어!', wrongText: '괜찮아. 들기 대장을 같이 찾아볼까?', stageClass: 'cs-stage-lift' },
     { id: 'pump', title: '콘크리트를 높은 곳으로!', question: '긴 관으로 콘크리트를 높은 곳에 보내요. 어떤 차가 필요할까?', answerIds: ['concrete_pump_truck'], targetIcon: '🏢', resultIcon: '🌟', workLabel: '콘크리트 보내기', successText: '쭉쭉! 긴 관으로 콘크리트를 보냈어!', wrongText: '괜찮아. 콘크리트를 보낼 긴 관이 있는 차를 찾아볼까?', stageClass: 'cs-stage-pump' }
   ];
+
+  // A vehicle outside answerIds is not automatically wrong: loaders can dig,
+  // lift and carry, and a drill can make a hole too. Only reviewed, clearly
+  // different roles may be distractors for the current broad spoken question.
+  // Unlisted/new vehicles remain out of the question until their role is reviewed.
+  const SAFE_DISTRACTOR_IDS = {
+    dig: ['concrete_mixer', 'concrete_pump_truck', 'road_roller', 'water_truck', 'fuel_truck', 'sweeper_truck', 'forklift', 'crane_truck', 'tower_crane', 'mobile_crane', 'scissor_lift'],
+    push: ['concrete_mixer', 'concrete_pump_truck', 'water_truck', 'fuel_truck', 'forklift', 'crane_truck', 'tower_crane', 'mobile_crane', 'scissor_lift'],
+    load: ['concrete_mixer', 'concrete_pump_truck', 'road_roller', 'water_truck', 'fuel_truck', 'pile_driver', 'drilling_rig', 'excavator_breaker'],
+    carry: ['concrete_mixer', 'concrete_pump_truck', 'road_roller', 'water_truck', 'fuel_truck', 'pile_driver', 'drilling_rig', 'excavator_breaker'],
+    mix: ['excavator', 'mini_excavator', 'bulldozer', 'wheel_loader', 'dump_truck', 'concrete_pump_truck', 'crane_truck', 'forklift', 'backhoe_loader', 'skid_steer_loader', 'road_roller', 'tower_crane', 'mobile_crane', 'pile_driver', 'drilling_rig', 'excavator_breaker', 'dump_loader', 'articulated_dump_truck', 'water_truck', 'sweeper_truck', 'fuel_truck', 'lowbed_trailer', 'cargo_truck', 'scissor_lift'],
+    lift: ['concrete_mixer', 'concrete_pump_truck', 'road_roller', 'asphalt_paver', 'water_truck', 'fuel_truck', 'sweeper_truck'],
+    pump: ['excavator', 'mini_excavator', 'bulldozer', 'wheel_loader', 'dump_truck', 'concrete_mixer', 'crane_truck', 'forklift', 'backhoe_loader', 'skid_steer_loader', 'road_roller', 'asphalt_paver', 'grader', 'tower_crane', 'mobile_crane', 'pile_driver', 'drilling_rig', 'excavator_breaker', 'dump_loader', 'articulated_dump_truck', 'water_truck', 'sweeper_truck', 'fuel_truck', 'lowbed_trailer', 'cargo_truck', 'scissor_lift']
+  };
 
   const state = {
     container: null,
@@ -377,6 +391,9 @@
       const raw = Array.isArray(manifest) ? manifest : Array.isArray(manifest.vehicles) ? manifest.vehicles : [];
       const list = raw.map(normalizeVehicle).filter((vehicle) => vehicle && vehicle.file);
       if (list.length < 3) throw new Error('Construction manifest has too few vehicles.');
+      if (!MISSIONS.some((mission) => list.some((vehicle) => mission.answerIds.includes(vehicle.id)))) {
+        throw new Error('Construction manifest has no supported mission vehicle.');
+      }
       return list;
     } catch (error) {
       return FALLBACK_VEHICLES.map(normalizeVehicle).filter((vehicle) => vehicle && vehicle.file);
@@ -386,8 +403,7 @@
   function pickMissions() {
     const availableVehicleIds = new Set(state.vehicles.map((vehicle) => vehicle.id));
     const possible = MISSIONS.filter((mission) => mission.answerIds.some((id) => availableVehicleIds.has(id)));
-    const source = possible.length >= TOTAL_ROUNDS ? possible : MISSIONS;
-    return shuffle(source).slice(0, TOTAL_ROUNDS);
+    return shuffle(possible).slice(0, TOTAL_ROUNDS);
   }
 
   function getVehicleById(id) {
@@ -395,8 +411,8 @@
   }
 
   function getAnswerVehicle(mission) {
-    const availableAnswerId = mission.answerIds.find((id) => getVehicleById(id));
-    return getVehicleById(availableAnswerId) || state.vehicles[0] || null;
+    const answers = state.vehicles.filter((vehicle) => mission.answerIds.includes(vehicle.id));
+    return shuffle(answers)[0] || null;
   }
 
   function makeChoices(mission) {
@@ -404,15 +420,14 @@
     if (!answer) return [];
 
     const answerIds = new Set(mission.answerIds);
-    const wrongPool = shuffle(state.vehicles.filter((vehicle) => !answerIds.has(vehicle.id)));
-    const choices = [answer, ...wrongPool.slice(0, 2)];
-
-    while (choices.length < 3) {
-      const extra = state.vehicles.find((vehicle) => !choices.some((choice) => choice.id === vehicle.id));
-      if (!extra) break;
-      choices.push(extra);
-    }
-    return shuffle(choices.slice(0, 3));
+    const safeWrongIds = new Set(SAFE_DISTRACTOR_IDS[mission.id] || []);
+    const wrong = shuffle(state.vehicles.filter((vehicle) => !answerIds.has(vehicle.id) && safeWrongIds.has(vehicle.id)));
+    const otherAnswers = state.vehicles.filter((vehicle) => vehicle.id !== answer.id && answerIds.has(vehicle.id));
+    const choices = wrong.length ? [answer, wrong[0]] : [answer];
+    const alternatives = shuffle([...otherAnswers, ...wrong.slice(1)]);
+    // More than one displayed vehicle may be right; handleChoice accepts all.
+    // A small catalog gets fewer choices, never an arbitrary false distractor.
+    return shuffle([...choices, ...alternatives.slice(0, 3 - choices.length)]);
   }
 
   function render(container, options = {}) {
@@ -572,6 +587,7 @@
 
     const mission = state.currentMission;
     const selectedVehicle = getVehicleById(vehicleId);
+    if (!selectedVehicle || !state.currentChoices.some((vehicle) => vehicle.id === vehicleId)) return;
     const isCorrect = mission.answerIds.includes(vehicleId);
 
     if (!isCorrect) {
@@ -635,9 +651,9 @@
     const successMessage = `우와! 시현이가 고른 ${vehicle.name}${ending}! ${mission.successText}`;
     if (window.SihyeonVoice && typeof window.SihyeonVoice.playSequence === 'function') {
       window.SihyeonVoice.playSequence([
-        [getConstructionVehicleVoiceId(vehicle, 'name'), ''],
-        [getConstructionVehicleVoiceId(vehicle, 'sound'), '']
-      ]).catch(() => {});
+        [getConstructionVehicleVoiceId(vehicle, 'name'), vehicle.name],
+        [getConstructionVehicleVoiceId(vehicle, 'sound'), vehicle.sound]
+      ], { allowTtsFallback: true }).catch(() => {});
     }
     root.classList.add('is-working');
 

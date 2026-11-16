@@ -10,19 +10,34 @@
   const WORDS = {
     '가':['가방','🎒'],'나':['나비','🦋'],'다':['다람쥐','🐿️'],'라':['라디오','📻'],
     '마':['마차','🐴'],'바':['바나나','🍌'],'사':['사과','🍎'],'아':['아기','👶'],
-    '자':['자동차','🚗'],'차':['차','🚙'],'카':['카메라','📷'],'타':['타조','🪶'],
+    '자':['자동차','🚗'],'차':['차','🚙'],'카':['카메라','📷'],'타':['타조',''],
     '파':['파인애플','🍍'],'하':['하마','🦛'],'거':['거미','🕷️'],'고':['고래','🐳'],
     '구':['구두','👞'],'기':['기차','🚂'],'너':['너구리','🦝'],'노':['노래','🎵'],
-    '도':['도토리','🌰'],'두':['두부','⬜'],'로':['로봇','🤖'],'리':['리본','🎀'],
+    '도':['도토리',''],'두':['두부',''],'로':['로봇','🤖'],'리':['리본','🎀'],
     '모':['모자','🎩'],'무':['무지개','🌈'],'미':['미소','😊'],'버':['버스','🚌'],
     '보':['보물','💎'],'부':['부엉이','🦉'],'비':['비행기','✈️'],'서':['서랍','🗄️'],
     '소':['소','🐮'],'수':['수박','🍉'],'시':['시계','⏰'],'오':['오리','🦆'],
     '우':['우산','☔'],'이':['이불','🛏️'],'여':['여우','🦊'],'야':['야구공','⚾'],
-    '요':['요요','🪀'],'유':['유모차','👶'],'저':['저금통','🐷'],'조':['조개','🐚'],
+    '요':['요요','🪀'],'유':['유모차',''],'저':['저금통',''],'조':['조개','🐚'],
     '주':['주사위','🎲'],'지':['지구','🌍'],'초':['초콜릿','🍫'],'치':['치즈','🧀'],
     '코':['코끼리','🐘'],'쿠':['쿠키','🍪'],'키':['키위','🥝'],'토':['토끼','🐰'],
     '티':['티셔츠','👕'],'포':['포도','🍇'],'피':['피아노','🎹'],'호':['호랑이','🐯']
   };
+  // These words have no accurate single emoji. Use the named object itself,
+  // so the fallback does not teach chestnut=acorn or baby=stroller.
+  const WORD_PICTURES = {
+    '도토리': '<path d="M31 49 Q28 87 60 105 Q92 87 89 49Z" fill="#bc7948"/><path d="M26 50 Q29 24 60 24 Q91 24 94 50 Q61 62 26 50Z" fill="#765038"/><path d="M58 25 Q54 12 67 9" fill="none" stroke="#765038" stroke-width="8" stroke-linecap="round"/><path d="M39 40L46 34M55 46L63 37M74 44L80 35" stroke="#aa8155" stroke-width="4" stroke-linecap="round"/>',
+    '두부': '<ellipse cx="60" cy="92" rx="51" ry="14" fill="#d5e9eb"/><path d="M20 43L65 27L101 44L55 62Z" fill="#fffdf1" stroke="#c8c3ac" stroke-width="2"/><path d="M20 43V81L55 99V62Z" fill="#eee9d7" stroke="#c8c3ac" stroke-width="2"/><path d="M55 62L101 44V81L55 99Z" fill="#f8f4e6" stroke="#c8c3ac" stroke-width="2"/><path d="M42 35L79 53M41 53L87 37" stroke="#e3ddc8" stroke-width="2"/>',
+    '타조': '<path d="M51 78L44 106M67 78L71 106M44 106H35M71 106H81" fill="none" stroke="#d99875" stroke-width="6" stroke-linecap="round"/><ellipse cx="51" cy="66" rx="29" ry="22" fill="#49464c"/><path d="M74 63Q83 51 82 23" fill="none" stroke="#d99875" stroke-width="11" stroke-linecap="round"/><ellipse cx="83" cy="20" rx="13" ry="12" fill="#ecc7ac"/><path d="M94 17L110 23L94 26" fill="#df9c50"/><circle cx="86" cy="17" r="2.6" fill="#302e32"/><path d="M26 57Q44 47 57 63Q39 76 24 69" fill="#e7e4df"/>',
+    '유모차': '<path d="M31 72L22 28H12M33 74L80 74L94 39" fill="none" stroke="#4c687b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 43H94Q89 76 48 77Z" fill="#78bdc7"/><path d="M55 43Q56 10 86 16Q104 22 100 43Z" fill="#f1bd72" stroke="#d19b55" stroke-width="2"/><path d="M42 76L38 97M80 76L86 97" stroke="#4c687b" stroke-width="6"/><circle cx="37" cy="101" r="12" fill="#4c687b"/><circle cx="87" cy="101" r="12" fill="#4c687b"/><circle cx="37" cy="101" r="5" fill="#f2f5f5"/><circle cx="87" cy="101" r="5" fill="#f2f5f5"/>',
+    '저금통': '<circle cx="59" cy="17" r="12" fill="#efc85e" stroke="#c99b30" stroke-width="2"/><path d="M59 11V23M55 14H63M55 20H63" stroke="#b98a25" stroke-width="2"/><ellipse cx="58" cy="67" rx="39" ry="29" fill="#efa8ba"/><path d="M79 43L90 34L92 54" fill="#efa8ba"/><rect x="88" y="57" width="23" height="23" rx="9" fill="#e88fa7"/><circle cx="95" cy="68" r="2" fill="#93596a"/><circle cx="103" cy="68" r="2" fill="#93596a"/><circle cx="82" cy="58" r="3" fill="#3e3640"/><path d="M34 88V104M75 88V104" stroke="#d98ca2" stroke-width="12" stroke-linecap="round"/><path d="M22 64Q5 58 11 50Q17 44 20 53" fill="none" stroke="#d98ca2" stroke-width="4" stroke-linecap="round"/><path d="M48 42H69" stroke="#754b57" stroke-width="5" stroke-linecap="round"/>'
+  };
+  function wordPicture(word) {
+    const drawing = WORD_PICTURES[word[0]];
+    return drawing
+      ? `<svg viewBox="0 0 120 120" width="112" height="112" role="img" aria-label="${word[0]}">${drawing}</svg>`
+      : `<span aria-hidden="true">${word[1]}</span>`;
+  }
   let active = null;
   let cleanup3D = null;
 
@@ -166,6 +181,7 @@
       .s2d-result { min-width:150px;text-align:center;font-size:100px;font-weight:800;line-height:1.2;animation:s2d-pop .35s ease; }
       .s2d-word { width:100%;text-align:center;font-size:25px; }
       .s2d-word span { display:block;font-size:72px;line-height:1.3; }
+      .s2d-word svg { display:block;width:112px;height:112px;margin:auto; }
       .s2d-root .s2d-jamo-button[aria-pressed='true'] { outline:3px solid #247aa8;outline-offset:-3px;background:#fff3bd; }
       @keyframes s2d-pop { from{transform:scale(.85)}to{transform:scale(1)} }
       @media (orientation:portrait) {
@@ -308,7 +324,7 @@
           <div class="s2d-message" role="status">${active.message}</div>
           <div class="s2d-board">
             ${numbers ? active.blocks.map(block => `<button class="s2d-block" data-block="${block.id}" aria-label="${block.value} 블록 선택" aria-pressed="${active.selected.includes(block.id)}"><strong class="s2d-amount">${block.value}</strong>${frames(block.value)}</button>`).join('') || '<div class="s2d-empty">🧱<br>블록을 골라볼까?</div>'
-              : `<div class="s2d-compose">${active.joined ? `<div class="s2d-result">${syllable}</div>${word ? `<div class="s2d-word"><span>${word[1]}</span>${word[0]}</div>` : ''}` : `<span class="s2d-jamo">${active.cho}</span><span class="s2d-plus">+</span><span class="s2d-jamo vowel">${active.jung}</span>`}</div>`}
+              : `<div class="s2d-compose">${active.joined ? `<div class="s2d-result">${syllable}</div>${word ? `<div class="s2d-word">${wordPicture(word)}${word[0]}</div>` : ''}` : `<span class="s2d-jamo">${active.cho}</span><span class="s2d-plus">+</span><span class="s2d-jamo vowel">${active.jung}</span>`}</div>`}
           </div>
           ${numbers ? `<div class="s2d-total" aria-live="polite">모두 ${sum(active.blocks)}개 · 👆 블록 두 개를 골라요</div>` : ''}
         </section>

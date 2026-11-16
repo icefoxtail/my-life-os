@@ -282,91 +282,91 @@ function composeHangul(cho, jung){
 // 아이가 좋아하는 친숙한 음절별 대표 단어 & 3D 장난감 매핑 (나머지 모든 글자도 자동 대응)
 const WORD_DICT = {
   '가': {word:'가방',   emoji:'🎒', toy:'bag'},
-  '거': {word:'거미',   emoji:'🕷️', toy:'star'},
+  '거': {word:'거미',   emoji:'🕷️', toy:'picture'},
   '고': {word:'고래',   emoji:'🐳', toy:'whale'},
   '구': {word:'구름',   emoji:'☁️', toy:'cloud'},
   '기': {word:'기차',   emoji:'🚂', toy:'train'},
   '나': {word:'나비',   emoji:'🦋', toy:'butterfly'},
-  '너': {word:'너구리', emoji:'🦝', toy:'duck'},
-  '노': {word:'노래',   emoji:'🎵', toy:'star'},
-  '누': {word:'눈사람', emoji:'⛄', toy:'snowman'},
-  '다': {word:'다람쥐', emoji:'🐿️', toy:'duck'},
-  '도': {word:'도토리', emoji:'🌰', toy:'apple'},
-  '두': {word:'두부',   emoji:'⬜', toy:'star'},
-  '라': {word:'라디오', emoji:'📻', toy:'bag'},
-  '로': {word:'로봇',   emoji:'🤖', toy:'train'},
-  '루': {word:'루돌프', emoji:'🦌', toy:'duck'},
-  '리': {word:'리본',   emoji:'🎀', toy:'butterfly'},
-  '마': {word:'마법별', emoji:'🌟', toy:'star'},
-  '머': {word:'머리띠', emoji:'👑', toy:'hat'},
+  '너': {word:'너구리', emoji:'🦝', toy:'picture'},
+  '노': {word:'노래',   emoji:'🎵', toy:'picture'},
+  '누': {word:'누에',   emoji:'', toy:'picture'},
+  '다': {word:'다람쥐', emoji:'🐿️', toy:'picture'},
+  '도': {word:'도토리', emoji:'', toy:'picture'},
+  '두': {word:'두부',   emoji:'', toy:'picture'},
+  '라': {word:'라디오', emoji:'📻', toy:'picture'},
+  '로': {word:'로봇',   emoji:'🤖', toy:'picture'},
+  '루': {word:'루돌프', emoji:'🦌', toy:'picture'},
+  '리': {word:'리본',   emoji:'🎀', toy:'picture'},
+  '마': {word:'마법별', emoji:'🌟', toy:'picture'},
+  '머': {word:'머리띠', emoji:'', toy:'picture'},
   '모': {word:'모자',   emoji:'🎩', toy:'hat'},
-  '무': {word:'무지개', emoji:'🌈', toy:'cloud'},
-  '미': {word:'미소',   emoji:'😊', toy:'star'},
+  '무': {word:'무지개', emoji:'🌈', toy:'picture'},
+  '미': {word:'미소',   emoji:'😊', toy:'picture'},
   '바': {word:'바나나', emoji:'🍌', toy:'banana'},
-  '버': {word:'버스',   emoji:'🚌', toy:'car'},
-  '보': {word:'보물',   emoji:'💎', toy:'star'},
-  '부': {word:'부엉이', emoji:'🦉', toy:'duck'},
+  '버': {word:'버스',   emoji:'🚌', toy:'picture'},
+  '보': {word:'보물',   emoji:'💎', toy:'picture'},
+  '부': {word:'부엉이', emoji:'🦉', toy:'picture'},
   '비': {word:'비행기', emoji:'✈️', toy:'airplane'},
   '사': {word:'사과',   emoji:'🍎', toy:'apple'},
-  '서': {word:'선물',   emoji:'🎁', toy:'bag'},
-  '소': {word:'송아지', emoji:'🐮', toy:'duck'},
-  '수': {word:'수박',   emoji:'🍉', toy:'apple'},
-  '시': {word:'시계',   emoji:'⏰', toy:'star'},
+  '서': {word:'서랍',   emoji:'', toy:'picture'},
+  '소': {word:'소',     emoji:'🐄', toy:'picture'},
+  '수': {word:'수박',   emoji:'🍉', toy:'picture'},
+  '시': {word:'시계',   emoji:'⏰', toy:'picture'},
   '아': {word:'아기오리',emoji:'🐤', toy:'duck'},
-  '야': {word:'야구공', emoji:'⚾', toy:'apple'},
-  '어': {word:'어항',   emoji:'🐠', toy:'whale'},
-  '여': {word:'여우',   emoji:'🦊', toy:'duck'},
-  '오': {word:'오렌지', emoji:'🍊', toy:'apple'},
-  '요': {word:'요술봉', emoji:'🪄', toy:'star'},
+  '야': {word:'야구공', emoji:'⚾', toy:'picture'},
+  '어': {word:'어항',   emoji:'', toy:'picture'},
+  '여': {word:'여우',   emoji:'🦊', toy:'picture'},
+  '오': {word:'오렌지', emoji:'🍊', toy:'picture'},
+  '요': {word:'요술봉', emoji:'🪄', toy:'picture'},
   '우': {word:'우산',   emoji:'☔', toy:'umbrella'},
-  '유': {word:'유모차', emoji:'🍼', toy:'car'},
-  '이': {word:'이슬',   emoji:'💧', toy:'cloud'},
+  '유': {word:'유모차', emoji:'', toy:'picture'},
+  '이': {word:'이슬',   emoji:'💧', toy:'picture'},
   '자': {word:'자동차', emoji:'🚗', toy:'car'},
-  '저': {word:'저금통', emoji:'🐷', toy:'duck'},
-  '조': {word:'조개',   emoji:'🐚', toy:'whale'},
-  '주': {word:'주사위', emoji:'🎲', toy:'star'},
-  '지': {word:'지구',   emoji:'🌍', toy:'apple'},
-  '차': {word:'자동차', emoji:'🚙', toy:'car'},
-  '초': {word:'초콜릿', emoji:'🍫', toy:'bag'},
-  '추': {word:'축구공', emoji:'⚽', toy:'apple'},
-  '치': {word:'치즈',   emoji:'🧀', toy:'banana'},
-  '카': {word:'카메라', emoji:'📷', toy:'bag'},
-  '코': {word:'코끼리', emoji:'🐘', toy:'whale'},
-  '쿠': {word:'쿠키',   emoji:'🍪', toy:'star'},
-  '키': {word:'키위',   emoji:'🥝', toy:'apple'},
-  '타': {word:'타조',   emoji:'🦩', toy:'duck'},
-  '토': {word:'토끼',   emoji:'🐰', toy:'duck'},
-  '투': {word:'투구',   emoji:'⛑️', toy:'hat'},
-  '티': {word:'티셔츠', emoji:'👕', toy:'bag'},
-  '파': {word:'파인애플',emoji:'🍍', toy:'banana'},
-  '포': {word:'포도',   emoji:'🍇', toy:'apple'},
-  '푸': {word:'풍선',   emoji:'🎈', toy:'apple'},
-  '피': {word:'피아노', emoji:'🎹', toy:'train'},
-  '하': {word:'하마',   emoji:'🦛', toy:'whale'},
-  '허': {word:'허수아비',emoji:'🌻', toy:'hat'},
-  '호': {word:'호랑이', emoji:'🐯', toy:'duck'},
-  '후': {word:'후라이팬',emoji:'🍳', toy:'star'},
-  '히': {word:'히어로', emoji:'🦸', toy:'airplane'}
+  '저': {word:'저금통', emoji:'', toy:'picture'},
+  '조': {word:'조개',   emoji:'🐚', toy:'picture'},
+  '주': {word:'주사위', emoji:'🎲', toy:'picture'},
+  '지': {word:'지구',   emoji:'🌍', toy:'picture'},
+  '차': {word:'차',     emoji:'🚙', toy:'car'},
+  '초': {word:'초콜릿', emoji:'🍫', toy:'picture'},
+  '추': {word:'추',     emoji:'', toy:'picture'},
+  '치': {word:'치즈',   emoji:'🧀', toy:'picture'},
+  '카': {word:'카메라', emoji:'📷', toy:'picture'},
+  '코': {word:'코끼리', emoji:'🐘', toy:'picture'},
+  '쿠': {word:'쿠키',   emoji:'🍪', toy:'picture'},
+  '키': {word:'키위',   emoji:'🥝', toy:'picture'},
+  '타': {word:'타조',   emoji:'', toy:'picture'},
+  '토': {word:'토끼',   emoji:'🐰', toy:'picture'},
+  '투': {word:'투구',   emoji:'', toy:'picture'},
+  '티': {word:'티셔츠', emoji:'👕', toy:'picture'},
+  '파': {word:'파인애플',emoji:'🍍', toy:'picture'},
+  '포': {word:'포도',   emoji:'🍇', toy:'picture'},
+  '푸': {word:'푸딩',   emoji:'🍮', toy:'picture'},
+  '피': {word:'피아노', emoji:'🎹', toy:'picture'},
+  '하': {word:'하마',   emoji:'🦛', toy:'picture'},
+  '허': {word:'허수아비',emoji:'', toy:'picture'},
+  '호': {word:'호랑이', emoji:'🐯', toy:'picture'},
+  '후': {word:'후추',   emoji:'', toy:'picture'},
+  '히': {word:'히어로', emoji:'🦸', toy:'picture'}
 };
 
-// 진열대에 나란히 놓았을 때 보너스 축제가 열리는 친숙한 단어들
+// 현재 자음·모음으로 만들 수 있는 받침 없는 2~3음절 단어만 보너스로 사용한다.
 const SHELF_WORDS = {
   '나비': {emoji:'🦋', toy:'butterfly'},
   '기차': {emoji:'🚂', toy:'train'},
-  '우유': {emoji:'🥛', toy:'cloud'},
-  '나무': {emoji:'🌳', toy:'apple'},
+  '우유': {emoji:'🥛', toy:'picture'},
+  '나무': {emoji:'🌳', toy:'picture'},
   '바나나':{emoji:'🍌', toy:'banana'},
-  '비누': {emoji:'🫧', toy:'cloud'},
+  '비누': {emoji:'🧼', toy:'picture'},
   '오리': {emoji:'🐤', toy:'duck'},
-  '하마': {emoji:'🦛', toy:'whale'},
+  '하마': {emoji:'🦛', toy:'picture'},
   '모자': {emoji:'🎩', toy:'hat'},
-  '구두': {emoji:'👞', toy:'bag'},
-  '포도': {emoji:'🍇', toy:'apple'},
-  '사자': {emoji:'🦁', toy:'duck'},
-  '고래': {emoji:'🐳', toy:'whale'},
-  '우산': {emoji:'☔', toy:'umbrella'},
-  '토끼': {emoji:'🐰', toy:'duck'},
-  '자동차':{emoji:'🚗', toy:'car'}
+  '구두': {emoji:'👞', toy:'picture'},
+  '포도': {emoji:'🍇', toy:'picture'},
+  '사자': {emoji:'🦁', toy:'picture'},
+  '고구마':{emoji:'🍠', toy:'picture'},
+  '여우': {emoji:'🦊', toy:'picture'},
+  '두부': {emoji:'',   toy:'picture'},
+  '바다': {emoji:'🌊', toy:'picture'}
 };
 
 function getSyllableMeta(cho, jung){
@@ -382,13 +382,11 @@ function getSyllableMeta(cho, jung){
       speech: `${cSpec.name} ${jSpec.name}, ${char}! ${entry.word}!`
     };
   }
-  const fallbackToys = ['star', 'butterfly', 'cloud', 'duck', 'apple'];
-  const t = fallbackToys[char.charCodeAt(0) % fallbackToys.length];
   return {
     char,
     word: `${char} 블록`,
-    emoji: '✨',
-    toy: t,
+    emoji: '',
+    toy: 'picture',
     speech: `${cSpec.name} ${jSpec.name}, ${char}! 반짝반짝 ${char}!`
   };
 }
@@ -786,7 +784,130 @@ function buildHangulBlockMesh(block){
  * ============================================================================ */
 const eyePupilMat = new THREE.MeshStandardMaterial({color:0x1d2c46, roughness:0.15});
 
-function buildMiniToy3D(toyType){
+// 정확한 3D 모형이 없는 단어는 다른 사물로 대체하지 않고 이름이 붙은 그림으로 보여 준다.
+// 이모지가 다른 사물인 도토리·타조·유모차 등은 작은 벡터 그림으로 직접 그린다.
+function drawWordIllustration(ctx, meta){
+  const oval = (x,y,rx,ry,color) => {ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill();};
+  const box = (x,y,w,h,color) => {ctx.fillStyle=color;ctx.fillRect(x,y,w,h);};
+  const line = (points,color,width=10) => {ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();};
+  const shape = (points,color) => {ctx.fillStyle=color;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill();};
+  switch(meta.word){
+    case '도토리':
+      oval(200,169,66,88,'#b97638');
+      shape([[140,198],[260,198],[200,270]],'#b97638');
+      oval(200,108,78,30,'#765032');
+      line([[199,86],[202,60],[218,49]],'#765032',15);
+      [160,185,210,235].forEach(x=>line([[x-8,101],[x+8,115]],'#aa7a49',5));
+      break;
+    case '두부':
+      oval(200,229,148,28,'#b2dce4');
+      shape([[88,124],[259,111],[314,150],[138,165]],'#fffef0');
+      shape([[138,165],[314,150],[314,223],[138,238]],'#ede9d5');
+      shape([[88,124],[138,165],[138,238],[88,197]],'#f8f4e2');
+      line([[176,121],[220,158],[220,230]],'#d8d4c3',4);
+      line([[115,145],[288,131]],'#d8d4c3',4);
+      break;
+    case '머리띠':
+      ctx.strokeStyle='#e5619d';ctx.lineWidth=28;ctx.lineCap='round';ctx.beginPath();ctx.arc(200,183,91,Math.PI,Math.PI*2);ctx.stroke();
+      line([[109,183],[118,222]],'#e5619d',28);line([[291,183],[282,222]],'#e5619d',28);
+      oval(164,91,30,21,'#ffbdde');oval(222,91,30,21,'#ffbdde');oval(193,91,15,19,'#e5619d');
+      break;
+    case '어항':
+      box(65,69,270,195,'#a9dfe9');box(77,111,246,139,'#59bce6');
+      line([[63,69],[337,69]],'#3d7f99',12);
+      shape([[234,177],[276,154],[276,200]],'#fa982b');oval(204,177,44,26,'#ffbd45');oval(184,170,5,5,'#273c56');
+      [91,115,145,179,216,247,277,308].forEach((x,i)=>oval(x,244,11,7,i%2?'#e9d6a6':'#bda981'));
+      line([[107,236],[98,201],[114,174]],'#3e9a61',10);line([[105,218],[127,203]],'#3e9a61',8);
+      [120,104,91].forEach((y,i)=>oval(245+i*12,y,5,5,'#eaffff'));
+      break;
+    case '유모차':
+      shape([[99,164],[301,164],[273,217],[139,217]],'#f57fab');
+      ctx.fillStyle='#91b9ed';ctx.beginPath();ctx.moveTo(99,164);ctx.arc(191,164,92,Math.PI,Math.PI*1.5);ctx.lineTo(191,164);ctx.closePath();ctx.fill();
+      line([[281,166],[314,103],[340,103]],'#4c637f',12);
+      line([[148,216],[255,265]],'#4c637f',10);line([[265,216],[155,265]],'#4c637f',10);
+      oval(146,263,24,24,'#344d68');oval(273,263,24,24,'#344d68');oval(146,263,10,10,'#d4e4ef');oval(273,263,10,10,'#d4e4ef');
+      break;
+    case '저금통':
+      oval(199,164,99,66,'#f5a1bb');shape([[238,112],[254,72],[276,122]],'#e886a5');
+      oval(288,169,28,29,'#f5a1bb');oval(294,167,4,7,'#ad5676');oval(306,167,4,7,'#ad5676');oval(250,145,6,6,'#293d57');
+      box(137,212,27,34,'#d97699');box(235,212,27,34,'#d97699');line([[178,104],[222,104]],'#8b4b66',8);
+      oval(200,62,24,24,'#efbd44');line([[199,49],[199,75]],'#a67c1b',5);
+      ctx.strokeStyle='#d97699';ctx.lineWidth=9;ctx.beginPath();ctx.arc(91,158,16,0,Math.PI*1.7);ctx.stroke();
+      break;
+    case '타조':
+      oval(181,156,80,58,'#455163');oval(173,147,44,29,'#aab5c2');
+      line([[234,134],[256,107],[258,69]],'#e4bd9d',23);oval(266,57,25,21,'#e4bd9d');
+      shape([[289,56],[322,65],[288,74]],'#e5a250');oval(274,52,5,5,'#273c56');
+      line([[163,206],[147,252],[146,274],[174,274]],'#d8a780',12);line([[200,208],[218,249],[216,275],[244,275]],'#d8a780',12);
+      shape([[113,150],[74,128],[99,178]],'#455163');
+      break;
+    case '허수아비':
+      line([[200,99],[200,281]],'#9a693c',17);line([[84,149],[316,149]],'#9a693c',14);
+      shape([[142,132],[110,148],[120,179],[166,164],[157,221],[243,221],[234,164],[280,179],[290,148],[258,132]],'#f49c52');
+      oval(200,93,36,32,'#f4d49d');shape([[161,75],[172,38],[226,38],[239,75]],'#b98340');line([[143,75],[257,75]],'#b98340',15);
+      oval(186,92,4,4,'#4a4947');oval(214,92,4,4,'#4a4947');line([[188,108],[212,108]],'#be744f',5);
+      [169,187,214,231].forEach(x=>line([[x,221],[x-7,245]],'#d7b156',5));
+      break;
+    case '누에':
+      oval(203,218,135,43,'#85c770');line([[88,224],[317,202]],'#4c9c55',5);
+      [108,143,180,217,254].forEach((x,i)=>oval(x,180-i*8,27,31,'#fff7de'));
+      oval(278,136,29,31,'#fff7de');oval(285,131,4,4,'#35465d');line([[278,151],[292,151]],'#b98f70',4);
+      break;
+    case '서랍':
+      box(88,61,224,210,'#b67e4c');box(104,78,192,77,'#efbe7b');box(104,166,192,77,'#efbe7b');
+      line([[186,116],[214,116]],'#89572e',12);line([[186,204],[214,204]],'#89572e',12);box(111,270,24,18,'#89572e');box(265,270,24,18,'#89572e');
+      break;
+    case '추':
+      line([[200,34],[200,129]],'#527c99',9);oval(200,140,23,20,'#819dad');
+      shape([[162,150],[238,150],[266,226],[200,271],[134,226]],'#819dad');line([[164,220],[200,249],[238,220]],'#b8cbd5',8);
+      break;
+    case '후추':
+      box(133,107,119,137,'#d5e4e9');oval(192,244,59,17,'#afc9d4');oval(192,107,59,17,'#7994a1');
+      [168,192,216].forEach(x=>oval(x,106,5,4,'#344d5a'));
+      for(let i=0;i<18;i++) oval(149+(i%5)*21,168+Math.floor(i/5)*18,5,5,'#4d4037');
+      [[287,231],[309,247],[276,262],[325,275],[299,280]].forEach(([x,y])=>oval(x,y,9,9,'#594b40'));
+      break;
+    case '투구':
+      ctx.fillStyle='#aabccb';ctx.beginPath();ctx.arc(200,157,91,Math.PI,0);ctx.lineTo(286,226);ctx.lineTo(114,226);ctx.closePath();ctx.fill();
+      shape([[125,155],[187,171],[187,190],[125,178]],'#35465b');shape([[275,155],[213,171],[213,190],[275,178]],'#35465b');
+      box(192,108,16,138,'#7b94a7');line([[178,69],[184,37],[211,33]],'#df5c64',20);
+      break;
+    default:
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.font=meta.emoji?'190px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif':'bold 170px sans-serif';
+      ctx.fillStyle='#4864a1';ctx.fillText(meta.emoji || meta.char || meta.word,200,157,365);
+  }
+}
+
+function buildWordPictureToy(meta){
+  const picture = document.createElement('canvas');
+  picture.width=512;picture.height=448;
+  const ctx=picture.getContext('2d');
+  ctx.fillStyle='#fffdf5';ctx.strokeStyle='#a7c4e1';ctx.lineWidth=8;
+  ctx.beginPath();ctx.roundRect(5,5,502,438,38);ctx.fill();ctx.stroke();
+  ctx.save();ctx.translate(56,30);drawWordIllustration(ctx,meta);ctx.restore();
+  ctx.fillStyle='#223454';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 42px sans-serif';ctx.fillText(meta.word,256,393,458);
+  const texture=new THREE.CanvasTexture(picture);
+  if('encoding' in texture) texture.encoding=THREE.sRGBEncoding;
+  const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true}));
+  sprite.scale.set(2.15,1.88,1);
+  const group=new THREE.Group();group.add(sprite);group.userData.wordPicture=sprite;
+  group.userData.word=meta.word;
+  return group;
+}
+
+function removeMiniToy(mesh){
+  toysGroup.remove(mesh);
+  const picture=mesh.userData.wordPicture;
+  if(picture){
+    picture.material.map.dispose();
+    picture.material.dispose();
+    mesh.userData.wordPicture=null;
+  }
+}
+
+function buildMiniToy3D(toyType, meta = {}){
+  if(toyType === 'picture') return buildWordPictureToy(meta);
   const g = new THREE.Group();
   const mPink   = getToyMaterial('#FF6B8B');
   const mYellow = getToyMaterial('#FFD43B');
@@ -1103,7 +1224,7 @@ function clearAllBlocks(){
   }
   state.blocks = [];
   for(const t of state.toys){
-    if(t.mesh) toysGroup.remove(t.mesh);
+    if(t.mesh) removeMiniToy(t.mesh);
   }
   state.toys = [];
 }
@@ -1274,9 +1395,9 @@ function spawnMiniToyPopup(block, meta){
   // 기존 장난감이 너무 많으면 정리
   while(state.toys.length >= 4){
     const old = state.toys.shift();
-    if(old.mesh) toysGroup.remove(old.mesh);
+    if(old.mesh) removeMiniToy(old.mesh);
   }
-  const mesh = buildMiniToy3D(meta.toy);
+  const mesh = buildMiniToy3D(meta.toy, meta);
   mesh.position.set(block.x, block.y + 2.6, block.z);
   mesh.scale.setScalar(0.1);
   toysGroup.add(mesh);
@@ -1677,7 +1798,7 @@ function updatePhysics(dt, now){
       t.mesh.userData.wings[1].rotation.z = -flap;
     }
     if(t.age >= t.maxAge){
-      toysGroup.remove(t.mesh);
+      removeMiniToy(t.mesh);
     }
   }
   state.toys = state.toys.filter(t => t.age < t.maxAge);
