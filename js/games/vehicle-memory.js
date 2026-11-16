@@ -1615,6 +1615,8 @@
       if (cardEl.classList.contains('is-matched') || cardEl.classList.contains('is-open') || cardEl.classList.contains('is-preview')) {
         return;
       }
+      // A shared picture key must not reveal the positions of unseen copies.
+      if (!state.seenCards.has(Number(cardEl.dataset.index))) return;
 
       const pairKey = cardEl.dataset.pairKey;
       const color = pairKey ? state.hintPairs[pairKey] : '';

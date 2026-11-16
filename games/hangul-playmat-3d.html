@@ -2006,7 +2006,12 @@ window.OpenWorldDebug = {
   resetInitialBlocks,
   returnToPlayOS
 };
-window.Sihyeon2DFallback.ready('hangul', () => { state.destroyed = true; renderer.dispose(); window.removeEventListener('resize', adjustCameraForViewport); });
+window.Sihyeon2DFallback.ready('hangul', () => {
+  state.destroyed = true;
+  clearAllBlocks();
+  renderer.dispose();
+  window.removeEventListener('resize', adjustCameraForViewport);
+});
 } catch (error) {
   console.warn('3D block play is unavailable; opening picture blocks.', error);
   window.Sihyeon2DFallback.show('hangul');

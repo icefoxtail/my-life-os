@@ -155,6 +155,22 @@ async function testMemory() {
   ].map(alias.api.normalizeVehicle);
   const samePicture = alias.deal('rescue', 8);
   assert.equal(new Set(samePicture.map(card => card.pairKey)).size, 1, 'different catalog IDs sharing a picture still match');
+  // Two copies learned in separate wrong turns may be hinted; two copies the
+  // child has never opened must stay hidden even though their picture is equal.
+  const hints = memoryFixture(15), hintCards = hints.deal('rescue', 8);
+  const repeated = hintCards.find(card => hintCards.filter(other => other.file === card.file).length >= 4);
+  const repeatedIndices = hintCards.map((card, index) => ({card, index})).filter(({card}) => card.file === repeated.file).map(({index}) => index);
+  const other = hintCards.findIndex(card => card.file !== repeated.file);
+  for (const index of repeatedIndices.slice(0, 2)) {
+    hints.api.handleMemoryCardClick(index); hints.api.handleMemoryCardClick(other); await hints.time.drain();
+  }
+  const color = hints.api.state.hintPairs[repeated.pairKey];
+  assert.ok(color);
+  repeatedIndices.forEach((index, position) => assert.equal(hints.cards[index].classList.contains(`hint-${color}`), position < 2,
+    'only individually seen cards receive a location hint'));
+  hints.api.handleMemoryCardClick(repeatedIndices[2]); hints.api.handleMemoryCardClick(other); await hints.time.drain();
+  assert.equal(hints.cards[repeatedIndices[2]].classList.contains(`hint-${color}`), true, 'an actually opened third copy joins the hint group');
+  assert.equal(hints.cards[repeatedIndices[3]].classList.contains(`hint-${color}`), false, 'the last unopened copy stays unhinted');
   const wrong = memoryFixture(); const wrongCards = wrong.deal('rescue', 8);
   wrong.api.handleMemoryCardClick(0);
   wrong.api.handleMemoryCardClick(wrongCards.findIndex(card => card.file !== wrongCards[0].file));
@@ -253,7 +269,42 @@ function testConstruction() {
   assert.equal(ignored.classList.contains('is-wrong'), false, 'a stale/hidden choice is ignored');
 }
 
+async function testConstructionVoices() {
+  const utterances = [];
+  let language = 'en';
+  const window = {
+    addEventListener() {}, removeEventListener() {},
+    SihyeonPlaySettings: {getLanguage: () => language},
+    speechSynthesis: {
+      cancel() {}, getVoices: () => [],
+      speak(utterance) { utterances.push({text: utterance.text, lang: utterance.lang}); utterance.onend?.(); }
+    }
+  };
+  const context = vm.createContext({window, navigator: {}, console,
+    SpeechSynthesisUtterance: class { constructor(text) { this.text = text; } },
+    fetch: async () => ({ok: true, json: async () => ({voices: {}})})});
+  for (const file of ['js/voice-labels.js', 'js/english-listening.js', 'js/voice-engine.js']) {
+    vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, {filename: file});
+  }
+  const source = fs.readFileSync(path.join(sourceRoot, 'js/games/construction-site.js'), 'utf8')
+    .replace(/\}\)\(\);\s*$/, 'window.__constructionVoiceTest = {normalizeVehicle, announceConstructionVehicle};\n})();');
+  vm.runInContext(source, context);
+  const api = window.__constructionVoiceTest;
+  for (const id of ['backhoe_loader', 'skid_steer_loader', 'grader', 'dump_loader', 'articulated_dump_truck', 'cargo_truck', 'tower_crane', 'mobile_crane']) {
+    const vehicle = api.normalizeVehicle(construction.find(item => item.id === id), 0);
+    language = 'en'; utterances.length = 0;
+    await api.announceConstructionVehicle(vehicle);
+    assert.deepEqual(utterances, [{text: window.SihyeonVoiceLabels.entry('vehicle', id).en, lang: 'en-US'}],
+      `${id} speaks its shared English name through the real voice engine`);
+    assert.ok(utterances.every(utterance => !/[가-힣]/.test(utterance.text)), 'English mode never voices untranslated Korean');
+    language = 'ko'; utterances.length = 0;
+    await api.announceConstructionVehicle(vehicle);
+    assert.deepEqual(utterances, [{text: vehicle.name, lang: 'ko-KR'}, {text: vehicle.sound, lang: 'ko-KR'}],
+      `${id} keeps its Korean name and role fallback`);
+  }
+}
+
 (async () => {
-  const boards = constructionOnly ? 0 : await testMemory(); testConstruction();
-  console.log(`PASS ${constructionOnly ? '' : `${boards} memory catalog/count boards; rescue 8 and police 16 cross-copy matching, reconstructed markup, remaining hints, completion, stale timers, emoji and empty data; `}construction 27 vehicles across 7 missions, multiple valid roles, safe distractors and sparse catalogs.`);
+  const boards = constructionOnly ? 0 : await testMemory(); testConstruction(); await testConstructionVoices();
+  console.log(`PASS ${constructionOnly ? '' : `${boards} memory catalog/count boards; rescue 8 and police 16 cross-copy matching, reconstructed markup, seen-card-only hints, completion, stale timers, emoji and empty data; `}construction 27 vehicles across 7 missions, multiple valid roles, safe distractors, sparse catalogs and real Korean/English voice-engine requests.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

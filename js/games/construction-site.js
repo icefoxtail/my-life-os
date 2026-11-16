@@ -93,6 +93,22 @@
     return key ? `vehicles.construction.${key}.${kind}` : '';
   }
 
+  function announceConstructionVehicle(vehicle) {
+    const nameId = getConstructionVehicleVoiceId(vehicle, 'name');
+    const labels = window.SihyeonVoiceLabels;
+    if (!nameId && window.SihyeonPlaySettings?.getLanguage?.() === 'en'
+      && labels?.entry?.('vehicle', vehicle.id)?.en && typeof labels.say === 'function') {
+      // Newly eligible machines have no legacy voice ID. The shared label
+      // registry supplies their English name; untranslated roles stay silent.
+      return labels.say('vehicle', vehicle.id, { lang: 'en' }).catch(() => false);
+    }
+    if (typeof window.SihyeonVoice?.playSequence !== 'function') return Promise.resolve(false);
+    return window.SihyeonVoice.playSequence([
+      [nameId, vehicle.name],
+      [getConstructionVehicleVoiceId(vehicle, 'sound'), vehicle.sound]
+    ], { allowTtsFallback: true }).catch(() => false);
+  }
+
   function speak(text, force) {
     if (!text || state.currentMission?.id !== 'pump') return;
     try { state.options.say?.(text); } catch (error) {}
@@ -649,12 +665,7 @@
 
     const ending = getSubjectParticle(vehicle.name) === '은' ? '이야' : '야';
     const successMessage = `우와! 시현이가 고른 ${vehicle.name}${ending}! ${mission.successText}`;
-    if (window.SihyeonVoice && typeof window.SihyeonVoice.playSequence === 'function') {
-      window.SihyeonVoice.playSequence([
-        [getConstructionVehicleVoiceId(vehicle, 'name'), vehicle.name],
-        [getConstructionVehicleVoiceId(vehicle, 'sound'), vehicle.sound]
-      ], { allowTtsFallback: true }).catch(() => {});
-    }
+    announceConstructionVehicle(vehicle);
     root.classList.add('is-working');
 
     // 거대해지는 타이밍(약 1.2초 후)에 맞추어 칭찬 및 폭죽 발사
