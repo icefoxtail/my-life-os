@@ -1,0 +1,56 @@
+name: Pages on pinned runner
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# The existing branch publisher remains configured. This independent queue uses
+# the available pinned runner and publishes the same current main source.
+concurrency:
+  group: pages-pinned-runner
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Check the existing static entry points
+        run: |
+          test -s index.html
+          test -s sw.js
+          test -s manifest.json
+          node scripts/qa-static.cjs
+      - name: Package the current static site
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: .
+      - name: Check that this is still the current main
+        id: source
+        run: |
+          current="$(git ls-remote --exit-code origin refs/heads/main | cut -f1)"
+          if test "$current" = "$GITHUB_SHA"; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+            echo 'A newer main exists; leave its deployment to the newer run.'
+          fi
+      - name: Deploy the existing Pages site
+        if: steps.source.outputs.current == 'true'
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
