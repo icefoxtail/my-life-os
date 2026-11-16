@@ -15,12 +15,25 @@ on:
       - 'scripts/qa-picture-arithmetic-browser.py'
       - 'scripts/qa-art-reference-browser.py'
       - 'scripts/qa-quantity-change*'
+      - 'scripts/qa-artwork-choices.cjs'
+      - 'scripts/qa-neighborhood-story.cjs'
+      - 'scripts/qa-art-story-browser.py'
       - '.github/workflows/phase2-browser-release.yml'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'index.html'
+      - 'sw.js'
+      - 'js/play-objects.js'
+      - 'js/games/neighborhood-story*'
+      - 'css/games/neighborhood-story.css'
+      - 'assets/games/neighborhood-story/**'
+      - 'js/games/picture-arithmetic.js'
+      - 'css/games/picture-arithmetic.css'
+      - 'scripts/qa-artwork-choices.cjs'
+      - 'scripts/qa-neighborhood-story.cjs'
+      - 'scripts/qa-art-story-browser.py'
       - 'js/games/pattern-train*'
       - 'css/games/pattern-train.css'
       - 'js/games/quantity*'
@@ -69,9 +82,9 @@ jobs:
   production-ui:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 65
     env:
-      PLAYGROUND_LIVE_GAMES: quantity-change ten-frame-garden
+      PLAYGROUND_LIVE_GAMES: art-story
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -84,10 +97,13 @@ jobs:
         run: |
           python3 - <<'PY'
           import hashlib, json, pathlib, time, urllib.request
-          paths = ['sw.js', 'index.html', 'js/games/quantity-play-model.js', 'js/games/quantity-change.js', 'css/games/quantity-change.css', 'assets/games/quantity-change/card.svg', 'js/games/ten-frame-garden.js', 'css/games/ten-frame-garden.css']
+          paths = ['sw.js', 'index.html', 'js/play-objects.js', 'js/games/picture-arithmetic.js', 'css/games/picture-arithmetic.css', 'js/games/quantity-change.js', 'css/games/quantity-change.css', 'js/games/neighborhood-story-model.js', 'js/games/neighborhood-story.js', 'css/games/neighborhood-story.css', 'assets/games/neighborhood-story/card.svg', 'js/games/art-zone.js']
           expected = {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
           base = 'https://icefoxtail.github.io/my-life-os/'
-          for attempt in range(48):
+          # The Pages runner can remain queued for over 40 minutes. Keep the
+          # exact-source and real-menu gates, and give deployment time to finish.
+          deadline = time.monotonic() + 50 * 60
+          while time.monotonic() < deadline:
               actual = {}
               try:
                   for path in paths:
@@ -117,6 +133,34 @@ jobs:
           name: production-ui-${{ github.run_id }}
           path: qa-production-evidence/
           if-no-files-found: warn
+          retention-days: 14
+  art-story:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify artwork references and complete story models
+        run: |
+          node scripts/qa-artwork-choices.cjs
+          node scripts/qa-neighborhood-story.cjs
+          python3 -m py_compile scripts/qa-art-story-browser.py
+      - name: Install pinned browser harness
+        run: |
+          mkdir -p qa-art-story-evidence
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Personal artwork and four neighborhood stories through real menus
+        run: python3 scripts/qa-art-story-browser.py --output qa-art-story-evidence
+      - name: Attach artwork and story evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: art-story-browser-${{ github.run_id }}
+          path: qa-art-story-evidence/
+          if-no-files-found: error
           retention-days: 14
   quantity-games:
     runs-on: ubuntu-24.04
