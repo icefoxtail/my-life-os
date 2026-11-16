@@ -1,0 +1,27 @@
+{
+  "suite": "Independent neighborhood-story quantities, original identities and event replay",
+  "status": "PASS",
+  "sourceSHA256": "464b94f2a7ce2117bf7c991e232cf950da733dd934cb809e5c363e20cd879bcc",
+  "episodes": 8556,
+  "counts": {
+    "fire": 1984,
+    "police": 1984,
+    "snack": 744,
+    "neighborhood": 3844,
+    "invalid": 3849,
+    "events": 121980
+  },
+  "assertions": 2658758,
+  "checked": [
+    "all valid quantities for all four scenes and four ages",
+    "independent arithmetic and generated quantities",
+    "exact registry partition before and after every event",
+    "stage continuity and replay reconstruction",
+    "original return, pair uniqueness, equal sharing rounds and remaining originals",
+    "saved input and prior-episode immutability",
+    "invalid quantities, scene, age and group values reject"
+  ],
+  "limitations": [
+    "Pure model only; browser, audible audio and physical-device validation are separate"
+  ]
+}

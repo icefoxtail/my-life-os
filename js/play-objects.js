@@ -33,6 +33,38 @@
     return result;
   }
   function get(id) { return list().find(function (item) { return item.id === id; }) || null; }
+  function sourceKind(value) { return value === 'artwork' ? 'artwork' : 'recommended'; }
+  function artworkFor(recommended) {
+    if (!recommended.artTemplateId || recommended.id !== 'art:' + recommended.artTemplateId) return null;
+    try {
+      const artwork = window.SihyeonArtPlayBridge?.getSavedPlayObject?.(recommended.artTemplateId);
+      if (valid(artwork) && artwork.id === recommended.id && artwork.fromArtwork === true) {
+        return Object.assign({}, artwork, { sourceKind: 'artwork' });
+      }
+    } catch (_) { /* A missing or unreadable personal picture can use its known reference. */ }
+    return null;
+  }
+  function listChoices(options) {
+    const kind = sourceKind(options?.sourceKind);
+    // The art bridge loads after this module. Read it when the picker opens,
+    // and keep the existing list()/get() recommendation-only contract intact.
+    const recommended = list();
+    if (kind === 'artwork') return recommended.map(artworkFor).filter(Boolean);
+    return recommended.map(function (item) { return Object.assign({}, item, { sourceKind: kind, fromArtwork: false }); });
+  }
+  function resolveChoice(choice) {
+    const recommended = get(choice?.id);
+    if (!recommended) return null;
+    const requested = { id: recommended.id, sourceKind: sourceKind(choice?.sourceKind) };
+    const artwork = requested.sourceKind === 'artwork' ? artworkFor(recommended) : null;
+    const object = artwork || Object.assign({}, recommended, { sourceKind: 'recommended', fromArtwork: false });
+    return {
+      requested: requested,
+      actual: { id: object.id, sourceKind: object.sourceKind },
+      missingArtwork: requested.sourceKind === 'artwork' && !artwork,
+      object: object
+    };
+  }
   function esc(text) { return String(text).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function picture(item, className) {
     return '<span class="qp-picture '+esc(className||'')+'"><img src="'+esc(item.src)+'" alt="" draggable="false"><span class="qp-image-fallback" aria-hidden="true">'+esc(item.emoji||'🎨')+'</span></span>';
@@ -46,5 +78,5 @@
       if(img.getAttribute('src').includes('/vehicles/')) window.SihyeonVehicleDisplay?.apply?.(img);
     });
   }
-  window.SihyeonPlayObjects = {list:list,get:get,isValid:valid,picture:picture,preparePictures:preparePictures};
+  window.SihyeonPlayObjects = {list:list,get:get,listChoices:listChoices,resolveChoice:resolveChoice,isValid:valid,picture:picture,preparePictures:preparePictures};
 })();

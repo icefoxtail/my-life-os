@@ -6,8 +6,8 @@
   const SAVE_KEY = 'sihyeon-quantity-change-v1';
   const DEFAULTS = {
     version: 1, mode: 'compare',
-    compare: { a: 15, b: 12, aId: 'pump_engine', bId: 'korean_police_car', activeTerm: 'a' },
-    subtract: { a: 15, b: 4, objectId: 'pump_engine', activeTerm: 'b' },
+    compare: { a: 15, b: 12, aId: 'pump_engine', bId: 'korean_police_car', activeTerm: 'a', aSourceKind: 'recommended', bSourceKind: 'recommended' },
+    subtract: { a: 15, b: 4, objectId: 'pump_engine', activeTerm: 'b', objectSourceKind: 'recommended' },
     style: 'native', muted: false
   };
   const view = {
@@ -16,6 +16,7 @@
     range: 0, category: 'vehicle', dialog: null, runId: 0, phase: 'idle',
     matchedPairs: 0, extrasShown: 0, moved: 0, current: null,
     complete: false, audioFailed: false, error: null,
+    choiceSourceKind: 'recommended', choiceObjects: [], choices: {},
     storage: { read: 'unread', write: 'unwritten' }
   };
   let memory = null;
@@ -29,22 +30,44 @@
     return [4, 5, 6, 7].includes(n) ? n : 4;
   }
   function values() { return view.state[view.state.mode]; }
-  function item(id) { return view.objects.find(object => object.id === id) || view.objects[0]; }
-  function selectedId() {
-    const s = values();
-    return view.state.mode === 'compare' ? s[s.activeTerm + 'Id'] : s.objectId;
+  function selectedSlot() { return view.state.mode === 'compare' ? values().activeTerm : 'object'; }
+  function reference(slot) { return { id: values()[slot + 'Id'], sourceKind: values()[slot + 'SourceKind'] }; }
+  function selectedRef() { return reference(selectedSlot()); }
+  function item(slot) { return view.choices[slot].object; }
+  function captureChoices() {
+    // A run owns its resolved pictures. Moving a node or changing the number
+    // range must not replace personal paint midway through the sequence.
+    view.choices = {};
+    (view.state.mode === 'compare' ? ['a', 'b'] : ['object']).forEach(slot => {
+      view.choices[slot] = C().resolveChoice(reference(slot));
+    });
   }
+  function refreshChoiceList(kind) {
+    view.choiceSourceKind = kind === 'artwork' ? 'artwork' : 'recommended';
+    view.choiceObjects = C().listChoices({ sourceKind: view.choiceSourceKind });
+  }
+  function missingArtwork() { return Object.values(view.choices).some(choice => choice.missingArtwork); }
+  function choiceSnapshot() {
+    return Object.fromEntries(Object.entries(view.choices).map(([slot, choice]) => [slot, {
+      requested: Object.assign({}, choice.requested), actual: Object.assign({}, choice.actual),
+      missingArtwork: choice.missingArtwork, artVersion: choice.object.artVersion || null,
+      fromArtwork: choice.object.fromArtwork === true
+    }]));
+  }
+  function pictureLabel(slot) { return (view.choices[slot].actual.sourceKind === 'artwork' ? '내 그림 ' : '추천 그림 ') + item(slot).nameKo; }
+  function sourceBadge(slot) { return view.choices[slot].actual.sourceKind === 'artwork' ? '<span class="qc-source-badge" aria-hidden="true">내</span>' : ''; }
   function selectedNumber() { const s = values(); return s[s.activeTerm]; }
   function commonUnit() {
-    const s = values();
-    return view.state.mode === 'subtract' ? item(s.objectId).unitKo
-      : item(s.aId).unitKo === item(s.bId).unitKo ? item(s.aId).unitKo : '개';
+    return view.state.mode === 'subtract' ? item('object').unitKo
+      : item('a').unitKo === item('b').unitKo ? item('a').unitKo : '개';
   }
   function plainQuantity(n, unit) { return M().determiner(n) + ' ' + unit; }
   function syncPicker() {
     const n = selectedNumber();
     view.range = n <= 10 ? 0 : n <= 20 ? 1 : 2;
-    view.category = item(selectedId()).category || 'toy';
+    const selected = selectedRef();
+    view.category = (view.objects.find(object => object.id === selected.id) || view.objects[0]).category || 'toy';
+    refreshChoiceList(selected.sourceKind);
   }
   function save() {
     memory = copy(view.state);
@@ -74,7 +97,11 @@
         if (!candidate || typeof candidate !== 'object') return;
         if (['a', 'b'].includes(candidate.activeTerm)) state[mode].activeTerm = candidate.activeTerm;
         (mode === 'compare' ? ['aId', 'bId'] : ['objectId']).forEach(key => {
-          if (view.objects.some(object => object.id === candidate[key])) state[mode][key] = candidate[key];
+          if (view.objects.some(object => object.id === candidate[key])) {
+            state[mode][key] = candidate[key];
+            const sourceKey = key.replace(/Id$/, 'SourceKind');
+            state[mode][sourceKey] = candidate[sourceKey] === 'artwork' ? 'artwork' : 'recommended';
+          }
         });
       });
       if (['native', 'sino'].includes(saved.style)) state.style = saved.style;
@@ -123,16 +150,17 @@
       enText: M().countWord(s.a, 'sino', 'en') + ' minus ' + M().countWord(s.b, 'sino', 'en') + ' is ' + M().countWord(model.remainingCount, 'sino', 'en') + '.' });
     return result;
   }
-  function objectMarkup(object, selected, side) {
-    return '<div class="qc-item" data-item-id="' + esc(object.id) + '" data-object-id="' + esc(selected.id) + '" data-side="' + side + '">' +
+  function objectMarkup(object, slot, side) {
+    const choice = view.choices[slot], selected = choice.object;
+    return '<div class="qc-item" data-item-id="' + esc(object.id) + '" data-object-id="' + esc(selected.id) + '" data-side="' + side +
+      '" data-source-kind="' + choice.actual.sourceKind + '" data-requested-source-kind="' + choice.requested.sourceKind + '" data-missing-artwork="' + choice.missingArtwork + '">' +
       C().picture(selected) + '<span class="qc-item-number" aria-hidden="true">' + object.ordinal + '</span></div>';
   }
   function pairMarkup(left, right, index, extra) {
-    const s = values();
     return '<div class="qc-match-row ' + (extra ? 'qc-extra-row' : 'qc-pair') + '" data-row-index="' + index + '"' + (extra ? '' : ' data-pair-index="' + index + '"') + '>' +
-      '<div class="qc-side qc-side-left">' + (left ? objectMarkup(left, item(s.aId), 'left') : '<span class="qc-no-pair" aria-label="왼쪽에는 짝이 없어요">빈 자리</span>') + '</div>' +
+      '<div class="qc-side qc-side-left">' + (left ? objectMarkup(left, 'a', 'left') : '<span class="qc-no-pair" aria-label="왼쪽에는 짝이 없어요">빈 자리</span>') + '</div>' +
       '<span class="qc-pair-link" aria-hidden="true">' + (extra ? '·' : '↔') + '</span><div class="qc-side qc-side-right">' +
-      (right ? objectMarkup(right, item(s.bId), 'right') : '<span class="qc-no-pair" aria-label="오른쪽에는 짝이 없어요">빈 자리</span>') + '</div></div>';
+      (right ? objectMarkup(right, 'b', 'right') : '<span class="qc-no-pair" aria-label="오른쪽에는 짝이 없어요">빈 자리</span>') + '</div></div>';
   }
   function boardMarkup() {
     const model = view.model, s = values();
@@ -143,7 +171,7 @@
         model.rightExtra.map((object, index) => pairMarkup(null, object, model.pairCount + index, true)).join('') + '</div>';
     }
     return '<div class="qc-subtract-board"><section class="qc-bucket qc-remaining"><header><span>남은 그림</span><strong data-qc-remaining-count>' + s.a + '</strong></header>' +
-      '<div class="qc-remaining-items">' + model.original.map(object => objectMarkup(object, item(s.objectId), 'original')).join('') + '</div>' +
+      '<div class="qc-remaining-items">' + model.original.map(object => objectMarkup(object, 'object', 'original')).join('') + '</div>' +
       '<p class="qc-bucket-empty" data-qc-remaining-empty' + (s.a ? ' hidden' : '') + '>하나도 없어요 · 0</p></section>' +
       '<section class="qc-bucket qc-departed"><header><span>떠난 그림</span><strong data-qc-departed-count>0</strong></header><div class="qc-departed-items"></div>' +
       '<p class="qc-bucket-empty" data-qc-departed-empty>아직 없어요 · 0</p></section></div>';
@@ -151,9 +179,9 @@
   function termMarkup(term) {
     const s = values(), compared = view.state.mode === 'compare';
     const label = compared ? term === 'a' ? '왼쪽' : '오른쪽' : term === 'a' ? '처음 수' : '떠날 수';
-    const selected = item(compared ? s[term + 'Id'] : s.objectId);
+    const slot = compared ? term : 'object', selected = item(slot);
     return '<div class="qc-term qc-term-' + term + (s.activeTerm === term ? ' is-selected' : '') + (compared || term === 'a' ? '' : ' qc-number-only') + '" data-term-slot="' + term + '">' +
-      (compared || term === 'a' ? '<button type="button" class="qc-term-picture" data-qc-action="choosePicture" data-value="' + (compared ? term : 'source') + '" aria-label="' + label + ' 그림 바꾸기: ' + esc(selected.nameKo) + '" aria-haspopup="dialog">' + C().picture(selected) + '<span aria-hidden="true">▾</span></button>' : '') +
+      (compared || term === 'a' ? '<button type="button" class="qc-term-picture" data-qc-action="choosePicture" data-value="' + (compared ? term : 'source') + '" data-source-kind="' + view.choices[slot].actual.sourceKind + '" aria-label="' + label + ' 그림 바꾸기: ' + esc(pictureLabel(slot)) + '" aria-haspopup="dialog">' + C().picture(selected) + sourceBadge(slot) + '<span aria-hidden="true">▾</span></button>' : '') +
       '<button type="button" class="qc-term-number" data-qc-action="term" data-value="' + term + '" aria-label="' + label + ' 숫자 고르기" aria-pressed="' + (s.activeTerm === term) + '"><small>' + label + '</small><strong>' + s[term] + '<span aria-hidden="true">▾</span></strong></button></div>';
   }
   function expressionMarkup() {
@@ -197,7 +225,7 @@
       '<div class="qc-progress" role="status" aria-live="polite"><strong class="qc-count-now">' + (compared ? '0' : values().a) + '</strong><span class="qc-count-word">' + (compared ? '짝을 지어요' : '남아 있어요') + '</span><span class="qc-status">자동으로 시작해요</span></div></main>' +
       '<aside class="qc-picker" aria-label="그림의 수 고르기">' + pickerMarkup() + '</aside><footer class="qc-footer"><div class="qc-readings" role="group" aria-label="수 읽는 방법">' +
       (language() === 'en' ? '<span class="qc-english">🌐 English · one, two</span>' : '<button type="button" data-qc-action="style" data-value="native" aria-pressed="' + (view.state.style === 'native') + '">하나·둘</button><button type="button" data-qc-action="style" data-value="sino" aria-pressed="' + (view.state.style === 'sino') + '">일·이</button>') +
-      '</div><button type="button" class="qc-replay" data-qc-action="replay">↻ 다시 보기</button><p class="qc-audio-note" hidden>소리 없이도 함께 볼 수 있어요</p></footer></section>';
+      '</div><button type="button" class="qc-replay" data-qc-action="replay">↻ 다시 보기</button><p class="qc-audio-note qc-artwork-note" data-missing-artwork="' + missingArtwork() + '"' + (missingArtwork() ? '' : ' hidden') + '>' + (missingArtwork() ? '내 그림이 없어 견본으로 놀아요' : '소리 없이도 함께 볼 수 있어요') + '</p></footer></section>';
     C().preparePictures(view.container);
     const board = view.container.querySelector('.qc-board');
     if (typeof window.ResizeObserver === 'function') {
@@ -212,8 +240,13 @@
     if (expression) { expression.innerHTML = expressionMarkup(); C().preparePictures(expression); }
   }
   function pictureChoices() {
-    return '<div class="qc-categories" role="group" aria-label="그림 종류">' + categoryOptions().map(category => '<button type="button" data-qc-action="category" data-value="' + category[0] + '" aria-pressed="' + (view.category === category[0]) + '"><span aria-hidden="true">' + category[1] + '</span>' + category[2] + '</button>').join('') + '</div>' +
-      '<div class="qc-picture-choices">' + view.objects.filter(object => object.category === view.category).map(object => '<button type="button" class="qc-object-choice" data-qc-action="object" data-value="' + esc(object.id) + '" aria-label="' + esc(object.nameKo) + ' 고르기" aria-pressed="' + (object.id === selectedId()) + '">' + C().picture(object) + '<span>' + esc(object.nameKo) + '</span></button>').join('') + '</div>';
+    const selected = selectedRef(), personal = view.choiceSourceKind === 'artwork';
+    const objects = view.choiceObjects.filter(object => personal || object.category === view.category);
+    return '<div class="qc-choice-controls"><div class="qc-source-kinds" role="group" aria-label="그림 출처">' +
+      [['recommended', '추천 그림'], ['artwork', '내 그림']].map(([kind, label]) => '<button type="button" data-qc-action="sourceKind" data-value="' + kind + '" aria-pressed="' + (view.choiceSourceKind === kind) + '">' + label + '</button>').join('') + '</div>' +
+      (personal ? '' : '<div class="qc-categories" role="group" aria-label="그림 종류">' + categoryOptions().map(category => '<button type="button" data-qc-action="category" data-value="' + category[0] + '" aria-pressed="' + (view.category === category[0]) + '"><span aria-hidden="true">' + category[1] + '</span>' + category[2] + '</button>').join('') + '</div>') + '</div>' +
+      '<div class="qc-picture-choices">' + (objects.length ? objects.map(object => '<button type="button" class="qc-object-choice" data-qc-action="object" data-value="' + esc(object.id) + '" data-source-kind="' + object.sourceKind + '" aria-label="' + (personal ? '내 그림 ' : '추천 그림 ') + esc(object.nameKo) + ' 고르기" aria-pressed="' + (selected.id === object.id && selected.sourceKind === object.sourceKind) + '">' + C().picture(object) + '<span>' + esc(object.nameKo) + '</span></button>').join('') :
+        '<div class="qc-choice-empty"><p>불러올 내 그림이 없어요.</p><p>그림판에서 먼저 색칠해 보세요.</p><button type="button" data-qc-action="sourceKind" data-value="recommended">추천 그림 보기</button></div>') + '</div>';
   }
   function paintDialog() {
     view.container?.querySelector('.qc-picture-overlay')?.remove();
@@ -319,7 +352,7 @@
     stop(); const ticket = view.runId;
     view.matchedPairs = 0; view.extrasShown = 0; view.moved = 0; view.current = null;
     view.phase = 'preview'; view.complete = false; view.audioFailed = false;
-    calculate(); paint();
+    captureChoices(); calculate(); paint();
     view.sequence.start(steps(), {
       muted: view.state.muted, delayMs: 150,
       onStep: step => { if (view.container && ticket === view.runId) showStep(step); },
@@ -327,7 +360,7 @@
         if (!view.container || ticket !== view.runId) return;
         const note = view.container.querySelector('.qc-audio-note');
         if (error.code.startsWith('AUDIO_')) view.audioFailed = true;
-        else { view.phase = 'error'; if (note) note.textContent = '다시 보기로 한 번 더 해 봐요'; }
+        else { view.phase = 'error'; if (note && !missingArtwork()) note.textContent = '다시 보기로 한 번 더 해 봐요'; }
         if (note) note.hidden = false;
       },
       onEnd: () => {
@@ -370,12 +403,13 @@
     if (action === 'closeDialog') { closeDialog(); return; }
     if (action === 'mode' && ['compare', 'subtract'].includes(value)) { view.state.mode = value; syncPicker(); save(); run(); return; }
     if (action === 'term' && ['a', 'b'].includes(value)) { values().activeTerm = value; syncPicker(); save(); paintPicker(); return; }
+    if (action === 'sourceKind' && ['recommended', 'artwork'].includes(value)) { refreshChoiceList(value); if (view.dialog) paintDialog(); return; }
     if (action === 'range' && ['0', '1', '2'].includes(value)) { view.range = Number(value); paintPicker(); return; }
     if (action === 'category' && categoryOptions().some(category => category[0] === value)) { view.category = value; if (view.dialog) paintDialog(); return; }
     if (action === 'number') { changeNumber(Number(value)); return; }
-    if (action === 'object' && view.objects.some(object => object.id === value)) {
-      const s = values();
-      if (view.state.mode === 'compare') s[s.activeTerm + 'Id'] = value; else s.objectId = value;
+    if (action === 'object' && view.choiceObjects.some(object => object.id === value && object.sourceKind === button.dataset.sourceKind)) {
+      const s = values(), slot = selectedSlot();
+      s[slot + 'Id'] = value; s[slot + 'SourceKind'] = button.dataset.sourceKind;
       view.dialog = null; syncPicker(); save(); run(); return;
     }
     if (action === 'style' && ['native', 'sino'].includes(value)) { view.state.style = value; save(); run(); return; }
@@ -395,7 +429,8 @@
     destroy(); view.container = container; view.options = options || {}; view.error = null;
     if (!container) return;
     const ready = typeof M()?.comparison === 'function' && typeof M()?.subtraction === 'function'
-      && typeof C()?.list === 'function' && typeof window.SihyeonQuantitySequencer?.create === 'function';
+      && typeof C()?.list === 'function' && typeof C()?.listChoices === 'function' && typeof C()?.resolveChoice === 'function'
+      && typeof window.SihyeonQuantitySequencer?.create === 'function';
     view.objects = ready ? C().list().filter(object => C().isValid(object)) : [];
     if (!ready || !view.objects.length) {
       view.error = 'dependencies-unavailable'; view.state = null; view.model = null;
@@ -424,12 +459,14 @@
       if (view.handlers.resize) { window.removeEventListener('resize', view.handlers.resize); window.removeEventListener('orientationchange', view.handlers.resize); }
     }
     view.container = null; view.sequence = null; view.handlers = null; view.options = {}; view.dialog = null;
+    view.choices = {}; view.choiceObjects = [];
   }
   function getSnapshot() {
     const s = view.state ? values() : null, root = view.container, model = view.model;
     const count = selector => root?.querySelectorAll(selector).length || 0;
     return {
       active: !!root, error: view.error, mode: view.state?.mode || null, a: s?.a ?? null, b: s?.b ?? null,
+      artworkChoices: choiceSnapshot(), missingArtwork: missingArtwork(), choiceSourceKind: view.choiceSourceKind,
       state: view.state ? copy(view.state) : null, model: model ? copy(model) : null,
       pairCount: model?.pairCount ?? null, difference: model?.difference ?? null, relation: model?.relation || null,
       remainingCount: model?.remainingCount ?? null, matchedPairs: view.matchedPairs, extrasShown: view.extrasShown, moved: view.moved,
