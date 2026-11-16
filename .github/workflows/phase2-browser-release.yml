@@ -78,7 +78,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import hashlib, json, pathlib, time, urllib.request
-          paths = ['sw.js', 'index.html', 'js/games/art-zone.js']
+          paths = ['sw.js', 'index.html', 'js/games/art-zone.js', 'css/play-settings.css']
           expected = {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
           base = 'https://icefoxtail.github.io/my-life-os/'
           for attempt in range(48):

@@ -18,3 +18,8 @@ button:focus-visible,.ps-dialog select:focus-visible{outline:4px solid #125fa6;o
 @media(orientation:landscape) and (max-height:520px){
   .ps-home-ages .ps-language-toggle{min-height:48px;flex-direction:row;gap:4px}
 }
+/* Keep the five home choices above the map on small portrait phones. */
+@media(orientation:portrait) and (max-width:360px){
+  .ps-home-ages{flex-wrap:nowrap}
+  .ps-home-ages button,.ps-home-ages .ps-language-toggle{box-sizing:border-box;min-width:44px;width:44px;flex:0 0 44px;padding-left:2px;padding-right:2px}
+}
