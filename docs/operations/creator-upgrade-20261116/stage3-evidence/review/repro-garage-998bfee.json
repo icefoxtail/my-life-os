@@ -1,0 +1,48 @@
+{
+  "source": "/tmp/sihyeon-stage3-evidence/publication/20ceba6e-f060-4c3d-8c4a-d6b91a1c130c/js/games/car-garage.js",
+  "sha256": "45b294bc31e4968006475592f37366d9d0b89dc84d1f2946a0f68e6c4e4981ce",
+  "results": [
+    {
+      "name": "get denied but set allowed",
+      "previous": "{\"version\":1,\"cars\":[{\"id\":\"old-car\",\"vehicleId\":\"fire\",\"savedAt\":1,\"decorations\":[]}]}",
+      "actual": "{\"version\":1,\"cars\":[{\"id\":\"new-car\",\"vehicleId\":\"police\",\"savedAt\":2,\"decorations\":[]}]}",
+      "writes": 1,
+      "durable": true,
+      "priorPreserved": false,
+      "memoryOnly": false
+    },
+    {
+      "name": "future version",
+      "previous": "{\"version\":2,\"cars\":[{\"id\":\"future-car\",\"vehicleId\":\"fire\",\"savedAt\":1,\"decorations\":[]}]}",
+      "actual": "{\"version\":1,\"cars\":[{\"id\":\"new-car\",\"vehicleId\":\"police\",\"savedAt\":2,\"decorations\":[]}]}",
+      "writes": 1,
+      "durable": true,
+      "priorPreserved": false,
+      "memoryOnly": false
+    },
+    {
+      "name": "corrupt JSON",
+      "previous": "{\"version\":1,\"cars\":[{\"id\":\"old-car\",\"vehicleId\":\"fire\",\"savedAt\":1,\"decorations\":[]}]",
+      "actual": "{\"version\":1,\"cars\":[{\"id\":\"new-car\",\"vehicleId\":\"police\",\"savedAt\":2,\"decorations\":[]}]}",
+      "writes": 1,
+      "durable": true,
+      "priorPreserved": false,
+      "memoryOnly": false
+    },
+    {
+      "name": "prototype vehicle __proto__",
+      "accepted": 1,
+      "error": "Cannot read properties of undefined (reading 'includes')"
+    },
+    {
+      "name": "prototype vehicle constructor",
+      "accepted": 1,
+      "error": "Cannot read properties of undefined (reading 'includes')"
+    },
+    {
+      "name": "prototype vehicle toString",
+      "accepted": 1,
+      "error": "Cannot read properties of undefined (reading 'includes')"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "matches": true,
+  "expected": {
+    "sw.js": "6495628ae49b6faf1e6f3ca50f7d114737814fc41beb395cb91b7529585dab93",
+    "index.html": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+    "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+    "js/games/art-zone.js": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+    "js/games/car-garage.js": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c"
+  },
+  "actual": {
+    "sw.js": "6495628ae49b6faf1e6f3ca50f7d114737814fc41beb395cb91b7529585dab93",
+    "index.html": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+    "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+    "js/games/art-zone.js": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+    "js/games/car-garage.js": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c"
+  }
+}

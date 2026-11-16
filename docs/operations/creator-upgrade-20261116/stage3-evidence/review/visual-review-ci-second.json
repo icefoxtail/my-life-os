@@ -1,0 +1,399 @@
+{
+  "kind": "independent visual review",
+  "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
+  "reviewer": "stage3_review",
+  "runId": "43913303118",
+  "head": "1a35bc12b36d318e44937725f08d854cdc41535c",
+  "artifactId": "14248298658",
+  "artifactSha256": "cb67076edef9ca7c8a2150aaf8e5585de6daf360eada79f1300c4685708843e3",
+  "method": "Individually inspected all original PNG files with view_image at their native dimensions. Source files read only. No browser re-execution or product mutations by reviewer.",
+  "status": "NO_PRODUCT_VISUAL_BLOCKER_FOUND_IN_VIEWED_OUTPUT",
+  "releaseApproval": false,
+  "coverage": {
+    "imagesViewed": 38,
+    "artViewports": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        640,
+        360
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        1024,
+        768
+      ]
+    ],
+    "artStates": [
+      "actual template selector and editor",
+      "one-work gallery",
+      "two-work quota/session-only gallery",
+      "legacy 15-region geometry",
+      "restored free PNG",
+      "unrelated-page undo preservation",
+      "number-play failure output"
+    ],
+    "garageViewports": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "garageStates": [
+      "repair entrance",
+      "wheel before/after",
+      "wash before/after",
+      "siren before/after",
+      "decorated completion",
+      "saved-car drive finish",
+      "two saved cars restored"
+    ],
+    "garageLandscapeGameplay": "NOT_RUN in this artifact: 640x360 entry helper failed on an intentionally scrollable public-menu card before game entry."
+  },
+  "findings": [
+    {
+      "severity": "none",
+      "area": "art layout",
+      "observed": "Actual line-art previews, editor geometry, toolbar, palette and gallery save/open/delete/close controls are visible without blocking clipping or overlap in all five requested viewports. Longer template names ellipsize in narrow selectors, while their vehicle previews remain distinct."
+    },
+    {
+      "severity": "none",
+      "area": "art persistence display",
+      "observed": "Quota screenshot clearly distinguishes two independent police thumbnails by purple/green lights and labels the unsaved second picture as session-only. Restored free PNG shows the red stroke and chosen colored background. Legacy screenshot displays the older curved police geometry."
+    },
+    {
+      "severity": "none",
+      "area": "garage portrait layout",
+      "observed": "At 320 and 390 widths, completed-car comparison controls, drive controls, two saved-car cards and their use/remove controls fit. At 320 width the retry label wraps to two lines but remains inside its button."
+    },
+    {
+      "severity": "none",
+      "area": "garage visible changes and reuse",
+      "observed": "Wheel crop changes from a flattened front wheel to a round wheel; siren changes from cracked gray to red/blue with light rays; completed full-stage image shows a clean body. The bow/crown and diamond variants remain distinct in saved-card images; reused car in drive image retains the bow/crown placement and base vehicle geometry."
+    },
+    {
+      "severity": "evidence improvement",
+      "area": "garage entry capture",
+      "observed": "Both repair-before full-page captures occur during .fullscreen-zone zoneEnter fade/scale animation, producing a cyan-tinted image. Final completed/drive/collection captures are clear. Wait for the real entry animation to finish before taking the untouched-car screenshot. Reported to root and garage implementation owner."
+    },
+    {
+      "severity": "evidence improvement",
+      "area": "garage region comparison",
+      "observed": "The wash group changes its own bounds between dirty ellipses and clean sparkles, so locator screenshots compare different physical crops (320:167x41 to212x21;390:204x49 to260x26). Current hash inequality alone is not a fixed-region visual comparison. Capture the full stage or the same vehicle SVG bounding box before/after. Reported to root and garage implementation owner."
+    }
+  ],
+  "ciStatusAtReview": {
+    "art": {
+      "status": "FAIL",
+      "passed": 10,
+      "failed": 3,
+      "failures": [
+        {
+          "name": "two versions remain independent through restore undo reload and number play",
+          "error": "Page.wait_for_function: Timeout 25000ms exceeded."
+        },
+        {
+          "name": "two free pictures keep their colors backgrounds and saved PNGs after reload",
+          "error": "Response.body: Protocol error (Network.getResponseBody): No resource with given identifier found"
+        },
+        {
+          "name": "storage quota keeps the old disk picture and provides usable session-only work",
+          "error": "Response.body: Protocol error (Network.getResponseBody): No resource with given identifier found"
+        }
+      ]
+    },
+    "garage": {
+      "status": "FAIL",
+      "completedPassingCases": 2,
+      "failedAt": "640x360 public-menu card whole-bounds helper"
+    },
+    "overall": "Current run is not green; this report does not upgrade failed functional/source-verification checks to PASS."
+  },
+  "limitations": [
+    "No final landscape garage gameplay PNGs in this artifact",
+    "All-12 gallery or all-24 garage simultaneous layout not pictured here",
+    "Screenshots cannot establish physical touch, audible speech, or child response",
+    "Await corrected CI and stable-entry/fixed-region evidence for final independent closure"
+  ],
+  "images": [
+    {
+      "path": "art-collection/art-collection-failure-storage-quota-keeps-the-old-disk-picture-and-provides-usable-session-o.png",
+      "sha256": "4daa0ad76798b1cdead61ae525e55b05bb17ee387418c7048632fa9c4848a41b",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-failure-two-free-pictures-keep-their-colors-backgrounds-and-saved-PNGs-after-r.png",
+      "sha256": "10c37da657cff417e0e8444488470f455d1709f4cb821d49e25da7b2c43db521",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-failure-two-versions-remain-independent-through-restore-undo-reload-and-number.png",
+      "sha256": "ba5c6f771607541ebcc69cd399c7c9d28d27d58cea7c78d746abdb671eecc990",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-gallery-1024x768.png",
+      "sha256": "bfe81bdae1b1b060c25f599c0516f220087ddf1eecf1329c67eaf444a72dfc43",
+      "width": 1024,
+      "height": 768,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-gallery-320x568.png",
+      "sha256": "7f07879c7d009d6c485f8a8d723dc2e208c8e7b689f71a42eebb8e1b6a3dbfa4",
+      "width": 320,
+      "height": 568,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-gallery-390x844.png",
+      "sha256": "b2653bd71e02526809ce1c7be33493d9a7cdfce98ea3f6de150f3b82c5a100cf",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-gallery-640x360.png",
+      "sha256": "daddd131a33ceb85d630131fe379dd596270dd1d4ec84a3fcc5b820ead121ace",
+      "width": 640,
+      "height": 360,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-gallery-844x390.png",
+      "sha256": "8182c2390f65c03fe6f0dea2d2c955f63bc628025d5e317dccdea96af7a686c4",
+      "width": 844,
+      "height": 390,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-legacy-fifteen-regions-restored.png",
+      "sha256": "49faf2d506ac1535e2e6b35853d22121e1813c6b97d5f5fc8e4a70fdfa396124",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-preview-1024x768.png",
+      "sha256": "68f91de1f929bb86f987ab3c6bea2f7243da70e1b17207bf7cfdb7d8a083b31f",
+      "width": 1024,
+      "height": 768,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-preview-320x568.png",
+      "sha256": "873095a818ebd44d063916b4d81484ed4a92623d7e579d2c99ec891a130eb3de",
+      "width": 320,
+      "height": 568,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-preview-390x844.png",
+      "sha256": "b4f5eecf3898264af28aeb2fb1cc98730361147ea2a3eb221e88895656331744",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-preview-640x360.png",
+      "sha256": "793438f44e09092098acf77b11abbd00a990cf9fae41a8e77a678076de64c23b",
+      "width": 640,
+      "height": 360,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-preview-844x390.png",
+      "sha256": "c8a668bc4cd30f805bafcdc5b65c3930aa61724e786dcb422fcc97c37431e522",
+      "width": 844,
+      "height": 390,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-quota-session-picture.png",
+      "sha256": "53c2a81fe9572d1ea025d058d71f43a47e4888e4045a487dac6748f936b2d0b7",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-red-free-picture-restored.png",
+      "sha256": "41a44f4b43be1278031b3d35ca6a1cea26db07f7ca5ecbecba2f3657654d66bd",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "art-collection/art-collection-undo-preserves-other-pages.png",
+      "sha256": "6b5322772c703551bb710245e870dab71e4185757d5d159303599a7ee0bd33cd",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/FAIL-fire-640x360.png",
+      "sha256": "80d179a114f11d25d5affb6645cbb2a53c1ab00b881e6c172fd9d170bc426b17",
+      "width": 640,
+      "height": 360,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-completed-first.png",
+      "sha256": "2d7db787b3aa90a64986de0f39cf265565785c1b4659256c7ae056e49e7d2dfb",
+      "width": 320,
+      "height": 568,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-drive-finish.png",
+      "sha256": "cbea989296cbf72d481a86f72728fbed72481c0665855e241d2e2154f9e7df8a",
+      "width": 320,
+      "height": 568,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-garage-restored.png",
+      "sha256": "4ee1ba89ee30facc7be5c883c08e352fe52dae588b9c6d23e3f1c5f4c94f38a2",
+      "width": 320,
+      "height": 568,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-repair-before.png",
+      "sha256": "a7edc8d956865fa2a14e10c51c55c284c36813fd4fdc3a34c27bf379ce8e22c3",
+      "width": 320,
+      "height": 568,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-siren-after.png",
+      "sha256": "45463e2b9a50050aaa1fb5caa033f51b0d68c2f47c97e5bd8a434a351cd3e452",
+      "width": 56,
+      "height": 25,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-siren-before.png",
+      "sha256": "d081ef92b4d39365e01c22bb9b0e16460b1f0e4d01e470d3222d5fb891fabe22",
+      "width": 38,
+      "height": 14,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-wash-after.png",
+      "sha256": "12e2c0a7b44508f5bc530b9d38b77326cd6f2ea71dde1c06de634e964ff1d3bc",
+      "width": 212,
+      "height": 21,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-wash-before.png",
+      "sha256": "51985a88d110720bf4ece0311e372b54f507ee874d39fcc09848733e3932a9bc",
+      "width": 167,
+      "height": 41,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-wheel-after.png",
+      "sha256": "8ecc2e3e993c6fbce85dff6c8a3cbaae68c91a23dd00bb8b032e63e233f4d038",
+      "width": 170,
+      "height": 38,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-320x568-wheel-before.png",
+      "sha256": "e7bf2b8c789904e8c0501e08899c65d3aa0d9a151b9fb62a6c279cc308942a29",
+      "width": 172,
+      "height": 39,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-completed-first.png",
+      "sha256": "fbe89952095b58a055c436186cb62bb2fb982ee0846d74b739c1e090392e4d49",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-drive-finish.png",
+      "sha256": "0e0711ee947dd233521f1f933f394354eed70fad54328903a82a334b5575b25b",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-garage-restored.png",
+      "sha256": "836979cabe37cce911947022dae669a9b8de3e0f5159bf363fcfedcbb51cbc75",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-repair-before.png",
+      "sha256": "08b4c3797d5dc3ad56c56568ec3576d023b579a79cc7bb87f3e7ff121d0dbf22",
+      "width": 390,
+      "height": 844,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-siren-after.png",
+      "sha256": "6cc351f73ddfd333b5cab4ecf258fbae35ee5ece4737cc5bc2eb47d6beca0224",
+      "width": 69,
+      "height": 31,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-siren-before.png",
+      "sha256": "edb4da0dbd59635a96c299ba9bd663cb0f8f68e5ec3608dedbd68d19d34693f0",
+      "width": 46,
+      "height": 18,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-wash-after.png",
+      "sha256": "e221049c8dc11a01dad10b26400eccd916b3e7d739558f8becc37e16676b4cdd",
+      "width": 260,
+      "height": 26,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-wash-before.png",
+      "sha256": "9ad0fdaacc459289da451a91a91a1c041c3caf08121b51968bc5e0652b41389e",
+      "width": 204,
+      "height": 49,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-wheel-after.png",
+      "sha256": "61cd592ebb5176501716a0c7dddb97a9207c022565f515888755c69596649703",
+      "width": 209,
+      "height": 47,
+      "viewedByIndependentReviewer": true
+    },
+    {
+      "path": "garage/fire-390x844-wheel-before.png",
+      "sha256": "4b395857e957a1e2df9f3dffb19aa3373720f301e235fc522e9f4a3b5ee17152",
+      "width": 211,
+      "height": 47,
+      "viewedByIndependentReviewer": true
+    }
+  ]
+}

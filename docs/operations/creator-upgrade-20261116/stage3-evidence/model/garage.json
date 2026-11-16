@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "checks": 11,
+  "repairPermutations": 30,
+  "cases": [
+    {
+      "name": "five vehicles / all 30 valid repair orders preserve only the repaired parts",
+      "status": "PASS"
+    },
+    {
+      "name": "unneeded tools and detached controls do not alter the next workshop",
+      "status": "PASS"
+    },
+    {
+      "name": "same model can be stored twice with independent decorations and one reward per completion",
+      "status": "PASS"
+    },
+    {
+      "name": "six sticker positions, remove and render preserve exact coordinates",
+      "status": "PASS"
+    },
+    {
+      "name": "saved car drives to all three stops in free order without replay rewards and restores unfinished work",
+      "status": "PASS"
+    },
+    {
+      "name": "deletion requires its visible confirmation, is reversible and does not recreate on return",
+      "status": "PASS"
+    },
+    {
+      "name": "storage failure retains prior durable bytes and all new cars for the current tab",
+      "status": "PASS"
+    },
+    {
+      "name": "unreadable, future and damaged saves block writes and keep the original raw bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid saved values are not treated as vehicles or markup",
+      "status": "PASS"
+    },
+    {
+      "name": "a full garage keeps every prior car and saves the waiting finish only after a deliberate removal",
+      "status": "PASS"
+    },
+    {
+      "name": "rotation and stale timeouts cannot change a later mount or duplicate drive completion",
+      "status": "PASS"
+    }
+  ],
+  "sourceSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+  "notRun": [
+    "real browser pixels",
+    "physical device touch",
+    "audible speech",
+    "child observation"
+  ]
+}

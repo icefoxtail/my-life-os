@@ -1,0 +1,19 @@
+{
+  "source": "/tmp/sihyeon-stage3-evidence/publication/20ceba6e-f060-4c3d-8c4a-d6b91a1c130c/js/games/art-zone.js",
+  "sha256": "b4e6f9a4a5cd22b1f0d5cb577d635a46d407cc78915d1ce8abbe80e5e82b7aed",
+  "results": [
+    {
+      "name": "Undo restored police after painting another template",
+      "loadedPolice": "#44CC44",
+      "expectedFire": "#4488FF",
+      "actualFire": "#FF4444",
+      "policeRestored": "#FF4444",
+      "otherTemplateEditLost": true
+    },
+    {
+      "name": "untouched free canvas accepted as collectible",
+      "accepted": true,
+      "kind": "free"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "suite": "Creator stage3 art collection",
+  "status": "PASS",
+  "sourceSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+  "checks": [
+    {
+      "name": "all 28 chooser pictures contain the exact selectable SVG instead of emoji placeholders",
+      "status": "PASS",
+      "detail": {
+        "templates": 28
+      }
+    },
+    {
+      "name": "two colors of one template are independent snapshots that survive a fresh module",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "legacy preview, saved picture, and reopened working picture preserve all fifteen original regions",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "two free pictures retain their backgrounds and late PNG callbacks cannot replace the newest choice",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "opening a stored picture is undoable without losing other templates or the free drawing",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "restore undo cannot roll back later edits to other templates or to the free canvas",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "undoing a free-picture restore preserves a later coloring edit",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "a quota failure preserves old disk bytes and keeps the added picture usable in this session",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "denied reads cannot silently overwrite an existing collection even when writes are allowed",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "corrupt, duplicate, and future-format collections stay untouched for recovery",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "the thirteenth picture is refused without evicting any of the twelve saved pictures",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "stored SVG injection and external images cannot enter a collection preview",
+      "status": "PASS",
+      "detail": true
+    }
+  ],
+  "limitations": [
+    "Production closure with controlled storage and Image callbacks; no real browser pixels, physical touch, audible listening, or child observation."
+  ]
+}

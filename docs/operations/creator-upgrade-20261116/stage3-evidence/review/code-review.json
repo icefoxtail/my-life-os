@@ -1,0 +1,47 @@
+{
+  "reviewer": "stage3_review",
+  "reviewScope": "Independent source review and original-counterexample replay; browser pixels remain pending",
+  "initialRemoteHead": "998bfee34a89fd55a7954bb204e38c989289e20e",
+  "findings": [
+    {
+      "id": "garage-read-failure-overwrite",
+      "status": "FIXED_VERIFIED",
+      "initialEvidence": "repro-garage-998bfee.json",
+      "verifiedEvidence": "repro-garage-fixed-33184e4.json",
+      "verification": "Denied read, future schema, corrupt JSON preserve original raw with zero writes and memory-only status."
+    },
+    {
+      "id": "garage-inherited-vehicle-key",
+      "status": "FIXED_VERIFIED",
+      "initialEvidence": "repro-garage-998bfee.json",
+      "verifiedEvidence": "repro-garage-fixed-33184e4.json",
+      "verification": "__proto__, constructor, toString all rejected; no gallery render exception."
+    },
+    {
+      "id": "art-restore-undo-erases-other-edits",
+      "status": "FIXED_VERIFIED",
+      "initialEvidence": "repro-art-998bfee.json",
+      "verifiedEvidence": "repro-art-fixed-0db6d11.json",
+      "verification": "Original police restoration undo keeps later fire_pump paint unchanged."
+    }
+  ],
+  "verifiedSourceSha256": {
+    "js/games/art-zone.js": "0db6d1140bdf3c9a43b507eae9890850c68ad942cae342893ce6fad912331129",
+    "js/games/car-garage.js": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c"
+  },
+  "sourceReviewStatus": "PASS_SCOPED",
+  "browserReviewStatus": "PENDING_GITHUB_ACTIONS",
+  "notRun": [
+    "local Chromium (OS socket restriction)",
+    "physical device touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "sourceObservation": [
+    "Safe shipped SVG/validated paint and sticker inputs; restricted collection IDs",
+    "12-artwork saturation refuses new save without evicting an old work",
+    "Detached gallery snapshots and original legacy drawing revisions",
+    "PNG restore tokens and garage epoch/render tokens",
+    "Completion reward latch on garage replay"
+  ]
+}

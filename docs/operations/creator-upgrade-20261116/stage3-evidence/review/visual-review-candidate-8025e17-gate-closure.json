@@ -1,0 +1,199 @@
+{
+  "kind": "independent final required-gate closure addendum",
+  "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
+  "reviewer": "stage3_review",
+  "candidateHead": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+  "status": "PASS_REQUIRED_VISUAL_REVIEW_GATE_CLOSED",
+  "scope": "Closes only the remaining measured 390x844 mode-tab overflow gate after the earlier42-image source-bound visual review. No duplicated review of those42 PNGs was performed.",
+  "phase2Evidence": {
+    "runId": "43915933803",
+    "artifactId": "14252507902",
+    "artifactSha256": "d5739ef4b98e6ed3d8563598977685ba2811bd8a975b0fb81cf7db56d7dc02f1",
+    "report": "/tmp/sihyeon-stage3-evidence/candidate-quantity/art-reference/art-reference-browser.json",
+    "reportSha256": "4693eeef13c2c82cc0a6c14ad892df9fffbd90fa7e21bf29e690e1f1c542ddfc",
+    "status": "PASS",
+    "passed": 7,
+    "failed": 0,
+    "pageErrors": 0,
+    "sourceHashesMatchExactCandidate": true,
+    "sources": {
+      "index.html": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+      "js/games/art-zone.js": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+      "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+      "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+      "scripts/qa-art-reference-browser.py": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+      "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+    }
+  },
+  "unchangedAcceptance": {
+    "originalFailingHead": "1a35bc12b36d318e44937725f08d854cdc41535c",
+    "testScript": "scripts/qa-art-reference-browser.py",
+    "beforeSha256": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+    "afterSha256": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+    "entireTestFileByteIdentical": true,
+    "textBoundaryTolerancePixels": 1,
+    "scrollOverflowTolerancePixels": 1,
+    "assertionsRelaxed": false
+  },
+  "before": {
+    "source": "prior failing art-reference390 report",
+    "coloringButtonRight": 236.79998779296875,
+    "coloringTextRight": 237.8199920654297,
+    "overrunPixels": 1.0200042724609375,
+    "clientWidth": 76,
+    "scrollWidth": 79,
+    "status": "FAIL"
+  },
+  "afterMeasurements": [
+    {
+      "template": "police",
+      "viewport": [
+        390,
+        844
+      ],
+      "tabs": [
+        {
+          "selector": ".az-mode-tab[data-tab=\"free\"]",
+          "buttonLeft": 70,
+          "buttonRight": 150,
+          "textLeft": 85,
+          "textRight": 135,
+          "leftClearance": 15,
+          "rightClearance": 15,
+          "clientWidth": 76,
+          "scrollWidth": 76,
+          "contained": true
+        },
+        {
+          "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+          "buttonLeft": 155.1999969482422,
+          "buttonRight": 236.79998779296875,
+          "textLeft": 170.5,
+          "textRight": 221.5,
+          "leftClearance": 15.300003051757812,
+          "rightClearance": 15.29998779296875,
+          "clientWidth": 76,
+          "scrollWidth": 76,
+          "contained": true
+        }
+      ],
+      "clippedText": [],
+      "allHitTestsReachable": true
+    },
+    {
+      "template": "police_swat_suv",
+      "viewport": [
+        390,
+        844
+      ],
+      "tabs": [
+        {
+          "selector": ".az-mode-tab[data-tab=\"free\"]",
+          "buttonLeft": 70,
+          "buttonRight": 150,
+          "textLeft": 85,
+          "textRight": 135,
+          "leftClearance": 15,
+          "rightClearance": 15,
+          "clientWidth": 76,
+          "scrollWidth": 76,
+          "contained": true
+        },
+        {
+          "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+          "buttonLeft": 155.1999969482422,
+          "buttonRight": 236.79998779296875,
+          "textLeft": 170.5,
+          "textRight": 221.5,
+          "leftClearance": 15.300003051757812,
+          "rightClearance": 15.29998779296875,
+          "clientWidth": 76,
+          "scrollWidth": 76,
+          "contained": true
+        }
+      ],
+      "clippedText": [],
+      "allHitTestsReachable": true
+    },
+    {
+      "template": "butterfly",
+      "viewport": [
+        390,
+        844
+      ],
+      "tabs": [
+        {
+          "selector": ".az-mode-tab[data-tab=\"free\"]",
+          "buttonLeft": 70,
+          "buttonRight": 150,
+          "textLeft": 85,
+          "textRight": 135,
+          "leftClearance": 15,
+          "rightClearance": 15,
+          "clientWidth": 76,
+          "scrollWidth": 76,
+          "contained": true
+        },
+        {
+          "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+          "buttonLeft": 155.1999969482422,
+          "buttonRight": 236.79998779296875,
+          "textLeft": 170.5,
+          "textRight": 221.5,
+          "leftClearance": 15.300003051757812,
+          "rightClearance": 15.29998779296875,
+          "clientWidth": 76,
+          "scrollWidth": 76,
+          "contained": true
+        }
+      ],
+      "clippedText": [],
+      "allHitTestsReachable": true
+    }
+  ],
+  "visualObservation": "Police, police SWAT SUV and butterfly original390x844 PNGs all show both Korean mode labels fully within their buttons with visible side padding and no decorative emoji. Companion example, next-part control, selected outline and color palette remain visible.",
+  "conclusion": "The same mandatory test that previously measured overflow now passes for all three representative390x844 layouts on exact candidate8025. Numeric containment, zero clipped text, normal hit testing, original PNG inspection and unchanged assertions independently support closing the remaining review gate.",
+  "priorReports": [
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/independent/visual-review-ci-second.json",
+      "sha256": "c2ebc45a2b1f4f645bbba1ebddbaad2735bd7b6c9eb0e59f7b6833d0b79d6370",
+      "preservedUnchanged": true
+    },
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/independent/visual-review-ci-second-addendum.json",
+      "sha256": "594396c84892e0a34b7513996e49cfe539927f0d8f56c31b7799424979cb557b",
+      "preservedUnchanged": true
+    },
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/independent/visual-review-candidate-8025e17.json",
+      "sha256": "a6ced8d74bce0dbae673860fc98e4aa29c778c4b895491daadb0488d839c9b73",
+      "preservedUnchanged": true
+    }
+  ],
+  "imagesNewlyViewed": [
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/candidate-quantity/art-reference/art-reference-police-390x844.png",
+      "sha256": "745b306e99081abc42d00c54f2c9428ef59469f4785e264862b709b166a7b597",
+      "directlyViewed": true
+    },
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/candidate-quantity/art-reference/art-reference-police_swat_suv-390x844.png",
+      "sha256": "515339f3d6613790f21198b6c3c30a6b2b394344892b829f2b366b929f6a12a2",
+      "directlyViewed": true
+    },
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/candidate-quantity/art-reference/art-reference-butterfly-390x844.png",
+      "sha256": "4291041e36710623d4422b2672252e789a1475767ae72e7b63ba13525ee2cfae",
+      "directlyViewed": true
+    }
+  ],
+  "reusedPriorReview": "visual-review-candidate-8025e17.json (42 images); no repeat of garage or art workflow screenshots",
+  "independentReviewOpenFindings": [],
+  "productMutationsByReviewer": false,
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "deploymentStatus": "This addendum does not claim merge or production completion; those steps remain under root coordination."
+}

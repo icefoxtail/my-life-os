@@ -1,0 +1,183 @@
+{
+  "status": "FAIL",
+  "checks": [
+    {
+      "status": "PASS",
+      "vehicle": "fire",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:43383/index.html",
+          "httpStatus": 200,
+          "servedSha256": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+          "checkoutSha256": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:43383/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "e7bf2b8c789904e8c0501e08899c65d3aa0d9a151b9fb62a6c279cc308942a29",
+          "afterSha256": "8ecc2e3e993c6fbce85dff6c8a3cbaae68c91a23dd00bb8b032e63e233f4d038"
+        },
+        "wash": {
+          "beforeSha256": "51985a88d110720bf4ece0311e372b54f507ee874d39fcc09848733e3932a9bc",
+          "afterSha256": "12e2c0a7b44508f5bc530b9d38b77326cd6f2ea71dde1c06de634e964ff1d3bc"
+        },
+        "siren": {
+          "beforeSha256": "d081ef92b4d39365e01c22bb9b0e16460b1f0e4d01e470d3222d5fb891fabe22",
+          "afterSha256": "45463e2b9a50050aaa1fb5caa033f51b0d68c2f47c97e5bd8a434a351cd3e452"
+        }
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjig28q-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 13.12000846862793,
+        "y": 100.6400146484375,
+        "width": 293.75999641418457,
+        "height": 379.1999816894531
+      },
+      "driveStage": {
+        "x": 7,
+        "y": 93,
+        "width": 306,
+        "height": 400
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "fire",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:43383/index.html",
+          "httpStatus": 200,
+          "servedSha256": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+          "checkoutSha256": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:43383/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "4b395857e957a1e2df9f3dffb19aa3373720f301e235fc522e9f4a3b5ee17152",
+          "afterSha256": "61cd592ebb5176501716a0c7dddb97a9207c022565f515888755c69596649703"
+        },
+        "wash": {
+          "beforeSha256": "9ad0fdaacc459289da451a91a91a1c041c3caf08121b51968bc5e0652b41389e",
+          "afterSha256": "e221049c8dc11a01dad10b26400eccd916b3e7d739558f8becc37e16676b4cdd"
+        },
+        "siren": {
+          "beforeSha256": "edb4da0dbd59635a96c299ba9bd663cb0f8f68e5ec3608dedbd68d19d34693f0",
+          "afterSha256": "6cc351f73ddfd333b5cab4ecf258fbae35ee5ece4737cc5bc2eb47d6beca0224"
+        }
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjigjkb-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 17.400001525878906,
+        "y": 109.04000091552734,
+        "width": 355.1999740600586,
+        "height": 628.7999649047852
+      },
+      "driveStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 664
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "testScriptSha256": "70e37f837a6d3a4fb4b776f1c089d3498fed7ec0b2ebc2963337a8f6220fb80a",
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "baseUrl": "http://127.0.0.1:43383/",
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-garage-browser.py\", line 272, in main\n    report[\"checks\"].append(one_case(page, base, output, vehicle, width, height, responses))\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-garage-browser.py\", line 149, in one_case\n    enter(page, base)\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-garage-browser.py\", line 98, in enter\n    click(page, '.zone-game-card[onclick=\"openCarGarageGame()\"]')\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-garage-browser.py\", line 73, in click\n    visible_control(page, locator)\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-garage-browser.py\", line 61, in visible_control\n    assert box[\"y\"] + box[\"height\"] <= viewport[\"height\"] + 1, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 16, 'y': 178, 'width': 295, 'height': 452.078125}\n"
+}
