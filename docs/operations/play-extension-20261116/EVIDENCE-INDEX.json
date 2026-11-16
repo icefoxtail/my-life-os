@@ -1,0 +1,201 @@
+{
+  "releaseMerge": "0b90bd0ceab618c76bba4651d1e85a7afc557f3a",
+  "testedCandidate": "cc267b9cc2513cfbea0c01c47e66210cfaed7b69",
+  "notes": [
+    "Independent manifests retain their original extraction paths. This index maps all preserved files to their repository paths and raw-byte SHA256.",
+    "Browser report JSONs are gzip-compressed losslessly; screenshots preserve original bytes.",
+    "This closeout changes only project documentation and evidence."
+  ],
+  "files": [
+    {
+      "path": "ci/stage3/IMPLEMENTATION.json",
+      "bytes": 4144,
+      "sha256": "1e5413adea222ccc1615f57aac663b0780afd3bec0c09d7bb352896ed69d50fa"
+    },
+    {
+      "path": "ci/stage3/artwork-choices-model.json",
+      "bytes": 2397,
+      "sha256": "d86c27ee9bc2c2b6a8ad180158f9ab432af5aff5990c21e5fe1bb3427bf39a48"
+    },
+    {
+      "path": "ci/stage3/browser/art-reference-browser.json.gz",
+      "bytes": 4884,
+      "sha256": "1e244ed50c1ff2ceedf0ad11fa697a893f4a72a5d0e616d10a981949d770d403"
+    },
+    {
+      "path": "ci/stage3/browser/art-story-addition-personal-and-example-same-id.png",
+      "bytes": 46419,
+      "sha256": "9afe600a0ff3ed95e4197598e4a78e940ed8ea00889f0e0b875afd8f212f8d3b"
+    },
+    {
+      "path": "ci/stage3/browser/art-story-arithmetic-deleted-artwork-fallback.png",
+      "bytes": 48378,
+      "sha256": "899d56c48dfeba974afeb9fff7af01c91b65172cef6411428a22883c18084e47"
+    },
+    {
+      "path": "ci/stage3/browser/art-story-browser.json.gz",
+      "bytes": 108959,
+      "sha256": "926d9e8c3a0d9d56f54fa7171d32830d28b40c3e2bfedee903c1d7b775bf4027"
+    },
+    {
+      "path": "ci/stage3/browser/independent-audit.json",
+      "bytes": 15263,
+      "sha256": "1ece828f56b172f7a49a8a32801fd834056866893b1db70a5b3af8688708e4c3"
+    },
+    {
+      "path": "ci/stage3/browser/number-picture-browser.json.gz",
+      "bytes": 6627,
+      "sha256": "d19abc61034812bbfea59bba8e8a124d0837aac9f6196e6fb1a5c66dda0d3fe1"
+    },
+    {
+      "path": "ci/stage3/browser/picture-arithmetic-browser.json.gz",
+      "bytes": 6725,
+      "sha256": "dd751608552e61b2b980ce83bab7e75d37fd0b3fc91caba7ea343abd99342c73"
+    },
+    {
+      "path": "ci/stage3/browser/picture-arithmetic-share-1024x768.png",
+      "bytes": 110762,
+      "sha256": "6acdbcd86b76f0fd7ba9c15ee0f126832c7a7ba7a6c536eb47d88c6a86657a74"
+    },
+    {
+      "path": "ci/stage3/browser/quantity-change-browser.json.gz",
+      "bytes": 40777,
+      "sha256": "fa71ea7d90532e4ea0f7b188392ab4f08d33a7bb11f07ee7993e1bc9e83f0dda"
+    },
+    {
+      "path": "ci/stage3/browser/ten-frame-garden-browser.json.gz",
+      "bytes": 23035,
+      "sha256": "8aea8024351c1fb0f1acba14401bdf5d79d70076645ae6868ad1d895774bc2fc"
+    },
+    {
+      "path": "ci/stage3/first-candidate/art-story-browser.json.gz",
+      "bytes": 109336,
+      "sha256": "a9bda6a9539511c7c8105307f8497fb07d9d22bb44ae32b63348bd9a1eb32c91"
+    },
+    {
+      "path": "ci/stage3/first-candidate/independent-audit.json",
+      "bytes": 9014,
+      "sha256": "5a2741ad3f3a320d8451397f9664a0079d1b8c9a41b44ef81e2e01c085443436"
+    },
+    {
+      "path": "ci/stage3/first-candidate/pa-personal-art-320x568-before.png",
+      "bytes": 46191,
+      "sha256": "1c29ecc9b302c2ce6cd78e607de34560fc2ad2c9ef336e62a097f96103d0db16"
+    },
+    {
+      "path": "ci/stage3/first-candidate/pa-sharing-1024x768-before.png",
+      "bytes": 112525,
+      "sha256": "aaf1e515a06e1d9e33b0e6c44d1ab55e1aa88d7f934614ad10aeaf5ca735466a"
+    },
+    {
+      "path": "ci/stage3/first-candidate/picture-arithmetic-browser.json.gz",
+      "bytes": 7309,
+      "sha256": "2012a86889f5430a318374f07655b673554bb4c5b53b20e999d4212d83508bee"
+    },
+    {
+      "path": "ci/stage3/local-required-checks.json",
+      "bytes": 25518,
+      "sha256": "51294e09da153a78d70a0a04e912aab267fef2e4400ae2983ae0118425d1eb73"
+    },
+    {
+      "path": "ci/stage3/neighborhood-story-model.json",
+      "bytes": 950,
+      "sha256": "11d475558dfba7035e97ae2a979bfc842de843ea7378909c1fb8dee5ff4c8870"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-addition-personal-and-example-same-id.png",
+      "bytes": 46419,
+      "sha256": "9afe600a0ff3ed95e4197598e4a78e940ed8ea00889f0e0b875afd8f212f8d3b"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-fire-age7-320x568.png",
+      "bytes": 49921,
+      "sha256": "2e15779bf682e444444e10fddaea66d8731df6d0d86cf44acd4d8e38071487e3"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-neighborhood-age6-390x844.png",
+      "bytes": 120176,
+      "sha256": "7649992ef4132069e269014b09a058420935a722a8eee090423a3a304e28a4d2"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-police-age5-1024x768.png",
+      "bytes": 70012,
+      "sha256": "d7127603b243b3268e965ea530c7b65127778b4884c59e80d4ca611108ecb045"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-snack-age7-844x390.png",
+      "bytes": 48310,
+      "sha256": "a5f168e31fbb6740fed024d42d60a8a03df4305625b787dc0e1476f6b02f0a03"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-story-deleted-artwork-fallback.png",
+      "bytes": 47474,
+      "sha256": "b16c6c556cbff94e578032f9aedb2f2cd6d7af655e95ff4ef1c74025d8be4678"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-story-legacy-fifteen-regions.png",
+      "bytes": 45435,
+      "sha256": "7b8202d36eb0343a0879e5f6af0aedea7091485cc578d1d597550ce75002f479"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-story-personal-police-originals-return.png",
+      "bytes": 45452,
+      "sha256": "49680705c953fdab1cfb2cca2d6cdc9cffbf4b92bf38b947cdd02b66ecb0efd6"
+    },
+    {
+      "path": "ci/stage3/production/art-story/art-story-story-speech-failure-completed.png",
+      "bytes": 45277,
+      "sha256": "2c59544bfa984fc9e33fee21e35e129604e4ab9c70b4104eb16a81b25ac547a2"
+    },
+    {
+      "path": "ci/stage3/production/art-story-browser.json.gz",
+      "bytes": 108976,
+      "sha256": "dc1502799d642e050f5bfe4717bdfb1c2ba6b10896e7761fcfbd80e3f04acca9"
+    },
+    {
+      "path": "ci/stage3/production/deployed-runtime.json",
+      "bytes": 2555,
+      "sha256": "01fcbda1c843923ae4f50d3c43e91f9d5c935e57eb51634bbddbfa0cd8149dc6"
+    },
+    {
+      "path": "ci/stage3/production/final-native-observation.json",
+      "bytes": 893,
+      "sha256": "8e86992b3e57221c7cdf00812a3c6b25a47106a76fdc7c6308401a39b0b2f54f"
+    },
+    {
+      "path": "ci/stage3/production/independent-audit.json",
+      "bytes": 28985,
+      "sha256": "91f12727c29d4652a8575a71b9bae21eeb1964ea8fd56c115ff7dba2634ecea8"
+    },
+    {
+      "path": "ci/stage3/production/root-live-verification-0b90bd0c.json",
+      "bytes": 4151,
+      "sha256": "2d796b2e26c9c5530db31015c70ffbc4681df476c69d03d0d2335eac593127fb"
+    },
+    {
+      "path": "ci/stage3/production/stage3-personal-sharing-live.jpg",
+      "bytes": 110908,
+      "sha256": "69ef64a1cd08970189df3bded00344efd067be1d180f5d07f9d9456536fca707"
+    },
+    {
+      "path": "ci/stage3/production/stage3-personal-subtraction-live.jpg",
+      "bytes": 87738,
+      "sha256": "8d829e965544f73dd684224bdcd80382fae3cc8c19893475d2216de7c0bb49ca"
+    },
+    {
+      "path": "ci/stage3/production/stage3-story-age4-live.jpg",
+      "bytes": 64957,
+      "sha256": "dd1d7478c44a111f574bdfbe0d0f2ea6afc21b464bcb9eb6216ef4832b94e7b8"
+    },
+    {
+      "path": "ci/stage3/production/stage3-story-age6-live.jpg",
+      "bytes": 70368,
+      "sha256": "70fdbb2d63c0cc52f88e9225815de04e5327ede7f0cca1978bf1daedb5d990dd"
+    },
+    {
+      "path": "ci/stage3/production/stage3-story-age7-live.jpg",
+      "bytes": 63049,
+      "sha256": "636c6e42ebe9f3dbbea75060e4b8fa6eed6a784efb55c5322498db65073c1f07"
+    }
+  ]
+}

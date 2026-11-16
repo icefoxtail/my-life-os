@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "candidate": {
+    "head": "742cddb4f5a83b62d613990378a6a5c47aff1686",
+    "tree": "084106e165db6a7dd2fed97ec5ba82c7198ae762",
+    "pullRequest": 33
+  },
+  "checkedAtUTC": "2026-11-16T07:41:12.885156+00:00",
+  "status": "FAIL",
+  "releaseReady": false,
+  "workflow": {
+    "playground": {
+      "runId": 43822792355,
+      "status": "SUCCESS"
+    },
+    "phase2": {
+      "runId": 43822792377,
+      "status": "IN_PROGRESS_WITH_FAILURES"
+    },
+    "quantityGames": {
+      "jobId": 133149504306,
+      "status": "FAIL"
+    },
+    "artStory": {
+      "jobId": 133149504547,
+      "status": "FAIL"
+    },
+    "chromium": {
+      "jobId": 133149505443,
+      "status": "PENDING",
+      "lastObservedStep": "Korean and English tap-to-speech synchronization"
+    },
+    "productionUI": {
+      "jobId": 133149506099,
+      "status": "SKIPPED",
+      "reason": "PR event"
+    }
+  },
+  "checks": {
+    "existingQuantity": {
+      "passed": 75,
+      "failed": 1,
+      "total": 76
+    },
+    "artStory": {
+      "passed": 20,
+      "failed": 1,
+      "total": 21
+    },
+    "sourceHashRecords": {
+      "matched": 63,
+      "mismatched": 0,
+      "method": "SHA-256 of git show exact candidate path bytes"
+    },
+    "pageErrors": [],
+    "independentlyViewedScreenshots": 10
+  },
+  "failures": [
+    {
+      "suite": "picture-arithmetic",
+      "case": "15 shared among 4 / 1024x768",
+      "assertion": "blockedButtons must be empty",
+      "observed": "All six groups buttons have blocked centers; the screenshot shows them clipped at the lower edge of the desktop picker. Arithmetic and speech completed correctly.",
+      "classification": "actual UI clipping",
+      "report": "picture-arithmetic/picture-arithmetic-browser.json",
+      "screenshot": "picture-arithmetic/picture-arithmetic-failure-15-shared-among-4-1024x768.png",
+      "trace": "qa-picture-arithmetic-browser.py layout 194; fifteen_four 316",
+      "owner": "svg_completion_audit"
+    },
+    {
+      "suite": "art-story",
+      "case": "personal artwork addition sharing refresh and deletion fallback",
+      "viewport": [
+        320,
+        568
+      ],
+      "assertion": "PA expression text Range must remain inside its element",
+      "observed": "Expression contained=false; term buttons clientHeight=44 and scrollHeight=45. Native hits, target sizes, SVG decode and personal-vs-example colors passed before the failure.",
+      "classification": "actual compact expression bounds failure",
+      "report": "art-story/art-story-browser.json",
+      "screenshot": "art-story/art-story-failure-personal-artwork-addition-sharing-refresh-and-deletion-fallback.png",
+      "trace": "qa-art-story-browser.py layout 322; arithmetic_art 532",
+      "notRunAfterEarlyFailure": [
+        "personal arithmetic sharing",
+        "personal arithmetic refresh",
+        "personal arithmetic deletion fallback"
+      ],
+      "owner": "svg_completion_audit"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 14204899525,
+      "name": "quantity-browser-43822792377",
+      "file": "quantity.zip",
+      "sha256": "cad80ba246d2526d5c6725aaaa4b1b452941e655c84b4c0e33911e41fa694549"
+    },
+    {
+      "id": 14205259384,
+      "name": "art-story-browser-43822792377",
+      "file": "art-story.zip",
+      "sha256": "2804885340c95b3426fcdfc40e62e89b4e88b1bdbc6265a0b8d6657652359513"
+    }
+  ],
+  "reports": [
+    {
+      "path": "art-reference/art-reference-browser.json",
+      "sha256": "f19dba1aa58ed12d14c6ec664267bd2a93af861386dc48409c8d1a12201129c3",
+      "passed": 7,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 6
+    },
+    {
+      "path": "art-story/art-story-browser.json",
+      "sha256": "aed0ea171fb7e165b29f0aa08bf37bc497ac2cc25bef65b6b01d6133636e4b39",
+      "passed": 20,
+      "failed": 1,
+      "pageErrors": [],
+      "sourceRecordsMatched": 17
+    },
+    {
+      "path": "number-picture/number-picture-browser.json",
+      "sha256": "5564748713b0bff8a3b555be33f29064ac7054138f78f566896d0a3df4d52be9",
+      "passed": 20,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 10
+    },
+    {
+      "path": "picture-arithmetic/picture-arithmetic-browser.json",
+      "sha256": "285217975dd8ba78737a43b0f5a2ef9368edca8184f55d80d8375ef527eb5c1f",
+      "passed": 18,
+      "failed": 1,
+      "pageErrors": [],
+      "sourceRecordsMatched": 8
+    },
+    {
+      "path": "quantity-change/quantity-change-browser.json",
+      "sha256": "210e8d0de608c5ca01e5a9aebe2ae2a48cbf04177b801b805f2389291e9c59ce",
+      "passed": 16,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 12
+    },
+    {
+      "path": "ten-frame-garden/ten-frame-garden-browser.json",
+      "sha256": "9e87d069b527ae540ac5a0ad0fd2b637cf150ceb20a17b4445d3f6575a3673ab",
+      "passed": 14,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 10
+    }
+  ],
+  "newSuiteSources": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "26fdf32e46a7984fd1a0ccd7ac73aa6b342565fd9ec8019cd3a0fa6576036a51",
+    "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+    "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+    "js/games/picture-arithmetic.js": "0384e47d9c35e74be220b765e543eaeace472d71830c40e92ab6fc0615eee7fc",
+    "css/games/picture-arithmetic.css": "1c555858f71c955b65efe3fa6c935ddbabb26835113331d530ffd8d9772ba8a9",
+    "js/games/quantity-change.js": "7cc52a1a6c04b8e7e3ce9ae053ff1bc831ed95901a43b328a8953546c34ee06d",
+    "css/games/quantity-change.css": "a4ed8fc40e3bfe843cdd451b0cf36e70478f420666ae1c4c839340c91a27abbd",
+    "js/games/neighborhood-story-model.js": "464b94f2a7ce2117bf7c991e232cf950da733dd934cb809e5c363e20cd879bcc",
+    "js/games/neighborhood-story.js": "5d74d271038258fb6eb3018fa0fd51119078eaa9153fc28b9edfa13b9487e47f",
+    "css/games/neighborhood-story.css": "e33c0bd170858805afc7d21e274982c350f0b1d153f779eb51542e60999a4c4d",
+    "assets/games/neighborhood-story/card.svg": "2b73c8bed1983b4e9f91bbee973eba1526c73a6ee1bd8d80b6c19df68f0398b3",
+    "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+    "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+    "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+    "scripts/qa-art-story-browser.py": "18b51f2a557976525ad35bca876baf3366158e841fc875d4d3d33dbcde0a098f"
+  },
+  "reviewedScreenshots": [
+    {
+      "path": "picture-arithmetic/picture-arithmetic-failure-15-shared-among-4-1024x768.png",
+      "sha256": "aaf1e515a06e1d9e33b0e6c44d1ab55e1aa88d7f934614ad10aeaf5ca735466a"
+    },
+    {
+      "path": "art-story/art-story-failure-personal-artwork-addition-sharing-refresh-and-deletion-fallback.png",
+      "sha256": "1c29ecc9b302c2ce6cd78e607de34560fc2ad2c9ef336e62a097f96103d0db16"
+    },
+    {
+      "path": "art-story/art-story-fire-age7-320x568.png",
+      "sha256": "2e15779bf682e444444e10fddaea66d8731df6d0d86cf44acd4d8e38071487e3"
+    },
+    {
+      "path": "art-story/art-story-neighborhood-age6-390x844.png",
+      "sha256": "7649992ef4132069e269014b09a058420935a722a8eee090423a3a304e28a4d2"
+    },
+    {
+      "path": "art-story/art-story-snack-age7-844x390.png",
+      "sha256": "a5f168e31fbb6740fed024d42d60a8a03df4305625b787dc0e1476f6b02f0a03"
+    },
+    {
+      "path": "art-story/art-story-police-age5-1024x768.png",
+      "sha256": "d7127603b243b3268e965ea530c7b65127778b4884c59e80d4ca611108ecb045"
+    },
+    {
+      "path": "art-story/art-story-story-personal-police-originals-return.png",
+      "sha256": "49680705c953fdab1cfb2cca2d6cdc9cffbf4b92bf38b947cdd02b66ecb0efd6"
+    },
+    {
+      "path": "art-story/art-story-story-legacy-fifteen-regions.png",
+      "sha256": "7b8202d36eb0343a0879e5f6af0aedea7091485cc578d1d597550ce75002f479"
+    },
+    {
+      "path": "art-story/art-story-story-speech-failure-completed.png",
+      "sha256": "2c59544bfa984fc9e33fee21e35e129604e4ab9c70b4104eb16a81b25ac547a2"
+    },
+    {
+      "path": "art-story/art-story-story-deleted-artwork-fallback.png",
+      "sha256": "b16c6c556cbff94e578032f9aedb2f2cd6d7af655e95ff4ef1c74025d8be4678"
+    }
+  ],
+  "visualReview": "Four story viewports, personal paint, legacy geometry, silent completion and missing-art fallback were directly viewed without additional defects. Both failed PA screenshots were directly viewed.",
+  "limitations": {
+    "nativeAudio": "NOT_RUN",
+    "physicalDevice": "NOT_RUN",
+    "productionURL": "NOT_RUN for this candidate",
+    "chromium": "PENDING; not claimed as PASS"
+  },
+  "nextAction": "Publish the owner-approved PA CSS correction and verify the new exact candidate with unchanged QA gates. Do not treat either failed suite as PASS.",
+  "qaFilesChangedDuringFailureReview": false
+}

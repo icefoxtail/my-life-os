@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "candidate": {
+    "head": "cc267b9cc2513cfbea0c01c47e66210cfaed7b69",
+    "tree": "b67d750f754306f2e43af2143cdfebbe5eebfe67",
+    "pullRequest": 33
+  },
+  "checkedAtUTC": "2026-11-16T08:05:08.834821+00:00",
+  "status": "PASS",
+  "candidateQA": "PASS",
+  "productionQA": "NOT_RUN",
+  "workflows": [
+    {
+      "id": 43825567976,
+      "name": "Playground checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 43825567992,
+      "name": "Phase 2 browser release",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 133158489281,
+      "name": "art-story",
+      "status": "completed",
+      "conclusion": "success",
+      "requiredForPR": true,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify artwork references and complete story models",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned browser harness",
+          "conclusion": "success"
+        },
+        {
+          "name": "Personal artwork and four neighborhood stories through real menus",
+          "conclusion": "success"
+        },
+        {
+          "name": "Attach artwork and story evidence even on failure",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 133158489501,
+      "name": "chromium",
+      "status": "completed",
+      "conclusion": "success",
+      "requiredForPR": true,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned browser harness",
+          "conclusion": "success"
+        },
+        {
+          "name": "Vehicle grammar and game interaction regression",
+          "conclusion": "success"
+        },
+        {
+          "name": "Latest train fixture, real menu and legacy entry checks",
+          "conclusion": "success"
+        },
+        {
+          "name": "Native Chromium English Listening and mode-switch verification",
+          "conclusion": "success"
+        },
+        {
+          "name": "Menu arrival voice and cancellation regression",
+          "conclusion": "success"
+        },
+        {
+          "name": "Korean and English tap-to-speech synchronization",
+          "conclusion": "success"
+        },
+        {
+          "name": "Home welcome and guide voice regression",
+          "conclusion": "success"
+        },
+        {
+          "name": "Attach source-bound evidence even on failure",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 133158489589,
+      "name": "quantity-games",
+      "status": "completed",
+      "conclusion": "success",
+      "requiredForPR": true,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify quantities, cancellation and staged game models",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned browser harness",
+          "conclusion": "success"
+        },
+        {
+          "name": "Automatic picture counting and staged quantity games",
+          "conclusion": "success"
+        },
+        {
+          "name": "Attach quantity-game evidence even on failure",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 133158490557,
+      "name": "production-ui",
+      "status": "completed",
+      "conclusion": "skipped",
+      "requiredForPR": false,
+      "steps": []
+    }
+  ],
+  "checks": {
+    "existingQuantity": {
+      "passed": 76,
+      "failed": 0,
+      "total": 76
+    },
+    "artStory": {
+      "passed": 21,
+      "failed": 0,
+      "total": 21
+    },
+    "totalBrowserGroups": 97,
+    "sourceHashRecords": {
+      "matched": 63,
+      "mismatched": 0,
+      "uniqueFiles": 28,
+      "method": "SHA-256 of git show exact candidate path bytes"
+    },
+    "pageErrors": []
+  },
+  "resolvedFailures": [
+    {
+      "beforeHead": "742cddb4f5a83b62d613990378a6a5c47aff1686",
+      "case": "15 shared among 4 / 1024x768",
+      "status": "PASS",
+      "blockedButtons": [],
+      "currentAndHeadingVisible": true,
+      "screenshot": "picture-arithmetic/picture-arithmetic-share-1024x768.png",
+      "observation": "All six grouping controls are fully visible and their native centers are reachable."
+    },
+    {
+      "beforeHead": "742cddb4f5a83b62d613990378a6a5c47aff1686",
+      "case": "personal artwork addition sharing refresh and deletion fallback",
+      "status": "PASS",
+      "expressionTextContained": true,
+      "screenshot": "art-story/art-story-addition-personal-and-example-same-id.png",
+      "observation": "Both compact picture names and the result fit their visible boundaries; personal sharing, refresh and deletion fallback completed in this run."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 14207431327,
+      "name": "phase2-browser-43825567992",
+      "sha256": "4da715425f390bf338363510c323d3bcecdbff2b0bf3b5c7198757cb7ce70edc",
+      "localFile": null,
+      "zipSHA256VerifiedLocally": false
+    },
+    {
+      "id": 14207172952,
+      "name": "quantity-browser-43825567992",
+      "sha256": "8a6c1f28fcd924e7ead36f97acad13a26bcce4e094e0b02e6b830fb2a3ee6df1",
+      "localFile": "quantity.zip",
+      "zipSHA256VerifiedLocally": true
+    },
+    {
+      "id": 14206947251,
+      "name": "art-story-browser-43825567992",
+      "sha256": "20e6dda52d6f8539c18897033461799ed3d5f9c77f50c51f147e1a74c1442898",
+      "localFile": "art-story.zip",
+      "zipSHA256VerifiedLocally": true
+    }
+  ],
+  "reports": [
+    {
+      "path": "art-reference/art-reference-browser.json",
+      "sha256": "e865613ba9feb0c9c8871c5e9f6a30cfbfbdd32b20362b3d01794f852e7b4d87",
+      "passed": 7,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 6
+    },
+    {
+      "path": "art-story/art-story-browser.json",
+      "sha256": "97556d2cf2c1cb2b120743d0f56e9805c1c3eb40110dd3b51909e09b4f8093b1",
+      "passed": 21,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 17
+    },
+    {
+      "path": "number-picture/number-picture-browser.json",
+      "sha256": "d502acfa3f49585a531f491f84fe55960dd239f68ccec55e03d888e68d759bcb",
+      "passed": 20,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 10
+    },
+    {
+      "path": "picture-arithmetic/picture-arithmetic-browser.json",
+      "sha256": "b547031564b8b1e0576778564d734dafcc73837cc9aba40508d2e5557cc1f064",
+      "passed": 19,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 8
+    },
+    {
+      "path": "quantity-change/quantity-change-browser.json",
+      "sha256": "ea352ee91ee65540b303ee502009c0e8d996186d1f9baec8f18b1a7d4a29e4e9",
+      "passed": 16,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 12
+    },
+    {
+      "path": "ten-frame-garden/ten-frame-garden-browser.json",
+      "sha256": "0afd3873e92f94fb337ff6eef4e5f44cffbb1f683e1a82ca035f275922b1980c",
+      "passed": 14,
+      "failed": 0,
+      "pageErrors": [],
+      "sourceRecordsMatched": 10
+    }
+  ],
+  "sources": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "js/games/art-zone.js": "0fe11c426919120d892218c29ffa1094ff49e91e87cf7b4e4289b996a21c5b36",
+    "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+    "scripts/qa-art-reference-browser.py": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+    "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880",
+    "sw.js": "26fdf32e46a7984fd1a0ccd7ac73aa6b342565fd9ec8019cd3a0fa6576036a51",
+    "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+    "js/games/picture-arithmetic.js": "0384e47d9c35e74be220b765e543eaeace472d71830c40e92ab6fc0615eee7fc",
+    "css/games/picture-arithmetic.css": "1c8dbb01a2844f3da2ca04e27ca2ea7791cc07c028db54e6c81c1f7fc4fd3bf3",
+    "js/games/quantity-change.js": "7cc52a1a6c04b8e7e3ce9ae053ff1bc831ed95901a43b328a8953546c34ee06d",
+    "css/games/quantity-change.css": "a4ed8fc40e3bfe843cdd451b0cf36e70478f420666ae1c4c839340c91a27abbd",
+    "js/games/neighborhood-story-model.js": "464b94f2a7ce2117bf7c991e232cf950da733dd934cb809e5c363e20cd879bcc",
+    "js/games/neighborhood-story.js": "5d74d271038258fb6eb3018fa0fd51119078eaa9153fc28b9edfa13b9487e47f",
+    "css/games/neighborhood-story.css": "e33c0bd170858805afc7d21e274982c350f0b1d153f779eb51542e60999a4c4d",
+    "assets/games/neighborhood-story/card.svg": "2b73c8bed1983b4e9f91bbee973eba1526c73a6ee1bd8d80b6c19df68f0398b3",
+    "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+    "js/quantity-sequencer.js": "469383bf860059b56218924e3194b13f607ca4cab126bc512fc43bb9fdabe0e5",
+    "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+    "scripts/qa-art-story-browser.py": "18b51f2a557976525ad35bca876baf3366158e841fc875d4d3d33dbcde0a098f",
+    "css/games/number-picture.css": "c4f38e1f9aef80da784e83a0c6937e0380f606aba3dbb928798e4cb4a2e4ffbe",
+    "scripts/qa-picture-arithmetic-browser.py": "c16f5389d4eaf94189b43a42a28e2f62c3f6df941e7d324f06c34abdb6b6669b",
+    "assets/games/quantity-change/card.svg": "b5ba10376518a5f637a1652afb6e1722b4b9ebf174d974f9f34e3c8d4f5b49a2",
+    "scripts/qa-quantity-change-browser.py": "a47bdde4434e14f2d8baaf2ebbadd414413df5c91d0d041e84eee5fb84435109",
+    "js/games/ten-frame-garden.js": "e47a078f90606d2d6881c267006c4cd14168d35e5ae5b760657320e1d87160c0",
+    "css/games/ten-frame-garden.css": "d5da0653fec49e4c7091796255e2258abc2ef0019ebd1b1f3b2ce998fe669fc3",
+    "assets/games/ten-frame-garden/card.svg": "a17052d9b2fd56ca2a60c2d7efd7252347c78750c82705a3504a3af454f16c62",
+    "scripts/qa-ten-frame-garden-browser.py": "15bf1cdbc0e7954049ee142c9ddcbe1baa91aba28840e2f4e729cbadcb3cc237"
+  },
+  "reviewedScreenshots": [
+    {
+      "path": "picture-arithmetic/picture-arithmetic-share-1024x768.png",
+      "sha256": "6acdbcd86b76f0fd7ba9c15ee0f126832c7a7ba7a6c536eb47d88c6a86657a74",
+      "reviewMethod": "direct visual review",
+      "priorCandidate": null
+    },
+    {
+      "path": "art-story/art-story-addition-personal-and-example-same-id.png",
+      "sha256": "9afe600a0ff3ed95e4197598e4a78e940ed8ea00889f0e0b875afd8f212f8d3b",
+      "reviewMethod": "direct visual review",
+      "priorCandidate": null
+    },
+    {
+      "path": "art-story/art-story-arithmetic-deleted-artwork-fallback.png",
+      "sha256": "899d56c48dfeba974afeb9fff7af01c91b65172cef6411428a22883c18084e47",
+      "reviewMethod": "direct visual review",
+      "priorCandidate": null
+    },
+    {
+      "path": "art-story/art-story-fire-age7-320x568.png",
+      "sha256": "2e15779bf682e444444e10fddaea66d8731df6d0d86cf44acd4d8e38071487e3",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-neighborhood-age6-390x844.png",
+      "sha256": "7649992ef4132069e269014b09a058420935a722a8eee090423a3a304e28a4d2",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-snack-age7-844x390.png",
+      "sha256": "a5f168e31fbb6740fed024d42d60a8a03df4305625b787dc0e1476f6b02f0a03",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-police-age5-1024x768.png",
+      "sha256": "d7127603b243b3268e965ea530c7b65127778b4884c59e80d4ca611108ecb045",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-story-personal-police-originals-return.png",
+      "sha256": "49680705c953fdab1cfb2cca2d6cdc9cffbf4b92bf38b947cdd02b66ecb0efd6",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-story-legacy-fifteen-regions.png",
+      "sha256": "7b8202d36eb0343a0879e5f6af0aedea7091485cc578d1d597550ce75002f479",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-story-deleted-artwork-fallback.png",
+      "sha256": "b16c6c556cbff94e578032f9aedb2f2cd6d7af655e95ff4ef1c74025d8be4678",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    },
+    {
+      "path": "art-story/art-story-story-speech-failure-completed.png",
+      "sha256": "2c59544bfa984fc9e33fee21e35e129604e4ab9c70b4104eb16a81b25ac547a2",
+      "reviewMethod": "byte-identical to directly reviewed first-candidate image",
+      "priorCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686"
+    }
+  ],
+  "qaFilesChangedDuringRepair": false,
+  "visualReview": "Three repaired or newly completed arithmetic screens were directly reviewed. Eight current story PNGs match, byte for byte, the prior directly reviewed four viewports, personal paint, legacy geometry, missing-art fallback and silent completion.",
+  "limitations": {
+    "nativeAudio": "NOT_RUN",
+    "physicalDevice": "NOT_RUN",
+    "productionURL": "NOT_RUN for this candidate; PR production-ui job intentionally SKIPPED",
+    "chromiumArtifact": "Hosted chromium job and every required step are SUCCESS; its separate archive was not downloaded again."
+  },
+  "nextAction": "Root can perform the authorized normal PR merge and verify exact deployed runtime and production menu flows."
+}

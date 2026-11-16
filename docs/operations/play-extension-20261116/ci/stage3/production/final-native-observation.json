@@ -1,0 +1,7 @@
+{
+  "items": 15,
+  "personalColoredItems": 15,
+  "personalItems": 15,
+  "rootTextContentIncludesHidden": "⌂그림이 움직이는 수 이야기내 그림 우리 동네4세 · 설정🔊🚓이야기를 골라요경찰서 도착▾①9, 6수 바꾸기▾🚙그림 바꾸기경찰 특공대 SUV · 경찰 특공대 SUV▾1 / 1경찰 특공대 SUV 여섯 대 도착해요9 + 6 = 15경찰서15🚙1🚙2🚙3🚙4🚙5🚙6🚙7🚙8🚙9🚙1🚙2🚙3🚙4🚙5🚙6하나도 없어요 · 0오고 있어요0하나도 없어요 · 0출동한 곳0하나도 없어요 · 015열다섯 대 있어요하나·둘일·이↻ 다시 보기내 그림이 없어 견본으로 놀아요소리 없이도 함께 볼 수 있어요",
+  "interpretation": "rootTextContentIncludesHidden is DOM textContent, not a visibility assertion. Use native accessibility observations and screenshot for visible labels."
+}
