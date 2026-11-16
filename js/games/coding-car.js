@@ -147,7 +147,7 @@
         font-family: 'Arial Rounded MT Bold', 'Jua', 'Nanum Gothic', sans-serif;
         box-sizing: border-box;
         user-select: none;
-        touch-action: none;
+        touch-action: pan-y;
         overflow: hidden;
         color: #17324a;
       }
@@ -158,6 +158,11 @@
 
       .coding-car-root * {
         box-sizing: border-box;
+      }
+
+      .game-play-screen:has(.cc-root) > .game-back-floating {
+        min-width: 44px;
+        min-height: 44px;
       }
 
       .cc-top {
@@ -207,7 +212,7 @@
       .cc-diff-btn {
         flex: 1;
         min-width: 120px;
-        min-height: 42px;
+        min-height: 44px;
         padding: 0 14px;
         border-radius: 999px;
         border: 4px solid #fff;
@@ -504,6 +509,8 @@
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
         display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
         place-items: center;
         position: relative;
         overflow: hidden;
@@ -517,6 +524,8 @@
       .cc-btn-arrow img {
         width: 92%;
         height: 92%;
+        min-width: 0;
+        min-height: 0;
         object-fit: contain;
         pointer-events: none;
         position: relative;
@@ -799,13 +808,15 @@
         grid-row: 1;
         height: 100%;
         min-height: 0;
-        align-content: center;
+        align-content: start;
+        align-content: safe center;
         border-radius: 32px;
         border-top: 0;
         border: 5px solid rgba(255,255,255,0.82);
         padding: 16px max(14px, env(safe-area-inset-right)) 16px 14px;
         gap: 12px;
         overflow: hidden auto;
+        overscroll-behavior-y: contain;
       }
 
       .coding-car-landscape .cc-guide-text {
@@ -889,7 +900,7 @@
         }
 
         .cc-diff-btn {
-          min-height: 38px;
+          min-height: 44px;
           border-width: 3px;
           padding: 0 10px;
         }
@@ -974,7 +985,7 @@
         }
 
         .cc-diff-btn {
-          min-height: 32px;
+          min-height: 44px;
           font-size: 14px;
         }
 
