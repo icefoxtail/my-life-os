@@ -2966,6 +2966,7 @@
         #azTplRow .az-tpl-name{font-size:10px;line-height:1.1}
       }
       @media(max-width:520px){
+        .az-mode-icon{display:none}
         .az-work-actions{gap:4px}
         .az-work-actions button{width:44px;min-width:44px}
         .az-collection-header{padding:8px 10px}
@@ -2977,7 +2978,7 @@
         .az-collected-work h3{font-size:12px;line-height:1.25}
         .az-collected-actions button{padding:5px;font-size:12px}
       }
-      @media(max-width:380px){.az-mode-icon{display:none}.az-mode-tabs{gap:4px}.az-mode-tab{min-width:44px}}
+      @media(max-width:380px){.az-mode-tabs{gap:4px}.az-mode-tab{min-width:44px}}
       @media(orientation:landscape) and (max-height:500px){
         .az-left-panel,.az-right-panel{height:100%;min-height:0;display:flex}
         .az-left-panel .coloring-section{height:100%;min-height:0;display:flex;flex-direction:column}
