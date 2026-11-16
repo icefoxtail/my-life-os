@@ -1,0 +1,217 @@
+{
+  "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
+  "featureCommit": "5740b267413bed8a735214c24da653b3c0109972",
+  "productionArtifact": {
+    "run": 43920000244,
+    "artifact": 14253282168,
+    "artifactSha256": "e843c7277fef6a21e0f8c40f26834c97b559e2419a84be90863513d8aad5946f",
+    "head": "5740b267413bed8a735214c24da653b3c0109972"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2245,
+      "sha256": "3689fda79655f1390ba30ed88ffa70eccb0fca785b51ba2d48c0f349bf193794"
+    },
+    {
+      "path": "candidate/art-collection-browser.json",
+      "bytes": 41413,
+      "sha256": "ea5f9398b9bc3c636018487927f374e14648d34b305b7eaa157498ddc7c84464"
+    },
+    {
+      "path": "candidate/art-reference-browser.json",
+      "bytes": 102901,
+      "sha256": "4693eeef13c2c82cc0a6c14ad892df9fffbd90fa7e21bf29e690e1f1c542ddfc"
+    },
+    {
+      "path": "candidate/artifact-receipt.json",
+      "bytes": 193,
+      "sha256": "a505f786014ee55622e36ba860c0b212721c773d93ed4802857e74f36e5e4189"
+    },
+    {
+      "path": "candidate/creator-regression-summary.json",
+      "bytes": 2328,
+      "sha256": "36d3d6ebfdbca8c705e10e82d66f59d133f82b7fff359b73f765ca79d2f8f0ad"
+    },
+    {
+      "path": "candidate/garage-browser.json",
+      "bytes": 24299,
+      "sha256": "da23a2e4e7bca06e0f1c7f713e41a5e506baa106cfd24586f2d8f6a48c922245"
+    },
+    {
+      "path": "candidate/quantity-artifact-receipt.json",
+      "bytes": 923,
+      "sha256": "ace417280791d83415c7a58faf0869c26ff2680ede76787a6ba11088b29f2c08"
+    },
+    {
+      "path": "candidate/workflow-runs.json",
+      "bytes": 1045,
+      "sha256": "6c4ff7cb18f9ded7456eef1cbe7ddc988e826a184adee34845ee9e412cd5e866"
+    },
+    {
+      "path": "history/art-mode-label-overflow-390x844.png",
+      "bytes": 82949,
+      "sha256": "f4ca77e4a6d22639410c717e15403fea5b3d95ce1d9774a0098ca3d845e7eca0"
+    },
+    {
+      "path": "history/art-reference-1a35.json",
+      "bytes": 90038,
+      "sha256": "a847253ff1cfd28964530a05e8e880b75ce364d4dbf6300f629fd52dc929348a"
+    },
+    {
+      "path": "history/stage3-1a35-art-collection.json",
+      "bytes": 38363,
+      "sha256": "c7490bdafd12a463fa7cb4f2486d34d1b55aae7bd7f4883c3bab7a7ad5526da9"
+    },
+    {
+      "path": "history/stage3-1a35-garage.json",
+      "bytes": 6549,
+      "sha256": "bca59ab62b6746c158959c0abf5ec375b2f3c1e1bead56004231f803fcdd2f0f"
+    },
+    {
+      "path": "model/art-collection.json",
+      "bytes": 2294,
+      "sha256": "a3ae6ef2de194d58837f206504a422f400d40b7d424e00336588aa6ee7cf3947"
+    },
+    {
+      "path": "model/garage.json",
+      "bytes": 1773,
+      "sha256": "72ef3950589ee0a9dadb3434c4b0c573f2835b61303f3ec2d5f50eebcc3b8097"
+    },
+    {
+      "path": "production/art-collection-browser.json",
+      "bytes": 42246,
+      "sha256": "b911f1c4c1cc7e73fccca498fca323ce561df105b9bd8249bfc4745dd4da30fe"
+    },
+    {
+      "path": "production/artifact-receipt.json",
+      "bytes": 193,
+      "sha256": "a78bc4fd878830cfb70dcf47f8c4de2e84382a8b85d50a0cfc4097951310ac13"
+    },
+    {
+      "path": "production/creator-regression-summary.json",
+      "bytes": 5381,
+      "sha256": "0c73848f89369d2627d835917c56f92760fb95c08990bb51cd6552c68221dd01"
+    },
+    {
+      "path": "production/creator-stage3-artifact.zip",
+      "bytes": 3308043,
+      "sha256": "e843c7277fef6a21e0f8c40f26834c97b559e2419a84be90863513d8aad5946f"
+    },
+    {
+      "path": "production/garage-browser.json",
+      "bytes": 24588,
+      "sha256": "79cbcf87564e0c8a01d05229defb066192187481f4c9d5afefa365b4a4bd7472"
+    },
+    {
+      "path": "production/runtime-source.json",
+      "bytes": 1026,
+      "sha256": "10aabd0640fd6e30f39d5ee2fc2713794f6bafaa528d4061ccce95ebc10eb1e1"
+    },
+    {
+      "path": "production/screenshots/art-collection-gallery-320x568.png",
+      "bytes": 55919,
+      "sha256": "6c207b5d626f293368c08bc6eb548d3cdea3643ab27a5772d10c69d5405e721b"
+    },
+    {
+      "path": "production/screenshots/art-collection-gallery-640x360.png",
+      "bytes": 34164,
+      "sha256": "daddd131a33ceb85d630131fe379dd596270dd1d4ec84a3fcc5b820ead121ace"
+    },
+    {
+      "path": "production/screenshots/art-collection-preview-390x844.png",
+      "bytes": 71320,
+      "sha256": "ad688e721d3435a6cc9ea4baa9454d74c518c7d2136bce1a70dcd5d635faf118"
+    },
+    {
+      "path": "production/screenshots/art-collection-red-free-picture-restored.png",
+      "bytes": 43254,
+      "sha256": "a3f0c8bae8bc8ebd36dcc41299b6188e7cdbc563b00377c4f8abec56634fb25f"
+    },
+    {
+      "path": "production/screenshots/art-collection-stored-purple-picture-number-play.png",
+      "bytes": 74385,
+      "sha256": "e7780f6f288a07ce79c8b66d98cd6cb4c4bda1c778b9be8b3152a1d325d2ecd5"
+    },
+    {
+      "path": "production/screenshots/fire-640x360-drive-finish.png",
+      "bytes": 47638,
+      "sha256": "429a2f79a8a59121090cca05f89ddfa9c769a06e92804e201e54027dd6e50d66"
+    },
+    {
+      "path": "production/screenshots/fire-640x360-garage-restored.png",
+      "bytes": 42256,
+      "sha256": "39bb01cd45bb330b717e3d8915e4a35dc28f630f2405e2cad4c32515b8c3d4e1"
+    },
+    {
+      "path": "production/screenshots/fire-640x360-repair-before.png",
+      "bytes": 65955,
+      "sha256": "1a94751aa86676e1be635f31d2a65a24775250f5b22375e224860054c978b31a"
+    },
+    {
+      "path": "production/screenshots/fire-640x360-vehicle-fixed-after.png",
+      "bytes": 12415,
+      "sha256": "abe80e4c20404ab30396fed2fe60b4988a8394a377641f0b371387c7af2e39c7"
+    },
+    {
+      "path": "production/screenshots/fire-640x360-vehicle-fixed-before.png",
+      "bytes": 13234,
+      "sha256": "4873343201b14a403d5b04a6637b45dd8db661ac433fadf4eb2a1c41d8338b90"
+    },
+    {
+      "path": "production/workflow-runs.json",
+      "bytes": 1310,
+      "sha256": "f51e3d9ea01cffa22ec9b5f9ff1458baedf4a70916763310a23cddc35930ae74"
+    },
+    {
+      "path": "review/code-review.json",
+      "bytes": 2010,
+      "sha256": "f54ea2b773132df6fe8457d99e078449da71a7d05984571f4902bf8007fe28ab"
+    },
+    {
+      "path": "review/repro-art-998bfee.json",
+      "bytes": 588,
+      "sha256": "20de707b5163d6463850c59081ccd4bd8ad31abf269471a22206da6b88719ab1"
+    },
+    {
+      "path": "review/repro-art-fixed-0db6d11.json",
+      "bytes": 544,
+      "sha256": "8b3735142a685a28435c500e733532d94d63d2ef8dc82808896aed77dc411f55"
+    },
+    {
+      "path": "review/repro-garage-998bfee.json",
+      "bytes": 1872,
+      "sha256": "2f31ce293ecd4c6a4ed6dc31ce5bb784422e6ce915fa709aeab08e6c85f38acc"
+    },
+    {
+      "path": "review/repro-garage-fixed-33184e4.json",
+      "bytes": 1658,
+      "sha256": "d60cc7640c8f37bbd62f08c559113f06092a2a5ddebca9eac9282720273876e1"
+    },
+    {
+      "path": "review/visual-review-candidate-8025e17-gate-closure.json",
+      "bytes": 7651,
+      "sha256": "36de2ecf1375046c7c5205008ba4e98d59420299edea2bf3ec4af1b99a76458f"
+    },
+    {
+      "path": "review/visual-review-candidate-8025e17.json",
+      "bytes": 27593,
+      "sha256": "a6ced8d74bce0dbae673860fc98e4aa29c778c4b895491daadb0488d839c9b73"
+    },
+    {
+      "path": "review/visual-review-ci-second-addendum.json",
+      "bytes": 4302,
+      "sha256": "594396c84892e0a34b7513996e49cfe539927f0d8f56c31b7799424979cb557b"
+    },
+    {
+      "path": "review/visual-review-ci-second.json",
+      "bytes": 14884,
+      "sha256": "c2ebc45a2b1f4f645bbba1ebddbaad2735bd7b6c9eb0e59f7b6833d0b79d6370"
+    },
+    {
+      "path": "review/visual-review-production-5740b26.json",
+      "bytes": 9311,
+      "sha256": "3f925369a0049deb65c1e16017a71f9d03385644686d18e0b19b1fdc2b0f122a"
+    }
+  ]
+}

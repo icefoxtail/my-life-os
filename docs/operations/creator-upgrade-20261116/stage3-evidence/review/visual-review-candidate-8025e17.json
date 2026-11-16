@@ -1,0 +1,833 @@
+{
+  "kind": "independent source-bound visual review",
+  "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
+  "reviewer": "stage3_review",
+  "candidateHead": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+  "status": "REQUESTED_STAGE3_VISUAL_SCOPE_VERIFIED_NO_NEW_BLOCKER",
+  "releaseApproval": false,
+  "pendingGate": "Final-candidate Phase2 art-reference 390x844 original text-boundary assertions are pending; prior approximately 1.02px text overflow is not formally closed by screenshots alone.",
+  "priorReports": [
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/independent/visual-review-ci-second.json",
+      "sha256": "c2ebc45a2b1f4f645bbba1ebddbaad2735bd7b6c9eb0e59f7b6833d0b79d6370",
+      "preservedUnchanged": true
+    },
+    {
+      "path": "/tmp/sihyeon-stage3-evidence/independent/visual-review-ci-second-addendum.json",
+      "sha256": "594396c84892e0a34b7513996e49cfe539927f0d8f56c31b7799424979cb557b",
+      "preservedUnchanged": true
+    }
+  ],
+  "evidence": {
+    "ci-third": {
+      "runId": "43914911772",
+      "artifactId": "14249388554",
+      "head": "4e01b2f8a86cadacf7857d62d8de008fe2cddfd7",
+      "artifactSha256": "7f8c738879b61f36107fd82ab73d684ab650751d385d9c1c2726ea562dc74150",
+      "artStatus": "13/13 PASS",
+      "garageStatus": "8/8 PASS",
+      "pageErrors": 0,
+      "servedSourcesMatchCommit": true,
+      "fixedFrames": [
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 320,
+            "height": 568
+          },
+          "clip": {
+            "x": 17,
+            "y": 185,
+            "width": 286,
+            "height": 247
+          },
+          "sameBounds": true,
+          "beforeSha256": "cee1fc530cb662487ebd9ef50f52dcc8a29f59e5010286f4fb803b7357f8ffbd",
+          "afterSha256": "1301282d3148d62470000ce4d137313504b9d7fb43132ad27324d22b268cdf48",
+          "beforeFile": "fire-320x568-vehicle-fixed-before.png",
+          "afterFile": "fire-320x568-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "a31058a48e20bdbe61f0f95e4406c919b1aabf7dac955868afafc40b2686de11",
+          "afterSha256": "b714127537b319eeb86e0dd9cc372298f3abe2e3163ab01558a242a8d6c6d5a4",
+          "beforeFile": "fire-390x844-vehicle-fixed-before.png",
+          "afterFile": "fire-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 640,
+            "height": 360
+          },
+          "clip": {
+            "x": 19,
+            "y": 164.1875,
+            "width": 440,
+            "height": 178.8125
+          },
+          "sameBounds": true,
+          "beforeSha256": "4873343201b14a403d5b04a6637b45dd8db661ac433fadf4eb2a1c41d8338b90",
+          "afterSha256": "abe80e4c20404ab30396fed2fe60b4988a8394a377641f0b371387c7af2e39c7",
+          "beforeFile": "fire-640x360-vehicle-fixed-before.png",
+          "afterFile": "fire-640x360-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "clip": {
+            "x": 19,
+            "y": 164.1875,
+            "width": 609.03125,
+            "height": 208.8125
+          },
+          "sameBounds": true,
+          "beforeSha256": "3f3c2428e94ea05cf6916c6cd0964514b36ae11cc8cf39516d58a4c612253025",
+          "afterSha256": "09a4f918cdefd23f131528bbdae1553fcddecc075ccee98a5843ea350a7e27b6",
+          "beforeFile": "fire-844x390-vehicle-fixed-before.png",
+          "afterFile": "fire-844x390-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "police",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "a165156e10eabc5dcb29e7982e3e9c637af18f3331c4803a8591a93a51e2b554",
+          "afterSha256": "915d24837535f0cc909cc516ae1ffc6f6808d9a564a429b248a55305e0dff9c7",
+          "beforeFile": "police-390x844-vehicle-fixed-before.png",
+          "afterFile": "police-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "bus",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "d1ce4bfb161560c39c4bb13bfe36d0740c6f3bad4662c667a960a3998f67834f",
+          "afterSha256": "d794c7c3cf08dbb234d414ad06a07eef976ff7c3641657432677a158eb78f873",
+          "beforeFile": "bus-390x844-vehicle-fixed-before.png",
+          "afterFile": "bus-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "ambulance",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "4ff236ae0d5054f07485110ca7c9edbe4ca76b9b2076dfea9e79cfcf06933c8d",
+          "afterSha256": "1c163f8a02ad55ccddcc8ef45e42aedddfbb7f3cb6dc7088a50bf0fd07b4b14c",
+          "beforeFile": "ambulance-390x844-vehicle-fixed-before.png",
+          "afterFile": "ambulance-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "rocket",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "c6ffa76ffbfadc7e9130f3b6209a278578fc04f1438e036eeb1e6097d554da07",
+          "afterSha256": "059c51d8b5fdfdf0d884b7fca27445c13069c7fffe5d69b71dc62d52f8fa36f4",
+          "beforeFile": "rocket-390x844-vehicle-fixed-before.png",
+          "afterFile": "rocket-390x844-vehicle-fixed-after.png"
+        }
+      ]
+    },
+    "ci-final-candidate": {
+      "runId": "43915933767",
+      "artifactId": "14252255436",
+      "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+      "artifactSha256": "78140a699e8b3cbc5fb3a5a8c9ba6de89e7ea2e77eecc19e58579cf83d2e8d78",
+      "artStatus": "13/13 PASS",
+      "garageStatus": "8/8 PASS",
+      "pageErrors": 0,
+      "servedSourcesMatchCommit": true,
+      "fixedFrames": [
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 320,
+            "height": 568
+          },
+          "clip": {
+            "x": 17,
+            "y": 185,
+            "width": 286,
+            "height": 247
+          },
+          "sameBounds": true,
+          "beforeSha256": "cee1fc530cb662487ebd9ef50f52dcc8a29f59e5010286f4fb803b7357f8ffbd",
+          "afterSha256": "1301282d3148d62470000ce4d137313504b9d7fb43132ad27324d22b268cdf48",
+          "beforeFile": "fire-320x568-vehicle-fixed-before.png",
+          "afterFile": "fire-320x568-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "a31058a48e20bdbe61f0f95e4406c919b1aabf7dac955868afafc40b2686de11",
+          "afterSha256": "b714127537b319eeb86e0dd9cc372298f3abe2e3163ab01558a242a8d6c6d5a4",
+          "beforeFile": "fire-390x844-vehicle-fixed-before.png",
+          "afterFile": "fire-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 640,
+            "height": 360
+          },
+          "clip": {
+            "x": 19,
+            "y": 164.1875,
+            "width": 440,
+            "height": 178.8125
+          },
+          "sameBounds": true,
+          "beforeSha256": "4873343201b14a403d5b04a6637b45dd8db661ac433fadf4eb2a1c41d8338b90",
+          "afterSha256": "abe80e4c20404ab30396fed2fe60b4988a8394a377641f0b371387c7af2e39c7",
+          "beforeFile": "fire-640x360-vehicle-fixed-before.png",
+          "afterFile": "fire-640x360-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "fire",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "clip": {
+            "x": 19,
+            "y": 164.1875,
+            "width": 609.03125,
+            "height": 208.8125
+          },
+          "sameBounds": true,
+          "beforeSha256": "3f3c2428e94ea05cf6916c6cd0964514b36ae11cc8cf39516d58a4c612253025",
+          "afterSha256": "09a4f918cdefd23f131528bbdae1553fcddecc075ccee98a5843ea350a7e27b6",
+          "beforeFile": "fire-844x390-vehicle-fixed-before.png",
+          "afterFile": "fire-844x390-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "police",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "a165156e10eabc5dcb29e7982e3e9c637af18f3331c4803a8591a93a51e2b554",
+          "afterSha256": "915d24837535f0cc909cc516ae1ffc6f6808d9a564a429b248a55305e0dff9c7",
+          "beforeFile": "police-390x844-vehicle-fixed-before.png",
+          "afterFile": "police-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "bus",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "d1ce4bfb161560c39c4bb13bfe36d0740c6f3bad4662c667a960a3998f67834f",
+          "afterSha256": "d794c7c3cf08dbb234d414ad06a07eef976ff7c3641657432677a158eb78f873",
+          "beforeFile": "bus-390x844-vehicle-fixed-before.png",
+          "afterFile": "bus-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "ambulance",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "4ff236ae0d5054f07485110ca7c9edbe4ca76b9b2076dfea9e79cfcf06933c8d",
+          "afterSha256": "1c163f8a02ad55ccddcc8ef45e42aedddfbb7f3cb6dc7088a50bf0fd07b4b14c",
+          "beforeFile": "ambulance-390x844-vehicle-fixed-before.png",
+          "afterFile": "ambulance-390x844-vehicle-fixed-after.png"
+        },
+        {
+          "vehicle": "rocket",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "clip": {
+            "x": 20,
+            "y": 189,
+            "width": 350,
+            "height": 510
+          },
+          "sameBounds": true,
+          "beforeSha256": "c6ffa76ffbfadc7e9130f3b6209a278578fc04f1438e036eeb1e6097d554da07",
+          "afterSha256": "059c51d8b5fdfdf0d884b7fca27445c13069c7fffe5d69b71dc62d52f8fa36f4",
+          "beforeFile": "rocket-390x844-vehicle-fixed-before.png",
+          "afterFile": "rocket-390x844-vehicle-fixed-after.png"
+        }
+      ]
+    }
+  },
+  "sourceEqualityForReuse": {
+    "index.html": {
+      "head4e01Sha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+      "candidate8025Sha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+      "identical": true
+    },
+    "js/games/car-garage.js": {
+      "head4e01Sha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+      "candidate8025Sha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+      "identical": true
+    },
+    "scripts/qa-creator-garage-browser.py": {
+      "head4e01Sha256": "46988157bf44929bd8d48fdeff5320eb82c70c4972b1a981bb30c7f9fa650f1a",
+      "candidate8025Sha256": "46988157bf44929bd8d48fdeff5320eb82c70c4972b1a981bb30c7f9fa650f1a",
+      "identical": true
+    },
+    "js/games/art-zone.js": {
+      "head4e01Sha256": "45259227bfe96e9bed0725b6c4b2473c3353c5d6830c37de11d7882b59959f30",
+      "candidate8025Sha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+      "identical": false
+    },
+    "js/play-objects.js": {
+      "head4e01Sha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+      "candidate8025Sha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+      "identical": true
+    }
+  },
+  "reuseDecision": "Reuse the ci-third garage PNGs for candidate8025 because index.html, car-garage.js and the garage harness are byte-identical in Git and both artifact sets verify their served source hashes. Do not reuse old art source for the corrected mode-tab claim; the four art images reviewed here are from exact candidate8025.",
+  "sourceChangeBetweenHeads": "Only the art mode-icon hiding breakpoint changes from 380px to 520px in product code; STAGE3.md also changes. This was independently read from git diff. Garage code and harness do not change.",
+  "actualDirectReview": {
+    "totalNewPNGs": 42,
+    "garagePNGsFromCiThird": 38,
+    "artPNGsFromExactFinalCandidate": 4,
+    "garageLandscapeViewports": [
+      [
+        640,
+        360
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "garagePortraitStableEntryViewports": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "garageVehicleTypes": [
+      "fire",
+      "police",
+      "bus",
+      "ambulance",
+      "rocket"
+    ],
+    "fixedBeforeAfterPairsDirectlyViewed": [
+      "fire-320x568",
+      "fire-640x360",
+      "police-390x844",
+      "bus-390x844",
+      "ambulance-390x844",
+      "rocket-390x844"
+    ],
+    "fixedBeforeAfterPairsVerifiedByReportAndFileHashes": 8
+  },
+  "findings": [
+    {
+      "area": "garage stable entry",
+      "status": "RESOLVED",
+      "detail": "320,390,640 and844 entrance PNGs are opaque and show the unrepaired vehicle clearly; no cyan fade capture remains in the reviewed frames."
+    },
+    {
+      "area": "garage aligned before/after",
+      "status": "RESOLVED",
+      "detail": "Six directly viewed before/after pairs use the same fixed vehicle region. Body geometry stays aligned, while flattened wheels become round, dirt disappears, broken/gray lamps and sirens become illuminated, and low red fuel becomes full green. All eight cases report sameBounds with before/after file hashes independently verified."
+    },
+    {
+      "area": "garage landscape layout",
+      "status": "VERIFIED",
+      "detail": "640x360 and844x390 entrance, decorated completion, drive finish and restored two-car collection are visible. Controls and vehicle remain within the viewport. At640 the drive button text wraps to two lines without clipping."
+    },
+    {
+      "area": "garage five vehicle types and reuse",
+      "status": "VERIFIED",
+      "detail": "Fire, police, bus, ambulance and rocket cars have distinct identifiable geometry/colors. Each reviewed completed car retains bow/crown decorations in its drive view and the older restored card; the separate diamond-decorated car remains distinguishable."
+    },
+    {
+      "area": "exact candidate art320/390 mode labels",
+      "status": "VISUALLY_VERIFIED_FORMAL_BOUNDARY_PENDING",
+      "detail": "Decorative mode emoji are absent. At320 the Korean labels use two complete lines; at390 they fit on one line with visible padding. The original measured art-reference text-boundary gate is still pending."
+    },
+    {
+      "area": "exact candidate free background restoration",
+      "status": "VERIFIED",
+      "detail": "The restored red freehand stroke appears on the pale blue sea background, with Sea selected and Forest unselected."
+    },
+    {
+      "area": "exact candidate number-play handoff",
+      "status": "VERIFIED",
+      "detail": "Stored purple-light police artwork appears as three matching police cars, with numeral3 and Korean count3 displayed. No unrelated default picture replaces it."
+    }
+  ],
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "limits": [
+    "Raw screenshots do not substitute for exact text-boundary assertions",
+    "Prior failure reports remain part of history; they were not overwritten or relabeled PASS",
+    "Not every duplicate part crop or duplicate candidate garage PNG was re-opened; the report lists exactly42 new images actually viewed"
+  ],
+  "productMutationsByReviewer": false,
+  "images": [
+    {
+      "path": "ci-third/garage/fire-640x360-repair-before.png",
+      "sha256": "1a94751aa86676e1be635f31d2a65a24775250f5b22375e224860054c978b31a",
+      "dimensions": [
+        640,
+        360
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-640x360-completed-first.png",
+      "sha256": "3358cd8a42581c1a12c2504aaea0ff82f09b4ab95172b9a918664d3e57afd4ff",
+      "dimensions": [
+        640,
+        360
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-640x360-drive-finish.png",
+      "sha256": "429a2f79a8a59121090cca05f89ddfa9c769a06e92804e201e54027dd6e50d66",
+      "dimensions": [
+        640,
+        360
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-640x360-garage-restored.png",
+      "sha256": "39bb01cd45bb330b717e3d8915e4a35dc28f630f2405e2cad4c32515b8c3d4e1",
+      "dimensions": [
+        640,
+        360
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-844x390-repair-before.png",
+      "sha256": "3bfc2127bff4b1fed9dbbe9d7b9827eb88775315d5db7be5c49c02e1b4d7db3e",
+      "dimensions": [
+        844,
+        390
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-844x390-completed-first.png",
+      "sha256": "8b5cb93b67a72c34614834e8f72079ffe8ebbdb762279180b678dc207c5f4472",
+      "dimensions": [
+        844,
+        390
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-844x390-drive-finish.png",
+      "sha256": "efb8454a1692b7f9ac9d753e16707ff34f8ad1f1494381717eb861e8b6f33881",
+      "dimensions": [
+        844,
+        390
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-844x390-garage-restored.png",
+      "sha256": "4687274ef1764ccbe03a96dd0c34fedee27ce121802f6860ba7e1f3ef85cd918",
+      "dimensions": [
+        844,
+        390
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-320x568-repair-before.png",
+      "sha256": "1ba573bb49b8d23f37100607708683cb639ab1538466b0e50a1a34462e2c73f0",
+      "dimensions": [
+        320,
+        568
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-390x844-repair-before.png",
+      "sha256": "70839b480ec4781d34992cac1a235d298c113c59a91d23aa6d7182d97dceb744",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-320x568-vehicle-fixed-before.png",
+      "sha256": "cee1fc530cb662487ebd9ef50f52dcc8a29f59e5010286f4fb803b7357f8ffbd",
+      "dimensions": [
+        286,
+        247
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-320x568-vehicle-fixed-after.png",
+      "sha256": "1301282d3148d62470000ce4d137313504b9d7fb43132ad27324d22b268cdf48",
+      "dimensions": [
+        286,
+        247
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-640x360-vehicle-fixed-before.png",
+      "sha256": "4873343201b14a403d5b04a6637b45dd8db661ac433fadf4eb2a1c41d8338b90",
+      "dimensions": [
+        440,
+        178
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/fire-640x360-vehicle-fixed-after.png",
+      "sha256": "abe80e4c20404ab30396fed2fe60b4988a8394a377641f0b371387c7af2e39c7",
+      "dimensions": [
+        440,
+        178
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/police-390x844-repair-before.png",
+      "sha256": "d3aa918cac42049899cf94b032f195bc0604b18004d68042080e7788424bfbc5",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/police-390x844-vehicle-fixed-before.png",
+      "sha256": "a165156e10eabc5dcb29e7982e3e9c637af18f3331c4803a8591a93a51e2b554",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/police-390x844-vehicle-fixed-after.png",
+      "sha256": "915d24837535f0cc909cc516ae1ffc6f6808d9a564a429b248a55305e0dff9c7",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/police-390x844-completed-first.png",
+      "sha256": "82e46bb2e0625e5defb894ad889504d04c85c0161b55734eaca30bfa41b7eacd",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/police-390x844-drive-finish.png",
+      "sha256": "15e73d54ddc29e5cae87f783ed07c234d739a552ad5990e65e23533184475a7a",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/police-390x844-garage-restored.png",
+      "sha256": "82785a0f6868704a2853e5892123bc164d1277412a8a65fb43058091a3eb4acb",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/bus-390x844-repair-before.png",
+      "sha256": "37290b963fce1d273b41012ca43fdf00a1c9d52dd8c0b18803a62aa0478a4f92",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/bus-390x844-vehicle-fixed-before.png",
+      "sha256": "d1ce4bfb161560c39c4bb13bfe36d0740c6f3bad4662c667a960a3998f67834f",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/bus-390x844-vehicle-fixed-after.png",
+      "sha256": "d794c7c3cf08dbb234d414ad06a07eef976ff7c3641657432677a158eb78f873",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/bus-390x844-completed-first.png",
+      "sha256": "5adc90981438eecf5c40d59cc442224e4d9136e25bb7be1a199aac3799710618",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/bus-390x844-drive-finish.png",
+      "sha256": "565605f694ce5603dd098f99f500c0140ab31b5bc4847a385a4eb582e6e1c957",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/bus-390x844-garage-restored.png",
+      "sha256": "1fed37a2dd9891125339c006edd585956a11aa6cbf3eeec5a24f8588199dc8c9",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/ambulance-390x844-repair-before.png",
+      "sha256": "c7b870985f8903dd3433a3067548fae567e912ca0cc68d8607201f141b0ba782",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/ambulance-390x844-vehicle-fixed-before.png",
+      "sha256": "4ff236ae0d5054f07485110ca7c9edbe4ca76b9b2076dfea9e79cfcf06933c8d",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/ambulance-390x844-vehicle-fixed-after.png",
+      "sha256": "1c163f8a02ad55ccddcc8ef45e42aedddfbb7f3cb6dc7088a50bf0fd07b4b14c",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/ambulance-390x844-completed-first.png",
+      "sha256": "c6e14b9cb3f2cc6b1afefcc3b2230e430d5245afd762f8e48629f2944d71bf5c",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/ambulance-390x844-drive-finish.png",
+      "sha256": "176cdf8d27b49ad68b8cbd8e5f32c6103d6b63a10b6d8281b9e000c5512d6029",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/ambulance-390x844-garage-restored.png",
+      "sha256": "9c7ba1cfe701556b5300d89dc031e2139f4127834af423c376f5c273fd4322cd",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/rocket-390x844-repair-before.png",
+      "sha256": "3a1e0b3249717bdd4474ad913005f686a44dd494898cb4b5a4cecbba4bd59d2c",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/rocket-390x844-vehicle-fixed-before.png",
+      "sha256": "c6ffa76ffbfadc7e9130f3b6209a278578fc04f1438e036eeb1e6097d554da07",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/rocket-390x844-vehicle-fixed-after.png",
+      "sha256": "059c51d8b5fdfdf0d884b7fca27445c13069c7fffe5d69b71dc62d52f8fa36f4",
+      "dimensions": [
+        350,
+        510
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/rocket-390x844-completed-first.png",
+      "sha256": "b8b548068e8b5949bed6345e8c0cf9d5cf05f7aa12fb3ee2af254a74315295a2",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/rocket-390x844-drive-finish.png",
+      "sha256": "53584958745c898c37c2cfc3536b5a8169249b2f4e56b344ec26dd548b26d908",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-third/garage/rocket-390x844-garage-restored.png",
+      "sha256": "39db261d2c977a743e08d14fc0f362f61d29e8f74beaaadd4491ebef18330622",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-final-candidate/art-collection/art-collection-preview-320x568.png",
+      "sha256": "c8558705dc214769861698a9df2b3b0c155b5915329755b92d5a119b43b3c778",
+      "dimensions": [
+        320,
+        568
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-final-candidate/art-collection/art-collection-preview-390x844.png",
+      "sha256": "13529f37a06a6e70c5ef931e34353d19d0c69f9348ade26ca956f8189ad3aafa",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-final-candidate/art-collection/art-collection-red-free-picture-restored.png",
+      "sha256": "a3f0c8bae8bc8ebd36dcc41299b6188e7cdbc563b00377c4f8abec56634fb25f",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    },
+    {
+      "path": "ci-final-candidate/art-collection/art-collection-stored-purple-picture-number-play.png",
+      "sha256": "9edf1cbfd417b9aa8d0214c6432268e1f48e211d9be2fc874df20b3141735029",
+      "dimensions": [
+        390,
+        844
+      ],
+      "directlyViewed": true
+    }
+  ]
+}

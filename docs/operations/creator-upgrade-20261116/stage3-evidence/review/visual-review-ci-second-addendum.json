@@ -1,0 +1,118 @@
+{
+  "kind": "independent visual review addendum",
+  "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
+  "reviewer": "stage3_review",
+  "relatedHead": "1a35bc12b36d318e44937725f08d854cdc41535c",
+  "relatedRegressionRunId": "43913303041",
+  "priorReport": {
+    "path": "/tmp/sihyeon-stage3-evidence/independent/visual-review-ci-second.json",
+    "sha256": "c2ebc45a2b1f4f645bbba1ebddbaad2735bd7b6c9eb0e59f7b6833d0b79d6370",
+    "unchanged": true
+  },
+  "status": "REQUIRED_REGRESSION_DEFECT_OPEN_AWAITING_FIXED_EVIDENCE",
+  "correction": "The prior 38-PNG review found no blocking visual defect by inspection. A separate mandatory art-reference regression measured mode-tab text overflow at the same 390x844 viewport. The earlier qualitative inspection did not detect this approximately one-pixel overrun and must not be cited as an all-layout PASS.",
+  "newEvidence": {
+    "report": "/tmp/sihyeon-stage3-evidence/ci-second-quantity/art-reference/art-reference-browser.json",
+    "sha256": "a847253ff1cfd28964530a05e8e880b75ce364d4dbf6300f629fd52dc929348a",
+    "screenshot": "/tmp/sihyeon-stage3-evidence/ci-second-quantity/art-reference/art-reference-failure-companion-layout-and-reachable-controls-390x844.png",
+    "screenshotSha256": "f4ca77e4a6d22639410c717e15403fea5b3d95ce1d9774a0098ca3d845e7eca0",
+    "screenshotIndependentlyViewed": true
+  },
+  "defect": {
+    "viewport": [
+      390,
+      844
+    ],
+    "state": "coloring with companion example open",
+    "modeTabText": [
+      {
+        "selector": ".az-mode-tab[data-tab=\"free\"]",
+        "text": "🎨 그림 팡팡",
+        "lines": [
+          {
+            "left": 80,
+            "top": 21.5,
+            "right": 101,
+            "bottom": 35.5
+          },
+          {
+            "left": 80,
+            "top": 21.5,
+            "right": 101,
+            "bottom": 35.5
+          },
+          {
+            "left": 101,
+            "top": 21.5,
+            "right": 151,
+            "bottom": 35.5
+          }
+        ],
+        "contained": true
+      },
+      {
+        "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+        "text": "🌈 색칠 팡팡",
+        "lines": [
+          {
+            "left": 165.39999389648438,
+            "top": 21.360000610351562,
+            "right": 186.8199920654297,
+            "bottom": 35.63999938964844
+          },
+          {
+            "left": 165.39999389648438,
+            "top": 21.360000610351562,
+            "right": 186.8199920654297,
+            "bottom": 35.63999938964844
+          },
+          {
+            "left": 186.8199920654297,
+            "top": 21.360000610351562,
+            "right": 237.8199920654297,
+            "bottom": 35.63999938964844
+          }
+        ],
+        "contained": false
+      }
+    ],
+    "tabBoxes": {
+      ".az-mode-tab[data-tab=\"free\"]": {
+        "left": 70,
+        "top": 6.5,
+        "right": 150,
+        "bottom": 50.5,
+        "width": 80,
+        "height": 44,
+        "clientWidth": 76,
+        "scrollWidth": 79,
+        "clientHeight": 40,
+        "scrollHeight": 40
+      },
+      ".az-mode-tab[data-tab=\"coloring\"]": {
+        "left": 155.1999969482422,
+        "top": 6.060001373291016,
+        "right": 236.79998779296875,
+        "bottom": 50.939998626708984,
+        "width": 81.59999084472656,
+        "height": 44.87999725341797,
+        "clientWidth": 76,
+        "scrollWidth": 79,
+        "clientHeight": 40,
+        "scrollHeight": 40
+      }
+    },
+    "clippedText": [
+      "🎨 그림 팡팡",
+      "🌈 색칠 팡팡"
+    ],
+    "requiredTestChanged": false
+  },
+  "nextAcceptance": [
+    "Product CSS fix only; preserve original art-reference text-boundary assertions",
+    "Read final art-reference 390x844 layout: modeTabText contained true, no clipped mode labels, normal hit testing",
+    "Inspect final 390x844 original PNG and narrow 320x568 image for label rendering",
+    "Inspect garage stable-entry and repairFixedVehicleFrame aligned before/after evidence plus first available landscape gameplay"
+  ],
+  "garageEvidenceFollowup": "Garage owner reports harness now waits for actual entry-animation completion plus opacity >= .99 and records same-layout before/current fixed SVG clips with <= .1px bounds difference; not yet independently observed in a completed artifact."
+}

@@ -1,6 +1,6 @@
 {
   "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
-  "owner": "GPT_UPGRADE_5EF8F1489B24",
+  "owner": "GPT_UPGRADE_7C923CB944E6",
   "repository": "icefoxtail/my-life-os",
   "publicUrl": "https://icefoxtail.github.io/my-life-os/index.html",
   "stages": [
@@ -269,10 +269,438 @@
           }
         }
       }
+    },
+    {
+      "stage": 3,
+      "status": "PRODUCTION_VERIFIED",
+      "owner": "GPT_UPGRADE_7C923CB944E6",
+      "pr": 41,
+      "sourceHead": {
+        "sha": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+        "tree": "e63e628ca3a116eccbe8a2d90fc72768db350724"
+      },
+      "merge": {
+        "sha": "5740b267413bed8a735214c24da653b3c0109972",
+        "tree": "e63e628ca3a116eccbe8a2d90fc72768db350724",
+        "parents": [
+          "c3839fc34b94f6b6bf47b0c86a1c8bce187acb89",
+          "8025e17e8761fd9772cae6970194ec3a64b04b05"
+        ]
+      },
+      "preMergeRuns": [
+        {
+          "id": 43915933907,
+          "name": "Playground checks",
+          "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43915933907"
+        },
+        {
+          "id": 43915933767,
+          "name": "Creator stage 3 release",
+          "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43915933767"
+        },
+        {
+          "id": 43915934571,
+          "name": "Creator upgrade release",
+          "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43915934571"
+        },
+        {
+          "id": 43915933803,
+          "name": "Phase 2 browser release",
+          "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43915933803"
+        }
+      ],
+      "preMergeProof": {
+        "run": 43915933767,
+        "artifact": 14252255436,
+        "artifactSha256": "78140a699e8b3cbc5fb3a5a8c9ba6de89e7ea2e77eecc19e58579cf83d2e8d78",
+        "head": "8025e17e8761fd9772cae6970194ec3a64b04b05"
+      },
+      "preMergeChecks": {
+        "artCollection": 13,
+        "garage": 8
+      },
+      "mandatoryCreatorRegression": {
+        "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+        "run": 43915934571,
+        "artifact": 14250272949,
+        "artifactSha256": "dcf086b724230281282c131678aff338ea7f235cc83b4a1ace3f99dad0ca6001",
+        "status": "PASS",
+        "suites": [
+          {
+            "report": "count-pace/count-pace-results.json",
+            "status": "PASS",
+            "cases": 2,
+            "pageErrors": 0,
+            "sha256": "01b3601e8a8cef3aefd226f49ec11431f0be19acae0ef2bcc7591c5b7219d70d"
+          },
+          {
+            "report": "hangul/results.json",
+            "status": "PASS",
+            "cases": 28,
+            "pageErrors": 0,
+            "sha256": "db12e516cc730fa618599ba8bda989e117490304749aca14974c9b644ede2fb3"
+          },
+          {
+            "report": "help/results.json",
+            "status": "PASS",
+            "cases": 16,
+            "pageErrors": 0,
+            "sha256": "befacc0a59ed9204048139019d3629e998971656c9cd461d65282de8cbca3bf9"
+          },
+          {
+            "report": "life-pace/life-pace-results.json",
+            "status": "PASS",
+            "cases": 2,
+            "pageErrors": 0,
+            "sha256": "1aa0fc7eed191d766c96d48427924c9e7208d604e0dc455fb9eef952f8009838"
+          },
+          {
+            "report": "memory-pace/creator-memory-pace-results.json",
+            "status": "PASS",
+            "cases": 2,
+            "pageErrors": 0,
+            "sha256": "ed9784986b9249d26865adde0fb7905d7534b674fe05ef1615d837b72e81521c"
+          },
+          {
+            "report": "number/number-browser.json",
+            "status": "PASS",
+            "cases": 14,
+            "pageErrors": 0,
+            "sha256": "7d39262962dfd21cb4d06c6f9048d38868c86baa59dabf88ee4159b4ed1a2b4e"
+          },
+          {
+            "report": "number-mute/number-mute-browser.json",
+            "status": "PASS",
+            "cases": 6,
+            "pageErrors": 0,
+            "sha256": "49d4ce00c77cdec3eb65926c3cc4bb891a6cb9a3af46c2f1caaa64321b7e40a1"
+          },
+          {
+            "report": "train-edit/creator-train-edit-results.json",
+            "status": "PASS",
+            "cases": 1,
+            "pageErrors": 0,
+            "sha256": "6419cc0fb789276275189daaee0ed02db1d6e4b9382c121353c11ffe45c82eab"
+          },
+          {
+            "report": "vehicle/creator-vehicle-results.json",
+            "status": "PASS",
+            "cases": 10,
+            "pageErrors": 0,
+            "sha256": "3f6a3da689d97ea51c5397b13042d566f6da25c7f1cfcaeee24d24dd6ae0e7d7"
+          }
+        ],
+        "totalCases": 81,
+        "includesStage1Cases": 52,
+        "pageErrors": 0,
+        "scope": "Mandatory regression on current candidate; prior Stage1/2 production records remain unchanged."
+      },
+      "mandatoryProductionCreatorRegression": {
+        "head": "5740b267413bed8a735214c24da653b3c0109972",
+        "run": 43920000191,
+        "artifact": 14254915119,
+        "artifactSha256": "1fd309e6bc0b343841b0ffa750f4f0a1eb11629e1c5762bc3ddd525d9ddbd999",
+        "status": "PASS",
+        "suites": [
+          {
+            "report": "count-pace/count-pace-results.json",
+            "status": "PASS",
+            "cases": 2,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "d2680423fd1c13098c3485b9fb019bac09652c6e0ff2ff74765ecf1c096072d8"
+          },
+          {
+            "report": "hangul/results.json",
+            "status": "PASS",
+            "cases": 28,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os",
+            "sha256": "ecdb18d4960fc470264ddaa6651bde79e79fda00af08bc1c44fb53743b213139"
+          },
+          {
+            "report": "help/results.json",
+            "status": "PASS",
+            "cases": 16,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os",
+            "sha256": "a377cd538a44635556a92c65a58cad73697f832b7d9b7280ceefa398752c1b39"
+          },
+          {
+            "report": "life-pace/life-pace-results.json",
+            "status": "PASS",
+            "cases": 2,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "4d5afed07b0ee29314607cd41171f03c0dc624535c5cf0c234a95f8484661f7f"
+          },
+          {
+            "report": "memory-pace/creator-memory-pace-results.json",
+            "status": "PASS",
+            "cases": 2,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "0f2c47461893f8126e41a6bfd1e063b9ad2e3cc4b730b5a8226c0d68320ccac3"
+          },
+          {
+            "report": "number/number-browser.json",
+            "status": "PASS",
+            "cases": 14,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "98539dd8a44f1f9c9aacb8ff020c781a700caaee8e8cdfd20fa6d5fbcbae7ccc"
+          },
+          {
+            "report": "number-mute/number-mute-browser.json",
+            "status": "PASS",
+            "cases": 6,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "ca69467ee499155ed1aa2837474d9ce295b76473df00ac13b349ea57779623cd"
+          },
+          {
+            "report": "train-edit/creator-train-edit-results.json",
+            "status": "PASS",
+            "cases": 1,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "54edc1a41efbfbbee7020ea2a0ef73f15b6d8a2f47f042aec7e003a3d7058b25"
+          },
+          {
+            "report": "vehicle/creator-vehicle-results.json",
+            "status": "PASS",
+            "cases": 10,
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "sha256": "d773b0e4fbbe266923aa7da5c6da85360ee030fcd8f77d3bb0eedd9dba8e975c"
+          }
+        ],
+        "totalCases": 81,
+        "includesStage1Cases": 52,
+        "pageErrors": 0,
+        "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+        "runtimeSource": {
+          "matches": true,
+          "expected": {
+            "sw.js": "6495628ae49b6faf1e6f3ca50f7d114737814fc41beb395cb91b7529585dab93",
+            "js/games/vehicle-memory.js": "bcb3fe61b623fb161b2bcfc834694997a6e2898e1a2a00559e46cc48cc828ece",
+            "js/games/construction-site.js": "830683a37c5c9258c76279c48ff6b90e499ab0a782b088d5a100e21235a1e817",
+            "js/games/number-count.js": "a3ac928ebb06ba4847245edb6cfdf5d85c71e33f5ce443ac1ac202ce58fe93b3",
+            "js/games/color-balloon.js": "9cc14d7cb97b655b740c2ce44f3c55de59ec57ae42cca7ded0604f821bdff4b5",
+            "js/games/megaDispatch.js": "c15405fb64465a0b5f1400e175dc86a3bbe9a3db189dc229be9c07fac4adb060",
+            "js/games/life-sequence.js": "ab91eaef9654b19149e6959bb22f8b2ffe25cbec71fd489f183d0255fc844cef",
+            "js/games/pattern-train.js": "c1f4de13617c17e2989dd69c09ed52decddb902f591ad6521e354443706b35de",
+            "js/games/pattern-train-model.js": "50a73b6b3d31129c4dd8b602ba375b255b7220c0cd7e4e04bee3534104108e19",
+            "js/engine/webgl-fallback.js": "82bc46098f537c12eb476e3a01a1fafcc6e876e2a9a6003ad6112fa2fe16f4ff",
+            "games/hangul-playmat-3d.html": "bb75ee3cb90e26ec43d9b0dec751ee43988e75c470d2705f1c7362790cdf43c5",
+            "games/number-kingdom-3d.html": "a11dc8774bd42824352adaa2a5585c140781bc6a542aedb9d8fb9d19dd47fb3b"
+          },
+          "actual": {
+            "sw.js": "6495628ae49b6faf1e6f3ca50f7d114737814fc41beb395cb91b7529585dab93",
+            "js/games/vehicle-memory.js": "bcb3fe61b623fb161b2bcfc834694997a6e2898e1a2a00559e46cc48cc828ece",
+            "js/games/construction-site.js": "830683a37c5c9258c76279c48ff6b90e499ab0a782b088d5a100e21235a1e817",
+            "js/games/number-count.js": "a3ac928ebb06ba4847245edb6cfdf5d85c71e33f5ce443ac1ac202ce58fe93b3",
+            "js/games/color-balloon.js": "9cc14d7cb97b655b740c2ce44f3c55de59ec57ae42cca7ded0604f821bdff4b5",
+            "js/games/megaDispatch.js": "c15405fb64465a0b5f1400e175dc86a3bbe9a3db189dc229be9c07fac4adb060",
+            "js/games/life-sequence.js": "ab91eaef9654b19149e6959bb22f8b2ffe25cbec71fd489f183d0255fc844cef",
+            "js/games/pattern-train.js": "c1f4de13617c17e2989dd69c09ed52decddb902f591ad6521e354443706b35de",
+            "js/games/pattern-train-model.js": "50a73b6b3d31129c4dd8b602ba375b255b7220c0cd7e4e04bee3534104108e19",
+            "js/engine/webgl-fallback.js": "82bc46098f537c12eb476e3a01a1fafcc6e876e2a9a6003ad6112fa2fe16f4ff",
+            "games/hangul-playmat-3d.html": "bb75ee3cb90e26ec43d9b0dec751ee43988e75c470d2705f1c7362790cdf43c5",
+            "games/number-kingdom-3d.html": "a11dc8774bd42824352adaa2a5585c140781bc6a542aedb9d8fb9d19dd47fb3b"
+          }
+        }
+      },
+      "artReferenceRegression": {
+        "cases": 7,
+        "status": "PASS",
+        "artifact": {
+          "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+          "run": 43915933803,
+          "artifact": 14252507902,
+          "artifactSha256": "d5739ef4b98e6ed3d8563598977685ba2811bd8a975b0fb81cf7db56d7dc02f1",
+          "reports": [
+            {
+              "file": "art-reference/art-reference-browser.json",
+              "status": "PASS",
+              "checks": 7,
+              "pageErrors": []
+            },
+            {
+              "file": "number-picture/number-picture-browser.json",
+              "status": "PASS",
+              "checks": 20,
+              "pageErrors": []
+            },
+            {
+              "file": "picture-arithmetic/picture-arithmetic-browser.json",
+              "status": "PASS",
+              "checks": 19,
+              "pageErrors": []
+            },
+            {
+              "file": "quantity-change/quantity-change-browser.json",
+              "status": "PASS",
+              "checks": 16,
+              "pageErrors": []
+            },
+            {
+              "file": "ten-frame-garden/ten-frame-garden-browser.json",
+              "status": "PASS",
+              "checks": 14,
+              "pageErrors": []
+            }
+          ]
+        },
+        "testUnchangedFromFailingVersion": true,
+        "closure": "stage3-evidence/review/visual-review-candidate-8025e17-gate-closure.json"
+      },
+      "modelChecks": {
+        "artCollection": 12,
+        "garage": 11,
+        "garageRepairOrderCombinations": 30
+      },
+      "storage": {
+        "artworkLimit": 12,
+        "completedVehicleLimit": 24,
+        "backend": "browser localStorage",
+        "crossDeviceSync": false,
+        "unreadableOrUnknownRawPreserved": true,
+        "silentEviction": false
+      },
+      "productionRuns": [
+        {
+          "id": 43920000244,
+          "name": "Creator stage 3 release",
+          "head": "5740b267413bed8a735214c24da653b3c0109972",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43920000244"
+        },
+        {
+          "id": 43920000191,
+          "name": "Creator upgrade release",
+          "head": "5740b267413bed8a735214c24da653b3c0109972",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43920000191"
+        },
+        {
+          "id": 43920000139,
+          "name": "Playground checks",
+          "head": "5740b267413bed8a735214c24da653b3c0109972",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43920000139"
+        },
+        {
+          "id": 43920000416,
+          "name": "Phase 2 browser release",
+          "head": "5740b267413bed8a735214c24da653b3c0109972",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43920000416"
+        },
+        {
+          "id": 43919997782,
+          "name": "pages build and deployment",
+          "head": "5740b267413bed8a735214c24da653b3c0109972",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/icefoxtail/my-life-os/actions/runs/43919997782"
+        }
+      ],
+      "productionProof": {
+        "commit": "5740b267413bed8a735214c24da653b3c0109972",
+        "run": 43920000244,
+        "artifact": 14253282168,
+        "artifactSha256": "e843c7277fef6a21e0f8c40f26834c97b559e2419a84be90863513d8aad5946f",
+        "runtimeFiles": 5,
+        "runtimeSource": {
+          "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+          "matches": true,
+          "expected": {
+            "sw.js": "6495628ae49b6faf1e6f3ca50f7d114737814fc41beb395cb91b7529585dab93",
+            "index.html": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+            "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+            "js/games/art-zone.js": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+            "js/games/car-garage.js": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c"
+          },
+          "actual": {
+            "sw.js": "6495628ae49b6faf1e6f3ca50f7d114737814fc41beb395cb91b7529585dab93",
+            "index.html": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+            "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+            "js/games/art-zone.js": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+            "js/games/car-garage.js": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c"
+          }
+        },
+        "checks": {
+          "artCollection": 13,
+          "garage": 8
+        },
+        "totalCases": 21,
+        "status": "PASS",
+        "pageErrors": 0,
+        "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+        "visualReview": "stage3-evidence/review/visual-review-production-5740b26.json",
+        "completeArtifact": "stage3-evidence/production/creator-stage3-artifact.zip",
+        "notRun": [
+          "physical device touch",
+          "audible speech listening",
+          "child observation"
+        ]
+      },
+      "independentFixedFindings": [
+        "Unreadable/future/corrupt garage storage no longer overwritten",
+        "Inherited vehicle keys rejected before rendering",
+        "Artwork restore Undo preserves later edits to other pictures",
+        "390px art mode labels contained with original regression assertions"
+      ],
+      "coverage": {
+        "artViewports": [
+          [
+            320,
+            568
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            640,
+            360
+          ],
+          [
+            844,
+            390
+          ],
+          [
+            1024,
+            768
+          ]
+        ],
+        "garageCases": "Fire at four viewports; police, bus, ambulance, rocket at390x844",
+        "allVehicleViewportCrossProductTested": false
+      },
+      "evidenceManifest": {
+        "path": "stage3-evidence/MANIFEST.json",
+        "sha256": "c6eabb6ac56ff631d62a14782dba18f0a4d6f4d7053d13b7c02304f8c4bdbd12"
+      }
     }
   ],
   "remainingStages": [
-    3,
     4,
     5,
     6,
@@ -292,5 +720,8 @@
       "stage": 5,
       "observation": "The shape picker overlaps the lower 3D scene in landscape comparison fixtures; improve camera/palette spacing in the number-depth stage."
     }
+  ],
+  "previousOwners": [
+    "GPT_UPGRADE_5EF8F1489B24"
   ]
 }

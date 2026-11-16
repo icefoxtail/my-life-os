@@ -1,0 +1,3137 @@
+{
+  "scope": "Visible companion example, native menu/pointer input, paint independence, undo, saved revisions and number-play handoff",
+  "nativeAudio": {
+    "status": "NOT_RUN",
+    "reason": "speech transport completion fixture; no speaker or physical-device claim"
+  },
+  "physicalDevice": {
+    "status": "NOT_RUN",
+    "reason": "Chromium viewports and touch emulation only"
+  },
+  "fixture": {
+    "transport": "speechSynthesis.speak/cancel",
+    "sharedVoiceEngineReplaced": false,
+    "gameFunctionsReplaced": false
+  },
+  "catalogDecodeScope": "All 28 catalog SVGs remain covered by qa-number-picture-browser.py; this suite checks three representative layouts.",
+  "checks": [
+    {
+      "name": "companion layout and reachable controls 320x568",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          320,
+          568
+        ],
+        "input": "native browser touch tap",
+        "representatives": [
+          {
+            "template": "police",
+            "guidance": {
+              "part": "body",
+              "name": "차체",
+              "color": "#FFF8E7",
+              "colorName": "아이보리색"
+            },
+            "layout": {
+              "viewport": [
+                320,
+                568
+              ],
+              "documentWidth": 320,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 320,
+                "bottom": 568,
+                "width": 320,
+                "height": 568,
+                "clientWidth": 320,
+                "scrollWidth": 320,
+                "clientHeight": 568,
+                "scrollHeight": 568
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 6,
+                  "top": 211,
+                  "right": 314,
+                  "bottom": 293,
+                  "width": 308,
+                  "height": 82,
+                  "clientWidth": 304,
+                  "scrollWidth": 304,
+                  "clientHeight": 78,
+                  "scrollHeight": 78
+                },
+                "#azReference img": {
+                  "left": 15,
+                  "top": 218,
+                  "right": 91,
+                  "bottom": 286,
+                  "width": 76,
+                  "height": 68,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 68,
+                  "scrollHeight": 68
+                },
+                "#azColoringWrap": {
+                  "left": 10,
+                  "top": 305,
+                  "right": 310,
+                  "bottom": 448,
+                  "width": 300,
+                  "height": 143,
+                  "clientWidth": 300,
+                  "scrollWidth": 300,
+                  "clientHeight": 143,
+                  "scrollHeight": 143
+                },
+                "#azColoringWrap svg": {
+                  "left": 19,
+                  "top": 309.296875,
+                  "right": 301,
+                  "bottom": 443.703125,
+                  "width": 282,
+                  "height": 134.40625,
+                  "clientWidth": 282,
+                  "scrollWidth": 282,
+                  "clientHeight": 134,
+                  "scrollHeight": 134
+                },
+                "#azReferenceToggle": {
+                  "left": 120.5,
+                  "top": 158,
+                  "right": 230,
+                  "bottom": 202,
+                  "width": 109.5,
+                  "height": 44,
+                  "clientWidth": 106,
+                  "scrollWidth": 106,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 8,
+                  "top": 158,
+                  "right": 117.5,
+                  "bottom": 202,
+                  "width": 109.5,
+                  "height": 44,
+                  "clientWidth": 106,
+                  "scrollWidth": 106,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 251,
+                  "top": 223,
+                  "right": 305,
+                  "bottom": 267,
+                  "width": 54,
+                  "height": 44,
+                  "clientWidth": 50,
+                  "scrollWidth": 50,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 172,
+                  "top": 6.5,
+                  "right": 216,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 220,
+                  "top": 6.5,
+                  "right": 264,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 236,
+                  "top": 158,
+                  "right": 314,
+                  "bottom": 202,
+                  "width": 78,
+                  "height": 44,
+                  "clientWidth": 74,
+                  "scrollWidth": 74,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 70,
+                  "top": 6.5,
+                  "right": 116,
+                  "bottom": 50.5,
+                  "width": 46,
+                  "height": 44,
+                  "clientWidth": 42,
+                  "scrollWidth": 42,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 119.54000091552734,
+                  "top": 6.060001373291016,
+                  "right": 166.45999145507812,
+                  "bottom": 50.939998626708984,
+                  "width": 46.91999053955078,
+                  "height": 44.87999725341797,
+                  "clientWidth": 42,
+                  "scrollWidth": 42,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 84,
+                      "top": 14.703125,
+                      "right": 102,
+                      "bottom": 26.703125
+                    },
+                    {
+                      "left": 83,
+                      "top": 28.5,
+                      "right": 103,
+                      "bottom": 40.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 133.30999755859375,
+                      "top": 14.427188873291016,
+                      "right": 152.69000244140625,
+                      "bottom": 26.66718864440918
+                    },
+                    {
+                      "left": 132.8000030517578,
+                      "top": 28.5,
+                      "right": 153.1999969482422,
+                      "bottom": 40.7400016784668
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "police_swat_suv",
+            "guidance": {
+              "part": "body",
+              "name": "튼튼한 차체",
+              "color": "#1E40AF",
+              "colorName": "진파랑"
+            },
+            "layout": {
+              "viewport": [
+                320,
+                568
+              ],
+              "documentWidth": 320,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 320,
+                "bottom": 568,
+                "width": 320,
+                "height": 568,
+                "clientWidth": 320,
+                "scrollWidth": 320,
+                "clientHeight": 568,
+                "scrollHeight": 568
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 6,
+                  "top": 211,
+                  "right": 314,
+                  "bottom": 293,
+                  "width": 308,
+                  "height": 82,
+                  "clientWidth": 304,
+                  "scrollWidth": 304,
+                  "clientHeight": 78,
+                  "scrollHeight": 78
+                },
+                "#azReference img": {
+                  "left": 15,
+                  "top": 218,
+                  "right": 91,
+                  "bottom": 286,
+                  "width": 76,
+                  "height": 68,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 68,
+                  "scrollHeight": 68
+                },
+                "#azColoringWrap": {
+                  "left": 10,
+                  "top": 305,
+                  "right": 310,
+                  "bottom": 448,
+                  "width": 300,
+                  "height": 143,
+                  "clientWidth": 300,
+                  "scrollWidth": 300,
+                  "clientHeight": 143,
+                  "scrollHeight": 143
+                },
+                "#azColoringWrap svg": {
+                  "left": 19,
+                  "top": 309.296875,
+                  "right": 301,
+                  "bottom": 443.703125,
+                  "width": 282,
+                  "height": 134.40625,
+                  "clientWidth": 282,
+                  "scrollWidth": 282,
+                  "clientHeight": 134,
+                  "scrollHeight": 134
+                },
+                "#azReferenceToggle": {
+                  "left": 120.5,
+                  "top": 158,
+                  "right": 230,
+                  "bottom": 202,
+                  "width": 109.5,
+                  "height": 44,
+                  "clientWidth": 106,
+                  "scrollWidth": 106,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 8,
+                  "top": 158,
+                  "right": 117.5,
+                  "bottom": 202,
+                  "width": 109.5,
+                  "height": 44,
+                  "clientWidth": 106,
+                  "scrollWidth": 106,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 251,
+                  "top": 223,
+                  "right": 305,
+                  "bottom": 267,
+                  "width": 54,
+                  "height": 44,
+                  "clientWidth": 50,
+                  "scrollWidth": 50,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 172,
+                  "top": 6.5,
+                  "right": 216,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 220,
+                  "top": 6.5,
+                  "right": 264,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 236,
+                  "top": 158,
+                  "right": 314,
+                  "bottom": 202,
+                  "width": 78,
+                  "height": 44,
+                  "clientWidth": 74,
+                  "scrollWidth": 74,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 70,
+                  "top": 6.5,
+                  "right": 116,
+                  "bottom": 50.5,
+                  "width": 46,
+                  "height": 44,
+                  "clientWidth": 42,
+                  "scrollWidth": 42,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 119.54000091552734,
+                  "top": 6.060001373291016,
+                  "right": 166.45999145507812,
+                  "bottom": 50.939998626708984,
+                  "width": 46.91999053955078,
+                  "height": 44.87999725341797,
+                  "clientWidth": 42,
+                  "scrollWidth": 42,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 84,
+                      "top": 14.703125,
+                      "right": 102,
+                      "bottom": 26.703125
+                    },
+                    {
+                      "left": 83,
+                      "top": 28.5,
+                      "right": 103,
+                      "bottom": 40.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 133.30999755859375,
+                      "top": 14.427188873291016,
+                      "right": 152.69000244140625,
+                      "bottom": 26.66718864440918
+                    },
+                    {
+                      "left": 132.8000030517578,
+                      "top": 28.5,
+                      "right": 153.1999969482422,
+                      "bottom": 40.7400016784668
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "butterfly",
+            "guidance": {
+              "part": "body",
+              "name": "몸통",
+              "color": "#8B5A2B",
+              "colorName": "갈색"
+            },
+            "layout": {
+              "viewport": [
+                320,
+                568
+              ],
+              "documentWidth": 320,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 320,
+                "bottom": 568,
+                "width": 320,
+                "height": 568,
+                "clientWidth": 320,
+                "scrollWidth": 320,
+                "clientHeight": 568,
+                "scrollHeight": 568
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 6,
+                  "top": 211,
+                  "right": 314,
+                  "bottom": 293,
+                  "width": 308,
+                  "height": 82,
+                  "clientWidth": 304,
+                  "scrollWidth": 304,
+                  "clientHeight": 78,
+                  "scrollHeight": 78
+                },
+                "#azReference img": {
+                  "left": 15,
+                  "top": 218,
+                  "right": 91,
+                  "bottom": 286,
+                  "width": 76,
+                  "height": 68,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 68,
+                  "scrollHeight": 68
+                },
+                "#azColoringWrap": {
+                  "left": 10,
+                  "top": 305,
+                  "right": 310,
+                  "bottom": 448,
+                  "width": 300,
+                  "height": 143,
+                  "clientWidth": 300,
+                  "scrollWidth": 300,
+                  "clientHeight": 143,
+                  "scrollHeight": 143
+                },
+                "#azColoringWrap svg": {
+                  "left": 19,
+                  "top": 309.296875,
+                  "right": 301,
+                  "bottom": 443.703125,
+                  "width": 282,
+                  "height": 134.40625,
+                  "clientWidth": 282,
+                  "scrollWidth": 282,
+                  "clientHeight": 134,
+                  "scrollHeight": 134
+                },
+                "#azReferenceToggle": {
+                  "left": 120.5,
+                  "top": 158,
+                  "right": 230,
+                  "bottom": 202,
+                  "width": 109.5,
+                  "height": 44,
+                  "clientWidth": 106,
+                  "scrollWidth": 106,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 8,
+                  "top": 158,
+                  "right": 117.5,
+                  "bottom": 202,
+                  "width": 109.5,
+                  "height": 44,
+                  "clientWidth": 106,
+                  "scrollWidth": 106,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 251,
+                  "top": 223,
+                  "right": 305,
+                  "bottom": 267,
+                  "width": 54,
+                  "height": 44,
+                  "clientWidth": 50,
+                  "scrollWidth": 50,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 172,
+                  "top": 6.5,
+                  "right": 216,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 220,
+                  "top": 6.5,
+                  "right": 264,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 236,
+                  "top": 158,
+                  "right": 314,
+                  "bottom": 202,
+                  "width": 78,
+                  "height": 44,
+                  "clientWidth": 74,
+                  "scrollWidth": 74,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 70,
+                  "top": 6.5,
+                  "right": 116,
+                  "bottom": 50.5,
+                  "width": 46,
+                  "height": 44,
+                  "clientWidth": 42,
+                  "scrollWidth": 42,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 119.54000091552734,
+                  "top": 6.060001373291016,
+                  "right": 166.45999145507812,
+                  "bottom": 50.939998626708984,
+                  "width": 46.91999053955078,
+                  "height": 44.87999725341797,
+                  "clientWidth": 42,
+                  "scrollWidth": 42,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 84,
+                      "top": 14.703125,
+                      "right": 102,
+                      "bottom": 26.703125
+                    },
+                    {
+                      "left": 83,
+                      "top": 28.5,
+                      "right": 103,
+                      "bottom": 40.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 133.30999755859375,
+                      "top": 14.427188873291016,
+                      "right": 152.69000244140625,
+                      "bottom": 26.66718864440918
+                    },
+                    {
+                      "left": 132.8000030517578,
+                      "top": 28.5,
+                      "right": 153.1999969482422,
+                      "bottom": 40.7400016784668
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "companion layout and reachable controls 390x844",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "input": "native browser touch tap",
+        "representatives": [
+          {
+            "template": "police",
+            "guidance": {
+              "part": "body",
+              "name": "차체",
+              "color": "#FFF8E7",
+              "colorName": "아이보리색"
+            },
+            "layout": {
+              "viewport": [
+                390,
+                844
+              ],
+              "documentWidth": 390,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 390,
+                "bottom": 844,
+                "width": 390,
+                "height": 844,
+                "clientWidth": 390,
+                "scrollWidth": 390,
+                "clientHeight": 844,
+                "scrollHeight": 844
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 6,
+                  "top": 213,
+                  "right": 384,
+                  "bottom": 303,
+                  "width": 378,
+                  "height": 90,
+                  "clientWidth": 374,
+                  "scrollWidth": 374,
+                  "clientHeight": 86,
+                  "scrollHeight": 86
+                },
+                "#azReference img": {
+                  "left": 17,
+                  "top": 221,
+                  "right": 111,
+                  "bottom": 295,
+                  "width": 94,
+                  "height": 74,
+                  "clientWidth": 94,
+                  "scrollWidth": 94,
+                  "clientHeight": 74,
+                  "scrollHeight": 74
+                },
+                "#azColoringWrap": {
+                  "left": 10,
+                  "top": 315,
+                  "right": 380,
+                  "bottom": 724,
+                  "width": 370,
+                  "height": 409,
+                  "clientWidth": 370,
+                  "scrollWidth": 370,
+                  "clientHeight": 409,
+                  "scrollHeight": 409
+                },
+                "#azColoringWrap svg": {
+                  "left": 21.09375,
+                  "top": 327.265625,
+                  "right": 368.890625,
+                  "bottom": 711.71875,
+                  "width": 347.796875,
+                  "height": 384.453125,
+                  "clientWidth": 348,
+                  "scrollWidth": 348,
+                  "clientHeight": 384,
+                  "scrollHeight": 384
+                },
+                "#azReferenceToggle": {
+                  "left": 143,
+                  "top": 159,
+                  "right": 273,
+                  "bottom": 203,
+                  "width": 130,
+                  "height": 44,
+                  "clientWidth": 126,
+                  "scrollWidth": 126,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 9,
+                  "top": 159,
+                  "right": 139,
+                  "bottom": 203,
+                  "width": 130,
+                  "height": 44,
+                  "clientWidth": 126,
+                  "scrollWidth": 126,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 319,
+                  "top": 228.40625,
+                  "right": 373,
+                  "bottom": 272.40625,
+                  "width": 54,
+                  "height": 44,
+                  "clientWidth": 50,
+                  "scrollWidth": 50,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 242,
+                  "top": 6.5,
+                  "right": 286,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 290,
+                  "top": 6.5,
+                  "right": 334,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 282,
+                  "top": 159,
+                  "right": 384,
+                  "bottom": 203,
+                  "width": 102,
+                  "height": 44,
+                  "clientWidth": 98,
+                  "scrollWidth": 98,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 70,
+                  "top": 6.5,
+                  "right": 150,
+                  "bottom": 50.5,
+                  "width": 80,
+                  "height": 44,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 155.1999969482422,
+                  "top": 6.060001373291016,
+                  "right": 236.79998779296875,
+                  "bottom": 50.939998626708984,
+                  "width": 81.59999084472656,
+                  "height": 44.87999725341797,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 85,
+                      "top": 21.5,
+                      "right": 135,
+                      "bottom": 35.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 170.5,
+                      "top": 21.360000610351562,
+                      "right": 221.5,
+                      "bottom": 35.63999938964844
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "police_swat_suv",
+            "guidance": {
+              "part": "body",
+              "name": "튼튼한 차체",
+              "color": "#1E40AF",
+              "colorName": "진파랑"
+            },
+            "layout": {
+              "viewport": [
+                390,
+                844
+              ],
+              "documentWidth": 390,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 390,
+                "bottom": 844,
+                "width": 390,
+                "height": 844,
+                "clientWidth": 390,
+                "scrollWidth": 390,
+                "clientHeight": 844,
+                "scrollHeight": 844
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 6,
+                  "top": 213,
+                  "right": 384,
+                  "bottom": 303,
+                  "width": 378,
+                  "height": 90,
+                  "clientWidth": 374,
+                  "scrollWidth": 374,
+                  "clientHeight": 86,
+                  "scrollHeight": 86
+                },
+                "#azReference img": {
+                  "left": 17,
+                  "top": 221,
+                  "right": 111,
+                  "bottom": 295,
+                  "width": 94,
+                  "height": 74,
+                  "clientWidth": 94,
+                  "scrollWidth": 94,
+                  "clientHeight": 74,
+                  "scrollHeight": 74
+                },
+                "#azColoringWrap": {
+                  "left": 10,
+                  "top": 315,
+                  "right": 380,
+                  "bottom": 724,
+                  "width": 370,
+                  "height": 409,
+                  "clientWidth": 370,
+                  "scrollWidth": 370,
+                  "clientHeight": 409,
+                  "scrollHeight": 409
+                },
+                "#azColoringWrap svg": {
+                  "left": 21.09375,
+                  "top": 327.265625,
+                  "right": 368.890625,
+                  "bottom": 711.71875,
+                  "width": 347.796875,
+                  "height": 384.453125,
+                  "clientWidth": 348,
+                  "scrollWidth": 348,
+                  "clientHeight": 384,
+                  "scrollHeight": 384
+                },
+                "#azReferenceToggle": {
+                  "left": 143,
+                  "top": 159,
+                  "right": 273,
+                  "bottom": 203,
+                  "width": 130,
+                  "height": 44,
+                  "clientWidth": 126,
+                  "scrollWidth": 126,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 9,
+                  "top": 159,
+                  "right": 139,
+                  "bottom": 203,
+                  "width": 130,
+                  "height": 44,
+                  "clientWidth": 126,
+                  "scrollWidth": 126,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 319,
+                  "top": 228.40625,
+                  "right": 373,
+                  "bottom": 272.40625,
+                  "width": 54,
+                  "height": 44,
+                  "clientWidth": 50,
+                  "scrollWidth": 50,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 242,
+                  "top": 6.5,
+                  "right": 286,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 290,
+                  "top": 6.5,
+                  "right": 334,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 282,
+                  "top": 159,
+                  "right": 384,
+                  "bottom": 203,
+                  "width": 102,
+                  "height": 44,
+                  "clientWidth": 98,
+                  "scrollWidth": 98,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 70,
+                  "top": 6.5,
+                  "right": 150,
+                  "bottom": 50.5,
+                  "width": 80,
+                  "height": 44,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 155.1999969482422,
+                  "top": 6.060001373291016,
+                  "right": 236.79998779296875,
+                  "bottom": 50.939998626708984,
+                  "width": 81.59999084472656,
+                  "height": 44.87999725341797,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 85,
+                      "top": 21.5,
+                      "right": 135,
+                      "bottom": 35.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 170.5,
+                      "top": 21.360000610351562,
+                      "right": 221.5,
+                      "bottom": 35.63999938964844
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "butterfly",
+            "guidance": {
+              "part": "body",
+              "name": "몸통",
+              "color": "#8B5A2B",
+              "colorName": "갈색"
+            },
+            "layout": {
+              "viewport": [
+                390,
+                844
+              ],
+              "documentWidth": 390,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 390,
+                "bottom": 844,
+                "width": 390,
+                "height": 844,
+                "clientWidth": 390,
+                "scrollWidth": 390,
+                "clientHeight": 844,
+                "scrollHeight": 844
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 6,
+                  "top": 213,
+                  "right": 384,
+                  "bottom": 303,
+                  "width": 378,
+                  "height": 90,
+                  "clientWidth": 374,
+                  "scrollWidth": 374,
+                  "clientHeight": 86,
+                  "scrollHeight": 86
+                },
+                "#azReference img": {
+                  "left": 17,
+                  "top": 221,
+                  "right": 111,
+                  "bottom": 295,
+                  "width": 94,
+                  "height": 74,
+                  "clientWidth": 94,
+                  "scrollWidth": 94,
+                  "clientHeight": 74,
+                  "scrollHeight": 74
+                },
+                "#azColoringWrap": {
+                  "left": 10,
+                  "top": 315,
+                  "right": 380,
+                  "bottom": 724,
+                  "width": 370,
+                  "height": 409,
+                  "clientWidth": 370,
+                  "scrollWidth": 370,
+                  "clientHeight": 409,
+                  "scrollHeight": 409
+                },
+                "#azColoringWrap svg": {
+                  "left": 21.09375,
+                  "top": 327.265625,
+                  "right": 368.890625,
+                  "bottom": 711.71875,
+                  "width": 347.796875,
+                  "height": 384.453125,
+                  "clientWidth": 348,
+                  "scrollWidth": 348,
+                  "clientHeight": 384,
+                  "scrollHeight": 384
+                },
+                "#azReferenceToggle": {
+                  "left": 143,
+                  "top": 159,
+                  "right": 273,
+                  "bottom": 203,
+                  "width": 130,
+                  "height": 44,
+                  "clientWidth": 126,
+                  "scrollWidth": 126,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 9,
+                  "top": 159,
+                  "right": 139,
+                  "bottom": 203,
+                  "width": 130,
+                  "height": 44,
+                  "clientWidth": 126,
+                  "scrollWidth": 126,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 319,
+                  "top": 228.40625,
+                  "right": 373,
+                  "bottom": 272.40625,
+                  "width": 54,
+                  "height": 44,
+                  "clientWidth": 50,
+                  "scrollWidth": 50,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 242,
+                  "top": 6.5,
+                  "right": 286,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 290,
+                  "top": 6.5,
+                  "right": 334,
+                  "bottom": 50.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 282,
+                  "top": 159,
+                  "right": 384,
+                  "bottom": 203,
+                  "width": 102,
+                  "height": 44,
+                  "clientWidth": 98,
+                  "scrollWidth": 98,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 70,
+                  "top": 6.5,
+                  "right": 150,
+                  "bottom": 50.5,
+                  "width": 80,
+                  "height": 44,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 155.1999969482422,
+                  "top": 6.060001373291016,
+                  "right": 236.79998779296875,
+                  "bottom": 50.939998626708984,
+                  "width": 81.59999084472656,
+                  "height": 44.87999725341797,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 85,
+                      "top": 21.5,
+                      "right": 135,
+                      "bottom": 35.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 170.5,
+                      "top": 21.360000610351562,
+                      "right": 221.5,
+                      "bottom": 35.63999938964844
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "companion layout and reachable controls 844x390",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "input": "native browser touch tap",
+        "representatives": [
+          {
+            "template": "police",
+            "guidance": {
+              "part": "body",
+              "name": "차체",
+              "color": "#FFF8E7",
+              "colorName": "아이보리색"
+            },
+            "layout": {
+              "viewport": [
+                844,
+                390
+              ],
+              "documentWidth": 844,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 844,
+                "bottom": 390,
+                "width": 844,
+                "height": 390,
+                "clientWidth": 844,
+                "scrollWidth": 844,
+                "clientHeight": 390,
+                "scrollHeight": 390
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 592,
+                  "top": 112,
+                  "right": 704,
+                  "bottom": 386,
+                  "width": 112,
+                  "height": 274,
+                  "clientWidth": 108,
+                  "scrollWidth": 108,
+                  "clientHeight": 270,
+                  "scrollHeight": 270
+                },
+                "#azReference img": {
+                  "left": 600,
+                  "top": 143.234375,
+                  "right": 696,
+                  "bottom": 253.234375,
+                  "width": 96,
+                  "height": 110,
+                  "clientWidth": 96,
+                  "scrollWidth": 96,
+                  "clientHeight": 110,
+                  "scrollHeight": 110
+                },
+                "#azColoringWrap": {
+                  "left": 142,
+                  "top": 114,
+                  "right": 585,
+                  "bottom": 384,
+                  "width": 443,
+                  "height": 270,
+                  "clientWidth": 443,
+                  "scrollWidth": 443,
+                  "clientHeight": 270,
+                  "scrollHeight": 270
+                },
+                "#azColoringWrap svg": {
+                  "left": 155.296875,
+                  "top": 122.09375,
+                  "right": 571.703125,
+                  "bottom": 375.890625,
+                  "width": 416.40625,
+                  "height": 253.796875,
+                  "clientWidth": 416,
+                  "scrollWidth": 416,
+                  "clientHeight": 254,
+                  "scrollHeight": 254
+                },
+                "#azReferenceToggle": {
+                  "left": 381,
+                  "top": 62,
+                  "right": 547,
+                  "bottom": 106,
+                  "width": 166,
+                  "height": 44,
+                  "clientWidth": 162,
+                  "scrollWidth": 162,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 211,
+                  "top": 62,
+                  "right": 377,
+                  "bottom": 106,
+                  "width": 166,
+                  "height": 44,
+                  "clientWidth": 162,
+                  "scrollWidth": 162,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 613.515625,
+                  "top": 310.765625,
+                  "right": 682.46875,
+                  "bottom": 354.765625,
+                  "width": 68.953125,
+                  "height": 44,
+                  "clientWidth": 65,
+                  "scrollWidth": 65,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 690,
+                  "top": 4.5,
+                  "right": 734,
+                  "bottom": 48.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 740,
+                  "top": 4.5,
+                  "right": 784,
+                  "bottom": 48.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 555,
+                  "top": 62,
+                  "right": 635,
+                  "bottom": 106,
+                  "width": 80,
+                  "height": 44,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 74,
+                  "top": 4.5,
+                  "right": 371,
+                  "bottom": 48.5,
+                  "width": 297,
+                  "height": 44,
+                  "clientWidth": 293,
+                  "scrollWidth": 293,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 374.0299987792969,
+                  "top": 4.060001373291016,
+                  "right": 676.969970703125,
+                  "bottom": 48.939998626708984,
+                  "width": 302.9399719238281,
+                  "height": 44.87999725341797,
+                  "clientWidth": 293,
+                  "scrollWidth": 293,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 192,
+                      "top": 20,
+                      "right": 211,
+                      "bottom": 32
+                    },
+                    {
+                      "left": 192,
+                      "top": 20,
+                      "right": 211,
+                      "bottom": 32
+                    },
+                    {
+                      "left": 211,
+                      "top": 20,
+                      "right": 253,
+                      "bottom": 32
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 493.8800048828125,
+                      "top": 19.8700008392334,
+                      "right": 513.260009765625,
+                      "bottom": 32.11000061035156
+                    },
+                    {
+                      "left": 493.8800048828125,
+                      "top": 19.8700008392334,
+                      "right": 513.260009765625,
+                      "bottom": 32.11000061035156
+                    },
+                    {
+                      "left": 513.260009765625,
+                      "top": 19.8700008392334,
+                      "right": 557.1199951171875,
+                      "bottom": 32.11000061035156
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "police_swat_suv",
+            "guidance": {
+              "part": "body",
+              "name": "튼튼한 차체",
+              "color": "#1E40AF",
+              "colorName": "진파랑"
+            },
+            "layout": {
+              "viewport": [
+                844,
+                390
+              ],
+              "documentWidth": 844,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 844,
+                "bottom": 390,
+                "width": 844,
+                "height": 390,
+                "clientWidth": 844,
+                "scrollWidth": 844,
+                "clientHeight": 390,
+                "scrollHeight": 390
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 592,
+                  "top": 112,
+                  "right": 704,
+                  "bottom": 386,
+                  "width": 112,
+                  "height": 274,
+                  "clientWidth": 108,
+                  "scrollWidth": 108,
+                  "clientHeight": 270,
+                  "scrollHeight": 270
+                },
+                "#azReference img": {
+                  "left": 600,
+                  "top": 143.234375,
+                  "right": 696,
+                  "bottom": 253.234375,
+                  "width": 96,
+                  "height": 110,
+                  "clientWidth": 96,
+                  "scrollWidth": 96,
+                  "clientHeight": 110,
+                  "scrollHeight": 110
+                },
+                "#azColoringWrap": {
+                  "left": 142,
+                  "top": 114,
+                  "right": 585,
+                  "bottom": 384,
+                  "width": 443,
+                  "height": 270,
+                  "clientWidth": 443,
+                  "scrollWidth": 443,
+                  "clientHeight": 270,
+                  "scrollHeight": 270
+                },
+                "#azColoringWrap svg": {
+                  "left": 155.296875,
+                  "top": 122.09375,
+                  "right": 571.703125,
+                  "bottom": 375.890625,
+                  "width": 416.40625,
+                  "height": 253.796875,
+                  "clientWidth": 416,
+                  "scrollWidth": 416,
+                  "clientHeight": 254,
+                  "scrollHeight": 254
+                },
+                "#azReferenceToggle": {
+                  "left": 381,
+                  "top": 62,
+                  "right": 547,
+                  "bottom": 106,
+                  "width": 166,
+                  "height": 44,
+                  "clientWidth": 162,
+                  "scrollWidth": 162,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 211,
+                  "top": 62,
+                  "right": 377,
+                  "bottom": 106,
+                  "width": 166,
+                  "height": 44,
+                  "clientWidth": 162,
+                  "scrollWidth": 162,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 613.515625,
+                  "top": 310.765625,
+                  "right": 682.46875,
+                  "bottom": 354.765625,
+                  "width": 68.953125,
+                  "height": 44,
+                  "clientWidth": 65,
+                  "scrollWidth": 65,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 690,
+                  "top": 4.5,
+                  "right": 734,
+                  "bottom": 48.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 740,
+                  "top": 4.5,
+                  "right": 784,
+                  "bottom": 48.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 555,
+                  "top": 62,
+                  "right": 635,
+                  "bottom": 106,
+                  "width": 80,
+                  "height": 44,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 74,
+                  "top": 4.5,
+                  "right": 371,
+                  "bottom": 48.5,
+                  "width": 297,
+                  "height": 44,
+                  "clientWidth": 293,
+                  "scrollWidth": 293,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 374.0299987792969,
+                  "top": 4.060001373291016,
+                  "right": 676.969970703125,
+                  "bottom": 48.939998626708984,
+                  "width": 302.9399719238281,
+                  "height": 44.87999725341797,
+                  "clientWidth": 293,
+                  "scrollWidth": 293,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 192,
+                      "top": 20,
+                      "right": 211,
+                      "bottom": 32
+                    },
+                    {
+                      "left": 192,
+                      "top": 20,
+                      "right": 211,
+                      "bottom": 32
+                    },
+                    {
+                      "left": 211,
+                      "top": 20,
+                      "right": 253,
+                      "bottom": 32
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 493.8800048828125,
+                      "top": 19.8700008392334,
+                      "right": 513.260009765625,
+                      "bottom": 32.11000061035156
+                    },
+                    {
+                      "left": 493.8800048828125,
+                      "top": 19.8700008392334,
+                      "right": 513.260009765625,
+                      "bottom": 32.11000061035156
+                    },
+                    {
+                      "left": 513.260009765625,
+                      "top": 19.8700008392334,
+                      "right": 557.1199951171875,
+                      "bottom": 32.11000061035156
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "butterfly",
+            "guidance": {
+              "part": "body",
+              "name": "몸통",
+              "color": "#8B5A2B",
+              "colorName": "갈색"
+            },
+            "layout": {
+              "viewport": [
+                844,
+                390
+              ],
+              "documentWidth": 844,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 844,
+                "bottom": 390,
+                "width": 844,
+                "height": 390,
+                "clientWidth": 844,
+                "scrollWidth": 844,
+                "clientHeight": 390,
+                "scrollHeight": 390
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 592,
+                  "top": 112,
+                  "right": 704,
+                  "bottom": 386,
+                  "width": 112,
+                  "height": 274,
+                  "clientWidth": 108,
+                  "scrollWidth": 108,
+                  "clientHeight": 270,
+                  "scrollHeight": 270
+                },
+                "#azReference img": {
+                  "left": 600,
+                  "top": 143.234375,
+                  "right": 696,
+                  "bottom": 253.234375,
+                  "width": 96,
+                  "height": 110,
+                  "clientWidth": 96,
+                  "scrollWidth": 96,
+                  "clientHeight": 110,
+                  "scrollHeight": 110
+                },
+                "#azColoringWrap": {
+                  "left": 142,
+                  "top": 114,
+                  "right": 585,
+                  "bottom": 384,
+                  "width": 443,
+                  "height": 270,
+                  "clientWidth": 443,
+                  "scrollWidth": 443,
+                  "clientHeight": 270,
+                  "scrollHeight": 270
+                },
+                "#azColoringWrap svg": {
+                  "left": 155.296875,
+                  "top": 122.09375,
+                  "right": 571.703125,
+                  "bottom": 375.890625,
+                  "width": 416.40625,
+                  "height": 253.796875,
+                  "clientWidth": 416,
+                  "scrollWidth": 416,
+                  "clientHeight": 254,
+                  "scrollHeight": 254
+                },
+                "#azReferenceToggle": {
+                  "left": 381,
+                  "top": 62,
+                  "right": 547,
+                  "bottom": 106,
+                  "width": 166,
+                  "height": 44,
+                  "clientWidth": 162,
+                  "scrollWidth": 162,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 211,
+                  "top": 62,
+                  "right": 377,
+                  "bottom": 106,
+                  "width": 166,
+                  "height": 44,
+                  "clientWidth": 162,
+                  "scrollWidth": 162,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 613.515625,
+                  "top": 310.765625,
+                  "right": 682.46875,
+                  "bottom": 354.765625,
+                  "width": 68.953125,
+                  "height": 44,
+                  "clientWidth": 65,
+                  "scrollWidth": 65,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 690,
+                  "top": 4.5,
+                  "right": 734,
+                  "bottom": 48.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNewPaper": {
+                  "left": 740,
+                  "top": 4.5,
+                  "right": 784,
+                  "bottom": 48.5,
+                  "width": 44,
+                  "height": 44,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azPlayArtwork": {
+                  "left": 555,
+                  "top": 62,
+                  "right": 635,
+                  "bottom": 106,
+                  "width": 80,
+                  "height": 44,
+                  "clientWidth": 76,
+                  "scrollWidth": 76,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 74,
+                  "top": 4.5,
+                  "right": 371,
+                  "bottom": 48.5,
+                  "width": 297,
+                  "height": 44,
+                  "clientWidth": 293,
+                  "scrollWidth": 293,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 374.0299987792969,
+                  "top": 4.060001373291016,
+                  "right": 676.969970703125,
+                  "bottom": 48.939998626708984,
+                  "width": 302.9399719238281,
+                  "height": 44.87999725341797,
+                  "clientWidth": 293,
+                  "scrollWidth": 293,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 192,
+                      "top": 20,
+                      "right": 211,
+                      "bottom": 32
+                    },
+                    {
+                      "left": 192,
+                      "top": 20,
+                      "right": 211,
+                      "bottom": 32
+                    },
+                    {
+                      "left": 211,
+                      "top": 20,
+                      "right": 253,
+                      "bottom": 32
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 493.8800048828125,
+                      "top": 19.8700008392334,
+                      "right": 513.260009765625,
+                      "bottom": 32.11000061035156
+                    },
+                    {
+                      "left": 493.8800048828125,
+                      "top": 19.8700008392334,
+                      "right": 513.260009765625,
+                      "bottom": 32.11000061035156
+                    },
+                    {
+                      "left": 513.260009765625,
+                      "top": 19.8700008392334,
+                      "right": 557.1199951171875,
+                      "bottom": 32.11000061035156
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "companion layout and reachable controls 1024x768",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "input": "native browser touch tap",
+        "representatives": [
+          {
+            "template": "police",
+            "guidance": {
+              "part": "body",
+              "name": "차체",
+              "color": "#FFF8E7",
+              "colorName": "아이보리색"
+            },
+            "layout": {
+              "viewport": [
+                1024,
+                768
+              ],
+              "documentWidth": 1024,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 1024,
+                "bottom": 768,
+                "width": 1024,
+                "height": 768,
+                "clientWidth": 1024,
+                "scrollWidth": 1024,
+                "clientHeight": 768,
+                "scrollHeight": 768
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 644.09375,
+                  "top": 129,
+                  "right": 766,
+                  "bottom": 760,
+                  "width": 121.90625,
+                  "height": 631,
+                  "clientWidth": 118,
+                  "scrollWidth": 118,
+                  "clientHeight": 627,
+                  "scrollHeight": 627
+                },
+                "#azReference img": {
+                  "left": 654.09375,
+                  "top": 296.359375,
+                  "right": 756,
+                  "bottom": 476.359375,
+                  "width": 101.90625,
+                  "height": 180,
+                  "clientWidth": 102,
+                  "scrollWidth": 102,
+                  "clientHeight": 180,
+                  "scrollHeight": 180
+                },
+                "#azColoringWrap": {
+                  "left": 263,
+                  "top": 134,
+                  "right": 631.09375,
+                  "bottom": 755,
+                  "width": 368.09375,
+                  "height": 621,
+                  "clientWidth": 368,
+                  "scrollWidth": 368,
+                  "clientHeight": 621,
+                  "scrollHeight": 621
+                },
+                "#azColoringWrap svg": {
+                  "left": 274.046875,
+                  "top": 152.625,
+                  "right": 620.046875,
+                  "bottom": 736.359375,
+                  "width": 346,
+                  "height": 583.734375,
+                  "clientWidth": 346,
+                  "scrollWidth": 346,
+                  "clientHeight": 584,
+                  "scrollHeight": 584
+                },
+                "#azReferenceToggle": {
+                  "left": 460,
+                  "top": 75,
+                  "right": 625,
+                  "bottom": 119,
+                  "width": 165,
+                  "height": 44,
+                  "clientWidth": 161,
+                  "scrollWidth": 161,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 291,
+                  "top": 75,
+                  "right": 456,
+                  "bottom": 119,
+                  "width": 165,
+                  "height": 44,
+                  "clientWidth": 161,
+                  "scrollWidth": 161,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 663.15625,
+                  "top": 548.625,
+                  "right": 746.9375,
+                  "bottom": 592.625,
+                  "width": 83.78125,
+                  "height": 44,
+                  "clientWidth": 80,
+                  "scrollWidth": 80,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 870,
+                  "top": 5.5,
+                  "right": 914,
+                  "bottom": 53.5,
+                  "width": 44,
+                  "height": 48,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 44,
+                  "scrollHeight": 44
+                },
+                "#azNewPaper": {
+                  "left": 920,
+                  "top": 5.5,
+                  "right": 964,
+                  "bottom": 53.5,
+                  "width": 44,
+                  "height": 48,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 44,
+                  "scrollHeight": 44
+                },
+                "#azPlayArtwork": {
+                  "left": 634,
+                  "top": 75,
+                  "right": 736,
+                  "bottom": 119,
+                  "width": 102,
+                  "height": 44,
+                  "clientWidth": 98,
+                  "scrollWidth": 98,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 164,
+                  "top": 5.5,
+                  "right": 459,
+                  "bottom": 53.5,
+                  "width": 295,
+                  "height": 48,
+                  "clientWidth": 289,
+                  "scrollWidth": 289,
+                  "clientHeight": 42,
+                  "scrollHeight": 42
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 466.04998779296875,
+                  "top": 5.020000457763672,
+                  "right": 766.949951171875,
+                  "bottom": 53.97999954223633,
+                  "width": 300.89996337890625,
+                  "height": 48.959999084472656,
+                  "clientWidth": 289,
+                  "scrollWidth": 289,
+                  "clientHeight": 42,
+                  "scrollHeight": 42
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 265.5,
+                      "top": 20.5,
+                      "right": 292.5,
+                      "bottom": 38.5
+                    },
+                    {
+                      "left": 265.5,
+                      "top": 20.5,
+                      "right": 292.5,
+                      "bottom": 38.5
+                    },
+                    {
+                      "left": 292.5,
+                      "top": 20.5,
+                      "right": 357.5,
+                      "bottom": 38.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 569.5799560546875,
+                      "top": 20.31999969482422,
+                      "right": 597.1199951171875,
+                      "bottom": 38.68000030517578
+                    },
+                    {
+                      "left": 569.5799560546875,
+                      "top": 20.31999969482422,
+                      "right": 597.1199951171875,
+                      "bottom": 38.68000030517578
+                    },
+                    {
+                      "left": 597.1199951171875,
+                      "top": 20.31999969482422,
+                      "right": 663.4199829101562,
+                      "bottom": 38.68000030517578
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "police_swat_suv",
+            "guidance": {
+              "part": "body",
+              "name": "튼튼한 차체",
+              "color": "#1E40AF",
+              "colorName": "진파랑"
+            },
+            "layout": {
+              "viewport": [
+                1024,
+                768
+              ],
+              "documentWidth": 1024,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 1024,
+                "bottom": 768,
+                "width": 1024,
+                "height": 768,
+                "clientWidth": 1024,
+                "scrollWidth": 1024,
+                "clientHeight": 768,
+                "scrollHeight": 768
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 644.09375,
+                  "top": 129,
+                  "right": 766,
+                  "bottom": 760,
+                  "width": 121.90625,
+                  "height": 631,
+                  "clientWidth": 118,
+                  "scrollWidth": 118,
+                  "clientHeight": 627,
+                  "scrollHeight": 627
+                },
+                "#azReference img": {
+                  "left": 654.09375,
+                  "top": 296.359375,
+                  "right": 756,
+                  "bottom": 476.359375,
+                  "width": 101.90625,
+                  "height": 180,
+                  "clientWidth": 102,
+                  "scrollWidth": 102,
+                  "clientHeight": 180,
+                  "scrollHeight": 180
+                },
+                "#azColoringWrap": {
+                  "left": 263,
+                  "top": 134,
+                  "right": 631.09375,
+                  "bottom": 755,
+                  "width": 368.09375,
+                  "height": 621,
+                  "clientWidth": 368,
+                  "scrollWidth": 368,
+                  "clientHeight": 621,
+                  "scrollHeight": 621
+                },
+                "#azColoringWrap svg": {
+                  "left": 274.046875,
+                  "top": 152.625,
+                  "right": 620.046875,
+                  "bottom": 736.359375,
+                  "width": 346,
+                  "height": 583.734375,
+                  "clientWidth": 346,
+                  "scrollWidth": 346,
+                  "clientHeight": 584,
+                  "scrollHeight": 584
+                },
+                "#azReferenceToggle": {
+                  "left": 460,
+                  "top": 75,
+                  "right": 625,
+                  "bottom": 119,
+                  "width": 165,
+                  "height": 44,
+                  "clientWidth": 161,
+                  "scrollWidth": 161,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 291,
+                  "top": 75,
+                  "right": 456,
+                  "bottom": 119,
+                  "width": 165,
+                  "height": 44,
+                  "clientWidth": 161,
+                  "scrollWidth": 161,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 663.15625,
+                  "top": 548.625,
+                  "right": 746.9375,
+                  "bottom": 592.625,
+                  "width": 83.78125,
+                  "height": 44,
+                  "clientWidth": 80,
+                  "scrollWidth": 80,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 870,
+                  "top": 5.5,
+                  "right": 914,
+                  "bottom": 53.5,
+                  "width": 44,
+                  "height": 48,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 44,
+                  "scrollHeight": 44
+                },
+                "#azNewPaper": {
+                  "left": 920,
+                  "top": 5.5,
+                  "right": 964,
+                  "bottom": 53.5,
+                  "width": 44,
+                  "height": 48,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 44,
+                  "scrollHeight": 44
+                },
+                "#azPlayArtwork": {
+                  "left": 634,
+                  "top": 75,
+                  "right": 736,
+                  "bottom": 119,
+                  "width": 102,
+                  "height": 44,
+                  "clientWidth": 98,
+                  "scrollWidth": 98,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 164,
+                  "top": 5.5,
+                  "right": 459,
+                  "bottom": 53.5,
+                  "width": 295,
+                  "height": 48,
+                  "clientWidth": 289,
+                  "scrollWidth": 289,
+                  "clientHeight": 42,
+                  "scrollHeight": 42
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 466.04998779296875,
+                  "top": 5.020000457763672,
+                  "right": 766.949951171875,
+                  "bottom": 53.97999954223633,
+                  "width": 300.89996337890625,
+                  "height": 48.959999084472656,
+                  "clientWidth": 289,
+                  "scrollWidth": 289,
+                  "clientHeight": 42,
+                  "scrollHeight": 42
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 265.5,
+                      "top": 20.5,
+                      "right": 292.5,
+                      "bottom": 38.5
+                    },
+                    {
+                      "left": 265.5,
+                      "top": 20.5,
+                      "right": 292.5,
+                      "bottom": 38.5
+                    },
+                    {
+                      "left": 292.5,
+                      "top": 20.5,
+                      "right": 357.5,
+                      "bottom": 38.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 569.5799560546875,
+                      "top": 20.31999969482422,
+                      "right": 597.1199951171875,
+                      "bottom": 38.68000030517578
+                    },
+                    {
+                      "left": 569.5799560546875,
+                      "top": 20.31999969482422,
+                      "right": 597.1199951171875,
+                      "bottom": 38.68000030517578
+                    },
+                    {
+                      "left": 597.1199951171875,
+                      "top": 20.31999969482422,
+                      "right": 663.4199829101562,
+                      "bottom": 38.68000030517578
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          },
+          {
+            "template": "butterfly",
+            "guidance": {
+              "part": "body",
+              "name": "몸통",
+              "color": "#8B5A2B",
+              "colorName": "갈색"
+            },
+            "layout": {
+              "viewport": [
+                1024,
+                768
+              ],
+              "documentWidth": 1024,
+              "root": {
+                "left": 0,
+                "top": 0,
+                "right": 1024,
+                "bottom": 768,
+                "width": 1024,
+                "height": 768,
+                "clientWidth": 1024,
+                "scrollWidth": 1024,
+                "clientHeight": 768,
+                "scrollHeight": 768
+              },
+              "boxes": {
+                "#azReference": {
+                  "left": 644.09375,
+                  "top": 129,
+                  "right": 766,
+                  "bottom": 760,
+                  "width": 121.90625,
+                  "height": 631,
+                  "clientWidth": 118,
+                  "scrollWidth": 118,
+                  "clientHeight": 627,
+                  "scrollHeight": 627
+                },
+                "#azReference img": {
+                  "left": 654.09375,
+                  "top": 296.359375,
+                  "right": 756,
+                  "bottom": 476.359375,
+                  "width": 101.90625,
+                  "height": 180,
+                  "clientWidth": 102,
+                  "scrollWidth": 102,
+                  "clientHeight": 180,
+                  "scrollHeight": 180
+                },
+                "#azColoringWrap": {
+                  "left": 263,
+                  "top": 134,
+                  "right": 631.09375,
+                  "bottom": 755,
+                  "width": 368.09375,
+                  "height": 621,
+                  "clientWidth": 368,
+                  "scrollWidth": 368,
+                  "clientHeight": 621,
+                  "scrollHeight": 621
+                },
+                "#azColoringWrap svg": {
+                  "left": 274.046875,
+                  "top": 152.625,
+                  "right": 620.046875,
+                  "bottom": 736.359375,
+                  "width": 346,
+                  "height": 583.734375,
+                  "clientWidth": 346,
+                  "scrollWidth": 346,
+                  "clientHeight": 584,
+                  "scrollHeight": 584
+                },
+                "#azReferenceToggle": {
+                  "left": 460,
+                  "top": 75,
+                  "right": 625,
+                  "bottom": 119,
+                  "width": 165,
+                  "height": 44,
+                  "clientWidth": 161,
+                  "scrollWidth": 161,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azFreeColoring": {
+                  "left": 291,
+                  "top": 75,
+                  "right": 456,
+                  "bottom": 119,
+                  "width": 165,
+                  "height": 44,
+                  "clientWidth": 161,
+                  "scrollWidth": 161,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azNextPart": {
+                  "left": 663.15625,
+                  "top": 548.625,
+                  "right": 746.9375,
+                  "bottom": 592.625,
+                  "width": 83.78125,
+                  "height": 44,
+                  "clientWidth": 80,
+                  "scrollWidth": 80,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                "#azUndo": {
+                  "left": 870,
+                  "top": 5.5,
+                  "right": 914,
+                  "bottom": 53.5,
+                  "width": 44,
+                  "height": 48,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 44,
+                  "scrollHeight": 44
+                },
+                "#azNewPaper": {
+                  "left": 920,
+                  "top": 5.5,
+                  "right": 964,
+                  "bottom": 53.5,
+                  "width": 44,
+                  "height": 48,
+                  "clientWidth": 40,
+                  "scrollWidth": 40,
+                  "clientHeight": 44,
+                  "scrollHeight": 44
+                },
+                "#azPlayArtwork": {
+                  "left": 634,
+                  "top": 75,
+                  "right": 736,
+                  "bottom": 119,
+                  "width": 102,
+                  "height": 44,
+                  "clientWidth": 98,
+                  "scrollWidth": 98,
+                  "clientHeight": 40,
+                  "scrollHeight": 40
+                },
+                ".az-mode-tab[data-tab=\"free\"]": {
+                  "left": 164,
+                  "top": 5.5,
+                  "right": 459,
+                  "bottom": 53.5,
+                  "width": 295,
+                  "height": 48,
+                  "clientWidth": 289,
+                  "scrollWidth": 289,
+                  "clientHeight": 42,
+                  "scrollHeight": 42
+                },
+                ".az-mode-tab[data-tab=\"coloring\"]": {
+                  "left": 466.04998779296875,
+                  "top": 5.020000457763672,
+                  "right": 766.949951171875,
+                  "bottom": 53.97999954223633,
+                  "width": 300.89996337890625,
+                  "height": 48.959999084472656,
+                  "clientWidth": 289,
+                  "scrollWidth": 289,
+                  "clientHeight": 42,
+                  "scrollHeight": 42
+                }
+              },
+              "hits": [
+                {
+                  "selector": "#azReferenceToggle",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azFreeColoring",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNextPart",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azUndo",
+                  "reachable": true
+                },
+                {
+                  "selector": "#azNewPaper",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "reachable": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "reachable": true
+                }
+              ],
+              "modeTabText": [
+                {
+                  "selector": ".az-mode-tab[data-tab=\"free\"]",
+                  "text": "🎨 그림 팡팡",
+                  "lines": [
+                    {
+                      "left": 265.5,
+                      "top": 20.5,
+                      "right": 292.5,
+                      "bottom": 38.5
+                    },
+                    {
+                      "left": 265.5,
+                      "top": 20.5,
+                      "right": 292.5,
+                      "bottom": 38.5
+                    },
+                    {
+                      "left": 292.5,
+                      "top": 20.5,
+                      "right": 357.5,
+                      "bottom": 38.5
+                    }
+                  ],
+                  "contained": true
+                },
+                {
+                  "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+                  "text": "🌈 색칠 팡팡",
+                  "lines": [
+                    {
+                      "left": 569.5799560546875,
+                      "top": 20.31999969482422,
+                      "right": 597.1199951171875,
+                      "bottom": 38.68000030517578
+                    },
+                    {
+                      "left": 569.5799560546875,
+                      "top": 20.31999969482422,
+                      "right": 597.1199951171875,
+                      "bottom": 38.68000030517578
+                    },
+                    {
+                      "left": 597.1199951171875,
+                      "top": 20.31999969482422,
+                      "right": 663.4199829101562,
+                      "bottom": 38.68000030517578
+                    }
+                  ],
+                  "contained": true
+                }
+              ],
+              "clippedText": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "independent example paint undo reload and number-play handoff",
+      "status": "PASS",
+      "detail": {
+        "firstHint": {
+          "part": "body",
+          "name": "차체",
+          "color": "#FFF8E7",
+          "colorName": "아이보리색"
+        },
+        "nextHint": {
+          "part": "window_rear",
+          "name": "뒷창문",
+          "color": "#8EF6D1",
+          "colorName": "민트색"
+        },
+        "exampleNeverApplied": true,
+        "undoIgnoredModeAndHintChanges": true,
+        "savedPaintSurvivedReload": true,
+        "handoffWhileExampleOpen": {
+          "objectId": "art:police",
+          "pictures": 9,
+          "paint": "#9944FF"
+        }
+      }
+    },
+    {
+      "name": "legacy saved picture stays on its own geometry through reference new-paper undo and reload",
+      "status": "PASS",
+      "detail": {
+        "preVersioningRegions": 15,
+        "legacyPaintUnchangedByReference": true,
+        "newPaperVersion": 2,
+        "undoAndReloadVersion": 1
+      }
+    },
+    {
+      "name": "separate free drawing survives companion controls and reload",
+      "status": "PASS",
+      "detail": {
+        "storedDrawingUntouchedByReference": true,
+        "before": {
+          "painted": 3151,
+          "width": 378,
+          "height": 572
+        },
+        "returned": {
+          "painted": 3151,
+          "width": 378,
+          "height": 572
+        },
+        "reloaded": {
+          "painted": 2979,
+          "width": 363,
+          "height": 549
+        }
+      }
+    }
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    "art-reference-police-320x568.png",
+    "art-reference-police_swat_suv-320x568.png",
+    "art-reference-butterfly-320x568.png",
+    "art-reference-police-390x844.png",
+    "art-reference-police_swat_suv-390x844.png",
+    "art-reference-butterfly-390x844.png",
+    "art-reference-police-844x390.png",
+    "art-reference-police_swat_suv-844x390.png",
+    "art-reference-butterfly-844x390.png",
+    "art-reference-police-1024x768.png",
+    "art-reference-police_swat_suv-1024x768.png",
+    "art-reference-butterfly-1024x768.png",
+    "art-reference-painted-purple-and-red-example.png",
+    "art-reference-purple-artwork-number-play.png",
+    "art-reference-legacy-v1-with-current-example.png",
+    "art-reference-free-drawing-preserved.png"
+  ],
+  "sources": {
+    "index.html": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+    "js/games/art-zone.js": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+    "js/games/number-picture.js": "156193d5d840c33d9ca583484684e544010faca89302d2bf032e5e2229501737",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+    "scripts/qa-art-reference-browser.py": "b1c6175d4e29d84c676217bde26e0a450418938b85e8b76733c9b15315e27186",
+    "scripts/qa-number-picture-browser.py": "1100b143191aa3f28e46ff1589ff8e1cffb032e6b2803057b54d2047d7b8c880"
+  },
+  "baseUrl": "http://127.0.0.1:44755/",
+  "browser": "143.0.7499.4",
+  "status": "PASS",
+  "passed": 7,
+  "failed": 0
+}

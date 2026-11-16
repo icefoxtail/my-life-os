@@ -1,0 +1,791 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "status": "PASS",
+      "vehicle": "fire",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "e7bf2b8c789904e8c0501e08899c65d3aa0d9a151b9fb62a6c279cc308942a29",
+          "afterSha256": "8ecc2e3e993c6fbce85dff6c8a3cbaae68c91a23dd00bb8b032e63e233f4d038"
+        },
+        "wash": {
+          "beforeSha256": "51985a88d110720bf4ece0311e372b54f507ee874d39fcc09848733e3932a9bc",
+          "afterSha256": "12e2c0a7b44508f5bc530b9d38b77326cd6f2ea71dde1c06de634e964ff1d3bc"
+        },
+        "siren": {
+          "beforeSha256": "d081ef92b4d39365e01c22bb9b0e16460b1f0e4d01e470d3222d5fb891fabe22",
+          "afterSha256": "45463e2b9a50050aaa1fb5caa033f51b0d68c2f47c97e5bd8a434a351cd3e452"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 17,
+          "y": 185,
+          "width": 286,
+          "height": 247
+        },
+        "sameBounds": true,
+        "beforeSha256": "cee1fc530cb662487ebd9ef50f52dcc8a29f59e5010286f4fb803b7357f8ffbd",
+        "afterSha256": "1301282d3148d62470000ce4d137313504b9d7fb43132ad27324d22b268cdf48",
+        "beforeFile": "fire-320x568-vehicle-fixed-before.png",
+        "afterFile": "fire-320x568-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj19yq-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 7,
+        "y": 93,
+        "width": 306,
+        "height": 395
+      },
+      "driveStage": {
+        "x": 7,
+        "y": 93,
+        "width": 306,
+        "height": 400
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "fire",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "4b395857e957a1e2df9f3dffb19aa3373720f301e235fc522e9f4a3b5ee17152",
+          "afterSha256": "61cd592ebb5176501716a0c7dddb97a9207c022565f515888755c69596649703"
+        },
+        "wash": {
+          "beforeSha256": "9ad0fdaacc459289da451a91a91a1c041c3caf08121b51968bc5e0652b41389e",
+          "afterSha256": "e221049c8dc11a01dad10b26400eccd916b3e7d739558f8becc37e16676b4cdd"
+        },
+        "siren": {
+          "beforeSha256": "edb4da0dbd59635a96c299ba9bd663cb0f8f68e5ec3608dedbd68d19d34693f0",
+          "afterSha256": "6cc351f73ddfd333b5cab4ecf258fbae35ee5ece4737cc5bc2eb47d6beca0224"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 20,
+          "y": 189,
+          "width": 350,
+          "height": 510
+        },
+        "sameBounds": true,
+        "beforeSha256": "a31058a48e20bdbe61f0f95e4406c919b1aabf7dac955868afafc40b2686de11",
+        "afterSha256": "b714127537b319eeb86e0dd9cc372298f3abe2e3163ab01558a242a8d6c6d5a4",
+        "beforeFile": "fire-390x844-vehicle-fixed-before.png",
+        "afterFile": "fire-390x844-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj1r4r-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 655
+      },
+      "driveStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 664
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "fire",
+      "viewport": {
+        "width": 640,
+        "height": 360
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "9e6e7f85bf5e1fb1223c168cd62a9113262f7d2d3732038041e177de9dbe0a38",
+          "afterSha256": "5b753512de771a9144e5f6077da7215d299a150f05a3270975ab52a0ef1982e0"
+        },
+        "wash": {
+          "beforeSha256": "0f219c407fb0ac8f51a10bd71faeef1512570436d13ae4ba8130c79750ba0173",
+          "afterSha256": "cec7c8588edb25a9a9fe54e11288dd03a370b6cb38c92c599c1557d67253c7bb"
+        },
+        "siren": {
+          "beforeSha256": "179ab4ab89ee5cf8e026481b75c570b0ba134434ef77f6cb754f6c2995ea0715",
+          "afterSha256": "1322aba8749152db9f305330ac276f744154cbfee1e22164b23a02ae08f77309"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 19,
+          "y": 164.1875,
+          "width": 440,
+          "height": 178.8125
+        },
+        "sameBounds": true,
+        "beforeSha256": "4873343201b14a403d5b04a6637b45dd8db661ac433fadf4eb2a1c41d8338b90",
+        "afterSha256": "abe80e4c20404ab30396fed2fe60b4988a8394a377641f0b371387c7af2e39c7",
+        "beforeFile": "fire-640x360-vehicle-fixed-before.png",
+        "afterFile": "fire-640x360-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj287j-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 9,
+        "y": 71.1875,
+        "width": 460,
+        "height": 281.8125
+      },
+      "driveStage": {
+        "x": 9,
+        "y": 71.1875,
+        "width": 622,
+        "height": 214.8125
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "fire",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "6816b6f28ed501f504fc1b13132fbfd5cf2a61337289214942ac1d2f28d30294",
+          "afterSha256": "cd90a8b3e65d5b705bc216904eb8a6425991857ad85fb66ffd1410e216007e29"
+        },
+        "wash": {
+          "beforeSha256": "b00b517498f53f59d596ef27b624f4978b13da20fd2e5e1ad457778abb9fb828",
+          "afterSha256": "f8cbba68c40e61fa776501f01b1ecc9254f6b08764cef4bdda6ea50eb95ebcc3"
+        },
+        "siren": {
+          "beforeSha256": "72e18d883787cf2e1cc0ada8dcb5882234664b001cb23cf47cd9244d27947763",
+          "afterSha256": "e6c48eb5ba1fe5b3aea7176b86890c273881596c0effffb783a11a4243fbe72e"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 19,
+          "y": 164.1875,
+          "width": 609.03125,
+          "height": 208.8125
+        },
+        "sameBounds": true,
+        "beforeSha256": "3f3c2428e94ea05cf6916c6cd0964514b36ae11cc8cf39516d58a4c612253025",
+        "afterSha256": "09a4f918cdefd23f131528bbdae1553fcddecc075ccee98a5843ea350a7e27b6",
+        "beforeFile": "fire-844x390-vehicle-fixed-before.png",
+        "afterFile": "fire-844x390-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj2p6m-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 9,
+        "y": 71.1875,
+        "width": 629.03125,
+        "height": 311.8125
+      },
+      "driveStage": {
+        "x": 9,
+        "y": 71.1875,
+        "width": 826,
+        "height": 244.8125
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "police",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "316487806a331e10674468c7501a24c692e920d8ccdd25ca05b98ce5bf0e004b",
+          "afterSha256": "808f1fc3a51a5b89908983666009bb46615b1f359b7cdeb9cae008d0a63f310d"
+        },
+        "light": {
+          "beforeSha256": "13425e8cafe9258eb59e798e002533ed3c8a509f39adcde937893c56346bfb71",
+          "afterSha256": "6d4ec9caf9f965e3ea7eb82f4fc94215fb1b07e4cae38a251413eb0fce8a1364"
+        },
+        "siren": {
+          "beforeSha256": "67339407302e77798ee664c9bbd5352dc2f94e27cead9c551bb80a6ba27bdc23",
+          "afterSha256": "6cc351f73ddfd333b5cab4ecf258fbae35ee5ece4737cc5bc2eb47d6beca0224"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 20,
+          "y": 189,
+          "width": 350,
+          "height": 510
+        },
+        "sameBounds": true,
+        "beforeSha256": "a165156e10eabc5dcb29e7982e3e9c637af18f3331c4803a8591a93a51e2b554",
+        "afterSha256": "915d24837535f0cc909cc516ae1ffc6f6808d9a564a429b248a55305e0dff9c7",
+        "beforeFile": "police-390x844-vehicle-fixed-before.png",
+        "afterFile": "police-390x844-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj368i-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 655
+      },
+      "driveStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 664
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "bus",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "d23012049fa15095b5ec389e5539deb8799d28be9027c03fe6b710a4940521bc",
+          "afterSha256": "341912831915c7a224f534895c8570c799a0721b65bbbb2c7963616192ac2ee6"
+        },
+        "light": {
+          "beforeSha256": "9921690d9255ba50c771c270271dc98f72cadcecfac1ed36b0dedd435a98b363",
+          "afterSha256": "bd905798a3b0ce61968bf971a7500a5f8c3391e7ea4792a19dd0c8e1c3816e6c"
+        },
+        "wash": {
+          "beforeSha256": "46845e0537e17b660d61150950151a1af728bb4b88fecb16fa36a09b50c21d14",
+          "afterSha256": "a22bffd410ce1cdbd780b6af3e7bfa2e506b85cd504c791eb0627968234a25aa"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 20,
+          "y": 189,
+          "width": 350,
+          "height": 510
+        },
+        "sameBounds": true,
+        "beforeSha256": "d1ce4bfb161560c39c4bb13bfe36d0740c6f3bad4662c667a960a3998f67834f",
+        "afterSha256": "d794c7c3cf08dbb234d414ad06a07eef976ff7c3641657432677a158eb78f873",
+        "beforeFile": "bus-390x844-vehicle-fixed-before.png",
+        "afterFile": "bus-390x844-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj3ndl-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 655
+      },
+      "driveStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 664
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "ambulance",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "6cb90df24774c7ba2287faeece376d159ee030711dd311a0ab07b45495fa1c60",
+          "afterSha256": "c8313922992afb6cf5293b94fb9f18d8df5cbbdd72b165b7daffb9a7990acec3"
+        },
+        "light": {
+          "beforeSha256": "fb4c89507b0db58f7f86dde3fd52f9e0a124a8ffa6204eb9c508a962bcaf95b8",
+          "afterSha256": "d7024139f1979c4cd6a464002496224f49984f71d5a706560d83cba60372722b"
+        },
+        "gas": {
+          "beforeSha256": "1095e9f44226fed2f34541683fe3605aed0b18fa0395e8c65aa137e4fa28bdde",
+          "afterSha256": "cea27dfcf38f4f5da1ae3d553c7df95cfe9e8ccbc9bbd2cecf19d84795f7387e"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 20,
+          "y": 189,
+          "width": 350,
+          "height": 510
+        },
+        "sameBounds": true,
+        "beforeSha256": "4ff236ae0d5054f07485110ca7c9edbe4ca76b9b2076dfea9e79cfcf06933c8d",
+        "afterSha256": "1c163f8a02ad55ccddcc8ef45e42aedddfbb7f3cb6dc7088a50bf0fd07b4b14c",
+        "beforeFile": "ambulance-390x844-vehicle-fixed-before.png",
+        "afterFile": "ambulance-390x844-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj44i8-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 655
+      },
+      "driveStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 664
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    },
+    {
+      "status": "PASS",
+      "vehicle": "rocket",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:46205/index.html",
+          "httpStatus": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        },
+        "js/games/car-garage.js": {
+          "url": "http://127.0.0.1:46205/js/games/car-garage.js",
+          "httpStatus": 200,
+          "servedSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "checkoutSha256": "33184e4967f00c6581d1e12db2360932e2c295fb7e423972cbfe99733bc5863c",
+          "matchesCheckout": true
+        }
+      },
+      "repairPartPixels": {
+        "wheel": {
+          "beforeSha256": "4600a368d0fc8b1544b4eb3a5eec30faa8478fa6dc3831b0608c976943621e91",
+          "afterSha256": "49afca0ff08757f149ef561ced491ea49df69d62d63e3503d538aabd1edd3639"
+        },
+        "gas": {
+          "beforeSha256": "d17328423b0086c08193c98b208a12060f624d0f2ccf81094b43709edd068340",
+          "afterSha256": "9c2df14194b96912bbe73321c7dfbf07e33497c0f55b761c3eceaff83a49448d"
+        },
+        "light": {
+          "beforeSha256": "371c2659f164cab8cf514f49cc86151b17110b1e990fb6beff74351f99501796",
+          "afterSha256": "292eecf1c1c5d31ee5437d42cfff87ed4345ba87f9bc9338ce85c750b7344174"
+        }
+      },
+      "repairFixedVehicleFrame": {
+        "clip": {
+          "x": 20,
+          "y": 189,
+          "width": 350,
+          "height": 510
+        },
+        "sameBounds": true,
+        "beforeSha256": "c6ffa76ffbfadc7e9130f3b6209a278578fc04f1438e036eeb1e6097d554da07",
+        "afterSha256": "059c51d8b5fdfdf0d884b7fca27445c13069c7fffe5d69b71dc62d52f8fa36f4",
+        "beforeFile": "rocket-390x844-vehicle-fixed-before.png",
+        "afterFile": "rocket-390x844-vehicle-fixed-after.png"
+      },
+      "savedCars": 2,
+      "firstCarId": "car-mwjj4lnc-2",
+      "decorations": [
+        {
+          "emoji": "🎀",
+          "x": 172,
+          "y": 187
+        },
+        {
+          "emoji": "👑",
+          "x": 220,
+          "y": 187
+        }
+      ],
+      "driveOrder": [
+        2,
+        0,
+        1
+      ],
+      "rewardCallsBeforeReload": [
+        40,
+        40
+      ],
+      "initialStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 655
+      },
+      "driveStage": {
+        "x": 10,
+        "y": 96,
+        "width": 370,
+        "height": 664
+      },
+      "checks": [
+        "repair order and visible part change",
+        "before/after view",
+        "sticker removal",
+        "two independent saved cars",
+        "saved-car drive",
+        "no duplicate reward",
+        "workshop restore",
+        "reload persistence",
+        "delete cancel and undo"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "testScriptSha256": "46988157bf44929bd8d48fdeff5320eb82c70c4972b1a981bb30c7f9fa650f1a",
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "baseUrl": "http://127.0.0.1:46205/",
+  "totalCases": 8
+}

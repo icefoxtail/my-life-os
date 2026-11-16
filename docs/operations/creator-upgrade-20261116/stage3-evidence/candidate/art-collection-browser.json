@@ -1,0 +1,1329 @@
+{
+  "suite": "Creator stage3 art collection",
+  "checks": [
+    {
+      "name": "actual previews and gallery controls 320x568",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          320,
+          568
+        ],
+        "toolbar": [
+          {
+            "selector": "#azUndo",
+            "left": 172,
+            "top": 6.5,
+            "right": 216,
+            "bottom": 50.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azNewPaper",
+            "left": 220,
+            "top": 6.5,
+            "right": 264,
+            "bottom": 50.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azCollectionButton",
+            "left": 268,
+            "top": 6.5,
+            "right": 312,
+            "bottom": 50.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"free\"]",
+            "left": 70,
+            "top": 6.5,
+            "right": 116,
+            "bottom": 50.5,
+            "width": 46,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+            "left": 119.54000091552734,
+            "top": 6.060001373291016,
+            "right": 166.45999145507812,
+            "bottom": 50.939998626708984,
+            "width": 46.91999053955078,
+            "height": 44.87999725341797,
+            "reachable": true
+          }
+        ],
+        "templates": [
+          {
+            "id": "police",
+            "regions": 13,
+            "version": "2"
+          },
+          {
+            "id": "police_swat_suv",
+            "regions": 14,
+            "version": "1"
+          },
+          {
+            "id": "butterfly",
+            "regions": 10,
+            "version": "1"
+          }
+        ],
+        "gallery": {
+          "dialog": {
+            "left": 12,
+            "top": 108.90625,
+            "right": 308,
+            "bottom": 459.09375,
+            "width": 296,
+            "height": 350.1875
+          },
+          "grid": {
+            "left": 15,
+            "top": 256.09375,
+            "right": 305,
+            "bottom": 456.09375,
+            "width": 290,
+            "height": 200
+          },
+          "width": 320,
+          "height": 568,
+          "pageWidth": 320,
+          "gridWidth": 290,
+          "gridScrollWidth": 290,
+          "buttons": [
+            {
+              "selector": "#azCollectionClose",
+              "left": 231.265625,
+              "top": 119.90625,
+              "right": 295,
+              "bottom": 163.90625,
+              "width": 63.734375,
+              "height": 44,
+              "reachable": true
+            },
+            {
+              "selector": "#azCollectionSave",
+              "left": 25,
+              "top": 179.90625,
+              "right": 295,
+              "bottom": 223.90625,
+              "width": 270,
+              "height": 44,
+              "reachable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "actual previews and gallery controls 390x844",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          390,
+          844
+        ],
+        "toolbar": [
+          {
+            "selector": "#azUndo",
+            "left": 242,
+            "top": 6.5,
+            "right": 286,
+            "bottom": 50.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azNewPaper",
+            "left": 290,
+            "top": 6.5,
+            "right": 334,
+            "bottom": 50.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azCollectionButton",
+            "left": 338,
+            "top": 6.5,
+            "right": 382,
+            "bottom": 50.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"free\"]",
+            "left": 70,
+            "top": 6.5,
+            "right": 150,
+            "bottom": 50.5,
+            "width": 80,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+            "left": 155.1999969482422,
+            "top": 6.060001373291016,
+            "right": 236.79998779296875,
+            "bottom": 50.939998626708984,
+            "width": 81.59999084472656,
+            "height": 44.87999725341797,
+            "reachable": true
+          }
+        ],
+        "templates": [
+          {
+            "id": "police",
+            "regions": 13,
+            "version": "2"
+          },
+          {
+            "id": "police_swat_suv",
+            "regions": 14,
+            "version": "1"
+          },
+          {
+            "id": "butterfly",
+            "regions": 10,
+            "version": "1"
+          }
+        ],
+        "gallery": {
+          "dialog": {
+            "left": 12,
+            "top": 246.90625,
+            "right": 378,
+            "bottom": 597.09375,
+            "width": 366,
+            "height": 350.1875
+          },
+          "grid": {
+            "left": 15,
+            "top": 394.09375,
+            "right": 375,
+            "bottom": 594.09375,
+            "width": 360,
+            "height": 200
+          },
+          "width": 390,
+          "height": 844,
+          "pageWidth": 390,
+          "gridWidth": 360,
+          "gridScrollWidth": 360,
+          "buttons": [
+            {
+              "selector": "#azCollectionClose",
+              "left": 301.265625,
+              "top": 257.90625,
+              "right": 365,
+              "bottom": 301.90625,
+              "width": 63.734375,
+              "height": 44,
+              "reachable": true
+            },
+            {
+              "selector": "#azCollectionSave",
+              "left": 25,
+              "top": 317.90625,
+              "right": 365,
+              "bottom": 361.90625,
+              "width": 340,
+              "height": 44,
+              "reachable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "actual previews and gallery controls 640x360",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "toolbar": [
+          {
+            "selector": "#azUndo",
+            "left": 486,
+            "top": 4.5,
+            "right": 530,
+            "bottom": 48.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azNewPaper",
+            "left": 536,
+            "top": 4.5,
+            "right": 580,
+            "bottom": 48.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azCollectionButton",
+            "left": 586,
+            "top": 4.5,
+            "right": 630,
+            "bottom": 48.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"free\"]",
+            "left": 70,
+            "top": 4.5,
+            "right": 272,
+            "bottom": 48.5,
+            "width": 202,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+            "left": 275.9800109863281,
+            "top": 4.060001373291016,
+            "right": 482.02001953125,
+            "bottom": 48.939998626708984,
+            "width": 206.04000854492188,
+            "height": 44.87999725341797,
+            "reachable": true
+          }
+        ],
+        "templates": [
+          {
+            "id": "police",
+            "regions": 13,
+            "version": "2"
+          },
+          {
+            "id": "police_swat_suv",
+            "regions": 14,
+            "version": "1"
+          },
+          {
+            "id": "butterfly",
+            "regions": 10,
+            "version": "1"
+          }
+        ],
+        "gallery": {
+          "dialog": {
+            "left": 12,
+            "top": 23,
+            "right": 628,
+            "bottom": 337,
+            "width": 616,
+            "height": 314
+          },
+          "grid": {
+            "left": 15,
+            "top": 138,
+            "right": 625,
+            "bottom": 334,
+            "width": 610,
+            "height": 196
+          },
+          "width": 640,
+          "height": 360,
+          "pageWidth": 640,
+          "gridWidth": 610,
+          "gridScrollWidth": 610,
+          "buttons": [
+            {
+              "selector": "#azCollectionClose",
+              "left": 549.265625,
+              "top": 32,
+              "right": 613,
+              "bottom": 76,
+              "width": 63.734375,
+              "height": 44,
+              "reachable": true
+            },
+            {
+              "selector": "#azCollectionSave",
+              "left": 27,
+              "top": 88,
+              "right": 158,
+              "bottom": 132,
+              "width": 131,
+              "height": 44,
+              "reachable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "actual previews and gallery controls 844x390",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          844,
+          390
+        ],
+        "toolbar": [
+          {
+            "selector": "#azUndo",
+            "left": 690,
+            "top": 4.5,
+            "right": 734,
+            "bottom": 48.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azNewPaper",
+            "left": 740,
+            "top": 4.5,
+            "right": 784,
+            "bottom": 48.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": "#azCollectionButton",
+            "left": 790,
+            "top": 4.5,
+            "right": 834,
+            "bottom": 48.5,
+            "width": 44,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"free\"]",
+            "left": 74,
+            "top": 4.5,
+            "right": 371,
+            "bottom": 48.5,
+            "width": 297,
+            "height": 44,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+            "left": 374.0299987792969,
+            "top": 4.060001373291016,
+            "right": 676.969970703125,
+            "bottom": 48.939998626708984,
+            "width": 302.9399719238281,
+            "height": 44.87999725341797,
+            "reachable": true
+          }
+        ],
+        "templates": [
+          {
+            "id": "police",
+            "regions": 13,
+            "version": "2"
+          },
+          {
+            "id": "police_swat_suv",
+            "regions": 14,
+            "version": "1"
+          },
+          {
+            "id": "butterfly",
+            "regions": 10,
+            "version": "1"
+          }
+        ],
+        "gallery": {
+          "dialog": {
+            "left": 12,
+            "top": 38,
+            "right": 832,
+            "bottom": 352,
+            "width": 820,
+            "height": 314
+          },
+          "grid": {
+            "left": 15,
+            "top": 153,
+            "right": 829,
+            "bottom": 349,
+            "width": 814,
+            "height": 196
+          },
+          "width": 844,
+          "height": 390,
+          "pageWidth": 844,
+          "gridWidth": 814,
+          "gridScrollWidth": 814,
+          "buttons": [
+            {
+              "selector": "#azCollectionClose",
+              "left": 753.265625,
+              "top": 47,
+              "right": 817,
+              "bottom": 91,
+              "width": 63.734375,
+              "height": 44,
+              "reachable": true
+            },
+            {
+              "selector": "#azCollectionSave",
+              "left": 27,
+              "top": 103,
+              "right": 158,
+              "bottom": 147,
+              "width": 131,
+              "height": 44,
+              "reachable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "actual previews and gallery controls 1024x768",
+      "status": "PASS",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "toolbar": [
+          {
+            "selector": "#azUndo",
+            "left": 870,
+            "top": 5.5,
+            "right": 914,
+            "bottom": 53.5,
+            "width": 44,
+            "height": 48,
+            "reachable": true
+          },
+          {
+            "selector": "#azNewPaper",
+            "left": 920,
+            "top": 5.5,
+            "right": 964,
+            "bottom": 53.5,
+            "width": 44,
+            "height": 48,
+            "reachable": true
+          },
+          {
+            "selector": "#azCollectionButton",
+            "left": 970,
+            "top": 5.5,
+            "right": 1014,
+            "bottom": 53.5,
+            "width": 44,
+            "height": 48,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"free\"]",
+            "left": 164,
+            "top": 5.5,
+            "right": 459,
+            "bottom": 53.5,
+            "width": 295,
+            "height": 48,
+            "reachable": true
+          },
+          {
+            "selector": ".az-mode-tab[data-tab=\"coloring\"]",
+            "left": 466.04998779296875,
+            "top": 5.020000457763672,
+            "right": 766.949951171875,
+            "bottom": 53.97999954223633,
+            "width": 300.89996337890625,
+            "height": 48.959999084472656,
+            "reachable": true
+          }
+        ],
+        "templates": [
+          {
+            "id": "police",
+            "regions": 13,
+            "version": "2"
+          },
+          {
+            "id": "police_swat_suv",
+            "regions": 14,
+            "version": "1"
+          },
+          {
+            "id": "butterfly",
+            "regions": 10,
+            "version": "1"
+          }
+        ],
+        "gallery": {
+          "dialog": {
+            "left": 102,
+            "top": 202,
+            "right": 922,
+            "bottom": 566,
+            "width": 820,
+            "height": 364
+          },
+          "grid": {
+            "left": 105,
+            "top": 329,
+            "right": 919,
+            "bottom": 563,
+            "width": 814,
+            "height": 234
+          },
+          "width": 1024,
+          "height": 768,
+          "pageWidth": 1024,
+          "gridWidth": 814,
+          "gridScrollWidth": 814,
+          "buttons": [
+            {
+              "selector": "#azCollectionClose",
+              "left": 841.265625,
+              "top": 215,
+              "right": 905,
+              "bottom": 259,
+              "width": 63.734375,
+              "height": 44,
+              "reachable": true
+            },
+            {
+              "selector": "#azCollectionSave",
+              "left": 119,
+              "top": 277,
+              "right": 250,
+              "bottom": 321,
+              "width": 131,
+              "height": 44,
+              "reachable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "all 28 previews match their actual editor geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "police",
+          "regions": 13,
+          "version": "2"
+        },
+        {
+          "id": "police_swat_suv",
+          "regions": 14,
+          "version": "1"
+        },
+        {
+          "id": "police_bus",
+          "regions": 14,
+          "version": "2"
+        },
+        {
+          "id": "fire_pump",
+          "regions": 13,
+          "version": "2"
+        },
+        {
+          "id": "fire_ladder",
+          "regions": 13,
+          "version": "2"
+        },
+        {
+          "id": "ambulance",
+          "regions": 13,
+          "version": "2"
+        },
+        {
+          "id": "excavator",
+          "regions": 9,
+          "version": "2"
+        },
+        {
+          "id": "dump_truck",
+          "regions": 9,
+          "version": "2"
+        },
+        {
+          "id": "bulldozer",
+          "regions": 9,
+          "version": "2"
+        },
+        {
+          "id": "rocket",
+          "regions": 8,
+          "version": "2"
+        },
+        {
+          "id": "dino",
+          "regions": 10,
+          "version": "2"
+        },
+        {
+          "id": "train",
+          "regions": 12,
+          "version": "2"
+        },
+        {
+          "id": "airplane",
+          "regions": 10,
+          "version": "2"
+        },
+        {
+          "id": "lion",
+          "regions": 9,
+          "version": "2"
+        },
+        {
+          "id": "whale",
+          "regions": 7,
+          "version": "2"
+        },
+        {
+          "id": "icecream",
+          "regions": 6,
+          "version": "2"
+        },
+        {
+          "id": "police_motorcycle",
+          "regions": 12,
+          "version": "1"
+        },
+        {
+          "id": "police_helicopter",
+          "regions": 10,
+          "version": "1"
+        },
+        {
+          "id": "police_officer",
+          "regions": 13,
+          "version": "1"
+        },
+        {
+          "id": "police_dog",
+          "regions": 13,
+          "version": "1"
+        },
+        {
+          "id": "boat",
+          "regions": 7,
+          "version": "1"
+        },
+        {
+          "id": "bus",
+          "regions": 14,
+          "version": "1"
+        },
+        {
+          "id": "strawberry",
+          "regions": 6,
+          "version": "1"
+        },
+        {
+          "id": "apple",
+          "regions": 6,
+          "version": "1"
+        },
+        {
+          "id": "cat",
+          "regions": 9,
+          "version": "1"
+        },
+        {
+          "id": "puppy",
+          "regions": 11,
+          "version": "1"
+        },
+        {
+          "id": "butterfly",
+          "regions": 10,
+          "version": "1"
+        },
+        {
+          "id": "house",
+          "regions": 9,
+          "version": "1"
+        }
+      ]
+    },
+    {
+      "name": "two versions remain independent through restore undo reload and number play",
+      "status": "PASS",
+      "detail": {
+        "separatePictures": 2,
+        "restoreUndo": true,
+        "reload": true,
+        "numberPlayUsesSelectedStoredColor": "#9944FF"
+      }
+    },
+    {
+      "name": "restore undo preserves later edits on other coloring and free pages",
+      "status": "PASS",
+      "detail": {
+        "restoredPoliceLight": "#44CC44",
+        "laterFireBodyPreserved": "#4488FF",
+        "laterFreeDrawingPreserved": true
+      }
+    },
+    {
+      "name": "two free pictures keep their colors backgrounds and saved PNGs after reload",
+      "status": "PASS",
+      "detail": {
+        "first": {
+          "red": 3690,
+          "blue": 0,
+          "total": 3690
+        },
+        "second": {
+          "red": 0,
+          "blue": 3694,
+          "total": 3694
+        },
+        "reload": {
+          "red": 3690,
+          "blue": 0,
+          "total": 3690
+        },
+        "backgrounds": [
+          {
+            "theme": "ocean",
+            "background": "rgb(224, 247, 250)",
+            "storedTheme": "ocean"
+          },
+          {
+            "theme": "forest",
+            "background": "rgb(241, 248, 233)",
+            "storedTheme": "forest"
+          },
+          {
+            "theme": "ocean",
+            "background": "rgb(224, 247, 250)",
+            "storedTheme": "ocean"
+          }
+        ],
+        "originalPngSnapshotsUnchanged": true
+      }
+    },
+    {
+      "name": "legacy fifteen-region artwork can be collected and reopened unchanged",
+      "status": "PASS",
+      "detail": {
+        "storedVersion": 1,
+        "restoredRegions": 15,
+        "fillsPreserved": true
+      }
+    },
+    {
+      "name": "storage quota keeps the old disk picture and provides usable session-only work",
+      "status": "PASS",
+      "detail": {
+        "oldDiskPictures": 1,
+        "sessionPicturesBeforeReload": 2,
+        "clearSessionOnlyNotice": true,
+        "diskBytesPreserved": true
+      }
+    },
+    {
+      "name": "denied collection reads do not overwrite existing pictures",
+      "status": "PASS",
+      "detail": {
+        "readDeniedWriteAllowed": true,
+        "existingDiskPicturePreserved": true,
+        "sessionRestore": true
+      }
+    },
+    {
+      "name": "collection deletion requires confirmation and keeps the working picture",
+      "status": "PASS",
+      "detail": {
+        "cancelPreservesPicture": true,
+        "explicitConfirmDeletesOnlyStoredCopy": true,
+        "currentPicturePreserved": true
+      }
+    }
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    "art-collection-preview-320x568.png",
+    "art-collection-gallery-320x568.png",
+    "art-collection-preview-390x844.png",
+    "art-collection-gallery-390x844.png",
+    "art-collection-preview-640x360.png",
+    "art-collection-gallery-640x360.png",
+    "art-collection-preview-844x390.png",
+    "art-collection-gallery-844x390.png",
+    "art-collection-preview-1024x768.png",
+    "art-collection-gallery-1024x768.png",
+    "art-collection-stored-purple-picture-number-play.png",
+    "art-collection-undo-preserves-other-pages.png",
+    "art-collection-red-free-picture-restored.png",
+    "art-collection-legacy-fifteen-regions-restored.png",
+    "art-collection-quota-session-picture.png"
+  ],
+  "servedSources": [
+    {
+      "check": "actual previews and gallery controls 320x568",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "actual previews and gallery controls 390x844",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "actual previews and gallery controls 640x360",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "actual previews and gallery controls 844x390",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "actual previews and gallery controls 1024x768",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "all 28 previews match their actual editor geometry",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "two versions remain independent through restore undo reload and number play",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "two versions remain independent through restore undo reload and number play",
+      "navigation": "reload",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "restore undo preserves later edits on other coloring and free pages",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "two free pictures keep their colors backgrounds and saved PNGs after reload",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "two free pictures keep their colors backgrounds and saved PNGs after reload",
+      "navigation": "reload",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "legacy fifteen-region artwork can be collected and reopened unchanged",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "storage quota keeps the old disk picture and provides usable session-only work",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "storage quota keeps the old disk picture and provides usable session-only work",
+      "navigation": "reload",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "denied collection reads do not overwrite existing pictures",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "check": "collection deletion requires confirmation and keeps the working picture",
+      "navigation": "initial",
+      "files": {
+        "js/games/art-zone.js": {
+          "url": "http://127.0.0.1:46477/js/games/art-zone.js",
+          "status": 200,
+          "servedSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "checkoutSha256": "d5f6bad1fc867c3160d1800e327e8eadea1b4d09fdd1d000076e7cfb1bf72c1a",
+          "matchesCheckout": true
+        },
+        "js/play-objects.js": {
+          "url": "http://127.0.0.1:46477/js/play-objects.js",
+          "status": 200,
+          "servedSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "checkoutSha256": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "matchesCheckout": true
+        },
+        "index.html": {
+          "url": "http://127.0.0.1:46477/index.html",
+          "status": 200,
+          "servedSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "checkoutSha256": "1c4bab46804dec5cf28ddcaf29bbba197e750dd58ebaf9aad6b420e3861056e1",
+          "matchesCheckout": true
+        }
+      }
+    }
+  ],
+  "notRun": [
+    "physical touch",
+    "audible speech listening",
+    "child observation"
+  ],
+  "fixture": "Speech transport completion; explicit storage failure and legacy seeds only",
+  "baseUrl": "http://127.0.0.1:46477/",
+  "browser": "143.0.7499.4",
+  "status": "PASS",
+  "passed": 13,
+  "failed": 0
+}

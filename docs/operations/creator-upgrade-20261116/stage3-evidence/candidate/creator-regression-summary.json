@@ -1,0 +1,76 @@
+{
+  "head": "8025e17e8761fd9772cae6970194ec3a64b04b05",
+  "run": 43915934571,
+  "artifact": 14250272949,
+  "artifactSha256": "dcf086b724230281282c131678aff338ea7f235cc83b4a1ace3f99dad0ca6001",
+  "status": "PASS",
+  "suites": [
+    {
+      "report": "count-pace/count-pace-results.json",
+      "status": "PASS",
+      "cases": 2,
+      "pageErrors": 0,
+      "sha256": "01b3601e8a8cef3aefd226f49ec11431f0be19acae0ef2bcc7591c5b7219d70d"
+    },
+    {
+      "report": "hangul/results.json",
+      "status": "PASS",
+      "cases": 28,
+      "pageErrors": 0,
+      "sha256": "db12e516cc730fa618599ba8bda989e117490304749aca14974c9b644ede2fb3"
+    },
+    {
+      "report": "help/results.json",
+      "status": "PASS",
+      "cases": 16,
+      "pageErrors": 0,
+      "sha256": "befacc0a59ed9204048139019d3629e998971656c9cd461d65282de8cbca3bf9"
+    },
+    {
+      "report": "life-pace/life-pace-results.json",
+      "status": "PASS",
+      "cases": 2,
+      "pageErrors": 0,
+      "sha256": "1aa0fc7eed191d766c96d48427924c9e7208d604e0dc455fb9eef952f8009838"
+    },
+    {
+      "report": "memory-pace/creator-memory-pace-results.json",
+      "status": "PASS",
+      "cases": 2,
+      "pageErrors": 0,
+      "sha256": "ed9784986b9249d26865adde0fb7905d7534b674fe05ef1615d837b72e81521c"
+    },
+    {
+      "report": "number/number-browser.json",
+      "status": "PASS",
+      "cases": 14,
+      "pageErrors": 0,
+      "sha256": "7d39262962dfd21cb4d06c6f9048d38868c86baa59dabf88ee4159b4ed1a2b4e"
+    },
+    {
+      "report": "number-mute/number-mute-browser.json",
+      "status": "PASS",
+      "cases": 6,
+      "pageErrors": 0,
+      "sha256": "49d4ce00c77cdec3eb65926c3cc4bb891a6cb9a3af46c2f1caaa64321b7e40a1"
+    },
+    {
+      "report": "train-edit/creator-train-edit-results.json",
+      "status": "PASS",
+      "cases": 1,
+      "pageErrors": 0,
+      "sha256": "6419cc0fb789276275189daaee0ed02db1d6e4b9382c121353c11ffe45c82eab"
+    },
+    {
+      "report": "vehicle/creator-vehicle-results.json",
+      "status": "PASS",
+      "cases": 10,
+      "pageErrors": 0,
+      "sha256": "3f6a3da689d97ea51c5397b13042d566f6da25c7f1cfcaeee24d24dd6ae0e7d7"
+    }
+  ],
+  "totalCases": 81,
+  "includesStage1Cases": 52,
+  "pageErrors": 0,
+  "scope": "Mandatory regression on current candidate; prior Stage1/2 production records remain unchanged."
+}

@@ -1,0 +1,19 @@
+{
+  "source": "/tmp/sihyeon-stage3-7c923cb944e6/js/games/art-zone.js",
+  "sha256": "0db6d1140bdf3c9a43b507eae9890850c68ad942cae342893ce6fad912331129",
+  "results": [
+    {
+      "name": "Undo restored police after painting another template",
+      "loadedPolice": "#44CC44",
+      "expectedFire": "#4488FF",
+      "actualFire": "#4488FF",
+      "policeRestored": "#FF4444",
+      "otherTemplateEditLost": false
+    },
+    {
+      "name": "untouched free canvas accepted as collectible",
+      "accepted": true,
+      "kind": "free"
+    }
+  ]
+}
