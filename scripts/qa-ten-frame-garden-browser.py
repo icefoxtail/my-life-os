@@ -77,6 +77,12 @@ SPEECH_FIXTURE = r"""
       counter: root.querySelector('[data-count-value]')?.textContent?.trim(),
       word: root.querySelector('[data-count-word]')?.textContent?.trim(),
       goal: root.querySelector('.tfg-goal strong')?.textContent?.trim(),
+      fillNeed: (() => {
+        const need = root.querySelector('[data-fill-need]');
+        return need ? {text:need.textContent.trim(), initialNeed:Number(need.dataset.initialNeed),
+          added:Number(need.dataset.added), stillNeeded:Number(need.dataset.stillNeeded)} : null;
+      })(),
+      equationNumbers: (root.querySelector('.tfg-equation')?.textContent.match(/\d+/g) || []).map(Number),
       filled: slots.filter(s => s.querySelector(':scope > svg.tfg-flower'))
                    .map(s => Number(s.dataset.slot)),
       active: slots.filter(s => s.dataset.active === 'true')
@@ -158,6 +164,11 @@ DOM_READ = r"""
     chosen: Number(root.querySelector('.tfg-quantity-button strong')?.textContent),
     goalNumbers: numbers(root.querySelector('.tfg-goal strong')),
     equationNumbers: numbers(root.querySelector('.tfg-equation')),
+    fillNeed: (() => {
+      const need = root.querySelector('[data-fill-need]');
+      return need ? {text:need.textContent.trim(), initialNeed:Number(need.dataset.initialNeed),
+        added:Number(need.dataset.added), stillNeeded:Number(need.dataset.stillNeeded)} : null;
+    })(),
     counter: root.querySelector('[data-count-value]')?.textContent?.trim(),
     flower: root.querySelector('[data-action="flower"][aria-pressed="true"]')?.dataset.value,
     reading: root.querySelector('[data-action="reading"][aria-pressed="true"]')?.dataset.value,
@@ -215,6 +226,13 @@ LAYOUT_READ = r"""
     focusedFrame: focused ? box(focused.closest('.tfg-frame')) : null,
     drawings: [...root.querySelectorAll('.tfg-slot > svg.tfg-flower')]
       .map(svg => ({ordinal: Number(svg.parentElement.dataset.slot), ...artBox(svg)})),
+    fillText: root.dataset.mode === 'fill' ? [...root.querySelectorAll('[data-fill-need],.tfg-equation')].map(el => {
+      const r = el.getBoundingClientRect(), range = document.createRange();
+      range.selectNodeContents(el);
+      const lines = [...range.getClientRects()].filter(line => line.width > 0 && line.height > 0);
+      return {text:el.textContent.trim(), ...box(el), contained:lines.length > 0 && lines.every(line =>
+        line.left >= r.left - 1 && line.right <= r.right + 1 && line.top >= r.top - 1 && line.bottom <= r.bottom + 1)};
+    }) : [],
     brokenImages: [...root.querySelectorAll('img')]
       .filter(img => !img.complete || img.naturalWidth === 0).map(img => img.currentSrc || img.src),
     buttons: [...root.querySelectorAll('button:not([disabled])')].map(button => ({
@@ -301,7 +319,16 @@ def assert_board(page, chosen, actual=None, target=None):
     assert state["state"]["goal"] == target, state
     assert state["state"]["count"] == actual, state
     assert state["quantities"]["visible"] == actual, state
-    if value["mode"] == "colors":
+    if value["mode"] == "fill":
+        need = {"initialNeed": target - chosen, "added": actual - chosen, "stillNeeded": target - actual}
+        assert value["equationNumbers"] == [chosen, target - chosen, target], value
+        assert value["fillNeed"] and all(value["fillNeed"][key] == count for key, count in need.items()), value
+        assert all(state["quantities"][key] == count for key, count in need.items()), state
+        assert value["fillNeed"]["stillNeeded"] == sum(not slot["drawn"] for slot in slots), value
+        english = state["language"] == "en"
+        expected_text = (f'{target - actual} more' if english else f'{target - actual}송이 더') if target > actual else ('All filled!' if english else '가득 찼어요!')
+        assert value["fillNeed"]["text"] == expected_text, value
+    elif value["mode"] == "colors":
         assert len(value["split"]) == 2 and sum(value["split"]) == chosen, value
         assert value["equationNumbers"] == value["split"] + [chosen], value
     else:
@@ -355,6 +382,16 @@ def assert_automatic_speech(page, after, ordinals, chosen, style="native", fill=
         visible = max(chosen, ordinal) if fill else chosen
         assert observed["filled"] == list(range(1, visible + 1)), row
     assert rows, "No request reached the real shared Voice → speechSynthesis boundary"
+    if fill:
+        target = min(30, (chosen // 10 + 1) * 10)
+        for row in rows:
+            observed = row["dom"]
+            actual = len(observed["filled"])
+            need = observed["fillNeed"]
+            assert observed["equationNumbers"] == [chosen, target - chosen, target], row
+            assert need and [need["initialNeed"], need["added"], need["stillNeeded"]] == [target - chosen, actual - chosen, target - actual], row
+            expected_text = (f'{target - actual} more' if style == 'en' else f'{target - actual}송이 더') if actual < target else ('All filled!' if style == 'en' else '가득 찼어요!')
+            assert need["text"] == expected_text, row
     return {"expectedOrdinals": list(ordinals), "observedWords": [r["text"] for r in counts],
             "lastSpeech": rows[-1]["text"], "locale": locale,
             "domAndSpeechSynchronized": True}
@@ -426,6 +463,8 @@ def inspect_layout(page, width, height):
         if name != "frames":
             assert rect["scrollWidth"] <= rect["clientWidth"] + 2, (name, rect)
     assert value["app"]["scrollHeight"] <= value["app"]["clientHeight"] + 2, value["app"]
+    for text in value["fillText"]:
+        assert text["contained"] and text["scrollWidth"] <= text["clientWidth"] + 1 and text["scrollHeight"] <= text["clientHeight"] + 1, text
     if width > height:
         assert value["controls"]["left"] >= value["stage"]["right"] - 2, value
     else:
@@ -473,7 +512,7 @@ def boundaries(page, url, output):
 def fill_to_ten(page, url, output):
     enter(page, url)
     results = []
-    for n, target in ((15, 20), (0, 10), (30, 30)):
+    for n, target in ((7, 10), (15, 20), (0, 10), (10, 20), (20, 30), (30, 30)):
         button(page, "mode", "number").click()
         choose_number(page, n)
         # Hold only the browser speech boundary so a busy CI worker can inspect
@@ -482,11 +521,15 @@ def fill_to_ten(page, url, output):
         start = click_and_mark(page, button(page, "mode", "fill"))
         # The initial existing flowers must remain N; the target is displayed separately.
         initial = assert_board(page, n, actual=n, target=target)
+        if n == 7:
+            assert initial["fillNeed"]["text"] == "3송이 더", initial
+            page.screenshot(path=str(output / "fill-7-needs-3.png"))
         page.evaluate("window.__gardenProbe.hold = false; window.__gardenProbe.finishActive()")
         complete(page, n, actual=target, target=target)
         spoken = assert_automatic_speech(page, start, range(n + 1, target + 1), n, fill=True)
         page.screenshot(path=str(output / f"fill-{n}-to-{target}.png"))
         results.append({"chosen": n, "target": target, "initialGoal": initial["goalNumbers"],
+                        "initialNeed": initial["fillNeed"], "fixedEquation": initial["equationNumbers"],
                         "finalDrawn": len([s for s in dom(page)["slots"] if s["drawn"]]),
                         "speech": spoken})
     return results
@@ -636,12 +679,14 @@ def responsive(page, url, output, width, height):
     layout_failures = []
     # Every viewport uses native flower, number, and mode clicks before measurement.
     button(page, "flower", "pink").click()
-    for quantity, mode in ((15, "number"), (30, "number"), (30, "colors")):
+    for quantity, mode in ((15, "number"), (30, "number"), (30, "colors"), (7, "fill")):
         button(page, "mode", mode).click()
         choose_number(page, quantity)
         if mode == "colors":
             set_split(page, 15)
             assert_colors(page, 30, 15, "pink", "purple")
+        elif mode == "fill":
+            complete(page, 7, actual=10, target=10)
         else:
             value = assert_board(page, quantity)
             assert all(s["color"] == value["palette"]["pink"]

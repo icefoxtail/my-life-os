@@ -1,0 +1,14 @@
+[
+  {
+    "script": "scripts/qa-quantity-change.cjs",
+    "exitCode": 0,
+    "stdout": "{\n  \"suite\": \"Independent quantity comparison and subtraction invariants\",\n  \"status\": \"PASS\",\n  \"sourceSHA256\": \"5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e\",\n  \"comparisons\": 961,\n  \"validSubtractions\": 496,\n  \"invalidSubtractions\": 465,\n  \"invalidOperands\": 60,\n  \"assertions\": 88882,\n  \"checked\": [\n    \"zero through thirty on each side, including sixty visible comparison objects\",\n    \"pair and extra references, identity and uniqueness\",\n    \"all departure steps and conserved original arrays\",\n    \"independent calls and frozen prior-result nonmutation\",\n    \"invalid operands and subtraction rejection\",\n    \"English house and boat units\"\n  ],\n  \"limitations\": [\n    \"Model checks only; browser layout, native audio, physical devices and child observation are NOT_RUN\"\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "script": "scripts/qa-ten-frame-garden.cjs",
+    "exitCode": 0,
+    "stdout": "PASS: 620 garden quantity/fill/color states and 723 fill-position complement checks; 0-30 counts, fixed totals, unique objects, restore and cancellation state. Browser rendering and real speech are NOT_RUN.\n",
+    "stderr": ""
+  }
+]

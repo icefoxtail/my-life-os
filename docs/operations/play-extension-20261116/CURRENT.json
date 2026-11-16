@@ -3,7 +3,7 @@
   "owner": "GPT_ROOT_4414C9BDF4A5",
   "instructionRevision": 2,
   "baseMain": "e47e89b1617a3a68628bf277be15efb6bed38ff9",
-  "state": "IMPLEMENTING",
+  "state": "VERIFYING",
   "activeStage": 2,
   "stages": [
     {
@@ -30,8 +30,16 @@
       "id": 2,
       "name": "quantity-comparison-and-subtraction",
       "branch": "work/quantity-compare-subtract-20261116",
-      "status": "IMPLEMENTING",
-      "baseMain": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78"
+      "status": "IMPLEMENTED_BROWSER_CI_PENDING",
+      "baseMain": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
+      "modelChecks": {
+        "comparisons": 961,
+        "validSubtractions": 496,
+        "invalidSubtractionsRejected": 465,
+        "gardenStates": 620,
+        "gardenComplementProgress": 723,
+        "status": "PASS"
+      }
     },
     {
       "id": 3,
@@ -40,6 +48,6 @@
       "status": "NOT_STARTED"
     }
   ],
-  "nextAction": "Implement and independently verify stage 2 on its branch. Verify stage 1 Pages before merging stage 2.",
+  "nextAction": "Run Stage 2 browser CI. Continue Stage 3 after Stage 2 verification. Stage 1 Pages must be verified before Stage 2 main merge.",
   "progressionAdjustment": "Pages runner allocation delayed the first deployment; continue implementation in order on separate branches while preserving stage-by-stage production gates."
 }
