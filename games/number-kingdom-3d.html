@@ -3758,8 +3758,10 @@ function sayNumber(n, unit = ''){
   return false;
 }
 function stopSpeech(){
-  if(window.parent && window.parent!==window) window.parent.SihyeonVoice?.stop?.();
-  else window.speechSynthesis?.cancel?.();
+  const root=window.parent && window.parent!==window ? window.parent : window;
+  // Stop the shared queue as well as this frame's standalone speech fallback.
+  try { root.SihyeonVoice?.stop?.(); } catch(_) {}
+  try { window.speechSynthesis?.cancel?.(); } catch(_) {}
 }
 
 function handleFriendTap(o, isSpawn = false){
@@ -4744,7 +4746,10 @@ function mountUI(){
   $('sound').onclick = () => {
     state.sound = !state.sound;
     updateSoundButton();
-    if(!state.sound && state.soundCtx) state.soundCtx.suspend().catch(() => {});
+    if(!state.sound){
+      stopSpeech();
+      if(state.soundCtx) state.soundCtx.suspend().catch(() => {});
+    }
   };
   updateSoundButton();
 

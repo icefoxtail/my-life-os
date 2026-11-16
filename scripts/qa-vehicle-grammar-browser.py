@@ -80,7 +80,8 @@ def count_round(page, url, lang, vehicle_id, n, question, answer):
     page.wait_for_function("(text) => window.__voiceTrace.some(row => row.text === text)", arg=question)
     expect(page.locator(".nc-vehicle-cell")).to_have_count(n)
     page.locator(f'.nc-toy-block-btn[data-answer="{n}"]').click()
-    expect(page.locator(".nc-number-stamp")).to_have_text(str(n), timeout=15000)
+    expect(page.locator(".nc-round-result")).to_contain_text(f"{n}대, 맞았어!")
+    expect(page.locator("#ncContinueBtn")).to_be_enabled()
     page.wait_for_function("(text) => window.__voiceTrace.some(row => row.text === text)", arg=answer)
     return {"question": question, "answer": answer, "visibleVehicles": n}
 
