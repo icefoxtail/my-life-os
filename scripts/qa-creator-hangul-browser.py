@@ -79,56 +79,120 @@ READ_TOY = """() => {
     picturePng:image?.toDataURL('image/png')||null};
 }"""
 
-READ_VISIBLE_PICTURE = """async (png) => {
+COMPARE_PIXELS = """(screen, reference, width, height, bounds) => {
+  const counts={picture:{ink:0,matched:0},label:{ink:0,matched:0}};
+  for(let y=Math.max(0,Math.floor(bounds.y));y<Math.min(height,Math.ceil(bounds.y+bounds.height));y++){
+    for(let x=Math.max(0,Math.floor(bounds.x));x<Math.min(width,Math.ceil(bounds.x+bounds.width));x++){
+      const nx=(x-bounds.x)/bounds.width,ny=(y-bounds.y)/bounds.height;
+      const zone=nx>.10&&nx<.90&&ny>.08&&ny<.74?'picture':nx>.07&&nx<.93&&ny>.80&&ny<.96?'label':null;
+      if(!zone) continue;
+      const p=(y*width+x)*4;
+      if(reference[p+3]<245 || Math.min(reference[p],reference[p+1],reference[p+2])>195) continue;
+      counts[zone].ink++;
+      let matched=false;
+      for(let dy=-2;dy<=2&&!matched;dy++) for(let dx=-2;dx<=2;dx++){
+        const sx=x+dx,sy=y+dy;
+        if(sx<0||sy<0||sx>=width||sy>=height) continue;
+        const q=(sy*width+sx)*4;
+        if(Math.max(Math.abs(reference[p]-screen[q]),Math.abs(reference[p+1]-screen[q+1]),Math.abs(reference[p+2]-screen[q+2]))<=40){matched=true;break;}
+      }
+      if(matched) counts[zone].matched++;
+    }
+  }
+  return {pictureInk:counts.picture.ink,labelInk:counts.label.ink,
+    pictureMatch:counts.picture.matched/Math.max(1,counts.picture.ink),
+    labelMatch:counts.label.matched/Math.max(1,counts.label.ink)};
+}"""
+
+READ_VISIBLE_PICTURE = "async (png) => { const compare = " + COMPARE_PIXELS + """;
   const t=OpenWorldDebug.state.toys.at(-1), sprite=t.mesh.userData.wordPicture;
-  const bounds=t.mesh.userData.pictureBounds;
-  if(!sprite || !bounds) throw new Error('No projected picture card');
+  const bounds={...t.mesh.userData.pictureBounds};
+  if(!sprite || !bounds.width) throw new Error('No projected picture card');
   const image=new Image();image.src='data:image/png;base64,'+png;await image.decode();
   const actual=document.createElement('canvas');actual.width=image.width;actual.height=image.height;
   const a=actual.getContext('2d');a.drawImage(image,0,0);
   const screen=a.getImageData(0,0,actual.width,actual.height).data;
-  const expected=document.createElement('canvas');
-  expected.width=Math.round(bounds.width);expected.height=Math.round(bounds.height);
-  const e=expected.getContext('2d');e.drawImage(sprite.material.map.image,0,0,expected.width,expected.height);
-  const reference=e.getImageData(0,0,expected.width,expected.height).data;
-  const counts={picture:{ink:0,matched:0},label:{ink:0,matched:0}};
-  for(let y=0;y<expected.height;y++) for(let x=0;x<expected.width;x++){
-    const nx=x/expected.width,ny=y/expected.height;
-    const zone=nx>.10&&nx<.90&&ny>.08&&ny<.74?'picture':nx>.07&&nx<.93&&ny>.80&&ny<.96?'label':null;
-    if(!zone) continue;
-    const p=(y*expected.width+x)*4;
-    if(reference[p+3]<245 || Math.min(reference[p],reference[p+1],reference[p+2])>195) continue;
-    counts[zone].ink++;
-    let matched=false;
-    for(let dy=-2;dy<=2&&!matched;dy++) for(let dx=-2;dx<=2;dx++){
-      const sx=Math.round(bounds.x)+x+dx,sy=Math.round(bounds.y)+y+dy;
-      if(sx<0||sy<0||sx>=actual.width||sy>=actual.height) continue;
-      const q=(sy*actual.width+sx)*4;
-      if(Math.max(Math.abs(reference[p]-screen[q]),Math.abs(reference[p+1]-screen[q+1]),Math.abs(reference[p+2]-screen[q+2]))<=40){matched=true;break;}
-    }
-    if(matched) counts[zone].matched++;
+
+  // A 2D drawImage downsample is not a WebGL texture reference: sRGB sampling,
+  // mipmaps and subpixel rasterization differ. Render an isolated clone through
+  // the same GPU pipeline at the live card's exact projected size instead.
+  // This renderer never receives the game's scene, camera or owned material.
+  const reference=document.createElement('canvas');reference.width=actual.width;reference.height=actual.height;
+  const refContext=reference.getContext('2d');
+  const gpu=new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});
+  const texture=sprite.material.map.clone();texture.needsUpdate=true;
+  const material=sprite.material.clone();material.map=texture;
+  try {
+    gpu.setPixelRatio(1);gpu.setSize(actual.width,actual.height,false);
+    gpu.setClearColor(0x000000,0);
+    if('outputEncoding' in gpu) gpu.outputEncoding=THREE.sRGBEncoding;
+    const scene=new THREE.Scene();
+    const camera=new THREE.OrthographicCamera(0,actual.width,actual.height,0,.1,10);camera.position.z=1;
+    const card=new THREE.Sprite(material);
+    card.position.set(bounds.x+bounds.width/2,actual.height-bounds.y-bounds.height/2,0);
+    card.scale.set(bounds.width,bounds.height,1);scene.add(card);
+    gpu.render(scene,camera);
+    refContext.drawImage(gpu.domElement,0,0);
+  } finally {
+    material.dispose();texture.dispose();gpu.dispose();gpu.forceContextLoss();
   }
+  const referencePixels=refContext.getImageData(0,0,reference.width,reference.height).data;
+  const measured=compare(screen,referencePixels,actual.width,actual.height,bounds);
+
+  // Keep the old reference only as diagnostic evidence of the raster mismatch.
+  const legacy=document.createElement('canvas');legacy.width=actual.width;legacy.height=actual.height;
+  const legacyContext=legacy.getContext('2d');
+  legacyContext.drawImage(sprite.material.map.image,Math.round(bounds.x),Math.round(bounds.y),Math.round(bounds.width),Math.round(bounds.height));
+  const legacyPixels=legacyContext.getImageData(0,0,legacy.width,legacy.height).data;
+  const legacyMeasured=compare(screen,legacyPixels,actual.width,actual.height,bounds);
+  const pipelineDifference=compare(referencePixels,legacyPixels,actual.width,actual.height,bounds);
+
+  // The unchanged thresholds must reject actual missing content. Mask only a
+  // copy of the GPU reference, never the live world, for these negative controls.
+  function occluded(zone){
+    const copy=document.createElement('canvas');copy.width=reference.width;copy.height=reference.height;
+    const ctx=copy.getContext('2d');ctx.drawImage(reference,0,0);ctx.fillStyle='#fffdf5';
+    if(zone==='picture') ctx.fillRect(bounds.x+bounds.width*.25,bounds.y+bounds.height*.08,bounds.width*.5,bounds.height*.66);
+    else ctx.fillRect(bounds.x+bounds.width*.5,bounds.y+bounds.height*.78,bounds.width*.5,bounds.height*.22);
+    return compare(ctx.getImageData(0,0,copy.width,copy.height).data,referencePixels,copy.width,copy.height,bounds);
+  }
+  const selfTests={unoccluded:compare(referencePixels,referencePixels,actual.width,actual.height,bounds),
+    pictureOccluded:occluded('picture'),labelOccluded:occluded('label')};
+
+  // Actual / GPU reference / old 2D reference, enlarged without smoothing.
+  const labels=document.createElement('canvas'),labelHeight=Math.ceil(bounds.height*.22);
+  labels.width=Math.ceil(bounds.width)*3*4;labels.height=labelHeight*4;
+  const labelsContext=labels.getContext('2d');labelsContext.imageSmoothingEnabled=false;
+  [actual,reference,legacy].forEach((source,i)=>labelsContext.drawImage(source,bounds.x,bounds.y+bounds.height*.78,bounds.width,labelHeight,i*Math.ceil(bounds.width)*4,0,Math.ceil(bounds.width)*4,labelHeight*4));
   const toast=document.getElementById('toast').getBoundingClientRect();
   const tray=document.getElementById('trayWrap').getBoundingClientRect();
-  return {bounds,screen:{width:actual.width,height:actual.height},toastBottom:toast.bottom,trayTop:tray.top,
-    depthTest:sprite.material.depthTest,worldZ:t.mesh.position.z,
-    pictureInk:counts.picture.ink,labelInk:counts.label.ink,
-    pictureMatch:counts.picture.matched/Math.max(1,counts.picture.ink),labelMatch:counts.label.matched/Math.max(1,counts.label.ink)};
+  return {bounds,screen:{width:actual.width,height:actual.height,dpr:devicePixelRatio},toastBottom:toast.bottom,trayTop:tray.top,
+    depthTest:sprite.material.depthTest,worldZ:t.mesh.position.z,...measured,
+    legacyMeasured,pipelineDifference,selfTests,
+    referencePng:reference.toDataURL('image/png'),labelsPng:labels.toDataURL('image/png')};
 }"""
 
 
-def verify_visible_picture(frame):
-    # Real compositor pixels catch a correct source picture hidden behind letters,
-    # an earlier popup or fixed UI. The drawing's source canvas alone cannot.
-    png = frame.locator("#scene3d").screenshot()
+def verify_visible_picture(frame, output, name):
+    # Save actual pixels before any assertions, including a failure of comparison
+    # code itself. Every attempted case keeps its screenshot, reference and scores.
+    png = frame.locator("#scene3d").screenshot(path=str(output / f"{name}-actual.png"))
     visible = frame.evaluate(READ_VISIBLE_PICTURE, base64.b64encode(png).decode())
+    write_png(visible.pop("referencePng"), output / f"{name}-reference.png")
+    write_png(visible.pop("labelsPng"), output / f"{name}-labels-actual-gpu-2d.png")
+    (output / f"{name}-visibility.json").write_text(json.dumps(visible, ensure_ascii=False, indent=2) + "\n")
     bounds = visible["bounds"]
+    assert visible["screen"]["dpr"] == 1, "Reference and screenshot require the same device pixel ratio"
     assert bounds["width"] >= 80 and bounds["height"] >= 70, visible
     assert bounds["x"] >= 4 and bounds["x"] + bounds["width"] <= visible["screen"]["width"] - 4, visible
     assert bounds["y"] >= visible["toastBottom"] + 3, visible
     assert bounds["y"] + bounds["height"] <= visible["trayTop"] - 3, visible
     assert visible["depthTest"] is True and abs(visible["worldZ"] - 5) < .01, visible
     assert visible["pictureInk"] > 100 and visible["labelInk"] > 20, visible
+    controls = visible["selfTests"]
+    assert controls["unoccluded"]["pictureMatch"] == 1 and controls["unoccluded"]["labelMatch"] == 1, visible
+    assert controls["pictureOccluded"]["pictureMatch"] < .90, visible
+    assert controls["labelOccluded"]["labelMatch"] < .88, visible
     assert visible["pictureMatch"] >= .90 and visible["labelMatch"] >= .88, visible
     return visible
 
@@ -179,7 +243,8 @@ def main():
                               "Speech is muted during 3D checks; audio listening is NOT_RUN."],
               "test_api_scope": ["OpenWorldDebug.state.sound=false", "resetInitialBlocks()", "spawnFromTray()", "mergeChoAndJung()",
                                  "Read state.toys, lastBonusWord, projected pictureBounds and CanvasTexture image.",
-                                 "Compare real WebGL canvas screenshot pixels to picture/label ink; no rendering state is hidden or replaced."]}
+                                 "Compare the actual screenshot with an isolated offscreen WebGL clone; keep the live scene unchanged.",
+                                 "Use copied PNG occlusion controls and save actual/reference/label pixels and all scores before assertions."]}
     try:
         try:
             result["checkout_commit"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
@@ -201,7 +266,7 @@ def main():
             try:
                 for width, height in VIEWPORTS:
                     tag = f"{width}x{height}"
-                    context = browser.new_context(viewport={"width": width, "height": height}, service_workers="block")
+                    context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1, service_workers="block")
                     page = context.new_page()
                     page.on("pageerror", lambda error, tag=tag: result["page_errors"].append({"viewport": tag, "error": str(error)}))
                     frame, webgl = open_public_hangul(page, base_url)
@@ -217,7 +282,7 @@ def main():
                         if is_picture:
                             assert toy["pictureWord"] == word and toy["inkPixels"] > 1500, toy
                             write_png(toy.pop("picturePng"), output / f"picture-{name}-{tag}.png")
-                            toy["visiblePicture"] = verify_visible_picture(frame)
+                            toy["visiblePicture"] = verify_visible_picture(frame, output, f"hangul-{name}-{tag}")
                         else:
                             assert toy["firstGeometry"] == "SphereGeometry", toy
                             toy.pop("picturePng")
@@ -232,8 +297,8 @@ def main():
                         toy.pop("picturePng")
                         page.wait_for_timeout(200)
                         assert frame.evaluate("OpenWorldDebug.state.toys.length") == 1, "Bonus must replace previous syllable popups"
-                        toy["visiblePicture"] = verify_visible_picture(frame)
                         name = "tofu" if word == "두부" else "sweet-potato"
+                        toy["visiblePicture"] = verify_visible_picture(frame, output, f"shelf-{name}-{tag}")
                         page.screenshot(path=str(output / f"shelf-{name}-{tag}.png"))
                         result["checks"].append({"case": "shelf-" + name, "viewport": tag, "status": "PASS", "toy": toy})
 

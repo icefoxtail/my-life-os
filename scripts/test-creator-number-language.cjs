@@ -48,7 +48,7 @@ vm.createContext(sandbox);
 vm.runInContext([
   'const PLAY_MAX = 300;', constant('SINO_NAMES'), constant('PURE_KOREAN'), constant('tapTracker'),
   ...required.map(functionSource), ...helpers.map(functionSource),
-  'globalThis.game = {cellsFor, getBoundsLocal, handleFriendTap, sayNumber, tapTracker};'
+  'globalThis.game = {poses, cellsFor, getBoundsLocal, handleFriendTap, sayNumber, tapTracker};'
 ].join('\n'), sandbox);
 const game = sandbox.game;
 const block = (id, n, pose) => ({id, kind: 'friend', n, pose, cells: game.cellsFor(n, pose), gx: 2, gy: 0, gz: 0});
@@ -141,4 +141,17 @@ sandbox.state.destroyed = true;
 assert.equal(game.sayNumber(2, 'tap'), false);
 assert.equal(spoken.length, before, 'mute and disposal still suppress speech');
 checks += 2;
-console.log(`PASS ${checks} Number Kingdom language scenarios: real pose geometry, quantity comparison, tap-count Korean/English requests, state preservation and voice guards.`);
+let poseChecks = 0;
+for (let n = 1; n <= 300; n++) {
+  const signatures = new Set();
+  for (const pose of game.poses(n)) {
+    const cells = game.cellsFor(n, pose);
+    assert.equal(cells.length, n, `${n}:${pose} preserves the number of blocks`);
+    const coords = cells.map(c => `${c.dx},${c.dy},${c.dz}`);
+    assert.equal(new Set(coords).size, n, `${n}:${pose} has no overlapping cells`);
+    const signature = coords.sort().join('|');
+    assert.ok(!signatures.has(signature), `${n}:${pose} must offer a distinct shape, not a duplicate button`);
+    signatures.add(signature); poseChecks++;
+  }
+}
+console.log(`PASS ${checks} Number Kingdom language scenarios and ${poseChecks} distinct quantity-preserving poses for 1–300: real geometry, quantity comparison, tap-count Korean/English requests, state preservation and voice guards.`);

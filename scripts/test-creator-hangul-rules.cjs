@@ -177,4 +177,39 @@ popupContext.spawn(anchor,{word:'두부',toy:'picture'},true);
 assert.deepEqual(removed,['로봇','도토리','사과','호랑이']);
 assert.equal(popupContext.state.toys.length,1);assert.equal(popupContext.state.toys[0].word,'두부');checks++;
 assert.equal(popupContext.state.toys[0].isBonus,true);assert.equal(popupContext.state.toys[0].maxAge,5.5);checks++;
-console.log(`PASS ${checks} Hangul rule scenarios: 140 syllables, 16 reachable bonuses, semantic picture routing, shelf behavior, readable popup replacement and owned cleanup. Browser/audio NOT_RUN.`);
+
+// Exercise the exact browser comparison function independently of a browser.
+// The old 2D reference can reject an intact glyph: a half-covered sRGB text edge
+// and the corresponding linear-light filtered edge have different RGB values.
+// Matching the GPU reference must accept that edge and still reject occlusion.
+const browserQa=fs.readFileSync(path.join(__dirname,'qa-creator-hangul-browser.py'),'utf8');
+const comparatorSource=browserQa.match(/COMPARE_PIXELS = """([\s\S]*?)"""/)[1];
+const compare=vm.runInNewContext('('+comparatorSource+')');
+const pixelWidth=80,pixelHeight=100,bounds={x:0,y:0,width:pixelWidth,height:pixelHeight};
+const paper=[255,253,245,255],ink=[34,52,84,255];
+const linear=c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4;
+const srgb=c=>255*(c<=.0031308?12.92*c:1.055*c**(1/2.4)-.055);
+const gpuEdge=ink.map((c,i)=>i===3?255:Math.round(srgb((linear(c/255)+linear(paper[i]/255))/2)));
+const canvasEdge=ink.map((c,i)=>i===3?255:Math.round((c+paper[i])/2));
+const pixels=new Uint8ClampedArray(pixelWidth*pixelHeight*4);
+function paint(array,x,y,width,height,color){
+  for(let j=y;j<y+height;j++)for(let i=x;i<x+width;i++)array.set(color,(j*pixelWidth+i)*4);
+}
+paint(pixels,0,0,pixelWidth,pixelHeight,paper);
+paint(pixels,20,20,40,40,[166,101,49,255]);
+for(const x of [24,42]){
+  paint(pixels,x,82,2,12,gpuEdge);paint(pixels,x+2,82,3,12,ink);paint(pixels,x+5,82,2,12,gpuEdge);
+}
+const canvasReference=new Uint8ClampedArray(pixels);
+for(const x of [24,42]){paint(canvasReference,x,82,2,12,canvasEdge);paint(canvasReference,x+5,82,2,12,canvasEdge);}
+const wrongPipeline=compare(pixels,canvasReference,pixelWidth,pixelHeight,bounds);
+assert.ok(wrongPipeline.labelMatch<.88,'Different raster pipelines can reject an intact label');checks++;
+const intact=compare(pixels,pixels,pixelWidth,pixelHeight,bounds);
+assert.equal(intact.pictureMatch,1);assert.equal(intact.labelMatch,1);checks++;
+const hiddenLabel=new Uint8ClampedArray(pixels);paint(hiddenLabel,40,78,40,22,paper);
+const labelResult=compare(hiddenLabel,pixels,pixelWidth,pixelHeight,bounds);
+assert.ok(labelResult.labelMatch<.88);assert.equal(labelResult.pictureMatch,1);checks++;
+const hiddenPicture=new Uint8ClampedArray(pixels);paint(hiddenPicture,20,8,40,66,paper);
+const pictureResult=compare(hiddenPicture,pixels,pixelWidth,pixelHeight,bounds);
+assert.ok(pictureResult.pictureMatch<.90);assert.equal(pictureResult.labelMatch,1);checks++;
+console.log(`PASS ${checks} Hangul rule scenarios: 140 syllables, 16 reachable bonuses, semantic pictures, shelf behavior, popup cleanup, raster-reference mismatch and real occlusion rejection. Browser/audio NOT_RUN.`);

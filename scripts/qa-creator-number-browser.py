@@ -112,6 +112,8 @@ def native_entry(page, base, output, size, responses, report):
     assert frame, "Public card did not create an accessible game iframe"
     assert urlsplit(frame.url).path == urlsplit(urljoin(base, "games/number-kingdom-3d.html")).path, frame.url
     runtime = webgl_runtime(frame)
+    audit = frame.evaluate("NumberKingdomDebug.selfTest()")
+    assert audit["pass"], f"Startup mathematical self-test: {audit}"
     evidence = loaded_sources(responses, base, report["checkoutSourceSha256"])
     report["sourceSha256"][size] = evidence
     assert all(item["httpStatus"] == 200 and item["matchesCheckout"] for item in evidence.values()), evidence
@@ -119,7 +121,7 @@ def native_entry(page, base, output, size, responses, report):
     image = f"number-native-menu-{size}.png"
     page.screenshot(path=str(output / image))
     return {"actions": ["native click: number zone", "native click: Number Kingdom card"],
-            "iframeUrl": frame.url, "runtime": runtime, "screenshot": image}
+            "iframeUrl": frame.url, "runtime": runtime, "selfTest": audit, "screenshot": image}
 
 
 def empty_world_and_spawn(frame, numbers):
