@@ -35,7 +35,7 @@
       "id": 2,
       "name": "quantity-comparison-and-subtraction",
       "branch": "work/quantity-compare-subtract-20261116",
-      "status": "MERGED_WAITING_FOR_PAGES",
+      "status": "DEPLOYED_VERIFIED",
       "baseMain": "6f6c739ee75cb215bf0a1768d62b50d649fa7a78",
       "modelChecks": {
         "comparisons": 961,
@@ -55,19 +55,23 @@
       "mainChecksRun": 43820498568,
       "mainChecksStatus": "SUCCESS",
       "pagesRun": 43820498378,
-      "pagesStatus": "DEPLOY_QUEUED",
+      "pagesStatus": "SUCCESS",
       "productionUI": {
         "run": 43820498604,
-        "job": 133142237398,
-        "status": "DEPLOYMENT_WAIT_TIMEOUT",
-        "menuChecks": "NOT_RUN"
+        "job": 133149640770,
+        "status": "PASS",
+        "menuChecks": "30/30",
+        "artifact": 14205114417,
+        "runtimeHashes": "8/8",
+        "sourceHashRecords": "22/22",
+        "rootLiveInteraction": "3/3 PASS"
       }
     },
     {
       "id": 3,
       "name": "personal-artwork-story-play",
       "branch": "work/art-story-play-20261116",
-      "status": "IMPLEMENTED_BROWSER_CI_PENDING",
+      "status": "LAYOUT_CORRECTED_BROWSER_RERUN_PENDING",
       "baseMain": "9d28ef0bab06859df0d3432ad4a8191c18394870",
       "design": "STAGE3-DESIGN.md",
       "coreCheckpoint": "a68320c49a446a0c1eaaf80d86db7dd3c7be8450",
@@ -80,9 +84,23 @@
       },
       "requiredLocalChecks": "7/7 PASS",
       "sourceReview": "PASS",
-      "browserPlannedGroups": 21
+      "browserPlannedGroups": 21,
+      "testedCandidate": "742cddb4f5a83b62d613990378a6a5c47aff1686",
+      "pr": 33,
+      "checksRun": 43822792355,
+      "checksStatus": "SUCCESS",
+      "browserRun": 43822792377,
+      "firstCandidateBrowser": {
+        "run": 43822792377,
+        "quantity": "75/76",
+        "artStory": "20/21",
+        "status": "FAIL",
+        "defects": 2,
+        "testSourcesChanged": false
+      },
+      "correctedCssSha256": "1c8dbb01a2844f3da2ca04e27ca2ea7791cc07c028db54e6c81c1f7fc4fd3bf3"
     }
   ],
-  "nextAction": "Run Stage3 browser CI and review actual screenshots. Rerun Stage2 production verification after Pages publishes; merge Stage3 only after Stage2 production PASS.",
+  "nextAction": "Run unchanged hosted browser suites on corrected candidate, then merge and verify deployed Stage3.",
   "progressionAdjustment": "Pages runner allocation delayed the first deployment; continue implementation in order on separate branches while preserving stage-by-stage production gates."
 }

@@ -1,0 +1,24 @@
+{
+  "base": "https://icefoxtail.github.io/my-life-os/",
+  "expected": {
+    "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+    "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+    "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+    "js/games/quantity-change.js": "620ae7d076e52397facc359b630ca35aa9278e633b0eebcabdaf029d45fabd25",
+    "css/games/quantity-change.css": "398dccdd6ea0f8b2f755f66ad24423be8bfe0aa28a25afaea2b79dc8dd5e89c0",
+    "assets/games/quantity-change/card.svg": "b5ba10376518a5f637a1652afb6e1722b4b9ebf174d974f9f34e3c8d4f5b49a2",
+    "js/games/ten-frame-garden.js": "e47a078f90606d2d6881c267006c4cd14168d35e5ae5b760657320e1d87160c0",
+    "css/games/ten-frame-garden.css": "d5da0653fec49e4c7091796255e2258abc2ef0019ebd1b1f3b2ce998fe669fc3"
+  },
+  "actual": {
+    "sw.js": "8265f1bc9855b39fd6260c6429e9be5438fc98773b3d7ef91d429227c3528aa2",
+    "index.html": "29ec92478a732b16143ebd67269786b514af079fbfb9a9984bb26cc6cc9cfdd5",
+    "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+    "js/games/quantity-change.js": "620ae7d076e52397facc359b630ca35aa9278e633b0eebcabdaf029d45fabd25",
+    "css/games/quantity-change.css": "398dccdd6ea0f8b2f755f66ad24423be8bfe0aa28a25afaea2b79dc8dd5e89c0",
+    "assets/games/quantity-change/card.svg": "b5ba10376518a5f637a1652afb6e1722b4b9ebf174d974f9f34e3c8d4f5b49a2",
+    "js/games/ten-frame-garden.js": "e47a078f90606d2d6881c267006c4cd14168d35e5ae5b760657320e1d87160c0",
+    "css/games/ten-frame-garden.css": "d5da0653fec49e4c7091796255e2258abc2ef0019ebd1b1f3b2ce998fe669fc3"
+  },
+  "matches": true
+}

@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-11-16T07:21:58.465206+00:00",
+  "production": "https://icefoxtail.github.io/my-life-os/index.html",
+  "sourceHead": "9d28ef0bab06859df0d3432ad4a8191c18394870",
+  "runtimeHashProof": "production-file-hashes-9d28ef0b.json",
+  "interactions": [
+    {
+      "name": "Native home to number land to comparison",
+      "status": "PASS",
+      "left": 15,
+      "right": 12,
+      "actualDOMTotal": 27,
+      "pairs": 12,
+      "extras": 3,
+      "finalDisplayedDifference": 3
+    },
+    {
+      "name": "Native subtract mode; automatic movement to departed zone",
+      "status": "PASS",
+      "originalTotal": 15,
+      "remaining": 11,
+      "departed": 4,
+      "actualIDs": [
+        "subtract-1",
+        "subtract-2",
+        "subtract-3",
+        "subtract-4",
+        "subtract-5",
+        "subtract-6",
+        "subtract-7",
+        "subtract-8",
+        "subtract-9",
+        "subtract-10",
+        "subtract-11",
+        "subtract-15",
+        "subtract-14",
+        "subtract-13",
+        "subtract-12"
+      ],
+      "equation": "15 - 4 = 11"
+    },
+    {
+      "name": "Native garden number chooser selects7 in fill mode",
+      "status": "PASS",
+      "initialNeed": 3,
+      "initialFlowerCount": 7,
+      "finalFlowerCount": 10,
+      "finalLabel": "가득 찼어요!",
+      "complementEquationObservedInAXAndScreenshot": "7 + 3 = 10"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "/workspace/shared/play-extension-20261116/stage2-subtraction-live.jpg",
+      "bytes": 98683,
+      "sha256": "d6787b46f529e88b68a5be7aef55e16b99ef90b3e6e5e6b876e67caf22108774"
+    },
+    {
+      "path": "/workspace/shared/play-extension-20261116/stage2-garden-live.jpg",
+      "bytes": 83119,
+      "sha256": "4ae821fee3e3c0565361c94821f54f7d705840e6dd94be3e62e9a5ca6a97c8ae"
+    }
+  ],
+  "nativeAudio": "NOT_RUN",
+  "observedAudioFallbackNotice": true,
+  "physicalDevice": "NOT_RUN"
+}
