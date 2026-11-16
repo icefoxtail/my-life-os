@@ -797,8 +797,8 @@
           justify-content: center;
           gap: 4px;
           flex: 0 0 auto;
-          min-width: 44px;
-          min-height: 44px;
+          min-width: 48px;
+          min-height: 48px;
           padding: 6px 9px;
           border: 2px solid #a4bcd0;
           border-radius: 14px;

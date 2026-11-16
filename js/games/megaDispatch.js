@@ -246,8 +246,8 @@
         align-items: center;
         justify-content: center;
         gap: 4px;
-        min-width: 44px;
-        min-height: 44px;
+        min-width: 48px;
+        min-height: 48px;
         padding: 6px 8px;
         border: 2px solid #b7c9d5;
         border-radius: 14px;

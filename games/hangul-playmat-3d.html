@@ -1814,7 +1814,8 @@ function updatePhysics(dt, now){
       // and above the tray. It must not follow an off-screen shelf slot or hide
       // behind the jumping letter that has just summoned it.
       const height = Math.min(168, Math.max(24, pictureArea.bottom - pictureArea.top));
-      const width = height * 512 / 448;
+      const picture = t.mesh.userData.wordPicture;
+      const width = height * picture.scale.x / picture.scale.y;
       const anchor = new THREE.Vector3(ax, 2.55, az).project(camera);
       const centerX = t.isBonus ? innerWidth / 2 : clamp((anchor.x + 1) * innerWidth / 2, width / 2 + 10, innerWidth - width / 2 - 10);
       const centerY = pictureArea.top + height / 2;

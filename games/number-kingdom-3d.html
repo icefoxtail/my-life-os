@@ -1069,7 +1069,9 @@ function poses(n){
   if(n <= 10) p.push('tall');
   if(n >= 2 && n <= 20) p.push('bridge');
   if([3, 6, 10, 15, 21].includes(n)) p.push('stairs');
-  const rect = {4:2, 6:2, 8:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5};
+  // For 6 and 8, the default standing form already has two columns.
+  // Do not offer the identical geometry again as a second shape choice.
+  const rect = {4:2, 9:3, 12:3, 14:2, 15:3, 16:4, 18:3, 20:4, 24:4, 25:5, 30:5};
   if(rect[n]) p.push('rect' + rect[n]);
   if([4, 6, 7, 8, 9, 10, 12, 16, 20].includes(n)) p.push('cube3d');
   if(n >= 6 && n <= 20) p.push('super');

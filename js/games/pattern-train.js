@@ -137,7 +137,8 @@
   function dispatch(action, shouldDraw) {
     const next = M().reduce(view.state, action);
     if (next === view.state) return false;
-    view.state = next; save(); if (shouldDraw !== false) draw(); return true;
+    view.state = next; view.task = M().resolveTask(next);
+    save(); if (shouldDraw !== false) draw(); return true;
   }
   function rowPictures(values, extra) { return '<span class="pt-rule-pictures ' + (extra || '') + '">' + values.map(value => token(value)).join('') + '</span>'; }
   function guideHtml() {
@@ -246,9 +247,7 @@
   function changeLength(delta) {
     const old = view.state, length = Math.max(2, Math.min(12, old.size + delta));
     if (length === old.size || !old.free || old.phase !== 'BUILDING') return;
-    view.task = M().createFreeTask(old.theme, length); view.state = M().createState(view.task);
-    view.state.board = Array.from({ length }, (_, i) => old.board[i] || null); view.state.selected = old.selected;
-    save(); draw(); if (delta > 0) scrollToIndex(length - 1);
+    if (dispatch({ type: 'resize', size: length }) && delta > 0) scrollToIndex(length - 1);
   }
   function onClick(event) {
     const button = event.target.closest?.('[data-action]');

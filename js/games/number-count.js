@@ -1221,14 +1221,15 @@
         .nc-choice-many .nc-choice-num{font-size:clamp(30px,5vw,64px)}
         .nc-idle-anim{animation:none}
         .number-count-root .nc-choices-area.nc-round-actions{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:8px;max-width:520px;margin:auto}
-        .nc-round-result{text-align:center;font-size:clamp(16px,3.5vw,23px);font-weight:bold;color:#164b50}
-        .nc-round-actions button{min-height:48px;border:3px solid white;border-radius:16px;padding:10px 12px;font:inherit;font-size:clamp(14px,3vw,20px);font-weight:bold;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.14);line-height:1.35}
+        .nc-round-result{text-align:center;font-size:clamp(16px,3.5vw,23px);font-weight:bold;color:#164b50;word-break:keep-all;line-height:1.35}
+        .nc-round-actions button{min-height:48px;border:3px solid white;border-radius:16px;padding:10px 12px;font:inherit;font-size:clamp(14px,3vw,20px);font-weight:bold;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.14);line-height:1.35;word-break:keep-all}
         .nc-round-next{background:#17695a;color:#fff}
         .nc-round-recount{background:#fff7cf;color:#294d52}
         .nc-round-actions button:focus-visible{outline:3px solid #192e51;outline-offset:3px}
         .nc-recounting .nc-tap-count{visibility:hidden}
         .nc-recounting .nc-count-dot{top:0;left:auto;right:0;transform:none;width:28px;height:28px;font-size:16px;border-width:2px;box-shadow:0 2px 4px #0003}
         @media(orientation:portrait){.number-count-root .nc-choices-area.nc-round-actions{display:grid;grid-template-columns:1fr 1fr}.nc-round-result{grid-column:1/-1}}
+        @media(orientation:landscape) and (max-height:520px){.nc-round-actions button{font-size:16px;padding:10px 4px}.nc-round-result{font-size:18px}}
         @media(orientation:landscape) and (max-height:520px){.number-count-landscape{grid-template-columns:120px minmax(0,1fr) 120px;gap:6px}.number-count-landscape .nc-difficulty-tabs{display:flex;flex-direction:column;gap:3px}.nc-range-label{font-size:14px}.nc-difficulty-tabs select{min-height:46px;font-size:16px;padding:5px}.number-count-landscape .nc-vehicle-cat-tab{font-size:14px;min-height:44px;padding:4px}.number-count-landscape .nc-toy-block-btn{min-height:48px;height:54px;width:104px}.number-count-landscape .nc-choice-num{font-size:30px}.number-count-landscape .nc-choice-dots{display:none}.nc-objects-area{overflow-y:auto}.nc-many{min-height:calc(var(--nc-rows)*54px)}}
       `;
       document.head.appendChild(style);

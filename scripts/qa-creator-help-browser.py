@@ -71,7 +71,12 @@ def assert_help_button(page, selector, enabled):
     assert button.get_attribute("aria-pressed") == str(enabled).lower()
     assert button.get_attribute("aria-label") and button.inner_text().strip()
     box = button.bounding_box()
-    assert box and box["width"] >= 44 and box["height"] >= 44, box
+    geometry = button.evaluate("""button => {
+      const own=getComputedStyle(button), shell=button.closest('.game-play-screen');
+      return {active:button.matches(':active'),cssWidth:own.width,cssHeight:own.height,
+        transform:own.transform,shellTransform:shell?getComputedStyle(shell).transform:null};
+    }""")
+    assert box and box["width"] >= 44 and box["height"] >= 44, {"box": box, **geometry}
     viewport = page.viewport_size
     assert box["x"] >= 0 and box["y"] >= 0, box
     assert box["x"] + box["width"] <= viewport["width"] + 1, box
