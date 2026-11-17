@@ -72,7 +72,19 @@
       color: '#9575CD',
       voiceId: 'games.cat.sleep',
       particle: '⭐'
-    }
+    },
+    { id: 'wait', emoji: '🌿', label: '기다리기', shortLabel: '기다려요', color: '#A5D6A7', particle: '💚' }
+  ];
+
+  const NEEDS = [
+    { id: 'hungry', action: 'eat', cue: '🥣', title: '배가 고파요', clue: '빈 밥그릇을 바라보고 있어요.', result: '냠냠! 밥을 먹어서 배가 든든해졌어요.',
+      en: ['I am hungry', 'The food bowl is empty. What does the cat need?', 'Yum! The cat has eaten and feels full.'] },
+    { id: 'messy', action: 'bath', cue: '🐾', title: '털에 흙이 묻었어요', clue: '흙놀이를 해서 털이 지저분해요.', result: '보글보글 씻었어요. 털이 깨끗해졌어요.',
+      en: ['My fur is muddy', 'The cat got muddy while playing. What could help?', 'We washed the mud away. The fur is clean.'] },
+    { id: 'sleepy', action: 'sleep', cue: '🥱', title: '졸려요', clue: '하품을 하며 눈을 감으려 해요.', result: '코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.',
+      en: ['I am sleepy', 'The cat is yawning and closing its eyes. What does it need?', 'The cat is resting. Let us keep it quiet.'] },
+    { id: 'space', action: 'wait', cue: '🌿', title: '혼자 쉬고 싶어요', clue: '고개를 돌렸어요. 조금 떨어져 기다려 줄까요?', result: '조용히 기다려 줬어요. 고양이가 편안해졌어요.',
+      en: ['I need some space', 'The cat is turning away. Shall we give it some space?', 'We waited quietly. The cat feels comfortable.'] }
   ];
 
   const state = {
@@ -88,7 +100,16 @@
     // 보상 및 음성 중복 방지 플래그
     selectIntroPlayed: false,
     careIntroPlayed: false,
-    completeRewardGiven: false
+    completeRewardGiven: false,
+    needIndex: 0,
+    resolved: false,
+    feedback: '',
+    feedbackEn: '',
+    turnId: 0,
+    timerToken: 0,
+    rewarded: new Set(),
+    completedCats: new Set(),
+    particles: new Set()
   };
 
   function isLandscapeMode() {
@@ -96,9 +117,10 @@
   }
 
   function timer(fn, ms) {
+    const token = state.timerToken;
     const id = setTimeout(() => {
       state.timers = state.timers.filter(t => t !== id);
-      if (!state.destroyed) fn();
+      if (!state.destroyed && token === state.timerToken) fn();
     }, ms);
 
     state.timers.push(id);
@@ -106,6 +128,9 @@
   }
 
   function clearTimers() {
+    state.timerToken += 1;
+    state.particles.forEach(node => node.remove());
+    state.particles.clear();
     state.timers.forEach(id => clearTimeout(id));
     state.timers = [];
   }
@@ -1038,6 +1063,45 @@
       }
     `;
 
+
+    s.textContent += `
+      .cc-care-v2{display:grid;height:100%;min-height:0;padding:10px;gap:8px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(70px,1fr) auto auto auto;overflow:hidden}
+      .cc-care-header{display:flex;align-items:center;gap:8px;min-width:0;grid-row:1}
+      .cc-care-name{flex:1;min-width:0;font-size:clamp(18px,5vw,25px);font-weight:900;margin:0;color:#614449}
+      .cc-care-control{min-width:44px;min-height:44px;flex-shrink:0;border:3px solid #fff;background:#fff9de;border-radius:15px;font:inherit;font-size:14px;font-weight:900;color:#46363b;padding:7px 10px;cursor:pointer;box-shadow:0 3px 0 #dec7c7}
+      .cc-care-control[data-cat-listen]{font-size:22px;padding:5px;width:44px}
+      .cc-observe-scene{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:28px;overflow:hidden;border:5px solid #fff;background:linear-gradient(135deg,#fff8e9,#fff0f5);box-shadow:0 5px 0 #e9d7da}
+      .cc-observe-scene img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}
+      .cc-observe-scene .cc-main-fallback{font-size:80px;box-shadow:none}
+      .cc-need-cue{position:absolute;right:10px;top:10px;padding:8px 12px;display:grid;place-items:center;background:#fff;border:3px solid #f2c7ca;border-radius:22px;font-size:clamp(30px,7vw,48px);box-shadow:0 3px 8px #66443322;pointer-events:none}
+      .cc-care-story{min-width:0;padding:8px 12px;border-radius:18px;background:#fffdf7;border:3px solid #fff;text-align:center;line-height:1.35}
+      .cc-need-title{margin:0 0 3px;font-size:clamp(18px,4.6vw,23px);font-weight:900;color:#743b4c}
+      .cc-care-copy{font-size:clamp(14px,3.7vw,17px);margin:0;word-break:keep-all;color:#46363b;line-height:1.4}
+      .cc-care-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      .cc-care-v2 .cc-btn{min-width:44px;min-height:58px;border:4px solid #fff;border-radius:18px;font-size:28px;display:flex;flex-direction:row;gap:8px;padding:6px;box-shadow:0 4px 0 #cbbec7}
+      .cc-care-v2 .cc-btn-label{font-size:clamp(14px,3.7vw,18px);white-space:normal;line-height:1.2;color:#322c37}
+      .cc-care-v2 .cc-btn.done{opacity:1;pointer-events:auto;outline:3px solid #438460;outline-offset:-3px}
+      .cc-care-v2 .cc-btn.done::after{content:'✓';top:2px;right:7px;font-size:16px;color:#175e36;filter:none}
+      .cc-care-footer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      .cc-care-footer .cc-care-control{padding:6px;font-size:clamp(13px,3.3vw,16px)}
+      .cc-care-next{background:#336d61;color:white}
+      .cc-care-next:disabled{background:#eee3df;color:#6e6560;cursor:default;box-shadow:none}
+      .cc-care-v2 button:focus-visible{outline:3px solid #174e87;outline-offset:2px}
+      .cc-care-v2.is-landscape{grid-template-columns:minmax(0,1fr) minmax(230px,42%);grid-template-rows:44px auto minmax(0,1fr) 44px;gap:8px}
+      .cc-care-v2.is-landscape .cc-care-header{grid-column:1/3}
+      .cc-care-v2.is-landscape .cc-observe-scene{grid-column:1;grid-row:2/5}
+      .cc-care-v2.is-landscape .cc-care-story{grid-column:2;grid-row:2;padding:6px 8px}
+      .cc-care-v2.is-landscape .cc-care-actions{grid-column:2;grid-row:3}
+      .cc-care-v2.is-landscape .cc-care-footer{grid-column:2;grid-row:4}
+      .cc-care-v2.is-landscape .cc-btn{min-height:44px;font-size:23px;padding:4px;gap:5px;border-width:3px;border-radius:14px}
+      .cc-care-v2.is-landscape .cc-btn-label{font-size:14px}
+      .cc-care-v2.is-landscape .cc-need-title{font-size:18px}
+      .cc-care-v2.is-landscape .cc-care-copy{font-size:14px}
+      @media(orientation:portrait) and (max-height:650px){.cc-care-v2{padding:7px;gap:6px}.cc-care-v2 .cc-btn{min-height:50px;font-size:24px}.cc-care-v2 .cc-care-story{padding:6px 8px}.cc-care-v2 .cc-need-title{font-size:18px}.cc-care-v2 .cc-care-copy{font-size:14px}}
+      @media(orientation:landscape) and (max-height:400px){.cc-care-v2.is-landscape{padding:6px;gap:6px;grid-template-columns:minmax(0,1fr) minmax(236px,43%)}.cc-care-v2.is-landscape .cc-care-actions{gap:5px}.cc-care-v2.is-landscape .cc-care-story{padding:4px 7px}.cc-care-v2.is-landscape .cc-care-footer{gap:5px}.cc-care-v2.is-landscape .cc-care-footer .cc-care-control{font-size:13px}}
+      @media(prefers-reduced-motion:reduce){.cc-particle{animation:none}.cc-main-img{animation:none;transition:none}}
+    `;
+
     document.head.appendChild(s);
   }
 
@@ -1067,40 +1131,15 @@
       p.style.top = `${startY}px`;
 
       root.appendChild(p);
-      setTimeout(() => p.remove(), 900);
+      state.particles.add(p);
+      timer(() => { p.remove(); state.particles.delete(p); }, 900);
     }
-  }
-
-  function setMainImg(stepKey) {
-    if (!state.container || !state.currentCat) return;
-
-    const img = state.container.querySelector('#cc-main-img');
-    const fallback = state.container.querySelector('#cc-main-fallback');
-
-    if (!img) return;
-
-    const src = state.currentCat.steps[stepKey] || state.currentCat.steps.default;
-
-    img.style.opacity = '0';
-
-    timer(() => {
-      if (!state.container) return;
-
-      img.style.display = 'block';
-      img.src = src;
-      img.style.opacity = '1';
-
-      if (fallback) {
-        fallback.textContent = state.currentCat.emoji;
-        fallback.style.display = 'none';
-      }
-    }, 120);
   }
 
   function renderSelect(renderOpts = {}) {
     if (state.destroyed || !state.container) return;
     state.currentScreen = 'select';
-    
+    const selectionTurn = state.turnId;
     const root = state.container.querySelector('.cc-root');
     const isLand = isLandscapeMode();
     
@@ -1145,7 +1184,9 @@
         <div class="cc-cat-name">${cat.name}</div>
       `;
 
-      card.addEventListener('click', () => startCare(cat));
+      card.addEventListener('click', () => {
+        if (!state.destroyed && state.currentScreen === 'select' && state.turnId === selectionTurn) startCare(cat);
+      });
       row.appendChild(card);
     });
 
@@ -1156,102 +1197,103 @@
     }
   }
 
-  function renderCare(renderOpts = {}) {
-    if (state.destroyed || !state.container) return;
-    state.currentScreen = 'care';
+  function activeNeed() { return NEEDS[state.needIndex % NEEDS.length]; }
 
+  function stopSpeech() {
+    try { window.SihyeonVoice?.stop?.(); } catch (error) {}
+    try { window.speechSynthesis?.cancel?.(); } catch (error) {}
+  }
+
+  function say(ko, en) {
+    if (state.destroyed) return;
+    const text = window.SihyeonPlaySettings?.getLanguage?.() === 'en' ? en : ko;
+    if (!text) return;
+    stopSpeech();
+    try {
+      const result = typeof state.options.say === 'function'
+        ? state.options.say(text) : window.SihyeonVoice?.speak?.(text);
+      result?.catch?.(() => {});
+    } catch (error) {}
+  }
+
+  function describeNeed() {
+    const need = activeNeed();
+    say(state.feedback || `${need.title}. ${need.clue}`,
+      state.feedbackEn || `${need.en[0]}. ${need.en[1]}`);
+  }
+
+  function changeCat() {
+    clearTimers(); stopSpeech(); state.turnId += 1;
+    state.currentCat = null;
+    state.completed = null;
+    state.activeStep = 'default';
+    state.feedback = ''; state.feedbackEn = '';
+    state.careIntroPlayed = false;
+    renderSelect({ silent: true });
+  }
+
+  function renderCare(renderOpts = {}) {
+    if (state.destroyed || !state.container || !state.currentCat) return;
+    state.currentScreen = 'care';
     const cat = state.currentCat;
+    const need = activeNeed();
     const root = state.container.querySelector('.cc-root');
     const isLand = isLandscapeMode();
-    
+    const turnId = state.turnId;
     root.className = 'cc-root' + (isLand ? ' is-landscape' : '');
-
-    if (isLand) {
-      root.innerHTML = `
-        <div class="cc-screen cc-care-landscape">
-          <aside class="cc-left-panel">
-            <div class="cc-info-card">
-              <div class="cc-info-emoji">${cat.emoji}</div>
-              <div class="cc-info-name">${cat.name}</div>
-              <div class="cc-info-sub">밥 먹고<br>목욕하고<br>코 잘 시간이에요</div>
-            </div>
-            <div class="cc-mini-actions">
-              <button class="cc-small-btn" id="cc-change-cat" type="button">고양이 바꾸기</button>
-            </div>
-          </aside>
-          <main class="cc-main-display">
-            <div class="cc-main-wrap">
-              <img id="cc-main-img" class="cc-main-img"
-                src="${cat.steps[state.activeStep]}" alt="${cat.name}"
-                onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
-              <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
-            </div>
-          </main>
-          <aside class="cc-action-panel-landscape">
-            <div class="cc-panel-title">${cat.name} 돌보기</div>
-            <div class="cc-action-bar-landscape" id="cc-action-bar"></div>
-          </aside>
+    root.innerHTML = `
+      <section class="cc-screen cc-care-v2${isLand ? ' is-landscape' : ''}" data-cat-need="${need.id}" data-cat-resolved="${state.resolved}">
+        <header class="cc-care-header">
+          <h2 class="cc-care-name">${cat.emoji} ${cat.name}</h2>
+          <button class="cc-care-control" data-cat-listen type="button" aria-label="고양이 마음 다시 듣기">🔊</button>
+          <button class="cc-care-control" id="cc-change-cat" type="button">고양이 선택</button>
+        </header>
+        <div class="cc-observe-scene">
+          <img id="cc-main-img" src="${cat.steps[state.activeStep] || cat.steps.default}" alt="${cat.name} ${state.resolved ? '돌봄 뒤 모습' : '모습'}"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+          <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
+          <div class="cc-need-cue" aria-hidden="true">${state.resolved ? (need.id === 'sleepy' ? '💤' : '💚') : need.cue}</div>
         </div>
-      `;
-    } else {
-      root.innerHTML = `
-        <div class="cc-screen cc-care-portrait">
-          <main class="cc-main-display">
-            <div class="cc-main-wrap">
-              <img id="cc-main-img" class="cc-main-img"
-                src="${cat.steps[state.activeStep]}" alt="${cat.name}"
-                onerror="this.style.display='none';document.getElementById('cc-main-fallback').style.display='grid';">
-              <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
-            </div>
-          </main>
-          <aside class="cc-action-panel-portrait">
-            <div class="cc-action-bar-portrait" id="cc-action-bar"></div>
-          </aside>
+        <div class="cc-care-story" role="status" aria-live="polite">
+          <h3 class="cc-need-title">${state.resolved ? '마음을 알아줬어요' : need.title}</h3>
+          <p class="cc-care-copy" data-cat-feedback>${state.feedback || need.clue}</p>
         </div>
-      `;
-    }
-
-    const changeBtn = root.querySelector('#cc-change-cat');
-    if (changeBtn) {
-      changeBtn.addEventListener('click', () => {
-        state.currentCat = null;
-        state.completed = null;
-        state.activeStep = 'default';
-        state.careIntroPlayed = false; // 고양이 변경 시 인사 다시 재생 가능하도록 초기화
-        renderSelect();
-      });
-    }
-
+        <div class="cc-care-actions" id="cc-action-bar"></div>
+        <div class="cc-care-footer">
+          <button class="cc-care-control cc-care-next" data-cat-next type="button" ${state.resolved ? '' : 'disabled'}>${state.completed.size >= NEEDS.length ? '다시 살펴보기' : '다음 모습 ▶'}</button>
+          <button class="cc-care-control" data-cat-finish type="button">오늘은 여기까지</button>
+        </div>
+      </section>`;
+    root.querySelector('#cc-change-cat').onclick = () => {
+      if (!state.destroyed && state.turnId === turnId) changeCat();
+    };
+    root.querySelector('[data-cat-listen]').onclick = () => {
+      if (!state.destroyed && state.turnId === turnId) describeNeed();
+    };
+    root.querySelector('[data-cat-next]').onclick = () => nextNeed(turnId);
+    root.querySelector('[data-cat-finish]').onclick = () => {
+      if (state.destroyed || state.turnId !== turnId) return;
+      clearTimers(); stopSpeech(); state.turnId += 1; renderComplete();
+    };
     renderActionBtns();
-    
-    // 최초 고양이 선택 진입 렌더링에서만 인사 음성 재생
-    if (!renderOpts.silent && !state.careIntroPlayed) {
-      playVoiceId(cat.introVoiceId);
-      state.careIntroPlayed = true;
-    }
+    if (!renderOpts.silent) describeNeed();
   }
 
   function renderActionBtns() {
-    if (!state.container) return;
-
+    if (!state.container || !state.currentCat) return;
     const bar = state.container.querySelector('#cc-action-bar');
     if (!bar) return;
-
     bar.innerHTML = '';
-
+    const turnId = state.turnId;
     ACTIONS.forEach(action => {
       const btn = document.createElement('button');
-      btn.className = 'cc-btn' + (state.completed.has(action.id) ? ' done' : '');
+      btn.className = 'cc-btn' + (state.resolved && action.id === activeNeed().action ? ' done' : '');
       btn.type = 'button';
       btn.style.background = action.color;
       btn.innerHTML = `${action.emoji}<span class="cc-btn-label">${action.label}</span>`;
       btn.setAttribute('aria-label', action.label);
-
-      btn.addEventListener('click', (e) => {
-        if (state.completed.has(action.id)) return;
-        handleAction(action, e.clientX, e.clientY);
-      });
-
+      btn.setAttribute('data-cat-action', action.id);
+      btn.addEventListener('click', (e) => handleAction(action, e.clientX, e.clientY, turnId));
       bar.appendChild(btn);
     });
   }
@@ -1261,17 +1303,17 @@
     state.currentScreen = 'complete';
 
     const cat = state.currentCat;
+    const turnId = state.turnId;
     const root = state.container.querySelector('.cc-root');
     const isLand = isLandscapeMode();
-    
     root.className = 'cc-root' + (isLand ? ' is-landscape' : '');
     const completeClass = 'cc-screen cc-complete' + (isLand ? ' is-landscape' : '');
 
     root.innerHTML = `
       <div class="${completeClass}">
         <div class="cc-complete-emoji">${cat.emoji}</div>
-        <div class="cc-complete-title">${cat.name} 행복해요! 🎉</div>
-        <div class="cc-complete-sub">${cat.name}가 너무 기뻐해요!<br>시현이 최고야 ⭐</div>
+        <div class="cc-complete-title">${cat.name}와 함께했어요 💚</div>
+        <div class="cc-complete-sub">${state.completed.size ? `${state.completed.size}가지 마음을 살펴봤어요.` : '곁에서 지켜보는 것도 좋은 돌봄이에요.'}</div>
         <div class="cc-complete-btns">
           <button class="cc-c-btn cc-c-btn-primary" id="cc-replay" type="button">다시 하기 🔄</button>
           <button class="cc-c-btn cc-c-btn-secondary" id="cc-to-land" type="button">즐거운놀이터로 👋</button>
@@ -1280,17 +1322,12 @@
     `;
 
     root.querySelector('#cc-replay').addEventListener('click', () => {
-      state.currentCat = null;
-      state.completed = null;
-      state.activeStep = 'default';
-      // 모든 진행 플래그 초기화
-      state.selectIntroPlayed = false;
-      state.careIntroPlayed = false;
-      state.completeRewardGiven = false;
-      renderSelect();
+      if (state.destroyed || state.currentScreen !== 'complete' || state.turnId !== turnId) return;
+      changeCat();
     });
 
     root.querySelector('#cc-to-land').addEventListener('click', () => {
+      if (state.destroyed || state.currentScreen !== 'complete' || state.turnId !== turnId) return;
       if (typeof window.openGameLand === 'function') {
         window.openGameLand();
       } else {
@@ -1299,41 +1336,76 @@
     });
 
     // 최초 게임 완료 렌더링에서만 보상 및 축하 효과 실행
-    if (!renderOpts.silent && !state.completeRewardGiven) {
-      playVoiceId(cat.completeVoiceId);
-      state.options.fireConfetti?.();
-      state.options.gainExp?.(25);
-      state.completeRewardGiven = true; // 지급 완료 표시
+    if (!renderOpts.silent) {
+      say('고양이의 마음을 살펴봐 줘서 고마워요.', 'Thank you for noticing how the cat feels.');
+      if (state.completed.size === NEEDS.length && !state.completedCats.has(cat.id)) {
+        state.completedCats.add(cat.id);
+        state.completeRewardGiven = true;
+        try { state.options.fireConfetti?.(); } catch (error) {}
+        try { state.options.gainExp?.(25); } catch (error) {}
+      }
     }
   }
 
   function startCare(cat) {
+    if (state.destroyed || !state.container) return;
+    clearTimers(); stopSpeech(); state.turnId += 1;
     state.currentCat = cat;
     state.completed = new Set();
+    state.needIndex = 0;
+    state.resolved = false;
+    state.feedback = ''; state.feedbackEn = '';
     state.activeStep = 'default';
-    state.careIntroPlayed = false; // 선택 직후 인사가 나오도록 보장
+    state.careIntroPlayed = false;
     renderCare();
   }
 
-  function handleAction(action, clientX, clientY) {
-    state.completed.add(action.id);
-    state.activeStep = action.id;
+  function nextNeed(turnId = state.turnId) {
+    if (state.destroyed || state.currentScreen !== 'care' || !state.resolved || state.turnId !== turnId) return;
+    clearTimers(); stopSpeech(); state.turnId += 1;
+    state.needIndex = (state.needIndex + 1) % NEEDS.length;
+    state.resolved = false;
+    state.feedback = ''; state.feedbackEn = '';
+    state.activeStep = 'default';
+    renderCare();
+  }
 
-    setMainImg(action.id);
-    burst(clientX, clientY, action.particle);
-    playVoiceId(action.voiceId);
-    renderActionBtns();
-
-    if (state.completed.size >= ACTIONS.length) {
-      timer(() => renderComplete(), 1800);
+  function handleAction(action, clientX, clientY, turnId = state.turnId) {
+    if (state.destroyed || !state.currentCat || state.currentScreen !== 'care' || state.turnId !== turnId || !ACTIONS.includes(action)) return;
+    const need = activeNeed();
+    if (state.resolved) {
+      state.feedback = need.result;
+      state.feedbackEn = need.en[2];
+    } else if (action.id === need.action) {
+      state.resolved = true;
+      state.completed.add(need.id);
+      state.activeStep = action.id === 'wait' ? 'default' : action.id;
+      state.feedback = need.result;
+      state.feedbackEn = need.en[2];
+      const rewardKey = `${state.currentCat.id}:${need.id}`;
+      if (!state.rewarded.has(rewardKey)) {
+        state.rewarded.add(rewardKey);
+        try { state.options.gainExp?.(5); } catch (error) {}
+        if (need.id !== 'sleepy' && need.id !== 'space') burst(clientX, clientY, action.particle, 8);
+      }
+    } else if (action.id === 'wait') {
+      state.feedback = '서두르지 않아도 돼요. 모습을 조금 더 살펴봐요.';
+      state.feedbackEn = 'There is no rush. Let us look a little longer.';
+    } else {
+      state.feedback = `지금은 ${need.title.replace(/요$/, '요')}. ${need.clue}`;
+      state.feedbackEn = `${need.en[0]}. ${need.en[1]}`;
     }
+    renderCare({ silent: true });
+    describeNeed();
   }
 
   function handleResize() {
     if (state.destroyed) return;
     
     clearTimeout(state.resizeTimer);
+    const token = state.timerToken;
     state.resizeTimer = setTimeout(() => {
+      if (state.destroyed || token !== state.timerToken) return;
       // 재렌더링 시에는 보상 및 음성 재생을 하지 않도록 silent 옵션 전달
       if (state.currentScreen === 'select') renderSelect({ silent: true });
       else if (state.currentScreen === 'care') renderCare({ silent: true });
@@ -1351,6 +1423,10 @@
     state.currentCat = null;
     state.completed = null;
     state.activeStep = 'default';
+    state.needIndex = 0; state.resolved = false;
+    state.feedback = ''; state.feedbackEn = '';
+    state.rewarded = new Set(); state.completedCats = new Set();
+    state.turnId += 1;
     state.timers = [];
     state.currentScreen = 'select';
     // 게임 시작 시 모든 플래그 초기화
@@ -1367,7 +1443,9 @@
 
   function destroy() {
     state.destroyed = true;
+    state.turnId += 1;
     clearTimers();
+    stopSpeech();
     clearTimeout(state.resizeTimer);
     window.removeEventListener('resize', handleResize);
     window.removeEventListener('orientationchange', handleResize);
@@ -1381,6 +1459,9 @@
     }
 
     state.container = null;
+    state.options = {};
+    const style = document.getElementById(STYLE_ID);
+    if (style) style.remove();
   }
 
   window.SihyeonGames = window.SihyeonGames || {};

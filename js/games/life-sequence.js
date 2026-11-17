@@ -105,6 +105,107 @@
     }
   ];
 
+  // Reasons describe the relationship between actions, not one family's routine.
+  const REASONS = {
+    wash_hands: {
+      guide: '비누 거품은 물로 헹군 뒤 수건으로 닦아요.',
+      water: '손을 적시면 비누 거품을 내기 쉬워요.',
+      soap: '비누로 손 구석구석을 문질러요.',
+      rinse: '비누 거품이 남지 않게 흐르는 물로 헹궈요.',
+      towel: '거품을 헹군 다음 물기를 닦아요.'
+    },
+    brush_teeth: {
+      guide: '치약을 준비하고 이를 닦은 뒤 마무리해요.',
+      paste: '이를 닦을 준비로 칫솔에 치약을 짜요.',
+      brush: '치약을 묻힌 칫솔로 이를 구석구석 닦아요.',
+      rinse: '이를 닦고 나서 입안을 마무리해요.'
+    },
+    eat_meal: {
+      guide: '손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요.',
+      clean: '깨끗한 손으로 음식을 먹어요.',
+      sit: '자리에 앉으면 편안하게 먹을 수 있어요.',
+      eat: '손을 씻고 자리를 잡았으니 맛있게 먹어요.'
+    },
+    sleep_time: {
+      guide: '잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요.',
+      pajamas: '편한 잠옷을 입고 잘 준비를 해요.',
+      book: '조용히 책을 보며 쉬는 시간을 준비해요.',
+      light: '준비를 마쳤으니 불을 끄고 편안히 쉬어요.'
+    },
+    go_out: {
+      guide: '옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요.',
+      clothes: '바깥 날씨에 맞는 옷을 입어요.',
+      shoes: '바깥에 나갈 때 신발이 발을 보호해요.',
+      door: '옷과 신발을 준비한 뒤 어른과 함께 나가요.'
+    },
+    clean_up: {
+      guide: '장난감을 모아 바구니에 넣으면 방이 정리돼요.',
+      gather: '흩어진 장난감을 한곳에 모아요.',
+      basket: '모은 장난감을 바구니에 넣어 자리를 찾아 줘요.',
+      clean: '장난감을 정리해서 걸어 다닐 자리가 생겼어요.'
+    }
+  };
+  const FLEXIBLE_PREPARATION = new Set(['eat_meal', 'sleep_time', 'go_out']);
+  const ENGLISH = {
+    wash_hands: {
+      guide: 'Rinse away the soap before drying your hands.',
+      intro: 'Shall we wash our hands?', complete: 'Your hands are clean.',
+      water: ['Wet your hands', 'Water helps the soap make bubbles.'],
+      soap: ['Rub with soap', 'Rub the soap all around your hands.'],
+      rinse: ['Rinse with running water', 'Wash the soap bubbles away with running water.'],
+      towel: ['Dry with a towel', 'Dry your hands after rinsing away the soap.']
+    },
+    brush_teeth: {
+      guide: 'Get the toothpaste ready, brush, then finish cleaning your mouth.',
+      intro: 'Shall we brush our teeth?', complete: 'Your teeth are clean.',
+      paste: ['Put toothpaste on the brush', 'Prepare the toothbrush before brushing.'],
+      brush: ['Brush your teeth', 'Use the toothbrush to clean all around your teeth.'],
+      rinse: ['Rinse your mouth', 'Finish cleaning your mouth after brushing.']
+    },
+    eat_meal: {
+      guide: 'Washing and sitting can switch places. Get ready before eating.',
+      intro: 'Shall we get ready to eat?', complete: 'You are ready to enjoy your meal.',
+      clean: ['Wash your hands', 'Eat with clean hands.'],
+      sit: ['Sit down', 'Sitting helps you eat comfortably.'],
+      eat: ['Enjoy your meal', 'Your hands are clean and you are seated. Now enjoy your meal.']
+    },
+    sleep_time: {
+      guide: 'Pajamas and a book can switch places. Get ready before resting.',
+      intro: 'Shall we get ready for bed?', complete: 'Rest well. See you tomorrow.',
+      pajamas: ['Put on pajamas', 'Comfortable pajamas help you get ready for bed.'],
+      book: ['Read a book', 'A quiet story helps you get ready to rest.'],
+      light: ['Turn off the light and rest', 'You are ready. Turn off the light and rest.']
+    },
+    go_out: {
+      guide: 'Clothes and shoes can switch places. Get ready before going outside.',
+      intro: 'Shall we get ready to go outside?', complete: 'You are ready to go outside.',
+      clothes: ['Put on clothes', 'Choose clothes for the weather.'],
+      shoes: ['Put on shoes', 'Shoes protect your feet outside.'],
+      door: ['Go outside', 'With clothes and shoes ready, go outside with a grown-up.']
+    },
+    clean_up: {
+      guide: 'Gather the toys and put them in a basket to make space.',
+      intro: 'Shall we tidy up after playing?', complete: 'There is room to walk again.',
+      gather: ['Gather the toys', 'Bring the scattered toys together.'],
+      basket: ['Put the toys in the basket', 'Give the gathered toys a place in the basket.'],
+      clean: ['The room is tidy', 'Putting the toys away makes room to walk.']
+    }
+  };
+
+  function englishFor(text) {
+    const mission = state.mission;
+    if (!mission) return '';
+    const data = ENGLISH[mission.id];
+    if (text === REASONS[mission.id].guide) return data.guide;
+    if (text === mission.guide) return data.intro;
+    for (const step of mission.steps) {
+      if (text === step.label) return data[step.id][0];
+      if (text === REASONS[mission.id][step.id]) return data[step.id][1];
+      if (text === `${step.label}. ${REASONS[mission.id][step.id]}`) return `${data[step.id][0]}. ${data[step.id][1]}`;
+    }
+    return '';
+  }
+
   const state = {
     container: null,
     options: {},
@@ -124,7 +225,8 @@
     completeRewardGiven: false,
     roundId: 0,
     roundAnswered: false,
-    timerToken: 0
+    timerToken: 0,
+    guideText: ''
   };
 
   function injectStyle() {
@@ -154,6 +256,13 @@
       @media(max-height:610px) and (orientation:portrait){.life-sequence-portrait .ls-pool{height:96px}.life-sequence-portrait .ls-slot{min-height:62px}.ls-mini-status{min-height:40px}.ls-mission-icon,.ls-icon-btn{width:32px;height:32px;font-size:19px}.ls-dot{width:10px;height:10px}}
     `;
     style.textContent += `
+      .ls-root .ls-mini-status{min-height:52px}
+      .ls-root .ls-icon-btn{width:44px;height:44px;min-width:44px;min-height:44px}
+      .ls-explanation{display:flex;align-items:center;gap:8px;flex:0 0 auto;padding:7px 9px;border:3px solid white;border-radius:18px;background:#fffdf1;color:#233047;min-height:58px}
+      .ls-reason{flex:1;min-width:0;margin:0;font-size:clamp(15px,3.8vw,19px);font-weight:800;line-height:1.4;word-break:keep-all}
+      .ls-explanation .ls-icon-btn{box-shadow:0 3px 0 #dfce9b;background:#ffea8c;font-size:22px}
+      .life-sequence-landscape .ls-left-work{grid-template-rows:auto auto minmax(0,1fr)}
+      .ls-root button:focus-visible{outline:3px solid #174e87;outline-offset:2px}
       .ls-root[data-step-count="4"] .ls-pool, .ls-root[data-step-count="4"] .ls-slots { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .ls-root[data-step-count="4"] .ls-pool { grid-template-rows: repeat(2,minmax(0,1fr)); }
       .ls-root[data-step-count="4"].life-sequence-portrait .ls-pool { height: clamp(180px,28vh,230px); }
@@ -201,10 +310,25 @@
     }
   }
 
-  function speak(text, force) {
-    if (!text || state.mission?.id !== 'wash_hands') return;
-    // The four-step handwashing wording must include rinsing in both text and audio.
-    try { state.options.say?.(text); } catch (error) {}
+  function speak(text, force, english) {
+    if (!text || state.destroyed) return;
+    if (window.SihyeonPlaySettings?.getLanguage?.() === 'en') {
+      text = english || englishFor(text);
+      if (!text) return;
+    }
+    try {
+      const result = typeof state.options.say === 'function'
+        ? state.options.say(text)
+        : window.SihyeonVoice?.speak?.(text);
+      result?.catch?.(() => {});
+    } catch (error) {}
+  }
+
+  function setExplanation(text, read = false) {
+    state.guideText = text || REASONS[state.mission?.id]?.guide || state.mission?.guide || '';
+    const target = state.container?.querySelector('[data-life-reason]');
+    if (target) target.textContent = state.guideText;
+    if (read) { stopSpeech(); speak(state.guideText, true); }
   }
 
   function stopSpeech() {
@@ -324,12 +448,13 @@
       return;
     }
     state.mission = state.missions[state.round - 1];
+    state.guideText = REASONS[state.mission.id]?.guide || state.mission.guide;
     state.pool = shuffle(state.mission.steps.map((step) => ({ ...step })));
     state.placed = new Array(state.mission.steps.length).fill(null);
     state.successRewardGiven = false;
     draw();
     playGameVoice('games.life.intro');
-    speak(state.mission.guide, true);
+    if (state.mission.id === 'wash_hands') speak(state.mission.guide, true);
   }
 
   function draw() {
@@ -346,6 +471,10 @@
               </div>
               <div class="ls-mission-icon" aria-label="${escapeAttr(mission.title)}">${escapeHtml(mission.sceneEmoji)}</div>
               <button class="ls-icon-btn" data-action="restart" type="button" aria-label="다시 하기">🔄</button>
+            </div>
+            <div class="ls-explanation">
+              <p class="ls-reason" data-life-reason>${escapeHtml(state.guideText)}</p>
+              <button class="ls-icon-btn" type="button" data-life-listen aria-label="설명 다시 듣기">🔊</button>
             </div>
             <div class="ls-pool">${state.pool.map(renderPoolCard).join('')}</div>
           </section>
@@ -405,6 +534,10 @@
     if (!root) return;
 
     root.querySelector('[data-action="restart"]')?.addEventListener('click', restart);
+    const roundId = state.roundId;
+    root.querySelector('[data-life-listen]')?.addEventListener('click', () => {
+      if (!state.destroyed && state.roundId === roundId) setExplanation(state.guideText, true);
+    });
 
     root.querySelectorAll('[data-card]').forEach((button) => {
       button.addEventListener('click', () => placeCard(button.dataset.card));
@@ -457,7 +590,8 @@
     if (index < 0) return;
 
     state.placed[index] = card;
-    speak(card.effect || card.label, false);
+    setExplanation(REASONS[state.mission.id]?.[card.id] || card.effect || card.label);
+    speak(`${card.label}. ${state.guideText}`, false);
     vibrate(40);
     draw();
 
@@ -477,7 +611,9 @@
   function checkAnswer() {
     const wrong = [];
     state.placed.forEach((card, index) => {
-      if (!card || Number(card.order) !== index + 1) wrong.push(index);
+      const flexible = FLEXIBLE_PREPARATION.has(state.mission?.id) && index < 2;
+      const fits = card && (flexible ? Number(card.order) < 3 : Number(card.order) === index + 1);
+      if (!fits) wrong.push(index);
     });
     wrong.length ? handleWrong(wrong) : handleCorrect();
   }
@@ -487,17 +623,19 @@
 
     state.combo = 0;
     vibrate([70, 40, 70]);
-    playGameVoice('games.common.wrong');
 
     wrongIndexes.forEach((index) => {
       state.container.querySelector(`[data-slot="${index}"]`)?.classList.add('wrong');
     });
 
-    const expected = state.mission.steps.find((step) => Number(step.order) === wrongIndexes[0] + 1);
-    const text = expected?.hint || '괜찮아. 순서가 조금 달라요. 다시 해볼까?';
+    const retainedIds = state.placed.filter((_, index) => !wrongIndexes.includes(index)).filter(Boolean).map(card => card.id);
+    const expected = FLEXIBLE_PREPARATION.has(state.mission.id) && wrongIndexes[0] < 2
+      ? state.mission.steps.find(step => Number(step.order) < 3 && !retainedIds.includes(step.id))
+      : state.mission.steps.find((step) => Number(step.order) === wrongIndexes[0] + 1);
+    const text = REASONS[state.mission.id]?.[expected?.id] || expected?.hint || '괜찮아. 다시 해볼까?';
 
     showMessage(text);
-    speak(text, true);
+    setExplanation(text, true);
 
     timer(() => {
       wrongIndexes.forEach((index) => { state.placed[index] = null; });
@@ -512,6 +650,7 @@
     state.roundAnswered = true;
     state.locked = true;
     state.combo += 1;
+    setExplanation(REASONS[state.mission.id]?.guide);
     vibrate(180);
     renderRoundActions();
     if (!state.successRewardGiven) {
@@ -567,7 +706,10 @@
       timer(() => {
         const card = state.placed[index];
         slot.classList.add('correct');
-        if (card) speak(card.label, false);
+        if (card) {
+          setExplanation(`${card.label}. ${REASONS[mission.id]?.[card.id] || ''}`);
+          if (index === 0) speak(card.label, false);
+        }
       }, index * 360);
     });
 
@@ -577,12 +719,16 @@
       if (scene && scene.dataset.complete === '1') scene.classList.add('has-complete');
 
       const comboText = state.combo >= 2 ? ` ${state.combo}번 연속 성공!` : '';
-      const sequenceText = mission.sequenceText ? ` ${mission.sequenceText}` : '';
+      // Read the child's valid order, including flexible preparation pairs.
+      const sequenceText = FLEXIBLE_PREPARATION.has(mission.id)
+        ? ` ${state.placed.map(card => card.label).join('. ')}.`
+        : mission.sequenceText ? ` ${mission.sequenceText}` : '';
       const message = `${mission.completeText} ${sequenceText}${comboText}`.replace(/\s+/g, ' ').trim();
 
       showMessage(message);
-      speak(message, true);
-      playGameVoice('games.common.correct');
+      setExplanation(REASONS[mission.id]?.guide);
+      const englishMessage = `${ENGLISH[mission.id].complete} ${state.placed.map(card => ENGLISH[mission.id][card.id][0]).join('. ')}.`;
+      speak(message, true, englishMessage);
     }, delay);
   }
 
@@ -606,7 +752,7 @@
       try { state.options.fireConfetti?.(); } catch (error) {}
       try { state.options.gainExp?.(30); } catch (error) {}
       playGameVoice('games.common.complete');
-      speak('차례차례 모두 해냈어요. 정말 멋져요!', true);
+      speak('차례차례 모두 해냈어요. 정말 멋져요!', true, 'You tried all six routines. Well done!');
     }
 
     state.container.innerHTML = `
@@ -642,6 +788,7 @@
     state.combo = 0;
     state.successRewardGiven = false;
     state.completeRewardGiven = false;
+    state.guideText = '';
     state.missions = shuffle(MISSIONS).slice(0, TOTAL_ROUNDS);
     startRound();
   }
