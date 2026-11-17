@@ -15,6 +15,8 @@ import runpy
 import subprocess
 import threading
 import traceback
+from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.request import Request, urlopen
 
 from playwright.sync_api import sync_playwright
 
@@ -140,8 +142,52 @@ def runner_hashes():
             for p in ['scripts/qa-small-screen-ui-browser.py', 'scripts/qa-p1-voice-browser.py']}
 
 
+def normalize_base(value):
+    parsed = urlsplit(value)
+    if parsed.scheme not in ('http', 'https') or not parsed.netloc:
+        raise ValueError('--base-url must be an HTTP(S) playground URL')
+    path = parsed.path
+    if path.endswith('/index.html'):
+        path = path[:-len('index.html')]
+    return urlunsplit((parsed.scheme, parsed.netloc, path.rstrip('/') + '/', '', ''))
+
+
+def served_sources(base, expected):
+    """Read the complete release surface, including the blocked service worker."""
+    evidence = {'baseUrl': base, 'expected': expected, 'actual': {}, 'errors': {}}
+    for name in SOURCES:
+        try:
+            request = Request(urljoin(base, name), headers={'Cache-Control': 'no-cache'})
+            with urlopen(request, timeout=30) as response:
+                if response.status != 200:
+                    raise RuntimeError(f'HTTP {response.status}')
+                evidence['actual'][name] = hashlib.sha256(response.read()).hexdigest()
+        except Exception as exc:
+            evidence['errors'][name] = str(exc)
+    evidence['matchesCheckout'] = not evidence['errors'] and evidence['actual'] == expected
+    return evidence
+
+
+def page_source_evidence(responses, expected):
+    """Check bytes Chromium loaded, separately from the release URL readback."""
+    names = ('index.html', 'js/games/construction-site.js',
+             'js/games/coding-car.js', 'js/vehicle-display.js')
+    evidence = {}
+    for name in names:
+        response = responses.get(name)
+        assert response is not None, f'Browser did not load {name}'
+        actual = hashlib.sha256(response.body()).hexdigest()
+        evidence[name] = {'url': response.url, 'httpStatus': response.status,
+                          'servedSha256': actual, 'checkoutSha256': expected[name],
+                          'matchesCheckout': actual == expected[name]}
+    assert all(row['httpStatus'] == 200 and row['matchesCheckout']
+               for row in evidence.values()), evidence
+    return evidence
+
+
 def enter(page, base, game):
-    page.goto(base + "index.html", wait_until="load")
+    response = page.goto(urljoin(base, 'index.html'), wait_until='load', timeout=60000)
+    assert response and response.ok, 'Playground entry did not load successfully'
     page.locator('[data-home-age="4"]').tap()
     page.locator('.world-zone[onclick="travelToZone(\'cars\')"]').tap()
     page.locator('.zone-game-card[onclick="openConstructionSiteGame()"]',).wait_for()
@@ -369,6 +415,7 @@ def coding_flow(page, cdp, capture, name):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=pathlib.Path, default=SCRIPT_ROOT)
+    parser.add_argument('--base-url', help='Verify the same checked-out runtime on a public HTTP(S) playground URL.')
     parser.add_argument('--output', type=pathlib.Path, required=True)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--baseline', action='store_true')
@@ -376,6 +423,12 @@ def main():
     parser.add_argument('--game', choices=['construction', 'coding'], help='Run only the selected candidate game; preserves the six viewport checks.')
     parser.add_argument('--viewport', help='Candidate-only size filter, e.g. 1024x768; requires --game and a previously defined viewport.')
     args = parser.parse_args()
+    if args.base_url and (args.baseline or args.tablet_baseline):
+        parser.error('--base-url verifies a release; baseline reproductions use a frozen local --root.')
+    try:
+        public_base = normalize_base(args.base_url) if args.base_url else None
+    except ValueError as exc:
+        parser.error(str(exc))
     if (args.game or args.viewport) and (args.baseline or args.tablet_baseline):
         parser.error('--game/--viewport are candidate-only; baseline modes select their exact reproduction cases.')
     selected_size = None
@@ -386,17 +439,24 @@ def main():
             parser.error('--viewport requires --game and one of: ' + ', '.join(f'{w}x{h}' for w, h in SIZES))
     root, out = args.root.resolve(), args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
-    mode = 'baseline' if args.baseline else 'tablet-baseline' if args.tablet_baseline else 'candidate'
+    mode = 'baseline' if args.baseline else 'tablet-baseline' if args.tablet_baseline else 'production' if public_base else 'candidate'
     report = {'mode': mode, 'gameFilter': args.game, 'viewportFilter': selected_size, 'gitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
               'sourceHashesBefore': hashes(root), 'checks': [], 'pageErrors': [],
-              'scrollDiagnostics': [],
+              'scrollDiagnostics': [], 'browserSources': [],
               'runnerGitSha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=SCRIPT_ROOT).decode().strip(),
               'runnerSourceHashesBefore': runner_hashes(),
               'scope': 'Two games only. Chromium touch emulation; simulated audio completion; coding existing internal entry. Physical device/speaker NOT_RUN.'}
-    server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(QA['QuietServer'], directory=str(root)))
-    threading.Thread(target=server.serve_forever, daemon=True).start()
-    base = f'http://127.0.0.1:{server.server_port}/'
+    server = None
+    if public_base:
+        base = public_base
+    else:
+        server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(QA['QuietServer'], directory=str(root)))
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        base = f'http://127.0.0.1:{server.server_port}/'
+    report['baseUrl'] = base
     try:
+        report['servedSourcesBefore'] = served_sources(base, report['sourceHashesBefore'])
+        assert report['servedSourcesBefore']['matchesCheckout'], report['servedSourcesBefore']
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True)
             report['browserVersion'] = browser.version
@@ -421,6 +481,13 @@ def main():
                     page._ui_scroll_shots = set()
                     page._ui_case_name = name
                     page._ui_output = out
+                    responses = {}
+                    source_paths = {urlsplit(urljoin(base, path)).path: path for path in SOURCES}
+                    def remember_source(response):
+                        path = source_paths.get(urlsplit(response.url).path)
+                        if path:
+                            responses[path] = response
+                    page.on('response', remember_source)
                     page.on('pageerror', lambda error, n=name: report['pageErrors'].append({'screen': n, 'error': str(error)}))
                     def capture(label, detail):
                         page.screenshot(path=str(out / (label + '.png')))
@@ -445,6 +512,8 @@ def main():
                         return row
                     try:
                         enter(page, base, game)
+                        report['browserSources'].append({'screen': name,
+                            'sources': page_source_evidence(responses, report['sourceHashesBefore'])})
                         if args.tablet_baseline:
                             for difficulty in ['easy', 'challenge']:
                                 if difficulty == 'challenge':
@@ -476,12 +545,18 @@ def main():
                         report['scrollDiagnostics'].extend({'screen': name, **row} for row in page._ui_scroll_diagnostics)
                         context.close()
             browser.close()
+    except Exception as exc:
+        report['runnerError'] = str(exc)
+        report['runnerTrace'] = traceback.format_exc()
     finally:
-        server.shutdown()
+        report['servedSourcesAfter'] = served_sources(base, report['sourceHashesBefore'])
+        if server:
+            server.shutdown()
         report['sourceHashesAfter'] = hashes(root)
         report['runnerSourceHashesAfter'] = runner_hashes()
         report['sourcesUnchanged'] = report['sourceHashesBefore'] == report['sourceHashesAfter'] and report['runnerSourceHashesBefore'] == report['runnerSourceHashesAfter']
-        report['status'] = 'PASS' if report['checks'] and all(row['status'] == 'PASS' for row in report['checks']) and not report['pageErrors'] and report['sourcesUnchanged'] else 'FAIL'
+        report['servedSourcesMatchCheckout'] = report.get('servedSourcesBefore', {}).get('matchesCheckout', False) and report['servedSourcesAfter']['matchesCheckout']
+        report['status'] = 'PASS' if report['checks'] and all(row['status'] == 'PASS' for row in report['checks']) and not report['pageErrors'] and report['sourcesUnchanged'] and report['servedSourcesMatchCheckout'] and not report.get('runnerError') else 'FAIL'
         if args.baseline:
             construction = next((r for r in report['checks'] if r['name'] == 'construction-640x360-layout'), {})
             coding = next((r for r in report['checks'] if r['name'] == 'coding-390x844-layout'), {})
@@ -498,7 +573,7 @@ def main():
         (out / 'small-screen-ui-results.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print('SMALL_SCREEN_UI', report['mode'], report['status'], flush=True)
     if args.baseline or args.tablet_baseline:
-        return 0 if all(report['expectedDefectsReproduced'].values()) and report['sourcesUnchanged'] and not report['pageErrors'] else 1
+        return 0 if all(report['expectedDefectsReproduced'].values()) and report['sourcesUnchanged'] and report['servedSourcesMatchCheckout'] and not report['pageErrors'] and not report.get('runnerError') else 1
     return int(report['status'] != 'PASS')
 
 
