@@ -1,0 +1,16 @@
+{
+  "runId": 43903458052,
+  "artifactId": 14245080649,
+  "artifactZipSha256": "3b0f96ec5b5ad34bfb2627ff477462c837a277ca4dd3bcd01d05cb22f65a223c",
+  "candidate": "a857c31a130e9bd8ba41ab658a34a140813a91b9",
+  "automated": {
+    "status": "PASS",
+    "passed": 24,
+    "total": 24
+  },
+  "independentVisual": {
+    "construction": "PASS_SCOPED",
+    "coding": "OPEN_TABLET_COMMAND_SLOT_OVERLAP"
+  },
+  "note": "Initial automation did not check command-slot containment. Its automated PASS is not full visual approval. The tablet failure was observed in the original screenshot, then added to the follow-up check."
+}

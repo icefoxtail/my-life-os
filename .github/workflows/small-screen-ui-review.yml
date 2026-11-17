@@ -1,0 +1,48 @@
+name: Small screen UI review
+
+on:
+  push:
+    branches: ['fix/small-screen-clipping-20261117']
+    paths:
+      - 'js/games/construction-site.js'
+      - 'js/games/coding-car.js'
+      - 'scripts/qa-small-screen-ui-browser.py'
+      - '.github/workflows/small-screen-ui-review.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  changed-screens:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      BASE_SHA: 23fd7f9af6e28034d1a6a3062e293742b3d66cb7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check scoped source and preserved assets
+        run: |
+          node --check js/games/construction-site.js
+          node --check js/games/coding-car.js
+          python3 -m py_compile scripts/qa-small-screen-ui-browser.py
+          git diff --exit-code "$BASE_SHA" -- assets/vehicles js/vehicle-display.js js/engine/pixi-runtime.js js/games-pixi/number-vehicles-pixi.js
+      - name: Install pinned Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      # Run 43903458052 preserves construction and the original reproductions.
+      # Run 43905541853 preserves the slot reproduction and five coding sizes.
+      # Runtime CSS is unchanged; this closes the remaining tablet touch check.
+      - name: Inspect tablet layout and native touch scrolling
+        run: python3 scripts/qa-small-screen-ui-browser.py --root . --output qa-small-screen/tablet-after --game coding --viewport 1024x768
+      - name: Preserve comparison evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: small-screen-ui-${{ github.run_id }}
+          path: qa-small-screen/
+          if-no-files-found: warn
+          retention-days: 14

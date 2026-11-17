@@ -1,0 +1,3376 @@
+{
+  "mode": "candidate",
+  "gameFilter": "coding",
+  "viewportFilter": [
+    1024,
+    768
+  ],
+  "gitSha": "b29bd80dbbe61bc9e9038969831cbde5658a4699",
+  "sourceHashesBefore": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "291507c4cddca1b5b21ac89609cc148b9b5e64473850aed7640fd4c8781d797e",
+    "js/games/construction-site.js": "ac660b713ca9932b68e9dd305045246cdc6b91b4c9b92cd9c9c56c7460b402e7",
+    "js/games/coding-car.js": "bc7c186adc009ba13f839cc0efb6289ee2b8aa9f583b7bf5cde18c518080d222",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a"
+  },
+  "checks": [
+    {
+      "name": "coding-1024x768-layout",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "easy",
+            "rect": {
+              "left": 31,
+              "top": 186.828125,
+              "right": 238.75,
+              "bottom": 254.828125,
+              "width": 207.75,
+              "height": 68
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "challenge",
+            "rect": {
+              "left": 31,
+              "top": 266.828125,
+              "right": 238.75,
+              "bottom": 334.828125,
+              "width": 207.75,
+              "height": 68
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "ccCar",
+            "rect": {
+              "left": 562.40625,
+              "top": 116.515625,
+              "right": 704.234375,
+              "bottom": 294.828125,
+              "width": 141.828125,
+              "height": 178.3125
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "up",
+            "rect": {
+              "left": 744.28125,
+              "top": 262.65625,
+              "right": 863.640625,
+              "bottom": 354.8125,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "down",
+            "rect": {
+              "left": 873.640625,
+              "top": 262.65625,
+              "right": 993,
+              "bottom": 354.8125,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "left",
+            "rect": {
+              "left": 744.28125,
+              "top": 364.8125,
+              "right": 863.640625,
+              "bottom": 456.96875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "right",
+            "rect": {
+              "left": 873.640625,
+              "top": 364.8125,
+              "right": 993,
+              "bottom": 456.96875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "undo",
+            "rect": {
+              "left": 744.28125,
+              "top": 538.96875,
+              "right": 993,
+              "bottom": 608.078125,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "clear",
+            "rect": {
+              "left": 744.28125,
+              "top": 618.078125,
+              "right": 993,
+              "bottom": 687.1875,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "ccGoBtn",
+            "rect": {
+              "left": 744.28125,
+              "top": 697.1875,
+              "right": 993,
+              "bottom": 766.296875,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": true,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": true
+          },
+          {
+            "label": "놀이터로",
+            "rect": {
+              "left": 8,
+              "top": 8,
+              "right": 64,
+              "bottom": 64,
+              "width": 56,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          }
+        ],
+        "issues": [],
+        "page": {
+          "width": 1024,
+          "height": 768,
+          "x": 0,
+          "y": 0
+        },
+        "panel": {
+          "rect": {
+            "left": 725.28125,
+            "top": 10,
+            "right": 1012,
+            "bottom": 758,
+            "width": 286.71875,
+            "height": 748
+          },
+          "scrollTop": 0,
+          "scrollHeight": 767,
+          "clientHeight": 738,
+          "overflow": "auto",
+          "touchAction": "auto",
+          "rootTouchAction": "pan-y",
+          "alignContent": "safe center"
+        },
+        "codeSlots": {
+          "difficulty": "easy",
+          "expected": 4,
+          "group": {
+            "left": 744.28125,
+            "top": 118.78125,
+            "right": 993,
+            "bottom": 250.65625,
+            "width": 248.71875,
+            "height": 131.875
+          },
+          "groupContent": {
+            "left": 744.28125,
+            "top": 118.78125,
+            "right": 993.28125,
+            "bottom": 250.78125
+          },
+          "controls": {
+            "left": 744.28125,
+            "top": 262.65625,
+            "right": 993,
+            "bottom": 456.96875,
+            "width": 248.71875,
+            "height": 194.3125
+          },
+          "rows": [
+            {
+              "index": 1,
+              "rect": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 864.140625,
+                "bottom": 180.21875,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 2,
+              "rect": {
+                "left": 873.140625,
+                "top": 118.78125,
+                "right": 993,
+                "bottom": 180.21875,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 3,
+              "rect": {
+                "left": 744.28125,
+                "top": 189.21875,
+                "right": 864.140625,
+                "bottom": 250.65625,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 4,
+              "rect": {
+                "left": 873.140625,
+                "top": 189.21875,
+                "right": 993,
+                "bottom": 250.65625,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            }
+          ]
+        },
+        "arrows": [
+          {
+            "dir": "up",
+            "button": {
+              "left": 744.28125,
+              "top": 262.65625,
+              "right": 863.640625,
+              "bottom": 354.8125,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 748.28125,
+              "top": 266.65625,
+              "right": 859.28125,
+              "bottom": 350.65625
+            },
+            "imageRect": {
+              "left": 757.328125,
+              "top": 274.625,
+              "right": 850.578125,
+              "bottom": 342.84375,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 774.640380859375,
+              "top": 278.22247314453125,
+              "right": 835.7974243164062,
+              "bottom": 342.84375
+            },
+            "contained": true
+          },
+          {
+            "dir": "down",
+            "button": {
+              "left": 873.640625,
+              "top": 262.65625,
+              "right": 993,
+              "bottom": 354.8125,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 877.640625,
+              "top": 266.65625,
+              "right": 988.640625,
+              "bottom": 350.65625
+            },
+            "imageRect": {
+              "left": 886.6875,
+              "top": 274.625,
+              "right": 979.9375,
+              "bottom": 342.84375,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 901.7346801757812,
+              "top": 278.22247314453125,
+              "right": 963.0249633789062,
+              "bottom": 342.84375
+            },
+            "contained": true
+          },
+          {
+            "dir": "left",
+            "button": {
+              "left": 744.28125,
+              "top": 364.8125,
+              "right": 863.640625,
+              "bottom": 456.96875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 748.28125,
+              "top": 368.8125,
+              "right": 859.28125,
+              "bottom": 452.8125
+            },
+            "imageRect": {
+              "left": 757.328125,
+              "top": 376.78125,
+              "right": 850.578125,
+              "bottom": 445,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 775.17333984375,
+              "top": 378.24688720703125,
+              "right": 834.9979858398438,
+              "bottom": 441.5357666015625
+            },
+            "contained": true
+          },
+          {
+            "dir": "right",
+            "button": {
+              "left": 873.640625,
+              "top": 364.8125,
+              "right": 993,
+              "bottom": 456.96875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 877.640625,
+              "top": 368.8125,
+              "right": 988.640625,
+              "bottom": 452.8125
+            },
+            "imageRect": {
+              "left": 886.6875,
+              "top": 376.78125,
+              "right": 979.9375,
+              "bottom": 445,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 902.40087890625,
+              "top": 378.24688720703125,
+              "right": 962.2255249023438,
+              "bottom": 441.5357666015625
+            },
+            "contained": true
+          }
+        ],
+        "map": {
+          "rect": {
+            "left": 269.75,
+            "top": 107.515625,
+            "right": 713.28125,
+            "bottom": 660.46875,
+            "width": 443.53125,
+            "height": 552.953125
+          },
+          "grid": "3",
+          "start": [
+            "2",
+            "0"
+          ],
+          "goal": [
+            "1",
+            "1"
+          ]
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "coding-1024x768-touch-flow",
+      "detail": {
+        "states": [
+          {
+            "viewport": [
+              1024,
+              768
+            ],
+            "root": {
+              "left": 0,
+              "top": 0,
+              "right": 1024,
+              "bottom": 768,
+              "width": 1024,
+              "height": 768
+            },
+            "controls": [
+              {
+                "label": "easy",
+                "rect": {
+                  "left": 31,
+                  "top": 186.828125,
+                  "right": 238.75,
+                  "bottom": 254.828125,
+                  "width": 207.75,
+                  "height": 68
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              },
+              {
+                "label": "challenge",
+                "rect": {
+                  "left": 31,
+                  "top": 266.828125,
+                  "right": 238.75,
+                  "bottom": 334.828125,
+                  "width": 207.75,
+                  "height": 68
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              },
+              {
+                "label": "ccCar",
+                "rect": {
+                  "left": 562.40625,
+                  "top": 116.515625,
+                  "right": 704.234375,
+                  "bottom": 294.828125,
+                  "width": 141.828125,
+                  "height": 178.3125
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              },
+              {
+                "label": "up",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 262.65625,
+                  "right": 863.640625,
+                  "bottom": 354.8125,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "down",
+                "rect": {
+                  "left": 873.640625,
+                  "top": 262.65625,
+                  "right": 993,
+                  "bottom": 354.8125,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "left",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 364.8125,
+                  "right": 863.640625,
+                  "bottom": 456.96875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "right",
+                "rect": {
+                  "left": 873.640625,
+                  "top": 364.8125,
+                  "right": 993,
+                  "bottom": 456.96875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "undo",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 538.96875,
+                  "right": 993,
+                  "bottom": 608.078125,
+                  "width": 248.71875,
+                  "height": 69.109375
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "clear",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 618.078125,
+                  "right": 993,
+                  "bottom": 687.1875,
+                  "width": 248.71875,
+                  "height": 69.109375
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "ccGoBtn",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 697.1875,
+                  "right": 993,
+                  "bottom": 766.296875,
+                  "width": 248.71875,
+                  "height": 69.109375
+                },
+                "disabled": true,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "놀이터로",
+                "rect": {
+                  "left": 8,
+                  "top": 8,
+                  "right": 64,
+                  "bottom": 64,
+                  "width": 56,
+                  "height": 56
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              }
+            ],
+            "issues": [],
+            "page": {
+              "width": 1024,
+              "height": 768,
+              "x": 0,
+              "y": 0
+            },
+            "panel": {
+              "rect": {
+                "left": 725.28125,
+                "top": 10,
+                "right": 1012,
+                "bottom": 758,
+                "width": 286.71875,
+                "height": 748
+              },
+              "scrollTop": 0,
+              "scrollHeight": 767,
+              "clientHeight": 738,
+              "overflow": "auto",
+              "touchAction": "auto",
+              "rootTouchAction": "pan-y",
+              "alignContent": "safe center"
+            },
+            "codeSlots": {
+              "difficulty": "easy",
+              "expected": 4,
+              "group": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 993,
+                "bottom": 250.65625,
+                "width": 248.71875,
+                "height": 131.875
+              },
+              "groupContent": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 993.28125,
+                "bottom": 250.78125
+              },
+              "controls": {
+                "left": 744.28125,
+                "top": 262.65625,
+                "right": 993,
+                "bottom": 456.96875,
+                "width": 248.71875,
+                "height": 194.3125
+              },
+              "rows": [
+                {
+                  "index": 1,
+                  "rect": {
+                    "left": 744.28125,
+                    "top": 118.78125,
+                    "right": 864.140625,
+                    "bottom": 180.21875,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 2,
+                  "rect": {
+                    "left": 873.140625,
+                    "top": 118.78125,
+                    "right": 993,
+                    "bottom": 180.21875,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 3,
+                  "rect": {
+                    "left": 744.28125,
+                    "top": 189.21875,
+                    "right": 864.140625,
+                    "bottom": 250.65625,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 4,
+                  "rect": {
+                    "left": 873.140625,
+                    "top": 189.21875,
+                    "right": 993,
+                    "bottom": 250.65625,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                }
+              ]
+            },
+            "arrows": [
+              {
+                "dir": "up",
+                "button": {
+                  "left": 744.28125,
+                  "top": 262.65625,
+                  "right": 863.640625,
+                  "bottom": 354.8125,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 748.28125,
+                  "top": 266.65625,
+                  "right": 859.28125,
+                  "bottom": 350.65625
+                },
+                "imageRect": {
+                  "left": 757.328125,
+                  "top": 274.625,
+                  "right": 850.578125,
+                  "bottom": 342.84375,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 774.640380859375,
+                  "top": 278.22247314453125,
+                  "right": 835.7974243164062,
+                  "bottom": 342.84375
+                },
+                "contained": true
+              },
+              {
+                "dir": "down",
+                "button": {
+                  "left": 873.640625,
+                  "top": 262.65625,
+                  "right": 993,
+                  "bottom": 354.8125,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 877.640625,
+                  "top": 266.65625,
+                  "right": 988.640625,
+                  "bottom": 350.65625
+                },
+                "imageRect": {
+                  "left": 886.6875,
+                  "top": 274.625,
+                  "right": 979.9375,
+                  "bottom": 342.84375,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 901.7346801757812,
+                  "top": 278.22247314453125,
+                  "right": 963.0249633789062,
+                  "bottom": 342.84375
+                },
+                "contained": true
+              },
+              {
+                "dir": "left",
+                "button": {
+                  "left": 744.28125,
+                  "top": 364.8125,
+                  "right": 863.640625,
+                  "bottom": 456.96875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 748.28125,
+                  "top": 368.8125,
+                  "right": 859.28125,
+                  "bottom": 452.8125
+                },
+                "imageRect": {
+                  "left": 757.328125,
+                  "top": 376.78125,
+                  "right": 850.578125,
+                  "bottom": 445,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 775.17333984375,
+                  "top": 378.24688720703125,
+                  "right": 834.9979858398438,
+                  "bottom": 441.5357666015625
+                },
+                "contained": true
+              },
+              {
+                "dir": "right",
+                "button": {
+                  "left": 873.640625,
+                  "top": 364.8125,
+                  "right": 993,
+                  "bottom": 456.96875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 877.640625,
+                  "top": 368.8125,
+                  "right": 988.640625,
+                  "bottom": 452.8125
+                },
+                "imageRect": {
+                  "left": 886.6875,
+                  "top": 376.78125,
+                  "right": 979.9375,
+                  "bottom": 445,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 902.40087890625,
+                  "top": 378.24688720703125,
+                  "right": 962.2255249023438,
+                  "bottom": 441.5357666015625
+                },
+                "contained": true
+              }
+            ],
+            "map": {
+              "rect": {
+                "left": 269.75,
+                "top": 107.515625,
+                "right": 713.28125,
+                "bottom": 660.46875,
+                "width": 443.53125,
+                "height": 552.953125
+              },
+              "grid": "3",
+              "start": [
+                "2",
+                "0"
+              ],
+              "goal": [
+                "1",
+                "1"
+              ]
+            }
+          },
+          {
+            "viewport": [
+              1024,
+              768
+            ],
+            "root": {
+              "left": 0,
+              "top": 0,
+              "right": 1024,
+              "bottom": 768,
+              "width": 1024,
+              "height": 768
+            },
+            "controls": [
+              {
+                "label": "easy",
+                "rect": {
+                  "left": 31,
+                  "top": 186.828125,
+                  "right": 238.75,
+                  "bottom": 254.828125,
+                  "width": 207.75,
+                  "height": 68
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              },
+              {
+                "label": "challenge",
+                "rect": {
+                  "left": 31,
+                  "top": 266.828125,
+                  "right": 238.75,
+                  "bottom": 334.828125,
+                  "width": 207.75,
+                  "height": 68
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              },
+              {
+                "label": "ccCar",
+                "rect": {
+                  "left": 597.875,
+                  "top": 116.515625,
+                  "right": 704.25,
+                  "bottom": 250.25,
+                  "width": 106.375,
+                  "height": 133.734375
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              },
+              {
+                "label": "up",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 403.53125,
+                  "right": 863.640625,
+                  "bottom": 495.6875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "down",
+                "rect": {
+                  "left": 873.640625,
+                  "top": 403.53125,
+                  "right": 993,
+                  "bottom": 495.6875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "left",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 505.6875,
+                  "right": 863.640625,
+                  "bottom": 597.84375,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "right",
+                "rect": {
+                  "left": 873.640625,
+                  "top": 505.6875,
+                  "right": 993,
+                  "bottom": 597.84375,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "undo",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 679.84375,
+                  "right": 993,
+                  "bottom": 748.953125,
+                  "width": 248.71875,
+                  "height": 69.109375
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": true
+              },
+              {
+                "label": "clear",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 758.953125,
+                  "right": 993,
+                  "bottom": 828.0625,
+                  "width": 248.71875,
+                  "height": 69.109375
+                },
+                "disabled": false,
+                "hit": false,
+                "viewport": false,
+                "scrollPanel": true
+              },
+              {
+                "label": "ccGoBtn",
+                "rect": {
+                  "left": 744.28125,
+                  "top": 838.0625,
+                  "right": 993,
+                  "bottom": 907.171875,
+                  "width": 248.71875,
+                  "height": 69.109375
+                },
+                "disabled": true,
+                "hit": false,
+                "viewport": false,
+                "scrollPanel": true
+              },
+              {
+                "label": "놀이터로",
+                "rect": {
+                  "left": 8,
+                  "top": 8,
+                  "right": 64,
+                  "bottom": 64,
+                  "width": 56,
+                  "height": 56
+                },
+                "disabled": false,
+                "hit": true,
+                "viewport": true,
+                "scrollPanel": false
+              }
+            ],
+            "issues": [],
+            "page": {
+              "width": 1024,
+              "height": 768,
+              "x": 0,
+              "y": 0
+            },
+            "panel": {
+              "rect": {
+                "left": 725.28125,
+                "top": 10,
+                "right": 1012,
+                "bottom": 758,
+                "width": 286.71875,
+                "height": 748
+              },
+              "scrollTop": 0,
+              "scrollHeight": 908,
+              "clientHeight": 738,
+              "overflow": "auto",
+              "touchAction": "auto",
+              "rootTouchAction": "pan-y",
+              "alignContent": "safe center"
+            },
+            "codeSlots": {
+              "difficulty": "challenge",
+              "expected": 7,
+              "group": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 993,
+                "bottom": 391.53125,
+                "width": 248.71875,
+                "height": 272.75
+              },
+              "groupContent": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 993.28125,
+                "bottom": 391.78125
+              },
+              "controls": {
+                "left": 744.28125,
+                "top": 403.53125,
+                "right": 993,
+                "bottom": 597.84375,
+                "width": 248.71875,
+                "height": 194.3125
+              },
+              "rows": [
+                {
+                  "index": 1,
+                  "rect": {
+                    "left": 744.28125,
+                    "top": 118.78125,
+                    "right": 864.140625,
+                    "bottom": 180.21875,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 2,
+                  "rect": {
+                    "left": 873.140625,
+                    "top": 118.78125,
+                    "right": 993,
+                    "bottom": 180.21875,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 3,
+                  "rect": {
+                    "left": 744.28125,
+                    "top": 189.21875,
+                    "right": 864.140625,
+                    "bottom": 250.65625,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 4,
+                  "rect": {
+                    "left": 873.140625,
+                    "top": 189.21875,
+                    "right": 993,
+                    "bottom": 250.65625,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 5,
+                  "rect": {
+                    "left": 744.28125,
+                    "top": 259.65625,
+                    "right": 864.140625,
+                    "bottom": 321.09375,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 6,
+                  "rect": {
+                    "left": 873.140625,
+                    "top": 259.65625,
+                    "right": 993,
+                    "bottom": 321.09375,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                },
+                {
+                  "index": 7,
+                  "rect": {
+                    "left": 744.28125,
+                    "top": 330.09375,
+                    "right": 864.140625,
+                    "bottom": 391.53125,
+                    "width": 119.859375,
+                    "height": 61.4375
+                  },
+                  "insideGroup": true,
+                  "overlapsControls": false,
+                  "insideViewport": true,
+                  "insidePanel": true
+                }
+              ]
+            },
+            "arrows": [
+              {
+                "dir": "up",
+                "button": {
+                  "left": 744.28125,
+                  "top": 403.53125,
+                  "right": 863.640625,
+                  "bottom": 495.6875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 748.28125,
+                  "top": 407.53125,
+                  "right": 859.28125,
+                  "bottom": 491.53125
+                },
+                "imageRect": {
+                  "left": 757.328125,
+                  "top": 415.5,
+                  "right": 850.578125,
+                  "bottom": 483.71875,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 774.640380859375,
+                  "top": 419.09747314453125,
+                  "right": 835.7974243164062,
+                  "bottom": 483.71875
+                },
+                "contained": true
+              },
+              {
+                "dir": "down",
+                "button": {
+                  "left": 873.640625,
+                  "top": 403.53125,
+                  "right": 993,
+                  "bottom": 495.6875,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 877.640625,
+                  "top": 407.53125,
+                  "right": 988.640625,
+                  "bottom": 491.53125
+                },
+                "imageRect": {
+                  "left": 886.6875,
+                  "top": 415.5,
+                  "right": 979.9375,
+                  "bottom": 483.71875,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 901.7346801757812,
+                  "top": 419.09747314453125,
+                  "right": 963.0249633789062,
+                  "bottom": 483.71875
+                },
+                "contained": true
+              },
+              {
+                "dir": "left",
+                "button": {
+                  "left": 744.28125,
+                  "top": 505.6875,
+                  "right": 863.640625,
+                  "bottom": 597.84375,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 748.28125,
+                  "top": 509.6875,
+                  "right": 859.28125,
+                  "bottom": 593.6875
+                },
+                "imageRect": {
+                  "left": 757.328125,
+                  "top": 517.65625,
+                  "right": 850.578125,
+                  "bottom": 585.875,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 775.17333984375,
+                  "top": 519.1218872070312,
+                  "right": 834.9979858398438,
+                  "bottom": 582.4107666015625
+                },
+                "contained": true
+              },
+              {
+                "dir": "right",
+                "button": {
+                  "left": 873.640625,
+                  "top": 505.6875,
+                  "right": 993,
+                  "bottom": 597.84375,
+                  "width": 119.359375,
+                  "height": 92.15625
+                },
+                "buttonContent": {
+                  "left": 877.640625,
+                  "top": 509.6875,
+                  "right": 988.640625,
+                  "bottom": 593.6875
+                },
+                "imageRect": {
+                  "left": 886.6875,
+                  "top": 517.65625,
+                  "right": 979.9375,
+                  "bottom": 585.875,
+                  "width": 93.25,
+                  "height": 68.21875
+                },
+                "gridRows": "74.1562px",
+                "gridColumns": "101.359px",
+                "naturalWidth": 512,
+                "naturalHeight": 512,
+                "alphaBounds": {
+                  "left": 902.40087890625,
+                  "top": 519.1218872070312,
+                  "right": 962.2255249023438,
+                  "bottom": 582.4107666015625
+                },
+                "contained": true
+              }
+            ],
+            "map": {
+              "rect": {
+                "left": 269.75,
+                "top": 107.515625,
+                "right": 713.28125,
+                "bottom": 660.46875,
+                "width": 443.53125,
+                "height": 552.953125
+              },
+              "grid": "4",
+              "start": [
+                "3",
+                "0"
+              ],
+              "goal": [
+                "0",
+                "3"
+              ]
+            }
+          }
+        ],
+        "scrollChecks": [
+          {
+            "difficulty": "easy",
+            "codeSlotsReached": [
+              {
+                "rect": {
+                  "left": 744.28125,
+                  "top": 118.78125,
+                  "right": 864.140625,
+                  "bottom": 180.21875
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 873.140625,
+                  "top": 118.78125,
+                  "right": 993,
+                  "bottom": 180.21875
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 744.28125,
+                  "top": 189.21875,
+                  "right": 864.140625,
+                  "bottom": 250.65625
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 873.140625,
+                  "top": 189.21875,
+                  "right": 993,
+                  "bottom": 250.65625
+                },
+                "panelScrollTop": 0
+              }
+            ],
+            "scrollTop": 29,
+            "max": 29
+          },
+          {
+            "difficulty": "challenge",
+            "codeSlotsReached": [
+              {
+                "rect": {
+                  "left": 744.28125,
+                  "top": 118.78125,
+                  "right": 864.140625,
+                  "bottom": 180.21875
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 873.140625,
+                  "top": 118.78125,
+                  "right": 993,
+                  "bottom": 180.21875
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 744.28125,
+                  "top": 189.21875,
+                  "right": 864.140625,
+                  "bottom": 250.65625
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 873.140625,
+                  "top": 189.21875,
+                  "right": 993,
+                  "bottom": 250.65625
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 744.28125,
+                  "top": 259.65625,
+                  "right": 864.140625,
+                  "bottom": 321.09375
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 873.140625,
+                  "top": 259.65625,
+                  "right": 993,
+                  "bottom": 321.09375
+                },
+                "panelScrollTop": 0
+              },
+              {
+                "rect": {
+                  "left": 744.28125,
+                  "top": 330.09375,
+                  "right": 864.140625,
+                  "bottom": 391.53125
+                },
+                "panelScrollTop": 0
+              }
+            ],
+            "scrollTop": 170,
+            "max": 170
+          }
+        ],
+        "rotationKeepsCommands": true,
+        "undoAndRouteExecution": true,
+        "homeToWorldAndReentry": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "scrollDiagnostics": [
+    {
+      "screen": "coding-1024x768",
+      "driver": "Input.dispatchTouchEvent",
+      "direction": "down",
+      "from": [
+        868.640625,
+        593.44
+      ],
+      "to": [
+        868.640625,
+        333.44000000000005
+      ],
+      "moves": 12,
+      "stepDelayMs": 30,
+      "before": {
+        "scrollTop": 0,
+        "maxScroll": 29,
+        "hit": "cc-btn-edit",
+        "ancestors": [
+          {
+            "element": "cc-btn-edit",
+            "touchAction": "manipulation",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 61,
+            "clientHeight": 61
+          },
+          {
+            "element": "cc-bottom-actions",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 227,
+            "clientHeight": 227
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 0,
+            "scrollHeight": 767,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 8,
+        "difficulty": "easy",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "screenshots": [
+        "coding-1024x768-easy-scroll-top.png",
+        "coding-1024x768-easy-scroll-bottom.png"
+      ],
+      "after": {
+        "scrollTop": 29,
+        "maxScroll": 29,
+        "hit": "ccControls",
+        "ancestors": [
+          {
+            "element": "ccControls",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 194,
+            "clientHeight": 194
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 29,
+            "scrollHeight": 767,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 24,
+        "difficulty": "easy",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "time": 5434.600000000006,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 4,
+          "x": 868.640625,
+          "y": 593.4400024414062
+        },
+        {
+          "type": "touchstart",
+          "time": 5434.699999999997,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 593.4400024414062
+            }
+          ]
+        },
+        {
+          "type": "pointermove",
+          "time": 5517.100000000006,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 4,
+          "x": 868.640625,
+          "y": 571.7733154296875
+        },
+        {
+          "type": "touchmove",
+          "time": 5517.199999999997,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 571.7733154296875
+            }
+          ]
+        },
+        {
+          "type": "pointercancel",
+          "time": 5517.800000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 4,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "scroll",
+          "time": 5539.900000000009,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 7
+        },
+        {
+          "type": "touchmove",
+          "time": 5584.100000000006,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 550.106689453125
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 5584.100000000006,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 28
+        },
+        {
+          "type": "scroll",
+          "time": 5633.900000000009,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 29
+        },
+        {
+          "type": "touchmove",
+          "time": 5673.800000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 506.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 5790.300000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 463.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 5850.699999999997,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 441.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 5940.300000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 398.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 6040.400000000009,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 355.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 6117.300000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchend",
+          "time": 6157,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        }
+      ],
+      "trustedTouchObserved": true,
+      "scrollDelta": 29
+    },
+    {
+      "screen": "coding-1024x768",
+      "driver": "Input.dispatchTouchEvent",
+      "direction": "down",
+      "from": [
+        868.640625,
+        593.44
+      ],
+      "to": [
+        868.640625,
+        333.44000000000005
+      ],
+      "moves": 12,
+      "stepDelayMs": 30,
+      "before": {
+        "scrollTop": 0,
+        "maxScroll": 29,
+        "hit": "cc-btn-edit",
+        "ancestors": [
+          {
+            "element": "cc-btn-edit",
+            "touchAction": "manipulation",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 61,
+            "clientHeight": 61
+          },
+          {
+            "element": "cc-bottom-actions",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 227,
+            "clientHeight": 227
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 0,
+            "scrollHeight": 767,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 45,
+        "difficulty": "easy",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "after": {
+        "scrollTop": 29,
+        "maxScroll": 29,
+        "hit": "ccControls",
+        "ancestors": [
+          {
+            "element": "ccControls",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 194,
+            "clientHeight": 194
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 29,
+            "scrollHeight": 767,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 65,
+        "difficulty": "easy",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "time": 7986,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 10,
+          "x": 868.640625,
+          "y": 593.4400024414062
+        },
+        {
+          "type": "touchstart",
+          "time": 7986,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 593.4400024414062
+            }
+          ]
+        },
+        {
+          "type": "pointermove",
+          "time": 8050.300000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 10,
+          "x": 868.640625,
+          "y": 571.7733154296875
+        },
+        {
+          "type": "touchmove",
+          "time": 8050.5,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 571.7733154296875
+            }
+          ]
+        },
+        {
+          "type": "pointercancel",
+          "time": 8050.800000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 10,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "scroll",
+          "time": 8073.100000000006,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 7
+        },
+        {
+          "type": "touchmove",
+          "time": 8100.800000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 550.106689453125
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 8100.900000000009,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 28
+        },
+        {
+          "type": "scroll",
+          "time": 8133.800000000003,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 29
+        },
+        {
+          "type": "touchmove",
+          "time": 8156.300000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 528.4400024414062
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8189.800000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 506.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8223.300000000003,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 485.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8256.699999999997,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 463.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8290.100000000006,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 441.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8323.400000000009,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 420.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8356.100000000006,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 398.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8389.5,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 376.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8423,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 355.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 8456.699999999997,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchend",
+          "time": 8456.699999999997,
+          "trusted": true,
+          "target": "cc-btn-edit",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        }
+      ],
+      "trustedTouchObserved": true,
+      "scrollDelta": 29
+    },
+    {
+      "screen": "coding-1024x768",
+      "driver": "Input.dispatchTouchEvent",
+      "direction": "down",
+      "from": [
+        868.640625,
+        593.44
+      ],
+      "to": [
+        868.640625,
+        333.44000000000005
+      ],
+      "moves": 12,
+      "stepDelayMs": 30,
+      "before": {
+        "scrollTop": 0,
+        "maxScroll": 170,
+        "hit": "ccControls",
+        "ancestors": [
+          {
+            "element": "ccControls",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 194,
+            "clientHeight": 194
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 0,
+            "scrollHeight": 908,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 77,
+        "difficulty": "challenge",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "screenshots": [
+        "coding-1024x768-challenge-scroll-top.png",
+        "coding-1024x768-challenge-scroll-bottom.png"
+      ],
+      "after": {
+        "scrollTop": 170,
+        "maxScroll": 170,
+        "hit": "ccControls",
+        "ancestors": [
+          {
+            "element": "ccControls",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 194,
+            "clientHeight": 194
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 170,
+            "scrollHeight": 908,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 100,
+        "difficulty": "challenge",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "time": 12200.900000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 14,
+          "x": 868.640625,
+          "y": 593.4400024414062
+        },
+        {
+          "type": "touchstart",
+          "time": 12200.900000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 593.4400024414062
+            }
+          ]
+        },
+        {
+          "type": "pointermove",
+          "time": 12333.5,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 14,
+          "x": 868.640625,
+          "y": 571.7733154296875
+        },
+        {
+          "type": "touchmove",
+          "time": 12333.600000000006,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 571.7733154296875
+            }
+          ]
+        },
+        {
+          "type": "pointercancel",
+          "time": 12334.199999999997,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 14,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "scroll",
+          "time": 12356.300000000003,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 7
+        },
+        {
+          "type": "touchmove",
+          "time": 12417.100000000006,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 550.106689453125
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 12417.199999999997,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 28
+        },
+        {
+          "type": "scroll",
+          "time": 12483.600000000006,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 50
+        },
+        {
+          "type": "touchmove",
+          "time": 12540.300000000003,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 506.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 12550.199999999997,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 72
+        },
+        {
+          "type": "scroll",
+          "time": 12616.900000000009,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 93
+        },
+        {
+          "type": "touchmove",
+          "time": 12639.800000000003,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 485.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 12700.199999999997,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 115
+        },
+        {
+          "type": "touchmove",
+          "time": 12756.900000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 441.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 12766.800000000003,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 137
+        },
+        {
+          "type": "scroll",
+          "time": 12833.5,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 158
+        },
+        {
+          "type": "touchmove",
+          "time": 12856.400000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 420.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 12900.100000000006,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 170
+        },
+        {
+          "type": "touchmove",
+          "time": 12956.800000000003,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 376.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 13072.800000000003,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 355.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 13173.600000000006,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchend",
+          "time": 13173.600000000006,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        }
+      ],
+      "trustedTouchObserved": true,
+      "scrollDelta": 170
+    },
+    {
+      "screen": "coding-1024x768",
+      "driver": "Input.dispatchTouchEvent",
+      "direction": "down",
+      "from": [
+        868.640625,
+        593.44
+      ],
+      "to": [
+        868.640625,
+        333.44000000000005
+      ],
+      "moves": 12,
+      "stepDelayMs": 30,
+      "before": {
+        "scrollTop": 0,
+        "maxScroll": 170,
+        "hit": "ccControls",
+        "ancestors": [
+          {
+            "element": "ccControls",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 194,
+            "clientHeight": 194
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 0,
+            "scrollHeight": 908,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 109,
+        "difficulty": "challenge",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "after": {
+        "scrollTop": 170,
+        "maxScroll": 170,
+        "hit": "ccControls",
+        "ancestors": [
+          {
+            "element": "ccControls",
+            "touchAction": "auto",
+            "overflowX": "visible",
+            "overflowY": "visible",
+            "scrollTop": 0,
+            "scrollHeight": 194,
+            "clientHeight": 194
+          },
+          {
+            "element": "cc-ui-area",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "scrollTop": 170,
+            "scrollHeight": 908,
+            "clientHeight": 738
+          },
+          {
+            "element": "cc-root coding-car-root coding-car-landscape",
+            "touchAction": "pan-y",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "codingCarTarget",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "game-play-screen game-play-fullscreen",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "sihyeonPlayOS",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "BODY",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          },
+          {
+            "element": "HTML",
+            "touchAction": "auto",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
+            "scrollTop": 0,
+            "scrollHeight": 768,
+            "clientHeight": 768
+          }
+        ],
+        "panel": {
+          "left": 725.28125,
+          "top": 10,
+          "right": 1012,
+          "bottom": 758
+        },
+        "eventIndex": 131,
+        "difficulty": "challenge",
+        "input": {
+          "maxTouchPoints": 1,
+          "coarsePointer": true
+        }
+      },
+      "events": [
+        {
+          "type": "pointerdown",
+          "time": 14534.900000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 17,
+          "x": 868.640625,
+          "y": 593.4400024414062
+        },
+        {
+          "type": "touchstart",
+          "time": 14534.900000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 593.4400024414062
+            }
+          ]
+        },
+        {
+          "type": "pointermove",
+          "time": 14583.400000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 17,
+          "x": 868.640625,
+          "y": 571.7733154296875
+        },
+        {
+          "type": "touchmove",
+          "time": 14583.5,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 571.7733154296875
+            }
+          ]
+        },
+        {
+          "type": "pointercancel",
+          "time": 14583.900000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "pointerType": "touch",
+          "pointerId": 17,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "scroll",
+          "time": 14616.800000000003,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 7
+        },
+        {
+          "type": "touchmove",
+          "time": 14633.699999999997,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 550.106689453125
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 14633.699999999997,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 28
+        },
+        {
+          "type": "scroll",
+          "time": 14683.5,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 50
+        },
+        {
+          "type": "touchmove",
+          "time": 14723.400000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 506.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 14733.400000000009,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 72
+        },
+        {
+          "type": "scroll",
+          "time": 14783.5,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 93
+        },
+        {
+          "type": "touchmove",
+          "time": 14840.100000000006,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 463.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 14850.100000000006,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 115
+        },
+        {
+          "type": "touchmove",
+          "time": 14917,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 441.7733459472656
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 14917,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 137
+        },
+        {
+          "type": "scroll",
+          "time": 14966.699999999997,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 158
+        },
+        {
+          "type": "touchmove",
+          "time": 15023.400000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 398.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "scroll",
+          "time": 15033.400000000009,
+          "trusted": true,
+          "target": "cc-ui-area",
+          "defaultPrevented": false,
+          "scrollTop": 170
+        },
+        {
+          "type": "touchmove",
+          "time": 15123.199999999997,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 355.1066589355469
+            }
+          ]
+        },
+        {
+          "type": "touchmove",
+          "time": 15183.600000000006,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        },
+        {
+          "type": "touchend",
+          "time": 15223.400000000009,
+          "trusted": true,
+          "target": "ccControls",
+          "defaultPrevented": false,
+          "points": [
+            {
+              "id": 0,
+              "x": 868.640625,
+              "y": 333.44000244140625
+            }
+          ]
+        }
+      ],
+      "trustedTouchObserved": true,
+      "scrollDelta": 170
+    }
+  ],
+  "runnerGitSha": "b29bd80dbbe61bc9e9038969831cbde5658a4699",
+  "runnerSourceHashesBefore": {
+    "scripts/qa-small-screen-ui-browser.py": "576ecab1f6d1126d6e61eb959f0b6a105c96dc9e9d983675b06a675dd612ab0d",
+    "scripts/qa-p1-voice-browser.py": "c0b7edd4b88c0809817eef744e8b5c9e1ab766db5a449d3b31ebcefc2a53b2b1"
+  },
+  "scope": "Two games only. Chromium touch emulation; simulated audio completion; coding existing internal entry. Physical device/speaker NOT_RUN.",
+  "browserVersion": "143.0.7499.4",
+  "sourceHashesAfter": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "291507c4cddca1b5b21ac89609cc148b9b5e64473850aed7640fd4c8781d797e",
+    "js/games/construction-site.js": "ac660b713ca9932b68e9dd305045246cdc6b91b4c9b92cd9c9c56c7460b402e7",
+    "js/games/coding-car.js": "bc7c186adc009ba13f839cc0efb6289ee2b8aa9f583b7bf5cde18c518080d222",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a"
+  },
+  "runnerSourceHashesAfter": {
+    "scripts/qa-small-screen-ui-browser.py": "576ecab1f6d1126d6e61eb959f0b6a105c96dc9e9d983675b06a675dd612ab0d",
+    "scripts/qa-p1-voice-browser.py": "c0b7edd4b88c0809817eef744e8b5c9e1ab766db5a449d3b31ebcefc2a53b2b1"
+  },
+  "sourcesUnchanged": true,
+  "status": "PASS"
+}

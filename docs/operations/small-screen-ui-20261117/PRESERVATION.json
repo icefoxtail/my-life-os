@@ -1,0 +1,23 @@
+{
+  "baselineCommit": "23fd7f9af6e28034d1a6a3062e293742b3d66cb7",
+  "reusedProductCommit": "b6719ff833f25e5a7c8dec45c53abe0ce71bc0c7",
+  "manifestImageCount": 138,
+  "approvedImageCount": 76,
+  "approvedByteMismatches": [],
+  "protectedChangesSinceBaseline": [],
+  "protectedChangesBetweenPriorReleaseAndBaseline": [],
+  "reusedEvidence": {
+    "vehicle": {
+      "run": 43869275111,
+      "checks": "38/38",
+      "rerun": false
+    },
+    "pixi": {
+      "run": 43869274835,
+      "checks": "7/7",
+      "rerun": false
+    }
+  },
+  "status": "PASS",
+  "note": "Byte/source preservation audit only; no repeated image geometry or Pixi browser suite."
+}
