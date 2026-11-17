@@ -584,6 +584,7 @@ def settings_close_and_ages(page, url, output):
     page.evaluate("window.__gardenProbe.hold = true")
     choose_number(page, 15)
     page.wait_for_function("window.__gardenProbe.activeId() !== null")
+    before_pause = snapshot(page)
     button(page, "settings").click()
     expect(page.locator(".tfg-settings-dialog")).to_be_visible()
     assert snapshot(page)["running"] is False, snapshot(page)
@@ -596,6 +597,7 @@ def settings_close_and_ages(page, url, output):
     expect(page.locator(".tfg-modal")).to_have_count(0)
     page.wait_for_function("window.__gardenProbe.activeId() !== null")
     assert_board(page, 15)
+    assert snapshot(page)['sequence']['runId'] == before_pause['sequence']['runId']
     page.evaluate("window.__gardenProbe.hold = false; window.__gardenProbe.finishActive()")
     complete(page, 15)
     resumed = assert_automatic_speech(page, start, range(1, 16), 15)
@@ -616,12 +618,23 @@ def settings_close_and_ages(page, url, output):
 def reading_and_english(page, url, output):
     enter(page, url)
     choose_number(page, 9)
+    button(page, 'pause').click()
+    paused = snapshot(page)
     start = click_and_mark(page, button(page, "reading", "sino"))
-    complete(page, 9)
+    held = snapshot(page)
+    assert held['sequence']['status'] == 'paused' and held['state']['active'] == paused['state']['active'], (paused, held)
+    button(page, 'pause').click(); complete(page, 9)
+    first = paused['state']['active'] + 1
+    assert_automatic_speech(page, start, range(first, 10), 9, style='sino')
+    # Full pronunciation sequence remains required for the explicit replay action.
+    start = click_and_mark(page, button(page, 'replay')); complete(page, 9)
     sino = assert_automatic_speech(page, start, range(1, 10), 9, style="sino")
     button(page, "settings").click()
     start = click_and_mark(page, button(page, "language", "en"))
     complete(page, 9)
+    assert snapshot(page)['state']['count'] == 9
+    # Completed pictures remain complete on language change. Replay is an explicit request.
+    start = click_and_mark(page, button(page, 'replay')); complete(page, 9)
     english = assert_automatic_speech(page, start, range(1, 10), 9, style="en")
     garden_speech = [r for r in speech_rows(page, start)
                      if r["kind"] == "speak" and r["dom"]["garden"]]

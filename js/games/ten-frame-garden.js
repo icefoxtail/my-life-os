@@ -87,7 +87,7 @@
   const view = {
     container: null, options: {}, state: null, sequencer: null, runId: 0, handlers: null,
     modal: null, muted: false, voiceFailed: false, saveFailed: false, memory: null,
-    undo: [], age: 4, language: 'ko', previousBack: null, lastWord: '', lastOrdinal: 0
+    undo: [], age: 4, language: 'ko', previousBack: null, lastWord: '', lastOrdinal: 0, userPaused: false, resumeAfterModal: false, resumeAfterVisibility: false, groupMode: 'ones', groupStart: 0, groupEnd: 0
   };
   const Q = () => window.SihyeonQuantityPlayModel;
   const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -120,7 +120,7 @@
   }
   function save() {
     if (!view.state) return;
-    view.memory = Object.assign(preferences(view.state), { muted: view.muted });
+    view.memory = Object.assign(preferences(view.state), { muted: view.muted, groupMode: view.groupMode });
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(view.memory)); view.saveFailed = false; }
     catch (_) { view.saveFailed = true; }
   }
@@ -130,9 +130,12 @@
     catch (_) { return {}; }
   }
   function stopRun(reason) {
-    view.runId++;
-    view.sequencer?.stop?.();
-    if (view.state && reason === 'pause') view.state = reduce(view.state, { type: 'PAUSE' });
+    if(reason === 'pause'){
+      view.sequencer?.pause?.();
+      if(view.state && view.sequencer?.isPaused?.())view.state=Object.assign({},view.state,{phase:'paused'});
+      paintPlayback();return;
+    }
+    view.runId++;view.sequencer?.stop?.();
   }
   function modeGuide(mode) {
     return ({ number: ['원하는 꽃과 숫자를 골라요.', 'Choose a flower and a number.'], free: ['더하고 빼며 꽃정원을 바꿔요.', 'Add or take away flowers.'], fill: ['선택한 수에서 열 칸을 이어 채워요.', 'Keep planting to fill the next ten.'], colors: ['두 색으로 같은 수를 만들어요.', 'Make the same number with two colors.'] })[mode];
@@ -150,7 +153,13 @@
         enText: (state.quantity === 0 ? 'There are no flowers yet.' : state.quantity === 1 ? 'There is one flower.' : 'There are ' + Q().quantityText(state.quantity, '송이', 'en') + '.') + ' Add ' + Q().quantityText(need, '송이', 'en') + ' to make ' + Q().quantityText(state.goal, '송이', 'en') + '.' });
     }
     const firstOrdinal = state.mode === 'fill' ? state.quantity + 1 : 1;
-    for (let n = firstOrdinal; n <= state.goal; n++) {
+    const groupSize=state.mode!=='fill'&&view.groupMode==='fives'?5:state.mode!=='fill'&&view.groupMode==='tens'?10:1;
+    for (let from = firstOrdinal; from <= state.goal; from+=groupSize) {
+      const n=Math.min(state.goal,from+groupSize-1);
+      if(groupSize>1){
+        const parts=[];for(let v=0;v<n;v+=groupSize)parts.push(Math.min(groupSize,n-v));
+        steps.push({id:'garden-group-'+n,kind:'group',ordinal:n,from,label:parts.join('+'),text:parts.map(v=>Q().quantityText(v,'송이','ko')).join(', ')+'. 모두 '+Q().quantityText(n,'송이','ko')+'예요.',enText:parts.map(v=>Q().countWord(v,'sino','en')).join(' plus ')+'. '+Q().quantityText(n,'송이','en')+' in all.'});continue;
+      }
       steps.push({ id: 'garden-count-' + n, ordinal: n, kind: 'count',
         nativeText: Q().countWord(n, 'native', 'ko'), sinoText: Q().countWord(n, 'sino', 'ko'),
         enText: Q().countWord(n, state.reading, 'en'), readingStyle: state.reading });
@@ -178,24 +187,30 @@
     steps.push({ id: 'garden-total', text: ko, enText: en, kind: 'summary' });
     return steps;
   }
-  function startAuto(announceMode) {
+  function startAuto(announceMode, continuation) {
     if (!view.container || !view.state || !view.sequencer) return;
     stopRun();
     const run = view.runId;
-    view.state = reduce(view.state, { type: 'REPLAY' });
-    view.lastWord = ''; view.lastOrdinal = 0;
+    if(!continuation){view.state = reduce(view.state, { type: 'REPLAY' });view.lastWord = ''; view.lastOrdinal = 0;}
+    view.groupStart=0;view.groupEnd=0;
     draw(); save();
-    const steps = countSteps(view.state, announceMode);
+    const steps = countSteps(view.state, announceMode).filter(step=>!continuation||step.kind==='summary'||((step.kind==='count'||step.kind==='group')&&step.ordinal>view.lastOrdinal));
+    playSteps(steps,run);
+  }
+  function playSteps(steps,run){
+    if(document.hidden&&!view.userPaused)view.resumeAfterVisibility=true;
     view.sequencer.start(steps, {
-      muted: view.muted, delayMs: 100,
+      muted: view.muted, paused:view.userPaused||document.hidden||!!view.modal, delayMs: 100,onState:paintPlayback,
       onStep(step) {
         if (!view.container || view.runId !== run) return;
-        if (step.kind === 'count') {
+        if (step.kind === 'count' || step.kind === 'group' || step.kind === 'change') {
           view.state = reduce(view.state, { type: 'STEP', ordinal: step.ordinal });
+          if(step.activeOrdinal)view.state=Object.assign({},view.state,{active:step.activeOrdinal});
           view.lastOrdinal = step.ordinal;
-          view.lastWord = Q().countWord(step.ordinal, view.state.reading, language());
+          view.lastWord = step.kind==='change'?(language()==='en'?step.enLabel:step.label):step.kind==='group'?step.label:Q().countWord(step.ordinal, view.state.reading, language());
+          view.groupStart=step.kind==='group'?step.from:0;view.groupEnd=step.kind==='group'?step.ordinal:0;
         } else {
-          view.state = Object.assign({}, view.state, { active: 0 });
+          view.state = Object.assign({}, view.state, { active: 0 });view.groupStart=0;view.groupEnd=0;
           if (step.kind === 'baseline') { view.lastOrdinal = step.ordinal; view.lastWord = Q().quantityText(step.ordinal, '송이', language()); }
           if (step.kind === 'summary') { view.lastOrdinal = view.state.goal; view.lastWord = view.state.goal === 0 ? '없어요' : '모두 ' + Q().quantityText(view.state.goal, '송이', 'ko'); }
         }
@@ -203,7 +218,7 @@
       },
       onEnd() {
         if (!view.container || view.runId !== run) return;
-        view.state = reduce(view.state, { type: 'COMPLETE' }); paintProgress(); save();
+        view.state = reduce(view.state, { type: 'COMPLETE' }); paintProgress(); save();paintPlayback();
       },
       onError() {
         if (!view.container || view.runId !== run) return;
@@ -215,19 +230,40 @@
       if (!view.container || view.runId !== run) return;
       view.voiceFailed = true; view.state = reduce(view.state, { type: 'PAUSE' }); paintProgress();
     });
+    if(view.userPaused)view.sequencer.pause();paintPlayback();
+  }
+  function paintPlayback(){
+    const root=view.container;if(!root)return;
+    const pause=root.querySelector('[data-action="pause"]');
+    const paused=view.sequencer?.isPaused?.()||view.userPaused;
+    if(pause){pause.textContent=paused?'▶':'⏸';pause.setAttribute('aria-label',paused?'이어서 세기':'잠깐 멈추기');pause.setAttribute('aria-pressed',String(paused));pause.disabled=view.state?.phase==='complete'&&!view.sequencer?.isPaused?.()&&!view.sequencer?.isRunning?.();}
+    const group=root.querySelector('[data-action="group"]');if(group){group.textContent={ones:'1씩',fives:'5씩',tens:'10씩'}[view.groupMode];group.setAttribute('aria-label','세는 묶음 바꾸기, 현재 '+{ones:'하나씩',fives:'다섯 송이씩',tens:'열 송이씩'}[view.groupMode]);group.disabled=view.state?.mode==='fill';}
   }
   function change(action, announceMode) {
     if (!view.state) return;
-    const next = reduce(view.state, action);
-    if (next === view.state) return;
-    view.undo.push(preferences(view.state)); if (view.undo.length > 20) view.undo.shift();
-    stopRun(); view.state = next; view.modal = null; startAuto(announceMode);
+    const before=view.state,next = reduce(before, action);
+    if (next === before) return;
+    view.undo.push(preferences(before)); if (view.undo.length > 20) view.undo.shift();
+    const delta=next.quantity-before.quantity;
+    const single=action.type==='QUANTITY'&&action.incremental===true&&Math.abs(delta)===1&&next.mode!=='fill';
+    const recolor=action.type==='SPLIT'&&Math.abs(next.split-before.split)===1;
+    stopRun();view.state=next;view.modal=null;
+    if(action.type==='READING'){view.state=Object.assign({},before,{reading:next.reading});draw();save();startAuto(false,true);return;}
+    if(single||recolor){
+      view.state=Object.assign({},next,{phase:'counting'});view.lastOrdinal=next.quantity;view.groupStart=0;view.groupEnd=0;draw();save();
+      const ordinal=next.quantity,activeOrdinal=single?next.quantity:Math.max(next.split,before.split);
+      const ko=single?(delta>0?'하나 더, ':'하나 덜, ')+Q().countWord(next.quantity,next.reading,'ko'):'한 송이의 색을 바꿨어요. 모두 '+Q().quantityText(next.quantity,'송이','ko')+'예요.';
+      const en=single?(delta>0?'One more, ':'One fewer, ')+Q().countWord(next.quantity,next.reading,'en'):'One flower changed color. Still '+Q().quantityText(next.quantity,'송이','en')+'.';
+      playSteps([{id:'garden-change',kind:'change',ordinal,activeOrdinal,text:ko,enText:en,label:single?(delta>0?'+1':'−1'):'같은 수',enLabel:single?(delta>0?'+1':'−1'):'Same total'}],view.runId);
+      return;
+    }
+    startAuto(announceMode);
   }
   function framesHtml() {
     const all = slots(view.state); const count = all.length / 10;
     return '<div class="tfg-frames" data-frames="' + count + '" style="--tfg-frames:' + count + '" role="region" aria-label="열 칸 화단. 스크롤해서 다른 화단도 볼 수 있어요" tabindex="0">' + Array.from({ length: count }, (_, f) => {
       const group = all.filter(s => s.frame === f);
-      return '<section class="tfg-frame" aria-label="' + (f + 1) + '번째 열 칸 화단"><div class="tfg-frame-heading"><span>' + (f * 10 + 1) + '–' + ((f + 1) * 10) + '</span><strong data-frame-count="' + f + '">' + group.filter(s => s.filled).length + '</strong></div><div class="tfg-ten-grid">' + group.map(s => '<div class="tfg-slot" data-slot="' + s.ordinal + '" data-filled="' + s.filled + '" data-active="false" role="img" aria-label="' + (s.filled ? s.ordinal + '번째 꽃' : '빈 칸') + '">' + (s.filled ? flowerSvg(s.flower) : '<span class="tfg-soil-dot" aria-hidden="true"></span>') + '<span class="tfg-count-badge" aria-hidden="true">' + s.ordinal + '</span></div>').join('') + '</div></section>';
+      return '<section class="tfg-frame" aria-label="' + (f + 1) + '번째 열 칸 화단"><div class="tfg-frame-heading"><span>' + (f * 10 + 1) + '–' + ((f + 1) * 10) + '</span><strong data-frame-count="' + f + '">' + group.filter(s => s.filled).length + '</strong></div><div class="tfg-ten-grid">' + group.map(s => '<div class="tfg-slot" data-slot="' + s.ordinal + '" data-filled="' + s.filled + '" data-flower="' + s.flower + '" data-active="false" role="img" aria-label="' + (s.filled ? s.ordinal + '번째 꽃' : '빈 칸') + '">' + (s.filled ? flowerSvg(s.flower) : '<span class="tfg-soil-dot" aria-hidden="true"></span>') + '<span class="tfg-count-badge" aria-hidden="true">' + s.ordinal + '</span></div>').join('') + '</div></section>';
     }).join('') + '</div>';
   }
   function equationHtml() {
@@ -236,7 +272,8 @@
     // planting. Progress is a separate remaining count in the stage heading.
     if (s.mode === 'fill') return '<span data-fill-start>' + s.quantity + '</span><span>＋</span><span class="tfg-complement" data-fill-addend>' + d.initialNeed + '</span><span>＝</span><strong data-fill-goal>' + s.goal + '</strong>';
     if (s.mode === 'colors') return '<span class="tfg-equation-flower">' + flowerSvg(s.flower) + '<b>' + s.split + '</b></span><span>＋</span><span class="tfg-equation-flower">' + flowerSvg(partner(s.flower)) + '<b>' + (s.quantity - s.split) + '</b></span><span>＝</span><strong>' + s.quantity + '</strong>';
-    return '<span class="tfg-group-equation">' + d.groups.filter((n, i) => n > 0 || i === 0).join(' ＋ ') + '</span><span>＝</span><strong>' + s.count + '</strong>';
+    const groups=view.groupMode==='fives'?Array.from({length:Math.max(1,Math.ceil(s.count/5))},(_,i)=>Math.max(0,Math.min(5,s.count-i*5))):d.groups.filter((n,i)=>n>0||i===0);
+    return '<span class="tfg-group-equation">' + groups.join(' ＋ ') + '</span><span>＝</span><strong>' + s.count + '</strong>';
   }
   function fillNeedText() {
     const remaining = inspect(view.state).stillNeeded;
@@ -251,10 +288,14 @@
   }
   function draw() {
     if (!view.container || !view.state) return;
+    const previous=new Map([...view.container.querySelectorAll('.tfg-slot')].map(el=>[el.dataset.slot,el]));
+    const oldBoard=view.container.querySelector('.tfg-frames'),oldScroll={top:oldBoard?.scrollTop||0,left:oldBoard?.scrollLeft||0};
     const s = view.state;
     const titles = { number: '내 숫자', free: '자유 정원', fill: '열 칸 채우기', colors: '두 색 꽃' };
-    view.container.innerHTML = '<section class="tfg-app" data-mode="' + s.mode + '" data-phase="' + s.phase + '" data-age="' + view.age + '"><header class="tfg-top"><button type="button" class="tfg-icon-button tfg-home" data-action="home" aria-label="숫자놀이터로">' + icon('home') + '</button><div class="tfg-brand"><small>꽃이 하나, 둘, 셋</small><h1>열 칸 꽃정원</h1></div><button type="button" class="tfg-icon-button" data-action="replay" aria-label="처음부터 다시 세기">' + icon('replay') + '</button><button type="button" class="tfg-icon-button" data-action="mute" aria-label="' + (view.muted ? '소리 켜기' : '소리 끄기') + '" aria-pressed="' + view.muted + '">' + icon(view.muted ? 'mute' : 'hear') + '</button></header><nav class="tfg-mode-bar" aria-label="꽃정원 놀이 선택"><div class="tfg-modes">' + MODES.map(mode => '<button type="button" data-action="mode" data-value="' + mode + '" aria-pressed="' + (s.mode === mode) + '" aria-label="' + titles[mode] + '">' + modeMark(mode) + '<span>' + titles[mode] + '</span></button>').join('') + '</div><button type="button" class="tfg-age-button" data-action="settings" aria-label="' + view.age + '세 놀이 설정"><b>' + view.age + '</b><span>세 ⚙</span></button></nav><main class="tfg-workspace"><section class="tfg-stage" aria-label="꽃이 피는 정원"><div class="tfg-stage-heading"><div class="tfg-goal">' + (s.mode === 'fill' ? '<small data-fill-need>' + fillNeedText() + '</small><strong>' + s.quantity + '<span> → </span>' + s.goal + '</strong>' : '<small>' + (s.mode === 'colors' ? '두 색, 같은 수' : '내가 고른 꽃') + '</small><strong>' + s.quantity + '<span> 송이</span></strong>') + '</div><div class="tfg-counting" aria-live="polite" aria-atomic="true"><b data-count-value>' + (view.lastOrdinal || (s.quantity === 0 ? '0' : '♪')) + '</b><span data-count-word>' + esc(view.lastWord || (s.quantity === 0 ? '없어요' : '함께 세어요')) + '</span></div></div>' + framesHtml() + '<div class="tfg-equation" aria-label="화단별 꽃 수">' + equationHtml() + '</div></section><aside class="tfg-controls" aria-label="꽃과 숫자 선택"><div class="tfg-flower-choices" aria-label="꽃 선택">' + FLOWERS.map(f => '<button type="button" data-action="flower" data-value="' + f.id + '" aria-label="' + f.name + ' 선택" aria-pressed="' + (s.flower === f.id) + '">' + flowerSvg(f.id) + '<span>' + f.name + '</span></button>').join('') + '</div><div class="tfg-quantity-control"><button type="button" class="tfg-step-button" data-action="less" aria-label="꽃 한 송이 덜"' + (s.quantity === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" class="tfg-quantity-button" data-action="number-picker" aria-label="숫자 고르기, 현재 ' + s.quantity + '송이"><strong>' + s.quantity + '</strong><span>송이 ▦</span></button><button type="button" class="tfg-step-button" data-action="more" aria-label="꽃 한 송이 더"' + (s.quantity === 30 ? ' disabled' : '') + '>' + icon('plus') + '</button></div><div class="tfg-quick-numbers" aria-label="자주 고르는 숫자">' + [5, 9, 10, 15, 20, 30].map(n => '<button type="button" data-action="quantity" data-value="' + n + '" aria-pressed="' + (s.quantity === n) + '">' + n + '</button>').join('') + '</div>' + (s.mode === 'colors' ? '<div class="tfg-split-controls"><div>' + flowerSvg(s.flower) + '<strong>' + s.split + '</strong><span>＋</span>' + flowerSvg(partner(s.flower)) + '<strong>' + (s.quantity - s.split) + '</strong></div><button type="button" data-action="split-less" aria-label="첫 번째 색 꽃 한 송이를 두 번째 색으로 바꾸기"' + (s.split === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" data-action="split-more" aria-label="두 번째 색 꽃 한 송이를 첫 번째 색으로 바꾸기"' + (s.split === s.quantity ? ' disabled' : '') + '>' + icon('plus') + '</button></div>' : '') + '<div class="tfg-reading" role="group" aria-label="숫자 읽는 방식"><button type="button" data-action="reading" data-value="native" aria-pressed="' + (s.reading === 'native') + '">🔊 하나·둘</button><button type="button" data-action="reading" data-value="sino" aria-pressed="' + (s.reading === 'sino') + '">🔊 일·이</button></div><div class="tfg-control-bottom"><button type="button" data-action="undo" aria-label="이전 선택으로 돌아가기"' + (!view.undo.length ? ' disabled' : '') + '>' + icon('undo') + '<span>되돌리기</span></button><p class="tfg-voice-note"' + (view.voiceFailed ? '' : ' hidden') + '>소리가 없어도 꽃을 함께 볼 수 있어요.</p></div></aside></main>' + modalHtml() + '</section>';
-    paintProgress();
+    view.container.innerHTML = '<section class="tfg-app" data-mode="' + s.mode + '" data-phase="' + s.phase + '" data-age="' + view.age + '"><header class="tfg-top"><button type="button" class="tfg-icon-button tfg-home" data-action="home" aria-label="숫자놀이터로">' + icon('home') + '</button><div class="tfg-brand"><small>꽃이 하나, 둘, 셋</small><h1>열 칸 꽃정원</h1></div><button type="button" class="tfg-icon-button" data-action="replay" aria-label="처음부터 다시 세기">' + icon('replay') + '</button><button type="button" class="tfg-icon-button" data-action="mute" aria-label="' + (view.muted ? '소리 켜기' : '소리 끄기') + '" aria-pressed="' + view.muted + '">' + icon(view.muted ? 'mute' : 'hear') + '</button></header><nav class="tfg-mode-bar" aria-label="꽃정원 놀이 선택"><div class="tfg-modes">' + MODES.map(mode => '<button type="button" data-action="mode" data-value="' + mode + '" aria-pressed="' + (s.mode === mode) + '" aria-label="' + titles[mode] + '">' + modeMark(mode) + '<span>' + titles[mode] + '</span></button>').join('') + '</div><button type="button" class="tfg-age-button" data-action="settings" aria-label="' + view.age + '세 놀이 설정"><b>' + view.age + '</b><span>세 ⚙</span></button></nav><main class="tfg-workspace"><section class="tfg-stage" aria-label="꽃이 피는 정원"><div class="tfg-stage-heading"><div class="tfg-goal">' + (s.mode === 'fill' ? '<small data-fill-need>' + fillNeedText() + '</small><strong>' + s.quantity + '<span> → </span>' + s.goal + '</strong>' : '<small>' + (s.mode === 'colors' ? '두 색, 같은 수' : '내가 고른 꽃') + '</small><strong>' + s.quantity + '<span> 송이</span></strong>') + '</div><div class="tfg-counting" aria-live="polite" aria-atomic="true"><b data-count-value>' + (view.lastOrdinal || (s.quantity === 0 ? '0' : '♪')) + '</b><span data-count-word>' + esc(view.lastWord || (s.quantity === 0 ? '없어요' : '함께 세어요')) + '</span></div></div>' + framesHtml() + '<div class="tfg-equation" aria-label="화단별 꽃 수">' + equationHtml() + '</div></section><aside class="tfg-controls" aria-label="꽃과 숫자 선택"><div class="tfg-flower-choices" aria-label="꽃 선택">' + FLOWERS.map(f => '<button type="button" data-action="flower" data-value="' + f.id + '" aria-label="' + f.name + ' 선택" aria-pressed="' + (s.flower === f.id) + '">' + flowerSvg(f.id) + '<span>' + f.name + '</span></button>').join('') + '</div><div class="tfg-quantity-control"><button type="button" class="tfg-step-button" data-action="less" aria-label="꽃 한 송이 덜"' + (s.quantity === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" class="tfg-quantity-button" data-action="number-picker" aria-label="숫자 고르기, 현재 ' + s.quantity + '송이"><strong>' + s.quantity + '</strong><span>송이 ▦</span></button><button type="button" class="tfg-step-button" data-action="more" aria-label="꽃 한 송이 더"' + (s.quantity === 30 ? ' disabled' : '') + '>' + icon('plus') + '</button></div><div class="tfg-quick-numbers" aria-label="자주 고르는 숫자">' + [5, 9, 10, 15, 20, 30].map(n => '<button type="button" data-action="quantity" data-value="' + n + '" aria-pressed="' + (s.quantity === n) + '">' + n + '</button>').join('') + '</div>' + (s.mode === 'colors' ? '<div class="tfg-split-controls"><div>' + flowerSvg(s.flower) + '<strong>' + s.split + '</strong><span>＋</span>' + flowerSvg(partner(s.flower)) + '<strong>' + (s.quantity - s.split) + '</strong></div><button type="button" data-action="split-less" aria-label="첫 번째 색 꽃 한 송이를 두 번째 색으로 바꾸기"' + (s.split === 0 ? ' disabled' : '') + '>' + icon('minus') + '</button><button type="button" data-action="split-more" aria-label="두 번째 색 꽃 한 송이를 첫 번째 색으로 바꾸기"' + (s.split === s.quantity ? ' disabled' : '') + '>' + icon('plus') + '</button></div>' : '') + '<div class="tfg-reading" role="group" aria-label="숫자 읽는 방식"><button type="button" data-action="reading" data-value="native" aria-pressed="' + (s.reading === 'native') + '">🔊 하나·둘</button><button type="button" data-action="reading" data-value="sino" aria-pressed="' + (s.reading === 'sino') + '">🔊 일·이</button></div><div class="tfg-control-bottom"><button type="button" data-action="pause" aria-label="잠깐 멈추기" aria-pressed="false">⏸</button><button type="button" data-action="group" aria-label="세는 묶음 바꾸기">1씩</button><button type="button" data-action="undo" aria-label="이전 선택으로 돌아가기"' + (!view.undo.length ? ' disabled' : '') + '>' + icon('undo') + '<span>되돌리기</span></button><p class="tfg-voice-note"' + (view.voiceFailed ? '' : ' hidden') + '>소리가 없어도 꽃을 함께 볼 수 있어요.</p></div></aside></main>' + modalHtml() + '</section>';
+    view.container.querySelectorAll('.tfg-slot').forEach(el=>{const old=previous.get(el.dataset.slot);if(old)el.replaceWith(old);});
+    const board=view.container.querySelector('.tfg-frames');if(board){board.scrollTop=oldScroll.top;board.scrollLeft=oldScroll.left;}
+    paintProgress();paintPlayback();
   }
   function paintProgress() {
     if (!view.container || !view.state) return;
@@ -264,11 +305,11 @@
     slots(s).forEach(slot => {
       const node = view.container.querySelector('[data-slot="' + slot.ordinal + '"]');
       if (!node) return;
-      if (node.dataset.filled !== String(slot.filled)) {
-        node.dataset.filled = String(slot.filled);
+      if (node.dataset.filled !== String(slot.filled) || (slot.filled && node.dataset.flower !== slot.flower)) {
+        node.dataset.filled = String(slot.filled);node.dataset.flower=slot.flower;
         node.innerHTML = (slot.filled ? flowerSvg(slot.flower) : '<span class="tfg-soil-dot" aria-hidden="true"></span>') + '<span class="tfg-count-badge" aria-hidden="true">' + slot.ordinal + '</span>';
       }
-      node.dataset.active = String(slot.active);
+      node.dataset.active = String(slot.active);node.dataset.grouped=String(slot.filled&&slot.ordinal>=view.groupStart&&slot.ordinal<=view.groupEnd&&view.groupEnd>0);
       node.setAttribute('aria-label', slot.filled ? slot.ordinal + '번째 꽃' : '빈 칸');
     });
     details.groups.forEach((n, index) => { const node = view.container.querySelector('[data-frame-count="' + index + '"]'); if (node) node.textContent = n; });
@@ -291,9 +332,11 @@
     revealActiveFlower();
   }
   function revealActiveFlower() {
-    if (!view.container || !view.state?.active) return;
+    if (!view.container || !view.state) return;
+    const ordinal=view.state.active||(view.state.phase==='complete'?view.lastOrdinal:0);
+    if(!ordinal)return;
     const board = view.container.querySelector('.tfg-frames');
-    const slot = board?.querySelector('[data-slot="' + view.state.active + '"]');
+    const slot = board?.querySelector('[data-slot="' + ordinal + '"]');
     if (!board || !slot) return;
     const frame = slot.closest('.tfg-frame');
     const frameRect = frame?.getBoundingClientRect();
@@ -309,13 +352,13 @@
     if (dx || dy) board.scrollBy({ left: dx, top: dy, behavior: 'auto' });
   }
   function showModal(name) {
-    stopRun('pause'); view.modal = name; draw();
+    view.resumeAfterModal=view.sequencer?.isRunning?.();stopRun('pause'); view.modal = name; draw();
     const target = view.container.querySelector('.tfg-modal [aria-pressed="true"], .tfg-modal button');
     target?.focus?.({ preventScroll: true });
   }
   function closeModal() {
     const returnAction = view.modal === 'settings' ? 'settings' : 'number-picker';
-    view.modal = null; startAuto();
+    view.modal = null;draw();view.resumeAfterVisibility=view.resumeAfterVisibility||view.resumeAfterModal;resumeVisible();
     view.container?.querySelector('[data-action="' + returnAction + '"]')?.focus?.({ preventScroll: true });
   }
   function onClick(event) {
@@ -327,25 +370,28 @@
     if (a === 'settings') { showModal('settings'); return; }
     if (a === 'close-modal') { closeModal(); return; }
     if (a === 'quantity') { change({ type: 'QUANTITY', value: Number(b.dataset.value) }); return; }
-    if (a === 'more' || a === 'less') { change({ type: 'QUANTITY', value: view.state.quantity + (a === 'more' ? 1 : -1) }); return; }
+    if (a === 'more' || a === 'less') { change({ type: 'QUANTITY', value: view.state.quantity + (a === 'more' ? 1 : -1),incremental:true }); return; }
     if (a === 'mode') { change({ type: 'MODE', value: b.dataset.value }, true); return; }
     if (a === 'flower') { change({ type: 'FLOWER', value: b.dataset.value }); return; }
     if (a === 'reading') { change({ type: 'READING', value: b.dataset.value }); return; }
     if (a === 'split-less' || a === 'split-more') { change({ type: 'SPLIT', value: view.state.split + (a === 'split-more' ? 1 : -1) }); return; }
-    if (a === 'replay') { startAuto(); return; }
-    if (a === 'mute') { view.muted = !view.muted; startAuto(); return; }
+    if (a === 'replay') { view.userPaused=false;startAuto(); return; }
+    if(a==='pause'){view.userPaused=!view.sequencer.isPaused();if(view.userPaused)stopRun('pause');else{view.resumeAfterVisibility=true;resumeVisible();}paintPlayback();return;}
+    if(a==='group'){const modes=['ones','fives','tens'];view.groupMode=modes[(modes.indexOf(view.groupMode)+1)%3];startAuto();return;}
+    if (a === 'mute') { view.muted = !view.muted;view.sequencer.setMuted(view.muted);save();draw();return; }
     if (a === 'undo' && view.undo.length) { stopRun(); view.state = createState(view.undo.pop()); startAuto(); return; }
     if (a === 'age') {
-      const n = Number(b.dataset.value); if (![4, 5, 6, 7].includes(n)) return;
-      view.modal = null; view.age = n; view.options.ageMode = n;
-      if (window.SihyeonPlaySettings?.setAge) window.SihyeonPlaySettings.setAge(n);
-      view.age = currentAge(); startAuto(); return;
+      const n=Number(b.dataset.value);if(![4,5,6,7].includes(n))return;
+      view.modal=null;view.age=n;view.options.ageMode=n;
+      window.SihyeonPlaySettings?.setAge?.(n);view.age=currentAge();draw();
+      view.resumeAfterVisibility=view.resumeAfterVisibility||view.resumeAfterModal;resumeVisible();return;
     }
     if (a === 'language') {
-      if (!['ko', 'en'].includes(b.dataset.value)) return;
-      view.modal = null; view.language = b.dataset.value;
+      if(!['ko','en'].includes(b.dataset.value))return;
+      const wasPaused=view.userPaused;view.modal=null;
       window.SihyeonPlaySettings?.setLanguage?.(b.dataset.value);
-      view.language = language(); startAuto();
+      if(view.language!==language()){view.language=language();startAuto(false,true);}else draw();
+      if(!wasPaused){view.resumeAfterVisibility=true;resumeVisible();}
     }
   }
   function onKey(event) {
@@ -361,18 +407,19 @@
     if (!view.container) return;
     const nextAge = currentAge(); const nextLanguage = language();
     if (nextAge === view.age && nextLanguage === view.language) return;
-    stopRun(); view.age = nextAge; view.language = nextLanguage; startAuto();
+    const changed=nextLanguage!==view.language;view.age = nextAge; view.language = nextLanguage;
+    if(changed){startAuto(false,true);if(view.modal)view.sequencer.pause();}else draw();
   }
   function resumeVisible() {
-    if (view.container && !document.hidden && !view.modal && view.state?.phase === 'paused') startAuto();
+    if (view.container && !document.hidden && !view.modal && !view.userPaused && view.resumeAfterVisibility && view.sequencer?.isPaused?.()){view.state=Object.assign({},view.state,{phase:'counting'});view.sequencer.resume();view.resumeAfterVisibility=false;view.resumeAfterModal=false;paintProgress();}
   }
   function bind() {
     const h = view.handlers = {
       click: onClick, key: onKey, settings: onSettings,
-      blur: () => { stopRun('pause'); save(); paintProgress(); },
+      blur: () => { view.resumeAfterVisibility=view.sequencer?.isRunning?.()||view.resumeAfterVisibility;stopRun('pause'); save(); paintProgress(); },
       focus: resumeVisible,
-      visibility: () => { if (document.hidden) { stopRun('pause'); save(); } else resumeVisible(); },
-      pagehide: () => { stopRun('pause'); save(); }
+      visibility: () => { if (document.hidden) { view.resumeAfterVisibility=view.sequencer?.isRunning?.()||view.resumeAfterVisibility;stopRun('pause'); save(); } else resumeVisible(); },
+      pagehide: () => { view.resumeAfterVisibility=view.sequencer?.isRunning?.()||view.resumeAfterVisibility;stopRun('pause'); save(); }
     };
     view.container.addEventListener('click', h.click);
     view.container.addEventListener('keydown', h.key);
@@ -393,7 +440,7 @@
     }
     if (view.previousBack?.element) view.previousBack.element.hidden = view.previousBack.hidden;
     view.container = null; view.state = null; view.sequencer = null; view.handlers = null; view.previousBack = null;
-    view.modal = null; view.undo = []; view.lastWord = ''; view.lastOrdinal = 0;
+    view.modal = null; view.undo = []; view.lastWord = ''; view.lastOrdinal = 0;view.userPaused=false;view.resumeAfterVisibility=false;view.resumeAfterModal=false;view.groupMode='ones';view.groupStart=0;view.groupEnd=0;
   }
   function render(container, options) {
     destroy(); if (!container) return;
@@ -408,12 +455,12 @@
     }
     const back = container.closest('.game-play-screen')?.querySelector('.game-back-floating');
     if (back) { view.previousBack = { element: back, hidden: back.hidden }; back.hidden = true; }
-    const saved = load(); view.state = createState(saved); view.muted = saved.muted === true;
+    const saved = load(); view.state = createState(saved); view.muted = saved.muted === true;view.groupMode=['ones','fives','tens'].includes(saved.groupMode)?saved.groupMode:'ones';
     view.age = currentAge(); view.language = language(); view.voiceFailed = false; view.saveFailed = false;
     view.sequencer = window.SihyeonQuantitySequencer.create({ timeoutMs: 7500, fallbackMs: 470 });
     bind(); startAuto(false);
   }
   window.SihyeonGames = window.SihyeonGames || {};
   window.SihyeonGames[KEY] = { id: KEY, title: '열 칸 꽃정원', render, destroy, model: Model,
-    getSnapshot: () => view.state ? { state: clone(view.state), quantities: inspect(view.state), age: view.age, language: language(), muted: view.muted, voiceFailed: view.voiceFailed, saveFailed: view.saveFailed, modal: view.modal, running: view.sequencer?.isRunning?.() || false, sequence: view.sequencer?.getSnapshot?.() || null } : null };
+    getSnapshot: () => view.state ? { state: clone(view.state), quantities: inspect(view.state), age: view.age, language: language(), muted: view.muted, voiceFailed: view.voiceFailed, saveFailed: view.saveFailed, modal: view.modal, groupMode:view.groupMode, userPaused:view.userPaused, running: view.sequencer?.isRunning?.() || false, sequence: view.sequencer?.getSnapshot?.() || null } : null };
 })();

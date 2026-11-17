@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#d8f1ff">
 <title>시현이의 숫자 왕국 V3.1 — 입체 4열 & 묶음·절반 수학 놀이터</title>
 <script src="../js/engine/webgl-fallback.js"></script>
+<script src="../js/games/number-world-save.js"></script>
 <style>
 :root{
   font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -450,6 +451,9 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 .dockBtn.add { background: linear-gradient(180deg, #FFE066 0%, #F59F00 100%); }
 .dockBtn.add.readyPulse {
   box-shadow: 0 0 0 4px #FFF3BF, 0 10px 24px rgba(245, 159, 0, 0.55), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+}
+/* Pulse the illustration, keeping the button's touch target still. */
+.dockBtn.add.readyPulse .dockSvg {
   animation: dockPulse 0.75s infinite alternate ease-in-out;
 }
 .dockBtn.decomp { background: linear-gradient(180deg, #63E6BE 0%, #12B886 100%); }
@@ -458,11 +462,16 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   background: linear-gradient(180deg, #FF8787 0%, #E03131 100%);
   border-color: #FFE3E3;
   box-shadow: 0 0 0 4px #FFA8A8, 0 10px 24px rgba(224, 49, 49, 0.5), inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+.dockBtn.hammer.active .dockSvg {
   animation: dockPulse 0.85s infinite alternate ease-in-out;
 }
 @keyframes dockPulse {
   0% { transform: scale(1); }
   100% { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dockBtn.add.readyPulse .dockSvg, .dockBtn.hammer.active .dockSvg { animation: none; }
 }
 .dockSvg {
   width: 31px;
@@ -702,6 +711,27 @@ body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(saf
  #game[data-layout="phoneLandscape"] #sideActionDock{gap:5px!important}
 }
 
+/* The shape tray occupies its own row. The 3D canvas no longer extends under it. */
+#game[data-layout="phoneLandscape"],#game[data-layout="tabletLandscape"]{
+ grid-template-rows:minmax(0,1fr) var(--nk-shape-space,0px);row-gap:0
+}
+#game[data-layout="phoneLandscape"] #trayWrap,#game[data-layout="tabletLandscape"] #trayWrap,
+#game[data-layout="phoneLandscape"] #sideActionDock,#game[data-layout="tabletLandscape"] #sideActionDock{grid-row:1 / span 2}
+#game[data-layout="phoneLandscape"] #actions,#game[data-layout="tabletLandscape"] #actions{
+ grid-column:2;grid-row:2;position:relative;left:auto;right:auto;bottom:auto!important;
+ width:100%;height:100%;max-height:none;min-height:0;min-width:0;margin:0;box-shadow:none;
+ overflow-y:hidden;padding:6px;align-items:center;justify-content:center
+}
+#worldSaveStatus{font-size:12px;line-height:1.4;color:#3e5371;max-width:166px;margin:2px 4px;text-align:center}
+#worldSaveBtn{font-size:14px!important;gap:4px;padding:6px 10px!important}
+#mergePreview{position:absolute;z-index:3;top:62px;left:50%;transform:translateX(-50%);
+ max-width:min(310px,72%);padding:5px 10px;border-radius:14px;border:2px solid #ffd43b;
+ background:rgba(255,249,219,.94);color:#60420c;text-align:center;font-weight:900;font-size:15px;
+ pointer-events:none;white-space:normal;display:none}
+#game[data-layout="phoneLandscape"] #mergePreview,#game[data-layout="tabletLandscape"] #mergePreview{
+ left:calc(var(--nk-left-w) + (100% - var(--nk-left-w) - var(--nk-right-w))/2);
+ max-width:calc(100% - var(--nk-left-w) - var(--nk-right-w) - 30px);top:58px;font-size:13px
+}
 </style>
 </head>
 <body>
@@ -742,6 +772,8 @@ body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(saf
     <button id="voice" style="display:none;" aria-hidden="true"></button>
     <button id="reset" class="pill toyPill" title="새 놀이터" aria-label="새 놀이터">🔄</button>
     <button id="helpBtn" class="pill toyPill" title="도움말" aria-label="도움말">❓</button>
+    <button id="worldSaveBtn" class="pill" aria-label="만든 세계 보관하기">💾 보관</button>
+    <p id="worldSaveStatus" role="status">만든 블록은 자동으로 보관해요.</p>
   </div>
 
   <div id="townGuides" class="glass" aria-label="건축 가이드">
@@ -751,6 +783,7 @@ body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(saf
   </div>
 
   <div id="toast" role="status" aria-live="polite"></div>
+  <div id="mergePreview" aria-hidden="true"></div>
 
   <!-- 자유 분해(절반 1순위 + 다양한 가르기) 및 묶음 합체 플로팅 팔레트 -->
   <div id="decompPalette" class="glass" role="dialog" aria-label="숫자 나누기 선택지" style="display:none"></div>
@@ -847,7 +880,7 @@ body:not(.embedded) #game[data-layout="phonePortrait"] #top{left:max(5px,env(saf
   <section id="confirm" role="dialog" aria-modal="true" aria-label="새 놀이터 확인">
     <article class="glass">
       <h2>🔄 새 3D 놀이터를 열까요?</h2>
-      <p>지금 만든 블록이 처음 상태로 돌아가요.</p>
+      <p>지금 만든 블록이 처음 상태로 돌아가요.<br>이 화면의 되돌리기로 이전 모습을 다시 찾을 수 있어요.</p>
       <button id="resetNo">계속 놀기</button>
       <button id="resetYes" class="danger">새로 시작!</button>
     </article>
@@ -1668,6 +1701,18 @@ function updateSideDockStatus(){
 
   const plan = resolvePlusActionPlan(state);
 
+  const preview = $('mergePreview');
+  if(preview){
+    preview.style.display = plan ? 'block' : 'none';
+    preview.textContent = plan ? (plan.mode === 'bundle'
+      ? `${plan.targets[0].n} × ${plan.targets.length} → ${plan.sum}`
+      : `${plan.targets.map(f => f.n).join(' + ')} → ${plan.sum}`) : '';
+    preview.dataset.targets = plan ? plan.targets.map(f => f.id).join(',') : '';
+    preview.dataset.total = plan ? String(plan.sum) : '';
+  }
+  addBtn.setAttribute('aria-label', plan
+    ? (numberWorldIsEnglish() ? `Combine ${plan.targets.map(f => f.n).join(' plus ')} to make ${plan.sum}` : `${plan.targets.map(f => f.n).join(' 더하기 ')}은 ${plan.sum}, 합체하기`)
+    : (numberWorldIsEnglish() ? 'Combine number friends' : '숫자 친구 합체하기'));
   if(plan){
     addBtn.classList.add('readyPulse');
     addBadge.style.display = 'block';
@@ -2680,7 +2725,12 @@ function capture(w = state){
       id: p.id, _old: p.id, type: p.type,
       gx: p.gx, gy: p.gy, gz: p.gz, carrier: p.carrier
     })),
-    cameraX: w.goalX
+    cameraX: w.goalX,
+    camPresetIdx: w.camPresetIdx ?? 1,
+    camFov: w.headless ? DEFAULT_CAM_FOV : camFov,
+    zone: zoneAt(w.goalX).id,
+    selected: w.selected || null,
+    townGuide: w.townGuide || null
   });
 }
 
@@ -2725,17 +2775,104 @@ function restore(raw, w = state){
   w.props.forEach((p, i) => {
     p.carrier = lookup.get(s.props[i].carrier) || null;
   });
-  w.selected = null;
-  if(!w.headless){ w.recentSpawnIds = []; w.recentSpawnZone = state.zone; }
+  w.selected = lookup.get(s.selected) || null;
+  w.zone = zones.some(z => z.id === s.zone) ? s.zone : zoneAt(s.cameraX || 11).id;
+  if(!w.headless){ w.recentSpawnIds = []; w.recentSpawnZone = w.zone; }
   w.drag = null;
   w.pan = null;
   w.merging = null;
-  w.goalX = clamp(s.cameraX || 11, 4, WORLD_W - 8);
+  w.goalX = clamp(s.cameraX || 11, 4, WORLD_W - 6);
   w.cameraX = w.goalX;
+  w.camPresetIdx = Number.isInteger(s.camPresetIdx) && CAM_PRESETS[s.camPresetIdx] ? s.camPresetIdx : (w.camPresetIdx ?? 1);
+  if(!w.headless){
+    camFov = typeof s.camFov === 'number' ? clamp(s.camFov, 28, 62) : DEFAULT_CAM_FOV;
+    camera.fov = camFov;
+    camera.updateProjectionMatrix();
+    updateTownBlueprint(['house', 'tower', 'stairs'].includes(s.townGuide) ? s.townGuide : null);
+    for(const b of $('zones').children) b.classList.toggle('active', b.dataset.zone === w.zone);
+    $('townGuides').style.display = w.zone === 'town' ? 'flex' : 'none';
+  }
   w.train = {gx: TRAIN_BASE_GX, offsetX: 0, timer: 0, departing: false, passengers: []};
   if(!w.headless && trainGroup3D) trainGroup3D.position.x = TRAIN_BASE_GX;
   recalcSupport3D(w);
   if(!w.headless) updateUI();
+}
+
+// Autosave is independent of undo. Only settled world data is persisted, and a
+// same-origin parent keeps the latest work available when storage is refused.
+let worldSaveReady = false, lastSavedWorld = '', lastWorldSaveAt = 0;
+let worldSaveResult = {mode:'empty', restored:false, invalid:false};
+let warnedWorldSaveMode = '';
+function numberWorldIsEnglish(){
+  try { return window.parent.SihyeonPlaySettings?.getLanguage?.() === 'en'; }
+  catch (_) { return false; }
+}
+function worldSaveMemory(){
+  try {
+    const host = window.parent || window;
+    if(!host.__sihyeonNumberWorldMemory) host.__sihyeonNumberWorldMemory = {};
+    return host.__sihyeonNumberWorldMemory;
+  } catch (_) { return {}; }
+}
+const worldStore = window.NumberWorldSave.create({
+  rules:{maxEntities:MAX_ENTITIES,maxNumber:PLAY_MAX,worldWidth:WORLD_W,poses,
+    propTypes:Object.keys(specs),bridgeIds:gaps.map(g => g.id),zoneIds:zones.map(z => z.id),cameraPresets:CAM_PRESETS.length},
+  memory:worldSaveMemory(),local:() => window.localStorage,session:() => window.sessionStorage
+});
+function updateWorldSaveStatus(){
+  const status = $('worldSaveStatus');
+  if(!status) return;
+  const en = numberWorldIsEnglish();
+  const labels = en ? {
+    local:'Your world is saved on this device.', session:'Saved for this browser tab.',
+    memory:'Kept in this open page. Reloading may clear it.', invalid:'Saved data could not be opened. Your previous save is unchanged.',
+    empty:'Your blocks are saved automatically.', failed:'This change could not be saved.'
+  } : {
+    local:'이 기기에 만든 세계를 보관했어요.', session:'이 브라우저 탭에 보관했어요.',
+    memory:'지금 연 화면에서만 보관돼요. 새로고침하면 사라질 수 있어요.',
+    invalid:'보관한 세계를 열지 못했어요. 이전 보관본은 그대로예요.',
+    empty:'만든 블록은 자동으로 보관해요.', failed:'이번 변화는 보관하지 못했어요.'
+  };
+  status.textContent = labels[worldSaveResult.mode] || labels.failed;
+  status.dataset.mode = worldSaveResult.mode;
+  $('worldSaveBtn').textContent = en ? '💾 Save' : '💾 보관';
+}
+function saveWorldNow(force = false, replaceInvalid = false){
+  if(!worldSaveReady || state.destroyed) return false;
+  if(state.drag || state.pan || state.train.departing){
+    if(!force) return false;
+    if(state.pointer !== null) endDrag({pointerId:state.pointer}, true);
+  }
+  const raw = capture();
+  // Leaving an untouched recovery scene must not overwrite unreadable artwork.
+  // A new edit or the explicit Save button makes replacement intentional.
+  if(worldSaveResult.mode === 'invalid' && raw === lastSavedWorld && !replaceInvalid) return false;
+  if(!force && raw === lastSavedWorld) return true;
+  const result = worldStore.write(JSON.parse(raw));
+  worldSaveResult = result.ok ? result : {...result, mode:'failed'};
+  if(result.ok) lastSavedWorld = raw;
+  updateWorldSaveStatus();
+  if(result.ok && result.mode !== 'local' && warnedWorldSaveMode !== result.mode){
+    warnedWorldSaveMode = result.mode;
+    toast(numberWorldIsEnglish() ? '💾 Saved here for this play session.' : '💾 지금 연 곳에서만 보관하고 있어요.');
+  }
+  return result.ok;
+}
+function saveWorldOnLeave(){ saveWorldNow(true); }
+function saveWorldOnHidden(){ if(document.hidden) saveWorldNow(true); }
+function resumeSavedWorld(){
+  const saved = worldStore.read();
+  worldSaveResult = worldStore.status();
+  if(saved){
+    restore(JSON.stringify(saved));
+    toast(numberWorldIsEnglish() ? '🌈 Welcome back! Keep building your world.' : '🌈 다시 왔네! 만든 세계에서 이어 놀자.');
+  } else {
+    reset();
+    if(worldSaveResult.invalid) toast(numberWorldIsEnglish() ? 'Your previous save is unchanged. Start a new world when ready.' : '보관한 세계를 열지 못했어요. 새 블록으로 놀 수 있어요.');
+  }
+  lastSavedWorld = capture();
+  worldSaveReady = true;
+  updateWorldSaveStatus();
 }
 
 function undo(w = state){
@@ -4199,6 +4336,8 @@ function updateUI(){
     acts.style.display = 'none';
     closeDecompPalette();
     refreshSelectionHighlight();
+    reserveShapeSpace();
+    saveWorldNow();
     return;
   }
 
@@ -4228,6 +4367,15 @@ function updateUI(){
     acts.style.display = 'none';
   }
   refreshSelectionHighlight();
+  reserveShapeSpace();
+  saveWorldNow();
+}
+
+function reserveShapeSpace(){
+  const root = $('game');
+  const landscape = ['phoneLandscape','tabletLandscape'].includes(root.dataset.layout);
+  const shown = $('actions').style.display !== 'none';
+  root.style.setProperty('--nk-shape-space', landscape && shown ? '72px' : '0px');
 }
 
 /* ============================================================================
@@ -4246,6 +4394,7 @@ function flyToZone(idx){
   state.goalX = idx === 0 ? 11.0 : clamp((z.a + z.b) / 2, 5, WORLD_W - 6);
   sfx('grab');
   $('drawer').style.display = 'none';
+  saveWorldNow();
 }
 
 function update3D(dt, now){
@@ -4528,6 +4677,10 @@ function animate(now){
   state.lastTick = now;
   update3D(dt, now);
   renderer.render(scene, camera);
+  if(now - lastWorldSaveAt >= 650){
+    lastWorldSaveAt = now;
+    saveWorldNow();
+  }
   requestAnimationFrame(animate);
 }
 
@@ -4547,7 +4700,7 @@ function chooseNumberKingdomLayout(){
   const w = root?.clientWidth || window.innerWidth;
   const h = root?.clientHeight || window.innerHeight;
   const touch = (window.matchMedia?.('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
-  if(!touch) return 'desktop';
+  if(!touch && w > 900 && h > 600) return 'desktop';
   if(w > h) return h <= 500 ? 'phoneLandscape' : 'tabletLandscape';
   return w < 600 ? 'phonePortrait' : 'tabletPortrait';
 }
@@ -4564,6 +4717,7 @@ function applyNumberKingdomLayout(){
   $('game').dataset.layout = next;
   document.body.classList.toggle('embedded', window.parent !== window);
   activeLayoutProfile = next;
+  reserveShapeSpace();
 }
 function onResize(){
   applyNumberKingdomLayout();
@@ -4735,8 +4889,14 @@ function mountUI(){
     state.camPresetIdx = (state.camPresetIdx + 1) % CAM_PRESETS.length;
     sfx('grab');
     toast(`🎥 ${CAM_PRESETS[state.camPresetIdx].name}`);
+    saveWorldNow();
   };
   $('undo').onclick = () => undo(state);
+
+  $('worldSaveBtn').onclick = () => {
+    const ok = saveWorldNow(true, true);
+    if(ok) toast($('worldSaveStatus').textContent);
+  };
 
   function updateSoundButton(){
     const b = $('sound');
@@ -4760,7 +4920,8 @@ function mountUI(){
   $('resetYes').onclick = () => {
     $('confirm').style.display = 'none';
     reset(true);
-    toast('✨ 새 3D 놀이터가 열렸어요!');
+    saveWorldNow(true);
+    toast(numberWorldIsEnglish() ? '✨ A new world is ready. Undo brings your old one back.' : '✨ 새 놀이터가 열렸어요! 되돌리기로 돌아갈 수 있어요.');
   };
   $('helpBtn').onclick = () => { $('help').style.display = 'flex'; };
   $('helpClose').onclick = () => { $('help').style.display = 'none'; };
@@ -4822,6 +4983,7 @@ function mountUI(){
 }
 
 function returnToPlayOS(){
+  saveWorldNow(true);
   try {
     if(window.parent && window.parent !== window && typeof window.parent.returnToCurrentGameLand === 'function'){
       window.parent.returnToCurrentGameLand();
@@ -5016,7 +5178,11 @@ const nkLayoutObserver = (typeof ResizeObserver === 'function')
 nkLayoutObserver?.observe(canvas);
 window.addEventListener('orientationchange', onResize);
 window.visualViewport?.addEventListener('resize', onResize);
-reset();
+resumeSavedWorld();
+window.addEventListener('pagehide', saveWorldOnLeave);
+window.addEventListener('beforeunload', saveWorldOnLeave);
+window.addEventListener('unload', saveWorldOnLeave);
+document.addEventListener('visibilitychange', saveWorldOnHidden);
 
 const audit = selfTest();
 if(!audit.pass){
@@ -5061,8 +5227,17 @@ window.NumberKingdomDebug = {
   pickMathToy3D,
   triggerToyAction,
   reset: () => reset(true),
+  captureWorld: () => JSON.parse(capture()),
+  saveWorld: () => saveWorldNow(true),
+  getSaveStatus: () => ({...worldSaveResult}),
+  getCamera: () => camera,
   dispose: () => {
+    saveWorldNow(true);
     state.destroyed = true;
+    window.removeEventListener('pagehide', saveWorldOnLeave);
+    window.removeEventListener('beforeunload', saveWorldOnLeave);
+    window.removeEventListener('unload', saveWorldOnLeave);
+    document.removeEventListener('visibilitychange', saveWorldOnHidden);
     nkLayoutObserver?.disconnect();
     window.removeEventListener('resize', onResize);
     window.removeEventListener('orientationchange', onResize);

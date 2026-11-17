@@ -131,7 +131,7 @@ def sharing(page, total, groups):
     return start, value
 
 
-def finish(page, mode, total, groups=None, muted=False):
+def finish(page, mode, total, groups=None, muted=False, interrupted=False):
     page.wait_for_function(
         '(wanted)=>{const s=SihyeonGames.pictureArithmetic.getSnapshot();return s.active&&s.mode===wanted.mode&&s.total===wanted.total&&s.complete&&s.sequence?.status==="completed";}',
         arg={'mode': mode, 'total': total}, timeout=30000)
@@ -151,8 +151,14 @@ def finish(page, mode, total, groups=None, muted=False):
         assert sum(value['actualGroups']) + value['poolCount'] == total, value
         expected_steps = total - remainder + 2
     assert value['sequence']['completedSteps'] == expected_steps, value
-    assert value['sequence']['audioAttempted'] == (0 if muted else expected_steps), value
-    assert value['sequence']['audioSucceeded'] == (0 if muted else expected_steps), value
+    if not interrupted:
+        assert value['sequence']['audioAttempted'] == (0 if muted else expected_steps), value
+        assert value['sequence']['audioSucceeded'] == (0 if muted else expected_steps), value
+    else:
+        # Pause can interrupt a transport request, then retry its speech without
+        # repeating the visual step. Mid-run mute preserves prior audio counts.
+        assert 0 <= value['sequence']['audioSucceeded'] <= value['sequence']['audioAttempted'], value
+        assert value['sequence']['audioTimedOut'] == 0, value
     assert page.evaluate('__arithmeticEngine.api===SihyeonVoice&&__arithmeticEngine.speak===SihyeonVoice.speak&&__arithmeticEngine.stop===SihyeonVoice.stop'), 'Shared engine was replaced'
     return value
 
@@ -341,8 +347,11 @@ def main():
 
                     def independent_pictures():
                         addition(page, 9, 6)
+                        before = snap(page)
                         action(page, 'choosePicture', 'b')
-                        assert snap(page)['dialog'] == 'pictures' and snap(page)['sequence']['status'] == 'cancelled'
+                        paused = snap(page)
+                        assert paused['dialog'] == 'pictures' and paused['sequence']['status'] == 'paused'
+                        assert paused['sequence']['runId'] == before['sequence']['runId']
                         page.locator('.pa-picture-dialog').wait_for(state='visible')
                         action(page, 'category', 'food')
                         action(page, 'object', 'cookie')
@@ -355,6 +364,7 @@ def main():
                     check('independent types for the two addends', independent_pictures, page)
 
                     def picker_keyboard():
+                        before = snap(page)
                         action(page, 'choosePicture', 'a')
                         page.keyboard.press('Shift+Tab')
                         assert page.evaluate("document.activeElement===document.querySelector('.pa-picture-dialog').querySelectorAll('button')[document.querySelector('.pa-picture-dialog').querySelectorAll('button').length-1]")
@@ -362,8 +372,9 @@ def main():
                         assert page.evaluate("document.activeElement===document.querySelector('.pa-picture-dialog [data-pa-action=\"closeDialog\"]')")
                         page.keyboard.press('Escape')
                         page.locator('.pa-picture-dialog').wait_for(state='detached')
-                        value = finish(page, 'add', 15)
+                        value = finish(page, 'add', 15, interrupted=True)
                         assert value['dialog'] is None
+                        assert value['sequence']['runId'] == before['sequence']['runId']
                         return {'escapeResumed': value, 'focusStayedInsideDialog': True}
                     check('large picture chooser traps focus and Escape resumes', picker_keyboard, page)
 
@@ -401,13 +412,21 @@ def main():
                         running = snap(page)
                         assert running['sequence']['running'] and running['sequence']['status'] == 'running', running
                         action(page, 'settings'); page.locator('#playSettingsDialog').wait_for(state='visible')
-                        assert snap(page)['sequence']['status'] == 'cancelled'
+                        paused = snap(page)
+                        assert paused['sequence']['status'] == 'paused'
+                        assert paused['sequence']['runId'] == running['sequence']['runId']
+                        paused_count = paused['counted']
+                        page.wait_for_timeout(250)
+                        assert snap(page)['counted'] == paused_count
                         page.evaluate('__arithmeticSpeech.delayMs=25')
                         page.locator('[data-play-age="7"]').click()
                         assert snap(page)['age'] == 7 and snap(page)['total'] == 5
                         page.locator('[data-ps-language="en"]').click()
                         start = mark(page); page.locator('[data-ps-close]').last.click()
                         page.locator('#playSettingsDialog').wait_for(state='detached')
+                        value = finish(page, 'add', 5, interrupted=True)
+                        assert value['sequence']['runId'] == running['sequence']['runId']
+                        start = mark(page); action(page, 'replay')
                         value = finish(page, 'add', 5)
                         english = speech(page, start, value, ['one', 'two', 'three', 'four', 'five'], 'en-US')
                         action(page, 'settings')
@@ -415,11 +434,12 @@ def main():
                         assert completed['sequence']['status'] == 'completed' and not completed['sequence']['running'], completed
                         start = mark(page); page.locator('[data-ps-close]').last.click()
                         unchanged = finish(page, 'add', 5)
-                        speech(page, start, unchanged, ['one', 'two', 'three', 'four', 'five'], 'en-US')
+                        assert unchanged['sequence']['runId'] == completed['sequence']['runId']
+                        assert not requests(page, start, unchanged['sequence']['runId']), 'Closing settings replayed a completed sum'
                         action(page, 'settings'); page.locator('[data-ps-language="ko"]').click(); page.locator('[data-ps-close]').last.click()
                         finish(page, 'add', 5)
                         action(page, 'style', 'native')
-                        return {'sino': sino, 'cancelledFromRunning': running, 'english': english, 'unchangedCloseResumed': unchanged}
+                        return {'sino': sino, 'pausedFromRunning': running, 'english': english, 'unchangedCompletedClose': unchanged}
                     check('reading modes and settings close automatically resume', settings_and_languages, page)
 
                     def persistence():
@@ -449,9 +469,13 @@ def main():
 
                     def mute_and_exit():
                         sharing(page, 3, 5)
+                        before = snap(page)
                         action(page, 'mute')
-                        value = finish(page, 'share', 3, 5, muted=True)
+                        muted_start = mark(page)
+                        value = finish(page, 'share', 3, 5, muted=True, interrupted=True)
                         assert value['muted'] is True
+                        assert value['sequence']['runId'] == before['sequence']['runId']
+                        assert not requests(page, muted_start, value['sequence']['runId']), 'Mute started more speech'
                         action(page, 'mute'); action(page, 'replay')
                         old = snap(page)
                         action(page, 'home')

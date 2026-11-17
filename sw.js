@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.13.0-creator-construction-fire';
+const CACHE_NAME = 'sihyeon-play-os-v1.14.0-creator-number-depth';
 
 const ASSETS = [
   './js/games/neighborhood-story-model.js',
@@ -63,6 +63,7 @@ const ASSETS = [
   './assets/games/number-post-office/truck-orange.svg',
   './js/engine/webgl-fallback.js',
   './games/number-kingdom-3d.html',
+  './js/games/number-world-save.js',
   './games/hangul-playmat-3d.html',
   './js/zones/voice-zone.js',
   './js/zones/karaoke-zone.js',
