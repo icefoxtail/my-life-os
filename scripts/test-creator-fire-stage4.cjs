@@ -101,6 +101,18 @@ function choose(f,id) {click(f,`[data-field-game-id="${id}"]`);assert.equal(f.ap
 function rotate(f) {const before=clone(f.api.state.field);f.window.innerWidth=844;f.window.innerHeight=390;f.api.handleResize();f.advance(120);assert.deepEqual(clone(f.api.state.field),before,'rotation preserves the real incident, selected truck and work');checks++;}
 function hints(f,enabled) {const s=f.api.state;for(const button of f.container.querySelectorAll('.md-field-choice')){const vehicle=s.field.choices.find(t=>t.gameId===button.dataset.fieldGameId);const key=f.api.FIELD_INCIDENTS.find(i=>i.id===s.field.incidentId).steps[s.field.stepIndex];const valid=f.api.FIELD_ROLES[key].ids.includes(vehicle.id);assert.equal(button.classList.contains('target-glow'),enabled&&valid);}assert.equal(f.container.querySelector('[data-action="help"]').getAttribute('aria-pressed'),String(enabled));checks++;}
 function work(f,n){for(let i=0;i<n;i++)click(f,'[data-field-work]');}
+function ladderGeometry(f, tip) {
+  const layer=f.container.querySelector('.md-field-tool-layer');
+  const ladder=f.container.querySelector('[data-scene-ladder]');
+  assert.ok(layer && ladder, 'an extending ladder has one visible tool layer');
+  assert.equal(ladder.parentNode.parentNode,layer);
+  assert.equal(layer.parentNode.children.at(-1),layer,'the ladder is above even an opaque truck picture');
+  assert.equal(f.container.querySelectorAll('[data-scene-ladder]').length,1,'the ladder group is moved, never duplicated');
+  const p=ladder.querySelector('path').getAttribute('d').match(/-?\d+(?:\.\d+)?/g).map(Number);
+  assert.deepEqual([(p[0]+p[4])/2,(p[1]+p[5])/2],[150,300],'both rail feet start in the common vehicle body');
+  assert.deepEqual([(p[2]+p[6])/2,(p[3]+p[7])/2],tip,'extension preserves the fixed window endpoint');
+  checks+=2;
+}
 
 (async()=>{
   const initial=await ready();
@@ -143,8 +155,9 @@ function work(f,n){for(let i=0;i<n;i++)click(f,'[data-field-work]');}
     const actual=Array.from(f.api.state.field.choices,t=>t.gameId);
     ladderVariants.forEach(id=>assert.ok(actual.includes(id),`${id} is visible and selectable`));
     assert.ok(!actual.includes('s_articulating_boom_truck'),'unverified rescue basket is neither a forced answer nor a false wrong choice');
-    hints(f,true);choose(f,ladder);work(f,1);assert.equal(f.api.state.field.world.ladder,1);assert.equal(f.api.state.field.world.rescued,false);rotate(f);
+    hints(f,true);choose(f,ladder);work(f,1);assert.equal(f.api.state.field.world.ladder,1);assert.equal(f.api.state.field.world.rescued,false);ladderGeometry(f,[295,225]);rotate(f);
     work(f,1);assert.equal(f.api.state.field.world.ladder,2);assert.equal(f.api.state.field.world.rescued,false);
+    ladderGeometry(f,[440,150]);
     const progress=clone(f.api.state.field);click(f,'[data-field-listen]');assert.equal(f.spoken.at(-1),f.api.state.field.message);assert.deepEqual(clone(f.api.state.field),progress);
     work(f,1);assert.equal(f.api.state.field.world.rescued,true);assert.equal(f.api.state.field.world.safe,true);assert.deepEqual(f.rewards,[20]);
     click(f,'[data-field-next]');click(f,'[data-field-incident="ladder"]');choose(f,ladder);work(f,3);assert.deepEqual(f.rewards,[20],'replaying a completed incident cannot duplicate its reward within the visit');

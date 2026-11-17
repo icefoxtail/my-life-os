@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets/vehicles/construction_manifest.json'), 'utf8'));
 const filename = path.join(ROOT, 'js/games/construction-site.js');
 const source = fs.readFileSync(filename, 'utf8').replace(/\}\)\(\);\s*$/,
-  'window.__constructionStage4 = {state, PROJECTS, MISSIONS, SAFE_DISTRACTOR_IDS, VEHICLE_ROLES, normalizeVehicle, beginProject, showProjectChooser, handleChoice, performWork, finishWork, nextWork, playCompletedScene, restartGame, refreshLayoutOnly, wrongExplanation, speakMission, sceneSvg, render, destroy};\n})();');
+  'window.__constructionStage4 = {state, PROJECTS, MISSIONS, SAFE_DISTRACTOR_IDS, VEHICLE_ROLES, normalizeVehicle, beginProject, showProjectChooser, handleChoice, performWork, finishWork, nextWork, playCompletedScene, restartGame, refreshLayoutOnly, fitProjectScene, wrongExplanation, speakMission, sceneSvg, render, destroy};\n})();');
 
 function element() {
   const classes = new Set();
@@ -66,6 +66,20 @@ async function flush(){for(let i=0;i<8;i++)await Promise.resolve();}
     assert.match(bridge.steps[1].question,/작은 다리판/);
     assert.match(bridge.steps[2].question,/낮은 받침/);
     assert.match(f.api.PROJECTS.find(p=>p.id==='station').steps[2].result,/놀이 속에서 단단해진/);
+  });
+
+  check('ground and work vehicle share one fitted 8:5 canvas across stage shapes',()=>{
+    const f=fixture(),stage=f.container.querySelector('.cs-project-game .cs-stage');
+    const canvas=stage.querySelector('.cs-project-canvas');
+    for(const [width,height,expectedWidth,expectedHeight] of [[340,600,340,212.5],[600,180,288,180],[300,300,300,187.5]]){
+      stage.clientWidth=width;stage.clientHeight=height;f.api.fitProjectScene();
+      assert.equal(canvas.style.width,expectedWidth+'px');
+      assert.equal(canvas.style.height,expectedHeight+'px');
+      assert.ok(expectedWidth<=width&&expectedHeight<=height);
+      assert.equal(expectedWidth/expectedHeight,8/5);
+    }
+    stage.clientWidth=0;f.api.fitProjectScene();
+    assert.equal(canvas.style.width,'300px','a temporarily hidden stage cannot overwrite its valid fit');
   });
 
   for(const projectId of ['playground','station','bridge'])check(projectId+' tap/watch, persistent progress, manual next and repeat play',()=>{

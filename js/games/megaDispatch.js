@@ -982,6 +982,8 @@
       .md-field-canvas > svg { width: 100%; height: 100%; display: block; }
       .md-field-engine { position: absolute; left: 5%; bottom: 7%; width: 35%; height: 28%; display: grid; place-items: center; filter: drop-shadow(0 4px 2px #16313f55); }
       .md-field-engine > img, .md-field-engine > .sv-vehicle-frame { width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; }
+      .md-field-tool-layer { position: absolute; inset: 0; pointer-events: none; }
+      .md-field-tool-layer > svg { display: block; width: 100%; height: 100%; }
       .md-field-engine.is-arriving { animation: mdFieldArrive .55s ease-out both; }
       @keyframes mdFieldArrive { from { transform: translateX(-140%); } to { transform: translateX(0); } }
       .md-field-water-jet { stroke-dasharray: 12 8; animation: mdFieldWater .55s linear both; }
@@ -1086,10 +1088,13 @@
     let scene = '';
     if (incidentId === 'ladder') {
       const fraction = Math.min(2, w.ladder) / 2;
-      const bx = 220, by = 292, tx = bx + 220 * fraction, ty = by - 142 * fraction;
+      // Both rail feet overlap the visible body of all four ladder pictures.
+      // Keep the window end fixed as the ladder extends from the truck.
+      const bx = 150, by = 300, dx = 440 - bx, dy = 150 - by;
+      const tx = bx + dx * fraction, ty = by + dy * fraction;
       const rungs = Array.from({ length: Math.round(fraction * 11) }, (_, index) => {
         const t = (index + 1) / 12;
-        const x = bx + 220 * t, y = by - 142 * t;
+        const x = bx + dx * t, y = by + dy * t;
         return `<path d="M${x - 5} ${y - 8}L${x + 5} ${y + 8}" stroke="#fff0ab" stroke-width="5"/>`;
       }).join('');
       scene = `<rect x="354" y="55" width="190" height="253" rx="8" fill="#f2bd8d" stroke="#9b7161" stroke-width="4"/>
@@ -1197,6 +1202,17 @@
       <section class="md-field-controls" aria-label="${f.phase === 'choose' ? '역할에 맞는 차 선택' : '현장 작업'}">${controls}</section>
     </main></div>`;
     state.container.querySelectorAll('.md-field-choice-media img, .md-field-engine img').forEach(img => window.SihyeonVehicleDisplay?.apply(img));
+    if (incident.id === 'ladder' && f.selected && f.world.ladder > 0) {
+      // A legacy truck picture has an opaque white background. Put the same
+      // ladder group above the picture so that background cannot sever its feet.
+      const canvas = state.container.querySelector('.md-field-canvas');
+      const tools = document.createElement('div');
+      tools.className = 'md-field-tool-layer';
+      tools.setAttribute('aria-hidden', 'true');
+      tools.innerHTML = '<svg viewBox="0 0 640 360"></svg>';
+      tools.querySelector('svg').appendChild(canvas.querySelector('[data-scene-ladder]'));
+      canvas.appendChild(tools);
+    }
     fitFieldScene();
     bindFieldControls();
     updateTargetGlow();

@@ -62,8 +62,32 @@ LAYOUT = r"""() => {
   if(status&&visible(status))for(const control of controls)if(overlap(rect(status),control.rect))issues.push({kind:'status-over-control',control:control.label});
   const svg=root.querySelector('#csProjectScene svg'),pieces=[];
   if(svg){for(const e of svg.querySelectorAll('[data-piece],.cs-scene-actor')){const r=rect(e);pieces.push({name:e.dataset.piece||'actor',rect:r});if(!inside(r,rect(svg)))issues.push({kind:'scene-piece-clipped',name:e.dataset.piece||'actor',rect:r,boundary:rect(svg)});}}
+  let sceneCoordinates=null;
+  if(svg){
+    const canvas=root.querySelector('.cs-project-canvas'),worker=root.querySelector('#csWorkerVehicle');
+    sceneCoordinates={svg:rect(svg),canvas:canvas?rect(canvas):null,worker:worker&&visible(worker)?rect(worker):null};
+    if(!canvas)issues.push({kind:'missing-common-scene-canvas'});
+    else{
+      const c=rect(canvas),s=rect(svg);
+      if(Math.abs(c.width/c.height-8/5)>.001||!inside(c,rect(stage)))issues.push({kind:'scene-canvas-fit',...sceneCoordinates});
+      if(['left','top','right','bottom'].some(key=>Math.abs(c[key]-s[key])>1))issues.push({kind:'svg-outside-common-canvas',...sceneCoordinates});
+      if(worker&&visible(worker)&&(worker.offsetParent!==canvas||!inside(rect(worker),c)))issues.push({kind:'worker-outside-common-canvas',...sceneCoordinates});
+    }
+    const walker=svg.querySelector('.cs-walker'),path=svg.querySelector('[data-piece="finished-path"] path');
+    if(walker&&path){
+      const legs=walker.querySelector('path[stroke="#394b72"]'),numbers=legs.getAttribute('d').match(/[-+]?\d*\.?\d+/g).map(Number);
+      const feet=[[numbers[0]+numbers[2],numbers[1]+numbers[3]],[numbers[0]+numbers[2]+numbers[4]+numbers[6],numbers[1]+numbers[3]+numbers[5]+numbers[7]]];
+      const matrix=path.getCTM().inverse().multiply(legs.getCTM()),radius=+legs.getAttribute('stroke-width')/2;
+      sceneCoordinates.walkerFeet=feet.map(([x,y])=>{
+        const point=new DOMPoint(x,y).matrixTransform(matrix);
+        const insidePath=Array.from({length:16},(_,i)=>{const a=i*Math.PI/8;return path.isPointInFill(new DOMPoint(x+radius*Math.cos(a),y+radius*Math.sin(a)).matrixTransform(matrix));}).every(Boolean);
+        if(!insidePath)issues.push({kind:'walker-foot-outside-finished-path',point:{x:point.x,y:point.y}});
+        return {x:point.x,y:point.y,insidePath};
+      });
+    }
+  }
   if(document.documentElement.scrollWidth>innerWidth+1)issues.push({kind:'horizontal-document-overflow'});
-  return {viewport:[innerWidth,innerHeight],phase:root.dataset.phase||'chooser',project:root.dataset.projectId,root:rect(root),controls,texts,pieces,issues};
+  return {viewport:[innerWidth,innerHeight],phase:root.dataset.phase||'chooser',project:root.dataset.projectId,root:rect(root),controls,texts,pieces,sceneCoordinates,issues};
 }"""
 
 
@@ -228,6 +252,10 @@ def project_flow(page, project, capture, language='ko'):
         page.wait_for_timeout(1000)
         capture(f'play-{turn+1}')
         expect(page.locator('[data-action="play-scene"]')).to_be_enabled()
+        if project == 'playground' and viewport['width'] == 390 and turn == 0:
+            endpoint = capture('walk-finished')
+            feet = endpoint['layout']['sceneCoordinates']['walkerFeet']
+            assert abs(feet[0]['x'] - 366) < 1 and abs(feet[0]['y'] - 262) < 1, feet
         assert total_exp(page) == final_exp, 'replay must not grant another completion reward'
     speech = page.evaluate('i=>window.__voiceTrace.slice(i).filter(r=>r.kind==="tts")', voice_start)
     assert speech, 'No project instructions were spoken'

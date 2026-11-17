@@ -146,6 +146,47 @@ def scene_bounds(page):
     return box
 
 
+def ladder_connection(page, expected_tip):
+    """Compare the actual rail feet with decoded source pixels using SVG CTMs.
+
+    A frame bounding box alone would accept the old floating connection. Sample
+    both feet in the original picture as well, rejecting transparent/white space.
+    """
+    wait_images(page)
+    result = page.evaluate(r"""() => {
+      const canvas=document.querySelector('.md-field-canvas');
+      const layer=canvas.querySelector('.md-field-tool-layer');
+      const ladder=canvas.querySelector('[data-scene-ladder]');
+      const picture=canvas.querySelector('.md-field-engine img');
+      const frame=picture.closest('.sv-vehicle-frame');
+      const p=ladder.querySelector('path').getAttribute('d').match(/-?\d+(?:\.\d+)?/g).map(Number);
+      const bitmap=document.createElement('canvas');
+      bitmap.width=picture.naturalWidth;bitmap.height=picture.naturalHeight;
+      const context=bitmap.getContext('2d', {willReadFrequently:true});
+      context.drawImage(picture,0,0);
+      const samples=[[p[0],p[1]],[p[4],p[5]]].map(([x,y])=>{
+        const screen=new DOMPoint(x,y).matrixTransform(ladder.getScreenCTM());
+        const source=screen.matrixTransform(frame.getScreenCTM().inverse());
+        const px=Math.round(source.x),py=Math.round(source.y);
+        return {world:[x,y],screen:[screen.x,screen.y],source:[px,py],
+          rgba:Array.from(context.getImageData(px,py,1,1).data)};
+      });
+      const c=canvas.getBoundingClientRect(),t=layer.getBoundingClientRect();
+      return {picture:picture.currentSrc,base:[(p[0]+p[4])/2,(p[1]+p[5])/2],
+        tip:[(p[2]+p[6])/2,(p[3]+p[7])/2],samples,
+        aboveVehicle:canvas.lastElementChild===layer && layer.contains(ladder),
+        pointerEvents:getComputedStyle(layer).pointerEvents,
+        planeDifference:[t.x-c.x,t.y-c.y,t.width-c.width,t.height-c.height],
+        groupCount:canvas.querySelectorAll('[data-scene-ladder]').length};
+    }""")
+    assert result["base"] == [150, 300] and result["tip"] == expected_tip, result
+    assert result["aboveVehicle"] and result["pointerEvents"] == "none" and result["groupCount"] == 1, result
+    assert all(abs(value) < 0.5 for value in result["planeDifference"]), result
+    assert all(sample["rgba"][3] >= 240 and min(sample["rgba"][:3]) < 235
+               for sample in result["samples"]), "A ladder foot falls in transparent or white space: " + json.dumps(result)
+    return result
+
+
 def capture(page, output, tag):
     wait_images(page)
     page.screenshot(path=str(output / f"{tag}.png"))
@@ -293,8 +334,10 @@ def one_viewport(page, base, output, index, width, height, responses):
     original_person = scene_snapshot(page)["person"]
     work(page)
     assert scene_snapshot(page)["ladderParts"] > 0 and scene_snapshot(page)["person"] == original_person
+    half_connection = ladder_connection(page, [295, 225])
     work(page)
     assert scene_snapshot(page)["person"] == original_person
+    full_connection = ladder_connection(page, [440, 150])
     expect(page.locator("[data-field-work]")).to_contain_text("친구 내려오기")
     click(page, "[data-field-listen]")
     work(page)
@@ -327,17 +370,19 @@ def one_viewport(page, base, output, index, width, height, responses):
             "motion": "no-preference" if (width, height) == (390, 844) else "reduce",
             "arrivalObservation": motion_observation,
             "sources": source_evidence(responses, base), "water": [water_before, filled_image, water_after],
-            "ladder": [ladder_before, ladder_after], "smoke": [smoke_before, smoke_after],
+            "ladder": [ladder_before, ladder_after], "ladderConnection": [half_connection, full_connection],
+            "smoke": [smoke_before, smoke_after],
             "rewardCalls": [20, 20, 20], "checks": ["wrong role feedback", "all tanker and ladder variants offered",
               "help on/off unchanged scene", "vehicle arrival then manual work", "water persists into pump work",
-              "no automatic next step", "visible flames/ladder/person/smoke change", "three incidents and voluntary replay"]}
+              "no automatic next step", "visible flames/ladder/person/smoke change",
+              "ladder feet meet decoded truck pixels in the same coordinate plane", "three incidents and voluntary replay"]}
 
 
 def retry_case(browser, base, output):
     context = browser.new_context(viewport={"width": 390, "height": 844}, service_workers="block", reduced_motion="reduce")
     page = context.new_page()
     responses, errors, requests = [], [], []
-    page.on("response", responses.append)
+    page.on("response", lambda response: responses.append(response))
     page.on("pageerror", lambda error: errors.append(str(error)))
     failed = {"on": True}
     def route_manifest(route):

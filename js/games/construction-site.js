@@ -136,7 +136,8 @@
     workPhase: 'choose',
     workMode: null,
     scenePlayCount: 0,
-    scenePlaying: false
+    scenePlaying: false,
+    sceneObserver: null
   };
 
   function playGameVoice(id) {
@@ -269,12 +270,14 @@
     const nextMode = getLayoutMode();
     if (state.layoutMode === nextMode) {
       applyRootLayoutClass();
+      fitProjectScene();
       return;
     }
     state.layoutMode = nextMode;
 
     if (state.locked || !state.currentMission) {
       applyRootLayoutClass();
+      fitProjectScene();
       return;
     }
 
@@ -503,6 +506,7 @@
       .cs-scene-svg { width:100%; height:100%; display:block; overflow:hidden; }
       .cs-project-game .cs-stage { min-height:100px; background:#d9f3ff; border:5px solid #fff; }
       .cs-project-game .cs-stage::before, .cs-project-game .cs-stage::after { display:none; }
+      .cs-project-canvas { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:100%; aspect-ratio:8 / 5; }
       .cs-project-scene { width:100%; height:100%; position:absolute; inset:0; }
       .cs-project-game .cs-worker-vehicle { width:30%; height:35%; left:3%; bottom:3%; z-index:4; opacity:0; }
       .cs-project-game.cs-ready .cs-worker-vehicle, .cs-project-game.cs-result-held .cs-worker-vehicle { left:3%; bottom:3%; width:30%; height:35%; opacity:1; }
@@ -529,10 +533,16 @@
       .cs-project-complete .cs-work-panel { display:grid; height:auto; min-height:174px; }
       .cs-project-complete .cs-work-buttons { grid-template-columns:1fr 1fr; }
       .cs-project-complete .cs-work-buttons .cs-primary { grid-column:1 / -1; }
-      .cs-scene-svg.is-playing .cs-walker { animation:csWalkPath 1.7s ease-in-out forwards; }
+      .cs-scene-svg.is-playing .cs-walker { animation:csWalkPath 1.7s linear forwards; }
       .cs-scene-svg.is-playing .cs-fire-engine { animation:csApronDrive 1.7s ease-in-out forwards; }
       .cs-scene-svg.is-playing .cs-bridge-car { animation:csCrossBridge 1.7s ease-in-out forwards; }
-      @keyframes csWalkPath { to { transform:translate(236px,-82px); } }
+      @keyframes csWalkPath {
+        0% { transform:translate(0px,0px); }
+        12% { transform:translate(18px,-31px); }
+        27% { transform:translate(48px,-62px); }
+        47% { transform:translate(100px,-86px); }
+        100% { transform:translate(254px,-104px); }
+      }
       @keyframes csApronDrive { to { transform:translate(-138px,48px); } }
       @keyframes csCrossBridge { to { transform:translateX(370px); } }
       .cs-work-spark { animation:csSpark .85s ease-out infinite; transform-origin:center; }
@@ -687,7 +697,7 @@
         ${n < 1 ? '<g data-piece="soil-pile" fill="#9c6b42"><path d="M155 324q50-97 102-14z"/><path d="M272 274q45-65 83-15z"/></g>' : '<g data-piece="cleared-path" stroke="#c49c65" stroke-width="5"><path d="M140 335l81-38m30-28 103-27"/></g>'}
         ${n >= 2 && n < 3 ? '<g data-piece="loaded-sand"><rect x="418" y="280" width="116" height="51" rx="12" fill="#f6bd4c" stroke="#bd7c28" stroke-width="5"/><path d="M425 287q49-57 102 0" fill="#f5d99b"/><circle cx="441" cy="337" r="12" fill="#50606b"/><circle cx="511" cy="337" r="12" fill="#50606b"/></g>' : ''}
         ${n >= 3 ? '<g data-piece="finished-path"><path d="M98 383q41-118 213-139l88-10 14 29-107 12q-123 22-173 108" fill="#f5d99b"/><path d="M145 344l26-25m34-22 31-14m43-20 33-8m36-7 29-5" stroke="#e0bc77" stroke-width="8" stroke-linecap="round"/></g>' : ''}`;
-      actor = '<g class="cs-scene-actor cs-walker" aria-label="길을 걷는 아이"><circle cx="144" cy="305" r="14" fill="#ffd0a1"/><path d="M133 325h22l2 24h-26z" fill="#ed6963"/><path d="M136 349l-6 17m21-17 7 16" stroke="#394b72" stroke-width="7" stroke-linecap="round"/><path d="M134 332l-12 10m32-10 12-9" stroke="#ffd0a1" stroke-width="7" stroke-linecap="round"/></g>';
+      actor = '<g class="cs-scene-actor cs-walker" aria-label="길을 걷는 아이"><circle cx="126" cy="305" r="14" fill="#ffd0a1"/><path d="M115 325h22l2 24h-26z" fill="#ed6963"/><path d="M118 349l-6 17m21-17 7 16" stroke="#394b72" stroke-width="7" stroke-linecap="round"/><path d="M116 332l-12 10m32-10 12-9" stroke="#ffd0a1" stroke-width="7" stroke-linecap="round"/></g>';
     } else if (id === 'station') {
       scene = `${tree(70,132)}
         <g aria-label="이미 있는 소방서"><rect x="266" y="98" width="284" height="149" rx="12" fill="#fff3d9" stroke="#c96348" stroke-width="7"/><path d="M247 111l24-38h271l27 38z" fill="#dc6457"/><rect x="289" y="136" width="56" height="46" rx="7" fill="#8ed1e1" stroke="#fff" stroke-width="6"/><rect x="368" y="141" width="136" height="106" rx="8" fill="#526f83"/><path d="M370 158h132m-132 20h132m-132 20h132m-132 20h132" stroke="#91a8b7" stroke-width="5"/><rect x="353" y="82" width="117" height="32" rx="9" fill="#fff"/><path d="M406 86v25m-13-12h26" stroke="#dd6258" stroke-width="8" stroke-linecap="round"/></g>
@@ -718,6 +728,7 @@
 
   function showProjectChooser() {
     if (!state.container || state.destroyed) return;
+    state.sceneObserver?.disconnect(); state.sceneObserver = null;
     clearTimers(); stopSpeech(); state.roundToken += 1;
     state.mode = 'chooser'; state.projectId = null; state.currentMission = null;
     state.selectedVehicle = null; state.workPhase = 'choose'; state.locked = false;
@@ -751,6 +762,29 @@
       title: step.title, question: step.question, englishQuestion: step.en, workAction: step.action,
       englishAction: step.actionEn, successText: step.result, englishSuccess: step.resultEn, stepLabel: step.label})) : pickMissions();
     startRound(); return true;
+  }
+
+  function fitProjectScene() {
+    const stage = state.container?.querySelector('.cs-project-game .cs-stage');
+    const canvas = stage?.querySelector('.cs-project-canvas');
+    if (!canvas || !(stage.clientWidth > 0) || !(stage.clientHeight > 0)) return;
+    // One 640:400 coordinate system for the drawn ground and the real vehicle.
+    // A tall outer stage may letterbox this whole canvas, never just its SVG.
+    const width = Math.min(stage.clientWidth, stage.clientHeight * 8 / 5);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${width * 5 / 8}px`;
+  }
+
+  function watchProjectScene() {
+    state.sceneObserver?.disconnect(); state.sceneObserver = null;
+    fitProjectScene();
+    const stage = state.container?.querySelector('.cs-project-game .cs-stage');
+    if (!stage || typeof window.ResizeObserver !== 'function') return;
+    const session = state.session, container = state.container;
+    state.sceneObserver = new window.ResizeObserver(() => {
+      if (!state.destroyed && state.session === session && state.container === container) fitProjectScene();
+    });
+    state.sceneObserver.observe(stage);
   }
 
   function render(container, options = {}) {
@@ -847,7 +881,7 @@
         </div>
 
         <div class="cs-stage" aria-label="공사장">
-          ${project ? `<div class="cs-project-scene" id="csProjectScene">${sceneSvg(project.id, state.completedSteps.length)}</div>` : `
+          ${project ? `<div class="cs-project-canvas"><div class="cs-project-scene" id="csProjectScene">${sceneSvg(project.id, state.completedSteps.length)}</div>` : `
           <div class="cs-stage-sky-shine"></div>
           ${mission.workLabel ? `<div class="cs-site-board">🚧 ${escapeHtml(mission.workLabel)}</div>` : ''}
           <div class="cs-sun"></div>
@@ -863,6 +897,7 @@
           </div>
           `}
           <div class="cs-worker-vehicle" id="csWorkerVehicle"></div>
+          ${project ? '</div>' : ''}
         </div>
 
         <div class="cs-choices">
@@ -882,6 +917,7 @@
       </div>
     `;
     bindEvents();
+    watchProjectScene();
   }
 
   function bindEvents() {
@@ -1012,6 +1048,7 @@
       panel.querySelector('[data-action="next-work"]')?.addEventListener('click', nextWork);
       panel.querySelector('[data-action="listen-result"]')?.addEventListener('click', speakResult);
     }
+    fitProjectScene();
   }
 
   function updateProjectScene() {
@@ -1100,7 +1137,7 @@
     if (project) {
       state.container.innerHTML = `<div class="cs-root ${getRootLayoutClass()} cs-project-game cs-project-complete is-complete" data-phase="complete" data-project-id="${project.id}">
         <div class="cs-top"><div class="cs-pill">${project.icon} ${escapeHtml(project.short)} 완성!</div><div class="cs-actions"><button class="cs-btn" data-action="projects">현장</button><button class="cs-btn" data-action="restart-complete">다시</button></div></div>
-        <div class="cs-stage" aria-label="완성한 현장"><div class="cs-project-scene" id="csProjectScene">${sceneSvg(project.id, 3)}</div></div>
+        <div class="cs-stage" aria-label="완성한 현장"><div class="cs-project-canvas"><div class="cs-project-scene" id="csProjectScene">${sceneSvg(project.id, 3)}</div></div></div>
         <div class="cs-work-panel"><p class="cs-work-status" role="status">우리가 준비한 곳에서 놀아요.</p><div class="cs-work-buttons">
           <button class="cs-btn cs-primary" data-action="play-scene">${escapeHtml(project.play)}</button>
           <button class="cs-btn" data-action="projects">🏗️ 다른 현장</button><button class="cs-btn" data-action="home-complete">🏠 놀이터</button>
@@ -1109,6 +1146,7 @@
       state.container.querySelectorAll('[data-action="projects"]').forEach((button) => button.addEventListener('click', showProjectChooser));
       state.container.querySelector('[data-action="restart-complete"]')?.addEventListener('click', restartGame);
       state.container.querySelector('[data-action="home-complete"]')?.addEventListener('click', () => state.options.closeToParkHome?.());
+      watchProjectScene();
       return;
     }
 
@@ -1181,6 +1219,7 @@
   function destroy() {
     state.session += 1; state.roundToken += 1;
     clearTimers();
+    state.sceneObserver?.disconnect(); state.sceneObserver = null;
     stopSpeech();
     if (state.resizeTimer) {
       window.clearTimeout(state.resizeTimer);
