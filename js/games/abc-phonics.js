@@ -197,7 +197,8 @@
     completeRewardGiven: false,
     sound: true,
     voiceEpoch: 0,
-    matchAnswered: false
+    matchAnswered: false,
+    introTimer: null
   };
 
   function isLandscapeMode() {
@@ -229,13 +230,34 @@
     state.handleResizeBound = handleResize;
     window.addEventListener('resize', state.handleResizeBound, { passive: true });
     window.addEventListener('orientationchange', state.handleResizeBound, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibility);
   }
 
   function unbindLayoutEvents() {
     if (!state.handleResizeBound) return;
     window.removeEventListener('resize', state.handleResizeBound);
     window.removeEventListener('orientationchange', state.handleResizeBound);
+    document.removeEventListener('visibilitychange', handleVisibility);
     state.handleResizeBound = null;
+  }
+
+  function handleVisibility() {
+    if (document.hidden) { cancelIntro(); stopVoice(); }
+  }
+
+  function cancelIntro() {
+    if (state.introTimer == null) return;
+    clearTimeout(state.introTimer);
+    state.timers = state.timers.filter(id => id !== state.introTimer);
+    state.introTimer = null;
+  }
+
+  function scheduleIntro(fn, ms) {
+    cancelIntro();
+    state.introTimer = timer(() => {
+      state.introTimer = null;
+      if (!document.hidden && state.phase === 'LETTER') fn();
+    }, ms);
   }
 
   function handleResize() {
@@ -260,6 +282,7 @@
   function clearTimers() {
     state.timers.forEach((id) => clearTimeout(id));
     state.timers = [];
+    state.introTimer = null;
     if (state.resizeTimer) {
       window.clearTimeout(state.resizeTimer);
       state.resizeTimer = null;
@@ -1061,7 +1084,7 @@
   }
 
   function speakDirect(text, lang = 'ko-KR') {
-    if (state.destroyed || !state.sound || !text) return Promise.resolve(false);
+    if (state.destroyed || document.hidden || !state.sound || !text) return Promise.resolve(false);
     // Korean letter learning stays Korean. English Listening never reads it
     // with an English voice or substitutes a translation for the learned sound.
     if (lang === 'ko-KR' && window.SihyeonPlaySettings?.getLanguage?.() === 'en') return Promise.resolve(false);
@@ -1097,7 +1120,18 @@
   }
 
   function speakItemText(text, forceLang) {
-    if (state.destroyed || !state.sound || !text) return Promise.resolve(false);
+    if (state.destroyed || document.hidden || !state.sound || !text) return Promise.resolve(false);
+    // ABC words are English learning content in either listening setting. The
+    // shared English manifest deliberately has no games.abc.* translations.
+    // Use the explicit lesson text so replay does not silently disappear.
+    if (forceLang === 'en-US') {
+      const englishLesson = {
+        '에이, 비, 씨가 장난감으로 변신해요!': 'The letters A, B, and C turn into pictures!',
+        '우와. 에이, 비, 씨를 모두 만났어요.': 'You met A, B, and C!'
+      };
+      const phrase = englishLesson[text] || text;
+      return /[가-힣]/.test(phrase) ? Promise.resolve(false) : speakDirect(phrase, 'en-US');
+    }
     const voiceIds = {
       '에이, 비, 씨가 장난감으로 변신해요!': 'games.abc.intro',
       'Touch A!': 'games.abc.touchA',
@@ -1206,9 +1240,9 @@
     state.successRewardGiven = false;
     state.completeRewardGiven = false;
     renderScene(true);
-    timer(() => {
+    scheduleIntro(() => {
       const dataset = getDataset();
-      speakItemText(dataset.intro, nextMode === 'abc' ? 'en-US' : 'ko-KR');
+      if (state.phase === 'LETTER') speakItemText(dataset.intro, nextMode === 'abc' ? 'en-US' : 'ko-KR');
     }, 300);
   }
 
@@ -1277,6 +1311,7 @@
     root.querySelectorAll('.lt-mode-tab').forEach(btn => btn.addEventListener('click', () => resetMode(btn.dataset.mode)));
     root.querySelector('#ltSound').addEventListener('click', () => {
       state.sound = !state.sound;
+      cancelIntro();
       stopVoice();
       const button = root.querySelector('#ltSound');
       button.setAttribute('aria-pressed', String(state.sound));
@@ -1311,6 +1346,7 @@
     showVisual(item.letterImg, false);
 
     function replayPrompt() {
+      cancelIntro();
       if (state.phase === 'LETTER') speakDirect(state.mode === 'abc' ? `Letter ${item.letterName}. Touch the letter.` : `글자 이름은 ${item.letterName}. 눌러서 ${item.word} 그림을 만나 볼까요?`, lang);
       else if (state.phase === 'CHOOSING') speakDirect(state.mode === 'abc' ? `Find the ${item.word.toLowerCase()}.` : `${item.word} 그림을 찾아볼까요?`, lang);
       else if (state.phase === 'OBJECT') speakItemText(item.wordVoice, lang);
@@ -1321,6 +1357,7 @@
       if (state.destroyed || !root.contains(mainCard)) return;
       if (state.phase === 'OBJECT') { replayPrompt(); return; }
       if (state.phase !== 'LETTER') return;
+      cancelIntro();
       state.phase = 'TRANSFORMING';
       state.isTransforming = true;
       mainCard.disabled = true;
@@ -1377,19 +1414,19 @@
         if (state.destroyed || state.phase !== 'CHOOSING') return;
         const chosen = button.dataset.choice;
         if (chosen === item.word) {
-          context.textContent = `맞아요! ${item.word}이에요`;
+          context.textContent = `맞아요! ${item.word}!`;
           speakItemText(item.wordVoice, lang);
           if (!state.matchAnswered) { state.matchAnswered = true; state.options.fireConfetti?.(); }
           board.querySelectorAll('[data-choice]').forEach(b => b.classList.toggle('lt-match', b === button));
         } else {
-          context.textContent = `이건 ${chosen} · ${item.word}을 찾아요`;
-          speakDirect(state.mode === 'abc' ? `That is a ${chosen.toLowerCase()}. Find the ${item.word.toLowerCase()}.` : `이건 ${chosen}. ${item.word}을 찾아볼까요?`, lang);
+          context.textContent = `이건 ${chosen} · ${item.word} 그림을 찾아요`;
+          speakDirect(state.mode === 'abc' ? `You picked the ${chosen.toLowerCase()}. Find the ${item.word.toLowerCase()}.` : `이건 ${chosen}. ${item.word} 그림을 찾아볼까요?`, lang);
         }
       }));
       replayPrompt();
     });
 
-    if (!skipIntroVoice) timer(replayPrompt, 400);
+    if (!skipIntroVoice) scheduleIntro(replayPrompt, 400);
   }
 
   function advanceRound() {
@@ -1461,7 +1498,7 @@
       state.successRewardGiven = false;
       state.completeRewardGiven = false;
       renderScene(true);
-      timer(() => {
+      scheduleIntro(() => {
         const msg = state.mode === 'abc' ? 'Touch the letter!' : '글자를 눌러볼까?';
         speakItemText(msg, state.mode === 'abc' ? 'en-US' : 'ko-KR');
       }, 350);
@@ -1499,9 +1536,9 @@
     container.innerHTML = `<div class="${getRootClass()}"></div>`;
     renderScene(true);
 
-    timer(() => {
+    scheduleIntro(() => {
       const dataset = getDataset();
-      speakItemText(dataset.intro, state.mode === 'abc' ? 'en-US' : 'ko-KR');
+      if (state.phase === 'LETTER') speakItemText(dataset.intro, state.mode === 'abc' ? 'en-US' : 'ko-KR');
     }, 350);
   }
 

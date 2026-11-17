@@ -178,11 +178,12 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   margin-top:1px;
 }
 
+@media(max-width:1000px){#brand>span:last-child{display:none}#brand strong{font-size:14px}#rightTop .pill{padding:6px 8px}}
 @media(max-width:700px){
   #top{gap:4px;padding-left:6px;padding-right:6px}
   #rightTop{gap:4px;padding:4px}
   #rightTop .pill{min-width:44px;min-height:44px;padding:4px 8px}
-  #brand{padding:5px 8px}
+  #brand{display:none}
   #brand strong{display:none}
 
   #brand span,.pill .btnTxt{display:none}
@@ -2035,6 +2036,7 @@ function animate(now){
 }
 
 function returnToPlayOS(){
+  stopSpeech();
   try{
     if(window.parent && window.parent !== window && typeof window.parent.returnToCurrentGameLand === 'function'){
       window.parent.returnToCurrentGameLand();

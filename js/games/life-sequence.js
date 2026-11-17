@@ -124,13 +124,13 @@
       guide: '손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요.',
       clean: '깨끗한 손으로 음식을 먹어요.',
       sit: '자리에 앉으면 편안하게 먹을 수 있어요.',
-      eat: '손을 씻고 자리를 잡았으니 맛있게 먹어요.'
+      eat: '손을 씻고 자리에 앉은 뒤 맛있게 먹어요.'
     },
     sleep_time: {
       guide: '잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요.',
       pajamas: '편한 잠옷을 입고 잘 준비를 해요.',
       book: '조용히 책을 보며 쉬는 시간을 준비해요.',
-      light: '준비를 마쳤으니 불을 끄고 편안히 쉬어요.'
+      light: '잠잘 준비를 마친 뒤 불을 끄고 편안히 쉬어요.'
     },
     go_out: {
       guide: '옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요.',
@@ -142,7 +142,7 @@
       guide: '장난감을 모아 바구니에 넣으면 방이 정리돼요.',
       gather: '흩어진 장난감을 한곳에 모아요.',
       basket: '모은 장난감을 바구니에 넣어 자리를 찾아 줘요.',
-      clean: '장난감을 정리해서 걸어 다닐 자리가 생겼어요.'
+      clean: '장난감을 정리하면 걸어 다닐 자리가 생겨요.'
     }
   };
   const FLEXIBLE_PREPARATION = new Set(['eat_meal', 'sleep_time', 'go_out']);
@@ -167,14 +167,14 @@
       intro: 'Shall we get ready to eat?', complete: 'You are ready to enjoy your meal.',
       clean: ['Wash your hands', 'Eat with clean hands.'],
       sit: ['Sit down', 'Sitting helps you eat comfortably.'],
-      eat: ['Enjoy your meal', 'Your hands are clean and you are seated. Now enjoy your meal.']
+      eat: ['Enjoy your meal', 'Wash your hands and sit down before enjoying your meal.']
     },
     sleep_time: {
       guide: 'Pajamas and a book can switch places. Get ready before resting.',
       intro: 'Shall we get ready for bed?', complete: 'Rest well. See you tomorrow.',
       pajamas: ['Put on pajamas', 'Comfortable pajamas help you get ready for bed.'],
       book: ['Read a book', 'A quiet story helps you get ready to rest.'],
-      light: ['Turn off the light and rest', 'You are ready. Turn off the light and rest.']
+      light: ['Turn off the light and rest', 'When you are ready, turn off the light and rest.']
     },
     go_out: {
       guide: 'Clothes and shoes can switch places. Get ready before going outside.',
@@ -226,7 +226,8 @@
     roundId: 0,
     roundAnswered: false,
     timerToken: 0,
-    guideText: ''
+    guideText: '',
+    speechRevision: 0
   };
 
   function injectStyle() {
@@ -288,6 +289,7 @@
   }
 
   function playGameVoice(id) {
+    if (state.destroyed || (typeof document !== 'undefined' && document.hidden)) return;
     const missionId = state.mission?.id || 'wash_hands';
     if (missionId === 'wash_hands' && ['games.life.intro', 'games.common.wrong', 'games.common.correct'].includes(id)) return;
     const missionMap = {
@@ -311,7 +313,7 @@
   }
 
   function speak(text, force, english) {
-    if (!text || state.destroyed) return;
+    if (!text || state.destroyed || (typeof document !== 'undefined' && document.hidden)) return;
     if (window.SihyeonPlaySettings?.getLanguage?.() === 'en') {
       text = english || englishFor(text);
       if (!text) return;
@@ -328,12 +330,16 @@
     state.guideText = text || REASONS[state.mission?.id]?.guide || state.mission?.guide || '';
     const target = state.container?.querySelector('[data-life-reason]');
     if (target) target.textContent = state.guideText;
-    if (read) { stopSpeech(); speak(state.guideText, true); }
+    if (read) { state.speechRevision += 1; stopSpeech(); speak(state.guideText, true); }
   }
 
   function stopSpeech() {
     try { window.SihyeonVoice?.stop?.(); } catch (error) {}
     try { window.speechSynthesis?.cancel?.(); } catch (error) {}
+  }
+
+  function handleVisibility() {
+    if (document.hidden) stopSpeech();
   }
 
   function vibrate(pattern) {
@@ -434,6 +440,7 @@
     state.completeRewardGiven = false;
     state.missions = shuffle(MISSIONS).slice(0, TOTAL_ROUNDS);
     bindResizeEvents();
+    document.addEventListener?.('visibilitychange', handleVisibility);
     startRound();
   }
 
@@ -693,6 +700,7 @@
     clearTimers();
     stopSpeech();
     const mission = state.mission;
+    const speechRevision = state.speechRevision;
     const root = state.container.querySelector('.ls-root');
     const scene = state.container.querySelector('#lsScene');
     root?.classList.remove('complete');
@@ -708,7 +716,7 @@
         slot.classList.add('correct');
         if (card) {
           setExplanation(`${card.label}. ${REASONS[mission.id]?.[card.id] || ''}`);
-          if (index === 0) speak(card.label, false);
+          if (index === 0 && speechRevision === state.speechRevision) speak(card.label, false);
         }
       }, index * 360);
     });
@@ -728,7 +736,7 @@
       showMessage(message);
       setExplanation(REASONS[mission.id]?.guide);
       const englishMessage = `${ENGLISH[mission.id].complete} ${state.placed.map(card => ENGLISH[mission.id][card.id][0]).join('. ')}.`;
-      speak(message, true, englishMessage);
+      if (speechRevision === state.speechRevision) speak(message, true, englishMessage);
     }, delay);
   }
 
@@ -801,6 +809,7 @@
       state.resizeTimer = null;
     }
     unbindResizeEvents();
+    document.removeEventListener?.('visibilitychange', handleVisibility);
     state.destroyed = true;
     const prev = document.getElementById(STYLE_ID);
     if (prev) prev.remove();

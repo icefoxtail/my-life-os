@@ -77,14 +77,14 @@
   ];
 
   const NEEDS = [
-    { id: 'hungry', action: 'eat', cue: '🥣', title: '배가 고파요', clue: '빈 밥그릇을 바라보고 있어요.', result: '냠냠! 밥을 먹어서 배가 든든해졌어요.',
+    { id: 'hungry', action: 'eat', cue: '🥣', request: '배가 고파!', title: '배가 고파요', clue: '빈 밥그릇 앞에서 기다려요. 무엇이 필요할까요?', result: '냠냠! 맛있게 밥을 먹어요.',
       en: ['I am hungry', 'The food bowl is empty. What does the cat need?', 'Yum! The cat has eaten and feels full.'] },
-    { id: 'messy', action: 'bath', cue: '🐾', title: '털에 흙이 묻었어요', clue: '흙놀이를 해서 털이 지저분해요.', result: '보글보글 씻었어요. 털이 깨끗해졌어요.',
-      en: ['My fur is muddy', 'The cat got muddy while playing. What could help?', 'We washed the mud away. The fur is clean.'] },
-    { id: 'sleepy', action: 'sleep', cue: '🥱', title: '졸려요', clue: '하품을 하며 눈을 감으려 해요.', result: '코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.',
-      en: ['I am sleepy', 'The cat is yawning and closing its eyes. What does it need?', 'The cat is resting. Let us keep it quiet.'] },
-    { id: 'space', action: 'wait', cue: '🌿', title: '혼자 쉬고 싶어요', clue: '고개를 돌렸어요. 조금 떨어져 기다려 줄까요?', result: '조용히 기다려 줬어요. 고양이가 편안해졌어요.',
-      en: ['I need some space', 'The cat is turning away. Shall we give it some space?', 'We waited quietly. The cat feels comfortable.'] }
+    { id: 'wash', action: 'bath', cue: '🫧', request: '깨끗이 씻고 싶어!', title: '씻고 싶어요', clue: '씻고 싶은 마음을 알려 줬어요. 어떻게 도와줄까요?', result: '보글보글, 함께 목욕해요.',
+      en: ['I want to wash', 'The cat says it would like to wash. How can we help?', 'Bubbles! We are helping the cat wash.'] },
+    { id: 'sleepy', action: 'sleep', cue: '🌙', request: '졸려, 쉬고 싶어.', title: '졸려요', clue: '졸린 마음을 알려 줬어요. 무엇이 필요할까요?', result: '코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.',
+      en: ['I am sleepy', 'The cat says it feels sleepy. What does it need?', 'The cat is resting. Let us keep it quiet.'] },
+    { id: 'space', action: 'wait', cue: '🌿', request: '조금 혼자 있고 싶어.', title: '혼자 쉬고 싶어요', clue: '혼자 있고 싶은 마음을 알려 줬어요. 기다려 줄까요?', result: '조용히 기다려 줬어요. 고양이가 편안히 쉬어요.',
+      en: ['I need some space', 'The cat says it wants some time alone. Shall we wait?', 'We waited quietly. The cat is resting.'] }
   ];
 
   const state = {
@@ -1074,6 +1074,7 @@
       .cc-observe-scene img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}
       .cc-observe-scene .cc-main-fallback{font-size:80px;box-shadow:none}
       .cc-need-cue{position:absolute;right:10px;top:10px;padding:8px 12px;display:grid;place-items:center;background:#fff;border:3px solid #f2c7ca;border-radius:22px;font-size:clamp(30px,7vw,48px);box-shadow:0 3px 8px #66443322;pointer-events:none}
+      .cc-cat-request{position:absolute;left:12px;right:12px;bottom:10px;max-width:380px;margin:0 auto;padding:8px 12px;background:#fffdf5;border:3px solid #d5abae;border-radius:20px;font-size:clamp(17px,4.2vw,23px);line-height:1.25;text-align:center;font-weight:900;color:#613644;box-shadow:0 3px 8px #66443322;pointer-events:none}
       .cc-care-story{min-width:0;padding:8px 12px;border-radius:18px;background:#fffdf7;border:3px solid #fff;text-align:center;line-height:1.35}
       .cc-need-title{margin:0 0 3px;font-size:clamp(18px,4.6vw,23px);font-weight:900;color:#743b4c}
       .cc-care-copy{font-size:clamp(14px,3.7vw,17px);margin:0;word-break:keep-all;color:#46363b;line-height:1.4}
@@ -1106,6 +1107,7 @@
   }
 
   function playVoiceId(voiceId) {
+    if (state.destroyed || document.hidden) return;
     if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
       window.SihyeonVoice.play(voiceId, '').catch(() => {});
     }
@@ -1205,7 +1207,7 @@
   }
 
   function say(ko, en) {
-    if (state.destroyed) return;
+    if (state.destroyed || document.hidden) return;
     const text = window.SihyeonPlaySettings?.getLanguage?.() === 'en' ? en : ko;
     if (!text) return;
     stopSpeech();
@@ -1220,6 +1222,10 @@
     const need = activeNeed();
     say(state.feedback || `${need.title}. ${need.clue}`,
       state.feedbackEn || `${need.en[0]}. ${need.en[1]}`);
+  }
+
+  function handleVisibility() {
+    if (document.hidden) stopSpeech();
   }
 
   function changeCat() {
@@ -1249,10 +1255,11 @@
           <button class="cc-care-control" id="cc-change-cat" type="button">고양이 선택</button>
         </header>
         <div class="cc-observe-scene">
-          <img id="cc-main-img" src="${cat.steps[state.activeStep] || cat.steps.default}" alt="${cat.name} ${state.resolved ? '돌봄 뒤 모습' : '모습'}"
+          <img id="cc-main-img" src="${!state.resolved && need.id !== 'hungry' ? cat.selectImg : cat.steps[state.activeStep] || cat.steps.default}" alt="${cat.name} ${state.resolved ? '돌봄 뒤 모습' : '모습'}"
             onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
           <div id="cc-main-fallback" class="cc-main-fallback">${cat.emoji}</div>
           <div class="cc-need-cue" aria-hidden="true">${state.resolved ? (need.id === 'sleepy' ? '💤' : '💚') : need.cue}</div>
+          ${state.resolved ? '' : `<p class="cc-cat-request" data-cat-request>${need.request}</p>`}
         </div>
         <div class="cc-care-story" role="status" aria-live="polite">
           <h3 class="cc-need-title">${state.resolved ? '마음을 알아줬어요' : need.title}</h3>
@@ -1379,7 +1386,7 @@
     } else if (action.id === need.action) {
       state.resolved = true;
       state.completed.add(need.id);
-      state.activeStep = action.id === 'wait' ? 'default' : action.id;
+      state.activeStep = action.id === 'wait' ? 'sleep' : action.id;
       state.feedback = need.result;
       state.feedbackEn = need.en[2];
       const rewardKey = `${state.currentCat.id}:${need.id}`;
@@ -1439,6 +1446,7 @@
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('orientationchange', handleResize);
+    document.addEventListener?.('visibilitychange', handleVisibility);
   }
 
   function destroy() {
@@ -1449,6 +1457,7 @@
     clearTimeout(state.resizeTimer);
     window.removeEventListener('resize', handleResize);
     window.removeEventListener('orientationchange', handleResize);
+    document.removeEventListener?.('visibilitychange', handleVisibility);
 
     if (typeof speechSynthesis !== 'undefined') {
       speechSynthesis.cancel();

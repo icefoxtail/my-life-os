@@ -1,0 +1,77 @@
+{
+  "baseCommit": "f92fb050524cae533322e09db0d0cc170350789f",
+  "sourceSha256": {
+    "js/games/abc-phonics.js": "555a79b76d2937a61be216ff8e42bb7fc06dcdc253c5d7121fe34609e49d9a00",
+    "games/hangul-playmat-3d.html": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+    "js/games/life-sequence.js": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+    "js/games/cat-care.js": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+    "sw.js": "a07ef6e85c4c8ed745404c9f363139a0832b0881be09ff9e64c0b9fc441cfbe3",
+    "scripts/test-creator-language-stage6.cjs": "37676dd96d2a132e849a36a0c703f69635aff45559d47e9c4c65adc4d5a957e7",
+    "scripts/test-creator-life-care-stage6.cjs": "6132613c99d59bbc954ebd88c72e7094668c23485b3b86e15499c96b10d3c3f8",
+    "scripts/test-creator-hangul-rules.cjs": "6b2ab13e6a2e4409b1659a295260fb008fdf930ac98797433266be601c751964",
+    "scripts/test-creator-life-pace.cjs": "3c06d03537dacf7ebd6540ab73722e7dc710aa88078b946ab2119ffdaf5e6fbf",
+    "scripts/test-legacy-models.cjs": "1bec266969b09e9b0f8a19e8d8352bddad36c2836cc2edb1354e84676a0e7df4",
+    "scripts/test-legacy-inputs.cjs": "7372d2b4f65950c8a634762eaf9193c7bf9b0c59f9ccaa9b3f2f4c2f8196d9ce",
+    "scripts/qa-static.cjs": "6ab0225ae14654d0a8569cce58bf51abf9e852639013fe9872c2a82be251e286",
+    "scripts/qa-sw-independent.cjs": "18c7826fdd2c9f66bfac0a3b968d29ead67ea04715cb3b554694c60cfcb5a041",
+    "scripts/qa-creator-language-stage6-browser.py": "92fc6678753c5d69e064bb7d4dd37d9f4b1333ab4a3925eab0602afeea7e5171",
+    "scripts/qa-creator-life-care-stage6-browser.py": "23739cc0c5d02b68a5559f41587ec24b2275745995a98d834a768759b98783b5"
+  },
+  "results": [
+    {
+      "file": "scripts/test-creator-language-stage6.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 14 stage6 language cases: an object is replayable and Next is the only progression; fast taps cannot skip transformation or make repeated rewards; wrong and repeated right picture choices preserve the round and reward once; early instruction replay supersedes intro, and hiding cancels late voice without restarting play; each exercise has three distinct pictures and target moves between slots; switching during the transform cancels old callbacks and stale voice permissions; sound toggle cancels pending audio and replay never changes play state; Korean transform explains an actual combined syllable without pseudo phonemes; actual shared English engine speaks ABC replay, guide and completion without an ID translation; the acorn is a distinct semantic vector, not a chestnut emoji; destroy cancels transformations and outstanding replay permissions; explicit completion is once per play and never triggered by replay; every 3D consonant tap says its name, while composed blocks say the actual syllable; 3D instruction is retained while muted and replayed after unmuting; English policy is preserved. Browser/audio NOT_RUN.\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/test-creator-life-care-stage6.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 27,\n  \"scenarios\": [\n    \"life wash_hands: every action speaks; explanation is replayable without changing placement\",\n    \"life wash_hands: English replay and action speech contain no Korean\",\n    \"life brush_teeth: every action speaks; explanation is replayable without changing placement\",\n    \"life brush_teeth: English replay and action speech contain no Korean\",\n    \"life eat_meal: every action speaks; explanation is replayable without changing placement\",\n    \"life eat_meal: English replay and action speech contain no Korean\",\n    \"life sleep_time: every action speaks; explanation is replayable without changing placement\",\n    \"life sleep_time: English replay and action speech contain no Korean\",\n    \"life go_out: every action speaks; explanation is replayable without changing placement\",\n    \"life go_out: English replay and action speech contain no Korean\",\n    \"life clean_up: every action speaks; explanation is replayable without changing placement\",\n    \"life clean_up: English replay and action speech contain no Korean\",\n    \"life eat_meal: both preparations are valid before the final action\",\n    \"life eat_meal: the final action cannot precede both preparations; retained preparation is respected\",\n    \"life sleep_time: both preparations are valid before the final action\",\n    \"life sleep_time: the final action cannot precede both preparations; retained preparation is respected\",\n    \"life go_out: both preparations are valid before the final action\",\n    \"life go_out: the final action cannot precede both preparations; retained preparation is respected\",\n    \"cat: observed need, unsuitable action and waiting preserve the state; correct care changes it once\",\n    \"cat: all four actual needs have a matching response, including space; only manual next changes need\",\n    \"cat: early finish is kind and does not claim or reward completion\",\n    \"cat: switching and unmount clear particles and invalidate old actions and callbacks\",\n    \"cat: rotation is silent and keeps chosen care, scene and rewards\",\n    \"cat: explicit English replay uses English, reward storage failure does not block next\",\n    \"life: hidden page stops narration, keeps the pending verdict and only resumes speech on a new action\",\n    \"life: explicit explanation replay is not interrupted by the remaining automatic narration\",\n    \"cat: hidden page stops narration and no queued callback speaks or worsens the need\"\n  ],\n  \"sourceSha256\": {\n    \"js/games/life-sequence.js\": \"13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99\",\n    \"js/games/cat-care.js\": \"c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89\"\n  },\n  \"notRun\": [\n    \"rendered pixels\",\n    \"audible speech\",\n    \"physical touch\",\n    \"child observation\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/test-creator-hangul-rules.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 474 Hangul rule scenarios: 140 syllables, 16 reachable bonuses, semantic pictures, shelf behavior, popup cleanup, raster-reference mismatch and real occlusion rejection. Browser/audio NOT_RUN.\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/test-creator-life-pace.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 11,\n  \"scenarios\": [\n    \"verdict offers Next immediately and awards the solved arrangement once\",\n    \"animation still completes but no amount of waiting advances without the child\",\n    \"early Next cancels animation and detached controls cannot skip or replay another round\",\n    \"Replay restarts only the existing sequence and never duplicates combo or rewards\",\n    \"wrong positions recover at the original 1150ms; correct water/towel stay in place\",\n    \"rotation preserves solved slots, accessible actions and the running animation\",\n    \"destroy and a new mount reject late verdict/animation callbacks\",\n    \"six child-chosen advances complete once; the last result waits for Finish\",\n    \"actual shared engine stops the prior step immediately when Next is chosen\",\n    \"an external round reward error cannot hide Next or stop the original animation\",\n    \"external completion reward errors cannot prevent Finish and its result controls\"\n  ],\n  \"sourceSha256\": \"13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99\",\n  \"limitation\": \"Synthetic DOM/device; run required legacy-inputs and native browser checks separately\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/test-legacy-models.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 22963 model scenarios: quantity conservation, undoable parts, saved-data validation, 140 Hangul compositions.\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/test-legacy-inputs.cjs",
+      "exitCode": 0,
+      "stdout": "PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy, secondary pointer and cloned-image fallback.\nPASS handwashing: all 24 four-step arrangements, required rinse step, delayed-check edit lock, and correct-slot preservation.\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/qa-static.cjs",
+      "exitCode": 0,
+      "stdout": "PASS: 15 JS files, 9 inline scripts, Boardland removal, load order and new asset cache paths.\n",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/qa-sw-independent.cjs",
+      "exitCode": 0,
+      "stdout": "PASS SW: 164 assets visited once, max 4 concurrent fetches, optional network/404/cache errors continue, 6 boundary lengths, only two old matching-prefix caches deleted.\n",
+      "stderr": ""
+    },
+    {
+      "file": "browser-script-compile",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "allPassed": true
+}

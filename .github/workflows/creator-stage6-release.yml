@@ -1,0 +1,110 @@
+name: Creator stage 6 release
+
+on:
+  pull_request:
+    paths:
+      - 'js/games/abc-phonics.js'
+      - 'js/games/life-sequence.js'
+      - 'js/games/cat-care.js'
+      - 'games/hangul-playmat-3d.html'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/*stage6*'
+      - '.github/workflows/creator-stage6-release.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/games/abc-phonics.js'
+      - 'js/games/life-sequence.js'
+      - 'js/games/cat-care.js'
+      - 'games/hangul-playmat-3d.html'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/*stage6*'
+      - '.github/workflows/creator-stage6-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stage6-rules:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Meaning, causal sequences, care states and direct regression
+        run: |
+          node scripts/test-creator-language-stage6.cjs
+          node scripts/test-creator-life-care-stage6.cjs
+          node scripts/test-creator-hangul-rules.cjs
+          node scripts/test-creator-life-pace.cjs
+          node scripts/test-legacy-models.cjs
+          node scripts/test-legacy-inputs.cjs
+          node scripts/qa-static.cjs
+          node scripts/qa-sw-independent.cjs
+          python3 -m py_compile scripts/qa-creator-language-stage6-browser.py scripts/qa-creator-life-care-stage6-browser.py
+
+  stage6-chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [language, life-care]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Install pinned Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
+      - name: Wait for exact production runtime
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib,time,urllib.request
+          paths=['index.html','sw.js','js/play-settings.js','js/voice-engine.js','js/voice-labels.js','js/english-listening.js','js/games/abc-phonics.js','js/games/life-sequence.js','js/games/cat-care.js','games/hangul-playmat-3d.html','js/engine/webgl-fallback.js']
+          expected={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base='https://icefoxtail.github.io/my-life-os/'
+          out=pathlib.Path('qa-stage6-evidence');out.mkdir(exist_ok=True)
+          deadline=time.monotonic()+40*60
+          while time.monotonic()<deadline:
+              actual={}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base+path+'?stage6='+expected['sw.js'][:12],timeout=15) as response:
+                          actual[path]=hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__,flush=True)
+              if actual==expected:
+                  (out/'production-source.json').write_text(json.dumps({'baseUrl':base,'matches':True,'expected':expected,'actual':actual},indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Exact stage6 main runtime not served by Pages; production play did not run.')
+          PY
+      - name: Play through actual public menus and controls
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          STAGE6_GAME: ${{ matrix.game }}
+        run: |
+          args=()
+          if [ "$EVENT_NAME" = push ]; then
+            args=(--base-url https://icefoxtail.github.io/my-life-os/)
+          fi
+          python3 "scripts/qa-creator-$STAGE6_GAME-stage6-browser.py" "${args[@]}" --output "qa-stage6-evidence/$STAGE6_GAME"
+      - name: Preserve source-bound reports and original screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: creator-stage6-${{ matrix.game }}-${{ github.run_id }}
+          path: qa-stage6-evidence/
+          if-no-files-found: error
+          retention-days: 14
