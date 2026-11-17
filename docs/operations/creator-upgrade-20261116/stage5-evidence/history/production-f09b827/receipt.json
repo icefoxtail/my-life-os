@@ -1,0 +1,182 @@
+{
+  "sourceEvidenceSet": "main-f09b827",
+  "archive": {
+    "path": "raw-json-reports.tar.gz",
+    "sha256": "361901b89fe15cd11a305e823518c6135cf4a78fa1a0da294a8bddd28226cbd4",
+    "bytes": 43910
+  },
+  "rawJsonReports": [
+    {
+      "path": "arithmetic-strategies/REVIEW.json",
+      "bytes": 7485,
+      "sha256": "e8a45b77e161498cf1b6111c8dfc3ac84dd00268005489a370b2538e6e0b3b04"
+    },
+    {
+      "path": "arithmetic-strategies/artifact-metadata.json",
+      "bytes": 388,
+      "sha256": "1fa0feee59c5b5df69797caa49f78f4e6ebefb61fc41a1f9b3b45c8aad536cd2"
+    },
+    {
+      "path": "arithmetic-strategies/github-artifact-metadata.json",
+      "bytes": 854,
+      "sha256": "46adcd42a7d8f6a552d312e5115953d2c742c0899b9b9213ed999cfc91aa2b76"
+    },
+    {
+      "path": "arithmetic-strategies/github-main-commit.json",
+      "bytes": 3103,
+      "sha256": "1120516d3f8913e7715bfcae964baad345d9b2827e631a9ec4f80c224029e212"
+    },
+    {
+      "path": "arithmetic-strategies/raw/arithmetic-strategies/arithmetic-strategies-browser.json",
+      "bytes": 111787,
+      "sha256": "04310b40b3e15e78297be92db0acb11d10360e6b05098c253274e065026c1d49"
+    },
+    {
+      "path": "arithmetic-strategies/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "github-artifacts.json",
+      "bytes": 3558,
+      "sha256": "60068f885f22ad777895d81fd4b1a63d6df4976185c9cc6d2671c6859189e141"
+    },
+    {
+      "path": "merge-equality.json",
+      "bytes": 475,
+      "sha256": "6ff72aeb490d1f73d2afc3674e045eb5cb84a0fb4ed42574c9cfcbd998f28710"
+    },
+    {
+      "path": "number-continuity/REVIEW.json",
+      "bytes": 11720,
+      "sha256": "75dbddb70d96c69bf26c1a4d6215efcf0240443ea6c4ac5cf373836bd4470813"
+    },
+    {
+      "path": "number-continuity/artifact-metadata.json",
+      "bytes": 749,
+      "sha256": "462703ead9bbed1ede2f30098a2e10b348f4dc8e935aaf00b9ac64cdf27ec6f4"
+    },
+    {
+      "path": "number-continuity/raw/number-continuity/number-continuity-browser.json",
+      "bytes": 177213,
+      "sha256": "078f5b15ea6b7b70c396cf1566771ebdc69fab7533e62084924e4cb0bd61a76c"
+    },
+    {
+      "path": "number-continuity/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "number-world/REVIEW.json",
+      "bytes": 18489,
+      "sha256": "39a7bf38fcb0662c83a887ae0636280661ab46262e8fb9e73bcebc74aee25966"
+    },
+    {
+      "path": "number-world/artifact-metadata.json",
+      "bytes": 2292,
+      "sha256": "674720a177b28cbecdb68c1b9a2af70829849f28f0c379e5201808aca5d17811"
+    },
+    {
+      "path": "number-world/raw/number-world/number-world-browser.json",
+      "bytes": 213898,
+      "sha256": "8d588afa6553a1018b48b3840966d203f324a8de9dfefc18e07979226bdbd709"
+    },
+    {
+      "path": "number-world/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "train-collection/REVIEW.json",
+      "bytes": 8115,
+      "sha256": "0f06d443295433688ee74b13b89b18fa1079574bb7d9fd7d445b4429e9776159"
+    },
+    {
+      "path": "train-collection/artifact-metadata.json",
+      "bytes": 383,
+      "sha256": "43652b69b6fdb36bf5ff12b01cb9cf35bcf89cd96c873a8e03a89acd7b684f1b"
+    },
+    {
+      "path": "train-collection/github-artifact-metadata.json",
+      "bytes": 849,
+      "sha256": "ec86507c2fec19c47ea52a87232cc87b1f5105f639d8246437f1bcab8ab25440"
+    },
+    {
+      "path": "train-collection/github-main-commit.json",
+      "bytes": 3103,
+      "sha256": "1120516d3f8913e7715bfcae964baad345d9b2827e631a9ec4f80c224029e212"
+    },
+    {
+      "path": "train-collection/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "train-collection/raw/train-collection/creator-train-collection-browser.json",
+      "bytes": 33400,
+      "sha256": "17e3feac9803013c4a305e316d03713156e6fca57c7df45e906f147b715f116a"
+    },
+    {
+      "path": "workflow-runs.json",
+      "bytes": 3011,
+      "sha256": "fb38abfd9e753fcc17fe9eeeef309dc666d4dce0ebd0b26c0d18f6f322c0aea4"
+    }
+  ],
+  "preservedPng": [
+    {
+      "sourcePath": "number-continuity/raw/number-continuity/number-continuity-320x568.png",
+      "path": "reviewed-png/number-continuity--number-continuity-320x568.png",
+      "bytes": 80873,
+      "sha256": "5eb3712b28e1b780470533e80a22347fe5d1eec984fe9a3f8c79268183943e6d"
+    },
+    {
+      "sourcePath": "number-continuity/raw/number-continuity/garden-continuity-390x844.png",
+      "path": "reviewed-png/number-continuity--garden-continuity-390x844.png",
+      "bytes": 76891,
+      "sha256": "16ba88cb6473dd23ad10934147a1594645377573a29046c288959a0b989def1c"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-saved-844x390.png",
+      "path": "reviewed-png/number-world--number-world-saved-844x390.png",
+      "bytes": 136281,
+      "sha256": "d5be4ddf2d19f5f7a6cdc8ca3e11dcc0e565dd23d4bf2c6cdae01b9d6c008ded"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-restored-844x390.png",
+      "path": "reviewed-png/number-world--number-world-restored-844x390.png",
+      "bytes": 128325,
+      "sha256": "eb4de2c546a162e432b99f581d8dbf39f40ed3ef434872797c4525c20bb37b57"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-boundary-failure.png",
+      "path": "reviewed-png/number-world--number-world-boundary-failure.png",
+      "bytes": 150521,
+      "sha256": "f31f16ccb5915c1481f576ac88290b58fc776d64b8f4ef5edb02df67dc513888"
+    },
+    {
+      "sourcePath": "train-collection/raw/train-collection/train-two-vs-four-320x568.png",
+      "path": "reviewed-png/train-collection--train-two-vs-four-320x568.png",
+      "bytes": 72602,
+      "sha256": "d949e9cadc8568e33f3d2945a3ce38908db9d34bd079e206c34da68ab10a5d65"
+    },
+    {
+      "sourcePath": "train-collection/raw/train-collection/train-gallery-full.png",
+      "path": "reviewed-png/train-collection--train-gallery-full.png",
+      "bytes": 80899,
+      "sha256": "cd98d1104c96098d3812c1c01e4c6ca736561a0862d79339d6c6e216a168530b"
+    },
+    {
+      "sourcePath": "arithmetic-strategies/raw/arithmetic-strategies/kept-remainder-320x568.png",
+      "path": "reviewed-png/arithmetic-strategies--kept-remainder-320x568.png",
+      "bytes": 47043,
+      "sha256": "a94c1ae5bde26b56239606d263db038e2d95cd3ba5c80415f4b33201af8a1f95"
+    },
+    {
+      "sourcePath": "arithmetic-strategies/raw/arithmetic-strategies/compare-sharing-640x360.png",
+      "path": "reviewed-png/arithmetic-strategies--compare-sharing-640x360.png",
+      "bytes": 47685,
+      "sha256": "9e2779039fec16b1d9bcc48655b7435cb011db80dd8ecc2ed1d28495761d5626"
+    }
+  ],
+  "note": "JSON and PNG bytes are preserved unchanged. Original review records may contain session paths; this receipt maps each preserved PNG to its portable repository path. Unselected screenshots remain identified in the original artifact receipts."
+}

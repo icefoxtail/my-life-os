@@ -1,0 +1,106 @@
+{
+  "reviewer": "/root/auto_numbers",
+  "reviewedAtUtc": "2026-11-17T08:28:37.250376+00:00",
+  "status": "PASS_INDEPENDENT_HARNESS_COUNTEREXAMPLE",
+  "scope": "Minimal independent model of the observed slow-RAF instrumentation failure; repository files were not modified by reviewer.",
+  "oldMain": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+  "reviewedNewFile": "scripts/qa-creator-number-world-browser.py",
+  "reviewedNewFileSha256": "cf858155fed70dab13ec10263a683ae8ac63982cecaad2ad169ed4ea8f26f53e",
+  "extraction": "Exact observer evaluate strings were extracted by Python AST and executed unchanged in Node VM.",
+  "results": {
+    "raf750ms": {
+      "oldSamples": 2,
+      "oldContractPass": false,
+      "newSamples": 4,
+      "newObservationMs": 2250,
+      "newContractPass": true
+    },
+    "noRaf": {
+      "oldStillPendingAt10000ms": true,
+      "newSamples": 0,
+      "newTimedOut": true,
+      "newResolvedAtMs": 10000,
+      "newContractPass": false
+    },
+    "raf3000ms": {
+      "newSamples": 3,
+      "newTimedOut": true,
+      "newResolvedAtMs": 10000,
+      "newContractPass": false
+    }
+  },
+  "preservedChecks": {
+    "allPreviousAssertionsPreservedAstExactly": true,
+    "oldAssertCount": 5,
+    "newAssertCount": 6,
+    "wholeHarnessNativeClickCallsUnchangedAstExactly": true,
+    "nativeClickCount": 22,
+    "forcedClickKeywords": 0,
+    "measurementUsesSameRectAndCenterHitAndAnimationApis": true
+  },
+  "phase2MainRun": {
+    "run": 44044633924,
+    "jobs": [
+      {
+        "id": 133907179746,
+        "name": "production-ui",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 133907180170,
+        "name": "quantity-games",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 133907180177,
+        "name": "chromium",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 133907180203,
+        "name": "art-story",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "evidence": {
+    "extraction.json": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/extraction.json",
+      "sha256": "d96e4b0e1be798a60dab5d93588fb677f741e0453fdb7ef0e401d235e4e49827"
+    },
+    "old-observer.js": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/old-observer.js",
+      "sha256": "b304b3607d7e1f6d1daf7fcd172b00dee710fe15d69a9c7c59b5499dd60f4a8f"
+    },
+    "new-observer.js": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/new-observer.js",
+      "sha256": "a4dbdb46eb2df82ef25a8042a68e1a0d424f617bac0de9ceeaa7508effcd43fa"
+    },
+    "reproduce.cjs": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/reproduce.cjs",
+      "sha256": "e9cb2e8af001eb681a4bc26e7f24797a9425aace09b62c5632fc3eaea6035f59"
+    },
+    "results.json": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/results.json",
+      "sha256": "4aa87bf72d4951452f34f0bfb3ada9ba41c17be5280ba68958aa46d47ff5b686"
+    },
+    "observer-change.diff": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/observer-change.diff",
+      "sha256": "2733e87b98e4168247d2872e0d8900bce7904bcd42cce3862f541e8a200f8f28"
+    },
+    "phase2-main-jobs.json": {
+      "path": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/phase2-main-jobs.json",
+      "sha256": "11fdd7fda841185d050729c9fbaa2428e93ae38c383c0ff06e91a6b3c1688e3d"
+    }
+  },
+  "repositoryFilesModifiedByReviewer": [],
+  "limits": [
+    "Virtual RAF/timers validate the real observer logic under sparse, missing and excessively delayed frames. This is not an actual Chromium rerun.",
+    "Geometry is a deliberately stable 54 by 54 px fixture with center hit, zero rectangle delta, and no animations in reduced-motion mode. Existing product geometry assertions are preserved independently by AST comparison.",
+    "The fix must still pass the actual Chromium workflow on its committed SHA."
+  ]
+}

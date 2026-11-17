@@ -1,0 +1,133 @@
+{
+  "status": "PASS_MINIMAL_HARNESS_COUNTEREXAMPLE",
+  "fixture": {
+    "width": 54,
+    "height": 54,
+    "centerHit": true,
+    "maxRectDelta": 0,
+    "buttonAnimations": 0,
+    "iconAnimations": 0,
+    "preference": "reduce"
+  },
+  "results": {
+    "sparse750ms": {
+      "old": {
+        "settled": true,
+        "virtualFinishedAtMs": 1500,
+        "contractPass": false,
+        "observation": {
+          "samples": 2,
+          "minWidth": 54,
+          "minHeight": 54,
+          "centerHit": true,
+          "maxRectDelta": 0,
+          "buttonAnimationCount": 0,
+          "iconAnimationCount": 0
+        }
+      },
+      "new": {
+        "settled": true,
+        "virtualFinishedAtMs": 3000,
+        "contractPass": true,
+        "observation": {
+          "samples": 4,
+          "rafFrames": 4,
+          "timedOut": false,
+          "elapsedMs": 3000,
+          "observationMs": 2250,
+          "minimumObservationMs": 1000,
+          "minimumRafFrames": 4,
+          "deadlineMs": 10000,
+          "sampleTimesMs": [
+            750,
+            1500,
+            2250,
+            3000
+          ],
+          "minWidth": 54,
+          "minHeight": 54,
+          "centerHit": true,
+          "maxRectDelta": 0,
+          "buttonAnimationCount": 0,
+          "iconAnimationCount": 0
+        }
+      }
+    },
+    "noFrames": {
+      "old": {
+        "settled": false,
+        "virtualFinishedAtMs": 10000,
+        "contractPass": false,
+        "observation": null
+      },
+      "new": {
+        "settled": true,
+        "virtualFinishedAtMs": 10000,
+        "contractPass": false,
+        "observation": {
+          "samples": 0,
+          "rafFrames": 0,
+          "timedOut": true,
+          "elapsedMs": 10000,
+          "observationMs": 0,
+          "minimumObservationMs": 1000,
+          "minimumRafFrames": 4,
+          "deadlineMs": 10000,
+          "sampleTimesMs": [],
+          "minWidth": null,
+          "minHeight": null,
+          "centerHit": false,
+          "maxRectDelta": null,
+          "buttonAnimationCount": 0,
+          "iconAnimationCount": 0
+        }
+      }
+    },
+    "tooSlow3000ms": {
+      "old": {
+        "settled": true,
+        "virtualFinishedAtMs": 3000,
+        "contractPass": false,
+        "observation": {
+          "samples": 1,
+          "minWidth": 54,
+          "minHeight": 54,
+          "centerHit": true,
+          "maxRectDelta": 0,
+          "buttonAnimationCount": 0,
+          "iconAnimationCount": 0
+        }
+      },
+      "new": {
+        "settled": true,
+        "virtualFinishedAtMs": 10000,
+        "contractPass": false,
+        "observation": {
+          "samples": 3,
+          "rafFrames": 3,
+          "timedOut": true,
+          "elapsedMs": 10000,
+          "observationMs": 6000,
+          "minimumObservationMs": 1000,
+          "minimumRafFrames": 4,
+          "deadlineMs": 10000,
+          "sampleTimesMs": [
+            3000,
+            6000,
+            9000
+          ],
+          "minWidth": 54,
+          "minHeight": 54,
+          "centerHit": true,
+          "maxRectDelta": 0,
+          "buttonAnimationCount": 0,
+          "iconAnimationCount": 0
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Virtual RAF and timer scheduling only; actual extracted observer logic is executed unchanged.",
+    "Not an actual browser run or proof of any untested geometry."
+  ]
+}

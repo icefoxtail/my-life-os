@@ -1,0 +1,157 @@
+{
+  "sourceEvidenceSet": "main-7c14faf",
+  "archive": {
+    "path": "raw-json-reports.tar.gz",
+    "sha256": "b66288f61d72ee32041e0cf228b1d0e1276278dd6619401992da9c6f584c4a51",
+    "bytes": 51916
+  },
+  "rawJsonReports": [
+    {
+      "path": "ROOT_REVIEW.json",
+      "bytes": 13976,
+      "sha256": "913369cccc0dfdcc3ea3de957f195b2bc6649730f98a485ebd714974cd903749"
+    },
+    {
+      "path": "arithmetic-strategies/REVIEW.json",
+      "bytes": 14324,
+      "sha256": "16f9eee127e68315038572b48d2ff86a01bb5b28832ef3a7e1e4c6ea857c6940"
+    },
+    {
+      "path": "arithmetic-strategies/artifact-metadata.json",
+      "bytes": 753,
+      "sha256": "d7c78770869a9e65906edac3147f44c4177e0809c47d03b9538792e3fbaf9b7c"
+    },
+    {
+      "path": "arithmetic-strategies/job-metadata.json",
+      "bytes": 1379,
+      "sha256": "767da1c9faf8188ce87d2456dfa530c0e162293d23b3b9c59edec6c9b9c8918a"
+    },
+    {
+      "path": "arithmetic-strategies/main-commit-metadata.json",
+      "bytes": 2925,
+      "sha256": "343b6d6a01fc4bda74612a1c31129495cf292360083ee720c272153c2694f139"
+    },
+    {
+      "path": "arithmetic-strategies/raw/arithmetic-strategies/arithmetic-strategies-browser.json",
+      "bytes": 111787,
+      "sha256": "52ced0064c404568b375abb44a55b52cc95ace41780aec376272d16348e359ce"
+    },
+    {
+      "path": "arithmetic-strategies/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "github-artifacts.json",
+      "bytes": 3558,
+      "sha256": "76ada733850e52fe754c1046aa5afd1943defda4dd083f349a63fc8c884fa4e5"
+    },
+    {
+      "path": "merge-equality.json",
+      "bytes": 2322,
+      "sha256": "7b976ff3991922dd43d681c9314f31c37c837df88c822d2e89eb414b031679c7"
+    },
+    {
+      "path": "number-continuity/REVIEW.json",
+      "bytes": 18410,
+      "sha256": "84494cd9c13d5e66dab455f2380172801bf17b7b0cabd4dc0e7c371219007666"
+    },
+    {
+      "path": "number-continuity/artifact-metadata.json",
+      "bytes": 749,
+      "sha256": "6469b9ef0e705715fedaa22b709bf15ba23bf73173338fe7400a10b57cdb57c3"
+    },
+    {
+      "path": "number-continuity/raw/number-continuity/number-continuity-browser.json",
+      "bytes": 177213,
+      "sha256": "078f5b15ea6b7b70c396cf1566771ebdc69fab7533e62084924e4cb0bd61a76c"
+    },
+    {
+      "path": "number-continuity/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "number-world/REVIEW.json",
+      "bytes": 48860,
+      "sha256": "b4bea31a2977d9793d5a41728e5bff7cae456c19843da98e26f740e3c13178ef"
+    },
+    {
+      "path": "number-world/artifact-metadata.json",
+      "bytes": 2292,
+      "sha256": "5d5437689c5b4aec9dfa8862b49cc506549232578bb79093113db6b159ccbb91"
+    },
+    {
+      "path": "number-world/raw/number-world/number-world-browser.json",
+      "bytes": 217191,
+      "sha256": "c9b688e10019102dbe4f29180a38ba05861b57db707a6f744101e06b4d596b23"
+    },
+    {
+      "path": "number-world/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "train-collection/REVIEW.json",
+      "bytes": 15028,
+      "sha256": "e230c379b59f49bc0c0f8b7eb109745c43a6267044111c8b3545f99d35757bb1"
+    },
+    {
+      "path": "train-collection/artifact-metadata.json",
+      "bytes": 748,
+      "sha256": "7d2d7efe3094ec2bba9b8a214bb10231c36f0a97111e511cf182c60737e60b54"
+    },
+    {
+      "path": "train-collection/job-metadata.json",
+      "bytes": 1374,
+      "sha256": "0b677bdac8694c7e215fdd40c0bad7ee4f29a8755e76df984ccefd43046c8461"
+    },
+    {
+      "path": "train-collection/main-commit-metadata.json",
+      "bytes": 2925,
+      "sha256": "343b6d6a01fc4bda74612a1c31129495cf292360083ee720c272153c2694f139"
+    },
+    {
+      "path": "train-collection/raw/production-source.json",
+      "bytes": 3730,
+      "sha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+    },
+    {
+      "path": "train-collection/raw/train-collection/creator-train-collection-browser.json",
+      "bytes": 33400,
+      "sha256": "c28f7418c54a11e9faafde8c6abbddf6116e2dea011ce27da14afb0c1216a93c"
+    },
+    {
+      "path": "workflow-runs.json",
+      "bytes": 1171,
+      "sha256": "d5a933e1613dfce22fc48a5e70b2fcde02d7b676de18950f7cfbf59d6166189e"
+    }
+  ],
+  "preservedPng": [
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-saved-844x390.png",
+      "path": "reviewed-png/number-world--number-world-saved-844x390.png",
+      "bytes": 136537,
+      "sha256": "bb5f3ce74b52ab0e82ca1394c6da5b61d35ee2db1784217be8caffab25d67221"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-restored-844x390.png",
+      "path": "reviewed-png/number-world--number-world-restored-844x390.png",
+      "bytes": 128412,
+      "sha256": "934545df71b866ff2b8a11b1ca60351630c7bb4df3a9c5b5c716bdb46a9bd3a8"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-ready-targets.png",
+      "path": "reviewed-png/number-world--number-world-ready-targets.png",
+      "bytes": 147657,
+      "sha256": "c18d9244407fd065a9a0741986e1da7ed26674d6cf39568791ee8f7c8a21bdcd"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-three-hundreds.png",
+      "path": "reviewed-png/number-world--number-world-three-hundreds.png",
+      "bytes": 147307,
+      "sha256": "bd9d281d3fda7bcffd2ac8a01f4d0ad759a65f987e28f46abbb0dfb717d6e774"
+    }
+  ],
+  "note": "JSON and PNG bytes are preserved unchanged. Original review records may contain session paths; this receipt maps each preserved PNG to its portable repository path. Unselected screenshots remain identified in the original artifact receipts."
+}

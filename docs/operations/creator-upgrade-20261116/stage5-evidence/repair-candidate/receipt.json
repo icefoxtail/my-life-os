@@ -1,0 +1,85 @@
+{
+  "sourceEvidenceSet": "candidate-b8f8ca9",
+  "archive": {
+    "path": "raw-json-reports.tar.gz",
+    "sha256": "ace8ea5d8eef03c9fb13725858a7fd8b105090ee8a33c82bbb1c3d9dbf10b4a2",
+    "bytes": 31556
+  },
+  "rawJsonReports": [
+    {
+      "path": "ROOTCHECK.json",
+      "bytes": 11890,
+      "sha256": "c951e2c3ccb25a32141a1555bf187df5f9d7645a7a75fcf850eb15ddd70e69ea"
+    },
+    {
+      "path": "arithmetic-strategies/artifact-metadata.json",
+      "bytes": 800,
+      "sha256": "2a643629b542efe379193e234f9dd22af97af8b5e2ff1f3aa6cc6cc25f76a511"
+    },
+    {
+      "path": "arithmetic-strategies/raw/arithmetic-strategies/arithmetic-strategies-browser.json",
+      "bytes": 111770,
+      "sha256": "6aacc6651286a7e7880e1490d075499d602e5d956d8a585f805321dd77eff389"
+    },
+    {
+      "path": "number-continuity/artifact-metadata.json",
+      "bytes": 796,
+      "sha256": "06db6d242b69a7b70e8497645907c154db386bc971b9b7bec3296eb10a640fa6"
+    },
+    {
+      "path": "number-continuity/raw/number-continuity/number-continuity-browser.json",
+      "bytes": 177196,
+      "sha256": "c1bb3bb89cb336fa94ae9b04689a7580dcb2477cbd4cd2b7c30b6e371e8d7a5d"
+    },
+    {
+      "path": "number-world/artifact-metadata.json",
+      "bytes": 791,
+      "sha256": "47f1a484670a8c003a1a76ec06d62182094cb34484c87bb8c2cd04ac6f1f5be0"
+    },
+    {
+      "path": "number-world/raw/number-world/number-world-browser.json",
+      "bytes": 216799,
+      "sha256": "65f01d7c4fe720eaf1f2e34cf2c470f28644d4d237a64484e038041e064d2c28"
+    },
+    {
+      "path": "runtime-comparison.json",
+      "bytes": 5077,
+      "sha256": "0d019e0a8e94e75a33f80ed7b388da6d02ff046ebce3a6167999edf2a0be2e37"
+    },
+    {
+      "path": "stage5-job-metadata.json",
+      "bytes": 7523,
+      "sha256": "88eb976ce4a248402ec952bab861093e16090fcd233bc2cb63723ede105acfac"
+    },
+    {
+      "path": "train-collection/artifact-metadata.json",
+      "bytes": 795,
+      "sha256": "76423cb03db2f3a4220db46541f9e9a0a3d5dfde8e7f2aedf536c2703148bc7a"
+    },
+    {
+      "path": "train-collection/raw/train-collection/creator-train-collection-browser.json",
+      "bytes": 32227,
+      "sha256": "b69dde993e51b11131865d7c396276d17ee5177844e93fd596c6d3fbbef6f72d"
+    },
+    {
+      "path": "workflow-runs.json",
+      "bytes": 810,
+      "sha256": "a1d11c4625c7dd8a31c1bbf4a463d31efc9e9d9d146553445250e24c81b496d8"
+    }
+  ],
+  "preservedPng": [
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-ready-targets.png",
+      "path": "reviewed-png/number-world--number-world-ready-targets.png",
+      "bytes": 145439,
+      "sha256": "abb572552ff2cf5a601fd7b22513d88a9dc3b480ad677a9adbc29719c6102e89"
+    },
+    {
+      "sourcePath": "number-world/raw/number-world/number-world-three-hundreds.png",
+      "path": "reviewed-png/number-world--number-world-three-hundreds.png",
+      "bytes": 147391,
+      "sha256": "c332aeb5ce1a43cd865ee8bbd92eb880438f0c7555bc2b05dfd00a2c89afa516"
+    }
+  ],
+  "note": "JSON and PNG bytes are preserved unchanged. Original review records may contain session paths; this receipt maps each preserved PNG to its portable repository path. Unselected screenshots remain identified in the original artifact receipts."
+}
