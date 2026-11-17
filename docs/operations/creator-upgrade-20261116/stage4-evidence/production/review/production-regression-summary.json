@@ -1,0 +1,629 @@
+{
+  "review": "production-regression-summary",
+  "reviewer": "/root/status_checkpoint",
+  "createdAt": "2026-11-17T07:05:56.321895+00:00",
+  "mergeCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+  "status": "PASS_FOR_SAVED_PRODUCTION_REGRESSION_EVIDENCE",
+  "scope": "Verified saved production artifact bytes, report assertions, public-source evidence and Git blobs. No new browser run, new network probe, code/Git/AWCR writes or new PNG sweep.",
+  "totals": {
+    "creatorReports": 9,
+    "creatorChecksPassed": 81,
+    "smallScreenChecksPassed": 24,
+    "combinedChecksPassed": 105
+  },
+  "workflows": {
+    "evidence": {
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/workflow-runs.json",
+      "rawSha256": "82359b800590878448ee27dde54763dd5c20dea0673dbce5c48b5039c9436203"
+    },
+    "allEightAtMergeSuccessful": true,
+    "runs": [
+      {
+        "name": "Playground checks",
+        "id": 44033698167,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698167",
+        "conclusion": "success"
+      },
+      {
+        "name": "pages build and deployment",
+        "id": 44033696883,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033696883",
+        "conclusion": "success"
+      },
+      {
+        "name": "Vehicle display release",
+        "id": 44033698037,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698037",
+        "conclusion": "success"
+      },
+      {
+        "name": "Creator stage 3 release",
+        "id": 44033698099,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698099",
+        "conclusion": "success"
+      },
+      {
+        "name": "Small screen UI release",
+        "id": 44033698109,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698109",
+        "conclusion": "success"
+      },
+      {
+        "name": "Phase 2 browser release",
+        "id": 44033698042,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698042",
+        "conclusion": "success"
+      },
+      {
+        "name": "Creator upgrade release",
+        "id": 44033698065,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+        "conclusion": "success"
+      },
+      {
+        "name": "Creator stage 4 release",
+        "id": 44033698174,
+        "url": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698174",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "artifacts": {
+    "creator": {
+      "runId": 44033698065,
+      "runUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "artifactId": 14307545595,
+      "zipSha256": "129a89ecc731d3819d247d9743b81484f0f2f7753dbea77f2056bafde4604af0"
+    },
+    "small": {
+      "runId": 44033698109,
+      "runUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698109",
+      "artifactId": 14306242833,
+      "zipSha256": "827fc2f8ce6c6f96f70c23f966a4beef3198ea037980e1a9ef90bd119e590797"
+    }
+  },
+  "creatorPublicSourceBarrier": {
+    "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/production-source.json",
+    "rawSha256": "47178c29d90e868e88224039cbced602fe14dc4fd3d100b5fa4556af6882f9cf",
+    "sourceCount": 12,
+    "allActualExpectedAndMergeHashesMatch": true,
+    "requestUrlBasis": "URLs reconstructed from the exact-merge Creator workflow; production-source.json itself stores only expected/actual digests, not URL/status fields.",
+    "workflowPath": ".github/workflows/creator-upgrade-release.yml",
+    "workflowSha256": "51326de3a6aa278b0c3a8f6beff5c5e3e9ef83594840cc91a670999c88b6543c",
+    "sources": [
+      {
+        "path": "sw.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/sw.js?creator=ca7993d4635a",
+        "sha256": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd"
+      },
+      {
+        "path": "js/games/vehicle-memory.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/vehicle-memory.js?creator=ca7993d4635a",
+        "sha256": "bcb3fe61b623fb161b2bcfc834694997a6e2898e1a2a00559e46cc48cc828ece"
+      },
+      {
+        "path": "js/games/construction-site.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/construction-site.js?creator=ca7993d4635a",
+        "sha256": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153"
+      },
+      {
+        "path": "js/games/number-count.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/number-count.js?creator=ca7993d4635a",
+        "sha256": "a3ac928ebb06ba4847245edb6cfdf5d85c71e33f5ce443ac1ac202ce58fe93b3"
+      },
+      {
+        "path": "js/games/color-balloon.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/color-balloon.js?creator=ca7993d4635a",
+        "sha256": "9cc14d7cb97b655b740c2ce44f3c55de59ec57ae42cca7ded0604f821bdff4b5"
+      },
+      {
+        "path": "js/games/megaDispatch.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/megaDispatch.js?creator=ca7993d4635a",
+        "sha256": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6"
+      },
+      {
+        "path": "js/games/life-sequence.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/life-sequence.js?creator=ca7993d4635a",
+        "sha256": "ab91eaef9654b19149e6959bb22f8b2ffe25cbec71fd489f183d0255fc844cef"
+      },
+      {
+        "path": "js/games/pattern-train.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/pattern-train.js?creator=ca7993d4635a",
+        "sha256": "c1f4de13617c17e2989dd69c09ed52decddb902f591ad6521e354443706b35de"
+      },
+      {
+        "path": "js/games/pattern-train-model.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/games/pattern-train-model.js?creator=ca7993d4635a",
+        "sha256": "50a73b6b3d31129c4dd8b602ba375b255b7220c0cd7e4e04bee3534104108e19"
+      },
+      {
+        "path": "js/engine/webgl-fallback.js",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/js/engine/webgl-fallback.js?creator=ca7993d4635a",
+        "sha256": "82bc46098f537c12eb476e3a01a1fafcc6e876e2a9a6003ad6112fa2fe16f4ff"
+      },
+      {
+        "path": "games/hangul-playmat-3d.html",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/games/hangul-playmat-3d.html?creator=ca7993d4635a",
+        "sha256": "bb75ee3cb90e26ec43d9b0dec751ee43988e75c470d2705f1c7362790cdf43c5"
+      },
+      {
+        "path": "games/number-kingdom-3d.html",
+        "requestUrl": "https://icefoxtail.github.io/my-life-os/games/number-kingdom-3d.html?creator=ca7993d4635a",
+        "sha256": "a11dc8774bd42824352adaa2a5585c140781bc6a542aedb9d8fb9d19dd47fb3b"
+      }
+    ]
+  },
+  "creatorReports": [
+    {
+      "suite": "help",
+      "status": "PASS",
+      "checks": 16,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/help/results.json",
+      "rawSha256": "4a1abef0635b6ab5ba3d735113df26df27aa8437687af3b24ad699d4456a21a0",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "base_url",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os",
+      "sourceProof": "direct HTTP source probes (runner asserts HTTP 200 and exact checkout bytes)",
+      "sourceEntries": 3,
+      "uniqueSourcePaths": [
+        "index.html",
+        "js/games/color-balloon.js",
+        "js/games/megaDispatch.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "page_errors": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "fieldNote": "The report records base_url and checkout_commit. Camel-case baseUrl is absent; production provenance is present. Each nested sources entry is the digest of a direct public HTTP probe, not a separately recorded browser-loaded response. Per-entry URL/httpStatus and harness SHA are not serialized.",
+      "sourceUrlReconstruction": {
+        "index.html": "https://icefoxtail.github.io/my-life-os/index.html",
+        "js/games/color-balloon.js": "https://icefoxtail.github.io/my-life-os/js/games/color-balloon.js",
+        "js/games/megaDispatch.js": "https://icefoxtail.github.io/my-life-os/js/games/megaDispatch.js"
+      },
+      "limits": [
+        "Machine browser checks; physical touch and child observation are NOT_RUN.",
+        "Audio listening is NOT_RUN."
+      ]
+    },
+    {
+      "suite": "hangul",
+      "status": "PASS",
+      "checks": 28,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/hangul/results.json",
+      "rawSha256": "b392bd03f4270634404bb4a192d87a912ef36e24dae22902b1c996f7849408ec",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "base_url",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os",
+      "sourceProof": "direct HTTP source probes (runner asserts HTTP 200 and exact checkout bytes)",
+      "sourceEntries": 3,
+      "uniqueSourcePaths": [
+        "games/hangul-playmat-3d.html",
+        "index.html",
+        "js/engine/webgl-fallback.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "page_errors": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "fieldNote": "The report records base_url and checkout_commit. Camel-case baseUrl is absent; production provenance is present. Each nested sources entry is the digest of a direct public HTTP probe, not a separately recorded browser-loaded response. Per-entry URL/httpStatus and harness SHA are not serialized.",
+      "sourceUrlReconstruction": {
+        "games/hangul-playmat-3d.html": "https://icefoxtail.github.io/my-life-os/games/hangul-playmat-3d.html",
+        "index.html": "https://icefoxtail.github.io/my-life-os/index.html",
+        "js/engine/webgl-fallback.js": "https://icefoxtail.github.io/my-life-os/js/engine/webgl-fallback.js"
+      },
+      "limits": [
+        "Machine browser checks, not a physical touch or child observation session.",
+        "3D content composition uses the existing OpenWorldDebug API; drag gestures are not certified.",
+        "Speech is muted during 3D checks; audio listening is NOT_RUN."
+      ]
+    },
+    {
+      "suite": "number",
+      "status": "PASS",
+      "checks": 14,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/number/number-browser.json",
+      "rawSha256": "3eed438c162d347f38660f1e4d08d81c9ac41c118c158537975a907d087d5d96",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "actual browser response body hash records",
+      "sourceEntries": 6,
+      "uniqueSourcePaths": [
+        "games/number-kingdom-3d.html",
+        "index.html",
+        "js/engine/webgl-fallback.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "startupSelfTestErrors": 0
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 2,
+      "limits": {
+        "nativeMenu": "Real index -> number zone -> Number Kingdom card clicks at both sizes",
+        "scenarios": "Debug API drives controlled world setup/taps; real pose cards change rendered geometry",
+        "renderer": "Chromium WebGL using SwiftShader; 2D fallback is a failure",
+        "notRun": [
+          "physical touch",
+          "audible TTS",
+          "child observation"
+        ]
+      }
+    },
+    {
+      "suite": "number-mute",
+      "status": "PASS",
+      "checks": 6,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/number-mute/number-mute-browser.json",
+      "rawSha256": "2753a74fc55c89be1520bb4dd41642292cf9281a0b4d477e5ed8b9da9fae7846",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "actual browser response body hash records",
+      "sourceEntries": 8,
+      "uniqueSourcePaths": [
+        "games/number-kingdom-3d.html",
+        "index.html",
+        "js/engine/webgl-fallback.js",
+        "js/voice-engine.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "startupSelfTestErrors": 0
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 2,
+      "limits": {
+        "entry": "Native public menu -> number zone -> Number Kingdom card",
+        "mute": "Native number and sound buttons; real parent voice engine with pass-through spies",
+        "mode": "Existing companion API invoked for controlled mode transition",
+        "notRun": [
+          "audible TTS/silence",
+          "physical device"
+        ],
+        "renderer": "Real Chromium WebGL; startup 2D fallback fails"
+      }
+    },
+    {
+      "suite": "vehicle",
+      "status": "PASS",
+      "checks": 10,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/vehicle/creator-vehicle-results.json",
+      "rawSha256": "2b5010dc3d6fdf5defb82ecdb6a75e1035de4ad6dbee3e64feaeb6a606df917c",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "served-versus-checkout hash records",
+      "sourceEntries": 5,
+      "uniqueSourcePaths": [
+        "assets/vehicles/construction_manifest.json",
+        "assets/vehicles/vehicles_manifest.json",
+        "index.html",
+        "js/games/construction-site.js",
+        "js/games/vehicle-memory.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "limits": "native-menu Chromium DOM/click regression; not physical-touch or audible-speech QA"
+    },
+    {
+      "suite": "count-pace",
+      "status": "PASS",
+      "checks": 2,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/count-pace/count-pace-results.json",
+      "rawSha256": "f978e96fbb0d9a40708d198e9554e76ed1d96c8e5ce09dcdcded4c1214edf51c",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "served-versus-checkout hash records",
+      "sourceEntries": 2,
+      "uniqueSourcePaths": [
+        "index.html",
+        "js/games/number-count.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "limits": "Actual menu/click pace checks; deterministic quantities, no replaced game handlers.\n\nSpeech is stubbed. This does not establish audible speech, physical touch or\nchild usability. Screenshot review remains separate from automated assertions.\n"
+    },
+    {
+      "suite": "life-pace",
+      "status": "PASS",
+      "checks": 2,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/life-pace/life-pace-results.json",
+      "rawSha256": "db882b6791c82a50869c0e02c30e14ee40579923af7bfa407f8a22b903afb56e",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "actual browser response body hash records",
+      "sourceEntries": 6,
+      "uniqueSourcePaths": [
+        "index.html",
+        "js/games/life-sequence.js",
+        "js/voice-engine.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0,
+        "failedRequests": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "limits": {
+        "nativeUI": true,
+        "privateGameStateInjection": false,
+        "deterministicRandomness": true,
+        "voice": "pass-through cancellation request spies",
+        "notRun": [
+          "audible TTS",
+          "physical device",
+          "child observation"
+        ]
+      }
+    },
+    {
+      "suite": "memory-pace",
+      "status": "PASS",
+      "checks": 2,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/memory-pace/creator-memory-pace-results.json",
+      "rawSha256": "e6f5ea9ae657da8984657a618484af29f4fd19a02db95578e47fd15c34ac2b1e",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "served-versus-checkout hash records",
+      "sourceEntries": 5,
+      "uniqueSourcePaths": [
+        "assets/vehicles/vehicles_manifest.json",
+        "index.html",
+        "js/games/vehicle-memory.js",
+        "js/voice-engine.js",
+        "js/voice-labels.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "limits": "public-menu native clicks and actual TTS engine completion callbacks"
+    },
+    {
+      "suite": "train-edit",
+      "status": "PASS",
+      "checks": 1,
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/creator/train-edit/creator-train-edit-results.json",
+      "rawSha256": "064abf6db59197ba56b567c6675ca67135a41c42947458cd987dd5debb6c939d",
+      "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698065",
+      "baseUrlField": "baseUrl",
+      "recordedBaseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "sourceProof": "served-versus-checkout hash records",
+      "sourceEntries": 4,
+      "uniqueSourcePaths": [
+        "css/games/pattern-train.css",
+        "index.html",
+        "js/games/pattern-train-model.js",
+        "js/games/pattern-train.js"
+      ],
+      "allSourceHashesMatchMerge": true,
+      "recordedErrorCounts": {
+        "pageErrors": 0
+      },
+      "consoleErrorCount": null,
+      "consoleWarningCount": null,
+      "limits": "native public-menu free editing and fresh-document restoration"
+    }
+  ],
+  "numberObserver": {
+    "status": "PASS",
+    "reportChecks": 14,
+    "observations": 12,
+    "testScriptSha256": "cec0cac83d5a1c00a022f1987cbb7588f4848b635ed1dad79ec532788bcd136f",
+    "productionProductSha256": "a11dc8774bd42824352adaa2a5585c140781bc6a542aedb9d8fb9d19dd47fb3b",
+    "visibleElapsedRangeMs": [
+      209,
+      742.3
+    ],
+    "allRecordedComputedAndInlineOpacity": 1,
+    "allExpectedTextsAndBoundsValid": true,
+    "timings": [
+      {
+        "case": "equal-four 390x844",
+        "visibleElapsedMs": 245.6,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 868.2,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "equal-eight 390x844",
+        "visibleElapsedMs": 239.5,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 870,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "equal-twelve 390x844",
+        "visibleElapsedMs": 209.8,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 979.3,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "eight-more-but-shorter 390x844",
+        "visibleElapsedMs": 247.7,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 889.1,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "hundred-more-but-shorter 390x844",
+        "visibleElapsedMs": 217.6,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 1314.2,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "one block ten taps 390x844",
+        "visibleElapsedMs": 338.6,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 894.8,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "equal-four 844x390",
+        "visibleElapsedMs": 209,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 751.6,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "equal-eight 844x390",
+        "visibleElapsedMs": 240.2,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 927.4,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "equal-twelve 844x390",
+        "visibleElapsedMs": 263.3,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 1043.2,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "eight-more-but-shorter 844x390",
+        "visibleElapsedMs": 226.6,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 823.5,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "hundred-more-but-shorter 844x390",
+        "visibleElapsedMs": 742.3,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 1913.8,
+        "afterScreenshotOpacity": 1
+      },
+      {
+        "case": "one block ten taps 844x390",
+        "visibleElapsedMs": 456.4,
+        "computedOpacity": 1,
+        "inlineOpacity": "1",
+        "afterScreenshotElapsedMs": 1125.6,
+        "afterScreenshotOpacity": 1
+      }
+    ],
+    "errorScope": {
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "startupSelfTestErrors": 0,
+      "consoleErrors": 0,
+      "consoleWarnings": 2,
+      "warningMeaning": "Playwright blocked service-worker registration, one warning per viewport."
+    },
+    "limits": {
+      "nativeMenu": "Real index -> number zone -> Number Kingdom card clicks at both sizes",
+      "scenarios": "Debug API drives controlled world setup/taps; real pose cards change rendered geometry",
+      "renderer": "Chromium WebGL using SwiftShader; 2D fallback is a failure",
+      "notRun": [
+        "physical touch",
+        "audible TTS",
+        "child observation"
+      ]
+    },
+    "historicalFailureCause": "Still undetermined: the older opacity-zero records lack inline opacity and same-frame timestamps. Current production success does not retroactively classify late-host versus transition."
+  },
+  "smallScreen": {
+    "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/small/screens/small-screen-ui-results.json",
+    "rawSha256": "cb21543bc8ca0d8a9cec3dfc800d1c1e90830352facb137a7540eb32425c6408",
+    "status": "PASS",
+    "checks": 24,
+    "workflowUrl": "https://github.com/icefoxtail/my-life-os/actions/runs/44033698109",
+    "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+    "mergeAndRunnerRefMatch": true,
+    "pageErrors": 0,
+    "sourceCount": 6,
+    "sourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+      "js/games/construction-site.js": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+      "js/games/coding-car.js": "bc7c186adc009ba13f839cc0efb6289ee2b8aa9f583b7bf5cde18c518080d222",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a"
+    },
+    "sourceHashesBeforeAfterUnchanged": true,
+    "runnerHashCount": 2,
+    "runnerHashesBeforeAfterUnchangedAndMatchMerge": true,
+    "separatePreflightProbe": {
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-production/small/production-source.json",
+      "rawSha256": "e6024f0f47c0e2cac68ca2efae8e8dffcfea489824b04089c2d0367935966081"
+    },
+    "separatePreflightSourceEntries": 6,
+    "servedBeforeSourceEntries": 6,
+    "servedAfterSourceEntries": 6,
+    "browserSourceBundles": 12,
+    "browserLoadedEntries": 48,
+    "browserLoadedUniqueFiles": [
+      "index.html",
+      "js/games/coding-car.js",
+      "js/games/construction-site.js",
+      "js/vehicle-display.js"
+    ],
+    "browserUnrecordedAmongSix": [
+      "assets/vehicles/display_bounds.json",
+      "sw.js"
+    ],
+    "allRecordedSourceProofsMatchMerge": true,
+    "allBrowserLoadedRecordsHttp200": true,
+    "layoutChecks": 12,
+    "touchFlowChecks": 12,
+    "scrollDiagnostics": 4,
+    "scope": "Two games only. Chromium touch emulation; simulated audio completion; coding existing internal entry. Physical device/speaker NOT_RUN.",
+    "notSerialized": [
+      "failedRequests aggregate",
+      "console errors aggregate"
+    ]
+  },
+  "pngEvidenceReuse": {
+    "newPngReviewInThisTask": false,
+    "priorNumberReview": {
+      "file": "/workspace/scratch/d006ae658a87/evidence/stage4-review/candidate3-number-observer-review.json",
+      "rawSha256": "e47bd4cadbd8764fdc291a46719c15a6d5bc1525589699eed97386c124761729",
+      "reviewedImages": 3
+    },
+    "verifiedReuseBasis": "The three candidate3 number-toast PNGs retain their prior visual findings; their index/number/fallback source hashes and checker hash equal the production report. They are not relabeled as production captures. Current deployment behavior is supported by the fresh 14/14 production report.",
+    "otherPriorPngReviews": "Remain tied to their recorded runs/refs. No new full visual PASS is inferred from these raw JSON checks.",
+    "newStage4PngReview": "The separate reviewer owns the current construction/fire 20+8 visual review; excluded from this 81+24 summary."
+  },
+  "qualityLimits": [
+    "Physical-device touch, actual speaker listening and child observation are not established.",
+    "Small-screen touch is Chromium emulation with simulated audio completion; coding uses the existing internal entry.",
+    "Creator scopes mix public menu/native controls with explicitly documented debug setup and speech stubs.",
+    "Missing error fields remain unrecorded; zero is reported only for recorded error arrays."
+  ]
+}

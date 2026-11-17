@@ -1,0 +1,283 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T07:02:49.122716+00:00",
+  "status": "PASS_PRODUCTION_SCOPED",
+  "commit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "scope": "Independent final review of actual production fire and construction artifacts, source binding and six specifically viewed production PNGs. No product, test or Git mutations.",
+  "imagesActuallyViewed": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/fire-844x390-friend-safe.png",
+      "sha256": "98e5e7b34948cca3700705fb1818e0a6fbd8f861ca2469e9b45ded44c9e0ee4e"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/fire-640x360-friend-safe.png",
+      "sha256": "5470fbac03b79d6685a7af914e29860cad7f0c20f72d344271784171edb985c9"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/fire-640x360-water-ready.png",
+      "sha256": "a99a86ddef28b73b1f72de27ca8c90bdc6daf5a8f6e68d73e304f32a54ce03a6"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/station-390x844-job-1-result.png",
+      "sha256": "2c7a6550eecf93e166e7321b72804ba9a57dff876dcaba2cabb2d2d6f6a61481"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/playground-390x844-walk-finished.png",
+      "sha256": "d84c8749661875a9cf606adffabd711697010db4b8125c000149699eaf47e9b2"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/bridge-320x568-complete.png",
+      "sha256": "4facabcb44a80248699e5ceeef1f3683674f7b233daf2650149015183fb46f9f"
+    }
+  ],
+  "rawReports": {
+    "construction": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/construction-stage4-results.json",
+      "sha256": "409768165c6cede5b75f5ca957c1be0d9579a43c75ca42e463554dd89118f254",
+      "status": "PASS",
+      "caseCount": 20,
+      "gitSha": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+      "browserVersion": "143.0.7499.4",
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "pageErrors": [],
+      "sourcesUnchanged": true
+    },
+    "fire": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/creator-fire-stage4-browser.json",
+      "sha256": "1ab27a0042bf4bc1e60b068274f1f1c1fd0e0abc8400909685aebf9b87d7abdf",
+      "status": "PASS",
+      "caseCount": 8,
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "unexpectedErrors": {
+        "pageErrors": [],
+        "consoleErrors": [],
+        "httpErrors": [],
+        "failedRequests": []
+      },
+      "testScriptSha256": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae"
+    }
+  },
+  "productionNineSourceProofs": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/production-source.json",
+      "sha256": "ac6c21818b3231f501bd60b230cf20bdf8edf1dc8aa88f1ff625c4c40eb2e358",
+      "sourceCount": 9,
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "matchesGitCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+      "sourceSha256": {
+        "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+        "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+        "js/games/construction-site.js": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+        "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+        "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+        "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+        "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+      }
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/production-source.json",
+      "sha256": "ac6c21818b3231f501bd60b230cf20bdf8edf1dc8aa88f1ff625c4c40eb2e358",
+      "sourceCount": 9,
+      "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+      "matchesGitCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+      "sourceSha256": {
+        "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+        "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+        "js/games/construction-site.js": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+        "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+        "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+        "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+        "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+        "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+        "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+      }
+    }
+  ],
+  "exactSourceBinding": {
+    "gitCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+    "constructionSixPrePostSourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+      "js/games/construction-site.js": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+      "assets/vehicles/fire/pump_engine.png": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0"
+    },
+    "constructionAll20ActualLoadedSourceRecordsMatch": true,
+    "fireFiveLoadedSourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+      "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+    },
+    "fireAllSixMainAndRetryActualLoadedSourcesMatch": true,
+    "publicUrlVerified": true
+  },
+  "candidateContinuity": {
+    "candidateCommit": "61f926b6895787d26d32c4952a8914e25bcdd3e1",
+    "mainCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+    "sameTree": true,
+    "tree": "4e124e5fe11f4abdd1fbd96f38a94767469784b2"
+  },
+  "constructionVisualFindings": [
+    {
+      "file": "station-390x844-job-1-result.png",
+      "verdict": "PASS",
+      "finding": "The building visibly says 소방서. The excavator is on the drawn ground beside the shallow apron, with next/listen controls unobstructed. The former cross-sign ambiguity and floating-vehicle defect are absent."
+    },
+    {
+      "file": "playground-390x844-walk-finished.png",
+      "verdict": "PASS",
+      "finding": "The child finishes with both feet inside the yellow path. Raw path-space coordinates are (366,262) and (394,261), with both recorded insidePath=true. Repeat-play and navigation controls are visible."
+    },
+    {
+      "file": "bridge-320x568-complete.png",
+      "verdict": "PASS",
+      "finding": "At 320x568 the finished low bridge and waiting car are visible. Repeat-play, another-site and playground navigation controls fit without clipping or overlap."
+    }
+  ],
+  "constructionMeasurements": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/station-390x844-job-1-result.json",
+      "sha256": "244c45fa73cac4b7b092ee3d84f9b6f6653e104b66db09df7c65f6be094119eb",
+      "phase": "result",
+      "sceneCoordinates": {
+        "svg": {
+          "left": 17,
+          "top": 311.25,
+          "right": 373,
+          "bottom": 533.75,
+          "width": 356,
+          "height": 222.5
+        },
+        "canvas": {
+          "left": 17,
+          "top": 311.25,
+          "right": 373,
+          "bottom": 533.75,
+          "width": 356,
+          "height": 222.5
+        },
+        "worker": {
+          "left": 27.671875,
+          "top": 449.203125,
+          "right": 134.46875,
+          "bottom": 527.078125,
+          "width": 106.796875,
+          "height": 77.875
+        }
+      },
+      "issues": []
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/playground-390x844-walk-finished.json",
+      "sha256": "e142fd4987302923d5aefbaba7461cf86aaea6db72e0f85cb105d23010ac061b",
+      "phase": "complete",
+      "sceneCoordinates": {
+        "svg": {
+          "left": 17,
+          "top": 248.75,
+          "right": 373,
+          "bottom": 471.25,
+          "width": 356,
+          "height": 222.5
+        },
+        "canvas": {
+          "left": 17,
+          "top": 248.75,
+          "right": 373,
+          "bottom": 471.25,
+          "width": 356,
+          "height": 222.5
+        },
+        "worker": null,
+        "walkerFeet": [
+          {
+            "x": 366,
+            "y": 262,
+            "insidePath": true
+          },
+          {
+            "x": 394,
+            "y": 261,
+            "insidePath": true
+          }
+        ]
+      },
+      "issues": []
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/construction/construction/bridge-320x568-complete.json",
+      "sha256": "27c6000e9b6c8a41aeab2f33f475bd9fdb8250a90b5a3f34e02576c4fa0c78fc",
+      "phase": "complete",
+      "sceneCoordinates": {
+        "svg": {
+          "left": 17,
+          "top": 132.625,
+          "right": 303,
+          "bottom": 311.375,
+          "width": 286,
+          "height": 178.75
+        },
+        "canvas": {
+          "left": 17,
+          "top": 132.625,
+          "right": 303,
+          "bottom": 311.375,
+          "width": 286,
+          "height": 178.75
+        },
+        "worker": null
+      },
+      "issues": []
+    }
+  ],
+  "fireVisualFindings": [
+    {
+      "file": "fire-844x390-friend-safe.png",
+      "vehicle": "s_aerial_ladder_truck",
+      "verdict": "PASS",
+      "finding": "The yellow ladder visibly meets the special aerial truck body despite its existing opaque white image background. The ladder reaches the window, the friend is in the ground safety area, and result/next controls are visible."
+    },
+    {
+      "file": "fire-640x360-friend-safe.png",
+      "vehicle": "n_articulating_ladder_truck",
+      "verdict": "PASS",
+      "finding": "Both ladder rails meet the visible vehicle body; the candidate1 detached gap has not returned on production. Vehicle/road height and result controls remain consistent."
+    },
+    {
+      "file": "fire-640x360-water-ready.png",
+      "vehicle": "n_water_tanker",
+      "verdict": "PASS",
+      "finding": "The tanker is decoded and visible on the road beside a full blue water tank. Remaining flames and the manual next-work button communicate the follow-up pump task. No scene/control obstruction was observed."
+    }
+  ],
+  "priorFireReview": {
+    "path": "/workspace/scratch/d006ae658a87/evidence/stage4-review/production-fire-review.json",
+    "sha256": "4b31d175624d3960eaaa1bf27ca901196d5e1032463071ac4db6192fce186a2a"
+  },
+  "functionalScope": {
+    "construction": "18 project/viewport combinations, one English project and one interrupted-work/reentry case: 20 PASS.",
+    "fire": "Six viewport three-incident flows plus manifest-failure/real retry and English speech-failure/storage-refusal/lifecycle/legacy-mode case: 8 PASS."
+  },
+  "inputAndMotionScope": {
+    "construction": "Public project choices and native touch; simulated audio completion. Physical device and audible speech NOT_RUN.",
+    "fireInput": "native browser mouse/keyboard clicks; has_touch is not enabled",
+    "fireMotion": "390x844 uses no-preference with one arrival DOM/PNG observation; other five viewports and special failure contexts use reduce"
+  },
+  "limits": [
+    "Exactly the six listed production PNGs were manually viewed; no full screenshot census is claimed.",
+    "Construction screenshots cover three representative repaired states, not every intermediate animation frame.",
+    "The fire normal-motion suite observes one 390x844 arrival; no full-catalog trajectory review is claimed, and this production visual pass did not manually reopen that motion pair.",
+    "Physical-device touch, audible speech listening and child observation were not performed.",
+    "The existing white background on the special fire-truck asset remains; it no longer breaks the ladder connection.",
+    "The browser flow evidence uses fresh service-worker-blocked contexts; this review does not certify installed/offline cache migration."
+  ],
+  "blockers": [],
+  "verdict": "The reviewed production flows, repaired visuals and source identity pass within the stated scope. Candidate1 visual defects are not present in the selected production evidence. No independent Stage4 gameplay-release blocker remains.",
+  "remainingAdministrativeWork": "Root owns documentation closeout and final user summary; this review does not claim that administrative closeout has already been merged."
+}
