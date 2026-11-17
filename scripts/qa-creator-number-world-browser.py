@@ -313,6 +313,35 @@ def corrupt_save(browser, base, report):
         context.close()
 
 
+def stable_action_targets(page, frame):
+    measurements=[]
+    for preference in ('no-preference','reduce'):
+        page.emulate_media(reduced_motion=preference)
+        frame.locator('#dockHammerBtn').click()
+        assert frame.locator('#dockHammerBtn').evaluate("el=>el.classList.contains('active')")
+        for selector in ('#dockAddBtn','#dockHammerBtn'):
+            observed=frame.locator(selector).evaluate("""async el => {
+              const samples=[], start=performance.now();
+              do {
+                const r=el.getBoundingClientRect(), hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+                samples.push({x:r.x,y:r.y,width:r.width,height:r.height,hit:hit===el||el.contains(hit)});
+                await new Promise(requestAnimationFrame);
+              } while(performance.now()-start<1000);
+              const first=samples[0], svg=el.querySelector('.dockSvg');
+              return {samples:samples.length,minWidth:Math.min(...samples.map(s=>s.width)),
+                minHeight:Math.min(...samples.map(s=>s.height)),centerHit:samples.every(s=>s.hit),
+                maxRectDelta:Math.max(...samples.flatMap(s=>['x','y','width','height'].map(k=>Math.abs(s[k]-first[k])))),
+                buttonAnimationCount:el.getAnimations().length,iconAnimationCount:svg.getAnimations().length};
+            }""")
+            assert observed['samples']>=4 and observed['minWidth']>=44 and observed['minHeight']>=44, observed
+            assert observed['centerHit'] and observed['maxRectDelta']<.1, (preference,selector,observed)
+            assert observed['buttonAnimationCount']==0, (preference,selector,observed)
+            assert observed['iconAnimationCount']==(0 if preference=='reduce' else 1), (preference,selector,observed)
+            measurements.append({'motionPreference':preference,'selector':selector,**observed})
+        frame.locator('#dockHammerBtn').click()
+    return measurements
+
+
 def boundaries(browser, base, out, report):
     context=browser.new_context(viewport={'width':844,'height':390},has_touch=True,service_workers='block',reduced_motion='reduce')
     track_page_errors(context,report,'300-blocks-and-empty-world')
@@ -328,6 +357,8 @@ def boundaries(browser, base, out, report):
         frame.wait_for_function("NumberKingdomDebug.resolvePlusActionPlan().sum === 300")
         preview=frame.locator('#mergePreview').inner_text()
         assert preview=='100 × 3 → 300', preview
+        targets=stable_action_targets(page,frame)
+        page.screenshot(path=str(out/'number-world-ready-targets.png'))
         frame.locator('#dockAddBtn').click();settle(frame)
         assert frame.evaluate("NumberKingdomDebug.getState().friends.map(f=>[f.n,f.cells.length])")==[[300,300]]
         save_button(frame)
@@ -340,8 +371,12 @@ def boundaries(browser, base, out, report):
         assert save_button(frame)=='local'
         frame=close_and_reenter(page,base)
         assert frame.evaluate('NumberKingdomDebug.getState().friends.length + NumberKingdomDebug.getState().props.length')==0
-        return {'preview':preview,'threeHundredBlocksRestored':True,'restoredMeshes':meshes,'emptyWorldRestored':True,'screenshot':image,
+        return {'preview':preview,'stableActionTargets':targets,'threeHundredBlocksRestored':True,'restoredMeshes':meshes,'emptyWorldRestored':True,'screenshot':image,
           'fixture':'debug setup only; native merge/save/exit/re-entry'}
+    except Exception:
+        if 'page' in locals():
+            page.screenshot(path=str(out/'number-world-boundary-failure.png'))
+        raise
     finally:
         context.close()
 

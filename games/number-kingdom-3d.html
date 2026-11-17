@@ -451,6 +451,9 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 .dockBtn.add { background: linear-gradient(180deg, #FFE066 0%, #F59F00 100%); }
 .dockBtn.add.readyPulse {
   box-shadow: 0 0 0 4px #FFF3BF, 0 10px 24px rgba(245, 159, 0, 0.55), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+}
+/* Pulse the illustration, keeping the button's touch target still. */
+.dockBtn.add.readyPulse .dockSvg {
   animation: dockPulse 0.75s infinite alternate ease-in-out;
 }
 .dockBtn.decomp { background: linear-gradient(180deg, #63E6BE 0%, #12B886 100%); }
@@ -459,11 +462,16 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
   background: linear-gradient(180deg, #FF8787 0%, #E03131 100%);
   border-color: #FFE3E3;
   box-shadow: 0 0 0 4px #FFA8A8, 0 10px 24px rgba(224, 49, 49, 0.5), inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+.dockBtn.hammer.active .dockSvg {
   animation: dockPulse 0.85s infinite alternate ease-in-out;
 }
 @keyframes dockPulse {
   0% { transform: scale(1); }
   100% { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dockBtn.add.readyPulse .dockSvg, .dockBtn.hammer.active .dockSvg { animation: none; }
 }
 .dockSvg {
   width: 31px;
