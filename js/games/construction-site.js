@@ -65,7 +65,7 @@
       ] },
     { id: 'bridge', title: '다리 잇기', short: '작은 다리', icon: '🌉', en: 'Join a small bridge', play: '다리를 건너요', playEn: 'Cross the small bridge',
       steps: [
-        { id: 'dig', label: '받침 자리', title: '낮은 받침 자리를 파요', question: '작은 물길 양쪽에 낮은 받침 자리를 파야 해. 어떤 차가 좋을까?', en: 'Dig shallow spaces for low supports beside a small stream. Which machine can dig?', action: '받침 자리 파기', actionEn: 'Dig the support spaces', result: '양쪽 자리를 파고 낮은 받침을 놓았어.', resultEn: 'The spaces are ready for our low supports.' },
+        { id: 'dig', label: '받침 자리', title: '받침 옆의 흙을 파요', question: '작은 물길 양쪽의 낮은 받침을 가린 흙을 파야 해. 어떤 차가 좋을까?', en: 'Dig away the soil covering the low supports beside a small stream. Which machine can dig?', action: '받침 자리 파기', actionEn: 'Dig beside the supports', result: '받침을 가린 흙을 파서 다리판을 놓을 자리를 준비했어.', resultEn: 'The soil is dug away. Our low supports are ready for the bridge pieces.' },
         { id: 'carry', label: '작은 판 운반', title: '작은 다리판을 옮겨요', question: '차에 실을 수 있는 작은 다리판을 옮겨야 해. 짐을 옮길 차를 골라 줘.', en: 'Carry the small bridge pieces that fit in a truck. Choose a load-carrying vehicle.', action: '작은 판 옮기기', actionEn: 'Carry the small pieces', result: '작은 다리판이 도착했어. 낮은 받침에 올려 보자.', resultEn: 'The small bridge pieces have arrived. Let us place them on the low supports.' },
         { id: 'lift', label: '낮게 올리기', title: '낮은 받침에 올려요', question: '작은 다리판을 바로 옆 낮은 받침에 올려야 해. 들어 올리는 차를 골라 줘.', en: 'Lift a small bridge piece onto the low support beside it. Choose a machine that lifts.', action: '받침에 올리기', actionEn: 'Lift onto the low support', result: '작은 판을 낮은 받침에 올려 다리가 이어졌어!', resultEn: 'The small pieces join our low bridge. It is ready to cross!' }
       ] }
@@ -511,6 +511,9 @@
       .cs-project-game .cs-question-card { display:grid; grid-template-columns:minmax(0,1fr) 48px; gap:6px; align-items:center; }
       .cs-project-game .cs-title { font-size:clamp(18px,4.6vw,28px); line-height:1.2; }
       .cs-project-game .cs-question { display:none; }
+      .cs-project-game .cs-question-card .cs-message { position:static; display:none; transform:none; animation:none; margin:0; padding:0; width:auto; max-width:none; border:0; border-radius:0; background:transparent; box-shadow:none; font-size:16px; line-height:1.3; text-align:center; opacity:1; }
+      .cs-project-game .cs-question-card.has-feedback .cs-title { display:none; }
+      .cs-project-game .cs-question-card.has-feedback .cs-message.show { display:block; }
       .cs-project-game .cs-top { padding-left:58px; gap:8px; }
       .cs-project-game .cs-pill { font-size:clamp(16px,3.5vw,23px); padding:6px 10px; border-width:3px; min-width:0; }
       .cs-project-game .cs-btn { min-width:44px; min-height:44px; }
@@ -520,8 +523,10 @@
       .cs-project-game .cs-message { font-size:17px; line-height:1.3; padding:9px 12px; border-width:3px; max-width:90%; bottom:122px; }
       .cs-project-game .cs-choice { min-height:100px; padding:6px; }
       .cs-project-game .cs-choice-img-wrap { height:82px; }
+      .cs-project-game .cs-work-panel { height:156px; min-height:156px; grid-template-rows:minmax(0,1fr) auto; }
+      .cs-project-game .cs-work-status { align-self:center; }
       .cs-project-complete .cs-stage { flex:1; }
-      .cs-project-complete .cs-work-panel { display:grid; }
+      .cs-project-complete .cs-work-panel { display:grid; height:auto; min-height:174px; }
       .cs-project-complete .cs-work-buttons { grid-template-columns:1fr 1fr; }
       .cs-project-complete .cs-work-buttons .cs-primary { grid-column:1 / -1; }
       .cs-scene-svg.is-playing .cs-walker { animation:csWalkPath 1.7s ease-in-out forwards; }
@@ -550,13 +555,14 @@
         .cs-project-game .cs-step-label { display:none; }
         .cs-project-game .cs-question-card { grid-column:1; grid-row:3; margin:0; align-self:stretch; display:flex; flex-direction:column; justify-content:center; padding:8px; border-radius:18px; }
         .cs-project-game .cs-title { font-size:clamp(17px,2.2vw,26px); }
+        .cs-project-game .cs-question-card .cs-message { font-size:clamp(13px,1.8vw,19px); }
         .cs-project-game .cs-question-card .cs-btn { width:48px; padding:4px; margin-top:8px; }
         .cs-project-game .cs-stage { grid-column:2; grid-row:2 / 4; margin:0; height:100%; min-height:0; border-radius:22px; }
         .cs-project-game .cs-choices, .cs-project-game .cs-work-panel { grid-column:3; grid-row:2 / 4; min-height:0; padding:0; align-content:stretch; }
         .cs-project-game .cs-choices { grid-template-columns:1fr; grid-template-rows:repeat(3,minmax(0,1fr)); gap:6px; }
         .cs-project-game .cs-choice { min-height:0; padding:3px; border-width:4px; border-radius:18px; }
         .cs-project-game .cs-choice-img-wrap { height:clamp(44px,13vh,90px); }
-        .cs-project-game .cs-work-panel { align-content:center; gap:8px; }
+        .cs-project-game .cs-work-panel { align-content:center; gap:8px; height:100%; min-height:0; grid-template-rows:minmax(0,1fr) auto; }
         .cs-project-game .cs-work-buttons { grid-template-columns:1fr; }
         .cs-project-game .cs-work-buttons .cs-btn { min-height:48px; font-size:clamp(15px,2vw,22px); padding:6px; }
         .cs-project-game .cs-work-status { font-size:clamp(14px,1.9vw,21px); line-height:1.25; }
@@ -695,7 +701,8 @@
         <path d="M255 170q-30 63-65 109t-52 121h366q-38-72-94-118t-63-112" fill="#76cae2"/>
         <path d="M262 191q-37 75-55 100m94-98q-20 80 38 154m8-123q23 55 75 101" fill="none" stroke="#beeaf3" stroke-width="10" stroke-linecap="round"/>
         <path d="M0 288h196m237 0h207" stroke="#ddc391" stroke-width="70"/>
-        ${n < 1 ? '<g data-piece="support-spaces" fill="#9c744e"><ellipse cx="202" cy="286" rx="25" ry="12"/><ellipse cx="429" cy="286" rx="25" ry="12"/></g>' : '<g data-piece="low-supports" fill="#9ba8a9" stroke="#6e858c" stroke-width="4"><rect x="178" y="264" width="52" height="38" rx="5"/><rect x="404" y="264" width="52" height="38" rx="5"/></g>'}
+        <g data-piece="low-supports" fill="#9ba8a9" stroke="#6e858c" stroke-width="4"><rect x="178" y="264" width="52" height="38" rx="5"/><rect x="404" y="264" width="52" height="38" rx="5"/></g>
+        ${n < 1 ? '<g data-piece="soil-over-supports" fill="#a67b51"><path d="M161 301q42-59 83 0z"/><path d="M389 301q43-59 84 0z"/></g>' : ''}
         ${n >= 2 && n < 3 ? '<g data-piece="small-bridge-pieces" fill="#e7bd72" stroke="#a57a44" stroke-width="4"><rect x="47" y="322" width="91" height="19" rx="3"/><rect x="57" y="344" width="91" height="19" rx="3"/><rect x="466" y="323" width="91" height="19" rx="3"/></g>' : ''}
         ${n >= 3 ? '<g data-piece="joined-low-bridge"><rect x="178" y="245" width="278" height="27" rx="5" fill="#e7bd72" stroke="#a57a44" stroke-width="5"/><path d="M234 247v22m55-22v22m55-22v22m55-22v22" stroke="#b88c50" stroke-width="4"/><path d="M182 246v-31m69 31v-31m69 31v-31m69 31v-31m63 31v-31m-270 8h270" stroke="#db9970" stroke-width="6" stroke-linecap="round"/></g>' : ''}`;
       actor = '<g class="cs-scene-actor cs-bridge-car" aria-label="낮은 다리를 건너는 차"><rect x="70" y="205" width="85" height="35" rx="10" fill="#f1ad44" stroke="#fff3cb" stroke-width="4"/><path d="M88 207l13-23h30l14 23" fill="#77c7e0" stroke="#fff3cb" stroke-width="4"/><circle cx="89" cy="242" r="12" fill="#47576d"/><circle cx="140" cy="242" r="12" fill="#47576d"/></g>';
@@ -805,6 +812,7 @@
   function speakMission() {
     const mission = state.currentMission;
     if (!mission) return;
+    state.container?.querySelector('.cs-question-card')?.classList.remove('has-feedback');
     const english = mission.englishQuestion || `We need a vehicle that can ${MISSION_GUIDES[mission.id][1]}. Which one can help?`;
     speak(mission.question, true, english);
   }
@@ -834,6 +842,7 @@
         <div class="cs-question-card">
           <div class="cs-title">${escapeHtml(mission.title)}</div>
           <div class="cs-question">${escapeHtml(mission.question)}</div>
+          ${project ? '<div class="cs-message" id="csMessage" role="status"></div>' : ''}
           <button class="cs-btn" type="button" data-action="listen" aria-label="주문 다시 듣기">🔊</button>
         </div>
 
@@ -869,7 +878,7 @@
         </div>
 
         <div class="cs-work-panel" id="csWorkPanel" hidden></div>
-        <div class="cs-message" id="csMessage"></div>
+        ${project ? '' : '<div class="cs-message" id="csMessage" role="status"></div>'}
       </div>
     `;
     bindEvents();
@@ -923,6 +932,7 @@
     }
 
     state.locked = true;
+    state.container?.querySelector('.cs-question-card')?.classList.remove('has-feedback');
     state.selectedVehicle = selectedVehicle;
     state.workPhase = 'selected';
     button.classList.add('is-correct');
@@ -1065,6 +1075,7 @@
   function showMessage(text) {
     const message = state.container?.querySelector('#csMessage');
     if (!message) return;
+    if (state.projectId && state.workPhase === 'choose') state.container.querySelector('.cs-question-card')?.classList.add('has-feedback');
     message.textContent = text;
     message.classList.remove('show');
     void message.offsetWidth;

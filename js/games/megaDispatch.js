@@ -232,7 +232,10 @@
       if (state.destroyed || !state.container) return;
 
       const nextMode = getLayoutMode();
-      if (state.layoutMode === nextMode) return;
+      if (state.layoutMode === nextMode) {
+        if (state.playMode === 'field') fitFieldScene();
+        return;
+      }
       state.layoutMode = nextMode;
 
       if (state.isEnding) {
@@ -975,7 +978,8 @@
       .md-field-brief h2 { margin: 0; font-size: clamp(20px, 3vw, 27px); line-height: 1.2; }
       .md-field-brief p { margin: 0; font-size: clamp(16px, 2vw, 21px); line-height: 1.35; }
       .md-field-scene { position: relative; min-height: 0; overflow: hidden; border: 3px solid #526e7e; border-radius: 24px; background: #bde6f1; display: grid; place-items: center; }
-      .md-field-scene > svg { width: 100%; height: 100%; display: block; }
+      .md-field-canvas { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; max-height: 100%; }
+      .md-field-canvas > svg { width: 100%; height: 100%; display: block; }
       .md-field-engine { position: absolute; left: 5%; bottom: 7%; width: 35%; height: 28%; display: grid; place-items: center; filter: drop-shadow(0 4px 2px #16313f55); }
       .md-field-engine > img, .md-field-engine > .sv-vehicle-frame { width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; }
       .md-field-engine.is-arriving { animation: mdFieldArrive .55s ease-out both; }
@@ -1132,6 +1136,15 @@
       <button class="md-field-small" type="button" data-field-home>본부</button></header>`;
   }
 
+  function fitFieldScene() {
+    const scene = state.container?.querySelector('.md-field-scene');
+    const canvas = scene?.querySelector('.md-field-canvas');
+    if (!canvas || !(scene.clientWidth > 0) || !(scene.clientHeight > 0)) return;
+    const width = Math.min(scene.clientWidth, scene.clientHeight * 16 / 9);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${width * 9 / 16}px`;
+  }
+
   function renderField() {
     if (!state.container || state.destroyed || !state.field) return;
     state.layoutMode = getLayoutMode();
@@ -1178,12 +1191,13 @@
         <button class="md-field-small" type="button" data-field-home>본부로</button>`;
     }
     state.container.innerHTML = `<div class="md14-root md-field-root">${fieldHeader()}<main class="md-field-layout" data-field-phase="${f.phase}" data-field-role="${incident.steps[f.stepIndex]}">
-      <section class="md-field-brief"><h2>${incident.icon} ${incident.title}${incident.steps.length > 1 ? ` · ${f.stepIndex + 1}/${incident.steps.length}` : ''}</h2><p>${fieldEscape(f.phase === 'choose' ? role.need : f.phase === 'result' ? f.message : role.reason)}</p></section>
-      <section class="md-field-scene" aria-label="선택에 따라 변하는 출동 현장" data-field-scene="${incident.id}">${fieldSceneMarkup(incident.id, f.world)}
-        ${f.selected ? `<div class="md-field-engine ${f.phase === 'arrival' ? 'is-arriving' : ''}"><img src="${fieldEscape(f.selected.file)}" alt="${fieldEscape(f.selected.name_ko || '출동한 소방차')}" onerror="this.outerHTML='<span style=&quot;font-size:50px&quot;>🚒</span>'"></div>` : ''}</section>
+      <section class="md-field-brief"><h2>${incident.icon} ${incident.title}${incident.steps.length > 1 ? ` · ${f.stepIndex + 1}/${incident.steps.length}` : ''}</h2><p>${fieldEscape(f.phase === 'choose' ? role.need : f.phase === 'result' ? '현장이 이렇게 바뀌었어요. 다음 일을 골라요.' : f.phase === 'arrival' ? '선택한 차가 현장으로 출동해요.' : `${actionLabel} · 준비되면 큰 버튼을 눌러요.`)}</p></section>
+      <section class="md-field-scene" aria-label="선택에 따라 변하는 출동 현장" data-field-scene="${incident.id}"><div class="md-field-canvas">${fieldSceneMarkup(incident.id, f.world)}
+        ${f.selected ? `<div class="md-field-engine ${f.phase === 'arrival' ? 'is-arriving' : ''}"><img src="${fieldEscape(f.selected.file)}" alt="${fieldEscape(f.selected.name_ko || '출동한 소방차')}" onerror="this.outerHTML='<span style=&quot;font-size:50px&quot;>🚒</span>'"></div>` : ''}</div></section>
       <section class="md-field-controls" aria-label="${f.phase === 'choose' ? '역할에 맞는 차 선택' : '현장 작업'}">${controls}</section>
     </main></div>`;
     state.container.querySelectorAll('.md-field-choice-media img, .md-field-engine img').forEach(img => window.SihyeonVehicleDisplay?.apply(img));
+    fitFieldScene();
     bindFieldControls();
     updateTargetGlow();
   }
@@ -1198,6 +1212,7 @@
       if (f.phase === 'menu') fieldSpeak('어디부터 도와줄까요? 현장을 골라요.', 'Where shall we help first? Choose a scene.');
       else if (f.phase === 'loading') fieldSpeak('출동할 차를 준비하고 있어요.', 'We are getting the fire trucks ready.');
       else if (f.phase === 'result') fieldSpeak(f.message, f.messageEn);
+      else if (f.message && f.phase === 'choose' && role) fieldSpeak(`${f.message} ${role.need}`, `${f.messageEn} ${role.needEn}`);
       else if (f.message) fieldSpeak(f.message, f.messageEn);
       else if (role) fieldSpeak(f.phase === 'choose' ? role.need : role.reason, f.phase === 'choose' ? role.needEn : role.reasonEn);
     });
@@ -1268,11 +1283,11 @@
     if (!truck) return;
     if (!role.ids.includes(truck.id)) {
       const [ko, en] = fieldWrongRole(truck);
-      f.message = `${ko} ${role.need}`;
-      f.messageEn = `${en} ${role.needEn}`;
+      f.message = ko;
+      f.messageEn = en;
       f.reconsidered = truck.gameId;
       renderField();
-      fieldSpeak(f.message, f.messageEn);
+      fieldSpeak(`${ko} ${role.need}`, `${en} ${role.needEn}`);
       return;
     }
     state.isBusy = true;

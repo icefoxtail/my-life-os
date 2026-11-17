@@ -1,0 +1,78 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "reviewedAtUtc": "2026-11-17T05:33:52.093769+00:00",
+  "status": "STATIC_REVIEW_PASS_SCOPED",
+  "baselineGitSha": "475577ec48b85a7f19781447502881a8d9ec0981",
+  "rootIntegrationGitSha": "14ec486d4f9a60bd33e23bedb9b32c3039729420",
+  "scope": "Independent review of the root integration workflow and four existing browser-regression helper diffs; no product or test files edited.",
+  "files": [
+    {
+      "path": "scripts/qa-creator-vehicle-browser.py",
+      "reviewedSha256": "72224cff36c81dc1a933b2e2934415a052bda2d32f666e23cbbacdd94c80b568",
+      "oldAsserts": 14,
+      "newAsserts": 14,
+      "oldExpectChecks": 16,
+      "newExpectChecks": 18,
+      "removedOrChangedExistingChecks": 0
+    },
+    {
+      "path": "scripts/qa-vehicle-grammar-browser.py",
+      "reviewedSha256": "46cbf98511b98edc7c803326df32e6540b4ca45786bc3042eb97bb4765ceb501",
+      "oldAsserts": 4,
+      "newAsserts": 4,
+      "oldExpectChecks": 5,
+      "newExpectChecks": 5,
+      "removedOrChangedExistingChecks": 0
+    },
+    {
+      "path": "scripts/qa-vehicle-display-browser.py",
+      "reviewedSha256": "a86b67f56946987430e1bc353dcb7b63624727c9aa561e5b6fedfacf81ecc91f",
+      "oldAsserts": 10,
+      "newAsserts": 10,
+      "oldExpectChecks": 0,
+      "newExpectChecks": 0,
+      "removedOrChangedExistingChecks": 0
+    },
+    {
+      "path": "scripts/qa-small-screen-ui-browser.py",
+      "reviewedSha256": "3161c2343d58cde4842c773bba7d1e0b8a86ff6fe0ab7a1f6229bf133f28bec0",
+      "oldAsserts": 25,
+      "newAsserts": 26,
+      "oldExpectChecks": 0,
+      "newExpectChecks": 0,
+      "removedOrChangedExistingChecks": 0
+    },
+    {
+      "path": ".github/workflows/creator-stage4-release.yml",
+      "reviewedSha256": "27af1824e1409691b1d9fe994434a788d325538dadcfea09b5e12e7cd9a394e0"
+    }
+  ],
+  "preservedSmallScreenConstants": {
+    "MEASURE": true,
+    "TOUCH_PROBE": true,
+    "SCROLL_SNAPSHOT": true,
+    "SIZES": true,
+    "ANSWERS": true,
+    "SOURCES": true
+  },
+  "preservedSmallScreenFunctions": {
+    "coding_flow": true,
+    "tap_exact": true,
+    "touch_scroll": true,
+    "reach": true
+  },
+  "findings": [
+    "All 53 original Python assertions and 21 Playwright expect checks are preserved; additions do not soften existing checks.",
+    "Construction flow uses real public practice, work and next-work controls. No new forced clicks or game-state injection.",
+    "Small-screen capture awaits real img.decode(), verifies nonzero natural dimensions, and waits two animation frames before PNG capture. Decode errors are not swallowed.",
+    "Workflow checkout selects PR head SHA or event SHA. Push execution waits for nine public runtime-file hashes to match checkout before passing --base-url to the browser helper.",
+    "Source-wait, browser failure and missing-artifact paths remain failures; artifacts are uploaded even after failed checks."
+  ],
+  "blockers": [],
+  "notYetVerified": [
+    "Two new Stage 4 browser helpers were not available at review time; their source-response binding and report limitations remain for later review.",
+    "Product DOM selectors and manual work/next runtime behavior await completed implementations.",
+    "Image fallback, expected image counts and actual new-scene PNG visibility await implementation and browser evidence.",
+    "No Stage 4 browser execution, physical-device touch or audible playback is certified by this static review."
+  ]
+}

@@ -9,7 +9,8 @@
   "rawResultSha256": "f8b8bf0839aff8384594eea4e827577ee752a5da229e4a79b0dfbcff4f9bdebe",
   "files": {
     "independent-review.json": "8e68b5528f79b29d8baf6e4fff504df819774cf4ce61f0fa63276acb1e012cd9",
-    "small-screen-ui-results.json.gz": "1436de61fcc62b4ef48f9e3faed05118a8f989df3f46804ffcd877eeebcde512"
+    "small-screen-ui-results.json.gz": "1436de61fcc62b4ef48f9e3faed05118a8f989df3f46804ffcd877eeebcde512",
+    "workflow-runs.json": "870e56be633989dc72a5a47d57582f6cebc12bf73c76e5f04e725b07ae1f0ca4"
   },
   "status": "PASS",
   "checks": 24,
