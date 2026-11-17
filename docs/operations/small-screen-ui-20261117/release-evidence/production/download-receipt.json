@@ -1,0 +1,10 @@
+{
+  "out": "/workspace/scratch/d006ae658a87/evidence/small-screen-production",
+  "expected": "faf6615d75c5e305e9926ecf8ff322a9aac0bd1e67c6165970913e1c810d232a",
+  "artifactId": 14302530899,
+  "runId": 44022960099,
+  "name": "small-screen-release-44022960099",
+  "sha256": "faf6615d75c5e305e9926ecf8ff322a9aac0bd1e67c6165970913e1c810d232a",
+  "bytes": 8787767,
+  "verified": true
+}

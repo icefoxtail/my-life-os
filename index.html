@@ -1655,7 +1655,7 @@ const ZONE_CONFIGS = {
     games:[
       { id:'garage', title:'자동차 정비소', emoji:'🔧', image:'./assets/games/cards/car-garage.webp', desc:'고친 차로 다시 놀아요', action:'openCarGarageGame()', isNew:false },
       { id:'parking', title:'주차장', emoji:'🅿️', image:'./assets/games/cards/parking-lot.webp', desc:'차를 주차해요', action:'openParkingGame()', isNew:true },
-      { id:'construction', title:'공사장', emoji:'🏗️', image:'./assets/games/cards/construction-site.webp', desc:'공사차를 골라요', action:'openConstructionSiteGame()', isNew:true }
+      { id:'construction', title:'공사장', emoji:'🏗️', image:'./assets/games/cards/construction-site.webp', desc:'공사차로 현장을 만들어요', action:'openConstructionSiteGame()', isNew:true }
     ]
   },
   voice: {
@@ -1685,7 +1685,7 @@ function addZoneGameOnce(zoneId, game) {
       title: '소방 출동',
       emoji: '🚒',
       image: './assets/games/cards/megadispatch.png',
-      desc: '소방차를 순서대로 찾아요',
+      desc: '알맞은 차로 현장을 도와요',
       action: 'openMegaDispatchGame()',
       isNew: true
     }

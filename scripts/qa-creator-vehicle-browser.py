@@ -146,6 +146,8 @@ def construction_case(page, base, output, mission, random_value, backhoe_fixture
     page.add_init_script(f"Math.random = () => {random_value};")
     open_menu_game(page, base, "cars", "openConstructionSiteGame")
     expect(page.locator(".cs-root")).to_be_visible()
+    page.locator('[data-action="practice"]').click()
+    expect(page.locator('.cs-choice').first).to_be_visible()
     preliminary = []
     # Constant random 0.0005 gives push, load, carry; the load scenario therefore
     # completes the preceding real push round through its visible choice.
@@ -154,6 +156,9 @@ def construction_case(page, base, output, mission, random_value, backhoe_fixture
         before = choice_ids(page)
         answer = next(vehicle for vehicle in before if vehicle in VALID["push"])
         page.locator(f'.cs-choice[data-id="{answer}"]').click()
+        page.locator('[data-action="work"]').click()
+        expect(page.locator('[data-action="next-work"]')).to_be_visible(timeout=10000)
+        page.locator('[data-action="next-work"]').click()
         expect(page.locator(".cs-root.cs-stage-load")).to_be_visible(timeout=10000)
         preliminary.append({"mission": "push", "answer": answer})
     assert mission_id(page) == mission
@@ -171,6 +176,7 @@ def construction_case(page, base, output, mission, random_value, backhoe_fixture
     assert answer in offered, (mission, answer, offered)
     page.locator(f'.cs-choice[data-id="{answer}"]').click()
     expect(page.locator(f'.cs-choice[data-id="{answer}"]')).to_have_class(re.compile(r"\bis-correct\b"))
+    page.locator('[data-action="work"]').click()
     expect(page.locator(".cs-root.is-success")).to_be_visible(timeout=6000)
     expect(page.locator("#csWorkerVehicle img")).to_have_count(1)
     expect(page.locator("#csWorkerVehicle img")).to_have_attribute("src", "./" + next(vehicle["file"] for vehicle in CONSTRUCTION if vehicle["id"] == answer))

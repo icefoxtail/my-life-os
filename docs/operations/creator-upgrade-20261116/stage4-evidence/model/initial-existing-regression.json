@@ -1,0 +1,37 @@
+{
+  "scope": "Stage4 first implementation local existing regression checks",
+  "firstCore": "3dbaf3eec9bff9d3fec7f1d03e01064972d03aa0",
+  "browserVerified": false,
+  "checks": [
+    {
+      "test": "qa-static.cjs",
+      "exitCode": 0,
+      "output": "PASS: 15 JS files, 9 inline scripts, Boardland removal, load order and new asset cache paths.\n"
+    },
+    {
+      "test": "qa-play-settings.cjs",
+      "exitCode": 0,
+      "output": "PASS: all four ages retain independent challenge choices, counting 1–5 persists, malformed/denied storage remains playable, invalid values rejected.\n"
+    },
+    {
+      "test": "test-legacy-models.cjs",
+      "exitCode": 0,
+      "output": "PASS 22963 model scenarios: quantity conservation, undoable parts, saved-data validation, 140 Hangul compositions.\n"
+    },
+    {
+      "test": "test-legacy-inputs.cjs",
+      "exitCode": 0,
+      "output": "PASS parking input lifecycle: tap, wrong/correct drop, outside drop, duplicate models, double activation, cancel, capture loss, blur, resize, cleanup, destroy, secondary pointer and cloned-image fallback.\nPASS handwashing: all 24 four-step arrangements, required rinse step, delayed-check edit lock, and correct-slot preservation.\n"
+    },
+    {
+      "test": "test-legacy-fallback.cjs",
+      "exitCode": 0,
+      "output": "PASS 7 fault-boundary scenarios: unavailable GPU, two CDN errors, working 3D, context loss, explicit 2D, denied storage, invalid and restored progress.\n"
+    },
+    {
+      "test": "test-vehicle-display.cjs",
+      "exitCode": 0,
+      "output": "PASS 828 uniform-scale layouts for all 138 current sources; exact image hashes, clean39 preserved, margin/baseline, replacement, error fallback and cleanup.\n"
+    }
+  ]
+}

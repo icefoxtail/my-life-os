@@ -1,0 +1,263 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T06:18:05.097363+00:00",
+  "candidateCommit": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+  "status": "VISUAL_PASS_SCOPED",
+  "scope": "Independent actual PNG review of repaired vehicle/ground and walker/path geometry, plus small-screen work/result/choice controls. No product, test or Git mutations.",
+  "rawReport": {
+    "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/construction-stage4-results.json",
+    "sha256": "da202ae0ed40e4924aa1662c58e41da95ce89f29d511ca8ec632c3ad5006e47d",
+    "status": "PASS",
+    "caseCount": 20,
+    "browserVersion": "143.0.7499.4",
+    "baseUrl": "http://127.0.0.1:37269/"
+  },
+  "exactCommitSourceBinding": {
+    "verifiedAgainstGitObject": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+    "allSixPrePostSourcesMatch": true,
+    "all20LoadedSourceRecordsMatch": true,
+    "sourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+      "js/games/construction-site.js": "285fdcd6144ab6c5a336530f41e713a5bc3ed7db21829d7198871a09cc45e9cc",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+      "assets/vehicles/fire/pump_engine.png": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0"
+    }
+  },
+  "imagesActuallyViewed": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/station-390x844-job-1-result.png",
+      "sha256": "2d042181ee74df54044df731bf345e06e5cb6c1f7d613dc89b6dd9021769de50"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/playground-390x844-walk-finished.png",
+      "sha256": "d84c8749661875a9cf606adffabd711697010db4b8125c000149699eaf47e9b2"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/station-640x360-job-3-working.png",
+      "sha256": "598dd13e4b8cdb36bd733493f449b9a68a50d1ac5744901a8c6d00eeeaa5ffcf"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/station-640x360-job-3-result.png",
+      "sha256": "93bd86366e7a921cc68442244d95a192a1f849fadf5a925570f2bc75283bd27a"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/bridge-320x568-wrong-role.png",
+      "sha256": "73895710cf4d8a6eb2cad19cddd3bb2511d03d1caecb07c1518b9ad36f439b7a"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/bridge-320x568-complete.png",
+      "sha256": "4facabcb44a80248699e5ceeef1f3683674f7b233daf2650149015183fb46f9f"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/playground-1024x768-play-2.png",
+      "sha256": "cd1e3d9d3dd7027de824c1d3d50f56677535ffb271c39131798835d6c705245e"
+    }
+  ],
+  "associatedMeasurements": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/station-390x844-job-1-result.json",
+      "sha256": "84dabf2a7c58f2afb71e5a3a200f41ae827f6b954b0506756e9de5f6730e72fe"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/playground-390x844-walk-finished.json",
+      "sha256": "e142fd4987302923d5aefbaba7461cf86aaea6db72e0f85cb105d23010ac061b"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/station-640x360-job-3-working.json",
+      "sha256": "2249896ab4e8526c2f91849bfa329ac6c9c83c3e1b2a738ec981750518ad80d3"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/station-640x360-job-3-result.json",
+      "sha256": "ab6b3e22caf86b7dc96725a1f3d4f20a20e9a604f65e9d86f3904eccd1bc4bbc"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/bridge-320x568-wrong-role.json",
+      "sha256": "3c45732691593c7f007ace9aa7f13393ab71354e29bb5e376bb30581f07cd6fc"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/bridge-320x568-complete.json",
+      "sha256": "27c6000e9b6c8a41aeab2f33f475bd9fdb8250a90b5a3f34e02576c4fa0c78fc"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/playground-1024x768-play-2.json",
+      "sha256": "8feee75968088533474994200dd4aeacb63f5bba5f0970ccc5b43777b51c497d"
+    }
+  ],
+  "actualVisualFindings": [
+    {
+      "verdict": "PASS",
+      "files": [
+        "station-390x844-job-1-result.png"
+      ],
+      "finding": "The excavator now rests on the illustrated ground beside the shallow apron, rather than in the lower blue letterbox region. SVG and worker share the fitted canvas."
+    },
+    {
+      "verdict": "PASS",
+      "files": [
+        "playground-1024x768-play-2.png",
+        "playground-390x844-walk-finished.png"
+      ],
+      "finding": "Both feet remain on the yellow path in the matching intermediate capture and the separately captured finished state. The finished feet are (366,262) and (394,261) in path coordinates; both stroke samples lie inside the path."
+    },
+    {
+      "verdict": "PASS",
+      "files": [
+        "station-640x360-job-3-working.png",
+        "station-640x360-job-3-result.png"
+      ],
+      "finding": "Working and result states retain the worker on the same ground and preserve scene/control separation. The brown apron becomes a completed gray apron with a fire engine. Work and result buttons are visible; raw working measurement confirms phase=working at that capture."
+    },
+    {
+      "verdict": "PASS",
+      "files": [
+        "bridge-320x568-wrong-role.png",
+        "bridge-320x568-complete.png"
+      ],
+      "finding": "Wrong-role explanation and all three choice cards fit on the 320px screen. The completed bridge, repeat-play and navigation buttons remain visible without clipping or overlap."
+    }
+  ],
+  "priorEvidenceComparison": {
+    "stationBefore": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/station-390x844-job-1-result.png",
+      "sha256": "cb8eda959f7a71bd498b1bb475119976dc20205ae62a810f1bd50bcb022a19a3"
+    },
+    "walkerIntermediateBefore": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/playground-1024x768-play-2.png",
+      "sha256": "29ad5c77d1b91448f79b180055ec3ed21434172d6df97fce3ee5835508e21c07"
+    },
+    "resolution": "Both actual candidate1 visual findings are resolved in the corresponding candidate2 views. The 390 finished-walk image additionally covers the endpoint; it is not mislabeled as the original intermediate capture."
+  },
+  "recordedGeometrySummary": {
+    "jsonFramesRead": 176,
+    "workerGeometryFrames": 79,
+    "walkerFootGeometryFrames": 25,
+    "layoutIssues": [],
+    "allRecordedFeetInsidePath": true,
+    "scope": "All these geometry JSONs were read programmatically. Only the seven named PNGs were manually viewed. This does not prove every animation frame."
+  },
+  "endpointGeometry": {
+    "svg": {
+      "left": 17,
+      "top": 248.75,
+      "right": 373,
+      "bottom": 471.25,
+      "width": 356,
+      "height": 222.5
+    },
+    "canvas": {
+      "left": 17,
+      "top": 248.75,
+      "right": 373,
+      "bottom": 471.25,
+      "width": 356,
+      "height": 222.5
+    },
+    "worker": null,
+    "walkerFeet": [
+      {
+        "x": 366,
+        "y": 262,
+        "insidePath": true
+      },
+      {
+        "x": 394,
+        "y": 261,
+        "insidePath": true
+      }
+    ]
+  },
+  "browserCases": [
+    {
+      "name": "playground-390x844",
+      "status": "PASS"
+    },
+    {
+      "name": "playground-844x390",
+      "status": "PASS"
+    },
+    {
+      "name": "playground-640x360",
+      "status": "PASS"
+    },
+    {
+      "name": "playground-320x568",
+      "status": "PASS"
+    },
+    {
+      "name": "playground-768x1024",
+      "status": "PASS"
+    },
+    {
+      "name": "playground-1024x768",
+      "status": "PASS"
+    },
+    {
+      "name": "station-390x844",
+      "status": "PASS"
+    },
+    {
+      "name": "station-844x390",
+      "status": "PASS"
+    },
+    {
+      "name": "station-640x360",
+      "status": "PASS"
+    },
+    {
+      "name": "station-320x568",
+      "status": "PASS"
+    },
+    {
+      "name": "station-768x1024",
+      "status": "PASS"
+    },
+    {
+      "name": "station-1024x768",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge-390x844",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge-844x390",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge-640x360",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge-320x568",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge-768x1024",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge-1024x768",
+      "status": "PASS"
+    },
+    {
+      "name": "station-English-390x844",
+      "status": "PASS"
+    },
+    {
+      "name": "interrupt-work-390x844",
+      "status": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "sourcesUnchanged": true,
+  "inputAndAudioScope": "Public project choices and native touch; simulated audio completion. Physical device and audible speech NOT_RUN.",
+  "notRun": [
+    "Physical-device touch",
+    "Audible speech listening",
+    "Child observation",
+    "Every intermediate animation frame"
+  ],
+  "remainingReleaseWork": "Root owns remaining integration checks, merge and production verification. Candidate visual review is not production release completion."
+}

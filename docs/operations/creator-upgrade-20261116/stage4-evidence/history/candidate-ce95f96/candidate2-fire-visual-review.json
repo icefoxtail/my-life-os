@@ -1,0 +1,764 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T06:15:39.947816+00:00",
+  "candidateCommit": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+  "status": "VISUAL_PASS_SCOPED",
+  "scope": "Independent actual PNG review of the corrected four ladder variants and one normal-motion arrival; raw browser report and source binding also verified.",
+  "rawReport": {
+    "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/creator-fire-stage4-browser.json",
+    "sha256": "52e792f7edcfe1baf020385c5d0420636ea43fff9d8fafd43ac79104abb69abf",
+    "status": "PASS",
+    "caseCount": 8
+  },
+  "exactCommitSourceBinding": {
+    "verifiedAgainstGitObject": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+    "allSixMainCasesAndRetryMatch": true,
+    "sourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+      "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+      "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+    },
+    "harnessSha256": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae"
+  },
+  "imagesActuallyViewed": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/fire-320x568-friend-safe.png",
+      "sha256": "516cf763a903bcafd5b9216e5d2d7e95258c34b8bd555c418e22786f9eb9d11d"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/fire-390x844-friend-safe.png",
+      "sha256": "2ef7f7346c8aab29badd6369de80c42b0846f74111a2967720cab8fcad2663fb"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/fire-640x360-friend-safe.png",
+      "sha256": "13f95aec1a07cdf925d425c9d733c24ad5a46887c5266a494945d73a549570be"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/fire-844x390-friend-safe.png",
+      "sha256": "9ef5b8feeed91902d43864f1796d2a75f0cfbc5f0a0a04be3c207d34a00aa8db"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/fire-390x844-arrival-moving.png",
+      "sha256": "46fec1dd538cc16e13e99941af5430911fbf9c7dfb77ce2029e0c8f2911d5f6a"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/fire-390x844-arrival-on-road.png",
+      "sha256": "5862b5b4584b478d829ef07a4f23c6578ac16ff9a0bb3c7f14e6a08b6709cd01"
+    }
+  ],
+  "ladderFindings": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "vehicle": "n_ladder_truck",
+      "verdict": "PASS",
+      "finding": "Both yellow rail bases visibly meet the truck body; no detached gap remains. The upper end stays at the window. The rescued friend remains at ground level and result controls are visible.",
+      "connectionMeasurements": [
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire/ladder_truck.png",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            295,
+            225
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                77.96875,
+                314.578125
+              ],
+              "source": [
+                519,
+                563
+              ],
+              "rgba": [
+                235,
+                32,
+                22,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                82.65625,
+                322.078125
+              ],
+              "source": [
+                585,
+                670
+              ],
+              "rgba": [
+                230,
+                27,
+                20,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        },
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire/ladder_truck.png",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            440,
+            150
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                77.96875,
+                314.578125
+              ],
+              "source": [
+                519,
+                563
+              ],
+              "rgba": [
+                235,
+                32,
+                22,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                82.65625,
+                322.078125
+              ],
+              "source": [
+                585,
+                670
+              ],
+              "rgba": [
+                230,
+                27,
+                20,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "vehicle": "n_aerial_ladder_truck",
+      "verdict": "PASS",
+      "finding": "Both yellow rail bases visibly meet the truck body; no detached gap remains. The upper end stays at the window. The rescued friend remains at ground level and result controls are visible.",
+      "connectionMeasurements": [
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire/aerial_ladder_truck.png",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            295,
+            225
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                95.46875,
+                461.153125
+              ],
+              "source": [
+                519,
+                567
+              ],
+              "rgba": [
+                240,
+                45,
+                32,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                101.15625,
+                470.25312499999995
+              ],
+              "source": [
+                592,
+                683
+              ],
+              "rgba": [
+                236,
+                39,
+                25,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        },
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire/aerial_ladder_truck.png",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            440,
+            150
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                95.46875,
+                461.153125
+              ],
+              "source": [
+                519,
+                567
+              ],
+              "rgba": [
+                240,
+                45,
+                32,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                101.15625,
+                470.25312499999995
+              ],
+              "source": [
+                592,
+                683
+              ],
+              "rgba": [
+                236,
+                39,
+                25,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 640,
+        "height": 360
+      },
+      "vehicle": "n_articulating_ladder_truck",
+      "verdict": "PASS",
+      "finding": "Both yellow rail bases visibly meet the truck body; no detached gap remains. The upper end stays at the window. The rescued friend remains at ground level and result controls are visible.",
+      "connectionMeasurements": [
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire/articulating_ladder_truck.png",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            295,
+            225
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                84.4453125,
+                296.696875
+              ],
+              "source": [
+                520,
+                575
+              ],
+              "rgba": [
+                230,
+                43,
+                34,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                89.6484375,
+                305.021875
+              ],
+              "source": [
+                603,
+                706
+              ],
+              "rgba": [
+                215,
+                22,
+                17,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        },
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire/articulating_ladder_truck.png",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            440,
+            150
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                84.4453125,
+                296.696875
+              ],
+              "source": [
+                520,
+                575
+              ],
+              "rgba": [
+                230,
+                43,
+                34,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                89.6484375,
+                305.021875
+              ],
+              "source": [
+                603,
+                706
+              ],
+              "rgba": [
+                215,
+                22,
+                17,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "vehicle": "s_aerial_ladder_truck",
+      "verdict": "PASS",
+      "finding": "Both yellow rail bases visibly meet the truck body; no detached gap remains. The upper end stays at the window. The rescued friend remains at ground level and result controls are visible.",
+      "connectionMeasurements": [
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire_special/aerial_ladder_truck.webp",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            295,
+            225
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                109.59375,
+                331.121875
+              ],
+              "source": [
+                261,
+                296
+              ],
+              "rgba": [
+                205,
+                143,
+                134,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                116.53125,
+                342.22187499999995
+              ],
+              "source": [
+                315,
+                382
+              ],
+              "rgba": [
+                56,
+                54,
+                53,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        },
+        {
+          "picture": "http://127.0.0.1:41573/assets/vehicles/fire_special/aerial_ladder_truck.webp",
+          "base": [
+            150,
+            300
+          ],
+          "tip": [
+            440,
+            150
+          ],
+          "samples": [
+            {
+              "world": [
+                145,
+                292
+              ],
+              "screen": [
+                109.59375,
+                331.121875
+              ],
+              "source": [
+                261,
+                296
+              ],
+              "rgba": [
+                205,
+                143,
+                134,
+                255
+              ]
+            },
+            {
+              "world": [
+                155,
+                308
+              ],
+              "screen": [
+                116.53125,
+                342.22187499999995
+              ],
+              "source": [
+                315,
+                382
+              ],
+              "rgba": [
+                56,
+                54,
+                53,
+                255
+              ]
+            }
+          ],
+          "aboveVehicle": true,
+          "pointerEvents": "none",
+          "planeDifference": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "groupCount": 1
+        }
+      ]
+    }
+  ],
+  "opaqueAssetLimitation": "The special aerial-ladder image still has an existing white square background. In the viewed 844x390 PNG the foreground ladder crosses that background and meets the vehicle body visibly; the background no longer severs the connection. No asset-background removal claim is made.",
+  "controlsAndScene": "Inspected result frames preserve readable result/next controls and the vehicle/road relationship. This is a scoped inspection of the six listed PNGs, not a claim that every screenshot was manually reviewed.",
+  "normalMotion": {
+    "measurement": {
+      "moving": {
+        "phase": "arrival",
+        "engine": {
+          "x": -104.73652648925781,
+          "y": 433.171875,
+          "width": 127.390625,
+          "height": 57.328125
+        },
+        "canvas": {
+          "x": 13,
+          "y": 300.078125,
+          "width": 364,
+          "height": 204.75
+        },
+        "relativeLeft": -0.3234519958496094,
+        "relativeBottom": 0.9300213675213675,
+        "animation": {
+          "currentTime": 83.243999999989,
+          "duration": 550,
+          "playState": "running"
+        }
+      },
+      "afterMovingCapture": {
+        "phase": "arrival",
+        "engine": {
+          "x": -89.1125259399414,
+          "y": 433.171875,
+          "width": 127.390625,
+          "height": 57.328125
+        },
+        "canvas": {
+          "x": 13,
+          "y": 300.078125,
+          "width": 364,
+          "height": 204.75
+        },
+        "relativeLeft": -0.2805289174174214,
+        "relativeBottom": 0.9300213675213675,
+        "animation": {
+          "currentTime": 116.64399999998842,
+          "duration": 550,
+          "playState": "running"
+        }
+      },
+      "movingFile": "fire-390x844-arrival-moving.png",
+      "arrived": {
+        "phase": "work",
+        "engine": {
+          "x": 31.1875,
+          "y": 433.171875,
+          "width": 127.390625,
+          "height": 57.328125
+        },
+        "canvas": {
+          "x": 13,
+          "y": 300.078125,
+          "width": 364,
+          "height": 204.75
+        },
+        "relativeLeft": 0.049965659340659344,
+        "relativeBottom": 0.9300213675213675,
+        "animation": null
+      },
+      "arrivedFile": "fire-390x844-arrival-on-road.png",
+      "vehicle": "s_water_tanker",
+      "scope": "This one normal-motion arrival only; physical touch and the full motion catalog are not claimed"
+    },
+    "verdict": "PASS_SCOPED",
+    "finding": "Moving capture is an early entrance frame with most of the tanker still offscreen at the left edge. DOM time advances approximately 83.24 to 116.64ms below the 550ms duration and relativeLeft advances from -0.32345 to -0.28053. The separately viewed arrival-on-road PNG shows the tanker on the road at relativeLeft about 0.04997. This proves one observed arrival, not full-catalog motion trajectories."
+  },
+  "automatedBrowserOutcomes": {
+    "sixViewportThreeIncidentFlows": "PASS",
+    "manifest503AndRealRetry": {
+      "case": "manifest-failure-and-real-retry",
+      "status": "PASS",
+      "requestCount": 4,
+      "sourcesAfterRetry": {
+        "index.html": {
+          "url": "http://127.0.0.1:41573/index.html",
+          "httpStatus": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/vehicle-display.js": {
+          "url": "http://127.0.0.1:41573/js/vehicle-display.js",
+          "httpStatus": 200,
+          "servedSha256": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+          "checkoutSha256": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+          "matchesCheckout": true
+        },
+        "js/games/megaDispatch.js": {
+          "url": "http://127.0.0.1:41573/js/games/megaDispatch.js",
+          "httpStatus": 200,
+          "servedSha256": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+          "checkoutSha256": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+          "matchesCheckout": true
+        },
+        "assets/vehicles/fire_special_manifest.json": {
+          "url": "http://127.0.0.1:41573/assets/vehicles/fire_special_manifest.json",
+          "httpStatus": 200,
+          "servedSha256": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa",
+          "checkoutSha256": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa",
+          "matchesCheckout": true
+        },
+        "assets/vehicles/fire_manifest.json": {
+          "url": "http://127.0.0.1:41573/assets/vehicles/fire_manifest.json",
+          "httpStatus": 200,
+          "servedSha256": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+          "checkoutSha256": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+          "matchesCheckout": true
+        }
+      },
+      "expectedHttpFailure": 503
+    },
+    "englishFailureStorageLifecycleAndLegacyModes": {
+      "case": "english-speech-failure-storage-refusal-and-lifecycle",
+      "status": "PASS",
+      "speechRequests": [
+        {
+          "text": "The fire is out, but smoke remains. Choose the truck with a big fan.",
+          "lang": "en-US"
+        },
+        {
+          "text": "The big fan moves the smoke out. Let us send some air.",
+          "lang": "en-US"
+        },
+        {
+          "text": "The smoke is thinner. Send a little more air.",
+          "lang": "en-US"
+        },
+        {
+          "text": "The smoke is thinner. Send a little more air.",
+          "lang": "en-US"
+        },
+        {
+          "text": "The smoke has cleared! Everyone feels better now.",
+          "lang": "en-US"
+        }
+      ],
+      "rewardCalls": [
+        20
+      ],
+      "legacyModes": [
+        4,
+        9,
+        16
+      ],
+      "scope": "Actual voice-engine requests with a deliberately failing browser TTS; no audible claim"
+    }
+  },
+  "unexpectedErrors": {
+    "pageErrors": [],
+    "consoleErrors": [],
+    "httpErrors": [],
+    "failedRequests": []
+  },
+  "inputMode": "native browser mouse/keyboard clicks; has_touch is not enabled",
+  "motionMode": "390x844 uses no-preference with one arrival DOM/PNG observation; other five viewports and special failure contexts use reduce",
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "full catalog motion trajectories",
+    "child observation"
+  ],
+  "priorFindingResolution": "Candidate1 detached ladder finding is resolved in the four actual vehicle variants inspected. Candidate1 evidence is retained unchanged.",
+  "remainingReleaseWork": "Construction repaired PNG review and remaining integration/production gates are owned by root; this review alone is not production-release completion."
+}

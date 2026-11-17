@@ -1,0 +1,317 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T05:57:11.406947+00:00",
+  "status": "CHANGES_REQUIRED_VISUAL",
+  "scope": "Independent read-only review of original candidate1 Chromium artifacts; no product or harness edits by reviewer.",
+  "candidateCommitFromConstructionReport": "0e892efd115b3c4943d61eb88437a9cd06e990ef",
+  "fire": {
+    "rawReport": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/creator-fire-stage4-browser.json",
+      "sha256": "3f5e1877c694a09ef147feace13723a7474034c0b118f1acf142e5dcb21fe919"
+    },
+    "overallHarnessStatus": "FAIL",
+    "completedMainCases": 6,
+    "completedScope": "Six viewport sizes, each completing water supply plus pump, ladder rescue, and smoke clearing.",
+    "mainCaseStatuses": [
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "status": "PASS",
+        "tankerVariant": "n_water_tanker",
+        "ladderVariant": "n_ladder_truck"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "status": "PASS",
+        "tankerVariant": "s_water_tanker",
+        "ladderVariant": "n_aerial_ladder_truck"
+      },
+      {
+        "viewport": {
+          "width": 640,
+          "height": 360
+        },
+        "status": "PASS",
+        "tankerVariant": "n_water_tanker",
+        "ladderVariant": "n_articulating_ladder_truck"
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "status": "PASS",
+        "tankerVariant": "s_water_tanker",
+        "ladderVariant": "s_aerial_ladder_truck"
+      },
+      {
+        "viewport": {
+          "width": 768,
+          "height": 1024
+        },
+        "status": "PASS",
+        "tankerVariant": "n_water_tanker",
+        "ladderVariant": "n_ladder_truck"
+      },
+      {
+        "viewport": {
+          "width": 1024,
+          "height": 768
+        },
+        "status": "PASS",
+        "tankerVariant": "s_water_tanker",
+        "ladderVariant": "n_aerial_ladder_truck"
+      }
+    ],
+    "allObservedSourceResponsesMatchCheckout": true,
+    "observedProductSha256": "302b2c7c7aebdd79e1878432a39ef56be3e0cdb65d7e248f175f3df38417a977",
+    "pageErrors": [],
+    "consoleErrors": [],
+    "httpErrors": [],
+    "failedRequests": [],
+    "failure": "After all six main cases, retry_case stopped at page.on(\"response\", responses.append): Playwright attempted setattr on a builtin method, raising AttributeError. This is a harness registration failure; retry, English/failure and lifecycle cases did not execute.",
+    "imagesActuallyViewed": [
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-320x568-water-ready.png",
+        "sha256": "1b3087c7ac46388c5a575a6c434daf69f64ee04d6d7d79a0fac10a96e0019273"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-320x568-fire-out.png",
+        "sha256": "7df173c6172e322b22718bda6eaaeb7bae7d34adf432f2f1ffeef1800201d97f"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-320x568-ladder-before.png",
+        "sha256": "c1b092a56b9674124aef2fe8768cab1251d6dc6654f87158653345bf01ee8ebe"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-320x568-friend-safe.png",
+        "sha256": "61ad93d982f1e0b5abea3099ea634b56f022b4576bccdefb9b51accab3134dde"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-320x568-smoke-before.png",
+        "sha256": "48b58e69fc411a7509de2f6870498e3c43788c04968ae6f635915c5e169db7e1"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-320x568-smoke-clear.png",
+        "sha256": "e8fc9b32845bf5ce2bbf01f3619896e8cbd472f1a377cbb7e1ccef4d8ac15242"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-640x360-water-ready.png",
+        "sha256": "a99a86ddef28b73b1f72de27ca8c90bdc6daf5a8f6e68d73e304f32a54ce03a6"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-640x360-fire-out.png",
+        "sha256": "96d53b7ea3900dfb19f9ce5c5d73380f22775c9594520204dfaa1b861f68a525"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-640x360-ladder-before.png",
+        "sha256": "49e4102f9135f8cb08ae03525d7ec2f0eccda9eb62cf7c57a623fe64365bd28f"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-640x360-friend-safe.png",
+        "sha256": "f87377238e0f21d960c62eb5e76a34147acf99cbcbe34c3005161fee98badf69"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-640x360-smoke-before.png",
+        "sha256": "982b37857ee8f346de72c1e8ed2a93ca860fa5b8502b9f5ecac3461e2ffc7b49"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-640x360-smoke-clear.png",
+        "sha256": "b3fc3189bf0b46c98ca92926ec6bd97e9112eb420c3236e0e74865f3acfa7477"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-water-ready.png",
+        "sha256": "05054b1f6ed727e933d8a084c5af50fc53c76d4d089db30a48cd1ac954e5ecfe"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-fire-out.png",
+        "sha256": "13f0334a58cbdefabe2e26ccc310893110cf91e4103d8dd20be5b51f81c86b31"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-ladder-before.png",
+        "sha256": "67d2f1868c0280ca6bf6bb83d923bb82150a0e9270f409af1952b40b21e057a6"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-friend-safe.png",
+        "sha256": "85ba779a4ec118a8f87544a60f2400a4717681b78a2ddde2a8526dce7ef6185c"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-smoke-before.png",
+        "sha256": "c20a82f948b063284caefa7b3d4409162878abfa900a1e4e11fb5cfcb3c000a7"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-smoke-clear.png",
+        "sha256": "242eb67a73181463e08d8c5480375eef50244adba56a2cdcaf0b3b9b50a77f42"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-1024x768-water-before.png",
+        "sha256": "43d4e016ecfe0346dab9c2917f113ae9e4df98e6e42fdb84b99c0d5247385121"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-390x844-arrival-moving.png",
+        "sha256": "46fec1dd538cc16e13e99941af5430911fbf9c7dfb77ce2029e0c8f2911d5f6a"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/fire/fire/fire-390x844-arrival-on-road.png",
+        "sha256": "5862b5b4584b478d829ef07a4f23c6578ac16ff9a0bb3c7f14e6a08b6709cd01"
+      }
+    ],
+    "visualFindings": [
+      {
+        "severity": "PASS_SCOPED",
+        "finding": "At 320x568, 640x360 and 1024x768 the full water tank becomes empty and the flames disappear after pump work. The selected tanker/pump image is visible on the road; result and next buttons remain visible."
+      },
+      {
+        "severity": "PASS_SCOPED",
+        "finding": "At those three sizes the waiting friend moves from the high window to the ground safety area. The before/after change is visually clear."
+      },
+      {
+        "severity": "REPAIR_REQUIRED",
+        "finding": "The yellow extended ladder is visibly detached from the actual visible rear of the truck in the 640x360 articulating-ladder result and 1024x768 aerial-ladder result. Approximate screen gaps are 8-10px and 10-15px respectively, estimated by visual inspection rather than a pixel-boundary algorithm. SVG base bx=220 is right of the visible contain/calibrated vehicle body. Keep the window endpoint while moving/connecting the base into the truck body, then inspect the four allowed variants.",
+        "evidence": [
+          "fire-640x360-friend-safe.png",
+          "fire-1024x768-friend-safe.png"
+        ]
+      },
+      {
+        "severity": "PASS_SCOPED",
+        "finding": "At those three sizes gray smoke disappears, white wind lines appear, and the friend is visible at the safety area. Work/result controls do not obstruct the scene."
+      },
+      {
+        "severity": "OBSERVED_ASSET_LIMITATION",
+        "finding": "The smoke-extraction vehicle image retains a white square background visible against the road. Recorded separately from the Stage4 functional gate; no asset editing was performed."
+      },
+      {
+        "severity": "OBSERVED_TRANSIENT_OVERLAY",
+        "finding": "Confetti is visible over some scenes and controls. Text remains readable in the inspected frames; a claim of a completely overlay-free image is not made."
+      }
+    ],
+    "normalMotionObservation": {
+      "moving": {
+        "phase": "arrival",
+        "engine": {
+          "x": -104.69728088378906,
+          "y": 433.171875,
+          "width": 127.390625,
+          "height": 57.328125
+        },
+        "canvas": {
+          "x": 13,
+          "y": 300.078125,
+          "width": 364,
+          "height": 204.75
+        },
+        "relativeLeft": -0.32334417825216777,
+        "relativeBottom": 0.9300213675213675,
+        "animation": {
+          "currentTime": 83.32600000004398,
+          "duration": 550,
+          "playState": "running"
+        }
+      },
+      "afterMovingCapture": {
+        "phase": "arrival",
+        "engine": {
+          "x": -89.07505798339844,
+          "y": 433.171875,
+          "width": 127.390625,
+          "height": 57.328125
+        },
+        "canvas": {
+          "x": 13,
+          "y": 300.078125,
+          "width": 364,
+          "height": 204.75
+        },
+        "relativeLeft": -0.28042598347087483,
+        "relativeBottom": 0.9300213675213675,
+        "animation": {
+          "currentTime": 116.7260000000443,
+          "duration": 550,
+          "playState": "running"
+        }
+      },
+      "movingFile": "fire-390x844-arrival-moving.png",
+      "arrived": {
+        "phase": "work",
+        "engine": {
+          "x": 31.1875,
+          "y": 433.171875,
+          "width": 127.390625,
+          "height": 57.328125
+        },
+        "canvas": {
+          "x": 13,
+          "y": 300.078125,
+          "width": 364,
+          "height": 204.75
+        },
+        "relativeLeft": 0.049965659340659344,
+        "relativeBottom": 0.9300213675213675,
+        "animation": null
+      },
+      "arrivedFile": "fire-390x844-arrival-on-road.png",
+      "vehicle": "s_water_tanker",
+      "scope": "This one normal-motion arrival only; physical touch and the full motion catalog are not claimed"
+    },
+    "normalMotionInterpretation": "One special water-tanker arrival only. The moving PNG shows the initial partly offscreen entrance; the after PNG shows the truck on the road. DOM currentTime progresses from about 83 to 117ms below the 550ms duration, then relativeLeft reaches about 0.05. This is not full-catalog trajectory evidence.",
+    "inputMode": "native browser mouse/keyboard clicks; has_touch is not enabled",
+    "motionMode": "390x844 uses no-preference with one arrival DOM/PNG observation; other five viewports and special failure contexts use reduce",
+    "notRun": [
+      "physical device touch",
+      "audible speech listening",
+      "full catalog motion trajectories",
+      "child observation",
+      "Manifest-failure retry case after the builtin response-handler error",
+      "English speech-failure/storage/lifecycle/old-practice browser case after that error"
+    ]
+  },
+  "construction": {
+    "rawReport": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/construction-stage4-results.json",
+      "sha256": "9b8dfaa4d58ce483b0d529e27ea0838986fe6b94a6fde5575bf9fb86cbe951f9"
+    },
+    "overallHarnessStatus": "PASS",
+    "completedCases": 20,
+    "pageErrors": [],
+    "sourcesUnchanged": true,
+    "observedProductSha256": "ef64f37bb82a5d1f30720343c4588c35846f7036c1df25bbee2000062f7f5c3a",
+    "imagesActuallyViewed": [
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/station-390x844-job-1-result.png",
+        "sha256": "cb8eda959f7a71bd498b1bb475119976dc20205ae62a810f1bd50bcb022a19a3"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/playground-1024x768-play-2.png",
+        "sha256": "29ad5c77d1b91448f79b180055ec3ed21434172d6df97fce3ee5835508e21c07"
+      }
+    ],
+    "associatedMeasurements": [
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/station-390x844-job-1-result.json",
+        "sha256": "cc4f48782f31e5771466f89b31845adc4680fe6b97bc0be931c322e49afc6975"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate1/construction/construction/playground-1024x768-play-2.json",
+        "sha256": "b57fa265fc437ab85ad12792928c6e97e7cd6b3849cd13d830f57eb6d698aeca"
+      }
+    ],
+    "visualFindings": [
+      {
+        "severity": "REPAIR_REQUIRED",
+        "finding": "In station-390x844-job-1-result.png, the excavator sits in the lower blue letterbox area below the illustrated ground. The overlay and scene coordinate systems do not match. The common 8:5 canvas repair is necessary and requires new PNG comparison."
+      },
+      {
+        "severity": "REPAIR_REQUIRED",
+        "finding": "In playground-1024x768-play-2.png both feet are below the finished path on grass. This is the one-second intermediate animation capture (play button disabled), not a final endpoint capture. The separately reviewed old static endpoint was also outside the path. Revised waypoints/foot positions and a new endpoint capture require actual CI review."
+      }
+    ],
+    "scopeLimit": "The 20 functional/layout browser cases passed, but the original layout checks did not detect vehicle-to-ground or foot-to-path geometry. Functional PASS does not erase these actual visual defects."
+  },
+  "followup": "Owners repair ladder base and construction canvas/walk geometry. Rerun exact candidate CI, including previously unexecuted fire retry/lifecycle cases, and independently compare replacement PNGs before release approval."
+}

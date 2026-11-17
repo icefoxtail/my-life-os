@@ -1,0 +1,40 @@
+{
+  "kind": "model-and-state-only",
+  "browserVerified": false,
+  "sourceHashesBefore": {
+    "js/games/construction-site.js": "285fdcd6144ab6c5a336530f41e713a5bc3ed7db21829d7198871a09cc45e9cc",
+    "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6"
+  },
+  "checks": [
+    {
+      "command": "node scripts/test-creator-construction-stage4.cjs",
+      "exitCode": 0,
+      "stdout": "PASS three honest sites use the unchanged seven machine roles\nPASS ground and work vehicle share one fitted 8:5 canvas across stage shapes\nPASS playground tap/watch, persistent progress, manual next and repeat play\nPASS station tap/watch, persistent progress, manual next and repeat play\nPASS bridge tap/watch, persistent progress, manual next and repeat play\nPASS all seven orders and wrong roles have Korean and English speech\nPASS incorrect and hidden choices neither work nor reward\nPASS destroy/reentry cancels work and prevents old rewards\nPASS reward persistence exception cannot wedge a completed job\nPASS partial catalogs cannot start impossible projects or invent a substitute answer\nPASS late manifest from an old game cannot overwrite a new session\nPASS construction stage 4: 11 state/lifecycle cases. Browser visibility, native touch and audible speech are separate evidence.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/test-creator-fire-stage4.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 165 stage-4 fire assertions/groups: all three coherent incidents, tanker2/ladder4 variants, safe choices, persistent cooperation, work input, help/rotation, replay, language/speech failure, catalog partial/failure retry and lifecycle. Browser NOT_RUN.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/test-creator-vehicle-rules.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 33 memory catalog/count boards; rescue 8 and police 16 cross-copy matching, reconstructed markup, seen-card-only hints, completion, stale timers, emoji and empty data; construction 27 vehicles across 7 missions, multiple valid roles, safe distractors, sparse catalogs and real Korean/English voice-engine requests.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/test-creator-help-modes.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 86 help-mode scenarios: default, immediate/delayed clues, wrong/correct outcomes, persistence/denial, unchanged rounds, water coordinates/lifetime and destroy. Browser NOT_RUN.\n",
+      "stderr": ""
+    }
+  ],
+  "sourceHashesAfter": {
+    "js/games/construction-site.js": "285fdcd6144ab6c5a336530f41e713a5bc3ed7db21829d7198871a09cc45e9cc",
+    "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6"
+  },
+  "sourcesUnchanged": true,
+  "status": "PASS"
+}

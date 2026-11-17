@@ -173,6 +173,7 @@ def main():
         for response in reversed(responses):
             name = expected.get(urlsplit(response.url).path)
             if name and name not in evidence:
+                assert response.status == 200, {'source': name, 'url': response.url, 'status': response.status}
                 served = hashlib.sha256(response.body()).hexdigest()
                 checkout = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                 evidence[name] = {'url': response.url, 'status': response.status,
@@ -217,6 +218,13 @@ def main():
                 if init:
                     context.add_init_script(script=init)
                 page = context.new_page()
+                # This suite attests the body of every loaded source on reload.
+                # Keep those navigations on the network: a cache validation or
+                # redirect response need not expose a response body to CDP.
+                # Installed/offline cache behavior is outside this SW-blocked suite.
+                source_session = context.new_cdp_session(page)
+                source_session.send('Network.enable')
+                source_session.send('Network.setCacheDisabled', {'cacheDisabled': True})
                 page.set_default_timeout(12000)
                 page.on('pageerror', lambda error: report['pageErrors'].append({'check': current['name'], 'message': str(error)}))
                 try:

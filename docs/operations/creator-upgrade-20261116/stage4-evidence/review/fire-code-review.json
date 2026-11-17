@@ -1,0 +1,55 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "reviewedAtUtc": "2026-11-17T05:42:56.674921+00:00",
+  "status": "CODE_AND_MODEL_PASS_SCOPED",
+  "baselineGitSha": "475577ec48b85a7f19781447502881a8d9ec0981",
+  "scope": "Read-only independent review of the fire implementation, its model harness and new browser harness. Browser execution and actual Stage 4 pixels are not certified.",
+  "files": [
+    {
+      "path": "js/games/megaDispatch.js",
+      "sha256": "302b2c7c7aebdd79e1878432a39ef56be3e0cdb65d7e248f175f3df38417a977"
+    },
+    {
+      "path": "scripts/test-creator-fire-stage4.cjs",
+      "sha256": "ccc5888a87248ea797c2922372fd52fa8cbbb375f9adb6bc08a6894f4a3aede3"
+    },
+    {
+      "path": "scripts/qa-creator-fire-stage4-browser.py",
+      "sha256": "77d1ced174f2778ae3b93a501d1f813ee12b9c20faadccab38f6b737405f2b29"
+    }
+  ],
+  "executed": [
+    {
+      "command": "node scripts/test-creator-fire-stage4.cjs",
+      "status": "PASS",
+      "reportedGroups": 149,
+      "countMeaning": "Manually accumulated assertion/groups counter; not 149 independent scenarios or pixel observations."
+    },
+    {
+      "command": "node scripts/test-creator-help-modes.cjs",
+      "status": "PASS",
+      "reportedScenarios": 86
+    }
+  ],
+  "findings": [
+    "Actual manifests and explicit vehicle variants support both tanker pictures and four ladder pictures; ambiguous boom and potentially water-capable vehicles are protected from inappropriate wrong-answer placement.",
+    "Work changes persistent water, flame, ladder, rescued-person and smoke state; supplied water survives into the pump step and results wait for the child.",
+    "Round/catalog tokens, detached-button handling, reward-once behavior, real catalog retry and exit/reentry were reviewed and exercised by the model harness.",
+    "Core model checks use explicit expected IDs and world transitions instead of simply copying the implementation answer list. Help-glow helper itself consults implementation roles, so it alone is not independent semantic proof.",
+    "Legacy startRound, shootWater, handleTouch, finishRound, showEnding and renderEnding sections match the baseline.",
+    "New browser harness uses public controls for six viewport sizes, all three incidents, real response-body hashes for five sources, 503 retry, English voice-engine requests with deliberately failed TTS, storage refusal, exit/reentry and legacy 4/9/16 entry."
+  ],
+  "reviewFindingResolvedInCode": {
+    "issue": "The scene SVG and overlaid truck previously used different letterbox coordinate planes.",
+    "change": "The owner placed SVG and truck into one 16:9 canvas and refits it after renders and same-orientation resizing.",
+    "verification": "Source reviewed and model regressions rerun; actual road/truck/ladder alignment remains pending PNG inspection."
+  },
+  "browserHarnessAccuracyFollowup": "Latest saved helper was read: decode failures are no longer swallowed; inputMode states native mouse/keyboard clicks without has_touch. A new planned 390x844 normal-motion arrival DOM/PNG check is included; the other five viewports and failure contexts use reduced motion. No CI/browser run is certified by this record.",
+  "blockers": [],
+  "notYetVerified": [
+    "Actual Stage 4 PNG visibility, small-screen clipping and road/truck/ladder alignment.",
+    "Actual normal-motion arrival evidence and full catalog trajectories. The latest helper plans one 390x844 no-preference arrival check; other contexts use reduce.",
+    "Physical-device touch, audible speech listening and child observation.",
+    "CI outcome at a frozen PR head and deployed production source."
+  ]
+}

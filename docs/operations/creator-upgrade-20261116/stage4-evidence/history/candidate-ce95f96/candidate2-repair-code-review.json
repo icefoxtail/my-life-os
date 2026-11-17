@@ -1,0 +1,64 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T06:06:18.202817+00:00",
+  "status": "STATIC_AND_MODEL_PASS_SCOPED",
+  "baselineCommit": "0e892efd115b3c4943d61eb88437a9cd06e990ef",
+  "reviewedSourceSha256": {
+    "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+    "scripts/test-creator-fire-stage4.cjs": "6d688d63e76fe37168ed8ee1609c622efa1cc80680e4c52c77533a9d308b16fc",
+    "scripts/qa-creator-fire-stage4-browser.py": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae",
+    "js/games/construction-site.js": "285fdcd6144ab6c5a336530f41e713a5bc3ed7db21829d7198871a09cc45e9cc",
+    "scripts/test-creator-construction-stage4.cjs": "714840b7b560fd2ca118e958c23b33ef4902baf708b7feb2fa07b525a48758b8",
+    "scripts/qa-creator-construction-stage4-browser.py": "7313b95aee6f71678b5600e6dd035867534699c56cbdf017b5915d37bb2c6cd7",
+    "scripts/qa-creator-art-collection-browser.py": "27ed3aa9d61110bc6791b3274196d47af766f8130285e0d51f509f7be0c68676"
+  },
+  "directExecutions": [
+    {
+      "command": "node scripts/test-creator-construction-stage4.cjs",
+      "exitCode": 0,
+      "result": "11 state/lifecycle cases PASS; includes pure fit geometry case, not browser geometry proof."
+    },
+    {
+      "command": "node scripts/test-creator-fire-stage4.cjs",
+      "exitCode": 0,
+      "result": "165 manually counted assertions/groups PASS; not 165 independent browser tests."
+    },
+    {
+      "command": "node scripts/test-creator-help-modes.cjs",
+      "exitCode": 0,
+      "result": "86 model help-mode scenarios PASS; browser NOT_RUN."
+    }
+  ],
+  "fireRepairReview": [
+    "Existing data-scene-ladder group is moved by appendChild into one transparent layer; it is not cloned. Same 640x360 canvas and pointer-events none are maintained.",
+    "Base is now (150,300); full tip remains (440,150). Half tip is (295,225). Rungs use the same displacement vector as rails.",
+    "Scene-wide snapshot selector continues to find the moved group. Direct-child SVG crop selector still resolves one element; raster capture can include overlay pixels within that same screen rectangle.",
+    "Source pixel mapping uses actual ladder screen CTM then the inverse of the existing SVG vehicle-frame CTM. The vehicle frame maps the foreignObject source image at its metadata pixel dimensions, matching this conversion.",
+    "New checks reject white/transparent source pixels at both rail starts, duplicate groups, a displaced layer or wrong base/tip. Real visible contact still requires the next actual PNGs."
+  ],
+  "fireBrowserAstPreservation": {
+    "oldAssertions": 61,
+    "newAssertions": 65,
+    "removedOriginalAssertions": 0,
+    "oldExpectExpressions": 25,
+    "newExpectExpressions": 25,
+    "removedOriginalExpectExpressions": 0
+  },
+  "constructionRepairReview": [
+    "SVG and worker share one fitted 8:5 canvas. Same-orientation resize, work-panel changes and guarded ResizeObserver callbacks refit it. Observer is disconnected on exit/chooser/render replacement.",
+    "Updated walking waypoints and shifted actor feet address the original intermediate and final path escape. New browser geometry converts actual leg endpoints to path coordinates and samples the foot stroke circumference with isPointInFill.",
+    "New 390x844 walk-finished capture verifies endpoint after the play button is reenabled. Original scenario count and functional assertions are retained."
+  ],
+  "harnessExceptionRepairs": [
+    "Fire response callback wraps list.append in a lambda, removing the builtin-callable registration error without skipping retry validation.",
+    "Art-collection disables network cache per CDP page in an already service-worker-blocked source-attestation suite. An explicit HTTP 200 check precedes response.body with URL/status diagnostics. Original hash and feature checks remain; cache/offline behavior is not claimed."
+  ],
+  "notRun": [
+    "Repaired candidate browser execution and PNG review",
+    "Previously unexecuted fire retry/English/lifecycle browser cases",
+    "Physical device touch",
+    "Audible speech listening"
+  ],
+  "unresolvedSeparateObservation": "Root reports existing number-browser hundred-more-but-shorter 844x390 toast opacity 0 in candidate1 despite unchanged runtime/harness bytes and no pageErrors. This review does not assign a cause. The unchanged case is awaiting re-observation.",
+  "nextAction": "Run exact repaired candidate CI, inspect all four ladder variants plus construction ground/walk PNGs, and retain the original candidate1 failure evidence."
+}

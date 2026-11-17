@@ -1,8 +1,8 @@
 /**
  * 시현이 놀이터 OS — 🏗️ 공사장 (Construction Site)
  * 파일: js/games/construction-site.js
- * 버전: 4살 시현이 맞춤 최종 통합본 (v4.0)
- * 적용 내역: 3라운드, 초거대 애니메이션, 이름 부르기(TTS), 0.4초 대기, 피날레 뷰, 글자 제거(그림 중심)
+ * 세 작업으로 길·앞마당·낮은 다리를 만들고, 완성한 장소에서 다시 놀아요.
+ * 기존 공사차 연습의 일곱 역할과 복수 정답은 같은 규칙을 사용합니다.
  */
 (function () {
   const GAME_KEY = 'constructionSite';
@@ -48,6 +48,68 @@
     pump: ['excavator', 'mini_excavator', 'bulldozer', 'wheel_loader', 'dump_truck', 'concrete_mixer', 'crane_truck', 'forklift', 'backhoe_loader', 'skid_steer_loader', 'road_roller', 'asphalt_paver', 'grader', 'tower_crane', 'mobile_crane', 'pile_driver', 'drilling_rig', 'excavator_breaker', 'dump_loader', 'articulated_dump_truck', 'water_truck', 'sweeper_truck', 'fuel_truck', 'lowbed_trailer', 'cargo_truck', 'scissor_lift']
   };
 
+  // These are small, visible pieces of a place that already exists. Three
+  // machine actions do not magically construct an entire building or bridge.
+  const PROJECTS = [
+    { id: 'playground', title: '놀이터 길 만들기', short: '놀이터 길', icon: '🛝', en: 'Make a playground path', play: '길을 걸어요', playEn: 'Walk along the path',
+      steps: [
+        { id: 'push', label: '자리 정리', title: '길 위의 흙을 밀어요', question: '놀이터로 가는 길에 흙더미가 있어. 흙을 밀 차를 골라 줘.', en: 'A pile of soil is blocking the playground path. Choose a machine that can push the soil.', action: '흙을 쓱 밀기', actionEn: 'Push the soil aside', result: '흙더미를 밀어서 길 자리를 정리했어.', resultEn: 'The soil is pushed aside. There is space for our path.' },
+        { id: 'load', label: '재료 담기', title: '길에 쓸 모래를 담아요', question: '길에 쓸 모래를 삽으로 담아야 해. 어떤 차가 좋을까?', en: 'We need to scoop sand for the path. Which machine can scoop it?', action: '모래 한 삽 담기', actionEn: 'Scoop the sand', result: '삽으로 모래를 담았어. 이제 길로 옮기자.', resultEn: 'The sand is loaded. Now we can carry it to the path.' },
+        { id: 'carry', label: '길로 옮기기', title: '모래를 길로 옮겨요', question: '담은 모래를 놀이터 길로 옮겨야 해. 짐을 옮길 차를 골라 줘.', en: 'Carry the loaded sand to the playground path. Choose a vehicle that carries loads.', action: '길로 옮겨 내리기', actionEn: 'Deliver the sand', result: '모래를 옮겨 내렸어. 준비한 길을 걸어 볼까?', resultEn: 'The sand has arrived. Let us walk along our prepared path.' }
+      ] },
+    { id: 'station', title: '소방서 앞마당 만들기', short: '소방서 앞마당', icon: '🚒', en: 'Make a fire station apron', play: '소방차 출동!', playEn: 'Drive out of the fire station',
+      steps: [
+        { id: 'dig', label: '자리 파기', title: '앞마당 자리를 파요', question: '소방서 앞마당의 낮은 바닥 자리를 파야 해. 땅을 파는 차를 골라 줘.', en: 'Dig a shallow space for the fire station apron. Choose a machine that digs.', action: '흙 한 삽 파기', actionEn: 'Dig a scoop of soil', result: '낮게 파서 앞마당 바닥 자리를 준비했어.', resultEn: 'We dug a shallow space for the apron.' },
+        { id: 'mix', label: '콘크리트 준비', title: '콘크리트를 섞어요', question: '앞마당에 쓸 콘크리트를 빙글빙글 섞어야 해. 어떤 차가 좋을까?', en: 'Mix the concrete for the apron. Which truck can turn its drum to mix?', action: '빙글빙글 섞기', actionEn: 'Turn and mix', result: '콘크리트를 섞었어. 이제 긴 관으로 보내자.', resultEn: 'The concrete is mixed. Now we can send it through a pipe.' },
+        { id: 'pump', label: '바닥 채우기', title: '관으로 앞마당에 보내요', question: '긴 관으로 콘크리트를 앞마당 바닥에 보내요. 어떤 차가 필요할까?', en: 'Send concrete through a long pipe into the shallow apron. Which truck can do that?', action: '관으로 보내기', actionEn: 'Pump through the pipe', result: '콘크리트를 보내 바닥을 채웠어. 놀이 속에서 단단해진 앞마당으로 출동하자!', resultEn: 'The concrete fills the apron. In our play, it is now firm and ready to drive on.' }
+      ] },
+    { id: 'bridge', title: '다리 잇기', short: '작은 다리', icon: '🌉', en: 'Join a small bridge', play: '다리를 건너요', playEn: 'Cross the small bridge',
+      steps: [
+        { id: 'dig', label: '받침 자리', title: '받침 옆의 흙을 파요', question: '작은 물길 양쪽의 낮은 받침을 가린 흙을 파야 해. 어떤 차가 좋을까?', en: 'Dig away the soil covering the low supports beside a small stream. Which machine can dig?', action: '받침 자리 파기', actionEn: 'Dig beside the supports', result: '받침을 가린 흙을 파서 다리판을 놓을 자리를 준비했어.', resultEn: 'The soil is dug away. Our low supports are ready for the bridge pieces.' },
+        { id: 'carry', label: '작은 판 운반', title: '작은 다리판을 옮겨요', question: '차에 실을 수 있는 작은 다리판을 옮겨야 해. 짐을 옮길 차를 골라 줘.', en: 'Carry the small bridge pieces that fit in a truck. Choose a load-carrying vehicle.', action: '작은 판 옮기기', actionEn: 'Carry the small pieces', result: '작은 다리판이 도착했어. 낮은 받침에 올려 보자.', resultEn: 'The small bridge pieces have arrived. Let us place them on the low supports.' },
+        { id: 'lift', label: '낮게 올리기', title: '낮은 받침에 올려요', question: '작은 다리판을 바로 옆 낮은 받침에 올려야 해. 들어 올리는 차를 골라 줘.', en: 'Lift a small bridge piece onto the low support beside it. Choose a machine that lifts.', action: '받침에 올리기', actionEn: 'Lift onto the low support', result: '작은 판을 낮은 받침에 올려 다리가 이어졌어!', resultEn: 'The small pieces join our low bridge. It is ready to cross!' }
+      ] }
+  ];
+
+  const MISSION_GUIDES = {
+    dig: ['땅을 파는', 'dig soil', '흙 한 삽 파기', 'Dig a scoop of soil'],
+    push: ['흙을 미는', 'push soil', '흙을 쓱 밀기', 'Push the soil'],
+    load: ['삽으로 흙을 담는', 'scoop soil', '흙 한 삽 담기', 'Scoop the soil'],
+    carry: ['짐을 옮기는', 'carry loads', '짐을 옮겨 내리기', 'Carry and unload'],
+    mix: ['콘크리트를 섞는', 'mix concrete', '빙글빙글 섞기', 'Mix the concrete'],
+    lift: ['짐을 들어 올리는', 'lift a load', '짐 들어 올리기', 'Lift the load'],
+    pump: ['긴 관으로 콘크리트를 보내는', 'pump concrete through a pipe', '관으로 보내기', 'Pump through the pipe']
+  };
+  const VEHICLE_ROLES = {
+    excavator: ['삽으로 땅을 파고 흙을 담아요.', 'digs and scoops soil'],
+    mini_excavator: ['작은 삽으로 땅을 파고 흙을 담아요.', 'digs and scoops with a small bucket'],
+    bulldozer: ['앞의 넓은 판으로 흙을 밀어요.', 'pushes soil with a wide blade'],
+    wheel_loader: ['앞의 큰 삽으로 흙을 담고 밀어요.', 'scoops and pushes soil with a front bucket'],
+    dump_truck: ['적재함에 흙과 돌을 싣고 옮겨요.', 'carries soil and stones in its bed'],
+    concrete_mixer: ['통을 돌려 콘크리트를 섞어요.', 'mixes concrete in a turning drum'],
+    concrete_pump_truck: ['긴 관으로 콘크리트를 보내요.', 'pumps concrete through a long pipe'],
+    crane_truck: ['갈고리로 무거운 짐을 들어 올려요.', 'lifts heavy loads with a hook'],
+    forklift: ['앞의 두 갈래 포크로 짐을 들어요.', 'lifts loads with two forks'],
+    road_roller: ['무거운 바퀴로 바닥을 다져요.', 'compacts the ground with a heavy roller'],
+    asphalt_paver: ['도로 위에 아스팔트를 펼쳐요.', 'spreads asphalt on a road'],
+    grader: ['긴 판으로 흙을 밀며 땅을 고르게 해요.', 'levels soil with a long blade'],
+    backhoe_loader: ['앞뒤 삽으로 땅을 파고 흙을 담아요.', 'digs and scoops with front and rear buckets'],
+    skid_steer_loader: ['앞의 삽으로 흙을 담고 밀어요.', 'scoops and pushes soil with its front bucket'],
+    tower_crane: ['높은 탑의 갈고리로 짐을 들어요.', 'lifts loads with a hook on a tall tower'],
+    mobile_crane: ['이동해서 갈고리로 짐을 들어요.', 'moves into position and lifts loads with a hook'],
+    pile_driver: ['긴 기둥을 땅속으로 박아요.', 'drives long piles into the ground'],
+    drilling_rig: ['드릴을 돌려 땅에 구멍을 뚫어요.', 'drills holes in the ground'],
+    excavator_breaker: ['단단한 바위나 콘크리트를 깨요.', 'breaks hard rock or concrete'],
+    dump_loader: ['흙을 담고 적재함으로 옮겨요.', 'loads soil and carries it in its bed'],
+    articulated_dump_truck: ['흙과 돌을 싣고 굽은 길도 가요.', 'carries soil and stones on winding tracks'],
+    water_truck: ['탱크에 물을 싣고 물을 뿌려요.', 'carries and sprays water'],
+    sweeper_truck: ['솔로 도로의 먼지를 쓸어요.', 'sweeps dust off a road'],
+    fuel_truck: ['탱크에 연료를 싣고 보내요.', 'carries fuel in a tank'],
+    lowbed_trailer: ['낮은 짐칸에 큰 기계를 싣고 옮겨요.', 'carries large machines on a low trailer'],
+    cargo_truck: ['짐칸에 재료를 싣고 옮겨요.', 'carries materials in its cargo bed'],
+    scissor_lift: ['작업대에 탄 사람을 위로 올려요.', 'raises people on a work platform']
+  };
+
   const state = {
     container: null,
     options: {},
@@ -64,7 +126,18 @@
     resizeTimer: null,
     handleResizeBound: null,
     successRewardGiven: false,
-    completeRewardGiven: false
+    completeRewardGiven: false,
+    session: 0,
+    roundToken: 0,
+    mode: 'chooser',
+    projectId: null,
+    completedSteps: [],
+    selectedVehicle: null,
+    workPhase: 'choose',
+    workMode: null,
+    scenePlayCount: 0,
+    scenePlaying: false,
+    sceneObserver: null
   };
 
   function playGameVoice(id) {
@@ -109,9 +182,19 @@
     ], { allowTtsFallback: true }).catch(() => false);
   }
 
-  function speak(text, force) {
-    if (!text || state.currentMission?.id !== 'pump') return;
-    try { state.options.say?.(text); } catch (error) {}
+  function speak(text, force, englishText) {
+    const phrase = window.SihyeonPlaySettings?.getLanguage?.() === 'en' ? englishText : text;
+    if (!phrase || state.destroyed) return;
+    try { state.options.say?.(phrase)?.catch?.(() => {}); } catch (_) {}
+  }
+
+  function stopSpeech() {
+    try { window.SihyeonVoice?.stop?.(); } catch (_) {}
+  }
+
+  function reward(amount) {
+    try { state.options.fireConfetti?.(); } catch (_) {}
+    try { state.options.gainExp?.(amount); } catch (_) {}
   }
 
   function vibrate(pattern) {
@@ -120,9 +203,10 @@
   }
 
   function setManagedTimeout(fn, delay) {
+    const session = state.session, round = state.roundToken;
     const id = window.setTimeout(() => {
       state.timers = state.timers.filter((timerId) => timerId !== id);
-      if (!state.destroyed) fn();
+      if (!state.destroyed && state.session === session && state.roundToken === round) fn();
     }, delay);
     state.timers.push(id);
     return id;
@@ -186,12 +270,14 @@
     const nextMode = getLayoutMode();
     if (state.layoutMode === nextMode) {
       applyRootLayoutClass();
+      fitProjectScene();
       return;
     }
     state.layoutMode = nextMode;
 
     if (state.locked || !state.currentMission) {
       applyRootLayoutClass();
+      fitProjectScene();
       return;
     }
 
@@ -389,6 +475,137 @@
         .cs-success-title { font-size: 28px; line-height: 1.1; }
         .cs-success-sub { font-size: 16px; line-height: 1.25; }
       }
+
+      /* Work controls replace the choice tray; they never float over a scene. */
+      .cs-work-panel { position: relative; z-index: 6; flex-shrink: 0; display: grid; gap: 8px; padding: 8px 12px 14px; min-height: 116px; box-sizing: border-box; }
+      .cs-work-panel[hidden], .cs-choices[hidden] { display: none !important; }
+      .cs-work-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .cs-work-buttons .cs-btn { min-height: 58px; font-size: clamp(16px, 4vw, 23px); padding: 8px; }
+      .cs-work-buttons .cs-primary { background: linear-gradient(180deg,#dfff9c,#81d87b); border-color:#fff; }
+      .cs-work-status { margin: 0; color:#34465c; font-size:clamp(16px,3.8vw,22px); line-height:1.35; text-align:center; }
+      .construction-landscape .cs-work-panel { grid-column: 3; grid-row: 1 / span 3; min-height:0; padding:8px; align-content:center; }
+      .construction-landscape .cs-work-buttons { grid-template-columns: 1fr; }
+      .cs-root.cs-ready .cs-worker-vehicle, .cs-root.cs-result-held .cs-worker-vehicle { animation:none; left:5%; bottom:9%; width:43%; height:61%; opacity:1; transform:none; z-index:10; }
+      .cs-root.cs-result-held .cs-result-icon { left:72%; }
+      .cs-root.cs-ready .cs-message, .cs-root.cs-result-held .cs-message, .cs-root.is-working .cs-message { display:none; }
+      .cs-root.cs-result-held .cs-target-zone { opacity:.25; }
+      .cs-work-status .cs-current-car { font-size: .9em; }
+      .cs-project-picker { display:grid !important; grid-template-columns:1fr !important; grid-template-rows:auto minmax(0,1fr) auto !important; padding:12px; gap:12px; box-sizing:border-box; }
+      .cs-picker-heading { position:relative; z-index:2; display:flex; align-items:center; justify-content:center; gap:12px; min-height:48px; padding-left:42px; }
+      .cs-picker-heading h2 { font-size:clamp(21px,4vw,34px); margin:0; }
+      .cs-project-cards { min-height:0; display:grid; grid-template-columns:1fr; gap:10px; position:relative; z-index:2; }
+      .cs-project-card { min-width:0; min-height:80px; display:grid; grid-template-columns:38% 1fr; grid-template-rows:1fr 1fr; align-items:center; gap:0 8px; border:5px solid #fff; border-radius:24px; padding:8px; background:#fff8df; color:#30465d; font:inherit; cursor:pointer; box-shadow:0 5px 0 #bc8957; overflow:hidden; }
+      .cs-project-card:active { transform:translateY(3px); }
+      .cs-project-card:disabled { opacity:.55; cursor:default; }
+      .cs-project-thumb { grid-row:1 / 3; display:block; min-width:0; height:100%; max-height:180px; }
+      .cs-project-name { font-size:clamp(17px,3.7vw,27px); line-height:1.25; align-self:end; }
+      .cs-project-small { font-size:clamp(12px,2.7vw,17px); color:#6c725d; align-self:start; margin-top:6px; }
+      .cs-picker-footer { position:relative; z-index:2; display:flex; justify-content:center; align-items:center; gap:14px; color:#755635; }
+      .cs-picker-footer .cs-btn { min-height:48px; }
+      .cs-picker-footer span { font-size:15px; }
+      .cs-scene-svg { width:100%; height:100%; display:block; overflow:hidden; }
+      .cs-project-game .cs-stage { min-height:100px; background:#d9f3ff; border:5px solid #fff; }
+      .cs-project-game .cs-stage::before, .cs-project-game .cs-stage::after { display:none; }
+      .cs-project-canvas { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:100%; aspect-ratio:8 / 5; }
+      .cs-project-scene { width:100%; height:100%; position:absolute; inset:0; }
+      .cs-project-game .cs-worker-vehicle { width:30%; height:35%; left:3%; bottom:3%; z-index:4; opacity:0; }
+      .cs-project-game.cs-ready .cs-worker-vehicle, .cs-project-game.cs-result-held .cs-worker-vehicle { left:3%; bottom:3%; width:30%; height:35%; opacity:1; }
+      .cs-project-game.is-working .cs-worker-vehicle { animation:csProjectWork .85s ease-in-out forwards; }
+      @keyframes csProjectWork { 0%{opacity:1;transform:translateX(0) rotate(0)} 50%{opacity:1;transform:translateX(22%) rotate(-3deg)} 100%{opacity:1;transform:translateX(12%) rotate(0)} }
+      .cs-project-game .cs-question-card { display:grid; grid-template-columns:minmax(0,1fr) 48px; gap:6px; align-items:center; }
+      .cs-project-game .cs-title { font-size:clamp(18px,4.6vw,28px); line-height:1.2; }
+      .cs-project-game .cs-question { display:none; }
+      .cs-project-game .cs-question-card .cs-message { position:static; display:none; transform:none; animation:none; margin:0; padding:0; width:auto; max-width:none; border:0; border-radius:0; background:transparent; box-shadow:none; font-size:16px; line-height:1.3; text-align:center; opacity:1; }
+      .cs-project-game .cs-question-card.has-feedback .cs-title { display:none; }
+      .cs-project-game .cs-question-card.has-feedback .cs-message.show { display:block; }
+      .cs-project-game .cs-top { padding-left:58px; gap:8px; }
+      .cs-project-game .cs-pill { font-size:clamp(16px,3.5vw,23px); padding:6px 10px; border-width:3px; min-width:0; }
+      .cs-project-game .cs-btn { min-width:44px; min-height:44px; }
+      .cs-project-game .cs-top .cs-btn { padding:6px 8px; font-size:16px; }
+      .cs-project-game .cs-progress { align-items:center; gap:6px; min-height:24px; }
+      .cs-step-label { font-size:clamp(12px,2.7vw,17px); color:#5b633e; }
+      .cs-project-game .cs-message { font-size:17px; line-height:1.3; padding:9px 12px; border-width:3px; max-width:90%; bottom:122px; }
+      .cs-project-game .cs-choice { min-height:100px; padding:6px; }
+      .cs-project-game .cs-choice-img-wrap { height:82px; }
+      .cs-project-game .cs-work-panel { height:156px; min-height:156px; grid-template-rows:minmax(0,1fr) auto; }
+      .cs-project-game .cs-work-status { align-self:center; }
+      .cs-project-complete .cs-stage { flex:1; }
+      .cs-project-complete .cs-work-panel { display:grid; height:auto; min-height:174px; }
+      .cs-project-complete .cs-work-buttons { grid-template-columns:1fr 1fr; }
+      .cs-project-complete .cs-work-buttons .cs-primary { grid-column:1 / -1; }
+      .cs-scene-svg.is-playing .cs-walker { animation:csWalkPath 1.7s linear forwards; }
+      .cs-scene-svg.is-playing .cs-fire-engine { animation:csApronDrive 1.7s ease-in-out forwards; }
+      .cs-scene-svg.is-playing .cs-bridge-car { animation:csCrossBridge 1.7s ease-in-out forwards; }
+      @keyframes csWalkPath {
+        0% { transform:translate(0px,0px); }
+        12% { transform:translate(18px,-31px); }
+        27% { transform:translate(48px,-62px); }
+        47% { transform:translate(100px,-86px); }
+        100% { transform:translate(254px,-104px); }
+      }
+      @keyframes csApronDrive { to { transform:translate(-138px,48px); } }
+      @keyframes csCrossBridge { to { transform:translateX(370px); } }
+      .cs-work-spark { animation:csSpark .85s ease-out infinite; transform-origin:center; }
+      @keyframes csSpark { 50%{opacity:.25;transform:translateY(-15px) scale(1.2)} }
+      @media (orientation:landscape) {
+        .cs-project-picker { gap:8px; padding:8px; }
+        .cs-project-cards { grid-template-columns:repeat(3,minmax(0,1fr)); }
+        .cs-project-card { display:flex; flex-direction:column; justify-content:center; padding:6px; min-height:0; }
+        .cs-project-thumb { width:100%; flex:1; min-height:0; max-height:none; }
+        .cs-project-name { font-size:clamp(15px,2.2vw,25px); align-self:stretch; }
+        .cs-project-small { font-size:12px; align-self:center; margin:4px 0; }
+        .cs-picker-heading h2 { font-size:clamp(21px,3vw,30px); }
+        .cs-picker-footer span { display:none; }
+        .cs-project-game { display:grid; grid-template-columns:minmax(118px,22%) minmax(0,1fr) minmax(158px,28%); grid-template-rows:48px 26px minmax(0,1fr); gap:6px; padding:6px; box-sizing:border-box; }
+        .cs-project-game .cs-top { grid-column:1 / -1; grid-row:1; flex-direction:row; align-items:center; padding:0 2px 0 50px; }
+        .cs-project-game .cs-pill { width:auto; min-height:40px; display:flex; align-items:center; justify-content:center; }
+        .cs-project-game .cs-actions { display:flex; gap:6px; }
+        .cs-project-game .cs-top .cs-btn { width:auto; min-height:44px; }
+        .cs-project-game .cs-progress { grid-column:1; grid-row:2; padding:0; justify-content:center; flex-wrap:wrap; }
+        .cs-project-game .cs-step-label { display:none; }
+        .cs-project-game .cs-question-card { grid-column:1; grid-row:3; margin:0; align-self:stretch; display:flex; flex-direction:column; justify-content:center; padding:8px; border-radius:18px; }
+        .cs-project-game .cs-title { font-size:clamp(17px,2.2vw,26px); }
+        .cs-project-game .cs-question-card .cs-message { font-size:clamp(13px,1.8vw,19px); }
+        .cs-project-game .cs-question-card .cs-btn { width:48px; padding:4px; margin-top:8px; }
+        .cs-project-game .cs-stage { grid-column:2; grid-row:2 / 4; margin:0; height:100%; min-height:0; border-radius:22px; }
+        .cs-project-game .cs-choices, .cs-project-game .cs-work-panel { grid-column:3; grid-row:2 / 4; min-height:0; padding:0; align-content:stretch; }
+        .cs-project-game .cs-choices { grid-template-columns:1fr; grid-template-rows:repeat(3,minmax(0,1fr)); gap:6px; }
+        .cs-project-game .cs-choice { min-height:0; padding:3px; border-width:4px; border-radius:18px; }
+        .cs-project-game .cs-choice-img-wrap { height:clamp(44px,13vh,90px); }
+        .cs-project-game .cs-work-panel { align-content:center; gap:8px; height:100%; min-height:0; grid-template-rows:minmax(0,1fr) auto; }
+        .cs-project-game .cs-work-buttons { grid-template-columns:1fr; }
+        .cs-project-game .cs-work-buttons .cs-btn { min-height:48px; font-size:clamp(15px,2vw,22px); padding:6px; }
+        .cs-project-game .cs-work-status { font-size:clamp(14px,1.9vw,21px); line-height:1.25; }
+        .cs-project-game .cs-message { left:50%; bottom:14px; width:min(90%,560px); font-size:16px; }
+        .cs-project-complete .cs-stage { grid-column:1 / 3; grid-row:2 / 4; }
+        .cs-project-complete .cs-work-panel { grid-column:3; grid-row:2 / 4; }
+        .cs-project-complete .cs-work-buttons { grid-template-columns:1fr; }
+      }
+      @media (max-width:360px) and (orientation:portrait) {
+        .cs-project-game .cs-top { padding-left:50px; gap:4px; }
+        .cs-project-game .cs-pill { font-size:14px; padding:4px 6px; }
+        .cs-project-game .cs-top .cs-btn { font-size:14px; padding:4px; }
+        .cs-project-game .cs-choice-img-wrap { height:60px; }
+        .cs-project-game .cs-choice { min-height:78px; }
+        .cs-work-panel { min-height:100px; padding:6px 10px; }
+        .cs-project-card { padding:5px; }
+      }
+      @media (max-height:500px) and (orientation:landscape) {
+        .cs-work-panel { min-height:88px; padding:4px 12px 6px; }
+        .cs-work-status { font-size:15px; }
+        .cs-work-buttons .cs-btn { min-height:44px; font-size:16px; padding:4px; }
+        .cs-project-game .cs-work-panel { min-height:0; padding:0; }
+        .cs-project-game .cs-work-status { font-size:14px; }
+        .cs-project-game .cs-work-buttons { gap:6px; }
+        .cs-project-game .cs-work-buttons .cs-btn { min-height:44px; }
+        .cs-project-card { border-width:4px; border-radius:18px; }
+        .cs-project-picker { grid-template-rows:44px minmax(0,1fr) 44px; }
+        .cs-picker-heading { min-height:44px; }
+        .cs-picker-footer .cs-btn { min-height:44px; padding:4px 12px; }
+      }
+      @media (prefers-reduced-motion:reduce) {
+        .cs-scene-svg.is-playing .cs-scene-actor, .cs-work-spark { animation-duration:.01s; }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -462,6 +679,114 @@
     return shuffle([...choices, ...alternatives.slice(0, 3 - choices.length)]);
   }
 
+  function projectById(id) { return PROJECTS.find((project) => project.id === id) || null; }
+
+  function projectAvailable(project) {
+    return project.steps.every((step) => MISSIONS.find((mission) => mission.id === step.id)
+      .answerIds.some((id) => state.vehicles.some((vehicle) => vehicle.id === id)));
+  }
+
+  function sceneSvg(id, progress, playing = false) {
+    const n = Math.max(0, Math.min(3, progress));
+    let scene = '', actor = '';
+    const tree = (x, y) => `<g transform="translate(${x} ${y})"><path d="M0 25v42" stroke="#975b35" stroke-width="12" stroke-linecap="round"/><circle cy="10" r="35" fill="#3fac68"/><circle cx="-16" cy="1" r="25" fill="#62cb7b"/></g>`;
+    if (id === 'playground') {
+      scene = `${tree(82,128)}${tree(560,125)}
+        <g aria-label="이미 있는 놀이터"><path d="M335 203V114h42v89M335 131h42M335 151h42M335 171h42" fill="none" stroke="#73549d" stroke-width="9" stroke-linecap="round"/><path d="M371 115q3 58 80 90h28q-80-50-81-90" fill="#ffcf4c" stroke="#dd8b2c" stroke-width="5"/><path d="M168 200l24-104 28 104m-26-102h90l27 102" fill="none" stroke="#ef805b" stroke-width="9" stroke-linecap="round"/><path d="M222 102v67m38-67v67" stroke="#706251" stroke-width="4"/><rect x="216" y="165" width="52" height="12" rx="6" fill="#8c63ab"/></g>
+        <path d="M84 383q39-124 218-147l97-11 20 46-112 12q-117 22-161 100" fill="${n >= 1 ? '#d7b77d' : '#bb8957'}" stroke="#fff1c7" stroke-width="6"/>
+        ${n < 1 ? '<g data-piece="soil-pile" fill="#9c6b42"><path d="M155 324q50-97 102-14z"/><path d="M272 274q45-65 83-15z"/></g>' : '<g data-piece="cleared-path" stroke="#c49c65" stroke-width="5"><path d="M140 335l81-38m30-28 103-27"/></g>'}
+        ${n >= 2 && n < 3 ? '<g data-piece="loaded-sand"><rect x="418" y="280" width="116" height="51" rx="12" fill="#f6bd4c" stroke="#bd7c28" stroke-width="5"/><path d="M425 287q49-57 102 0" fill="#f5d99b"/><circle cx="441" cy="337" r="12" fill="#50606b"/><circle cx="511" cy="337" r="12" fill="#50606b"/></g>' : ''}
+        ${n >= 3 ? '<g data-piece="finished-path"><path d="M98 383q41-118 213-139l88-10 14 29-107 12q-123 22-173 108" fill="#f5d99b"/><path d="M145 344l26-25m34-22 31-14m43-20 33-8m36-7 29-5" stroke="#e0bc77" stroke-width="8" stroke-linecap="round"/></g>' : ''}`;
+      actor = '<g class="cs-scene-actor cs-walker" aria-label="길을 걷는 아이"><circle cx="126" cy="305" r="14" fill="#ffd0a1"/><path d="M115 325h22l2 24h-26z" fill="#ed6963"/><path d="M118 349l-6 17m21-17 7 16" stroke="#394b72" stroke-width="7" stroke-linecap="round"/><path d="M116 332l-12 10m32-10 12-9" stroke="#ffd0a1" stroke-width="7" stroke-linecap="round"/></g>';
+    } else if (id === 'station') {
+      scene = `${tree(70,132)}
+        <g aria-label="이미 있는 소방서"><rect x="266" y="98" width="284" height="149" rx="12" fill="#fff3d9" stroke="#c96348" stroke-width="7"/><path d="M247 111l24-38h271l27 38z" fill="#dc6457"/><rect x="289" y="136" width="56" height="46" rx="7" fill="#8ed1e1" stroke="#fff" stroke-width="6"/><rect x="368" y="141" width="136" height="106" rx="8" fill="#526f83"/><path d="M370 158h132m-132 20h132m-132 20h132m-132 20h132" stroke="#91a8b7" stroke-width="5"/><rect x="353" y="82" width="117" height="32" rx="9" fill="#fff"/><text x="411.5" y="105" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="800" fill="#c54b3f">소방서</text></g>
+        <path d="M244 254h326l40 118H189z" fill="${n >= 3 ? '#b7c4c9' : n >= 1 ? '#96714c' : '#cfaa74'}" stroke="${n >= 1 ? '#ece2cd' : '#b98d59'}" stroke-width="8"/>
+        ${n >= 1 && n < 3 ? '<path data-piece="shallow-apron-space" d="M247 264h315l27 89H212z" fill="#815e40"/><path d="M220 348l26-76m25 68 18-65m259 65-17-65" stroke="#a17e54" stroke-width="5"/>' : ''}
+        ${n >= 2 && n < 3 ? '<g data-piece="mixed-concrete"><path d="M49 272h118l-13 71H62z" fill="#fac04c" stroke="#b98036" stroke-width="5"/><ellipse cx="108" cy="272" rx="58" ry="17" fill="#aebabe" stroke="#e2ecec" stroke-width="5"/><path d="M88 270q18-17 40 0t-36 6" fill="none" stroke="#7d919b" stroke-width="4"/></g>' : ''}
+        ${n >= 3 ? '<g data-piece="finished-apron"><path d="M272 279l-18 67h87m125 0h89l-21-67" fill="none" stroke="#ffe68a" stroke-width="7"/><path d="M393 277v68" stroke="#eff6f6" stroke-width="5" stroke-dasharray="13 12"/></g>' : ''}`;
+      actor = '<g class="cs-scene-actor cs-fire-engine" aria-label="앞마당을 지나는 소방차"><image href="./assets/vehicles/fire/pump_engine.png" x="352" y="180" width="171" height="151" preserveAspectRatio="xMidYMid meet"/></g>';
+    } else {
+      scene = `${tree(67,112)}${tree(570,126)}
+        <path d="M255 170q-30 63-65 109t-52 121h366q-38-72-94-118t-63-112" fill="#76cae2"/>
+        <path d="M262 191q-37 75-55 100m94-98q-20 80 38 154m8-123q23 55 75 101" fill="none" stroke="#beeaf3" stroke-width="10" stroke-linecap="round"/>
+        <path d="M0 288h196m237 0h207" stroke="#ddc391" stroke-width="70"/>
+        <g data-piece="low-supports" fill="#9ba8a9" stroke="#6e858c" stroke-width="4"><rect x="178" y="264" width="52" height="38" rx="5"/><rect x="404" y="264" width="52" height="38" rx="5"/></g>
+        ${n < 1 ? '<g data-piece="soil-over-supports" fill="#a67b51"><path d="M161 301q42-59 83 0z"/><path d="M389 301q43-59 84 0z"/></g>' : ''}
+        ${n >= 2 && n < 3 ? '<g data-piece="small-bridge-pieces" fill="#e7bd72" stroke="#a57a44" stroke-width="4"><rect x="47" y="322" width="91" height="19" rx="3"/><rect x="57" y="344" width="91" height="19" rx="3"/><rect x="466" y="323" width="91" height="19" rx="3"/></g>' : ''}
+        ${n >= 3 ? '<g data-piece="joined-low-bridge"><rect x="178" y="245" width="278" height="27" rx="5" fill="#e7bd72" stroke="#a57a44" stroke-width="5"/><path d="M234 247v22m55-22v22m55-22v22m55-22v22" stroke="#b88c50" stroke-width="4"/><path d="M182 246v-31m69 31v-31m69 31v-31m69 31v-31m63 31v-31m-270 8h270" stroke="#db9970" stroke-width="6" stroke-linecap="round"/></g>' : ''}`;
+      actor = '<g class="cs-scene-actor cs-bridge-car" aria-label="낮은 다리를 건너는 차"><rect x="70" y="205" width="85" height="35" rx="10" fill="#f1ad44" stroke="#fff3cb" stroke-width="4"/><path d="M88 207l13-23h30l14 23" fill="#77c7e0" stroke="#fff3cb" stroke-width="4"/><circle cx="89" cy="242" r="12" fill="#47576d"/><circle cx="140" cy="242" r="12" fill="#47576d"/></g>';
+    }
+    const project = projectById(id);
+    return `<svg class="cs-scene-svg ${playing ? 'is-playing' : ''}" viewBox="0 0 640 400" role="img" aria-label="${escapeAttr(project?.title || '')}, ${n}단계 완료" data-progress="${n}">
+      <rect width="640" height="400" rx="28" fill="#d9f3ff"/><circle cx="540" cy="60" r="29" fill="#ffd573"/><path d="M0 215q105-62 219-4t232-7 189 9v187H0z" fill="#a1d996"/>
+      <path d="M75 64h65m285-5h54" stroke="#fff" stroke-width="22" stroke-linecap="round"/><path d="M0 313q133-41 287 4t353-3v86H0" fill="#90ca82"/>
+      ${scene}${n >= 3 ? actor : ''}
+      ${state.workPhase === 'working' && state.projectId === id ? '<g class="cs-work-spark" fill="#fff1ba"><circle cx="270" cy="300" r="16"/><circle cx="320" cy="277" r="11"/><circle cx="360" cy="306" r="15"/></g>' : ''}
+    </svg>`;
+  }
+
+  function showProjectChooser() {
+    if (!state.container || state.destroyed) return;
+    state.sceneObserver?.disconnect(); state.sceneObserver = null;
+    clearTimers(); stopSpeech(); state.roundToken += 1;
+    state.mode = 'chooser'; state.projectId = null; state.currentMission = null;
+    state.selectedVehicle = null; state.workPhase = 'choose'; state.locked = false;
+    state.container.innerHTML = `<div class="cs-root ${getRootLayoutClass()} cs-project-picker">
+      <div class="cs-picker-heading"><h2>어디를 만들어 볼까?</h2><button class="cs-btn" data-action="listen-projects" aria-label="현장 안내 다시 듣기">🔊</button></div>
+      <div class="cs-project-cards">${PROJECTS.map((project) => `<button class="cs-project-card" data-project="${project.id}" ${projectAvailable(project) ? '' : 'disabled'}>
+        <span class="cs-project-thumb">${sceneSvg(project.id, 3)}</span><span class="cs-project-name">${project.icon} ${project.title}</span><span class="cs-project-small">${projectAvailable(project) ? '세 가지 일을 함께 해요' : '필요한 차를 준비하고 있어요'}</span>
+      </button>`).join('')}</div>
+      <div class="cs-picker-footer"><button class="cs-btn" data-action="practice">🚜 공사차 연습</button><span>그림을 고르고 직접 뚝딱!</span></div>
+    </div>`;
+    state.container.querySelectorAll('[data-project]').forEach((button) => button.addEventListener('click', () => beginProject(button.dataset.project)));
+    state.container.querySelector('[data-action="practice"]')?.addEventListener('click', () => beginProject(null));
+    state.container.querySelector('[data-action="listen-projects"]')?.addEventListener('click', announceProjects);
+    announceProjects();
+  }
+
+  function announceProjects() {
+    speak('놀이터 길, 소방서 앞마당, 작은 다리. 어디를 만들어 볼까?', true,
+      'A playground path, a fire station apron, or a small bridge. What shall we make?');
+  }
+
+  function beginProject(id) {
+    const project = id ? projectById(id) : null;
+    if (id && (!project || !projectAvailable(project))) return false;
+    clearTimers(); stopSpeech(); state.roundToken += 1;
+    state.mode = project ? 'project' : 'practice'; state.projectId = project?.id || null;
+    state.currentRound = 1; state.completedVehicles = []; state.completedSteps = [];
+    state.selectedVehicle = null; state.scenePlaying = false; state.scenePlayCount = 0;
+    state.successRewardGiven = false; state.completeRewardGiven = false;
+    state.missions = project ? project.steps.map((step) => ({...MISSIONS.find((mission) => mission.id === step.id),
+      title: step.title, question: step.question, englishQuestion: step.en, workAction: step.action,
+      englishAction: step.actionEn, successText: step.result, englishSuccess: step.resultEn, stepLabel: step.label})) : pickMissions();
+    startRound(); return true;
+  }
+
+  function fitProjectScene() {
+    const stage = state.container?.querySelector('.cs-project-game .cs-stage');
+    const canvas = stage?.querySelector('.cs-project-canvas');
+    if (!canvas || !(stage.clientWidth > 0) || !(stage.clientHeight > 0)) return;
+    // One 640:400 coordinate system for the drawn ground and the real vehicle.
+    // A tall outer stage may letterbox this whole canvas, never just its SVG.
+    const width = Math.min(stage.clientWidth, stage.clientHeight * 8 / 5);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${width * 5 / 8}px`;
+  }
+
+  function watchProjectScene() {
+    state.sceneObserver?.disconnect(); state.sceneObserver = null;
+    fitProjectScene();
+    const stage = state.container?.querySelector('.cs-project-game .cs-stage');
+    if (!stage || typeof window.ResizeObserver !== 'function') return;
+    const session = state.session, container = state.container;
+    state.sceneObserver = new window.ResizeObserver(() => {
+      if (!state.destroyed && state.session === session && state.container === container) fitProjectScene();
+    });
+    state.sceneObserver.observe(stage);
+  }
+
   function render(container, options = {}) {
     destroy();
     injectStyle();
@@ -477,7 +802,11 @@
     state.layoutMode = getLayoutMode();
     state.successRewardGiven = false;
     state.completeRewardGiven = false;
+    state.mode = 'chooser'; state.projectId = null; state.completedSteps = [];
+    state.selectedVehicle = null; state.workPhase = 'choose';
+    state.scenePlaying = false; state.scenePlayCount = 0;
     bindResizeEvents();
+    const session = state.session;
 
     container.innerHTML = `
       <div class="cs-loading">
@@ -486,19 +815,18 @@
     `;
 
     fetchConstructionVehicles().then((vehicles) => {
-      if (state.destroyed || !state.container) return;
+      if (state.destroyed || state.session !== session || state.container !== container) return;
       state.vehicles = vehicles;
-      state.missions = pickMissions();
-      startRound();
+      showProjectChooser();
     }).catch(() => {
-      if (!state.container || state.destroyed) return;
+      if (!state.container || state.destroyed || state.session !== session || state.container !== container) return;
       state.container.innerHTML = `<div class="cs-error"><div>공사차를 불러오지 못했어요.</div></div>`;
     });
   }
 
   function startRound() {
-    if (!state.container) return;
-    clearTimers();
+    if (!state.container || state.destroyed) return;
+    clearTimers(); stopSpeech(); state.roundToken += 1;
     state.locked = false;
 
     if (state.currentRound > state.missions.length) {
@@ -509,28 +837,32 @@
     state.currentMission = state.missions[state.currentRound - 1];
     state.currentChoices = makeChoices(state.currentMission);
     state.successRewardGiven = false;
+    state.selectedVehicle = null; state.workPhase = 'choose'; state.workMode = null;
 
     renderGame();
-    if (state.currentMission.id === 'pump') {
-      // The old "high" recording did not name the material and made several trucks valid.
-      speak(state.currentMission.question, true);
-    } else {
-      playGameVoice('games.construction.intro');
-      playGameVoice(`games.construction.${state.currentMission.id === 'carry' ? 'move' : state.currentMission.id}`);
-    }
+    speakMission();
+  }
+
+  function speakMission() {
+    const mission = state.currentMission;
+    if (!mission) return;
+    state.container?.querySelector('.cs-question-card')?.classList.remove('has-feedback');
+    const english = mission.englishQuestion || `We need a vehicle that can ${MISSION_GUIDES[mission.id][1]}. Which one can help?`;
+    speak(mission.question, true, english);
   }
 
   function renderGame() {
     const mission = state.currentMission;
     if (!mission) return;
+    const project = projectById(state.projectId);
 
     state.container.innerHTML = `
-      <div class="cs-root ${getRootLayoutClass()} ${escapeAttr(mission.stageClass || '')}">
+      <div class="cs-root ${getRootLayoutClass()} ${project ? 'cs-project-game' : ''} ${escapeAttr(mission.stageClass || '')}" data-phase="choose" data-project-id="${project?.id || 'practice'}">
         <div class="cs-top">
-          <div class="cs-pill">🏗️ ${state.currentRound}번 공사</div>
+          <div class="cs-pill">${project ? `${project.icon} ${escapeHtml(project.short)}` : `🏗️ ${state.currentRound}번 공사`}</div>
           <div class="cs-actions">
+            <button class="cs-btn" type="button" data-action="projects" aria-label="현장 고르기">현장</button>
             <button class="cs-btn" type="button" data-action="restart">다시</button>
-            <button class="cs-btn" type="button" data-action="home">홈</button>
           </div>
         </div>
 
@@ -538,15 +870,18 @@
           ${state.missions.map((_, index) => `
             <span class="cs-dot ${index + 1 < state.currentRound ? 'done' : index + 1 === state.currentRound ? 'active' : ''}"></span>
           `).join('')}
+          ${project ? `<span class="cs-step-label">${state.currentRound}/3 · ${escapeHtml(mission.stepLabel)}</span>` : ''}
         </div>
 
         <div class="cs-question-card">
           <div class="cs-title">${escapeHtml(mission.title)}</div>
           <div class="cs-question">${escapeHtml(mission.question)}</div>
-          ${mission.id === 'pump' ? '<button class="cs-btn" type="button" data-action="listen" aria-label="주문 다시 듣기">🔊</button>' : ''}
+          ${project ? '<div class="cs-message" id="csMessage" role="status"></div>' : ''}
+          <button class="cs-btn" type="button" data-action="listen" aria-label="주문 다시 듣기">🔊</button>
         </div>
 
         <div class="cs-stage" aria-label="공사장">
+          ${project ? `<div class="cs-project-canvas"><div class="cs-project-scene" id="csProjectScene">${sceneSvg(project.id, state.completedSteps.length)}</div>` : `
           <div class="cs-stage-sky-shine"></div>
           ${mission.workLabel ? `<div class="cs-site-board">🚧 ${escapeHtml(mission.workLabel)}</div>` : ''}
           <div class="cs-sun"></div>
@@ -557,18 +892,12 @@
             <div class="cs-target-icon">${escapeHtml(mission.targetIcon)}</div>
           </div>
           <div class="cs-result-icon">${escapeHtml(mission.resultIcon)}</div>
-
-          <div class="cs-worker-vehicle" id="csWorkerVehicle"></div>
-
           <div class="cs-dust">
             <span></span><span></span><span></span><span></span>
           </div>
-
-          <div class="cs-finish-build">
-            <div class="cs-build-roof"></div>
-            <div class="cs-build-base"></div>
-            <div class="cs-build-door"></div>
-          </div>
+          `}
+          <div class="cs-worker-vehicle" id="csWorkerVehicle"></div>
+          ${project ? '</div>' : ''}
         </div>
 
         <div class="cs-choices">
@@ -583,10 +912,12 @@
           `).join('')}
         </div>
 
-        <div class="cs-message" id="csMessage"></div>
+        <div class="cs-work-panel" id="csWorkPanel" hidden></div>
+        ${project ? '' : '<div class="cs-message" id="csMessage" role="status"></div>'}
       </div>
     `;
     bindEvents();
+    watchProjectScene();
   }
 
   function bindEvents() {
@@ -594,7 +925,8 @@
     if (!root) return;
 
     root.querySelector('[data-action="restart"]')?.addEventListener('click', restartGame);
-    root.querySelector('[data-action="listen"]')?.addEventListener('click', () => speak(state.currentMission?.question, true));
+    root.querySelector('[data-action="projects"]')?.addEventListener('click', showProjectChooser);
+    root.querySelector('[data-action="listen"]')?.addEventListener('click', speakMission);
     root.querySelector('[data-action="home"]')?.addEventListener('click', () => {
       state.options.closeToParkHome?.();
     });
@@ -623,13 +955,11 @@
     const isCorrect = mission.answerIds.includes(vehicleId);
 
     if (!isCorrect) {
-      // 오답 시 부드러운 피드백 (시현이 이름 추가)
-      const wrongMessage = `시현아, ${buildVehicleWrongText(selectedVehicle, mission.wrongText)}`;
+      const explanation = wrongExplanation(selectedVehicle, mission);
       button.classList.add('is-wrong');
-      vibrate([70, 40, 70]);
-      playGameVoice('games.common.wrong');
-      showMessage(wrongMessage);
-      speak(wrongMessage, true);
+      vibrate(50);
+      showMessage(explanation.ko);
+      speak(explanation.ko, true, explanation.en);
 
       setManagedTimeout(() => {
         button.classList.remove('is-wrong');
@@ -638,14 +968,16 @@
     }
 
     state.locked = true;
+    state.container?.querySelector('.cs-question-card')?.classList.remove('has-feedback');
+    state.selectedVehicle = selectedVehicle;
+    state.workPhase = 'selected';
     button.classList.add('is-correct');
     rootDisableChoices();
     
     // 정답 차량 기록 (피날레용)
     state.completedVehicles.push(selectedVehicle);
 
-    playGameVoice('games.common.correct');
-    vibrate(180);
+    stopSpeech(); vibrate(70);
     
     // ★ "아 알겠다!" 시간을 위한 여유 0.4초 대기 후 애니메이션 재생
     setManagedTimeout(() => {
@@ -656,6 +988,7 @@
   function rootDisableChoices() {
     state.container?.querySelectorAll('.cs-choice').forEach((el) => {
       el.classList.add('is-disabled');
+      el.disabled = true;
     });
   }
 
@@ -663,7 +996,7 @@
     const root = state.container?.querySelector('.cs-root');
     const worker = state.container?.querySelector('#csWorkerVehicle');
     const mission = state.currentMission;
-    if (!root || !worker || !mission || !vehicle) return;
+    if (!root || !worker || !mission || !vehicle || state.workPhase !== 'selected') return;
 
     worker.innerHTML = `
       <img src="./${escapeAttr(vehicle.file)}" alt="${escapeAttr(vehicle.name)}" draggable="false">
@@ -679,28 +1012,86 @@
       if (fallback) fallback.hidden = false;
     });
 
+    state.workPhase = 'ready'; root.dataset.phase = 'ready'; root.classList.add('cs-ready');
+    const tray = state.container.querySelector('.cs-choices'); if (tray) tray.hidden = true;
+    renderWorkPanel();
+    speak(`${vehicle.name}${getSubjectParticle(vehicle.name)} 이 일을 할 수 있어. 큰 버튼을 눌러 함께 해 보자.`, true,
+      `${englishVehicleName(vehicle)} can do this job. Tap the big button to help, or choose watch.`);
+  }
+
+  function englishVehicleName(vehicle) {
+    return window.SihyeonVoiceLabels?.entry?.('vehicle', vehicle.id)?.en || 'This machine';
+  }
+
+  function wrongExplanation(vehicle, mission) {
+    const role = VEHICLE_ROLES[vehicle.id];
+    const need = MISSION_GUIDES[mission.id];
+    return {
+      ko: `괜찮아. ${vehicle.name}${getSubjectParticle(vehicle.name)} ${role ? role[0] : '다른 일을 도와요.'} 지금은 ${need[0]} 차를 찾아보자.`,
+      en: `${englishVehicleName(vehicle)} ${role ? role[1] : 'helps with another job'}. We need a vehicle that can ${need[1]}. Try another one.`
+    };
+  }
+
+  function renderWorkPanel() {
+    const panel = state.container?.querySelector('#csWorkPanel'), mission = state.currentMission;
+    if (!panel || !mission) return;
+    panel.hidden = false;
+    const label = mission.workAction || MISSION_GUIDES[mission.id][2];
+    if (state.workPhase === 'ready') {
+      panel.innerHTML = `<p class="cs-work-status">직접 해 볼까?</p><div class="cs-work-buttons"><button class="cs-btn cs-primary" data-action="work">👆 ${escapeHtml(label)}</button><button class="cs-btn" data-action="auto-work">▶ 자동으로 보기</button></div>`;
+      panel.querySelector('[data-action="work"]')?.addEventListener('click', () => performWork(false));
+      panel.querySelector('[data-action="auto-work"]')?.addEventListener('click', () => performWork(true));
+    } else if (state.workPhase === 'working') {
+      panel.innerHTML = `<p class="cs-work-status">${escapeHtml(label)} 중이에요</p><div class="cs-work-buttons"><button class="cs-btn" disabled>🚧 함께 만드는 중</button></div>`;
+    } else if (state.workPhase === 'result') {
+      panel.innerHTML = `<p class="cs-work-status" role="status">${escapeHtml(mission.successText)}</p><div class="cs-work-buttons"><button class="cs-btn cs-primary" data-action="next-work">${state.currentRound === state.missions.length ? '🏁 완성한 곳에서 놀기' : '➡ 다음 공사'}</button><button class="cs-btn" data-action="listen-result" aria-label="결과 다시 듣기">🔊 다시 듣기</button></div>`;
+      panel.querySelector('[data-action="next-work"]')?.addEventListener('click', nextWork);
+      panel.querySelector('[data-action="listen-result"]')?.addEventListener('click', speakResult);
+    }
+    fitProjectScene();
+  }
+
+  function updateProjectScene() {
+    const scene = state.container?.querySelector('#csProjectScene');
+    if (scene && state.projectId) scene.innerHTML = sceneSvg(state.projectId, state.completedSteps.length, state.scenePlaying);
+  }
+
+  function performWork(automatic) {
+    if (state.destroyed || state.workPhase !== 'ready' || !state.selectedVehicle) return false;
+    stopSpeech(); state.workPhase = 'working'; state.workMode = automatic ? 'auto' : 'tap';
+    const root = state.container?.querySelector('.cs-root');
+    if (root) { root.dataset.phase = 'working'; root.dataset.workMode = state.workMode; root.classList.remove('cs-ready'); root.classList.add('is-working'); }
+    renderWorkPanel(); updateProjectScene();
+    const mission = state.currentMission;
+    speak(mission.workAction || MISSION_GUIDES[mission.id][2], true, mission.englishAction || MISSION_GUIDES[mission.id][3]);
+    setManagedTimeout(finishWork, 900);
+    return true;
+  }
+
+  function finishWork() {
+    if (state.destroyed || state.workPhase !== 'working' || !state.currentMission) return false;
+    state.workPhase = 'result';
+    if (!state.completedSteps.includes(state.currentRound)) state.completedSteps.push(state.currentRound);
+    const root = state.container?.querySelector('.cs-root');
+    if (root) { root.dataset.phase = 'result'; root.classList.remove('is-working'); root.classList.add('is-success', 'cs-result-held'); }
+    updateProjectScene(); renderWorkPanel();
+    const vehicle = state.selectedVehicle;
     const ending = getSubjectParticle(vehicle.name) === '은' ? '이야' : '야';
-    const successMessage = `우와! 시현이가 고른 ${vehicle.name}${ending}! ${mission.successText}`;
-    announceConstructionVehicle(vehicle);
-    root.classList.add('is-working');
+    showMessage(`우와! 시현이가 고른 ${vehicle.name}${ending}! ${state.currentMission.successText}`);
+    speakResult();
+    if (!state.successRewardGiven) { state.successRewardGiven = true; reward(10); }
+    return true;
+  }
 
-    // 거대해지는 타이밍(약 1.2초 후)에 맞추어 칭찬 및 폭죽 발사
-    setManagedTimeout(() => {
-      root.classList.add('is-success');
-      showMessage(successMessage);
-      speak(successMessage, true);
-      if (!state.successRewardGiven) {
-        state.successRewardGiven = true;
-        state.options.fireConfetti?.();
-        state.options.gainExp?.(10); // 라운드 축소로 획득 경험치 상향
-      }
-    }, 1200);
+  function speakResult() {
+    const mission = state.currentMission;
+    if (!mission) return;
+    speak(mission.successText, true, mission.englishSuccess || `The machine helped us ${MISSION_GUIDES[mission.id][1]}. The job is done.`);
+  }
 
-    // 차 구경할 시간 보장 및 4.5초 뒤 다음 라운드로
-    setManagedTimeout(() => {
-      state.currentRound += 1;
-      startRound();
-    }, 4500);
+  function nextWork() {
+    if (state.destroyed || state.workPhase !== 'result') return false;
+    state.workPhase = 'transition'; state.currentRound += 1; startRound(); return true;
   }
 
   function getSubjectParticle(text) {
@@ -721,6 +1112,7 @@
   function showMessage(text) {
     const message = state.container?.querySelector('#csMessage');
     if (!message) return;
+    if (state.projectId && state.workPhase === 'choose') state.container.querySelector('.cs-question-card')?.classList.add('has-feedback');
     message.textContent = text;
     message.classList.remove('show');
     void message.offsetWidth;
@@ -728,17 +1120,34 @@
   }
 
   function showCompleteScreen() {
-    if (!state.container) return;
+    if (!state.container || state.destroyed) return;
 
     clearTimers();
     state.locked = true;
+    state.workPhase = 'complete';
 
     if (!state.completeRewardGiven) {
       state.completeRewardGiven = true;
-      state.options.fireConfetti?.();
-      state.options.gainExp?.(30);
-      playGameVoice('games.common.complete');
-      speak('뚝딱뚝딱! 시현이가 멋진 공사장을 완성했어요!', true);
+      reward(30);
+      speak(state.projectId ? '세 가지 일을 함께 했어. 완성한 곳에서 놀아 보자!' : '세 가지 공사차 연습을 마쳤어!', true,
+        state.projectId ? 'We did three jobs together. Let us play in the place we prepared!' : 'We finished our three construction jobs!');
+    }
+
+    const project = projectById(state.projectId);
+    if (project) {
+      state.container.innerHTML = `<div class="cs-root ${getRootLayoutClass()} cs-project-game cs-project-complete is-complete" data-phase="complete" data-project-id="${project.id}">
+        <div class="cs-top"><div class="cs-pill">${project.icon} ${escapeHtml(project.short)} 완성!</div><div class="cs-actions"><button class="cs-btn" data-action="projects">현장</button><button class="cs-btn" data-action="restart-complete">다시</button></div></div>
+        <div class="cs-stage" aria-label="완성한 현장"><div class="cs-project-canvas"><div class="cs-project-scene" id="csProjectScene">${sceneSvg(project.id, 3)}</div></div></div>
+        <div class="cs-work-panel"><p class="cs-work-status" role="status">우리가 준비한 곳에서 놀아요.</p><div class="cs-work-buttons">
+          <button class="cs-btn cs-primary" data-action="play-scene">${escapeHtml(project.play)}</button>
+          <button class="cs-btn" data-action="projects">🏗️ 다른 현장</button><button class="cs-btn" data-action="home-complete">🏠 놀이터</button>
+        </div></div></div>`;
+      state.container.querySelector('[data-action="play-scene"]')?.addEventListener('click', playCompletedScene);
+      state.container.querySelectorAll('[data-action="projects"]').forEach((button) => button.addEventListener('click', showProjectChooser));
+      state.container.querySelector('[data-action="restart-complete"]')?.addEventListener('click', restartGame);
+      state.container.querySelector('[data-action="home-complete"]')?.addEventListener('click', () => state.options.closeToParkHome?.());
+      watchProjectScene();
+      return;
     }
 
     // ★ 피날레 뷰: 시현이가 고른 3대의 차를 나란히 배치
@@ -755,12 +1164,6 @@
           <div class="cs-ground"></div>
           <div class="cs-road"></div>
           
-          <div class="cs-finish-build">
-            <div class="cs-build-roof"></div>
-            <div class="cs-build-base"></div>
-            <div class="cs-build-door"></div>
-          </div>
-
           <div class="cs-finale-vehicles">
             ${finaleImages}
           </div>
@@ -769,8 +1172,8 @@
         <div class="cs-success-panel">
           <div class="cs-success-box">
             <div class="cs-success-icon">🏗️</div>
-            <div class="cs-success-title">공사 완료!</div>
-            <div class="cs-success-sub">시현이가 멋진 공사장을 만들었어!</div>
+            <div class="cs-success-title">공사차 연습 완료!</div>
+            <div class="cs-success-sub">세 가지 일을 함께 했어!</div>
             <div class="cs-success-actions">
               <button class="cs-btn" type="button" data-action="restart-complete">또 할래!</button>
               <button class="cs-btn" type="button" data-action="home-complete">놀이터</button>
@@ -794,18 +1197,30 @@
     });
   }
 
+  function playCompletedScene() {
+    const project = projectById(state.projectId);
+    if (!project || state.destroyed || state.workPhase !== 'complete' || state.scenePlaying) return false;
+    state.scenePlaying = true; state.scenePlayCount += 1;
+    const button = state.container?.querySelector('[data-action="play-scene"]'); if (button) button.disabled = true;
+    updateProjectScene(); speak(project.play, true, project.playEn);
+    setManagedTimeout(() => {
+      state.scenePlaying = false;
+      // Leave the actor where the animation ended until the child plays again.
+      const activeButton = state.container?.querySelector('[data-action="play-scene"]'); if (activeButton) activeButton.disabled = false;
+    }, 1750);
+    return true;
+  }
+
   function restartGame() {
-    clearTimers();
-    state.currentRound = 1;
-    state.completedVehicles = [];
-    state.successRewardGiven = false;
-    state.completeRewardGiven = false;
-    state.missions = pickMissions();
-    startRound();
+    if (state.mode === 'chooser') showProjectChooser();
+    else beginProject(state.projectId);
   }
 
   function destroy() {
+    state.session += 1; state.roundToken += 1;
     clearTimers();
+    state.sceneObserver?.disconnect(); state.sceneObserver = null;
+    stopSpeech();
     if (state.resizeTimer) {
       window.clearTimeout(state.resizeTimer);
       state.resizeTimer = null;
@@ -826,6 +1241,9 @@
     state.locked = false;
     state.successRewardGiven = false;
     state.completeRewardGiven = false;
+    state.mode = 'chooser'; state.projectId = null; state.completedSteps = [];
+    state.selectedVehicle = null; state.workPhase = 'choose'; state.workMode = null;
+    state.scenePlayCount = 0; state.scenePlaying = false;
   }
 
   function escapeHtml(value) {

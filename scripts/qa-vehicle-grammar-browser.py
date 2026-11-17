@@ -93,6 +93,7 @@ def construction(page, url):
     page.add_init_script("Math.random = () => 0.999;")
     QA["start"](page, url, "ko")
     QA["enter"](page, "자동차놀이터", "공사장")
+    page.locator('[data-action="practice"]').click()
     results = []
     # Wheel loaders can also push soil. Follow the displayed mission rather
     # than assuming the old, overly narrow answer list fixes the round order.
@@ -108,10 +109,12 @@ def construction(page, url):
         assert question in choices_by_question, question
         vehicle, phrase = choices_by_question[question]
         page.locator(f'.cs-choice[data-id="{vehicle}"]').click(timeout=10000)
+        page.locator('[data-action="work"]').click()
         expect(page.locator("#csMessage")).to_contain_text(phrase)
         results.append(phrase)
         if {"휠로더야!", "덤프트럭이야!"}.issubset(results):
             break
+        page.locator('[data-action="next-work"]').click(timeout=10000)
     assert {"휠로더야!", "덤프트럭이야!"}.issubset(results), results
     return results
 

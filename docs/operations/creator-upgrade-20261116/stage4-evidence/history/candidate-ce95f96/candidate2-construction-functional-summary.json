@@ -1,0 +1,633 @@
+{
+  "schema": "construction-stage4-functional-review-v1",
+  "candidate": "candidate2",
+  "gitSha": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+  "status": "PASS",
+  "reviewScope": "Raw CI result and per-capture JSON review; no new browser run or visual PNG judgment in this summary.",
+  "evidence": {
+    "directory": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction",
+    "rawReport": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/construction/construction/construction-stage4-results.json",
+    "rawReportSha256": "da202ae0ed40e4924aa1662c58e41da95ce89f29d511ca8ec632c3ad5006e47d",
+    "harnessPath": "scripts/qa-creator-construction-stage4-browser.py",
+    "harnessSha256AtCommit": "7313b95aee6f71678b5600e6dd035867534699c56cbdf017b5915d37bb2c6cd7"
+  },
+  "execution": {
+    "browser": "Chromium 143.0.7499.4",
+    "baseUrl": "http://127.0.0.1:37269/",
+    "environment": "CI local HTTP server; not deployed production",
+    "cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "pageErrors": 0,
+    "runnerErrors": 0
+  },
+  "caseMatrix": {
+    "projects": [
+      "playground",
+      "station",
+      "bridge"
+    ],
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        640,
+        360
+      ],
+      [
+        320,
+        568
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        1024,
+        768
+      ]
+    ],
+    "matrixCases": 18,
+    "extraCases": [
+      "station-English-390x844",
+      "interrupt-work-390x844"
+    ]
+  },
+  "cases": [
+    {
+      "name": "playground-390x844",
+      "status": "PASS",
+      "missions": [
+        "push",
+        "load",
+        "carry"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "playground-844x390",
+      "status": "PASS",
+      "missions": [
+        "push",
+        "load",
+        "carry"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "playground-640x360",
+      "status": "PASS",
+      "missions": [
+        "push",
+        "load",
+        "carry"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "playground-320x568",
+      "status": "PASS",
+      "missions": [
+        "push",
+        "load",
+        "carry"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "playground-768x1024",
+      "status": "PASS",
+      "missions": [
+        "push",
+        "load",
+        "carry"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "playground-1024x768",
+      "status": "PASS",
+      "missions": [
+        "push",
+        "load",
+        "carry"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-390x844",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-844x390",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-640x360",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-320x568",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-768x1024",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-1024x768",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "bridge-390x844",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "carry",
+        "lift"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "bridge-844x390",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "carry",
+        "lift"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "bridge-640x360",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "carry",
+        "lift"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "bridge-320x568",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "carry",
+        "lift"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "bridge-768x1024",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "carry",
+        "lift"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "bridge-1024x768",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "carry",
+        "lift"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "station-English-390x844",
+      "status": "PASS",
+      "missions": [
+        "dig",
+        "mix",
+        "pump"
+      ],
+      "actionModes": [
+        "work",
+        "auto-work",
+        "work"
+      ],
+      "sameFrameSceneChanges": 3,
+      "finalExpGain": 60,
+      "replayKeepsReward": true,
+      "reentryStartsNewProject": true
+    },
+    {
+      "name": "interrupt-work-390x844",
+      "status": "PASS",
+      "detail": {
+        "oldWorkCancelled": true,
+        "newProject": "station",
+        "lateReward": false
+      }
+    }
+  ],
+  "sourceProof": {
+    "committedFileHashesIndependentlyMatched": 6,
+    "servedBeforeMatched": 6,
+    "servedAfterMatched": 6,
+    "sourcesUnchanged": true,
+    "fileSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+      "js/games/construction-site.js": "285fdcd6144ab6c5a336530f41e713a5bc3ed7db21829d7198871a09cc45e9cc",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+      "assets/vehicles/fire/pump_engine.png": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0"
+    },
+    "actualBrowserLoadedFiles": [
+      "index.html",
+      "js/games/construction-site.js",
+      "js/vehicle-display.js",
+      "assets/vehicles/construction_manifest.json"
+    ],
+    "browserLoadedCases": 20,
+    "browserLoadedResponsesChecked": 80,
+    "allLoadedResponsesHttp200AndHashMatch": true,
+    "serviceWorkers": "blocked for direct-source browser testing"
+  },
+  "functionalProof": {
+    "completedProjects": 19,
+    "completedJobs": 57,
+    "eachJobSameFramePngHashChanged": true,
+    "manualWorkJobs": 38,
+    "autoWatchJobs": 19,
+    "wrongRoleCaptures": 19,
+    "allProjectRunsExpGain": 60,
+    "repeatPlayCountPerCompletedProject": 2,
+    "noReplayReward": true,
+    "manualNextRequired": true,
+    "firstResult5100msHoldCases": 3,
+    "rotationPreservedResultCases": 4,
+    "newProjectReentryStartsAtZero": true,
+    "interruption": {
+      "oldWorkCancelled": true,
+      "newProject": "station",
+      "lateReward": false
+    },
+    "englishTtsRequests": 21,
+    "englishScopeContainsNoKorean": true
+  },
+  "captureProof": {
+    "pngCount": 176,
+    "jsonCount": 176,
+    "layoutIssueCount": 0,
+    "imageDecodeFailureCount": 0,
+    "phaseCounts": {
+      "chooser": 19,
+      "choose": 20,
+      "result": 61,
+      "complete": 58,
+      "ready": 9,
+      "working": 9
+    },
+    "minimumObservedControlWidthCssPixels": 44,
+    "minimumObservedControlHeightCssPixels": 44,
+    "workingSnapshots": [
+      {
+        "capture": "playground-640x360-job-1-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "playground-640x360-job-2-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "playground-640x360-job-3-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "station-640x360-job-1-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "station-640x360-job-2-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "station-640x360-job-3-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "bridge-640x360-job-1-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "bridge-640x360-job-2-working.png",
+        "phase": "working"
+      },
+      {
+        "capture": "bridge-640x360-job-3-working.png",
+        "phase": "working"
+      }
+    ]
+  },
+  "correctedGeometry": {
+    "commonCanvasCaptures": 157,
+    "visibleWorkerCaptures": 79,
+    "maxCanvasSvgEdgeDifferenceCssPixels": 0,
+    "maxCanvasAspectRatioError": 2.9856687898233147e-05,
+    "workerOffsetParentAssertion": "same canvas in exact-commit harness; zero worker-outside-common-canvas issues",
+    "walkerFootCaptures": 25,
+    "allFeetAnd16StrokeRadialSamplesInsideSvgPath": true,
+    "walkerStartFeet": [
+      {
+        "x": 112,
+        "y": 366,
+        "insidePath": true
+      },
+      {
+        "x": 140,
+        "y": 365,
+        "insidePath": true
+      }
+    ],
+    "walkerMovingFeet": [
+      {
+        "x": 243.5127410888672,
+        "y": 276.3166961669922,
+        "insidePath": true
+      },
+      {
+        "x": 271.5127410888672,
+        "y": 275.3166961669922,
+        "insidePath": true
+      }
+    ],
+    "walkerFinalFeet": [
+      {
+        "x": 366,
+        "y": 262,
+        "insidePath": true
+      },
+      {
+        "x": 394,
+        "y": 261,
+        "insidePath": true
+      }
+    ],
+    "walkerFinalEvidence": "playground-390x844-walk-finished.json",
+    "stationCorrectedSceneEvidence": "station-390x844-job-1-result.json",
+    "stationCorrectedSceneCoordinates": {
+      "svg": {
+        "left": 17,
+        "top": 311.25,
+        "right": 373,
+        "bottom": 533.75,
+        "width": 356,
+        "height": 222.5
+      },
+      "canvas": {
+        "left": 17,
+        "top": 311.25,
+        "right": 373,
+        "bottom": 533.75,
+        "width": 356,
+        "height": 222.5
+      },
+      "worker": {
+        "left": 27.671875,
+        "top": 449.203125,
+        "right": 134.46875,
+        "bottom": 527.078125,
+        "width": 106.796875,
+        "height": 77.875
+      }
+    }
+  },
+  "inputAndMotion": {
+    "publicEntry": "Age 4 -> vehicles zone -> construction card -> project chooser; no construction state injection",
+    "projectInput": "Native Playwright touchscreen taps with hit-testing, visibility, enabled and viewport-bound checks",
+    "initialHomeNavigation": "Playwright locator clicks",
+    "touchEnabled": true,
+    "motion": "Default normal-motion context; no reduced-motion override in exact-commit harness",
+    "normalMotionEvidence": [
+      {
+        "project": "playground",
+        "startEvidence": "playground-390x844-complete.json",
+        "movingEvidence": "playground-390x844-play-1.json",
+        "observedActorTranslationCssPixels": {
+          "x": 73.15396881103516,
+          "y": -49.886322021484375
+        }
+      },
+      {
+        "project": "station",
+        "startEvidence": "station-390x844-complete.json",
+        "movingEvidence": "station-390x844-play-1.json",
+        "observedActorTranslationCssPixels": {
+          "x": -48.602752685546875,
+          "y": 16.905303955078125
+        }
+      },
+      {
+        "project": "bridge",
+        "startEvidence": "bridge-390x844-complete.json",
+        "movingEvidence": "bridge-390x844-play-1.json",
+        "observedActorTranslationCssPixels": {
+          "x": 130.3063507080078,
+          "y": 0.0
+        }
+      }
+    ],
+    "audio": "Completion probe simulates audio completion; TTS requests/language recorded",
+    "randomChoices": "Math.random fixed to 0.3 for reproducible browser paths"
+  },
+  "limits": [
+    "Local CI artifact only; production URL/source/cache behavior requires the separate post-merge verification.",
+    "Physical-device touch and audible sound NOT_RUN.",
+    "This browser suite covers the deterministic offered vehicles in 20 flows; all 27 vehicles, 7 capability sets and 150-seed rule checks are separate evidence.",
+    "PNG visual assessment is assigned to the independent reviewer and is not claimed by this JSON review.",
+    "DOM geometry is sampled at captures; it is not continuous frame-by-frame video. Working phase is recorded immediately before screenshot capture."
+  ]
+}

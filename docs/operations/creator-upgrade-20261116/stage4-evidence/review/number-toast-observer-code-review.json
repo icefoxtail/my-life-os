@@ -1,0 +1,121 @@
+{
+  "schema": "number-toast-observer-code-review-v1",
+  "reviewer": "verify_upgrade_prs",
+  "decision": "PASS_STATIC_REVIEW",
+  "reviewScope": "Independent read-only review of the working diff; Python compilation and generated JavaScript syntax parsing only. No Chromium execution.",
+  "baselineGitSha": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+  "reviewedFile": "scripts/qa-creator-number-browser.py",
+  "reviewedFileSha256": "cec0cac83d5a1c00a022f1987cbb7588f4848b635ed1dad79ec532788bcd136f",
+  "baselineFileSha256": "3bcd98bf2076c46c91a0b9edeae3aa47c011c36e19de95f335a960348e760e61",
+  "product": {
+    "path": "games/number-kingdom-3d.html",
+    "sha256": "a11dc8774bd42824352adaa2a5585c140781bc6a542aedb9d8fb9d19dd47fb3b",
+    "byteIdenticalToBaseline": true,
+    "cssOpacityTransitionSeconds": 0.17,
+    "productHideTimerMs": 2300,
+    "styleOrTimerForcedByNewObserver": false
+  },
+  "preservedChecks": {
+    "oldPythonAssertPredicates": 30,
+    "allOldPredicatesPresentWithSameAST": true,
+    "currentPythonAssertPredicates": 32,
+    "newPredicates": [
+      "final observed text equals expected message",
+      "outcome is visible and 200 <= elapsedMs < 1000"
+    ],
+    "existingVisibilityAndGeometry": [
+      "width > 0",
+      "height > 0",
+      "computed opacity > 0",
+      "left >= -1",
+      "right <= viewportWidth + 1",
+      "top >= 0",
+      "bottom <= viewportHeight + 1"
+    ],
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "comparisonCases": [
+      "equal-four",
+      "equal-eight",
+      "equal-twelve",
+      "eight-more-but-shorter",
+      "hundred-more-but-shorter"
+    ],
+    "otherCasesPerViewport": [
+      "native public menu entry",
+      "one block ten taps"
+    ],
+    "totalScenarios": 14,
+    "sourcePathsUnchanged": [
+      "index.html",
+      "games/number-kingdom-3d.html",
+      "js/engine/webgl-fallback.js"
+    ],
+    "webglLaunchArgumentsUnchanged": true,
+    "webglFallbackAndContextAssertionsPreserved": true,
+    "comparisonActualTapHandlerCalls": 2,
+    "tapCountActualTapHandlerCalls": 10,
+    "noExtraTapOrToastReplayForObserver": true
+  },
+  "observerReview": {
+    "tapAndInitialStyleRead": "The existing final actual handler call and first computed-style observation occur in the same iframe async evaluate task.",
+    "clock": "iframe performance.now(); elapsed begins immediately before the final actual handler call",
+    "acceptedWindowMs": {
+      "minimumInclusive": 200,
+      "maximumExclusive": 1000
+    },
+    "successCondition": "A requestAnimationFrame sample has the exact expected text and all unchanged positive-opacity/geometry conditions within the accepted time window.",
+    "deadline": "A separate observer-owned timeout or an elapsed >= 1000 rAF sample produces outcome=deadline, which fails the Python assertion even if geometry is positive.",
+    "cleanup": "Only the observer-owned requestAnimationFrame id and timeout id are cancelled. Product state.toastTimer is not accessed.",
+    "productMutation": "No new assignment to product text, CSS, opacity, animation, game state or timer. getComputedStyle intentionally flushes styles without assigning a style.",
+    "doubleResolution": "finished guard prevents duplicate settlement.",
+    "expectedTextNotSelfCertifying": "The exact-product string is checked against the unchanged mathematical-language assertions in Python, so matching an arbitrary wrong string does not bypass those assertions."
+  },
+  "diagnostics": {
+    "iframeSnapshots": [
+      "initial",
+      "firstFrame",
+      "final"
+    ],
+    "snapshotFields": [
+      "text",
+      "inlineOpacity",
+      "computed opacity",
+      "bounds",
+      "viewport dimensions",
+      "tapAtMs",
+      "sampleAtMs",
+      "elapsedMs"
+    ],
+    "hostMeasurements": [
+      "evaluate request-to-response duration",
+      "screenshot call duration"
+    ],
+    "captureMeasurements": "read-only iframe samples immediately before and after the screenshot call",
+    "preservedOnObserverFailure": "The assertion message contains the observation object including initial/firstFrame/final and hostEvaluationDurationMs."
+  },
+  "staticValidation": {
+    "pythonCompile": "PASS (compile only; no module execution)",
+    "generatedJavaScriptParse": "PASS for 11 evaluate/wait_for_function expressions, including concatenated observer and screenshot sampler",
+    "oldAssertASTComparison": "PASS",
+    "scenarioAndSourceConstantComparison": "PASS",
+    "productByteComparison": "PASS"
+  },
+  "findings": [],
+  "limitsAndNextEvidence": [
+    "Static PASS does not establish that the new CI run passes or prove the cause of the old opacity=0 failures.",
+    "The original opacity > 0 threshold is preserved; this gate does not claim full opacity=1 or continuous visibility for the whole toast lifetime.",
+    "Success records a real in-frame visibility sample within 200–1000ms. The host may receive it later; the screenshot can therefore occur after that sample. Screenshot timing and actual PNG review remain separate evidence.",
+    "The new observer does not continuously trace every opacity mutation or transition event. Initial/first/final samples support timing analysis without proving unseen intermediate events.",
+    "A heavily stalled renderer still fails the finite deadline; it is not accepted by extending or resetting the product toast.",
+    "Next CI should retain exact script/source hashes, final elapsed/opacity, host evaluation duration, before/after screenshot elapsed/opacity, and screenshot pixels. Physical device and audible speech remain outside scope."
+  ]
+}
