@@ -1,0 +1,913 @@
+{
+  "commit": "61f926b6895787d26d32c4952a8914e25bcdd3e1",
+  "rawJsonArchive": {
+    "path": "raw-json-reports.tar.gz",
+    "sha256": "be35fc1e70741a1bf85a571819b1569aea5b3814fe297bba600149ab040885c5",
+    "bytes": 88441,
+    "members": {
+      "construction/construction/bridge-1024x768-chooser.json": {
+        "sha256": "a713bfa80e80f5aa5a63420a7d41b06b4622cdbd3871e9bbe00e6b6eb59a42e1",
+        "bytes": 3998
+      },
+      "construction/construction/bridge-1024x768-complete.json": {
+        "sha256": "2feed77e16bad68011b9910d721742edac6ad7a3fcd44987034aeee299bb618f",
+        "bytes": 3899
+      },
+      "construction/construction/bridge-1024x768-job-1-result.json": {
+        "sha256": "761c7b14aeb60c867ec28fa2ebcdccb75c74a8ae9a170e644a8d5f7867686da3",
+        "bytes": 3943
+      },
+      "construction/construction/bridge-1024x768-job-2-result.json": {
+        "sha256": "be7fb728773b80feddcab2e423dcb282d8e95fa4d741e691a5aa2b97747b70d1",
+        "bytes": 4234
+      },
+      "construction/construction/bridge-1024x768-job-3-result.json": {
+        "sha256": "24fa86d26cc089e5695ce6e38c34f3c082936f57ae02572a842fedf544fe8d13",
+        "bytes": 4489
+      },
+      "construction/construction/bridge-1024x768-play-1.json": {
+        "sha256": "679a62c4b5824f9e327856987b47660a006ce80360633fa81ab65bafa130e6a6",
+        "bytes": 3914
+      },
+      "construction/construction/bridge-1024x768-play-2.json": {
+        "sha256": "501dd4137a16e6d5193ccfec2c21e5604da0a0f6547f91f6b71bc0c35b619806",
+        "bytes": 3914
+      },
+      "construction/construction/bridge-1024x768-wrong-role.json": {
+        "sha256": "61c146a2b2dd1c8925b872ff12228040069621162abf2fcc1aa45f15f09dc5e1",
+        "bytes": 4480
+      },
+      "construction/construction/bridge-320x568-chooser.json": {
+        "sha256": "99b36838e79d951c7e8dc76f90667d51c09f37ea10a05917401550a69e6f8e92",
+        "bytes": 4002
+      },
+      "construction/construction/bridge-320x568-complete.json": {
+        "sha256": "27c6000e9b6c8a41aeab2f33f475bd9fdb8250a90b5a3f34e02576c4fa0c78fc",
+        "bytes": 3802
+      },
+      "construction/construction/bridge-320x568-job-1-result.json": {
+        "sha256": "afb1af417efddc21d7842a1f0bd9c17f0214276612851a4fc5c4e8af00579513",
+        "bytes": 3844
+      },
+      "construction/construction/bridge-320x568-job-2-result.json": {
+        "sha256": "9eab52f132573479ff82176b1fa3e96bb84b1a4b62c53142a3a165d32a17940d",
+        "bytes": 4148
+      },
+      "construction/construction/bridge-320x568-job-3-result.json": {
+        "sha256": "108fe938ab8fe7cdf6ed68db07f9097e1dd7fc3593b2ec50fd162f0bc164ea95",
+        "bytes": 4396
+      },
+      "construction/construction/bridge-320x568-play-1.json": {
+        "sha256": "a99612bb8bc8eee53088cb74bf26ef16a31d5c5879ef1a295e7fd0a62364656e",
+        "bytes": 3818
+      },
+      "construction/construction/bridge-320x568-play-2.json": {
+        "sha256": "a99612bb8bc8eee53088cb74bf26ef16a31d5c5879ef1a295e7fd0a62364656e",
+        "bytes": 3818
+      },
+      "construction/construction/bridge-320x568-wrong-role.json": {
+        "sha256": "fe88738d43bc55ad17bad3e974aed0f0b5a9ec7318ad2321c70af5df7407aa68",
+        "bytes": 4431
+      },
+      "construction/construction/bridge-390x844-chooser.json": {
+        "sha256": "e038b2be56093b314afcdbaa4e495583ad7a1de1b7afcd95182836f576889e18",
+        "bytes": 4013
+      },
+      "construction/construction/bridge-390x844-complete.json": {
+        "sha256": "ec9b7c7c3e3bf8fd0939e9ca2b44eb3a2a6cde81b8437a235a6c7e82a365970e",
+        "bytes": 3787
+      },
+      "construction/construction/bridge-390x844-job-1-result.json": {
+        "sha256": "ec812c17a509d2a093cd38a6dec720e30334ae01ebeb2814e7cb01b2514d638b",
+        "bytes": 3843
+      },
+      "construction/construction/bridge-390x844-job-2-result.json": {
+        "sha256": "98604ab8dbf032fc5b22d58dbb023a400524c723c2cd7e2398bfdee54bd4966a",
+        "bytes": 4134
+      },
+      "construction/construction/bridge-390x844-job-3-result.json": {
+        "sha256": "71c08d0b7f826b2963c4b2ce0824e173f168c4d9e49963c3f4f61eefca146c7b",
+        "bytes": 4387
+      },
+      "construction/construction/bridge-390x844-play-1.json": {
+        "sha256": "74399046f52b72d97d2a451677d20dfb16c026f25ddaf4485d2355e1b56e5019",
+        "bytes": 3806
+      },
+      "construction/construction/bridge-390x844-play-2.json": {
+        "sha256": "0798e08cac7f2f214c9ee82602b5a9cbb7ef905624847ffc4443167df05ba660",
+        "bytes": 3806
+      },
+      "construction/construction/bridge-390x844-result-rotated.json": {
+        "sha256": "0b6872e925ea8adf1444fd14bc3115d19a3114db06cab24f9e9663b859c6c8b0",
+        "bytes": 3926
+      },
+      "construction/construction/bridge-390x844-wrong-role.json": {
+        "sha256": "6fcf70fc88be92e2e88628bc524381d2faf16d3ae96e6e24eb9ff290a23cc3fa",
+        "bytes": 4417
+      },
+      "construction/construction/bridge-640x360-chooser.json": {
+        "sha256": "60e9327a95f7f0b1c98f4bf093b17bdc9746a317a913d57dc29a95da65b61cc5",
+        "bytes": 3975
+      },
+      "construction/construction/bridge-640x360-complete.json": {
+        "sha256": "b611c1e44a1696d41c621d7d5487e413673bcbcc67fa20ad06daa804900a55b3",
+        "bytes": 3861
+      },
+      "construction/construction/bridge-640x360-job-1-ready.json": {
+        "sha256": "dfd9740dcdfff129e29b360a09603e5c6ad5c671db976a66d8895fe1bfa018aa",
+        "bytes": 4176
+      },
+      "construction/construction/bridge-640x360-job-1-result.json": {
+        "sha256": "37e700846b7996f82e40e2efcd08bc0c0c577c4bc9e55229461eafba892c5542",
+        "bytes": 3927
+      },
+      "construction/construction/bridge-640x360-job-1-working.json": {
+        "sha256": "d70f54aa87d8f209e319ca345eac862b6dfe70095dfcf36f6e521aca16cdb247",
+        "bytes": 3916
+      },
+      "construction/construction/bridge-640x360-job-2-ready.json": {
+        "sha256": "a451d9e351edad7bf73324aca46019d854536d078dd14a38761caa5c6dbe3067",
+        "bytes": 3863
+      },
+      "construction/construction/bridge-640x360-job-2-result.json": {
+        "sha256": "13c4abbe97b29d861a8bbc0c6ce4bf5ffd91224e79d10f73a053ddcd5d15b692",
+        "bytes": 4218
+      },
+      "construction/construction/bridge-640x360-job-2-working.json": {
+        "sha256": "d12a47dea03481f825f777ef58850359597fefe33441ef6dedf729722e2a5760",
+        "bytes": 3603
+      },
+      "construction/construction/bridge-640x360-job-3-ready.json": {
+        "sha256": "f13955031a17a5e73bd86579213b49ff40caf76366000a6a70c7bfbeedfc5eb1",
+        "bytes": 4163
+      },
+      "construction/construction/bridge-640x360-job-3-result.json": {
+        "sha256": "fd92d248fe7867efce232669955e3f4e66dd2fc423cc3a2b4affd9507e68771f",
+        "bytes": 4474
+      },
+      "construction/construction/bridge-640x360-job-3-working.json": {
+        "sha256": "00c4e5ece76e01e6a25cc46eacce46bda87ed8740c2d81d37c5f534a43c49474",
+        "bytes": 3902
+      },
+      "construction/construction/bridge-640x360-play-1.json": {
+        "sha256": "1bd2429295f0c2c8fe18924f3258d10871cb1627f8c06eff8e7027a3d139bd67",
+        "bytes": 3877
+      },
+      "construction/construction/bridge-640x360-play-2.json": {
+        "sha256": "9b7d6784b91c09b1cec77905559ebbdd603c3c3a758d41aae4724849cd529202",
+        "bytes": 3885
+      },
+      "construction/construction/bridge-640x360-wrong-role.json": {
+        "sha256": "5b522f3cf0d6f6d441d8fa9ba8cbd3c410cc10cdea899ad6f3c8ff4432afeeed",
+        "bytes": 4463
+      },
+      "construction/construction/bridge-768x1024-chooser.json": {
+        "sha256": "32865b87def0f70af830294e0771b467a3104d50357e7be79e4253c4b2c4e17c",
+        "bytes": 4044
+      },
+      "construction/construction/bridge-768x1024-complete.json": {
+        "sha256": "6c5bf022921a9b364e6685db6abc5a21a1de733a9d70cfc3b7cabf6a639c63c7",
+        "bytes": 3814
+      },
+      "construction/construction/bridge-768x1024-job-1-result.json": {
+        "sha256": "389a002f9c9663b922d292ba31d16b64d60f003460f3c59328e751bf52d6c3a9",
+        "bytes": 3854
+      },
+      "construction/construction/bridge-768x1024-job-2-result.json": {
+        "sha256": "447137ec0f09e3d61b3cb72ccea3cd036da806e280b5b5dc69dab3d94348ca31",
+        "bytes": 4144
+      },
+      "construction/construction/bridge-768x1024-job-3-result.json": {
+        "sha256": "b5495712bb86cfd017020ed667d29ce6665b5a7317ecccae057912a38124c389",
+        "bytes": 4411
+      },
+      "construction/construction/bridge-768x1024-play-1.json": {
+        "sha256": "c298a86672219256a4446c35b1a80bb8ae5da4fbd710fb762df84823357c9de8",
+        "bytes": 3829
+      },
+      "construction/construction/bridge-768x1024-play-2.json": {
+        "sha256": "13237f51f2c34c83d9f30290e23b11dd2992bcdeafde03fac06ce0fa5121adfe",
+        "bytes": 3829
+      },
+      "construction/construction/bridge-768x1024-wrong-role.json": {
+        "sha256": "40dd991e8dbf5e1324db94e9f07b4c1fd595003b8027c281b07f2fa61a9c6d46",
+        "bytes": 4442
+      },
+      "construction/construction/bridge-844x390-chooser.json": {
+        "sha256": "87f4a500c61a962ec68e537472fb873ea3bf89f752ff260e437ae605e1f1d182",
+        "bytes": 3989
+      },
+      "construction/construction/bridge-844x390-complete.json": {
+        "sha256": "19e476deea3cb82324c86a183440895d745a10fd06d253fb85ef4e8b76c8a747",
+        "bytes": 3911
+      },
+      "construction/construction/bridge-844x390-job-1-result.json": {
+        "sha256": "0b6872e925ea8adf1444fd14bc3115d19a3114db06cab24f9e9663b859c6c8b0",
+        "bytes": 3926
+      },
+      "construction/construction/bridge-844x390-job-2-result.json": {
+        "sha256": "3964e2e9eadc7092fbe9e84d89ca038343d5620086e842eeb73a66e56f51e958",
+        "bytes": 4218
+      },
+      "construction/construction/bridge-844x390-job-3-result.json": {
+        "sha256": "0a8b0daea618760a7d6c32205975d7ff68a00389b583d70f94e1b808504af6d5",
+        "bytes": 4481
+      },
+      "construction/construction/bridge-844x390-play-1.json": {
+        "sha256": "fc9b979a7255416001c47d3f848ec6774258a151935cbe5c44c0cb2801a1e33c",
+        "bytes": 3913
+      },
+      "construction/construction/bridge-844x390-play-2.json": {
+        "sha256": "9d70fff26b494748fbe73cdf4f777a9500a7bd590c34f8bc44c111752017e861",
+        "bytes": 3911
+      },
+      "construction/construction/bridge-844x390-wrong-role.json": {
+        "sha256": "f0346eb8fe82bd4e4f0d6b432335abb7cccc0c2b1ee7768690e77b7186636007",
+        "bytes": 4488
+      },
+      "construction/construction/construction-stage4-results.json": {
+        "sha256": "dcf7761bb3e0d7be0ccad00376b32747c628e6be252656a5c25786919a88f2be",
+        "bytes": 169859
+      },
+      "construction/construction/interrupt-work-390x844-new-session-after-old-work.json": {
+        "sha256": "c832ab8cddf06b13a2a7951bb98eeeff47bb6039c916a73a7f6f3eab049aae12",
+        "bytes": 3653
+      },
+      "construction/construction/playground-1024x768-chooser.json": {
+        "sha256": "a713bfa80e80f5aa5a63420a7d41b06b4622cdbd3871e9bbe00e6b6eb59a42e1",
+        "bytes": 3998
+      },
+      "construction/construction/playground-1024x768-complete.json": {
+        "sha256": "f99ff388208528c655addd136ea56df72192b917e0e3fa4324d7462ce5be0469",
+        "bytes": 4118
+      },
+      "construction/construction/playground-1024x768-job-1-result.json": {
+        "sha256": "1b46c6f5da03397bdb8f675455d8209c491e43f41efccd34b21277fc395f7a47",
+        "bytes": 3903
+      },
+      "construction/construction/playground-1024x768-job-2-result.json": {
+        "sha256": "1c23025d5ab12abc2a13d5038e67633248a3550d9ec7cbf3098e515e01955136",
+        "bytes": 4210
+      },
+      "construction/construction/playground-1024x768-job-3-result.json": {
+        "sha256": "6d6d96ce487535534372dddc0afaf26e0b50cc8627a288deb34c581831d9542b",
+        "bytes": 4712
+      },
+      "construction/construction/playground-1024x768-play-1.json": {
+        "sha256": "933336da0337b809c2c251de205d3ce9ab3131e1613b29c86ad40e56b60d2ff5",
+        "bytes": 4175
+      },
+      "construction/construction/playground-1024x768-play-2.json": {
+        "sha256": "b11fe307b1950640de6b733f69fd8e2179be8b8be5f76bd688d3488b5e48d551",
+        "bytes": 4175
+      },
+      "construction/construction/playground-1024x768-wrong-role.json": {
+        "sha256": "b97f153aa44171f16cdb233eff6d119fb632779ed59ec687d7d33b2feba44195",
+        "bytes": 4139
+      },
+      "construction/construction/playground-320x568-chooser.json": {
+        "sha256": "99b36838e79d951c7e8dc76f90667d51c09f37ea10a05917401550a69e6f8e92",
+        "bytes": 4002
+      },
+      "construction/construction/playground-320x568-complete.json": {
+        "sha256": "80cd7a502a61a14c8701e594e4531e6cc524a2d7139137364dc7c049f5671f95",
+        "bytes": 4077
+      },
+      "construction/construction/playground-320x568-job-1-result.json": {
+        "sha256": "9f92fbe2e6ef2d69a74afd0e39f8b993c3962f36d5ed1052f0da3f6f21376ad9",
+        "bytes": 3807
+      },
+      "construction/construction/playground-320x568-job-2-result.json": {
+        "sha256": "303fa918ed813006e24b9b80bd78adb46b156fa1ca84ec4adf044c36123646f8",
+        "bytes": 4118
+      },
+      "construction/construction/playground-320x568-job-3-result.json": {
+        "sha256": "aa7a615869fd257c3087afd1e3e9fc70ae2334cf1295fa04775c981fa53c9382",
+        "bytes": 4671
+      },
+      "construction/construction/playground-320x568-play-1.json": {
+        "sha256": "d4c4061c607ba3c626b7cad079a33022b55621ae1c1a15cc35803d006a9bbe08",
+        "bytes": 4075
+      },
+      "construction/construction/playground-320x568-play-2.json": {
+        "sha256": "680f76f29b1e7b4c4d9fe5f538ef8ff2d2cf5a7d9731dd944254dc29d6cc6116",
+        "bytes": 4074
+      },
+      "construction/construction/playground-320x568-wrong-role.json": {
+        "sha256": "f3f82b64424b0bd31ba2fe8e6455677bfee3bd247e9598803830142e3fdcea1c",
+        "bytes": 4097
+      },
+      "construction/construction/playground-390x844-chooser.json": {
+        "sha256": "e038b2be56093b314afcdbaa4e495583ad7a1de1b7afcd95182836f576889e18",
+        "bytes": 4013
+      },
+      "construction/construction/playground-390x844-complete.json": {
+        "sha256": "fa5be2212993247c72dc95ad003b66fd011dac73ee8ea1817dc53cb85a55ff64",
+        "bytes": 4005
+      },
+      "construction/construction/playground-390x844-job-1-result.json": {
+        "sha256": "eff5bbd5511864a91f48135a8965f321f4d0090e4446b40aab06ff735e14838b",
+        "bytes": 3803
+      },
+      "construction/construction/playground-390x844-job-2-result.json": {
+        "sha256": "7dd10c0cef7587761c9ffa17a7a170f292448e348db597f3dc6d8e05324082ed",
+        "bytes": 4113
+      },
+      "construction/construction/playground-390x844-job-3-result.json": {
+        "sha256": "5c921b6dd2b8ca7582d7047f0e2ad9e68d006e595ccf5d1a9bf3e16389496de8",
+        "bytes": 4611
+      },
+      "construction/construction/playground-390x844-play-1.json": {
+        "sha256": "e40567f4da272ad61f2eacd8a114c53fb3a0c8997d01ddff940c2e5ab705bed5",
+        "bytes": 4065
+      },
+      "construction/construction/playground-390x844-play-2.json": {
+        "sha256": "40306b64ab19a158e85cf4c2e40a32031751c57e263037c626ac42f46f564cab",
+        "bytes": 4066
+      },
+      "construction/construction/playground-390x844-result-rotated.json": {
+        "sha256": "99a45e02bc8c7af635dd9e00f6e587e36380eb192eb93f130373721aa1303618",
+        "bytes": 3895
+      },
+      "construction/construction/playground-390x844-walk-finished.json": {
+        "sha256": "e142fd4987302923d5aefbaba7461cf86aaea6db72e0f85cb105d23010ac061b",
+        "bytes": 4008
+      },
+      "construction/construction/playground-390x844-wrong-role.json": {
+        "sha256": "cc8f0367fdb1b9cff9dbf7839f17f25dc3b5ede472c9c6b79d4cb5f32b66bdaf",
+        "bytes": 4081
+      },
+      "construction/construction/playground-640x360-chooser.json": {
+        "sha256": "60e9327a95f7f0b1c98f4bf093b17bdc9746a317a913d57dc29a95da65b61cc5",
+        "bytes": 3975
+      },
+      "construction/construction/playground-640x360-complete.json": {
+        "sha256": "2dd5e82934e1e4e596c661f20e0b84ee07d9f73bed422062176ac899635bca23",
+        "bytes": 4091
+      },
+      "construction/construction/playground-640x360-job-1-ready.json": {
+        "sha256": "b0f2263eea0ffd0dddb1a96d2265d5ddd2c8013083371a0ed6ec52c27a256990",
+        "bytes": 3831
+      },
+      "construction/construction/playground-640x360-job-1-result.json": {
+        "sha256": "17d4c8fe884b3dca86f94d13c1d8d8bf4ec0460617a02b5e9a63ed2901042188",
+        "bytes": 3888
+      },
+      "construction/construction/playground-640x360-job-1-working.json": {
+        "sha256": "48e9feb0996bc4430e64ae3b61fff3c2a5ed3c6527e78bf5031a51d8160985af",
+        "bytes": 3568
+      },
+      "construction/construction/playground-640x360-job-2-ready.json": {
+        "sha256": "aa4eff3e052eeb492dd827b92b6074bc8fad4cfa00c37444988bd747ddc62701",
+        "bytes": 3853
+      },
+      "construction/construction/playground-640x360-job-2-result.json": {
+        "sha256": "34f1d90d7df5098440fe6c4a7c46eb6d6f547562f510fa63b30492b96be5cbf3",
+        "bytes": 4201
+      },
+      "construction/construction/playground-640x360-job-2-working.json": {
+        "sha256": "32eb7e5bf2e7b0a33efe1aaa07c1ad7099b093179a95aa71e58ac2dd75eea7f7",
+        "bytes": 3594
+      },
+      "construction/construction/playground-640x360-job-3-ready.json": {
+        "sha256": "17d83037b1cd1460c3af26e92f76b4823fe12f89c2e48f2be9e93aab3eae7f0c",
+        "bytes": 4151
+      },
+      "construction/construction/playground-640x360-job-3-result.json": {
+        "sha256": "4be5ec1393c1a743318d26e721beebfc0d6d06467aa1a9bd746439e5b8f537f0",
+        "bytes": 4759
+      },
+      "construction/construction/playground-640x360-job-3-working.json": {
+        "sha256": "8595d2897b3a69a4ccf86aa0b2df2d2589b7c14b43f3263a709329939c97a2df",
+        "bytes": 3894
+      },
+      "construction/construction/playground-640x360-play-1.json": {
+        "sha256": "bda0f30e4f3d99e5da50bd10e2cd0683378ae7eace96cf05f42ccd0d264a5d60",
+        "bytes": 4160
+      },
+      "construction/construction/playground-640x360-play-2.json": {
+        "sha256": "bda0f30e4f3d99e5da50bd10e2cd0683378ae7eace96cf05f42ccd0d264a5d60",
+        "bytes": 4160
+      },
+      "construction/construction/playground-640x360-wrong-role.json": {
+        "sha256": "50a169ff7f1d0956f35078a86090df1afd354bc1d563be9e7d0d8b1ba0eaa4f9",
+        "bytes": 4129
+      },
+      "construction/construction/playground-768x1024-chooser.json": {
+        "sha256": "32865b87def0f70af830294e0771b467a3104d50357e7be79e4253c4b2c4e17c",
+        "bytes": 4044
+      },
+      "construction/construction/playground-768x1024-complete.json": {
+        "sha256": "5712a65b4ba184ce7133c147e6b2e644359a5038f7072fd4708ae245c089fd83",
+        "bytes": 4027
+      },
+      "construction/construction/playground-768x1024-job-1-result.json": {
+        "sha256": "97d1691877ea0e49eeb1ce343c5010884f37e6416f69aba20e0ffd1f11fbc783",
+        "bytes": 3818
+      },
+      "construction/construction/playground-768x1024-job-2-result.json": {
+        "sha256": "06ecbb7a26e1de5b717917e2638ea72b0d80989d811743022918c73e075ddd35",
+        "bytes": 4129
+      },
+      "construction/construction/playground-768x1024-job-3-result.json": {
+        "sha256": "45f9579753abe3bb97c02fac72c030a3b186096f9c5f6e689df8a952bf8153e4",
+        "bytes": 4620
+      },
+      "construction/construction/playground-768x1024-play-1.json": {
+        "sha256": "f2b77e001b64a3b5b8a95ec6809a829a115253ee78be826ba30fe965d28ee3a8",
+        "bytes": 4086
+      },
+      "construction/construction/playground-768x1024-play-2.json": {
+        "sha256": "fd627afe82032dcac0fab33261688d3d76ff5786963847a1365910e1cbdbb9c1",
+        "bytes": 4083
+      },
+      "construction/construction/playground-768x1024-wrong-role.json": {
+        "sha256": "7d97b8b4c49c244d6270c0d8a2e88b75f49aa668fdd6020491e2b2112c442ecc",
+        "bytes": 4101
+      },
+      "construction/construction/playground-844x390-chooser.json": {
+        "sha256": "87f4a500c61a962ec68e537472fb873ea3bf89f752ff260e437ae605e1f1d182",
+        "bytes": 3989
+      },
+      "construction/construction/playground-844x390-complete.json": {
+        "sha256": "5cc22bfb01ec57a65d332d958fde589b3e174aabd4494e9ad20a06aea583ef9f",
+        "bytes": 4118
+      },
+      "construction/construction/playground-844x390-job-1-result.json": {
+        "sha256": "99a45e02bc8c7af635dd9e00f6e587e36380eb192eb93f130373721aa1303618",
+        "bytes": 3895
+      },
+      "construction/construction/playground-844x390-job-2-result.json": {
+        "sha256": "c67c961a1a77d90f4c54667960f2ce4362e1a67e1d89d2871208c1b285eb8652",
+        "bytes": 4206
+      },
+      "construction/construction/playground-844x390-job-3-result.json": {
+        "sha256": "f7c3f9d220bc1783994444ae08c240bd4cf4131c0092a18fd6408116f913dcd1",
+        "bytes": 4701
+      },
+      "construction/construction/playground-844x390-play-1.json": {
+        "sha256": "283af228913792d5b2075978ba7df7db34662dcd1157388e1c163954035d1178",
+        "bytes": 4173
+      },
+      "construction/construction/playground-844x390-play-2.json": {
+        "sha256": "d6339f9e0faa675adf6ef53d8fc6731789242eb2d117cb4fe5075068bc82dce4",
+        "bytes": 4173
+      },
+      "construction/construction/playground-844x390-wrong-role.json": {
+        "sha256": "e1a3e76527fe2053f28de450ab4c328252f548b126a931eaf9473b19832b5778",
+        "bytes": 4146
+      },
+      "construction/construction/station-1024x768-chooser.json": {
+        "sha256": "a713bfa80e80f5aa5a63420a7d41b06b4622cdbd3871e9bbe00e6b6eb59a42e1",
+        "bytes": 3998
+      },
+      "construction/construction/station-1024x768-complete.json": {
+        "sha256": "1824363017f07bcaa39270444cf860d5bdef799f3bc0b588304faca9a98bc388",
+        "bytes": 3856
+      },
+      "construction/construction/station-1024x768-job-1-result.json": {
+        "sha256": "34c4eb39dd7c8496ac021c4fe01d12c518477c95658f69b072bd75354487e026",
+        "bytes": 3934
+      },
+      "construction/construction/station-1024x768-job-2-result.json": {
+        "sha256": "1eace3e18f2f7c14b21a5ffb5a5921b76b1bdbd21010ccd58469129c7d7e93fd",
+        "bytes": 4235
+      },
+      "construction/construction/station-1024x768-job-3-result.json": {
+        "sha256": "ef18f576489cad372cdda5191c42040caa8b8d56eb3a5717aa698e7588f65145",
+        "bytes": 4498
+      },
+      "construction/construction/station-1024x768-play-1.json": {
+        "sha256": "027320ec8852022bbf9f7468a8e4a1dfa815d340136b43565640751824abc03a",
+        "bytes": 3855
+      },
+      "construction/construction/station-1024x768-play-2.json": {
+        "sha256": "8ee8a29f506df62dfcc3307f550ce21ea1e29ce3d25e4aeb0e121161c4b4e933",
+        "bytes": 3864
+      },
+      "construction/construction/station-1024x768-wrong-role.json": {
+        "sha256": "b25a51c16b443f642936d579c3b622b1e8d53f21e942a9028c6582a31546a36d",
+        "bytes": 3865
+      },
+      "construction/construction/station-320x568-chooser.json": {
+        "sha256": "99b36838e79d951c7e8dc76f90667d51c09f37ea10a05917401550a69e6f8e92",
+        "bytes": 4002
+      },
+      "construction/construction/station-320x568-complete.json": {
+        "sha256": "a18c2789165d9c303e1c20bb5d341b07ba851d335e8429974548d902f50fb415",
+        "bytes": 3757
+      },
+      "construction/construction/station-320x568-job-1-result.json": {
+        "sha256": "390ba49c0f916aceff5501b06f88338d2c260e2ce547c1698ddea3eeab27890e",
+        "bytes": 3840
+      },
+      "construction/construction/station-320x568-job-2-result.json": {
+        "sha256": "500e3ae512180b589eb32a5a219b2c816699420027019628b5299376e4d868fe",
+        "bytes": 4143
+      },
+      "construction/construction/station-320x568-job-3-result.json": {
+        "sha256": "7f4b45254e936ba96af7ad815096ebfd5ed6e4ed27f7aa0a8d45afd7657ad3a8",
+        "bytes": 4408
+      },
+      "construction/construction/station-320x568-play-1.json": {
+        "sha256": "e38590341b2e01ead3cf8374b2517373c5f195a3331f8aa104d2c304e28a4bec",
+        "bytes": 3766
+      },
+      "construction/construction/station-320x568-play-2.json": {
+        "sha256": "828a90768d4b871d4e56be4ebf741941f352d1c5e2a94c704283e8a3e2348a2f",
+        "bytes": 3769
+      },
+      "construction/construction/station-320x568-wrong-role.json": {
+        "sha256": "4485a90a45c4254e250e4bfbbdc86ff38f87031d9b7016d59662b5fc764cf89d",
+        "bytes": 3818
+      },
+      "construction/construction/station-390x844-chooser.json": {
+        "sha256": "e038b2be56093b314afcdbaa4e495583ad7a1de1b7afcd95182836f576889e18",
+        "bytes": 4013
+      },
+      "construction/construction/station-390x844-complete.json": {
+        "sha256": "023b4c1cf5bd841b0537eef74308f28be8ce15c496e9aa1faefef854b402b3ad",
+        "bytes": 3750
+      },
+      "construction/construction/station-390x844-job-1-result.json": {
+        "sha256": "c1b444a01375b02ba88a9af0ce9fd0c4919108c49ea948905db856e68b3a812f",
+        "bytes": 3835
+      },
+      "construction/construction/station-390x844-job-2-result.json": {
+        "sha256": "6d2e93557f6a70652fc5f3724c8ad6a109db6c0aa15ed742ea9f98f99a74dd3b",
+        "bytes": 4138
+      },
+      "construction/construction/station-390x844-job-3-result.json": {
+        "sha256": "42ef4246e93aad142945ae421a0ae7e5421ed32b94e0ac47e01336b4a7b398fc",
+        "bytes": 4403
+      },
+      "construction/construction/station-390x844-play-1.json": {
+        "sha256": "1eeeb035df8810ad221a8dc06a796ac13c34a8c3187786dca369469213a75e74",
+        "bytes": 3753
+      },
+      "construction/construction/station-390x844-play-2.json": {
+        "sha256": "e2c381d0a181df974e2b72921a01bcba07e37a39c5181a4ebc543e53d754d59b",
+        "bytes": 3757
+      },
+      "construction/construction/station-390x844-result-rotated.json": {
+        "sha256": "09a3718ce16c3e94cf49d0245e842a3d63d9ff0ba13233a40750adfd9bb68951",
+        "bytes": 3927
+      },
+      "construction/construction/station-390x844-wrong-role.json": {
+        "sha256": "3b1dd8989683b52697777b73d64ea15e4d5250502ccc0710239b80e469082550",
+        "bytes": 3805
+      },
+      "construction/construction/station-640x360-chooser.json": {
+        "sha256": "60e9327a95f7f0b1c98f4bf093b17bdc9746a317a913d57dc29a95da65b61cc5",
+        "bytes": 3975
+      },
+      "construction/construction/station-640x360-complete.json": {
+        "sha256": "6c0e305e4ffd1f7f86bb3233d18c896b8b2dc868ea21c1da29487011f9d710a3",
+        "bytes": 3825
+      },
+      "construction/construction/station-640x360-job-1-ready.json": {
+        "sha256": "ce16f66461e34fcd697d30d0e412797ebf83c51c99f5eef604c3926f467edb8c",
+        "bytes": 3559
+      },
+      "construction/construction/station-640x360-job-1-result.json": {
+        "sha256": "ab65178c9276babd585703744d2a95f85b3732aaf53c3ef60340c0854a10a77c",
+        "bytes": 3918
+      },
+      "construction/construction/station-640x360-job-1-working.json": {
+        "sha256": "3db2f006df17c97ac7d3977e580e21a22aca2cdc83c30e4f0945a1acca143493",
+        "bytes": 3297
+      },
+      "construction/construction/station-640x360-job-2-ready.json": {
+        "sha256": "aa150d2058dda8fdabd0f76328de3a3366c8e2e8f4b8310f443e53960c87fbd3",
+        "bytes": 3872
+      },
+      "construction/construction/station-640x360-job-2-result.json": {
+        "sha256": "89559224e5a51888c5699ed9ef661cf935c463ba5aa82e762581231394161fa2",
+        "bytes": 4217
+      },
+      "construction/construction/station-640x360-job-2-working.json": {
+        "sha256": "f2f9d22b2a8ee0ff37e7cb719755b41fd5256ed1b20f4b6995866464d92a0175",
+        "bytes": 3611
+      },
+      "construction/construction/station-640x360-job-3-ready.json": {
+        "sha256": "31f7c94be4a73fd433f9ae92118b9588ad6b0444a2a5b485c34e3711e6e5e753",
+        "bytes": 4186
+      },
+      "construction/construction/station-640x360-job-3-result.json": {
+        "sha256": "b9ccb154c3967cb267b62257cf9a7f1c7dab61c6fad0faf9affb63cffb518249",
+        "bytes": 4491
+      },
+      "construction/construction/station-640x360-job-3-working.json": {
+        "sha256": "f7f8eba1ffbacdc39d4fd30645ea14caf3b149afb0ed18005a1f0769c4c9615e",
+        "bytes": 3925
+      },
+      "construction/construction/station-640x360-play-1.json": {
+        "sha256": "cac619925ddaf868311715a4c1ff990d69234f21cf8a3ff8c9e7c36fba6d287e",
+        "bytes": 3834
+      },
+      "construction/construction/station-640x360-play-2.json": {
+        "sha256": "e5cfef427eaa574db7946315b337c957a291627e4c7ee7109d3b2e724d3184e6",
+        "bytes": 3832
+      },
+      "construction/construction/station-640x360-wrong-role.json": {
+        "sha256": "a5b6276a58f22c1bbfa28ac7a719df66fc85f636e6785ed03ad2ccacc46320f5",
+        "bytes": 3859
+      },
+      "construction/construction/station-768x1024-chooser.json": {
+        "sha256": "32865b87def0f70af830294e0771b467a3104d50357e7be79e4253c4b2c4e17c",
+        "bytes": 4044
+      },
+      "construction/construction/station-768x1024-complete.json": {
+        "sha256": "7f5f4f3971b8b92a732d14c2bcaab663cbae38f519bf7a4ae83b89a5731bd456",
+        "bytes": 3764
+      },
+      "construction/construction/station-768x1024-job-1-result.json": {
+        "sha256": "d3c4620fc006e57ff4c0d8072d142cf02750ff7fbd62cd06027736a62e873e6c",
+        "bytes": 3849
+      },
+      "construction/construction/station-768x1024-job-2-result.json": {
+        "sha256": "9120ad6a34e09a19ab2b0581a9b5706d4d57e621317333007da80b9f6930ac30",
+        "bytes": 4152
+      },
+      "construction/construction/station-768x1024-job-3-result.json": {
+        "sha256": "aa3e8e6a34f91ef04d6718f1bbe323b8c1c618a532de4a98d862758c7ecd856e",
+        "bytes": 4417
+      },
+      "construction/construction/station-768x1024-play-1.json": {
+        "sha256": "ae0aea70c0871535657c0822558cde60a6b027cce2926f45b46ea66e1d0142d9",
+        "bytes": 3772
+      },
+      "construction/construction/station-768x1024-play-2.json": {
+        "sha256": "2ac9c7418b5a4c8d23f22cedf979098d4202171bb5313d7b90ec40fd63b4e9ef",
+        "bytes": 3775
+      },
+      "construction/construction/station-768x1024-wrong-role.json": {
+        "sha256": "8f4f0e6ca8c109b945fa6e60df28607bbcdbdec12b422ba5ccd035268926ed91",
+        "bytes": 3833
+      },
+      "construction/construction/station-844x390-chooser.json": {
+        "sha256": "87f4a500c61a962ec68e537472fb873ea3bf89f752ff260e437ae605e1f1d182",
+        "bytes": 3989
+      },
+      "construction/construction/station-844x390-complete.json": {
+        "sha256": "abcfbb8be8b080743aebee348ad4a08680d3408fb0a273e30e931d2a1db90bd5",
+        "bytes": 3844
+      },
+      "construction/construction/station-844x390-job-1-result.json": {
+        "sha256": "09a3718ce16c3e94cf49d0245e842a3d63d9ff0ba13233a40750adfd9bb68951",
+        "bytes": 3927
+      },
+      "construction/construction/station-844x390-job-2-result.json": {
+        "sha256": "9f8a1f4abae416379feae1382ef3924cac1e13c026269fc64e1ee40c1ca8ffbb",
+        "bytes": 4231
+      },
+      "construction/construction/station-844x390-job-3-result.json": {
+        "sha256": "6714daebc8cc344e792fb86f41e44a5f20ae2c6219ded7a3c4a4aec14bfc13ce",
+        "bytes": 4499
+      },
+      "construction/construction/station-844x390-play-1.json": {
+        "sha256": "910e8269eb4d3bdd3933c8ab6029d34a71fd02d222813c454111c45e2ffe74e4",
+        "bytes": 3845
+      },
+      "construction/construction/station-844x390-play-2.json": {
+        "sha256": "7a1123e817df0d7d3043eba19867b5744ffb625e1c0c27582fc1996c7e444e03",
+        "bytes": 3844
+      },
+      "construction/construction/station-844x390-wrong-role.json": {
+        "sha256": "f791241130cf0447b14d3e50d45002908daec7e5220ba81f1980ff214a9a3675",
+        "bytes": 3872
+      },
+      "construction/construction/station-English-390x844-chooser.json": {
+        "sha256": "e038b2be56093b314afcdbaa4e495583ad7a1de1b7afcd95182836f576889e18",
+        "bytes": 4013
+      },
+      "construction/construction/station-English-390x844-complete.json": {
+        "sha256": "023b4c1cf5bd841b0537eef74308f28be8ce15c496e9aa1faefef854b402b3ad",
+        "bytes": 3750
+      },
+      "construction/construction/station-English-390x844-job-1-result.json": {
+        "sha256": "c1b444a01375b02ba88a9af0ce9fd0c4919108c49ea948905db856e68b3a812f",
+        "bytes": 3835
+      },
+      "construction/construction/station-English-390x844-job-2-result.json": {
+        "sha256": "6d2e93557f6a70652fc5f3724c8ad6a109db6c0aa15ed742ea9f98f99a74dd3b",
+        "bytes": 4138
+      },
+      "construction/construction/station-English-390x844-job-3-result.json": {
+        "sha256": "42ef4246e93aad142945ae421a0ae7e5421ed32b94e0ac47e01336b4a7b398fc",
+        "bytes": 4403
+      },
+      "construction/construction/station-English-390x844-play-1.json": {
+        "sha256": "107e0e389a699d6a85423be6a1abcea646f42e2ef0dfee13f1a4f89fde7841d2",
+        "bytes": 3746
+      },
+      "construction/construction/station-English-390x844-play-2.json": {
+        "sha256": "7bb9aede9512c031cc12452434df86003110d340538ae3cdde29a248b6b15d18",
+        "bytes": 3759
+      },
+      "construction/construction/station-English-390x844-result-rotated.json": {
+        "sha256": "09a3718ce16c3e94cf49d0245e842a3d63d9ff0ba13233a40750adfd9bb68951",
+        "bytes": 3927
+      },
+      "construction/construction/station-English-390x844-wrong-role.json": {
+        "sha256": "028b5b51721a9e9ab76db842b0bf6df518e7ab6b3a93bc915f17aeb0aef6c9db",
+        "bytes": 3808
+      },
+      "construction/download-receipt.json": {
+        "sha256": "d20f29c397cef157ab1297da9a4942c95ff2e194d045359139820f4c54b9f890",
+        "bytes": 396
+      },
+      "creator/count-pace/count-pace-results.json": {
+        "sha256": "77f1fb4592c6083c532b083c3a0120b1fff0527cba0f9a88988a94160f1d09f7",
+        "bytes": 1438
+      },
+      "creator/download-receipt.json": {
+        "sha256": "dc4a09872d9fc1d0390bd4304f14c3939d3fa8962e45bbf4b3d74a6e78f08181",
+        "bytes": 377
+      },
+      "creator/hangul/hangul-acorn-390x844-visibility.json": {
+        "sha256": "7596f179d1e024c977c4280d9256535ee7229c5920a970304c60458670a3c3d0",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-acorn-844x390-visibility.json": {
+        "sha256": "e05f36d620e4254da1fb51a2e2f936eaec64c8db9eab11ffdb885c8b7e77928d",
+        "bytes": 1021
+      },
+      "creator/hangul/hangul-letter-390x844-visibility.json": {
+        "sha256": "bb537491d64989ceabe4953082e1ce262d2a9090113f83df70ea0350406900ff",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-letter-844x390-visibility.json": {
+        "sha256": "e92ebbfffba0d4fe95947eb62dfe0c95120920decd874c96b32662079ad3c2d1",
+        "bytes": 1018
+      },
+      "creator/hangul/hangul-rabbit-390x844-visibility.json": {
+        "sha256": "7706983f97c0aa7fab99e2907caf41206f7ce9f88b265f9458f84146f14fe3ce",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-rabbit-844x390-visibility.json": {
+        "sha256": "4a68a112207083bf8a414bc305abd7bf66ecded56a71a1e075e9efb9464d64c8",
+        "bytes": 1012
+      },
+      "creator/hangul/hangul-robot-390x844-visibility.json": {
+        "sha256": "9571b39f5add581c03d54cae8634f6383b470b6f89e1a1a914821f366f2e6ba4",
+        "bytes": 1025
+      },
+      "creator/hangul/hangul-robot-844x390-visibility.json": {
+        "sha256": "046a3423b484e5ff4c3f0693e4a890795c27612bb2db1ea82e588eb97e804b97",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-tiger-390x844-visibility.json": {
+        "sha256": "0539a699040d4eb78add1819b2433b6b4e5f841a68b01a181d5b9915e8bc2d5d",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-tiger-844x390-visibility.json": {
+        "sha256": "46291abc187f81d6d263c55d01955a34a5d4d2e2e7a99074ec006bfad9c2e02a",
+        "bytes": 1058
+      },
+      "creator/hangul/results.json": {
+        "sha256": "817153049313543a4e2575c057b07c29b351d0fcdd544d1024d43c5d8a0c25aa",
+        "bytes": 28761
+      },
+      "creator/hangul/shelf-sweet-potato-390x844-visibility.json": {
+        "sha256": "998da7c438ab26e78bbcbdbbc6fb23c64e49e77994f385825560723e44b2cc8f",
+        "bytes": 1024
+      },
+      "creator/hangul/shelf-sweet-potato-844x390-visibility.json": {
+        "sha256": "0a8e6624e86b24106ddc4d520680bcc82dbe3a67b962836b02335365a38a5df8",
+        "bytes": 1054
+      },
+      "creator/hangul/shelf-tofu-390x844-visibility.json": {
+        "sha256": "0a724c0c8eff80003a4b65bbfc827b7c417b3f7c5d1cd6944ba77b8450bfacfe",
+        "bytes": 1039
+      },
+      "creator/hangul/shelf-tofu-844x390-visibility.json": {
+        "sha256": "79858dadac0c95fabc8792c75f320fa63381eb1f0165b3ab1a20ab372dbd51a5",
+        "bytes": 1031
+      },
+      "creator/help/results.json": {
+        "sha256": "2077f8998d9e4958cd24435e0296fc8e558cd2fee1db73bf5e17e4996d42b1e4",
+        "bytes": 3934
+      },
+      "creator/life-pace/life-pace-results.json": {
+        "sha256": "ffd33d897bc210eb567f176ae6e85fc5826ab1edd0195d60e1936fec62a24809",
+        "bytes": 12256
+      },
+      "creator/memory-pace/creator-memory-pace-results.json": {
+        "sha256": "c6c0df56bb9318a21bd6ad236e4f199d668292bb52e7c6492ed41d01326e5482",
+        "bytes": 3191
+      },
+      "creator/number/number-browser.json": {
+        "sha256": "d0e6ed171fef615b2c85a18aa64a7c3bd532b81c53440ab6abb9afa42d0c8ac9",
+        "bytes": 70838
+      },
+      "creator/number-mute/number-mute-browser.json": {
+        "sha256": "54683e7e9c9d47f0173e9b154e28042abb03bb1b46065620e1ee44b7f07485ab",
+        "bytes": 15099
+      },
+      "creator/train-edit/creator-train-edit-results.json": {
+        "sha256": "ba7362055b95f06f8e3761060c771aff8d71393fba3e9ad899d14c56a563f61e",
+        "bytes": 2123
+      },
+      "creator/vehicle/creator-vehicle-results.json": {
+        "sha256": "c2d9a090514959c01c7da981f5225b229097fd0f331bfdd2a29187228f26c51b",
+        "bytes": 5861
+      },
+      "fire/download-receipt.json": {
+        "sha256": "7f1361300c81c2db498624182a05bea6b9c277aa62edaefd21b63fb288e7cf55",
+        "bytes": 379
+      },
+      "fire/fire/creator-fire-stage4-browser.json": {
+        "sha256": "03690899754c5d30054de7e7a48b91f4a972e8583da580d7a2b2db7904e81370",
+        "bytes": 57408
+      },
+      "stage3/art-collection/art-collection-browser.json": {
+        "sha256": "8fa502cefc14b044e94a5629ed750c171d7054256a54866a7f3183c40b86ba0a",
+        "bytes": 41413
+      },
+      "stage3/download-receipt.json": {
+        "sha256": "d562c57f6aae1d5a4b126c259b50b40b8e064e6fedeee6f690d6dc6e378558e5",
+        "bytes": 376
+      },
+      "stage3/garage/creator-garage-browser.json": {
+        "sha256": "8fa80d5ff18b419f6fa6a729e620d36d7f14ad941e6ee311dd1f9c12691d6858",
+        "bytes": 24299
+      },
+      "workflow-runs.json": {
+        "sha256": "4a806265adb974f446c851a125ecd414b1fb5717bd9877fb0638846c43c4b349",
+        "bytes": 1894
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "out": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction",
+      "expected": "efe92a13cfdb047180884836686f82ff3ded4474b9eac90e97c006859c8a058b",
+      "artifactId": 14305229613,
+      "runId": 44032201677,
+      "name": "creator-stage4-construction-44032201677",
+      "sha256": "efe92a13cfdb047180884836686f82ff3ded4474b9eac90e97c006859c8a058b",
+      "bytes": 14684547,
+      "verified": true
+    },
+    {
+      "out": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/creator",
+      "expected": "2112566e4df0e55bae5d889cd2d9b6c03d4cedaaf5ed426b8d953c880be571b2",
+      "artifactId": 14305004551,
+      "runId": 44032201666,
+      "name": "creator-rules-44032201666",
+      "sha256": "2112566e4df0e55bae5d889cd2d9b6c03d4cedaaf5ed426b8d953c880be571b2",
+      "bytes": 13390092,
+      "verified": true
+    },
+    {
+      "out": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/fire",
+      "expected": "3a430964f8f97badc86c10850ba7a27318b17ba9d73b1f8cfdbe890841f4c33f",
+      "artifactId": 14304964861,
+      "runId": 44032201677,
+      "name": "creator-stage4-fire-44032201677",
+      "sha256": "3a430964f8f97badc86c10850ba7a27318b17ba9d73b1f8cfdbe890841f4c33f",
+      "bytes": 8931277,
+      "verified": true
+    },
+    {
+      "out": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/stage3",
+      "expected": "ed76fd1c08db0adbb4517f6bce8726bfefc4d742e58948de22d2e9deea5e41d9",
+      "artifactId": 14305219412,
+      "runId": 44032201690,
+      "name": "creator-stage3-44032201690",
+      "sha256": "ed76fd1c08db0adbb4517f6bce8726bfefc4d742e58948de22d2e9deea5e41d9",
+      "bytes": 3306795,
+      "verified": true
+    }
+  ],
+  "reviews": [
+    {
+      "path": "review/candidate4-sign-and-release-review.json",
+      "sha256": "4d8e7659298ae11a9c8ead8c37bd71fcda87623267f264c56e2ab3ffe1e676d2"
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "reviewed-png/station-390x844-job-1-result.png",
+      "sha256": "7beab5a1aa7be8f89b8ff43eb968274a1592339b03b7ed078f27524daf83efac"
+    },
+    {
+      "path": "reviewed-png/station-320x568-job-3-result.png",
+      "sha256": "b2fcc761322944d74297b9914c2a637351764413058944cde5641dd78bb4237f"
+    },
+    {
+      "path": "reviewed-png/station-640x360-job-3-working.png",
+      "sha256": "c6153d88ba68373731c33f113965045dec08a682cb14f62d4df8234666f9000f"
+    }
+  ],
+  "files": {
+    "raw-json-reports.tar.gz": "be35fc1e70741a1bf85a571819b1569aea5b3814fe297bba600149ab040885c5",
+    "review/candidate4-sign-and-release-review.json": "4d8e7659298ae11a9c8ead8c37bd71fcda87623267f264c56e2ab3ffe1e676d2",
+    "reviewed-png/station-320x568-job-3-result.png": "b2fcc761322944d74297b9914c2a637351764413058944cde5641dd78bb4237f",
+    "reviewed-png/station-390x844-job-1-result.png": "7beab5a1aa7be8f89b8ff43eb968274a1592339b03b7ed078f27524daf83efac",
+    "reviewed-png/station-640x360-job-3-working.png": "c6153d88ba68373731c33f113965045dec08a682cb14f62d4df8234666f9000f",
+    "workflow-runs.json": "4a806265adb974f446c851a125ecd414b1fb5717bd9877fb0638846c43c4b349"
+  },
+  "retention": "All downloaded raw JSON retained losslessly; listed reviewed PNGs retained. Other full PNG sets remain CI artifacts with their configured retention."
+}

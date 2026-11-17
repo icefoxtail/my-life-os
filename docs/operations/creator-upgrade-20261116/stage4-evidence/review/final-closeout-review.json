@@ -1,0 +1,151 @@
+{
+  "schema": "stage4-final-closeout-review-v1",
+  "reviewer": "/root/verify_upgrade_prs",
+  "createdAt": "2026-11-17T07:09:48.362433+00:00",
+  "decision": "PASS_DOCUMENTATION_AND_EVIDENCE_REVIEW",
+  "scope": "Read-only independent review of the four closeout documents against saved final-candidate and actual-production reports, workflow records, artifact download receipts, archive members and Git objects. No new test or browser execution and no new manual PNG judgment.",
+  "reviewedDocuments": {
+    "docs/operations/creator-upgrade-20261116/STAGE4.md": "147ade696877a7b1377c67cbeb0ba13353ec177d7824fd9d2626099d8795b967",
+    "docs/operations/creator-upgrade-20261116/PROGRESS.md": "4f33e6f3c4b78d04ea258d05fab548b66278e92f76cb19bb155312bb7730540f",
+    "docs/operations/creator-upgrade-20261116/STAGE4_RELEASE_EVIDENCE.json": "dfdf54b3cb69ad12500ae1025120323a18f23a0cc67e4bdf769f2ee24921fcbd",
+    "docs/operations/creator-upgrade-20261116/RELEASE_EVIDENCE.json": "85b744c159d20f157fc7e0d5a0f469125bff15bc2ddbf3d034e9e3bef2d0af87"
+  },
+  "repository": "icefoxtail/my-life-os",
+  "featurePullRequest": 44,
+  "candidate": {
+    "sha": "61f926b6895787d26d32c4952a8914e25bcdd3e1",
+    "tree": "4e124e5fe11f4abdd1fbd96f38a94767469784b2",
+    "recordedSuccessfulWorkflows": 7
+  },
+  "production": {
+    "sha": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+    "tree": "4e124e5fe11f4abdd1fbd96f38a94767469784b2",
+    "sameTreeAsTestedCandidate": true,
+    "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+    "recordedSuccessfulWorkflowsIncludingPages": 8,
+    "runtimeFileHashesMatchedToGit": 9,
+    "constructionCases": 20,
+    "fireCases": 8,
+    "creatorRegressionCases": 81,
+    "creatorRegressionRuntimeFileHashesMatchedToGit": 12,
+    "stage3RegressionCases": 21,
+    "smallScreenRegressionCases": 24,
+    "constructionPageErrors": 0,
+    "firePageConsoleHttpAndRequestErrors": 0
+  },
+  "evidenceCrossChecks": [
+    {
+      "check": "Workflow identity",
+      "result": "PASS",
+      "detail": "All 7 candidate and 8 production records exactly match the saved workflow-runs.json lists and their respective commit; all are completed/success."
+    },
+    {
+      "check": "Candidate to main tree",
+      "result": "PASS",
+      "detail": "Both tree IDs independently resolved from local Git objects to 4e124e5fe11f4abdd1fbd96f38a94767469784b2."
+    },
+    {
+      "check": "Construction report and actual source binding",
+      "result": "PASS",
+      "detail": "Candidate and public-production reports each have 20 PASS cases, 6 before/after source hashes matching the respective Git object, and all 80 actual loaded response records matching HTTP200 and hashes."
+    },
+    {
+      "check": "Fire report and actual source binding",
+      "result": "PASS",
+      "detail": "Candidate and public-production reports each have 8 PASS cases and zero recorded unexpected errors; each has 35 recorded source-response entries across 6 primary flows and the retry bundle, matching HTTP200 and Git hashes. The lifecycle case does not independently record a source bundle."
+    },
+    {
+      "check": "Existing regression counts",
+      "result": "PASS",
+      "detail": "In each candidate and production bundle, 9 Creator reports sum to 81 PASS cases (2+28+16+2+2+14+6+1+10); art13+garage8 sum to21. Production small-screen report has24 PASS cases."
+    },
+    {
+      "check": "Production runtime identity",
+      "result": "PASS",
+      "detail": "Both construction/fire production-source.json proofs have the same9 actual/expected hashes matching main. The separate Creator production-source.json has12 matching hashes."
+    },
+    {
+      "check": "Release raw report SHA",
+      "result": "PASS",
+      "detail": "Construction409768165c6cede5b75f5ca957c1be0d9579a43c75ca42e463554dd89118f254 and fire1ab27a0042bf4bc1e60b068274f1f1c1fd0e0abc8400909685aebf9b87d7abdf match the actual saved production report bytes."
+    },
+    {
+      "check": "Evidence archives and receipts",
+      "result": "PASS",
+      "detail": "Candidate208 and production273 raw JSON members were compared byte-for-byte to the downloaded originals, including archive/member SHA and byte lengths. Receipt file inventories and9 downloaded artifact ZIP hashes/lengths matched."
+    },
+    {
+      "check": "Visual scope and retained images",
+      "result": "PASS",
+      "detail": "The documents correctly separate Candidate2 13 inspected PNGs, Candidate4 3 sign PNGs, and production6 inspected PNGs. Retained image/review hashes match the receipts; the existing independent visual judgments are cited rather than claimed as a new review here."
+    },
+    {
+      "check": "Last product correction scope",
+      "result": "PASS",
+      "detail": "Git diff1453d26 to61f926b shows only the single fire-station sign substitution in construction-site.js among runtime files, supporting stated reuse of unchanged geometry evidence."
+    },
+    {
+      "check": "Model counts",
+      "result": "PASS",
+      "detail": "Saved model stdout supports construction11, fire165 assertions/groups and help86 scenarios; vehicle rule regression is separately described. The documents explicitly avoid equating model counts with visual or educational quality."
+    }
+  ],
+  "preservation": {
+    "priorStageObjects1Through3DeepEqualToPreCloseoutReleaseEvidence": true,
+    "stage4AppendDeepEqualToSeparateStage4ReleaseEvidence": true,
+    "remainingStages": [
+      5,
+      6,
+      7
+    ],
+    "progressStage1Through3CompletionStatementsPreserved": true,
+    "followupObservationsForStages5And6Preserved": true,
+    "historicalFailuresAndCandidateEvidencePreserved": true
+  },
+  "archiveEvidence": {
+    "candidate": {
+      "receipt": "docs/operations/creator-upgrade-20261116/stage4-evidence/candidate/receipt.json",
+      "receiptSha256": "078e6fdd4538e7800b70fa7ab600774eec4be1ce96a338ab6b05ca26dcf43ffe",
+      "rawJsonCount": 208,
+      "archiveSha256": "be35fc1e70741a1bf85a571819b1569aea5b3814fe297bba600149ab040885c5",
+      "retainedReviewedPngCount": 3,
+      "downloadedArtifactZipsVerified": 4
+    },
+    "production": {
+      "receipt": "docs/operations/creator-upgrade-20261116/stage4-evidence/production/receipt.json",
+      "receiptSha256": "ff9c54d8f5b8a5837803d5ad6ef37e07d9334520734685e29f924360b79b2861",
+      "rawJsonCount": 273,
+      "archiveSha256": "0ab6e0060e26c305e896d484cefcff22c6283b30ad29b510e4e838e230d88c6d",
+      "retainedReviewedPngCount": 6,
+      "downloadedArtifactZipsVerified": 5
+    },
+    "productionVisualReview": {
+      "path": "stage4-evidence/production/review/production-stage4-review.json",
+      "sha256": "73845bb8e5e3586a37c9270450f621cdfc3ec6170aed95d6d599a3120a82cd0d"
+    }
+  },
+  "documentationScope": {
+    "phase4ProductionVerifiedSupported": true,
+    "phases5Through7RemainWaiting": true,
+    "physicalDeviceTouch": "NOT_RUN",
+    "audibleSpeechListening": "NOT_RUN",
+    "childObservation": "NOT_RUN",
+    "installedOfflineCacheMigration": "NOT_RUN",
+    "fireFullCatalogMotion": "NOT_RUN",
+    "allPngsOrEveryAnimationFrameManuallyReviewed": false,
+    "fullArtifactPngRetention": "14 days in CI; selected reviewed PNGs and raw JSON are separately retained in Git evidence"
+  },
+  "runtimePreservationAtReview": {
+    "head": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+    "trackedRuntimeDiffPaths": [],
+    "currentNineRuntimeFileHashesMatchProduction": true,
+    "closeoutChangeScope": "Documentation and evidence only; no runtime, test or workflow change in the closeout diff."
+  },
+  "resolvedEditorialNote": {
+    "issue": "The initial phrase could imply that86 included both vehicle and help regressions.",
+    "resolution": "STAGE4 now says existing vehicle-rule regression plus86 help-mode scenarios, matching the model evidence."
+  },
+  "blockers": [],
+  "nextAction": "Root may publish and merge the reviewed documentation closeout. This review does not claim that the documentation closeout has already been published or merged.",
+  "writes": "Only evidence/stage4-review/final-closeout-review.json; no product, tracked documentation, Git or AWCR mutation."
+}

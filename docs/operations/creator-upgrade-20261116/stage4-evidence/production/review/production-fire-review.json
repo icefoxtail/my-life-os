@@ -1,0 +1,168 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T06:58:23.401866+00:00",
+  "status": "PASS_FIRE_PRODUCTION_SCOPED",
+  "commit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+  "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+  "overallStage4ProductionStatus": "PENDING_CONSTRUCTION_REVIEW",
+  "scope": "Independent read-only review of three actual production fire PNGs, the eight-case production browser report, and public-source binding. Construction production review is not part of this record.",
+  "imagesActuallyViewed": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/fire-844x390-friend-safe.png",
+      "sha256": "98e5e7b34948cca3700705fb1818e0a6fbd8f861ca2469e9b45ded44c9e0ee4e"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/fire-640x360-friend-safe.png",
+      "sha256": "5470fbac03b79d6685a7af914e29860cad7f0c20f72d344271784171edb985c9"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/fire-640x360-water-ready.png",
+      "sha256": "a99a86ddef28b73b1f72de27ca8c90bdc6daf5a8f6e68d73e304f32a54ce03a6"
+    }
+  ],
+  "rawBrowserReport": {
+    "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/fire/creator-fire-stage4-browser.json",
+    "sha256": "1ab27a0042bf4bc1e60b068274f1f1c1fd0e0abc8400909685aebf9b87d7abdf",
+    "status": "PASS",
+    "caseCount": 8,
+    "testScriptSha256": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae"
+  },
+  "productionSourceProof": {
+    "path": "/workspace/scratch/d006ae658a87/evidence/stage4-production/fire/production-source.json",
+    "sha256": "ac6c21818b3231f501bd60b230cf20bdf8edf1dc8aa88f1ff625c4c40eb2e358",
+    "sourceCount": 9,
+    "allHashesMatchPublicProofAndGitObject": true,
+    "gitCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+    "sourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+      "js/games/construction-site.js": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+      "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+      "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+      "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+      "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+    }
+  },
+  "candidateTreeContinuity": {
+    "candidateCommit": "61f926b6895787d26d32c4952a8914e25bcdd3e1",
+    "mainCommit": "47760e3151862c6e08dc759d4f6f1bdec178331f",
+    "tree": "4e124e5fe11f4abdd1fbd96f38a94767469784b2",
+    "sameTree": true
+  },
+  "browserSourceBinding": {
+    "sixMainCasesAndRetryMatchGit": true,
+    "publicUrlVerified": true,
+    "sourceCountPerMainCase": 5
+  },
+  "visualFindings": [
+    {
+      "file": "fire-844x390-friend-safe.png",
+      "vehicle": "s_aerial_ladder_truck",
+      "verdict": "PASS",
+      "finding": "The yellow ladder visibly meets the special aerial truck body despite its existing opaque white image background. The ladder reaches the window, the friend is in the ground safety area, and result/next controls are visible."
+    },
+    {
+      "file": "fire-640x360-friend-safe.png",
+      "vehicle": "n_articulating_ladder_truck",
+      "verdict": "PASS",
+      "finding": "Both ladder rails meet the visible vehicle body; the candidate1 detached gap has not returned on production. Vehicle/road height and result controls remain consistent."
+    },
+    {
+      "file": "fire-640x360-water-ready.png",
+      "vehicle": "n_water_tanker",
+      "verdict": "PASS",
+      "finding": "The tanker is decoded and visible on the road beside a full blue water tank. Remaining flames and the manual next-work button communicate the follow-up pump task. No scene/control obstruction was observed."
+    }
+  ],
+  "browserCases": [
+    {
+      "case": "three-incidents",
+      "status": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "ladderVariant": "n_ladder_truck"
+    },
+    {
+      "case": "three-incidents",
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "ladderVariant": "n_aerial_ladder_truck"
+    },
+    {
+      "case": "three-incidents",
+      "status": "PASS",
+      "viewport": {
+        "width": 640,
+        "height": 360
+      },
+      "ladderVariant": "n_articulating_ladder_truck"
+    },
+    {
+      "case": "three-incidents",
+      "status": "PASS",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "ladderVariant": "s_aerial_ladder_truck"
+    },
+    {
+      "case": "three-incidents",
+      "status": "PASS",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "ladderVariant": "n_ladder_truck"
+    },
+    {
+      "case": "three-incidents",
+      "status": "PASS",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "ladderVariant": "n_aerial_ladder_truck"
+    },
+    {
+      "case": "manifest-failure-and-real-retry",
+      "status": "PASS",
+      "viewport": null,
+      "ladderVariant": null
+    },
+    {
+      "case": "english-speech-failure-storage-refusal-and-lifecycle",
+      "status": "PASS",
+      "viewport": null,
+      "ladderVariant": null
+    }
+  ],
+  "unexpectedErrors": {
+    "pageErrors": [],
+    "consoleErrors": [],
+    "httpErrors": [],
+    "failedRequests": []
+  },
+  "inputMode": "native browser mouse/keyboard clicks; has_touch is not enabled",
+  "motionMode": "390x844 uses no-preference with one arrival DOM/PNG observation; other five viewports and special failure contexts use reduce",
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "full catalog motion trajectories",
+    "child observation"
+  ],
+  "limits": [
+    "Only the three listed production PNGs were manually viewed in this step.",
+    "No new manual production motion-PNG inspection is claimed here. The raw suite contains its separately scoped single 390x844 arrival observation.",
+    "The special truck retains an existing white image background; this does not sever the repaired connection.",
+    "Construction production results and overall Stage4 production completion remain pending."
+  ],
+  "nextAction": "Review the construction production artifact when available, then produce the combined production-stage4-review.json without changing this scoped evidence."
+}
