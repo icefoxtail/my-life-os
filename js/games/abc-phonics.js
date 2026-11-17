@@ -23,7 +23,6 @@
         {
           letter: 'A',
           letterName: 'A',
-          phonics: '애, 애',
           word: 'Apple',
           wordVoice: 'Apple!',
           displayWord: 'Apple',
@@ -36,7 +35,6 @@
         {
           letter: 'B',
           letterName: 'B',
-          phonics: '브, 브',
           word: 'Ball',
           wordVoice: 'Ball!',
           displayWord: 'Ball',
@@ -49,7 +47,6 @@
         {
           letter: 'C',
           letterName: 'C',
-          phonics: '크, 크',
           word: 'Car',
           wordVoice: 'Car!',
           displayWord: 'Car',
@@ -75,7 +72,6 @@
         {
           letter: 'ㄱ',
           letterName: '기역',
-          phonics: '그, 그',
           word: '가방',
           wordVoice: '가, 가, 가방!',
           displayWord: '가방',
@@ -88,7 +84,6 @@
         {
           letter: 'ㄴ',
           letterName: '니은',
-          phonics: '느, 느',
           word: '나비',
           wordVoice: '나, 나, 나비!',
           displayWord: '나비',
@@ -101,20 +96,18 @@
         {
           letter: 'ㄷ',
           letterName: '디귿',
-          phonics: '드, 드',
           word: '도토리',
           wordVoice: '도, 도, 도토리!',
           displayWord: '도토리',
           color: '#8B5CF6',
           fallbackLetter: 'ㄷ',
-          fallbackObject: '🌰',
+          fallbackObject: '',
           letterImg: '',
           objectImg: ''
         },
         {
           letter: 'ㄹ',
           letterName: '리을',
-          phonics: '르, 르',
           word: '로봇',
           wordVoice: '로, 로, 로봇!',
           displayWord: '로봇',
@@ -127,7 +120,6 @@
         {
           letter: 'ㅁ',
           letterName: '미음',
-          phonics: '므, 므',
           word: '모자',
           wordVoice: '모, 모, 모자!',
           displayWord: '모자',
@@ -140,7 +132,6 @@
         {
           letter: 'ㅂ',
           letterName: '비읍',
-          phonics: '브, 브',
           word: '바나나',
           wordVoice: '바, 바, 바나나!',
           displayWord: '바나나',
@@ -153,7 +144,6 @@
         {
           letter: 'ㅅ',
           letterName: '시옷',
-          phonics: '스, 스',
           word: '사자',
           wordVoice: '사, 사, 사자!',
           displayWord: '사자',
@@ -166,7 +156,6 @@
         {
           letter: 'ㅇ',
           letterName: '이응',
-          phonics: '으, 으',
           word: '오리',
           wordVoice: '오, 오, 오리!',
           displayWord: '오리',
@@ -179,7 +168,6 @@
         {
           letter: 'ㅈ',
           letterName: '지읒',
-          phonics: '즈, 즈',
           word: '자동차',
           wordVoice: '자, 자, 자동차!',
           displayWord: '자동차',
@@ -206,13 +194,16 @@
     resizeTimer: null,
     handleResizeBound: null,
     successRewardGiven: false,
-    completeRewardGiven: false
+    completeRewardGiven: false,
+    sound: true,
+    voiceEpoch: 0,
+    matchAnswered: false
   };
 
   function isLandscapeMode() {
     const width = window.innerWidth || document.documentElement.clientWidth || 0;
     const height = window.innerHeight || document.documentElement.clientHeight || 0;
-    return width >= 760 && width > height;
+    return width > height && width >= 540;
   }
 
   function getLayoutMode() {
@@ -1008,6 +999,51 @@
       }
     `;
 
+
+    style.textContent += `
+      .lt-root{display:flex;flex-direction:column;padding:0;gap:0}
+      .lt-root [hidden]{display:none!important}
+      .lt-top{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"tabs sound" "progress progress";padding:8px 12px;gap:6px;flex:0 0 auto;height:auto;border:0;border-radius:0;background:transparent;box-shadow:none}
+      .lt-mode-tabs{grid-area:tabs;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;width:min(100%,250px);padding:3px;gap:4px}
+      .lt-root .lt-mode-tab{min-height:44px;padding:4px 12px;font-size:18px;border-radius:22px}
+      .lt-sound{grid-area:sound;width:48px;height:48px;border:3px solid #fff;border-radius:16px;background:#fff7ce;font-size:24px;cursor:pointer;box-shadow:0 3px 0 #d6c88f}
+      .lt-progress{grid-area:progress;width:100%;min-height:14px;display:flex;flex-direction:row;flex-wrap:nowrap;gap:7px}
+      .lt-dot{width:10px;height:10px;border-width:2px}
+      .lt-stage{display:flex;flex:1 1 auto;width:100%;height:auto;min-height:0;padding:6px 14px 16px}
+      .lt-stage-inner{display:grid;width:min(100%,980px);margin:auto;height:100%;min-height:0;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:12px;align-items:stretch;justify-items:stretch}
+      .lt-picture-area{position:relative;min-height:0;min-width:0;display:grid;place-items:stretch}
+      .lt-main-card{width:100%;height:100%;min-height:0;max-height:none;border-width:5px;border-radius:28px;grid-column:auto;box-shadow:0 6px 0 rgba(0,0,0,.14),inset 0 4px 0 rgba(255,255,255,.75)}
+      .lt-image-wrap{width:82%;height:82%;min-height:0;max-height:100%;align-self:center;justify-self:center;animation:none}
+      .lt-display-img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain}
+      .lt-fallback-letter,.lt-fallback-object{width:100%;height:100%;max-height:100%;border-radius:26px;font-size:clamp(80px,26vw,180px);box-shadow:inset 0 4px 0 rgba(255,255,255,.4),0 5px 0 rgba(0,0,0,.1)}
+      .lt-fallback-object svg{width:70%;height:90%}
+      .lt-learning-panel{display:grid;grid-template-rows:auto auto auto;align-content:center;gap:8px;min-width:0;padding-top:2px}
+      .lt-word-label,.abc-phonics-landscape .lt-word-label{position:static;grid-column:auto;right:auto;top:auto;width:100%;min-height:48px;padding:7px 12px;font-size:clamp(26px,7vw,42px);line-height:1.1;opacity:1;transform:none;border-radius:20px;animation:none;box-shadow:0 4px 0 rgba(0,0,0,.1)}
+      .lt-context{text-align:center;min-height:2.6em;display:grid;place-items:center;padding:0 4px;font-size:clamp(15px,3.8vw,19px);font-weight:900;line-height:1.3}
+      .lt-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      .lt-action,.abc-phonics-landscape .lt-hint{position:static;width:100%;min-width:44px;min-height:48px;margin:0;padding:8px 5px;border:3px solid #fff;border-radius:16px;box-shadow:0 3px 0 rgba(0,0,0,.13);background:#fff5c2;color:#24324a;font:inherit;font-size:clamp(14px,3.8vw,19px);font-weight:900;line-height:1.2;cursor:pointer;opacity:1;transform:none;animation:none;scale:1}
+      .lt-actions .lt-hint{grid-column:1/-1;background:#267e66;color:#fff;min-height:48px}
+      .lt-action:disabled{opacity:.52;cursor:default}
+      .lt-action:focus-visible,.lt-sound:focus-visible,.lt-choice:focus-visible,.lt-mode-tab:focus-visible{outline:3px solid #1266b0;outline-offset:2px}
+      .lt-choice-board{height:100%;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px;border-radius:26px;background:rgba(255,255,255,.58)}
+      .lt-choice{min-width:44px;min-height:44px;border:4px solid #fff;border-radius:23px;background:#fff8de;display:grid;place-items:center;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.12);font-size:clamp(44px,12vw,100px);transition:background .2s}
+      .lt-choice svg{width:90%;max-height:90%}
+      .lt-choice.lt-match{background:#b6f0cf;border-color:#277e64}
+      .abc-phonics-landscape .lt-top{display:flex;grid-column:auto;grid-row:auto;padding:8px 12px;gap:12px;height:auto;border:0;background:transparent;box-shadow:none;border-radius:0;flex:0 0 auto}
+      .abc-phonics-landscape .lt-mode-tabs{width:200px;flex:0 0 auto;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:24px;padding:3px;gap:4px}
+      .abc-phonics-landscape .lt-progress{flex:1 1 auto;flex-direction:row;flex-wrap:nowrap;gap:8px;min-height:14px}
+      .abc-phonics-landscape .lt-stage{grid-column:auto;grid-row:auto;display:flex;padding:2px 14px 14px}
+      .abc-phonics-landscape .lt-stage-inner{grid-template-columns:minmax(0,1.2fr) minmax(210px,1fr);grid-template-rows:minmax(0,1fr);gap:16px;grid-column:auto}
+      .abc-phonics-landscape .lt-fallback-letter,.abc-phonics-landscape .lt-fallback-object{width:100%;height:100%;font-size:clamp(80px,25vh,160px)}
+      .abc-phonics-landscape .lt-context{font-size:17px;min-height:2.6em}
+      .abc-phonics-landscape .lt-choice-board{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:6px}
+      .abc-phonics-landscape .lt-choice{font-size:clamp(40px,7vw,86px);border-width:3px;border-radius:18px}
+      @media(max-width:360px){.lt-top{padding:6px 10px}.lt-stage{padding:3px 10px 10px}.lt-stage-inner{gap:8px}.lt-learning-panel{gap:5px}.lt-context{font-size:14px}.lt-action{font-size:14px}.lt-word-label{font-size:28px}.lt-choice-board{gap:5px;padding:6px}}
+      @media(orientation:landscape) and (max-height:400px){.abc-phonics-landscape .lt-top{padding:5px 10px}.abc-phonics-landscape .lt-stage{padding:2px 10px 10px}.abc-phonics-landscape .lt-stage-inner{gap:12px}.abc-phonics-landscape .lt-learning-panel{gap:5px}.abc-phonics-landscape .lt-word-label{min-height:42px;padding:4px 8px;font-size:30px}.abc-phonics-landscape .lt-context{min-height:2.4em;font-size:15px}.lt-actions{gap:6px}}
+      @media(max-height:650px){.lt-complete-screen{padding:12px}.lt-complete-box{padding:18px 14px;gap:9px}.lt-complete-emoji{font-size:64px}.lt-complete-title{font-size:28px}.lt-complete-sub{font-size:18px}.lt-btn{min-height:48px;font-size:17px}.lt-complete-btns{gap:9px}}
+      @media(orientation:landscape) and (max-height:500px){.abc-phonics-landscape .lt-complete-screen{padding:12px}.abc-phonics-landscape .lt-complete-box{width:min(95%,760px);padding:16px;gap:8px}.abc-phonics-landscape .lt-complete-title{font-size:28px}.abc-phonics-landscape .lt-complete-sub{font-size:18px}.abc-phonics-landscape .lt-complete-emoji{font-size:70px}}
+      @media(prefers-reduced-motion:reduce){.lt-root::before,.lt-transformed .lt-image-wrap{animation:none}}
+    `;
     document.head.appendChild(style);
   }
 
@@ -1019,12 +1055,49 @@
       .replace(/>/g, '&gt;');
   }
 
-  function speakDirect(text, lang, rate) {
-    return;
+  function stopVoice() {
+    state.voiceEpoch += 1;
+    try { window.SihyeonVoice?.stop?.(); } catch (_) {}
+  }
+
+  function speakDirect(text, lang = 'ko-KR') {
+    if (state.destroyed || !state.sound || !text) return Promise.resolve(false);
+    // Korean letter learning stays Korean. English Listening never reads it
+    // with an English voice or substitutes a translation for the learned sound.
+    if (lang === 'ko-KR' && window.SihyeonPlaySettings?.getLanguage?.() === 'en') return Promise.resolve(false);
+    stopVoice();
+    const epoch = state.voiceEpoch;
+    try {
+      return Promise.resolve(window.SihyeonVoice?.speak?.(text, {
+        lang, rate: 0.88, shouldPlay: () => !state.destroyed && state.sound && epoch === state.voiceEpoch
+      })).catch(() => false);
+    } catch (_) { return Promise.resolve(false); }
+  }
+
+  function syllableLink(item) {
+    if (state.mode === 'abc') return {text: `글자 이름 · ${item.letter}`, speech: item.letterName};
+    const syllable = item.word[0];
+    const vowel = {0:'아',4:'어',8:'오',13:'우',18:'으',20:'이'}[Math.floor((syllable.codePointAt(0) - 0xac00) / 28) % 21];
+    return {text: `${item.letterName} + ${vowel} → ${syllable}`,
+      speech: `글자 이름은 ${item.letterName}. ${item.letterName}과 ${vowel}가 만나면 ${syllable}. ${item.word}.`};
+  }
+
+  function objectMarkup(item) {
+    // A chestnut symbol is not an acorn. This simple vector preserves the cap,
+    // stem and pointed nut that distinguish the actual representative object.
+    if (item.word === '도토리') return '<svg viewBox="0 0 120 120" role="img" aria-label="도토리"><path d="M61 28q-3-17 10-22" fill="none" stroke="#69422a" stroke-width="8" stroke-linecap="round"/><path d="M29 51h62c2 28-12 45-31 57C40 95 27 78 29 51" fill="#bd743a"/><path d="M24 53q2-30 36-30t36 30Z" fill="#79532e"/><path d="M34 38l13 12m2-21l16 21m1-23l17 22m-48-1l14-16m4 16l14-20m3 21l13-16" stroke="#a78150" stroke-width="4" stroke-linecap="round"/><path d="M43 63q-3 17 9 29" fill="none" stroke="#e3a86c" stroke-width="6" stroke-linecap="round"/></svg>';
+    return `<span aria-hidden="true">${item.fallbackObject}</span>`;
+  }
+
+  function matchingItems() {
+    const items = getItems(), index = state.currentIndex;
+    const choices = [items[index], items[(index + 1) % items.length], items[(index + 2) % items.length]];
+    // Rotate the target position; no answer styling or fixed first-button clue.
+    return choices.slice(index % 3).concat(choices.slice(0, index % 3));
   }
 
   function speakItemText(text, forceLang) {
-    if (!text) return;
+    if (state.destroyed || !state.sound || !text) return Promise.resolve(false);
     const voiceIds = {
       '에이, 비, 씨가 장난감으로 변신해요!': 'games.abc.intro',
       'Touch A!': 'games.abc.touchA',
@@ -1039,15 +1112,6 @@
       'Touch the letter!': 'games.abc.touchLetter',
       '우와. 에이, 비, 씨를 모두 만났어요.': 'games.abc.complete',
       '한글 친구들이 그림으로 변신해요!': 'games.korean.intro',
-      '기역! 그, 그': 'games.korean.giyeok',
-      '니은! 느, 느': 'games.korean.nieun',
-      '디귿! 드, 드': 'games.korean.digeut',
-      '리을! 르, 르': 'games.korean.rieul',
-      '미음! 므, 므': 'games.korean.mieum',
-      '비읍! 브, 브': 'games.korean.bieup',
-      '시옷! 스, 스': 'games.korean.siot',
-      '이응! 으, 으': 'games.korean.ieung',
-      '지읒! 즈, 즈': 'games.korean.jieut',
       '가, 가, 가방!': 'games.korean.ga',
       '나, 나, 나비!': 'games.korean.na',
       '도, 도, 도토리!': 'games.korean.do',
@@ -1062,9 +1126,14 @@
     };
     const voiceId = voiceIds[text];
     if (voiceId && window.SihyeonVoice && typeof window.SihyeonVoice.play === 'function') {
-      window.SihyeonVoice.play(voiceId, '').catch(() => {});
-      return;
+      stopVoice();
+      const epoch = state.voiceEpoch;
+      return Promise.resolve(window.SihyeonVoice.play(voiceId, text, {
+        allowTtsFallback: true, lang: forceLang || 'ko-KR',
+        shouldPlay: () => !state.destroyed && state.sound && epoch === state.voiceEpoch
+      })).catch(() => false);
     }
+    return speakDirect(text, forceLang || 'ko-KR');
   }
 
   function vibrate(pattern) {
@@ -1129,6 +1198,7 @@
   function resetMode(nextMode) {
     if (!DATASETS[nextMode] || state.mode === nextMode) return;
     clearTimers();
+    stopVoice();
     state.mode = nextMode;
     state.currentIndex = 0;
     state.isTransforming = false;
@@ -1145,48 +1215,52 @@
   function renderScene(skipIntroVoice) {
     if (state.destroyed || !state.container) return;
     clearTimers();
+    stopVoice();
     state.phase = 'LETTER';
     state.isTransforming = false;
+    state.matchAnswered = false;
 
     const root = state.container.querySelector('.lt-root');
     const item = getCurrentItem();
-    const dataset = getDataset();
-
     if (!root || !item) return;
     root.style.opacity = '1';
-
     state.successRewardGiven = false;
     updateRootLayoutClass();
     updateRootBackground(root, item);
+    const link = syllableLink(item);
 
     root.innerHTML = `
       <div class="lt-top">
-        <div class="lt-mode-tabs" role="tablist" aria-label="글자 모드 선택">
-          <button type="button" class="lt-mode-tab ${state.mode === 'abc' ? 'active' : ''}" data-mode="abc">ABC</button>
-          <button type="button" class="lt-mode-tab ${state.mode === 'hangul' ? 'active' : ''}" data-mode="hangul">한글</button>
+        <div class="lt-mode-tabs" role="group" aria-label="글자 모드 선택">
+          <button type="button" class="lt-mode-tab ${state.mode === 'abc' ? 'active' : ''}" data-mode="abc" aria-pressed="${state.mode === 'abc'}">ABC</button>
+          <button type="button" class="lt-mode-tab ${state.mode === 'hangul' ? 'active' : ''}" data-mode="hangul" aria-pressed="${state.mode === 'hangul'}">한글</button>
         </div>
-        <div class="lt-progress" aria-label="진행도">${makeProgressHTML()}</div>
+        <div class="lt-progress" aria-label="${state.currentIndex + 1} / ${getItems().length}">${makeProgressHTML()}</div>
+        <button type="button" class="lt-sound" id="ltSound" aria-label="안내 소리" aria-pressed="${state.sound}">${state.sound ? '🔊' : '🔇'}</button>
       </div>
-
-      <div class="lt-title-wrap">
-        <div class="lt-title">${dataset.title}</div>
-      </div>
-
       <div class="lt-stage">
         <div class="lt-stage-inner">
-          <button type="button" class="lt-main-card" id="ltMainCard" aria-label="${escapeAttr(item.letterName)} 변신">
-            <span class="lt-image-wrap" id="ltImageWrap">
-              <img class="lt-display-img" id="ltMainImg" alt="${escapeAttr(item.letter)}" draggable="false" hidden>
-              <span class="lt-fallback-letter" id="ltFallbackLetter">${item.fallbackLetter}</span>
-              <span class="lt-fallback-object" id="ltFallbackObject" style="display:none;">${item.fallbackObject}</span>
-            </span>
-          </button>
-
-          <div class="lt-word-label" id="ltWordLabel">${escapeAttr(item.displayWord)}</div>
-          <button type="button" class="lt-hint" id="ltHint" aria-label="글자 변신">✨ 변신</button>
+          <div class="lt-picture-area">
+            <button type="button" class="lt-main-card" id="ltMainCard" aria-label="${escapeAttr(item.letterName)} 변신">
+              <span class="lt-image-wrap" id="ltImageWrap">
+                <img class="lt-display-img" id="ltMainImg" alt="${escapeAttr(item.letter)}" draggable="false" hidden>
+                <span class="lt-fallback-letter" id="ltFallbackLetter">${item.fallbackLetter}</span>
+                <span class="lt-fallback-object" id="ltFallbackObject" style="display:none;">${objectMarkup(item)}</span>
+              </span>
+            </button>
+            <div class="lt-choice-board" id="ltChoices" role="group" aria-label="뜻에 맞는 그림 찾기" hidden></div>
+          </div>
+          <div class="lt-learning-panel">
+            <div class="lt-word-label show" id="ltWordLabel">${escapeAttr(item.letter)}</div>
+            <div class="lt-context" id="ltContext" role="status" aria-live="polite">${escapeAttr(link.text)}</div>
+            <div class="lt-actions">
+              <button type="button" class="lt-action" id="ltReplayPrompt">🔊 다시 듣기</button>
+              <button type="button" class="lt-action" id="ltFind" disabled>👀 그림 찾기</button>
+              <button type="button" class="lt-action lt-hint visible" id="ltHint" aria-label="글자 변신">✨ 변신</button>
+            </div>
+          </div>
         </div>
-      </div>
-    `;
+      </div>`;
 
     const mainCard = root.querySelector('#ltMainCard');
     const mainImg = root.querySelector('#ltMainImg');
@@ -1194,9 +1268,19 @@
     const fallbackLetter = root.querySelector('#ltFallbackLetter');
     const fallbackObject = root.querySelector('#ltFallbackObject');
     const hint = root.querySelector('#ltHint');
+    const find = root.querySelector('#ltFind');
+    const label = root.querySelector('#ltWordLabel');
+    const context = root.querySelector('#ltContext');
+    const board = root.querySelector('#ltChoices');
+    const lang = state.mode === 'abc' ? 'en-US' : 'ko-KR';
 
-    root.querySelectorAll('.lt-mode-tab').forEach((btn) => {
-      btn.addEventListener('click', () => resetMode(btn.dataset.mode));
+    root.querySelectorAll('.lt-mode-tab').forEach(btn => btn.addEventListener('click', () => resetMode(btn.dataset.mode)));
+    root.querySelector('#ltSound').addEventListener('click', () => {
+      state.sound = !state.sound;
+      stopVoice();
+      const button = root.querySelector('#ltSound');
+      button.setAttribute('aria-pressed', String(state.sound));
+      button.textContent = state.sound ? '🔊' : '🔇';
     });
 
     let visualIsObject = false;
@@ -1217,94 +1301,102 @@
       visualIsObject = isObject;
       mainImg.alt = isObject ? item.word : item.letter;
       showFallback();
-      // Hangul has no raster assets in the repository. Render its large letter and
-      // familiar object directly; do not issue 18 known-broken image requests.
       if (source) {
         mainImg.src = source;
         if (mainImg.complete) showLoadedImage();
-      } else {
-        mainImg.removeAttribute('src');
-      }
+      } else mainImg.removeAttribute('src');
     }
     mainImg.addEventListener('error', showFallback);
     mainImg.addEventListener('load', showLoadedImage);
     showVisual(item.letterImg, false);
 
-    timer(() => {
-      if (!state.destroyed) hint.classList.add('visible');
-    }, 650);
+    function replayPrompt() {
+      if (state.phase === 'LETTER') speakDirect(state.mode === 'abc' ? `Letter ${item.letterName}. Touch the letter.` : `글자 이름은 ${item.letterName}. 눌러서 ${item.word} 그림을 만나 볼까요?`, lang);
+      else if (state.phase === 'CHOOSING') speakDirect(state.mode === 'abc' ? `Find the ${item.word.toLowerCase()}.` : `${item.word} 그림을 찾아볼까요?`, lang);
+      else if (state.phase === 'OBJECT') speakItemText(item.wordVoice, lang);
+    }
+    root.querySelector('#ltReplayPrompt').addEventListener('click', replayPrompt);
 
-    function transformOrAdvance() {
+    function transform() {
       if (state.destroyed || !root.contains(mainCard)) return;
-      if (state.phase === 'OBJECT') {
-        advanceRound();
-        return;
-      }
+      if (state.phase === 'OBJECT') { replayPrompt(); return; }
       if (state.phase !== 'LETTER') return;
-
       state.phase = 'TRANSFORMING';
       state.isTransforming = true;
       mainCard.disabled = true;
       hint.disabled = true;
       vibrate(70);
-      hint.classList.remove('visible');
-
-      speakItemText(
-        state.mode === 'abc' ? item.letterName : `${item.letterName}! ${item.phonics}`,
-        state.mode === 'abc' ? 'en-US' : 'ko-KR'
-      );
-
       const rect = mainCard.getBoundingClientRect();
       createExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2, item.color);
-
       mainCard.classList.add('lt-transformed');
-
+      // A complete phrase makes the name / combined syllable distinction clear.
+      // The visual may finish before speech; the child can replay or continue.
+      speakDirect(state.mode === 'abc' ? `${item.letterName}. ${item.word}.` : link.speech, lang);
+      timer(() => { showVisual(item.objectImg, true); vibrate([45, 40, 45]); }, 230);
       timer(() => {
-        showVisual(item.objectImg, true);
-        vibrate([45, 40, 45]);
-      }, 230);
-
-      timer(() => {
-        const label = root.querySelector('#ltWordLabel');
-        if (label) label.classList.add('show');
-
-        speakItemText(
-          state.mode === 'abc' ? item.wordVoice : item.wordVoice,
-          state.mode === 'abc' ? 'en-US' : 'ko-KR'
-        );
-
+        label.textContent = item.displayWord;
+        context.textContent = state.mode === 'abc' ? `${item.letter} → ${item.word} · ${ {Apple:'사과',Ball:'공',Car:'자동차'}[item.word] }` : link.text;
         if (!state.successRewardGiven) {
           state.successRewardGiven = true;
           state.options.fireConfetti?.();
         }
-      }, 760);
-
-      timer(() => {
         state.phase = 'OBJECT';
+        state.isTransforming = false;
         mainCard.disabled = false;
+        mainCard.setAttribute('aria-label', `${item.word} 다시 듣기`);
         hint.disabled = false;
+        find.disabled = false;
         hint.textContent = '다음 ▶';
         hint.setAttribute('aria-label', '다음 글자');
-        hint.classList.add('visible');
-      }, 2100);
+      }, 800);
     }
-    mainCard.addEventListener('click', transformOrAdvance);
-    hint.addEventListener('click', transformOrAdvance);
+    mainCard.addEventListener('click', transform);
+    hint.addEventListener('click', () => {
+      if (state.phase === 'LETTER') transform();
+      else if (state.phase === 'OBJECT' || state.phase === 'CHOOSING') advanceRound();
+    });
+    find.addEventListener('click', () => {
+      if (state.phase === 'CHOOSING') {
+        state.phase = 'OBJECT';
+        board.hidden = true;
+        mainCard.hidden = false;
+        find.textContent = '👀 그림 찾기';
+        label.textContent = item.displayWord;
+        context.textContent = link.text;
+        return;
+      }
+      if (state.phase !== 'OBJECT') return;
+      state.phase = 'CHOOSING';
+      mainCard.hidden = true;
+      board.hidden = false;
+      find.textContent = '🖼️ 그림 보기';
+      label.textContent = item.displayWord;
+      context.textContent = `${item.word} 그림을 찾아요`;
+      board.innerHTML = matchingItems().map(choice => `<button type="button" class="lt-choice" data-choice="${escapeAttr(choice.word)}" aria-label="${escapeAttr(choice.word)}">${objectMarkup(choice)}</button>`).join('');
+      board.querySelectorAll('[data-choice]').forEach(button => button.addEventListener('click', () => {
+        if (state.destroyed || state.phase !== 'CHOOSING') return;
+        const chosen = button.dataset.choice;
+        if (chosen === item.word) {
+          context.textContent = `맞아요! ${item.word}이에요`;
+          speakItemText(item.wordVoice, lang);
+          if (!state.matchAnswered) { state.matchAnswered = true; state.options.fireConfetti?.(); }
+          board.querySelectorAll('[data-choice]').forEach(b => b.classList.toggle('lt-match', b === button));
+        } else {
+          context.textContent = `이건 ${chosen} · ${item.word}을 찾아요`;
+          speakDirect(state.mode === 'abc' ? `That is a ${chosen.toLowerCase()}. Find the ${item.word.toLowerCase()}.` : `이건 ${chosen}. ${item.word}을 찾아볼까요?`, lang);
+        }
+      }));
+      replayPrompt();
+    });
 
-    if (!skipIntroVoice) {
-      timer(() => {
-        const guide = state.mode === 'abc'
-          ? `Touch ${item.letter}!`
-          : '글자를 눌러볼까?';
-        speakItemText(guide, state.mode === 'abc' ? 'en-US' : 'ko-KR');
-      }, 450);
-    }
+    if (!skipIntroVoice) timer(replayPrompt, 400);
   }
 
   function advanceRound() {
-    if (state.destroyed || !state.container || state.phase !== 'OBJECT') return;
+    if (state.destroyed || !state.container || !['OBJECT','CHOOSING'].includes(state.phase)) return;
     state.phase = 'ADVANCING';
     clearTimers();
+    stopVoice();
 
     const root = state.container.querySelector('.lt-root');
     if (!root) return;
@@ -1330,6 +1422,7 @@
     if (state.destroyed || !state.container) return;
     state.phase = 'COMPLETE';
     clearTimers();
+    stopVoice();
 
     const root = state.container.querySelector('.lt-root');
     const dataset = getDataset();
@@ -1398,6 +1491,8 @@
     state.layoutMode = getLayoutMode();
     state.successRewardGiven = false;
     state.completeRewardGiven = false;
+    state.sound = true;
+    state.matchAnswered = false;
 
     bindLayoutEvents();
 
@@ -1413,6 +1508,7 @@
   function destroy() {
     state.destroyed = true;
     clearTimers();
+    stopVoice();
     unbindLayoutEvents();
 
     if (typeof speechSynthesis !== 'undefined') {

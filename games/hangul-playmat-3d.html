@@ -179,6 +179,12 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 }
 
 @media(max-width:700px){
+  #top{gap:4px;padding-left:6px;padding-right:6px}
+  #rightTop{gap:4px;padding:4px}
+  #rightTop .pill{min-width:44px;min-height:44px;padding:4px 8px}
+  #brand{padding:5px 8px}
+  #brand strong{display:none}
+
   #brand span,.pill .btnTxt{display:none}
   #brand strong{font-size:14px}
   .jamoBtn{min-width:48px;height:48px;border-radius:14px}
@@ -212,6 +218,9 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
       <button id="clearBtn" class="pill" title="모두 치우기" aria-label="모두 치우기">
         <span style="font-size:19px">🧹</span><span class="btnTxt">싹치우기</span>
       </button>
+      <button id="replayBtn" class="pill" title="안내 다시 듣기" aria-label="안내 다시 듣기">
+        <span style="font-size:20px">🗣️</span><span class="btnTxt">다시 듣기</span>
+      </button>
       <button id="soundBtn" class="pill" title="소리 켜기/끄기" aria-label="소리" aria-pressed="true">
         <span id="soundIcon" style="font-size:20px">🔊</span>
       </button>
@@ -241,20 +250,20 @@ try {
  * 1. 자음 14종 & 모음 10종 정의 + 유니코드 140음절 조합 + 대표 단어/3D 장난감 사전
  * ============================================================================ */
 const CHO_LIST = [
-  {id:'ㄱ', uIdx:0,  name:'기역', sound:'그', color:'#FF595E'},
-  {id:'ㄴ', uIdx:2,  name:'니은', sound:'느', color:'#FF922B'},
-  {id:'ㄷ', uIdx:3,  name:'디귿', sound:'드', color:'#FCC419'},
-  {id:'ㄹ', uIdx:5,  name:'리을', sound:'르', color:'#F06595'},
-  {id:'ㅁ', uIdx:6,  name:'미음', sound:'므', color:'#FF6B6B'},
-  {id:'ㅂ', uIdx:7,  name:'비읍', sound:'브', color:'#FD7E14'},
-  {id:'ㅅ', uIdx:9,  name:'시옷', sound:'스', color:'#FAB005'},
-  {id:'ㅇ', uIdx:11, name:'이응', sound:'으', color:'#FA5252'},
-  {id:'ㅈ', uIdx:12, name:'지읒', sound:'즈', color:'#E64980'},
-  {id:'ㅊ', uIdx:14, name:'치읓', sound:'츠', color:'#FF8787'},
-  {id:'ㅋ', uIdx:15, name:'키읔', sound:'크', color:'#FFA94D'},
-  {id:'ㅌ', uIdx:16, name:'티읕', sound:'트', color:'#FFD43B'},
-  {id:'ㅍ', uIdx:17, name:'피읖', sound:'프', color:'#FF6B8B'},
-  {id:'ㅎ', uIdx:18, name:'히읗', sound:'흐', color:'#FF758F'}
+  {id:'ㄱ', uIdx:0,  name:'기역', color:'#FF595E'},
+  {id:'ㄴ', uIdx:2,  name:'니은', color:'#FF922B'},
+  {id:'ㄷ', uIdx:3,  name:'디귿', color:'#FCC419'},
+  {id:'ㄹ', uIdx:5,  name:'리을', color:'#F06595'},
+  {id:'ㅁ', uIdx:6,  name:'미음', color:'#FF6B6B'},
+  {id:'ㅂ', uIdx:7,  name:'비읍', color:'#FD7E14'},
+  {id:'ㅅ', uIdx:9,  name:'시옷', color:'#FAB005'},
+  {id:'ㅇ', uIdx:11, name:'이응', color:'#FA5252'},
+  {id:'ㅈ', uIdx:12, name:'지읒', color:'#E64980'},
+  {id:'ㅊ', uIdx:14, name:'치읓', color:'#FF8787'},
+  {id:'ㅋ', uIdx:15, name:'키읔', color:'#FFA94D'},
+  {id:'ㅌ', uIdx:16, name:'티읕', color:'#FFD43B'},
+  {id:'ㅍ', uIdx:17, name:'피읖', color:'#FF6B8B'},
+  {id:'ㅎ', uIdx:18, name:'히읗', color:'#FF758F'}
 ];
 
 const JUNG_LIST = [
@@ -379,7 +388,7 @@ function getSyllableMeta(cho, jung){
       word: entry.word,
       emoji: entry.emoji,
       toy: entry.toy,
-      speech: `${cSpec.name} ${jSpec.name}, ${char}! ${entry.word}!`
+      speech: `${cSpec.name}, ${jSpec.name}. 합치면 ${char}. ${entry.word}!`
     };
   }
   return {
@@ -387,7 +396,7 @@ function getSyllableMeta(cho, jung){
     word: `${char} 블록`,
     emoji: '',
     toy: 'picture',
-    speech: `${cSpec.name} ${jSpec.name}, ${char}! 반짝반짝 ${char}!`
+    speech: `${cSpec.name}, ${jSpec.name}. 합치면 ${char}. 반짝반짝 ${char}!`
   };
 }
 
@@ -886,7 +895,7 @@ function buildWordPictureToy(meta){
   ctx.fillStyle='#fffdf5';ctx.strokeStyle='#a7c4e1';ctx.lineWidth=8;
   ctx.beginPath();ctx.roundRect(5,5,502,438,38);ctx.fill();ctx.stroke();
   ctx.save();ctx.translate(56,30);drawWordIllustration(ctx,meta);ctx.restore();
-  ctx.fillStyle='#223454';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 42px sans-serif';ctx.fillText(meta.word,256,393,458);
+  ctx.fillStyle='#223454';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 72px sans-serif';ctx.fillText(meta.word,256,393,458);
   const texture=new THREE.CanvasTexture(picture);
   if('encoding' in texture) texture.encoding=THREE.sRGBEncoding;
   const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true}));
@@ -1207,6 +1216,7 @@ const state = {
   drag: null,
   pointerId: null,
   sound: true,
+  lastSpeech: '기역 블록과 아 블록을 끌어다 붙여 볼까요? 합치면 가가 돼요.',
   soundCtx: null,
   toastTimer: 0,
   lastTick: performance.now()
@@ -1361,7 +1371,7 @@ function spawnFromTray(role, id){
   sfx('spawn');
   if(role === 'cho'){
     const c = CHO_MAP[id];
-    say(`${c.name}! ${c.sound}~`);
+    say(`자음 이름은 ${c.name}.`);
     toast(`🧩 자음 [${c.id}] ${c.name}! 모음 블록과 붙여보세요`);
   } else {
     const j = JUNG_MAP[id];
@@ -1481,7 +1491,7 @@ function handleBlockTap(block, slotPitchIdx = 0){
   if(block.role === 'cho'){
     const c = CHO_MAP[block.cho];
     sfx('tap', slotPitchIdx);
-    say(`${c.name}! ${c.sound}~`);
+    say(`자음 이름은 ${c.name}.`);
     toast(`🧩 [${c.id}] ${c.name}`);
   } else if(block.role === 'jung'){
     const j = JUNG_MAP[block.jung];
@@ -1879,7 +1889,9 @@ function stopSpeech(){
 }
 
 function say(text){
-  if(!state.sound || !text) return;
+  if(state.destroyed || !text) return;
+  state.lastSpeech = text;
+  if(!state.sound) return;
   const root = getVoiceRoot();
   // Hangul phonics are Korean learning content, not English translations.
   // English Listening must not send these phrases to an English or Korean TTS.
@@ -1956,6 +1968,7 @@ function mountUI(){
     btn.className = 'jamoBtn';
     btn.style.background = c.color;
     btn.innerHTML = `<span class="charTxt">${c.id}</span><span class="nameTxt">${c.name}</span>`;
+    btn.setAttribute('aria-label', `${c.id}, 자음 이름 ${c.name}`);
     btn.onclick = () => spawnFromTray('cho', c.id);
     choRow.appendChild(btn);
   }
@@ -1966,6 +1979,7 @@ function mountUI(){
     btn.className = 'jamoBtn';
     btn.style.background = j.color;
     btn.innerHTML = `<span class="charTxt">${j.id}</span><span class="nameTxt">${j.name}</span>`;
+    btn.setAttribute('aria-label', `${j.id}, 모음 ${j.name}`);
     btn.onclick = () => spawnFromTray('jung', j.id);
     jungRow.appendChild(btn);
   }
@@ -1974,6 +1988,7 @@ function mountUI(){
     if(!state.undoStack.length){ toast('↩️ 되돌릴 동작이 없어요'); return; }
     restoreState(state.undoStack.pop());
     sfx('tap', 1);
+    state.lastSpeech = '이전 모습으로 되돌렸어요. 글자 블록을 눌러 다시 들어 보세요.';
     toast('↩️ 이전 모습으로 되돌렸어요');
   };
 
@@ -1981,13 +1996,17 @@ function mountUI(){
     saveUndo();
     resetInitialBlocks();
     sfx('basket');
+    state.lastSpeech = '기역 블록과 아 블록을 끌어다 붙여 볼까요? 합치면 가가 돼요.';
     toast('🧹 놀이터를 깨끗하게 정리했어요!');
   };
+
+  $('replayBtn').onclick = () => say(state.lastSpeech);
 
   $('soundBtn').onclick = () => {
     state.sound = !state.sound;
     if(!state.sound) stopSpeech();
     $('soundIcon').textContent = state.sound ? '🔊' : '🔇';
+    $('soundBtn').setAttribute('aria-pressed', String(state.sound));
     toast(state.sound ? '🔊 소리를 켰어요' : '🔇 소리를 껐어요');
   };
 
@@ -2045,6 +2064,8 @@ window.OpenWorldDebug = {
 };
 window.Sihyeon2DFallback.ready('hangul', () => {
   state.destroyed = true;
+  stopSpeech();
+  clearTimeout(state.toastTimer);
   clearAllBlocks();
   renderer.dispose();
   window.removeEventListener('resize', adjustCameraForViewport);
