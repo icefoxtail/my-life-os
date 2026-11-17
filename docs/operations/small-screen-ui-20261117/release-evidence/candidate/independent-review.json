@@ -1,0 +1,89 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "reviewedAtUtc": "2026-11-17T05:14:20.737289+00:00",
+  "status": "VISUAL_PASS_SCOPED",
+  "candidateGitSha": "c98fe169656b404024eab298114a38df9d8baf1f",
+  "scope": "Independent pixel review of the seven named PNGs and their measurements for the original small-screen construction/coding clipping, hit-area, slot-overlap and scroll defects. Candidate evidence only.",
+  "report": {
+    "path": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/small-screen-ui-results.json",
+    "sha256": "f8b8bf0839aff8384594eea4e827577ee752a5da229e4a79b0dfbcff4f9bdebe",
+    "status": "PASS",
+    "checksPassed": 24,
+    "checksTotal": 24,
+    "pageErrors": [],
+    "browserVersion": "143.0.7499.4",
+    "sourcesUnchanged": true,
+    "servedSourcesMatchCheckout": true
+  },
+  "viewedEvidence": [
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-initial.png",
+      "pngSha256": "37db692d46e0fcd0ef92494103e3c8ffa39f2f33910b024948cbf934832b7db8",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-initial.json",
+      "measurementSha256": "d783c99e4b2a1ad9d111c87464e56889a6d296369249841cffc260d0e387bfe1"
+    },
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-pump.png",
+      "pngSha256": "f7d1906f3c6a6c91af5a34b42788ace5d6d26094603dda1929e1471928b917e2",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-pump.json",
+      "measurementSha256": "062d51b6572ed255a8add89a6dfc6ce1bdf9c494c80534221efd8b1c541d2a73"
+    },
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-result.png",
+      "pngSha256": "6bd25ba90911eceb055beba728230f161a4dfd2ecc2c1447c0c48f0b23e4c470",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-result.json",
+      "measurementSha256": "761aef7f30c54af5339cca9d4655ce2975761f5f35e1a7934f8bbadcab009a40"
+    },
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-complete.png",
+      "pngSha256": "0c0d2da9bee938fcfd396a98b5ec0dd252932094fa02e231671347d706d98059",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/construction-640x360-complete.json",
+      "measurementSha256": "e76059c6d164d4e53d12a956c3c94dd5a5cca2c30d87bc5bb0babde612b9c9b6"
+    },
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/coding-390x844-initial.png",
+      "pngSha256": "af5aac66e05b7a6c629226818f5fa19131e42b1ba214ccdddbf96516ea732c38",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/coding-390x844-initial.json",
+      "measurementSha256": "802936d504162e0aa7b08d2929881c177d9da817f6e7cc32f90f9b8734c104fa"
+    },
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/coding-1024x768-challenge-scroll-top.png",
+      "pngSha256": "4986a5c72e2771266ed127e5d2f626ad8f30c4ea909fa8124cef617e26adfd19",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/coding-1024x768-challenge-scroll-top.json",
+      "measurementSha256": "52410502af644d46c37711c35d61970d3afa86c95813646d549765da7c6efd52"
+    },
+    {
+      "png": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/coding-1024x768-challenge-scroll-bottom.png",
+      "pngSha256": "5a200151907c20ad042c53da606d7be3624541ed90b3a6046d0f352d81678438",
+      "measurement": "/workspace/scratch/d006ae658a87/evidence/small-screen-candidate/screens/coding-1024x768-challenge-scroll-bottom.json",
+      "measurementSha256": "11cfd2f2b11c79c82d689335955b9998672beabbf40c4a04631a979c47c60469"
+    }
+  ],
+  "findings": [
+    {
+      "area": "construction 640x360",
+      "status": "PASS",
+      "observed": "Initial, pump, result and completion captures keep the target/result/complete panel inside the scene or viewport. Top buttons, listen and vehicle choices remain visibly separated. Measured enabled controls are hit-testable and at least 44 CSS px in each dimension."
+    },
+    {
+      "area": "coding 390x844",
+      "status": "PASS",
+      "observed": "All four directional images are visually contained; four command slots are separated from arrow controls. Measurements agree on alpha-bound containment and no reported layout issues."
+    },
+    {
+      "area": "coding 1024x768 challenge",
+      "status": "PASS",
+      "observed": "The top capture visibly contains all seven command slots with no overlap into arrow controls. The bottom capture exposes Undo, Clear and GO. Measured scroll changes from 0 to maximum 170; full flow retains seven contained nonoverlapping slots."
+    }
+  ],
+  "nonBlockingObservations": [
+    "The construction result snapshot catches the pre-existing animated vehicle and fading feedback message overlapping; this review does not certify full feedback-text readability at every animation frame. Persistent outcome feedback remains within the planned Stage 4 work."
+  ],
+  "blockers": [],
+  "limitations": [
+    "This is candidate evidence; production deployment and production-source verification are owned by the parent release task.",
+    "Chromium touch emulation and simulated audio completion only; physical device and speaker audio NOT_RUN.",
+    "The seven named captures were visually reviewed, not every frame or every captured viewport.",
+    "The parent owns remaining unrelated workflow gates and release authorization."
+  ]
+}
