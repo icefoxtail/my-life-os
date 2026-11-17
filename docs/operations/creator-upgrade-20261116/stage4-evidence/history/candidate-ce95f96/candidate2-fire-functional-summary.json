@@ -1,0 +1,247 @@
+{
+  "review": "candidate2-fire-functional-report",
+  "reviewer": "/root/status_checkpoint",
+  "createdAt": "2026-11-17T06:16:49.950891+00:00",
+  "status": "PASS",
+  "scope": "Read-only verification of saved CI report, source blobs and artifact bytes; no new browser run and no visual PNG judgment.",
+  "candidateHead": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+  "candidateHeadBinding": "Reference supplied by root; all five recorded source SHA256 values and the test script SHA256 independently match git show at this ref.",
+  "evidence": {
+    "report": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate2/fire/fire/creator-fire-stage4-browser.json",
+    "reportSha256": "52e792f7edcfe1baf020385c5d0420636ea43fff9d8fafd43ac79104abb69abf",
+    "artifactId": 14303434638,
+    "runId": 44028799797,
+    "artifactZipSha256": "13a789c010cc6fa520c96b21a9ee654eb3270e29efd62da493f3c9e1842a84fa",
+    "testScriptSha256": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae",
+    "baseUrl": "http://127.0.0.1:41573/"
+  },
+  "cases": [
+    {
+      "case": "three-incidents",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "three-incidents",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "three-incidents",
+      "viewport": {
+        "width": 640,
+        "height": 360
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "three-incidents",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "three-incidents",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "three-incidents",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "manifest-failure-and-real-retry",
+      "status": "PASS"
+    },
+    {
+      "case": "english-speech-failure-storage-refusal-and-lifecycle",
+      "status": "PASS"
+    }
+  ],
+  "caseCount": 8,
+  "sourceProvenance": {
+    "distinctSourceFiles": 5,
+    "loadedResponseBundles": 6,
+    "loadedResponseEntries": 30,
+    "afterRetryResponseBundleEntries": 5,
+    "totalRecordedSourceEntries": 35,
+    "allRecordedEntriesHttp200AndCheckoutMatch": true,
+    "separateBeforeRunProbeEntries": 0,
+    "separateAfterRunProbeEntries": 0,
+    "beforeAfterProbeStatus": "NOT_RECORDED: the report records page response bodies, not separate before/after HTTP probes.",
+    "afterRetryMeaning": "Snapshot of successful observed page responses after retry; three shell/script responses were loaded before retry and two manifest responses recovered after injected failures.",
+    "lifecycleCaseSourceBundle": "NOT_RECORDED",
+    "candidateGitSourceBlobMatches": 5,
+    "candidateGitHarnessBlobMatches": 1,
+    "sourceSha256": {
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+      "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+      "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+    }
+  },
+  "functionalScope": {
+    "normalViewportCases": 6,
+    "incidentsPerViewport": 3,
+    "incidents": [
+      "water supply then pump",
+      "ladder rescue",
+      "smoke fan after fire is out"
+    ],
+    "rewardCallsPerNormalCase": [
+      20,
+      20,
+      20
+    ],
+    "recordedChecks": [
+      "wrong role feedback",
+      "all tanker and ladder variants offered",
+      "help on/off unchanged scene",
+      "vehicle arrival then manual work",
+      "water persists into pump work",
+      "no automatic next step",
+      "visible flames/ladder/person/smoke change",
+      "ladder feet meet decoded truck pixels in the same coordinate plane",
+      "three incidents and voluntary replay"
+    ]
+  },
+  "ladderConnection": {
+    "status": "PASS",
+    "variants": {
+      "n_ladder_truck": {
+        "viewports": [
+          "320x568",
+          "768x1024"
+        ],
+        "connectionObservations": 4,
+        "pixelSamples": 8,
+        "status": "PASS"
+      },
+      "n_aerial_ladder_truck": {
+        "viewports": [
+          "390x844",
+          "1024x768"
+        ],
+        "connectionObservations": 4,
+        "pixelSamples": 8,
+        "status": "PASS"
+      },
+      "n_articulating_ladder_truck": {
+        "viewports": [
+          "640x360"
+        ],
+        "connectionObservations": 2,
+        "pixelSamples": 4,
+        "status": "PASS"
+      },
+      "s_aerial_ladder_truck": {
+        "viewports": [
+          "844x390"
+        ],
+        "connectionObservations": 2,
+        "pixelSamples": 4,
+        "status": "PASS"
+      }
+    },
+    "observations": 12,
+    "decodedSourcePixelSamples": 24,
+    "allPixelAlpha": 255,
+    "allSamplesNonWhite": true,
+    "base": [
+      150,
+      300
+    ],
+    "halfTip": [
+      295,
+      225
+    ],
+    "fullTip": [
+      440,
+      150
+    ],
+    "allPlaneDifferences": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "singleGroupAboveVehicle": true,
+    "pointerEvents": "none",
+    "visualReview": "Separate independent reviewer; not performed by this summary author."
+  },
+  "specialCases": {
+    "manifestRetry": {
+      "status": "PASS",
+      "manifestRequestCount": 4,
+      "expectedInjectedHttpStatus": 503,
+      "recoveredSourceEntries": 5
+    },
+    "speechStorageLifecycle": {
+      "status": "PASS",
+      "speechRequestCount": 5,
+      "speechLanguages": [
+        "en-US"
+      ],
+      "rewardCalls": [
+        20
+      ],
+      "legacyModes": [
+        4,
+        9,
+        16
+      ],
+      "scope": "Actual voice-engine requests with a deliberately failing browser TTS; no audible claim"
+    }
+  },
+  "errors": {
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "httpErrors": 0,
+    "failedRequests": 0
+  },
+  "inputAndMotion": {
+    "reportedInputMode": "native browser mouse/keyboard clicks; has_touch is not enabled",
+    "observedScriptInput": "Playwright locator.click on public controls; no dedicated keyboard-only traversal scenario.",
+    "hasTouch": false,
+    "reportedMotionMode": "390x844 uses no-preference with one arrival DOM/PNG observation; other five viewports and special failure contexts use reduce",
+    "normalMotionViewport": [
+      390,
+      844
+    ],
+    "explicitArrivalObservations": 1,
+    "normalMotionVehicle": "s_water_tanker",
+    "movingCurrentTimeMs": 83.243999999989,
+    "afterCaptureCurrentTimeMs": 116.64399999998842,
+    "animationDurationMs": 550,
+    "arrivedRelativeLeft": 0.049965659340659344,
+    "arrivedRelativeBottom": 0.9300213675213675,
+    "motionFiles": [
+      "fire-390x844-arrival-moving.png",
+      "fire-390x844-arrival-on-road.png"
+    ],
+    "scope": "This one normal-motion arrival only; physical touch and the full motion catalog are not claimed"
+  },
+  "notRun": [
+    "physical device touch",
+    "audible speech listening",
+    "full catalog motion trajectories",
+    "child observation"
+  ],
+  "writes": "Only this evidence summary; no product, test, Git or AWCR writes."
+}

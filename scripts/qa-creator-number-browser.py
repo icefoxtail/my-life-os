@@ -11,6 +11,7 @@ import http.server
 import json
 import pathlib
 import threading
+import time
 import traceback
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
@@ -22,6 +23,49 @@ SOURCE_PATHS = ("index.html", "games/number-kingdom-3d.html", "js/engine/webgl-f
 VIEWPORTS = ((390, 844), (844, 390))
 WEBGL_ARGS = ["--enable-webgl", "--ignore-gpu-blocklist", "--use-angle=swiftshader",
               "--enable-unsafe-swiftshader"]
+
+# Observe the product's real transition/timer without changing either one.
+# The first computed-style read happens in the same iframe task as the last tap.
+TOAST_SAMPLE_JS = """
+function sampleToast(tapAtMs) {
+  const element = document.querySelector('#toast');
+  const opacity = Number(getComputedStyle(element).opacity);
+  const rect = element.getBoundingClientRect(), sampleAtMs = performance.now();
+  return {left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom,
+    width: rect.width, height: rect.height, viewportWidth: innerWidth,
+    viewportHeight: innerHeight, opacity, inlineOpacity: element.style.opacity,
+    text: element.textContent, tapAtMs, sampleAtMs, elapsedMs: sampleAtMs - tapAtMs};
+}
+"""
+TOAST_OBSERVER_JS = TOAST_SAMPLE_JS + """
+function observeToast(expectedText, tapAtMs) {
+  const initial = sampleToast(tapAtMs), minimumMs = 200, deadlineMs = 1000;
+  return new Promise(resolve => {
+    let frameId = 0, deadlineTimer = 0, firstFrame = null, samples = 0, finished = false;
+    function finish(outcome, box) {
+      if (finished) return;
+      finished = true;
+      cancelAnimationFrame(frameId);
+      clearTimeout(deadlineTimer);
+      resolve({outcome, expectedText, minimumMs, deadlineMs, initial, firstFrame, final: box, samples});
+    }
+    function inspectFrame() {
+      const box = sampleToast(tapAtMs);
+      samples++;
+      if (!firstFrame) firstFrame = box;
+      if (box.elapsedMs >= deadlineMs) return finish('deadline', box);
+      const visible = box.width > 0 && box.height > 0 && box.opacity > 0 &&
+        box.left >= -1 && box.right <= box.viewportWidth + 1 &&
+        box.top >= 0 && box.bottom <= box.viewportHeight + 1;
+      if (box.elapsedMs >= minimumMs && visible && box.text === expectedText) return finish('visible', box);
+      frameId = requestAnimationFrame(inspectFrame);
+    }
+    deadlineTimer = setTimeout(() => finish('deadline', sampleToast(tapAtMs)),
+      Math.max(0, deadlineMs - initial.elapsedMs));
+    frameId = requestAnimationFrame(inspectFrame);
+  });
+}
+"""
 
 
 class QuietServer(http.server.SimpleHTTPRequestHandler):
@@ -179,17 +223,25 @@ def place_neighbors(frame, friend_ids):
     }""", friend_ids)
 
 
-def check_toast_visible(frame):
-    box = frame.locator("#toast").evaluate("""element => {
-      const rect = element.getBoundingClientRect();
-      return {left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom,
-        width: rect.width, height: rect.height, viewportWidth: innerWidth,
-        viewportHeight: innerHeight, opacity: Number(getComputedStyle(element).opacity)};
-    }""")
-    assert box["width"] > 0 and box["height"] > 0 and box["opacity"] > 0, box
-    assert box["left"] >= -1 and box["right"] <= box["viewportWidth"] + 1, box
-    assert box["top"] >= 0 and box["bottom"] <= box["viewportHeight"] + 1, box
+def check_toast_visible(observation, expected_text):
+    box = observation["final"]
+    assert box["width"] > 0 and box["height"] > 0 and box["opacity"] > 0, observation
+    assert box["left"] >= -1 and box["right"] <= box["viewportWidth"] + 1, observation
+    assert box["top"] >= 0 and box["bottom"] <= box["viewportHeight"] + 1, observation
+    assert box["text"] == expected_text, observation
+    assert observation["outcome"] == "visible" and 200 <= box["elapsedMs"] < 1000, observation
     return box
+
+
+def capture_toast(page, frame, output, image, tap_at_ms):
+    sampler = "tapAtMs => {" + TOAST_SAMPLE_JS + "return sampleToast(tapAtMs); }"
+    before = frame.evaluate(sampler, tap_at_ms)
+    host_start = time.perf_counter()
+    page.screenshot(path=str(output / image))
+    host_duration_ms = (time.perf_counter() - host_start) * 1000
+    after = frame.evaluate(sampler, tap_at_ms)
+    return {"before": before, "after": after, "hostScreenshotDurationMs": host_duration_ms,
+            "scope": "Timing around the saved screenshot; the visibility assertion uses the in-frame observation above."}
 
 
 def comparison_case(page, frame, output, size, spec):
@@ -206,13 +258,18 @@ def comparison_case(page, frame, output, size, spec):
     else:
         assert a["n"] > b["n"] and a["height"] < b["height"], placement
     page.wait_for_timeout(350)
-    observed = frame.evaluate("""id => {
+    host_start = time.perf_counter()
+    observed = frame.evaluate("async id => {" + TOAST_OBSERVER_JS + """
       const d = NumberKingdomDebug, friend = d.getState().friends.find(item => item.id === id);
       d.handleFriendTap(friend);
       const first = document.querySelector('#toast').textContent;
+      const tapAtMs = performance.now();
       d.handleFriendTap(friend);
-      return {first, repeated: document.querySelector('#toast').textContent};
+      const repeated = document.querySelector('#toast').textContent;
+      const toastObservation = await observeToast(repeated, tapAtMs);
+      return {first, repeated, toastObservation};
     }""", ids[0])
+    observed["toastObservation"]["hostEvaluationDurationMs"] = (time.perf_counter() - host_start) * 1000
     message = observed["repeated"]
     assert "키" not in message and "커요" not in message, observed
     if spec["kind"] == "equal":
@@ -223,30 +280,34 @@ def comparison_case(page, frame, output, size, spec):
             assert text in message, observed
             if a["n"] >= 20:
                 assert text in observed["first"], observed
-    page.wait_for_timeout(200)
-    toast_box = check_toast_visible(frame)
+    toast_box = check_toast_visible(observed["toastObservation"], message)
     runtime = webgl_runtime(frame)
     image = f"number-{spec['name']}-{size}.png"
-    page.screenshot(path=str(output / image))
+    screenshot_timing = capture_toast(page, frame, output, image, toast_box["tapAtMs"])
     return {"driver": "existing debug API for world setup/taps; native pose-card clicks",
             "placement": placement, "observed": observed, "toastBox": toast_box,
-            "runtime": runtime, "screenshot": image}
+            "runtime": runtime, "screenshot": image, "screenshotTiming": screenshot_timing}
 
 
 def tap_count_case(page, frame, output, size):
     ids = empty_world_and_spawn(frame, [1])
     place_neighbors(frame, ids)
     page.wait_for_timeout(350)
-    result = frame.evaluate("""id => {
+    host_start = time.perf_counter()
+    result = frame.evaluate("async id => {" + TOAST_OBSERVER_JS + """
       const d = NumberKingdomDebug, friend = d.getState().friends.find(item => item.id === id);
       const steps = [];
+      let tapAtMs;
       for (let count = 1; count <= 10; count++) {
+        tapAtMs = performance.now();
         d.handleFriendTap(friend);
         steps.push({count, toast: document.querySelector('#toast').textContent,
           quantity: friend.n, cells: friend.cells.length, renderedUnitMeshes: friend.cubeMeshes.length});
       }
-      return {steps, totalFriends: d.getState().friends.length};
+      const toastObservation = await observeToast(steps[steps.length - 1].toast, tapAtMs);
+      return {steps, totalFriends: d.getState().friends.length, toastObservation};
     }""", ids[0])
+    result["toastObservation"]["hostEvaluationDurationMs"] = (time.perf_counter() - host_start) * 1000
     assert result["totalFriends"] == 1, result
     for step in result["steps"]:
         assert step["quantity"] == step["cells"] == step["renderedUnitMeshes"] == 1, step
@@ -255,11 +316,10 @@ def tap_count_case(page, frame, output, size):
             assert f"({step['count']}/10)" in step["toast"], step
             assert "개" not in step["toast"], step
     assert "열 번" in result["steps"][-1]["toast"], result
-    page.wait_for_timeout(200)
-    result["toastBox"] = check_toast_visible(frame)
+    result["toastBox"] = check_toast_visible(result["toastObservation"], result["steps"][-1]["toast"])
     result["runtime"] = webgl_runtime(frame)
     image = f"number-tap-count-ten-{size}.png"
-    page.screenshot(path=str(output / image))
+    result["screenshotTiming"] = capture_toast(page, frame, output, image, result["toastBox"]["tapAtMs"])
     result.update(driver="existing debug API invoking the actual tap handler", screenshot=image,
                   audio="NOT_RUN; this screen/state scenario disables game audio")
     return result
