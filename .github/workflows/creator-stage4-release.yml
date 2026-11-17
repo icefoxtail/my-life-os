@@ -1,0 +1,115 @@
+name: Creator stage 4 release
+
+on:
+  pull_request:
+    paths:
+      - 'js/games/construction-site.js'
+      - 'js/games/megaDispatch.js'
+      - 'js/vehicle-display.js'
+      - 'assets/vehicles/*manifest.json'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/test-creator-construction-stage4.cjs'
+      - 'scripts/test-creator-fire-stage4.cjs'
+      - 'scripts/qa-creator-construction-stage4-browser.py'
+      - 'scripts/qa-creator-fire-stage4-browser.py'
+      - '.github/workflows/creator-stage4-release.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/games/construction-site.js'
+      - 'js/games/megaDispatch.js'
+      - 'js/vehicle-display.js'
+      - 'assets/vehicles/*manifest.json'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/test-creator-construction-stage4.cjs'
+      - 'scripts/test-creator-fire-stage4.cjs'
+      - 'scripts/qa-creator-construction-stage4-browser.py'
+      - 'scripts/qa-creator-fire-stage4-browser.py'
+      - '.github/workflows/creator-stage4-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stage4-rules:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Project continuity, role fairness and lifecycle regression
+        run: |
+          node --check js/games/construction-site.js
+          node --check js/games/megaDispatch.js
+          node scripts/test-creator-construction-stage4.cjs
+          node scripts/test-creator-fire-stage4.cjs
+          node scripts/test-creator-vehicle-rules.cjs
+          node scripts/test-creator-help-modes.cjs
+          node scripts/qa-sw-independent.cjs
+          python3 -m py_compile scripts/qa-creator-construction-stage4-browser.py scripts/qa-creator-fire-stage4-browser.py
+
+  stage4-chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [construction, fire]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Install pinned Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
+      - name: Wait for the exact deployed stage 4 runtime
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib,time,urllib.request
+          paths=['index.html','sw.js','js/games/construction-site.js','js/games/megaDispatch.js','js/vehicle-display.js','js/play-settings.js','assets/vehicles/construction_manifest.json','assets/vehicles/fire_manifest.json','assets/vehicles/fire_special_manifest.json']
+          expected={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base='https://icefoxtail.github.io/my-life-os/'
+          out=pathlib.Path('qa-stage4-evidence');out.mkdir(exist_ok=True)
+          deadline=time.monotonic()+50*60
+          while time.monotonic()<deadline:
+              actual={}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base+path+'?stage4='+expected['sw.js'][:12],timeout=15) as response:
+                          actual[path]=hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__,flush=True)
+              if actual==expected:
+                  (out/'production-source.json').write_text(json.dumps({'baseUrl':base,'matches':True,'expected':expected,'actual':actual},indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Exact main runtime not served by Pages; stage 4 production play did not run.')
+          PY
+      - name: Play actual projects and incidents through public controls
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          STAGE4_GAME: ${{ matrix.game }}
+        run: |
+          args=()
+          if [ "$EVENT_NAME" = push ]; then
+            args=(--base-url https://icefoxtail.github.io/my-life-os/)
+          fi
+          python3 "scripts/qa-creator-$STAGE4_GAME-stage4-browser.py" "${args[@]}" --output "qa-stage4-evidence/$STAGE4_GAME"
+      - name: Preserve source-bound reports and actual screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: creator-stage4-${{ matrix.game }}-${{ github.run_id }}
+          path: qa-stage4-evidence/
+          if-no-files-found: error
+          retention-days: 14

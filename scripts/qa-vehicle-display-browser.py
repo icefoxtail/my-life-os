@@ -132,6 +132,9 @@ def enter(page, base, game):
         page.locator(f'.world-zone[onclick="travelToZone(\'{zone}\')"]').click()
         page.locator(f'.zone-game-card[onclick="{action}()"]',).click()
     page.locator(root).wait_for()
+    if name == "construction":
+        page.locator('[data-action="practice"]').click()
+        page.locator('.cs-choice').first.wait_for()
     if name == "fire":
         page.locator('[data-mode-size="4"]').click()
         page.locator('.md14-truck-btn').first.wait_for()

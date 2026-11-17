@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sihyeon-play-os-v1.12.1-small-screen';
+const CACHE_NAME = 'sihyeon-play-os-v1.13.0-creator-construction-fire';
 
 const ASSETS = [
   './js/games/neighborhood-story-model.js',

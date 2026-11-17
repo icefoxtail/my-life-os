@@ -197,6 +197,9 @@ def enter(page, base, game):
         # Existing internal entry only: the production menu has no coding card.
         page.evaluate("openCodingCarGame()")
     page.locator('.cs-root' if game == 'construction' else '.cc-root').wait_for()
+    if game == 'construction':
+        page.locator('.cs-root [data-action="practice"]').tap()
+        page.locator('.cs-choice').first.wait_for()
     page.wait_for_timeout(1500)
 
 
@@ -293,6 +296,9 @@ def home_and_reenter(page, game):
     else:
         page.evaluate('openCodingCarGame()')
     page.locator('.cs-root' if game == 'construction' else '.cc-root').wait_for()
+    if game == 'construction':
+        page.locator('.cs-root [data-action="practice"]').tap()
+        page.locator('.cs-choice').first.wait_for()
     page.wait_for_timeout(300)
     assert page.locator('.cs-success-panel,.cc-success-overlay').count() == 0
     tap_exact(page, '.game-back-floating')
@@ -304,6 +310,9 @@ def home_and_reenter(page, game):
     else:
         page.evaluate('openCodingCarGame()')
     page.locator('.cs-root' if game == 'construction' else '.cc-root').wait_for()
+    if game == 'construction':
+        page.locator('.cs-root [data-action="practice"]').tap()
+        page.locator('.cs-choice').first.wait_for()
     page.wait_for_timeout(250)
 
 
@@ -321,12 +330,15 @@ def construction_flow(page, capture, name):
         vehicle = next((v for v in ANSWERS[mission] if page.locator(f'.cs-choice[data-id="{v}"]').count()), None)
         assert vehicle, f'No displayed usable vehicle for {mission}'
         tap_exact(page, f'.cs-choice[data-id="{vehicle}"]')
+        page.locator('.cs-root [data-action="work"]').wait_for()
+        tap_exact(page, '.cs-root [data-action="work"]')
         page.locator('.cs-root.is-success').wait_for()
         page.wait_for_timeout(850)
         detail = page.evaluate(MEASURE, 'construction')
         stages.append(detail)
         if mission == 'pump':
             capture(name + '-result', detail)
+        tap_exact(page, '.cs-root [data-action="next-work"]')
         if round_number < 3:
             page.wait_for_function("r=>document.querySelector('.cs-pill')?.textContent.includes(r+'번')", arg=round_number + 1, timeout=10000)
         else:
@@ -490,6 +502,16 @@ def main():
                     page.on('response', remember_source)
                     page.on('pageerror', lambda error, n=name: report['pageErrors'].append({'screen': n, 'error': str(error)}))
                     def capture(label, detail):
+                        # Keep the original geometry checks. Wait for real image
+                        # pixels so a transition/loading frame is not mistaken
+                        # for a vehicle-visibility observation.
+                        detail['capturedImages'] = page.evaluate("""async () => {
+                          const images = [...document.querySelectorAll('.cs-root img,.cc-root img')].filter(img => !img.hidden && img.getAttribute('src'));
+                          await Promise.all(images.map(img => img.decode()));
+                          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                          return images.map(img => ({src:img.getAttribute('src'),complete:img.complete,width:img.naturalWidth,height:img.naturalHeight}));
+                        }""")
+                        assert all(img['complete'] and img['width'] > 0 and img['height'] > 0 for img in detail['capturedImages'])
                         page.screenshot(path=str(out / (label + '.png')))
                         (out / (label + '.json')).write_text(json.dumps(detail, ensure_ascii=False, indent=2))
                     def record(label, fn):

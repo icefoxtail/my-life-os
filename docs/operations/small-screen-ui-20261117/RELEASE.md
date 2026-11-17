@@ -19,6 +19,6 @@
 
 운영 pump 초기 PNG는 차량 그림이 표시되기 전 순간을 담았다. 같은 run의 후속 결과 PNG에서는 선택 차량 3대와 작업 차량이 실제로 표시된다. 초기 프레임의 차량 가시성을 PASS로 확대하지 않으며, 두 프레임의 장면 경계·44px 버튼·터치 판정은 모두 통과했다. 원본 PNG를 그대로 보존한다.
 
-현재 후보 필수 workflow 6개는 모두 성공했고 운영 Pages·Small screen UI·Vehicle display·Creator stage 3·Creator upgrade·Playground checks도 성공했다. 동일 tree의 Phase 2 push 회귀는 후속 수집 중이며 아직 성공으로 기록하지 않는다. 원래 REPORT.md의 승인 대기는 당시 기록이며 현재 상태는 이 문서를 따른다.
+후보 필수 workflow 6개와 운영 Pages·Small screen UI·Vehicle display·Creator stage 3·Creator upgrade·Playground checks·Phase 2 browser release가 모두 성공했다. 원래 REPORT.md의 승인 대기는 당시 기록이며 현재 상태는 이 문서를 따른다.
 
 로컬 Chromium은 OS socket 권한 제한으로 실행되지 않았다. 실제 Chromium 화면 검증은 정확한 PR head 및 병합 판본의 GitHub Actions에서 수행한다. 물리 기기 터치·실제 음성 청취는 미수행이다. 브라우저 검사는 서비스워커를 차단하므로 기존 설치 앱의 오프라인 캐시 전환을 실측한 것으로 보고하지 않는다.
