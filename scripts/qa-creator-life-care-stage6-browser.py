@@ -133,7 +133,9 @@ def open_game(page, base, action):
     }''')
     page.locator('.world-zone[onclick="travelToZone(\'game\')"]').click()
     page.locator(f'.zone-game-card[onclick="{action}()"]').click()
-    return settle_game_entrance(page)
+    entrance = settle_game_entrance(page)
+    entrance['parentBack'] = hit_control(page, page.locator('.game-back-floating'))
+    return entrance
 
 
 def life_case(page, base, output, size):

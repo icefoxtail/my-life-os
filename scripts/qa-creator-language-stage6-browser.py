@@ -12,6 +12,7 @@ import hashlib
 import http.server
 import json
 from pathlib import Path
+import re
 import threading
 import traceback
 from urllib.parse import urljoin, urlsplit, urlunsplit
@@ -65,9 +66,34 @@ def check_control(locator, viewport):
 def voice_count(page):
     return page.evaluate('window.__stage6Voices.filter(x => x.kind !== "stop").length')
 
+def settle_game_entrance(page):
+    # A loaded iframe can become ready before its parent shell finishes the
+    # 350 ms zoneEnter transform. Observe the real parent animation; keep all
+    # native controls and the exact 44 px target requirement unchanged.
+    snapshot = '''el => {
+      const style=getComputedStyle(el);
+      return {at:performance.now(),transform:style.transform,opacity:style.opacity,
+        animations:el.getAnimations().map(a=>({name:a.animationName,state:a.playState,
+          pending:a.pending,currentTime:a.currentTime}))};
+    }'''
+    screen = page.locator('.game-play-screen')
+    before = screen.evaluate(snapshot)
+    page.wait_for_function('''() => {
+      const screen=document.querySelector('.game-play-screen');
+      if(!screen) return false;
+      const style=getComputedStyle(screen);
+      const identity=style.transform==='none' || new DOMMatrixReadOnly(style.transform).isIdentity;
+      return identity && style.opacity==='1' && screen.getAnimations().every(a=>
+        !a.pending && (a.playState==='finished' || a.playState==='idle'));
+    }''', timeout=2000)
+    after = screen.evaluate(snapshot)
+    return {'before': before, 'after': after,
+            'waitedMs': round(after['at'] - before['at'], 2), 'timeoutMs': 2000}
+
 def open_abc(page):
     page.locator('.zone-game-card[onclick="openAbcPhonicsGame()"]').click()
     expect(page.locator('#ltMainCard')).to_be_visible()
+    return settle_game_entrance(page)
 
 def transform(page, word):
     page.locator('#ltMainCard').click()
@@ -89,11 +115,10 @@ def native_case(page, base, output, width, height, responses):
       }
     }''')
     page.locator('button.world-zone[onclick="travelToZone(\'letters\')"]').click()
-    open_abc(page)
-    page.wait_for_timeout(500)
+    abc_entrance = open_abc(page)
     controls = {selector: check_control(page.locator(selector), page.viewport_size)
-                for selector in ('#ltMainCard', '#ltSound', '[data-mode="abc"]', '[data-mode="hangul"]', '#ltReplayPrompt', '#ltFind', '#ltHint')}
-    back = page.locator('.game-back-floating').bounding_box()
+                for selector in ('.game-back-floating', '#ltMainCard', '#ltSound', '[data-mode="abc"]', '[data-mode="hangul"]', '#ltReplayPrompt', '#ltFind', '#ltHint')}
+    back = controls['.game-back-floating']
     for selector in ('[data-mode="abc"]', '[data-mode="hangul"]'):
         box = controls[selector]
         assert not (box['x'] < back['x'] + back['width'] and box['x'] + box['width'] > back['x']
@@ -181,10 +206,18 @@ def native_case(page, base, output, width, height, responses):
     expect(element).to_be_visible()
     frame = element.element_handle().content_frame()
     frame.wait_for_function('Boolean(window.OpenWorldDebug && OpenWorldDebug.state.blocks.length)', timeout=45000)
+    hangul_entrance = settle_game_entrance(page)
     iframe_box = element.bounding_box()
     frame_viewport = {'width': iframe_box['width'], 'height': iframe_box['height']}
+    expect(frame.locator('#homeBtn')).to_be_hidden()
+    expect(frame.locator('#homeBtn')).to_be_disabled()
+    parent_back = check_control(page.locator('.game-back-floating'), page.viewport_size)
     hangul_controls = {selector: check_control(frame.locator(selector), page.viewport_size)
-                       for selector in ('#homeBtn', '#undoBtn', '#clearBtn', '#replayBtn', '#soundBtn')}
+                       for selector in ('#undoBtn', '#clearBtn', '#replayBtn', '#soundBtn')}
+    for selector, box in hangul_controls.items():
+        assert page.evaluate('''({x,y}) => document.elementFromPoint(x,y) ===
+          document.querySelector('#hangulPlaymatFrame')''',
+          {'x': box['x'] + box['width'] / 2, 'y': box['y'] + box['height'] / 2}), (selector, box)
     frame.get_by_role('button', name='ㄱ, 자음 이름 기역', exact=True).click()
     assert frame.evaluate('OpenWorldDebug.state.lastSpeech') == '자음 이름은 기역.'
     count = voice_count(page)
@@ -212,20 +245,23 @@ def native_case(page, base, output, width, height, responses):
       return {word:t.word,bounds:t.mesh.userData.pictureBounds,textureHeight:picture.material.map.image.height,
         textureFont:picture.material.map.image.getContext('2d').font};
     }''')
-    assert card['word'] == '도토리' and '72px' in card['textureFont'], card
+    assert card['word'] == '도토리', card
     assert card['bounds']['width'] > 0 and card['bounds']['height'] > 0, card
-    if width == 844:
-        assert card['bounds']['height'] * 72 / card['textureHeight'] >= 16, card
+    font_match = re.search(r'(\d+(?:\.\d+)?)px', card['textureFont'])
+    assert font_match, card
+    card['projectedFontPx'] = card['bounds']['height'] * float(font_match.group(1)) / card['textureHeight']
+    assert card['projectedFontPx'] >= 16, card
     assert frame.evaluate('OpenWorldDebug.state.lastSpeech') == '디귿, 오. 합치면 도. 도토리!'
     page.screenshot(path=str(output / f'hangul-card-{size}.png'))
-    frame.locator('#homeBtn').click()
+    page.locator('.game-back-floating').click()
     expect(page.locator('.zone-game-card[onclick="openHangulPlaymat3DGame()"]')).to_be_visible()
     sources = evidence(responses, base)
     return {'controls': controls, 'completionControls': completion, 'hangulControls': hangul_controls,
             'iframeViewport': frame_viewport, 'meaningCard': card, 'sourceResponses': sources,
+            'entrances': {'abc': abc_entrance, 'hangulParent': hangul_entrance}, 'hangulParentBack': parent_back,
             'nativeFlows': ['object-replay-preserves-word', 'explicit-next-and-completion', 'wrong-right-picture-match',
                             'rotate-preserves-match', 'mute-and-replay', 'mode-switch-cancels-reveal',
-                            'hangul-name-combination', 'semantic-acorn', '3D-name-replay-mute', '3D-public-home'],
+                            'hangul-name-combination', 'semantic-acorn', '3D-name-replay-mute', '3D-public-parent-back'],
             'voiceRequests': page.evaluate('window.__stage6Voices')}
 
 def main():

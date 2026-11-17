@@ -51,6 +51,7 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 }
 #top>*{pointer-events:auto}
 #leftTop{display:flex;align-items:center;gap:8px}
+#homeBtn[hidden]{display:none}
 #brand{
   padding:8px 14px;
   display:flex;
@@ -896,7 +897,7 @@ function buildWordPictureToy(meta){
   ctx.fillStyle='#fffdf5';ctx.strokeStyle='#a7c4e1';ctx.lineWidth=8;
   ctx.beginPath();ctx.roundRect(5,5,502,438,38);ctx.fill();ctx.stroke();
   ctx.save();ctx.translate(56,30);drawWordIllustration(ctx,meta);ctx.restore();
-  ctx.fillStyle='#223454';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 72px sans-serif';ctx.fillText(meta.word,256,393,458);
+  ctx.fillStyle='#223454';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 84px sans-serif';ctx.fillText(meta.word,256,392,458);
   const texture=new THREE.CanvasTexture(picture);
   if('encoding' in texture) texture.encoding=THREE.sRGBEncoding;
   const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true}));
@@ -1963,6 +1964,16 @@ function toast(msg){
 }
 
 function mountUI(){
+  // Embedded play keeps the shell's back button, including the 2D fallback.
+  // Standalone and cross-origin frames retain their own working home button.
+  try{
+    const parentBack=window.parent!==window && window.parent.document.querySelector('.game-back-floating');
+    if(parentBack && parentBack.getClientRects().length){
+      $('homeBtn').hidden=true;
+      $('homeBtn').disabled=true;
+      $('leftTop').style.paddingLeft='54px';
+    }
+  }catch(e){}
   const choRow = $('choRow');
   for(const c of CHO_LIST){
     const btn = document.createElement('button');
