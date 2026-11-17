@@ -366,6 +366,9 @@ def main():
             for width, height in VIEWPORTS:
                 def viewport_check(width=width, height=height):
                     page.set_viewport_size({'width':width, 'height':height})
+                    # Each viewport owns a complete replay, so one earlier failed
+                    # delta case cannot leave the remaining cases on a one-step run.
+                    action(page, 'replay'); finish(page, 30)
                     page.wait_for_timeout(250)
                     before = snap(page)
                     assert before['quantity'] == 30 and before['actualCount'] == 30 and before['complete'], before

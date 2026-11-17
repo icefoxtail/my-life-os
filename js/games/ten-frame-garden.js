@@ -332,9 +332,11 @@
     revealActiveFlower();
   }
   function revealActiveFlower() {
-    if (!view.container || !view.state?.active) return;
+    if (!view.container || !view.state) return;
+    const ordinal=view.state.active||(view.state.phase==='complete'?view.lastOrdinal:0);
+    if(!ordinal)return;
     const board = view.container.querySelector('.tfg-frames');
-    const slot = board?.querySelector('[data-slot="' + view.state.active + '"]');
+    const slot = board?.querySelector('[data-slot="' + ordinal + '"]');
     if (!board || !slot) return;
     const frame = slot.closest('.tfg-frame');
     const frameRect = frame?.getBoundingClientRect();

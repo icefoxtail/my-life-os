@@ -48,7 +48,7 @@
 .pa-play-controls>button,.pa-play-controls>.pa-readings{flex:0 0 auto;white-space:nowrap}
 .pa-play-controls button{min-height:44px;font-size:13px;padding:4px 8px}
 .pa-play-controls .pa-readings{margin-right:auto}
-.pa-next-choices{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.pa-next-choices{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}
 .pa-next-choices button{font-size:12px;flex:1 1 100px;padding:5px 7px}
 .pa-pool.is-kept{background:#edf2df;border-color:#8da975;border-style:solid}
 .pa-comparisons{margin-top:12px;padding:8px;border:2px solid #aec8a8;border-radius:13px;background:#edf4e5}

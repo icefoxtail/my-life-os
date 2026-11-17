@@ -191,9 +191,9 @@
     const all = M().items(s.total, 'share');
     return '<section class="pa-pool"><header><strong class="pa-pool-title">나눌 그림</strong><span class="pa-pool-count">' + s.total + '</span></header>' +
       '<div class="pa-pool-items">' + all.map(object => objectMarkup(object, 'share', 'share')).join('') + '</div>' +
-      '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p><div class="pa-next-choices" hidden></div>' +
+      '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p>' +
       '<div class="pa-empty-groups-summary" hidden aria-label="' + s.groups + '곳 모두 0개"><strong>빈 자리</strong><div class="pa-empty-group-list" style="--pa-group-count:' + s.groups + '">' +
-      model.groups.map((_, index) => '<span class="pa-empty-group"><small>' + (index + 1) + '번</small><b>0</b></span>').join('') + '</div></div></section>' +
+      model.groups.map((_, index) => '<span class="pa-empty-group"><small>' + (index + 1) + '번</small><b>0</b></span>').join('') + '</div></div></section><div class="pa-next-choices" hidden></div>' +
       '<div class="pa-groups" data-groups="' + s.groups + '">' + model.groups.map((_, index) =>
         '<section class="pa-group" data-group="' + index + '" aria-label="' + (index + 1) + '번 자리"><header><span class="pa-group-badge" aria-hidden="true">' + ['🐰','🐻','🐱','🐶','🐸','🐼'][index] + '</span><strong>' + (index + 1) + '번 자리</strong><span class="pa-group-count" data-group-count="' + index + '">0</span></header>' +
         '<div class="pa-group-items" data-group-index="' + index + '"></div></section>').join('') + '</div><section class="pa-comparisons" hidden aria-label="같은 수를 다르게 나눈 모습"></section>';

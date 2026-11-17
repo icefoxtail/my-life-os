@@ -107,6 +107,19 @@ function languageFixture(){
   const result=await pending;assert.equal(result.status,'completed');assert.equal(result.runId,before.runId);assert.equal(result.completedSteps,2);assert.equal(result.audioSucceeded,2);assert.equal(result.audioFailed,0);
   return {mode,runId:result.runId,visualSteps:seen,utterances:v.calls.map(c=>c.text),status:result.status};
  });
+ await check('garden completion keeps the final quantity visible after a one-flower boundary change',()=>{
+  const source=fs.readFileSync(path.join(__dirname,'../js/games/ten-frame-garden.js'),'utf8');
+  const start=source.indexOf('  function revealActiveFlower('),end=source.indexOf('\n  function ',start+1);assert(start>=0&&end>start);
+  const calls=[],wanted=[];
+  const frame={getBoundingClientRect:()=>({left:0,right:100,top:0,bottom:300,width:100,height:300})};
+  const slot={closest:()=>frame,getBoundingClientRect:()=>({left:10,right:50,top:200,bottom:230,width:40,height:30})};
+  const board={clientWidth:100,clientHeight:100,clientLeft:0,clientTop:0,getBoundingClientRect:()=>({left:0,top:0}),querySelector(selector){wanted.push(selector);return slot;},scrollBy:delta=>calls.push(delta)};
+  const view={container:{querySelector:()=>board},state:{phase:'complete',active:0},lastOrdinal:30};const ctx={view};
+  vm.createContext(ctx);vm.runInContext(source.slice(start,end)+'\nrevealActiveFlower();',ctx);
+  assert.deepEqual(wanted,['[data-slot="30"]']);assert.equal(calls[0].top,132);assert.equal(calls[0].left,0);
+  calls.length=0;view.state.phase='paused';ctx.revealActiveFlower();assert.equal(calls.length,0,'an empty paused pointer must not jump to the end');
+  return {finalOrdinal:30,scrollDelta:132,pausedPointerPreserved:true,fixture:'real visibility function with measured board/slot rectangles'};
+ });
  await check('31 totals in three strategies count exact disjoint groups and preserve total',()=>{
   let source=fs.readFileSync(path.join(__dirname,'../js/games/ten-frame-garden.js'),'utf8');
   const marker='  window.SihyeonGames = window.SihyeonGames || {};';assert(source.includes(marker));
