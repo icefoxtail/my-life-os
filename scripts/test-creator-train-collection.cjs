@@ -94,7 +94,9 @@ test('public save/load handlers keep old work immutable, editing and restart sta
   const f = fixture(); f.click('free'); f.fill(['cat', 'rabbit', 'cat', 'rabbit', 'cat', 'rabbit']); f.save();
   const first = f.snapshot().collection.works[0]; assert.equal(first.state.history.length, 0);
   f.click('save-work'); assert.equal(f.snapshot().collection.works.length, 1); assert.match(f.container.innerHTML, /이미 작품함/);
-  f.click('close-modal'); f.fill(['cat', 'cat', 'rabbit', 'cat', 'cat', 'rabbit']); f.save();
+  f.click('close-modal'); f.fill(['cat', 'cat', 'rabbit', 'cat', 'cat', 'rabbit']); f.click('collection');
+  assert.doesNotMatch(f.container.innerHTML, /이미 작품함/, 'Opening another train must clear the previous duplicate notice');
+  f.click('save-work');
   assert.equal(f.snapshot().collection.works.length, 2);
   assert.match(f.container.innerHTML, /data-comparison="first"[\s\S]*data-period="2"/);
   assert.match(f.container.innerHTML, /data-comparison="current"[\s\S]*data-period="3"/);

@@ -53,6 +53,44 @@ function languageFixture(){
   const next=seq.start([{id:'b',text:'둘'}],{muted:true,paused:true,onStep:s=>seen.push(s.id)});seq.resume();assert.equal((await next).status,'completed');assert.deepEqual(seen,['b']);
   return {cancelled:cancelled.status,visualSteps:seen};
  });
+ await check('number chooser/settings close stays paused while hidden and duplicate visibility events preserve resume intent',async()=>{
+  const source=fs.readFileSync(path.join(__dirname,'../js/games/number-picture.js'),'utf8');
+  const body=name=>{const first=source.indexOf('  function '+name+'('),end=source.indexOf('\n  function ',first+1);assert(first>=0&&end>first,name);return source.slice(first,end);};
+  const cases=[];
+  for(const modal of ['chooser','settings']){
+   const seen=[],seq=API.create({fallbackMs:2});let modalOpen=false,observer;
+   const document={hidden:false,body:{},getElementById:()=>modalOpen?{}:null};
+   const view={container:{contains:()=>true,querySelector:()=>null},picturePicker:false,userPaused:false,resumeAfterModal:false,resumeAfterVisibility:false,sequence:seq,options:{openSettings(){modalOpen=true;}}};
+   const context={view,document,repaint(){},MutationObserver:class{constructor(fn){observer=fn;}observe(){}disconnect(){}}};
+   vm.createContext(context);vm.runInContext(['resumeWhenVisible','onVisibility','openSettings','closePictures','onClick'].map(body).join('\n'),context);
+   const pending=seq.start([{id:'a'},{id:'b'}],{muted:true,delayMs:0,onStep:s=>seen.push(s.id)});const id=seq.getSnapshot().runId;
+   if(modal==='chooser')context.onClick({target:{closest:()=>({dataset:{qpAction:'choosePicture'}})}});else context.openSettings();
+   document.hidden=true;context.onVisibility();context.onVisibility();
+   if(modal==='chooser')context.closePictures();else{modalOpen=false;observer();}
+   await sleep(5);assert.equal(seq.getSnapshot().status,'paused');assert.deepEqual(seen,['a']);
+   document.hidden=false;context.onVisibility();const result=await pending;
+   assert.equal(result.status,'completed');assert.equal(result.runId,id);assert.deepEqual(seen,['a','b']);
+   cases.push({modal,hiddenClose:'paused',visibleResume:result.status,sameRun:true});
+  }
+  return {cases,fixture:'actual lifecycle functions and real sequencer; presentation redraw is stubbed'};
+ });
+ await check('garden modal close and duplicate visibility events preserve the same suspended run',async()=>{
+  const source=fs.readFileSync(path.join(__dirname,'../js/games/ten-frame-garden.js'),'utf8');
+  const body=name=>{const first=source.indexOf('  function '+name+'('),end=source.indexOf('\n  function ',first+1);assert(first>=0&&end>first,name);return source.slice(first,end);};
+  const cases=[];
+  for(const modal of ['numbers','settings']){
+   const seen=[],seq=API.create({fallbackMs:2});const document={hidden:false,addEventListener(){}};
+   const view={container:{querySelector:()=>null,addEventListener(){}},state:{phase:'counting',active:1},userPaused:false,resumeAfterModal:false,resumeAfterVisibility:false,sequencer:seq,modal:null};
+   const context={view,document,window:{addEventListener(){}},draw(){},paintProgress(){},paintPlayback(){},save(){},onClick(){},onKey(){},onSettings(){}};
+   vm.createContext(context);vm.runInContext(['stopRun','showModal','closeModal','resumeVisible','bind'].map(body).join('\n'),context);context.bind();
+   const pending=seq.start([{id:'a'},{id:'b'}],{muted:true,delayMs:0,onStep:s=>seen.push(s.id)});const id=seq.getSnapshot().runId;
+   context.showModal(modal);document.hidden=true;view.handlers.visibility();view.handlers.visibility();context.closeModal();
+   await sleep(5);assert.equal(seq.getSnapshot().status,'paused');assert.deepEqual(seen,['a']);
+   document.hidden=false;view.handlers.visibility();const result=await pending;assert.equal(result.status,'completed');assert.equal(result.runId,id);assert.deepEqual(seen,['a','b']);
+   cases.push({modal,hiddenClose:'paused',visibleResume:result.status,sameRun:true});
+  }
+  return {cases,fixture:'actual lifecycle functions and real sequencer; presentation redraw is stubbed'};
+ });
  for(const mode of ['running','paused','paused-without-settings-event'])await check('followLanguage preserves the '+mode+' run and retries only its current utterance',async()=>{
   const f=languageFixture(),v=voice(),seen=[],seq=f.api.create({voice:v,timeoutMs:1000,fallbackMs:1});
   const pending=seq.start([{id:'a',text:'하나',enText:'one'},{id:'b',text:'둘',enText:'two'}],{followLanguage:true,delayMs:0,onStep:s=>seen.push(s.id)});

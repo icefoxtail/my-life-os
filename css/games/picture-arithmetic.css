@@ -58,3 +58,18 @@
 .pa-comparison-card>strong{font-size:14px;font-weight:400}.pa-comparison-card>span,.pa-comparison-card>small{font-size:11px;line-height:1.4}
 .pa-mini-groups{display:flex;flex-wrap:wrap;gap:3px}.pa-mini-groups>span{display:flex;flex-direction:column;align-items:center;min-width:27px;gap:2px;padding:3px;background:#e5eddc;border-radius:6px}.pa-mini-groups i{font-style:normal;font-size:15px}.pa-mini-groups b{font-weight:400;font-size:15px}
 @media(max-width:379px){.pa-comparison-list{grid-template-columns:1fr}}
+@media(max-width:379px){
+  .pa-play-controls{gap:4px}
+  .pa-play-controls button{font-size:12px;padding:4px}
+}
+/* Put mode choices over the number panel on short landscape screens, so the
+   pictures retain a useful viewport while every control keeps a 44px target. */
+@media(max-height:599px) and (min-width:580px){
+  .pa-root{grid-template-rows:44px minmax(0,1fr) auto}
+  .pa-stage{grid-column:1;grid-row:2}
+  .pa-footer{grid-column:1;grid-row:3}
+  .pa-modes{grid-column:2;grid-row:1;z-index:1;margin:0 6px;gap:5px}
+  .pa-modes button{font-size:12px;padding:3px 1px;white-space:nowrap}
+  .pa-modes button span{font-size:16px}
+  .pa-picker{grid-column:2;grid-row:1/-1;padding-top:54px}
+}

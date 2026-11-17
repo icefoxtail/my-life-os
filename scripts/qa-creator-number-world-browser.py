@@ -122,6 +122,33 @@ def settle(frame):
       const w=NumberKingdomDebug.getState();
       return !w.drag && !w.train.departing && w.friends.every(f=>!f.walk && Math.abs(f.vy)<.02 && f.anim.arcTimer<=0);
     }""", timeout=15000)
+    # Physics can be parked while the real camera is still easing to its saved
+    # preset. Observe several animation frames before comparing final views.
+    frame.evaluate('delete window.__numberWorldCameraProbe')
+    frame.wait_for_function("""() => {
+      const w=NumberKingdomDebug.getState(), c=NumberKingdomDebug.getCamera();
+      const now=[...c.position.toArray(),...c.quaternion.toArray(),c.fov,c.aspect];
+      const previous=window.__numberWorldCameraProbe;
+      const stable=previous && now.every((v,i)=>Number.isFinite(v)&&Math.abs(v-previous.values[i])<.0001);
+      const count=stable ? previous.count+1 : 0;
+      window.__numberWorldCameraProbe={values:now,count};
+      return count>=6 && Math.abs(w.cameraX-w.goalX)<.001;
+    }""", polling='raf', timeout=15000)
+
+
+def camera_snapshot(frame):
+    return frame.evaluate("""() => {
+      const c=NumberKingdomDebug.getCamera();
+      return {position:c.position.toArray(),quaternion:c.quaternion.toArray(),fov:c.fov,aspect:c.aspect};
+    }""")
+
+
+def assert_camera_restored(frame, expected):
+    actual=camera_snapshot(frame)
+    for key in ('position','quaternion'):
+        assert all(abs(a-b)<.01 for a,b in zip(actual[key],expected[key])), {'field':key,'saved':expected,'restored':actual}
+    assert abs(actual['fov']-expected['fov'])<.001 and abs(actual['aspect']-expected['aspect'])<.001, (expected,actual)
+    return actual
 
 
 def open_settings(frame):
@@ -180,19 +207,19 @@ def build_save(page, frame, out, size):
     settle(frame)
     open_settings(frame)
     frame.locator('#camBtn').click()
+    settle(frame)
     mode = save_button(frame)
     assert mode == 'local'
     before = capture(frame)
     assert before['zone'] == 'town' and before['friends'][-1]['n'] == 8 and before['friends'][-1]['pose'] == 'bridge', before
     assert before['selected'] == 'f'+str(len(before['friends'])-1), before
-    frame.wait_for_timeout(300)
     bounds=layout(frame)
     image=f'number-world-saved-{size}.png'
     page.screenshot(path=str(out/image))
-    return {'snapshot':before,'saveMode':mode,'layout':bounds,'screenshot':image,'driver':'native zone/tray/shape/camera/save controls'}
+    return {'snapshot':before,'camera':camera_snapshot(frame),'saveMode':mode,'layout':bounds,'screenshot':image,'driver':'native zone/tray/shape/camera/save controls'}
 
 
-def restore_check(page, base, before, out, size):
+def restore_check(page, base, before, saved_camera, out, size):
     page.reload(wait_until='domcontentloaded')
     frame=enter(page,base,navigate=False)
     settle(frame)
@@ -200,13 +227,16 @@ def restore_check(page, base, before, out, size):
     assert restored == before, {'before':before,'after':restored}
     assert frame.evaluate('NumberKingdomDebug.getSaveStatus().restored')
     reload_meshes=assert_rendered_world(frame,before)
+    reload_camera=assert_camera_restored(frame,saved_camera)
     frame=close_and_reenter(page,base)
     settle(frame)
     assert capture(frame) == before
     reentry_meshes=assert_rendered_world(frame,before)
+    reentry_camera=assert_camera_restored(frame,saved_camera)
     image=f'number-world-restored-{size}.png'
     page.screenshot(path=str(out/image))
-    return {'restored':restored,'afterReloadAndReentry':True,'reloadMeshes':reload_meshes,'reentryMeshes':reentry_meshes,'screenshot':image}
+    return {'restored':restored,'afterReloadAndReentry':True,'reloadMeshes':reload_meshes,'reentryMeshes':reentry_meshes,
+      'reloadCamera':reload_camera,'reentryCamera':reentry_camera,'screenshot':image}
 
 
 def reset_undo(page, frame, before):
@@ -230,7 +260,7 @@ def reset_undo(page, frame, before):
 
 def rotate(page, frame, before, out, size, width, height):
     page.set_viewport_size({'width':height,'height':width})
-    frame.wait_for_timeout(300)
+    settle(frame)
     assert capture(frame) == before
     bounds=layout(frame)
     image=f'number-world-rotated-{size}.png'
@@ -345,7 +375,7 @@ def main():
                     built=common.record(report,f'build-save-layout {size}','NATIVE',lambda:build_save(page,frame,out,size))
                     if built['status']!='PASS':continue
                     before=built['detail']['snapshot']
-                    restored=common.record(report,f'reload-reentry {size}','NATIVE',lambda:restore_check(page,base,before,out,size))
+                    restored=common.record(report,f'reload-reentry {size}','NATIVE',lambda:restore_check(page,base,before,built['detail']['camera'],out,size))
                     if restored['status']!='PASS':continue
                     frame=current_frame(page)
                     common.record(report,f'reset-cancel-undo {size}','NATIVE',lambda:reset_undo(page,frame,before))

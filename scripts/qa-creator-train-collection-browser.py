@@ -37,6 +37,9 @@ def snap(page):
 
 
 def enter(page, base):
+    # Tag each real navigation so both the initial and restored document need
+    # their own complete set of response-byte evidence.
+    page._train_source_document = getattr(page, "_train_source_document", 0) + 1
     page.goto(base + "index.html", wait_until="load")
     page.evaluate("""() => {
       const v = window.SihyeonVoice || {};
@@ -101,6 +104,7 @@ def compare_case(page, base, out, width, height):
     tap(page, "edit")
     fill(page, second)
     tap(page, "collection")
+    expect(page.locator(".pt-collection-notice")).to_have_text("여섯 작품까지 보관할 수 있어요.")
     expect(page.locator('[data-comparison="first"] .pt-work-pattern')).to_have_attribute("data-period", "2")
     expect(page.locator('[data-comparison="current"] .pt-work-pattern')).to_have_attribute("data-period", "4")
     expect(page.locator('[data-comparison="first"] [data-full-group="true"]')).to_have_count(4)
@@ -141,7 +145,9 @@ def compare_case(page, base, out, width, height):
     tap(page, "collection")
     tap(page, "remove-work", f'[data-work="{current_id}"]')
     assert len(snap(page)["collection"]["works"]) == 2
-    tap(page, "collection")  # cancel deletion
+    # The underlying gallery opener has the same action; exercise the visible
+    # confirmation dialog's cancellation button, not the obscured background.
+    page.get_by_role("dialog").locator('[data-action="collection"]').tap()
     assert len(snap(page)["collection"]["works"]) == 2
     tap(page, "remove-work", f'[data-work="{current_id}"]')
     tap(page, "confirm-remove-work")
@@ -266,7 +272,9 @@ def main():
             for name, width, height, run in cases:
                 context = browser.new_context(viewport={"width": width, "height": height}, service_workers="block", has_touch=True, reduced_motion="reduce")
                 page = context.new_page()
-                context.new_cdp_session(page).send("Network.setCacheDisabled", {"cacheDisabled": True})
+                source_session = context.new_cdp_session(page)
+                source_session.send("Network.enable")
+                source_session.send("Network.setCacheDisabled", {"cacheDisabled": True})
                 page.on("pageerror", lambda error, name=name: report["pageErrors"].append({"case": name, "error": str(error)}))
                 loaded = []
 
@@ -274,16 +282,23 @@ def main():
                     rel = urllib.parse.urlparse(response.url).path.removeprefix(urllib.parse.urlparse(base).path)
                     if rel not in expected:
                         return
+                    record = {"path": rel, "url": response.url, "status": response.status,
+                              "document": page._train_source_document}
                     try:
+                        response.finished()
                         actual = hashlib.sha256(response.body()).hexdigest()
-                        loaded.append({"path": rel, "url": response.url, "status": response.status, "sha256": actual, "matchesCheckout": actual == expected[rel]})
+                        loaded.append({**record, "sha256": actual, "matchesCheckout": actual == expected[rel]})
                     except Exception as error:
-                        loaded.append({"path": rel, "error": str(error)})
+                        loaded.append({**record, "error": str(error)})
 
                 page.on("response", capture)
                 try:
                     detail = run(page)
-                    assert set(x["path"] for x in loaded) == set(FILES), loaded
+                    expected_documents = 2 if name.startswith("compare-") else 1
+                    assert page._train_source_document == expected_documents
+                    for document_number in range(1, expected_documents + 1):
+                        document_sources = [x for x in loaded if x["document"] == document_number]
+                        assert sorted(x["path"] for x in document_sources) == sorted(FILES), document_sources
                     assert all(x.get("matchesCheckout") and x.get("status") == 200 for x in loaded), loaded
                     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), "page overflow"
                     report["checks"].append({"name": name, "status": "PASS", "detail": detail, "loadedSources": loaded})

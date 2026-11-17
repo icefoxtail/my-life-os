@@ -338,7 +338,7 @@
     if (action === 'repeat') { speak(view.state.phase === 'BUILDING' ? instruction() : resultText()); return; }
     if (action === 'mute') { view.muted = !view.muted; stopVoice(); save(); button.innerHTML = icon(view.muted ? 'mute' : 'sound'); button.setAttribute('aria-label', view.muted ? '소리 켜기' : '음소거'); button.setAttribute('aria-pressed', String(view.muted)); if (!view.muted) speak(instruction()); return; }
     if (action === 'scroll-left' || action === 'scroll-right') { const frame = view.container.querySelector('.pt-train-scroll'); frame?.scrollBy({ left: frame.clientWidth * (action === 'scroll-left' ? -.7 : .7), behavior: 'smooth' }); return; }
-    if (action === 'collection') { cancelDrag(); stopVoice(); view.modal = 'collection'; view.pendingWork = null; draw(); return; }
+    if (action === 'collection') { cancelDrag(); stopVoice(); view.modal = 'collection'; view.pendingWork = null; view.collectionNotice = ''; draw(); return; }
     if (action === 'save-work') { saveWork(); return; }
     if (action === 'open-work' || action === 'remove-work') {
       if (!view.collection.works.some(work => work.id === button.dataset.work)) return;

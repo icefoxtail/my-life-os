@@ -71,6 +71,29 @@ def number_pause(page,base,out):
     assert done['sequence']['totalSteps']==15-paused['counted']+1,done
     return {'paused':paused,'mutedSameRun':muted,'changedWhilePaused':changed,'done':done,'retainedPictures':15}
 
+
+def number_modal_visibility(page,base,out):
+    N.enter(page,base);N.select_number(page,15);wait_number(page,15)
+    page.evaluate("""() => {window.__creatorDocHidden=false;Object.defineProperty(document,'hidden',{configurable:true,get:()=>window.__creatorDocHidden});}""")
+    checks=[]
+    for modal in ['chooser','settings']:
+        page.evaluate('__numberPictureSpeech.delayMs=600');N.action(page,'replay')
+        page.wait_for_function('SihyeonGames.numberPicture.getSnapshot().counted>=2')
+        N.action(page,'choosePicture' if modal=='chooser' else 'settings')
+        before=N.snap(page)
+        page.evaluate("""() => {window.__creatorDocHidden=true;document.dispatchEvent(new Event('visibilitychange'));document.dispatchEvent(new Event('visibilitychange'));}""")
+        if modal=='chooser':N.action(page,'closePictures')
+        else:page.get_by_role('button',name='설정 닫기',exact=True).click()
+        page.wait_for_timeout(250)
+        held=N.snap(page)
+        assert held['sequence']['status']=='paused' and held['counted']==before['counted'],held
+        assert held['sequence']['runId']==before['sequence']['runId'],held
+        page.evaluate("""() => {__numberPictureSpeech.delayMs=25;window.__creatorDocHidden=false;document.dispatchEvent(new Event('visibilitychange'));}""")
+        done=wait_number(page,15);assert done['sequence']['runId']==before['sequence']['runId'],done
+        checks.append({'modal':modal,'hidden':held,'visibleDone':done})
+    return {'cases':checks,'fixture':'document visibility events only; native modal controls and real sequencer'}
+
+
 def garden_change(page,base,out,size):
     G.enter(page,base+'index.html');G.button(page,'mode','free').click();G.choose_number(page,15);G.complete(page,15)
     assert G.snapshot(page)['state']['mode']=='free'
@@ -112,6 +135,24 @@ def garden_pause(page,base,out):
     page.evaluate('__gardenProbe.hold=false');G.button(page,'pause').click();G.complete(page,15)
     return {'before':before,'after':after,'completed':G.snapshot(page)}
 
+
+def garden_modal_visibility(page,base,out):
+    G.enter(page,base+'index.html');G.choose_number(page,15);G.complete(page,15)
+    page.evaluate("""() => {window.__creatorDocHidden=false;Object.defineProperty(document,'hidden',{configurable:true,get:()=>window.__creatorDocHidden});}""")
+    cases=[]
+    for modal in ['number-picker','settings']:
+        page.evaluate('__gardenProbe.hold=true');G.button(page,'replay').click()
+        G.button(page,modal).click();before=G.snapshot(page)
+        page.evaluate("""() => {window.__creatorDocHidden=true;document.dispatchEvent(new Event('visibilitychange'));document.dispatchEvent(new Event('visibilitychange'));}""")
+        G.button(page,'close-modal').first.click();page.wait_for_timeout(250);held=G.snapshot(page)
+        assert held['sequence']['status']=='paused' and held['state']['active']==before['state']['active'],held
+        assert held['sequence']['runId']==before['sequence']['runId'],held
+        page.evaluate("""() => {__gardenProbe.hold=false;window.__creatorDocHidden=false;document.dispatchEvent(new Event('visibilitychange'));}""")
+        G.complete(page,15);done=G.snapshot(page);assert done['sequence']['runId']==before['sequence']['runId'],done
+        cases.append({'modal':modal,'hidden':held,'visibleDone':done})
+    return {'cases':cases,'fixture':'document visibility events only; native modal controls and real sequencer'}
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--base-url');parser.add_argument('--output',default='qa-stage5-number-continuity');args=parser.parse_args()
     out=pathlib.Path(args.output).resolve();out.mkdir(parents=True,exist_ok=True)
@@ -131,7 +172,7 @@ def main():
             cases=[]
             for size in SIZES:
                 cases.extend([(f'number-{size[0]}x{size[1]}',number_change,N.SPEECH_FIXTURE,size),(f'garden-{size[0]}x{size[1]}',garden_change,G.SPEECH_FIXTURE,size)])
-            cases.extend([('number-pause-mute-style',number_pause,N.SPEECH_FIXTURE,(390,844)),('garden-pause-mute-style',garden_pause,G.SPEECH_FIXTURE,(390,844))])
+            cases.extend([('number-pause-mute-style',number_pause,N.SPEECH_FIXTURE,(390,844)),('garden-pause-mute-style',garden_pause,G.SPEECH_FIXTURE,(390,844)),('number-hidden-modal-close',number_modal_visibility,N.SPEECH_FIXTURE,(390,844)),('garden-hidden-modal-close',garden_modal_visibility,G.SPEECH_FIXTURE,(390,844))])
             for name,fn,fixture,size in cases:
                 context=browser.new_context(viewport={'width':size[0],'height':size[1]},service_workers='block')
                 context.add_init_script(script=fixture);page=context.new_page();page.set_default_timeout(15000)
@@ -148,7 +189,7 @@ def main():
     except Exception as e:report['checks'].append({'name':'harness','status':'FAIL','error':str(e),'trace':traceback.format_exc()})
     finally:
         if server:server.shutdown();server.server_close()
-        report['status']='PASS' if len(report['checks'])==14 and not report['pageErrors'] and all(r['status']=='PASS' for r in report['checks']) else 'FAIL'
+        report['status']='PASS' if len(report['checks'])==16 and not report['pageErrors'] and all(r['status']=='PASS' for r in report['checks']) else 'FAIL'
         (out/'number-continuity-browser.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     return 0 if report['status']=='PASS' else 1
 if __name__=='__main__':raise SystemExit(main())

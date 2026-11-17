@@ -198,8 +198,9 @@
     playSteps(steps,run);
   }
   function playSteps(steps,run){
+    if(document.hidden&&!view.userPaused)view.resumeAfterVisibility=true;
     view.sequencer.start(steps, {
-      muted: view.muted, paused:view.userPaused||!!view.modal, delayMs: 100,onState:paintPlayback,
+      muted: view.muted, paused:view.userPaused||document.hidden||!!view.modal, delayMs: 100,onState:paintPlayback,
       onStep(step) {
         if (!view.container || view.runId !== run) return;
         if (step.kind === 'count' || step.kind === 'group' || step.kind === 'change') {
@@ -355,7 +356,7 @@
   }
   function closeModal() {
     const returnAction = view.modal === 'settings' ? 'settings' : 'number-picker';
-    view.modal = null;draw();if(view.resumeAfterModal&&!view.userPaused){view.state=Object.assign({},view.state,{phase:'counting'});view.sequencer.resume();paintProgress();}
+    view.modal = null;draw();view.resumeAfterVisibility=view.resumeAfterVisibility||view.resumeAfterModal;resumeVisible();
     view.container?.querySelector('[data-action="' + returnAction + '"]')?.focus?.({ preventScroll: true });
   }
   function onClick(event) {
@@ -373,7 +374,7 @@
     if (a === 'reading') { change({ type: 'READING', value: b.dataset.value }); return; }
     if (a === 'split-less' || a === 'split-more') { change({ type: 'SPLIT', value: view.state.split + (a === 'split-more' ? 1 : -1) }); return; }
     if (a === 'replay') { view.userPaused=false;startAuto(); return; }
-    if(a==='pause'){view.userPaused=!view.sequencer.isPaused();if(view.userPaused)stopRun('pause');else{view.state=Object.assign({},view.state,{phase:'counting'});view.sequencer.resume();paintProgress();}paintPlayback();return;}
+    if(a==='pause'){view.userPaused=!view.sequencer.isPaused();if(view.userPaused)stopRun('pause');else{view.resumeAfterVisibility=true;resumeVisible();}paintPlayback();return;}
     if(a==='group'){const modes=['ones','fives','tens'];view.groupMode=modes[(modes.indexOf(view.groupMode)+1)%3];startAuto();return;}
     if (a === 'mute') { view.muted = !view.muted;view.sequencer.setMuted(view.muted);save();draw();return; }
     if (a === 'undo' && view.undo.length) { stopRun(); view.state = createState(view.undo.pop()); startAuto(); return; }
@@ -381,14 +382,14 @@
       const n=Number(b.dataset.value);if(![4,5,6,7].includes(n))return;
       view.modal=null;view.age=n;view.options.ageMode=n;
       window.SihyeonPlaySettings?.setAge?.(n);view.age=currentAge();draw();
-      if(view.resumeAfterModal&&!view.userPaused)view.sequencer.resume();return;
+      view.resumeAfterVisibility=view.resumeAfterVisibility||view.resumeAfterModal;resumeVisible();return;
     }
     if (a === 'language') {
       if(!['ko','en'].includes(b.dataset.value))return;
       const wasPaused=view.userPaused;view.modal=null;
       window.SihyeonPlaySettings?.setLanguage?.(b.dataset.value);
       if(view.language!==language()){view.language=language();startAuto(false,true);}else draw();
-      if(!wasPaused)view.sequencer.resume();
+      if(!wasPaused){view.resumeAfterVisibility=true;resumeVisible();}
     }
   }
   function onKey(event) {
@@ -408,7 +409,7 @@
     if(changed){startAuto(false,true);if(view.modal)view.sequencer.pause();}else draw();
   }
   function resumeVisible() {
-    if (view.container && !document.hidden && !view.modal && !view.userPaused && view.resumeAfterVisibility && view.sequencer?.isPaused?.()){view.state=Object.assign({},view.state,{phase:'counting'});view.sequencer.resume();paintProgress();}
+    if (view.container && !document.hidden && !view.modal && !view.userPaused && view.resumeAfterVisibility && view.sequencer?.isPaused?.()){view.state=Object.assign({},view.state,{phase:'counting'});view.sequencer.resume();view.resumeAfterVisibility=false;view.resumeAfterModal=false;paintProgress();}
   }
   function bind() {
     const h = view.handlers = {
@@ -416,7 +417,7 @@
       blur: () => { view.resumeAfterVisibility=view.sequencer?.isRunning?.()||view.resumeAfterVisibility;stopRun('pause'); save(); paintProgress(); },
       focus: resumeVisible,
       visibility: () => { if (document.hidden) { view.resumeAfterVisibility=view.sequencer?.isRunning?.()||view.resumeAfterVisibility;stopRun('pause'); save(); } else resumeVisible(); },
-      pagehide: () => { stopRun('pause'); save(); }
+      pagehide: () => { view.resumeAfterVisibility=view.sequencer?.isRunning?.()||view.resumeAfterVisibility;stopRun('pause'); save(); }
     };
     view.container.addEventListener('click', h.click);
     view.container.addEventListener('keydown', h.key);
@@ -437,7 +438,7 @@
     }
     if (view.previousBack?.element) view.previousBack.element.hidden = view.previousBack.hidden;
     view.container = null; view.state = null; view.sequencer = null; view.handlers = null; view.previousBack = null;
-    view.modal = null; view.undo = []; view.lastWord = ''; view.lastOrdinal = 0;view.userPaused=false;view.groupMode='ones';view.groupStart=0;view.groupEnd=0;
+    view.modal = null; view.undo = []; view.lastWord = ''; view.lastOrdinal = 0;view.userPaused=false;view.resumeAfterVisibility=false;view.resumeAfterModal=false;view.groupMode='ones';view.groupStart=0;view.groupEnd=0;
   }
   function render(container, options) {
     destroy(); if (!container) return;

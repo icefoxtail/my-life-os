@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   const KEY='numberPicture', SAVE_KEY='sihyeon-number-picture-v1';
-  const view={container:null,options:{},objects:[],objectId:'korean_police_car',custom:null,n:9,style:'native',layout:'rows',range:0,category:'vehicle',muted:false,counted:0,complete:false,sequence:null,handlers:null,audioFailed:false,picturePicker:false,settingsObserver:null,boardObserver:null,scrollFrame:0,userPaused:false,resumeAfterModal:false,renderObjectId:null,currentLanguage:'ko'};
+  const view={container:null,options:{},objects:[],objectId:'korean_police_car',custom:null,n:9,style:'native',layout:'rows',range:0,category:'vehicle',muted:false,counted:0,complete:false,sequence:null,handlers:null,audioFailed:false,picturePicker:false,settingsObserver:null,boardObserver:null,scrollFrame:0,userPaused:false,resumeAfterModal:false,renderObjectId:null,currentLanguage:'ko',resumeAfterVisibility:false};
   let memory=null;
   const M=()=>window.SihyeonQuantityPlayModel;
   const C=()=>window.SihyeonPlayObjects;
@@ -96,7 +96,8 @@
     root.querySelector('.qp-progress').textContent=view.n===0?'0'+object().unitKo:'그림이 '+view.n+object().unitKo+' 있어요';
     const steps=M().items(view.n,'count').filter(item=>item.ordinal>=firstOrdinal).map(item=>({id:item.id,kind:'count',ordinal:item.ordinal,nativeText:M().countWord(item.ordinal,'native','ko'),sinoText:M().countWord(item.ordinal,'sino','ko'),enText:M().countWord(item.ordinal,'sino','en'),readingStyle:view.style}));
     steps.push(summaryStep());
-    view.sequence.start(steps,{muted:view.muted,paused:view.userPaused||view.picturePicker||!!document.getElementById('playSettingsDialog'),delayMs:170,onState:updatePlayback,onStep:updateProgress,onError:()=>{
+    if(document.hidden&&!view.userPaused)view.resumeAfterVisibility=true;
+    view.sequence.start(steps,{muted:view.muted,paused:view.userPaused||document.hidden||view.picturePicker||!!document.getElementById('playSettingsDialog'),delayMs:170,onState:updatePlayback,onStep:updateProgress,onError:()=>{
       if(!view.container)return;view.audioFailed=true;
       const note=view.container.querySelector('.qp-sound-note');if(note){note.hidden=false;note.textContent='그림과 숫자로 함께 세어요';}
     },onEnd:()=>{
@@ -174,17 +175,29 @@
     if(view.audioFailed){currentRoot.querySelector('.qp-sound-note').hidden=false;currentRoot.querySelector('.qp-sound-note').textContent='그림과 숫자로 함께 세어요';}
     observeBoard();updatePlayback();
   }
+  function resumeWhenVisible(){
+    if(!view.container||view.userPaused||document.hidden||view.picturePicker||document.getElementById('playSettingsDialog'))return;
+    if(view.resumeAfterModal||view.resumeAfterVisibility){
+      view.sequence?.resume();view.resumeAfterModal=false;view.resumeAfterVisibility=false;
+    }
+  }
+  function onVisibility(){
+    if(document.hidden){
+      view.resumeAfterVisibility=!!(view.sequence?.isRunning()||view.resumeAfterVisibility||view.resumeAfterModal);
+      view.sequence?.pause();
+    }else resumeWhenVisible();
+  }
   function openSettings(){
     view.resumeAfterModal=view.sequence.isRunning();view.sequence.pause();
     const open=view.options.openSettings||window.SihyeonPlaySettings?.openSettings;
-    if(typeof open!=='function'){if(view.resumeAfterModal)view.sequence.resume();return;}
+    if(typeof open!=='function'){resumeWhenVisible();return;}
     open();
     view.settingsObserver?.disconnect();
-    if(!document.getElementById('playSettingsDialog')){if(view.resumeAfterModal)view.sequence.resume();return;}
+    if(!document.getElementById('playSettingsDialog')){resumeWhenVisible();return;}
     view.settingsObserver=new MutationObserver(function(){
       if(!document.getElementById('playSettingsDialog')){
         view.settingsObserver?.disconnect();view.settingsObserver=null;
-        if(view.container){repaint();if(view.resumeAfterModal&&!view.userPaused)view.sequence.resume();}
+        if(view.container){repaint();resumeWhenVisible();}
       }
     });
     view.settingsObserver.observe(document.body,{childList:true});
@@ -201,7 +214,7 @@
   }
   function closePictures(){
     view.picturePicker=false;repaint();
-    if(view.resumeAfterModal&&!view.userPaused)view.sequence.resume();
+    resumeWhenVisible();
   }
   function changeNumber(n,incremental){
     if(!M().isQuantity(n))return;if(n===view.n){if(!incremental)run();return;}
@@ -213,7 +226,8 @@
     if(delta>0)fresh?.classList.add('is-new');
     const step={id:'change-'+n,kind:'change',delta,ordinal:n,text:(delta>0?'하나 더, ':'하나 덜, ')+M().countWord(n,view.style,'ko'),enText:(delta>0?'One more, ':'One fewer, ')+M().countWord(n,view.style,'en')};
     updateProgress(step);
-    view.sequence.start([step],{muted:view.muted,paused:view.userPaused,onStep:updateProgress,onState:updatePlayback,onEnd:()=>{
+    if(document.hidden&&!view.userPaused)view.resumeAfterVisibility=true;
+    view.sequence.start([step],{muted:view.muted,paused:view.userPaused||document.hidden,onStep:updateProgress,onState:updatePlayback,onEnd:()=>{
       if(!view.container)return;view.complete=true;view.counted=n;
       view.container.querySelector('.qp-root')?.classList.add('qp-finished');
       fresh?.classList.remove('is-new');view.container.querySelectorAll('.qp-item.is-current').forEach(el=>el.classList.remove('is-current'));updatePlayback();
@@ -238,7 +252,7 @@
     if(action==='style'){view.style=value;save();repaint();run(view.counted+1);return;}
     if(action==='layout'){const a=['rows','tens','scatter'];view.layout=a[(a.indexOf(view.layout)+1)%3];save();repaint();view.container.querySelector('.qp-progress').textContent='자리를 바꿔도 '+view.n+object().unitKo;return;}
     if(action==='mute'){view.muted=!view.muted;view.sequence.setMuted(view.muted);save();repaint();return;}
-    if(action==='pause'){view.userPaused=!view.sequence.isPaused();if(view.userPaused)view.sequence.pause();else view.sequence.resume();updatePlayback();return;}
+    if(action==='pause'){view.userPaused=!view.sequence.isPaused();if(view.userPaused)view.sequence.pause();else{view.resumeAfterVisibility=true;resumeWhenVisible();}updatePlayback();return;}
     if(action==='replay'){view.userPaused=false;run();}
   }
   function render(container,options){
@@ -252,8 +266,8 @@
     }
     view.range=view.n<=10?0:view.n<=20?1:2;
     view.sequence=window.SihyeonQuantitySequencer.create();
-    view.picturePicker=false;view.userPaused=false;view.currentLanguage=language();
-    view.handlers={click:onClick,key:onKey,resize:scheduleBoardFocus,settings:()=>{if(!view.container)return;const changed=language()!==view.currentLanguage;view.currentLanguage=language();repaint();if(changed){run(view.counted+1);if(document.getElementById('playSettingsDialog'))view.sequence.pause();}},visibility:()=>{if(document.hidden){view.resumeAfterVisibility=view.sequence?.isRunning();view.sequence?.pause();}else if(view.resumeAfterVisibility&&view.container&&!view.userPaused&&!document.getElementById('playSettingsDialog')&&!view.picturePicker)view.sequence?.resume();}};
+    view.picturePicker=false;view.userPaused=false;view.resumeAfterModal=false;view.resumeAfterVisibility=false;view.currentLanguage=language();
+    view.handlers={click:onClick,key:onKey,resize:scheduleBoardFocus,settings:()=>{if(!view.container)return;const changed=language()!==view.currentLanguage;view.currentLanguage=language();repaint();if(changed){run(view.counted+1);if(document.getElementById('playSettingsDialog'))view.sequence.pause();}},visibility:onVisibility};
     container.addEventListener('click',view.handlers.click);container.addEventListener('keydown',view.handlers.key);window.addEventListener('sihyeon-settings-change',view.handlers.settings);document.addEventListener('visibilitychange',view.handlers.visibility);
     window.addEventListener('resize',view.handlers.resize);window.addEventListener('orientationchange',view.handlers.resize);
     repaint();run();

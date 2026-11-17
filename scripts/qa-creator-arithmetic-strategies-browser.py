@@ -16,6 +16,16 @@ def completed(page):
     page.wait_for_function('SihyeonGames.pictureArithmetic.getSnapshot().complete', timeout=35000)
     return qa.snap(page)
 
+def visible_play_controls(page):
+    controls=page.evaluate('''()=>[...document.querySelectorAll('.pa-footer button,.pa-modes button')].map(e=>{
+      const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+      return {action:e.dataset.paAction,x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom,hit:e===hit||e.contains(hit)};
+    })''')
+    for c in controls:
+        assert c['width']>=43.5 and c['height']>=43.5,c
+        assert c['x']>=0 and c['y']>=0 and c['right']<=page.viewport_size['width']+1 and c['bottom']<=page.viewport_size['height']+1 and c['hit'],c
+    return controls
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--base-url');p.add_argument('--output',default='qa-stage5-arithmetic');args=p.parse_args()
     out=pathlib.Path(args.output).resolve();out.mkdir(parents=True,exist_ok=True)
@@ -52,7 +62,7 @@ def main():
                     texts=qa.requests(page,0,on['sequence']['runId'])
                     assert [e['text'] for e in texts[1:-1]]==['열','열하나','열둘','열셋','열넷','열다섯'],texts
                     assert page.locator('.pa-add-items .pa-item').count()==15
-                    geometry=qa.layout(page);capture(page,'count-on-'+name)
+                    geometry=qa.layout(page);geometry['playControls']=visible_play_controls(page);capture(page,'count-on-'+name)
                     page.evaluate('__arithmeticSpeech.delayMs=500')
                     qa.action(page,'replay');page.wait_for_function('SihyeonGames.pictureArithmetic.getSnapshot().counted>=10')
                     qa.action(page,'pause');paused=qa.snap(page);mark=qa.mark(page)
@@ -74,7 +84,7 @@ def main():
                     assert page.evaluate('[...document.querySelectorAll(".pa-item")].every(n=>__stage5ShareNodes.includes(n))')
                     qa.action(page,'compareShares');assert page.locator('.pa-comparison-card').count()==2
                     rows=second['shareHistory'];assert [(r['groups'],r['each'],r['remainder']) for r in rows]==[(3,2,1),(4,1,3)]
-                    geometry2=qa.layout(page);capture(page,'compare-sharing-'+name)
+                    geometry2=qa.layout(page);geometry2['playControls']=visible_play_controls(page);capture(page,'compare-sharing-'+name)
                     qa.action(page,'keepRemainder');assert qa.snap(page)['remainderKept']
                     for path in FILES: assert loaded.get(path)==report['sources'][path],(path,loaded.get(path),report['sources'][path])
                     qa.action(page,'home');assert not qa.snap(page)['active'];page.locator(qa.CARD).click();restored=completed(page)
