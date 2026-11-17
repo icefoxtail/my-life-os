@@ -1,0 +1,14 @@
+{
+  "runId": 43905541853,
+  "artifactId": 14245641878,
+  "artifactZipSha256": "0fe7826a65ecbe044a8e7dc870b061c6528c7ee16b055582b40f35688204de2f",
+  "candidate": "255408ebbaed10d4cdf27a1c9d7c5900274f0e3b",
+  "automated": {
+    "status": "FAIL",
+    "passed": 11,
+    "total": 12
+  },
+  "openCase": "coding-1024x768-touch-flow",
+  "failure": "synthesizeScrollGesture did not move the panel; GO remained partly outside its scroll viewport. Product vs driver cause unresolved in this run.",
+  "scope": "Five coding sizes passed; tablet slot containment passed but touch reachability failed. Native touch follow-up is required."
+}

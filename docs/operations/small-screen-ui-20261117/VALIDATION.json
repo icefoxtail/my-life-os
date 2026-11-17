@@ -1,0 +1,292 @@
+{
+  "state": "AWAITING_USER_MERGE_APPROVAL",
+  "branch": "fix/small-screen-clipping-20261117",
+  "baselineCommit": "23fd7f9af6e28034d1a6a3062e293742b3d66cb7",
+  "latestMainChecked": "c3839fc34b94f6b6bf47b0c86a1c8bce187acb89",
+  "testedCandidateCommit": "b29bd80dbbe61bc9e9038969831cbde5658a4699",
+  "productCssFinalizedAt": "255408ebbaed10d4cdf27a1c9d7c5900274f0e3b",
+  "productScope": [
+    {
+      "path": "js/games/construction-site.js",
+      "sha256": "ac660b713ca9932b68e9dd305045246cdc6b91b4c9b92cd9c9c56c7460b402e7",
+      "cssOutsideIdenticalToBaseline": true,
+      "addedLines": 21,
+      "removedLines": 5
+    },
+    {
+      "path": "js/games/coding-car.js",
+      "sha256": "bc7c186adc009ba13f839cc0efb6289ee2b8aa9f583b7bf5cde18c518080d222",
+      "cssOutsideIdenticalToBaseline": true,
+      "addedLines": 20,
+      "removedLines": 5
+    }
+  ],
+  "nonCssProductChanges": [],
+  "protectedPathsUnchangedSinceBaseline": [
+    "index.html",
+    "sw.js",
+    "assets",
+    "js/vehicle-display.js",
+    "js/engine/pixi-runtime.js",
+    "js/games-pixi"
+  ],
+  "latestMainChanges": [
+    "docs/operations/creator-upgrade-20261116/PROGRESS.md",
+    "docs/operations/creator-upgrade-20261116/RELEASE_EVIDENCE.json",
+    "docs/operations/creator-upgrade-20261116/STAGE2.md"
+  ],
+  "mainMerged": false,
+  "productionDeployed": false,
+  "pullRequestCreated": false,
+  "additionalVerification": {
+    "status": "PASS_SCOPED",
+    "uniquePassed": 24,
+    "uniqueTotal": 24,
+    "adoption": [
+      {
+        "runId": 43903458052,
+        "commit": "a857c31a130e9bd8ba41ab658a34a140813a91b9",
+        "reportSha256": "e6041d2914be8b0fc72cf1f22244a122d161223834fabaa75c2e09d8d9b9373c",
+        "acceptedRows": 12,
+        "sourceHashKeysMatchedToFinal": [
+          "index.html",
+          "sw.js",
+          "js/vehicle-display.js",
+          "assets/vehicles/display_bounds.json",
+          "js/games/construction-site.js"
+        ],
+        "reportWholeStatus": "PASS"
+      },
+      {
+        "runId": 43905541853,
+        "commit": "255408ebbaed10d4cdf27a1c9d7c5900274f0e3b",
+        "reportSha256": "5cc9885e336d04f384b6784ccd308538bcb62ee5754e59fc7bf537922ada74bf",
+        "acceptedRows": 10,
+        "sourceHashKeysMatchedToFinal": [
+          "index.html",
+          "sw.js",
+          "js/vehicle-display.js",
+          "assets/vehicles/display_bounds.json",
+          "js/games/construction-site.js",
+          "js/games/coding-car.js"
+        ],
+        "reportWholeStatus": "FAIL"
+      },
+      {
+        "runId": 43907162447,
+        "commit": "b29bd80dbbe61bc9e9038969831cbde5658a4699",
+        "reportSha256": "55bc769b25cb416efe2936cfce3e679bde59d472a96feffba69fe72ca9699b98",
+        "acceptedRows": 2,
+        "sourceHashKeysMatchedToFinal": [
+          "index.html",
+          "sw.js",
+          "js/vehicle-display.js",
+          "assets/vehicles/display_bounds.json",
+          "js/games/construction-site.js",
+          "js/games/coding-car.js"
+        ],
+        "reportWholeStatus": "PASS"
+      }
+    ],
+    "rows": [
+      {
+        "name": "construction-390x844-layout",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-390x844-touch-flow",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-844x390-layout",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-844x390-touch-flow",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-640x360-layout",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-640x360-touch-flow",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-360x640-layout",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-360x640-touch-flow",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-768x1024-layout",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-768x1024-touch-flow",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-1024x768-layout",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "construction-1024x768-touch-flow",
+        "status": "PASS",
+        "runId": 43903458052,
+        "report": "evidence/43903458052/after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-390x844-layout",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-390x844-touch-flow",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-844x390-layout",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-844x390-touch-flow",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-640x360-layout",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-640x360-touch-flow",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-360x640-layout",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-360x640-touch-flow",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-768x1024-layout",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-768x1024-touch-flow",
+        "status": "PASS",
+        "runId": 43905541853,
+        "report": "evidence/43905541853/coding-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-1024x768-layout",
+        "status": "PASS",
+        "runId": 43907162447,
+        "report": "evidence/43907162447/tablet-after/small-screen-ui-results.json"
+      },
+      {
+        "name": "coding-1024x768-touch-flow",
+        "status": "PASS",
+        "runId": 43907162447,
+        "report": "evidence/43907162447/tablet-after/small-screen-ui-results.json"
+      }
+    ],
+    "pageErrors": 0,
+    "independentVisualReview": "PASS_SCOPED"
+  },
+  "tabletTouchEvidence": [
+    {
+      "difficulty": "easy",
+      "scrollStart": 0,
+      "scrollEnd": 29,
+      "maximum": 29,
+      "trustedTouchObserved": true,
+      "driver": "Input.dispatchTouchEvent"
+    },
+    {
+      "difficulty": "easy",
+      "scrollStart": 0,
+      "scrollEnd": 29,
+      "maximum": 29,
+      "trustedTouchObserved": true,
+      "driver": "Input.dispatchTouchEvent"
+    },
+    {
+      "difficulty": "challenge",
+      "scrollStart": 0,
+      "scrollEnd": 170,
+      "maximum": 170,
+      "trustedTouchObserved": true,
+      "driver": "Input.dispatchTouchEvent"
+    },
+    {
+      "difficulty": "challenge",
+      "scrollStart": 0,
+      "scrollEnd": 170,
+      "maximum": 170,
+      "trustedTouchObserved": true,
+      "driver": "Input.dispatchTouchEvent"
+    }
+  ],
+  "runnerSourceHashes": {
+    "scripts/qa-small-screen-ui-browser.py": "576ecab1f6d1126d6e61eb959f0b6a105c96dc9e9d983675b06a675dd612ab0d",
+    "scripts/qa-p1-voice-browser.py": "c0b7edd4b88c0809817eef744e8b5c9e1ab766db5a449d3b31ebcefc2a53b2b1"
+  },
+  "reusedPriorEvidence": {
+    "vehicle": "38/38 at run43869275111",
+    "pixi": "7/7 at run43869274835",
+    "rerun": false,
+    "qualification": "Prior completed production evidence reused for unchanged assets/display helper/Pixi; not a new full-suite PASS on current main."
+  },
+  "limitations": [
+    "Chromium 143.0.7499.4 with Playwright 1.57.0 touch emulation",
+    "Physical mobile/tablet and iOS Safari NOT_RUN",
+    "Audio completion simulated; real speaker NOT_RUN",
+    "Service workers blocked; production cache update NOT_RUN",
+    "Coding entered through existing internal function; no public menu entry was added",
+    "No claim of zero overlap for all decorative/temporary animations"
+  ]
+}

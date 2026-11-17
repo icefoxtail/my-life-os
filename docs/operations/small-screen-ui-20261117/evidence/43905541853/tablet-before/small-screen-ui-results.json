@@ -1,0 +1,1280 @@
+{
+  "mode": "tablet-baseline",
+  "gameFilter": null,
+  "gitSha": "a857c31a130e9bd8ba41ab658a34a140813a91b9",
+  "sourceHashesBefore": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "291507c4cddca1b5b21ac89609cc148b9b5e64473850aed7640fd4c8781d797e",
+    "js/games/construction-site.js": "ac660b713ca9932b68e9dd305045246cdc6b91b4c9b92cd9c9c56c7460b402e7",
+    "js/games/coding-car.js": "387a44b247a040e371743d86cd536c9ceb1b4fed5ce542f0829f7ad1af4d3b62",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a"
+  },
+  "checks": [
+    {
+      "name": "coding-1024x768-easy-layout",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "easy",
+            "rect": {
+              "left": 31,
+              "top": 186.828125,
+              "right": 238.75,
+              "bottom": 254.828125,
+              "width": 207.75,
+              "height": 68
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "challenge",
+            "rect": {
+              "left": 31,
+              "top": 266.828125,
+              "right": 238.75,
+              "bottom": 334.828125,
+              "width": 207.75,
+              "height": 68
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "ccCar",
+            "rect": {
+              "left": 562.40625,
+              "top": 116.515625,
+              "right": 704.234375,
+              "bottom": 294.828125,
+              "width": 141.828125,
+              "height": 178.3125
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "up",
+            "rect": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 863.640625,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "down",
+            "rect": {
+              "left": 873.640625,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "left",
+            "rect": {
+              "left": 744.28125,
+              "top": 335.515625,
+              "right": 863.640625,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "right",
+            "rect": {
+              "left": 873.640625,
+              "top": 335.515625,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "undo",
+            "rect": {
+              "left": 744.28125,
+              "top": 509.671875,
+              "right": 993,
+              "bottom": 578.78125,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "clear",
+            "rect": {
+              "left": 744.28125,
+              "top": 588.78125,
+              "right": 993,
+              "bottom": 657.890625,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "ccGoBtn",
+            "rect": {
+              "left": 744.28125,
+              "top": 667.890625,
+              "right": 993,
+              "bottom": 737,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": true,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "놀이터로",
+            "rect": {
+              "left": 8,
+              "top": 8,
+              "right": 64,
+              "bottom": 64,
+              "width": 56,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          }
+        ],
+        "issues": [
+          {
+            "kind": "slot-outside-group",
+            "index": 3,
+            "rect": {
+              "left": 744.28125,
+              "top": 189.21875,
+              "right": 864.140625,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 3,
+            "rect": {
+              "left": 744.28125,
+              "top": 189.21875,
+              "right": 864.140625,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          },
+          {
+            "kind": "slot-outside-group",
+            "index": 4,
+            "rect": {
+              "left": 873.140625,
+              "top": 189.21875,
+              "right": 993,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 4,
+            "rect": {
+              "left": 873.140625,
+              "top": 189.21875,
+              "right": 993,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          }
+        ],
+        "page": {
+          "width": 1024,
+          "height": 768,
+          "x": 0,
+          "y": 0
+        },
+        "panel": {
+          "rect": {
+            "left": 725.28125,
+            "top": 10,
+            "right": 1012,
+            "bottom": 758,
+            "width": 286.71875,
+            "height": 748
+          },
+          "scrollTop": 0,
+          "scrollHeight": 738,
+          "clientHeight": 738,
+          "overflow": "auto",
+          "touchAction": "auto",
+          "rootTouchAction": "pan-y",
+          "alignContent": "safe center"
+        },
+        "codeSlots": {
+          "difficulty": "easy",
+          "expected": 4,
+          "group": {
+            "left": 744.28125,
+            "top": 118.78125,
+            "right": 993,
+            "bottom": 221.359375,
+            "width": 248.71875,
+            "height": 102.578125
+          },
+          "groupContent": {
+            "left": 744.28125,
+            "top": 118.78125,
+            "right": 993.28125,
+            "bottom": 221.78125
+          },
+          "controls": {
+            "left": 744.28125,
+            "top": 233.359375,
+            "right": 993,
+            "bottom": 427.671875,
+            "width": 248.71875,
+            "height": 194.3125
+          },
+          "rows": [
+            {
+              "index": 1,
+              "rect": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 864.140625,
+                "bottom": 180.21875,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 2,
+              "rect": {
+                "left": 873.140625,
+                "top": 118.78125,
+                "right": 993,
+                "bottom": 180.21875,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 3,
+              "rect": {
+                "left": 744.28125,
+                "top": 189.21875,
+                "right": 864.140625,
+                "bottom": 250.65625,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 4,
+              "rect": {
+                "left": 873.140625,
+                "top": 189.21875,
+                "right": 993,
+                "bottom": 250.65625,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            }
+          ]
+        },
+        "arrows": [
+          {
+            "dir": "up",
+            "button": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 863.640625,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 748.28125,
+              "top": 237.359375,
+              "right": 859.28125,
+              "bottom": 321.359375
+            },
+            "imageRect": {
+              "left": 757.328125,
+              "top": 245.328125,
+              "right": 850.578125,
+              "bottom": 313.546875,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 774.640380859375,
+              "top": 248.92559814453125,
+              "right": 835.7974243164062,
+              "bottom": 313.546875
+            },
+            "contained": true
+          },
+          {
+            "dir": "down",
+            "button": {
+              "left": 873.640625,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 877.640625,
+              "top": 237.359375,
+              "right": 988.640625,
+              "bottom": 321.359375
+            },
+            "imageRect": {
+              "left": 886.6875,
+              "top": 245.328125,
+              "right": 979.9375,
+              "bottom": 313.546875,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 901.7346801757812,
+              "top": 248.92559814453125,
+              "right": 963.0249633789062,
+              "bottom": 313.546875
+            },
+            "contained": true
+          },
+          {
+            "dir": "left",
+            "button": {
+              "left": 744.28125,
+              "top": 335.515625,
+              "right": 863.640625,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 748.28125,
+              "top": 339.515625,
+              "right": 859.28125,
+              "bottom": 423.515625
+            },
+            "imageRect": {
+              "left": 757.328125,
+              "top": 347.484375,
+              "right": 850.578125,
+              "bottom": 415.703125,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 775.17333984375,
+              "top": 348.95001220703125,
+              "right": 834.9979858398438,
+              "bottom": 412.2388916015625
+            },
+            "contained": true
+          },
+          {
+            "dir": "right",
+            "button": {
+              "left": 873.640625,
+              "top": 335.515625,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 877.640625,
+              "top": 339.515625,
+              "right": 988.640625,
+              "bottom": 423.515625
+            },
+            "imageRect": {
+              "left": 886.6875,
+              "top": 347.484375,
+              "right": 979.9375,
+              "bottom": 415.703125,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 902.40087890625,
+              "top": 348.95001220703125,
+              "right": 962.2255249023438,
+              "bottom": 412.2388916015625
+            },
+            "contained": true
+          }
+        ],
+        "map": {
+          "rect": {
+            "left": 269.75,
+            "top": 107.515625,
+            "right": 713.28125,
+            "bottom": 660.46875,
+            "width": 443.53125,
+            "height": 552.953125
+          },
+          "grid": "3",
+          "start": [
+            "2",
+            "0"
+          ],
+          "goal": [
+            "1",
+            "1"
+          ]
+        }
+      },
+      "status": "FAIL",
+      "screenshot": "coding-1024x768-easy-layout-failure.png"
+    },
+    {
+      "name": "coding-1024x768-challenge-layout",
+      "detail": {
+        "viewport": [
+          1024,
+          768
+        ],
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "width": 1024,
+          "height": 768
+        },
+        "controls": [
+          {
+            "label": "easy",
+            "rect": {
+              "left": 31,
+              "top": 186.828125,
+              "right": 238.75,
+              "bottom": 254.828125,
+              "width": 207.75,
+              "height": 68
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "challenge",
+            "rect": {
+              "left": 31,
+              "top": 266.828125,
+              "right": 238.75,
+              "bottom": 334.828125,
+              "width": 207.75,
+              "height": 68
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "ccCar",
+            "rect": {
+              "left": 597.875,
+              "top": 116.515625,
+              "right": 704.25,
+              "bottom": 250.25,
+              "width": 106.375,
+              "height": 133.734375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "up",
+            "rect": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 863.640625,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "down",
+            "rect": {
+              "left": 873.640625,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "left",
+            "rect": {
+              "left": 744.28125,
+              "top": 335.515625,
+              "right": 863.640625,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "right",
+            "rect": {
+              "left": 873.640625,
+              "top": 335.515625,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "undo",
+            "rect": {
+              "left": 744.28125,
+              "top": 509.671875,
+              "right": 993,
+              "bottom": 578.78125,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "clear",
+            "rect": {
+              "left": 744.28125,
+              "top": 588.78125,
+              "right": 993,
+              "bottom": 657.890625,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "ccGoBtn",
+            "rect": {
+              "left": 744.28125,
+              "top": 667.890625,
+              "right": 993,
+              "bottom": 737,
+              "width": 248.71875,
+              "height": 69.109375
+            },
+            "disabled": true,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          },
+          {
+            "label": "놀이터로",
+            "rect": {
+              "left": 8,
+              "top": 8,
+              "right": 64,
+              "bottom": 64,
+              "width": 56,
+              "height": 56
+            },
+            "disabled": false,
+            "hit": true,
+            "viewport": true,
+            "scrollPanel": false
+          }
+        ],
+        "issues": [
+          {
+            "kind": "slot-outside-group",
+            "index": 3,
+            "rect": {
+              "left": 744.28125,
+              "top": 189.21875,
+              "right": 864.140625,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 3,
+            "rect": {
+              "left": 744.28125,
+              "top": 189.21875,
+              "right": 864.140625,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          },
+          {
+            "kind": "slot-outside-group",
+            "index": 4,
+            "rect": {
+              "left": 873.140625,
+              "top": 189.21875,
+              "right": 993,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 4,
+            "rect": {
+              "left": 873.140625,
+              "top": 189.21875,
+              "right": 993,
+              "bottom": 250.65625,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          },
+          {
+            "kind": "slot-outside-group",
+            "index": 5,
+            "rect": {
+              "left": 744.28125,
+              "top": 259.65625,
+              "right": 864.140625,
+              "bottom": 321.09375,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 5,
+            "rect": {
+              "left": 744.28125,
+              "top": 259.65625,
+              "right": 864.140625,
+              "bottom": 321.09375,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          },
+          {
+            "kind": "slot-outside-group",
+            "index": 6,
+            "rect": {
+              "left": 873.140625,
+              "top": 259.65625,
+              "right": 993,
+              "bottom": 321.09375,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 6,
+            "rect": {
+              "left": 873.140625,
+              "top": 259.65625,
+              "right": 993,
+              "bottom": 321.09375,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          },
+          {
+            "kind": "slot-outside-group",
+            "index": 7,
+            "rect": {
+              "left": 744.28125,
+              "top": 330.09375,
+              "right": 864.140625,
+              "bottom": 391.53125,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "boundary": {
+              "left": 744.28125,
+              "top": 118.78125,
+              "right": 993.28125,
+              "bottom": 221.78125
+            }
+          },
+          {
+            "kind": "slot-control-overlap",
+            "index": 7,
+            "rect": {
+              "left": 744.28125,
+              "top": 330.09375,
+              "right": 864.140625,
+              "bottom": 391.53125,
+              "width": 119.859375,
+              "height": 61.4375
+            },
+            "controls": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 248.71875,
+              "height": 194.3125
+            }
+          }
+        ],
+        "page": {
+          "width": 1024,
+          "height": 768,
+          "x": 0,
+          "y": 0
+        },
+        "panel": {
+          "rect": {
+            "left": 725.28125,
+            "top": 10,
+            "right": 1012,
+            "bottom": 758,
+            "width": 286.71875,
+            "height": 748
+          },
+          "scrollTop": 0,
+          "scrollHeight": 738,
+          "clientHeight": 738,
+          "overflow": "auto",
+          "touchAction": "auto",
+          "rootTouchAction": "pan-y",
+          "alignContent": "safe center"
+        },
+        "codeSlots": {
+          "difficulty": "challenge",
+          "expected": 7,
+          "group": {
+            "left": 744.28125,
+            "top": 118.78125,
+            "right": 993,
+            "bottom": 221.359375,
+            "width": 248.71875,
+            "height": 102.578125
+          },
+          "groupContent": {
+            "left": 744.28125,
+            "top": 118.78125,
+            "right": 993.28125,
+            "bottom": 221.78125
+          },
+          "controls": {
+            "left": 744.28125,
+            "top": 233.359375,
+            "right": 993,
+            "bottom": 427.671875,
+            "width": 248.71875,
+            "height": 194.3125
+          },
+          "rows": [
+            {
+              "index": 1,
+              "rect": {
+                "left": 744.28125,
+                "top": 118.78125,
+                "right": 864.140625,
+                "bottom": 180.21875,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 2,
+              "rect": {
+                "left": 873.140625,
+                "top": 118.78125,
+                "right": 993,
+                "bottom": 180.21875,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": true,
+              "overlapsControls": false,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 3,
+              "rect": {
+                "left": 744.28125,
+                "top": 189.21875,
+                "right": 864.140625,
+                "bottom": 250.65625,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 4,
+              "rect": {
+                "left": 873.140625,
+                "top": 189.21875,
+                "right": 993,
+                "bottom": 250.65625,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 5,
+              "rect": {
+                "left": 744.28125,
+                "top": 259.65625,
+                "right": 864.140625,
+                "bottom": 321.09375,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 6,
+              "rect": {
+                "left": 873.140625,
+                "top": 259.65625,
+                "right": 993,
+                "bottom": 321.09375,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            },
+            {
+              "index": 7,
+              "rect": {
+                "left": 744.28125,
+                "top": 330.09375,
+                "right": 864.140625,
+                "bottom": 391.53125,
+                "width": 119.859375,
+                "height": 61.4375
+              },
+              "insideGroup": false,
+              "overlapsControls": true,
+              "insideViewport": true,
+              "insidePanel": true
+            }
+          ]
+        },
+        "arrows": [
+          {
+            "dir": "up",
+            "button": {
+              "left": 744.28125,
+              "top": 233.359375,
+              "right": 863.640625,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 748.28125,
+              "top": 237.359375,
+              "right": 859.28125,
+              "bottom": 321.359375
+            },
+            "imageRect": {
+              "left": 757.328125,
+              "top": 245.328125,
+              "right": 850.578125,
+              "bottom": 313.546875,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 774.640380859375,
+              "top": 248.92559814453125,
+              "right": 835.7974243164062,
+              "bottom": 313.546875
+            },
+            "contained": true
+          },
+          {
+            "dir": "down",
+            "button": {
+              "left": 873.640625,
+              "top": 233.359375,
+              "right": 993,
+              "bottom": 325.515625,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 877.640625,
+              "top": 237.359375,
+              "right": 988.640625,
+              "bottom": 321.359375
+            },
+            "imageRect": {
+              "left": 886.6875,
+              "top": 245.328125,
+              "right": 979.9375,
+              "bottom": 313.546875,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 901.7346801757812,
+              "top": 248.92559814453125,
+              "right": 963.0249633789062,
+              "bottom": 313.546875
+            },
+            "contained": true
+          },
+          {
+            "dir": "left",
+            "button": {
+              "left": 744.28125,
+              "top": 335.515625,
+              "right": 863.640625,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 748.28125,
+              "top": 339.515625,
+              "right": 859.28125,
+              "bottom": 423.515625
+            },
+            "imageRect": {
+              "left": 757.328125,
+              "top": 347.484375,
+              "right": 850.578125,
+              "bottom": 415.703125,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 775.17333984375,
+              "top": 348.95001220703125,
+              "right": 834.9979858398438,
+              "bottom": 412.2388916015625
+            },
+            "contained": true
+          },
+          {
+            "dir": "right",
+            "button": {
+              "left": 873.640625,
+              "top": 335.515625,
+              "right": 993,
+              "bottom": 427.671875,
+              "width": 119.359375,
+              "height": 92.15625
+            },
+            "buttonContent": {
+              "left": 877.640625,
+              "top": 339.515625,
+              "right": 988.640625,
+              "bottom": 423.515625
+            },
+            "imageRect": {
+              "left": 886.6875,
+              "top": 347.484375,
+              "right": 979.9375,
+              "bottom": 415.703125,
+              "width": 93.25,
+              "height": 68.21875
+            },
+            "gridRows": "74.1562px",
+            "gridColumns": "101.359px",
+            "naturalWidth": 512,
+            "naturalHeight": 512,
+            "alphaBounds": {
+              "left": 902.40087890625,
+              "top": 348.95001220703125,
+              "right": 962.2255249023438,
+              "bottom": 412.2388916015625
+            },
+            "contained": true
+          }
+        ],
+        "map": {
+          "rect": {
+            "left": 269.75,
+            "top": 107.515625,
+            "right": 713.28125,
+            "bottom": 660.46875,
+            "width": 443.53125,
+            "height": 552.953125
+          },
+          "grid": "4",
+          "start": [
+            "3",
+            "0"
+          ],
+          "goal": [
+            "0",
+            "3"
+          ]
+        }
+      },
+      "status": "FAIL",
+      "screenshot": "coding-1024x768-challenge-layout-failure.png"
+    }
+  ],
+  "pageErrors": [],
+  "runnerGitSha": "255408ebbaed10d4cdf27a1c9d7c5900274f0e3b",
+  "runnerSourceHashesBefore": {
+    "scripts/qa-small-screen-ui-browser.py": "382c1c5fcd93f5216e97cdba4b5340a262523c1595e88d51cb7d8d95e3b82d90",
+    "scripts/qa-p1-voice-browser.py": "c0b7edd4b88c0809817eef744e8b5c9e1ab766db5a449d3b31ebcefc2a53b2b1"
+  },
+  "scope": "Two games only. Chromium touch emulation; simulated audio completion; coding existing internal entry. Physical device/speaker NOT_RUN.",
+  "browserVersion": "143.0.7499.4",
+  "sourceHashesAfter": {
+    "index.html": "90716f1288694d1866eeaaf8c9f14d3d16513c15fa3f5d97980fc9c548cfe38f",
+    "sw.js": "291507c4cddca1b5b21ac89609cc148b9b5e64473850aed7640fd4c8781d797e",
+    "js/games/construction-site.js": "ac660b713ca9932b68e9dd305045246cdc6b91b4c9b92cd9c9c56c7460b402e7",
+    "js/games/coding-car.js": "387a44b247a040e371743d86cd536c9ceb1b4fed5ce542f0829f7ad1af4d3b62",
+    "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+    "assets/vehicles/display_bounds.json": "e6c95664c2cec6d00e39a2d44d3835046976d6a83ce20e925ac5e65b094acb3a"
+  },
+  "runnerSourceHashesAfter": {
+    "scripts/qa-small-screen-ui-browser.py": "382c1c5fcd93f5216e97cdba4b5340a262523c1595e88d51cb7d8d95e3b82d90",
+    "scripts/qa-p1-voice-browser.py": "c0b7edd4b88c0809817eef744e8b5c9e1ab766db5a449d3b31ebcefc2a53b2b1"
+  },
+  "sourcesUnchanged": true,
+  "status": "FAIL",
+  "expectedDefectsReproduced": {
+    "easyCodeSlots": true,
+    "challengeCodeSlots": true
+  }
+}

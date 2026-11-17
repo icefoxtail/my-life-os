@@ -230,7 +230,7 @@
       .cs-top { position: relative; z-index: 5; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 6px; }
       .cs-pill { padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.9); border: 4px solid #fff; box-shadow: 0 6px 0 rgba(102,60,14,0.22); font-size: clamp(17px, 4.6vw, 24px); font-weight: 900; }
       .cs-actions { display: flex; gap: 8px; flex-shrink: 0; }
-      .cs-btn { padding: 8px 13px; border-radius: 999px; border: 4px solid #fff; background: linear-gradient(180deg, #fff 0%, #ffe477 100%); box-shadow: 0 6px 0 rgba(102,60,14,0.22); font: inherit; font-size: 17px; font-weight: 900; cursor: pointer; }
+      .cs-btn { min-width: 44px; min-height: 44px; padding: 8px 13px; border-radius: 999px; border: 4px solid #fff; background: linear-gradient(180deg, #fff 0%, #ffe477 100%); box-shadow: 0 6px 0 rgba(102,60,14,0.22); font: inherit; font-size: 17px; font-weight: 900; cursor: pointer; }
       .cs-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(102,60,14,0.22); }
 
       .cs-progress { position: relative; z-index: 5; flex-shrink: 0; display: flex; justify-content: center; gap: 7px; padding: 0 12px 6px; }
@@ -344,7 +344,7 @@
 
       @media (orientation: landscape) and (max-width: 900px) {
         .construction-landscape { grid-template-columns: minmax(180px, 26%) minmax(280px, 1fr) minmax(190px, 28%); gap: 8px; padding: 8px; }
-        .construction-landscape .cs-pill, .construction-landscape .cs-btn { min-height: 40px; font-size: 16px; padding: 6px 10px; }
+        .construction-landscape .cs-pill, .construction-landscape .cs-btn { min-height: 44px; font-size: 16px; padding: 6px 10px; }
         .construction-landscape .cs-question-card { padding: 8px; border-radius: 20px; }
         .construction-landscape .cs-title { font-size: 20px; }
         .construction-landscape .cs-question { font-size: 15px; }
@@ -354,16 +354,25 @@
 
       /* 스마트폰 가로모드 최적화 */
       @media (max-height: 500px) and (orientation: landscape) {
-        .cs-top { padding: 4px 12px; }
+        .game-play-screen:has(> #constructionSiteTarget) > .game-back-floating { width: 44px; height: 44px; }
+        .cs-top { padding: 4px 12px 4px 58px; }
         .cs-pill { min-height: 36px; padding: 4px 12px; font-size: 16px; }
-        .cs-btn { min-height: 36px; padding: 4px 12px; font-size: 14px; }
-        .cs-question-card { margin: 0 12px 4px; padding: 6px; }
+        .cs-btn { min-height: 44px; padding: 4px 12px; font-size: 14px; }
+        .cs-question-card { margin: 0 12px 4px; padding: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .cs-title { font-size: 18px; }
         .cs-question { display: none; }
         .cs-stage { margin-bottom: 4px; }
+        /* Keep the scene inside its remaining height, including the listen-button mission. */
+        .cs-site-board { top: 8px; left: 8px; padding: 4px 8px; border-width: 3px; font-size: 13px; }
+        .cs-sun { top: 8px; right: 18px; width: 40px; height: 40px; }
+        .cs-target-zone { width: min(40%, 190px); height: 64%; max-height: 100px; bottom: 16%; border-width: 4px; border-radius: 18px; }
+        .cs-target-icon { font-size: clamp(32px, 10vh, 44px); line-height: 1; }
+        .cs-result-icon { width: min(34%, 160px); height: 58%; max-height: 86px; bottom: 18%; border-width: 4px; border-radius: 18px; font-size: clamp(28px, 9vh, 40px); line-height: 1; }
         .cs-choices { padding: 0 12px 6px; gap: 6px; }
         .cs-choice { min-height: 90px; border-radius: 16px; border-width: 4px; padding: 4px; }
         .cs-choice-img { max-height: 70px; }
+        .cs-choice-img-wrap { height: 70px; }
+        .cs-message { bottom: 104px; padding: 8px 12px; border-width: 4px; border-radius: 20px; font-size: 18px; line-height: 1.25; }
       }
       
       .cs-success-panel { position: absolute; inset: 0; z-index: 60; display: grid; place-items: center; padding: 18px; background: rgba(70, 170, 255, 0.2); backdrop-filter: blur(4px); }
@@ -373,6 +382,13 @@
       .cs-success-title { font-size: clamp(30px, 8vw, 46px); font-weight: 900; color: #223047; }
       .cs-success-sub { font-size: clamp(17px, 4.8vw, 24px); font-weight: 900; color: #74501c; }
       .cs-success-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      @media (max-height: 500px) and (orientation: landscape) {
+        .cs-success-panel { padding: 12px; }
+        .cs-success-box { max-width: 100%; padding: 12px 16px; gap: 6px; }
+        .cs-success-icon { font-size: 56px; line-height: 1; }
+        .cs-success-title { font-size: 28px; line-height: 1.1; }
+        .cs-success-sub { font-size: 16px; line-height: 1.25; }
+      }
     `;
     document.head.appendChild(style);
   }

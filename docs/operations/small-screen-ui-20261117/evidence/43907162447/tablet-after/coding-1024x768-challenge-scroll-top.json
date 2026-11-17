@@ -1,0 +1,91 @@
+{
+  "scrollTop": 0,
+  "maxScroll": 170,
+  "hit": "ccControls",
+  "ancestors": [
+    {
+      "element": "ccControls",
+      "touchAction": "auto",
+      "overflowX": "visible",
+      "overflowY": "visible",
+      "scrollTop": 0,
+      "scrollHeight": 194,
+      "clientHeight": 194
+    },
+    {
+      "element": "cc-ui-area",
+      "touchAction": "auto",
+      "overflowX": "hidden",
+      "overflowY": "auto",
+      "scrollTop": 0,
+      "scrollHeight": 908,
+      "clientHeight": 738
+    },
+    {
+      "element": "cc-root coding-car-root coding-car-landscape",
+      "touchAction": "pan-y",
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "clientHeight": 768
+    },
+    {
+      "element": "codingCarTarget",
+      "touchAction": "auto",
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "clientHeight": 768
+    },
+    {
+      "element": "game-play-screen game-play-fullscreen",
+      "touchAction": "auto",
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "clientHeight": 768
+    },
+    {
+      "element": "sihyeonPlayOS",
+      "touchAction": "auto",
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "clientHeight": 768
+    },
+    {
+      "element": "BODY",
+      "touchAction": "auto",
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "clientHeight": 768
+    },
+    {
+      "element": "HTML",
+      "touchAction": "auto",
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "clientHeight": 768
+    }
+  ],
+  "panel": {
+    "left": 725.28125,
+    "top": 10,
+    "right": 1012,
+    "bottom": 758
+  },
+  "eventIndex": 77,
+  "difficulty": "challenge",
+  "input": {
+    "maxTouchPoints": 1,
+    "coarsePointer": true
+  }
+}

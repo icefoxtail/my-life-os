@@ -1,0 +1,93 @@
+name: Small screen UI release
+
+on:
+  pull_request:
+    paths:
+      - 'js/games/construction-site.js'
+      - 'js/games/coding-car.js'
+      - 'js/vehicle-display.js'
+      - 'assets/vehicles/display_bounds.json'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/qa-small-screen-ui-browser.py'
+      - 'scripts/qa-p1-voice-browser.py'
+      - '.github/workflows/small-screen-ui-release.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/games/construction-site.js'
+      - 'js/games/coding-car.js'
+      - 'js/vehicle-display.js'
+      - 'assets/vehicles/display_bounds.json'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/qa-small-screen-ui-browser.py'
+      - 'scripts/qa-p1-voice-browser.py'
+      - '.github/workflows/small-screen-ui-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  changed-screens:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Check scoped syntax and cache contract
+        run: |
+          node --check js/games/construction-site.js
+          node --check js/games/coding-car.js
+          node scripts/qa-sw-independent.cjs
+          python3 -m py_compile scripts/qa-small-screen-ui-browser.py
+      - name: Install pinned Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
+      - name: Wait for the exact deployed small-screen runtime
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib,time,urllib.request
+          paths=['index.html','sw.js','js/games/construction-site.js','js/games/coding-car.js','js/vehicle-display.js','assets/vehicles/display_bounds.json']
+          expected={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base='https://icefoxtail.github.io/my-life-os/'
+          out=pathlib.Path('qa-small-screen-release');out.mkdir(exist_ok=True)
+          deadline=time.monotonic()+50*60
+          while time.monotonic()<deadline:
+              actual={}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base+path+'?small_screen='+expected['sw.js'][:12],timeout=15) as response:
+                          actual[path]=hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__,flush=True)
+              if actual==expected:
+                  (out/'production-source.json').write_text(json.dumps({'baseUrl':base,'matches':True,'expected':expected,'actual':actual},indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Exact main runtime not served by Pages; production screen checks did not run.')
+          PY
+      - name: Verify both games on all six screen sizes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          args=()
+          if [ "$EVENT_NAME" = push ]; then
+            args=(--base-url https://icefoxtail.github.io/my-life-os/)
+          fi
+          python3 scripts/qa-small-screen-ui-browser.py "${args[@]}" --root . --output qa-small-screen-release/screens
+      - name: Preserve exact-source reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: small-screen-release-${{ github.run_id }}
+          path: qa-small-screen-release/
+          if-no-files-found: error
+          retention-days: 14
