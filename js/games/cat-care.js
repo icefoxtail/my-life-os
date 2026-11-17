@@ -78,7 +78,7 @@
 
   const NEEDS = [
     { id: 'hungry', action: 'eat', cue: '🥣', request: '배가 고파!', title: '배가 고파요', clue: '빈 밥그릇 앞에서 기다려요. 무엇이 필요할까요?', result: '냠냠! 맛있게 밥을 먹어요.',
-      en: ['I am hungry', 'The food bowl is empty. What does the cat need?', 'Yum! The cat has eaten and feels full.'] },
+      en: ['I am hungry', 'The food bowl is empty. What does the cat need?', 'Yum! The cat is eating.'] },
     { id: 'wash', action: 'bath', cue: '🫧', request: '깨끗이 씻고 싶어!', title: '씻고 싶어요', clue: '씻고 싶은 마음을 알려 줬어요. 어떻게 도와줄까요?', result: '보글보글, 함께 목욕해요.',
       en: ['I want to wash', 'The cat says it would like to wash. How can we help?', 'Bubbles! We are helping the cat wash.'] },
     { id: 'sleepy', action: 'sleep', cue: '🌙', request: '졸려, 쉬고 싶어.', title: '졸려요', clue: '졸린 마음을 알려 줬어요. 무엇이 필요할까요?', result: '코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.',
@@ -1067,6 +1067,7 @@
     s.textContent += `
       .cc-care-v2{display:grid;height:100%;min-height:0;padding:10px;gap:8px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(70px,1fr) auto auto auto;overflow:hidden}
       .cc-care-header{display:flex;align-items:center;gap:8px;min-width:0;grid-row:1}
+      .game-play-screen .cc-care-header{padding-left:calc(64px + env(safe-area-inset-left,0px))}
       .cc-care-name{flex:1;min-width:0;font-size:clamp(18px,5vw,25px);font-weight:900;margin:0;color:#614449}
       .cc-care-control{min-width:44px;min-height:44px;flex-shrink:0;border:3px solid #fff;background:#fff9de;border-radius:15px;font:inherit;font-size:14px;font-weight:900;color:#46363b;padding:7px 10px;cursor:pointer;box-shadow:0 3px 0 #dec7c7}
       .cc-care-control[data-cat-listen]{font-size:22px;padding:5px;width:44px}

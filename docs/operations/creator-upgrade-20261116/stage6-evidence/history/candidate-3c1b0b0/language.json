@@ -1,0 +1,50 @@
+{
+  "status": "FAIL",
+  "checks": [
+    {
+      "viewport": "320x568",
+      "status": "FAIL",
+      "error": "Locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#ltHint\")\n    - locator resolved to <button id=\"ltHint\" type=\"button\" aria-label=\"다음 글자\" class=\"lt-action lt-hint visible\">다음 ▶</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n      - waiting 100ms\n    28 × waiting for element to be visible, enabled and stable\n       - element is not stable\n     - retrying click action\n       - waiting 500ms\n",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 257, in main\n    detail = native_case(page, base, output, width, height, responses)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 137, in native_case\n    page.locator('#ltHint').click()\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 15637, in click\n    self._sync(\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_locator.py\", line 162, in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_frame.py\", line 566, in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 559, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#ltHint\")\n    - locator resolved to <button id=\"ltHint\" type=\"button\" aria-label=\"다음 글자\" class=\"lt-action lt-hint visible\">다음 ▶</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n      - waiting 100ms\n    28 × waiting for element to be visible, enabled and stable\n       - element is not stable\n     - retrying click action\n       - waiting 500ms\n\n"
+    },
+    {
+      "viewport": "390x844",
+      "status": "FAIL",
+      "error": "Locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#ltHint\")\n    - locator resolved to <button id=\"ltHint\" type=\"button\" aria-label=\"다음 글자\" class=\"lt-action lt-hint visible\">다음 ▶</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n      - waiting 100ms\n    28 × waiting for element to be visible, enabled and stable\n       - element is not stable\n     - retrying click action\n       - waiting 500ms\n",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 257, in main\n    detail = native_case(page, base, output, width, height, responses)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 137, in native_case\n    page.locator('#ltHint').click()\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 15637, in click\n    self._sync(\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_locator.py\", line 162, in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_frame.py\", line 566, in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/.local/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 559, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#ltHint\")\n    - locator resolved to <button id=\"ltHint\" type=\"button\" aria-label=\"다음 글자\" class=\"lt-action lt-hint visible\">다음 ▶</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n      - waiting 100ms\n    28 × waiting for element to be visible, enabled and stable\n       - element is not stable\n     - retrying click action\n       - waiting 500ms\n\n"
+    },
+    {
+      "viewport": "640x360",
+      "status": "FAIL",
+      "error": "{'x': 594, 'y': 5, 'width': 36, 'height': 48}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 257, in main\n    detail = native_case(page, base, output, width, height, responses)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 94, in native_case\n    controls = {selector: check_control(page.locator(selector), page.viewport_size)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 55, in check_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 594, 'y': 5, 'width': 36, 'height': 48}\n"
+    },
+    {
+      "viewport": "844x390",
+      "status": "FAIL",
+      "error": "{'x': 798, 'y': 5, 'width': 36, 'height': 48}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 257, in main\n    detail = native_case(page, base, output, width, height, responses)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 94, in native_case\n    controls = {selector: check_control(page.locator(selector), page.viewport_size)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 55, in check_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 798, 'y': 5, 'width': 36, 'height': 48}\n"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "testScriptSha256": "92fc6678753c5d69e064bb7d4dd37d9f4b1333ab4a3925eab0602afeea7e5171",
+  "checkoutSourceSha256": {
+    "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+    "js/games/abc-phonics.js": "555a79b76d2937a61be216ff8e42bb7fc06dcdc253c5d7121fe34609e49d9a00",
+    "games/hangul-playmat-3d.html": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105"
+  },
+  "scope": {
+    "nativePublicMenus": true,
+    "3DMeaningCardSetup": "existing OpenWorldDebug compose API",
+    "voice": "pass-through shared voice requests",
+    "notRun": [
+      "physical touch",
+      "audible pronunciation",
+      "child observation"
+    ]
+  },
+  "baseUrl": "http://127.0.0.1:39787/",
+  "browserVersion": "143.0.7499.4"
+}

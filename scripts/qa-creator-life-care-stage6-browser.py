@@ -84,6 +84,41 @@ def readable(locator):
     assert locator.evaluate('el => el.scrollHeight <= el.clientHeight + 1 && el.scrollWidth <= el.clientWidth + 1'), 'Explanation is clipped'
 
 
+def cat_header_clearance(page):
+    name = page.locator('.cc-care-name')
+    readable(name)
+    name_box = name.bounding_box()
+    back_box = page.locator('.game-back-floating').bounding_box()
+    assert name_box and back_box, {'name': name_box, 'back': back_box}
+    assert name_box['x'] >= back_box['x'] + back_box['width'] + 4, {'name': name_box, 'back': back_box}
+    return {'name': name_box, 'back': back_box}
+
+
+def settle_game_entrance(page):
+    # The public shell has a 350 ms zoneEnter scale(.96 -> 1) transition.
+    # Measure targets only after its real animation completes; never change the
+    # animation, synthesize a click, or relax the 44 px target requirement.
+    snapshot = '''el => {
+      const style = getComputedStyle(el);
+      return {at: performance.now(), transform: style.transform, opacity: style.opacity,
+        animations: el.getAnimations().map(a => ({name: a.animationName,
+          state: a.playState, pending: a.pending, currentTime: a.currentTime}))};
+    }'''
+    screen = page.locator('.game-play-screen')
+    before = screen.evaluate(snapshot)
+    page.wait_for_function('''() => {
+      const screen = document.querySelector('.game-play-screen');
+      if (!screen) return false;
+      const style = getComputedStyle(screen);
+      const identity = style.transform === 'none' || new DOMMatrixReadOnly(style.transform).isIdentity;
+      return identity && style.opacity === '1' && screen.getAnimations().every(a =>
+        !a.pending && (a.playState === 'finished' || a.playState === 'idle'));
+    }''', timeout=2000)
+    after = screen.evaluate(snapshot)
+    return {'before': before, 'after': after,
+            'waitedMs': round(after['at'] - before['at'], 2), 'timeoutMs': 2000}
+
+
 def open_game(page, base, action):
     page.add_init_script('Math.random = () => 0.9999;')
     response = page.goto(urljoin(base, 'index.html'), wait_until='load', timeout=60000)
@@ -98,10 +133,11 @@ def open_game(page, base, action):
     }''')
     page.locator('.world-zone[onclick="travelToZone(\'game\')"]').click()
     page.locator(f'.zone-game-card[onclick="{action}()"]').click()
+    return settle_game_entrance(page)
 
 
 def life_case(page, base, output, size):
-    open_game(page, base, 'openLifeSequenceGame')
+    entrance = open_game(page, base, 'openLifeSequenceGame')
     steps = []
     for title, order, keyword in MISSIONS:
         expect(page.locator(f'.ls-mission-icon[aria-label="{title}"]')).to_be_visible()
@@ -136,14 +172,15 @@ def life_case(page, base, output, size):
     expect(page.locator('.ls-success')).to_be_visible()
     assert len(page.evaluate('window.__lifeCareProbe.rewards')) == 7
     page.screenshot(path=str(output / f'life-finish-{size}.png'))
-    return {'missions': steps, 'rewardCalls': page.evaluate('window.__lifeCareProbe.rewards'),
+    return {'missions': steps, 'entranceTransition': entrance, 'rewardCalls': page.evaluate('window.__lifeCareProbe.rewards'),
             'driver': 'public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish'}
 
 
 def cat_case(page, base, output, size):
-    open_game(page, base, 'openCatCareGame')
+    entrance = open_game(page, base, 'openCatCareGame')
     page.get_by_role('button', name='눈이', exact=True).click()
     expect(page.locator('[data-cat-need="hungry"]')).to_be_visible()
+    header_clearance = {'initial': cat_header_clearance(page)}
     for selector in ('#cc-change-cat', '[data-cat-listen]', '[data-cat-finish]'):
         hit_control(page, page.locator(selector))
     for action in ('eat', 'bath', 'sleep', 'wait'):
@@ -184,6 +221,7 @@ def cat_case(page, base, output, size):
             expect(page.locator('[data-cat-need="hungry"][data-cat-resolved="true"]')).to_be_visible()
             hit_control(page, page.locator('#cc-change-cat'))
             hit_control(page, page.locator('[data-cat-next]'))
+            header_clearance['rotated'] = cat_header_clearance(page)
             page.screenshot(path=str(output / f'cat-rotated-{size}.png'))
             page.set_viewport_size(original)
             page.wait_for_timeout(250)
@@ -210,7 +248,8 @@ def cat_case(page, base, output, size):
     page.wait_for_timeout(1200)
     expect(page.locator('[data-cat-need="hungry"][data-cat-resolved="false"]')).to_be_visible()
     assert page.locator('.cc-particle').count() == 0
-    return {'states': states, 'changeCat': 'portrait and landscape native controls',
+    return {'states': states, 'entranceTransition': entrance, 'headerClearance': header_clearance,
+            'changeCat': 'portrait and landscape native controls',
             'manualCompletion': True, 'repeatRewardCalls': 'unchanged',
             'rotation': 'resolved care and controls preserved', 'oldCatImageCallbacks': 'no delayed replacement',
             'driver': 'public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat'}

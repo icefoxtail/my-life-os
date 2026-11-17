@@ -1029,7 +1029,7 @@
       .lt-top{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"tabs sound" "progress progress";padding:8px 12px;gap:6px;flex:0 0 auto;height:auto;border:0;border-radius:0;background:transparent;box-shadow:none}
       .lt-mode-tabs{grid-area:tabs;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;width:min(100%,250px);padding:3px;gap:4px}
       .lt-root .lt-mode-tab{min-height:44px;padding:4px 12px;font-size:18px;border-radius:22px}
-      .lt-sound{grid-area:sound;width:48px;height:48px;border:3px solid #fff;border-radius:16px;background:#fff7ce;font-size:24px;cursor:pointer;box-shadow:0 3px 0 #d6c88f}
+      .lt-sound{grid-area:sound;flex:0 0 48px;min-width:48px;width:48px;height:48px;border:3px solid #fff;border-radius:16px;background:#fff7ce;font-size:24px;cursor:pointer;box-shadow:0 3px 0 #d6c88f}
       .lt-progress{grid-area:progress;width:100%;min-height:14px;display:flex;flex-direction:row;flex-wrap:nowrap;gap:7px}
       .lt-dot{width:10px;height:10px;border-width:2px}
       .lt-stage{display:flex;flex:1 1 auto;width:100%;height:auto;min-height:0;padding:6px 14px 16px}
@@ -1065,6 +1065,10 @@
       @media(orientation:landscape) and (max-height:400px){.abc-phonics-landscape .lt-top{padding:5px 10px}.abc-phonics-landscape .lt-stage{padding:2px 10px 10px}.abc-phonics-landscape .lt-stage-inner{gap:12px}.abc-phonics-landscape .lt-learning-panel{gap:5px}.abc-phonics-landscape .lt-word-label{min-height:42px;padding:4px 8px;font-size:30px}.abc-phonics-landscape .lt-context{min-height:2.4em;font-size:15px}.lt-actions{gap:6px}}
       @media(max-height:650px){.lt-complete-screen{padding:12px}.lt-complete-box{padding:18px 14px;gap:9px}.lt-complete-emoji{font-size:64px}.lt-complete-title{font-size:28px}.lt-complete-sub{font-size:18px}.lt-btn{min-height:48px;font-size:17px}.lt-complete-btns{gap:9px}}
       @media(orientation:landscape) and (max-height:500px){.abc-phonics-landscape .lt-complete-screen{padding:12px}.abc-phonics-landscape .lt-complete-box{width:min(95%,760px);padding:16px;gap:8px}.abc-phonics-landscape .lt-complete-title{font-size:28px}.abc-phonics-landscape .lt-complete-sub{font-size:18px}.abc-phonics-landscape .lt-complete-emoji{font-size:70px}}
+      /* Public shell Back occupies the first 44px. Keep both mode tabs clear. */
+      .lt-root .lt-top{padding-left:60px}
+      /* A choice control must stay still while a child aims or taps it. */
+      .lt-root .lt-hint.visible{animation:none;transform:none;scale:1}
       @media(prefers-reduced-motion:reduce){.lt-root::before,.lt-transformed .lt-image-wrap{animation:none}}
     `;
     document.head.appendChild(style);

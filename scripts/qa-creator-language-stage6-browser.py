@@ -92,7 +92,16 @@ def native_case(page, base, output, width, height, responses):
     open_abc(page)
     page.wait_for_timeout(500)
     controls = {selector: check_control(page.locator(selector), page.viewport_size)
-                for selector in ('#ltMainCard', '#ltSound', '#ltReplayPrompt', '#ltFind', '#ltHint')}
+                for selector in ('#ltMainCard', '#ltSound', '[data-mode="abc"]', '[data-mode="hangul"]', '#ltReplayPrompt', '#ltFind', '#ltHint')}
+    back = page.locator('.game-back-floating').bounding_box()
+    for selector in ('[data-mode="abc"]', '[data-mode="hangul"]'):
+        box = controls[selector]
+        assert not (box['x'] < back['x'] + back['width'] and box['x'] + box['width'] > back['x']
+                    and box['y'] < back['y'] + back['height'] and box['y'] + box['height'] > back['y']), (selector, box, back)
+    page.locator('[data-mode="hangul"]').click()
+    expect(page.locator('#ltWordLabel')).to_have_text('ㄱ')
+    page.locator('[data-mode="abc"]').click()
+    expect(page.locator('#ltWordLabel')).to_have_text('A')
     # An explicit replay is safe before and after the reveal.
     page.locator('#ltReplayPrompt').click()
     transform(page, 'Apple')
