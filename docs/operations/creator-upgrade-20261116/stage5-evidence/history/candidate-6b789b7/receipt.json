@@ -1,0 +1,81 @@
+{
+  "sourceEvidenceSet": "candidate-6b789b7",
+  "archive": {
+    "path": "raw-json-reports.tar.gz",
+    "sha256": "453b9d2688d3e7c57e703a20c5a21030f8b4cff27b8cb6bf91c133b0ff6c2e95",
+    "bytes": 32567
+  },
+  "rawJsonReports": [
+    {
+      "path": "arithmetic-strategies/REVIEW.json",
+      "bytes": 1105,
+      "sha256": "2bc0fab6c276d3f9a557680b4a91e9d4f819bdf610c14888aab1c29bb613cfcf"
+    },
+    {
+      "path": "arithmetic-strategies/raw/arithmetic-strategies/arithmetic-strategies-browser.json",
+      "bytes": 111770,
+      "sha256": "3fc5531aaa70cd33e392abb495b3176af46149fda55cb64634e3a7e7461903c0"
+    },
+    {
+      "path": "number-continuity/REVIEW.json",
+      "bytes": 9332,
+      "sha256": "017dd95e5d2ae97ad8b7f7ab9fcabf1aed5e7f6fa4ef33243e11115779435696"
+    },
+    {
+      "path": "number-continuity/raw/number-continuity/number-continuity-browser.json",
+      "bytes": 177196,
+      "sha256": "f770a54f2c4adf0284672ce97ef90a9c86290807f39ae3681726ca02052a607a"
+    },
+    {
+      "path": "number-world/artifact-metadata.json",
+      "bytes": 358,
+      "sha256": "adf2ed70df21399ca1b2285403dde399ccdd34bab00accb868ad4ce8326aa28c"
+    },
+    {
+      "path": "number-world/number-world/number-world-browser.json",
+      "bytes": 213385,
+      "sha256": "a00e1533f7d9a5e7eff3d8f10f443a4703709289cfd3fa0bb1cb0fe79879b6ac"
+    },
+    {
+      "path": "number-world/visual-review.json",
+      "bytes": 5243,
+      "sha256": "014cea9f99a7c9c8df9bc927bc0dadd10c222e0c9d2ca82563b198954678679a"
+    },
+    {
+      "path": "train-collection/REVIEW.json",
+      "bytes": 18395,
+      "sha256": "7852474b17af53119ee6a8cd302b57ae838ade9af104460566b87e43d1357b41"
+    },
+    {
+      "path": "train-collection/github-metadata.json",
+      "bytes": 10661,
+      "sha256": "ac25315fa2c4861fe7691fa3a0cdb8a3e60a26d591871b005a43bbf05858f59b"
+    },
+    {
+      "path": "train-collection/raw/train-collection/creator-train-collection-browser.json",
+      "bytes": 32227,
+      "sha256": "0726aa893485d48750dd9acd9f49b94ea3e4539c5576e2f7a830f1d19e794ba6"
+    }
+  ],
+  "preservedPng": [
+    {
+      "sourcePath": "arithmetic-strategies/raw/arithmetic-strategies/count-on-640x360.png",
+      "path": "reviewed-png/arithmetic-strategies--count-on-640x360.png",
+      "bytes": 72601,
+      "sha256": "b72c971f5321418b853649d1b102a1e4081a22979b91f2a37a874e7bda775c48"
+    },
+    {
+      "sourcePath": "number-world/number-world/number-world-saved-1024x768.png",
+      "path": "reviewed-png/number-world--number-world-saved-1024x768.png",
+      "bytes": 197526,
+      "sha256": "7b0b0ff7422dc76392e6098392ec4050edf7fecef7e9f435a4896f1585baa698"
+    },
+    {
+      "sourcePath": "number-world/number-world/number-world-restored-1024x768.png",
+      "path": "reviewed-png/number-world--number-world-restored-1024x768.png",
+      "bytes": 188593,
+      "sha256": "9f931f1debd3dd65516c9db42f03624dd7e31b0a4441edebcf29302770596177"
+    }
+  ],
+  "note": "JSON and PNG bytes are preserved unchanged. Original review records may contain session paths; this receipt maps each preserved PNG to its portable repository path. Unselected screenshots remain identified in the original artifact receipts."
+}

@@ -1,6 +1,6 @@
 {
   "taskId": "7cfd62c0-af1e-4696-be90-24ab7791a5fd",
-  "owner": "GPT_STAGE4_8938D6FFD8BF",
+  "owner": "GPT_STAGE5_B5BA6BFB1C19",
   "repository": "icefoxtail/my-life-os",
   "publicUrl": "https://icefoxtail.github.io/my-life-os/index.html",
   "stages": [
@@ -910,10 +910,423 @@
         "installed app offline cache migration",
         "full fire catalog motion trajectories"
       ]
+    },
+    {
+      "stage": 5,
+      "status": "PRODUCTION_VERIFIED",
+      "taskId": "15707adb-19d1-4b5e-bc00-8f4ef1267828",
+      "owner": "GPT_STAGE5_B5BA6BFB1C19",
+      "repository": "icefoxtail/my-life-os",
+      "publicUrl": "https://icefoxtail.github.io/my-life-os/index.html",
+      "pr": 46,
+      "sourceHead": {
+        "sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+        "tree": "79df57b01568a86d9332e9df26d01992e98fba56"
+      },
+      "merge": {
+        "sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+        "tree": "79df57b01568a86d9332e9df26d01992e98fba56"
+      },
+      "preMergeRuns": [
+        {
+          "id": 44042337769,
+          "name": "Playground checks",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337769"
+        },
+        {
+          "id": 44042337636,
+          "name": "Small screen UI release",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337636"
+        },
+        {
+          "id": 44042337644,
+          "name": "Creator stage 4 release",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337644"
+        },
+        {
+          "id": 44042337641,
+          "name": "Phase 2 browser release",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337641"
+        },
+        {
+          "id": 44042337647,
+          "name": "Creator upgrade release",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337647"
+        },
+        {
+          "id": 44042337661,
+          "name": "Creator stage 5 release",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337661"
+        },
+        {
+          "id": 44042337664,
+          "name": "Creator stage 3 release",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6b0a1bbd42075b00f78b3250ca516b4c88bbc60c",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44042337664"
+        }
+      ],
+      "productionRuns": [
+        {
+          "id": 44048032437,
+          "name": "Creator upgrade release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "7c14faf9ae153c0653fe6ca1c3077751d39bf946",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44048032437"
+        },
+        {
+          "id": 44048032498,
+          "name": "Playground checks",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "7c14faf9ae153c0653fe6ca1c3077751d39bf946",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44048032498"
+        },
+        {
+          "id": 44048032160,
+          "name": "pages build and deployment",
+          "event": "dynamic",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "7c14faf9ae153c0653fe6ca1c3077751d39bf946",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44048032160"
+        },
+        {
+          "id": 44048032596,
+          "name": "Creator stage 5 release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "7c14faf9ae153c0653fe6ca1c3077751d39bf946",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44048032596"
+        }
+      ],
+      "featureMainWorkflowHistory": [
+        {
+          "id": 44044634093,
+          "name": "Playground checks",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044634093",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:11:57Z"
+        },
+        {
+          "id": 44044634110,
+          "name": "Small screen UI release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044634110",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:17:04Z"
+        },
+        {
+          "id": 44044633804,
+          "name": "Creator stage 3 release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044633804",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:17:37Z"
+        },
+        {
+          "id": 44044633825,
+          "name": "Creator stage 5 release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044633825",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:19:11Z"
+        },
+        {
+          "id": 44044634038,
+          "name": "Creator stage 4 release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044634038",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:19:25Z"
+        },
+        {
+          "id": 44044633882,
+          "name": "Creator upgrade release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044633882",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:19:40Z"
+        },
+        {
+          "id": 44044633924,
+          "name": "Phase 2 browser release",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044633924",
+          "created_at": "2026-11-17T08:11:35Z",
+          "updated_at": "2026-11-17T08:22:31Z"
+        },
+        {
+          "id": 44044631898,
+          "name": "pages build and deployment",
+          "event": "dynamic",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+          "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44044631898",
+          "created_at": "2026-11-17T08:11:34Z",
+          "updated_at": "2026-11-17T08:12:32Z"
+        }
+      ],
+      "validationRepair": {
+        "pr": 47,
+        "sourceHead": {
+          "sha": "b8f8ca9056b9ba5059026d9e863dbad41027fcc5",
+          "tree": "4994917911174a38e67361a6324f23f813e62a22"
+        },
+        "merge": {
+          "sha": "7c14faf9ae153c0653fe6ca1c3077751d39bf946",
+          "tree": "4994917911174a38e67361a6324f23f813e62a22"
+        },
+        "preMergeRuns": [
+          {
+            "id": 44046635242,
+            "name": "Playground checks",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "b8f8ca9056b9ba5059026d9e863dbad41027fcc5",
+            "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44046635242"
+          },
+          {
+            "id": 44046635259,
+            "name": "Creator stage 5 release",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "b8f8ca9056b9ba5059026d9e863dbad41027fcc5",
+            "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44046635259"
+          },
+          {
+            "id": 44046635280,
+            "name": "Creator upgrade release",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "b8f8ca9056b9ba5059026d9e863dbad41027fcc5",
+            "html_url": "https://github.com/icefoxtail/my-life-os/actions/runs/44046635280"
+          }
+        ],
+        "changedPaths": [
+          "docs/operations/creator-upgrade-20261116/STAGE5.md",
+          "scripts/qa-creator-number-world-browser.py"
+        ],
+        "runtimeBytesUnchanged": true,
+        "candidateEvidenceManifest": "stage5-evidence/repair-candidate/receipt.json",
+        "candidateEvidenceManifestSha256": "727b752d0e14435a3707f7d2523b0c5e5cbce58ea0eedfbfce7e542b05be4d3f",
+        "independentSlowFrameCounterexample": "stage5-evidence/frame-observation-fix/"
+      },
+      "preMergeProof": {
+        "stage5Cases": 60,
+        "stage5SuiteCases": {
+          "number-continuity": 16,
+          "arithmetic-strategies": 6,
+          "train-collection": 11,
+          "number-world": 27
+        },
+        "phase2QuantityCases": 76,
+        "phase2SuiteCases": {
+          "number-picture": 20,
+          "ten-frame-garden": 14,
+          "picture-arithmetic": 19,
+          "quantity-change": 16,
+          "art-reference": 7
+        },
+        "pageErrors": 0,
+        "candidateEvidenceManifest": "stage5-evidence/candidate/receipt.json",
+        "candidateEvidenceManifestSha256": "a7a5efd673889d71edb9989c1e86cfbf039c98394cf227ae822b5aa998d5c1d7",
+        "visualReviewScope": "Candidate1-3 original failures and fixes retained. Final candidate4 changes were reviewed on two new number-world PNGs; unchanged tested code and existing screen reviews were reused with source hashes. Candidate4 reports cover all60 new and76 retained cases."
+      },
+      "productionProof": {
+        "commit": "7c14faf9ae153c0653fe6ca1c3077751d39bf946",
+        "run": 44048032596,
+        "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+        "totalCases": 60,
+        "status": "PASS",
+        "pageErrors": 0,
+        "runtimeFileCount": 18,
+        "runtimeSha256": {
+          "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "sw.js": "66d07eb5f9b574c5f454cd3f83f1fc79eaeae92fc1aeec6f4431f49f93df323c",
+          "js/quantity-sequencer.js": "df4b18df05c2bc8f37f779c1f36eebfb31b6a14e0d139afcb49e8bc5fa6fdd9a",
+          "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "js/play-objects.js": "00423da7175cc95cc71168936c226527ea4d1ffea8f36d5278e22c1103efd7b7",
+          "js/games/number-picture.js": "3a0524795446edf0b69435826b7277e14ac9530eb27d73215c221b387fdf196a",
+          "js/games/ten-frame-garden.js": "2c45d4470e04327fe462c292625aa90b8a8e93fae1010578cb2c41dd40e517bd",
+          "js/games/picture-arithmetic.js": "abfe7d04818169ae1511cf42e66d931fcc3fbff4f7001749baaf9ad71e67c683",
+          "js/games/quantity-play-model.js": "5f79f5ae04a15abdd7cb64313e6740e92559f4031d2cc0e33aa17e41320a191e",
+          "js/games/pattern-train.js": "a60b91fcf9a1e9e488159d974466911a22bd16242878aba5b965f2f690a91e11",
+          "js/games/pattern-train-model.js": "26e21ec855c40a4d70690bfbcda24d6f6ad962eb0f1b04f194110149e5e0b209",
+          "games/number-kingdom-3d.html": "40001e9f73e407db5dfb03bbda6fb2c1f3f226a8f79e40ba88c12300b1354e6e",
+          "js/games/number-world-save.js": "97ff23830d370bbcad2953e16010b0c61849e77866cdf8f6815610fe435b4c8b",
+          "css/games/number-picture.css": "d058c50f2c30bcb7fea110aa9701445f883a90cdfc98765e666e1d5e2d7e1387",
+          "css/games/ten-frame-garden.css": "ee9afaa96c23e6404aac6bc43b20db95baebaa75af09b2b39eb5bbe79e8e0eab",
+          "css/games/picture-arithmetic.css": "f9610c8ebf2a48d0713fef2c329efc53245ff124500af67e9310812b84186fa8",
+          "css/games/pattern-train.css": "4b0b893c7d415985fc0f7c78be153566facc20c8fa617e85981e7ac575e0427f"
+        },
+        "suites": [
+          {
+            "suite": "number-continuity",
+            "cases": 16,
+            "status": "PASS",
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "artifactId": 14311769459,
+            "artifactSha256": "1765c2d7cb8088bb4d84afd6b816cd7f776099f0efb45f737c679d1bfa15f401",
+            "rawReport": "number-continuity/raw/number-continuity/number-continuity-browser.json",
+            "rawReportSha256": "078f5b15ea6b7b70c396cf1566771ebdc69fab7533e62084924e4cb0bd61a76c",
+            "review": "number-continuity/REVIEW.json",
+            "reviewSha256": "84494cd9c13d5e66dab455f2380172801bf17b7b0cabd4dc0e7c371219007666",
+            "productionSourceSha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+          },
+          {
+            "suite": "arithmetic-strategies",
+            "cases": 6,
+            "status": "PASS",
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "artifactId": 14312088434,
+            "artifactSha256": "ec098ad7ec933bddf6387d83fce3bf9b1b91db752eb10df9d385e58e9104a645",
+            "rawReport": "arithmetic-strategies/raw/arithmetic-strategies/arithmetic-strategies-browser.json",
+            "rawReportSha256": "52ced0064c404568b375abb44a55b52cc95ace41780aec376272d16348e359ce",
+            "review": "arithmetic-strategies/REVIEW.json",
+            "reviewSha256": "16f9eee127e68315038572b48d2ff86a01bb5b28832ef3a7e1e4c6ea857c6940",
+            "productionSourceSha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+          },
+          {
+            "suite": "train-collection",
+            "cases": 11,
+            "status": "PASS",
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "artifactId": 14312896013,
+            "artifactSha256": "0cc98867b0be7c3fec687281001d387fabdc6123eda10ca7ccba8443cb76ef76",
+            "rawReport": "train-collection/raw/train-collection/creator-train-collection-browser.json",
+            "rawReportSha256": "c28f7418c54a11e9faafde8c6abbddf6116e2dea011ce27da14afb0c1216a93c",
+            "review": "train-collection/REVIEW.json",
+            "reviewSha256": "e230c379b59f49bc0c0f8b7eb109745c43a6267044111c8b3545f99d35757bb1",
+            "productionSourceSha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+          },
+          {
+            "suite": "number-world",
+            "cases": 27,
+            "status": "PASS",
+            "pageErrors": 0,
+            "baseUrl": "https://icefoxtail.github.io/my-life-os/",
+            "artifactId": 14312851430,
+            "artifactSha256": "30760c3822aee9ef4e2fa4cf5b9b6599e791307e4287061d00abf782f75230b3",
+            "rawReport": "number-world/raw/number-world/number-world-browser.json",
+            "rawReportSha256": "c9b688e10019102dbe4f29180a38ba05861b57db707a6f744101e06b4d596b23",
+            "review": "number-world/REVIEW.json",
+            "reviewSha256": "b4bea31a2977d9793d5a41728e5bff7cae456c19843da98e26f740e3c13178ef",
+            "productionSourceSha256": "d4883bbbe0408b6c2e9215d170ec009410eec0bbdc434fb788200fbb730da0f6"
+          }
+        ],
+        "sourceEvidenceScope": {
+          "number-continuity": "16 public-browser cases plus separate 18-file public preflight. The report sourceSha256 contains checkout/test bytes; it is not an individual response-body record.",
+          "arithmetic-strategies": "6 viewport cases; 36 HTTP200 response-body digests match the main Git bytes.",
+          "train-collection": "11 cases including collection and storage failures; 17 initial/reload documents and 68 HTTP200 response-body digests match main.",
+          "number-world": "27 cases; 6 viewport sets of 4 HTTP200 response-body digests match main, with actual Three.js meshes, camera and stable native-click targets."
+        },
+        "visualReviewScope": "Number-world final public PNGs were opened by an independent cross-reviewer. The three other suites reuse actual f09b827 public PNG reviews with identical runtime bytes; each final REVIEW binds the new report SHA and identifies the exact reused original review. This does not claim every final PNG was opened.",
+        "evidenceManifest": "stage5-evidence/production/receipt.json",
+        "evidenceManifestSha256": "c508f018813d0057a26fe26f5b4b17ed6f4ce65fd4e4e1a2ea0c1f1a21fc9f23"
+      },
+      "modelChecks": {
+        "scope": "State/model assertions, browser scenarios, image inspection and educational outcomes are distinct. Model counts are not educational quality or screen-quality totals.",
+        "continuityGroups": 11,
+        "arithmeticGroups": 8,
+        "trainCollectionGroups": 10,
+        "numberWorldGroups": 11,
+        "numberWorldExistingPoses": 640
+      },
+      "history": [
+        "stage5-evidence/history/candidate-3aef01e/",
+        "stage5-evidence/history/candidate-6b789b7/",
+        "stage5-evidence/history/candidate-23323c3/",
+        "stage5-evidence/history/production-f09b827/"
+      ],
+      "testHarnessCorrections": [
+        "Train cancel selector scoped to the active dialog; initial and reload HTTP response bodies retained with caching disabled.",
+        "World camera sampled after actual camera settling, with position/quaternion/FOV/aspect assertions.",
+        "Each old number viewport case resets through explicit replay while retaining original31 count/voice/visibility steps.",
+        "The infinite button-scale instability was fixed in product code by moving pulse to the internal SVG; native locator.click and stable44px-target assertions retained.",
+        "Public software-WebGL collected only2 RAF observations in1s; the repaired harness requires >=1s of observed frames AND >=4 RAF samples, bounded by10s. All existing geometry, animation and native-click assertions remain."
+      ],
+      "storageScope": {
+        "backend": "browser localStorage with explicit memory/session fallback",
+        "trainCollectionLimit": 6,
+        "crossDeviceSync": false,
+        "corruptOrFutureWorldRawPreservedUntilUserEdit": true,
+        "noSilentEviction": true
+      },
+      "notRun": [
+        "physical device touch",
+        "audible speech listening",
+        "child observation",
+        "installed app offline cache migration"
+      ],
+      "minorVisualObservations": [
+        {
+          "scope": "picture-arithmetic internal board scroll",
+          "observation": "The top edges of some kept-pool/comparison headings are partly clipped at the captured internal scroll position; quantities, equations and main controls are readable. Not claimed resolved.",
+          "evidence": "stage5-evidence/history/production-f09b827/receipt.json"
+        }
+      ],
+      "evidenceManifest": {
+        "path": "stage5-evidence/MANIFEST.json",
+        "sha256": "a2a9a7f40e2203241f127f9ed75e7042b7ba5a090c5eacd74c6e585cb9f2cc0e"
+      },
+      "remainingStages": [
+        6,
+        7
+      ]
     }
   ],
   "remainingStages": [
-    5,
     6,
     7
   ],
@@ -929,11 +1342,23 @@
     },
     {
       "stage": 5,
-      "observation": "The shape picker overlaps the lower 3D scene in landscape comparison fixtures; improve camera/palette spacing in the number-depth stage."
+      "observation": "Some arithmetic kept-pool/comparison heading top edges are partly clipped at captured internal-board scroll positions; numerical results and primary controls remain readable.",
+      "evidence": "STAGE5_RELEASE_EVIDENCE.json:minorVisualObservations"
     }
   ],
   "previousOwners": [
     "GPT_UPGRADE_5EF8F1489B24",
-    "GPT_UPGRADE_7C923CB944E6"
+    "GPT_UPGRADE_7C923CB944E6",
+    "GPT_STAGE4_8938D6FFD8BF"
+  ],
+  "activeTaskId": "15707adb-19d1-4b5e-bc00-8f4ef1267828",
+  "resolvedObservations": [
+    {
+      "stage": 5,
+      "observation": "The shape picker overlaps the lower 3D scene in landscape comparison fixtures; improve camera/palette spacing in the number-depth stage.",
+      "resolvedByStage": 5,
+      "resolution": "Landscape palette now occupies separate space below the actual3D canvas; public viewport geometry and original PNGs reviewed.",
+      "evidence": "STAGE5_RELEASE_EVIDENCE.json"
+    }
   ]
 }

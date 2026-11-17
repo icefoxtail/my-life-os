@@ -1,0 +1,42 @@
+{
+  "reviewer": "/root/auto_numbers",
+  "createdAtUtc": "2026-11-17T08:26:08.826324+00:00",
+  "main": "f09b827c7e5b98847ecf0a6a79e5c9fe4b1e97f4",
+  "path": "scripts/qa-creator-number-world-browser.py",
+  "extraction": "Python AST extracts the single actual evaluate string containing RAF and samples from stable_action_targets; no observer is reimplemented.",
+  "sources": {
+    "old": {
+      "fileSha256": "f7ae001e18c8b13bc274ed49f0e8641c760b25fe6b5f501e520b4d2a294eb873",
+      "observerPath": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/old-observer.js",
+      "observerSha256": "b304b3607d7e1f6d1daf7fcd172b00dee710fe15d69a9c7c59b5499dd60f4a8f",
+      "observedAssertions": [
+        "assert observed['samples']>=4 and observed['minWidth']>=44 and observed['minHeight']>=44, observed",
+        "assert observed['centerHit'] and observed['maxRectDelta']<.1, (preference,selector,observed)",
+        "assert observed['buttonAnimationCount']==0, (preference,selector,observed)",
+        "assert observed['iconAnimationCount']==(0 if preference=='reduce' else 1), (preference,selector,observed)"
+      ]
+    },
+    "new": {
+      "fileSha256": "cf858155fed70dab13ec10263a683ae8ac63982cecaad2ad169ed4ea8f26f53e",
+      "observerPath": "/workspace/scratch/b5ba6bfb1c19/evidence/frame-observation-fix/new-observer.js",
+      "observerSha256": "a4dbdb46eb2df82ef25a8042a68e1a0d424f617bac0de9ceeaa7508effcd43fa",
+      "observedAssertions": [
+        "assert not observed['timedOut'] and observed['observationMs']>=1000 and observed['rafFrames']>=4, (preference,selector,observed)",
+        "assert observed['samples']>=4 and observed['minWidth']>=44 and observed['minHeight']>=44, observed",
+        "assert observed['centerHit'] and observed['maxRectDelta']<.1, (preference,selector,observed)",
+        "assert observed['buttonAnimationCount']==0, (preference,selector,observed)",
+        "assert observed['iconAnimationCount']==(0 if preference=='reduce' else 1), (preference,selector,observed)"
+      ]
+    }
+  },
+  "staticChecks": {
+    "allPreviousAssertionsPreservedAstExactly": true,
+    "oldAssertCount": 5,
+    "newAssertCount": 6,
+    "wholeHarnessNativeClickCallsUnchangedAstExactly": true,
+    "nativeClickCount": 22,
+    "forcedClickKeywords": 0,
+    "measurementUsesSameRectAndCenterHitAndAnimationApis": true
+  },
+  "mutatedRepositoryFiles": []
+}

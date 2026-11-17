@@ -1,0 +1,250 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3478,
+      "sha256": "57809d8b4383db67975204dc1684c04b4f56fa7f081b071179490cb3c4ad5da5"
+    },
+    {
+      "path": "candidate/raw-json-reports.tar.gz",
+      "bytes": 209394,
+      "sha256": "9562e66804e87033d8a246e89b65dd0368ddabede33a3ecd27d9a1719b4f9425"
+    },
+    {
+      "path": "candidate/receipt.json",
+      "bytes": 8943,
+      "sha256": "a7a5efd673889d71edb9989c1e86cfbf039c98394cf227ae822b5aa998d5c1d7"
+    },
+    {
+      "path": "candidate/reviewed-png/number-world--number-world-ready-targets.png",
+      "bytes": 147765,
+      "sha256": "804c49afd644532f04decd06c91dda9a29c7f2d1c2a82c71d2d81988dc8bf55c"
+    },
+    {
+      "path": "candidate/reviewed-png/number-world--number-world-three-hundreds.png",
+      "bytes": 147241,
+      "sha256": "e7d6899b244e7ba1bfca6bac29a1d7186810f35471abf8dfdf7847132604cd5c"
+    },
+    {
+      "path": "frame-observation-fix/REVIEW.json",
+      "bytes": 4088,
+      "sha256": "5350c8f96eb6e14537d208e842664a08ceefa37da319ca4df9c4775c7546b3f8"
+    },
+    {
+      "path": "frame-observation-fix/extraction.json",
+      "bytes": 2380,
+      "sha256": "d96e4b0e1be798a60dab5d93588fb677f741e0453fdb7ef0e401d235e4e49827"
+    },
+    {
+      "path": "frame-observation-fix/new-observer.js",
+      "bytes": 1892,
+      "sha256": "a4dbdb46eb2df82ef25a8042a68e1a0d424f617bac0de9ceeaa7508effcd43fa"
+    },
+    {
+      "path": "frame-observation-fix/observer-change.diff",
+      "bytes": 3933,
+      "sha256": "2733e87b98e4168247d2872e0d8900bce7904bcd42cce3862f541e8a200f8f28"
+    },
+    {
+      "path": "frame-observation-fix/old-observer.js",
+      "bytes": 929,
+      "sha256": "b304b3607d7e1f6d1daf7fcd172b00dee710fe15d69a9c7c59b5499dd60f4a8f"
+    },
+    {
+      "path": "frame-observation-fix/phase2-main-jobs.json",
+      "bytes": 549,
+      "sha256": "11fdd7fda841185d050729c9fbaa2428e93ae38c383c0ff06e91a6b3c1688e3d"
+    },
+    {
+      "path": "frame-observation-fix/reproduce.cjs",
+      "bytes": 4824,
+      "sha256": "e9cb2e8af001eb681a4bc26e7f24797a9425aace09b62c5632fc3eaea6035f59"
+    },
+    {
+      "path": "frame-observation-fix/results.json",
+      "bytes": 3369,
+      "sha256": "4aa87bf72d4951452f34f0bfb3ada9ba41c17be5280ba68958aa46d47ff5b686"
+    },
+    {
+      "path": "history/candidate-23323c3/raw-json-reports.tar.gz",
+      "bytes": 194446,
+      "sha256": "9a3575f6e5239339cc115a7689b0ea027d4b2118ec29f85cb1aedfd7bf98e1df"
+    },
+    {
+      "path": "history/candidate-23323c3/receipt.json",
+      "bytes": 8782,
+      "sha256": "17c7f89ba65aac3b82606376880920a895abf35ac558f522add445e233d40d91"
+    },
+    {
+      "path": "history/candidate-23323c3/reviewed-png/arithmetic-strategies--kept-remainder-320x568.png",
+      "bytes": 47040,
+      "sha256": "aa2d14a3e9cc61f8b0d86e730d28286dac6b2d3076e3bc9d7781416581bfd9e8"
+    },
+    {
+      "path": "history/candidate-23323c3/reviewed-png/phase2-quantity--number-picture-320x568-thirty.png",
+      "bytes": 57286,
+      "sha256": "24bfc6ce3c839b27496b4463bea470a7cb8ba6ce913ca4c20fd1df6bb2eb4adf"
+    },
+    {
+      "path": "history/candidate-23323c3/reviewed-png/phase2-quantity--viewport-844x390-colors-30.png",
+      "bytes": 69106,
+      "sha256": "b907ae47b2667c0530eae3cca890a927312409c213c205ead534d4333fb68ccf"
+    },
+    {
+      "path": "history/candidate-3aef01e/raw-json-reports.tar.gz",
+      "bytes": 188203,
+      "sha256": "892f4fa2fd4dce2e36459a2d6a6c2b6c115f9c39b87e8deb5fcc6f866cdf52fa"
+    },
+    {
+      "path": "history/candidate-3aef01e/receipt.json",
+      "bytes": 9564,
+      "sha256": "5e8450ba1a7c6075bb715e0762f831e0c828d3b66bb4a30bad15721222ab19e6"
+    },
+    {
+      "path": "history/candidate-3aef01e/reviewed-png/arithmetic-strategies--failure-640x360.png",
+      "bytes": 63800,
+      "sha256": "cef7f5db8598c75db3721ee81affc2cdf63788a115095762911c42665fe63938"
+    },
+    {
+      "path": "history/candidate-3aef01e/reviewed-png/phase2-quantity--number-picture-failure-sino-nine-zero-thirty-and-plus-minus-boundaries.png",
+      "bytes": 106636,
+      "sha256": "de03c7a13486269ab87d25e6c74879cbe8ba18735b98cef5024ea36c45cd3dff"
+    },
+    {
+      "path": "history/candidate-3aef01e/reviewed-png/phase2-quantity--picture-arithmetic-failure-15-shared-among-4-320x568.png",
+      "bytes": 47342,
+      "sha256": "985a61dc7a3c4ce4ba9f73fae482be637bf80128c6cc40b44055840234f5d5b2"
+    },
+    {
+      "path": "history/candidate-6b789b7/raw-json-reports.tar.gz",
+      "bytes": 32567,
+      "sha256": "453b9d2688d3e7c57e703a20c5a21030f8b4cff27b8cb6bf91c133b0ff6c2e95"
+    },
+    {
+      "path": "history/candidate-6b789b7/receipt.json",
+      "bytes": 3182,
+      "sha256": "28c02af0d5d827dabb5185a06832df65ea1618b4d27bdf7e4e73814e16f0d9ef"
+    },
+    {
+      "path": "history/candidate-6b789b7/reviewed-png/arithmetic-strategies--count-on-640x360.png",
+      "bytes": 72601,
+      "sha256": "b72c971f5321418b853649d1b102a1e4081a22979b91f2a37a874e7bda775c48"
+    },
+    {
+      "path": "history/candidate-6b789b7/reviewed-png/number-world--number-world-restored-1024x768.png",
+      "bytes": 188593,
+      "sha256": "9f931f1debd3dd65516c9db42f03624dd7e31b0a4441edebcf29302770596177"
+    },
+    {
+      "path": "history/candidate-6b789b7/reviewed-png/number-world--number-world-saved-1024x768.png",
+      "bytes": 197526,
+      "sha256": "7b0b0ff7422dc76392e6098392ec4050edf7fecef7e9f435a4896f1585baa698"
+    },
+    {
+      "path": "history/production-f09b827/raw-json-reports.tar.gz",
+      "bytes": 43910,
+      "sha256": "361901b89fe15cd11a305e823518c6135cf4a78fa1a0da294a8bddd28226cbd4"
+    },
+    {
+      "path": "history/production-f09b827/receipt.json",
+      "bytes": 7162,
+      "sha256": "2ab41a35c1f600da13129b4db2dab4691385b7494239b059c58989adc6f63b86"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/arithmetic-strategies--compare-sharing-640x360.png",
+      "bytes": 47685,
+      "sha256": "9e2779039fec16b1d9bcc48655b7435cb011db80dd8ecc2ed1d28495761d5626"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/arithmetic-strategies--kept-remainder-320x568.png",
+      "bytes": 47043,
+      "sha256": "a94c1ae5bde26b56239606d263db038e2d95cd3ba5c80415f4b33201af8a1f95"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/number-continuity--garden-continuity-390x844.png",
+      "bytes": 76891,
+      "sha256": "16ba88cb6473dd23ad10934147a1594645377573a29046c288959a0b989def1c"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/number-continuity--number-continuity-320x568.png",
+      "bytes": 80873,
+      "sha256": "5eb3712b28e1b780470533e80a22347fe5d1eec984fe9a3f8c79268183943e6d"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/number-world--number-world-boundary-failure.png",
+      "bytes": 150521,
+      "sha256": "f31f16ccb5915c1481f576ac88290b58fc776d64b8f4ef5edb02df67dc513888"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/number-world--number-world-restored-844x390.png",
+      "bytes": 128325,
+      "sha256": "eb4de2c546a162e432b99f581d8dbf39f40ed3ef434872797c4525c20bb37b57"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/number-world--number-world-saved-844x390.png",
+      "bytes": 136281,
+      "sha256": "d5be4ddf2d19f5f7a6cdc8ca3e11dcc0e565dd23d4bf2c6cdae01b9d6c008ded"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/train-collection--train-gallery-full.png",
+      "bytes": 80899,
+      "sha256": "cd98d1104c96098d3812c1c01e4c6ca736561a0862d79339d6c6e216a168530b"
+    },
+    {
+      "path": "history/production-f09b827/reviewed-png/train-collection--train-two-vs-four-320x568.png",
+      "bytes": 72602,
+      "sha256": "d949e9cadc8568e33f3d2945a3ce38908db9d34bd079e206c34da68ab10a5d65"
+    },
+    {
+      "path": "production/raw-json-reports.tar.gz",
+      "bytes": 51916,
+      "sha256": "b66288f61d72ee32041e0cf228b1d0e1276278dd6619401992da9c6f584c4a51"
+    },
+    {
+      "path": "production/receipt.json",
+      "bytes": 5839,
+      "sha256": "c508f018813d0057a26fe26f5b4b17ed6f4ce65fd4e4e1a2ea0c1f1a21fc9f23"
+    },
+    {
+      "path": "production/reviewed-png/number-world--number-world-ready-targets.png",
+      "bytes": 147657,
+      "sha256": "c18d9244407fd065a9a0741986e1da7ed26674d6cf39568791ee8f7c8a21bdcd"
+    },
+    {
+      "path": "production/reviewed-png/number-world--number-world-restored-844x390.png",
+      "bytes": 128412,
+      "sha256": "934545df71b866ff2b8a11b1ca60351630c7bb4df3a9c5b5c716bdb46a9bd3a8"
+    },
+    {
+      "path": "production/reviewed-png/number-world--number-world-saved-844x390.png",
+      "bytes": 136537,
+      "sha256": "bb5f3ce74b52ab0e82ca1394c6da5b61d35ee2db1784217be8caffab25d67221"
+    },
+    {
+      "path": "production/reviewed-png/number-world--number-world-three-hundreds.png",
+      "bytes": 147307,
+      "sha256": "bd9d281d3fda7bcffd2ac8a01f4d0ad759a65f987e28f46abbb0dfb717d6e774"
+    },
+    {
+      "path": "repair-candidate/raw-json-reports.tar.gz",
+      "bytes": 31556,
+      "sha256": "ace8ea5d8eef03c9fb13725858a7fd8b105090ee8a33c82bbb1c3d9dbf10b4a2"
+    },
+    {
+      "path": "repair-candidate/receipt.json",
+      "bytes": 3211,
+      "sha256": "727b752d0e14435a3707f7d2523b0c5e5cbce58ea0eedfbfce7e542b05be4d3f"
+    },
+    {
+      "path": "repair-candidate/reviewed-png/number-world--number-world-ready-targets.png",
+      "bytes": 145439,
+      "sha256": "abb572552ff2cf5a601fd7b22513d88a9dc3b480ad677a9adbc29719c6102e89"
+    },
+    {
+      "path": "repair-candidate/reviewed-png/number-world--number-world-three-hundreds.png",
+      "bytes": 147391,
+      "sha256": "c332aeb5ce1a43cd865ee8bbd92eb880438f0c7555bc2b05dfd00a2c89afa516"
+    }
+  ],
+  "scope": "Original JSON bytes and selected originally reviewed PNGs; complete Actions ZIP SHA retained, full screenshots subject to Actions retention."
+}
