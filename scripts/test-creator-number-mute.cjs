@@ -82,6 +82,8 @@ function fixture({embedded, engine}) {
     SpeechSynthesisUtterance: utteranceClass,
     $: id => { assert.equal(id, 'sound'); return button; },
     nkLayoutObserver: {disconnect() {}}, onResize() {},
+    saveWorldNow() {}, saveWorldOnLeave() {}, saveWorldOnHidden() {},
+    document: {removeEventListener() {}},
     renderer: {dispose() { counters.rendererDisposed++; }}
   });
   vm.runInContext([

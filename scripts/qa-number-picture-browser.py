@@ -145,15 +145,16 @@ def select_number(page, quantity):
     return start, value
 
 
-def finish(page, quantity):
+def finish(page, quantity, expected_steps=None):
     page.wait_for_function(
         'n => {const s=SihyeonGames.numberPicture.getSnapshot(); return s.active && s.quantity===n && s.complete && s.sequence?.status==="completed";}',
         arg=quantity, timeout=25000,
     )
     value = snap(page)
     assert value['actualCount'] == quantity and value['counted'] == quantity, value
-    assert value['sequence']['completedSteps'] == quantity + 1, value
-    assert value['sequence']['audioSucceeded'] == quantity + 1, value
+    expected_steps = quantity + 1 if expected_steps is None else expected_steps
+    assert value['sequence']['completedSteps'] == expected_steps, value
+    assert value['sequence']['audioSucceeded'] == expected_steps, value
     assert value['sequence']['audioFailed'] == 0 and not value['audioFailed'], value
     assert page.locator('.qp-item.is-counted').count() == quantity
     assert page.locator('.qp-item.is-current').count() == 0
@@ -329,10 +330,18 @@ def main():
             def sino_and_boundaries():
                 select_picture(page, 'korean_police_car')
                 select_number(page, 9)
+                action(page, 'pause')
+                paused_style = snap(page)
                 start = mark(page)
                 action(page, 'style', 'sino')
-                nine = finish(page, 9)
-                heard = assert_speech(page, start, nine, SINO_NINE + ['모두 경찰차 아홉 대!'])
+                changed_style = snap(page)
+                assert changed_style['counted'] == paused_style['counted'] and changed_style['sequence']['status'] == 'paused', (paused_style, changed_style)
+                action(page, 'pause')
+                nine = finish(page, 9, 9-paused_style['counted']+1)
+                heard = assert_speech(page, start, nine, SINO_NINE[paused_style['counted']:] + ['모두 경찰차 아홉 대!'])
+                # Retain the original complete 1–9 pronunciation oracle on explicit replay.
+                start = mark(page); action(page, 'replay'); full_nine = finish(page, 9)
+                assert_speech(page, start, full_nine, SINO_NINE + ['모두 경찰차 아홉 대!'])
                 start, zero_initial = select_number(page, 0)
                 zero = finish(page, 0)
                 assert page.locator('.qp-zero').is_visible()
@@ -348,7 +357,9 @@ def main():
                 action(page, 'minus')
                 assert snap(page)['quantity'] == 29 and snap(page)['actualCount'] == 29
                 action(page, 'plus')
-                finish(page, 30)
+                delta = finish(page, 30, 1)
+                assert delta['sequence']['totalSteps'] == 1, delta
+                action(page, 'replay'); finish(page, 30)
                 return {'sinoNine':nine, 'sinoSpeech':heard, 'zeroInitial':zero_initial, 'zero':zero, 'thirtyInitial':thirty_initial, 'thirty':thirty, 'plusMinus':True}
             check('sino nine zero thirty and plus-minus boundaries', sino_and_boundaries, page)
 
@@ -365,8 +376,8 @@ def main():
                     modal = page.locator('.qp-picture-modal')
                     assert modal.is_visible()
                     modal.locator('[data-qp-action="closePictures"]').click()
-                    page.wait_for_function('SihyeonGames.numberPicture.getSnapshot().sequence.running')
                     completed = finish(page, 30)
+                    assert completed['sequence']['runId'] == before['sequence']['runId'], 'Closing a chooser must not restart completed counting'
                     return {'viewport':[width,height], 'layout':layout, 'screenshot':image, 'chooserClosedAndResumed':True,
                             'currentPicturesAndLastPictureVisible':completed['browserVisibility']}
                 check('responsive root and chooser %sx%s' % (width, height), viewport_check, page)
@@ -424,12 +435,13 @@ def main():
                 page.get_by_role('button', name='설정 닫기', exact=True).click()
                 page.locator('#playSettingsDialog').wait_for(state='detached')
                 resumed = snap(page)
-                assert resumed['sequence']['runId'] > before['sequence']['runId'], (before, resumed)
+                assert resumed['sequence']['runId'] == before['sequence']['runId'], (before, resumed)
+                assert resumed['counted'] >= stopped['counted'], (stopped, resumed)
                 assert resumed['quantity'] == 15 and resumed['objectId'] == before['objectId'] and resumed['readingStyle'] == before['readingStyle']
                 completed = finish(page, 15)
-                assert_speech(page, start, completed, NATIVE[:15] + ['모두 경찰차 열다섯 대!'])
+                assert_speech(page, start, completed, NATIVE[stopped['sequence']['completedSteps']:15] + ['모두 경찰차 열다섯 대!'])
                 return {'before':before, 'paused':stopped, 'resumed':resumed, 'completed':completed, 'settingsChanged':False}
-            check('closing unchanged settings automatically restarts the preserved selection', settings_close, page)
+            check('closing unchanged settings resumes the same run without resetting the count', settings_close, page)
 
             def leave_and_restore():
                 select_picture(page, 'pump_engine')
@@ -477,8 +489,13 @@ def main():
                 assert snap(page)['language'] == 'en' and not snap(page)['sequence']['running'], snap(page)
                 start = mark(page)
                 page.get_by_role('button', name='설정 닫기', exact=True).click()
-                completed = finish(page, 9)
-                heard = assert_speech(page, start, completed, ENGLISH_NINE + ['There are nine police cars.'], 'en-US')
+                resumed_en = snap(page)
+                completed = finish(page, 9, resumed_en['sequence']['totalSteps'])
+                # The setting keeps the visible prefix and changes only the remaining speech.
+                remaining = 9 - (resumed_en['sequence']['totalSteps'] - 1)
+                heard = assert_speech(page, start, completed, ENGLISH_NINE[remaining:] + ['There are nine police cars.'], 'en-US')
+                start = mark(page); action(page, 'replay'); full_en = finish(page, 9)
+                assert_speech(page, start, full_en, ENGLISH_NINE + ['There are nine police cars.'], 'en-US')
                 start, _ = select_number(page, 1)
                 one = finish(page, 1)
                 assert_speech(page, start, one, ['one', 'There is one police car.'], 'en-US')

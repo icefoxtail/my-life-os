@@ -25,3 +25,10 @@
 .qp-live{flex:0 1 auto;max-width:48%}
 .qp-count-now{flex:0 0 auto}
 .qp-count-word{min-width:0;white-space:normal;overflow-wrap:anywhere;word-break:keep-all}
+
+/* Counting remains pausable without crowding the picture area. */
+.qp-pause{display:flex;align-items:center;justify-content:center;gap:4px;min-width:44px;flex:0 0 auto;border-radius:13px;background:#dce8d4;padding:0 9px;font-size:18px!important}.qp-pause span{font-size:12px}.qp-pause[aria-pressed=true]{background:#ffe6ae}.qp-item.is-new{animation:qp-arrive .45s ease-out}.qp-count-word{overflow-wrap:anywhere}
+@keyframes qp-arrive{from{transform:translateY(-12px) scale(.8);opacity:.2}to{transform:none;opacity:1}}
+@media(max-width:899px){.qp-pause{padding:0;width:44px}.qp-pause span{display:none}.qp-footer{gap:4px}}
+@media(orientation:portrait) and (max-width:420px){.qp-readings button{padding:0 5px;font-size:11px}.qp-layout{padding:0 4px;font-size:10px!important}.qp-replay{padding:0 7px}.qp-replay span{display:none}}
+@media(prefers-reduced-motion:reduce){.qp-item.is-new{animation:none}}

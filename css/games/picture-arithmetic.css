@@ -34,3 +34,27 @@
 @media(max-height:599px) and (min-width:580px){.pa-root{grid-template-rows:44px 44px minmax(0,1fr) auto}}
 /* Keep both name and number readable inside the compact 44px term button. */
 @media(max-width:579px) and (max-height:699px){.pa-term-info{gap:1px}.pa-term-info small{font-size:11px;line-height:14px;flex-shrink:0}.pa-term-info strong{font-size:26px;line-height:28px;flex-shrink:0}.pa-show-result .pa-answer{transform:none}}
+
+/* Stage 5: the same pictures travel from their first groups into the sum. */
+.pa-source-trays{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);align-items:start;gap:5px;margin-bottom:9px}
+.pa-source-tray{min-width:0;padding:5px;border:1px dashed #c4d2c3;border-radius:12px;background:#f3f5ed}
+.pa-source-tray>header,.pa-together>header{font-size:12px;line-height:1.4;margin:0 0 5px;color:#527062}
+.pa-waiting-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;min-height:22px}
+.pa-waiting-items .pa-item{min-height:35px;padding:2px}
+.pa-join-sign{align-self:center;font:22px system-ui;color:#568674}
+.pa-together{padding:6px;border:2px solid #c5d6bb;border-radius:12px;min-height:55px;background:#f6f8ed}
+.pa-item.is-known{border-color:#699c80;background:#dfebd6}
+.pa-play-controls{display:flex;align-items:center;gap:5px;width:100%;min-width:0;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 0 4px}
+.pa-play-controls>button,.pa-play-controls>.pa-readings{flex:0 0 auto;white-space:nowrap}
+.pa-play-controls button{min-height:44px;font-size:13px;padding:4px 8px}
+.pa-play-controls .pa-readings{margin-right:auto}
+.pa-next-choices{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.pa-next-choices button{font-size:12px;flex:1 1 100px;padding:5px 7px}
+.pa-pool.is-kept{background:#edf2df;border-color:#8da975;border-style:solid}
+.pa-comparisons{margin-top:12px;padding:8px;border:2px solid #aec8a8;border-radius:13px;background:#edf4e5}
+.pa-comparisons h3{margin:0 0 7px;font-weight:400;font-size:16px}.pa-comparisons p{font-size:13px;line-height:1.5}
+.pa-comparison-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.pa-comparison-card{display:flex;flex-direction:column;gap:6px;padding:7px;border:1px solid #ccdcc0;border-radius:10px;background:#fffaf0;min-width:0}
+.pa-comparison-card>strong{font-size:14px;font-weight:400}.pa-comparison-card>span,.pa-comparison-card>small{font-size:11px;line-height:1.4}
+.pa-mini-groups{display:flex;flex-wrap:wrap;gap:3px}.pa-mini-groups>span{display:flex;flex-direction:column;align-items:center;min-width:27px;gap:2px;padding:3px;background:#e5eddc;border-radius:6px}.pa-mini-groups i{font-style:normal;font-size:15px}.pa-mini-groups b{font-weight:400;font-size:15px}
+@media(max-width:379px){.pa-comparison-list{grid-template-columns:1fr}}

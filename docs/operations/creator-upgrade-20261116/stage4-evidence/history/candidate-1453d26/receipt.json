@@ -1,0 +1,169 @@
+{
+  "commit": "1453d26ad40c48472ab8c8be59f74d7c8b2fad52",
+  "rawJsonArchive": {
+    "path": "raw-json-reports.tar.gz",
+    "sha256": "ec0050db812dfe7e2d70227132fa6649a42aced1d3ce2625510d1996853a5b12",
+    "bytes": 22631,
+    "members": {
+      "creator/count-pace/count-pace-results.json": {
+        "sha256": "c0af1692aada060c01bf4118c9cf23a96c74f6aa3a0dc09a212aaac38fd737d5",
+        "bytes": 1438
+      },
+      "creator/download-receipt.json": {
+        "sha256": "90a2861d77e71b5fb37ec3b8c912e73604288ec5b28f20d645fdcc288eba311c",
+        "bytes": 377
+      },
+      "creator/hangul/hangul-acorn-390x844-visibility.json": {
+        "sha256": "faa16dfae8a1ff50fd1c9d2cce3bc6306459b7c742ebc1bc6fe816d8c07aeb3f",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-acorn-844x390-visibility.json": {
+        "sha256": "e35f6f76b6af8a559f2dfc2be13146d8bd7af7ae4680f6233220215e8d3640c0",
+        "bytes": 1022
+      },
+      "creator/hangul/hangul-letter-390x844-visibility.json": {
+        "sha256": "3e6c90f48d2f5f6bb974c1efaa5c0a3dc737174022916c8d9b19dcc8435b69ae",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-letter-844x390-visibility.json": {
+        "sha256": "be0cf004297b3957bb08120ed2701daf2c8ec1aefbe407bd91bdce421bdff250",
+        "bytes": 1018
+      },
+      "creator/hangul/hangul-rabbit-390x844-visibility.json": {
+        "sha256": "cbd9afb2043e64b673a4e71c2afe06f3d737777a0ef5fb8f3df9b80cd711a8f7",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-rabbit-844x390-visibility.json": {
+        "sha256": "808831757bb714e3baad1979816e0e0816e6f8e40e5f095a7b112586445e9e46",
+        "bytes": 1011
+      },
+      "creator/hangul/hangul-robot-390x844-visibility.json": {
+        "sha256": "70bef5b1e2b498bef0d69aa30659f29a4c719515b1c4c0ee01a3f41134cce1be",
+        "bytes": 1025
+      },
+      "creator/hangul/hangul-robot-844x390-visibility.json": {
+        "sha256": "046a3423b484e5ff4c3f0693e4a890795c27612bb2db1ea82e588eb97e804b97",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-tiger-390x844-visibility.json": {
+        "sha256": "231f78d184919b6ce2ea964304104a9b0b977b50defbe1709533327f1807d238",
+        "bytes": 1024
+      },
+      "creator/hangul/hangul-tiger-844x390-visibility.json": {
+        "sha256": "9eef32dcf181072e55c308bf8311e66e9165aeacc065bf1298c8016d870bec3c",
+        "bytes": 1058
+      },
+      "creator/hangul/results.json": {
+        "sha256": "9425a6be2278a9cfc42b2a75266e16f0426c37093095e384189058d732597214",
+        "bytes": 28761
+      },
+      "creator/hangul/shelf-sweet-potato-390x844-visibility.json": {
+        "sha256": "998da7c438ab26e78bbcbdbbc6fb23c64e49e77994f385825560723e44b2cc8f",
+        "bytes": 1024
+      },
+      "creator/hangul/shelf-sweet-potato-844x390-visibility.json": {
+        "sha256": "0a8e6624e86b24106ddc4d520680bcc82dbe3a67b962836b02335365a38a5df8",
+        "bytes": 1054
+      },
+      "creator/hangul/shelf-tofu-390x844-visibility.json": {
+        "sha256": "0a724c0c8eff80003a4b65bbfc827b7c417b3f7c5d1cd6944ba77b8450bfacfe",
+        "bytes": 1039
+      },
+      "creator/hangul/shelf-tofu-844x390-visibility.json": {
+        "sha256": "79858dadac0c95fabc8792c75f320fa63381eb1f0165b3ab1a20ab372dbd51a5",
+        "bytes": 1031
+      },
+      "creator/help/results.json": {
+        "sha256": "63266d56054b6fba582d25ddcf80d9be2954a4b86229ee2bcad2893f75c59153",
+        "bytes": 3934
+      },
+      "creator/life-pace/life-pace-results.json": {
+        "sha256": "0ab2f58bf32c373fb0ca440b434e2d51c41a546c6e1d3ef325c8d3ce911d94bb",
+        "bytes": 12305
+      },
+      "creator/memory-pace/creator-memory-pace-results.json": {
+        "sha256": "fe4757a35160f3f3299dca13200951385b081f8ac78bf0e1e848050a9b23247c",
+        "bytes": 3186
+      },
+      "creator/number/number-browser.json": {
+        "sha256": "3cb402ac5168722524d73fd4fbf49048a91709c891ac59cac8d127df0201ac04",
+        "bytes": 70602
+      },
+      "creator/number-mute/number-mute-browser.json": {
+        "sha256": "b98e20c8ffc8549b32140cd4ad7e31525e008bac25268b6a7f5d317495eb5f3c",
+        "bytes": 15099
+      },
+      "creator/train-edit/creator-train-edit-results.json": {
+        "sha256": "68434bd636eb9a5655f20b0f7ebb215fe245c804b33b84e173e6f536e5998426",
+        "bytes": 2123
+      },
+      "creator/vehicle/creator-vehicle-results.json": {
+        "sha256": "14bb2a94e007c2b9a8ba49e85120c357928ea43faac9a03fc976067f161b59a8",
+        "bytes": 5857
+      },
+      "fire/download-receipt.json": {
+        "sha256": "f110303dbf613040ae28c96eccce8bf8773303342a7fcfca17b4233e6f96b556",
+        "bytes": 379
+      },
+      "fire/fire/creator-fire-stage4-browser.json": {
+        "sha256": "c51e2907362a53267e65855b849c9808fd795e2183626ff7df8fa2d5feaab8a5",
+        "bytes": 57409
+      },
+      "workflow-runs.json": {
+        "sha256": "7e9fe85b921d339a433ebc50d4b43a8c0841b9c3830ea7f99831f8e6a5b8d1f8",
+        "bytes": 1894
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "out": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate3/creator",
+      "expected": "af9e082e0f7d7fd3ac0079887808caec6d5ecd07683e06524dddc003615c3687",
+      "artifactId": 14304819893,
+      "runId": 44031336278,
+      "name": "creator-rules-44031336278",
+      "sha256": "af9e082e0f7d7fd3ac0079887808caec6d5ecd07683e06524dddc003615c3687",
+      "bytes": 13364737,
+      "verified": true
+    },
+    {
+      "out": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate3/fire",
+      "expected": "717a39f8897bc0fe98bb954a8fd0664aff9a211fce2f49ce5304e24c09bcce3b",
+      "artifactId": 14305986061,
+      "runId": 44031336299,
+      "name": "creator-stage4-fire-44031336299",
+      "sha256": "717a39f8897bc0fe98bb954a8fd0664aff9a211fce2f49ce5304e24c09bcce3b",
+      "bytes": 8884212,
+      "verified": true
+    }
+  ],
+  "reviews": [
+    {
+      "path": "review/candidate3-number-observer-review.json",
+      "sha256": "e47bd4cadbd8764fdc291a46719c15a6d5bc1525589699eed97386c124761729"
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "reviewed-png/number-equal-four-844x390.png",
+      "sha256": "86522dd27b04ee7aeec8ac3f9769f689e3b991fc3ec441e5df047179cd5d5143"
+    },
+    {
+      "path": "reviewed-png/number-hundred-more-but-shorter-844x390.png",
+      "sha256": "9a47df07320d2ac6cbd72c35f699eb1e42ff4d5cc798ac690966c84065afcc7a"
+    },
+    {
+      "path": "reviewed-png/number-tap-count-ten-844x390.png",
+      "sha256": "733ec70746f99bf8c68834cd7d4cd4e5a16e08e2fca2829807457f198746b180"
+    }
+  ],
+  "files": {
+    "raw-json-reports.tar.gz": "ec0050db812dfe7e2d70227132fa6649a42aced1d3ce2625510d1996853a5b12",
+    "review/candidate3-number-observer-review.json": "e47bd4cadbd8764fdc291a46719c15a6d5bc1525589699eed97386c124761729",
+    "reviewed-png/number-equal-four-844x390.png": "86522dd27b04ee7aeec8ac3f9769f689e3b991fc3ec441e5df047179cd5d5143",
+    "reviewed-png/number-hundred-more-but-shorter-844x390.png": "9a47df07320d2ac6cbd72c35f699eb1e42ff4d5cc798ac690966c84065afcc7a",
+    "reviewed-png/number-tap-count-ten-844x390.png": "733ec70746f99bf8c68834cd7d4cd4e5a16e08e2fca2829807457f198746b180",
+    "workflow-runs.json": "7e9fe85b921d339a433ebc50d4b43a8c0841b9c3830ea7f99831f8e6a5b8d1f8"
+  },
+  "retention": "All downloaded raw JSON retained losslessly; listed reviewed PNGs retained. Other full PNG sets remain CI artifacts with their configured retention."
+}

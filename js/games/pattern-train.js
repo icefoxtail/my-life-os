@@ -2,7 +2,11 @@
 (function () {
   'use strict';
   const PREFIX = 'sihyeon-pattern-train-v1:';
+  const COLLECTION_KEY = 'collection';
   const memory = Object.create(null);
+  const firstAnswers = Object.create(null);
+  let collectionVolatile = false;
+  let collectionReadProtected = false;
   const LEVELS = { 4: '첫 규칙', 5: '여러 묶음', 6: '규칙 공작', 7: '규칙 탐험' };
   const view = { container: null, options: {}, state: null, task: null, age: 5, level: 5, cursor: 0, mode: 'course', prefs: {}, muted: false, saveFailed: false, voiceFailed: false, modal: null, erase: false, drag: null, ghost: null, activePointers: new Set(), blockedGesture: false, handlers: null, timers: new Set(), voiceToken: 0, tripToken: 0, suppressClickUntil: 0, previousBack: null };
   const M = () => window.SihyeonPatternTrainModel;
@@ -65,6 +69,61 @@
   function write(key, value) {
     memory[key] = clone(value);
     try { localStorage.setItem(PREFIX + key, JSON.stringify(value)); } catch (_) { view.saveFailed = true; }
+  }
+  function loadCollection() {
+    view.collectionLocked = collectionReadProtected; view.collectionNotice = ''; view.pendingWork = null;
+    let raw = null;
+    try {
+      const saved = own(memory, COLLECTION_KEY) ? memory[COLLECTION_KEY] : localStorage.getItem(PREFIX + COLLECTION_KEY);
+      raw = typeof saved === 'string' ? JSON.parse(saved) : saved;
+      view.collection = M().restoreCollection(raw);
+      if (!view.collection) throw new Error('Unknown collection');
+    } catch (_) {
+      // Never overwrite an unreadable/unknown gallery. Keep it recoverable in
+      // storage, while allowing play and the existing board autosave to work.
+      view.collection = { version: 1, works: [] }; view.collectionLocked = true; collectionReadProtected = true; collectionVolatile = true;
+      view.collectionNotice = '작품함을 읽지 못했어요. 원본은 지키고 새 작품은 이 화면에만 보관해요.';
+    }
+    // A fresh document uses the earliest saved answer for each challenge. An
+    // answer already completed in this session keeps its original precedence.
+    view.collection.works.forEach(work => rememberFirst(work.state));
+  }
+  function persistCollection(collection) {
+    view.collection = collection; memory[COLLECTION_KEY] = clone(collection);
+    if (view.collectionLocked) { collectionVolatile = true; return true; }
+    try { localStorage.setItem(PREFIX + COLLECTION_KEY, JSON.stringify(collection)); collectionVolatile = false; }
+    catch (_) { collectionVolatile = true; view.saveFailed = true; }
+    return true;
+  }
+  function currentWork() { return M().workState(view.state); }
+  function firstWork() {
+    return firstAnswers[view.state.taskId] || view.collection.works.find(work => work.state.taskId === view.state.taskId)?.state || null;
+  }
+  function rememberFirst(state) {
+    const safe = M().workState(state);
+    if (safe && !firstAnswers[safe.taskId]) firstAnswers[safe.taskId] = safe;
+  }
+  function saveWork() {
+    const state = currentWork(), id = 'train-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+    const result = M().addWork(view.collection, state, id, Date.now());
+    if (!result.ok) {
+      view.collectionNotice = ({ duplicate: '같은 기차가 이미 작품함에 있어요.', full: '작품함에 여섯 기차가 있어요. 남길 기차를 고르고 한 작품을 지우면 새로 보관할 수 있어요.', invalid: '기차를 완성한 다음 보관해 주세요.' })[result.code];
+    } else {
+      persistCollection(result.collection); rememberFirst(state);
+      view.collectionNotice = collectionVolatile ? '이 화면에 보관했어요. 기기를 다시 열 때는 남지 않을 수 있어요.' : '작품함에 보관했어요. 고쳐도 이 작품은 그대로예요.';
+    }
+    draw();
+  }
+  function loadWork(id) {
+    const saved = view.collection.works.find(work => work.id === id), state = M().workState(saved?.state);
+    if (!state) return;
+    save(); cancelDrag(); view.tripToken++; stopVoice();
+    rememberFirst(saved.state); view.state = state; view.task = M().resolveTask(state);
+    view.mode = state.free ? 'free' : 'course';
+    if (state.free) view.prefs.freeTheme = state.theme;
+    else { view.level = view.task.age; view.cursor = M().getTasks(view.level).findIndex(task => task.id === state.taskId); }
+    view.erase = false; view.modal = null; view.pendingWork = null; save(); draw();
+    speak('마음껏 고쳐 봐.');
   }
   function age() { const value = Number(window.SihyeonPlaySettings?.getAge?.() || view.options.ageMode || 5); return [4, 5, 6, 7].includes(value) ? value : 5; }
   function loadPrefs() {
@@ -157,7 +216,8 @@
     } else {
       content = '<div class="pt-motif" aria-label="되풀이할 묶음 ' + t.unit.map(v => M().TOKENS[v].name).join(', ') + '">' + rowPictures(t.unit) + '<span class="pt-repeat-sign" aria-label="이 묶음 반복">↻</span></div>' + (t.unit.length <= 4 ? '<div class="pt-picture-guide" aria-hidden="true">' + icon('hand') + token(view.state.selected) + icon('arrow') + '<span class="pt-mini-coach">+</span></div>' : '');
     }
-    return '<section class="pt-guide"><div class="pt-guide-heading"><span class="pt-guide-label">' + (t.kind === 'free' ? '정답 없이, 마음대로' : t.title) + '</span><button class="pt-challenge" type="button" data-action="challenge"' + (view.state.phase === 'RUNNING' ? ' disabled' : '') + '>' + icon('book') + '<span>도전 바꾸기</span></button></div><div class="pt-guide-content">' + content + '</div></section>';
+    const busy = view.state.phase === 'RUNNING' ? ' disabled' : '';
+    return '<section class="pt-guide"><div class="pt-guide-heading"><span class="pt-guide-label">' + (t.kind === 'free' ? '정답 없이, 마음대로' : t.title) + '</span><div class="pt-guide-tools"><button class="pt-collection-open" type="button" data-action="collection" aria-label="내 기차 작품함, ' + view.collection.works.length + '개 보관"' + busy + '>' + icon('book') + '<span>작품함 <small>' + view.collection.works.length + '/6</small></span></button><button class="pt-challenge" type="button" data-action="challenge"' + busy + '>' + icon('spark') + '<span>도전 바꾸기</span></button></div></div><div class="pt-guide-content">' + content + '</div></section>';
   }
   function coachHtml(value, i) {
     const fixed = view.task.clues[i] !== null;
@@ -184,13 +244,31 @@
     const phase = view.state.phase;
     return '<footer class="pt-footer"><div class="pt-feedback" role="status" aria-live="polite"><span class="pt-friend-face">' + token('rabbit') + '</span><span>' + resultText() + '<small class="pt-voice-note" ' + (view.voiceFailed ? '' : 'hidden') + '>그림을 보며 함께 만들어요</small><small class="pt-save-note" ' + (view.saveFailed ? '' : 'hidden') + '>이 화면에는 보관돼요. 다시 열 때는 저장이 안 될 수 있어요.</small></span></div><div class="pt-actions">' + (phase === 'ARRIVED' ? '<button type="button" class="pt-button pt-edit" data-action="edit">' + icon('edit') + '<span>고쳐 만들기</span></button><button type="button" class="pt-button pt-go" data-action="' + (view.mode === 'free' ? 'replay' : 'next') + '">' + icon('play') + '<span>' + (view.mode === 'free' ? '또 출발' : view.cursor === 4 ? '여행 완성' : '다음 역') + '</span></button>' : '<button type="button" class="pt-button pt-undo" data-action="undo" aria-label="한 번 되돌리기"' + (!view.state.history.length || phase !== 'BUILDING' ? ' disabled' : '') + '>' + icon('undo') + '</button><button type="button" class="pt-button pt-go" data-action="start"' + (phase !== 'BUILDING' ? ' disabled' : '') + '>' + icon('play') + '<span>' + (phase === 'RUNNING' ? '달리는 중' : '출발!') + '</span></button>') + '</div></footer>';
   }
+  function patternHtml(state) {
+    if (!state) return '<p class="pt-work-empty">기차를 완성하면 여기서 함께 볼 수 있어요.</p>';
+    const pattern = M().describePattern(state.board);
+    const names = values => values.map(value => M().TOKENS[value].name).join(', ');
+    const group = (values, partial) => '<span class="pt-unit-group' + (partial ? ' pt-unit-tail' : '') + '" data-size="' + values.length + '" data-full-group="' + (!partial && pattern.repeating) + '" aria-label="' + (partial ? '이어지는 칸: ' : pattern.repeating ? '한 묶음: ' : '자유 순서: ') + names(values) + '">' + values.map(value => token(value)).join('') + '</span>';
+    const label = pattern.repeating ? pattern.period + '칸 한 묶음 · ' + pattern.fullGroups + '번' + (pattern.tail.length ? ' + ' + pattern.tail.length + '칸' : '') : '자유 순서 · ' + state.size + '칸';
+    return '<div class="pt-work-pattern" data-period="' + (pattern.period || 0) + '"><strong class="pt-pattern-label">' + label + '</strong><div class="pt-pattern-groups">' + pattern.groups.map(values => group(values, false)).join('') + (pattern.tail.length ? group(pattern.tail, true) : '') + '</div><small>' + (pattern.repeating ? '테두리 하나가 같은 순서의 한 묶음이에요.' : '같은 묶음 두 번이 아직 보이지 않아도 멋진 작품이에요.') + '</small></div>';
+  }
+  function collectionHtml() {
+    const current = currentWork(), first = firstWork(), same = first && current && M().workKey(first) === M().workKey(current);
+    return '<h2 id="ptDialogTitle">내 기차 작품함 <small>' + view.collection.works.length + '/6</small></h2><p>보관한 기차는 고쳐도 그대로 남아요.</p><div class="pt-compare" aria-label="첫 작품과 현재 기차의 반복 묶음 비교"><section class="pt-compare-card" data-comparison="first"><h3>첫 작품</h3>' + (first ? patternHtml(first) : '<p class="pt-work-empty">첫 기차를 출발시키거나 보관해 주세요.</p>') + '</section><section class="pt-compare-card" data-comparison="current"><h3>지금 기차</h3>' + patternHtml(current) + '</section></div><p class="pt-comparison-note">' + (same ? '같은 순서예요. 원래 기차를 남기고 다른 순서도 만들어 볼까요?' : first && current ? '테두리 안 친구들을 처음부터 차례로 비교해 보세요.' : '다른 기차를 만들고 돌아와 묶음을 나란히 비교해요.') + '</p><button class="pt-save-work" type="button" data-action="save-work"' + (!current ? ' disabled' : '') + '>' + icon('plus') + '지금 기차 보관하기</button><p class="pt-collection-notice" role="status" aria-live="polite">' + esc(view.collectionNotice || (current ? '여섯 작품까지 보관할 수 있어요.' : '빈칸과 규칙을 확인하고 기차를 완성해 주세요.')) + '</p>' + (collectionVolatile ? '<p class="pt-collection-warning">이 화면에만 보관돼요. 기기를 다시 열 때는 남지 않을 수 있어요.</p>' : '') + (view.collectionLocked ? '<p class="pt-collection-warning">읽지 못한 이전 작품함 원본은 바꾸지 않아요.</p>' : '') + '<div class="pt-collection-grid">' + view.collection.works.map((work, index) => {
+      const task = M().resolveTask(work.state);
+      return '<article class="pt-work-card" data-work-id="' + work.id + '"><h3>기차 ' + (index + 1) + ' <small>' + esc(task.kind === 'free' ? '자유 공작' : task.title) + '</small></h3>' + patternHtml(work.state) + '<div class="pt-work-actions"><button type="button" data-action="open-work" data-work="' + work.id + '">' + icon('edit') + '불러오기</button><button type="button" data-action="remove-work" data-work="' + work.id + '" aria-label="기차 ' + (index + 1) + ' 작품 삭제">지우기</button></div></article>';
+    }).join('') + '</div><button class="pt-dialog-close" data-action="close-modal" aria-label="작품함 닫기" type="button">' + icon('close') + '</button>';
+  }
   function modalHtml() {
     if (!view.modal) return '';
     let body = '';
+    if (view.modal === 'collection') body = collectionHtml();
+    if (view.modal === 'open-work') body = '<h2 id="ptDialogTitle">보관한 기차를 불러올까요?</h2><p>지금 작업장 대신 이 기차의 사본을 열어요. 작품함의 원본은 그대로 남아요.</p><div class="pt-dialog-actions"><button data-action="collection" type="button">작품함으로</button><button data-action="confirm-open-work" type="button">불러오기</button></div>';
+    if (view.modal === 'remove-work') body = '<h2 id="ptDialogTitle">이 작품을 지울까요?</h2><p>작업장 기차는 그대로 두고, 작품함에서만 지워요.</p><div class="pt-dialog-actions"><button data-action="collection" type="button">남겨 두기</button><button data-action="confirm-remove-work" type="button">작품 지우기</button></div>';
     if (view.modal === 'restart') body = '<h2 id="ptDialogTitle">이 기차를 다시 만들까요?</h2><div class="pt-modal-picture">' + engine() + '</div><p>다른 기차 작품은 그대로 보관돼요.</p><div class="pt-dialog-actions"><button data-action="close-modal" type="button">이어서 만들기</button><button data-action="confirm-reset" type="button">새로 만들기</button></div>';
     if (view.modal === 'challenge') body = '<h2 id="ptDialogTitle">어떤 규칙으로 놀까요?</h2><p>나이와 상관없이 어떤 놀이든 골라요.</p><div class="pt-challenge-list">' + [4, 5, 6, 7].map(n => '<button type="button" data-action="level" data-level="' + n + '" aria-pressed="' + (view.mode === 'course' && view.level === n) + '">' + rowPictures(n === 4 ? ['cat', 'rabbit'] : n === 5 ? ['cat', 'cat', 'rabbit'] : n === 6 ? ['red', 'blue', 'yellow'] : ['circle', 'triangle', 'circle', 'square']) + '<span>' + LEVELS[n] + '<small>' + n + '세 추천</small></span></button>').join('') + '</div><button class="pt-free-choice" type="button" data-action="free">' + icon('spark') + '자유 공작</button><button class="pt-dialog-close" data-action="close-modal" aria-label="도전 선택 닫기" type="button">' + icon('close') + '</button>';
     if (view.modal === 'complete') body = '<div class="pt-complete-art">' + token('cat') + token('rabbit') + token('bear') + '</div><h2 id="ptDialogTitle">다섯 정거장, 모두 도착!</h2><p>이번에는 나만의 기차를 만들어 볼까?</p><div class="pt-dialog-actions"><button data-action="tour-again" type="button">한 번 더 여행</button><button data-action="free" type="button">자유 공작</button></div><button class="pt-dialog-close" data-action="close-modal" aria-label="완성 기차로 돌아가기" type="button">' + icon('close') + '</button>';
-    return '<div class="pt-overlay"><section class="pt-dialog" role="dialog" aria-modal="true" aria-labelledby="ptDialogTitle">' + body + '</section></div>';
+    return '<div class="pt-overlay"><section class="pt-dialog' + (view.modal === 'collection' ? ' pt-collection-dialog' : '') + '" role="dialog" aria-modal="true" aria-labelledby="ptDialogTitle">' + body + '</section></div>';
   }
   function draw() {
     if (!view.container || !view.state) return;
@@ -240,8 +318,9 @@
   }
   function start() {
     if (view.state.phase !== 'BUILDING') return;
+    const completed = currentWork();
     cancelDrag(); dispatch({ type: 'start' });
-    if (view.state.phase === 'RUNNING') beginTrip();
+    if (view.state.phase === 'RUNNING') { rememberFirst(completed); beginTrip(); }
     else { speak(resultText()); const index = view.state.lastResult?.wrong?.[0]; if (Number.isInteger(index)) scrollToIndex(index); }
   }
   function changeLength(delta) {
@@ -259,6 +338,22 @@
     if (action === 'repeat') { speak(view.state.phase === 'BUILDING' ? instruction() : resultText()); return; }
     if (action === 'mute') { view.muted = !view.muted; stopVoice(); save(); button.innerHTML = icon(view.muted ? 'mute' : 'sound'); button.setAttribute('aria-label', view.muted ? '소리 켜기' : '음소거'); button.setAttribute('aria-pressed', String(view.muted)); if (!view.muted) speak(instruction()); return; }
     if (action === 'scroll-left' || action === 'scroll-right') { const frame = view.container.querySelector('.pt-train-scroll'); frame?.scrollBy({ left: frame.clientWidth * (action === 'scroll-left' ? -.7 : .7), behavior: 'smooth' }); return; }
+    if (action === 'collection') { cancelDrag(); stopVoice(); view.modal = 'collection'; view.pendingWork = null; draw(); return; }
+    if (action === 'save-work') { saveWork(); return; }
+    if (action === 'open-work' || action === 'remove-work') {
+      if (!view.collection.works.some(work => work.id === button.dataset.work)) return;
+      view.pendingWork = button.dataset.work; view.modal = action; draw(); return;
+    }
+    if (action === 'confirm-open-work') { loadWork(view.pendingWork); return; }
+    if (action === 'confirm-remove-work') {
+      const old = view.collection.works.find(work => work.id === view.pendingWork), next = M().removeWork(view.collection, view.pendingWork);
+      if (next) {
+        persistCollection(next);
+        if (old && M().workKey(firstAnswers[old.state.taskId]) === M().workKey(old.state)) delete firstAnswers[old.state.taskId];
+        view.collectionNotice = '작품함에서 지웠어요. 작업장의 기차는 그대로예요.';
+      }
+      view.pendingWork = null; view.modal = 'collection'; draw(); return;
+    }
     if (action === 'select') { view.erase = false; if (!dispatch({ type: 'select', token: button.dataset.token })) draw(); speak(M().TOKENS[button.dataset.token].name); return; }
     if (action === 'eraser') { view.erase = !view.erase; draw(); speak(view.erase ? '꺼낼 친구를 톡 눌러 줘.' : '친구를 다시 태워 줘.'); return; }
     if (action === 'seat') {
@@ -428,10 +523,11 @@
     }
     if (!document.getElementById('sihyeon-pattern-train-style')) { const link = document.createElement('link'); link.id = 'sihyeon-pattern-train-style'; link.rel = 'stylesheet'; link.href = './css/games/pattern-train.css'; document.head.appendChild(link); }
     const back = container.closest('.game-play-screen')?.querySelector('.game-back-floating'); if (back) { view.previousBack = { element: back, hidden: back.hidden }; back.hidden = true; }
-    view.saveFailed = false; view.voiceFailed = false; view.suppressClickUntil = 0; loadPrefs(); view.age = age(); view.level = view.prefs.levels[view.age] || view.age; view.cursor = view.prefs.cursors[view.level] || 0;
+    view.saveFailed = false; view.voiceFailed = false; view.suppressClickUntil = 0; loadPrefs(); loadCollection(); view.age = age(); view.level = view.prefs.levels[view.age] || view.age; view.cursor = view.prefs.cursors[view.level] || 0;
     bind(); if (view.prefs.mode === 'free') loadFree(view.prefs.freeTheme); else loadCourse(view.level, view.cursor, false);
   }
   window.SihyeonGames = window.SihyeonGames || {};
   window.SihyeonGames.patternTrain = { id: 'patternTrain', title: '패턴 기차 공작소', render, destroy,
-    getSnapshot: () => view.state ? { state: clone(view.state), taskId: view.task.id, age: view.age, level: view.level, cursor: view.cursor, mode: view.mode, muted: view.muted, voiceFailed: view.voiceFailed, saveFailed: view.saveFailed, dragging: !!view.drag?.moved, modal: view.modal } : null };
+    getSnapshot: () => view.state ? { state: clone(view.state), taskId: view.task.id, age: view.age, level: view.level, cursor: view.cursor, mode: view.mode, muted: view.muted, voiceFailed: view.voiceFailed, saveFailed: view.saveFailed, dragging: !!view.drag?.moved, modal: view.modal,
+      collection: clone(view.collection), collectionVolatile, collectionLocked: view.collectionLocked, firstWork: clone(firstWork()) } : null };
 })();

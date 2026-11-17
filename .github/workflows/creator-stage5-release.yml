@@ -1,0 +1,136 @@
+name: Creator stage 5 release
+
+on:
+  pull_request:
+    paths:
+      - 'js/quantity-sequencer.js'
+      - 'js/games/number-picture.js'
+      - 'js/games/ten-frame-garden.js'
+      - 'js/games/picture-arithmetic*.js'
+      - 'js/games/pattern-train*.js'
+      - 'js/games/number-world-save.js'
+      - 'games/number-kingdom-3d.html'
+      - 'css/games/number-picture.css'
+      - 'css/games/ten-frame-garden.css'
+      - 'css/games/picture-arithmetic.css'
+      - 'css/games/pattern-train.css'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/test-creator-*-strategies.cjs'
+      - 'scripts/test-creator-number-*.cjs'
+      - 'scripts/test-creator-train-collection.cjs'
+      - 'scripts/qa-creator-*-browser.py'
+      - 'scripts/qa-number-picture-browser.py'
+      - 'scripts/qa-ten-frame-garden-browser.py'
+      - 'scripts/qa-picture-arithmetic*'
+      - '.github/workflows/creator-stage5-release.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/quantity-sequencer.js'
+      - 'js/games/number-picture.js'
+      - 'js/games/ten-frame-garden.js'
+      - 'js/games/picture-arithmetic*.js'
+      - 'js/games/pattern-train*.js'
+      - 'js/games/number-world-save.js'
+      - 'games/number-kingdom-3d.html'
+      - 'css/games/number-picture.css'
+      - 'css/games/ten-frame-garden.css'
+      - 'css/games/picture-arithmetic.css'
+      - 'css/games/pattern-train.css'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/test-creator-*-strategies.cjs'
+      - 'scripts/test-creator-number-*.cjs'
+      - 'scripts/test-creator-train-collection.cjs'
+      - 'scripts/qa-creator-*-browser.py'
+      - 'scripts/qa-number-picture-browser.py'
+      - 'scripts/qa-ten-frame-garden-browser.py'
+      - 'scripts/qa-picture-arithmetic*'
+      - '.github/workflows/creator-stage5-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stage5-rules:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Continuity, strategies, multiple answers and creations
+        run: |
+          node scripts/qa-quantity-sequencer.cjs
+          node scripts/test-creator-number-continuity.cjs
+          node scripts/test-creator-arithmetic-strategies.cjs
+          node scripts/test-creator-train-collection.cjs
+          node scripts/test-creator-number-world.cjs
+          node scripts/test-creator-number-mute.cjs
+          node scripts/qa-pattern-train-ui-independent.cjs
+          node scripts/qa-sw-independent.cjs
+          python3 -m py_compile scripts/qa-creator-number-continuity-browser.py scripts/qa-creator-arithmetic-strategies-browser.py scripts/qa-creator-train-collection-browser.py scripts/qa-creator-number-world-browser.py
+
+  stage5-chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [number-continuity, arithmetic-strategies, train-collection, number-world]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Install pinned Chromium
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
+      - name: Wait for the exact deployed stage 5 runtime
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib,time,urllib.request
+          paths=['index.html','sw.js','js/quantity-sequencer.js','js/play-settings.js','js/voice-engine.js','js/play-objects.js','js/games/number-picture.js','js/games/ten-frame-garden.js','js/games/picture-arithmetic.js','js/games/quantity-play-model.js','js/games/pattern-train.js','js/games/pattern-train-model.js','games/number-kingdom-3d.html','js/games/number-world-save.js','css/games/number-picture.css','css/games/ten-frame-garden.css','css/games/picture-arithmetic.css','css/games/pattern-train.css']
+          expected={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}
+          base='https://icefoxtail.github.io/my-life-os/'
+          out=pathlib.Path('qa-stage5-evidence');out.mkdir(exist_ok=True)
+          deadline=time.monotonic()+50*60
+          while time.monotonic()<deadline:
+              actual={}
+              try:
+                  for path in paths:
+                      with urllib.request.urlopen(base+path+'?stage5='+expected['sw.js'][:12],timeout=15) as response:
+                          actual[path]=hashlib.sha256(response.read()).hexdigest()
+              except Exception as error:
+                  print(type(error).__name__,flush=True)
+              if actual==expected:
+                  (out/'production-source.json').write_text(json.dumps({'baseUrl':base,'matches':True,'expected':expected,'actual':actual},indent=2))
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('Exact main runtime not served by Pages; stage 5 production play did not run.')
+          PY
+      - name: Play stage 5 through public menus and controls
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          STAGE5_GAME: ${{ matrix.game }}
+        run: |
+          args=()
+          if [ "$EVENT_NAME" = push ]; then
+            args=(--base-url https://icefoxtail.github.io/my-life-os/)
+          fi
+          python3 "scripts/qa-creator-$STAGE5_GAME-browser.py" "${args[@]}" --output "qa-stage5-evidence/$STAGE5_GAME"
+      - name: Preserve source-bound reports and actual screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: creator-stage5-${{ matrix.game }}-${{ github.run_id }}
+          path: qa-stage5-evidence/
+          if-no-files-found: error
+          retention-days: 14

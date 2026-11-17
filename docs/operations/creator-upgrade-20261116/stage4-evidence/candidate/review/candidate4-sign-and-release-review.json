@@ -1,0 +1,246 @@
+{
+  "reviewer": "/root/stage4_independent",
+  "createdAt": "2026-11-17T06:44:29.807390+00:00",
+  "candidateCommit": "61f926b6895787d26d32c4952a8914e25bcdd3e1",
+  "baselineCandidate": "ce95f961758960ab8714d1fc08e39246d0e15cb0",
+  "reportedStage4WorkflowRun": "44032201677",
+  "status": "VISUAL_AND_SOURCE_BINDING_PASS_SCOPED",
+  "productionReleaseCompleted": false,
+  "scope": "Final candidate sign change plus source/evidence continuity. Independent source and raw-artifact verification; no product, test or Git mutations.",
+  "imagesActuallyViewed": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/station-390x844-job-1-result.png",
+      "sha256": "7beab5a1aa7be8f89b8ff43eb968274a1592339b03b7ed078f27524daf83efac"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/station-320x568-job-3-result.png",
+      "sha256": "b2fcc761322944d74297b9914c2a637351764413058944cde5641dd78bb4237f"
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/station-640x360-job-3-working.png",
+      "sha256": "c6153d88ba68373731c33f113965045dec08a682cb14f62d4df8234666f9000f"
+    }
+  ],
+  "associatedMeasurements": [
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/station-390x844-job-1-result.json",
+      "sha256": "c1b444a01375b02ba88a9af0ce9fd0c4919108c49ea948905db856e68b3a812f",
+      "phase": "result",
+      "sceneCoordinates": {
+        "svg": {
+          "left": 17,
+          "top": 311.25,
+          "right": 373,
+          "bottom": 533.75,
+          "width": 356,
+          "height": 222.5
+        },
+        "canvas": {
+          "left": 17,
+          "top": 311.25,
+          "right": 373,
+          "bottom": 533.75,
+          "width": 356,
+          "height": 222.5
+        },
+        "worker": {
+          "left": 27.671875,
+          "top": 449.203125,
+          "right": 134.46875,
+          "bottom": 527.078125,
+          "width": 106.796875,
+          "height": 77.875
+        }
+      }
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/station-320x568-job-3-result.json",
+      "sha256": "7f4b45254e936ba96af7ad815096ebfd5ed6e4ed27f7aa0a8d45afd7657ad3a8",
+      "phase": "result",
+      "sceneCoordinates": {
+        "svg": {
+          "left": 17,
+          "top": 195.125,
+          "right": 303,
+          "bottom": 373.875,
+          "width": 286,
+          "height": 178.75
+        },
+        "canvas": {
+          "left": 17,
+          "top": 195.125,
+          "right": 303,
+          "bottom": 373.875,
+          "width": 286,
+          "height": 178.75
+        },
+        "worker": {
+          "left": 25.578125,
+          "top": 305.953125,
+          "right": 111.375,
+          "bottom": 368.515625,
+          "width": 85.796875,
+          "height": 62.5625
+        }
+      }
+    },
+    {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/station-640x360-job-3-working.json",
+      "sha256": "f7f8eba1ffbacdc39d4fd30645ea14caf3b149afb0ed18005a1f0769c4c9615e",
+      "phase": "working",
+      "sceneCoordinates": {
+        "svg": {
+          "left": 155.15625,
+          "top": 115.75,
+          "right": 447.15625,
+          "bottom": 298.25,
+          "width": 292,
+          "height": 182.5
+        },
+        "canvas": {
+          "left": 155.15625,
+          "top": 115.75,
+          "right": 447.15625,
+          "bottom": 298.25,
+          "width": 292,
+          "height": 182.5
+        },
+        "worker": {
+          "left": 163.90625,
+          "top": 228.90625,
+          "right": 251.5,
+          "bottom": 292.78125,
+          "width": 87.59375,
+          "height": 63.875
+        }
+      }
+    }
+  ],
+  "visualFindings": [
+    {
+      "file": "station-390x844-job-1-result.png",
+      "verdict": "PASS",
+      "finding": "At 390x844 the sign clearly reads 소방서 inside the same white sign panel; the medical-looking red plus is gone. The station, shallow apron, grounded excavator and next/listen controls retain their layout."
+    },
+    {
+      "file": "station-320x568-job-3-result.png",
+      "verdict": "PASS",
+      "finding": "At 320x568 the three Korean characters remain identifiable within the small sign without clipping. The completed apron, fire engine and work vehicle remain visible. Result text and buttons are unobstructed."
+    },
+    {
+      "file": "station-640x360-job-3-working.png",
+      "verdict": "PASS",
+      "finding": "At 640x360 the sign is legible in the same building facade. Vehicle/ground perspective and scene bounds are unchanged, and the working status/control area remains clear. Raw measurement confirms phase working."
+    }
+  ],
+  "semanticFindingResolution": "The station image now names the same facility as the header and play objective. This resolves the red-cross ambiguity found during final review. This is visual review, not an observation of a child reading the sign.",
+  "exactProductDiffVerification": {
+    "changedProductPaths": [
+      "js/games/construction-site.js"
+    ],
+    "onlySubstitution": {
+      "from": "<path d=\"M406 86v25m-13-12h26\" stroke=\"#dd6258\" stroke-width=\"8\" stroke-linecap=\"round\"/>",
+      "to": "<text x=\"411.5\" y=\"105\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"22\" font-weight=\"800\" fill=\"#c54b3f\">소방서</text>"
+    },
+    "replacingNewSignWithOldRestoresEntireBaselineFile": true,
+    "constructionBeforeSha256": "285fdcd6144ab6c5a336530f41e713a5bc3ed7db21829d7198871a09cc45e9cc",
+    "constructionAfterSha256": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+    "unchangedRuntimeAndStage4TestSha256": {
+      "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+      "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+      "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+      "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+      "scripts/test-creator-construction-stage4.cjs": "714840b7b560fd2ca118e958c23b33ef4902baf708b7feb2fa07b525a48758b8",
+      "scripts/qa-creator-construction-stage4-browser.py": "7313b95aee6f71678b5600e6dd035867534699c56cbdf017b5915d37bb2c6cd7",
+      "scripts/test-creator-fire-stage4.cjs": "6d688d63e76fe37168ed8ee1609c622efa1cc80680e4c52c77533a9d308b16fc",
+      "scripts/qa-creator-fire-stage4-browser.py": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae"
+    },
+    "otherChangeScope": "Documentation/evidence and the separate number-browser synchronization harness. No claim of independent review of that number-harness change is made here."
+  },
+  "rawEvidence": {
+    "construction": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/construction/construction/construction-stage4-results.json",
+      "sha256": "dcf7761bb3e0d7be0ccad00376b32747c628e6be252656a5c25786919a88f2be",
+      "status": "PASS",
+      "cases": 20,
+      "sourceHashesBeforeAndAfterMatchGit": true,
+      "all20LoadedSourceRecordsMatch": true,
+      "sourceSha256": {
+        "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+        "sw.js": "ca7993d4635ac5be5268a10b3df4ce9e1bf7cc4f6f75251a424f6f21c5f994cd",
+        "js/games/construction-site.js": "bb241500a754f05b66a7aee03798d9a1e0aaa64dc37d63609b48b3441babc153",
+        "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+        "assets/vehicles/construction_manifest.json": "26495cf4dd79acff6c66f5e50c716ed5afa27e70c8b4592327a6a8af006e3da7",
+        "assets/vehicles/fire/pump_engine.png": "38837ebbd6a5fef0ab119fa916a4df9291af122d6faf25fdb502a29b4b5fd6a0"
+      },
+      "pageErrors": [],
+      "browserVersion": "143.0.7499.4",
+      "scope": "Public project choices and native touch; simulated audio completion. Physical device and audible speech NOT_RUN."
+    },
+    "fire": {
+      "path": "/workspace/scratch/d006ae658a87/evidence/stage4-candidate4/fire/fire/creator-fire-stage4-browser.json",
+      "sha256": "03690899754c5d30054de7e7a48b91f4a972e8583da580d7a2b2db7904e81370",
+      "status": "PASS",
+      "cases": 8,
+      "allSixMainAndRetrySourcesMatchGit": true,
+      "sourceSha256": {
+        "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+        "js/vehicle-display.js": "21b7b08965d92dec8398efe6fd305fb7975d7dd2f20844a1d5b5326ea4d02d02",
+        "js/games/megaDispatch.js": "d1c1133dda2c51dbbd5fe60064770878133c8d8e6724cec23bd81037094f90b6",
+        "assets/vehicles/fire_manifest.json": "101454e98e2c3c7c5d8f8027d72382e4c98b3a0917f6a1eacc85d52f1ff9a884",
+        "assets/vehicles/fire_special_manifest.json": "835bb223e08d63947247ef208a63da4e8e3314adca1fd73f5ca4307fef58f9aa"
+      },
+      "testScriptSha256": "bb316a2cf09f7bfc2ee5e3cfa481bc9900e27e80982688e2176b3628cefbfdae",
+      "unexpectedErrors": {
+        "pageErrors": [],
+        "consoleErrors": [],
+        "httpErrors": [],
+        "failedRequests": []
+      },
+      "inputMode": "native browser mouse/keyboard clicks; has_touch is not enabled",
+      "motionMode": "390x844 uses no-preference with one arrival DOM/PNG observation; other five viewports and special failure contexts use reduce",
+      "notRun": [
+        "physical device touch",
+        "audible speech listening",
+        "full catalog motion trajectories",
+        "child observation"
+      ]
+    }
+  },
+  "freshConstructionGeometrySummary": {
+    "framesRead": 176,
+    "workerFrames": 79,
+    "feetFrames": 25,
+    "issues": [],
+    "allRecordedFeetInsidePath": true,
+    "scope": "Programmatic reading of recorded geometry; only the three listed candidate4 PNGs were manually viewed."
+  },
+  "candidate2VisualEvidenceReuse": {
+    "reviews": [
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-review/candidate2-construction-visual-review.json",
+        "sha256": "7e44c7d66d8c455d6919a6bfe08887ecb5ee0f7f7f634cc44d963aca631e5b36"
+      },
+      {
+        "path": "/workspace/scratch/d006ae658a87/evidence/stage4-review/candidate2-fire-visual-review.json",
+        "sha256": "fc8562b51d616b1ea63ec629a08d354c0a091cd8fb93b9cf65da916526d277e8"
+      }
+    ],
+    "justification": "Only the sign literal changed in construction; all geometry, vehicle placement, walking path, roles, accepted answers, state transitions and reward logic remain byte-for-byte identical after reversing that substitution. Fire product/source assets and Stage4 harnesses are unchanged, and the final candidate reran 20 construction plus 8 fire cases successfully.",
+    "reusedScope": [
+      "Construction vehicle-to-ground alignment and intermediate/final walking path judgments",
+      "Construction small-screen controls and before/after causal scene changes",
+      "All four fire ladder variants and their visible rail connections",
+      "One 390x844 normal-motion tanker entrance with its stated limits"
+    ],
+    "notClaimed": "Candidate2 PNGs are historical baseline evidence, not new candidate4 screenshots. No additional candidate4 fire PNG was manually viewed for this sign-only review."
+  },
+  "releaseAssessment": "No independent visual/source-continuity blocker remains for this final candidate. Root must finish the remaining authorized merge and production verification; this JSON does not assert production completion.",
+  "limits": [
+    "Physical-device touch not tested",
+    "Audible speech listening not performed",
+    "No child observation",
+    "No full-catalog motion review",
+    "No claim that every candidate4 PNG was manually inspected"
+  ]
+}

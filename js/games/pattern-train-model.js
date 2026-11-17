@@ -195,7 +195,60 @@
     if (n.phase === 'ARRIVED' && !validateBoard(task, n.board, n).ok) n.phase = 'BUILDING';
     return n;
   }
-  const api = { TOKENS, PALETTES, TASKS, taskFor, getTasks, createFreeTask, resolveTask, createState, reduce, restoreState, validateBoard, candidateUnits, minimalPeriod, signature, repeat };
+  // Gallery snapshots are separate from the version-1 in-progress board. A
+  // saved train is an immutable completed arrangement, opened as a fresh copy.
+  const COLLECTION_LIMIT = 6;
+  function workState(raw) {
+    if (!raw || raw.phase === 'RUNNING') return null;
+    const state = restoreState(raw), task = resolveTask(state);
+    if (!state || !validateBoard(task, state.board, state).ok) return null;
+    state.phase = 'BUILDING'; state.history = []; state.lastResult = null;
+    return state;
+  }
+  function workKey(raw) {
+    const state = workState(raw);
+    return state ? JSON.stringify([state.taskId, state.board, state.seed, state.chosenPeriod]) : null;
+  }
+  function restoreCollection(raw) {
+    if (raw === null || raw === undefined) return { version: 1, works: [] };
+    if (!raw || raw.version !== 1 || !Array.isArray(raw.works) || raw.works.length > COLLECTION_LIMIT) return null;
+    const ids = new Set(), keys = new Set(), works = [];
+    for (const work of raw.works) {
+      if (!work || typeof work.id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,63}$/.test(work.id) || ids.has(work.id)
+        || !Number.isSafeInteger(work.createdAt) || work.createdAt < 0) return null;
+      const state = workState(work.state), key = workKey(state);
+      if (!state || keys.has(key)) return null;
+      ids.add(work.id); keys.add(key); works.push({ id: work.id, createdAt: work.createdAt, state });
+    }
+    return { version: 1, works };
+  }
+  function addWork(collection, raw, id, createdAt) {
+    const current = restoreCollection(collection), state = workState(raw);
+    if (!current || !state) return { ok: false, code: 'invalid' };
+    const existing = current.works.find(work => workKey(work.state) === workKey(state));
+    if (existing) return { ok: false, code: 'duplicate', id: existing.id };
+    if (current.works.length >= COLLECTION_LIMIT) return { ok: false, code: 'full' };
+    const next = restoreCollection({ version: 1, works: current.works.concat([{ id, createdAt, state }]) });
+    return next ? { ok: true, collection: next, id } : { ok: false, code: 'invalid' };
+  }
+  function removeWork(collection, id) {
+    const current = restoreCollection(collection);
+    if (!current || !current.works.some(work => work.id === id)) return null;
+    return { version: 1, works: current.works.filter(work => work.id !== id) };
+  }
+  function describePattern(board) {
+    const period = minimalPeriod(board);
+    if (!period) return null;
+    const fullGroups = Math.floor(board.length / period), repeating = fullGroups >= 2;
+    // One arbitrary free train is not a demonstrated repeating group. Do not
+    // label its entire board a repeated unit simply because p = board.length.
+    return { repeating, period: repeating ? period : null,
+      unit: repeating ? board.slice(0, period) : [], fullGroups: repeating ? fullGroups : 0,
+      tail: repeating ? board.slice(fullGroups * period) : [],
+      groups: repeating ? Array.from({ length: fullGroups }, (_, i) => board.slice(i * period, (i + 1) * period)) : [board.slice()] };
+  }
+  const api = { TOKENS, PALETTES, TASKS, taskFor, getTasks, createFreeTask, resolveTask, createState, reduce, restoreState, validateBoard, candidateUnits, minimalPeriod, signature, repeat,
+    COLLECTION_LIMIT, workState, workKey, restoreCollection, addWork, removeWork, describePattern };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.SihyeonPatternTrainModel = api;
 })(typeof window !== 'undefined' ? window : globalThis);

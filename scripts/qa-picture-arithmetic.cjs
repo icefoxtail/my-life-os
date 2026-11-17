@@ -41,6 +41,7 @@ class Element {
   set className(value) { this.attrs.class = String(value); }
   focus() { if (Element.document) Element.document.activeElement = this; }
   get disabled() { return Object.hasOwn(this.attrs, 'disabled'); }
+  set disabled(value) { if (value) this.attrs.disabled = ''; else delete this.attrs.disabled; }
   get hidden() { return Object.hasOwn(this.attrs, 'hidden'); }
   set hidden(value) { if (value) this.attrs.hidden = ''; else delete this.attrs.hidden; }
   get textContent() { return this.text + this.children.map(child => child.textContent).join(''); }
@@ -49,6 +50,7 @@ class Element {
   getAttribute(name) { return this.attrs[name] ?? null; }
   appendChild(child) { if (child.parentElement) child.parentElement.children = child.parentElement.children.filter(other => other !== child); child.parentElement = this; this.children.push(child); return child; }
   remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter(other => other !== this); this.parentElement = null; }
+  replaceWith(other) { const parent = this.parentElement; if (!parent) return; other.remove(); const index = parent.children.indexOf(this); parent.children.splice(index, 1, other); other.parentElement = parent; this.parentElement = null; }
   contains(element) { for (let node = element; node; node = node.parentElement) if (node === this) return true; return false; }
   matches(selector) {
     const attributes = [...selector.matchAll(/\[([^=\]]+)(?:="([^"]*)")?\]/g)];
@@ -104,7 +106,11 @@ function fixture({ saved = {}, writeFails = false, readFails = false, missing = 
           options.onStep(steps[0], 0); return Promise.resolve();
         },
         stop() { if (active) { active.status = 'cancelled'; active = null; } },
-        getSnapshot() { return { status: latest?.status || 'idle', running: !!active, stepIndex: latest?.index ?? -1, totalSteps: latest?.steps.length || 0 }; }
+        pause() { if (active) { active.status = 'paused'; active.options.onState?.(); } },
+        resume() { if (active?.status === 'paused') { active.status = 'running'; active.options.onState?.(); } },
+        isPaused() { return active?.status === 'paused'; },
+        setMuted(value) { if (active) active.options.muted = value; },
+        getSnapshot() { return { status: latest?.status || 'idle', running: active?.status === 'running', stepIndex: latest?.index ?? -1, totalSteps: latest?.steps.length || 0 }; }
       }; return api;
     } }
   });
@@ -185,22 +191,22 @@ check('equal sharing conserves each original DOM node through every move', () =>
     eq(f.container.querySelector('.pa-pool-title').textContent, '남은 그림'); f.api.destroy();
   }
 });
-check('replacement, modes, mute, settings, age, language and exit cancel stale callbacks', () => {
+check('replacement cancels stale callbacks while mute/settings preserve the current objects and count', () => {
   const f = fixture(), old = f.runs.at(-1);
   f.click('number', '7'); let current = f.api.getSnapshot();
   eq(old.status, 'cancelled'); old.options.onStep(old.steps[10], 10); old.options.onEnd({});
   eq(f.api.getSnapshot(), current, 'Old count callback changed the new selection');
   f.click('mode', 'share'); eq(f.api.getSnapshot().mode, 'share');
   f.click('groups', '4'); eq(f.api.getSnapshot().groups, 4);
-  const beforeMute = f.runs.at(-1); f.click('mute'); eq(beforeMute.status, 'cancelled'); eq(f.runs.at(-1).options.muted, true);
+  const beforeMute = f.runs.at(-1), beforeMuteIndex = beforeMute.index; f.click('mute'); eq(beforeMute.status, 'running'); ok(f.runs.at(-1) === beforeMute); eq(beforeMute.index, beforeMuteIndex); eq(f.runs.at(-1).options.muted, true);
   f.finish(); eq(f.api.getSnapshot().actualGroups, [3, 3, 3, 3]);
   f.click('style', 'sino'); ok(f.runs.at(-1).steps.filter(step => step.kind === 'move').every(step => step.readingStyle === 'sino'));
   f.setLanguage('en'); eq(f.api.getSnapshot().language, 'en'); ok(f.runs.at(-1).steps.every(step => typeof step.enText === 'string' && !/[가-힣]/.test(step.enText)));
   for (const a of [4, 5, 6, 7]) { f.setAge(a); eq([f.api.getSnapshot().age, f.api.getSnapshot().total, f.api.getSnapshot().groups], [a, 15, 4]); }
-  f.click('settings'); eq(f.api.getSnapshot().sequence.status, 'cancelled'); eq(f.counts().observers, 1);
+  f.click('settings'); eq(f.api.getSnapshot().sequence.status, 'paused'); eq(f.counts().observers, 1);
   const numRuns = f.runs.length; f.setLanguage('ko'); eq(f.runs.length, numRuns, 'Settings overlay must not restart background counting');
-  f.closeSettings(); eq(f.runs.length, numRuns + 1); eq(f.counts().observers, 0);
-  f.hide(true); eq(f.api.getSnapshot().sequence.status, 'cancelled'); f.hide(false); eq(f.api.getSnapshot().sequence.status, 'running');
+  f.closeSettings(); eq(f.runs.length, numRuns); eq(f.counts().observers, 0); eq(f.api.getSnapshot().sequence.status, 'running');
+  f.hide(true); eq(f.api.getSnapshot().sequence.status, 'paused'); f.hide(false); eq(f.api.getSnapshot().sequence.status, 'running');
   const exiting = f.runs.at(-1); f.click('home'); exiting.options.onEnd({}); eq(f.counts().homes, 1);
   eq([f.api.getSnapshot().active, f.counts().listeners, f.counts().observers], [false, 0, 0]);
 });
@@ -217,7 +223,7 @@ check('validated restoration and in-memory recovery after readable stale storage
 });
 check('large picture/group dialogs pause, trap focus and resume without losing the exact set', () => {
   const f = fixture(), first = f.runs.at(-1);
-  f.click('choosePicture', 'b'); eq(first.status, 'cancelled'); eq(f.api.getSnapshot().dialog, 'pictures');
+  f.click('choosePicture', 'b'); eq(first.status, 'paused'); eq(f.api.getSnapshot().dialog, 'pictures');
   eq(f.api.getSnapshot().actualCount, 15);
   let buttons = f.container.querySelectorAll('.pa-picture-dialog button');
   eq(f.document.activeElement.dataset.paAction, 'closeDialog');
@@ -231,7 +237,7 @@ check('large picture/group dialogs pause, trap focus and resume without losing t
   f.click('choosePicture', 'a'); const paused = f.runs.length;
   f.setLanguage('en'); eq(f.runs.length, paused);
   f.container.fire('keydown', { key: 'Escape', preventDefault() {} });
-  eq(f.api.getSnapshot().dialog, null); eq(f.runs.length, paused + 1);
+  eq(f.api.getSnapshot().dialog, null); eq(f.runs.length, paused); eq(f.api.getSnapshot().sequence.status, 'running');
   f.click('mode', 'share'); f.click('chooseGroups');
   eq(f.api.getSnapshot().dialog, 'groups');
   eq(f.container.querySelectorAll('.pa-picture-dialog [data-pa-action="groups"]').map(button => button.dataset.value), ['1', '2', '3', '4', '5', '6']);
@@ -247,3 +253,4 @@ check('missing dependencies provide an exit without reading or writing game stat
   f.click('home'); eq([f.counts().homes, f.counts().listeners], [1, 0]);
 });
 console.log(JSON.stringify({ status: 'PASS', scope: 'Production UI with controlled DOM/sequence, not browser layout or real audio', assertions, checks: results }, null, 2));
+module.exports = { fixture, model };

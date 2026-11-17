@@ -7,12 +7,14 @@
   const DEFAULTS = {
     mode: 'add', a: 9, b: 6, aId: 'korean_police_car', bId: 'pump_engine',
     total: 15, groups: 3, shareId: 'apple', activeTerm: 'a', style: 'native', muted: false,
-    aSourceKind: 'recommended', bSourceKind: 'recommended', shareSourceKind: 'recommended'
+    aSourceKind: 'recommended', bSourceKind: 'recommended', shareSourceKind: 'recommended',
+    strategy: 'all', shareHistory: [], keptShare: null
   };
   const view = {
     container: null, options: {}, objects: [], state: null, sequence: null, handlers: null,
     range: 0, category: 'vehicle', model: null, counted: 0, moved: 0, current: null,
     phase: 'idle', complete: false, audioFailed: false, runId: 0, error: null, settingsObserver: null, dialog: null,
+    remainderKept: false, userPaused: false, suspended: false,
     choiceSourceKind: 'recommended', choiceObjects: [], choices: {},
     storage: { read: 'unread', write: 'unwritten' }
   };
@@ -65,11 +67,17 @@
   }
   function save() {
     // The in-session copy is authoritative after a quota or privacy-mode write failure.
-    memory = Object.assign({ version: 1 }, view.state);
+    memory = JSON.parse(JSON.stringify(Object.assign({ version: 1 }, view.state)));
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify(memory));
       view.storage.write = 'saved';
     } catch (_) { view.storage.write = 'memory-only'; }
+  }
+  function validKeptShare(row) {
+    return !!row && M().isQuantity(row.total) && Number.isInteger(row.groups) && row.groups >= 1 && row.groups <= 6
+      && row.each === Math.floor(row.total / row.groups) && row.remainder === row.total % row.groups && row.remainder > 0
+      && typeof row.picture === 'string' && row.picture.length > 0 && row.picture.length <= 100
+      && ['recommended', 'artwork'].includes(row.sourceKind);
   }
   function load() {
     let saved = memory;
@@ -97,6 +105,16 @@
       });
       if (['a', 'b'].includes(saved.activeTerm)) s.activeTerm = saved.activeTerm;
       if (['native', 'sino'].includes(saved.style)) s.style = saved.style;
+      if (['all', 'on'].includes(saved.strategy)) s.strategy = saved.strategy;
+      s.shareHistory = Array.isArray(saved.shareHistory) ? saved.shareHistory.filter(row =>
+        row && M().isQuantity(row.total) && Number.isInteger(row.groups) && row.groups >= 1 && row.groups <= 6 &&
+        row.each === Math.floor(row.total / row.groups) && row.remainder === row.total % row.groups &&
+        typeof row.picture === 'string' && row.picture.length <= 100 && ['recommended', 'artwork'].includes(row.sourceKind)
+      ).slice(-4) : [];
+      if (validKeptShare(saved.keptShare)) {
+        const k = saved.keptShare;
+        s.keptShare = { total: k.total, groups: k.groups, each: k.each, remainder: k.remainder, picture: k.picture, sourceKind: k.sourceKind };
+      }
       s.muted = saved.muted === true;
     }
     ['aId', 'bId', 'shareId'].forEach(key => {
@@ -121,7 +139,8 @@
   function summaryStep() {
     const s = view.state, model = view.model, unit = commonUnit();
     if (s.mode === 'add') {
-      const total = model.total === 0 ? '하나도 없어요. 영이에요.' : '모두 ' + plainQuantity(model.total, unit) + '예요.';
+      const mixed = item('a').unitKo !== item('b').unitKo ? '물건 ' : '';
+      const total = model.total === 0 ? '하나도 없어요. 영이에요.' : mixed + '모두 ' + plainQuantity(model.total, unit) + '예요.';
       return { id: 'sum', kind: 'summary', readingStyle: s.style,
         nativeText: M().countWord(s.a, 'native') + ' 더하기 ' + M().countWord(s.b, 'native') + '. ' + total,
         sinoText: M().countWord(s.a, 'sino') + ' 더하기 ' + M().countWord(s.b, 'sino') + '. ' + total,
@@ -137,6 +156,13 @@
   function steps() {
     const s = view.state, model = view.model;
     if (s.mode === 'add') {
+      if (s.strategy === 'on') {
+        return [{ id: 'known-first', kind: 'base', number: s.a,
+          text: '먼저 ' + plainQuantity(s.a, item('a').unitKo) + '. 여기서 이어서 세어요.',
+          enText: 'Start with ' + s.a + '. Count on from here.' }].concat(
+          model.right.map((object, index) => readingStep('count-' + object.id, 'count', s.a + index + 1,
+            { itemId: object.id, ordinal: s.a + index + 1 })), summaryStep());
+      }
       return model.items.map((object, index) => readingStep('count-' + object.id, 'count', index + 1,
         { itemId: object.id, ordinal: index + 1 })).concat(summaryStep());
     }
@@ -156,18 +182,21 @@
     const s = view.state, model = view.model;
     if (s.mode === 'add') {
       if (!model.total) return '<div class="pa-zero"><strong>0</strong><span>하나도 없어요</span><span aria-hidden="true">🌿</span></div>';
-      return '<div class="pa-add-items">' + model.left.map(object => objectMarkup(object, 'a', 'a')).join('') +
-        model.right.map(object => objectMarkup(object, 'b', 'b')).join('') + '</div>';
+      return '<div class="pa-source-trays"><section class="pa-source-tray"><header>첫 그림 · ' + s.a + '</header><div class="pa-waiting-items" data-add-source="a">' +
+        model.left.map(object => objectMarkup(object, 'a', 'a')).join('') + '</div></section><span class="pa-join-sign" aria-hidden="true">＋</span>' +
+        '<section class="pa-source-tray"><header>둘째 그림 · ' + s.b + '</header><div class="pa-waiting-items" data-add-source="b">' +
+        model.right.map(object => objectMarkup(object, 'b', 'b')).join('') + '</div></section></div>' +
+        '<section class="pa-together"><header>여기로 모아요 <span aria-hidden="true">↓</span></header><div class="pa-add-items"></div></section>';
     }
     const all = M().items(s.total, 'share');
     return '<section class="pa-pool"><header><strong class="pa-pool-title">나눌 그림</strong><span class="pa-pool-count">' + s.total + '</span></header>' +
       '<div class="pa-pool-items">' + all.map(object => objectMarkup(object, 'share', 'share')).join('') + '</div>' +
-      '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p>' +
+      '<p class="pa-pool-empty"' + (s.total ? ' hidden' : '') + '>하나도 없어요 · 0</p><div class="pa-next-choices" hidden></div>' +
       '<div class="pa-empty-groups-summary" hidden aria-label="' + s.groups + '곳 모두 0개"><strong>빈 자리</strong><div class="pa-empty-group-list" style="--pa-group-count:' + s.groups + '">' +
       model.groups.map((_, index) => '<span class="pa-empty-group"><small>' + (index + 1) + '번</small><b>0</b></span>').join('') + '</div></div></section>' +
       '<div class="pa-groups" data-groups="' + s.groups + '">' + model.groups.map((_, index) =>
-        '<section class="pa-group" data-group="' + index + '" aria-label="' + (index + 1) + '번 자리"><header><span class="pa-group-badge">' + (index + 1) + '</span><strong>' + (index + 1) + '번 자리</strong><span class="pa-group-count" data-group-count="' + index + '">0</span></header>' +
-        '<div class="pa-group-items" data-group-index="' + index + '"></div></section>').join('') + '</div>';
+        '<section class="pa-group" data-group="' + index + '" aria-label="' + (index + 1) + '번 자리"><header><span class="pa-group-badge" aria-hidden="true">' + ['🐰','🐻','🐱','🐶','🐸','🐼'][index] + '</span><strong>' + (index + 1) + '번 자리</strong><span class="pa-group-count" data-group-count="' + index + '">0</span></header>' +
+        '<div class="pa-group-items" data-group-index="' + index + '"></div></section>').join('') + '</div><section class="pa-comparisons" hidden aria-label="같은 수를 다르게 나눈 모습"></section>';
   }
   function termMarkup(term) {
     const s = view.state, selected = item(term);
@@ -214,9 +243,11 @@
   }
   function footerMarkup() {
     const s = view.state;
-    return '<div class="pa-readings" role="group" aria-label="수 읽는 방법">' + (language() === 'en' ? '<span class="pa-english">🌐 English · one, two</span>' :
+    return '<div class="pa-play-controls"><button type="button" class="pa-pause" data-pa-action="pause" aria-label="잠깐 멈추기">Ⅱ 멈춤</button>' +
+      (s.mode === 'add' ? '<button type="button" class="pa-strategy" data-pa-action="strategy" aria-pressed="' + (s.strategy === 'on') + '">' + (s.strategy === 'on' ? '이어 세기 ✓' : '이어 세기') + '</button>' : '') +
+      '<div class="pa-readings" role="group" aria-label="수 읽는 방법">' + (language() === 'en' ? '<span class="pa-english">🌐 English · one, two</span>' :
       '<button type="button" data-pa-action="style" data-value="native" aria-pressed="' + (s.style === 'native') + '">하나·둘</button><button type="button" data-pa-action="style" data-value="sino" aria-pressed="' + (s.style === 'sino') + '">일·이</button>') + '</div>' +
-      '<button type="button" class="pa-replay" data-pa-action="replay">↻ ' + (s.mode === 'share' ? '다시 나누기' : '다시 세기') + '</button><p class="pa-sound-note pa-artwork-note" data-missing-artwork="' + missingArtwork() + '"' + (missingArtwork() ? '' : ' hidden') + '>' + (missingArtwork() ? '내 그림이 없어 견본으로 놀아요' : '그림과 숫자로 계속 놀아요') + '</p>';
+      '<button type="button" class="pa-replay" data-pa-action="replay">↻ ' + (s.mode === 'share' ? '다시 나누기' : '다시 세기') + '</button></div><p class="pa-sound-note pa-artwork-note" data-missing-artwork="' + missingArtwork() + '"' + (missingArtwork() ? '' : ' hidden') + '>' + (missingArtwork() ? '내 그림이 없어 견본으로 놀아요' : '그림과 숫자로 계속 놀아요') + '</p>';
   }
   function paint() {
     if (!view.container || !view.state) return;
@@ -251,14 +282,14 @@
     overlay.querySelector('[data-pa-action="closeDialog"]').focus();
   }
   function openDialog(kind, term) {
-    stop();
+    suspend();
     if (kind === 'pictures' && view.state.mode === 'add' && ['a', 'b'].includes(term)) view.state.activeTerm = term;
     syncPicker(); save(); paintPicker();
     view.dialog = kind; paintDialog();
   }
   function closeDialog() {
     const kind = view.dialog;
-    view.dialog = null; run();
+    view.dialog = null; view.container?.querySelector('.pa-picture-overlay')?.remove(); resumeSuspended();
     const selector = kind === 'groups' ? '[data-pa-action="chooseGroups"]' : '[data-pa-action="choosePicture"][data-value="' + (view.state.mode === 'share' ? 'share' : view.state.activeTerm) + '"]';
     view.container?.querySelector(selector)?.focus?.({ preventScroll: true });
   }
@@ -282,6 +313,88 @@
     if (target.bottom > bounds.bottom - 8) board.scrollTop += target.bottom - bounds.bottom + 8;
     else if (target.top < bounds.top + inset) board.scrollTop -= bounds.top + inset - target.top;
   }
+  function movePicture(element, target) {
+    if (!element || !target) return;
+    const before = element.getBoundingClientRect();
+    target.appendChild(element);
+    if (element.animate && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      const after = element.getBoundingClientRect();
+      element.animate([{ transform: 'translate(' + (before.left - after.left) + 'px,' + (before.top - after.top) + 'px)' }, { transform: 'translate(0,0)' }], { duration: 280, easing: 'ease-out' });
+    }
+  }
+  function updatePause() {
+    const button = view.container?.querySelector('[data-pa-action="pause"]');
+    if (!button) return;
+    const paused = view.sequence?.isPaused?.() || false;
+    button.textContent = paused ? '▶ 이어서' : 'Ⅱ 멈춤';
+    button.setAttribute('aria-label', paused ? '멈춘 곳부터 이어서 세기' : '잠깐 멈추기');
+    button.setAttribute('aria-pressed', String(paused));
+    button.disabled = view.complete;
+  }
+  function syncControls() {
+    const footer = view.container?.querySelector('.pa-footer');
+    if (footer) footer.innerHTML = footerMarkup();
+    const ageLabel = view.container?.querySelector('.pa-age strong');
+    if (ageLabel) ageLabel.textContent = String(age());
+    updatePause();
+  }
+  function suspend() {
+    // Visibility can suspend an already-open picker/settings dialog. Preserve
+    // the original intent to resume instead of replacing it with false.
+    view.suspended = view.suspended || view.sequence?.getSnapshot().status === 'running';
+    view.sequence?.pause?.(); updatePause();
+  }
+  function resumeSuspended() {
+    syncControls();
+    // Closing one blocker must not consume another blocker's pending resume.
+    if (document.hidden || view.dialog || document.getElementById('playSettingsDialog')) return;
+    if (view.suspended && !view.userPaused) view.sequence?.resume?.();
+    view.suspended = false; updatePause();
+  }
+  function distributionRecord() {
+    const model = view.model;
+    return { total: model.total, groups: model.groupCount, each: model.each, remainder: model.remainder,
+      picture: view.choices.share.actual.id, sourceKind: view.choices.share.actual.sourceKind };
+  }
+  function keptShareMatches() {
+    const kept = view.state.keptShare;
+    if (view.state.mode !== 'share' || !validKeptShare(kept)) return false;
+    const current = distributionRecord();
+    return Object.keys(current).every(key => kept[key] === current[key]);
+  }
+  function markKeptRemainder() {
+    view.container.querySelector('.pa-pool').classList.add('is-kept');
+    view.container.querySelector('.pa-pool-title').textContent = '🧺 다음에 쓸 그림';
+  }
+  function rememberDistribution() {
+    const s = view.state, row = distributionRecord();
+    s.shareHistory = s.shareHistory.filter(old => !(old.total === row.total && old.groups === row.groups && old.picture === row.picture && old.sourceKind === row.sourceKind)).concat(row).slice(-4);
+    save();
+  }
+  function showSharingChoices() {
+    const root = view.container?.querySelector('.pa-root');
+    if (!root || view.state.mode !== 'share') return;
+    const model = view.model, choices = root.querySelector('.pa-next-choices');
+    if (choices) {
+      choices.hidden = false;
+      choices.innerHTML = (model.remainder ? '<button type="button" data-pa-action="keepRemainder"' + (view.remainderKept ? ' disabled' : '') + '>🧺 ' + (view.remainderKept ? model.remainder + commonUnit() + ' 보관했어요' : '남은 것 보관') + '</button>' : '') +
+        (model.groupCount < 6 ? '<button type="button" data-pa-action="moreGroup">＋ 한 곳 더</button>' : '') +
+        '<button type="button" data-pa-action="compareShares">나눈 모습 비교</button>';
+    }
+  }
+  function showDistributionComparison() {
+    const area = view.container?.querySelector('.pa-comparisons');
+    if (!area) return;
+    const choice = view.choices.share.actual;
+    const rows = view.state.shareHistory.filter(row => row.total === view.model.total && row.picture === choice.id && row.sourceKind === choice.sourceKind);
+    area.hidden = false;
+    area.innerHTML = '<h3>같은 ' + view.model.total + commonUnit() + ', 다른 나눔</h3>' +
+      (rows.length < 2 ? '<p>한 곳 더 또는 나눌 곳을 바꿔 봐요.<br>' + (view.storage.write === 'memory-only' ? '이번 놀이 동안 이 모습을 기억해요.' : '이 모습은 그대로 기억할게요.') + '</p>' : '') +
+      '<div class="pa-comparison-list">' + rows.map(row => '<div class="pa-comparison-card"><strong>' + row.groups + '곳에 나누면</strong><div class="pa-mini-groups">' +
+        Array.from({ length: row.groups }, (_, index) => '<span><i aria-hidden="true">' + ['🐰','🐻','🐱','🐶','🐸','🐼'][index] + '</i><b>' + row.each + '</b></span>').join('') +
+        '</div><span>한 곳 ' + row.each + ' · 남은 것 ' + row.remainder + '</span><small>' + row.groups + ' × ' + row.each + ' + ' + row.remainder + ' = ' + row.total + '</small></div>').join('') + '</div>';
+    keepInBoard(area);
+  }
   function showStep(step) {
     const root = view.container?.querySelector('.pa-root');
     if (!root) return;
@@ -290,9 +403,20 @@
     root.querySelectorAll('.pa-item.is-current').forEach(element => element.classList.remove('is-current'));
     root.querySelectorAll('.pa-group.is-current').forEach(element => element.classList.remove('is-current'));
     let word = '', status = '', number = 0;
-    if (step.kind === 'count') {
+    if (step.kind === 'base') {
+      view.phase = 'counting'; view.counted = s.a;
+      const target = root.querySelector('.pa-add-items');
+      model.left.forEach((object, index) => {
+        const element = root.querySelector('[data-item-id="' + object.id + '"]');
+        movePicture(element, target); element?.classList.add('is-counted', 'is-known');
+        if (element) element.querySelector('.pa-item-number').textContent = String(index + 1);
+      });
+      number = s.a; word = '여기서 이어서'; status = s.a + '에서 시작해요';
+      keepInBoard(target);
+    } else if (step.kind === 'count') {
       view.phase = 'counting'; view.counted = step.ordinal;
       const element = root.querySelector('[data-item-id="' + step.itemId + '"]');
+      movePicture(element, root.querySelector('.pa-add-items'));
       element?.classList.add('is-current', 'is-counted');
       if (element) element.querySelector('.pa-item-number').textContent = String(step.ordinal);
       keepInBoard(element);
@@ -303,7 +427,7 @@
       const target = root.querySelector('[data-group-index="' + step.groupIndex + '"]');
       if (!element || !target) throw new Error('A sharing object or its group is missing');
       // Move the existing node. Never copy it, even while its highlight is animated.
-      target.appendChild(element);
+      movePicture(element, target);
       element.classList.add('is-current', 'is-counted');
       element.querySelector('.pa-item-number').textContent = String(step.number);
       root.querySelector('[data-group="' + step.groupIndex + '"]').classList.add('is-current');
@@ -320,6 +444,8 @@
       view.phase = 'summary'; root.classList.add('pa-show-result');
       if (s.mode === 'add') {
         number = model.total; word = model.total ? '모두 ' + model.total + unit : '하나도 없어요'; status = s.a + ' + ' + s.b + ' = ' + model.total;
+        const trays = root.querySelector('.pa-source-trays'); if (trays) trays.hidden = true;
+        const heading = root.querySelector('.pa-together > header'); if (heading) heading.textContent = '모두 모였어요 · ' + model.total + unit;
       } else {
         number = model.each; word = '한 곳에 ' + model.each + unit; status = '남은 것 ' + model.remainder + unit;
         root.querySelector('.pa-pool-title').textContent = '남은 그림';
@@ -328,6 +454,8 @@
         root.querySelector('.pa-pool-empty').hidden = model.remainder !== 0;
         root.querySelector('.pa-pool-empty').textContent = '남은 것 없어요 · 0';
         root.querySelector('.pa-empty-groups-summary').hidden = model.each !== 0;
+        view.remainderKept = keptShareMatches();
+        if (view.remainderKept) markKeptRemainder();
         keepInBoard(root.querySelector('.pa-pool'));
       }
     }
@@ -339,14 +467,23 @@
     view.runId++;
     view.sequence?.stop();
   }
-  function run() {
+  function run(options) {
     if (!view.container || !view.sequence || !view.state || view.error || view.dialog) return;
+    const retained = options?.preserveItems ? Array.from(view.container.querySelectorAll('.pa-item')) : [];
     stop();
     const ticket = view.runId;
     view.counted = 0; view.moved = 0; view.current = null; view.phase = 'preview';
-    view.complete = false; view.audioFailed = false;
+    view.complete = false; view.audioFailed = false; view.remainderKept = false; view.userPaused = false; view.suspended = false;
     captureChoices(); calculate(); paint();
-    view.sequence.start(steps(), { muted: view.state.muted, delayMs: 160,
+    retained.forEach(element => {
+      const placeholder = view.container.querySelector('[data-item-id="' + element.dataset.itemId + '"]');
+      if (!placeholder || placeholder.dataset.objectId !== element.dataset.objectId || placeholder.dataset.sourceKind !== element.dataset.sourceKind) return;
+      element.classList.remove('is-current', 'is-counted', 'is-known');
+      element.querySelector('.pa-item-number').textContent = '';
+      placeholder.replaceWith(element);
+    });
+    view.sequence.start(steps(), { muted: view.state.muted, followLanguage: true, delayMs: 160,
+      onState: () => { if (view.container && ticket === view.runId) updatePause(); },
       onStep: step => { if (view.container && ticket === view.runId) showStep(step); },
       onError: error => {
         if (!view.container || ticket !== view.runId) return;
@@ -364,6 +501,8 @@
         const root = view.container.querySelector('.pa-root');
         root?.classList.add('pa-finished');
         root?.querySelectorAll('.is-current').forEach(element => element.classList.remove('is-current'));
+        if (view.state.mode === 'share') { rememberDistribution(); showSharingChoices(); }
+        updatePause();
       }
     });
   }
@@ -379,16 +518,16 @@
     syncPicker(); save(); run();
   }
   function openSettings() {
-    stop();
+    suspend();
     const open = view.options.openSettings || window.SihyeonPlaySettings?.openSettings;
-    if (typeof open !== 'function') { run(); return; }
+    if (typeof open !== 'function') { resumeSuspended(); return; }
     open();
     view.settingsObserver?.disconnect();
-    if (!document.getElementById('playSettingsDialog')) { run(); return; }
+    if (!document.getElementById('playSettingsDialog')) { resumeSuspended(); return; }
     view.settingsObserver = new MutationObserver(() => {
       if (document.getElementById('playSettingsDialog')) return;
       view.settingsObserver?.disconnect(); view.settingsObserver = null;
-      if (view.container && !document.hidden) run();
+      if (view.container && !document.hidden) resumeSuspended();
     });
     view.settingsObserver.observe(document.body, { childList: true });
   }
@@ -417,11 +556,29 @@
     }
     if (action === 'groups') {
       const groups = Number(value);
-      if (Number.isInteger(groups) && groups >= 1 && groups <= 6) { s.groups = groups; view.dialog = null; save(); run(); }
+      if (Number.isInteger(groups) && groups >= 1 && groups <= 6) { s.groups = groups; view.dialog = null; save(); run({ preserveItems: true }); }
       return;
     }
+    if (action === 'pause') {
+      if (view.sequence?.isPaused?.()) { view.userPaused = false; view.sequence.resume(); }
+      else { view.userPaused = true; view.sequence?.pause?.(); }
+      updatePause(); return;
+    }
+    if (action === 'strategy') { s.strategy = s.strategy === 'all' ? 'on' : 'all'; save(); run({ preserveItems: true }); return; }
+    if (action === 'moreGroup' && view.complete && s.mode === 'share' && s.groups < 6) { s.groups++; save(); run({ preserveItems: true }); return; }
+    if (action === 'keepRemainder' && view.complete && view.model.remainder > 0 && s.mode === 'share') {
+      view.remainderKept = true;
+      s.keptShare = distributionRecord(); save(); markKeptRemainder();
+      view.container.querySelector('.pa-status').textContent = view.model.remainder + commonUnit() + ' 그대로 보관해요';
+      showSharingChoices(); return;
+    }
+    if (action === 'compareShares' && view.complete && s.mode === 'share') { showDistributionComparison(); return; }
     if (action === 'style' && ['native', 'sino'].includes(value)) { s.style = value; save(); run(); return; }
-    if (action === 'mute') { s.muted = !s.muted; save(); run(); return; }
+    if (action === 'mute') {
+      s.muted = !s.muted; save(); view.sequence?.setMuted?.(s.muted);
+      button.textContent = s.muted ? '🔇' : '🔊'; button.setAttribute('aria-pressed', String(s.muted));
+      button.setAttribute('aria-label', s.muted ? '소리 켜기' : '소리 끄기'); return;
+    }
     if (action === 'replay') run();
   }
   function render(container, options) {
@@ -439,8 +596,8 @@
     view.handlers = {
       click: onClick,
       key: onKey,
-      settings: () => { if (view.container && !view.error && !view.dialog && !document.getElementById('playSettingsDialog')) run(); },
-      visibility: () => { if (document.hidden) stop(); else if (view.container && !view.error && !view.dialog && !document.getElementById('playSettingsDialog')) run(); }
+      settings: () => { if (view.container && !view.error && !view.dialog && !document.getElementById('playSettingsDialog')) syncControls(); },
+      visibility: () => { if (document.hidden) suspend(); else if (view.container && !view.error && !view.dialog && !document.getElementById('playSettingsDialog')) resumeSuspended(); }
     };
     container.addEventListener('click', view.handlers.click);
     container.addEventListener('keydown', view.handlers.key);
@@ -476,6 +633,8 @@
       poolCount: root?.querySelector('.pa-pool-items')?.querySelectorAll('.pa-item').length || 0,
       counted: view.counted, moved: view.moved, phase: view.phase, currentStep: view.current ? Object.assign({}, view.current) : null,
       complete: view.complete, dialog: view.dialog, readingStyle: s?.style || 'native', muted: s?.muted || false,
+      strategy: s?.strategy || 'all', remainderKept: view.remainderKept,
+      shareHistory: s ? JSON.parse(JSON.stringify(s.shareHistory)) : [], paused: view.sequence?.isPaused?.() || false,
       age: age(), language: language(), audioFailed: view.audioFailed,
       storage: Object.assign({ memoryAvailable: !!memory }, view.storage), sequence: view.sequence?.getSnapshot() || null
     };

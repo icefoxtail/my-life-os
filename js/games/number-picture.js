@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   const KEY='numberPicture', SAVE_KEY='sihyeon-number-picture-v1';
-  const view={container:null,options:{},objects:[],objectId:'korean_police_car',custom:null,n:9,style:'native',layout:'rows',range:0,category:'vehicle',muted:false,counted:0,complete:false,sequence:null,handlers:null,audioFailed:false,picturePicker:false,settingsObserver:null,boardObserver:null,scrollFrame:0};
+  const view={container:null,options:{},objects:[],objectId:'korean_police_car',custom:null,n:9,style:'native',layout:'rows',range:0,category:'vehicle',muted:false,counted:0,complete:false,sequence:null,handlers:null,audioFailed:false,picturePicker:false,settingsObserver:null,boardObserver:null,scrollFrame:0,userPaused:false,resumeAfterModal:false,renderObjectId:null,currentLanguage:'ko'};
   let memory=null;
   const M=()=>window.SihyeonQuantityPlayModel;
   const C=()=>window.SihyeonPlayObjects;
@@ -73,37 +73,49 @@
     if(!view.container)return;
     const root=view.container.querySelector('.qp-root');
     root.querySelectorAll('.qp-item.is-current').forEach(el=>el.classList.remove('is-current'));
-    if(step.kind==='count'){
+    if(step.kind==='count'||step.kind==='change'){
       view.counted=step.ordinal;
       const el=root.querySelector('[data-object-index="'+(step.ordinal-1)+'"]');
       el?.classList.add('is-current','is-counted');
     }
     root.querySelector('.qp-count-now').textContent=step.kind==='total'?String(view.n):String(view.counted);
-    root.querySelector('.qp-count-word').textContent=step.kind==='total'?completionText():M().countWord(view.counted,view.style,language());
-    root.querySelector('.qp-progress').textContent=step.kind==='total'?'모두 '+view.n+object().unitKo:'지금 '+view.counted+object().unitKo+' 셌어요';
+    root.querySelector('.qp-count-word').textContent=step.kind==='change'?(language()==='en'?step.enText:step.text):step.kind==='total'?completionText():M().countWord(view.counted,view.style,language());
+    root.querySelector('.qp-progress').textContent=step.kind==='change'?(step.delta>0?'한 개 더!':'한 개 덜!'):step.kind==='total'?'모두 '+view.n+object().unitKo:'지금 '+view.counted+object().unitKo+' 셌어요';
     keepCountedVisible();scheduleBoardFocus();
   }
-  function run(){
+  function run(firstOrdinal){
     if(!view.container||!view.sequence)return;
-    view.counted=0;view.complete=false;view.audioFailed=false;
+    firstOrdinal=Number.isInteger(firstOrdinal)?Math.max(1,Math.min(view.n+1,firstOrdinal)):1;
+    view.counted=firstOrdinal-1;view.complete=false;view.audioFailed=false;
     const root=view.container.querySelector('.qp-root');
     root.classList.remove('qp-finished');
-    root.querySelectorAll('.qp-item').forEach(el=>el.classList.remove('is-current','is-counted'));
+    root.querySelectorAll('.qp-item').forEach((el,i)=>{el.classList.remove('is-current');el.classList.toggle('is-counted',i<view.counted);});
     root.querySelector('.qp-sound-note').hidden=true;
-    root.querySelector('.qp-count-now').textContent='0';
+    root.querySelector('.qp-count-now').textContent=String(view.counted);
     root.querySelector('.qp-count-word').textContent=view.n===0?'없어요':'같이 세어요';
     root.querySelector('.qp-progress').textContent=view.n===0?'0'+object().unitKo:'그림이 '+view.n+object().unitKo+' 있어요';
-    const steps=M().items(view.n,'count').map(item=>({id:item.id,kind:'count',ordinal:item.ordinal,nativeText:M().countWord(item.ordinal,'native','ko'),sinoText:M().countWord(item.ordinal,'sino','ko'),enText:M().countWord(item.ordinal,'sino','en'),readingStyle:view.style}));
+    const steps=M().items(view.n,'count').filter(item=>item.ordinal>=firstOrdinal).map(item=>({id:item.id,kind:'count',ordinal:item.ordinal,nativeText:M().countWord(item.ordinal,'native','ko'),sinoText:M().countWord(item.ordinal,'sino','ko'),enText:M().countWord(item.ordinal,'sino','en'),readingStyle:view.style}));
     steps.push(summaryStep());
-    view.sequence.start(steps,{muted:view.muted,delayMs:170,onStep:updateProgress,onError:()=>{
+    view.sequence.start(steps,{muted:view.muted,paused:view.userPaused||view.picturePicker||!!document.getElementById('playSettingsDialog'),delayMs:170,onState:updatePlayback,onStep:updateProgress,onError:()=>{
       if(!view.container)return;view.audioFailed=true;
       const note=view.container.querySelector('.qp-sound-note');if(note){note.hidden=false;note.textContent='그림과 숫자로 함께 세어요';}
     },onEnd:()=>{
       if(!view.container)return;view.counted=view.n;view.complete=true;
       const currentRoot=view.container.querySelector('.qp-root');currentRoot?.classList.add('qp-finished');
       currentRoot?.querySelectorAll('.qp-item.is-current').forEach(el=>el.classList.remove('is-current'));
-      keepCountedVisible();scheduleBoardFocus();
+      keepCountedVisible();scheduleBoardFocus();updatePlayback();
     }});
+    if(view.userPaused)view.sequence.pause();
+    updatePlayback();
+  }
+  function updatePlayback(){
+    const b=view.container?.querySelector('[data-qp-action="pause"]');
+    if(!b)return;
+    const paused=view.sequence?.isPaused?.()||view.userPaused;
+    b.innerHTML=(paused?'▶':'⏸')+'<span>'+(paused?'이어서':'잠깐')+'</span>';
+    b.setAttribute('aria-label',paused?'이어서 세기':'잠깐 멈추기');
+    b.setAttribute('aria-pressed',String(paused));
+    b.disabled=view.complete&&!view.sequence?.isRunning?.()&&!view.sequence?.isPaused?.();
   }
   function itemMarkup(index){return '<div class="qp-item" data-object-index="'+index+'">'+C().picture(object())+'<span class="qp-ordinal" aria-hidden="true">'+(index+1)+'</span></div>';}
   function boardMarkup(){
@@ -130,6 +142,10 @@
   }
   function repaint(){
     if(!view.container)return;
+    const previous=view.container.querySelector('.qp-board');
+    const preserved=view.renderObjectId===view.objectId?new Map([...view.container.querySelectorAll('.qp-item')].map(el=>[el.dataset.objectIndex,el])):new Map();
+    const oldScroll=previous?.scrollTop||0;
+    const oldRects=new Map([...preserved].map(([id,el])=>[id,el.getBoundingClientRect()]));
     const item=object(),rangeStart=[0,11,21][view.range],rangeEnd=[10,20,30][view.range];
     const choices=view.objects.filter(o=>o.category===view.category);
     if(view.custom && !choices.some(o=>o.id===view.custom.id) && view.category==='art')choices.unshift(view.custom);
@@ -143,7 +159,11 @@
       '<div class="qp-objects" role="group" aria-label="그림 고르기">'+choices.map(choice).join('')+'</div>'+
       '<div class="qp-ranges" role="group" aria-label="숫자 범위">'+['0–10','11–20','21–30'].map((r,i)=>'<button type="button" data-qp-action="range" data-value="'+i+'" aria-pressed="'+(view.range===i)+'">'+r+'</button>').join('')+'</div>'+
       '<div class="qp-numbers" role="group" aria-label="원하는 숫자">'+numbers.map(n=>'<button type="button" data-qp-action="number" data-value="'+n+'" aria-label="'+n+' 선택" aria-pressed="'+(view.n===n)+'">'+n+'</button>').join('')+'</div></aside>'+
-      '<footer class="qp-footer"><div class="qp-readings" role="group" aria-label="수 읽는 방법"><button type="button" data-qp-action="style" data-value="native" aria-pressed="'+(view.style==='native')+'">하나·둘</button><button type="button" data-qp-action="style" data-value="sino" aria-pressed="'+(view.style==='sino')+'">일·이</button></div><button type="button" data-qp-action="layout" class="qp-layout" aria-label="배열 바꾸기">'+({rows:'▦ 줄 맞추기',tens:'▦ 열 칸 보기',scatter:'✦ 흩어 놓기'})[view.layout]+'</button><button type="button" data-qp-action="replay" class="qp-replay" aria-label="자동으로 다시 세기">↻ <span>다시 세기</span></button><p class="qp-sound-note" hidden></p></footer>'+pictureDialog()+'</section>';
+      '<footer class="qp-footer"><button type="button" data-qp-action="pause" class="qp-pause" aria-label="잠깐 멈추기">⏸ 잠깐</button><div class="qp-readings" role="group" aria-label="수 읽는 방법"><button type="button" data-qp-action="style" data-value="native" aria-pressed="'+(view.style==='native')+'">하나·둘</button><button type="button" data-qp-action="style" data-value="sino" aria-pressed="'+(view.style==='sino')+'">일·이</button></div><button type="button" data-qp-action="layout" class="qp-layout" aria-label="배열 바꾸기">'+({rows:'▦ 줄 맞추기',tens:'▦ 열 칸 보기',scatter:'✦ 흩어 놓기'})[view.layout]+'</button><button type="button" data-qp-action="replay" class="qp-replay" aria-label="자동으로 다시 세기">↻ <span>다시 세기</span></button><p class="qp-sound-note" hidden></p></footer>'+pictureDialog()+'</section>';
+    view.container.querySelectorAll('.qp-item').forEach(el=>{const prior=preserved.get(el.dataset.objectIndex);if(prior)el.replaceWith(prior);});
+    view.renderObjectId=view.objectId;
+    view.container.querySelector('.qp-board').scrollTop=oldScroll;
+    if(!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches){preserved.forEach((el,id)=>{if(!el.isConnected)return;const a=oldRects.get(id),b=el.getBoundingClientRect();if(a&&b.width&&b.height&&(Math.abs(a.left-b.left)>2||Math.abs(a.top-b.top)>2))el.animate?.([{transform:'translate('+(a.left-b.left)+'px,'+(a.top-b.top)+'px)'},{transform:'none'}],{duration:350,easing:'ease-out'});});}
     C().preparePictures(view.container);
     const currentRoot=view.container.querySelector('.qp-root');
     currentRoot.classList.toggle('qp-finished',view.complete);
@@ -152,26 +172,26 @@
     currentRoot.querySelector('.qp-progress').textContent=view.complete?'모두 '+view.n+item.unitKo:'지금 '+view.counted+item.unitKo+' 셌어요';
     currentRoot.querySelectorAll('.qp-item').forEach((el,i)=>{el.classList.toggle('is-counted',i<view.counted);el.classList.toggle('is-current',!view.complete&&i===view.counted-1);});
     if(view.audioFailed){currentRoot.querySelector('.qp-sound-note').hidden=false;currentRoot.querySelector('.qp-sound-note').textContent='그림과 숫자로 함께 세어요';}
-    observeBoard();
+    observeBoard();updatePlayback();
   }
   function openSettings(){
-    view.sequence.stop();
+    view.resumeAfterModal=view.sequence.isRunning();view.sequence.pause();
     const open=view.options.openSettings||window.SihyeonPlaySettings?.openSettings;
-    if(typeof open!=='function'){run();return;}
+    if(typeof open!=='function'){if(view.resumeAfterModal)view.sequence.resume();return;}
     open();
     view.settingsObserver?.disconnect();
-    if(!document.getElementById('playSettingsDialog')){run();return;}
+    if(!document.getElementById('playSettingsDialog')){if(view.resumeAfterModal)view.sequence.resume();return;}
     view.settingsObserver=new MutationObserver(function(){
       if(!document.getElementById('playSettingsDialog')){
         view.settingsObserver?.disconnect();view.settingsObserver=null;
-        if(view.container){repaint();run();}
+        if(view.container){repaint();if(view.resumeAfterModal&&!view.userPaused)view.sequence.resume();}
       }
     });
     view.settingsObserver.observe(document.body,{childList:true});
   }
   function onKey(event){
     if(!view.picturePicker)return;
-    if(event.key==='Escape'){event.preventDefault();view.picturePicker=false;repaint();run();return;}
+    if(event.key==='Escape'){event.preventDefault();closePictures();return;}
     if(event.key==='Tab'){
       const buttons=Array.from(view.container.querySelectorAll('.qp-picture-modal button'));
       const first=buttons[0],last=buttons[buttons.length-1];
@@ -179,26 +199,47 @@
       else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
     }
   }
-  function changeNumber(n){if(!M().isQuantity(n))return;view.n=n;view.range=n<=10?0:n<=20?1:2;save();repaint();run();}
+  function closePictures(){
+    view.picturePicker=false;repaint();
+    if(view.resumeAfterModal&&!view.userPaused)view.sequence.resume();
+  }
+  function changeNumber(n,incremental){
+    if(!M().isQuantity(n))return;if(n===view.n){if(!incremental)run();return;}
+    const previous=view.n,delta=n-previous;
+    view.sequence.stop();view.n=n;view.range=n<=10?0:n<=20?1:2;
+    if(!incremental||Math.abs(delta)!==1){save();repaint();run();return;}
+    view.counted=n;view.complete=false;save();repaint();
+    const fresh=view.container.querySelector('[data-object-index="'+(n-1)+'"]');
+    if(delta>0)fresh?.classList.add('is-new');
+    const step={id:'change-'+n,kind:'change',delta,ordinal:n,text:(delta>0?'하나 더, ':'하나 덜, ')+M().countWord(n,view.style,'ko'),enText:(delta>0?'One more, ':'One fewer, ')+M().countWord(n,view.style,'en')};
+    updateProgress(step);
+    view.sequence.start([step],{muted:view.muted,paused:view.userPaused,onStep:updateProgress,onState:updatePlayback,onEnd:()=>{
+      if(!view.container)return;view.complete=true;view.counted=n;
+      view.container.querySelector('.qp-root')?.classList.add('qp-finished');
+      fresh?.classList.remove('is-new');view.container.querySelectorAll('.qp-item.is-current').forEach(el=>el.classList.remove('is-current'));updatePlayback();
+    }});
+    if(view.userPaused)view.sequence.pause();
+  }
   function onClick(event){
     const b=event.target.closest?.('[data-qp-action]');if(!b||!view.container?.contains(b)||b.disabled)return;
     const action=b.dataset.qpAction,value=b.dataset.value;
     if(action==='home'){destroy();view.options.closeToParkHome?.();return;}
     if(action==='settings'){openSettings();return;}
-    if(action==='choosePicture'){view.sequence.stop();view.picturePicker=true;repaint();view.container.querySelector('[data-qp-action="closePictures"]')?.focus();return;}
-    if(action==='closePictures'){view.picturePicker=false;repaint();run();return;}
+    if(action==='choosePicture'){view.resumeAfterModal=view.sequence.isRunning();view.sequence.pause();view.picturePicker=true;repaint();view.container.querySelector('[data-qp-action="closePictures"]')?.focus();return;}
+    if(action==='closePictures'){closePictures();return;}
     if(action==='number'){changeNumber(Number(value));return;}
-    if(action==='minus'||action==='plus'){changeNumber(view.n+(action==='plus'?1:-1));return;}
+    if(action==='minus'||action==='plus'){changeNumber(view.n+(action==='plus'?1:-1),true);return;}
     if(action==='category'){view.category=value;repaint();return;}
     if(action==='range'){view.range=Number(value);repaint();return;}
     if(action==='object'){
       if(!(view.custom?.id===value)&&!view.objects.some(o=>o.id===value))return;
       view.objectId=value;view.picturePicker=false;view.category=object().category||'vehicle';save();repaint();run();return;
     }
-    if(action==='style'){view.style=value;save();repaint();run();return;}
-    if(action==='layout'){const a=['rows','tens','scatter'];view.layout=a[(a.indexOf(view.layout)+1)%3];save();repaint();run();return;}
-    if(action==='mute'){view.muted=!view.muted;save();repaint();run();return;}
-    if(action==='replay')run();
+    if(action==='style'){view.style=value;save();repaint();run(view.counted+1);return;}
+    if(action==='layout'){const a=['rows','tens','scatter'];view.layout=a[(a.indexOf(view.layout)+1)%3];save();repaint();view.container.querySelector('.qp-progress').textContent='자리를 바꿔도 '+view.n+object().unitKo;return;}
+    if(action==='mute'){view.muted=!view.muted;view.sequence.setMuted(view.muted);save();repaint();return;}
+    if(action==='pause'){view.userPaused=!view.sequence.isPaused();if(view.userPaused)view.sequence.pause();else view.sequence.resume();updatePlayback();return;}
+    if(action==='replay'){view.userPaused=false;run();}
   }
   function render(container,options){
     destroy();view.container=container;view.options=options||{};view.objects=C().list();
@@ -211,8 +252,8 @@
     }
     view.range=view.n<=10?0:view.n<=20?1:2;
     view.sequence=window.SihyeonQuantitySequencer.create();
-    view.picturePicker=false;
-    view.handlers={click:onClick,key:onKey,resize:scheduleBoardFocus,settings:()=>{if(view.container&&!document.getElementById('playSettingsDialog')){repaint();run();}},visibility:()=>{if(document.hidden)view.sequence?.stop();else if(view.container&&!document.getElementById('playSettingsDialog')&&!view.picturePicker)run();}};
+    view.picturePicker=false;view.userPaused=false;view.currentLanguage=language();
+    view.handlers={click:onClick,key:onKey,resize:scheduleBoardFocus,settings:()=>{if(!view.container)return;const changed=language()!==view.currentLanguage;view.currentLanguage=language();repaint();if(changed){run(view.counted+1);if(document.getElementById('playSettingsDialog'))view.sequence.pause();}},visibility:()=>{if(document.hidden){view.resumeAfterVisibility=view.sequence?.isRunning();view.sequence?.pause();}else if(view.resumeAfterVisibility&&view.container&&!view.userPaused&&!document.getElementById('playSettingsDialog')&&!view.picturePicker)view.sequence?.resume();}};
     container.addEventListener('click',view.handlers.click);container.addEventListener('keydown',view.handlers.key);window.addEventListener('sihyeon-settings-change',view.handlers.settings);document.addEventListener('visibilitychange',view.handlers.visibility);
     window.addEventListener('resize',view.handlers.resize);window.addEventListener('orientationchange',view.handlers.resize);
     repaint();run();
@@ -223,7 +264,7 @@
     view.boardObserver?.disconnect();view.boardObserver=null;
     if(view.scrollFrame)cancelAnimationFrame(view.scrollFrame);view.scrollFrame=0;
     if(view.handlers){view.container?.removeEventListener('click',view.handlers.click);view.container?.removeEventListener('keydown',view.handlers.key);window.removeEventListener('sihyeon-settings-change',view.handlers.settings);document.removeEventListener('visibilitychange',view.handlers.visibility);window.removeEventListener('resize',view.handlers.resize);window.removeEventListener('orientationchange',view.handlers.resize);}
-    view.container=null;view.sequence=null;view.handlers=null;
+    view.container=null;view.sequence=null;view.handlers=null;view.renderObjectId=null;
   }
   function getSnapshot(){return {active:!!view.container,objectId:view.objectId,quantity:view.n,actualCount:view.container?.querySelectorAll('.qp-item').length||0,counted:view.counted,readingStyle:view.style,layout:view.layout,age:age(),language:language(),muted:view.muted,complete:view.complete,audioFailed:view.audioFailed,sequence:view.sequence?.getSnapshot()||null};}
   window.SihyeonGames=window.SihyeonGames||{};
