@@ -1,0 +1,1894 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "case": "life-320x568",
+      "status": "PASS",
+      "detail": {
+        "missions": [
+          {
+            "title": "손 씻기",
+            "validOrder": [
+              "water",
+              "soap",
+              "rinse",
+              "towel"
+            ],
+            "replayButton": {
+              "x": 257,
+              "y": 251,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "비누 거품은 물로 헹군 뒤 수건으로 닦아요."
+          },
+          {
+            "title": "양치하기",
+            "validOrder": [
+              "paste",
+              "brush",
+              "rinse"
+            ],
+            "replayButton": {
+              "x": 257,
+              "y": 335,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "치약을 준비하고 이를 닦은 뒤 마무리해요."
+          },
+          {
+            "title": "밥 먹기",
+            "validOrder": [
+              "sit",
+              "clean",
+              "eat"
+            ],
+            "replayButton": {
+              "x": 257,
+              "y": 335,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요."
+          },
+          {
+            "title": "잠자기",
+            "validOrder": [
+              "book",
+              "pajamas",
+              "light"
+            ],
+            "replayButton": {
+              "x": 257,
+              "y": 335,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요."
+          },
+          {
+            "title": "외출 준비",
+            "validOrder": [
+              "shoes",
+              "clothes",
+              "door"
+            ],
+            "replayButton": {
+              "x": 257,
+              "y": 335,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요."
+          },
+          {
+            "title": "장난감 정리",
+            "validOrder": [
+              "gather",
+              "basket",
+              "clean"
+            ],
+            "replayButton": {
+              "x": 257,
+              "y": 335,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "장난감을 모아 바구니에 넣으면 방이 정리돼요."
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 4769.100000000006,
+            "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+            "opacity": "0",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": true,
+                "currentTime": 0
+              }
+            ]
+          },
+          "after": {
+            "at": 5119,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 349.9,
+          "timeoutMs": 2000
+        },
+        "rewardCalls": [
+          12,
+          14,
+          16,
+          16,
+          16,
+          16,
+          30
+        ],
+        "driver": "public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "cat-320x568",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 4635.599999999991,
+            "transform": "matrix(0.966784, 0, 0, 0.966784, 0, 0)",
+            "opacity": "0.169603",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 16.661000000000037
+              }
+            ]
+          },
+          "after": {
+            "at": 4986.599999999991,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 351.0,
+          "timeoutMs": 2000
+        },
+        "headerClearance": {
+          "initial": {
+            "name": {
+              "x": 71,
+              "y": 17,
+              "width": 96,
+              "height": 24
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 48,
+              "height": 48
+            }
+          },
+          "rotated": {
+            "name": {
+              "x": 70,
+              "y": 12.5,
+              "width": 346,
+              "height": 31
+            },
+            "back": {
+              "x": 6,
+              "y": 6,
+              "width": 42,
+              "height": 42
+            }
+          }
+        },
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-390x844",
+      "status": "PASS",
+      "detail": {
+        "missions": [
+          {
+            "title": "손 씻기",
+            "validOrder": [
+              "water",
+              "soap",
+              "rinse",
+              "towel"
+            ],
+            "replayButton": {
+              "x": 327,
+              "y": 477,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "비누 거품은 물로 헹군 뒤 수건으로 닦아요."
+          },
+          {
+            "title": "양치하기",
+            "validOrder": [
+              "paste",
+              "brush",
+              "rinse"
+            ],
+            "replayButton": {
+              "x": 327,
+              "y": 557,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "치약을 준비하고 이를 닦은 뒤 마무리해요."
+          },
+          {
+            "title": "밥 먹기",
+            "validOrder": [
+              "sit",
+              "clean",
+              "eat"
+            ],
+            "replayButton": {
+              "x": 327,
+              "y": 557,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요."
+          },
+          {
+            "title": "잠자기",
+            "validOrder": [
+              "book",
+              "pajamas",
+              "light"
+            ],
+            "replayButton": {
+              "x": 327,
+              "y": 557,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요."
+          },
+          {
+            "title": "외출 준비",
+            "validOrder": [
+              "shoes",
+              "clothes",
+              "door"
+            ],
+            "replayButton": {
+              "x": 327,
+              "y": 557,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요."
+          },
+          {
+            "title": "장난감 정리",
+            "validOrder": [
+              "gather",
+              "basket",
+              "clean"
+            ],
+            "replayButton": {
+              "x": 327,
+              "y": 557,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "장난감을 모아 바구니에 넣으면 방이 정리돼요."
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 4672,
+            "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+            "opacity": "0",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": true,
+                "currentTime": 0
+              }
+            ]
+          },
+          "after": {
+            "at": 5029.099999999991,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 357.1,
+          "timeoutMs": 2000
+        },
+        "rewardCalls": [
+          12,
+          14,
+          16,
+          16,
+          16,
+          16,
+          30
+        ],
+        "driver": "public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "cat-390x844",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 4644.799999999988,
+            "transform": "matrix(0.973276, 0, 0, 0.973276, 0, 0)",
+            "opacity": "0.331895",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 33.34500000001306
+              }
+            ]
+          },
+          "after": {
+            "at": 4980.699999999997,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 335.9,
+          "timeoutMs": 2000
+        },
+        "headerClearance": {
+          "initial": {
+            "name": {
+              "x": 74,
+              "y": 19.5,
+              "width": 160,
+              "height": 25
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 48,
+              "height": 48
+            }
+          },
+          "rotated": {
+            "name": {
+              "x": 70,
+              "y": 12.5,
+              "width": 622,
+              "height": 31
+            },
+            "back": {
+              "x": 6,
+              "y": 6,
+              "width": 42,
+              "height": 42
+            }
+          }
+        },
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-640x360",
+      "status": "PASS",
+      "detail": {
+        "missions": [
+          {
+            "title": "손 씻기",
+            "validOrder": [
+              "water",
+              "soap",
+              "rinse",
+              "towel"
+            ],
+            "replayButton": {
+              "x": 251.4375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "비누 거품은 물로 헹군 뒤 수건으로 닦아요."
+          },
+          {
+            "title": "양치하기",
+            "validOrder": [
+              "paste",
+              "brush",
+              "rinse"
+            ],
+            "replayButton": {
+              "x": 251.4375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "치약을 준비하고 이를 닦은 뒤 마무리해요."
+          },
+          {
+            "title": "밥 먹기",
+            "validOrder": [
+              "sit",
+              "clean",
+              "eat"
+            ],
+            "replayButton": {
+              "x": 251.4375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요."
+          },
+          {
+            "title": "잠자기",
+            "validOrder": [
+              "book",
+              "pajamas",
+              "light"
+            ],
+            "replayButton": {
+              "x": 251.4375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요."
+          },
+          {
+            "title": "외출 준비",
+            "validOrder": [
+              "shoes",
+              "clothes",
+              "door"
+            ],
+            "replayButton": {
+              "x": 251.4375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요."
+          },
+          {
+            "title": "장난감 정리",
+            "validOrder": [
+              "gather",
+              "basket",
+              "clean"
+            ],
+            "replayButton": {
+              "x": 251.4375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "장난감을 모아 바구니에 넣으면 방이 정리돼요."
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 3645.0000000000146,
+            "transform": "matrix(0.966806, 0, 0, 0.966806, 0, 0)",
+            "opacity": "0.170144",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 16.71499999997872
+              }
+            ]
+          },
+          "after": {
+            "at": 3993.800000000003,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 348.8,
+          "timeoutMs": 2000
+        },
+        "rewardCalls": [
+          12,
+          14,
+          16,
+          16,
+          16,
+          16,
+          30
+        ],
+        "driver": "public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "cat-640x360",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 3618,
+            "transform": "matrix(0.966798, 0, 0, 0.966798, 0, 0)",
+            "opacity": "0.169953",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 16.695999999988054
+              }
+            ]
+          },
+          "after": {
+            "at": 3963.2000000000116,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 345.2,
+          "timeoutMs": 2000
+        },
+        "headerClearance": {
+          "initial": {
+            "name": {
+              "x": 70,
+              "y": 12.5,
+              "width": 418,
+              "height": 31
+            },
+            "back": {
+              "x": 6,
+              "y": 6,
+              "width": 42,
+              "height": 42
+            }
+          },
+          "rotated": {
+            "name": {
+              "x": 71,
+              "y": 17,
+              "width": 136,
+              "height": 24
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-844x390",
+      "status": "PASS",
+      "detail": {
+        "missions": [
+          {
+            "title": "손 씻기",
+            "validOrder": [
+              "water",
+              "soap",
+              "rinse",
+              "towel"
+            ],
+            "replayButton": {
+              "x": 349.359375,
+              "y": 80,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "비누 거품은 물로 헹군 뒤 수건으로 닦아요."
+          },
+          {
+            "title": "양치하기",
+            "validOrder": [
+              "paste",
+              "brush",
+              "rinse"
+            ],
+            "replayButton": {
+              "x": 349.359375,
+              "y": 80,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "치약을 준비하고 이를 닦은 뒤 마무리해요."
+          },
+          {
+            "title": "밥 먹기",
+            "validOrder": [
+              "sit",
+              "clean",
+              "eat"
+            ],
+            "replayButton": {
+              "x": 349.359375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요."
+          },
+          {
+            "title": "잠자기",
+            "validOrder": [
+              "book",
+              "pajamas",
+              "light"
+            ],
+            "replayButton": {
+              "x": 349.359375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요."
+          },
+          {
+            "title": "외출 준비",
+            "validOrder": [
+              "shoes",
+              "clothes",
+              "door"
+            ],
+            "replayButton": {
+              "x": 349.359375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요."
+          },
+          {
+            "title": "장난감 정리",
+            "validOrder": [
+              "gather",
+              "basket",
+              "clean"
+            ],
+            "replayButton": {
+              "x": 349.359375,
+              "y": 84.59375,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "장난감을 모아 바구니에 넣으면 방이 정리돼요."
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 3664.399999999994,
+            "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+            "opacity": "0",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": true,
+                "currentTime": 0
+              }
+            ]
+          },
+          "after": {
+            "at": 4010.100000000006,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 345.7,
+          "timeoutMs": 2000
+        },
+        "rewardCalls": [
+          12,
+          14,
+          16,
+          16,
+          16,
+          16,
+          30
+        ],
+        "driver": "public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "cat-844x390",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 3637.600000000006,
+            "transform": "matrix(0.973293, 0, 0, 0.973293, 0, 0)",
+            "opacity": "0.332335",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 33.39200000000098
+              }
+            ]
+          },
+          "after": {
+            "at": 3959.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 321.9,
+          "timeoutMs": 2000
+        },
+        "headerClearance": {
+          "initial": {
+            "name": {
+              "x": 70,
+              "y": 12.5,
+              "width": 622,
+              "height": 31
+            },
+            "back": {
+              "x": 6,
+              "y": 6,
+              "width": 42,
+              "height": 42
+            }
+          },
+          "rotated": {
+            "name": {
+              "x": 74,
+              "y": 19.5,
+              "width": 160,
+              "height": 25
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-768x1024",
+      "status": "PASS",
+      "detail": {
+        "missions": [
+          {
+            "title": "손 씻기",
+            "validOrder": [
+              "water",
+              "soap",
+              "rinse",
+              "towel"
+            ],
+            "replayButton": {
+              "x": 704,
+              "y": 652,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "비누 거품은 물로 헹군 뒤 수건으로 닦아요."
+          },
+          {
+            "title": "양치하기",
+            "validOrder": [
+              "paste",
+              "brush",
+              "rinse"
+            ],
+            "replayButton": {
+              "x": 704,
+              "y": 732,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "치약을 준비하고 이를 닦은 뒤 마무리해요."
+          },
+          {
+            "title": "밥 먹기",
+            "validOrder": [
+              "sit",
+              "clean",
+              "eat"
+            ],
+            "replayButton": {
+              "x": 704,
+              "y": 732,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요."
+          },
+          {
+            "title": "잠자기",
+            "validOrder": [
+              "book",
+              "pajamas",
+              "light"
+            ],
+            "replayButton": {
+              "x": 704,
+              "y": 732,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요."
+          },
+          {
+            "title": "외출 준비",
+            "validOrder": [
+              "shoes",
+              "clothes",
+              "door"
+            ],
+            "replayButton": {
+              "x": 704,
+              "y": 732,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요."
+          },
+          {
+            "title": "장난감 정리",
+            "validOrder": [
+              "gather",
+              "basket",
+              "clean"
+            ],
+            "replayButton": {
+              "x": 704,
+              "y": 732,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "장난감을 모아 바구니에 넣으면 방이 정리돼요."
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 4676,
+            "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+            "opacity": "0",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": true,
+                "currentTime": 0
+              }
+            ]
+          },
+          "after": {
+            "at": 5028.100000000006,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 352.1,
+          "timeoutMs": 2000
+        },
+        "rewardCalls": [
+          12,
+          14,
+          16,
+          16,
+          16,
+          16,
+          30
+        ],
+        "driver": "public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "cat-768x1024",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 4630.600000000006,
+            "transform": "matrix(0.966803, 0, 0, 0.966803, 0, 0)",
+            "opacity": "0.170074",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 16.707999999996836
+              }
+            ]
+          },
+          "after": {
+            "at": 4975,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 344.4,
+          "timeoutMs": 2000
+        },
+        "headerClearance": {
+          "initial": {
+            "name": {
+              "x": 74,
+              "y": 16.5,
+              "width": 538,
+              "height": 31
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 56,
+              "height": 56
+            }
+          },
+          "rotated": {
+            "name": {
+              "x": 74,
+              "y": 16.5,
+              "width": 794,
+              "height": 31
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 56,
+              "height": 56
+            }
+          }
+        },
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-1024x768",
+      "status": "PASS",
+      "detail": {
+        "missions": [
+          {
+            "title": "손 씻기",
+            "validOrder": [
+              "water",
+              "soap",
+              "rinse",
+              "towel"
+            ],
+            "replayButton": {
+              "x": 436.078125,
+              "y": 102,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "비누 거품은 물로 헹군 뒤 수건으로 닦아요."
+          },
+          {
+            "title": "양치하기",
+            "validOrder": [
+              "paste",
+              "brush",
+              "rinse"
+            ],
+            "replayButton": {
+              "x": 436.078125,
+              "y": 102,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "치약을 준비하고 이를 닦은 뒤 마무리해요."
+          },
+          {
+            "title": "밥 먹기",
+            "validOrder": [
+              "sit",
+              "clean",
+              "eat"
+            ],
+            "replayButton": {
+              "x": 436.078125,
+              "y": 102,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "손 씻기와 앉기는 바꿔도 돼요. 준비한 뒤 먹어요."
+          },
+          {
+            "title": "잠자기",
+            "validOrder": [
+              "book",
+              "pajamas",
+              "light"
+            ],
+            "replayButton": {
+              "x": 436.078125,
+              "y": 102,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "잠옷과 책의 순서는 달라도 돼요. 준비한 뒤 쉬어요."
+          },
+          {
+            "title": "외출 준비",
+            "validOrder": [
+              "shoes",
+              "clothes",
+              "door"
+            ],
+            "replayButton": {
+              "x": 436.078125,
+              "y": 102,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "옷과 신발의 순서는 달라도 돼요. 준비한 뒤 나가요."
+          },
+          {
+            "title": "장난감 정리",
+            "validOrder": [
+              "gather",
+              "basket",
+              "clean"
+            ],
+            "replayButton": {
+              "x": 436.078125,
+              "y": 102,
+              "width": 44,
+              "height": 44
+            },
+            "initialReason": "장난감을 모아 바구니에 넣으면 방이 정리돼요."
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 3658.1999999999825,
+            "transform": "matrix(0.966801, 0, 0, 0.966801, 0, 0)",
+            "opacity": "0.170034",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 16.70399999999539
+              }
+            ]
+          },
+          "after": {
+            "at": 4009.7999999999884,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 351.6,
+          "timeoutMs": 2000
+        },
+        "rewardCalls": [
+          12,
+          14,
+          16,
+          16,
+          16,
+          16,
+          30
+        ],
+        "driver": "public menus, six native arrangements including three alternative valid preparation orders, explanation replay, next and finish"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "cat-1024x768",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "entranceTransition": {
+          "before": {
+            "at": 3626,
+            "transform": "matrix(0.966788, 0, 0, 0.966788, 0, 0)",
+            "opacity": "0.169693",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "running",
+                "pending": false,
+                "currentTime": 16.67000000000307
+              }
+            ]
+          },
+          "after": {
+            "at": 3960.8000000000175,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "animations": [
+              {
+                "name": "zoneEnter",
+                "state": "finished",
+                "pending": false,
+                "currentTime": 350
+              }
+            ]
+          },
+          "waitedMs": 334.8,
+          "timeoutMs": 2000
+        },
+        "headerClearance": {
+          "initial": {
+            "name": {
+              "x": 74,
+              "y": 16.5,
+              "width": 794,
+              "height": 31
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 56,
+              "height": 56
+            }
+          },
+          "rotated": {
+            "name": {
+              "x": 74,
+              "y": 16.5,
+              "width": 538,
+              "height": 31
+            },
+            "back": {
+              "x": 8,
+              "y": 8,
+              "width": 56,
+              "height": 56
+            }
+          }
+        },
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:45585/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:45585/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:45585/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:45585/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:45585/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "checkoutSha256": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+          "matchesCheckout": true
+        }
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "testScriptSha256": "ae04d9efd571408617f440c9a38d7cc70d50598a1cf4aa8039a958cd81a80558",
+  "checkoutSourceSha256": {
+    "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+    "js/games/life-sequence.js": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+    "js/games/cat-care.js": "5c71dcfece0b4735791d8a3f28184aaa9c8c9c5bbd57b4cc8196ad1826bcc162",
+    "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105"
+  },
+  "scope": {
+    "publicMenus": true,
+    "nativeClicks": true,
+    "privateGameStateInjection": false,
+    "voice": "pass-through request probe",
+    "notRun": [
+      "audible speech",
+      "physical touch",
+      "child observation"
+    ]
+  },
+  "baseUrl": "http://127.0.0.1:45585/",
+  "browserVersion": "143.0.7499.4"
+}

@@ -1,0 +1,20 @@
+{
+  "head": "3c1b0b0903b1aeef2e6be9bf74aefaba173b3451",
+  "runId": 44054482122,
+  "artifacts": [
+    {
+      "id": 14315791649,
+      "name": "creator-stage6-language-44054482122",
+      "zipSha256": "07111e9bd23311866df9e7eb0a31c17afbfc7d65f67c343d0f28d7d21a522d08",
+      "size": 622714
+    },
+    {
+      "id": 14315586263,
+      "name": "creator-stage6-life-care-44054482122",
+      "zipSha256": "a81fe5f67f0800bf8e2007593d610866ebb00bead5839d39af25adec70318ef1",
+      "size": 14305229
+    }
+  ],
+  "downloadedAndHashVerified": true,
+  "preservedHere": "Original two JSON reports; full ZIPs and screenshot working copies are not included in this directory."
+}

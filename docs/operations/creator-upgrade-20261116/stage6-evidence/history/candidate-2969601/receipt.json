@@ -1,0 +1,20 @@
+{
+  "candidate": "2969601674aa3c1fb4d837145dd659211a38cbbf",
+  "runId": 44055465596,
+  "status": "FAIL",
+  "meaning": "Original reports retained; language 2/4 and life-care 12/12 passed. Language pending narrow repair.",
+  "artifacts": [
+    {
+      "id": 14315927240,
+      "sha256": "2a2dc552ccba9eb47d21951b1e665e0aa9f5d44c13111734d0eba021967bbac2"
+    },
+    {
+      "id": 14316196477,
+      "sha256": "68a6847ef57834c46d6823d95a4a26d64dc0d8e72cb0e77190e499b07c660746"
+    }
+  ],
+  "reports": {
+    "language.json": "a9bace79b50c4689a69bf5b48547bed63db353c65873827b0fb77f2cb83756eb",
+    "life-care.json": "3ad6d63fe0400e294176974bb398fd330df823d39da5f350bda8abe3ca715b51"
+  }
+}

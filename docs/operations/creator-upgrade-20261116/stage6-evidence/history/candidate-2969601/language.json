@@ -1,0 +1,1820 @@
+{
+  "status": "FAIL",
+  "checks": [
+    {
+      "viewport": "320x568",
+      "status": "PASS",
+      "detail": {
+        "controls": {
+          "#ltMainCard": {
+            "x": 10,
+            "y": 91,
+            "width": 300,
+            "height": 253.8125
+          },
+          "#ltSound": {
+            "x": 262,
+            "y": 10,
+            "width": 48,
+            "height": 48
+          },
+          "[data-mode=\"abc\"]": {
+            "x": 66,
+            "y": 12,
+            "width": 90,
+            "height": 44
+          },
+          "[data-mode=\"hangul\"]": {
+            "x": 160,
+            "y": 12,
+            "width": 90,
+            "height": 44
+          },
+          "#ltReplayPrompt": {
+            "x": 10,
+            "y": 454,
+            "width": 146,
+            "height": 48
+          },
+          "#ltFind": {
+            "x": 164,
+            "y": 454,
+            "width": 146,
+            "height": 48
+          },
+          "#ltHint": {
+            "x": 10,
+            "y": 510,
+            "width": 300,
+            "height": 48
+          }
+        },
+        "completionControls": {
+          "#ltReplay": {
+            "x": 33.796875,
+            "y": 287.171875,
+            "width": 252.390625,
+            "height": 48
+          },
+          "#ltSwitch": {
+            "x": 33.796875,
+            "y": 344.171875,
+            "width": 252.390625,
+            "height": 48
+          },
+          "#ltToLand": {
+            "x": 33.796875,
+            "y": 401.171875,
+            "width": 252.390625,
+            "height": 48
+          }
+        },
+        "hangulControls": {
+          "#homeBtn": {
+            "x": 16.03125,
+            "y": 15.0625,
+            "width": 52.984375,
+            "height": 46
+          },
+          "#undoBtn": {
+            "x": 108,
+            "y": 16.015625,
+            "width": 44,
+            "height": 44
+          },
+          "#clearBtn": {
+            "x": 156,
+            "y": 16.015625,
+            "width": 44,
+            "height": 44
+          },
+          "#replayBtn": {
+            "x": 204,
+            "y": 16.015625,
+            "width": 45,
+            "height": 44
+          },
+          "#soundBtn": {
+            "x": 253,
+            "y": 16,
+            "width": 45,
+            "height": 44
+          }
+        },
+        "iframeViewport": {
+          "width": 319.91864013671875,
+          "height": 567.8555908203125
+        },
+        "meaningCard": {
+          "word": "도토리",
+          "bounds": {
+            "x": 63.936209419554885,
+            "y": 140,
+            "width": 192.12765957446808,
+            "height": 168
+          },
+          "textureHeight": 448,
+          "textureFont": "900 72px sans-serif"
+        },
+        "sourceResponses": {
+          "index.html": {
+            "url": "http://127.0.0.1:33921/index.html",
+            "status": 200,
+            "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+            "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+            "matches": true
+          },
+          "js/voice-engine.js": {
+            "url": "http://127.0.0.1:33921/js/voice-engine.js",
+            "status": 200,
+            "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+            "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+            "matches": true
+          },
+          "js/games/abc-phonics.js": {
+            "url": "http://127.0.0.1:33921/js/games/abc-phonics.js",
+            "status": 200,
+            "servedSha256": "e4b05f4b41e124d447488a437692594adcba8c0360efdddd22af6c516efe1da5",
+            "checkoutSha256": "e4b05f4b41e124d447488a437692594adcba8c0360efdddd22af6c516efe1da5",
+            "matches": true
+          },
+          "games/hangul-playmat-3d.html": {
+            "url": "http://127.0.0.1:33921/games/hangul-playmat-3d.html",
+            "status": 200,
+            "servedSha256": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+            "checkoutSha256": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+            "matches": true
+          }
+        },
+        "nativeFlows": [
+          "object-replay-preserves-word",
+          "explicit-next-and-completion",
+          "wrong-right-picture-match",
+          "rotate-preserves-match",
+          "mute-and-replay",
+          "mode-switch-cancels-reveal",
+          "hangul-name-combination",
+          "semantic-acorn",
+          "3D-name-replay-mute",
+          "3D-public-home"
+        ],
+        "voiceRequests": [
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.land.letter"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "The letters A, B, and C turn into pictures!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Letter A. Touch the letter.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "A. Apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Apple!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Find the apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "You picked the ball. Find the apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Apple!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Apple!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Find the apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "B. Ball.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "C. Car.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "You met A, B, and C!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "The letters A, B, and C turn into pictures!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "A. Apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "한글 친구들이 그림으로 변신해요!",
+            "id": "games.korean.intro"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "글자 이름은 기역. 기역과 아가 만나면 가. 가방.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "글자 이름은 니은. 니은과 아가 만나면 나. 나비.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "글자 이름은 디귿. 디귿과 오가 만나면 도. 도토리.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "도토리 그림을 찾아볼까요?",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "도, 도, 도토리!",
+            "id": "games.korean.do"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 기역.",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 기역.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 기역.",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 디귿.",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "오!",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "디귿, 오. 합치면 도. 도토리!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "390x844",
+      "status": "FAIL",
+      "error": "{'x': 178, 'y': 16.0625, 'width': 44, 'height': 43.984375}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 266, in main\n    detail = native_case(page, base, output, width, height, responses)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 186, in native_case\n    hangul_controls = {selector: check_control(frame.locator(selector), page.viewport_size)\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 55, in check_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 178, 'y': 16.0625, 'width': 44, 'height': 43.984375}\n"
+    },
+    {
+      "viewport": "640x360",
+      "status": "PASS",
+      "detail": {
+        "controls": {
+          "#ltMainCard": {
+            "x": 10,
+            "y": 68,
+            "width": 331.625,
+            "height": 282
+          },
+          "#ltSound": {
+            "x": 582,
+            "y": 5,
+            "width": 48,
+            "height": 48
+          },
+          "[data-mode=\"abc\"]": {
+            "x": 66,
+            "y": 11,
+            "width": 92,
+            "height": 44
+          },
+          "[data-mode=\"hangul\"]": {
+            "x": 162,
+            "y": 11,
+            "width": 92,
+            "height": 44
+          },
+          "#ltReplayPrompt": {
+            "x": 353.625,
+            "y": 206.5,
+            "width": 135.171875,
+            "height": 48
+          },
+          "#ltFind": {
+            "x": 494.796875,
+            "y": 206.5,
+            "width": 135.1875,
+            "height": 48
+          },
+          "#ltHint": {
+            "x": 353.625,
+            "y": 260.5,
+            "width": 276.359375,
+            "height": 48
+          }
+        },
+        "completionControls": {
+          "#ltReplay": {
+            "x": 50.40625,
+            "y": 207,
+            "width": 173.71875,
+            "height": 48
+          },
+          "#ltSwitch": {
+            "x": 233.125,
+            "y": 207,
+            "width": 173.734375,
+            "height": 48
+          },
+          "#ltToLand": {
+            "x": 415.859375,
+            "y": 207,
+            "width": 173.734375,
+            "height": 48
+          }
+        },
+        "hangulControls": {
+          "#homeBtn": {
+            "x": 16.015625,
+            "y": 15,
+            "width": 52.984375,
+            "height": 46
+          },
+          "#undoBtn": {
+            "x": 428,
+            "y": 16,
+            "width": 44,
+            "height": 44
+          },
+          "#clearBtn": {
+            "x": 476,
+            "y": 16,
+            "width": 44,
+            "height": 44
+          },
+          "#replayBtn": {
+            "x": 524,
+            "y": 16,
+            "width": 45,
+            "height": 44
+          },
+          "#soundBtn": {
+            "x": 573,
+            "y": 16,
+            "width": 44.984375,
+            "height": 44
+          }
+        },
+        "iframeViewport": {
+          "width": 639.9522705078125,
+          "height": 359.97314453125
+        },
+        "meaningCard": {
+          "word": "도토리",
+          "bounds": {
+            "x": 268.53727752582785,
+            "y": 121,
+            "width": 102.92553191489363,
+            "height": 90
+          },
+          "textureHeight": 448,
+          "textureFont": "900 72px sans-serif"
+        },
+        "sourceResponses": {
+          "index.html": {
+            "url": "http://127.0.0.1:33921/index.html",
+            "status": 200,
+            "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+            "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+            "matches": true
+          },
+          "js/voice-engine.js": {
+            "url": "http://127.0.0.1:33921/js/voice-engine.js",
+            "status": 200,
+            "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+            "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+            "matches": true
+          },
+          "js/games/abc-phonics.js": {
+            "url": "http://127.0.0.1:33921/js/games/abc-phonics.js",
+            "status": 200,
+            "servedSha256": "e4b05f4b41e124d447488a437692594adcba8c0360efdddd22af6c516efe1da5",
+            "checkoutSha256": "e4b05f4b41e124d447488a437692594adcba8c0360efdddd22af6c516efe1da5",
+            "matches": true
+          },
+          "games/hangul-playmat-3d.html": {
+            "url": "http://127.0.0.1:33921/games/hangul-playmat-3d.html",
+            "status": 200,
+            "servedSha256": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+            "checkoutSha256": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+            "matches": true
+          }
+        },
+        "nativeFlows": [
+          "object-replay-preserves-word",
+          "explicit-next-and-completion",
+          "wrong-right-picture-match",
+          "rotate-preserves-match",
+          "mute-and-replay",
+          "mode-switch-cancels-reveal",
+          "hangul-name-combination",
+          "semantic-acorn",
+          "3D-name-replay-mute",
+          "3D-public-home"
+        ],
+        "voiceRequests": [
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.land.letter"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "The letters A, B, and C turn into pictures!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Letter A. Touch the letter.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "A. Apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Apple!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Find the apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "You picked the ball. Find the apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Apple!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Apple!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "Find the apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "B. Ball.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "C. Car.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "You met A, B, and C!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "The letters A, B, and C turn into pictures!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "A. Apple.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "한글 친구들이 그림으로 변신해요!",
+            "id": "games.korean.intro"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "글자 이름은 기역. 기역과 아가 만나면 가. 가방.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "글자 이름은 니은. 니은과 아가 만나면 나. 나비.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "글자 이름은 디귿. 디귿과 오가 만나면 도. 도토리.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "도토리 그림을 찾아볼까요?",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "도, 도, 도토리!",
+            "id": "games.korean.do"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 기역.",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 기역.",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 기역.",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "자음 이름은 디귿.",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "오!",
+            "id": null
+          },
+          {
+            "kind": "speak",
+            "text": "디귿, 오. 합치면 도. 도토리!",
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "stop",
+            "text": null,
+            "id": null
+          },
+          {
+            "kind": "play",
+            "text": "",
+            "id": "common.landArrive"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "844x390",
+      "status": "FAIL",
+      "error": "{'word': '도토리', 'bounds': {'x': 365.39096189542124, 'y': 130, 'width': 113.21808510638299, 'height': 99}, 'textureHeight': 448, 'textureFont': '900 72px sans-serif'}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 266, in main\n    detail = native_case(page, base, output, width, height, responses)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-language-stage6-browser.py\", line 218, in native_case\n    assert card['bounds']['height'] * 72 / card['textureHeight'] >= 16, card\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'word': '도토리', 'bounds': {'x': 365.39096189542124, 'y': 130, 'width': 113.21808510638299, 'height': 99}, 'textureHeight': 448, 'textureFont': '900 72px sans-serif'}\n"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "testScriptSha256": "08c8bc22eb6e1b69dfe3253ca697614b016fc49fc58615f90a131eeebfbb888e",
+  "checkoutSourceSha256": {
+    "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+    "js/games/abc-phonics.js": "e4b05f4b41e124d447488a437692594adcba8c0360efdddd22af6c516efe1da5",
+    "games/hangul-playmat-3d.html": "28122726195c886e710278a04572396134d457c38b5c06ad4f51980d8038fe31",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105"
+  },
+  "scope": {
+    "nativePublicMenus": true,
+    "3DMeaningCardSetup": "existing OpenWorldDebug compose API",
+    "voice": "pass-through shared voice requests",
+    "notRun": [
+      "physical touch",
+      "audible pronunciation",
+      "child observation"
+    ]
+  },
+  "baseUrl": "http://127.0.0.1:33921/",
+  "browserVersion": "143.0.7499.4"
+}

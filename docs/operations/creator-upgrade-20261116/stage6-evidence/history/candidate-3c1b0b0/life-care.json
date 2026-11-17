@@ -1,0 +1,514 @@
+{
+  "status": "FAIL",
+  "checks": [
+    {
+      "case": "life-320x568",
+      "status": "FAIL",
+      "error": "{'x': 254.9808349609375, 'y': 251.68692016601562, 'width': 43.0841064453125, 'height': 43.084075927734375}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 252, in main\n    detail = run(page, base, output, size)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 112, in life_case\n    button_box = hit_control(page, listen)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 70, in hit_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 254.9808349609375, 'y': 251.68692016601562, 'width': 43.0841064453125, 'height': 43.084075927734375}\n"
+    },
+    {
+      "case": "cat-320x568",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:39773/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:39773/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:39773/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:39773/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:39773/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "checkoutSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-390x844",
+      "status": "FAIL",
+      "error": "{'x': 323.4743347167969, 'y': 475.5309753417969, 'width': 42.82476806640625, 'height': 42.824737548828125}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 252, in main\n    detail = run(page, base, output, size)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 112, in life_case\n    button_box = hit_control(page, listen)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 70, in hit_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 323.4743347167969, 'y': 475.5309753417969, 'width': 42.82476806640625, 'height': 42.824737548828125}\n"
+    },
+    {
+      "case": "cat-390x844",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:39773/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:39773/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:39773/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:39773/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:39773/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "checkoutSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-640x360",
+      "status": "FAIL",
+      "error": "{'x': 253.26998901367188, 'y': 87.14369201660156, 'width': 42.824005126953125, 'height': 42.824005126953125}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 252, in main\n    detail = run(page, base, output, size)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 112, in life_case\n    button_box = hit_control(page, listen)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 70, in hit_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 253.26998901367188, 'y': 87.14369201660156, 'width': 42.824005126953125, 'height': 42.824005126953125}\n"
+    },
+    {
+      "case": "cat-640x360",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:39773/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:39773/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:39773/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:39773/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:39773/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "checkoutSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-844x390",
+      "status": "FAIL",
+      "error": "{'x': 351.29949951171875, 'y': 83.07151794433594, 'width': 42.8248291015625, 'height': 42.824806213378906}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 252, in main\n    detail = run(page, base, output, size)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 112, in life_case\n    button_box = hit_control(page, listen)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 70, in hit_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 351.29949951171875, 'y': 83.07151794433594, 'width': 42.8248291015625, 'height': 42.824806213378906}\n"
+    },
+    {
+      "case": "cat-844x390",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:39773/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:39773/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:39773/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:39773/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "checkoutSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:39773/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-768x1024",
+      "status": "FAIL",
+      "error": "{'x': 697.3392333984375, 'y': 649.0859375, 'width': 43.0841064453125, 'height': 43.0841064453125}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 252, in main\n    detail = run(page, base, output, size)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 112, in life_case\n    button_box = hit_control(page, listen)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 70, in hit_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 697.3392333984375, 'y': 649.0859375, 'width': 43.0841064453125, 'height': 43.0841064453125}\n"
+    },
+    {
+      "case": "cat-768x1024",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:39773/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:39773/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:39773/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:39773/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "checkoutSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:39773/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        }
+      }
+    },
+    {
+      "case": "life-1024x768",
+      "status": "FAIL",
+      "error": "{'x': 437.65838623046875, 'y': 107.86959838867188, 'width': 43.08416748046875, 'height': 43.08418273925781}",
+      "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 252, in main\n    detail = run(page, base, output, size)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 112, in life_case\n    button_box = hit_control(page, listen)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/my-life-os/my-life-os/scripts/qa-creator-life-care-stage6-browser.py\", line 70, in hit_control\n    assert box and box['width'] >= 44 and box['height'] >= 44, box\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'x': 437.65838623046875, 'y': 107.86959838867188, 'width': 43.08416748046875, 'height': 43.08418273925781}\n"
+    },
+    {
+      "case": "cat-1024x768",
+      "status": "PASS",
+      "detail": {
+        "states": [
+          {
+            "need": "hungry",
+            "action": "eat",
+            "result": "냠냠! 맛있게 밥을 먹어요.",
+            "image": "eat"
+          },
+          {
+            "need": "wash",
+            "action": "bath",
+            "result": "보글보글, 함께 목욕해요.",
+            "image": "bath"
+          },
+          {
+            "need": "sleepy",
+            "action": "sleep",
+            "result": "코오, 편안히 쉬어요. 깨우지 않고 지켜봐요.",
+            "image": "sleep"
+          },
+          {
+            "need": "space",
+            "action": "wait",
+            "result": "조용히 기다려 줬어요. 고양이가 편안히 쉬어요.",
+            "image": "sleep"
+          }
+        ],
+        "changeCat": "portrait and landscape native controls",
+        "manualCompletion": true,
+        "repeatRewardCalls": "unchanged",
+        "rotation": "resolved care and controls preserved",
+        "oldCatImageCallbacks": "no delayed replacement",
+        "driver": "public menu, wrong care, wait, four matching states, repeat, replay, rotation, finish, change cat"
+      },
+      "sourceSha256": {
+        "index.html": {
+          "url": "http://127.0.0.1:39773/index.html",
+          "status": 200,
+          "servedSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "checkoutSha256": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+          "matchesCheckout": true
+        },
+        "js/play-settings.js": {
+          "url": "http://127.0.0.1:39773/js/play-settings.js",
+          "status": 200,
+          "servedSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "checkoutSha256": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+          "matchesCheckout": true
+        },
+        "js/voice-engine.js": {
+          "url": "http://127.0.0.1:39773/js/voice-engine.js",
+          "status": 200,
+          "servedSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "checkoutSha256": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105",
+          "matchesCheckout": true
+        },
+        "js/games/cat-care.js": {
+          "url": "http://127.0.0.1:39773/js/games/cat-care.js",
+          "status": 200,
+          "servedSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "checkoutSha256": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+          "matchesCheckout": true
+        },
+        "js/games/life-sequence.js": {
+          "url": "http://127.0.0.1:39773/js/games/life-sequence.js",
+          "status": 200,
+          "servedSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "checkoutSha256": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+          "matchesCheckout": true
+        }
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "testScriptSha256": "23739cc0c5d02b68a5559f41587ec24b2275745995a98d834a768759b98783b5",
+  "checkoutSourceSha256": {
+    "index.html": "56ba1892d6159f35b44fafcce0b497d84a9037be5496ce1d930eac15cc31907b",
+    "js/games/life-sequence.js": "13a1aa657cbecf0438c6bcc82f82af518a6046d27d0603567e0453c939852a99",
+    "js/games/cat-care.js": "c92a6bc9f7ab1cdc699a1e7432b92fe9cb3db75ba4543d7aed501029eb791c89",
+    "js/play-settings.js": "e315b40000df29f16e26d1a650bbf25851cd87066ac7f4a6f1327b79649ef10b",
+    "js/voice-engine.js": "a114ca894d1ec93671f544357bfdb9345183393ac53382aeac7f86c4df5ac105"
+  },
+  "scope": {
+    "publicMenus": true,
+    "nativeClicks": true,
+    "privateGameStateInjection": false,
+    "voice": "pass-through request probe",
+    "notRun": [
+      "audible speech",
+      "physical touch",
+      "child observation"
+    ]
+  },
+  "baseUrl": "http://127.0.0.1:39773/",
+  "browserVersion": "143.0.7499.4"
+}

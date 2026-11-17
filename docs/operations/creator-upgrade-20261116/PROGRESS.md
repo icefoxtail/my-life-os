@@ -5,7 +5,7 @@
 - taskId: `7cfd62c0-af1e-4696-be90-24ab7791a5fd`
 - 1~4단계 마감 owner: `GPT_STAGE4_8938D6FFD8BF`
 - 5단계 taskId: `15707adb-19d1-4b5e-bc00-8f4ef1267828`
-- 현재 5단계 owner: `GPT_STAGE5_B5BA6BFB1C19`
+- 5단계 마감 owner: `GPT_STAGE5_B5BA6BFB1C19`
 - 3단계 owner: `GPT_UPGRADE_7C923CB944E6`
 - 1·2단계 owner: `GPT_UPGRADE_5EF8F1489B24`
 - 최초 조사 기준 main: `a1c2ccaf2ef9e484fb93c65d13e30ea7bd727b3f`
@@ -23,7 +23,7 @@
 - **3단계도 운영 검증 완료.** [PR #41](https://github.com/icefoxtail/my-life-os/pull/41)의 기능 병합 `5740b26`에서 도안 미리보기·여러 작품 보관·수리 전후 변화·완성 차량 재사용을 구현했다. 공개 운영 런타임 5개 해시가 일치했고 새 21개 시나리오가 통과했다. 변경 범위·원본 증거·검증 한계는 [STAGE3.md](STAGE3.md)에 기록한다. 기존 1·2단계 완료 근거는 유지한다.
 - **작은 화면 수리와 4단계도 운영 검증 완료.** [PR #43](https://github.com/icefoxtail/my-life-os/pull/43)의 작은 화면 수리를 마감한 뒤, [PR #44](https://github.com/icefoxtail/my-life-os/pull/44)를 `47760e31`로 병합했다. 공개 운영에서 공사장 20개·소방 8개와 런타임 9개 파일의 해시 일치, 실제 운영 PNG 6장의 독립 검토를 확인했다. 기존 Creator 81개·그림판/정비소 21개·작은 화면 24개도 통과했다. 기능·수리 이력·정확한 검증 범위는 [STAGE4.md](STAGE4.md), 세부 근거는 [STAGE4_RELEASE_EVIDENCE.json](STAGE4_RELEASE_EVIDENCE.json)에 있다.
 
-- **5단계도 운영 검증 완료.** [PR #46](https://github.com/icefoxtail/my-life-os/pull/46)을 `f09b827`로 병합했고 [PR #47](https://github.com/icefoxtail/my-life-os/pull/47)의 검사 하네스 보완을 `7c14faf`로 반영했다. 각 PR의 후보와 병합 tree가 같으며 두 병합 사이 운영 코드 바이트는 변하지 않았다. 최종 공개 런타임 18개 파일의 해시가 해당 main과 일치했고, 연속성 16개·연산 6개·기차 11개·왕국 27개가 운영에서 모두 통과했다(페이지 오류0). 기능 후보 필수 CI 7개와 기존 수량 놀이 76개가 통과했으며, 하네스 보완의 대상 CI 3개 및 Pages도 성공했다. 변경하지 않은 범위의 회귀와 PNG 검토는 소스 동일성을 확인해 재사용했다. 기능·원본 실패 이력·검증 범위는 [STAGE5.md](STAGE5.md), 판본별 증거는 [STAGE5_RELEASE_EVIDENCE.json](STAGE5_RELEASE_EVIDENCE.json)에 있다. **6·7단계는 대기다.**
+- **5단계도 운영 검증 완료.** [PR #46](https://github.com/icefoxtail/my-life-os/pull/46)을 `f09b827`로 병합했고 [PR #47](https://github.com/icefoxtail/my-life-os/pull/47)의 검사 하네스 보완을 `7c14faf`로 반영했다. 각 PR의 후보와 병합 tree가 같으며 두 병합 사이 운영 코드 바이트는 변하지 않았다. 최종 공개 런타임 18개 파일의 해시가 해당 main과 일치했고, 연속성 16개·연산 6개·기차 11개·왕국 27개가 운영에서 모두 통과했다(페이지 오류0). 기능 후보 필수 CI 7개와 기존 수량 놀이 76개가 통과했으며, 하네스 보완의 대상 CI 3개 및 Pages도 성공했다. 변경하지 않은 범위의 회귀와 PNG 검토는 소스 동일성을 확인해 재사용했다. 기능·원본 실패 이력·검증 범위는 [STAGE5.md](STAGE5.md), 판본별 증거는 [STAGE5_RELEASE_EVIDENCE.json](STAGE5_RELEASE_EVIDENCE.json)에 있다. **6단계 구현 중이며 7단계는 6단계 운영 마감 뒤 진행한다.**
 
 정확한 commit·tree·CI run·아티팩트 해시와 운영 검증 근거는 [RELEASE_EVIDENCE.json](RELEASE_EVIDENCE.json)에 기록한다. 2단계 기능 변화와 검증 범위는 [STAGE2.md](STAGE2.md)를 참조한다. STAGE2.md의 다음 3단계 안내는 2단계 마감 당시 기록이며, 현재 상태는 이 문서와 RELEASE_EVIDENCE.json을 따른다.
 
@@ -36,7 +36,7 @@
 | 3 | 매직 그림판·자동차 정비소 | 운영 검증 완료 | 도안 실제 미리보기, 여러 작품 보관, 수리 전후 변화, 완성 차량 재사용 |
 | 4 | 공사장·소방 출동 | 운영 검증 완료 | 사건과 선택의 이유, 실제 작업과 현장 변화, 후속 선택 |
 | 5 | 숫자 놀이의 깊이 | 운영 검증 완료 | 변화의 연속성, 이어 세기·묶음·여러 분배, 작품 보존 |
-| 6 | 언어·생활·돌봄 | 대기 | 글자·뜻 연결, 지시 재생, 생활 순서의 이유, 상태에 따른 돌봄 |
+| 6 | 언어·생활·돌봄 | 검수 중 | 글자·뜻 연결, 지시 재생, 생활 순서의 이유, 상태에 따른 돌봄 |
 | 7 | 내부 게임 공개 판단 | 대기 | Pixi 보존/탭 조작, 코딩 수정, 로봇 지도 해결 가능성; 겹치는 구형 게임 정리 판단 |
 
 ## 검증 범위와 후속 관찰
@@ -90,3 +90,10 @@
 3. 원격에 보존된 동일 판본의 완료 검증은 재사용한다.
 4. 진행 중인 writer가 있으면 파일 담당을 확인하고 겹쳐 쓰지 않는다.
 5. 작은 화면 마감 후 4단계를 구현·검증하여 main/운영까지 반영하는 지시는 완료했다. 1~4단계와 작은 화면의 검증된 완료 근거를 재사용한다. 새로운 작업은 최신 main·AWCR·사용자 지시를 먼저 확인한다. 후속 사용자 지시의 5단계 구현·검증·main 병합·공개 운영 확인도 별도 task에서 마쳤다. [STAGE5.md](STAGE5.md)와 [STAGE5_RELEASE_EVIDENCE.json](STAGE5_RELEASE_EVIDENCE.json)의 완료 증거를 재사용한다. 6·7단계는 다음 사용자 지시 전까지 대기다.
+
+## 6·7단계 후속 실행 (2026-11-17)
+
+- taskId: `5a9a9159-34d8-4f8f-9f20-20f36f344d68`; owner: `GPT_STAGE67_719D5EF180B4`.
+- 현재 사용자 지시: 6단계 구현·검수·main·운영 확인을 마친 뒤 7단계를 같은 순서로 진행한다.
+- 시작 main `9bd2daf`; 5단계 r12 완료 checkpoint 확인. 기존 완료 증거를 재사용한다.
+- 현재 브랜치 `work/creator-upgrade-stage6-20261117-719d`; 상세 범위와 최신 상태는 [STAGE6.md](STAGE6.md)를 참조한다.

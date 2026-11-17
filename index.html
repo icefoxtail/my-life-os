@@ -2298,6 +2298,10 @@ function openNumberKingdom3DGame(){
 
 function openHangulPlaymat3DGame(){
   const t=openGameShell('🧸 3D 한글 블록','hangulPlaymat3DTarget','#dff4ff','letters');
+  // Keep one visible exit for both the embedded 3D game and its 2D fallback.
+  // This screen's own home is hidden only when this parent control is present.
+  const back=t.parentElement.querySelector('.game-back-floating');
+  if(back){ back.style.width='48px'; back.style.height='48px'; }
   t.innerHTML=`<iframe id="hangulPlaymatFrame" src="./games/hangul-playmat-3d.html" style="width:100%;height:100%;border:0;display:block;touch-action:none;" allow="autoplay" title="시현이의 3D 한글 블록 놀이터"></iframe>`;
 }
 
@@ -2459,6 +2463,8 @@ function openKaraokeZone(){
 
 function openLifeSequenceGame(){
   const t=openGameShell('🌅 하루 순서','lifeSequenceTarget','linear-gradient(180deg,#8fd8ff 0%,#c9f1ff 42%,#fff5c7 100%)','game');
+  const back=t.parentElement.querySelector('.game-back-floating');
+  if(back){ back.style.width='48px'; back.style.height='48px'; }
   if(window.SihyeonGames?.lifeSequence?.render) window.SihyeonGames.lifeSequence.render(t,gameOptions('game'));
   else renderGameLoadError(t,'하루 순서 게임을 불러오지 못했어요.');
 }
@@ -2471,12 +2477,16 @@ function openArtZoneGame(){
 
 function openAbcPhonicsGame(){
   const t=openGameShell('🔤 ABC 변신','abcPhonicsTarget','linear-gradient(160deg,#e8f5e9 0%,#fff9c4 100%)','letters');
+  const back=t.parentElement.querySelector('.game-back-floating');
+  if(back){ back.style.width='48px'; back.style.height='48px'; }
   if(window.SihyeonGames?.abcPhonics?.render) window.SihyeonGames.abcPhonics.render(t,gameOptions('letters'));
   else renderGameLoadError(t,'ABC 게임을 불러오지 못했어요.','#333');
 }
 
 function openCatCareGame(){
   const t=openGameShell('🐱 고양이 돌보기','catCareTarget','linear-gradient(160deg,#FFF8E1 0%,#FCE4EC 100%)','game');
+  const back=t.parentElement.querySelector('.game-back-floating');
+  if(back){ back.style.width='48px'; back.style.height='48px'; }
   if(window.SihyeonGames?.catCare?.render) window.SihyeonGames.catCare.render(t,gameOptions('game'));
   else renderGameLoadError(t,'고양이 돌보기를 불러오지 못했어요.','#333');
 }
