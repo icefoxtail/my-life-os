@@ -197,7 +197,7 @@ button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlig
 }
 
 /* 한글 터치 최적화: 4살 시현이 손가락 기준 */
-@media (pointer: coarse) {
+@media (pointer: coarse), (max-width: 1024px) {
   .pill, #rightTop .pill  { min-width: 64px !important; min-height: 64px !important; }
   .jamoBtn               { min-width: 68px !important; height: 68px !important; }
   .jamoBtn .charTxt      { font-size: 28px !important; }
