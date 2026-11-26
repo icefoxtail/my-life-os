@@ -1450,7 +1450,93 @@
       color:#999;
       font-size:14px;
     }
-  </style>
+  
+/* ═══════════════════════════════════════════════════════
+   4살 시현이 터치 최적화 (pointer:coarse = 터치 기기)
+   모든 게임 버튼 최소 64×64px, 간격 넓히기
+   ═══════════════════════════════════════════════════════ */
+@media (pointer: coarse) {
+
+  /* ── 메모리 게임 (vehicle-memory.js) ── */
+  .memory-level-chip,
+  .memory-landscape .memory-level-chip   { min-height: 64px !important; font-size: 16px !important; }
+  .memory-cat-chip,
+  .memory-landscape .memory-cat-chip     { min-height: 64px !important; font-size: 16px !important; }
+  .memory-vehicle-cat-chip,
+  .memory-landscape .memory-vehicle-cat-chip { min-height: 64px !important; }
+  .memory-game-btn                       { min-height: 68px !important; font-size: 17px !important; }
+  .memory-category-picker-btn,
+  .memory-landscape .memory-category-picker-btn { min-height: 64px !important; }
+  .memory-category-sheet-close           { width: 64px !important; height: 64px !important; }
+
+  /* ── 아트존 (art-zone.js) ── */
+  .az-mode-tab                           { height: 64px !important; min-height: 64px !important; min-width: 64px !important; }
+  .az-cat-btn,
+  #azTplRow .az-cat-btn,
+  .az-left-panel .free-section .az-cat-btn { min-height: 64px !important; }
+  .az-work-actions button                { min-width: 64px !important; min-height: 64px !important; width: 64px !important; height: 64px !important; }
+  .az-art-tools button,
+  .az-reference-guide button             { min-height: 64px !important; }
+  .az-collection button                  { min-height: 64px !important; min-width: 64px !important; }
+
+  /* ── ABC 파닉스 (abc-phonics.js) ── */
+  .lt-mode-tab,
+  .lt-root .lt-mode-tab                  { min-height: 64px !important; }
+  .lt-home-btn                           { min-height: 64px !important; min-width: 64px !important; }
+  .lt-choice,
+  .lt-root .lt-choice                    { min-width: 64px !important; min-height: 64px !important; }
+  .lt-btn                                { min-height: 64px !important; }
+
+  /* ── 숫자 세기 (number-count.js) ── */
+  .nc-difficulty-tab,
+  .number-count-landscape .nc-difficulty-tab { min-height: 56px !important; }
+  .nc-vehicle-cat-tab,
+  .number-count-landscape .nc-vehicle-cat-tab { min-height: 56px !important; }
+  .nc-round-actions button               { min-height: 64px !important; }
+  .nc-vehicle-cell                       { min-height: 64px !important; }
+  .nc-toy-block-btn,
+  .number-count-landscape .nc-toy-block-btn { min-height: 64px !important; height: 64px !important; }
+  .nc-difficulty-tabs select             { min-height: 64px !important; font-size: 16px !important; }
+
+  /* ── 주차장 (parking-lot.js) ── */
+  .pl-cat-chip,
+  .pl-landscape .pl-cat-chip             { min-height: 64px !important; }
+
+  /* ── 로봇 코딩 (robotCoding.js) ── */
+  .rb11-seq-item                         { min-width: 64px !important; height: 64px !important; }
+
+  /* ── 고양이 케어 (cat-care.js) ── */
+  .cc-small-btn                          { min-height: 64px !important; }
+  .cc-care-v2 .cc-btn,
+  .cc-care-v2.is-landscape .cc-btn       { min-height: 64px !important; min-width: 64px !important; }
+  .cc-complete.is-landscape .cc-c-btn    { min-height: 64px !important; }
+
+  /* ── 차 고치기 (car-garage.js) ── */
+  .cg-root button                        { min-height: 64px !important; min-width: 64px !important; }
+  .cg-panel-btn                          { min-height: 64px !important; }
+  .cg-compare-btn,
+  .cg-sticker-list .cg-tool-btn,
+  .car-garage-landscape .cg-sticker-list .cg-tool-btn { min-height: 64px !important; }
+  .cg-go-btn,
+  .cg-saved-card .cg-go-btn             { min-height: 64px !important; }
+  .cg-saved-card .cg-panel-btn          { min-height: 64px !important; }
+
+  /* ── WebGL 엔진 공통 (webgl-fallback.js) ── */
+  .s2d-head button,
+  .s2d-footer button                     { min-height: 64px !important; }
+
+  /* ── 보드랜드 (boardland-zone.js) ── */
+  .bl-chip                               { min-width: 64px !important; min-height: 56px !important; }
+  .bl-player-card                        { height: 64px !important; }
+
+  /* ── 카라오케 (karaoke-zone.js) ── */
+  .kz-chip                               { min-height: 64px !important; }
+
+  /* ── 메인 UI (index.html) ── */
+  .btn-parent-lock                       { width: 56px !important; height: 56px !important; }
+  .story-filter-btn                      { min-height: 64px !important; }
+}
+</style>
 </head>
 <body>
 
